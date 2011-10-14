@@ -1,14 +1,42 @@
-<!-- TODO Work on this -->
-
-<%= form_for @adopter do |f| %>
-	<%= f.input :name %>
-	<%= f.input :email %>
-	<%= f.input :phone %>
-	<%= f.input :address1 %>
-	<%= f.input :address2 %>
-	<%= f.input :city %>
-	<%= f.input :state %>
-	<%= f.input :zip %>
-	<%= f.input :when_to_call %>
-	<%= f.button :submit %>
+<%= form_for(@adopter) do |f| %>
+	<%= render 'shared/error_messages', :object => f.object %>
+	<div class="field">
+		<%= f.label :name, "Full Name" %><br />
+		<%= f.text_field :name %>
+	</div>
+	<div class="field">
+		<%= f.label :email, "E-mail" %><br />
+		<%= f.text_field :email %>
+	</div>
+	<div class="field">
+		<%= f.label :phone, "Phone Number" %><br />
+		<%= f.text_field :phone %>
+	</div>
+	<div class="field">
+		<%= f.label :address1,"Address Line 1" %><br />
+		<%= f.text_field :address1 %>
+	</div>
+	<div class="field">
+		<%= f.label :address2, "Address Line 2" %><br />
+		<%= f.text_field :address2 %>
+	</div>
+	<div class="field">
+		<%= f.label :city, "City" %><br />
+		<%= f.text_field :city %>
+	</div>
+	<div class="field">
+		<%= f.label :state, "State" %><br />
+		<%= f.text_field :state %>
+	</div>
+	<div class="field">
+		<%= f.label :zip, "Zip Code" %><br />
+		<%= f.text_field :zip %>
+	</div>
+	<div class="field">
+		<%= f.label :when_to_call, "What is the best time to call you?" %><br />
+		<%= f.text_field :when_to_call %>
+	</div>
+	<div class "actions">
+		<%= f.submit "Continue" %>
+	</div>
 <% end %>

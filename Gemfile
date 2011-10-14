@@ -4,7 +4,7 @@ gem 'rails', '3.1.1'
 
 gem 'mysql2'
 #gem 'will_paginate'
-
+gem 'simple_form'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,10 +24,14 @@ gem 'jquery-rails'
 
 group :development do
   gem 'rspec-rails'
-  gem 'annotate'
+  gem 'annotate', :git => "https://github.com/ctran/annotate_models.git"
   gem 'faker'
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'turn', :require => false
+  gem 'autotest'
+  gem 'autotest-rails-pure'
+  gem 'autotest-fsevent'
+  gem 'autotest-growl'
 end
 
 group :test do
@@ -37,4 +41,8 @@ group :test do
   gem 'factory_girl_rails'
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'turn', :require => false
+  gem 'autotest'
+  gem 'autotest-rails-pure'
+  gem 'autotest-fsevent'
+  gem 'autotest-growl'
 end

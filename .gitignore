@@ -5,3 +5,4 @@ log/*.log
 tmp/
 .sass-cache/
 .DS_Store
+config/database.yml

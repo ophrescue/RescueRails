@@ -14,8 +14,8 @@ development:
   reconnect: false
   database: RescueRails_development
   pool: 5
-  username: root
-  password:
+  username: local_dev
+  password: dev_local
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -27,8 +27,8 @@ test:
   reconnect: false
   database: RescueRails_test
   pool: 5
-  username: root
-  password:
+  username: local_dev
+  password: dev_local
   socket: /tmp/mysql.sock
 
 production:

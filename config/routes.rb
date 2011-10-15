@@ -1,6 +1,17 @@
 RescueRails::Application.routes.draw do
 
-    resources :adopters
+  # resources :adopters
+  resources :sessions, :only => [:new, :create, :destroy]
+
+
+  match '/signin',  :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
+
+
+  root              :to => 'pages#home'
+  match '/contact',  :to => 'pages#contact'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -5,3 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Create default admin user.
+
+@attr = { :name => "Admin User",
+          :email => "test@test.com",
+          :password => "foobar",
+          :password_confirmation => "foobar",
+          :admin => 'true'
+}
+
+ User.create!(@attr)

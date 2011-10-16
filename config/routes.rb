@@ -1,6 +1,9 @@
 RescueRails::Application.routes.draw do
 
+  get "sessions/new"
+
   # resources :adopters
+  resources :users
   resources :sessions, :only => [:new, :create, :destroy]
 
 

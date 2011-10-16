@@ -34,8 +34,6 @@ describe PagesController do
         other_user = Factory(:user, :email => Factory.next(:email))
         other_user.follow!(@user)
       end
-
-      end
     end
 
   end

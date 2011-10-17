@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   
-  before_filter :authenticate, :except => [:show, :new, :create]
+  before_filter :authenticate
   before_filter :correct_user, :only => [:edit, :update]
-  before_filter :admin_user,   :only => [:destroy]
+  before_filter :admin_user,   :only => [:new, :create, :destroy]
 
 
   def index
-    @title = "All users"
+    @title = "All OPH Staff"
     @users = User.paginate(:page => params[:page])
   end
 
@@ -17,17 +17,16 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
-    @title = "Sign up"
+    @title = "Add a Staff Account"
   end
   
   def create
     @user = User.new(params[:user])
     if @user.save
-      sign_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+      flash[:success] = "Account created for " + @user.name
+      redirect_to users_path
     else
-      @title = "Sign up"
+      @title = "Add a Staff Account"
       @user.password = ""
       @user.password_confirmation = ""
       render 'new'
@@ -35,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @title = "Edit user"
+    @title = "Edit Profile"
   end
 
   def update
@@ -43,30 +42,15 @@ class UsersController < ApplicationController
       flash[:success] = "Profile updated."
       redirect_to @user
     else
-      @title = "Edit user"
+      @title = "Edit Profile"
       render 'edit'
     end
   end
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User destroyed."
-    debugger
+    flash[:success] = "User deleted."
     redirect_to users_path
-  end
-
-  def following
-    @title = "Following"
-    @user = User.find(params[:id])
-    @users = @user.following.paginate(:page => params[:page])
-    render 'show_follow'
-  end
-
-  def followers
-    @title = "Followers"
-    @user = User.find(params[:id])
-    @users = @user.followers.paginate(:page => params[:page])
-    render 'show_follow'
   end
 
 

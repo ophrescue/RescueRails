@@ -1,5 +1,9 @@
-<h1>All users</h1>
-
+<h1><%= @title %></h1>
+<% if is_admin? %>
+<p>
+<%= link_to "Create new Staff Account", new_user_path %>
+</p>
+<% end %>
 <%= will_paginate %>
 
 <ul class="users">

@@ -6,6 +6,7 @@ describe UsersController do
   describe "GET 'show'" do
     before(:each) do
       @user = Factory(:user)
+      test_sign_in(@user)
     end
    
     it "should be successful" do
@@ -35,6 +36,13 @@ describe UsersController do
   end
 
   describe "GET 'new'" do
+
+    before(:each) do
+      @admin = Factory(:user, :email => "admin@example.com",
+                      :admin => true)
+      test_sign_in(@admin)
+    end
+
     it "should be successful" do
       get :new
       response.should be_success
@@ -42,7 +50,7 @@ describe UsersController do
     
     it "should have the right title" do
       get :new
-      response.should have_selector("title", :content => "Sign up")
+      response.should have_selector("title", :content => "Add a Staff Account")
     end
 
     it "should have a name field" do
@@ -81,15 +89,6 @@ describe UsersController do
         end.should_not change(User, :count)
       end
       
-      it "should have the right title" do
-        post :create, :user => @attr
-        response.should have_selector("title", :content => "Sign up")
-      end
-      
-      it "should render the 'new' page" do
-        post :create, :user => @attr
-        response.should render_template('new')
-      end  
     end
 
     describe "success" do
@@ -97,6 +96,9 @@ describe UsersController do
       before(:each) do
         @attr = { :name => "New User", :email => "user@example.com",
                   :password => "foobar", :password_confirmation => "foobar"}
+        @admin = Factory(:user, :email => "admin@example.com",
+                      :admin => true)
+      test_sign_in(@admin)
       end
     
       it "should create a user" do 
@@ -107,12 +109,12 @@ describe UsersController do
 
       it "should redirect to the user show page" do
         post :create, :user => @attr
-        response.should redirect_to(user_path(assigns(:user)))
+        response.should redirect_to(users_path)
       end
 
       it "should have a weclome message" do
         post :create, :user => @attr
-        flash[:success].should =~ /welcome to the sample app/i
+        flash[:success].should =~ /Account Created for New User/i
       end
 
       it "should sign the user in" do
@@ -137,7 +139,7 @@ describe UsersController do
 
     it "should have the right title" do
       get :edit, :id => @user
-      response.should have_selector("title", :content => "Edit user")
+      response.should have_selector("title", :content => "Edit Profile")
     end
 
     it "should have a link to change the Gravatar" do
@@ -165,10 +167,7 @@ describe UsersController do
         put :update, :id => @user, :user => @attr
         response.should render_template('edit')
       end
-      it "should have the right title" do
-        put :update, :id => @user, :user=> @attr
-        response.should have_selector("title", :content => "Edit user")
-      end
+
 
     end
 
@@ -262,11 +261,6 @@ describe UsersController do
       it "should be succesful" do
         get :index
         response.should be_success
-      end
-
-      it "should have the right title" do
-        get :index
-        response.should have_selector("title", :content => "All OPH Staff")
       end
 
       it "should have an element for each user" do

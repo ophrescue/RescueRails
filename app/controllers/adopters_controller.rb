@@ -6,6 +6,13 @@ class AdoptersController < ApplicationController
 
 	def create
 		@adopter = Adopter.new(params[:adopter])
-		@adopter.save
+		@adopter.status = 'pending'
+		if @adopter.save
+			flash[:success] = "Adopter Created"
+			redirect_to root_path
+		else
+			render 'new'
+		end
+
 	end
 end

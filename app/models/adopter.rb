@@ -39,6 +39,8 @@ class Adopter < ActiveRecord::Base
     validates_acceptance_of :pre_q_abuse,
                             :message => "We are unable to adopt to individuals convicted of animal abuse."
 
+    has_one :adoption_app, :dependent => :destroy
+
     validates :name,  :presence   => true,
                       :length     => { :maximum => 50 }
 

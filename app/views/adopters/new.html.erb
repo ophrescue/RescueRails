@@ -11,7 +11,7 @@
 	</div>
 	<div class="field">
 		<%= f.check_box :pre_q_costs %>
-		<%= f.label :pre_q_costs, "I have reviewed the costs of adopting from OPH"%>
+		<%= f.label :pre_q_costs, "I have reviewed the costs of adopting" %>
 	</div>
 	<div class="field">
 		<%= f.check_box :pre_q_meds %>
@@ -61,7 +61,76 @@
 		<%= f.label :when_to_call, "What is the best time to call you?" %><br />
 		<%= f.text_field :when_to_call %>
 	</div>
+	
+	<%= f.fields_for @adoption_app do |af| %>
+		<div>
+			<%= af.label :spouse_name, "Spouse/Partner" %><br />
+			<%= af.text_field :spouse_name %>
+		</div>
+		<div>
+			<%= af.label :other_household_names, "Other Household Members" %><br />
+			<%= af.text_field :other_household_names %>
+		</div>
+		<div>
+			<%= af.label :ready_to_adopt_dt, "How soon do you want to adopt?" %><br />
+			<%= af.text_field :ready_to_adopt_dt %>
+		</div>
+		<div>
+			<%= af.label :house_type, "Do you rent or own your home?" %><br />
+			<%= af.radio_button :house_type, 'Rent' %> Rent
+			<%= af.radio_button :house_type, 'Own' %> Own
+		</div>
+<!-- RENTAL_INFO_START -->
+		<div>
+			<%= af.label :landlord_name, "Landlord's Name" %>
+			<%= af.text_field :landlord_name %>
+		</div>
+		<div>
+			<%= af.label :landlord_phone, "Landlord's Phone Number" %>
+			<%= af.text_field :landlord_phone %>
+		</div>
+		<div>
+			<%= af.label :rent_dog_restrictions, "Rent Dog Restrictions?" %><br />
+			<%= af.text_area(:rent_dog_restrictions) %>
+		</div>
+		<div>
+			<%= af.label :rent_deposit %>
+			<%= af.text_field :rent_deposit %>
+		</div>
+		<div>
+			<%= af.label :rent_increase %>
+			<%= af.text_field :rent_increase %>
+		</div>
+<!-- RENTAL_INFO_END -->
+		<div>
+			<%= af.label :has_yard %>
+			<%= af.radio_button :has_yard, true %>Yes
+			<%= af.radio_button :has_yard, false %>No
+		</div>
+		<div>
+			<%= af.label :has_fence %>
+			<%= af.radio_button :has_fence, true %>Yes
+			<%= af.radio_button :has_fence, false %>No
+		</div>
+		<div>
+			<%= af.label :has_parks %>
+			<%= af.radio_button :has_parks, true %>Yes
+			<%= af.radio_button :has_parks, false %>No
+		</div>
+		<div>
+			<%= af.label :dog_exercise, "How will your dog get exercise?" %>
+			<%= af.text_area :dog_exercise %>
+		</div>
+		<div>
+			<%= af.label :dog_stay_when_away %>
+			<%= af.radio_button :dog_stay_when_away, 'In a crate' %>In a crate
+			<%= af.radio_button :dog_stay_when_away, 'In a limited area of home' %>In a limited area of home
+			<%= af.radio_button :dog_stay_when_away, 'Free range of home' %>Free range of home
+			<%= af.radio_button :dog_stay_when_away, 'Outside' %>Outside
+		</div>
+	<% end %>
+
 	<div class "actions">
-		<%= f.submit "Continue" %>
+		<%= f.submit "Submit" %>
 	</div>
 <% end %>

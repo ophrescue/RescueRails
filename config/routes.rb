@@ -1,11 +1,9 @@
 RescueRails::Application.routes.draw do
 
-  get "sessions/new"
-
   # resources :adopters
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
-
+  resources :password_resets
 
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'

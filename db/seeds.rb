@@ -12,7 +12,7 @@
           :email => "test@test.com",
           :password => "foobar",
           :password_confirmation => "foobar",
-          :admin => 'true'
+          :admin => 1
 }
 
  User.create!(@attr)

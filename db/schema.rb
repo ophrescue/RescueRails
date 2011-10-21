@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111014234342) do
+ActiveRecord::Schema.define(:version => 20111021143558) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -41,7 +41,9 @@ ActiveRecord::Schema.define(:version => 20111014234342) do
     t.datetime "updated_at"
     t.string   "encrypted_password"
     t.string   "salt"
-    t.boolean  "admin",              :default => false
+    t.boolean  "admin",                  :default => false
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

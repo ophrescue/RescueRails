@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   validates :password, :presence      => true,
                        :confirmation  => true,
                        :length        => { :within => 6..40 }
+
                        
   before_save :encrypt_password
   
@@ -49,7 +50,21 @@ class User < ActiveRecord::Base
     (user && user.salt == cookie_salt) ? user : nil
   end
 
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
+
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!(:validate => false)
+    UserMailer.password_reset(self).deliver
+  end
+
   private
+
     def encrypt_password
       self.salt = make_salt unless has_password?(password)
       self.encrypted_password = encrypt(password)

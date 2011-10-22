@@ -7,11 +7,11 @@
 	</div>
 	<div class="field">
 		<%= f.check_box :pre_q_commited %>
-		<%= f.label :pre_q_commited, "Everyone in my household is commited to adopoting a new family member"%>
+		<%= f.label :pre_q_commited, "Everyone in my household is commited to adopoting a new family member."%>
 	</div>
 	<div class="field">
 		<%= f.check_box :pre_q_costs %>
-		<%= f.label :pre_q_costs, raw("I have reviewed the <a href='http://www.ophrescue.org/page2.php' target= '_blank'>costs of adopting</a>") %>
+		<%= f.label :pre_q_costs, raw("I have reviewed the <a href='http://www.ophrescue.org/page2.php' target= '_blank'>costs of adopting</a>.") %>
 	</div>
 	<div class="field">
 		<%= f.check_box :pre_q_meds %>
@@ -90,7 +90,7 @@
 			<%= af.text_field :landlord_phone %>
 		</div>
 		<div>
-			<%= af.label :rent_dog_restrictions, "Rent Dog Restrictions?" %><br />
+			<%= af.label :rent_dog_restrictions, "What are the weight restrictions in your complex or development for dogs? Please provide a website or actual document showing the weight restrictions for animals in your apartment " %><br />
 			<%= af.text_area(:rent_dog_restrictions) %>
 		</div>
 		<div>
@@ -103,17 +103,17 @@
 		</div>
 <!-- RENTAL_INFO_END -->
 		<div>
-			<%= af.label :has_yard %>
+			<%= af.label :has_yard, "Do you have yard?" %>
 			<%= af.radio_button :has_yard, true %>Yes
 			<%= af.radio_button :has_yard, false %>No
 		</div>
 		<div>
-			<%= af.label :has_fence %>
+			<%= af.label :has_fence, "Do you have a fence?" %>
 			<%= af.radio_button :has_fence, true %>Yes
 			<%= af.radio_button :has_fence, false %>No
 		</div>
 		<div>
-			<%= af.label :has_parks %>
+			<%= af.label :has_parks, "Are their parks nearby?" %>
 			<%= af.radio_button :has_parks, true %>Yes
 			<%= af.radio_button :has_parks, false %>No
 		</div>
@@ -122,11 +122,98 @@
 			<%= af.text_area :dog_exercise %>
 		</div>
 		<div>
-			<%= af.label :dog_stay_when_away %>
+			<%= af.label :dog_stay_when_away, "Where will your dog stay when you're away from home?" %>
 			<%= af.radio_button :dog_stay_when_away, 'In a crate' %>In a crate
 			<%= af.radio_button :dog_stay_when_away, 'In a limited area of home' %>In a limited area of home
 			<%= af.radio_button :dog_stay_when_away, 'Free range of home' %>Free range of home
 			<%= af.radio_button :dog_stay_when_away, 'Outside' %>Outside
+		</div>
+		<div>
+			<%= af.label :max_hrs_alone, "What will be the maximum length of time your dog will be left home alone?" %>
+			<%= af.text_field :max_hrs_alone %>
+		</div>
+		<div>
+			<%= af.label :dog_at_night, "Where will your dog sleep at night?" %>
+			<%= af.radio_button :dog_at_night, 'In a crate' %>In a crate
+			<%= af.radio_button :dog_at_night, 'In a limited area of home' %>In a limited area of home
+			<%= af.radio_button :dog_at_night, 'Free range of home' %>Free range of home
+			<%= af.radio_button :dog_at_night, 'Outside' %>Outside
+		</div>
+		<div>
+			<%= af.label :dog_vacation, "What are your plans for taking care of the dog while you are on vacation?" %>
+			<%= af.text_area :dog_vacation %>
+		</div>
+		<div>
+			<%= af.label :have_pets, "Do you currently have any cats or dogs?" %>
+			<%= af.radio_button :have_pets, true %>Yes
+			<%= af.radio_button :have_pets, false %>No
+		</div>
+		<div>
+			<%= af.label :had_pets, "Have you had any cats or dogs in the past 10 years?" %>
+			<%= af.radio_button :had_pets, true %>Yes
+			<%= af.radio_button :had_pets, false %>No
+		</div>
+<!-- OTHER PETS START -->
+		<div>
+			<%= af.label :current_pets, "Please identify any current pets(name, age, breed)" %>
+			<%= af.text_area :current_pets %>
+		</div>
+		<div>
+			<%= af.label :had_pets, "Are all your dogs/cats spayed/neutered?" %>
+			<%= af.radio_button :current_pets_fixed, "Yes" %>Yes
+			<%= af.radio_button :current_pets_fixed, "No" %>No
+		</div>
+		<div>
+			<%= af.label :why_not_fixed, "If no, please explain why." %>
+			<%= af.text_area :why_not_fixed %>
+		</div>
+		<div>
+			<%= af.label :prior_pets, "Please identify any other pets you have had in the past 10 years, and why they are no longer with you." %>
+			<%= af.text_area :prior_pets %>
+		</div>
+		<div>
+			<%= af.label :current_pets_uptodate, "Are all your pets up to date on routine vaccines?" %>
+			<%= af.radio_button :current_pets_uptodate, true %>Yes
+			<%= af.radio_button :current_pets_uptodate, false %>No
+		</div>
+		<div>
+			<%= af.label :current_pets_uptodate_why, "If no, please explain why." %>
+			<%= af.text_area :current_pets_uptodate_why %>
+		</div>
+		<h5>Please provide the name and number of a veterinarian who has seen this pets:</h5>
+		<div>
+			<%= af.label :vet_name, "Veterinarian Name" %>
+			<%= af.text_field :vet_name %>
+		</div>
+		<div>
+			<%= af.label :vet_phone, "Veterinarian Phone" %>
+			<%= af.text_field :vet_phone %>
+		</div>
+<!-- OTHER PETS END -->
+		<div>
+			<%= af.label :plan_training, "Do you plan to train your new dog or attend training classes?" %>
+			<%= af.text_area :plan_training %>
+		</div>
+		<div>
+			<%= af.label :training_explain, "If training is recommended to overovercome behavior problems, would you participate in this training? (why/why not)" %>
+			<%= af.text_area :training_explain %>
+		</div>		
+		<div>
+			<%= af.label :has_new_dog_exp, "Do you have experience with bringing home a new dog and working through the adjustments" %>
+			<%= af.radio_button :has_new_dog_exp, true %>Yes
+			<%= af.radio_button :has_new_dog_exp, false %>No
+		</div>
+		<div>
+			<%= af.label :surrender_pet_causes, "What would cause you to surrender or give up your new dog?" %>
+			<%= af.text_area :surrender_pet_causes %>
+		</div>
+		<div>
+			<%= af.label :surrendered_pets, "Have you ever surrendered, sold or given away one of your pets? If so, please explain in detail" %>
+			<%= af.text_area :surrendered_pets %>
+		</div>
+		<div>
+			<%= af.label :why_adopt, "Please tell us why you would like to make this dog part of your family!" %>
+			<%= af.text_area :why_adopt %>
 		</div>
 	<% end %>
 

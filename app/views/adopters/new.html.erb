@@ -62,7 +62,7 @@
 		<%= f.text_field :when_to_call %>
 	</div>
 	
-	<%= f.fields_for @adoption_app do |af| %>
+	<%= f.fields_for :adoption_app do |af| %>
 		<div>
 			<%= af.label :spouse_name, "Spouse/Partner" %><br />
 			<%= af.text_field :spouse_name %>

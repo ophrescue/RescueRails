@@ -2,7 +2,7 @@ class AdoptersController < ApplicationController
 
 	def new
 		@adopter = Adopter.new
-		@adoption_app = AdoptionApp.new
+		@adopter.adoption_app.build
 	end
 
 	def create

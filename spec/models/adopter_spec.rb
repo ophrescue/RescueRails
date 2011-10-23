@@ -10,8 +10,45 @@ describe Adopter do
 				  :city => "Baltimore",
 				  :state => "MD",
 				  :zip => "21224",
-				  :status => "pending",
-				  :when_to_call => "anytime"}
+				  :when_to_call => "anytime",
+          :status => "pending"
+        }
+          # :spouse_name => "Miss Spouse",             
+          # :other_household_names => "OtherHouse People" ,    
+          # :ready_to_adopt_dt      =>  "2011-01-01" , 
+          # :house_type            => 'Rent',
+          # :dog_reqs                 => 'Be Awesome',
+          # :has_yard              => 1,
+          # :has_fence                => 1 ,
+          # :has_parks                =>  1 ,
+          # :dog_exercise              => "Dog will goto Gym" ,
+          # :dog_stay_when_away       =>  "In crate",
+          # :max_hrs_alone            =>  8,
+          # :dog_at_night             =>  "In crate",
+          # :dog_vacation              =>  "dog vacation",
+          # :have_pets                 =>  1,
+          # :had_pets                  =>  1,
+          # :current_pets          =>  "My current pets",
+          # :current_pets_fixed    => 1,
+          # :why_not_fixed          => "they are fixed",
+          # :prior_pets              =>  "List of old dogs",
+          # :current_pets_uptodate      => 1,
+          # :current_pets_uptodate_why  => "upto date",
+          # :vet_name                   => "Dr Pets",
+          # :vet_phone                => "800-222-2222",
+          # :landlord_name           =>  "Mr Landlord",
+          # :landlord_phone           =>  "111-111-1111",
+          # :rent_dog_restrictions     =>  "No Dog Restrictions",
+          # :rent_deposit          =>  100,
+          # :rent_increase         =>  200,
+          # :annual_cost_est          =>  500 ,
+          # :plan_training              => "I will train",
+          # :has_new_dog_exp       =>  1,
+          # :surrender_pet_causes  =>  "if it barks",
+          # :training_explain     =>    "I will train",
+          # :surrendered_pets   =>   "I never gave up a pet before",
+          # :why_adopt        =>  "I want a dog"    
+          # }                 
 	end
 
 	it "should createa a new instance given valid attributes" do

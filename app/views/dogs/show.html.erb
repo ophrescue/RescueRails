@@ -1,0 +1,13 @@
+<table class="profile" summary="Dog information">
+	<tr>
+		<td class="main">
+			<h1>
+				<%= @dog.name %>
+			</h1>
+		<td class="sidebar round">	
+			<strong>Name</strong> 	<%= @dog.name %><br />
+			<strong>URL</strong>	<%= link_to dog_path(@dog), @user %></br>
+			<strong><%= link_to "Edit Dog", edit_dog_path(@dog) %></strong>
+		</td>
+	</tr>
+</table>

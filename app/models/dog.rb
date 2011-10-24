@@ -1,5 +1,3 @@
-class Dog < ActiveRecord::Base
-end
 # == Schema Information
 #
 # Table name: dogs
@@ -9,4 +7,7 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
+
+class Dog < ActiveRecord::Base
+end
 

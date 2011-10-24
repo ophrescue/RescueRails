@@ -2,6 +2,7 @@ RescueRails::Application.routes.draw do
 
   resources :adopters
   resources :users
+  resources :dogs
   resources :sessions, :only => [:new, :create, :destroy]
   resources :password_resets
 

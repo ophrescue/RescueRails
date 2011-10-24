@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111021200833) do
+ActiveRecord::Schema.define(:version => 20111024225638) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -75,7 +75,24 @@ ActiveRecord::Schema.define(:version => 20111021200833) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tracking_id"
+    t.integer  "breed_id"
+    t.string   "age",              :limit => 75
+    t.string   "size",             :limit => 75
+    t.boolean  "is_altered"
+    t.string   "sex",              :limit => 1
+    t.boolean  "is_special_needs"
+    t.boolean  "no_dogs"
+    t.boolean  "no_cats"
+    t.boolean  "no_kids"
+    t.string   "status"
   end
+
+  add_index "dogs", ["age"], :name => "index_dogs_on_age"
+  add_index "dogs", ["breed_id"], :name => "index_dogs_on_breed_id"
+  add_index "dogs", ["name"], :name => "index_dogs_on_name"
+  add_index "dogs", ["sex"], :name => "index_dogs_on_sex"
+  add_index "dogs", ["size"], :name => "index_dogs_on_size"
 
   create_table "users", :force => true do |t|
     t.string   "name"

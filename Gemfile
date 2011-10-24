@@ -5,7 +5,6 @@ gem 'rails', '3.1.1'
 gem 'mysql2'
 gem 'will_paginate',  '~> 3.0.2'
 gem 'gravatar_image_tag'
-gem 'pg'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -22,8 +21,6 @@ gem 'jquery-rails'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-gem 'heroku'
 
 group :development do
   gem 'rspec-rails'

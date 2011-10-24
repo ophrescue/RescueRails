@@ -5,6 +5,9 @@
 // the compiled file.
 //
 //= require jquery
-//= require jquery-ui
 //= require jquery_ujs
+//= require jquery.form
+//= require bbq
+//= require jquery-ui
+//= require jquery.form.wizard
 //= require_tree .

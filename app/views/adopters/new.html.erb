@@ -1,6 +1,7 @@
 <%= form_for(@adopter) do |f| %>
 	<%= render 'shared/error_messages', :object => f.object %>
 	
+	<div id="fieldWrapper">
 	<%= render 'preq', :f => f %>
 
 	<%= render 'contact', :f => f %>
@@ -17,8 +18,9 @@
 
 		<%= render 'new_dog_q', :af => af %>
 	<% end %>
-
-	<div class "actions">
+	</div>
+	<div id="Navigation"class="actions">
+		<input class="navigation_button" id="back" value="Back" type="reset" />
 		<%= f.submit "Submit" %>
 	</div>
 <% end %>

@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.1'
 
-gem 'sqlite3'
+gem 'pg'
 gem 'will_paginate',  '~> 3.0.2'
 gem 'gravatar_image_tag'
 

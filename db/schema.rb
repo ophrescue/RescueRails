@@ -71,6 +71,12 @@ ActiveRecord::Schema.define(:version => 20111024225638) do
 
   add_index "adoption_apps", ["adopter_id"], :name => "index_adoption_apps_on_adopter_id"
 
+  create_table "breeds", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "dogs", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -80,7 +86,7 @@ ActiveRecord::Schema.define(:version => 20111024225638) do
     t.string   "age",              :limit => 75
     t.string   "size",             :limit => 75
     t.boolean  "is_altered"
-    t.string   "sex",              :limit => 1
+    t.string   "gender",           :limit => 6
     t.boolean  "is_special_needs"
     t.boolean  "no_dogs"
     t.boolean  "no_cats"
@@ -90,8 +96,8 @@ ActiveRecord::Schema.define(:version => 20111024225638) do
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"
   add_index "dogs", ["breed_id"], :name => "index_dogs_on_breed_id"
+  add_index "dogs", ["gender"], :name => "index_dogs_on_gender"
   add_index "dogs", ["name"], :name => "index_dogs_on_name"
-  add_index "dogs", ["sex"], :name => "index_dogs_on_sex"
   add_index "dogs", ["size"], :name => "index_dogs_on_size"
 
   create_table "users", :force => true do |t|

@@ -5,7 +5,7 @@ class AddDetialsToDogs < ActiveRecord::Migration
   	add_column :dogs, :age, :string, :limit => 75
   	add_column :dogs, :size, :string, :limit => 75
   	add_column :dogs, :is_altered, :boolean
-  	add_column :dogs, :sex, :string, :limit => 1
+  	add_column :dogs, :gender, :string, :limit => 6
   	add_column :dogs, :is_special_needs, :boolean
   	add_column :dogs, :no_dogs, :boolean
   	add_column :dogs, :no_cats, :boolean
@@ -14,7 +14,7 @@ class AddDetialsToDogs < ActiveRecord::Migration
   	
   	add_index  :dogs, :breed_id
   	add_index  :dogs, :age
-  	add_index  :dogs, :sex
+  	add_index  :dogs, :gender
   	add_index  :dogs, :size
   	add_index  :dogs, :name
   end

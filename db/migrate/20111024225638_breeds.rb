@@ -1,7 +1,10 @@
 class Breeds < ActiveRecord::Migration
-  def up
+  def change
+	  create_table :breeds do |t|
+	  	t.string :name 
+
+	  	t.timestamps
+	  end
   end
 
-  def down
-  end
 end

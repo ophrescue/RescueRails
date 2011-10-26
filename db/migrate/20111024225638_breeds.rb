@@ -6,5 +6,4 @@ class Breeds < ActiveRecord::Migration
 	  	t.timestamps
 	  end
   end
-
 end

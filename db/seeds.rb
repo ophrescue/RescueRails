@@ -8,6 +8,8 @@
 
 # Create default admin user.
 
+User.destroy_all
+
 @attr = { :name => "Admin User",
           :email => "test@test.com",
           :password => "foobar",
@@ -16,3 +18,14 @@
 }
 
  User.create!(@attr)
+
+
+ # Load list of breeds to breed table
+
+ Breed.destroy_all
+ open("db/dog_breeds.txt") do |breeds|
+ 	breeds.read.each_line do |breed|
+ 		breed = breed.chomp
+ 		Breed.create!(:name => breed)
+ 	end
+ end

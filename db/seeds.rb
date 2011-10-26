@@ -14,10 +14,10 @@ User.destroy_all
           :email => "test@test.com",
           :password => "foobar",
           :password_confirmation => "foobar",
-          :admin => true
 }
 
- User.create!(@attr)
+ user = User.create!(@attr)
+ user.toggle!(:admin)
 
 
  # Load list of breeds to breed table

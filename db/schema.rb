@@ -82,22 +82,25 @@ ActiveRecord::Schema.define(:version => 20111024225638) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tracking_id"
-    t.integer  "breed_id"
-    t.string   "age",              :limit => 75
-    t.string   "size",             :limit => 75
+    t.integer  "primary_breed_id"
+    t.integer  "secondary_breed_id"
+    t.string   "status"
+    t.string   "age",                :limit => 75
+    t.string   "size",               :limit => 75
     t.boolean  "is_altered"
-    t.string   "gender",           :limit => 6
+    t.string   "gender",             :limit => 6
     t.boolean  "is_special_needs"
     t.boolean  "no_dogs"
     t.boolean  "no_cats"
     t.boolean  "no_kids"
-    t.string   "status"
+    t.text     "description"
   end
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"
-  add_index "dogs", ["breed_id"], :name => "index_dogs_on_breed_id"
   add_index "dogs", ["gender"], :name => "index_dogs_on_gender"
   add_index "dogs", ["name"], :name => "index_dogs_on_name"
+  add_index "dogs", ["primary_breed_id"], :name => "index_dogs_on_primary_breed_id"
+  add_index "dogs", ["secondary_breed_id"], :name => "index_dogs_on_secondary_breed_id"
   add_index "dogs", ["size"], :name => "index_dogs_on_size"
 
   create_table "users", :force => true do |t|

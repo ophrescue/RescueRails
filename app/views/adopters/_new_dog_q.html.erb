@@ -1,26 +1,26 @@
 <div id="new_dog_q" class="step">
-		<div>
+		<div class="field">
 			<%= af.label :plan_training, "Do you plan to train your new dog or attend training classes?" %>
 			<%= af.text_area :plan_training %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :training_explain, "If training is recommended to overovercome behavior problems, would you participate in this training? (why/why not)" %>
 			<%= af.text_area :training_explain %>
 		</div>		
-		<div>
+		<div class="field">
 			<%= af.label :has_new_dog_exp, "Do you have experience with bringing home a new dog and working through the adjustments" %>
 			<%= af.radio_button :has_new_dog_exp, true %>Yes
 			<%= af.radio_button :has_new_dog_exp, false %>No
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :surrender_pet_causes, "What would cause you to surrender or give up your new dog?" %>
 			<%= af.text_area :surrender_pet_causes %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :surrendered_pets, "Have you ever surrendered, sold or given away one of your pets? If so, please explain in detail" %>
 			<%= af.text_area :surrendered_pets %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :why_adopt, "Please tell us why you would like to make this dog part of your family!" %>
 			<%= af.text_area :why_adopt %>
 		</div>

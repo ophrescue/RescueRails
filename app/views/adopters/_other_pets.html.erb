@@ -1,36 +1,36 @@
 <div id="other_pets" class="step">
-		<div>
+		<div class="field">
 			<%= af.label :current_pets, "Please identify any current pets(name, age, breed)" %>
 			<%= af.text_area :current_pets %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :had_pets, "Are all your dogs/cats spayed/neutered?" %>
 			<%= af.radio_button :current_pets_fixed, "Yes" %>Yes
 			<%= af.radio_button :current_pets_fixed, "No" %>No
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :why_not_fixed, "If no, please explain why." %>
 			<%= af.text_area :why_not_fixed %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :prior_pets, "Please identify any other pets you have had in the past 10 years, and why they are no longer with you." %>
 			<%= af.text_area :prior_pets %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :current_pets_uptodate, "Are all your pets up to date on routine vaccines?" %>
 			<%= af.radio_button :current_pets_uptodate, true %>Yes
 			<%= af.radio_button :current_pets_uptodate, false %>No
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :current_pets_uptodate_why, "If no, please explain why." %>
 			<%= af.text_area :current_pets_uptodate_why %>
 		</div>
 		<h5>Please provide the name and number of a veterinarian who has seen this pets:</h5>
-		<div>
+		<div class="field">
 			<%= af.label :vet_name, "Veterinarian Name" %>
 			<%= af.text_field :vet_name %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :vet_phone, "Veterinarian Phone" %>
 			<%= af.text_field :vet_phone %>
 		</div>

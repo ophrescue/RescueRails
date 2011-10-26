@@ -1,17 +1,17 @@
 <div id="your_home" class="step">
-		<div>
+		<div class="field">
 			<%= af.label :spouse_name, "Spouse/Partner" %><br />
 			<%= af.text_field :spouse_name %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :other_household_names, "Other Household Members" %><br />
 			<%= af.text_field :other_household_names %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :ready_to_adopt_dt, "How soon do you want to adopt?" %><br />
 			<%= af.text_field :ready_to_adopt_dt %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :house_type, "Do you rent or own your home?" %><br />
 			<%= af.radio_button :house_type, 'Rent' %> Rent
 			<%= af.radio_button :house_type, 'Own' %> Own

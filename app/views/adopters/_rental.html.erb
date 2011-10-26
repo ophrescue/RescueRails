@@ -1,21 +1,21 @@
 <div id="rental" class="step">
-		<div>
+		<div class="field">
 			<%= af.label :landlord_name, "Landlord's Name" %>
 			<%= af.text_field :landlord_name %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :landlord_phone, "Landlord's Phone Number" %>
 			<%= af.text_field :landlord_phone %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :rent_dog_restrictions, "What are the weight restrictions in your complex or development for dogs? Please provide a website or actual document showing the weight restrictions for animals in your apartment " %><br />
 			<%= af.text_area(:rent_dog_restrictions) %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :rent_deposit %>
 			<%= af.text_field :rent_deposit %>
 		</div>
-		<div>
+		<div class="field">
 			<%= af.label :rent_increase %>
 			<%= af.text_field :rent_increase %>
 		</div>

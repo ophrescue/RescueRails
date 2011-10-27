@@ -19,6 +19,7 @@
 #  no_cats            :boolean
 #  no_kids            :boolean
 #  description        :text
+#  is_mix             :boolean
 #
 
 class Dog < ActiveRecord::Base
@@ -36,7 +37,8 @@ class Dog < ActiveRecord::Base
 					:no_dogs,
 					:no_cats,
 					:no_kids,
-					:description
+					:description,
+					:is_mix
 
 	validates :name, :presence => true,
 					 :length   => { :maximum => 75 }

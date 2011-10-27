@@ -12,7 +12,7 @@
 	</div>
 	<div class="field">
 		<%= f.label :status %><br />
-		<%= f.text_field :status %>
+		<%= select(:f,:status, Dog::STATUSES, :prompt => '-select-') %>
 	</div>
 	<div class="field">
 		<%= f.label :primary_breed_id %><br />
@@ -24,11 +24,17 @@
 	</div>
 	<div class="field">
 		<%= f.label :age %><br />
-		<%= f.text_field :age %>	
+		<%= select(:f,:age, Dog::AGES, :prompt => '-select-') %>	
 	</div>
 	<div class="field">
 		<%= f.label :size, "Size when grown" %><br />
-		<%= f.text_field :size %>	
+		<%= select(:f,:size, Dog::SIZES, :prompt => '-select-') %>	
+	</div>	
+	<br />
+	<h3>Details</h3>
+	<div class="field">
+		<%= f.check_box :is_mix %>
+		<%= f.label :is_mix %>
 	</div>	
 	<div class="field">
 		<%= f.check_box :is_altered %>

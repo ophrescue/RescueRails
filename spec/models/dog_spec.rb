@@ -24,5 +24,6 @@ end
 #  no_cats            :boolean
 #  no_kids            :boolean
 #  description        :text
+#  is_mix             :boolean
 #
 

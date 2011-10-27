@@ -1,4 +1,7 @@
 class Breed < ActiveRecord::Base
+
+	has_many :dog
+
 end
 # == Schema Information
 #

@@ -2,9 +2,13 @@ RescueRails::Application.routes.draw do
 
   resources :adopters
   resources :users
-  resources :dogs
+  resources :dogs do
+    get :autocomplete_breed_name, :on => :collection
+  end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :password_resets
+
+  
 
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'

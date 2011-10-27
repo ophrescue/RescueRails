@@ -5,5 +5,6 @@ class Breeds < ActiveRecord::Migration
 
 	  	t.timestamps
 	  end
+	  add_index  :breeds, :name
   end
 end

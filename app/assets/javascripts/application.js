@@ -6,8 +6,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.form
-//= require bbq
 //= require jquery-ui
+//= require jquery.form
+//= require autocomplete-rails
+//= require bbq
 //= require jquery.form.wizard
 //= require_tree .

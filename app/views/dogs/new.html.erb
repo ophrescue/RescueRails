@@ -12,23 +12,27 @@
 	</div>
 	<div class="field">
 		<%= f.label :status %><br />
-		<%= select(:f,:status, Dog::STATUSES, :prompt => '-select-') %>
+		<%= f.select(:status, Dog::STATUSES, :prompt => '-select-') %>
 	</div>
 	<div class="field">
 		<%= f.label :primary_breed_id %><br />
-		<%= f.text_field :primary_breed_id %>	
+		<%= f.autocomplete_field :primary_breed_name, autocomplete_breed_name_dogs_path %>
 	</div>
 	<div class="field">
 		<%= f.label :secondary_breed_id %><br />
 		<%= f.text_field :secondary_breed_id %>	
 	</div>
 	<div class="field">
+		<%= f.label :gender %><br />
+		<%= f.select(:gender, Dog::GENDERS, :prompt => '-select-') %>	
+	</div>	
+	<div class="field">
 		<%= f.label :age %><br />
-		<%= select(:f,:age, Dog::AGES, :prompt => '-select-') %>	
+		<%= f.select(:age, Dog::AGES, :prompt => '-select-') %>	
 	</div>
 	<div class="field">
 		<%= f.label :size, "Size when grown" %><br />
-		<%= select(:f,:size, Dog::SIZES, :prompt => '-select-') %>	
+		<%= f.select(:size, Dog::SIZES, :prompt => '-select-') %>	
 	</div>	
 	<br />
 	<h3>Details</h3>

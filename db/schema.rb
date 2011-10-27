@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(:version => 20111027001653) do
     t.datetime "updated_at"
   end
 
+  add_index "breeds", ["name"], :name => "index_breeds_on_name"
+
   create_table "dogs", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"

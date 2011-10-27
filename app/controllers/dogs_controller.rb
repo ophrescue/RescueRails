@@ -1,4 +1,5 @@
 class DogsController < ApplicationController
+  autocomplete :breed, :name, :full => true
 
   before_filter :admin_user,   :only => [:new, :create, :destroy]
 

@@ -24,6 +24,9 @@
 
 class Dog < ActiveRecord::Base
 
+	attr_accessor   :primary_breed_name,
+					:secondary_breed_name
+
 	attr_accessible :name, 
 					:tracking_id, 
 					:primary_breed_id,
@@ -39,6 +42,9 @@ class Dog < ActiveRecord::Base
 					:no_kids,
 					:description,
 					:is_mix
+
+	belongs_to :breed, :foreign_key => :primary_breed_id
+	belongs_to :breed, :foreign_key => :secondary_breed_id
 
 	validates :name, :presence => true,
 					 :length   => { :maximum => 75 }

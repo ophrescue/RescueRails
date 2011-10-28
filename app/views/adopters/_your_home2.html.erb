@@ -1,4 +1,4 @@
-<div id="your_home2" class="step">
+<div id="own" class="step">
 		<div class="field">
 			<%= af.label :has_yard, "Do you have yard?" %>
 			<%= af.radio_button :has_yard, true %>Yes
@@ -15,39 +15,39 @@
 			<%= af.radio_button :has_parks, false %>No
 		</div>
 		<div class="field">
-			<%= af.label :dog_exercise, "How will your dog get exercise?" %>
+			<%= af.label :dog_exercise, "How will your dog get exercise?" %><br />
 			<%= af.text_area :dog_exercise %>
 		</div>
 		<div class="field">
-			<%= af.label :dog_stay_when_away, "Where will your dog stay when you're away from home?" %>
-			<%= af.radio_button :dog_stay_when_away, 'In a crate' %>In a crate
-			<%= af.radio_button :dog_stay_when_away, 'In a limited area of home' %>In a limited area of home
-			<%= af.radio_button :dog_stay_when_away, 'Free range of home' %>Free range of home
-			<%= af.radio_button :dog_stay_when_away, 'Outside' %>Outside
+			<%= af.label :dog_stay_when_away, "Where will your dog stay when you're away from home?" %><br />
+			<%= af.radio_button :dog_stay_when_away, 'In a crate' %>In a crate<br />
+			<%= af.radio_button :dog_stay_when_away, 'In a limited area of home' %>In a limited area of home<br />
+			<%= af.radio_button :dog_stay_when_away, 'Free range of home' %>Free range of home<br />
+			<%= af.radio_button :dog_stay_when_away, 'Outside' %>Outside<br />
 		</div>
 		<div class="field">
 			<%= af.label :max_hrs_alone, "What will be the maximum length of time your dog will be left home alone?" %>
-			<%= af.text_field :max_hrs_alone %>
+			<%= af.select :max_hrs_alone, (0..24), {:selected => 8} %> hours
 		</div>
 		<div class="field">
-			<%= af.label :dog_at_night, "Where will your dog sleep at night?" %>
-			<%= af.radio_button :dog_at_night, 'In a crate' %>In a crate
-			<%= af.radio_button :dog_at_night, 'In a limited area of home' %>In a limited area of home
-			<%= af.radio_button :dog_at_night, 'Free range of home' %>Free range of home
-			<%= af.radio_button :dog_at_night, 'Outside' %>Outside
+			<%= af.label :dog_at_night, "Where will your dog sleep at night?" %><br />
+			<%= af.radio_button :dog_at_night, 'In a crate' %>In a crate<br />
+			<%= af.radio_button :dog_at_night, 'In a limited area of home' %>In a limited area of home<br />
+			<%= af.radio_button :dog_at_night, 'Free range of home' %>Free range of home<br />
+			<%= af.radio_button :dog_at_night, 'Outside' %>Outside<br />
 		</div>
 		<div class="field">
-			<%= af.label :dog_vacation, "What are your plans for taking care of the dog while you are on vacation?" %>
+			<%= af.label :dog_vacation, "What are your plans for taking care of the dog while you are on vacation?" %><br />
 			<%= af.text_area :dog_vacation %>
 		</div>
 		<div class="field">
-			<%= af.label :have_pets, "Do you currently have any cats or dogs?" %>
-			<%= af.radio_button :have_pets, true %>Yes
+			<%= af.label :have_pets, "Do you currently have any cats or dogs?" %><br />
+			<%= af.radio_button :have_pets, true %>Yes<br />
 			<%= af.radio_button :have_pets, false %>No
 		</div>
 		<div class="field">
-			<%= af.label :had_pets, "Have you had any cats or dogs in the past 10 years?" %>
-			<%= af.radio_button :had_pets, true %>Yes
-			<%= af.radio_button :had_pets, false %>No
+			<%= af.label :had_pets, "Have you had any cats or dogs in the past 10 years?" %><br />
+			<%= af.radio_button :had_pets, true %>Yes<br />
+			<%= af.radio_button :had_pets, false %>No<br />
 		</div>
 </div>

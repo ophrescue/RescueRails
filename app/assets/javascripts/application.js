@@ -7,7 +7,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery.form
 //= require autocomplete-rails
 //= require bbq
 //= require jquery.form.wizard

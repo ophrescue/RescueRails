@@ -1,3 +1,4 @@
+<h3>Operation Paws for Homes Adoption Application</h3>
 <%= form_for(@adopter) do |f| %>
 	<%= render 'shared/error_messages', :object => f.object %>
 	
@@ -19,6 +20,7 @@
 		<%= render 'new_dog_q', :af => af %>
 	<% end %>
 	</div>
+	<br />
 	<div id="Navigation"class="actions">
 		<input class="navigation_button" id="back" value="Back" type="reset" />
 		<%= f.submit "Submit", :id =>"next", :class=>"navigation_button" %>

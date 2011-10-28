@@ -19,7 +19,7 @@
 #  no_cats            :boolean
 #  no_kids            :boolean
 #  description        :text
-#  is_mix             :boolean
+#  is_purebred        :boolean
 #
 
 class Dog < ActiveRecord::Base
@@ -41,7 +41,7 @@ class Dog < ActiveRecord::Base
 					:no_cats,
 					:no_kids,
 					:description,
-					:is_mix
+					:is_purebred
 
 	belongs_to :primary_breed, :class_name => 'Breed'
 	belongs_to :secondary_breed, :class_name => 'Breed'

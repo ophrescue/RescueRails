@@ -43,8 +43,8 @@ class Dog < ActiveRecord::Base
 					:description,
 					:is_mix
 
-	belongs_to :breed, :foreign_key => :primary_breed_id
-	belongs_to :breed, :foreign_key => :secondary_breed_id
+	belongs_to :primary_breed, :class_name => 'Breed,'
+	belongs_to :secondary_breed, :class_name => 'Breed'
 
 	validates :name, :presence => true,
 					 :length   => { :maximum => 75 }

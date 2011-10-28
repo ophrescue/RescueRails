@@ -39,8 +39,8 @@
 	<br />
 	<h3>Details</h3>
 	<div class="field">
-		<%= f.check_box :is_mix %>
-		<%= f.label :is_mix %>
+		<%= f.check_box :is_purebred %>
+		<%= f.label :is_purebred %>
 	</div>	
 	<div class="field">
 		<%= f.check_box :is_altered %>
@@ -67,7 +67,7 @@
 		<%= f.text_area :description %>	
 	</div>
 
-	<div class "actions">
+	<div class="actions">
 		<%= f.submit "Add Dog" %>
 	</div>
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111027001653) do
+ActiveRecord::Schema.define(:version => 20111028002959) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(:version => 20111027001653) do
     t.boolean  "no_cats"
     t.boolean  "no_kids"
     t.text     "description"
-    t.boolean  "is_mix"
+    t.boolean  "is_purebred"
   end
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"

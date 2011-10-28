@@ -21,6 +21,18 @@ class DogsController < ApplicationController
   def edit
     @dog = Dog.find(params[:id])
     @title = "Edit Dog"
+    debugger
+  end
+
+  def update
+    @dog = Dog.find(params[:id])
+    if @dog.update_attributes(params[:dog])
+      flash[:success] = "Dog updated."
+      redirect_to @dog
+    else
+      @title = "Edit Dog"
+      render 'edit'
+    end
   end
 
   def create

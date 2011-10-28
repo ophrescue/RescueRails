@@ -19,9 +19,9 @@ class DogsController < ApplicationController
   end
 
   def edit
-    @dog = Dog.find(params[:id])
-    @dog.primary_breed_name = @dog.primary_breed.name
-    @dog.secondary_breed_name = @dog.secondary_breed.name
+    @dog = Dog.find(params[:id]) 
+    @dog.primary_breed_name = @dog.primary_breed.name unless @dog.primary_breed.nil?
+    @dog.secondary_breed_name = @dog.secondary_breed.name unless @dog.secondary_breed.nil?
     @title = "Edit Dog"
   end
 

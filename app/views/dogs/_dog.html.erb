@@ -1,6 +1,6 @@
 <li>
 	<%= link_to dog.name, dog %>
-	<% if current_user.admin? %>
+	<% if is_admin? %>
 	|	<%= link_to "delete", dog, :method => :delete, :confirm => "You sure?",
 								    :title => "Delete #{dog.name}" %>
 	<% end %>

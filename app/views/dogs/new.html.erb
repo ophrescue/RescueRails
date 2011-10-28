@@ -15,12 +15,14 @@
 		<%= f.select(:status, Dog::STATUSES, :prompt => '-select-') %>
 	</div>
 	<div class="field">
-		<%= f.label :primary_breed_id %><br />
-		<%= f.autocomplete_field :primary_breed_name, autocomplete_breed_name_dogs_path %>
+		<%= f.label :primary_breed_name %><br />
+		<%= f.autocomplete_field :primary_breed_name, autocomplete_breed_name_dogs_path, :id_element => '#dog_primary_breed_id' %>
+		<%= f.hidden_field :primary_breed_id =%>
 	</div>
 	<div class="field">
-		<%= f.label :secondary_breed_id %><br />
-		<%= f.text_field :secondary_breed_id %>	
+		<%= f.label :secondary_breed_name %><br />
+		<%= f.autocomplete_field :secondary_breed_name, autocomplete_breed_name_dogs_path, :id_element => '#dog_secondary_breed_id' %>
+		<%= f.hidden_field :secondary_breed_id %>	
 	</div>
 	<div class="field">
 		<%= f.label :gender %><br />

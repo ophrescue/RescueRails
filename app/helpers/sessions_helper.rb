@@ -24,10 +24,7 @@ module SessionsHelper
 	end
 
 	def is_admin?
-		if !current_user.nil?
-			then current_user.admin?
-		else false
-		end
+		current_user.admin? unless current_user.nil?
 	end
 
 	def sign_out

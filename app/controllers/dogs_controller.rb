@@ -20,8 +20,9 @@ class DogsController < ApplicationController
 
   def edit
     @dog = Dog.find(params[:id])
+    @dog.primary_breed_name = @dog.primary_breed.name
+    @dog.secondary_breed_name = @dog.secondary_breed.name
     @title = "Edit Dog"
-    debugger
   end
 
   def update

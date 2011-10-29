@@ -39,6 +39,9 @@ class Adopter < ActiveRecord::Base
     validates_acceptance_of :pre_q_abuse,
                             :message => "We are unable to adopt to individuals convicted of animal abuse."
 
+    has_many :references, :dependent => :destroy
+    accepts_nested_attributes_for :references, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
+
     has_many :adoption_app, :dependent => :destroy
     accepts_nested_attributes_for :adoption_app
 

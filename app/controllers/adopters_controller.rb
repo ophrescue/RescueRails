@@ -3,6 +3,9 @@ class AdoptersController < ApplicationController
 	def new
 		@adopter = Adopter.new
 		@adopter.adoption_app.build
+		3.times do
+			@adopter.references.build
+		end
 	end
 
 	def create

@@ -19,6 +19,13 @@
 
 		<%= render 'new_dog_q', :af => af %>
 	<% end %>
+
+	<%= f.fields_for :references do |builder| %>
+
+		<%= render 'reference_fields', :f => builder %>
+
+	<% end %>
+
 	</div>
 	<br />
 	<div id="Navigation"class="actions">

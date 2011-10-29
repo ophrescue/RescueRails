@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111028002959) do
+ActiveRecord::Schema.define(:version => 20111029024207) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -105,6 +105,18 @@ ActiveRecord::Schema.define(:version => 20111028002959) do
   add_index "dogs", ["primary_breed_id"], :name => "index_dogs_on_primary_breed_id"
   add_index "dogs", ["secondary_breed_id"], :name => "index_dogs_on_secondary_breed_id"
   add_index "dogs", ["size"], :name => "index_dogs_on_size"
+
+  create_table "references", :force => true do |t|
+    t.integer  "adopter_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "relationship"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "references", ["adopter_id"], :name => "index_references_on_adopter_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

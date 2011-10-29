@@ -1,0 +1,19 @@
+class Reference < ActiveRecord::Base
+
+	belongs_to :adopter
+	
+end
+# == Schema Information
+#
+# Table name: references
+#
+#  id           :integer         not null, primary key
+#  adopter_id   :integer
+#  name         :string(255)
+#  email        :string(255)
+#  phone        :string(255)
+#  relationship :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+

@@ -1,21 +1,3 @@
-# == Schema Information
-#
-# Table name: adopters
-#
-#  id           :integer(4)      not null, primary key
-#  name         :string(255)
-#  email        :string(255)
-#  phone        :string(255)
-#  address1     :string(255)
-#  address2     :string(255)
-#  city         :string(255)
-#  state        :string(255)
-#  zip          :string(255)
-#  status       :string(255)
-#  when_to_call :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-
 class Adopter < ActiveRecord::Base
 
     attr_accessor :pre_q_age,
@@ -40,10 +22,10 @@ class Adopter < ActiveRecord::Base
                             :message => "We are unable to adopt to individuals convicted of animal abuse."
 
     has_many :references, :dependent => :destroy
-    accepts_nested_attributes_for :references, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
+    accepts_nested_attributes_for :references
 
-    has_many :adoption_app, :dependent => :destroy
-    accepts_nested_attributes_for :adoption_app
+    has_many :adoption_apps, :dependent => :destroy
+    accepts_nested_attributes_for :adoption_apps
 
     validates :name,  :presence   => true,
                       :length     => { :maximum => 50 }
@@ -75,4 +57,20 @@ class Adopter < ActiveRecord::Base
 
 end
 
-
+# == Schema Information
+#
+# Table name: adopters
+#
+#  id           :integer(4)      not null, primary key
+#  name         :string(255)
+#  email        :string(255)
+#  phone        :string(255)
+#  address1     :string(255)
+#  address2     :string(255)
+#  city         :string(255)
+#  state        :string(255)
+#  zip          :string(255)
+#  status       :string(255)
+#  when_to_call :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime

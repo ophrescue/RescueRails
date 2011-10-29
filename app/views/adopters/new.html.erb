@@ -7,7 +7,7 @@
 
 	<%= render 'contact', :f => f %>
 	
-	<%= f.fields_for :adoption_app do |af| %>
+	<%= f.fields_for :adoption_apps do |af| %>
 
 		<%= render 'your_home', :af => af %>
 
@@ -22,7 +22,7 @@
 
 	<%= f.fields_for :references do |builder| %>
 
-		<%= render 'reference_fields', :f => builder %>
+		<%= render 'reference_fields', :rf => builder %>
 
 	<% end %>
 

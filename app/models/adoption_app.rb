@@ -1,6 +1,6 @@
 class AdoptionApp < ActiveRecord::Base
 
-	belongs_to :adopter
+	belongs_to :adopter, :class_name => 'Adopter'
 	
 end
 # == Schema Information

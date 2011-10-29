@@ -3,7 +3,9 @@ $(function(){
 	 	focusFirstInput : true,
 	 	historyEnabled : true,
 	 	validationEnabled: true,
-	 	disableUIStyles : true		
+	 	disableUIStyles : true,
+		inDuration : 200,
+		outDuration: 200
 	 }
 	);
 });

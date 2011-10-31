@@ -13,7 +13,9 @@
 			<p> <%= @dog.description %></p>
 		<td class="sidebar round">	
 			<strong>Status:</strong> 	<%= @dog.status %><br />
-			<strong><%= link_to "Edit Dog", edit_dog_path(@dog) %></strong><br />
+			<% if is_admin? %>
+				<strong><%= link_to "Edit Dog", edit_dog_path(@dog) %></strong><br />
+			<% end %>
 			<strong>Age:</strong>   <%= @dog.age %></br>
 			<strong>Size:</strong>  <%= @dog.size %></br>
 			<strong>Gender:</strong>  <%= @dog.gender %></br>

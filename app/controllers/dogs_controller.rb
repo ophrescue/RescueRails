@@ -1,7 +1,7 @@
 class DogsController < ApplicationController
   autocomplete :breed, :name, :full => true
 
-  before_filter :admin_user,   :only => [:new, :create, :destroy]
+  before_filter :admin_user,   :only => [:new, :edit, :create, :destroy]
 
   def index
     @title = "Dogs"
@@ -58,7 +58,7 @@ class DogsController < ApplicationController
   private
 
     def admin_user
-      redirect_to(root_path) unless current_user.admin?
+      redirect_to(root_path) unless is_admin?
     end
 
 

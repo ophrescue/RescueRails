@@ -2,7 +2,7 @@ class AdoptersController < ApplicationController
 
 	def new
 		@adopter = Adopter.new
-		@adopter.adoption_apps.build
+		@adopter.adoption_app = AdoptionApp.new
 		3.times do
 			@adopter.references.build
 		end

@@ -46,6 +46,10 @@ class Dog < ActiveRecord::Base
 	belongs_to :primary_breed, :class_name => 'Breed'
 	belongs_to :secondary_breed, :class_name => 'Breed'
 
+	has_many :photos
+
+	accepts_nested_attributes_for :photos
+
 	validates :name, :presence => true,
 					 :length   => { :maximum => 75 }
 

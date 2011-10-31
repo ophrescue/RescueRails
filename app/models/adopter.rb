@@ -24,8 +24,8 @@ class Adopter < ActiveRecord::Base
     has_many :references, :dependent => :destroy
     accepts_nested_attributes_for :references
 
-    has_many :adoption_apps, :dependent => :destroy
-    accepts_nested_attributes_for :adoption_apps
+    has_one :adoption_app, :dependent => :destroy
+    accepts_nested_attributes_for :adoption_app
 
     validates :name,  :presence   => true,
                       :length     => { :maximum => 50 }

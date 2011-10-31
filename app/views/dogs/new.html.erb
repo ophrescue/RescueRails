@@ -1,6 +1,6 @@
 <h1><%= @title %></h1>
 
-<%= form_for(@dog) do |f| %>
+<%= form_for @dog, :html=> { :multipart => true } do |f| %>
 	<%= render 'shared/error_messages', :object => f.object %>
 	<div class="field">
 		<%= f.label :tracking_id, "OPH Tracking ID" %><br />
@@ -61,6 +61,10 @@
 	<div class="field">
 		<%= f.check_box :no_kids %>
 		<%= f.label :no_kids %>
+	</div>
+	<div class="field">
+		<%= f.label :dogpic %><br />
+		<%= f.file_field :dogpic %>
 	</div>
 	<div class="field">
 		<%= f.label :description %><br />

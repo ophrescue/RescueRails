@@ -7,7 +7,10 @@
 			</h1>
 		<td class="sidebar round">	
 			<strong>Name</strong> 	<%= @user.name %><br />
-			<strong>URL</strong>	<%= link_to user_path(@user), @user %>
+			<strong>URL</strong>	<%= link_to user_path(@user), @user %><br />
+			<% if @user == current_user %>
+				<strong><%= link_to "Edit Profile", edit_user_path(current_user) %></string>
+			<% end %>
 		</td>
 	</tr>
 </table>

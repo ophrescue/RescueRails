@@ -30,7 +30,9 @@ class Dog < ActiveRecord::Base
 	attr_accessible :name, 
 					:tracking_id, 
 					:primary_breed_id,
+					:primary_breed_name,
 					:secondary_breed_id,
+					:secondary_breed_name,
 					:status,
 					:age,
 					:size,
@@ -41,14 +43,15 @@ class Dog < ActiveRecord::Base
 					:no_cats,
 					:no_kids,
 					:description,
-					:is_purebred
+					:is_purebred,
+					:photos_attributes
 
 	belongs_to :primary_breed, :class_name => 'Breed'
 	belongs_to :secondary_breed, :class_name => 'Breed'
 
-	has_many :photos
+	has_many :photos, :dependent => :destroy
 
-	accepts_nested_attributes_for :photos
+	accepts_nested_attributes_for :photos, :allow_destroy => true
 
 	validates :name, :presence => true,
 					 :length   => { :maximum => 75 }

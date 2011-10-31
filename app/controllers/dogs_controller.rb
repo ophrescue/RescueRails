@@ -15,6 +15,7 @@ class DogsController < ApplicationController
 
   def new
     @dog = Dog.new
+    3.times { @dog.photos.build }
     @title = "Add a New Dog"
   end
 
@@ -22,6 +23,7 @@ class DogsController < ApplicationController
     @dog = Dog.find(params[:id]) 
     @dog.primary_breed_name = @dog.primary_breed.name unless @dog.primary_breed.nil?
     @dog.secondary_breed_name = @dog.secondary_breed.name unless @dog.secondary_breed.nil?
+    3.times { @dog.photos.build }
     @title = "Edit Dog"
   end
 

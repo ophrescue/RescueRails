@@ -106,17 +106,17 @@ ActiveRecord::Schema.define(:version => 20111030224433) do
   add_index "dogs", ["secondary_breed_id"], :name => "index_dogs_on_secondary_breed_id"
   add_index "dogs", ["size"], :name => "index_dogs_on_size"
 
-  create_table "photo", :force => true do |t|
+  create_table "photos", :force => true do |t|
     t.integer  "dog_id"
-    t.string   "dogpic_file_name"
-    t.string   "dogpic_content_type"
-    t.string   "dogpic_file_size"
-    t.datetime "dogpic_updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "photo", ["dog_id"], :name => "index_photo_on_dog_id"
+  add_index "photos", ["dog_id"], :name => "index_photos_on_dog_id"
 
   create_table "references", :force => true do |t|
     t.integer  "adopter_id"

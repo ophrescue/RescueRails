@@ -36,6 +36,9 @@ class User < ActiveRecord::Base
 
                        
   before_save :encrypt_password
+
+  has_many :fosters
+  has_many :dogs, :through => :fosters
   
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

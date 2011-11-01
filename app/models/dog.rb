@@ -53,6 +53,10 @@ class Dog < ActiveRecord::Base
 
 	accepts_nested_attributes_for :photos, :allow_destroy => true
 
+	has_many :fosters
+	has_many :users, :through => :fosters
+
+
 	validates :name, :presence => true,
 					 :length   => { :maximum => 75 }
 

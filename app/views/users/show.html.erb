@@ -9,8 +9,16 @@
 			<strong>Name</strong> 	<%= @user.name %><br />
 			<strong>URL</strong>	<%= link_to user_path(@user), @user %><br />
 			<% if @user == current_user %>
-				<strong><%= link_to "Edit Profile", edit_user_path(current_user) %></string>
+				<strong><%= link_to( "Edit Profile", edit_user_path(current_user)) %></string>
 			<% end %>
+			<p>Current Dogs</p>
+			<ul>
+				<li>Fido</li>
+				<li>Rex</li>
+			</ul>
+
+
+
 		</td>
 	</tr>
 </table>

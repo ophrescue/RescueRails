@@ -61,6 +61,11 @@
 		<%= f.label :no_kids %>
 	</div>
 	<br />
+	<h3>Foster Assignemnt</h3>
+		<div class="field">
+			<%= f.label :user_id %>
+			<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
+		</div>
 	<h3>New Photos</h3>
 	<div class="field">
 	<%= f.fields_for :photos do |pf| %>

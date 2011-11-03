@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111101004344) do
+ActiveRecord::Schema.define(:version => 20111103214705) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -97,6 +97,9 @@ ActiveRecord::Schema.define(:version => 20111101004344) do
     t.boolean  "no_kids"
     t.text     "description"
     t.boolean  "is_purebred"
+    t.integer  "user_id"
+    t.date     "foster_start_date"
+    t.date     "adoption_date"
   end
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"
@@ -105,20 +108,16 @@ ActiveRecord::Schema.define(:version => 20111101004344) do
   add_index "dogs", ["primary_breed_id"], :name => "index_dogs_on_primary_breed_id"
   add_index "dogs", ["secondary_breed_id"], :name => "index_dogs_on_secondary_breed_id"
   add_index "dogs", ["size"], :name => "index_dogs_on_size"
+  add_index "dogs", ["user_id"], :name => "index_dogs_on_user_id"
 
-  create_table "fosters", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.integer  "dog_id",     :null => false
-    t.date     "start_date", :null => false
+  create_table "histories", :force => true do |t|
+    t.integer  "dog_id"
+    t.integer  "user_id"
+    t.date     "start_date"
     t.date     "end_date"
-    t.integer  "updated_by", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "fosters", ["dog_id"], :name => "index_fosters_on_dog_id"
-  add_index "fosters", ["user_id", "dog_id"], :name => "index_fosters_on_user_id_and_dog_id"
-  add_index "fosters", ["user_id"], :name => "index_fosters_on_user_id"
 
   create_table "photos", :force => true do |t|
     t.integer  "dog_id"
@@ -154,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20111101004344) do
     t.boolean  "admin",                  :default => false
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.boolean  "is_foster",              :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

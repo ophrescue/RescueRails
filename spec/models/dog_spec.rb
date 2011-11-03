@@ -25,5 +25,6 @@ end
 #  no_kids            :boolean
 #  description        :text
 #  is_purebred        :boolean
+#  user_id            :integer
 #
 

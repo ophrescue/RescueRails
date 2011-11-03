@@ -2,16 +2,17 @@
 #
 # Table name: users
 #
-#  id                     :integer(4)      not null, primary key
+#  id                     :integer         not null, primary key
 #  name                   :string(255)
 #  email                  :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
 #  encrypted_password     :string(255)
 #  salt                   :string(255)
-#  admin                  :boolean(1)      default(FALSE)
+#  admin                  :boolean         default(FALSE)
 #  password_reset_token   :string(255)
 #  password_reset_sent_at :datetime
+#  is_foster              :boolean         default(FALSE)
 #
 
 require 'digest'
@@ -37,8 +38,8 @@ class User < ActiveRecord::Base
                        
   before_save :encrypt_password
 
-  has_many :fosters
-  has_many :dogs, :through => :fosters
+  has_many :histories
+  has_many :dogs
   
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

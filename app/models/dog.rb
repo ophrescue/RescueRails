@@ -20,6 +20,7 @@
 #  no_kids            :boolean
 #  description        :text
 #  is_purebred        :boolean
+#  user_id            :integer
 #
 
 class Dog < ActiveRecord::Base
@@ -44,7 +45,10 @@ class Dog < ActiveRecord::Base
 					:no_kids,
 					:description,
 					:is_purebred,
-					:photos_attributes
+					:photos_attributes,
+					:user_id,
+					:foster_start_date,
+					:adoption_date
 
 	belongs_to :primary_breed, :class_name => 'Breed'
 	belongs_to :secondary_breed, :class_name => 'Breed'
@@ -53,9 +57,12 @@ class Dog < ActiveRecord::Base
 
 	accepts_nested_attributes_for :photos, :allow_destroy => true
 
-	has_many :fosters
-	has_many :users, :through => :fosters
+	has_many :histories, :dependent => :destroy
+	
+	has_many :users, :through => :history
+	belongs_to :user
 
+	before_save :set_dates
 
 	validates :name, :presence => true,
 					 :length   => { :maximum => 75 }
@@ -81,6 +88,18 @@ class Dog < ActiveRecord::Base
 	
 	GENDERS = ['Male', 'Female']
 	validates_inclusion_of :gender, :in => GENDERS
+
+
+
+	def set_dates
+      if (self.status == 'adopted')
+      	self.user_id = nil
+      	self.foster_start_date = nil
+      else
+      	self.foster_start_date = Time.now.strftime('%Y-%m-%d')
+      	self.adoption_date = nil
+      end
+    end
 
 end
 

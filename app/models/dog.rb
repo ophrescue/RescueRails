@@ -21,6 +21,8 @@
 #  description        :text
 #  is_purebred        :boolean
 #  user_id            :integer
+#  foster_start_date  :date
+#  adoption_date      :date
 #
 
 class Dog < ActiveRecord::Base
@@ -62,7 +64,7 @@ class Dog < ActiveRecord::Base
 	has_many :users, :through => :history
 	belongs_to :user
 
-	before_save :set_dates
+	before_save  :update_history, :set_dates
 
 	validates :name, :presence => true,
 					 :length   => { :maximum => 75 }
@@ -90,6 +92,17 @@ class Dog < ActiveRecord::Base
 	validates_inclusion_of :gender, :in => GENDERS
 
 
+	def update_history
+		if self.user_id != Dog.find(self.id).user_id
+			#TODO move to the History model.
+			@history = History.new
+			@history.dog_id = self.id
+			@history.user_id = self.user_id
+			@history.foster_start_date = self.foster_start_date
+			@history.foster_end_date = Time.now.strftime('%Y-%m-%d')
+			@history.save
+		end
+	end
 
 	def set_dates
       if (self.status == 'adopted')

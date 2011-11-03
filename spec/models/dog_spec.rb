@@ -26,5 +26,7 @@ end
 #  description        :text
 #  is_purebred        :boolean
 #  user_id            :integer
+#  foster_start_date  :date
+#  adoption_date      :date
 #
 

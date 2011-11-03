@@ -113,8 +113,8 @@ ActiveRecord::Schema.define(:version => 20111103214705) do
   create_table "histories", :force => true do |t|
     t.integer  "dog_id"
     t.integer  "user_id"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.date     "foster_start_date"
+    t.date     "foster_end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

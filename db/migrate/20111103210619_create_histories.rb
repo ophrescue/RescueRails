@@ -3,8 +3,8 @@ class CreateHistories < ActiveRecord::Migration
     create_table :histories do |t|
       t.integer :dog_id
       t.integer :user_id
-      t.date :start_date
-      t.date :end_date
+      t.date :foster_start_date
+      t.date :foster_end_date
 
       t.timestamps
     end

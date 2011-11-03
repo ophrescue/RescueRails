@@ -7,12 +7,12 @@ end
 #
 # Table name: histories
 #
-#  id         :integer         not null, primary key
-#  dog_id     :integer
-#  user_id    :integer
-#  start_date :date
-#  end_date   :date
-#  created_at :datetime
-#  updated_at :datetime
+#  id                :integer         not null, primary key
+#  dog_id            :integer
+#  user_id           :integer
+#  foster_start_date :date
+#  foster_end_date   :date
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 

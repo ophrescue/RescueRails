@@ -1,5 +1,5 @@
 $(function(){
-	$("#XXXXXnew_adopter").formwizard({ 
+	$("#new_adopter").formwizard({ 
 	 	focusFirstInput : true,
 	 	historyEnabled : true,
 	 	validationEnabled: true,

@@ -12,9 +12,10 @@
 			</div>
 		</div>
 		<div class="clearfix">
-			<%= af.label :rent_dog_restrictions, "What are the weight restrictions in your complex or development for dogs? Please provide a website or actual document showing the weight restrictions for animals in your apartment " %>
+			<%= af.label :rent_dog_restrictions, "What are the dog weight and breed restrictions?  " %>
 			<div class="input">
-			<%= af.text_area :rent_dog_restrictions, :class => "required" %>
+			<%= af.text_area :rent_dog_restrictions, :class => "required xxlarge", :rows => "3" %>
+			<span class="help-inline">Please provide a website or actual document showing the restrictions</span>
 			</div>
 		</div>
 		<div class="clearfix">

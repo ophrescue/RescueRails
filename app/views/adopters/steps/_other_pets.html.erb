@@ -2,7 +2,7 @@
 		<div class="clearfix">
 			<%= af.label :current_pets, "Please identify any current pets(name, age, breed)" %>
 			<div class="input">
-				<%= af.text_area :current_pets %>
+				<%= af.text_area :current_pets, :class => "xxlarge", :rows => "3" %>
 			</div>
 		</div>
 		<div class="clearfix">
@@ -27,7 +27,7 @@
 		<div class="clearfix">
 			<%= af.label :why_not_fixed, "If no, please explain why." %>
 			<div class="input">
-				<%= af.text_area :why_not_fixed %>
+				<%= af.text_area :why_not_fixed, :class => "xxlarge", :rows => "3"%>
 			</div>
 		</div>
 		<div class="clearfix">
@@ -52,13 +52,13 @@
 		<div class="clearfix">
 			<%= af.label :current_pets_uptodate_why, "If no, please explain why." %>
 			<div class="input">
-				<%= af.text_area :current_pets_uptodate_why %>
+				<%= af.text_area :current_pets_uptodate_why, :class => "xxlarge", :rows => "3" %>
 			</div>
 		</div>
 		<div class="clearfix">
 			<%= af.label :prior_pets, "Please identify any other pets you have had in the past 10 years, and why they are no longer with you." %>
 				<div class="input">
-					<%= af.text_area :prior_pets %>
+					<%= af.text_area :prior_pets, :class => "xxlarge", :rows => "3" %>
 				</div>
 		</div>
 		<h5>Please provide the name and number of a veterinarian who has seen these pets.</h5>

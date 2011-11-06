@@ -59,7 +59,7 @@
 		<div class="clearfix">
 			<%= af.label :dog_exercise, "How will your dog get exercise?" %>
 			<div class="input">
-				<%= af.text_area :dog_exercise, :class => "required" %>
+				<%= af.text_area :dog_exercise, :class => "required xxlarge", :rows => "3"%>
 			</div>
 		</div>
 		<div class="clearfix">
@@ -96,7 +96,7 @@
 		<div class="clearfix">
 			<%= af.label :max_hrs_alone, "What will be the maximum length of time your dog will be left home alone?" %>
 			<div class="input">
-				<%= af.select :max_hrs_alone, (0..24), {:selected => 8} %><span>hours</span>
+				<%= af.select :max_hrs_alone, (0..24), {:selected => 8}, :class => "span1" %><span> hours</span>
 			</div>
 		</div>
 		<div class="clearfix">
@@ -133,7 +133,7 @@
 		<div class="clearfix">
 			<%= af.label :dog_vacation, "What are your plans for taking care of the dog while you are on vacation?" %>
 			<div class="input">
-				<%= af.text_area :dog_vacation, :class => "required" %>
+				<%= af.text_area :dog_vacation, :class => "required xxlarge", :rows => "3" %>
 			</div>
 		</div>
 		<div class="clearfix">

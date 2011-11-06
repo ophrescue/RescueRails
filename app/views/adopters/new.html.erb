@@ -28,9 +28,9 @@
 				<%= render 'adopters/steps/reference_fields', :rf => builder %>
 
 			<% end %>
-			<div id="Navigation"class="actions">
-				<input class="navigation_button" id="back" value="Back" type="reset" />
-				<%= f.submit "Submit", :id =>"next", :class=>"navigation_button" %>
+			<div id="Navigation" class="actions well">
+				<input class="btn large" id="back" value="Back" type="reset" />
+				<%= f.submit "Submit", :id =>"next", :class => "btn large primary" %>
 			</div>
 		<% end %>
 	</div>

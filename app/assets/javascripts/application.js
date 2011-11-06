@@ -11,4 +11,5 @@
 //= require bbq
 //= require jquery.form.wizard
 //= require jquery.validate
+//= require bootstrap
 //= require_tree .

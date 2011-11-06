@@ -1,38 +1,56 @@
 <div id="contact" class="step">
-	<div class="field">
-		<%= f.label :name, "Full Name" %><br />
-		<%= f.text_field :name, :class => "required" %>
-	</div>
-	<div class="field">		
-		<%= f.label :email, "E-mail" %><br />
-		<%= f.text_field :email, :class => "required" %>
-	</div>
-	<div class="field">		
-		<%= f.label :phone, "Phone Number" %><br />
-		<%= f.text_field :phone, :class => "required" %>
-	</div>
-	<div class="field">		
-		<%= f.label :address1,"Address Line 1" %><br />
-		<%= f.text_field :address1, :class => "required" %>
-	</div>
-	<div class="field">		
-		<%= f.label :address2, "Address Line 2" %><br />
-		<%= f.text_field :address2 %>
+	<div class="clearfix">
+		<%= f.label :name, "Full Name" %>
+		<div class="input">
+			<%= f.text_field :name, :class => "required" %>
 		</div>
-	<div class="field">		
-		<%= f.label :city, "City" %><br />
-		<%= f.text_field :city, :class => "required" %>
 	</div>
-	<div class="field">		
-		<%= f.label :state, "State" %><br />
+	<div class="clearfix">		
+		<%= f.label :email, "E-mail" %>
+		<div class="input">
+			<%= f.text_field :email, :class => "required" %>
+		</div>
+	</div>
+	<div class="clearfix">		
+		<%= f.label :phone, "Phone Number" %>
+		<div class="input">
+			<%= f.text_field :phone, :class => "required" %>
+			</div>
+	</div>
+	<div class="clearfix">		
+		<%= f.label :address1,"Address Line 1" %>
+		<div class="input">
+			<%= f.text_field :address1, :class => "required" %>
+		</div>
+	</div>
+	<div class="clearfix">		
+		<%= f.label :address2, "Address Line 2" %>
+		<div class="input">
+			<%= f.text_field :address2 %>
+		</div>
+	</div>
+	<div class="clearfix">		
+		<%= f.label :city, "City" %>
+		<div class="input">
+			<%= f.text_field :city, :class => "required" %>
+		</div>
+	</div>
+	<div class="clearfix">		
+		<%= f.label :state, "State" %>
+		<div class="input">
 		<%= f.text_field :state, :class => "required" %>
 		</div>
-	<div class="field">		
-		<%= f.label :zip, "Zip Code" %><br />
-		<%= f.text_field :zip, :class => "required" %>
+	</div>
+	<div class="clearfix">		
+		<%= f.label :zip, "Zip Code" %>
+		<div class="input">
+			<%= f.text_field :zip, :class => "required" %>
 		</div>
-	<div class="field">		
-		<%= f.label :when_to_call, "What is the best time to call you?" %><br />
-		<%= f.text_field :when_to_call, :class => "required" %>
+	</div>
+	<div class="clearfix">		
+		<%= f.label :when_to_call, "What is the best time to call you?" %>
+		<div class="input">
+			<%= f.text_field :when_to_call, :class => "required" %>
+		</div>
 	</div>
 </div>

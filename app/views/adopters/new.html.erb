@@ -1,35 +1,37 @@
-<h3>Operation Paws for Homes Adoption Application</h3>
-<%= form_for(@adopter) do |f| %>
-	<%= render 'shared/error_messages', :object => f.object %>
-	
-	<div id="fieldWrapper">
-	<%= render 'adopters/steps/preq', :f => f %>
+<div class="page-header">
+	<h2>Adoption Application</h2>
+</div>
+<div class="row">
+	<div class="span12 offset2">
+		<%= form_for(@adopter) do |f| %>
+			<%= render 'shared/error_messages', :object => f.object %>
+			
+			<%= render 'adopters/steps/preq', :f => f %>
 
-	<%= render 'adopters/steps/contact', :f => f %>
-	
-	<%= f.fields_for :adoption_app do |af| %>
+			<%= render 'adopters/steps/contact', :f => f %>
+			
+			<%= f.fields_for :adoption_app do |af| %>
 
-		<%= render 'adopters/steps/your_home', :af => af %>
+				<%= render 'adopters/steps/your_home', :af => af %>
 
-		<%= render 'adopters/steps/rental', :af => af %>
+				<%= render 'adopters/steps/rental', :af => af %>
 
-		<%= render 'adopters/steps/your_home2', :af => af %>
+				<%= render 'adopters/steps/your_home2', :af => af %>
 
-		<%= render 'adopters/steps/other_pets', :af => af %>
+				<%= render 'adopters/steps/other_pets', :af => af %>
 
-		<%= render 'adopters/steps/new_dog_q', :af => af %>
-	<% end %>
+				<%= render 'adopters/steps/new_dog_q', :af => af %>
+			<% end %>
 
-	<%= f.fields_for :references do |builder| %>
+			<%= f.fields_for :references do |builder| %>
 
-		<%= render 'adopters/steps/reference_fields', :rf => builder %>
+				<%= render 'adopters/steps/reference_fields', :rf => builder %>
 
-	<% end %>
-
+			<% end %>
+			<div id="Navigation"class="actions">
+				<input class="navigation_button" id="back" value="Back" type="reset" />
+				<%= f.submit "Submit", :id =>"next", :class=>"navigation_button" %>
+			</div>
+		<% end %>
 	</div>
-	<br />
-	<div id="Navigation"class="actions">
-		<input class="navigation_button" id="back" value="Back" type="reset" />
-		<%= f.submit "Submit", :id =>"next", :class=>"navigation_button" %>
-	</div>
-<% end %>
+</div>

@@ -45,6 +45,8 @@ GEM
       sys-uname
     autotest-growl (0.2.14)
     autotest-rails-pure (4.1.2)
+    bootstrap-sass (1.4.0)
+      sass-rails (~> 3.1.0)
     builder (3.0.0)
     cocaine (0.2.0)
     coffee-rails (3.1.1)
@@ -180,6 +182,7 @@ DEPENDENCIES
   autotest-fsevent
   autotest-growl
   autotest-rails-pure
+  bootstrap-sass (~> 1.4.0)
   coffee-rails (~> 3.1.1)
   factory_girl_rails
   faker

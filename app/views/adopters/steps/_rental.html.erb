@@ -1,22 +1,32 @@
 <div id="rent" class="step">
-		<div class="field">
+		<div class="clearfix">
 			<%= af.label :landlord_name, "Landlord's Name" %>
-			<%= af.text_field :landlord_name, :class => "required" %>
+			<div class="input">
+				<%= af.text_field :landlord_name, :class => "required" %>
+			</div>
 		</div>
-		<div class="field">
+		<div class="clearfix">
 			<%= af.label :landlord_phone, "Landlord's Phone Number" %>
-			<%= af.text_field :landlord_phone, :class => "required" %>
+			<div class="input">
+				<%= af.text_field :landlord_phone, :class => "required" %>
+			</div>
 		</div>
-		<div class="field">
-			<%= af.label :rent_dog_restrictions, "What are the weight restrictions in your complex or development for dogs? Please provide a website or actual document showing the weight restrictions for animals in your apartment " %><br />
+		<div class="clearfix">
+			<%= af.label :rent_dog_restrictions, "What are the weight restrictions in your complex or development for dogs? Please provide a website or actual document showing the weight restrictions for animals in your apartment " %>
+			<div class="input">
 			<%= af.text_area :rent_dog_restrictions, :class => "required" %>
+			</div>
 		</div>
-		<div class="field">
+		<div class="clearfix">
 			<%= af.label :rent_deposit, "How much will your pet deposit be? " %>
-			<%= af.text_field :rent_deposit %>
+			<div class="input">
+				<%= af.text_field :rent_deposit %>
+			</div>
 		</div>
-		<div class="field">
+		<div class="clearfix">
 			<%= af.label :rent_increase, "How much will your rent increase per month? " %>
-			<%= af.text_field :rent_increase %>
+			<div class="input">
+				<%= af.text_field :rent_increase %>
+			</div>
 		</div>
 </div>

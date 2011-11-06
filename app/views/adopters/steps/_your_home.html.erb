@@ -1,19 +1,39 @@
 <div id="your_home" class="step">
-		<div class="field">
-			<%= af.label :spouse_name, "Spouse/Partner" %><br />
+	<div class="clearfix">
+		<%= af.label :spouse_name, "Spouse/Partner" %>
+		<div class="input">
 			<%= af.text_field :spouse_name %>
 		</div>
-		<div class="field">
-			<%= af.label :other_household_names, "Other Household Members" %><br />
+	</div>
+	<div class="clearfix">
+		<%= af.label :other_household_names, "Other Household Members" %>
+		<div class="input">
 			<%= af.text_field :other_household_names %>
 		</div>
-		<div class="field">
-			<%= af.label :ready_to_adopt_dt, "How soon do you want to adopt?" %><br />
+	</div>
+	<div class="clearfix">
+		<%= af.label :ready_to_adopt_dt, "How soon do you want to adopt?" %>
+		<div class="input">
 			<%= af.text_field :ready_to_adopt_dt, :class => "required" %>
 		</div>
-		<div class="field">
-			<%= af.label :house_type, "Do you rent or own your home?" %><br />
-			<%= af.radio_button :house_type, 'rent', :class => "link required" %> Rent
-			<%= af.radio_button :house_type, 'own', :class => "link required" %> Own
+	</div>
+	<div class="clearfix">
+		<%= af.label :house_type, "Do you rent or own your home?" %>
+		<div class="input">
+			<ul class="inputs-list">
+				<li>
+					<label>
+						<%= af.radio_button :house_type, 'rent', :class => "link required" %> 
+						<span>Rent</span>
+					</label>
+				</li>
+				<li>
+					<label>
+						<%= af.radio_button :house_type, 'own', :class => "link required" %> 
+						<span>Own</span>
+					</label>
+				</li>
+			</ul>
 		</div>
+	</div>
 </div>

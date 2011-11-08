@@ -64,7 +64,9 @@ class Dog < ActiveRecord::Base
 	has_many :users, :through => :history
 	belongs_to :user
 
-	before_save  :update_history, :set_dates
+	before_save   :set_dates
+
+	before_update :update_history
 
 	validates :name, :presence => true,
 					 :length   => { :maximum => 75 }

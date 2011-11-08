@@ -12,4 +12,6 @@
 //= require jquery.form.wizard
 //= require jquery.validate
 //= require bootstrap
+//= require jquery.maskedinput.js
+//= require msk_input.conf.js
 //= require_tree .

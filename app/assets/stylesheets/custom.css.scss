@@ -9,3 +9,11 @@ label.error {
 input.error {
 	color: red;
 }
+
+form .clearfix.error .error {
+    color: #B94A48;
+}
+
+form .clearfix.error span.error {
+    padding-left: 5px;
+}

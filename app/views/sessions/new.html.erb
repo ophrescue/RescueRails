@@ -1,20 +1,36 @@
 <h1>Staff Sign in</h1>
 
-<%= form_for(:session, :url => sessions_path) do |f| %>
-	<div class="field">
-		<%= f.label :email %><br />
-		<%= f.text_field :email %>
+<div class="row">
+	<div class="span12 offset2">
+		<%= form_for(:session, :url => sessions_path) do |f| %>
+			<div class="clearfix">
+				<%= f.label :email %>
+				<div class="input">
+					<%= f.text_field :email %>
+				</div>
+			</div>
+			<div classs="clearfix">
+				<%= f.label :password %>
+				<div class="input">
+					<%= f.password_field :password %>
+					<span class="help-inline"><%= link_to "forgotten password?", new_password_reset_path %></span>
+				</div>
+			</div>
+			<div class="clearfix">
+				<div class="input">
+					<ul class="inputs-list">
+						<li>
+							<label>
+								<%= check_box_tag :remember_me, 1, params[:remember_me] %>
+								<span><%= label_tag :remember_me %></span>
+							</label>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="actions">
+				<%= f.submit "Sign in", :class => "btn primary" %>
+			</div>
+		<% end %>
 	</div>
-	<div classs="field">
-		<%= f.label :password %><br />
-		<%= f.password_field :password %>
-	</div>
-	<p><%= link_to "forgotten password?", new_password_reset_path %></p>
-	<div class="field">
-		<%= label_tag :remember_me %>
-		<%= check_box_tag :remember_me, 1, params[:remember_me] %>
-	</div>
-	<div class="actions">
-		<%= f.submit "Sign in" %>
-	</div>
-<% end %>
+</div>

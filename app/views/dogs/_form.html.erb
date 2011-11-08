@@ -1,96 +1,130 @@
-<%= form_for @dog, :html=> { :multipart => true } do |f| %>
-	<%= render 'shared/error_messages', :object => f.object %>
-	<div class="field">
-		<%= f.label :tracking_id, "OPH Tracking ID" %><br />
-		<%= f.text_field :tracking_id %>
-	</div>
-	<div class="field">
-		<%= f.label :name %><br />
-		<%= f.text_field :name %>
-	</div>
-	<div class="field">
-		<%= f.label :status %><br />
-		<%= f.select(:status, Dog::STATUSES, :prompt => '-select-') %>
-	</div>
-	<div class="field">
-		<%= f.label :primary_breed_name %><br />
-		<%= f.autocomplete_field :primary_breed_name, autocomplete_breed_name_dogs_path, :id_element => '#dog_primary_breed_id' %>
-		<%= f.hidden_field :primary_breed_id =%>
-	</div>
-	<div class="field">
-		<%= f.label :secondary_breed_name %><br />
-		<%= f.autocomplete_field :secondary_breed_name, autocomplete_breed_name_dogs_path, :id_element => '#dog_secondary_breed_id' %>
-		<%= f.hidden_field :secondary_breed_id %>	
-	</div>
-	<div class="field">
-		<%= f.label :gender %><br />
-		<%= f.select(:gender, Dog::GENDERS, :prompt => '-select-') %>	
-	</div>	
-	<div class="field">
-		<%= f.label :age %><br />
-		<%= f.select(:age, Dog::AGES, :prompt => '-select-') %>	
-	</div>
-	<div class="field">
-		<%= f.label :size, "Size when grown" %><br />
-		<%= f.select(:size, Dog::SIZES, :prompt => '-select-') %>	
-	</div>	
-	<br />
-	<h3>Details</h3>
-	<div class="field">
-		<%= f.check_box :is_purebred %>
-		<%= f.label :is_purebred %>
-	</div>	
-	<div class="field">
-		<%= f.check_box :is_altered %>
-		<%= f.label :is_altered %>
-	</div>
-	<div class="field">
-		<%= f.check_box :is_special_needs %>
-		<%= f.label :is_special_needs %>
-	</div>
-	<div class="field">
-		<%= f.check_box :no_dogs %>
-		<%= f.label :no_dogs %>
-	</div>
-	<div class="field">
-		<%= f.check_box :no_cats %>
-		<%= f.label :no_cats %>
-	</div>
-	<div class="field">
-		<%= f.check_box :no_kids %>
-		<%= f.label :no_kids %>
-	</div>
-	<br />
-	<h3>Foster Assignemnt</h3>
-		<div class="field">
-			<%= f.label :user_id %>
-			<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
-		</div>
-	<h3>New Photos</h3>
-	<div class="field">
-	<%= f.fields_for :photos do |pf| %>
-		<% if pf.object.new_record? %>
-			<%= pf.file_field :photo %><br />
-		<% end %>
-	<% end %>
-	</div>
-	<h3>Existing Photos</h3>
-		<%= f.fields_for :photos do |pf| %>
-			<% unless pf.object.new_record? %>
-			<div class="thumb">
-				<%= link_to image_tag(pf.object.photo.url(:thumb)), pf.object.photo.url(:original) %>
-				<%= pf.check_box :_destroy %>
-				<%= pf.label "Delete Photo" %>
+<div class="row">
+	<div class="span12 offset2">
+		<%= form_for @dog, :html=> { :multipart => true } do |f| %>
+			<%= render 'shared/error_messages', :object => f.object %>
+			<div class="clearfix">
+				<%= f.label :tracking_id, "OPH Tracking ID" %>
+				<div class="input">
+					<%= f.text_field :tracking_id %>
+				</div>
 			</div>
+			<div class="clearfix">
+				<%= f.label :name %>
+				<div class="input">
+					<%= f.text_field :name %>
+				</div>
+			</div>
+			<div class="clearfix">
+				<%= f.label :status %>
+				<div class="input">
+					<%= f.select(:status, Dog::STATUSES, :prompt => '-select-') %>
+				</div>
+			</div>
+			<div class="clearfix">
+				<%= f.label :primary_breed_name %>
+				<div class="input">
+					<%= f.autocomplete_field :primary_breed_name, autocomplete_breed_name_dogs_path, :id_element => '#dog_primary_breed_id' %>
+				</div>
+					<%= f.hidden_field :primary_breed_id =%>
+			</div>
+			<div class="clearfix">
+				<%= f.label :secondary_breed_name %>
+				<div class="input">
+					<%= f.autocomplete_field :secondary_breed_name, autocomplete_breed_name_dogs_path, :id_element => '#dog_secondary_breed_id' %>
+				</div>
+				<%= f.hidden_field :secondary_breed_id %>	
+			</div>
+			<div class="clearfix">
+				<%= f.label :gender %>
+				<div class="input">
+					<%= f.select(:gender, Dog::GENDERS, :prompt => '-select-', :class => "span2") %>
+				</div>
+			</div>	
+			<div class="clearfix">
+				<%= f.label :age %>
+				<div class="input">
+					<%= f.select(:age, Dog::AGES, :prompt => '-select-', :class => "span2") %>	
+				</div>
+			</div>
+			<div class="clearfix">
+				<%= f.label :size, "Size when grown" %>
+				<div class="input">
+					<%= f.select(:size, Dog::SIZES, :prompt => '-select-', :class => "span2") %>
+				</div>
+			</div>
+			<div class="clearfix">
+			<label id="optionsCheckboxes"><strong>Check all that apply</strong></label>
+				<div class="input">
+					<ul class="inputs-list">
+						<li>
+							<label><%= f.check_box :is_purebred %>
+							<span><%= f.label :is_purebred %></span>
+							</label>
+						</li>
+						<li>
+							<label><%= f.check_box :is_altered %>
+							<span><%= f.label :is_altered %></span>
+							</label>
+						</li>
+						<li>
+							<label><%= f.check_box :is_special_needs %>
+							<span><%= f.label :is_special_needs %></span>
+							</label>
+						</li>
+						<li>
+							<label><%= f.check_box :no_dogs %>
+							<span><%= f.label :no_dogs %></span>
+							</label>
+						</li>
+						<li>
+							<label><%= f.check_box :no_cats %>
+							<span><%= f.label :no_cats %></span>
+							</label>
+						</li>
+						<li>
+							<label><%= f.check_box :no_kids %>
+							<span><%= f.label :no_kids %></span>
+							</label>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<br />
+			<h3>Foster Assignemnt</h3>
+				<div class="clearfix">
+					<%= f.label :user_id %>
+					<div class="input">
+						<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
+					</div>
+				</div>
+			<h3>New Photos</h3>
+			<div class="clearfix">
+			<%= f.fields_for :photos do |pf| %>
+				<% if pf.object.new_record? %>
+					<%= pf.file_field :photo %><br />
+				<% end %>
 			<% end %>
-		<% end %>
-	<br />
-	<div class="field">
-		<%= f.label :description %><br />
-		<%= f.text_area :description %>	
-	</div>
+			</div>
+			<h3>Existing Photos</h3>
+				<%= f.fields_for :photos do |pf| %>
+					<% unless pf.object.new_record? %>
+					<div class="thumb">
+						<%= link_to image_tag(pf.object.photo.url(:thumb)), pf.object.photo.url(:original) %>
+						<%= pf.check_box :_destroy %>
+						<%= pf.label "Delete Photo" %>
+					</div>
+					<% end %>
+				<% end %>
+			<div class="clearfix">
+				<%= f.label :description %>
+				<div class="input">
+					<%= f.text_area :description, :class => "required xlarge", :rows => "5" %>
+				</div>
+			</div>
 
-	<div class="actions">
-		<%= f.submit "Add Dog" %>
+			<div class="actions">
+				<%= f.submit "Add Dog", :class => "btn primary" %>
+			</div>
+		<% end %>
 	</div>
-<% end %>
+</div>

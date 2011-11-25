@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111103214705) do
+ActiveRecord::Schema.define(:version => 20111125164543) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -78,6 +78,18 @@ ActiveRecord::Schema.define(:version => 20111103214705) do
   end
 
   add_index "breeds", ["name"], :name => "index_breeds_on_name"
+
+  create_table "connections", :force => true do |t|
+    t.integer  "adopter_id"
+    t.integer  "dog_id"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "connections", ["adopter_id", "dog_id"], :name => "index_connections_on_adopter_id_and_dog_id", :unique => true
+  add_index "connections", ["adopter_id"], :name => "index_connections_on_adopter_id"
+  add_index "connections", ["dog_id"], :name => "index_connections_on_dog_id"
 
   create_table "dogs", :force => true do |t|
     t.string   "name"

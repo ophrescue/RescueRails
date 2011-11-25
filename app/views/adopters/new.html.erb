@@ -12,6 +12,8 @@
 			
 			<%= f.fields_for :adoption_app do |af| %>
 
+				<%= render 'adopters/steps/dog', :af => af %>
+
 				<%= render 'adopters/steps/your_home', :af => af %>
 
 				<%= render 'adopters/steps/rental', :af => af %>

@@ -1,11 +1,18 @@
 class Adopter < ActiveRecord::Base
 
-    attr_accessor :pre_q_age,
-                  :pre_q_commited,
-                  :pre_q_costs,
-                  :pre_q_meds,
-                  :pre_q_surrender,
-                  :pre_q_abuse
+  attr_accessor :pre_q_age,
+                :pre_q_commited,
+                :pre_q_costs,
+                :pre_q_meds,
+                :pre_q_surrender,
+                :pre_q_abuse
+                  
+
+  attr_reader :dog_tokens
+
+  def dog_tokens=(ids)
+    self.dog_ids = ids.split(",")
+  end
 
 #Prescreen Questions
     validates_acceptance_of :pre_q_age, 
@@ -24,8 +31,8 @@ class Adopter < ActiveRecord::Base
     has_many :references, :dependent => :destroy
     accepts_nested_attributes_for :references
 
-    has_many :connections, :dependent => :destroy
-    has_many :dogs, :through => :connection
+    has_many :adoptions, :dependent => :destroy
+    has_many :dogs, :through => :adoptions
 
     has_one :adoption_app, :dependent => :destroy
     accepts_nested_attributes_for :adoption_app

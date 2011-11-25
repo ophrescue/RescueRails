@@ -1,8 +1,16 @@
 <div id="dog" class="step">
+
 	<div class="clearfix">
-		<%= af.label :dog_reqs, "Describe the type of dog you want to adopt." %>
+		<%= f.label :dog_tokens, "Select your dogs" %>
 		<div class="input">
-			<%= af.text_area :dog_reqs, :class => "xxlarge required", :rows => "3" %>
+			<%= f.text_field :dog_tokens %>
+		</div>
+	</div>
+
+	<div class="clearfix">
+		<%= f.label :dog_reqs, "Describe the type of dog you want to adopt." %>
+		<div class="input">
+			<%= f.text_area :dog_reqs, :class => "xxlarge required", :rows => "3" %>
 			<span class="help-inline">Age, Weight, Activity Level, etc.</span>
 		</div>
 	</div>

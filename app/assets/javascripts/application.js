@@ -14,4 +14,5 @@
 //= require bootstrap
 //= require jquery.maskedinput.js
 //= require msk_input.conf.js
+//= require jquery.tokeninput.js
 //= require_tree .

@@ -1,17 +1,17 @@
-class Connection < ActiveRecord::Base
+class Adoption < ActiveRecord::Base
 
 	belongs_to :dog
 	belongs_to :adopter
 
-	TYPE = ['interested', 'adopted', 'returned',
-				'pending adoption', 'pending return', 'trial adoption']
+	# TYPE = ['interested', 'adopted', 'returned',
+	# 			'pending adoption', 'pending return', 'trial adoption']
 
-	validates_inclusion_of :type, :in => TYPE	
+	# validates_inclusion_of :type, :in => TYPE	
 
 end
 # == Schema Information
 #
-# Table name: connections
+# Table name: adoption
 #
 #  id              :integer         not null, primary key
 #  adopter_id      :integer

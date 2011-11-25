@@ -1,8 +1,7 @@
 <li>
-	<%= link_to image_tag(dog.photos.first.photo.url(:minithumb)),dog  %> 
-	<%= link_to dog.name, dog %>
-	<% if is_admin? %>
-	|	<%= link_to "delete", dog, :method => :delete, :confirm => "You sure?",
-								    :title => "Delete #{dog.name}" %>
+	<% if dog.photos == [] %>
+		<%= link_to image_tag("no_photo-205x195.png"),dog %>
+	<% else %>
+		<%= link_to image_tag(dog.photos.first.photo.url(:thumb)),dog  %> 
 	<% end %>
 </li>

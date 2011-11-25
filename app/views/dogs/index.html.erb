@@ -6,8 +6,12 @@
 <% end %>
 <%= will_paginate %>
 
-<ul class="dogs">
-	<%= render @dogs %>
-</ul>
+<div class="row">
+	<div class="span16">
+		<ul class="media-grid">
+			<%= render @dogs %>
+		</ul>
+	</div>
+</div>
 
 <%= will_paginate %>

@@ -13,6 +13,13 @@
 		</div>
 	</div>
 	<div class="clearfix">
+		<%= af.label :how_did_you_hear, "How did you hear about us?" %>
+		<div class="input">
+			<%= af.text_field :how_did_you_hear %>
+			<span class="help-inline">Google, Craigslist, Petfinder, etc.</span>
+		</div>
+	</div>
+	<div class="clearfix">
 		<%= af.label :ready_to_adopt_dt, "How soon do you want to adopt?" %>
 		<div class="input">
 			<%= af.text_field :ready_to_adopt_dt, :class => "required" %>

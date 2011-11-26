@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111125233947) do
+ActiveRecord::Schema.define(:version => 20111126045324) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20111125233947) do
     t.text     "why_adopt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "how_did_you_hear"
   end
 
   add_index "adoption_apps", ["adopter_id"], :name => "index_adoption_apps_on_adopter_id"

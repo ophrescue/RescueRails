@@ -21,8 +21,6 @@ end
 #  max_hrs_alone             :integer         default(8)
 #  dog_at_night              :string(100)
 #  dog_vacation              :text
-#  have_pets                 :boolean
-#  had_pets                  :boolean
 #  current_pets              :text
 #  current_pets_fixed        :string(50)
 #  why_not_fixed             :text
@@ -46,5 +44,6 @@ end
 #  created_at                :datetime
 #  updated_at                :datetime
 #  how_did_you_hear          :string(255)
+#  pets_branch               :string(255)
 #
 

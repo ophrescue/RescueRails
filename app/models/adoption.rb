@@ -3,10 +3,14 @@ class Adoption < ActiveRecord::Base
 	belongs_to :dog
 	belongs_to :adopter
 
-	# TYPE = ['interested', 'adopted', 'returned',
+	attr_accessible :relation_type,
+					:dog_id,
+					:adopter_id
+
+	# RELATION_TYPE = ['interested', 'adopted', 'returned',
 	# 			'pending adoption', 'pending return', 'trial adoption']
 
-	# validates_inclusion_of :type, :in => TYPE	
+	# validates_inclusion_of :adoption_type, :in => RELATION_TYPE	
 
 end
 # == Schema Information
@@ -16,7 +20,7 @@ end
 #  id              :integer         not null, primary key
 #  adopter_id      :integer
 #  dog_id          :integer
-#  connection_type :string(255)
+#  relation_type :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
 #

@@ -26,12 +26,12 @@ class AdoptersController < ApplicationController
 		@adopter = Adopter.new(params[:adopter])
 		@adopter.status = 'pending'
 
-
 		@adopter.dogs.each do |d|
 			d.adoptions.each do |a|
-				a.type = 'interested'
+				a.relation_type = 'interested'
 			end
 		end
+
 		if @adopter.save
 			flash[:success] = "Adopter Created"
 			redirect_to root_path

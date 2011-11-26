@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   
   before_filter :authenticate
   before_filter :correct_user, :only => [:edit, :update]
-  before_filter :admin_user,   :only => [:new, :create, :destroy]
+  before_filter :admin_user, :only => [:new, :create, :destroy]
 
 
   def index
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
 
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
+      redirect_to(root_path) unless (current_user?(@user) || current_user.admin?)
     end
 
     def admin_user

@@ -27,6 +27,18 @@ module SessionsHelper
 		current_user.admin? unless current_user.nil?
 	end
 
+	def can_edit_adopters?
+		current_user.edit_adopters? unless current_user.nil?
+	end
+
+	def can_edit_dogs?
+		current_user.edit_dogs? unless current_user.nil?
+	end
+
+	def can_view_adopters?
+		current_user.view_adopters? unless current_user.nil?
+	end
+
 	def sign_out
 		cookies.delete(:remember_token)
 		self.current_user = nil

@@ -1,33 +1,4 @@
-<h1>Sign up</h1>
+<h1>Create Staff Account</h1>
 
-<%= form_for(@user) do |f| %>
-	<%= render 'shared/error_messages', :object => f.object %>
-	<div class="clearfix">
-		<%= f.label :name %>
-		<div class="input">
-			<%= f.text_field :name %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :email %>
-		<div class="input">
-			<%= f.text_field :email %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :password %>
-		<div class="input">
-			<%= f.password_field :password %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :password_confirmation %>
-		<div class="input">
-			<%= f.password_field :password_confirmation %>
-		</div>
-	</div>
-	<div class="actions">
-		<%= f.submit "Sign up", :class => "btn primary" %>
-	</div>
-<% end %>
+<%= render 'form' %>
 	

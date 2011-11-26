@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111126160534) do
+ActiveRecord::Schema.define(:version => 20111126172258) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -174,9 +174,9 @@ ActiveRecord::Schema.define(:version => 20111126160534) do
     t.string   "state"
     t.string   "zip"
     t.string   "title"
-    t.boolean  "edit_adopters"
-    t.boolean  "edit_dogs"
-    t.boolean  "view_adopters"
+    t.boolean  "edit_adopters",          :default => false
+    t.boolean  "edit_dogs",              :default => false
+    t.boolean  "view_adopters",          :default => false
     t.text     "share_info"
   end
 

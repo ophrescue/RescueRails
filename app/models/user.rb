@@ -20,11 +20,10 @@
 #  state                  :string(255)
 #  zip                    :string(255)
 #  title                  :string(255)
-#  edit_adopters          :boolean
-#  edit_dogs              :boolean
-#  share_info             :boolean
-#  view_adopters          :boolean
-#
+#  edit_adopters          :boolean         default(FALSE)
+#  edit_dogs              :boolean         default(FALSE)
+#  view_adopters          :boolean         default(FALSE)
+#  share_info             :text
 
 require 'digest'
 
@@ -118,6 +117,3 @@ class User < ActiveRecord::Base
 
   
 end
-
-
-

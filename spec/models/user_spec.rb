@@ -22,8 +22,8 @@
 #  title                  :string(255)
 #  edit_adopters          :boolean
 #  edit_dogs              :boolean
-#  share_info             :boolean
 #  view_adopters          :boolean
+#  share_info             :text
 #
 
 require 'spec_helper'

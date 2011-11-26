@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111126045324) do
+ActiveRecord::Schema.define(:version => 20111126160534) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -167,6 +167,17 @@ ActiveRecord::Schema.define(:version => 20111126045324) do
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.boolean  "is_foster",              :default => false
+    t.string   "phone"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "title"
+    t.boolean  "edit_adopters"
+    t.boolean  "edit_dogs"
+    t.boolean  "view_adopters"
+    t.text     "share_info"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

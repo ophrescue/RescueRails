@@ -13,13 +13,41 @@
 #  password_reset_token   :string(255)
 #  password_reset_sent_at :datetime
 #  is_foster              :boolean         default(FALSE)
+#  phone                  :string(255)
+#  address1               :string(255)
+#  address2               :string(255)
+#  city                   :string(255)
+#  state                  :string(255)
+#  zip                    :string(255)
+#  title                  :string(255)
+#  edit_adopters          :boolean
+#  edit_dogs              :boolean
+#  share_info             :boolean
+#  view_adopters          :boolean
 #
 
 require 'digest'
 
 class User < ActiveRecord::Base
   attr_accessor :password
-  attr_accessible :name, :email, :password, :password_confirmation
+
+  attr_accessible :name, 
+                  :email, 
+                  :password, 
+                  :password_confirmation,
+                  :admin,
+                  :is_foster,
+                  :phone,
+                  :address1,
+                  :address2,
+                  :city,
+                  :state,
+                  :zip,
+                  :title,
+                  :edit_adopters,
+                  :edit_dogs,
+                  :share_info,
+                  :view_adopters
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
@@ -33,10 +61,10 @@ class User < ActiveRecord::Base
   #Automatically creates the virtual attribute 'password_confirmation'.
   validates :password, :presence      => true,
                        :confirmation  => true,
-                       :length        => { :within => 6..40 }
-
+                       :length        => { :within => 8..40 },
+                       :unless => Proc.new { |a| a.password.blank? }
                        
-  before_save :encrypt_password
+  before_save :encrypt_password, :unless => "password.blank?"
 
   has_many :histories
   has_many :dogs

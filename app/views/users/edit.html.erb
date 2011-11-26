@@ -9,9 +9,51 @@
 		</div>
 	</div>
 	<div class="clearfix">
+		<%= f.label :title %>
+		<div class="input">
+			<%= f.text_field :title %>
+		</div>
+	</div>
+	<div class="clearfix">
 		<%= f.label :email %>
 		<div class="input">
-		<%= f.text_field :email %>
+			<%= f.text_field :email %>
+		</div>
+	</div>
+	<div class="clearfix">
+		<%= f.label :phone %>
+		<div class="input">
+			<%= f.text_field :phone %>
+		</div>
+	</div>
+	<div class="clearfix">
+		<%= f.label :address1 %>
+		<div class="input">
+			<%= f.text_field :address1 %>
+		</div>
+	</div>
+	<div class="clearfix">
+		<%= f.label :address2 %>
+		<div class="input">
+			<%= f.text_field :address2 %>
+		</div>
+	</div>
+	<div class="clearfix">
+		<%= f.label :city %>
+		<div class="input">
+			<%= f.text_field :city %>
+		</div>
+	</div>
+	<div class="clearfix">
+		<%= f.label :state %>
+		<div class="input">
+			<%= f.text_field :state %>
+		</div>
+	</div>
+	<div class="clearfix">
+		<%= f.label :zip %>
+		<div class="input">
+			<%= f.text_field :zip %>
 		</div>
 	</div>
 	<div class="clearfix">
@@ -24,6 +66,51 @@
 		<%= f.label :password_confirmation %>
 		<div class="input">
 			<%= f.password_field :password_confirmation %>
+		</div>
+	</div>
+	<div class="clearfix">
+		<%= f.label :share_info, "What contact information can Adotion Coordinators share with Approved Adopters?" %>
+		<div class="input">
+			<%= f.text_area :share_info, :class => "xlarge", :rows => "4" %>
+			<span class="help-inline">E-mail, Phone number, etc.<span>
+		</div>
+	</div>
+	<h3>User Permissions</h3>
+	<div class="clearfix">
+		<label id="optionsCheckboxes">Check All that Apply</label>
+		<div class="input">
+			<ul class="inputs-list">
+				<li>
+					<label>
+						<%= f.check_box :admin %>
+						<span>Admin - Edit Staff, Override Assignments, Add/Remove Dogs</span>
+					</label>
+				</li>
+				<li>
+					<label>
+						<%= f.check_box :edit_adopters %>
+						<span>Process Adoption Applications</span>
+					</label>
+				</li>
+				<li>
+					<label>
+						<%= f.check_box :view_adopters %>
+						<span>View Adoption Applications</span>
+					</label>
+				</li>
+				<li>
+					<label>
+						<%= f.check_box :edit_dogs %>
+						<span>Edit Dogs - Can edit existing dog records (cannot add or delete)</span>
+					</label>
+				</li>
+				<li>
+					<label>
+						<%= f.check_box :is_foster %>
+						<span>Foster - This person can be selected as a foster on the dog edit screen.</span>
+					</label>
+				</li>
+			</ul>
 		</div>
 	</div>
 	<div class="actions">

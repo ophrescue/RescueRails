@@ -106,7 +106,7 @@ end
 #
 # Table name: adopters
 #
-#  id           :integer(4)      not null, primary key
+#  id           :integer         not null, primary key
 #  name         :string(255)
 #  email        :string(255)
 #  phone        :string(255)
@@ -119,5 +119,6 @@ end
 #  when_to_call :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
+#  dog_reqs     :text
 #
 

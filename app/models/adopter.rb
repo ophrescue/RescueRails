@@ -84,5 +84,6 @@ end
 #  when_to_call :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
+#  dog_reqs     :text
 #
 

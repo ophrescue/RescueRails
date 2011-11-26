@@ -13,6 +13,17 @@
 #  password_reset_token   :string(255)
 #  password_reset_sent_at :datetime
 #  is_foster              :boolean         default(FALSE)
+#  phone                  :string(255)
+#  address1               :string(255)
+#  address2               :string(255)
+#  city                   :string(255)
+#  state                  :string(255)
+#  zip                    :string(255)
+#  title                  :string(255)
+#  edit_adopters          :boolean
+#  edit_dogs              :boolean
+#  share_info             :boolean
+#  view_adopters          :boolean
 #
 
 require 'spec_helper'

@@ -15,13 +15,13 @@ class Adoption < ActiveRecord::Base
 end
 # == Schema Information
 #
-# Table name: adoption
+# Table name: adoptions
 #
-#  id              :integer         not null, primary key
-#  adopter_id      :integer
-#  dog_id          :integer
+#  id            :integer         not null, primary key
+#  adopter_id    :integer
+#  dog_id        :integer
 #  relation_type :string(255)
-#  created_at      :datetime
-#  updated_at      :datetime
+#  created_at    :datetime
+#  updated_at    :datetime
 #
 

@@ -64,6 +64,9 @@ class Dog < ActiveRecord::Base
 	has_many :users, :through => :history
 	belongs_to :user
 
+	has_many :adoptions, :dependent => :destroy
+	has_many :adopters, :through => :adoptions
+
 	before_save   :set_dates
 
 	before_update :update_history

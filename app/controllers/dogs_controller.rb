@@ -5,7 +5,12 @@ class DogsController < ApplicationController
 
   def index
     @title = "Dogs"
-    @dogs = Dog.paginate(:page => params[:page])
+    @dogs = Dog.where("name ilike ?", "%#{params[:q]}%")
+    # @dogs = Dog.paginate(:page => params[:page])
+    respond_to do |format|
+      format.html 
+      format.json { render :json => @dogs.map(&:attributes) }
+    end
   end
 
   def show

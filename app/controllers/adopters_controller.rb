@@ -25,7 +25,12 @@ class AdoptersController < ApplicationController
 	def create
 		@adopter = Adopter.new(params[:adopter])
 		@adopter.status = 'pending'
+
 		if @adopter.save
+			@adopter.adoptions.each do |a|
+				a.relation_type = 'interested'
+				a.save
+			end
 			flash[:success] = "Adopter Created"
 			redirect_to root_path
 		else

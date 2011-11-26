@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111103214705) do
+ActiveRecord::Schema.define(:version => 20111125233947) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20111103214705) do
     t.string   "when_to_call"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "dog_reqs"
   end
 
   create_table "adoption_apps", :force => true do |t|
@@ -34,7 +35,6 @@ ActiveRecord::Schema.define(:version => 20111103214705) do
     t.string   "other_household_names"
     t.date     "ready_to_adopt_dt"
     t.string   "house_type",                :limit => 40
-    t.text     "dog_reqs"
     t.boolean  "has_yard"
     t.boolean  "has_fence"
     t.boolean  "has_parks"
@@ -70,6 +70,18 @@ ActiveRecord::Schema.define(:version => 20111103214705) do
   end
 
   add_index "adoption_apps", ["adopter_id"], :name => "index_adoption_apps_on_adopter_id"
+
+  create_table "adoptions", :force => true do |t|
+    t.integer  "adopter_id"
+    t.integer  "dog_id"
+    t.string   "relation_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "adoptions", ["adopter_id", "dog_id"], :name => "index_connections_on_adopter_id_and_dog_id", :unique => true
+  add_index "adoptions", ["adopter_id"], :name => "index_connections_on_adopter_id"
+  add_index "adoptions", ["dog_id"], :name => "index_connections_on_dog_id"
 
   create_table "breeds", :force => true do |t|
     t.string   "name"

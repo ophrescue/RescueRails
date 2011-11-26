@@ -1,9 +1,25 @@
 <h1><%= @title %></h1>
 
-<%= will_paginate %>
 
-<ul class="adopters">
+<table class="zebra-striped bordered-table condensed-table">
+	<thead>
+		<tr>
+			<th>RTA</th>
+			<th>Status</th>
+			<th>Name</th>
+			<th>Location</th>
+			<th>Dogs</th>
+			<th>Assigned To</th>
+			<th>Refs</th>
+			<th>Vet Check</th>
+			<th>Landlord</th>
+			<th>Interview</th>
+			<th>Last Update</th>
+		</tr>
+	</thead>
+	<tbody>
 	<%= render @adopters %>
-</ul>
+	</tbody>
+</table>
 
-<%= will_paginate %>
+

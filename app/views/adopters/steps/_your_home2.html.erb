@@ -137,37 +137,18 @@
 			</div>
 		</div>
 		<div class="clearfix">
-			<%= af.label :have_pets, "Do you currently have any cats or dogs?" %>
+			<%= af.label :have_pets, "Have you owned any dogs or cats now or in the past 10 years?" %>
 			<div class="input">
 				<ul class="inputs-list">
 					<li>
 						<label>
-							<%= af.radio_button :have_pets, true, :class => "required" %>
+							<%= af.radio_button :pets_branch, 'other_pets', :class => "required link" %>
 							<span>Yes</span>
 						</label>
 					</li>
 					<li>
 						<label>
-							<%= af.radio_button :have_pets, false %>
-							<span>No</span>
-						</label>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="clearfix">
-			<%= af.label :had_pets, "Have you had any other cats or dogs in the past 10 years?" %>
-			<div class="input">
-				<ul class="inputs-list">
-					<li>
-						<label>
-							<%= af.radio_button :had_pets, true, :class => "required" %>
-							<span>Yes</span>
-						</label>
-					</li>
-					<li>
-						<label>
-							<%= af.radio_button :had_pets, false %>
+							<%= af.radio_button :pets_branch, 'no_pets', :class => "link required" %>
 							<span>No</span>
 						</label>
 					</li>

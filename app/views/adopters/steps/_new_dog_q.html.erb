@@ -1,30 +1,6 @@
 <div id="no_pets" class="step">
 		<div class="clearfix">
-			<%= af.label :has_new_dog_exp, "Do you have experience with bringing home a new dog and working through the adjustments?" %>
-			<div class="input">
-				<ul class="inputs-list">
-					<li>
-						<label>
-							<%= af.radio_button :has_new_dog_exp, true, :class => "required" %>
-							<span>Yes</span>
-						</label>
-					<li>
-						<label>
-							<%= af.radio_button :has_new_dog_exp, false %>
-							<span>No</span>
-						</label>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="clearfix">
-			<%= af.label :plan_training, "Do you plan to train your new dog or attend training classes?" %>
-			<div class="input">
-				<%= af.text_area :plan_training, :class => "required xxlarge", :rows => "5" %>
-			</div>
-		</div>
-		<div class="clearfix">
-			<%= af.label :training_explain, "If training is recommended to overovercome behavior problems, would you participate in this training? (why/why not)" %>
+			<%= af.label :training_explain, "Are you willing to seek professional training for any pet behavior issues? (Why/Why Not?)" %>
 			<div class="input">
 				<%= af.text_area :training_explain,:class => "required xxlarge", :rows => "5" %>
 			</div>
@@ -40,12 +16,6 @@
 			<div class="input">
 				<%= af.text_area :surrendered_pets, :class => "required xxlarge", :rows => "5" %>
 				<span class="help-inline">If so, please explain in detail</span>
-			</div>
-		</div>
-		<div class="clearfix">
-			<%= af.label :why_adopt, "Please tell us why you would like to make this dog part of your family!" %>
-			<div class="input">
-				<%= af.text_area :why_adopt, :class => "required xxlarge", :rows => "5" %>
 			</div>
 		</div>
 </div>

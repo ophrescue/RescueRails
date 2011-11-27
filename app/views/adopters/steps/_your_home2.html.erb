@@ -1,65 +1,9 @@
 <div id="own" class="step">
 		<div class="clearfix">
-			<%= af.label :has_yard, "Do you have yard?" %>
-			<div class="input">
-				<ul class="inputs-list">
-					<li>
-						<label>
-							<%= af.radio_button :has_yard, true, :class => "required" %>
-							<span>Yes</span>
-						</label>
-					</li>
-					<li>
-						<label>
-							<%= af.radio_button :has_yard, false %>
-							<span>No</span>
-						</label>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="clearfix">
-			<%= af.label :has_fence, "Do you have a fence?" %>
-			<div class="input">
-				<ul class="inputs-list">
-					<li>
-						<label>
-							<%= af.radio_button :has_fence, true, :class => "required" %>
-							<span>Yes</span>
-						</label>
-					</li>
-					<li>
-						<label>
-							<%= af.radio_button :has_fence, false %>
-							<span>No</span>
-						</label>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="clearfix">
-			<%= af.label :has_parks, "Are there parks nearby?" %>
-			<div class="input">
-				<ul class="inputs-list">
-					<li>
-						<label>
-							<%= af.radio_button :has_parks, true, :class => "required" %>
-							<span>Yes</span>
-						</label>
-					</li>
-					<li>
-						<label>
-							<%= af.radio_button :has_parks, false %>
-							<span>No</span>
-						</label>
-					</li>
-				</ul>
-			</div>			
-		</div>
-		<div class="clearfix">
 			<%= af.label :dog_exercise, "How will your dog get exercise?" %>
 			<div class="input">
 				<%= af.text_area :dog_exercise, :class => "required xxlarge", :rows => "3"%>
+				<span class="help-inline">Describe yard, nearby parks and family activities.</span>
 			</div>
 		</div>
 		<div class="clearfix">
@@ -97,37 +41,6 @@
 			<%= af.label :max_hrs_alone, "What will be the maximum length of time your dog will be left home alone?" %>
 			<div class="input">
 				<%= af.select :max_hrs_alone, (0..24), {:selected => 8}, :class => "span1" %><span> hours</span>
-			</div>
-		</div>
-		<div class="clearfix">
-			<%= af.label :dog_at_night, "Where will your dog sleep at night?" %>
-			<div class="input">
-				<ul class="inputs-list">
-					<li>
-						<label>
-							<%= af.radio_button :dog_at_night, 'In a crate', :class => "required" %>
-							<span>In a crate</span>
-						</label>
-					</li>
-					<li>
-						<label>
-							<%= af.radio_button :dog_at_night, 'In a limited area of home' %>
-							<span>In a limited area of home</span>
-						</label>
-					</li>
-					<li>
-						<label>
-							<%= af.radio_button :dog_at_night, 'Free range of home' %>
-							<span>Free range of home</span>
-						</label>
-					</li>
-					<li>
-						<label>
-							<%= af.radio_button :dog_at_night, 'Outside' %>
-							<span>Outside</span>
-						</label>
-					</li>
-				<ul>
 			</div>
 		</div>
 		<div class="clearfix">

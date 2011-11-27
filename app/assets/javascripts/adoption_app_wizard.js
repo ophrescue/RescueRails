@@ -25,13 +25,26 @@ $(function(){
       				email: true
       			},
       			"adopter[state]" : {
-      				maxlength: 2
+      				minlength: 2,
+              maxlength: 2
       			},
       			"adopter[zip]" : {
       				digits: true,
       				minlength: 5,
       				maxlength: 5
-      			}
+      			},
+                "adopter[references_attributes][0][email]" : {
+                      required: false,
+                      email: true    
+                },
+                "adopter[references_attributes][1][email]" : {
+                      required: false,
+                      email: true    
+                },
+                "adopter[references_attributes][2][email]" : {
+                      required: false,
+                      email: true    
+                }
       		},
       		messages : {
       			// "adopter[pre_q_age]" : {required: "Have a parent fill out this form, or get an adult to co-sign."}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111126230133) do
+ActiveRecord::Schema.define(:version => 20111127032214) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20111126230133) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "dog_reqs"
+    t.text     "why_adopt"
   end
 
   create_table "adoption_apps", :force => true do |t|
@@ -35,38 +36,28 @@ ActiveRecord::Schema.define(:version => 20111126230133) do
     t.string   "other_household_names"
     t.date     "ready_to_adopt_dt"
     t.string   "house_type",                :limit => 40
-    t.boolean  "has_yard"
-    t.boolean  "has_fence"
-    t.boolean  "has_parks"
     t.text     "dog_exercise"
     t.string   "dog_stay_when_away",        :limit => 100
     t.integer  "max_hrs_alone",                            :default => 8
-    t.string   "dog_at_night",              :limit => 100
     t.text     "dog_vacation"
     t.text     "current_pets"
-    t.string   "current_pets_fixed",        :limit => 50
     t.text     "why_not_fixed"
-    t.text     "prior_pets"
     t.boolean  "current_pets_uptodate"
     t.text     "current_pets_uptodate_why"
-    t.string   "vet_name",                  :limit => 100
-    t.string   "vet_phone",                 :limit => 15
     t.string   "landlord_name",             :limit => 100
     t.string   "landlord_phone",            :limit => 15
     t.text     "rent_dog_restrictions"
-    t.integer  "rent_deposit",                             :default => 0
-    t.integer  "rent_increase",                            :default => 0
     t.integer  "annual_cost_est",                          :default => 0
-    t.text     "plan_training"
-    t.boolean  "has_new_dog_exp"
     t.text     "surrender_pet_causes"
     t.text     "training_explain"
     t.text     "surrendered_pets"
-    t.text     "why_adopt"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "how_did_you_hear"
     t.string   "pets_branch"
+    t.boolean  "current_pets_fixed"
+    t.text     "rent_costs"
+    t.text     "vet_info"
   end
 
   add_index "adoption_apps", ["adopter_id"], :name => "index_adoption_apps_on_adopter_id"

@@ -25,11 +25,15 @@
 				<%= render 'adopters/steps/new_dog_q', :af => af %>
 			<% end %>
 
+			<div id="reference" class="step">
+			<h4>Reference</h4>
+			<p>Please provide three references, no immediate family members please.</p>
 			<%= f.fields_for :references do |builder| %>
 
 				<%= render 'adopters/steps/reference_fields', :rf => builder %>
 
 			<% end %>
+			</div>
 			<div id="Navigation" class="actions well">
 				<input class="btn large" id="back" value="Back" type="reset" />
 				<%= f.submit "Submit", :id =>"next", :class => "btn large primary" %>

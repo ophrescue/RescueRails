@@ -21,7 +21,7 @@ var DEFAULT_SETTINGS = {
     jsonContainer: null,
 
 	// Display settings
-    hintText: "Type in a search term",
+    hintText: "Type in name of dog from OPH",
     noResultsText: "No results",
     searchingText: "Searching...",
     deleteText: "&times;",

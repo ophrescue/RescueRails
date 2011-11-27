@@ -76,43 +76,27 @@
 			<td><%= @adopter.adoption_app.rent_dog_restrictions %></td>
 		</tr>
 		<tr>
-			<th>rent_deposit</th>
-			<td><%= @adopter.adoption_app.rent_deposit %></td>
-		</tr>		
+			<th>rent_dog_restrictions</th>
+			<td><%= @adopter.adoption_app.rent_dog_restrictions %></td>
+		</tr>
 		<tr>
-			<th>rent_increase</th>
-			<td><%= @adopter.adoption_app.rent_increase %></td>
-		</tr>		
+			<th>why_adopt</th>
+			<td><%= @adopter.why_adopt %></td>
+		</tr>			
 	</table>
 <% else %>
 	<h3>Adopter Owns Home</h3>
 <% end %>
 
-<h3>Home Info</h3>
+<h3>Household Info</h3>
 <table class="zebra-striped bordered-table condensed-table">
-	<% if @adopter.adoption_app.spouse_name? %>
-		<tr>
-			<th>spouse's name</th>
-			<td><%= @adopter.adoption_app.spouse_name %></td>
-		</tr>
-	<% end %>
-	<% if @adopter.adoption_app.other_household_names? %>
-		<tr>
-			<th>other_household_names</th>
-			<td><%= @adopter.adoption_app.other_household_names %></td>
-		</tr>
-	<% end %>
 	<tr>
-		<th>Has Yard</th>
-		<td><%= @adopter.adoption_app.has_yard %></td>
+		<th>spouse's name</th>
+		<td><%= @adopter.adoption_app.spouse_name %></td>
 	</tr>
 	<tr>
-		<th>Has Fence</th>
-		<td><%= @adopter.adoption_app.has_fence %></td>
-	</tr>
-	<tr>
-		<th>Has Parks Nearby</th>
-		<td><%= @adopter.adoption_app.has_parks %></td>
+		<th>other_household_names</th>
+		<td><%= @adopter.adoption_app.other_household_names %></td>
 	</tr>
 </table>
 
@@ -131,20 +115,8 @@
 		<td><%= @adopter.adoption_app.max_hrs_alone %></td>
 	</tr>
 	<tr>
-		<th>dog_at_night</th>
-		<td><%= @adopter.adoption_app.dog_at_night %></td>
-	</tr>
-		<tr>
 		<th>dog_vacation</th>
 		<td><%= @adopter.adoption_app.dog_vacation %></td>
-	</tr>
-	<tr>
-		<th>plan_training</th>
-		<td><%= @adopter.adoption_app.plan_training %></td>
-	</tr>
-	<tr>
-		<th>has_new_dog_exp</th>
-		<td><%= @adopter.adoption_app.has_new_dog_exp %></td>
 	</tr>
 	<tr>
 		<th>surrender_pet_causes</th>
@@ -157,10 +129,6 @@
 	<tr>
 		<th>surrendered_pets</th>
 		<td><%= @adopter.adoption_app.surrendered_pets %></td>
-	</tr>
-	<tr>
-		<th>why_adopt</th>
-		<td><%= @adopter.adoption_app.why_adopt %></td>
 	</tr>
 </table>
 
@@ -184,10 +152,6 @@
 	<td><%= @adopter.adoption_app.why_not_fixed %></td>
 </tr>
 <tr>
-	<th>prior_pets</th>
-	<td><%= @adopter.adoption_app.prior_pets %></td>
-</tr>
-<tr>
 	<th>current_pets_uptodate</th>
 	<td><%= @adopter.adoption_app.current_pets_uptodate %></td>
 </tr>
@@ -196,12 +160,8 @@
 	<td><%= @adopter.adoption_app.current_pets_uptodate_why %></td>
 </tr>
 <tr>
-	<th>vet_name</th>
-	<td><%= @adopter.adoption_app.vet_name %></td>
-</tr>
-<tr>
-	<th>vet_phone</th>
-	<td><%= @adopter.adoption_app.vet_phone %></td>
+	<th>vet_info</th>
+	<td><%= @adopter.adoption_app.vet_info %></td>
 </tr>
 </table>
 <% end %>

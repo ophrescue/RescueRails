@@ -84,5 +84,6 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #  dog_reqs     :text
+#  why_adopt    :text
 #
 

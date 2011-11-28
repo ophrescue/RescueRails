@@ -1,5 +1,7 @@
 RescueRails::Application.routes.draw do
 
+  match "/adopters/check_email" => "adopters#check_email"
+
   resources :adopters
   resources :users
   resources :dogs do
@@ -7,8 +9,6 @@ RescueRails::Application.routes.draw do
   end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :password_resets
-
-  
 
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'

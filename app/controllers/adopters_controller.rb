@@ -37,4 +37,13 @@ class AdoptersController < ApplicationController
 			render 'new'
 		end
 	end
+
+	def check_email
+		@adopter = Adopter.find_by_email(params[:adopter][:email])
+
+		respond_to do |format|
+			format.json { render :json => !@adopter }
+		end
+	end
+	
 end

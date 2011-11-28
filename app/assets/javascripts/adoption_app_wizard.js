@@ -22,7 +22,8 @@ $(function(){
       			},
       			"adopter[email]" : {
       				required: true,
-      				email: true
+      				email: true,
+              remote: "/adopters/check_email"
       			},
       			"adopter[state]" : {
       				minlength: 2,
@@ -47,7 +48,7 @@ $(function(){
                 }
       		},
       		messages : {
-      			// "adopter[pre_q_age]" : {required: "Have a parent fill out this form, or get an adult to co-sign."}
+      		  "adopter[email]" : {remote: "Email exists, contact adopt@ophrescue.org for changes." }
       		}
 	 	}
 	 });

@@ -1,5 +1,5 @@
 body {
-	padding-top: 60px;
+	padding-top: 90px;
 }
 
 label.error {
@@ -41,4 +41,13 @@ form .clearfix.error span.error {
 
 .topbar div > ul a, .nav a {
 	padding: 33px 10px 11px;
+}
+
+img.floatLeft { 
+    float: left; 
+    margin: 4px; 
+}
+img.floatRight { 
+    float: right; 
+    margin: 4px; 
 }

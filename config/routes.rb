@@ -16,6 +16,7 @@ RescueRails::Application.routes.draw do
 
   root              :to => 'pages#home'
   match '/contact',  :to => 'pages#contact'
+  match '/process',  :to => 'pages#process'
 
 
   # The priority is based upon order of creation:

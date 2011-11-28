@@ -1,64 +1,87 @@
 <h1><%= @adopter.name %></h1>
 <h2><%= @adopter.status %></h2>
 
-<h3>Contact Information</h3>
-<table class="zebra-striped bordered-table condensed-table">
-	<tr>
-		<th>application submitted</th>
-		<td><%= @adopter.created_at %></td>
-	<tr>
-		<th>email</th>
-		<td><%= @adopter.email %></td>
-	</tr>
-	<tr>
-		<th>phone</th>
-		<td><%= @adopter.phone %></td>
-	</tr>
-	<tr>
-		<th>best time to contact</th>
-		<td>
-			<%= @adopter.when_to_call %>
-		</td>
-	</tr>
-	<tr>
-		<th>address</th>
-		<td>
-			<address>
-				<%= @adopter.address1 %><br />
-				<% if @adopter.address2? %>
-					<%= @adopter.address2 %><br />
+<div class="row">
+	<div class="span6">
+	<h3>Contact Information</h3>
+		<table class="zebra-striped bordered-table condensed-table">
+			<tr>
+				<th>application submitted</th>
+				<td><%= @adopter.created_at %></td>
+			<tr>
+				<th>email</th>
+				<td><%= @adopter.email %></td>
+			</tr>
+			<tr>
+				<th>phone</th>
+				<td><%= @adopter.phone %></td>
+			</tr>
+			<tr>
+				<th>best time to contact</th>
+				<td>
+					<%= @adopter.when_to_call %>
+				</td>
+			</tr>
+			<tr>
+				<th>address</th>
+				<td>
+					<address>
+						<%= @adopter.address1 %><br />
+						<% if @adopter.address2? %>
+							<%= @adopter.address2 %><br />
+						<% end %>
+						<%= @adopter.city %>, 
+						<%= @adopter.state %> 
+						<%= @adopter.zip %>
+					</address>
+				</td>
+			</tr>
+		</table>
+		</div>
+
+	<div class="span10">
+		<h3>References</h3>
+		<table class="zebra-striped bordered-table condensed-table">
+			<thead>
+				<th>name</th>
+				<th>phone</th>
+				<th>email</th>
+				<th>relationship</th>
+			</thead>
+			<%= render @adopter.references, :target => @adopter %>
+		</table>
+	</div>
+
+</div>
+
+
+<div class="row">
+	<div class="span6">
+		<h3>Dog Choices</h3>
+
+		<table class="zebra-striped bordered-table condensed-table">
+			<tr>
+				<th>Ready to Adopt Date</th>
+				<td>
+					<%= @adopter.adoption_app.ready_to_adopt_dt %>
+				</td>
+			</tr>
+			<th>Dog Selections</th>
+			<td>
+				<% @adopter.dogs.each do |d| %>
+					<%= link_to d.name, d %>
+					(<%= d.status %>)
+					<br />
 				<% end %>
-				<%= @adopter.city %>, 
-				<%= @adopter.state %> 
-				<%= @adopter.zip %>
-			</address>
-		</td>
-	</tr>
-</table>
+			</td>
+			<tr>
+				<th>Dog Requirements</th>
+				<td><%= @adopter.dog_reqs %></td>
+			</tr>
+		</table>
+	</div>
 
-
-<h3>Dog Choices</h3>
-
-<table class="zebra-striped bordered-table condensed-table">
-	<tr>
-		<th>Ready to Adopt Date</th>
-		<td>
-			<%= @adopter.adoption_app.ready_to_adopt_dt %>
-		</td>
-	</tr>
-	<th>Dog Selections</th>
-	<td>
-		<% @adopter.dogs.each do |d| %>
-			<%= link_to d.name, d %>
-			(<%= d.status %>)
-			<br />
-		<% end %>
-	</td>
-	<tr>
-		<th>Dog Requirements</th>
-		<td><%= @adopter.dog_reqs %></td>
-	</tr>
-</table>
+</div>
 
 <% if @adopter.adoption_app.house_type == 'rent' %>
 	<h3>Rental Info</h3>
@@ -166,16 +189,7 @@
 </table>
 <% end %>
 
-<h3>References</h3>
-<table class="zebra-striped bordered-table condensed-table">
-	<thead>
-		<th>name</th>
-		<th>phone</th>
-		<th>email</th>
-		<th>relationship</th>
-	</thead>
-	<%= render @adopter.references, :target => @adopter %>
-</table>
+
 
 
 <h3>Private Notes</h3>

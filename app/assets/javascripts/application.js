@@ -12,6 +12,8 @@
 //= require jquery.form.wizard
 //= require jquery.validate
 //= require bootstrap
+//= require jquery.tablesorter.min.js
+//= require jquery.tablesorter.conf.js
 //= require jquery.maskedinput.js
 //= require msk_input.conf.js
 //= require jquery.tokeninput.js

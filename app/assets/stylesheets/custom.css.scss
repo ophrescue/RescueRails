@@ -1,5 +1,5 @@
 body {
-	padding-top: 90px;
+	padding-top: 80px;
 }
 
 label.error {
@@ -34,7 +34,7 @@ form .clearfix.error span.error {
 }
 
 .sidekick {
-	background-color: #e7f4f7;
+	background-color: #ffffff;
 	border-radius: 6px 6px 6px 6px;
 	padding: 10px;
 }
@@ -45,9 +45,11 @@ form .clearfix.error span.error {
 
 img.floatLeft { 
     float: left; 
-    margin: 4px; 
+    margin: 4px;
+    border-radius: 6px 6px 6px 6px;
 }
 img.floatRight { 
     float: right; 
-    margin: 4px; 
+    margin: 4px;
+    border-radius: 6px 6px 6px 6px;
 }

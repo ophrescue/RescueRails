@@ -14,9 +14,10 @@ RescueRails::Application.routes.draw do
   match '/signout', :to => 'sessions#destroy'
   match '/adopt',   :to => 'adopters#new'
 
-  root              :to => 'pages#home'
+  root               :to => 'pages#home'
   match '/contact',  :to => 'pages#contact'
   match '/process',  :to => 'pages#process'
+  match '/events',   :to => 'pages#events'
 
 
   # The priority is based upon order of creation:

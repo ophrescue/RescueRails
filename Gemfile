@@ -9,6 +9,7 @@ gem 'rails3-jquery-autocomplete'
 gem "paperclip", "~> 2.4"
 gem "bootstrap-sass", "~> 1.4.0"
 gem 'therubyracer'
+gem 'unicorn'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -49,8 +50,4 @@ group :test do
   gem 'autotest-rails-pure'
   gem 'autotest-fsevent'
   gem 'autotest-growl'
-end
-
-group :production do
-  gem 'unicorn'
 end

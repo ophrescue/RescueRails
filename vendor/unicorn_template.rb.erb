@@ -1,0 +1,67 @@
+# This file has been generated from unicorn_template.rb.erb which is greatly inspired from:
+# https://github.com/ricodigo/ricodigo-capistrano-recipes/blob/master/generators/unicorn.rb.erb
+#
+# See http://unicorn.bogomips.org/Unicorn/Configurator.html for complete
+# documentation.
+
+# Local variables
+old_pid = '<%= unicorn_pid + ".old" %>'
+
+# Unicorn setup
+
+worker_processes <%= unicorn_workers %>
+timeout <%= unicorn_workers_timeout %>
+
+# Listen on a Unix data socket
+listen '<%= unicorn_socket %>', :backlog => 1024
+pid '<%= unicorn_pid %>'
+
+user '<%= unicorn_user %>', '<%= unicorn_group %>'
+
+# Help ensure your application will always spawn in the symlinked
+# "current" directory that Capistrano sets up.
+working_directory '<%= "#{deploy_to}/current" %>'
+
+stderr_path '<%= "#{logs_path}/unicorn.stderr.log" %>'
+stdout_path '<%= "#{logs_path}/unicorn.stdout.log" %>'
+
+preload_app true
+
+GC.copy_on_write_friendly = true if GC.respond_to?(:copy_on_write_friendly=)
+
+before_fork do |server, worker|
+  if File.exists?(old_pid) && server.pid != old_pid
+    pid = File.read(old_pid).to_i
+    begin
+      puts ">> Killing old unicorn process"
+      Process.kill("QUIT", pid)
+    rescue Errno::ECHILD, Errno::ESRCH => e
+      $stderr.puts ">> Process #{pid} has stopped"
+    rescue Errno::ENOENT => e
+      $stderr.puts ">> Error killing previous instance. #{e.message}"
+      # someone else did our job for us
+    end
+  end
+end
+
+after_fork do |server, worker|
+  begin
+    uid, gid = Process.euid, Process.egid
+
+    target_uid = File.stat(Rails.root).uid
+    user = Etc.getpwuid(target_uid).name
+
+    target_gid = File.stat(Rails.root).gid
+    group = Etc.getgrgid(target_gid).name
+
+    worker.tmp.chown(target_uid, target_gid)
+    if uid != target_uid || gid != target_gid
+      Process.initgroups(user, target_gid)
+      Process::GID.change_privilege(target_gid)
+      Process::UID.change_privilege(target_uid)
+    end
+  rescue => e
+    STDERR.puts "cannot change privileges on #{Rails.env} environment"
+    STDERR.puts "  #{e}"
+  end
+end

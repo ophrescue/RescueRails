@@ -12,8 +12,8 @@ User.destroy_all
 
 @attr = { :name => "Admin User",
           :email => "test@test.com",
-          :password => "foobar",
-          :password_confirmation => "foobar",
+          :password => "foobar99",
+          :password_confirmation => "foobar99",
 }
 
  user = User.create!(@attr)

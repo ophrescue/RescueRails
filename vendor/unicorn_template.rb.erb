@@ -27,46 +27,34 @@ stdout_path '<%= "#{logs_path}/unicorn.stdout.log" %>'
 
 preload_app true
 
-GC.copy_on_write_friendly = true if GC.respond_to?(:copy_on_write_friendly=)
-
 before_fork do |server, worker|
   # the following is highly recomended for Rails + "preload_app true"
   # as there's no need for the master process to hold a connection
-  defined?(ActiveRecord::Base) and
-    ActiveRecord::Base.connection.disconnect
+  if defined?(ActiveRecord::Base)
+    ActiveRecord::Base.connection.disconnect!
   end
+
+  # Before forking, kill the master process that belongs to the .oldbin PID.
+  # This enables 0 downtime deploys.
+  old_pid = "/tmp/unicorn.my_site.pid.oldbin"
   if File.exists?(old_pid) && server.pid != old_pid
-    pid = File.read(old_pid).to_i
     begin
-      puts ">> Killing old unicorn process"
-      Process.kill("QUIT", pid)
-    rescue Errno::ECHILD, Errno::ESRCH => e
-      $stderr.puts ">> Process #{pid} has stopped"
-    rescue Errno::ENOENT => e
-      $stderr.puts ">> Error killing previous instance. #{e.message}"
+      Process.kill("QUIT", File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
       # someone else did our job for us
     end
   end
 end
 
 after_fork do |server, worker|
-  begin
-    uid, gid = Process.euid, Process.egid
-
-    target_uid = File.stat(Rails.root).uid
-    user = Etc.getpwuid(target_uid).name
-
-    target_gid = File.stat(Rails.root).gid
-    group = Etc.getgrgid(target_gid).name
-
-    worker.tmp.chown(target_uid, target_gid)
-    if uid != target_uid || gid != target_gid
-      Process.initgroups(user, target_gid)
-      Process::GID.change_privilege(target_gid)
-      Process::UID.change_privilege(target_uid)
-    end
-  rescue => e
-    STDERR.puts "cannot change privileges on #{Rails.env} environment"
-    STDERR.puts "  #{e}"
+  # the following is *required* for Rails + "preload_app true",
+  if defined?(ActiveRecord::Base)
+    ActiveRecord::Base.establish_connection
   end
+
+  # if preload_app is true, then you may also want to check and
+  # restart any other shared sockets/descriptors such as Memcached,
+  # and Redis.  TokyoCabinet file handles are safe to reuse
+  # between any number of forked children (assuming your kernel
+  # correctly implements pread()/pwrite() system calls)
 end

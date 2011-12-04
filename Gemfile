@@ -50,3 +50,7 @@ group :test do
   gem 'autotest-fsevent'
   gem 'autotest-growl'
 end
+
+group :production do
+  gem 'unicorn'
+end

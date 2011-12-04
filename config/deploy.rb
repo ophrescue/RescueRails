@@ -81,7 +81,7 @@ set :repository,          app_repository
 set :branch,              app_repository_branch
 
 set :user,                deployment_user
-set :password,            deployment_user_password
+#set :password,            deployment_user_password
 set :group,               deployment_group
 
 set :deploy_to,           app_deployment_root

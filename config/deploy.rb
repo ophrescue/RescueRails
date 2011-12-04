@@ -1,6 +1,9 @@
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require 'rvm/capistrano'
+require 'bundler/capistrano'
 set :rvm_ruby_string, 'ruby-1.9.3-p0@rescuerails'
+set :rvm_type, :system
+
 
 set :application, "rescuerails"
 set :repository,  "git@github.com:docvego/RescueRails.git"
@@ -21,10 +24,6 @@ set :deploy_to, "/var/www/#{application}"
 set :user, "unicorn"
 set :use_sudo, false
 ssh_options[:keys] = %w(/Users/mark/.ssh/unicorn)
-
-
-require "bundler/capistrano"
-
 
 
 # if you're still using the script/reaper helper you will need

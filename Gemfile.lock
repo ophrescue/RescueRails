@@ -48,6 +48,12 @@ GEM
     bootstrap-sass (1.4.0)
       sass-rails (~> 3.1.0)
     builder (3.0.0)
+    capistrano (2.9.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     cocaine (0.2.0)
     coffee-rails (3.1.1)
       coffee-script (>= 2.2.0)
@@ -69,6 +75,7 @@ GEM
     faker (1.0.1)
       i18n (~> 0.4)
     gravatar_image_tag (1.0.0)
+    highline (1.6.8)
     hike (1.2.1)
     i18n (0.6.0)
     jquery-rails (1.0.16)
@@ -83,6 +90,13 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     multi_json (1.0.3)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.2.1)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     nokogiri (1.5.0)
     paperclip (2.4.5)
       activerecord (>= 2.3.0)
@@ -183,6 +197,7 @@ DEPENDENCIES
   autotest-growl
   autotest-rails-pure
   bootstrap-sass (~> 1.4.0)
+  capistrano
   coffee-rails (~> 3.1.1)
   factory_girl_rails
   faker

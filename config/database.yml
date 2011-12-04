@@ -24,5 +24,4 @@ production:
   encoding: unicode
   database: RescueRails_production
   pool: 5
-  username: postgresql
-  password:
+  username: unicorn

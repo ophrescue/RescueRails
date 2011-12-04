@@ -23,7 +23,7 @@ gem 'jquery-rails'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+  gem 'capistrano'
 
 group :development do
   gem 'rspec-rails'

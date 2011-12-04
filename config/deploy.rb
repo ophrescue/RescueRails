@@ -1,3 +1,7 @@
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+require 'rvm/capistrano'
+set :rvm_ruby_string, 'ruby-1.9.3-p0@rescuerails'
+
 set :application, "rescuerails"
 set :repository,  "git@github.com:docvego/RescueRails.git"
 
@@ -18,11 +22,10 @@ set :user, "unicorn"
 set :use_sudo, false
 ssh_options[:keys] = %w(/Users/mark/.ssh/unicorn)
 
+
 require "bundler/capistrano"
 
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
-require 'rvm/capistrano'
-set :rvm_ruby_string, 'ruby-1.9.3-p0'
+
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts

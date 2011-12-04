@@ -4,7 +4,7 @@ upstream <%= application %>_app_server {
 
 # <%= application %> Server
 server {
-    listen <%= application_port %>;
+    listen 80;
     client_max_body_size 500M;
     server_name <%= nginx_domains %>;
 

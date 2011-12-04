@@ -44,7 +44,7 @@ rvm_ruby_string =           "ruby-1.9.3-p0@rescuerails"
 
 # You will be asked to enter domain names to deploy to. If you type nothing,
 # this value is used.
-default_nginx_domains =     "DOMAINS"
+default_nginx_domains =     "ophrescue.org"
 
 # Below are some parameters you may want/need to change depending on your app
 # requirements/server setup.

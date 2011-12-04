@@ -93,6 +93,8 @@ role :app,                server
 role :web,                server
 role :db,                 server, :primary => true
 
+load 'deploy/assets'
+
 # Options necessary to make Ubuntu’s SSH happy
 ssh_options[:paranoid]    = false
 default_run_options[:pty] = true

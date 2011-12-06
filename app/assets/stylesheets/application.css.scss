@@ -1,5 +1,6 @@
-/*
- *= require_self
-*/
+//= require vendor
+
 @import "bootstrap";
+@import "jquery-token/token-input.css";
+@import "jquery-ui/jquery-ui.css";
 @import "custom.css.scss";

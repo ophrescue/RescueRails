@@ -4,7 +4,8 @@ class Adopter < ActiveRecord::Base
                 :pre_q_commited,
                 :pre_q_costs,
                 :pre_q_surrender,
-                :pre_q_abuse
+                :pre_q_abuse,
+                :pre_q_reimbursement 
                   
 
   attr_reader :dog_tokens

@@ -1,22 +1,54 @@
-    <div class="topbar">
+ <div class="topbar-wrapper" style="z-index: 5;">
+    <div class="topbar" data-dropdown="dropdown">
       <div class="topbar-inner">
         <div class="container">
           <%= link_to image_tag("logo-top.png")+" Operation Paws for Homes" , root_path, :class => "brand" %>
           <ul class="nav">
-			<li><%= link_to "Adopt", new_adopter_path %></li>
-			<li><%= link_to "Dogs", dogs_path %></li>
-			<li><%= link_to "About us", '#' %></li>
-			<% if signed_in? %>
-			<li><%= link_to "Applications", adopters_path %>
-			<li><%= link_to "Staff", users_path %></li>
-			<li><%= link_to "My Profile", current_user %></li>
-			<% end %>
-			<% if signed_in? %>
-			<li><%= link_to "Sign out", signout_path, :method => :delete %></li>
-			<% else %>
-			<li><%= link_to "Sign in", signin_path %></li>
-			<% end %>
+            <li><%= link_to "Dogs", dogs_path %></li>
+            <li><%= link_to "Events", "#" %></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle">For Adopters</a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Adoption Application", new_adopter_path %></li>
+                <li class="divider"></li>
+                <li><a href="#">Adoption Process</a></li>
+                <li><a href="#">Resources</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+            	<a href="#" class="dropdown-toggle">Volunteer</a>
+            	<ul class="dropdown-menu">
+								<li><%= link_to "Volunteer", '/volunteer' %></li>
+								<li class="divider"></li>
+								<li><a href="#">Foster</a></li>
+								<li><a href="Foster FAQ">Foster FAQ</a></li>
+							</ul>
+						</li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle">About Us</a>
+              <ul class="dropdown-menu">
+                <li><a href="/aboutus">Our Story</a></li>
+                <li><a href="#">Contact Info</a></li>
+                <li><a href="#">Newsletter</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Contributers</a></li>
+              </ul>
+            </li>
+						<% if signed_in? %>
+						<li><%= link_to "Applications", adopters_path %></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle">Staff</a>
+							<ul class="dropdown-menu">
+								<li><%= link_to "Users", users_path %></li>
+								<li><%= link_to "My Profile", current_user %></li>
+								<li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+							</ul>
+						</li>
+						<% else %>
+							<li><%= link_to "Sign in", signin_path %></li>
+						<% end %>
           </ul>
         </div>
       </div>
     </div>
+</div>

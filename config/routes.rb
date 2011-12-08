@@ -21,6 +21,10 @@ RescueRails::Application.routes.draw do
   match '/aboutus',      :to => 'pages#aboutus'
   match '/contributors', :to => 'pages#contributers'
   match '/volunteer',    :to => 'pages#volunteer'
+  match '/foster',       :to => 'pages#foster'
+  match '/fosterfaq',    :to => 'pages#fosterfaq'
+  match '/newsletter',   :to => 'pages#newsletter'
+  match '/resources',    :to => 'pages#resources'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

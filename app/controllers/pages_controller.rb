@@ -7,6 +7,10 @@ class PagesController < ApplicationController
     @title = "About Us"
   end
   
+  def contact
+    @title = "Contact Us"
+  end
+
   def contributers
     @title = "Contributers"
   end
@@ -23,7 +27,7 @@ class PagesController < ApplicationController
     @title = "Newsletter"
   end
   
-  def process
+  def adoptprocess
     @title = "Adoption Process"
   end
   
@@ -33,6 +37,14 @@ class PagesController < ApplicationController
   
   def volunteer
     @title = "Volunteer Opportunities"
+  end
+
+  def puppyguide
+    @title = "Guide for Puppies"
+  end
+
+  def shopping
+    @title = "New Dog Shopping List"
   end
 
 end

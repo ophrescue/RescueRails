@@ -10,21 +10,27 @@ RescueRails::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
   resources :password_resets
 
+
   #resources :events
 
   match '/signin',       :to => 'sessions#new'
   match '/signout',      :to => 'sessions#destroy'
   match '/adopt',        :to => 'adopters#new'
 
+  match '/contact',      :to => 'pages#contact'
+
   root                   :to => 'pages#home'
-  match '/process',      :to => 'pages#process'
+  match '/guide',        :to => 'pages#guide'
   match '/aboutus',      :to => 'pages#aboutus'
+  match 'contact',       :to => 'pages#contact'
   match '/contributors', :to => 'pages#contributers'
   match '/volunteer',    :to => 'pages#volunteer'
   match '/foster',       :to => 'pages#foster'
   match '/fosterfaq',    :to => 'pages#fosterfaq'
-  match '/contactus',    :to => 'pages#contactus'
+  
   match '/resources',    :to => 'pages#resources'
+  match '/puppyguide',   :to => 'pages#puppyguide'
+  match '/shopping',     :to => 'pages#shopping'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

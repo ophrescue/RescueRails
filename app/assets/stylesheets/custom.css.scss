@@ -52,10 +52,20 @@ form .clearfix.error span.error {
 	padding: 33px 10px 11px;
 }
 
-div.article p {
+.article h2 {
+	border-bottom: 1px solid #000000;
+	margin-bottom: 10px;
+	margin-top: 30px;
+}
+
+.article li {
+	color: #404040;
+}
+
+/*div.article p {
 	font-family: georgia, "times new roman", times, serif;
 	font-size: 14px;
-}
+}*/
 
 img.floatLeft { 
     float: left; 

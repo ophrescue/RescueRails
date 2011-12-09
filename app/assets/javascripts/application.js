@@ -18,4 +18,5 @@
 //= require msk_input.conf.js
 //= require jquery.tokeninput.js
 //= require dog_token.js
+//= require analytics.js
 //= require_tree .

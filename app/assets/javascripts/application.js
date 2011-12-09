@@ -19,4 +19,5 @@
 //= require jquery.tokeninput.js
 //= require dog_token.js
 //= require analytics.js
+//= require facebook.js
 //= require_tree .

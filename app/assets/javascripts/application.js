@@ -11,7 +11,6 @@
 //= require bbq
 //= require jquery.form.wizard
 //= require jquery.validate
-//= require adoption_app_wizard.js
 //= require bootstrap
 //= require bootstrap-alerts
 //= require jquery.tablesorter.min.js

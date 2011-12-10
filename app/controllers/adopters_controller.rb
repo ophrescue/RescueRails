@@ -31,7 +31,7 @@ class AdoptersController < ApplicationController
 				a.relation_type = 'interested'
 				a.save
 			end
-			flash[:success] = "Adopter Created"
+			flash[:success] = "adoptsuccess"
 			redirect_to root_path
 		else
 			render 'new'

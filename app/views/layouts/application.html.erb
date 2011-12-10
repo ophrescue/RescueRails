@@ -10,9 +10,27 @@
 	<%= render 'layouts/topbar' %>
 	<div class="container">
 		<% flash.each do |key, value| %>
-			<%= content_tag(:div, value, :class => "alert-message #{key}") %>
+			<% if value == "adoptsuccess" %>
+				<div class="alert-message block-message success">
+					<a class="close" href="/">&times;</a>
+	        		<p><strong>Succes!</strong> Your adoption application has been submitted successfully. We will review
+	        		your application and contact you in the next 48 hours.</p>
+	        		<p>To speed up the adoption processs:</p>
+	        		<ul>
+	        			<li>Contact your references and let them know we will be calling.</li>
+	        			<li>If applicable, give your vet permission to release your other pets' medical records to us.</li>
+	        			<li>Contact us at <strong>adopt@ophrescue.org</strong> if you want to make any changes to your application, or withdraw it.</li>
+	        		</ul>
+	        		<p>For more information please read our adoption guide and other resources.</p>
+	        		<div class="alert-actions">
+	          			<a class="btn small primary" href="/guide">Adoption Guide</a>
+	          			<a class="btn small primary" href="/resources">Resources for Adopters</a>
+	          		</div>
+				</div>
+			<% else %>
+				<%= content_tag(:div, value, :class => "alert-message #{key}") %>
+			<% end %>
 		<% end %> 
-
 		<%= yield %>
 
 			<%= render 'layouts/footer' %>

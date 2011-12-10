@@ -48,7 +48,7 @@ $(function(){
                 }
       		},
       		messages : {
-      		  "adopter[email]" : {remote: "Email exists, contact adopt@ophrescue.org for changes." }
+      		  "adopter[email]" : {remote: "Application on file: please email adopt@ophrescue.org for updates." }
       		}
 	 	}
 	 });

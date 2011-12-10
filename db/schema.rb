@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111127032214) do
+ActiveRecord::Schema.define(:version => 20111210184036) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20111127032214) do
     t.datetime "updated_at"
     t.text     "dog_reqs"
     t.text     "why_adopt"
+    t.string   "dog_name"
   end
 
   create_table "adoption_apps", :force => true do |t|

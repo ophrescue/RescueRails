@@ -22,3 +22,4 @@
 //= require analytics.js
 //= require facebook.js
 //= require datepicker.js
+//= require adoption_app_wizard.js

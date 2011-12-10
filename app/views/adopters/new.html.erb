@@ -28,6 +28,7 @@
 			<div id="reference" class="step">
 			<h4>Reference</h4>
 			<p>Please provide three references, no immediate family members please.</p>
+			<% @i = 1 %>
 			<%= f.fields_for :references do |builder| %>
 
 				<%= render 'adopters/steps/reference_fields', :rf => builder %>

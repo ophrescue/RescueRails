@@ -23,8 +23,8 @@ $(function(){
       			},
       			"adopter[email]" : {
       				required: true,
-      				email: true
-              // remote: "/adopters/check_email"
+      				email: true,
+              remote: "/adopters/check_email"
       			},
       			"adopter[state]" : {
       				minlength: 2,

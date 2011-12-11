@@ -1,6 +1,6 @@
 class AdoptersController < ApplicationController
 
-	before_filter :authenticate, :except => [:new, :create]
+	before_filter :authenticate, :except => [:new, :create, :check_email]
 	before_filter :admin_user,   :only => [:destroy]
 
 

@@ -31,7 +31,7 @@
 				<% @i = 1 %>
 				<%= f.fields_for :references do |builder| %>
 
-					<% render 'adopters/steps/reference_fields', :rf => builder %>
+					<%= render 'adopters/steps/reference_fields', :rf => builder %>
 
 				<% end %>
 			</div> 

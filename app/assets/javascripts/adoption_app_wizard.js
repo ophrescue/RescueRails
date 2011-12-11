@@ -1,6 +1,7 @@
 $(function(){
 	$("#new_adopter").formwizard({ 
-	 	focusFirstInput : true,
+	 	formPluginEnabled: false,
+    focusFirstInput : true,
 	 	historyEnabled : true,
 	 	validationEnabled: true,
 	 	disableUIStyles : true,

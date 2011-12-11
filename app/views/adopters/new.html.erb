@@ -8,33 +8,33 @@
 			
 			<%= render 'adopters/steps/preq', :f => f %>
 
-			<%= render 'adopters/steps/contact', :f => f %>
+ 			<% render 'adopters/steps/contact', :f => f %>
 
-			<%= render 'adopters/steps/dog', :f => f %>
+			<% render 'adopters/steps/dog', :f => f %>
 			
-			<%= f.fields_for :adoption_app do |af| %>
+			<% f.fields_for :adoption_app do |af| %>
 				
-				<%= render 'adopters/steps/your_home', :af => af %>
+				<% render 'adopters/steps/your_home', :af => af %>
 
-				<%= render 'adopters/steps/rental', :af => af %>
+				<% render 'adopters/steps/rental', :af => af %>
 
-				<%= render 'adopters/steps/your_home2', :af => af %>
+				<% render 'adopters/steps/your_home2', :af => af %>
 
-				<%= render 'adopters/steps/other_pets', :af => af %>
+				<% render 'adopters/steps/other_pets', :af => af %>
 
-				<%= render 'adopters/steps/new_dog_q', :af => af %>
+				<% render 'adopters/steps/new_dog_q', :af => af %>
 			<% end %>
 
-			<div id="reference" class="step">
+			<!-- <div id="reference" class="step"> -->
 			<h4>References</h4>
 			<p>Please provide three references, no immediate family members please.</p>
 			<% @i = 1 %>
-			<%= f.fields_for :references do |builder| %>
+			<% f.fields_for :references do |builder| %>
 
-				<%= render 'adopters/steps/reference_fields', :rf => builder %>
+				<% render 'adopters/steps/reference_fields', :rf => builder %>
 
 			<% end %>
-			</div>
+			<!-- </div> -->
 			<div id="Navigation" class="actions well">
 				<input class="btn large" id="back" value="Back" type="reset" />
 				<%= f.submit "Submit", :id =>"next", :class => "btn large primary" %>

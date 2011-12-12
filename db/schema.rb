@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111211201235) do
+ActiveRecord::Schema.define(:version => 20111212233200) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -124,6 +124,8 @@ ActiveRecord::Schema.define(:version => 20111211201235) do
     t.integer  "created_by_user"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "events", ["start_ts"], :name => "index_events_on_start_ts"

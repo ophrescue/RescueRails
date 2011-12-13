@@ -14,14 +14,14 @@
 			<div class="clearfix">
 				<%= f.label :start_ts, "Start Time" %>
 				<div class="input">
-					<%= f.text_field :start_ts %>
+					<%= f.text_field :start_datetime,  %>
 				</div>
 			</div>
 
 			<div class="clearfix">
 				<%= f.label :end_ts, "End Time" %>
 				<div class="input">
-					<%= f.text_field :end_ts %>
+					<%= f.text_field :end_datetime, :default => Time.now %>
 				</div>
 			</div>
 

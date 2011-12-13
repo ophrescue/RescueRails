@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111213000606) do
+ActiveRecord::Schema.define(:version => 20111213002052) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -124,8 +124,8 @@ ActiveRecord::Schema.define(:version => 20111213000606) do
     t.datetime "updated_at"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.datetime "start_datetime"
+    t.datetime "end_datetime"
   end
 
   create_table "histories", :force => true do |t|

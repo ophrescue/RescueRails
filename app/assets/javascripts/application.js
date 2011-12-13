@@ -14,12 +14,14 @@
 //= require bootstrap
 //= require bootstrap-alerts
 //= require jquery.tablesorter.min
-//= require jquery.tablesorter.conf.js
+//= require jquery.tablesorter.cfg
 //= require jquery.maskedinput
-//= require msk_input.conf.js
+//= require msk_input.cfg
 //= require jquery.tokeninput
 //= require dog_token
 //= require analytics
 //= require facebook
-//= require datepicker
 //= require adoption_app_wizard
+//= require datepicker
+//= require jquery-ui.timepicker
+//= require jquery-ui.timepicker.cfg

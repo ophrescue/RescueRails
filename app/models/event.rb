@@ -45,7 +45,7 @@ end
 #  updated_at      :datetime
 #  latitude        :float
 #  longitude       :float
-#  start_time      :datetime
-#  end_time        :datetime
+#  start_datetime  :datetime
+#  end_datetime    :datetime
 #
 

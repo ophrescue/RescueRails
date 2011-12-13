@@ -1,6 +1,6 @@
-<h1><%= event.title %></h1>
-<p><%= event.location_name %><p>
-<p><%= event.start_datetime %></p>
-<p><%= event.end_datetime %></p>
-<p><%= event.address %></p>
-<p><%= event.description %></p>
+<h2><%= event.title %></h2>
+	
+	<p><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %I:%M %P") %> until <%= event.end_time.strftime(" %I:%M %P") %></p>
+	<p><%= event.location_name %><p>
+	<p><%= event.address %></p>
+	<p><%= event.description %></p>

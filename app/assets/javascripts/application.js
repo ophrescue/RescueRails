@@ -23,5 +23,3 @@
 //= require facebook
 //= require adoption_app_wizard
 //= require datepicker
-//= require jquery-ui.timepicker
-//= require jquery-ui.timepicker.cfg

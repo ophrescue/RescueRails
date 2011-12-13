@@ -1,6 +1,8 @@
 <div class="row">
 	<div class="span12 offset2">
 
+		<%=  %>
+
 		<%= form_for @event, :html=> { :multipart => true } do |f| %>
 			<%= render 'shared/error_messages', :object => f.object %>
 
@@ -12,21 +14,28 @@
 			</div>
 
 			<div class="clearfix">
-				<%= f.label :start_datetime, "Start Time" %>
+				<%= f.label :event_date, "Date" %>
 				<div class="input">
-					<%= f.text_field :start_datetime %>
+					<%= f.text_field :event_date, :class => "small" %>
 				</div>
 			</div>
 
 			<div class="clearfix">
-				<%= f.label :end_datetime, "End Time" %>
+				<%= f.label :start_time, "Start Time" %>
 				<div class="input">
-					<%= f.text_field :end_datetime %>
+					<%= f.text_field :start_time, :class => "small" %>
 				</div>
 			</div>
 
 			<div class="clearfix">
-				<%= f.label :location_name %>
+				<%= f.label :end_time, "End Time" %>
+				<div class="input">
+					<%= f.text_field :end_time, :class => "small" %>
+				</div>
+			</div>
+
+			<div class="clearfix">
+				<%= f.label :location_name, "Location Name" %>
 				<div class="input">
 					<%= f.text_field :location_name %>
 				</div>

@@ -1,4 +1,38 @@
-# == Schema Information
+class Event < ActiveRecord::Base
+
+	attr_accessible :title,
+				  				:event_date,
+				  				:start_time,
+				  				:end_time,
+				  				:location_name,
+				  				:address,
+				  				:description,
+									:latitude,
+									:longitude
+
+	validates_presence_of :title,
+					  						:event_date,
+				  							:start_time,
+				  							:end_time,
+												:location_name,
+												:address,
+												:description
+
+	before_save :set_user
+
+	# geocoded_by :address
+	
+	# after_validation :geocode,
+ #  	:if => lambda{ |obj| obj.address_changed? }
+
+
+	def set_user
+		self.created_by_user = @current_user
+	end
+
+end
+
+## == Schema Information
 #
 # Table name: events
 #
@@ -12,40 +46,7 @@
 #  updated_at      :datetime
 #  latitude        :float
 #  longitude       :float
-#  start_datetime  :datetime
-#  end_datetime    :datetime
+#  event_date      :date
+#  start_time      :time
+#  end_time        :time
 #
-
-class Event < ActiveRecord::Base
-
-	attr_accessible :title,
-				  				:start_datetime,
-				  				:end_datetime,
-				  				:location_name,
-				  				:address,
-				  				:description,
-									:latitude,
-									:longitude
-
-	validates_presence_of :title,
-											  :start_datetime,
-												:end_datetime,
-												:location_name,
-												:address,
-												:description
-
-
-	before_save :set_user
-
-	geocoded_by :address
-	
-	after_validation :geocode,
-  	:if => lambda{ |obj| obj.address_changed? }
-
-
-	def set_user
-		self.created_by_user = @current_user
-	end
-
-end
-

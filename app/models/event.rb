@@ -44,7 +44,7 @@ class Event < ActiveRecord::Base
 
 
 	def set_user
-		self.created_by = current_user.id
+		self.created_by_user = @current_user
 	end
 
 end

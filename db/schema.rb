@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111212233200) do
+ActiveRecord::Schema.define(:version => 20111213000606) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -116,8 +116,6 @@ ActiveRecord::Schema.define(:version => 20111212233200) do
 
   create_table "events", :force => true do |t|
     t.string   "title"
-    t.datetime "start_ts"
-    t.datetime "end_ts"
     t.string   "location_name"
     t.string   "address"
     t.text     "description"
@@ -126,9 +124,9 @@ ActiveRecord::Schema.define(:version => 20111212233200) do
     t.datetime "updated_at"
     t.float    "latitude"
     t.float    "longitude"
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
-
-  add_index "events", ["start_ts"], :name => "index_events_on_start_ts"
 
   create_table "histories", :force => true do |t|
     t.integer  "dog_id"

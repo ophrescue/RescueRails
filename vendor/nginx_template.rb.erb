@@ -109,4 +109,10 @@ server {
     location = /500.html {
       root <%= deploy_to %>/current/public;
     }
+    
+    #Rails 404 page
+    error_page 404
+    location = /404.html {
+        root <%= deploy_to %>/current/public;
+    }
 }

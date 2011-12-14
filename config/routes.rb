@@ -9,7 +9,11 @@ RescueRails::Application.routes.draw do
   end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :password_resets
+
+  match '/events/past',  :to => 'events#past'
   resources :events
+
+
 
   match '/signin',       :to => 'sessions#new'
   match '/signout',      :to => 'sessions#destroy'

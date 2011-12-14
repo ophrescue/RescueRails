@@ -4,7 +4,18 @@ class EventsController < ApplicationController
 
 	def index
 		@title = "Upcoming Events"
-		@events = Event.all
+		@events = Event.find(:all,
+							 :conditions => ["event_date >= ?", Date.today],
+							 :limit => 20, 
+							 :order => 'event_date')
+	end
+
+	def past
+		@title = "Past Events"
+		@events = Event.find(:all,
+							 :conditions => ["event_date <= ?", Date.today],
+							 :limit => 20, 
+							 :order => 'event_date')
 	end
 
 	def show

@@ -22,6 +22,7 @@
 				<%= f.label :start_time, "Start Time" %>
 				<div class="input">
 					<%= f.text_field :start_time, :class => "small" %>
+					<span class="help-inline">(1 PM, 3:45pm, etc.)</span>
 				</div>
 			</div>
 
@@ -43,6 +44,7 @@
 				<%= f.label :location_name, "Location Website" %>
 				<div class="input">
 					<%= f.text_field :location_url %>
+					<span class="help-inline">Include http://</span>
 				</div>
 			</div>
 
@@ -62,20 +64,25 @@
 
 			<div class="clearfix">
 					<% if f.object.photo? %>
-						<%= f.label "Delete Photo" %>
+						<%= f.label "Delete Image" %>
 						<div class="input">
 							<%= link_to image_tag(f.object.photo.url(:thumb)), f.object.photo.url(:original) %>
 							<%= f.check_box :photo_delete, {}, "1", "0" %>
 						</div>
 					<% else %>
-						<%= f.file_field :photo %>
+						<%= f.label "Image" %>
+						<div class="input">
+							<%= f.file_field :photo %>
+						</div>
 					<% end %>
 			</div>
 			<div class="clearfix">
 				<%= f.label :description %>
 				<div class="input">
-					<%= f.text_area :description, :class => "xlarge", :rows => "5" %>
+					<%= f.text_area :description, :class => "xlarge", :rows => "5", :value => "To be pre-approved, fill out our adoption application and be ready to take home your new dog right from the event!" %>
+					<span class="help-inline">Add more description as needed.</span>
 				</div>
+				
 			</div>
 
 			<div class="actions">

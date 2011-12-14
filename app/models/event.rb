@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
 	  				:end_time,
 	  				:location_name,
 	  				:location_url,
+	  				:location_phone,
 	  				:address,
 	  				:description,
 					:latitude,
@@ -30,17 +31,17 @@ class Event < ActiveRecord::Base
 
 	before_save :set_user
 
-	# geocoded_by :address
+	geocoded_by :address
 	
-	# after_validation :geocode,
- #  	:if => lambda{ |obj| obj.address_changed? }
+	after_validation :geocode,
+ 	 	:if => lambda{ |obj| obj.address_changed? }
 
 	has_attached_file :photo,
 					  :styles => { :original => "1024x1024>",
 								   :medium => "205x195>",
 								   :thumb => "64x64>" },
-					  :path => ":rails_root/public/system/event_photo/:id/:style/:filename",
-					  :url  => "/system/event_photo/:id/:style/:filename"
+					  				:path => ":rails_root/public/system/event_photo/:id/:style/:filename",
+					  				:url  => "/system/event_photo/:id/:style/:filename"
 
 	
 	validates_attachment_size :photo, :less_than => 5.megabytes

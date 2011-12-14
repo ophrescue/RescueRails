@@ -5,7 +5,6 @@ log/*.log
 tmp/
 .sass-cache/
 .DS_Store
-public/assets/
 public/system/
 config/newrelic.yml
 config/initializers/setup_mail.rb

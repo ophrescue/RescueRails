@@ -1,20 +1,22 @@
 class Event < ActiveRecord::Base
 
+	attr_accessor :photo_delete
+
 	attr_accessible :title,
-				  				:event_date,
-				  				:start_time,
-				  				:end_time,
-				  				:location_name,
-				  				:location_url,
-				  				:address,
-				  				:description,
-								:latitude,
-								:longitude,
-								:photo,
-								:photo_file_name,
-								:photo_content_type,
-								:photo_file_size,    
-								:photo_updated_at   
+	  				:event_date,
+	  				:start_time,
+	  				:end_time,
+	  				:location_name,
+	  				:location_url,
+	  				:address,
+	  				:description,
+					:latitude,
+					:longitude,
+					:photo,
+					:photo_file_name,
+					:photo_content_type,
+					:photo_file_size,    
+					:photo_updated_at   
 
 	validates_presence_of :title,
 					  	  :event_date,
@@ -40,16 +42,22 @@ class Event < ActiveRecord::Base
 					  :path => ":rails_root/public/system/event_photo/:id/:style/:filename",
 					  :url  => "/system/event_photo/:id/:style/:filename"
 
-	validates_attachment_presence :photo
+	
 	validates_attachment_size :photo, :less_than => 5.megabytes
 	validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/pjpeg']
 
-
+	before_save :delete_photo?
 
 
 	def set_user
 		self.created_by_user = @current_user
 	end
+
+	private
+	  def delete_photo?
+	    self.photo.clear if self.photo_delete == "1"
+	  end
+
 
 end
 

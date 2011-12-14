@@ -24,6 +24,7 @@ class EventsController < ApplicationController
 
 	def update
 		@event = Event.find(params[:id])
+		@event.photo_delete = params[:event][:photo_delete]
 	    if @event.update_attributes(params[:event])
 	      flash[:success] = "Event updated."
 	      redirect_to events_path

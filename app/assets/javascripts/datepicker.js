@@ -4,4 +4,9 @@ $(function() {
 										maxDate: '+9w',
 										minDate: '0d'
 									});
+		$("#event_event_date").datepicker({ 
+								dateFormat: 'yy-mm-dd',
+								maxDate: '+6m',
+								minDate: '0d'
+									});
 	});

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111210184036) do
+ActiveRecord::Schema.define(:version => 20111214010937) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -113,6 +113,29 @@ ActiveRecord::Schema.define(:version => 20111210184036) do
   add_index "dogs", ["secondary_breed_id"], :name => "index_dogs_on_secondary_breed_id"
   add_index "dogs", ["size"], :name => "index_dogs_on_size"
   add_index "dogs", ["user_id"], :name => "index_dogs_on_user_id"
+
+  create_table "events", :force => true do |t|
+    t.string   "title"
+    t.string   "location_name"
+    t.string   "address"
+    t.text     "description"
+    t.integer  "created_by_user"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.date     "event_date"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.string   "location_url"
+    t.string   "location_phone"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  add_index "events", ["event_date"], :name => "index_events_on_event_date"
 
   create_table "histories", :force => true do |t|
     t.integer  "dog_id"

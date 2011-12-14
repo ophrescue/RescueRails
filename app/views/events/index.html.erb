@@ -1,0 +1,17 @@
+<h1><%= @title %></h1>
+<% if is_admin? %>
+<p>
+( <%= link_to "Add an Event", new_event_path %> / 
+<%= link_to "Past Events", "/events/past" %> )
+</p>
+<% end %>
+
+	<% if @events.count > 0 %>
+		<%= render @events %>	
+	<% else %>
+		<div class="row">
+			<div class="span12 offset2">
+				<h3>No Events Scheduled</h3>
+			</div>
+		</div>
+	<% end %>

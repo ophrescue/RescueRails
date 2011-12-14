@@ -23,6 +23,9 @@ RescueRails::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Path to imagemagick for paperclip gem
+  Paperclip.options[:command_path] = "/usr/bin/"
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 

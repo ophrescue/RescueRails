@@ -61,22 +61,18 @@
 			</div>
 
 			<div class="clearfix">
-				<%= f.label :photo %>
-
 				<div class="input">
 					<% if f.object.photo? %>
-					<div class="thumb">
-						<%= link_to image_tag(f.object.photo.url(:thumb)), f.object.photo.url(:original) %>
-						<%= f.check_box :_destroy %>
-						<%= f.label "Delete Photo" %>
-					</div>
+						<div class="thumb">
+							<%= link_to image_tag(f.object.photo.url(:thumb)), f.object.photo.url(:original) %>
+							<%= f.check_box :_destroy %>
+							<%= f.label "Delete Photo" %>
+						</div>
 					<% else %>
 						<%= f.file_field :photo %>
 					<% end %>
 				</div>
 			</div>
-			
-
 			<div class="clearfix">
 				<%= f.label :description %>
 				<div class="input">

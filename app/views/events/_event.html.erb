@@ -22,7 +22,7 @@
 				 			  :title => "Delete #{event.title}" %>
 			</p>
 		<% end %>
-		<p><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %I:%M %P") %> - <%= event.end_time.strftime(" %I:%M %P") %></p>
+		<p><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %I:%M %P") %> to <%= event.end_time.strftime(" %I:%M %P") %></p>
 		<p><%= event.location_name %></p>
 		<p><%= event.location_phone %></p>
 		<p><%= event.address %></p>

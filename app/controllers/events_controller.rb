@@ -13,7 +13,7 @@ class EventsController < ApplicationController
 	end
 
 	def new
-		@title = " Add an Event"
+		@title = "Add an Event"
 		@event = Event.new
 	end
 
@@ -24,13 +24,13 @@ class EventsController < ApplicationController
 
 	def update
 		@event = Event.find(params[:id])
-    if @event.update_attributes(params[:dog])
-      flash[:success] = "Event updated."
-      redirect_to events_path
-    else
-      @title = "Edit Event"
-      render 'edit'
-    end
+	    if @event.update_attributes(params[:event])
+	      flash[:success] = "Event updated."
+	      redirect_to events_path
+	    else
+	      @title = "Edit Event"
+	      render 'edit'
+	    end
 	end
 
 	def create
@@ -48,6 +48,7 @@ class EventsController < ApplicationController
 		@title = "Events"
 		Event.find(params[:id]).destroy
 		flash[:danger] = "Event Deleted"
+		redirect_to events_path
 	end
 
 

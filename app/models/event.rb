@@ -8,16 +8,21 @@ class Event < ActiveRecord::Base
 				  				:location_url,
 				  				:address,
 				  				:description,
-									:latitude,
-									:longitude
+								:latitude,
+								:longitude,
+								:photo,
+								:photo_file_name,
+								:photo_content_type,
+								:photo_file_size,    
+								:photo_updated_at   
 
 	validates_presence_of :title,
-					  						:event_date,
-				  							:start_time,
-				  							:end_time,
-												:location_name,
-												:address,
-												:description
+					  	  :event_date,
+				  		  :start_time,
+				  		  :end_time,
+						  :location_name,
+						  :address,
+						  :description
 
 	validates_format_of :location_url, :with => URI::regexp(%w(http https))
 
@@ -30,6 +35,7 @@ class Event < ActiveRecord::Base
 
 	has_attached_file :photo, :styles => { :original => "1024x1024>", :thumb => "205x195>" }
 
+	validates_attachment_presence :photo
 	validates_attachment_size :photo, :less_than => 5.megabytes
 	validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/pjpeg']
 

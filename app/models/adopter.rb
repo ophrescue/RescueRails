@@ -67,6 +67,7 @@ class Adopter < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: adopters
@@ -86,5 +87,6 @@ end
 #  updated_at   :datetime
 #  dog_reqs     :text
 #  why_adopt    :text
+#  dog_name     :string(255)
 #
 

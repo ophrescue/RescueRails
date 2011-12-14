@@ -5,8 +5,12 @@
 </p>
 <% end %>
 
-<div class="row">
-	<div class="span12 offset 2">
-			<%= render @events %>	
-	</div>
-</div>
+	<% if @events.count > 0 %>
+		<%= render @events %>	
+	<% else %>
+		<div class="row">
+			<div class="span12 offset2">
+				<h3>No Events Scheduled</h3>
+			</div>
+		</div>
+	<% end %>

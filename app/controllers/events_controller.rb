@@ -26,7 +26,7 @@ class EventsController < ApplicationController
 		@event = Event.find(params[:id])
     if @event.update_attributes(params[:dog])
       flash[:success] = "Event updated."
-      redirect_to @event
+      redirect_to events_path
     else
       @title = "Edit Event"
       render 'edit'
@@ -47,7 +47,7 @@ class EventsController < ApplicationController
 	def destroy
 		@title = "Events"
 		Event.find(params[:id]).destroy
-		flash[:success] = "Event Deleted"
+		flash[:danger] = "Event Deleted"
 	end
 
 

@@ -1,6 +1,31 @@
-<h2><%= event.title %></h2>
-	
-	<p><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %I:%M %P") %> until <%= event.end_time.strftime(" %I:%M %P") %></p>
-	<p><%= event.location_name %><p>
-	<p><%= event.address %></p>
-	<p><%= event.description %></p>
+<div class="row">
+	<div class="span4">
+		<div>
+			<% if event.photo? %>
+				<%= link_to image_tag(event.photo.url(:medium)),event %>
+			<% else %>
+				<%= image_tag("no_photo-205x195.png") %>
+			<% end %>
+		</div>
+	</div>
+	<div class="span12">
+		<h2><%= event.title %></h2>
+		<% if is_admin? %>
+			<p><%= link_to  "edit",
+							 edit_event_path(event),
+							:class => "btn info small" %>
+			  	<%= link_to  "delete",
+				 			  event,
+				 			  :class => "btn danger small",
+				 			  :method => :delete,
+				 			  :confirm => "You sure?",
+				 			  :title => "Delete #{event.title}" %>
+			</p>
+		<% end %>
+		<p><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %I:%M %P") %> - <%= event.end_time.strftime(" %I:%M %P") %></p>
+		<p><%= event.location_name %></p>
+		<p><%= event.location_phone %></p>
+		<p><%= event.address %></p>
+		<p><%= event.description %></p>
+	</div>
+</div>

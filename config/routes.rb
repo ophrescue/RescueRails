@@ -9,8 +9,6 @@ RescueRails::Application.routes.draw do
   end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :password_resets
-
-
   resources :events
 
   match '/signin',       :to => 'sessions#new'

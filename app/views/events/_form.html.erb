@@ -1,8 +1,6 @@
 <div class="row">
 	<div class="span12 offset2">
 
-		<%=  %>
-
 		<%= form_for @event, :html=> { :multipart => true } do |f| %>
 			<%= render 'shared/error_messages', :object => f.object %>
 
@@ -42,11 +40,42 @@
 			</div>
 
 			<div class="clearfix">
+				<%= f.label :location_name, "Location Website" %>
+				<div class="input">
+					<%= f.text_field :location_url %>
+				</div>
+			</div>
+
+			<div class="clearfix">
+				<%= f.label :location_name, "Location Phone" %>
+				<div class="input">
+					<%= f.text_field :location_phone, :class => "small" %>
+				</div>
+			</div>
+
+			<div class="clearfix">
 				<%= f.label :address %>
 				<div class="input">
 					<%= f.text_field :address, :class => "xlarge" %>
 				</div>
 			</div>
+
+			<div class="clearfix">
+				<%= f.label :photo %>
+
+				<div class="input">
+					<% if f.object.photo? %>
+					<div class="thumb">
+						<%= link_to image_tag(f.object.photo.url(:thumb)), f.object.photo.url(:original) %>
+						<%= f.check_box :_destroy %>
+						<%= f.label "Delete Photo" %>
+					</div>
+					<% else %>
+						<%= f.file_field :photo %>
+					<% end %>
+				</div>
+			</div>
+			
 
 			<div class="clearfix">
 				<%= f.label :description %>

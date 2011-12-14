@@ -1,30 +1,3 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                     :integer         not null, primary key
-#  name                   :string(255)
-#  email                  :string(255)
-#  created_at             :datetime
-#  updated_at             :datetime
-#  encrypted_password     :string(255)
-#  salt                   :string(255)
-#  admin                  :boolean         default(FALSE)
-#  password_reset_token   :string(255)
-#  password_reset_sent_at :datetime
-#  is_foster              :boolean         default(FALSE)
-#  phone                  :string(255)
-#  address1               :string(255)
-#  address2               :string(255)
-#  city                   :string(255)
-#  state                  :string(255)
-#  zip                    :string(255)
-#  title                  :string(255)
-#  edit_adopters          :boolean         default(FALSE)
-#  edit_dogs              :boolean         default(FALSE)
-#  view_adopters          :boolean         default(FALSE)
-#  share_info             :text
-
 require 'digest'
 
 class User < ActiveRecord::Base
@@ -117,3 +90,31 @@ class User < ActiveRecord::Base
 
   
 end
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer         not null, primary key
+#  name                   :string(255)
+#  email                  :string(255)
+#  created_at             :datetime
+#  updated_at             :datetime
+#  encrypted_password     :string(255)
+#  salt                   :string(255)
+#  admin                  :boolean         default(FALSE)
+#  password_reset_token   :string(255)
+#  password_reset_sent_at :datetime
+#  is_foster              :boolean         default(FALSE)
+#  phone                  :string(255)
+#  address1               :string(255)
+#  address2               :string(255)
+#  city                   :string(255)
+#  state                  :string(255)
+#  zip                    :string(255)
+#  title                  :string(255)
+#  edit_adopters          :boolean         default(FALSE)
+#  edit_dogs              :boolean         default(FALSE)
+#  view_adopters          :boolean         default(FALSE)
+#  share_info             :text
+#
+

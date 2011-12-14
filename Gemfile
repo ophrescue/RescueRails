@@ -6,7 +6,7 @@ gem 'pg'
 gem 'will_paginate',  '~> 3.0.2'
 gem 'gravatar_image_tag'
 gem 'rails3-jquery-autocomplete'
-gem "paperclip", "~> 2.4"
+gem "paperclip"
 gem "bootstrap-sass", "~> 1.4.0"
 gem 'therubyracer'
 gem 'unicorn'
@@ -31,7 +31,7 @@ gem 'jquery-rails'
 
 group :development do
   gem 'rspec-rails'
-  gem 'annotate', :git => "https://github.com/ctran/annotate_models.git"
+  gem 'annotate'
   gem 'faker'
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'turn', :require => false

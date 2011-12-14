@@ -24,6 +24,9 @@
 				<abbr title="Phone">P:</abbr><%= event.location_phone %><br />
 			<% end %>
 		</address>
+		<a href="<%="http://maps.google.com/?q=#{event.latitude}%2C#{event.longitude}"%>">
+		<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x200&zoom=12&sensor=false&zoom=16&markers=#{event.latitude}%2C#{event.longitude}"
+			 %></a>
 		<p><%= event.description %></p>
 		<p><a href="/adopt" class="btn primary">Apply to Adopt</a>
 		<% if is_admin? %>(
@@ -41,3 +44,5 @@
 		)</p>
 	</div>
 </div>
+<br />
+<br />

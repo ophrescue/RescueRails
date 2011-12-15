@@ -31,6 +31,7 @@ class AdoptersController < ApplicationController
 				a.relation_type = 'interested'
 				a.save
 			end
+			NewAdopterMailer.adopter_created(@adopter).deliver
 			flash[:success] = "adoptsuccess"
 			redirect_to root_path
 		else

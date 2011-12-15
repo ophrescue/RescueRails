@@ -80,7 +80,7 @@
         </tr>
         <tr>
           <td>ready_to_adopt_dt</td>
-          <td><%= @adopter.adoption_app.ready_to_adopt_dt %></td>
+          <td><%= @adopter.adoption_app.ready_to_adopt_dt.strftime("%m/%d/%Y") %></td>
         </tr>
         <tr>
           <td>when_to_call</td>

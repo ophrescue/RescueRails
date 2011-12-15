@@ -1,4 +1,5 @@
 <div id="contact" class="step">
+<h3>Contact Information</h3>
 	<div class="clearfix">
 		<%= f.label :name, "Full Name" %>
 		<div class="input">
@@ -9,12 +10,6 @@
 		<%= f.label :email, "E-mail" %>
 		<div class="input">
 			<%= f.text_field :email, :class => "required" %>
-		</div>
-	</div>
-	<div class="clearfix">		
-		<%= f.label :phone, "Phone Number" %>
-		<div class="input">
-			<%= f.text_field :phone, :class => "required" %>
 		</div>
 	</div>
 	<div class="clearfix">		
@@ -38,13 +33,19 @@
 	<div class="clearfix">		
 		<%= f.label :state, "State" %>
 		<div class="input">
-			<%= f.text_field :state, :class => "required" %>
+			<%= f.text_field :state, :class => "required",:class => "small" %>
 		</div>
 	</div>
 	<div class="clearfix">		
 		<%= f.label :zip, "Zip Code" %>
 		<div class="input">
-			<%= f.text_field :zip, :class => "required" %>
+			<%= f.text_field :zip, :class => "required", :class => "small" %>
+		</div>
+	</div>
+	<div class="clearfix">		
+		<%= f.label :phone, "Phone Number" %>
+		<div class="input">
+			<%= f.text_field :phone, :class => "required" %>
 		</div>
 	</div>
 	<div class="clearfix">		
@@ -53,4 +54,3 @@
 			<%= f.text_field :when_to_call, :class => "required" %>
 		</div>
 	</div>
-</div>

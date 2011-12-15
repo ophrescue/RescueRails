@@ -10,22 +10,28 @@
 
  			<%= render 'adopters/steps/contact', :f => f %>
 
-			<%= render 'adopters/steps/dog', :f => f %>
+ 			<%= f.fields_for :adoption_app do |af| %>
+ 				<%= render 'adopters/steps/your_home', :af => af %>
+ 			<% end %>	
 			
 			<%= f.fields_for :adoption_app do |af| %>
-				
-				<%= render 'adopters/steps/your_home', :af => af %>
 
 				<%= render 'adopters/steps/rental', :af => af %>
+			<% end %>
+
+				<%= render 'adopters/steps/dog', :f => f %>
+
+			<%= f.fields_for :adoption_app do |af| %>
 
 				<%= render 'adopters/steps/your_home2', :af => af %>
 
-				<%= render 'adopters/steps/other_pets', :af => af %>
-
 				<%= render 'adopters/steps/new_dog_q', :af => af %>
+
+				<%= render 'adopters/steps/other_pets', :af => af %>
+				
 			<% end %>
 
-			<div id="reference" class="step">
+			<div id="no_pets" class="step">
 				<h4>References</h4>
 				<p>Please provide three references, these cannot be immediate family members.</p>
 				<% @i = 1 %>

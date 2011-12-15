@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111214010937) do
+ActiveRecord::Schema.define(:version => 20111215023514) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(:version => 20111214010937) do
     t.string   "house_type",                :limit => 40
     t.text     "dog_exercise"
     t.string   "dog_stay_when_away",        :limit => 100
-    t.integer  "max_hrs_alone",                            :default => 8
     t.text     "dog_vacation"
     t.text     "current_pets"
     t.text     "why_not_fixed"
@@ -59,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20111214010937) do
     t.boolean  "current_pets_fixed"
     t.text     "rent_costs"
     t.text     "vet_info"
+    t.integer  "max_hrs_alone"
   end
 
   add_index "adoption_apps", ["adopter_id"], :name => "index_adoption_apps_on_adopter_id"

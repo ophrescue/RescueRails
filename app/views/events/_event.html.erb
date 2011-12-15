@@ -12,7 +12,9 @@
 	<div class="span12">
 		<h2><%= event.title %></h2>
 
-		<p><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %I:%M %P") %> to <%= event.end_time.strftime(" %I:%M %P") %></p>
+		<p><strong><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %l:%M %P") %> to <%= event.end_time.strftime(" %l:%M %P") %></strong></p>
+		<div class="row">
+			<div class="span10 offset1">
 		<address>
 			<% if event.location_url? %>
 				<strong><%= link_to event.location_name, event.location_url %></strong><br />
@@ -21,13 +23,19 @@
 			<% end %>
 			<%= event.address %><br />
 			<% if event.location_phone? %>
-				<abbr title="Phone">P:</abbr><%= event.location_phone %><br />
+				<abbr title="Phone">P: </abbr><%= event.location_phone %><br />
 			<% end %>
 		</address>
+		</div>
+		</div>
 		<a href="<%="http://maps.google.com/?q=#{event.latitude}%2C#{event.longitude}"%>">
 		<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x200&zoom=12&sensor=false&zoom=16&markers=#{event.latitude}%2C#{event.longitude}"
 			 %></a>
-		<p><%= event.description %></p>
+		<div class="row">
+			<div class="span8">
+				<p><%= event.description %></p>
+			</div>
+		</div>
 		<p><a href="/adopt" class="btn primary">Apply to Adopt</a>
 		<% if is_admin? %>(
 			<%= link_to  "edit", edit_event_path(event) %> / 
@@ -37,8 +45,8 @@
 				 			  :confirm => "You sure?",
 				 			  :title => "Delete #{event.title}" %>
 			
-		<% end %>
-		)</p>
+		)<% end %>
+		</p>
 	</div>
 </div>
 <br />

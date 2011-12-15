@@ -66,14 +66,6 @@
           <td><%= @adopter.email %></td>
         </tr>
         <tr>
-          <td>phone</td>
-          <td><%= @adopter.phone %></td>
-        </tr>
-        <tr>
-          <td>when_to_call</td>
-          <td><%= @adopter.when_to_call %></td>
-        </tr>
-        <tr>
           <td>address</td>
           <td><address>
                 <%= @adopter.address1 %><br />
@@ -83,12 +75,16 @@
           </td>
         </tr>
         <tr>
-          <td>house_type</td>
-          <td><strong><%= @adopter.adoption_app.house_type %></strong></td>
+          <td>phone</td>
+          <td><%= @adopter.phone %></td>
         </tr>
         <tr>
           <td>ready_to_adopt_dt</td>
           <td><%= @adopter.adoption_app.ready_to_adopt_dt %></td>
+        </tr>
+        <tr>
+          <td>when_to_call</td>
+          <td><%= @adopter.when_to_call %></td>
         </tr>
         <tr>
           <td>spouse_name</td>
@@ -101,6 +97,10 @@
         <tr>
           <td>how_did_you_hear          :</td>
           <td><%= @adopter.adoption_app.how_did_you_hear %></td>
+        </tr>
+        <tr>
+          <td>house_type</td>
+          <td><strong><%= @adopter.adoption_app.house_type %></strong></td>
         </tr>
       </table>
 
@@ -150,7 +150,6 @@
         </table>
 
         <table>
-        <h5>House Info</h5>
 
         </table>
 
@@ -183,10 +182,6 @@
         <% if @adopter.adoption_app.pets_branch == "other_pets" %>
           <h5>Other Pets</h5>
           <table>
-          <tr>
-            <td>pets_branch               :</td>
-            <td><%= @adopter.adoption_app.pets_branch %></td>
-          </tr>
           <tr>
             <td>current_pets_fixed        :</td>
             <td>
@@ -225,7 +220,7 @@
         </tr>
         </table>
         <% else %>
-            <h5>No Pets in the past 10 years</h5>
+            <h5>No Other Pets in the past 10 years</h5>
       <% end %>
     
       <h5>References</h5>

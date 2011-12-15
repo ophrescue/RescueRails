@@ -32,6 +32,18 @@ server {
       rewrite ^ http://$host/ permanent;
     }
 
+    location ~ ^/assets/ {
+      expires 1y;
+      add_header Cache-Control public;
+     
+      # Some browsers still send conditional-GET requests if there's a
+      # Last-Modified header or an ETag header even if they haven't
+      # reached the expiry date sent in the Expires header.
+      add_header Last-Modified "";
+      add_header ETag "";
+      break;
+    }
+
     location / {
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header Host $http_host;
@@ -65,44 +77,6 @@ server {
         proxy_pass http://<%= application %>_app_server;
         break;
       }
-    }
-
-    # Now this supposedly should work as it gets the filenames with querystrings that Rails provides.
-    # BUT there's a chance it could break the ajax calls.
-    location ~* \.(ico|css|gif|jpe?g|png)(\?[0-9]+)?$ {
-       expires 1y;
-       add_header Cache-Control public;
-       break;
-    }
-
-    location ~ ^/javascripts/.*\.js(\?[0-9]+)?$ {
-       expires 1y;
-       add_header Cache-Control public;
-       break;
-    }
-
-    # Now this supposedly should work as it gets the filenames with querystrings that Rails provides.
-    # BUT there's a chance it could break the ajax calls.
-    location ~* \.(ico|css|gif|jpe?g|png)(\?[0-9]+)?$ {
-       expires 1y;
-       add_header Cache-Control public;
-       break;
-    }
-
-    location ~ ^/javascripts/.*\.js(\?[0-9]+)?$ {
-       expires 1y;
-       add_header Cache-Control public;
-       break;
-    }
-
-    # if the request is for a static resource, nginx should serve it directly
-    # and add a far future expires header to it, making the browser
-    # cache the resource and navigate faster over the website
-    location ~ ^/(images|javascripts|stylesheets|system)/ {
-      root <%= deploy_to %>/current/public;
-      expires 1y;
-      add_header Cache-Control public;
-      break;
     }
 
     # Rails error pages

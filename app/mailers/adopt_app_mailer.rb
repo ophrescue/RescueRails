@@ -7,7 +7,7 @@ class AdoptAppMailer < ActionMailer::Base
   	@adopter = adopter
   	mail(:to => "adopt@ophrescue.org",
   		 :reply_to => "#{adopter.name} <#{adopter.email}>",
-    	 :subject =>     "[app] #{adopter.name} for #{adopter.dog_name} on #{adopter.adoption_app.ready_to_adopt_dt}"
+    	 :subject =>     "[app] #{adopter.name} for #{adopter.dog_name} on #{adopter.adoption_app.ready_to_adopt_dt}",
     	 :content_type => "text/html")
   end
 end

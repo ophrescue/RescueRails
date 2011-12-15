@@ -111,7 +111,7 @@ server {
     }
     
     #Rails 404 page
-    error_page 404
+    error_page 404 /404.html;
     location = /404.html {
         root <%= deploy_to %>/current/public;
     }

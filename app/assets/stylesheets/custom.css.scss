@@ -62,10 +62,11 @@ form .clearfix.error span.error {
 	color: #404040;
 }
 
-/*div.article p {
-	font-family: georgia, "times new roman", times, serif;
-	font-size: 14px;
-}*/
+.eventphoto img {
+	display:block ; 
+	margin: auto ;
+	border-radius: 6px 6px 6px 6px;
+}
 
 img.floatLeft { 
     float: left; 

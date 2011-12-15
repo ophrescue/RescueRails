@@ -38,7 +38,7 @@ class Event < ActiveRecord::Base
 
 	has_attached_file :photo,
 					  :styles => { :original => "1024x1024>",
-								   :medium => "205x195>",
+								   :medium => "205x300>",
 								   :thumb => "64x64>" },
 					  				:path => ":rails_root/public/system/event_photo/:id/:style/:filename",
 					  				:url  => "/system/event_photo/:id/:style/:filename"

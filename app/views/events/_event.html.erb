@@ -1,6 +1,12 @@
 <div class="row">
+	<div class="row">
+		<div class="span12 offset4">
+			<h3><%= event.title %></h3>
+			<p><strong><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %l:%M %P") %> to <%= event.end_time.strftime(" %l:%M %P") %></strong></p>
+		</div>
+	</div>
 	<div class="span4">
-		<div>
+		<div class="eventphoto">
 			<% if event.photo? %>
 				<%= link_to image_tag(event.photo.url(:medium)),event %>
 			<% else %>
@@ -10,9 +16,9 @@
 		</div>
 	</div>
 	<div class="span12">
-		<h3><%= event.title %></h3>
+		
 
-		<p><strong><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %l:%M %P") %> to <%= event.end_time.strftime(" %l:%M %P") %></strong></p>
+		
 		<div class="row">
 			<div class="span10 offset1">
 		<address>

@@ -30,12 +30,9 @@
 		<p><%= event.description %></p>
 		<p><a href="/adopt" class="btn primary">Apply to Adopt</a>
 		<% if is_admin? %>(
-			<%= link_to  "edit",
-							 edit_event_path(event),
-							  %> / 
+			<%= link_to  "edit", edit_event_path(event) %> / 
 			  	<%= link_to  "delete",
 				 			  event,
-				 			  
 				 			  :method => :delete,
 				 			  :confirm => "You sure?",
 				 			  :title => "Delete #{event.title}" %>

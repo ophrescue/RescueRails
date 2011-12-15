@@ -75,6 +75,7 @@ set :use_sudo,            false
 
 set :git_shallow_clone,   1 # tell git to clone only the latest revision and not the whole repository
 set :keep_releases,       5
+after "deploy:update", "deploy:cleanup" 
 
 set :application,         app_name
 set :repository,          app_repository

@@ -1,7 +1,6 @@
 class Adopter < ActiveRecord::Base
 
   attr_accessor :pre_q_age,
-                :pre_q_commited,
                 :pre_q_costs,
                 :pre_q_surrender,
                 :pre_q_abuse,

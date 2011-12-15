@@ -69,7 +69,6 @@ describe AdoptersController do
 							:rent_dog_restrictions     => "no pittbulls",
 							:rent_deposit              => "500",
 							:rent_increase             => "200",
-							:annual_cost_est           => "1000",
 							:plan_training          => "go to dog school",   
 							:has_new_dog_exp           => true,
 							:surrender_pet_causes    => "if it bit me",  

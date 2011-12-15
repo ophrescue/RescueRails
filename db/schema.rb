@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111215023514) do
+ActiveRecord::Schema.define(:version => 20111215151239) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(:version => 20111215023514) do
     t.string   "landlord_name",             :limit => 100
     t.string   "landlord_phone",            :limit => 15
     t.text     "rent_dog_restrictions"
-    t.integer  "annual_cost_est",                          :default => 0
     t.text     "surrender_pet_causes"
     t.text     "training_explain"
     t.text     "surrendered_pets"

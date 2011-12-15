@@ -28,12 +28,8 @@ server {
 
     #OPH take care of redirects from old links to the old website
 
-    location = /howtoadopt.php {
+    location = ~ ^(.+\.php)(.*)$ {
       rewrite ^ http://$host/guide permanent;
-    }
-
-    location = /welcome.php {
-      rewrite ^ http://$host permanent;
     }
 
     location / {

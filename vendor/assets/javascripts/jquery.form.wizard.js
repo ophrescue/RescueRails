@@ -203,7 +203,9 @@
 				if(!this.options.formPluginEnabled){
 					// OPH added lines start
 					this.nextButton.addClass("disabled");
-					this.backButton.addClass("disabled");					
+					this.backButton.addClass("disabled");
+					this.nextButton.attr("disabled","disabled");
+					this.backButton.attr("disabled","disabled");						
 					// OPH added lines end
 					return true;
 				}else{

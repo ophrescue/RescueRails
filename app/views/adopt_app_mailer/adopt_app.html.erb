@@ -5,14 +5,57 @@
         
         <title>Adoption Application Received</title>
     <style type="text/css">
-      
+      table {
+          border-collapse: collapse;
+          font-size: 13px;
+          margin-bottom: 18px;
+          padding: 0;
+          width: 600px;
+      }
+      table td {
+          line-height: 18px;
+          padding: 10px 10px 9px;
+          text-align: left;
+      }
+      table th {
+          font-weight: bold;
+          padding-top: 9px;
+          vertical-align: middle;
+      }
+      table td {
+          border-top: 1px solid #DDDDDD;
+          vertical-align: top;
+      }
+      table tbody th {
+          border-top: 1px solid #DDDDDD;
+          vertical-align: top;
+      }
+      .label {
+        background-color: #BFBFBF;
+        border-radius: 3px 3px 3px 3px;
+        color: white;
+        font-size: 9.75px;
+        font-weight: bold;
+        padding: 1px 3px 2px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      .label.important {
+        background-color: #C43C35;
+      }
+      .label.warning {
+        background-color: #F89406;
+      }
+      .label.success {
+        background-color: #46A546;
+      }
+      .label.notice {
+        background-color: #62CFFC;
+      }
     </style>
     </head>
     <body>
       <h4><%= @adopter.name %></h4>
-      <% if %>
-        
-      <% end %>
       <table>
         <tr>
           <td>id</td>
@@ -39,7 +82,27 @@
               <address>
           </td>
         </tr>
-        </table>
+        <tr>
+          <td>house_type</td>
+          <td><strong><%= @adopter.adoption_app.house_type %></strong></td>
+        </tr>
+        <tr>
+          <td>ready_to_adopt_dt</td>
+          <td><%= @adopter.adoption_app.ready_to_adopt_dt %></td>
+        </tr>
+        <tr>
+          <td>spouse_name</td>
+          <td><%= @adopter.adoption_app.spouse_name %></td>
+        </tr>
+        <tr>
+          <td>other_household_names</td>
+          <td><%= @adopter.adoption_app.other_household_names %></td>
+        </tr>
+        <tr>
+          <td>how_did_you_hear          :</td>
+          <td><%= @adopter.adoption_app.how_did_you_hear %></td>
+        </tr>
+      </table>
 
 
         <h5>Dog Info</h5>
@@ -56,30 +119,9 @@
           <td>dog_name</td>
           <td><%= @adopter.dog_name %></td>
         </tr>
-        </table>
-
-
-        <table>
-        <h5>House Info</h5>
-          <tr>
-            <td>house_type</td>
-            <td><strong><%= @adopter.adoption_app.house_type %></strong></td>
-          </tr>
-          <tr>
-            <td>ready_to_adopt_dt</td>
-            <td><%= @adopter.adoption_app.ready_to_adopt_dt %></td>
-          </tr>
-          <tr>
-            <td>spouse_name</td>
-            <td><%= @adopter.adoption_app.spouse_name %></td>
-          </tr>
-          <tr>
-            <td>other_household_names</td>
-            <td><%= @adopter.adoption_app.other_household_names %></td>
-          </tr>
-          <tr>
+        <tr>
             <td>dog_exercise</td>
-            <td><%= @adopter.adoption_app.dog_exercise %>/td>
+            <td><%= @adopter.adoption_app.dog_exercise %></td>
           </tr>
           <tr>
             <td>dog_stay_when_away</td>
@@ -105,10 +147,11 @@
             <td>surrendered_pets          :</td>
             <td><%= @adopter.adoption_app.surrendered_pets %></td>
           </tr>
-          <tr>
-            <td>how_did_you_hear          :</td>
-            <td><%= @adopter.adoption_app.how_did_you_hear %></td>
-          </tr>
+        </table>
+
+        <table>
+        <h5>House Info</h5>
+
         </table>
 
         <% if @adopter.adoption_app.house_type == 'rent' %>
@@ -146,7 +189,13 @@
           </tr>
           <tr>
             <td>current_pets_fixed        :</td>
-            <td><%= @adopter.adoption_app.current_pets_fixed %></td>
+            <td>
+              <% if @adopter.adoption_app.current_pets_fixed? %>
+                <span class="label success">Pets are Fixed</span>
+              <% else %>
+                <span class="label important">pets not fixed</span>
+              <% end %>
+            </td>
           </tr>
           <tr>
             <td>why_not_fixed </td>
@@ -157,13 +206,19 @@
             <td><%= @adopter.adoption_app.vet_info %></td>
           </tr>
           <tr>
-          <td>current_pets</td>
-          <td><%= @adopter.adoption_app.current_pets %></td>
-        </tr>
-        <tr>
-          <td>current_pets_uptodate</td>
-          <td><%= @adopter.adoption_app.current_pets_uptodate %></td>
-        </tr>
+            <td>current_pets</td>
+            <td><%= @adopter.adoption_app.current_pets %></td>
+          </tr>
+          <tr>
+            <td>current_pets_uptodate</td>
+            <td>
+              <% if @adopter.adoption_app.current_pets_uptodate? %>
+                <span class="label success">Pets are up to date</span>
+              <% else %>
+                <span class="label important">pets need shots</span>
+              <% end %>
+            </td>
+          </tr>
         <tr>
           <td>current_pets_uptodate_why</td>
           <td><%= @adopter.adoption_app.current_pets_uptodate_why %></td>

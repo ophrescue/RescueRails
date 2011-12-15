@@ -70,24 +70,28 @@ server {
     # Now this supposedly should work as it gets the filenames with querystrings that Rails provides.
     # BUT there's a chance it could break the ajax calls.
     location ~* \.(ico|css|gif|jpe?g|png)(\?[0-9]+)?$ {
-       expires max;
+       expires 1y;
+       add_header Cache-Control public;
        break;
     }
 
     location ~ ^/javascripts/.*\.js(\?[0-9]+)?$ {
-       expires max;
+       expires 1y;
+       add_header Cache-Control public;
        break;
     }
 
     # Now this supposedly should work as it gets the filenames with querystrings that Rails provides.
     # BUT there's a chance it could break the ajax calls.
     location ~* \.(ico|css|gif|jpe?g|png)(\?[0-9]+)?$ {
-       expires max;
+       expires 1y;
+       add_header Cache-Control public;
        break;
     }
 
     location ~ ^/javascripts/.*\.js(\?[0-9]+)?$ {
-       expires max;
+       expires 1y;
+       add_header Cache-Control public;
        break;
     }
 
@@ -96,7 +100,8 @@ server {
     # cache the resource and navigate faster over the website
     location ~ ^/(images|javascripts|stylesheets|system)/ {
       root <%= deploy_to %>/current/public;
-      expires max;
+      expires 1y;
+      add_header Cache-Control public;
       break;
     }
 

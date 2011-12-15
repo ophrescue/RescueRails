@@ -6,7 +6,8 @@ class PasswordResetsController < ApplicationController
   	user = User.find_by_email(params[:email])
   	if user
   		user.send_password_reset 
-  		redirect_to root_url, :success => "Email sent with password reset instructions"
+      flash[:success] =  "Email sent with password reset instructions"
+  		redirect_to root_url
   	else
 		flash.now[:error] = "Unknown Email Address"
   	render 'new'

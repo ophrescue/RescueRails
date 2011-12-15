@@ -28,8 +28,8 @@ server {
 
     #OPH take care of redirects from old links to the old website
 
-    location = ~ ^(.+\.php)(.*)$ {
-      rewrite ^ http://$host/guide permanent;
+    location ~ \.php$ {
+      rewrite ^ http://$host/ permanent;
     }
 
     location / {

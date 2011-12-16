@@ -43,9 +43,15 @@
 		</div>
 	</div>
 	<div class="clearfix">		
-		<%= f.label :phone, "Phone Number" %>
+		<%= f.label :phone, "Primary Phone Number" %>
 		<div class="input">
 			<%= f.text_field :phone, :class => "required" %>
+		</div>
+	</div>
+	<div class="clearfix">		
+		<%= f.label :other_phone, "Alternate Phone Number" %>
+		<div class="input">
+			<%= f.text_field :other_phone %>
 		</div>
 	</div>
 	<div class="clearfix">		

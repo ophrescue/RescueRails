@@ -3,7 +3,7 @@ $(function(){
 	 	formPluginEnabled: false,
     focusFirstInput : true,
 	 	historyEnabled : true,
-	 	validationEnabled: false,
+	 	validationEnabled: true,
 	 	disableUIStyles : true,
 		inDuration : 200,
 		outDuration: 200,

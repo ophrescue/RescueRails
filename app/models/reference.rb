@@ -3,6 +3,7 @@ class Reference < ActiveRecord::Base
 	belongs_to :adopter, :class_name => 'Adopter'
 	
 end
+
 # == Schema Information
 #
 # Table name: references
@@ -15,5 +16,6 @@ end
 #  relationship :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
+#  whentocall   :string(255)
 #
 

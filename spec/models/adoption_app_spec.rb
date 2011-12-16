@@ -3,6 +3,7 @@ require 'spec_helper'
 describe AdoptionApp do
   pending "add some examples to (or delete) #{__FILE__}"
 end
+
 # == Schema Information
 #
 # Table name: adoption_apps
@@ -15,7 +16,6 @@ end
 #  house_type                :string(40)
 #  dog_exercise              :text
 #  dog_stay_when_away        :string(100)
-#  max_hrs_alone             :integer         default(8)
 #  dog_vacation              :text
 #  current_pets              :text
 #  why_not_fixed             :text
@@ -24,7 +24,6 @@ end
 #  landlord_name             :string(100)
 #  landlord_phone            :string(15)
 #  rent_dog_restrictions     :text
-#  annual_cost_est           :integer         default(0)
 #  surrender_pet_causes      :text
 #  training_explain          :text
 #  surrendered_pets          :text
@@ -35,5 +34,6 @@ end
 #  current_pets_fixed        :boolean
 #  rent_costs                :text
 #  vet_info                  :text
+#  max_hrs_alone             :integer
 #
 

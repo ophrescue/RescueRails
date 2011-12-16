@@ -103,6 +103,7 @@ describe Adopter do
 end
 
 
+
 # == Schema Information
 #
 # Table name: adopters
@@ -123,5 +124,6 @@ end
 #  dog_reqs     :text
 #  why_adopt    :text
 #  dog_name     :string(255)
+#  other_phone  :string(255)
 #
 

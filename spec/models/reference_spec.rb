@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Reference do
   pending "add some examples to (or delete) #{__FILE__}"
 end
+
 # == Schema Information
 #
 # Table name: references
@@ -15,5 +16,6 @@ end
 #  relationship :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
+#  whentocall   :string(255)
 #
 

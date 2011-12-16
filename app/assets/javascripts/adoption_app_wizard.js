@@ -3,7 +3,7 @@ $(function(){
 	 	formPluginEnabled: false,
     focusFirstInput : true,
 	 	historyEnabled : true,
-	 	validationEnabled: true,
+	 	validationEnabled: false,
 	 	disableUIStyles : true,
 		inDuration : 200,
 		outDuration: 200,
@@ -54,3 +54,6 @@ $(function(){
 	 	}
 	 });
 });
+
+
+

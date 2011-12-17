@@ -7,11 +7,12 @@ gem 'will_paginate',  '~> 3.0.2'
 gem 'gravatar_image_tag'
 gem 'rails3-jquery-autocomplete'
 gem "paperclip"
-gem "bootstrap-sass", "~> 1.4.2"
 gem 'therubyracer'
 gem 'unicorn'
 gem 'newrelic_rpm'
 gem 'geocoder'
+
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

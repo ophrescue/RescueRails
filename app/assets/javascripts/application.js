@@ -12,7 +12,6 @@
 //= require jquery.form.wizard
 //= require jquery.validate
 //= require bootstrap
-//= require bootstrap-alerts
 //= require jquery.tablesorter.min
 //= require jquery.tablesorter.cfg
 //= require jquery.maskedinput

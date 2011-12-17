@@ -43,7 +43,7 @@
 			</div> 
 			<div id="Navigation" class="actions well">
 				<input class="btn large" id="back" value="Back" type="reset" />
-				<%= f.submit "Submit", :id =>"next", :class => "btn large primary" %>
+				<%= f.submit "Submit", :id =>"next", :class => "btn large primary", :disable_with => 'Saving...' %>
 			</div>
 		<% end %>
 	</div>

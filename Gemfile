@@ -7,7 +7,7 @@ gem 'will_paginate',  '~> 3.0.2'
 gem 'gravatar_image_tag'
 gem 'rails3-jquery-autocomplete'
 gem "paperclip"
-gem "bootstrap-sass", "~> 1.4.0"
+gem "bootstrap-sass", "~> 1.4.2"
 gem 'therubyracer'
 gem 'unicorn'
 gem 'newrelic_rpm'

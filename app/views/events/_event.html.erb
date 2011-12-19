@@ -1,8 +1,8 @@
 <div class="row">
-	<div class="row">
+	<div class="row event-title">
 		<div class="span12 offset4">
-			<h3><%= event.title %></h3>
-			<p><strong><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %l:%M %P") %> to <%= event.end_time.strftime(" %l:%M %P") %></strong></p>
+			<h3><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %l:%M %P") %> to <%= event.end_time.strftime(" %l:%M %P") %></h3>
+			<p><strong><%= event.title %></strong></p>
 		</div>
 	</div>
 	<div class="span4">

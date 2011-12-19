@@ -23,3 +23,4 @@
 //= require facebook
 //= require adoption_app_wizard
 //= require datepicker
+//= require jquery.scroll

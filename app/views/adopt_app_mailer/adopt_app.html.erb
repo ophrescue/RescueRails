@@ -36,7 +36,7 @@
         <tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">At Least 21?</td>
           <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">
 
-              <% if @adopter.adoption_app.is_21? %>
+              <% if @adopter.adoption_app.is_ofage? %>
                 <span class="label success" style="background-color: #46A546;border-radius: 3px 3px 3px 3px;color: white;font-size: 9.75px;font-weight: bold;padding: 1px 3px 2px;text-transform: uppercase;white-space: nowrap">Yes, 21 or older</span>
               <% else %>
                 <span class="label important" style="background-color: #C43C35;border-radius: 3px 3px 3px 3px;color: white;font-size: 9.75px;font-weight: bold;padding: 1px 3px 2px;text-transform: uppercase;white-space: nowrap">Under 21 Years Old!</span>

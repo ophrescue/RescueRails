@@ -32,7 +32,21 @@
           <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.how_did_you_hear %></td>
         </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">house_type</td>
           <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><strong><%= @adopter.adoption_app.house_type %></strong></td>
-        </tr></table><h5>Dog Info</h5>
+        </tr>
+        <tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">At Least 21?</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">
+
+              <% if @adopter.adoption_app.is_21? %>
+                <span class="label success" style="background-color: #46A546;border-radius: 3px 3px 3px 3px;color: white;font-size: 9.75px;font-weight: bold;padding: 1px 3px 2px;text-transform: uppercase;white-space: nowrap">Yes, 21 or older</span>
+              <% else %>
+                <span class="label important" style="background-color: #C43C35;border-radius: 3px 3px 3px 3px;color: white;font-size: 9.75px;font-weight: bold;padding: 1px 3px 2px;text-transform: uppercase;white-space: nowrap">Under 21 Years Old!</span>
+              <% end %>
+          </td>
+        </tr>
+
+        </table>
+
+        <h5>Dog Info</h5>
         <table style="border-collapse: collapse;font-size: 13px;margin-bottom: 18px;padding: 0;width: 600px"><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">dog_name</td>
           <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><strong><%= @adopter.dog_name %></strong></td>
         </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">dog_reqs</td>
@@ -53,7 +67,7 @@
             <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.surrender_pet_causes %></td>
           </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">surrendered_pets          :</td>
             <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.surrendered_pets %></td>
-          </tr></table><table style="border-collapse: collapse;font-size: 13px;margin-bottom: 18px;padding: 0;width: 600px"></table>
+          </tr></table>
 
         <% if @adopter.adoption_app.house_type == 'rent' %>
             <h5>Rental Info</h5>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111220001657) do
+ActiveRecord::Schema.define(:version => 20111220015334) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20111220001657) do
     t.text     "rent_costs"
     t.text     "vet_info"
     t.integer  "max_hrs_alone"
+    t.boolean  "is_21"
   end
 
   add_index "adoption_apps", ["adopter_id"], :name => "index_adoption_apps_on_adopter_id"

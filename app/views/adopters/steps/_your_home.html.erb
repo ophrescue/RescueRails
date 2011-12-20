@@ -26,6 +26,25 @@
 		</div>
 	</div>
 	<div class="clearfix">
+		<%= af.label :is_21, "Are you at least 21 years old?" %>
+		<div class="input">
+			<ul class="inputs-list">
+				<li>
+					<label>
+						<%= af.radio_button :is_21, true, :class => "required" %> 
+						<span>Yes</span>
+					</label>
+				</li>
+				<li>
+					<label>
+						<%= af.radio_button :is_21, false, :class => "required" %> 
+						<span>No</span>
+					</label>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="clearfix">
 		<%= af.label :house_type, "Do you rent or own your home?" %>
 		<div class="input">
 			<ul class="inputs-list">

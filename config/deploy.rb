@@ -124,9 +124,6 @@ end
 after 'deploy:update_code', 'deploy:symlink_configs'
 
 # Delayed Job  
-before "deploy:restart", "delayed_job:stop"
-after  "deploy:restart", "delayed_job:start"
-
 after "deploy:stop",  "delayed_job:stop"
 after "deploy:start", "delayed_job:start"
 

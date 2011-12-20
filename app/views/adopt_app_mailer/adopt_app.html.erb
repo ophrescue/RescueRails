@@ -1,237 +1,108 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        
-        <title>Adoption Application Received</title>
-    <style type="text/css">
-      table {
-          border-collapse: collapse;
-          font-size: 13px;
-          margin-bottom: 18px;
-          padding: 0;
-          width: 600px;
-      }
-      table td {
-          line-height: 18px;
-          padding: 10px 10px 9px;
-          text-align: left;
-      }
-      table th {
-          font-weight: bold;
-          padding-top: 9px;
-          vertical-align: middle;
-      }
-      table td {
-          border-top: 1px solid #DDDDDD;
-          vertical-align: top;
-      }
-      table tbody th {
-          border-top: 1px solid #DDDDDD;
-          vertical-align: top;
-      }
-      .label {
-        background-color: #BFBFBF;
-        border-radius: 3px 3px 3px 3px;
-        color: white;
-        font-size: 9.75px;
-        font-weight: bold;
-        padding: 1px 3px 2px;
-        text-transform: uppercase;
-        white-space: nowrap;
-      }
-      .label.important {
-        background-color: #C43C35;
-      }
-      .label.warning {
-        background-color: #F89406;
-      }
-      .label.success {
-        background-color: #46A546;
-      }
-      .label.notice {
-        background-color: #62CFFC;
-      }
-    </style>
-    </head>
-    <body>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Adoption Application Received</title>
+  </head>
+  <body>
       <h4><%= @adopter.name %></h4>
-      <table>
-        <tr>
-          <td>id</td>
-          <td><%= @adopter.id %></td>
-        </tr>
-        <tr>
-          <td>email</td>
-          <td><%= @adopter.email %></td>
-        </tr>
-        <tr>
-          <td>address</td>
-          <td><address>
+      <table style="border-collapse: collapse;font-size: 13px;margin-bottom: 18px;padding: 0;width: 600px"><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">id</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.id %></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">email</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.email %></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">address</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><address>
                 <%= @adopter.address1 %><br />
                 <%= @adopter.address2 %><br />
                 <%= @adopter.city %>,<%= @adopter.state %> <%= @adopter.zip %>
               <address>
-          </td>
-        </tr>
-        <tr>
-          <td>phone</td>
-          <td><%= @adopter.phone %></td>
-        </tr>
-        <tr>
-          <td>other phone</td>
-          <td><%= @adopter.other_phone %></td>
-        </tr>
-        <tr>
-          <td>ready_to_adopt_dt</td>
-          <td><%= @adopter.adoption_app.ready_to_adopt_dt.strftime("%m/%d/%Y") %></td>
-        </tr>
-        <tr>
-          <td>when_to_call</td>
-          <td><%= @adopter.when_to_call %></td>
-        </tr>
-        <tr>
-          <td>spouse_name</td>
-          <td><%= @adopter.adoption_app.spouse_name %></td>
-        </tr>
-        <tr>
-          <td>other_household_names</td>
-          <td><%= @adopter.adoption_app.other_household_names %></td>
-        </tr>
-        <tr>
-          <td>how_did_you_hear          :</td>
-          <td><%= @adopter.adoption_app.how_did_you_hear %></td>
-        </tr>
-        <tr>
-          <td>house_type</td>
-          <td><strong><%= @adopter.adoption_app.house_type %></strong></td>
-        </tr>
-      </table>
-
-
-        <h5>Dog Info</h5>
-        <table>
-        <tr>
-          <td>dog_reqs</td>
-          <td><%= @adopter.dog_reqs %></td>
-        </tr>
-        <tr>
-          <td>why_adopt</td>
-          <td><%= @adopter.why_adopt %></td>
-        </tr>
-        <tr>
-          <td>dog_name</td>
-          <td><%= @adopter.dog_name %></td>
-        </tr>
-        <tr>
-            <td>dog_exercise</td>
-            <td><%= @adopter.adoption_app.dog_exercise %></td>
-          </tr>
-          <tr>
-            <td>dog_stay_when_away</td>
-            <td><%= @adopter.adoption_app.dog_stay_when_away %></td>
-          </tr>
-          <tr>
-            <td>max_hrs_alone</td>
-            <td><%= @adopter.adoption_app.max_hrs_alone %></td>
-          </tr>
-          <tr>
-            <td>dog_vacation</td>
-            <td><%= @adopter.adoption_app.dog_vacation %></td>
-          </tr>
-          <tr>
-            <td>surrender_pet_causes</td>
-            <td><%= @adopter.adoption_app.surrender_pet_causes %></td>
-          </tr>
-          <tr>
-            <td>training_explain</td>
-            <td><%= @adopter.adoption_app.training_explain %></td>
-          </tr>
-          <tr>
-            <td>surrendered_pets          :</td>
-            <td><%= @adopter.adoption_app.surrendered_pets %></td>
-          </tr>
-        </table>
-
-        <table>
-
-        </table>
+          </address></address></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">phone</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.phone %></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">other phone</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.other_phone %></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">ready_to_adopt_dt</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.ready_to_adopt_dt.strftime("%m/%d/%Y") %></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">when_to_call</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.when_to_call %></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">spouse_name</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.spouse_name %></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">other_household_names</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.other_household_names %></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">how_did_you_hear          :</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.how_did_you_hear %></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">house_type</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><strong><%= @adopter.adoption_app.house_type %></strong></td>
+        </tr></table><h5>Dog Info</h5>
+        <table style="border-collapse: collapse;font-size: 13px;margin-bottom: 18px;padding: 0;width: 600px"><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">dog_name</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><strong><%= @adopter.dog_name %></strong></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">dog_reqs</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.dog_reqs %></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">why_adopt</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.why_adopt %></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">dog_exercise</td>
+            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.dog_exercise %></td>
+          </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">dog_stay_when_away</td>
+            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.dog_stay_when_away %></td>
+          </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">max_hrs_alone</td>
+            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.max_hrs_alone %></td>
+          </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">dog_vacation</td>
+            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.dog_vacation %></td>
+          </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">training_explain</td>
+            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.training_explain %></td>
+          </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">surrender_pet_causes</td>
+            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.surrender_pet_causes %></td>
+          </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">surrendered_pets          :</td>
+            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.surrendered_pets %></td>
+          </tr></table><table style="border-collapse: collapse;font-size: 13px;margin-bottom: 18px;padding: 0;width: 600px"></table>
 
         <% if @adopter.adoption_app.house_type == 'rent' %>
             <h5>Rental Info</h5>
-                <table>
-                <tr>
-                  <td>landlord_name</td>
-                  <td><%= @adopter.adoption_app.landlord_name %></td>
-                </tr>
-                <tr>
-                  <td>landlord_phone </td>
-                  <td><%= @adopter.adoption_app.landlord_phone %></td>
-                </tr>
-                <tr>
-                  <td>rent_dog_restrictions </td>
-                  <td><%= @adopter.adoption_app.rent_dog_restrictions %></td>
-                </tr>
-                <tr>
-                  <td>rent_costs</td>
-                  <td><%= @adopter.adoption_app.rent_costs %></td>
-                </tr>
-            </table>
+                <table style="border-collapse: collapse;font-size: 13px;margin-bottom: 18px;padding: 0;width: 600px"><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">landlord_name</td>
+                  <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.landlord_name %></td>
+                </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">landlord_phone </td>
+                  <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.landlord_phone %></td>
+                </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">rent_dog_restrictions </td>
+                  <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.rent_dog_restrictions %></td>
+                </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">rent_costs</td>
+                  <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.rent_costs %></td>
+                </tr></table>
         <% end %>
 
-        <table>
-
-        </table>
+        <table style="border-collapse: collapse;font-size: 13px;margin-bottom: 18px;padding: 0;width: 600px"></table>
 
         <% if @adopter.adoption_app.pets_branch == "other_pets" %>
           <h5>Other Pets</h5>
-          <table>
-          <tr>
-            <td>current_pets_fixed        :</td>
-            <td>
+          <table style="border-collapse: collapse;font-size: 13px;margin-bottom: 18px;padding: 0;width: 600px"><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">current_pets</td>
+            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.current_pets %></td>
+          </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">current_pets_fixed        :</td>
+            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">
               <% if @adopter.adoption_app.current_pets_fixed? %>
-                <span class="label success">Pets are Fixed</span>
+                <span class="label success" style="background-color: #46A546;border-radius: 3px 3px 3px 3px;color: white;font-size: 9.75px;font-weight: bold;padding: 1px 3px 2px;text-transform: uppercase;white-space: nowrap">Pets are Fixed</span>
               <% else %>
-                <span class="label important">pets not fixed</span>
+                <span class="label important" style="background-color: #C43C35;border-radius: 3px 3px 3px 3px;color: white;font-size: 9.75px;font-weight: bold;padding: 1px 3px 2px;text-transform: uppercase;white-space: nowrap">pets not fixed</span>
               <% end %>
             </td>
-          </tr>
-          <tr>
-            <td>why_not_fixed </td>
-            <td><%= @adopter.adoption_app.why_not_fixed %></td>
-          </tr>
-          <tr>
-            <td>vet_info</td>
-            <td><%= @adopter.adoption_app.vet_info %></td>
-          </tr>
-          <tr>
-            <td>current_pets</td>
-            <td><%= @adopter.adoption_app.current_pets %></td>
-          </tr>
-          <tr>
-            <td>current_pets_uptodate</td>
-            <td>
+          </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">why_not_fixed </td>
+            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.why_not_fixed %></td>
+          </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">current_pets_uptodate</td>
+            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">
               <% if @adopter.adoption_app.current_pets_uptodate? %>
-                <span class="label success">Pets are up to date</span>
+                <span class="label success" style="background-color: #46A546;border-radius: 3px 3px 3px 3px;color: white;font-size: 9.75px;font-weight: bold;padding: 1px 3px 2px;text-transform: uppercase;white-space: nowrap">Pets are up to date</span>
               <% else %>
-                <span class="label important">pets need shots</span>
+                <span class="label important" style="background-color: #C43C35;border-radius: 3px 3px 3px 3px;color: white;font-size: 9.75px;font-weight: bold;padding: 1px 3px 2px;text-transform: uppercase;white-space: nowrap">pets need shots</span>
               <% end %>
             </td>
-          </tr>
-        <tr>
-          <td>current_pets_uptodate_why</td>
-          <td><%= @adopter.adoption_app.current_pets_uptodate_why %></td>
-        </tr>
-        </table>
+          </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">current_pets_uptodate_why</td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.current_pets_uptodate_why %></td>
+        </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">vet_info</td>
+            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.vet_info %></td>
+          </tr></table>
         <% else %>
             <h5>No Other Pets in the past 10 years</h5>
       <% end %>
     
       <h5>References</h5>
-        <table>
+        <table style="border-collapse: collapse;font-size: 13px;margin-bottom: 18px;padding: 0;width: 600px">
           <%= render @adopter.references, :target => @adopter %>
-        </table>
-    <body>
+        </table></body>
 </html>
-  
-  

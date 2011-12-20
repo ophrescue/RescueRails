@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111216233212) do
+ActiveRecord::Schema.define(:version => 20111220001657) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -83,6 +83,21 @@ ActiveRecord::Schema.define(:version => 20111216233212) do
 
   add_index "breeds", ["name"], :name => "index_breeds_on_name"
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
   create_table "dogs", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -113,6 +128,19 @@ ActiveRecord::Schema.define(:version => 20111216233212) do
   add_index "dogs", ["secondary_breed_id"], :name => "index_dogs_on_secondary_breed_id"
   add_index "dogs", ["size"], :name => "index_dogs_on_size"
   add_index "dogs", ["user_id"], :name => "index_dogs_on_user_id"
+
+  create_table "emails", :force => true do |t|
+    t.string   "from_address",     :null => false
+    t.string   "reply_to_address"
+    t.string   "subject"
+    t.text     "to_address"
+    t.text     "cc_address"
+    t.text     "bcc_address"
+    t.text     "content"
+    t.datetime "sent_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "events", :force => true do |t|
     t.string   "title"

@@ -71,6 +71,8 @@ require "rvm/capistrano"                                # Load RVM's capistrano 
 
 require 'bundler/capistrano'
 
+require "delayed/recipes"
+
 set :use_sudo,            false
 
 set :git_shallow_clone,   1 # tell git to clone only the latest revision and not the whole repository
@@ -120,6 +122,13 @@ end
 
 # Link up the config files
 after 'deploy:update_code', 'deploy:symlink_configs'
+
+# Delayed Job  
+before "deploy:restart", "delayed_job:stop"
+after  "deploy:restart", "delayed_job:start"
+
+after "deploy:stop",  "delayed_job:stop"
+after "deploy:start", "delayed_job:start"
 
 # Unicorn setup
 

@@ -12,6 +12,12 @@ gem 'unicorn'
 gem 'newrelic_rpm'
 gem 'geocoder'
 
+# Cool mail async stuff
+gem "delayed_job", "~> 2.1.4"
+gem 'mailhopper'
+gem 'delayed_mailhopper'
+
+
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails'
 
 # Gems used only for assets and not required

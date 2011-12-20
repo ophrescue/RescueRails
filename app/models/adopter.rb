@@ -1,7 +1,6 @@
 class Adopter < ActiveRecord::Base
 
-  attr_accessor :pre_q_age,
-                :pre_q_costs,
+  attr_accessor :pre_q_costs,
                 :pre_q_surrender,
                 :pre_q_abuse,
                 :pre_q_reimbursement 
@@ -12,20 +11,6 @@ class Adopter < ActiveRecord::Base
   def dog_tokens=(ids)
     self.dog_ids = ids.split(",")
   end
-
-#Prescreen Questions
-    validates_acceptance_of :pre_q_age, 
-                            :message => "If you are under 21, have a parent complete this application."
-    validates_acceptance_of :pre_q_commited, 
-                            :message => "All family members must be commited to adopt from OPH"
-    validates_acceptance_of :pre_q_costs,
-                            :message => "Review the costs."
-    validates_acceptance_of :pre_q_meds,
-                            :message => "These medications are required by contract."
-    validates_acceptance_of :pre_q_surrender,
-                            :message => "All OPH dogs are required to be returned to OPH if given up."
-    validates_acceptance_of :pre_q_abuse,
-                            :message => "We are unable to adopt to individuals convicted of animal abuse."
 
     has_many :references, :dependent => :destroy
     accepts_nested_attributes_for :references

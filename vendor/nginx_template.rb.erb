@@ -2,11 +2,19 @@ upstream <%= application %>_app_server {
     server unix:<%= unicorn_socket %> fail_timeout=0;
 }
 
+# www 301 redirect action
+server {
+  listen 80;
+  server_name www.ophrescue.org;
+  rewrite ^/(.*) http://ophrescue.org/$1 permanent;
+}
+
+
 # <%= application %> Server
 server {
     listen 80;
     client_max_body_size 500M;
-    server_name <%= nginx_domains %>;
+    server_name ophrescue.org;
 
     # ~2 seconds is often enough for most folks to parse HTML/CSS and
     # retrieve needed images/icons/frames, connections are cheap in

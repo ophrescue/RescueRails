@@ -9,7 +9,6 @@ gem 'rails3-jquery-autocomplete'
 gem "paperclip"
 gem 'therubyracer'
 gem 'unicorn'
-gem 'newrelic_rpm'
 gem 'geocoder'
 
 # Cool mail async stuff

@@ -59,3 +59,5 @@ group :test do
   gem 'autotest-fsevent'
   gem 'autotest-growl'
 end
+
+gem 'scout'

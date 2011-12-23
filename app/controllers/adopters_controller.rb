@@ -1,6 +1,9 @@
 class AdoptersController < ApplicationController
 
 	before_filter :authenticate, :except => [:new, :create, :check_email]
+	
+	before_filter :edit_my_adopters_user, :only => [:index, :show, :edit, :update]
+	before_filter :edit_all_adopters_user, :only => [:index, :show, :edit, :update]
 	before_filter :admin_user,   :only => [:destroy]
 
 
@@ -47,5 +50,17 @@ class AdoptersController < ApplicationController
 			format.json { render :json => !@adopter }
 		end
 	end
+
+	private
+
+	    def edit_my_adopters_user
+	    #TODO Figure out how to differentiate these
+	      redirect_to(root_path) unless current_user.edit_my_adopters?
+	    end
+
+	    def edit_all_adopters_user
+	     #TODO Figure out how to differentiate these
+	      redirect_to(root_path) unless current_user.edit_all_adopters?
+	    end
 	
 end

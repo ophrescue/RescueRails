@@ -43,15 +43,21 @@
 			</div>
 		</div>
 		<p><a href="/adopt" class="btn primary">Apply to Adopt</a>
-		<% if is_admin? %>(
-			<%= link_to  "edit", edit_event_path(event) %> / 
+		
+		<% if can_edit_events? %>
+			<%= link_to  "edit", edit_event_path(event), :class => "btn small" %>
+		<% end %>
+
+		<% if is_admin? %>
 			  	<%= link_to  "delete",
 				 			  event,
 				 			  :method => :delete,
+				 			  :class => "btn small",
 				 			  :confirm => "You sure?",
 				 			  :title => "Delete #{event.title}" %>
 			
-		)<% end %>
+		<% end %>
+
 		</p>
 	</div>
 </div>

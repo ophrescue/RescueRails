@@ -23,16 +23,16 @@ module SessionsHelper
 		!current_user.nil?
 	end
 
+	def is_locked?
+		if current_user.locked?
+			cookies.delete(:remember_token)
+			self.current_user = nil
+			redirect_to root, :error => "Your Account is Locked"
+		end
+	end
+
 	def is_admin?
 		current_user.admin? unless current_user.nil?
-	end
-
-	def can_edit_my_adopters?
-		current_user.edit_my_adopters unless current_user.nil?
-	end
-
-	def can_edit_all_adopters?
-		current_user.edit_all_adopters? unless current_user.nil?
 	end
 
 	def can_edit_events?
@@ -41,6 +41,14 @@ module SessionsHelper
 
 	def can_edit_dogs?
 		current_user.edit_dogs? unless current_user.nil?
+	end
+
+	def can_edit_all_adopters?
+		current_user.edit_all_adopters unless current_user.nil?
+	end
+
+	def can_edit_my_adopters?
+		current_user.edit_my_adopters unless current_user.nil?
 	end
 
 	def sign_out

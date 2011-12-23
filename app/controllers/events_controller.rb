@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 
-	before_filter :admin_user, 	:except => [:index, :show]
+	before_filter :authenticate
+	before_filter :edit_events_user, 	:except => [:index, :show]
 
 	def index
 		@title = "Upcoming Events"
@@ -18,10 +19,10 @@ class EventsController < ApplicationController
 							 :order => 'event_date')
 	end
 
-	def show
-		@title = "Events"
-		@event = Event.find(params[:id])
-	end
+	# def show
+	# 	@title = "Events"
+	# 	@event = Event.find(params[:id])
+	# end
 
 	def new
 		@title = "Add an Event"
@@ -63,12 +64,10 @@ class EventsController < ApplicationController
 		redirect_to events_path
 	end
 
+	private
 
-	private 
-
-		def admin_user
-			redirect_to(root_path) unless is_admin?
-		end
-
+	    def edit_events_user
+	      redirect_to(root_path) unless current_user.edit_events?
+	    end
 
 end

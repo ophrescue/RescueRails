@@ -11,6 +11,10 @@ class SessionsController < ApplicationController
   		flash.now[:error] = "Invalid email/password combination."
   		@title = "Sign in"
   		render 'new'
+    elsif user.locked?
+      flash.now[:error] = "Your account is disabled."
+      @title = "Sign in" 
+      render 'new'
   	else
   		sign_in user
   		redirect_to root_path

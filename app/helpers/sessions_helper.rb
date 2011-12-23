@@ -27,16 +27,20 @@ module SessionsHelper
 		current_user.admin? unless current_user.nil?
 	end
 
-	def can_edit_adopters?
-		current_user.edit_adopters? unless current_user.nil?
+	def can_edit_my_adopters?
+		current_user.edit_my_adopters unless current_user.nil?
+	end
+
+	def can_edit_all_adopters?
+		current_user.edit_all_adopters? unless current_user.nil?
+	end
+
+	def can_edit_events?
+		current_user.edit_events? unless current_user.nil?
 	end
 
 	def can_edit_dogs?
 		current_user.edit_dogs? unless current_user.nil?
-	end
-
-	def can_view_adopters?
-		current_user.view_adopters? unless current_user.nil?
 	end
 
 	def sign_out

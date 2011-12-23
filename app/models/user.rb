@@ -10,16 +10,19 @@ class User < ActiveRecord::Base
                   :admin,
                   :is_foster,
                   :phone,
+                  :other_phone,
                   :address1,
                   :address2,
                   :city,
                   :state,
                   :zip,
                   :title,
-                  :edit_adopters,
+                  :edit_all_adopters,
+                  :edit_my_adopters,
                   :edit_dogs,
+                  :edit_events,
                   :share_info,
-                  :view_adopters
+                  :locked
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   

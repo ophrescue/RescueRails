@@ -24,6 +24,12 @@
 			<%= f.text_field :phone %>
 		</div>
 	</div>
+		<div class="clearfix">
+		<%= f.label :other_phone %>
+		<div class="input">
+			<%= f.text_field :other_phone %>
+		</div>
+	</div>
 	<div class="clearfix">
 		<%= f.label :address1 %>
 		<div class="input">
@@ -83,31 +89,47 @@
 				<li>
 					<label>
 						<%= f.check_box :admin %>
-						<span>Admin - Edit Staff, Override Assignments, Add/Remove Dogs</span>
+						<span><strong>Admin</strong> - Add/edit staff, set staff permissions, delete dogs</span>
+					</label>
+				</li>
+				<br />
+				<li>
+					<label>
+						<%= f.check_box :edit_all_adopters %>
+						<span><strong>Lead Adoption Coordinator</strong> - Process All Adoption Applications</span>
 					</label>
 				</li>
 				<li>
 					<label>
-						<%= f.check_box :edit_adopters %>
-						<span>Process Adoption Applications</span>
+						<%= f.check_box :edit_my_adopters %>
+						<span><strong>Adoption Coordinator</strong> - Can be Assigned Adoption Applications, and process them</span>
 					</label>
 				</li>
+				<br />
 				<li>
 					<label>
-						<%= f.check_box :view_adopters %>
-						<span>View Adoption Applications</span>
+						<%= f.check_box :edit_events %>
+						<span><strong>Manage Events</strong> - Add/Edit Events </span>
 					</label>
 				</li>
 				<li>
 					<label>
 						<%= f.check_box :edit_dogs %>
-						<span>Edit Dogs - Can edit existing dog records (cannot add or delete)</span>
+						<span><strong>Manage Dogs</strong> - Can edit existing dog records (can not delete)</span>
 					</label>
 				</li>
+				<br />
 				<li>
 					<label>
 						<%= f.check_box :is_foster %>
-						<span>Foster - This person can be selected as a foster on the dog edit screen.</span>
+						<span><strong>Foster</strong> - This person can be selected as a foster on the dog edit screen.</span>
+					</label>
+				</li>
+				<br />
+				<li>
+					<label>
+						<%= f.check_box :locked %>
+						<span><strong>Lock</strong> - Will disable account, preventing user from logging in.</span>
 					</label>
 				</li>
 			</ul>
@@ -122,28 +144,34 @@
 						<li>Cannot Admin System</li>
 					<% end %>
 
-					<% if @user.edit_adopters? %>
-						<li>Can Process Applications</li>
+					<% if @user.edit_all_adopters? %>
+						<li>Can Process All Applications</li>
 					<% else %>
-						<li> Cannot Process Applications</li>
+						<li> Cannot Process All Applications</li>
+					<% end %>
+
+					<% if @user.edit_my_adopters? || @user.edit_all_adopters? %>
+						<li>Can be Assigned Adoption Applications</li>
+					<% else %>
+						<li>Cannot be Assigned Adoption Applications</li>
 					<% end %>
 
 					<% if @user.edit_dogs?%>
-						<li>Can Edit Dogs</li>
+						<li>Can Add/Edit Dogs</li>
 					<% else %>
-						<li>Cannot Edit Dogs</li>
-					<% end %>
-
-					<% if @user.view_adopters? %>
-						<li>Can View Adoption Applications</li>
-					<% else %>
-						<li>Cannot View Adoption Applications</li>
+						<li>Cannot Add/Edit Dogs</li>
 					<% end %>
 
 					<% if @user.is_foster? %>
 						<li>Is a Foster</li>
 					<% else %>
 						<li>Is not a Foster</li>
+					<% end %>
+
+					<% if @user.locked? %>
+						<li><span class="label error">Account Disabled</span></li>
+					<% else %>
+						<li><span class="label success">Account Active</span></li>
 					<% end %>
 				</ul>
 			</div>

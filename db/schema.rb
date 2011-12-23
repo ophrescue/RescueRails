@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111220025024) do
+ActiveRecord::Schema.define(:version => 20111223213530) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -218,10 +218,13 @@ ActiveRecord::Schema.define(:version => 20111220025024) do
     t.string   "state"
     t.string   "zip"
     t.string   "title"
-    t.boolean  "edit_adopters",          :default => false
     t.boolean  "edit_dogs",              :default => false
-    t.boolean  "view_adopters",          :default => false
     t.text     "share_info"
+    t.boolean  "edit_my_adopters",       :default => false
+    t.boolean  "edit_all_adopters",      :default => false
+    t.boolean  "locked",                 :default => false
+    t.boolean  "edit_events",            :default => false
+    t.string   "other_phone"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -4,6 +4,7 @@ describe AdoptionApp do
   pending "add some examples to (or delete) #{__FILE__}"
 end
 
+
 # == Schema Information
 #
 # Table name: adoption_apps
@@ -35,5 +36,6 @@ end
 #  rent_costs                :text
 #  vet_info                  :text
 #  max_hrs_alone             :integer
+#  is_ofage                  :boolean
 #
 

@@ -4,6 +4,7 @@ class AdoptionApp < ActiveRecord::Base
 	
 end
 
+
 # == Schema Information
 #
 # Table name: adoption_apps
@@ -35,5 +36,6 @@ end
 #  rent_costs                :text
 #  vet_info                  :text
 #  max_hrs_alone             :integer
+#  is_ofage                  :boolean
 #
 

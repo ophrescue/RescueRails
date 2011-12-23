@@ -93,6 +93,7 @@ class User < ActiveRecord::Base
 
   
 end
+
 # == Schema Information
 #
 # Table name: users
@@ -115,9 +116,12 @@ end
 #  state                  :string(255)
 #  zip                    :string(255)
 #  title                  :string(255)
-#  edit_adopters          :boolean         default(FALSE)
 #  edit_dogs              :boolean         default(FALSE)
-#  view_adopters          :boolean         default(FALSE)
 #  share_info             :text
+#  edit_my_adopters       :boolean         default(FALSE)
+#  edit_all_adopters      :boolean         default(FALSE)
+#  locked                 :boolean         default(FALSE)
+#  edit_events            :boolean         default(FALSE)
+#  other_phone            :string(255)
 #
 

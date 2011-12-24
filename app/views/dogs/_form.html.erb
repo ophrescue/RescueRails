@@ -53,12 +53,29 @@
 				</div>
 			</div>
 			<div class="clearfix">
+				<%= f.label :intake_dt, "Intake Date" %>
+				<div class="input">
+					<%= f.text_field :intake_dt %>
+				</div>
+			</div>
+			<div class="clearfix">
+				<%= f.label :available_on_dt, "Available On Date" %>
+				<div class="input">
+					<%= f.text_field :available_on_dt %>
+				</div>
+			</div>
+			<div class="clearfix">
 			<label id="optionsCheckboxes"><strong>Check all that apply</strong></label>
 				<div class="input">
 					<ul class="inputs-list">
 						<li>
-							<label><%= f.check_box :is_purebred %>
-							<span><%= f.label :is_purebred %></span>
+							<label><%= f.check_box :is_uptodateonshots %>
+							<span><%= f.label :is_uptodateonshots, "Up-to-date on shots"  %></span>
+							</label>
+						</li>
+						<li>
+							<label><%= f.check_box :is_housetrained %>
+							<span><%= f.label :is_housetrained, "Is Housetrained" %></span>
 							</label>
 						</li>
 						<li>

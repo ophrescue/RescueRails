@@ -9,4 +9,10 @@ $(function() {
 								maxDate: '+6m',
 								minDate: '0d'
 									});
+		$("#dog_intake_dt").datepicker({ 
+								dateFormat: 'yy-mm-dd'
+									});
+		$("#dog_available_on_dt").datepicker({ 
+								dateFormat: 'yy-mm-dd'
+									});
 	});

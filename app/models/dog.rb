@@ -1,30 +1,3 @@
-# == Schema Information
-#
-# Table name: dogs
-#
-#  id                 :integer         not null, primary key
-#  name               :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
-#  tracking_id        :integer
-#  primary_breed_id   :integer
-#  secondary_breed_id :integer
-#  status             :string(255)
-#  age                :string(75)
-#  size               :string(75)
-#  is_altered         :boolean
-#  gender             :string(6)
-#  is_special_needs   :boolean
-#  no_dogs            :boolean
-#  no_cats            :boolean
-#  no_kids            :boolean
-#  description        :text
-#  is_purebred        :boolean
-#  user_id            :integer
-#  foster_start_date  :date
-#  adoption_date      :date
-#
-
 class Dog < ActiveRecord::Base
 
 	attr_accessor   :primary_breed_name,
@@ -46,11 +19,15 @@ class Dog < ActiveRecord::Base
 					:no_cats,
 					:no_kids,
 					:description,
-					:is_purebred,
 					:photos_attributes,
 					:user_id,
 					:foster_start_date,
-					:adoption_date
+					:adoption_date,
+					:is_uptodateonshots,
+					:is_housetrained,
+					:intake_dt,
+					:available_on_dt
+
 
 	belongs_to :primary_breed, :class_name => 'Breed'
 	belongs_to :secondary_breed, :class_name => 'Breed'
@@ -120,4 +97,35 @@ class Dog < ActiveRecord::Base
     end
 
 end
+
+
+# == Schema Information
+#
+# Table name: dogs
+#
+#  id                 :integer         not null, primary key
+#  name               :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  tracking_id        :integer
+#  primary_breed_id   :integer
+#  secondary_breed_id :integer
+#  status             :string(255)
+#  age                :string(75)
+#  size               :string(75)
+#  is_altered         :boolean
+#  gender             :string(6)
+#  is_special_needs   :boolean
+#  no_dogs            :boolean
+#  no_cats            :boolean
+#  no_kids            :boolean
+#  description        :text
+#  user_id            :integer
+#  foster_start_date  :date
+#  adoption_date      :date
+#  is_uptodateonshots :boolean         default(TRUE)
+#  is_housetrained    :boolean         default(TRUE)
+#  intake_dt          :date
+#  available_on_dt    :date
+#
 

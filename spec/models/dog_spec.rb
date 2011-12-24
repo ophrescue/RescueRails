@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Dog do
   pending "add some examples to (or delete) #{__FILE__}"
 end
+
 # == Schema Information
 #
 # Table name: dogs
@@ -24,9 +25,12 @@ end
 #  no_cats            :boolean
 #  no_kids            :boolean
 #  description        :text
-#  is_purebred        :boolean
 #  user_id            :integer
 #  foster_start_date  :date
 #  adoption_date      :date
+#  is_uptodateonshots :boolean         default(TRUE)
+#  is_housetrained    :boolean         default(TRUE)
+#  intake_dt          :date
+#  available_on_dt    :date
 #
 

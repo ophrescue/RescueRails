@@ -84,7 +84,7 @@ class Dog < ActiveRecord::Base
 						  :gender
 
 	STATUSES = ['adoptable', 'adopted', 'adoption pending',
-				'hold', 'not available', 'return pending']
+				'hold', 'not available', 'return pending', 'coming soon']
 	validates_inclusion_of :status, :in => STATUSES	
 
 	AGES = ['baby', 'young', 'adult', 'senior']		

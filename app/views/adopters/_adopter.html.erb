@@ -1,7 +1,9 @@
 <tr>
-	<td><%= adopter.adoption_app.ready_to_adopt_dt %></td>
-	<td>Flags Temp</td>
-	<td><%= adopter.status %></td>
+	<td><%= adopter.adoption_app.ready_to_adopt_dt.strftime("%m/%d/%y") %></td>
+	<td></td>
+	<% if params[:status] == nil  %>
+		<td><%= adopter.status.titleize %></td>
+	<% end %>
 	<td><%= link_to adopter.name, adopter %></td>
 	<td><%= adopter.city %>, <%= adopter.state %></td>
 	<td>
@@ -11,7 +13,7 @@
 			<br />
 		<% end %>
 	</td>
-	<td>Assigned Temp</td>
-	<td>Last Update</td>
+	<td>Someone</td>
+	<td><%= time_ago_in_words(adopter.updated_at) %> ago</td>
 	<td>Last Comment</td>
 </tr>

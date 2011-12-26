@@ -16,7 +16,6 @@ class AdoptersController < ApplicationController
     	@adopters = Adopter.find_by_status(@search.status)
     else
     	@adopters = Adopter.all
-    	
     end
 
     # @adopters = Adopter.paginate(:page => params[:page])

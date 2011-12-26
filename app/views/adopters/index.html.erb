@@ -19,7 +19,7 @@
 		  <% else %>
 		    <li>
 		  <% end %>		  
-		    <%= link_to status.humanize, :controller => "adopters", :status => status %>
+		    <%= link_to status.titleize, :controller => "adopters", :status => status %>
 		  </li>
 		<% end %>
 			<% if params[:status] == nil %>
@@ -39,6 +39,9 @@
 		<tr>
 			<th>RTA</th>
 			<th>Flags</th>
+			<% if params[:status] == nil %>
+			<th>Status</th>
+			<% end %>
 			<th>Name</th>
 			<th>Location</th>
 			<th>Dogs</th>

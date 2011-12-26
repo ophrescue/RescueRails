@@ -43,8 +43,14 @@ class Adopter < ActiveRecord::Base
     validates :zip,		 :presence => true,
     					 :length   => {:in => 5..10}
              
-	STATUSES = ['approved', 'pending', 'denied', 
-		        'unresponsive', 'on hold', 'withdrawn']
+	STATUSES = ['new', 
+              'pend response', 
+              'workup', 
+		          'approved',
+              'adopted',
+              'withdrawn',
+              'denied']
+
 	
 	validates_presence_of  :status
 	validates_inclusion_of :status, :in => STATUSES

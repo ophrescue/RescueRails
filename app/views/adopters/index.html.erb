@@ -1,25 +1,58 @@
-<h1><%= @title %></h1>
+<div class="row">
+	<div class="span6">
+		<h1><%= @title %></h1>
+	</div>
+	<div class="span6 offset4">
+		<ul class="pills">
+		  <li class="active"><a href="#">My Apps</a></li>
+		  <li><a href="#">Open Apps</a></li>
+		  <li><a href="#">All Apps</a></li>
+		</ul>
+	</div>
+</div>
 
+<div class="row">
+	<ul class="tabs">
+		<% Adopter::STATUSES.each do |status| %>
+		  <% if status == params[:status] %>
+		  	<li class="active">
+		  <% else %>
+		    <li>
+		  <% end %>		  
+		    <%= link_to status.humanize, :controller => "adopters", :status => status %>
+		  </li>
+		<% end %>
+			<% if params[:status] == nil %>
+				<li class="active">
+			<% else %>
+				<li>
+			<% end %>
+			<%= link_to "All", adopters_path %>
+		</li>
+	</ul>
+</div>
+
+<% if !@adopters.nil? %>
 
 <table class="zebra-striped bordered-table condensed-table" id="adopt-sort">
 	<thead>
 		<tr>
 			<th>RTA</th>
-			<th>Status</th>
+			<th>Flags</th>
 			<th>Name</th>
 			<th>Location</th>
 			<th>Dogs</th>
 			<th>Assigned To</th>
-			<th>Refs</th>
-			<th>Vet Check</th>
-			<th>Landlord</th>
-			<th>Interview</th>
 			<th>Last Update</th>
+			<th>Last Comment</th>
 		</tr>
 	</thead>
 	<tbody>
 	<%= render @adopters %>
 	</tbody>
 </table>
+<% else %>
+<h3>No Records Found</h3>
+<% end %>
 
 

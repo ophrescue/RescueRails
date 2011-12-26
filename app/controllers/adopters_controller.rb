@@ -9,13 +9,24 @@ class AdoptersController < ApplicationController
 
   def index
     @title = "Adoption Applications"
-    @adopters = Adopter.paginate(:page => params[:page])
+
+
+    if params.has_key? :status
+    	@search = Adopter.new(:status => params[:status])
+    	@adopters = Adopter.find_by_status(@search.status)
+    else
+    	@adopters = Adopter.all
+    	
+    end
+
+    # @adopters = Adopter.paginate(:page => params[:page])
   end
 
-  def show
-    @adopter = Adopter.find(params[:id])
-    @title = @adopter.name
-  end
+
+	def show
+	  @adopter = Adopter.find(params[:id])
+	  @title = @adopter.name
+	end
 
 	def new
 		@adopter = Adopter.new

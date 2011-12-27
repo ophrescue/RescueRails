@@ -13,7 +13,7 @@ class AdoptersController < ApplicationController
 
     if params.has_key? :status
     	@search = Adopter.new(:status => params[:status])
-    	@adopters = Adopter.find_by_status(@search.status)
+    	@adopters = Adopter.find_all_by_status(@search.status)
     else
     	@adopters = Adopter.all
     end

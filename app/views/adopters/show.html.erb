@@ -1,5 +1,5 @@
-<h1><%= @adopter.name %></h1>
-<h2><%= @adopter.status.titleize %></h2>
+<h5><%= link_to "Adoption Applications", adopters_path  %></h5>
+<h2><%= @adopter.name %> - <%= @adopter.status.titleize %></h2>
 
 <div class="row">
 	<div class="span6">
@@ -58,26 +58,15 @@
 		</table>
 	</div>
 	<div class="span10">
-		<ul class="tabs">
-			<li class="active"><a href="#flags">Flags</a></li>
-			<li><a href="#process">Process</a></li>
-			<li><a href="#notes">Notes</a></li>
-		</ul>
-
-		<div class="pill-content">
 
 			<div class="active" id="flags">
 
 				<% if @adopter.adoption_app.is_ofage == false %>
 					<span class="label warning">Under 21</span>
-				<% else %>
-					<span class="label success">Over 21</span>
 				<% end %>
 
 				<% if @adopter.adoption_app.pets_branch == "no_pets" %>
 					<span class="label warning">First Time Dog Owner</span>
-				<% else %>
-					<span class="label success">Has had pets</span> 
 				<% end %>
 
 				<% if @adopter.adoption_app.max_hrs_alone > 5 %>
@@ -107,33 +96,35 @@
 				<% end %>
 
 			</div>
-
+			<br />
 			<div id="process">
-				<p>Process feature not available</p>
+				<%= form_for @adopter do |f| %>
+				<div class="clearfix">
+					<%= f.label :status %>
+					<div class="input">
+						<%= f.select(:status, Adopter::STATUSES) %>
+						<%= f.submit "Update", :class => "btn primary" %>
+					</div>
+				</div>
 			</div>
-
-			<div id="notes">
-				<p>Notes feature not available</p>
-			</div>
-
-		</div>
+			<% end %>
 		
-
 
 	</div>
 </div>
 
 <div class="row">
 	<ul class="tabs">
-	  <li class="active"><a href="#dog">Dog Choices</a></li>
-	  <li><a href="#references">References</a></li>
-	  <% if @adopter.adoption_app.house_type == 'rent' %>
-	  <li><a href="#rental">Rental</a></li>
-	  <% end %>
-	  <li><a href="#petownership">Pet Ownership</a></li>
-	  <% if @adopter.adoption_app.pets_branch == 'other_pets' %>
-	  <li><a href="#otherpets">Other Pets</a></li>
-	  <% end %>
+		<li class="active"><a href="#dog">Dog Choices</a></li>
+		<% if @adopter.adoption_app.pets_branch == 'other_pets' %>
+			<li><a href="#otherpets">Pet Vet</a></li>
+		<% end %>
+		<% if @adopter.adoption_app.house_type == 'rent' %>
+			<li><a href="#rental">Rental</a></li>
+		<% end %>
+		<li><a href="#references">References</a></li>
+
+
 	</ul>
 </div>
 
@@ -170,50 +161,6 @@
 						<th>Why Adopt</th>
 						<td><%= @adopter.why_adopt %></td>
 					</tr>
-				</table>
-			</div>
-
-			<div id="references">
-				<h3>References</h3>
-				<table class="zebra-striped bordered-table condensed-table">
-					<thead>
-						<th>Name</th>
-						<th>Phone</th>
-						<th>E-mail</th>
-						<th>Relationship</th>
-						<th>When to Call</th>
-					</thead>
-					<%= render @adopter.references, :target => @adopter %>
-				</table>
-			</div>
-
-			<div id="rental">
-
-				<h3>Rental Info</h3>
-				<table>
-					<tr>
-						<th>Landlord Name</th>
-						<td><%= @adopter.adoption_app.landlord_name %></td>
-					</tr>
-					<tr>
-						<th>Landlord's Phone</th>
-						<td><%= @adopter.adoption_app.landlord_phone %></td>
-					</tr>
-					<tr>
-						<th>Dog Restrictions at Rental</th>
-						<td><%= @adopter.adoption_app.rent_dog_restrictions %></td>
-					</tr>
-					<tr>
-						<th>Expected Rental Costs</th>
-						<td><%= @adopter.adoption_app.rent_costs %></td>
-					</tr>
-				</table>
-			</div>
-
-
-			<div id="petownership">
-				<h3>Pet Ownership</h3>
-				<table class="zebra-striped bordered-table condensed-table">
 					<tr>
 						<th>Dog Exercise</th>
 						<td><%= @adopter.adoption_app.dog_exercise %></td>
@@ -244,6 +191,44 @@
 					</tr>
 				</table>
 			</div>
+
+			<div id="references">
+				<h3>References</h3>
+				<table class="zebra-striped bordered-table condensed-table">
+					<thead>
+						<th>Name</th>
+						<th>Phone</th>
+						<th>E-mail</th>
+						<th>Relationship</th>
+						<th>When to Call</th>
+					</thead>
+					<%= render @adopter.references, :target => @adopter %>
+				</table>
+			</div>
+
+			<div id="rental">
+
+				<h3>Rental Info</h3>
+				<table class="zebra-striped bordered-table condensed-table">
+					<tr>
+						<th>Landlord Name</th>
+						<td><%= @adopter.adoption_app.landlord_name %></td>
+					</tr>
+					<tr>
+						<th>Landlord's Phone</th>
+						<td><%= @adopter.adoption_app.landlord_phone %></td>
+					</tr>
+					<tr>
+						<th>Dog Restrictions at Rental</th>
+						<td><%= @adopter.adoption_app.rent_dog_restrictions %></td>
+					</tr>
+					<tr>
+						<th>Expected Rental Costs</th>
+						<td><%= @adopter.adoption_app.rent_costs %></td>
+					</tr>
+				</table>
+			</div>
+
 
 			<div id='otherpets'>
 

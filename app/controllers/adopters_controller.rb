@@ -53,6 +53,16 @@ class AdoptersController < ApplicationController
 		end
 	end
 
+	def update
+		@adopter = Adopter.find(params[:id])
+		if @adopter.update_attributes(params[:adopter])
+		  flash[:success] = "Status updated."
+		  redirect_to @adopter
+		else
+			redirect_to @adopter
+		end
+	end
+
 	def check_email
 		@adopter = Adopter.find_by_email(params[:adopter][:email])
 

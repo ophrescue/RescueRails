@@ -271,14 +271,18 @@
 	<div class="span16">
 		<h4>Comments</h4>
 
-		<table class="zebra-striped bordered-table condensed-table">
-		<%= render @adopter.comments %>
-		</table>
-
 		<%= form_for [@adopter, @adopter.comments.build] do |f| %>
 				<%= f.text_area :content, :class => "xxlarge", :rows => "3" %>
 			<%= f.submit "Post", :class => "btn primary" %>
 		<% end %>
+
+		<table class="zebra-striped bordered-table condensed-table">
+			<% @adopter.comments.each do |comment| %>
+					<% if comment.id != nil %>
+	    				<%= render 'comments/comment', :comment => comment %>
+	    			<% end %>
+			<% end %>
+		</table>
 
 	</div>
 

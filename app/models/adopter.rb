@@ -21,8 +21,8 @@ class Adopter < ActiveRecord::Base
     has_one :adoption_app, :dependent => :destroy
     accepts_nested_attributes_for :adoption_app
 
-    has_many :comments, :as => :commentable
-    accepts_nested_attributes_for :comments
+    has_many :comments, :as => :commentable, :order => "created_at DESC"
+
 
     validates :name,  :presence   => true,
                       :length     => { :maximum => 50 }

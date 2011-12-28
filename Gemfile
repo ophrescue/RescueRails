@@ -30,6 +30,8 @@ end
 
 gem 'jquery-rails'
 
+gem 'newrelic_rpm'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -47,6 +49,7 @@ group :development do
   gem 'autotest-fsevent'
   gem 'autotest-growl'
 end
+
 
 group :test do
   gem 'rspec-rails'

@@ -109,6 +109,7 @@ GEM
     net-ssh (2.2.1)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
+    newrelic_rpm (3.3.1)
     nokogiri (1.5.0)
     paperclip (2.4.5)
       activerecord (>= 2.3.0)
@@ -226,6 +227,7 @@ DEPENDENCIES
   gravatar_image_tag
   jquery-rails
   mailhopper
+  newrelic_rpm
   paperclip
   pg
   rails (= 3.1.3)

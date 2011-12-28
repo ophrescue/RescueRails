@@ -6,6 +6,7 @@ class AdoptersController < ApplicationController
 	before_filter :edit_all_adopters_user, :only => [:index, :show, :edit, :update]
 	before_filter :admin_user,   :only => [:destroy]
 
+	respond_to :html, :json
 
   def index
     @title = "Adoption Applications"
@@ -55,12 +56,8 @@ class AdoptersController < ApplicationController
 
 	def update
 		@adopter = Adopter.find(params[:id])
-		if @adopter.update_attributes(params[:adopter])
-		  flash[:success] = "Status updated."
-		  redirect_to @adopter
-		else
-			redirect_to @adopter
-		end
+		@adopter.update_attributes(params[:adopter])
+		respond_with @adopter
 	end
 
 	def check_email

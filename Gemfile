@@ -10,6 +10,7 @@ gem "paperclip"
 gem 'therubyracer'
 gem 'unicorn'
 gem 'geocoder'
+gem 'best_in_place'
 
 # Cool mail async stuff
 gem "delayed_job", "~> 2.1.4"

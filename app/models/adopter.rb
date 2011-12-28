@@ -54,6 +54,14 @@ class Adopter < ActiveRecord::Base
               'withdrawn',
               'denied']
 
+  BIP_STATUSES =  [['new','New'],
+                   ['pend response', 'Pend Response'],
+                   ['workup','Workup'],
+                   ['approved', 'Approved'],
+                   ['adopted','Adopted'],
+                   ['withdrawn','Withdrawn'],
+                   ['denied','Denied']]
+
 	
 	validates_presence_of  :status
 	validates_inclusion_of :status, :in => STATUSES

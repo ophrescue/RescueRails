@@ -25,16 +25,6 @@
 	<div class="span6">
 		<table class="zebra-striped bordered-table condensed-table">
 			<tr>
-				<td>
-					<%= form_for @adopter do |f| %>
-					<%= f.select(:status, Adopter::STATUSES) %>
-				</td>
-				<td>
-					<%= f.submit "Update", :class => "btn primary" %>
-					<% end %>
-				</td>
-			</tr>
-			<tr>
 				<td colspan="2">
 				<% if @adopter.adoption_app.is_ofage == false %>
 					<span class="label warning">Under 21</span>
@@ -122,7 +112,23 @@
 					Heard about us from
 				</th>
 				<td><%= @adopter.adoption_app.how_did_you_hear %></td>
+			</tr>
 			<tr>
+				<th>
+					Assigned To:
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th>Click to Edit Status ->
+				</th>
+				<th>
+					<%= best_in_place @adopter, :status, type: :select, 
+						:collection => Adopter::BIP_STATUSES %>
+
+				</th>
+			</tr>
 		</table>
 	</div>
 

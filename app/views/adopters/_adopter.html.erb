@@ -16,9 +16,8 @@
 	</td> -->
 	<td><%= truncate(adopter.dog_name, :length => 30) %></td>
 	<td>Someone</td>
-	<td><%= time_ago_in_words(adopter.updated_at) %> ago</td>
 	<% if adopter.comments.last %>
-	<td><%= time_ago_in_words(adopter.comments.last.updated_at) %> ago</td>
+	<td><%= truncate(adopter.comments.last.content, :length => 80) %></td>
 	<% else %>
 	<td>None</td>
 	<% end %>

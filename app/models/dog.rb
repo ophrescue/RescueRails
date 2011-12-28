@@ -32,6 +32,8 @@ class Dog < ActiveRecord::Base
 	belongs_to :primary_breed, :class_name => 'Breed'
 	belongs_to :secondary_breed, :class_name => 'Breed'
 
+    has_many :comments, :as => :commentable
+
 	has_many :photos, :dependent => :destroy
 
 	accepts_nested_attributes_for :photos, :allow_destroy => true

@@ -2,7 +2,10 @@ RescueRails::Application.routes.draw do
 
   match "/adopters/check_email" => "adopters#check_email"
 
-  resources :adopters
+  resources :adopters do
+    resources :comments
+  end
+
   resources :users
   resources :dogs do
     get :autocomplete_breed_name, :on => :collection
@@ -13,7 +16,7 @@ RescueRails::Application.routes.draw do
   match '/events/past',  :to => 'events#past'
   resources :events
 
-
+  
 
   match '/signin',       :to => 'sessions#new'
   match '/signout',      :to => 'sessions#destroy'

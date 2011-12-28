@@ -7,14 +7,19 @@
 	<% end %>
 	<td><%= link_to adopter.name, adopter %></td>
 	<td><%= adopter.city %>, <%= adopter.state %></td>
-	<td>
+<!-- 	<td>
 		<% adopter.dogs.each do |d| %>
 			<%= link_to d.name, d %>
 			(<%= d.status %>)
 			<br />
 		<% end %>
-	</td>
+	</td> -->
+	<td><%= truncate(adopter.dog_name, :length => 30) %></td>
 	<td>Someone</td>
 	<td><%= time_ago_in_words(adopter.updated_at) %> ago</td>
-	<td>Last Comment</td>
+	<% if adopter.comments.last %>
+	<td><%= time_ago_in_words(adopter.comments.last.updated_at) %> ago</td>
+	<% else %>
+	<td>None</td>
+	<% end %>
 </tr>

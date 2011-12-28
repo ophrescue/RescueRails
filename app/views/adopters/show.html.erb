@@ -21,14 +21,6 @@
 </div>
 
 
-			<div class="active" id="flags">
-
-
-
-			</div>
-
-
-
 <div class="row">
 	<div class="span6">
 		<table class="zebra-striped bordered-table condensed-table">
@@ -270,10 +262,25 @@
 
 				</table>
 			</div>
-
 		</div>
 	</div>
+</div>
 
+<div class="row">
+
+	<div class="span16">
+		<h4>Comments</h4>
+
+		<table class="zebra-striped bordered-table condensed-table">
+		<%= render @adopter.comments %>
+		</table>
+
+		<%= form_for [@adopter, @adopter.comments.build] do |f| %>
+				<%= f.text_area :content, :class => "xxlarge", :rows => "3" %>
+			<%= f.submit "Post", :class => "btn primary" %>
+		<% end %>
+
+	</div>
 
 </div>
 

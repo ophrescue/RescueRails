@@ -37,7 +37,7 @@ class AdoptersController < ApplicationController
 
 	def create
 		@adopter = Adopter.new(params[:adopter])
-		@adopter.status = 'pending'
+		@adopter.status = 'new'
 
 		if @adopter.save
 			@adopter.adoptions.each do |a|

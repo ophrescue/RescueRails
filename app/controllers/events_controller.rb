@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-	before_filter :authenticate
+
 	before_filter :edit_events_user, 	:except => [:index, :show]
 
 	def index

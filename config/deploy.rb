@@ -260,8 +260,9 @@ end
 
 namespace :deploy do
 
-  desc "Symlinks setup_mail.rb"
+  desc "Symlinks setup_mail.rb and newrelic.yml"
   task :symlink_configs, :roles => :app do
+    run "ln -nfs #{deploy_to}/shared/configs/newrelic.yml #{release_path}/config/newrelic.yml"
     run "ln -nfs #{deploy_to}/shared/configs/setup_mail.rb #{release_path}/config/initializers/setup_mail.rb"
   end
 

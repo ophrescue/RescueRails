@@ -6,6 +6,8 @@ RescueRails::Application.routes.draw do
     resources :comments
   end
 
+  resources :adoption_app
+
   resources :users
   resources :dogs do
     get :autocomplete_breed_name, :on => :collection

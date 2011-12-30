@@ -119,7 +119,7 @@
 				</th>
 				<td> 
 				<%= form_for @adopter, :remote => true, :url => { :controller => "adopters", :action => "update" }  do |af| %>
-				<%= af.hidden_field(:id, :value => @adopter.id) %>
+				<%= af.hidden_field('id', :value => @adopter.id) %>
 				<%= af.collection_select(:assigned_to_user_id, @adopter_users, :id, :name, {},{:prompt => 'Unassigned', :onchange => "this.form.submit();"}) %>
 				<% end %>
 				</td>
@@ -130,7 +130,7 @@
 				</th>
 				<td>
 				<%= form_for @adopter, :remote => true, :url => { :controller => "adopters", :action => "update" }  do |sf| %>
-				<%= sf.hidden_field(:id, :value => @adopter.id) %>
+				<%= sf.hidden_field('id', :value => @adopter.id) %>
 				<%= sf.select(:status, Adopter::STATUSES, {}, {:onchange => "this.form.submit();"}) %>
 				<% end %>
 				</td>
@@ -146,9 +146,9 @@
 
 				<table class="zebra-striped bordered-table condensed-table">
 					<tr>
-						<th>Ready to Adopt Date</th>
-						<td>
-							<%= @adopter.adoption_app.ready_to_adopt_dt %>
+						<th>Ready to Adopt Date <br />(YYYY-MM-DD)</th>
+						<td><%= image_tag("pencil_go.png") %>
+							<%= best_in_place @adoption_app, :ready_to_adopt_dt %>
 						</td>
 					</tr>
 					<th>Dog Selections</th>
@@ -159,7 +159,7 @@
 							<br />
 						<% end %>
 					</td> -->
-					<td><%= @adopter.dog_name %></td>
+					<td><%= image_tag("pencil_go.png") %><%= best_in_place @adopter, :dog_name %></td>
 					<tr>
 						<th>Dog Requirements</th>
 						<td><%= @adopter.dog_reqs %></td>

@@ -25,6 +25,7 @@ class AdoptersController < ApplicationController
 
 	def show
 	  @adopter = Adopter.find(params[:id])
+	  @adoption_app = @adopter.adoption_app
 	  @title = @adopter.name
 	  @adopter_users = User.where(:edit_my_adopters => true)
 	end
@@ -56,7 +57,7 @@ class AdoptersController < ApplicationController
 	end
 
 	def update
-		@adopter = Adopter.find(params[:adopter][:id])
+		@adopter = Adopter.find(params[:id])
 		@adopter.update_attributes(params[:adopter])
 		flash[:success] = "Application Updated"
 		respond_with @adopter

@@ -45,6 +45,8 @@ class User < ActiveRecord::Base
   has_many :dogs
 
   has_many :comments
+
+  has_many :assignments, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id'
   
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

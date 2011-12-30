@@ -117,7 +117,18 @@
 				<th>
 					Assigned To:
 				</th>
-				<td>
+				<td> 
+				<%= form_for @adopter, :remote => true, :url => { :controller => "adopters", :action => "reassign" }  do |af| %>
+				<%= af.hidden_field(:id, :value => @adopter.id) %>
+				<%= af.collection_select(:assigned_to_user_id, @adopter_users, :id, :name, {},{:prompt => 'Unassigned', :onchange => "this.form.submit();"}) %>
+				<% end %>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Assigned To:
+				</th>
+				<td> <%= @adopter.user ? @adopter.user.name : "Unassigned" %>
 				</td>
 			</tr>
 			<tr>

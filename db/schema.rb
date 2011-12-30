@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111228003153) do
+ActiveRecord::Schema.define(:version => 20111228231429) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20111228003153) do
     t.text     "why_adopt"
     t.string   "dog_name"
     t.string   "other_phone"
+    t.integer  "assigned_to_user_id"
   end
 
   create_table "adoption_apps", :force => true do |t|

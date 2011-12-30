@@ -26,6 +26,7 @@ class AdoptersController < ApplicationController
 	def show
 	  @adopter = Adopter.find(params[:id])
 	  @title = @adopter.name
+	  @adopter_users = User.where(:edit_my_adopters => true)
 	end
 
 	def new
@@ -55,8 +56,15 @@ class AdoptersController < ApplicationController
 	end
 
 	def update
-		@adopter = Adopter.find(params[:id])
+		@adopter = Adopter.find(params[:adopter][:id])
 		@adopter.update_attributes(params[:adopter])
+		respond_with @adopter
+	end
+
+	def reassign
+		@adopter = Adopter.find(params[:adopter][:id])
+		@adopter.update_attributes(params[:adopter])
+		flash[:success] = "Applicaion Reassigned"
 		respond_with @adopter
 	end
 

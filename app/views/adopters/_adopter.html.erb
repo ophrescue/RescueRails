@@ -15,7 +15,7 @@
 		<% end %>
 	</td> -->
 	<td><%= truncate(adopter.dog_name, :length => 30) %></td>
-	<td>Someone</td>
+	<td><%= adopter.user ? adopter.user.name : "Unassigned" %></td>
 	<% if adopter.comments.last %>
 	<td><%= truncate(adopter.comments.last.content, :length => 80) %></td>
 	<% else %>

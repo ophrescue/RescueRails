@@ -58,13 +58,7 @@ class AdoptersController < ApplicationController
 	def update
 		@adopter = Adopter.find(params[:adopter][:id])
 		@adopter.update_attributes(params[:adopter])
-		respond_with @adopter
-	end
-
-	def reassign
-		@adopter = Adopter.find(params[:adopter][:id])
-		@adopter.update_attributes(params[:adopter])
-		flash[:success] = "Applicaion Reassigned"
+		flash[:success] = "Application Updated"
 		respond_with @adopter
 	end
 

@@ -105,6 +105,7 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: adopters
@@ -127,5 +128,6 @@ end
 #  dog_name            :string(255)
 #  other_phone         :string(255)
 #  assigned_to_user_id :integer
+#  flag                :string(255)
 #
 

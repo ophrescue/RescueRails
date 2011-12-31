@@ -114,6 +114,16 @@
 				<td><%= @adopter.adoption_app.how_did_you_hear %></td>
 			</tr>
 			<tr>
+				<th>Flag:
+				</th>
+				<td>
+					<%= form_for @adopter, :remote => true, :url => { :controller => "adopters", :action => "update" }  do |ff| %>
+					<%= ff.hidden_field('id', :value => @adopter.id) %>
+					<%= ff.select(:flag, Adopter::FLAGS, {:include_blank => "No Flag"}, {:onchange => "this.form.submit();"}) %>
+					<% end %>
+				</td>
+			</tr>
+			<tr>
 				<th>
 					Assigned To:
 				</th>

@@ -56,19 +56,14 @@ class Adopter < ActiveRecord::Base
               'withdrawn',
               'denied']
 
-  BIP_STATUSES =  [['new','New'],
-                   ['pend response', 'Pend Response'],
-                   ['workup','Workup'],
-                   ['approved', 'Approved'],
-                   ['adopted','Adopted'],
-                   ['withdrawn','Withdrawn'],
-                   ['denied','Denied']]
+  FLAGS = ['High','Low']
 
 	
 	validates_presence_of  :status
 	validates_inclusion_of :status, :in => STATUSES
 
 end
+
 
 
 
@@ -95,5 +90,6 @@ end
 #  dog_name            :string(255)
 #  other_phone         :string(255)
 #  assigned_to_user_id :integer
+#  flag                :string(255)
 #
 

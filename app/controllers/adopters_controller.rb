@@ -11,9 +11,12 @@ class AdoptersController < ApplicationController
   def index
     @title = "Adoption Applications"
 
-
-    if params.has_key? :status
-    	@adopters = Adopter.find(:all, :include => [:user, :comments, :dogs, :adoption_app], :conditions => {:status => params[:status]})
+	if params[:status] == 'active'
+		statuses = ['new', 'pending response', 'workup', 'approved']
+		@adopters = Adopter.where("status IN (?)", statuses).includes(:user, :comments, :dogs, :adoption_app)
+		# @adopters = Adopter.find(:all, :include => [:user, :comments, :dogs, :adoption_app], :conditions => ["status IN ?", statuses])
+	elsif params.has_key? :status
+		@adopters = Adopter.where(:status => params[:status]).includes(:user, :comments, :dogs, :adoption_app)
     else
     	@adopters = Adopter.find(:all, :include => [:user, :comments, :dogs, :adoption_app])
     end

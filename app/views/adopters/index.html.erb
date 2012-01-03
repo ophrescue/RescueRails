@@ -29,6 +29,13 @@
 			<% end %>
 			<%= link_to "All", adopters_path %>
 		</li>
+		<% if params[:status] == "active" %>
+			<li class="active">
+		<% else %>
+			<li>	
+		<% end %>
+			<%= link_to "Active", :controller => "adopters", :status => "active" %>
+		</li>
 	</ul>
 </div>
 
@@ -40,7 +47,7 @@
 			<th>id</th>
 			<th>RTA</th>
 			<th>Flag</th>
-			<% if params[:status] == nil %>
+			<% if (params[:status] == nil) || (params[:status] == "active")%>
 			<th>Status</th>
 			<% end %>
 			<th>Name</th>

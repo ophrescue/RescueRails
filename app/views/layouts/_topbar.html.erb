@@ -39,7 +39,7 @@
 							<a href="#" class="dropdown-toggle">Staff</a>
 							<ul class="dropdown-menu">
                 <% if can_edit_my_adopters? || can_edit_all_adopters? %>
-                  <li><%= link_to "Applications", adopters_path %></li>
+                  <li><%= link_to "Applications",  :controller => "adopters", :status => "active" %></li>
                 <% end %>
                 <% if can_edit_dogs? %>
                   <li><%= link_to "Manage Dogs", dogs_path %></li>

@@ -13,10 +13,9 @@ class AdoptersController < ApplicationController
 
 
     if params.has_key? :status
-    	@search = Adopter.new(:status => params[:status])
-    	@adopters = Adopter.find_all_by_status(@search.status)
+    	@adopters = Adopter.find(:all, :include => [:user, :comments, :dogs, :adoption_app], :conditions => {:status => params[:status]})
     else
-    	@adopters = Adopter.all
+    	@adopters = Adopter.find(:all, :include => [:user, :comments, :dogs, :adoption_app])
     end
 
     # @adopters = Adopter.paginate(:page => params[:page])

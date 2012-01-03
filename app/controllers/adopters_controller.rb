@@ -12,7 +12,7 @@ class AdoptersController < ApplicationController
     @title = "Adoption Applications"
 
 	if params[:status] == 'active'
-		statuses = ['new', 'pending response', 'workup', 'approved']
+		statuses = ['new', 'pend response', 'workup', 'approved']
 		@adopters = Adopter.where("status IN (?)", statuses).includes(:user, :comments, :dogs, :adoption_app)
 		# @adopters = Adopter.find(:all, :include => [:user, :comments, :dogs, :adoption_app], :conditions => ["status IN ?", statuses])
 	elsif params.has_key? :status

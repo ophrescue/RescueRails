@@ -56,7 +56,7 @@ class Adopter < ActiveRecord::Base
               'withdrawn',
               'denied']
 
-  FLAGS = ['High','Low']
+  FLAGS = ['High','Low','On Hold']
 
 	
 	validates_presence_of  :status

@@ -8,7 +8,7 @@ class Photo < ActiveRecord::Base
 								   :thumb => "210x150>",
 								   :minithumb => "64x64>" },
 					  :path => ":rails_root/public/system/dog_photo/:id/:style/:filename",
-					  :url  => "/system/event_photo/:id/:style/:filename"
+					  :url  => "/system/dog_photo/:id/:style/:filename"
 
 
 	validates_attachment_presence :photo

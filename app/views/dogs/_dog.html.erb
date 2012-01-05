@@ -1,7 +1,0 @@
-<li>
-	<% if dog.photos == [] %>
-		<%= link_to image_tag("no_photo-205x195.png"),dog %>
-	<% else %>
-		<%= link_to image_tag(dog.photos.first.photo.url(:thumb)),dog  %> 
-	<% end %>
-</li>

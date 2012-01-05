@@ -51,15 +51,14 @@ class Dog < ActiveRecord::Base
 	before_update :update_history
 
 	validates :name, :presence => true,
-					 :length   => { :maximum => 75 }
+					 :length   => { :maximum => 75 },
+					 :uniqueness => true
 
 	validates :tracking_id, :uniqueness => true,
 							:presence => true
 
 	validates_presence_of :primary_breed_id,
 						  :status,
-						  :age,
-						  :size,
 						  :gender
 
 	STATUSES = ['adoptable', 'adopted', 'adoption pending',

@@ -1,0 +1,22 @@
+<tr>
+	<td><%= dog.id %></td>
+	<td>Flag</td>
+	<td><%= link_to dog.name, dog %></td>
+	<% if (params[:status] == nil) || (params[:status] == "active")  %>
+		<td><%= dog.status.titleize %></td>
+	<% end %>
+	<td><%= dog.user ? link_to(dog.user.name, dog.user) : "Unassigned" %></td>
+	<td><%= dog.user ? "#{dog.user.city}, #{dog.user.state}" : "Unassigned" %></td>
+	<td>
+		<% dog.adopters.each do |d| %>
+			<%= link_to d.name, d %>
+			(<%= d.status %>)
+			<br />
+		<% end %>
+	</td>
+	<% if dog.comments.first %>
+		<td><%= truncate(dog.comments.first.content, :length => 80) %></td>
+	<% else %>
+		<td>None</td>
+	<% end %>
+</tr>

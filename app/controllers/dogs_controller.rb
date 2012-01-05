@@ -5,9 +5,12 @@ class DogsController < ApplicationController
   before_filter :admin_user,        :only => [:destroy]
 
   def index
-    @title = "Dogs"
-    @dogs = Dog.where("name ilike ?", "%#{params[:q]}%")
-    # @dogs = Dog.paginate(:page => params[:page])
+    if can_edit_dogs?
+      @title = "Dog Manager"
+      @dogs = Dog.where("name ilike ?", "%#{params[:q]}%")
+      # @dogs = Dog.paginate(:page => params[:page])
+    end
+
     respond_to do |format|
       format.html 
       format.json { render :json => @dogs.map(&:attributes) }

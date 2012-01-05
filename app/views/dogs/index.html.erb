@@ -5,10 +5,14 @@
 </p>
 <% end %>
 
-<div class="row">
-	<div class="span16">
-		<ul class="media-grid">
-			<%= render @dogs %>
-		</ul>
+<% if can_edit_dogs? %>
+	<%= render 'manager' %>
+<% else %>
+	<div class="row">
+		<div class="span16">
+			<ul class="media-grid">
+				<%= render @dogs %>
+			</ul>
+		</div>
 	</div>
-</div>
+<% end %>

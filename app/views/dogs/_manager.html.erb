@@ -1,0 +1,54 @@
+<div class="row">
+	<ul class="tabs">
+		<% Dog::STATUSES.each do |status| %>
+		  <% if status == params[:status] %>
+		  	<li class="active">
+		  <% else %>
+		    <li>
+		  <% end %>		  
+		    <%= link_to status.titleize, :controller => "dogs", :status => status %>
+		  </li>
+		<% end %>
+			<% if params[:status] == nil %>
+				<li class="active">
+			<% else %>
+				<li>
+			<% end %>
+			<%= link_to "All", dogs_path %>
+		</li>
+		<% if params[:status] == "active" %>
+			<li class="active">
+		<% else %>
+			<li>	
+		<% end %>
+			<%= link_to "Active", :controller => "dogs", :status => "active" %>
+		</li>
+	</ul>
+</div>
+
+<% if !@dogs.nil? %>
+
+<table class="zebra-striped bordered-table condensed-table" id="adopt-sort">
+	<thead>
+		<tr>
+			<th>OPH ID</th>
+			<th>Flag</th>
+			<th>Name</th>
+			<% if (params[:status] == nil) || (params[:status] == "active")%>
+			<th>Status</th>
+			<% end %>
+			<th>Foster Name</th>
+			<th>Location</th>
+			<th>Adopter Interest</th>
+			<th>Last Comment</th>
+		</tr>
+	</thead>
+	<tbody>
+	<%= render :partial => "manager_dog", :collection => @dogs, :as => :dog %>
+	</tbody>
+</table>
+<% else %>
+<h3>No Records Found</h3>
+<% end %>
+
+

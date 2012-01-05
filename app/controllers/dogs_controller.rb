@@ -7,10 +7,9 @@ class DogsController < ApplicationController
   def index
     if can_edit_dogs?
       @title = "Dog Manager"
-      @dogs = Dog.where("name ilike ?", "%#{params[:q]}%")
-      # @dogs = Dog.paginate(:page => params[:page])
     end
-
+    @dogs = Dog.where("name ilike ?", "%#{params[:q]}%")
+    # @dogs = Dog.paginate(:page => params[:page])
     respond_to do |format|
       format.html 
       format.json { render :json => @dogs.map(&:attributes) }

@@ -5,7 +5,7 @@ class Photo < ActiveRecord::Base
 					  :styles => { :original => "1024x1024>",
 								   :large => "640x640",
 								   :medium => "320x320>",
-								   :thumb => "210x150>",
+								   :thumb => "205x195>",
 								   :minithumb => "64x64>" },
 					  :path => ":rails_root/public/system/dog_photo/:id/:style/:filename",
 					  :url  => "/system/dog_photo/:id/:style/:filename"

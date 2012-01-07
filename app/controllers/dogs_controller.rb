@@ -5,8 +5,10 @@ class DogsController < ApplicationController
   before_filter :admin_user,        :only => [:destroy]
 
   def index
-    if can_edit_dogs?
+    if (can_edit_dogs?) && (cookies[:mgr_view] == true)
       @title = "Dog Manager"
+    else
+      @title = "Available Dogs"
     end
     @dogs = Dog.where("name ilike ?", "%#{params[:q]}%")
     # @dogs = Dog.paginate(:page => params[:page])
@@ -63,6 +65,20 @@ class DogsController < ApplicationController
   def destroy
     Dog.find(params[:id]).destroy
     flash[:success] = "Dog deleted."
+    redirect_to dogs_path
+  end
+
+  def switch_view
+    if session[:mgr_view] == nil
+      session[:mgr_view] == true
+    end
+    
+    if session[:mgr_view] == false
+      session[:mgr_view] = true 
+    else
+      session[:mgr_view] = false
+    end
+
     redirect_to dogs_path
   end
 

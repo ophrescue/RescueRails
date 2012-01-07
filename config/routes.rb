@@ -1,6 +1,7 @@
 RescueRails::Application.routes.draw do
 
   match "/adopters/check_email" => "adopters#check_email"
+  match "/dogs/switch_view" => "dogs#switch_view"
 
   resources :adopters do
     resources :comments

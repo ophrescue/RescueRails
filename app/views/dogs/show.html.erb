@@ -12,13 +12,41 @@
 			</div>
 			<p> <%= @dog.description %></p>
 		<td class="sidebar round">	
-			<strong>Status:</strong> 	<%= @dog.status %><br />
 			<% if can_edit_dogs? %>
 				<strong><%= link_to "Edit Dog", edit_dog_path(@dog) %></strong><br />
 			<% end %>
-			<strong>Age:</strong>   <%= @dog.age %></br>
-			<strong>Size:</strong>  <%= @dog.size %></br>
-			<strong>Gender:</strong>  <%= @dog.gender %></br>
+			<strong>Status:</strong> 	<%= @dog.status.titleize %><br />
+			<strong>Age:</strong>   <%= @dog.age.titleize %><br />
+			<strong>Size:</strong>  <%= @dog.size.titleize %><br />
+			<strong>Gender:</strong>  <%= @dog.gender.titleize %><br />
+			<strong>Primary Breed:</strong> <%= @dog.primary_breed.name %><br />
+			<strong>Secondary Breed:</strong> <%= @dog.secondary_breed.name unless !@dog.secondary_breed %><br />
+			<br / >
+			<% if @dog.is_special_needs %>
+				<strong>Special Needs</strong><br />
+			<% end %>
+
+			<% if @dog.no_dogs %>
+				<strong>Not good with other dogs</strong><br />
+			<% end %>
+
+			<% if @dog.no_cats %>
+				<strong>Not good with cats</strong><br />
+			<% end %>
+
+			<% if @dog.no_kids %>
+				<strong>Not good for homes with small children</strong><br />
+			<% end %>
+
+			<br />
+			<br />
+			<h5>Private Information</h5>
+			<strong>Foster for <%= time_ago_in_words(@dog.foster_start_date) %>:</strong><br />
+			<%= link_to @dog.user.name, user_path(@dog.user) %><br />
+			<%= @dog.user.address1 %><br />
+			<%= @dog.user.city %>, <%= @dog.user.state %><br />
+			<%= @dog.user.phone %><br />
+
 		</td>
 	</tr>
 </table>

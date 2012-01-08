@@ -19,11 +19,11 @@
 				<% slice.each do |dog| %>
 					<div class="span4 gallery">
 						<div>
-	    			  	<% if dog.photos == [] %>
-							<%= link_to image_tag("no_photo-205x195.png", :alt => dog.name),dog %>
-						<% else %>
-							<%= link_to image_tag(dog.photos.first.photo.url(:thumb), :alt => dog.name),dog  %> 
-						<% end %>
+		    			  	<% if dog.photos == [] %>
+								<%= link_to image_tag("no_photo-205x195.png", :alt => dog.name),dog %>
+							<% else %>
+								<%= link_to image_tag(dog.photos.first.photo.url(:thumb), :alt => dog.name),dog  %> 
+							<% end %>
 						</div>
 						<div>
 							<p><strong><%= dog.name %></strong></p>
@@ -32,7 +32,7 @@
 					</div>
 			    <% end %>
 			  </div>
-			<% end -%>
+			<% end %>
 		</div>
 	</div>
 <% end %>

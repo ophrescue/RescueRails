@@ -82,6 +82,7 @@ class DogsController < ApplicationController
     redirect_to dogs_path
   end
 
+
   private
 
       def edit_dogs_user

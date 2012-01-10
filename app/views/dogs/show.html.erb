@@ -20,8 +20,8 @@
 			<br />
 			<br />
 			<br />
-			<br />
 			<h3>About <%= @dog.name.titleize %></h3>
+			<br />
 			<% if can_edit_dogs? %>
 				<strong><%= link_to "Edit Dog", edit_dog_path(@dog) %></strong><br />
 			<% end %>
@@ -47,7 +47,7 @@
 			<% if @dog.no_kids %>
 				<strong>Not good for homes with small children</strong><br />
 			<% end %>
-
+			<div class="fb-like" data-href="<%= request.url %>" data-send="true" data-width="250" data-show-faces="false"></div>
 			<br />
 			<br />
 			<% if can_edit_dogs? %>

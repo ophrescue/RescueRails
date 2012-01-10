@@ -7,12 +7,13 @@
 .galleria-container {
     position: relative;
     overflow: hidden;
-    background: #000;
+    background: #fff;
 }
 .galleria-container img {
     -moz-user-select: none;
     -webkit-user-select: none;
     -o-user-select: none;
+    border-radius: 6px 6px 6px 6px;
 }
 .galleria-stage {
     position: absolute;
@@ -37,9 +38,9 @@
 .galleria-thumbnails .galleria-image {
     height: 40px;
     width: 60px;
-    background: #000;
+    background: #fff;
     margin: 0 5px 0 0;
-    border: 1px solid #000;
+    border: 1px solid #fff;
     float: left;
     cursor: pointer;
 }
@@ -79,7 +80,7 @@
 .galleria-info-title {
     font: bold 12px/1.1 arial,sans-serif;
     margin: 0;
-    color: #fff;
+    color: #000;
 	margin-bottom: 7px;
 }
 .galleria-info-description {
@@ -115,7 +116,7 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
-    background-color: #000;
+    background-color: #fff;
 }
 .notouch .galleria-info-link:hover {
     opacity: 1;

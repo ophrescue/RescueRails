@@ -12,6 +12,7 @@ RescueRails::Application.routes.draw do
   resources :users
   resources :dogs do
     get :autocomplete_breed_name, :on => :collection
+    resources :comments
   end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :password_resets

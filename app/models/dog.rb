@@ -32,7 +32,7 @@ class Dog < ActiveRecord::Base
 	belongs_to :primary_breed, :class_name => 'Breed'
 	belongs_to :secondary_breed, :class_name => 'Breed'
 
-    has_many :comments, :as => :commentable
+    has_many :comments, :as => :commentable, :order => "created_at DESC"
 
 	has_many :photos, :dependent => :destroy
 

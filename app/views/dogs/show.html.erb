@@ -60,6 +60,27 @@
 		</td>
 	</tr>
 </table>
+
+<% if can_edit_dogs? %>
+<div class="row">
+	<div class="span16">
+		<h4>Comments</h4>
+
+		<%= form_for [@dog, @dog.comments.build] do |f| %>
+				<%= f.text_area :content, :class => "xxlarge", :rows => "3" %>
+			<%= f.submit "Post", :class => "btn primary" %>
+		<% end %>
+
+		<table class="zebra-striped bordered-table condensed-table">
+			<% @dog.comments.each do |comment| %>
+					<% if comment.id != nil %>
+	    				<%= render 'comments/comment', :comment => comment %>
+	    			<% end %>
+			<% end %>
+		</table>
+	</div>
+</div>
+<% end %>
 <script>
     $('#galleria').galleria({
         width:500,

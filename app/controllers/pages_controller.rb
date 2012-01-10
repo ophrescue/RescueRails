@@ -3,6 +3,10 @@ class PagesController < ApplicationController
     @title = "All breed dog rescue based in Virgina and Maryland"
   end
   
+  def guide
+    @title = "Adoption Guide"
+  end
+
   def aboutus
     @title = "About Us"
   end

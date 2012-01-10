@@ -33,6 +33,7 @@ class AdoptersController < ApplicationController
 	end
 
 	def new
+		@title = "Adoption Application"
 		@adopter = Adopter.new
 		@adopter.adoption_app = AdoptionApp.new
 		3.times do

@@ -5,7 +5,7 @@
 				<%= @dog.name %>
 			</h1>
 			<h3><%= @dog.primary_breed.name %></h3>
-			<div class="thumb">
+			<div id="galleria">
 				<% for photo in @dog.photos %>
 					<%= link_to image_tag(photo.photo.url(:medium)), photo.photo.url(:original) %>
 				<% end %>
@@ -40,7 +40,8 @@
 
 			<br />
 			<br />
-			<h5>Private Information</h5>
+			<h4>Private Information</h4>
+			<h5>Foster</h5>
 			<% if @dog.user %>
 			<strong>Foster for <%= time_ago_in_words(@dog.foster_start_date) %>:</strong><br />
 			<%= link_to @dog.user.name, user_path(@dog.user) %><br />
@@ -50,6 +51,18 @@
 			<% else %>
 			<p>No Foster Assigned</p>
 			<% end %>
+			<h4>Adopter Info</h4>
+			<ul>
+			<% @dog.adopters.each do |a| %>
+				<li><%= link_to d.name, d %> - <%= d.status %></li>
+			<% end %>
+			</ul>
 		</td>
 	</tr>
 </table>
+<script>
+    $('#galleria').galleria({
+        width:500,
+        height:500
+    });
+</script>

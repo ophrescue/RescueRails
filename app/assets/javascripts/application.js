@@ -27,3 +27,5 @@
 //= require adoption_app_wizard
 //= require datepicker
 //= require jquery.scroll
+//= require galleria-1.2.6
+//= require galleria.classic

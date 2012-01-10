@@ -13,11 +13,11 @@
 <% if can_edit_dogs? && session[:mgr_view] == true %>
 	<%= render 'manager' %>
 <% else %>
-	<div class="row">
-		<% @dogs.each_slice(4) do |slice| %>
- 			 <div class="row">
+	<table class="gallery">
+		<% @dogs.each_slice(3) do |slice| %>
+ 			 <tr>
 				<% slice.each do |dog| %>
-					<div class="span4 gallery">
+					<td>
 						<div>
 		    			  	<% if dog.photos == [] %>
 								<%= link_to image_tag("no_photo-205x195.png", :alt => dog.name),dog %>
@@ -29,10 +29,9 @@
 							<p><strong><%= dog.name %></strong></p>
 							<p><%= dog.primary_breed.name %></p>
 						</div>
-					</div>
+					</td>
 			    <% end %>
-			  </div>
+			  </tr>
 			<% end %>
-		</div>
-	</div>
+		</table>
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111231144522) do
+ActiveRecord::Schema.define(:version => 20120111020417) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -118,10 +118,10 @@ ActiveRecord::Schema.define(:version => 20111231144522) do
     t.integer  "primary_breed_id"
     t.integer  "secondary_breed_id"
     t.string   "status"
-    t.string   "age",                :limit => 75
-    t.string   "size",               :limit => 75
+    t.string   "age",                  :limit => 75
+    t.string   "size",                 :limit => 75
     t.boolean  "is_altered"
-    t.string   "gender",             :limit => 6
+    t.string   "gender",               :limit => 6
     t.boolean  "is_special_needs"
     t.boolean  "no_dogs"
     t.boolean  "no_cats"
@@ -130,10 +130,15 @@ ActiveRecord::Schema.define(:version => 20111231144522) do
     t.integer  "user_id"
     t.date     "foster_start_date"
     t.date     "adoption_date"
-    t.boolean  "is_uptodateonshots",               :default => true
-    t.boolean  "is_housetrained",                  :default => true
+    t.boolean  "is_uptodateonshots",                 :default => true
+    t.boolean  "is_housetrained",                    :default => true
     t.date     "intake_dt"
     t.date     "available_on_dt"
+    t.boolean  "has_medical_need",                   :default => false
+    t.boolean  "is_high_priority",                   :default => false
+    t.boolean  "needs_photos",                       :default => false
+    t.boolean  "has_behavior_problem",               :default => false
+    t.boolean  "needs_foster",                       :default => false
   end
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"

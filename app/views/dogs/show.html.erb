@@ -32,6 +32,15 @@
 			<strong>Primary Breed:</strong> <%= @dog.primary_breed.name %><br />
 			<strong>Secondary Breed:</strong> <%= @dog.secondary_breed.name unless !@dog.secondary_breed %><br />
 			<br / >
+			<% if @dog.is_uptodateonshots %>
+				<strong>Up To Date On Shots</strong><br />
+			<% end %>
+			<% if @dog.is_housetrained %>
+				<strong>Is Housetrained</strong><br />
+			<% end %>
+			<% if @dog.is_altered %>
+				<strong>Already Spayed/Neutered</strong><br />
+			<% end %>
 			<% if @dog.is_special_needs %>
 				<strong>Special Needs</strong><br />
 			<% end %>
@@ -52,6 +61,25 @@
 			<br />
 			<% if can_edit_dogs? %>
 			<h4>Private Information</h4>
+			<h5>Dog Flags</h5>
+			<% if @dog.has_medical_need %>
+				<%= image_tag "has_medical_need.gif" %><strong>Has Medical Need</strong><br />
+			<% end %>
+			<% if !@dog.is_altered %>
+				<%= image_tag "needs_alter.gif" %><strong>Needs Spay or Neuter</strong><br />
+			<% end %>
+			<% if @dog.is_high_priority %>
+				<%= image_tag "is_high_priority.gif" %><strong>High Priority</strong><br />
+			<% end %>
+			<% if @dog.needs_photos %>
+				<%= image_tag "needs_photos.gif" %><strong>Needs Photos</strong><br />
+			<% end %>
+			<% if @dog.has_behavior_problem %>
+				<%= image_tag "has_behavior_problem.gif" %><strong>Has Behavior Problem</strong><br />
+			<% end %>
+			<% if @dog.needs_foster %>
+				<%= image_tag "needs_foster.gif" %><strong>Needs Foster</strong><br />
+			<% end %>
 			<h5>Foster</h5>
 			<% if @dog.user %>
 			<strong>Foster for <%= time_ago_in_words(@dog.foster_start_date) %>:</strong><br />

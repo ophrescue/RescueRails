@@ -65,7 +65,7 @@
 				</div>
 			</div>
 			<div class="clearfix">
-			<label id="optionsCheckboxes"><strong>Check all that apply</strong></label>
+			<label id="optionsCheckboxes"><strong>Public Attributes</strong></label>
 				<div class="input">
 					<ul class="inputs-list">
 						<li>
@@ -101,6 +101,39 @@
 						<li>
 							<label><%= f.check_box :no_kids %>
 							<span><%= f.label :no_kids %></span>
+							</label>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="clearfix">
+			<label id="optionsCheckboxes"><strong>Private Attributes</strong></label>
+				<div class="input">
+					<ul class="inputs-list">
+						<li>
+							<label><%= f.check_box :has_medical_need %>
+							<span><%= f.label :has_medical_need %></span>
+							</label>
+						</li>
+						<li>
+							<label><%= f.check_box :is_high_priority %>
+							<span><%= f.label "High Priority Dog" %></span>
+							</label>
+						</li>
+						<li>
+							<label><%= f.check_box :needs_photos %>
+							<span><%= f.label :needs_photos %></span>
+							</label>
+						</li>
+						<li>
+							<label><%= f.check_box :has_behavior_problem %>
+							<span><%= f.label :has_behavior_problem %></span>
+							</label>
+						</li>
+						<li>
+							<label><%= f.check_box :needs_foster %>
+							<span><%= f.label :needs_foster %></span>
 							</label>
 						</li>
 					</ul>

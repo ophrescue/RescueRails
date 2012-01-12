@@ -7,8 +7,12 @@
 			</h1>
 			<h3><%= @dog.primary_breed.name %></h3>
 			<div id="galleria">
-				<% for photo in @dog.photos %>
-					<%= link_to image_tag(photo.photo.url(:medium)), photo.photo.url(:original) %>
+			  	<% if @dog.photos == []  %>
+					<%= image_tag("no_photo-205x195.png", :alt => @dog.name) %>
+				<% else %>
+					<% for photo in @dog.photos %>
+						<%= link_to image_tag(photo.photo.url(:medium)), photo.photo.url(:original) %>
+					<% end %>
 				<% end %>
 			</div>
 			<p> <%= @dog.description %></p>

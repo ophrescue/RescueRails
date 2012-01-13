@@ -1,3 +1,6 @@
+## If you're unfortunate enough to be developing in Windows, bundle with:
+## bundle install --without-production 
+##
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
@@ -7,10 +10,14 @@ gem 'will_paginate',  '~> 3.0.2'
 gem 'gravatar_image_tag'
 gem 'rails3-jquery-autocomplete'
 gem "paperclip"
-gem 'therubyracer'
-gem 'unicorn'
+gem 'therubyracer', :platform => :ruby
 gem 'geocoder'
 gem 'best_in_place'
+
+group :production do
+  gem 'unicorn'
+end
+
 
 # Cool mail async stuff
 gem "delayed_job", "~> 2.1.4"
@@ -46,9 +53,12 @@ group :development do
   gem 'turn', :require => false
   gem 'autotest'
   gem 'autotest-rails-pure'
-  gem 'autotest-fsevent'
-  gem 'autotest-growl'
+  if RUBY_PLATFORM =~ /darwin/
+    gem 'autotest-fsevent'
+    gem 'autotest-growl'
+  end
 end
+
 
 
 group :test do
@@ -60,6 +70,8 @@ group :test do
   gem 'turn', :require => false
   gem 'autotest'
   gem 'autotest-rails-pure'
-  gem 'autotest-fsevent'
-  gem 'autotest-growl'
+  if RUBY_PLATFORM =~ /darwin/
+    gem 'autotest-fsevent'
+    gem 'autotest-growl'
+  end
 end

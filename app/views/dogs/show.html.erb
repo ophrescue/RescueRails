@@ -29,6 +29,7 @@
 			<% if can_edit_dogs? %>
 				<strong><%= link_to "Edit Dog", edit_dog_path(@dog) %></strong><br />
 			<% end %>
+			<strong>Dog ID:</strong>  <%= @dog.tracking_id %><br />
 			<strong>Status:</strong> 	<%= @dog.status.titleize %><br />
 			<strong>Age:</strong>   <%= @dog.age.titleize %><br />
 			<strong>Size:</strong>  <%= @dog.size.titleize %><br />

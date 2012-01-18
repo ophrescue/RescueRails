@@ -57,27 +57,26 @@ class Dog < ActiveRecord::Base
 
 	validates :name, :presence => true,
 					 :length   => { :maximum => 75 },
-					 :uniqueness => true
+					 :uniqueness => { :case_sensitive => false }
 
 	validates :tracking_id, :uniqueness => true,
 							:presence => true
 
-	validates_presence_of :primary_breed_id,
-						  :status,
-						  :gender
+	validates_presence_of :status
+
 
 	STATUSES = ['adoptable', 'adopted', 'adoption pending',
 				'hold', 'not available', 'return pending', 'coming soon']
-	validates_inclusion_of :status, :in => STATUSES	
+	validates_inclusion_of :status, :in => STATUSES
 
 	AGES = ['baby', 'young', 'adult', 'senior']		
-	validates_inclusion_of :age, :in => AGES	
+	validates_inclusion_of :age, :in => AGES, :allow_blank => true
 
 	SIZES = ['small', 'medium', 'large','extra large']	
-	validates_inclusion_of :size, :in => SIZES
+	validates_inclusion_of :size, :in => SIZES, :allow_blank => true
 	
 	GENDERS = ['Male', 'Female']
-	validates_inclusion_of :gender, :in => GENDERS
+	validates_inclusion_of :gender, :in => GENDERS, :allow_blank => true
 
 
 	def update_history

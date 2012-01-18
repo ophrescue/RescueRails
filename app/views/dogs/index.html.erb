@@ -27,7 +27,7 @@
 						</div>
 						<div>
 							<p><strong><%= dog.name %></strong></p>
-							<p><%= dog.primary_breed.name %></p>
+							<p><%= dog.primary_breed.name unless !dog.primary_breed %></p>
 						</div>
 					</td>
 			    <% end %>

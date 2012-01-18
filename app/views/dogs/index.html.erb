@@ -5,7 +5,11 @@
 	<% if can_edit_dogs? %>
 		<div class="span6 offset4">
 			<%= link_to "Add a Dog", new_dog_path, :class => "btn small primary" %>
-			<%= link_to("Switch View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn small") %>
+			<% if session[:mgr_view] == true %>
+			<%= link_to("Gallery View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn small") %>
+			<% else %>
+			<%= link_to("Manager View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn small") %>
+			<% end %>
 		</div>
 	<% end %>
 </div>

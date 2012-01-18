@@ -69,12 +69,8 @@ class DogsController < ApplicationController
   end
 
   def switch_view
-    if session[:mgr_view] == nil
-      session[:mgr_view] == true
-    end
-    
-    if session[:mgr_view] == false
-      session[:mgr_view] = true 
+    if !session[:mgr_view]
+      session[:mgr_view] = true
     else
       session[:mgr_view] = false
     end

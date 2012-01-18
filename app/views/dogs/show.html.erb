@@ -5,7 +5,7 @@
 			<h1>
 				<%= @dog.name %>
 			</h1>
-			<h3><%= @dog.primary_breed.name %></h3>
+			<h3><%= @dog.primary_breed.name unless !@dog.primary_breed %></h3>
 			<div id="galleria">
 			  	<% if @dog.photos == []  %>
 					<%= image_tag("no_photo-205x195.png", :alt => @dog.name) %>
@@ -33,7 +33,7 @@
 			<strong>Age:</strong>   <%= @dog.age.titleize %><br />
 			<strong>Size:</strong>  <%= @dog.size.titleize %><br />
 			<strong>Gender:</strong>  <%= @dog.gender.titleize %><br />
-			<strong>Primary Breed:</strong> <%= @dog.primary_breed.name %><br />
+			<strong>Primary Breed:</strong> <%= @dog.primary_breed.name unless !@dog.primary_breed %><br />
 			<strong>Secondary Breed:</strong> <%= @dog.secondary_breed.name unless !@dog.secondary_breed %><br />
 			<br / >
 			<% if @dog.is_uptodateonshots %>
@@ -108,7 +108,7 @@
 <% if can_edit_dogs? %>
 <div class="row">
 	<div class="span16">
-		<h4>Comments</h4>
+		<h4>Private Comments</h4>
 
 		<%= form_for [@dog, @dog.comments.build] do |f| %>
 				<%= f.text_area :content, :class => "xxlarge", :rows => "3" %>

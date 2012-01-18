@@ -13,5 +13,15 @@ module ApplicationHelper
       "#{base_title} | #{@title}"
     end
   end
+
+  def sortable(column, title = nil)
+    title ||= column.titleize
+
+    
+    direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
+    sort_updown = (sort_direction == "asc") ? "Up" : "Down"
+    css_class = (column == sort_column) ? "headerSort#{sort_updown}" : nil  
+    link_to title, {:sort => column, :direction => direction}, {:class => css_class}
+  end
       
 end

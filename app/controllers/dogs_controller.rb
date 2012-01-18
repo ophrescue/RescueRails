@@ -1,4 +1,6 @@
 class DogsController < ApplicationController
+  helper_method :sort_column, :sort_direction 
+
   autocomplete :breed, :name, :full => true
 
   before_filter :edit_dogs_user,   :except => [:index, :show, :delete]
@@ -10,7 +12,7 @@ class DogsController < ApplicationController
     else
       @title = "Available Dogs"
     end
-    @dogs = Dog.where("name ilike ?", "%#{params[:q]}%")
+    @dogs = Dog.where("name ilike ?", "%#{params[:q]}%").order(sort_column + ' ' + sort_direction)
     # @dogs = Dog.paginate(:page => params[:page])
     respond_to do |format|
       format.html 
@@ -81,12 +83,20 @@ class DogsController < ApplicationController
 
   private
 
-      def edit_dogs_user
-        redirect_to(root_path) unless current_user.edit_dogs?
-      end
+    def edit_dogs_user
+      redirect_to(root_path) unless current_user.edit_dogs?
+    end
 
-      def admin_user
-        redirect_to(root_path) unless current_user.admin?
-      end
+    def admin_user
+      redirect_to(root_path) unless current_user.admin?
+    end
+        
+    def sort_column  
+      Dog.column_names.include?(params[:sort]) ? params[:sort] : "name"  
+    end  
+      
+    def sort_direction  
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"  
+    end  
 
 end

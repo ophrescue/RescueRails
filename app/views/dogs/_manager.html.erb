@@ -28,14 +28,14 @@
 
 <% if !@dogs.nil? %>
 
-<table class="zebra-striped bordered-table condensed-table" id="adopt-sort">
+<table class="zebra-striped bordered-table condensed-table">
 	<thead>
 		<tr>
-			<th>OPH ID</th>
+			<th><%= sortable "tracking_id" %></th>
 			<th>Flag</th>
-			<th>Name</th>
+			<th><%= sortable "name" %></th>
 			<% if (params[:status] == nil) || (params[:status] == "active")%>
-			<th>Status</th>
+			<th><%= sortable "status" %></th>
 			<% end %>
 			<th>Foster Name</th>
 			<th>Location</th>

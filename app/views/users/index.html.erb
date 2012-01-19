@@ -4,10 +4,10 @@
 <%= link_to "Create new Staff Account", new_user_path %>
 </p>
 <% end %>
-<%= will_paginate %>
+<%= will_paginate @users %>
 
 <ul class="users">
 	<%= render @users %>
 </ul>
 
-<%= will_paginate %>
+<%= will_paginate @users %>

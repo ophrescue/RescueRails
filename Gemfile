@@ -7,6 +7,7 @@ gem 'rails', '3.1.3'
 
 gem 'pg'
 gem 'will_paginate',  '~> 3.0.2'
+gem 'bootstrap-will_paginate'
 gem 'gravatar_image_tag'
 gem 'rails3-jquery-autocomplete'
 gem "paperclip"

@@ -13,6 +13,7 @@
 		</div>
 	<% end %>
 </div>
+<%= will_paginate @dogs %>
 
 <% if can_edit_dogs? && session[:mgr_view] == true %>
 	<%= render 'manager' %>
@@ -39,3 +40,4 @@
 			<% end %>
 		</table>
 <% end %>
+<%= will_paginate @dogs %>

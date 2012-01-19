@@ -12,7 +12,10 @@ class DogsController < ApplicationController
     else
       @title = "Available Dogs"
     end
-    @dogs = Dog.where("name ilike ?", "%#{params[:q]}%").order(sort_column + ' ' + sort_direction)
+    ## Need to support the dog select drop down in the adopt app as well!
+    # .where("name ilike ?", "%#{params[:q]}%")
+
+    @dogs = Dog.order(sort_column + ' ' + sort_direction).paginate(:per_page => 3, :page => params[:page])
     # @dogs = Dog.paginate(:page => params[:page])
     respond_to do |format|
       format.html 

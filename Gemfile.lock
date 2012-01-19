@@ -44,6 +44,8 @@ GEM
     best_in_place (1.0.4)
       jquery-rails
       rails (~> 3.1.0)
+    bootstrap-will_paginate (0.0.3)
+      will_paginate
     builder (3.0.0)
     capistrano (2.9.0)
       highline
@@ -208,6 +210,7 @@ DEPENDENCIES
   autotest
   autotest-rails-pure
   best_in_place
+  bootstrap-will_paginate
   capistrano
   coffee-rails (~> 3.1.1)
   delayed_job (~> 2.1.4)

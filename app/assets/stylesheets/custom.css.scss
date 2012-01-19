@@ -107,3 +107,17 @@ td.sidebar {
 	vertical-align:top;
 	background: #ffc;
 }
+
+th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+th .asc {
+	background-image: url(up_arrow.gif);
+}
+
+th .desc {
+	background-image: url(down_arrow.gif);
+}

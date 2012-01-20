@@ -6,6 +6,9 @@
 				<%= @dog.name %>
 			</h1>
 			<h3><%= @dog.primary_breed.name unless !@dog.primary_breed %></h3>
+			<% if can_edit_dogs? %>
+				<strong><%= link_to "Edit Dog", edit_dog_path(@dog), :class => "btn primary" %></strong><br />
+			<% end %>
 			<div id="galleria">
 			  	<% if @dog.photos == []  %>
 					<%= image_tag("no_photo-205x195.png", :alt => @dog.name) %>
@@ -26,9 +29,7 @@
 			<br />
 			<h3>About <%= @dog.name.titleize %></h3>
 			<br />
-			<% if can_edit_dogs? %>
-				<strong><%= link_to "Edit Dog", edit_dog_path(@dog) %></strong><br />
-			<% end %>
+
 			<strong>Dog ID:</strong>  <%= @dog.tracking_id %><br />
 			<strong>Status:</strong> 	<%= @dog.status.titleize %><br />
 			<strong>Age:</strong>   <%= @dog.age.titleize %><br />

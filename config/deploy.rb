@@ -121,7 +121,7 @@ after 'deploy:setup' do
 end
 
 # Link up the config files
-after 'deploy:update_code', 'deploy:symlink_configs'
+before 'deploy:assets:precompile', 'deploy:symlink_configs'
 
 # Delayed Job  
 after "deploy:stop",  "delayed_job:stop"

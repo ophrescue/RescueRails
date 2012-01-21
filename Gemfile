@@ -54,13 +54,9 @@ group :development do
   gem 'turn', :require => false
   gem 'autotest'
   gem 'autotest-rails-pure'
-  if RUBY_PLATFORM =~ /darwin/
-    gem 'autotest-fsevent'
-    gem 'autotest-growl'
-  end
+  gem 'autotest-fsevent' , :platform => :ruby
+  gem 'autotest-growl' , :platform => :ruby  
 end
-
-
 
 group :test do
   gem 'rspec-rails'
@@ -71,8 +67,6 @@ group :test do
   gem 'turn', :require => false
   gem 'autotest'
   gem 'autotest-rails-pure'
-  if RUBY_PLATFORM =~ /darwin/
-    gem 'autotest-fsevent'
-    gem 'autotest-growl'
-  end
+  gem 'autotest-fsevent', :platform => :ruby
+  gem 'autotest-growl', :platform => :ruby
 end

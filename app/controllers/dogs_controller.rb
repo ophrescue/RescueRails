@@ -37,12 +37,12 @@ class DogsController < ApplicationController
   def new
     @dog = Dog.new
     3.times { @dog.photos.build }
-    @foster_users = User.where(:is_foster => true)
+    @foster_users = User.where(:is_foster => true).order("name")
     @title = "Add a New Dog"
   end
 
   def edit
-    @foster_users = User.where(:is_foster => true)
+    @foster_users = User.where(:is_foster => true).order("name")
     @dog = Dog.find(params[:id]) 
     @dog.primary_breed_name = @dog.primary_breed.name unless @dog.primary_breed.nil?
     @dog.secondary_breed_name = @dog.secondary_breed.name unless @dog.secondary_breed.nil?

@@ -6,8 +6,27 @@
 <% end %>
 <%= will_paginate @users %>
 
-<ul class="users">
+<% if !@users.nil? %>
+
+<table class="zebra-striped bordered-table condensed-table">
+	<thead>
+		<tr>
+			<th>Photo</th>
+			<th>Name</th>
+			<th>Title</th>
+			<th>Email</th>
+			<th>Phone</th>
+			<th>Address</th>
+			<th>Current Dogs</th>
+			<th>Admin</th>
+		</tr>
+	</thead>
+	<tbody>
 	<%= render @users %>
-</ul>
+	</tbody>
+</table>
+<% else %>
+<h3>No Records Found</h3>
+<% end %>
 
 <%= will_paginate @users %>

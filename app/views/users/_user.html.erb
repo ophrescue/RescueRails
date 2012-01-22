@@ -1,8 +1,21 @@
-<li>
-	<%= gravatar_for user, :size => 30 %>
-	<%= link_to user.name, user %>
+<tr>
+	<td><%= gravatar_for user, :size => 50 %></td>
+	<td><%= link_to user.name, user %></td>
+	<td><%= user.title %></td>
+	<td><%= user.email %></td>
+	<td><%= user.phone %></td>
+	<td><%= user.city %>, <%= user.state %></td>
+	<td>
+		<% user.dogs.each do |d| %>
+			<%= link_to d.name, d %>
+			(<%= d.status %>)
+			<br />
+		<% end %>
+	</td>
 	<% if current_user.admin? %>
-	|	<%= link_to "delete", user, :method => :delete, :confirm => "You sure?",
+		<td>
+			<%= link_to "Delete", user, :method => :delete, :confirm => "You sure?",
 								    :title => "Delete #{user.name}" %>
+		</td>
 	<% end %>
-</li>
+</tr>

@@ -1,5 +1,5 @@
 body {
-	padding-top: 80px;
+	padding-top: 90px;
 }
 
 label.error {
@@ -19,9 +19,22 @@ form .clearfix.error span.error {
 }
 
 .hero-unit {
-	background-image: url(hero_bg.jpg);
+	background-image: url(hero_bg2.jpg);
 	background-repeat: no-repeat;
 	background-position: center center;
+	background-size: 940px 340px;
+}
+
+#hero-dog  {
+	position:absolute;
+	left:70px;
+	top:340px;
+}
+
+#hero-adopt  {
+	position:absolute;
+	left:210px;
+	top:340px;
 }
 
 .hero-unit h1 {

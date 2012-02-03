@@ -23,18 +23,19 @@ form .clearfix.error span.error {
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 940px 340px;
+	position: relative;
 }
 
 #hero-dog  {
 	position:absolute;
-	left:70px;
-	top:340px;
+	left:30px;
+	top:250px;
 }
 
 #hero-adopt  {
 	position:absolute;
-	left:210px;
-	top:340px;
+	left:165px;
+	top:250px;
 }
 
 .hero-unit h1 {

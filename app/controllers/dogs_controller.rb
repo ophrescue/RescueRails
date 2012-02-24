@@ -101,7 +101,7 @@ class DogsController < ApplicationController
     end
         
     def sort_column  
-      Dog.column_names.include?(params[:sort]) ? params[:sort] : "name"  
+      Dog.column_names.include?(params[:sort]) ? params[:sort] : "tracking_id"  
     end  
       
     def sort_direction  

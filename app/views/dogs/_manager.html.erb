@@ -32,8 +32,8 @@
 	<thead>
 		<tr>
 			<th><%= sortable "tracking_id" %></th>
-			<th>Flag</th>
 			<th><%= sortable "name" %></th>
+			<th>Flag</th>
 			<% if (params[:status] == nil) || (params[:status] == "active")%>
 			<th><%= sortable "status" %></th>
 			<% end %>

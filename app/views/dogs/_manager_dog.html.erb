@@ -1,6 +1,7 @@
 <tr>
 	<td><%= dog.tracking_id %></td>
 	<td><%= link_to dog.name, dog %></td>
+	<td><%= dog.age.titleize %></td>
 	<td>
 		<% if dog.has_medical_need %>
 			<%= image_tag "has_medical_need.gif", :title => "Medical Need", :height => "80%" %>

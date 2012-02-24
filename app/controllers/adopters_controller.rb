@@ -29,7 +29,7 @@ class AdoptersController < ApplicationController
 	  @adopter = Adopter.find(params[:id])
 	  @adoption_app = @adopter.adoption_app
 	  @title = @adopter.name
-	  @adopter_users = User.where(:edit_my_adopters => true)
+	  @adopter_users = User.where(:edit_my_adopters => true).order("name")
 	end
 
 	def new

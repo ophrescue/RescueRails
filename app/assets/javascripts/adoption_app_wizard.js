@@ -35,18 +35,21 @@ $(function(){
       				minlength: 5,
       				maxlength: 5
       			},
-                "adopter[references_attributes][0][email]" : {
-                      required: false,
-                      email: true    
-                },
-                "adopter[references_attributes][1][email]" : {
-                      required: false,
-                      email: true    
-                },
-                "adopter[references_attributes][2][email]" : {
-                      required: false,
-                      email: true    
-                }
+            "adopter[adoption_app_attributes][max_hrs_alone]" : {
+                  required: true
+            },
+            "adopter[references_attributes][0][email]" : {
+                  required: false,
+                  email: true    
+            },
+            "adopter[references_attributes][1][email]" : {
+                  required: false,
+                  email: true    
+            },
+            "adopter[references_attributes][2][email]" : {
+                  required: false,
+                  email: true    
+            }
       		},
       		messages : {
       		  "adopter[email]" : {remote: "Application on file: please email adopt@ophrescue.org for updates." }

@@ -45,6 +45,10 @@ class AdoptersController < ApplicationController
 		@adopter = Adopter.new(params[:adopter])
 		@adopter.status = 'new'
 
+		if !@adopter.adoption_app.ready_to_adopt_dt
+			@adopter.adoption_app.ready_to_adopt_dt = Date.today
+		end
+
 		if @adopter.save
 			@adopter.adoptions.each do |a|
 				a.relation_type = 'interested'

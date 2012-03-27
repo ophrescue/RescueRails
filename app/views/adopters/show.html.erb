@@ -116,33 +116,24 @@
 			<tr>
 				<th>Flag:
 				</th>
-				<td>
-					<%= form_for @adopter, :remote => true, :url => { :controller => "adopters", :action => "update" }  do |ff| %>
-					<%= ff.hidden_field('id', :value => @adopter.id) %>
-					<%= ff.select(:flag, Adopter::FLAGS, {:include_blank => "No Flag"}, {:onchange => "this.form.submit();"}) %>
-					<% end %>
+				<td id="edit_flag">
+          <%= best_in_place @adopter, :flag, :type => :select, :collection => [['Undefined', 'Undefined']].concat( Adopter::FLAGS.collect{|s| [s, s]} ), :nil => 'click to edit', :activator => '#edit_flag' %>
 				</td>
 			</tr>
 			<tr>
 				<th>
 					Assigned To:
 				</th>
-				<td> 
-				<%= form_for @adopter, :remote => true, :url => { :controller => "adopters", :action => "update" }  do |af| %>
-				<%= af.hidden_field('id', :value => @adopter.id) %>
-				<%= af.collection_select(:assigned_to_user_id, @adopter_users, :id, :name, {:include_blank => "Unassigned" },{ :onchange => "this.form.submit();" }) %>
-				<% end %>
+				<td id="edit_assigned">
+          <%= best_in_place @adopter, :assigned_to_user_id, :type => :select, :collection => [['No One', 'No One']].concat( @adopter_users.collect {|u| [u.id, u.name] }), :nil => 'click to edit', :activator => "#edit_assigned" %>
 				</td>
 			</tr>
 
 			<tr>
 				<th>Status
 				</th>
-				<td>
-				<%= form_for @adopter, :remote => true, :url => { :controller => "adopters", :action => "update" }  do |sf| %>
-				<%= sf.hidden_field('id', :value => @adopter.id) %>
-				<%= sf.select(:status, Adopter::STATUSES, {}, {:onchange => "this.form.submit();"}) %>
-				<% end %>
+				<td id="edit_status">
+          <%= best_in_place @adopter, :status, :type => :select, :collection => [['none', 'none']].concat( Adopter::STATUSES.collect{|s| [s, s]} ), :nil => 'click to edit', :activator => '#edit_status' %>
 				</td>
 			</tr>
 		</table>
@@ -158,7 +149,7 @@
 					<tr>
 						<th>Ready to Adopt Date <br />(YYYY-MM-DD)</th>
 						<td><%= image_tag("pencil_go.png") %>
-							<%= best_in_place @adoption_app, :ready_to_adopt_dt %>
+							<%= best_in_place @adoption_app, :ready_to_adopt_dt, :type => :date %>
 						</td>
 					</tr>
 					<th>Dog Selections</th>
@@ -293,10 +284,10 @@
 	<div class="span16">
 		<h4>Comments</h4>
 
-		<%= form_for [@adopter, @adopter.comments.build] do |f| %>
-				<%= f.text_area :content, :class => "xxlarge", :rows => "3" %>
-			<%= f.submit "Post", :class => "btn primary" %>
-		<% end %>
+    <%= form_for [@adopter, @adopter.comments.build], :html => {:id => "adopter_new_comment"} do |f| %>
+      <%= f.text_area :content, :class => "xxlarge", :rows => "3" %>
+      <%= f.submit "Post", :class => "btn primary" %>
+    <% end %>
 
 		<table class="zebra-striped bordered-table condensed-table">
 			<% @adopter.comments.each do |comment| %>

@@ -9,3 +9,4 @@ public/system/
 config/newrelic.yml
 config/initializers/setup_mail.rb
 config/database.yml
+.rvmrc

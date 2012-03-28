@@ -8,4 +8,5 @@ tmp/
 public/system/
 config/newrelic.yml
 config/initializers/setup_mail.rb
+config/initializers/mailchimp.rb
 config/database.yml

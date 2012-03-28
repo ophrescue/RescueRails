@@ -7,6 +7,6 @@ tmp/
 .DS_Store
 public/system/
 config/newrelic.yml
-config/initializers/setup_mail.rb
+config/setup_mail.rb
 config/initializers/mailchimp.rb
 config/database.yml

@@ -14,6 +14,7 @@ gem "paperclip"
 gem 'therubyracer', :platform => :ruby
 gem 'geocoder'
 gem 'best_in_place'
+gem 'gibbon'
 
 group :production do
   gem 'unicorn'

@@ -85,9 +85,18 @@ GEM
       i18n (~> 0.4)
     ffi (1.0.11)
     geocoder (1.1.0)
+    gibbon (0.3.5)
+      httparty (> 0.6.0)
+      httparty (> 0.6.0)
+      json (> 1.4.0)
+      json (> 1.4.0)
+      rdoc
     gravatar_image_tag (1.0.0)
     highline (1.6.9)
     hike (1.2.1)
+    httparty (0.8.1)
+      multi_json
+      multi_xml
     i18n (0.6.0)
     jquery-rails (1.0.19)
       railties (~> 3.0)
@@ -105,6 +114,7 @@ GEM
       rails (~> 3.1.0)
     mime-types (1.17.2)
     multi_json (1.0.4)
+    multi_xml (0.4.2)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -232,6 +242,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   geocoder
+  gibbon
   gravatar_image_tag
   jquery-rails
   mailhopper

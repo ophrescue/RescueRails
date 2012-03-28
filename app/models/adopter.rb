@@ -62,6 +62,52 @@ class Adopter < ActiveRecord::Base
 	validates_presence_of  :status
 	validates_inclusion_of :status, :in => STATUSES
 
+  after_create :chimp_subscribe
+
+  after_update :chimp_update
+
+  private
+
+    def chimp_subscribe
+      gb = Gibbon.new
+      list_id = '5e50e2be93'
+
+      merge_vars = {
+        'FNAME' => self.name,
+        'MMERGE2' => self.status
+      }
+
+      double_optin = false
+
+      response = gb.listSubscribe({ :id => list_id,
+        :email_address => self.email,
+        :merge_vars => merge_vars,
+        :double_optin => double_optin,
+        :send_welcome => false
+        })
+
+    end
+
+    def chimp_update
+      gb = Gibbon.new
+      list_id = '5e50e2be93'
+
+      merge_vars = {
+        'FNAME' => self.name,
+        'MMERGE2' => self.status
+      }
+
+      double_optin = false
+
+      response = gb.listUpdateMember({ :id => list_id,
+        :email_address => self.email,
+        :merge_vars => merge_vars,
+        :double_optin => double_optin,
+        :send_welcome => false
+        })
+
+    end
+
 end
 
 

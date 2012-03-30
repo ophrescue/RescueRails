@@ -1,10 +1,9 @@
 class Adopter < ActiveRecord::Base
 
   attr_accessor :pre_q_costs,
-                :pre_q_surrender,
-                :pre_q_abuse,
-                :pre_q_reimbursement 
-                  
+    :pre_q_surrender,
+    :pre_q_abuse,
+    :pre_q_reimbursement
 
   attr_reader :dog_tokens
 
@@ -12,55 +11,55 @@ class Adopter < ActiveRecord::Base
     self.dog_ids = ids.split(",")
   end
 
-    has_many :references, :dependent => :destroy
-    accepts_nested_attributes_for :references
+  has_many :references, :dependent => :destroy
+  accepts_nested_attributes_for :references
 
-    has_many :adoptions, :dependent => :destroy
-    has_many :dogs, :through => :adoptions
+  has_many :adoptions, :dependent => :destroy
+  has_many :dogs, :through => :adoptions
 
-    has_one :adoption_app, :dependent => :destroy
-    accepts_nested_attributes_for :adoption_app
+  has_one :adoption_app, :dependent => :destroy
+  accepts_nested_attributes_for :adoption_app
 
-    has_many :comments, :as => :commentable, :order => "created_at DESC"
+  has_many :comments, :as => :commentable, :order => "created_at DESC"
 
-    belongs_to :user, :class_name => 'User', :primary_key => 'id', :foreign_key => 'assigned_to_user_id'
+  belongs_to :user, :class_name => 'User', :primary_key => 'id', :foreign_key => 'assigned_to_user_id'
 
 
-    validates :name,  :presence   => true,
-                      :length     => { :maximum => 50 }
+  validates :name,  :presence   => true,
+    :length     => { :maximum => 50 }
 
-    email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  
-    validates :email, :presence   => true,
-                      :format     => { :with => email_regex },
-                      :uniqueness => { :case_sensitive => false }
+  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-    validates :phone, :presence	  => true,
-    				  :length     => {:in => 10..25 }
+  validates :email, :presence   => true,
+    :format     => { :with => email_regex },
+    :uniqueness => { :case_sensitive => false }
 
-    validates :address1, :presence => true
+  validates :phone, :presence	  => true,
+    :length     => {:in => 10..25 }
 
-    validates :city,	 :presence => true
+  validates :address1, :presence => true
 
-    validates :state,    :presence => true,
-    					 :length   => { :is => 2 }
-    					
-    validates :zip,		 :presence => true,
-    					 :length   => {:in => 5..10}
-             
-	STATUSES = ['new', 
-              'pend response', 
-              'workup', 
-		          'approved',
+  validates :city, :presence => true
+
+  validates :state,    :presence => true,
+    :length   => { :is => 2 }
+
+  validates :zip, :presence => true,
+    :length   => {:in => 5..10}
+
+  STATUSES = ['new',
+              'pend response',
+              'workup',
+              'approved',
               'adopted',
               'withdrawn',
               'denied']
 
   FLAGS = ['High','Low','On Hold']
 
-	
-	validates_presence_of  :status
-	validates_inclusion_of :status, :in => STATUSES
+
+  validates_presence_of  :status
+  validates_inclusion_of :status, :in => STATUSES
 
   after_create :chimp_subscribe
 
@@ -80,11 +79,11 @@ class Adopter < ActiveRecord::Base
       double_optin = false
 
       response = gb.listSubscribe({ :id => list_id,
-        :email_address => self.email,
-        :merge_vars => merge_vars,
-        :double_optin => double_optin,
-        :send_welcome => false
-        })
+                                    :email_address => self.email,
+                                    :merge_vars => merge_vars,
+                                    :double_optin => double_optin,
+                                    :send_welcome => false
+      })
 
     end
 
@@ -100,18 +99,15 @@ class Adopter < ActiveRecord::Base
       double_optin = false
 
       response = gb.listUpdateMember({ :id => list_id,
-        :email_address => self.email,
-        :merge_vars => merge_vars,
-        :double_optin => double_optin,
-        :send_welcome => false
-        })
+                                       :email_address => self.email,
+                                       :merge_vars => merge_vars,
+                                       :double_optin => double_optin,
+                                       :send_welcome => false
+      })
 
     end
 
 end
-
-
-
 
 
 # == Schema Information

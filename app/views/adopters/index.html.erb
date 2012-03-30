@@ -39,6 +39,13 @@
 	</ul>
 </div>
 
+<%= form_tag adopters_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
 <% if !@adopters.nil? %>
 
 <table class="zebra-striped bordered-table condensed-table" id="adopt-sort">

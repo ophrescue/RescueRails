@@ -1,0 +1,5 @@
+<table id="comments" class="zebra-striped bordered-table condensed-table">
+  <% @comments.each do |c| %>
+    <%= render 'comments/comment', :comment => c %>
+  <% end %>
+</table>

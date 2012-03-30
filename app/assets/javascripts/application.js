@@ -29,3 +29,4 @@
 //= require jquery.scroll
 //= require galleria-1.2.6
 //= require galleria.classic
+//= require rescuerails.js

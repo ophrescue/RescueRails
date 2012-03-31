@@ -114,12 +114,16 @@ class Adopter < ActiveRecord::Base
 
     def chimp_check
 
-      if ((self.status == 'withdrawn') || (self.status == 'denied')) && (self.is_subscribed == true)
-        self.chimp_unsubscribe
-      elsif (self.status_changed?) && (self.is_subscribed == true)
-        self.chimp_update
-      elsif (self.status_changed?) && (self.is_subscribed == false)
-        self.chimp_subscribe
+      if self.status_changed?
+
+        if ((self.status == 'withdrawn') || (self.status == 'denied')) && (self.is_subscribed == true)
+          self.chimp_unsubscribe
+        elsif self.is_subscribed == true
+          self.chimp_update
+        elsif self.is_subscribed == false
+          self.chimp_subscribe
+        end
+        
       end
 
     end

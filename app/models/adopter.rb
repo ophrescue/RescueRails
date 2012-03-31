@@ -3,7 +3,7 @@ class Adopter < ActiveRecord::Base
   attr_accessor :pre_q_costs,
                 :pre_q_surrender,
                 :pre_q_abuse,
-                :pre_q_reimbursement 
+                :pre_q_reimbursement
                   
   attr_accessible  :id,
                    :name,  
@@ -91,9 +91,20 @@ class Adopter < ActiveRecord::Base
 
       list_id = '5e50e2be93'
 
+#Dupe Code Refactor at some point
+
+      if (self.status == 'adopted')
+        groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Adopted from OPH'} ]
+        adopt_date = Time.now.strftime("%m/%d/%Y")
+      else
+        groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Active Application'} ]
+        adopt_date = ''
+      end
+
       merge_vars = {
         'FNAME' => self.name,
         'MMERGE2' => self.status,
+        'MMERGE3' => adopt_date,
         'GROUPINGS' => [ { 'name' => 'OPH Target Segments', 'groups' => 'Active Application'} ]
       }
 
@@ -114,16 +125,17 @@ class Adopter < ActiveRecord::Base
 
     def chimp_check
 
+
       if self.status_changed?
 
         if ((self.status == 'withdrawn') || (self.status == 'denied')) && (self.is_subscribed == true)
           self.chimp_unsubscribe
-        elsif self.is_subscribed == true
+        elsif self.is_subscribed?
           self.chimp_update
         elsif self.is_subscribed == false
           self.chimp_subscribe
         end
-        
+
       end
 
     end
@@ -135,6 +147,8 @@ class Adopter < ActiveRecord::Base
       gb.timeout = 5
 
       list_id = '5e50e2be93'
+
+#Dupe Code Refactor at some point
 
       if (self.status == 'adopted')
         groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Adopted from OPH'} ]
@@ -180,6 +194,7 @@ class Adopter < ActiveRecord::Base
         })
 
       self.is_subscribed = false
+      #debugger      
 
     end
 

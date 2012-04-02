@@ -106,6 +106,7 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: adopters
@@ -129,5 +130,6 @@ end
 #  other_phone         :string(255)
 #  assigned_to_user_id :integer
 #  flag                :string(255)
+#  is_subscribed       :boolean         default(TRUE)
 #
 

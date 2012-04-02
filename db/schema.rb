@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120111020417) do
+ActiveRecord::Schema.define(:version => 20120329000822) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20120111020417) do
     t.string   "other_phone"
     t.integer  "assigned_to_user_id"
     t.string   "flag"
+    t.boolean  "is_subscribed",       :default => true
   end
 
   create_table "adoption_apps", :force => true do |t|
@@ -184,20 +185,6 @@ ActiveRecord::Schema.define(:version => 20120111020417) do
   end
 
   add_index "events", ["event_date"], :name => "index_events_on_event_date"
-
-  create_table "fosters", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.integer  "dog_id",     :null => false
-    t.date     "start_date", :null => false
-    t.date     "end_date"
-    t.integer  "updated_by", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "fosters", ["dog_id"], :name => "index_fosters_on_dog_id"
-  add_index "fosters", ["user_id", "dog_id"], :name => "index_fosters_on_user_id_and_dog_id"
-  add_index "fosters", ["user_id"], :name => "index_fosters_on_user_id"
 
   create_table "histories", :force => true do |t|
     t.integer  "dog_id"

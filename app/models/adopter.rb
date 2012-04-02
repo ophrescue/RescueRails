@@ -3,8 +3,26 @@ class Adopter < ActiveRecord::Base
   attr_accessor :pre_q_costs,
                 :pre_q_surrender,
                 :pre_q_abuse,
-                :pre_q_reimbursement 
+                :pre_q_reimbursement
                   
+  attr_accessible  :id,
+                   :name,  
+                   :email,    
+                   :phone,             
+                   :address1,        
+                   :address2,         
+                   :city,              
+                   :state,           
+                   :zip,              
+                   :status,           
+                   :when_to_call,    
+                   :dog_reqs,          
+                   :why_adopt,        
+                   :dog_name,           
+                   :other_phone,    
+                   :assigned_to_user_id, 
+                   :flag,                
+                   :is_subscribed     
 
   attr_reader :dog_tokens
 
@@ -62,24 +80,95 @@ class Adopter < ActiveRecord::Base
 	validates_presence_of  :status
 	validates_inclusion_of :status, :in => STATUSES
 
-  after_create :chimp_subscribe
+  before_create :chimp_subscribe
 
-  after_update :chimp_update
-
-  private
+  before_update :chimp_check
 
     def chimp_subscribe
+
       gb = Gibbon.new
+      gb.timeout = 5
+
       list_id = '5e50e2be93'
+
+#Dupe Code Refactor at some point
+
+      if (self.status == 'adopted')
+        groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Adopted from OPH'} ]
+        adopt_date = Time.now.strftime("%m/%d/%Y")
+      else
+        groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Active Application'} ]
+        adopt_date = ''
+      end
 
       merge_vars = {
         'FNAME' => self.name,
-        'MMERGE2' => self.status
+        'MMERGE2' => self.status,
+        'MMERGE3' => adopt_date,
+        'GROUPINGS' => [ { 'name' => 'OPH Target Segments', 'groups' => 'Active Application'} ]
       }
 
       double_optin = false
 
-      response = gb.listSubscribe({ :id => list_id,
+      response = gb.listSubscribe({ 
+        :id => list_id,
+        :email_address => self.email,
+        :merge_vars => merge_vars,
+        :double_optin => double_optin,
+        :send_welcome => false
+        })
+
+      self.is_subscribed = true
+
+    end
+
+
+    def chimp_check
+
+
+      if self.status_changed?
+
+        if ((self.status == 'withdrawn') || (self.status == 'denied')) && (self.is_subscribed == true)
+          self.chimp_unsubscribe
+        elsif self.is_subscribed?
+          self.chimp_update
+        elsif self.is_subscribed == false
+          self.chimp_subscribe
+        end
+
+      end
+
+    end
+    
+
+    def chimp_update
+
+      gb = Gibbon.new
+      gb.timeout = 5
+
+      list_id = '5e50e2be93'
+
+#Dupe Code Refactor at some point
+
+      if (self.status == 'adopted')
+        groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Adopted from OPH'} ]
+        adopt_date = Time.now.strftime("%m/%d/%Y")
+      else
+        groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Active Application'} ]
+        adopt_date = ''
+      end
+
+      merge_vars = {
+        'FNAME' => self.name,
+        'MMERGE2' => self.status,
+        'MMERGE3' => adopt_date,
+        'GROUPINGS' => groups
+      }
+
+      double_optin = false
+
+      response = gb.listUpdateMember({ 
+        :id => list_id,
         :email_address => self.email,
         :merge_vars => merge_vars,
         :double_optin => double_optin,
@@ -88,32 +177,27 @@ class Adopter < ActiveRecord::Base
 
     end
 
-    def chimp_update
+
+    def chimp_unsubscribe
+
       gb = Gibbon.new
+      gb.timeout = 5
+
       list_id = '5e50e2be93'
 
-      merge_vars = {
-        'FNAME' => self.name,
-        'MMERGE2' => self.status
-      }
-
-      double_optin = false
-
-      response = gb.listUpdateMember({ :id => list_id,
+      response = gb.listUnsubscribe({
+        :id => list_id,
         :email_address => self.email,
-        :merge_vars => merge_vars,
-        :double_optin => double_optin,
-        :send_welcome => false
+        :delete_member => true,
+        :send_goodbye => false,
+        :send_notify => false
         })
+
+      self.is_subscribed = 0   
 
     end
 
 end
-
-
-
-
-
 # == Schema Information
 #
 # Table name: adopters
@@ -137,5 +221,6 @@ end
 #  other_phone         :string(255)
 #  assigned_to_user_id :integer
 #  flag                :string(255)
+#  is_subscribed       :boolean         default(TRUE)
 #
 

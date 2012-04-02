@@ -1,4 +1,5 @@
 $(document).ready( function () {
+
   $('#new_comment').submit( function(e) {
     e.preventDefault();
     $.ajax({
@@ -17,6 +18,27 @@ $(document).ready( function () {
       }
     });
   });
+
+  $('#delete_comment').live('submit', function(e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: this.action,
+      data: $(this).serialize(),
+      success: function (data) {
+        // so it worked, add to the comment list
+        refresh_comments();
+      },
+      statusCode: {
+        401: function() {
+          alert('not authorized to delete this comment');
+        }
+      },
+      error: function() {
+      },
+    });
+  });
+
 });
 
 
@@ -26,4 +48,7 @@ function refresh_comments() {
     $('#comment_table').html(data);
     $('.best_in_place').best_in_place();
   });
+}
+
+function delete_comment() {
 }

@@ -43,6 +43,15 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    if @comment.user == current_user
+      @comment.destroy
+    else
+      respond_with @comment, :status => :unauthorized
+    end
+  end
+
   private
 
   def find_commentable

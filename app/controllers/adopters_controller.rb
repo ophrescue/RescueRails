@@ -66,6 +66,7 @@ class AdoptersController < ApplicationController
 	def update
 		@adopter = Adopter.find(params[:id])
 		@adopter.update_attributes(params[:adopter])
+		
 		flash[:success] = "Application Updated"
 		respond_with @adopter
 	end

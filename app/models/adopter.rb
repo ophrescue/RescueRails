@@ -193,8 +193,7 @@ class Adopter < ActiveRecord::Base
         :send_notify => false
         })
 
-      self.is_subscribed = false
-      #debugger      
+      self.is_subscribed = 0   
 
     end
 

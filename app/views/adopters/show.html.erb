@@ -114,7 +114,7 @@
       <tr>
         <th>Flag:
         </th>
-        <td id="edit_flag">
+        <td id="edit_flag"><%= image_tag("pencil_go.png") %>
           <%= best_in_place @adopter, :flag, :type => :select, :collection => [['Undefined', 'Undefined']].concat( Adopter::FLAGS.collect{|s| [s, s]} ), :nil => 'click to edit', :activator => '#edit_flag' %>
         </td>
       </tr>
@@ -122,7 +122,7 @@
         <th>
           Assigned To:
         </th>
-        <td id="edit_assigned">
+        <td id="edit_assigned"><%= image_tag("pencil_go.png") %>
           <%= best_in_place @adopter, :assigned_to_user_id, :type => :select, :collection => [['No One', 'No One']].concat( @adopter_users.collect {|u| [u.id, u.name] }), :nil => 'click to edit', :activator => "#edit_assigned" %>
         </td>
       </tr>
@@ -130,7 +130,7 @@
       <tr>
         <th>Status
         </th>
-        <td id="edit_status">
+        <td id="edit_status"><%= image_tag("pencil_go.png") %>
           <%= best_in_place @adopter, :status, :type => :select, :collection => [['none', 'none']].concat( Adopter::STATUSES.collect{|s| [s, s]} ), :nil => 'click to edit', :activator => '#edit_status' %>
         </td>
       </tr>

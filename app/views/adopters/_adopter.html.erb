@@ -1,6 +1,6 @@
 <tr>
 	<td><%= adopter.id %></td>
-	<td><%= adopter.adoption_app.ready_to_adopt_dt.strftime("%m/%d/%y") unless adopter.adoption_app.ready_to_adopt_dt == nil %>
+	<td></td>
 	<td><%= adopter.flag %></td>
 	<% if (params[:status] == nil) || (params[:status] == "active")  %>
 		<td><%= adopter.status.titleize %></td>

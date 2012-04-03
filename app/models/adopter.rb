@@ -3,26 +3,7 @@ class Adopter < ActiveRecord::Base
   attr_accessor :pre_q_costs,
                 :pre_q_surrender,
                 :pre_q_abuse,
-                :pre_q_reimbursement
-                  
-  attr_accessible  :id,
-                   :name,  
-                   :email,    
-                   :phone,             
-                   :address1,        
-                   :address2,         
-                   :city,              
-                   :state,           
-                   :zip,              
-                   :status,           
-                   :when_to_call,    
-                   :dog_reqs,          
-                   :why_adopt,        
-                   :dog_name,           
-                   :other_phone,    
-                   :assigned_to_user_id, 
-                   :flag,                
-                   :is_subscribed     
+                :pre_q_reimbursement   
 
   attr_reader :dog_tokens
 

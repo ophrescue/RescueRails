@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @title = "All breed dog rescue based in Virgina and Maryland"
+    @title = "All breed dog rescue based in Virginia and Maryland"
   end
   
   def guide

@@ -1,56 +1,55 @@
 <table class="profile" summary="Profile information">
-	<tr>
-		<td class="main">
-			<h1>
-				<%= gravatar_for @user %>
-				<%= @user.name %>
-			</h1>
-			<h4><%= @user.title %></h4>
-		<div class="span6">
-		<table class="zebra-striped bordered-table condensed-table">
-				<tr>
-				<th>Address</th>
-				<td>
-					
-					<address>
-						<%= @user.address1 %><br />
-						<% if @user.address2? %>
-							<%= @user.address2 %><br />
-						<% end %>
-						<%= @user.city %>, 
-						<%= @user.state %> 
-						<%= @user.zip %>
-					</address>
-				</td>
-			</tr>
-			<tr>
-				<th>Email</th>
-				<td><%= @user.email %></td>
-			</tr>
-			<tr>
-				<th>Phone</th>
-				<td><%= @user.phone %></td>
-			</tr>
-			<tr>
-				<th>Can share with adopters:</th>
-				<td><%= @user.share_info %></td>
-			</tr>
-		</table>
-		</div>
+  <tr>
+    <td class="main">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+      <h4><%= @user.title %></h4>
+      <div class="span6">
+        <table class="zebra-striped bordered-table condensed-table">
+          <tr>
+            <th>Address</th>
+            <td>
+              <address>
+                <%= @user.address1 %><br />
+                <% if @user.address2? %>
+                  <%= @user.address2 %><br />
+                <% end %>
+                <%= @user.city %>, 
+                <%= @user.state %> 
+                <%= @user.zip %>
+              </address>
+            </td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td><%= @user.email %></td>
+          </tr>
+          <tr>
+            <th>Phone</th>
+            <td><%= @user.phone %></td>
+          </tr>
+          <tr>
+            <th>Can share with adopters:</th>
+            <td><%= @user.share_info %></td>
+          </tr>
+        </table>
+      </div>
 
-		<td class="sidebar round">	
-			<strong>Name</strong> 	<%= @user.name %><br />
-			<strong>URL</strong>	<%= link_to user_path(@user), @user %><br />
-			<% if (@user == current_user || is_admin?) %>
-				<strong><%= link_to( "Edit Profile", edit_user_path(@user)) %></strong>
-			<% end %>
-			<h4>Current Dogs</h4>
+      <td class="sidebar round">	
+        <strong>Name</strong> 	<%= @user.name %><br />
+        <strong>URL</strong>	<%= link_to user_path(@user), @user %><br />
+        <% if (@user == current_user || is_admin?) %>
+          <strong><%= link_to( "Edit Profile", edit_user_path(@user)) %></strong>
+        <% end %>
+        <h4>Current Dogs</h4>
 
-			<% @user.dogs.each do |d| %>
-				<%= link_to d.name, d %>
-				(<%= d.status %>)
-				<br />
-			<% end %>
-		</td>
-	</tr>
-</table>
+        <% @user.dogs.each do |d| %>
+          <%= link_to d.name, d %>
+          (<%= d.status %>)
+          <br />
+        <% end %>
+      </td>
+    </tr>
+  </table>

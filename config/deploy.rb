@@ -260,6 +260,17 @@ end
 
 namespace :deploy do
 
+  desc "Deploy and migrate the database - this will cause downtime during migrations"
+  task :migrations do
+    transaction do
+      update_code
+      web:disable
+      migrate
+      web:enable
+    end
+    restart
+  end
+
   desc "Symlinks setup_mail.rb, newrelic.yml, database.yml"
   task :symlink_configs, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/configs/newrelic.yml #{release_path}/config/newrelic.yml"
@@ -297,6 +308,24 @@ namespace :deploy do
     start
   end
 end
+
+namespace :deploy do
+  namespace :web do
+    task :disable, :roles => :web, :except => { :no_release => true } do
+      require 'erb'
+      on_rollback { run "rm #{shared_path}/system/maintenance.html" }
+
+      reason = ENV['REASON']
+      deadline = ENV['UNTIL']
+
+      template = File.read("./app/views/layouts/maintenance.html.erb")
+      result = ERB.new(template).result(binding)
+
+      put result, "#{shared_path}/system/maintenance.html", :mode => 0644
+    end
+  end
+end
+
 
 def parse_config(file)
   puts File.expand_path(File.dirname(__FILE__))

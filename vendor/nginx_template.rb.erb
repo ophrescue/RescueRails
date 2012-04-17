@@ -29,7 +29,13 @@ server {
     # this rewrites all the requests to the maintenance.html
     # page if it exists in the doc root. This is for capistrano's
     # disable web task
+
     if (-f $document_root/system/maintenance.html) {
+      return 503;
+    }
+
+    error_page 503 @maintenance;
+    location @maintenance {
       rewrite  ^(.*)$  /system/maintenance.html last;
       break;
     }

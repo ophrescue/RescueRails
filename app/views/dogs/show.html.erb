@@ -112,18 +112,20 @@
 	<div class="span16">
 		<h4>Private Comments</h4>
 
-		<%= form_for [@dog, @dog.comments.build] do |f| %>
+		<%= form_for [@dog, @dog.comments.build], :html => {:id => "new_comment"} do |f| %>
 				<%= f.text_area :content, :class => "xxlarge", :rows => "3" %>
 			<%= f.submit "Post", :class => "btn primary" %>
 		<% end %>
 
-		<table class="zebra-striped bordered-table condensed-table">
-			<% @dog.comments.each do |comment| %>
-					<% if comment.id != nil %>
-	    				<%= render 'comments/comment', :comment => comment %>
-	    			<% end %>
-			<% end %>
-		</table>
+    <div id="comment_table">
+      <table class="zebra-striped bordered-table condensed-table">
+        <% @dog.comments.each do |comment| %>
+            <% if comment.id != nil %>
+                <%= render 'comments/comment', :comment => comment %>
+              <% end %>
+        <% end %>
+      </table>
+    </div>
 	</div>
 </div>
 <% end %>

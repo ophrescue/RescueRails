@@ -135,3 +135,9 @@ th .asc {
 th .desc {
 	background-image: url(down_arrow.gif);
 }
+
+#edit_flag select, 
+#edit_assigned select, 
+#edit_status select {
+  width: 100px;
+}

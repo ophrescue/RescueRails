@@ -1,8 +1,10 @@
 <h5><%= link_to "Adoption Applications", :controller => "adopters", :status => "active"   %></h5>
+
 <div class="row">
   <div class="span6">
     <h2><%= @adopter.name %></h2>
   </div>
+
   <div class="span8 offset1">
     <ul class="tabs">
       <li class="active"><a href="#dog">Dog Choices</a></li>
@@ -17,7 +19,6 @@
     </ul>
   </div>
 </div>
-
 
 <div class="row">
   <div class="span6">
@@ -116,6 +117,7 @@
         </th>
         <td id="edit_flag"><%= image_tag("pencil_go.png") %>
           <%= best_in_place @adopter, :flag, :type => :select, :collection => [['Undefined', 'Undefined']].concat( Adopter::FLAGS.collect{|s| [s, s]} ), :nil => 'click to edit', :activator => '#edit_flag' %>
+
         </td>
       </tr>
       <tr>
@@ -124,6 +126,7 @@
         </th>
         <td id="edit_assigned"><%= image_tag("pencil_go.png") %>
           <%= best_in_place @adopter, :assigned_to_user_id, :type => :select, :collection => [['No One', 'No One']].concat( @adopter_users.collect {|u| [u.id, u.name] }), :nil => 'click to edit', :activator => "#edit_assigned" %>
+
         </td>
       </tr>
 
@@ -286,7 +289,6 @@
       <%= f.text_area :content, :class => "xxlarge", :rows => "3" %>
       <%= f.submit "Post", :class => "btn primary" %>
     <% end %>
-
     <div id="comment_table">
       <table id="comments" class="zebra-striped bordered-table condensed-table">
         <% @adopter.comments.each do |comment| %>

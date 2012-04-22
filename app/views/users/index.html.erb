@@ -1,32 +1,41 @@
 <h1><%= @title %></h1>
+
+<%= form_tag users_path, :method => 'get' do %>
+  <p>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search", :name => nil %>
+  <%= link_to ' Clear Search', users_path %>
+  </p>
+<% end %>
+
 <% if is_admin? %>
-<p>
-<%= link_to "Create new Staff Account", new_user_path %>
-</p>
+  <p>
+  <%= link_to "Create new Staff Account", new_user_path %>
+  </p>
 <% end %>
 <%= will_paginate @users %>
 
 <% if !@users.nil? %>
 
-<table class="zebra-striped bordered-table condensed-table">
-	<thead>
-		<tr>
-			<th>Photo</th>
-			<th>Name</th>
-			<th>Title</th>
-			<th>Email</th>
-			<th>Phone</th>
-			<th>Address</th>
-			<th>Current Dogs</th>
-			<th>Admin</th>
-		</tr>
-	</thead>
-	<tbody>
-	<%= render @users %>
-	</tbody>
-</table>
+  <table class="zebra-striped bordered-table condensed-table" id="user-sort">
+    <thead>
+      <tr>
+        <th>Photo</th>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Current Dogs</th>
+        <th>Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @users %>
+    </tbody>
+  </table>
 <% else %>
-<h3>No Records Found</h3>
+  <h3>No Records Found</h3>
 <% end %>
 
 <%= will_paginate @users %>

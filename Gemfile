@@ -15,6 +15,7 @@ gem 'therubyracer', :platform => :ruby
 gem 'geocoder'
 gem 'best_in_place'
 gem 'gibbon'
+gem "exception_notification", "~> 2.6.1"
 
 group :production do
   gem "unicorn", "~> 4.3.0"

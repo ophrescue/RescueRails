@@ -33,5 +33,9 @@ RescueRails::Application.configure do
 
   # Paperclip Configuration
   Paperclip.options[:command_path] = "/usr/local/bin/"
+
+  config.middleware.use ExceptionNotifier,
+  sender_address: 'info@ophrescue.org',
+  exception_recipients: 'admin@ophrescue.org'
   
 end

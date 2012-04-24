@@ -227,7 +227,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  anjlab-bootstrap-rails
+  anjlab-bootstrap-rails (= 1.4.0.14)
   annotate
   autotest
   autotest-fsevent

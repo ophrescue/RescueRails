@@ -55,7 +55,7 @@ group :development do
   gem 'turn', :require => false
   gem 'autotest'
   gem 'autotest-rails-pure'
-  gem 'autotest-fsevent' , :platform => :ruby
+  gem "autotest-fsevent", "~> 0.2.8" , :platform => :ruby
   gem 'autotest-growl' , :platform => :ruby  
 end
 
@@ -68,6 +68,6 @@ group :test do
   gem 'turn', :require => false
   gem 'autotest'
   gem 'autotest-rails-pure'
-  gem 'autotest-fsevent', :platform => :ruby
+  gem "autotest-fsevent", "~> 0.2.8" , :platform => :ruby
   gem 'autotest-growl', :platform => :ruby
 end

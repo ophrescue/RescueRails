@@ -40,7 +40,7 @@ GEM
     arel (2.2.1)
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
-    autotest-fsevent (0.2.7)
+    autotest-fsevent (0.2.8)
       sys-uname
     autotest-growl (0.2.16)
     autotest-rails-pure (4.1.2)
@@ -230,7 +230,7 @@ DEPENDENCIES
   anjlab-bootstrap-rails (= 1.4.0.14)
   annotate
   autotest
-  autotest-fsevent
+  autotest-fsevent (~> 0.2.8)
   autotest-growl
   autotest-rails-pure
   best_in_place

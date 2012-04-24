@@ -33,7 +33,7 @@ require 'capistrano/cli'
 # Below are the parameters you must change to match your app.
 server =                    "173.255.234.200"
 app_name =                  "rescuerails"
-app_repository =            "git@github.com:docvego/RescueRails.git"
+app_repository =            "git@github.com:ophrescue/RescueRails.git"
 app_repository_branch =     "master"
 app_deployment_root =       "/var/www/rescuerails"
 deployment_user =           "unicorn"

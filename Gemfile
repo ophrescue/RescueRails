@@ -17,7 +17,7 @@ gem 'best_in_place'
 gem 'gibbon'
 
 group :production do
-  gem 'unicorn'
+  gem "unicorn", "~> 4.3.0"
 end
 
 

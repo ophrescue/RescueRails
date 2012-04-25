@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    @user.email.downcase!
     if @user.save
       flash[:success] = "Account created for " + @user.name
       redirect_to users_path
@@ -42,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    params[:user][:email].downcase!
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated."
       redirect_to @user

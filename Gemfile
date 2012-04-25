@@ -52,7 +52,7 @@ group :development do
   gem 'rspec-rails'
   gem 'annotate'
   gem 'faker'
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'debugger', :require => 'ruby-debug'
   gem 'turn', :require => false
   gem 'autotest'
   gem 'autotest-rails-pure'
@@ -65,7 +65,7 @@ group :test do
   gem 'webrat'
   gem 'spork'
   gem 'factory_girl_rails'
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'debugger', :require => 'ruby-debug'
   gem 'turn', :require => false
   gem 'autotest'
   gem 'autotest-rails-pure'

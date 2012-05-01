@@ -75,11 +75,12 @@ GEM
     delayed_job (2.1.4)
       activesupport (~> 3.0)
       daemons
-    delayed_mailhopper (0.0.2)
+    delayed_mailhopper (0.0.5)
       delayed_job
-      mailhopper (~> 0.0.1)
+      mailhopper (>= 0.0.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
+    eventmachine (0.12.10)
     exception_notification (2.6.1)
       actionmailer (>= 3.0.4)
     execjs (1.2.13)
@@ -116,8 +117,8 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mailhopper (0.0.5)
-      rails (~> 3.1.0)
+    mailhopper (0.1.0)
+      rails (>= 3.1.0)
     mime-types (1.17.2)
     multi_json (1.0.4)
     multi_xml (0.4.2)
@@ -197,6 +198,10 @@ GEM
       ffi (>= 1.0.0)
     therubyracer (0.9.9)
       libv8 (~> 3.3.10)
+    thin (1.3.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.14.6)
     tilt (1.3.3)
     treetop (1.4.10)
@@ -235,7 +240,7 @@ DEPENDENCIES
   coffee-rails (~> 3.1.1)
   debugger
   delayed_job (~> 2.1.4)
-  delayed_mailhopper
+  delayed_mailhopper (~> 0.0.5)
   exception_notification (~> 2.6.1)
   factory_girl_rails
   faker
@@ -243,7 +248,7 @@ DEPENDENCIES
   gibbon
   gravatar_image_tag
   jquery-rails
-  mailhopper
+  mailhopper (~> 0.1.0)
   newrelic_rpm
   paperclip
   pg
@@ -253,6 +258,7 @@ DEPENDENCIES
   sass-rails (~> 3.1.4)
   spork
   therubyracer
+  thin (~> 1.3.1)
   turn
   uglifier (>= 1.0.3)
   unicorn (~> 4.3.0)

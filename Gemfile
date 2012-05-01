@@ -24,8 +24,8 @@ end
 
 # Cool mail async stuff
 gem "delayed_job", "~> 2.1.4"
-gem 'mailhopper'
-gem 'delayed_mailhopper'
+gem "mailhopper", "~> 0.1.0"
+gem "delayed_mailhopper", "~> 0.0.5"
 
 
 gem 'anjlab-bootstrap-rails', '1.4.0.14', :require => 'bootstrap-rails'
@@ -58,6 +58,7 @@ group :development do
   gem 'autotest-rails-pure'
   gem "autotest-fsevent", "~> 0.2.8" , :platform => :ruby
   gem 'autotest-growl' , :platform => :ruby  
+  gem "thin", "~> 1.3.1"
 end
 
 group :test do
@@ -71,4 +72,5 @@ group :test do
   gem 'autotest-rails-pure'
   gem "autotest-fsevent", "~> 0.2.8" , :platform => :ruby
   gem 'autotest-growl', :platform => :ruby
+  gem "thin", "~> 1.3.1"
 end

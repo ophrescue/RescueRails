@@ -48,6 +48,11 @@ class User < ActiveRecord::Base
 
   has_many :assignments, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id'
   
+  before_create :chimp_subscribe
+
+  before_update :chimp_check
+
+
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
   end
@@ -75,6 +80,39 @@ class User < ActiveRecord::Base
     save!(:validate => false)
     UserMailer.password_reset(self).deliver
   end
+
+  def chimp_subscribe
+
+    gb = Gibbon.new
+    gb.timeout = 5
+
+    list_id = '5e50e2be93'
+
+    merge_vars = {
+      'FNAME' => self.name,
+      'GROUPINGS' => [ { 'name' => 'OPH Target Segments', 'groups' => 'Volunteer'} ]
+    }
+
+    double_optin = false
+
+    response = gb.listSubscribe({ :id => list_id,
+                                  :email_address => self.email,
+                                  :merge_vars => merge_vars,
+                                  :double_optin => double_optin,
+                                  :send_welcome => false
+    })
+
+  end
+
+
+  def chimp_check
+
+    if self.email_changed?
+      self.chimp_subscribe
+    end
+
+  end
+
 
   private
 

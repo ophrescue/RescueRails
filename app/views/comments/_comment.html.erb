@@ -11,5 +11,5 @@
       <% #<button id="" class="btn disable">Delete</button> %>
     <% end %>
   </td>
-  <td><%= image_tag("pencil_go.png") %><%= best_in_place_if comment.user_id == current_user.id, comment, :content, :type => :textarea %></td>
+  <td><%= image_tag("pencil_go.png") if comment.user_id == current_user.try(:id) %><%= best_in_place_if comment.user_id == current_user.try(:id), comment, :content, :type => :textarea %></td>
 </tr>

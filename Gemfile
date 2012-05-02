@@ -3,18 +3,18 @@
 ##
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem "rails", "~> 3.2.3"
 
-gem 'pg'
+gem "pg", "~> 0.13.2"
 gem 'will_paginate',  '~> 3.0.2'
-gem 'bootstrap-will_paginate'
-gem 'gravatar_image_tag'
-gem 'rails3-jquery-autocomplete'
-gem "paperclip"
-gem 'therubyracer', :platform => :ruby
-gem 'geocoder'
-gem 'best_in_place'
-gem 'gibbon'
+gem 'bootstrap-will_paginate', "~> 0.0.3"
+gem "gravatar_image_tag", "~> 1.1.2"
+gem "rails3-jquery-autocomplete", "~> 1.0.7"
+gem "paperclip", "~> 2.4.5"
+gem "therubyracer", "~> 0.10.1", :platform => :ruby
+gem "geocoder", "~> 1.1.1"
+gem "best_in_place", "~> 1.0.6"
+gem "gibbon", "~> 0.3.5"
 gem "exception_notification", "~> 2.6.1"
 
 group :production do
@@ -33,20 +33,20 @@ gem 'anjlab-bootstrap-rails', '1.4.0.14', :require => 'bootstrap-rails'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.1.4'
-  gem 'coffee-rails', '~> 3.1.1'
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem "jquery-rails", "~> 2.0.2"
 
-gem 'newrelic_rpm'
+gem "newrelic_rpm", "~> 3.3.4.1"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Deploy with Capistrano
-  gem 'capistrano'
+gem "capistrano", "~> 2.12.0"
 
 group :development do
   gem 'rspec-rails'

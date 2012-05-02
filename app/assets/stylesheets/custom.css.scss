@@ -1,5 +1,5 @@
 body {
-	padding-top: 90px;
+	padding-top: 0px;
 }
 
 label.error {
@@ -47,10 +47,6 @@ form .clearfix.error span.error {
 	color: #FFFFFF;
 }
 
-.menu-dropdown, .dropdown-menu {
-  top: 63px;
-}
-
 .sidekick {
 	background-color: #ffffff;
 	border-radius: 6px 6px 6px 6px;
@@ -60,10 +56,6 @@ form .clearfix.error span.error {
 .sidekick h2 {
 	border-bottom: 2px solid #000000;
 	margin-bottom: 10px;
-}
-
-.topbar div > ul a, .nav a {
-	padding: 33px 10px 11px;
 }
 
 .article h2 {

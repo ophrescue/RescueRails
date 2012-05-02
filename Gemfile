@@ -6,8 +6,8 @@ source 'http://rubygems.org'
 gem "rails", "~> 3.2.3"
 
 gem "pg", "~> 0.13.2"
-gem 'will_paginate',  '~> 3.0.2'
-gem 'bootstrap-will_paginate', "~> 0.0.3"
+gem 'will_paginate',  '~> 3.0.3'
+gem 'bootstrap-will_paginate', "~> 0.0.7"
 gem "gravatar_image_tag", "~> 1.1.2"
 gem "rails3-jquery-autocomplete", "~> 1.0.7"
 gem "paperclip", "~> 2.4.5"
@@ -18,7 +18,7 @@ gem "gibbon", "~> 0.3.5"
 gem "exception_notification", "~> 2.6.1"
 
 group :production do
-  gem "unicorn", "~> 4.3.0"
+  gem "unicorn", "~> 4.3.1"
 end
 
 
@@ -28,7 +28,7 @@ gem "mailhopper", "~> 0.1.0"
 gem "delayed_mailhopper", "~> 0.0.5"
 
 
-gem 'anjlab-bootstrap-rails', '1.4.0.14', :require => 'bootstrap-rails'
+gem "anjlab-bootstrap-rails", "~> 2.0.3.2", :require => 'bootstrap-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

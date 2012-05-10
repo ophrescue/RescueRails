@@ -30,6 +30,14 @@ form .clearfix.error span.error {
 	border-radius: 6px;*/
 }
 
+.carousel-inner {
+	background-repeat: no-repeat;
+	background-color: #262425;
+	text-align: center; 
+}
+
+.carousel .item > img { display: inline-block; }
+
 /*#hero-dog  {
 	position:relative;
 	left:30px;

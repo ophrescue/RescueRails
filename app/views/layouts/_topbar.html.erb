@@ -1,57 +1,64 @@
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
           <%= link_to image_tag("logo-top.png")+" Operation Paws for Homes" , root_path, :class => "brand" %>
-          <ul class="nav">
-            <li><%= link_to "Dogs", "http://www.petfinder.com/pet-search?shelterid=VA600", :target => "_blank" %></li>
-            <li><%= link_to "Events", events_path %></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">For Adopters<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><%= link_to "Adoption Application", new_adopter_path %></li>
-                <li class="divider"></li>
-                <li><a href="/guide">Adoption Guide</a></li>
-                <li><a href="/resources">Resources</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Volunteer<b class="caret"></b></a>
-            	<ul class="dropdown-menu">
-								<li><%= link_to "Volunteer", '/volunteer' %></li>
-								<li class="divider"></li>
-								<li><a href="/foster">Foster</a></li>
-								<li><a href="/fosterfaq">Foster FAQ</a></li>
-							</ul>
-						</li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">About Us<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/aboutus">Our Story</a></li>
-                <li><a href="/contact">Contact Us</a></li>
-                <li class="divider"></li>
-                <li><a href="/contributors">Contributors</a></li>
-              </ul>
-            </li>
-						<% if signed_in? %>
-						
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Staff<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-                <% if can_edit_my_adopters? || can_edit_all_adopters? %>
-                  <li><%= link_to "Applications",  :controller => "adopters", :status => "active" %></li>
-                <% end %>
-                <% if can_edit_dogs? %>
-                  <li><%= link_to "Manage Dogs", dogs_path %></li>
-                <% end %>
-								<li><%= link_to "Users", users_path %></li>
-								<li><%= link_to "My Profile", current_user %></li>
-								<li><%= link_to "Sign out", signout_path, :method => :delete %></li>
-							</ul>
-						</li>
-						<% else %>
-							<li><%= link_to "Sign in", signin_path %></li>
-						<% end %>
-          </ul>
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><%= link_to "Dogs", "http://www.petfinder.com/pet-search?shelterid=VA600", :target => "_blank" %></li>
+              <li><%= link_to "Events", events_path %></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">For Adopters<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Adoption Application", new_adopter_path %></li>
+                  <li class="divider"></li>
+                  <li><a href="/guide">Adoption Guide</a></li>
+                  <li><a href="/resources">Resources</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+              	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Volunteer<b class="caret"></b></a>
+              	<ul class="dropdown-menu">
+  								<li><%= link_to "Volunteer", '/volunteer' %></li>
+  								<li class="divider"></li>
+  								<li><a href="/foster">Foster</a></li>
+  								<li><a href="/fosterfaq">Foster FAQ</a></li>
+  							</ul>
+  						</li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About Us<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/aboutus">Our Story</a></li>
+                  <li><a href="/contact">Contact Us</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/contributors">Contributors</a></li>
+                </ul>
+              </li>
+  						<% if signed_in? %>
+  						
+  						<li class="dropdown">
+  							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Staff<b class="caret"></b></a>
+  							<ul class="dropdown-menu">
+                  <% if can_edit_my_adopters? || can_edit_all_adopters? %>
+                    <li><%= link_to "Applications",  :controller => "adopters", :status => "active" %></li>
+                  <% end %>
+                  <% if can_edit_dogs? %>
+                    <li><%= link_to "Manage Dogs", dogs_path %></li>
+                  <% end %>
+  								<li><%= link_to "Users", users_path %></li>
+  								<li><%= link_to "My Profile", current_user %></li>
+  								<li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+  							</ul>
+  						</li>
+  						<% else %>
+  							<li><%= link_to "Sign in", signin_path %></li>
+  						<% end %>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

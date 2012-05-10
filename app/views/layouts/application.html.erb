@@ -10,7 +10,7 @@
   <body>
   	<!--[if lte IE 6]><script src="js/ie6/warning.js"></script><script>window.onload=function(){e("/assets/ie6warn/")}</script><![endif]-->
 	<%= render 'layouts/topbar' %>
-	<div class="container-fluid">
+	<div class="container">
 		<% flash.each do |key, value| %>
 			<% if value == "adoptsuccess" %>
 				<div class="alert-message block-message success">

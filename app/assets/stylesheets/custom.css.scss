@@ -1,5 +1,6 @@
 body {
-	padding-top: 0px;
+	padding-top: 60px;
+	padding-bottom: 40px;
 }
 
 label.error {
@@ -19,26 +20,27 @@ form .clearfix.error span.error {
 }
 
 .hero-unit {
-	background-image: url(hero_bg2.jpg);
+	background-image: url(hero_bg2.gif);
 	background-repeat: no-repeat;
-	margin-bottom: 30px;
-	padding: 60px;
-/*	background-position: center center;*/
-/*	background-size: 940px 340px;*/
-/*	position: relative;*/
+	background-position: center;
+	background-color: #262425;
+	padding: 160px;
+/*	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;*/
 }
 
-#hero-dog  {
-	position:absolute;
+/*#hero-dog  {
+	position:relative;
 	left:30px;
 	top:250px;
 }
 
 #hero-adopt  {
-	position:absolute;
-	left:165px;
-	top:250px;
-}
+	position:relative;
+	left:16px;
+	top:50px;
+}*/
 
 .hero-unit h1 {
 	color: #FFFFFF;
@@ -49,11 +51,6 @@ form .clearfix.error span.error {
 	color: #FFFFFF;
 }
 
-.sidekick {
-	background-color: #ffffff;
-	border-radius: 6px 6px 6px 6px;
-	padding: 10px;
-}
 
 .sidekick h2 {
 	border-bottom: 2px solid #000000;

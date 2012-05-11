@@ -56,9 +56,11 @@ group :development do
   gem 'turn', :require => false
   gem 'autotest'
   gem 'autotest-rails-pure'
-  gem "autotest-fsevent", "~> 0.2.8" , :platform => :ruby
+  gem 'autotest-fsevent', '~> 0.2.8' , :platform => :ruby
   gem 'autotest-growl' , :platform => :ruby  
-  gem "thin", "~> 1.3.1"
+  gem 'thin', '~> 1.3.1'
+  gem 'safariwatir', :platform => :ruby
+  gem 'watir-webdriver', :platform => :ruby
 end
 
 group :test do
@@ -73,4 +75,6 @@ group :test do
   gem "autotest-fsevent", "~> 0.2.8" , :platform => :ruby
   gem 'autotest-growl', :platform => :ruby
   gem "thin", "~> 1.3.1"
+  gem 'safariwatir', :platform => :ruby
+  gem 'watir-webdriver', :platform => :ruby
 end

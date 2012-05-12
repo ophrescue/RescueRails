@@ -59,7 +59,6 @@ group :development do
   gem 'autotest-fsevent', '~> 0.2.8' , :platform => :ruby
   gem 'autotest-growl' , :platform => :ruby  
   gem 'thin', '~> 1.3.1'
-  gem 'safariwatir', :platform => :ruby
   gem 'watir-webdriver', :platform => :ruby
 end
 
@@ -75,6 +74,5 @@ group :test do
   gem "autotest-fsevent", "~> 0.2.8" , :platform => :ruby
   gem 'autotest-growl', :platform => :ruby
   gem "thin", "~> 1.3.1"
-  gem 'safariwatir', :platform => :ruby
   gem 'watir-webdriver', :platform => :ruby
 end

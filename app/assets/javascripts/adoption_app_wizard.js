@@ -34,13 +34,16 @@ $(function(){
                               maxlength: 250
                         },
                         "adopter[city]" : {
+                              required: true,
                               maxlength: 250
                         },
       			"adopter[state]" : {
+                              required: true,
       				minlength: 2,
                               maxlength: 2
       			},
       			"adopter[zip]" : {
+                              required: true,
       				digits: true,
       				minlength: 5,
       				maxlength: 5
@@ -102,6 +105,7 @@ $(function(){
                               maxlength: 250
                         },
                         "adopter[adoption_app_attributes][current_pets]" : {
+                              required: true,
                               maxlength: 250
                         },
                         "adopter[adoption_app_attributes][why_not_fixed]" : {
@@ -111,6 +115,7 @@ $(function(){
                               maxlength: 250
                         },
                         "adopter[adoption_app_attributes][vet_info]" : {
+                              required: true,
                               maxlength: 250
                         },
                         "adopter[references_attributes][0][email]" : {

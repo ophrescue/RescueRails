@@ -16,7 +16,7 @@
 	</div>		
 
 	<div class="clearfix">
-		<%= f.label :dog_reqs, "Describe the type of dog you want to adopt." %>
+		<%= f.label :dog_reqs, "Describe the type of dog you want to adopt.  Please include the two traits that are most important to you." %>
 		<div class="input">
 			<%= f.text_area :dog_reqs, :class => "xxlarge required", :rows => "3" %>
 			<span class="help-inline">Age, Weight, Activity Level, etc.</span>
@@ -24,7 +24,7 @@
 	</div>
 
 	<div class="clearfix">
-		<%= f.label :why_adopt, "Please tell us why you would like to make this dog part of your family!" %>
+		<%= f.label :why_adopt, "Why do you want to make this dog a part of your family and how will you incorporate the dog into your existing family?" %>
 		<div class="input">
 			<%= f.text_area :why_adopt, :class => "required xxlarge", :rows => "5" %>
 		</div>

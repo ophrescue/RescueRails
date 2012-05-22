@@ -1,55 +1,56 @@
 <div class="row">
-	<ul class="tabs">
-		<% Dog::STATUSES.each do |status| %>
-		  <% if status == params[:status] %>
-		  	<li class="active">
-		  <% else %>
-		    <li>
-		  <% end %>		  
-		    <%= link_to status.titleize, :controller => "dogs", :status => status %>
-		  </li>
-		<% end %>
-			<% if params[:status] == nil %>
+	<div class="span12">
+		<ul class="nav nav-tabs">
+			<% Dog::STATUSES.each do |status| %>
+			  <% if status == params[:status] %>
+			  	<li class="active">
+			  <% else %>
+			    <li>
+			  <% end %>		  
+			    <%= link_to status.titleize, :controller => "dogs", :status => status %>
+			  </li>
+			<% end %>
+				<% if params[:status] == nil %>
+					<li class="active">
+				<% else %>
+					<li>
+				<% end %>
+				<%= link_to "All", dogs_path %>
+			</li>
+			<% if params[:status] == "active" %>
 				<li class="active">
 			<% else %>
-				<li>
+				<li>	
 			<% end %>
-			<%= link_to "All", dogs_path %>
-		</li>
-		<% if params[:status] == "active" %>
-			<li class="active">
+				<%= link_to "Active", :controller => "dogs", :status => "active" %>
+			</li>
+		</ul>
+
+
+		<% if !@dogs.nil? %>
+
+		<table class="table-striped table-bordered table-condensed">
+			<thead>
+				<tr>
+					<th><%= sortable "tracking_id" %></th>
+					<th><%= sortable "name" %></th>
+					<th>Age</th>
+					<th>Flag</th>
+					<% if (params[:status] == nil) || (params[:status] == "active")%>
+					<th><%= sortable "status" %></th>
+					<% end %>
+					<th>Foster Name</th>
+					<th>Location</th>
+					<th>Adopter Interest</th>
+					<th>Last Comment</th>
+				</tr>
+			</thead>
+			<tbody>
+			<%= render :partial => "manager_dog", :collection => @dogs, :as => :dog %>
+			</tbody>
+		</table>
 		<% else %>
-			<li>	
+		<h3>No Records Found</h3>
 		<% end %>
-			<%= link_to "Active", :controller => "dogs", :status => "active" %>
-		</li>
-	</ul>
+	</div>
 </div>
-
-<% if !@dogs.nil? %>
-
-<table class="zebra-striped bordered-table condensed-table">
-	<thead>
-		<tr>
-			<th><%= sortable "tracking_id" %></th>
-			<th><%= sortable "name" %></th>
-			<th>Age</th>
-			<th>Flag</th>
-			<% if (params[:status] == nil) || (params[:status] == "active")%>
-			<th><%= sortable "status" %></th>
-			<% end %>
-			<th>Foster Name</th>
-			<th>Location</th>
-			<th>Adopter Interest</th>
-			<th>Last Comment</th>
-		</tr>
-	</thead>
-	<tbody>
-	<%= render :partial => "manager_dog", :collection => @dogs, :as => :dog %>
-	</tbody>
-</table>
-<% else %>
-<h3>No Records Found</h3>
-<% end %>
-
-

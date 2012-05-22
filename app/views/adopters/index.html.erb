@@ -1,9 +1,7 @@
 <div class="row">
-	<div class="span6">
+	<div class="span12">
 		<h1><%= @title %></h1>
-	</div>
-	<div class="span6 offset4">
-		<ul class="pills">
+		<ul class="nav nav-pills">
 		  <li class="active"><a href="#">My Apps</a></li>
 		  <li><a href="#">Open Apps</a></li>
 		  <li><a href="#">All Apps</a></li>
@@ -12,31 +10,33 @@
 </div>
 
 <div class="row">
-	<ul class="tabs">
-		<% Adopter::STATUSES.each do |status| %>
-		  <% if status == params[:status] %>
-		  	<li class="active">
-		  <% else %>
-		    <li>
-		  <% end %>		  
-		    <%= link_to status.titleize, :controller => "adopters", :status => status %>
-		  </li>
-		<% end %>
-			<% if params[:status] == nil %>
+	<div class="span12">
+		<ul class="nav nav-tabs">
+			<% Adopter::STATUSES.each do |status| %>
+			  <% if status == params[:status] %>
+			  	<li class="active">
+			  <% else %>
+			    <li>
+			  <% end %>		  
+			    <%= link_to status.titleize, :controller => "adopters", :status => status %>
+			  </li>
+			<% end %>
+				<% if params[:status] == nil %>
+					<li class="active">
+				<% else %>
+					<li>
+				<% end %>
+				<%= link_to "All", adopters_path %>
+			</li>
+			<% if params[:status] == "active" %>
 				<li class="active">
 			<% else %>
-				<li>
+				<li>	
 			<% end %>
-			<%= link_to "All", adopters_path %>
-		</li>
-		<% if params[:status] == "active" %>
-			<li class="active">
-		<% else %>
-			<li>	
-		<% end %>
-			<%= link_to "Active", :controller => "adopters", :status => "active" %>
-		</li>
-	</ul>
+				<%= link_to "Active", :controller => "adopters", :status => "active" %>
+			</li>
+		</ul>
+	</div>
 </div>
 
 <%= form_tag adopters_path, :method => 'get' do %>
@@ -48,7 +48,7 @@
 
 <% if !@adopters.nil? %>
 
-<table class="zebra-striped bordered-table condensed-table" id="adopt-sort">
+<table class="table-striped table-bordered table-condensed" id="adopt-sort">
 	<thead>
 		<tr>
 			<th>id</th>

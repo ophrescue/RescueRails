@@ -5,7 +5,7 @@
   <td >
     <% if current_user == comment.user %>
       <%= form_for comment, :html => {:id => "delete_comment", :class => "delete_comment"}, :method => :delete do |f| %>
-        <%= f.submit "Delete", :class => "btn danger" %>
+        <%= f.submit "Delete", :class => "btn btn-danger" %>
       <% end %>
     <% else %>
       <% #<button id="" class="btn disable">Delete</button> %>

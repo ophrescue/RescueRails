@@ -13,7 +13,7 @@
 	<div class="container">
 		<% flash.each do |key, value| %>
 			<% if value == "adoptsuccess" %>
-				<div class="alert-message block-message success">
+				<div class="alert alert-block alert-success">
 					<a class="close" href="/">&times;</a>
 	        		<p><strong>Success!</strong> Your adoption application has been submitted successfully. We will review
 	        		your application and contact you in the next 2 business days.</p>
@@ -31,7 +31,7 @@
 	          		</div>
 				</div>
 			<% else %>
-				<%= content_tag(:div, value, :class => "alert-message #{key}") %>
+				<%= content_tag(:div, value, :class => "alert alert-#{key}") %>
 			<% end %>
 		<% end %> 
 		<%= yield %>

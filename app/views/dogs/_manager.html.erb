@@ -26,6 +26,7 @@
 			</li>
 		</ul>
 
+		<%= will_paginate @dogs %>
 
 		<% if !@dogs.nil? %>
 
@@ -49,6 +50,7 @@
 			<%= render :partial => "manager_dog", :collection => @dogs, :as => :dog %>
 			</tbody>
 		</table>
+		<%= will_paginate @dogs %>
 		<% else %>
 		<h3>No Records Found</h3>
 		<% end %>

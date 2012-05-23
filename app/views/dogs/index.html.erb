@@ -13,13 +13,14 @@
 	<% end %>
 </div>
 </div>
-<%= will_paginate @dogs %>
+
 
 <div class="row">
 	<div class="span12">
 		<% if can_edit_dogs? && session[:mgr_view] == true %>
 			<%= render 'manager' %>
 		<% else %>
+			<%= will_paginate @dogs %>
 			<% @dogs.each_slice(3) do |slice| %>
 				<div class="row">
 					<div class="span12 gallery">
@@ -32,10 +33,10 @@
 										<% else %>
 											<%= image_tag(dog.photos.first.photo.url(:medium), :alt => dog.name)  %> 
 										<% end %>
-										<h4><%= dog.name %></h4>
+										<h4><%= dog.name.titleize %></h4>
 										<p>
-											<%= dog.primary_breed.name unless !dog.primary_breed %><br/>
-											<%= dog.secondary_breed.name unless !dog.secondary_breed %>
+											<%= dog.primary_breed.name.titleize unless !dog.primary_breed %><br/>
+											<%= dog.secondary_breed.name.titleize unless !dog.secondary_breed %>
 										</p>
 									<% end %>
 								</li>
@@ -44,7 +45,7 @@
 					</div>
 				</div>
 			<% end %>
+			<%= will_paginate @dogs %>
 		<% end %>
-		<%= will_paginate @dogs %>
 	</div>
 </div>

@@ -8,7 +8,7 @@
 	<div class="span4">
 		<div class="eventphoto">
 			<% if event.photo? %>
-				<%= link_to image_tag(event.photo.url(:medium)),event %>
+				<%= link_to image_tag(event.photo.url(:medium)),event.photo.url %>
 			<% else %>
 			&nbsp;
 			<% end %>

@@ -10,7 +10,7 @@ gem 'will_paginate',  '~> 3.0.2'
 gem 'bootstrap-will_paginate', "~> 0.0.3"
 gem "gravatar_image_tag", "~> 1.1.2"
 gem "rails3-jquery-autocomplete", "~> 1.0.7"
-gem "paperclip", "~> 2.4.5"
+gem "paperclip", "~> 3.0"
 gem "therubyracer", "~> 0.10.1", :platform => :ruby
 gem "geocoder", "~> 1.1.1"
 gem "best_in_place", "~> 1.0.6"

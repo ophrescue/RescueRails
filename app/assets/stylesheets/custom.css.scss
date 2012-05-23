@@ -38,18 +38,6 @@ form .clearfix.error span.error {
 
 .carousel .item > img { display: inline-block; }
 
-/*#hero-dog  {
-	position:relative;
-	left:30px;
-	top:250px;
-}
-
-#hero-adopt  {
-	position:relative;
-	left:16px;
-	top:50px;
-}*/
-
 .hero-unit h1 {
 	color: #FFFFFF;
 	font-size: 37px;
@@ -58,7 +46,6 @@ form .clearfix.error span.error {
 .hero-unit p {
 	color: #FFFFFF;
 }
-
 
 .sidekick h2 {
 	border-bottom: 2px solid #000000;
@@ -79,6 +66,16 @@ form .clearfix.error span.error {
 	display:block ; 
 	margin: auto ;
 	border-radius: 6px 6px 6px 6px;
+}
+
+.gallery img{
+	display:block ; 
+	margin: auto ;
+	border-radius: 6px 6px 6px 6px;	
+}
+
+.gallery h4 {
+	text-align: center;
 }
 
 img.floatLeft { 

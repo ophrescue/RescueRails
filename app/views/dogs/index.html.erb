@@ -33,7 +33,10 @@
 											<%= image_tag(dog.photos.first.photo.url(:medium), :alt => dog.name)  %> 
 										<% end %>
 										<h4><%= dog.name %></h4>
-										<p><%= dog.primary_breed.name unless !dog.primary_breed %></p>
+										<p>
+											<%= dog.primary_breed.name unless !dog.primary_breed %><br/>
+											<%= dog.secondary_breed.name unless !dog.secondary_breed %>
+										</p>
 									<% end %>
 								</li>
 							<% end %>

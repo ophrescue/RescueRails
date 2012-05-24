@@ -6,22 +6,12 @@
   </div>
 
   <div class="span6 offset1">
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#dog" data-toggle="tab">Dog Choices</a></li>
-      <li><a href="#doginfo" data-toggle="tab">Dog Info</a></li>
-      <% if @adopter.adoption_app.pets_branch == 'other_pets' %>
-        <li><a href="#otherpets" data-toggle="tab">Pet Vet</a></li>
-      <% end %>
-      <% if @adopter.adoption_app.house_type == 'rent' %>
-        <li><a href="#rental" data-toggle="tab">Rental</a></li>
-      <% end %>
-      <li><a href="#references" data-toggle="tab">References</a></li>
-    </ul>
+
   </div>
 </div>
 
 <div class="row">
-  <div class="span5">
+  <div class="span6">
     <table class="table-striped table-bordered table-condensed">
       <tr>
         <td colspan="2">
@@ -138,10 +128,22 @@
         </td>
       </tr>
     </table>
+    <br />
   </div>
 
 
-  <div class="span6 offset1">
+  <div class="span6">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#dog" data-toggle="tab">Dog Choices</a></li>
+      <li><a href="#doginfo" data-toggle="tab">Dog Info</a></li>
+      <% if @adopter.adoption_app.pets_branch == 'other_pets' %>
+        <li><a href="#otherpets" data-toggle="tab">Pet Vet</a></li>
+      <% end %>
+      <% if @adopter.adoption_app.house_type == 'rent' %>
+        <li><a href="#rental" data-toggle="tab">Rental</a></li>
+      <% end %>
+      <li><a href="#references" data-toggle="tab">References</a></li>
+    </ul>
     <div class="pill-content">
       <div class="tab-content">
         <div id="dog" class="tab-pane active">
@@ -245,9 +247,6 @@
 
 
       <div id='otherpets' class="tab-pane">
-
-        <h3>Other Pets</h3>
-
         <table class="table-striped table-bordered table-condensed">
           <tr>
             <th>Current Pets</th>
@@ -280,16 +279,17 @@
   </div>
 </div>
 </div>
-
+<br />
 <div class="row">
 
   <div class="span12">
-    <h4>Comments</h4>
+    <h4>Add Comment</h4>
 
     <%= form_for [@adopter, @adopter.comments.build], :html => {:id => "new_comment"} do |f| %>
-      <%= f.text_area :content, :class => "xxlarge", :rows => "3" %>
+      <%= f.text_area :content, :class => "input-xxlarge", :rows => "5" %>
       <%= f.submit "Post", :class => "btn btn-primary" %>
     <% end %>
+    <h4>Past Comments</h4>
     <div id="comment_table">
       <table id="comments" class="table-striped table-bordered table-condensed">
         <% @adopter.comments.each do |comment| %>

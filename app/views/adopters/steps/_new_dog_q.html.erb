@@ -1,41 +1,36 @@
 
-		<div class="clearfix">
-			<%= af.label :training_explain, "Are you willing to seek professional training for any pet behavior issues? (Why/Why Not?)" %>
-			<div class="input">
-				<%= af.text_area :training_explain,:class => "required xxlarge", :rows => "5" %>
+		<div class="control-group">
+			<%= af.label :training_explain, "Are you willing to seek professional training for any pet behavior issues? (Why/Why Not?)", :class => "control-label" %>
+			<div class="controls">
+				<%= af.text_area :training_explain,:class => "required input-xxlarge", :rows => "5" %>
 			</div>
 		</div>		
-		<div class="clearfix">
-			<%= af.label :surrender_pet_causes, "What would cause you to surrender or give up your new dog?" %>
-			<div class="input">
-				<%= af.text_area :surrender_pet_causes, :class => "required xxlarge", :rows => "5" %>
+		<div class="control-group">
+			<%= af.label :surrender_pet_causes, "What would cause you to surrender or give up your new dog?", :class => "control-label" %>
+			<div class="controls">
+				<%= af.text_area :surrender_pet_causes, :class => "required input-xxlarge", :rows => "5" %>
 				<span class="help-inline">Moving, aggression toward children, adults or other pets, having a baby, etc.</span>
 			</div>
 		</div>
-		<div class="clearfix">
-			<%= af.label :surrendered_pets, "Have you ever surrendered, sold or given away one of your pets?  This inlcudes giving a pet to a friend or family member." %>
-			<div class="input">
-				<%= af.text_area :surrendered_pets, :class => "required xxlarge", :rows => "5" %>
+		<div class="control-group">
+			<%= af.label :surrendered_pets, "Have you ever surrendered, sold or given away one of your pets?  This inlcudes giving a pet to a friend or family member.", :class => "control-label" %>
+			<div class="controls">
+				<%= af.text_area :surrendered_pets, :class => "required input-xxlarge", :rows => "5" %>
 				<span class="help-inline">If so, please explain in detail</span>
 			</div>
 		</div>
-		<div class="clearfix">
-			<%= af.label :have_pets, "Have you owned any dogs or cats now or in the past 10 years?" %>
-			<div class="input">
-				<ul class="inputs-list">
-					<li>
-						<label>
-							<%= af.radio_button :pets_branch, 'other_pets', :class => "required link" %>
-							<span>Yes</span>
-						</label>
-					</li>
-					<li>
-						<label>
-							<%= af.radio_button :pets_branch, 'no_pets', :class => "link required" %>
-							<span>No</span>
-						</label>
-					</li>
-				</ul>
+		<div class="control-group">
+			<%= af.label :have_pets, "Have you owned any dogs or cats now or in the past 10 years?", :class => "control-label" %>
+			<div class="controls">
+				<label>
+					<%= af.radio_button :pets_branch, 'other_pets', :class => "required link" %>
+					<span>Yes</span>
+				</label>
+
+				<label>
+					<%= af.radio_button :pets_branch, 'no_pets', :class => "link required" %>
+					<span>No</span>
+				</label>
 			</div>
 		</div>
 </div>

@@ -1,66 +1,60 @@
 
-	<div class="clearfix">
-		<%= af.label :spouse_name, "Spouse/Partner's name" %>
-		<div class="input">
+	<div class="control-group">
+		<%= af.label :spouse_name, "Spouse/Partner's name", :class => "control-label" %>
+		<div class="controls">
 			<%= af.text_field :spouse_name %>
 		</div>
 	</div>
-	<div class="clearfix">
-		<%= af.label :other_household_names, "Other Household Members" %>
-		<div class="input">
+	<div class="control-group">
+		<%= af.label :other_household_names, "Other Household Members", :class => "control-label" %>
+		<div class="controls">
 			<%= af.text_field :other_household_names %>
 			<span class="help-inline">Please include names and ages.</span>
 		</div>
 	</div>
-	<div class="clearfix">
-		<%= af.label :how_did_you_hear, "How did you hear about us?" %>
-		<div class="input">
+	<div class="control-group">
+		<%= af.label :how_did_you_hear, "How did you hear about us?", :class => "control-label" %>
+		<div class="controls">
 			<%= af.text_field :how_did_you_hear %>
 			<span class="help-inline">Google, Craigslist, Petfinder, etc.</span>
 		</div>
 	</div>
-	<div class="clearfix">
-		<%= af.label :ready_to_adopt_dt, "How soon do you want to adopt?" %>
-		<div class="input">
+	<div class="control-group">
+		<%= af.label :ready_to_adopt_dt, "How soon do you want to adopt?", :class => "control-label" %>
+		<div class="controls">
 			<%= af.text_field :ready_to_adopt_dt, :class => "required" %>
 		</div>
 	</div>
-	<div class="clearfix">
-		<%= af.label :is_ofage, "Are you at least 21 years old?" %>
-		<div class="input">
-			<ul class="inputs-list">
-				<li>
+	<div class="control-group">
+		<%= af.label :is_ofage, "Are you at least 21 years old?", :class => "control-label" %>
+		<div class="controls">
+
 					<label>
 						<%= af.radio_button :is_ofage, true, :class => "required" %> 
 						<span>Yes</span>
 					</label>
-				</li>
-				<li>
+
 					<label>
 						<%= af.radio_button :is_ofage, false, :class => "required" %> 
 						<span>No</span>
 					</label>
-				</li>
-			</ul>
+
 		</div>
 	</div>
-	<div class="clearfix">
-		<%= af.label :house_type, "Do you rent or own your home?" %>
-		<div class="input">
-			<ul class="inputs-list">
-				<li>
+	<div class="control-group">
+		<%= af.label :house_type, "Do you rent or own your home?", :class => "control-label" %>
+		<div class="controls">
+
 					<label>
 						<%= af.radio_button :house_type, 'rent', :class => "link required" %> 
 						<span>Rent</span>
 					</label>
-				</li>
-				<li>
+
 					<label>
 						<%= af.radio_button :house_type, 'own', :class => "link required" %> 
 						<span>Own</span>
 					</label>
-				</li>
-			</ul>
+
 		</div>
 	</div>
 </div>

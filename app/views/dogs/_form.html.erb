@@ -2,71 +2,71 @@
 	<div class="span12 offset2">
 		<%= form_for @dog, :html=> { :multipart => true } do |f| %>
 			<%= render 'shared/error_messages', :object => f.object %>
-			<div class="clearfix">
+			<div class="control-group">
 				<%= f.label :tracking_id, "OPH Tracking ID" %>
-				<div class="input">
+				<div class="controls">
 					<%= f.text_field :tracking_id %>
 				</div>
 			</div>
-			<div class="clearfix">
+			<div class="control-group">
 				<%= f.label :name %>
-				<div class="input">
+				<div class="controls">
 					<%= f.text_field :name %>
 				</div>
 			</div>
-			<div class="clearfix">
+			<div class="control-group">
 				<%= f.label :status %>
-				<div class="input">
+				<div class="controls">
 					<%= f.select(:status, Dog::STATUSES, :prompt => '-select-') %>
 				</div>
 			</div>
-			<div class="clearfix">
+			<div class="control-group">
 				<%= f.label :primary_breed_name %>
-				<div class="input">
+				<div class="controls">
 					<%= f.autocomplete_field :primary_breed_name, autocomplete_breed_name_dogs_path, :id_element => '#dog_primary_breed_id' %>
 				</div>
 					<%= f.hidden_field :primary_breed_id =%>
 			</div>
-			<div class="clearfix">
+			<div class="control-group">
 				<%= f.label :secondary_breed_name %>
-				<div class="input">
+				<div class="controls">
 					<%= f.autocomplete_field :secondary_breed_name, autocomplete_breed_name_dogs_path, :id_element => '#dog_secondary_breed_id' %>
 				</div>
 				<%= f.hidden_field :secondary_breed_id %>	
 			</div>
-			<div class="clearfix">
+			<div class="control-group">
 				<%= f.label :gender %>
-				<div class="input">
+				<div class="controls">
 					<%= f.select(:gender, Dog::GENDERS, :prompt => '-select-', :class => "span2") %>
 				</div>
 			</div>	
-			<div class="clearfix">
+			<div class="control-group">
 				<%= f.label :age %>
-				<div class="input">
+				<div class="controls">
 					<%= f.select(:age, Dog::AGES, :prompt => '-select-', :class => "span2") %>	
 				</div>
 			</div>
-			<div class="clearfix">
+			<div class="control-group">
 				<%= f.label :size, "Size when grown" %>
-				<div class="input">
+				<div class="controls">
 					<%= f.select(:size, Dog::SIZES, :prompt => '-select-', :class => "span2") %>
 				</div>
 			</div>
-			<div class="clearfix">
+			<div class="control-group">
 				<%= f.label :intake_dt, "Intake Date" %>
-				<div class="input">
+				<div class="controls">
 					<%= f.text_field :intake_dt %>
 				</div>
 			</div>
-			<div class="clearfix">
+			<div class="control-group">
 				<%= f.label :available_on_dt, "Available On Date" %>
-				<div class="input">
+				<div class="controls">
 					<%= f.text_field :available_on_dt %>
 				</div>
 			</div>
-			<div class="clearfix">
+			<div class="control-group">
 			<label id="optionsCheckboxes"><strong>Public Attributes</strong></label>
-				<div class="input">
+				<div class="controls">
 					<ul class="inputs-list">
 						<li>
 							<label><%= f.check_box :is_uptodateonshots %>
@@ -107,9 +107,9 @@
 				</div>
 			</div>
 
-			<div class="clearfix">
+			<div class="control-group">
 			<label id="optionsCheckboxes"><strong>Private Attributes</strong></label>
-				<div class="input">
+				<div class="controls">
 					<ul class="inputs-list">
 						<li>
 							<label><%= f.check_box :has_medical_need %>
@@ -141,14 +141,14 @@
 			</div>
 			<br />
 			<h3>Foster Assignments</h3>
-				<div class="clearfix">
+				<div class="control-group">
 					<%= f.label :user_id %>
-					<div class="input">
+					<div class="controls">
 						<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
 					</div>
 				</div>
 			<h3>New Photos</h3>
-			<div class="clearfix">
+			<div class="control-group">
 			<%= f.fields_for :photos do |pf| %>
 				<% if pf.object.new_record? %>
 					<%= pf.file_field :photo %><br />
@@ -165,9 +165,9 @@
 					</div>
 					<% end %>
 				<% end %>
-			<div class="clearfix">
+			<div class="control-group">
 				<%= f.label "Public Description" %>
-				<div class="input">
+				<div class="controls">
 					<%= f.text_area :description, :class => "required xlarge", :rows => "5" %>
 				</div>
 			</div>

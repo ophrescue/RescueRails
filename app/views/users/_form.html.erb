@@ -1,90 +1,90 @@
 <%= form_for(@user) do |f| %>
 	<%= render 'shared/error_messages', :object => f.object %>
-	<div class="clearfix">
+	<div class="control-group">
 		<%= f.label :name %>
-		<div class="input">
+		<div class="controls">
 			<%= f.text_field :name, :autocomplete => :off %>
 		</div>
 	</div>
-	<div class="clearfix">
+	<div class="control-group">
 		<%= f.label :title %>
-		<div class="input">
+		<div class="controls">
 			<%= f.text_field :title, :autocomplete => :off %>
 		</div>
 	</div>
-	<div class="clearfix">
+	<div class="control-group">
 		<%= f.label :email %>
-		<div class="input">
+		<div class="controls">
 			<%= f.text_field :email, :autocomplete => :off %>
 		</div>
 	</div>
-	<div class="clearfix">
+	<div class="control-group">
 		<%= f.label :phone %>
-		<div class="input">
+		<div class="controls">
 			<%= f.text_field :phone, :autocomplete => :off %>
 		</div>
 	</div>
-		<div class="clearfix">
+		<div class="control-group">
 		<%= f.label :other_phone %>
-		<div class="input">
+		<div class="controls">
 			<%= f.text_field :other_phone, :autocomplete => :off %>
 		</div>
 	</div>
-	<div class="clearfix">
+	<div class="control-group">
 		<%= f.label :address1 %>
-		<div class="input">
+		<div class="controls">
 			<%= f.text_field :address1, :autocomplete => :off %>
 		</div>
 	</div>
-	<div class="clearfix">
+	<div class="control-group">
 		<%= f.label :address2 %>
-		<div class="input">
+		<div class="controls">
 			<%= f.text_field :address2, :autocomplete => :off %>
 		</div>
 	</div>
-	<div class="clearfix">
+	<div class="control-group">
 		<%= f.label :city %>
-		<div class="input">
+		<div class="controls">
 			<%= f.text_field :city, :autocomplete => :off %>
 		</div>
 	</div>
-	<div class="clearfix">
+	<div class="control-group">
 		<%= f.label :state %>
-		<div class="input">
+		<div class="controls">
 			<%= f.text_field :state, :autocomplete => :off %>
 		</div>
 	</div>
-	<div class="clearfix">
+	<div class="control-group">
 		<%= f.label :zip %>
-		<div class="input">
+		<div class="controls">
 			<%= f.text_field :zip, :autocomplete => :off %>
 		</div>
 	</div>
-	<div class="clearfix">
+	<div class="control-group">
 		<%= f.label :password %>
-		<div class="input">
+		<div class="controls">
 			<%= f.password_field :password, :autocomplete => :off %>
 		</div>
 	</div>
-	<div class="clearfix">
+	<div class="control-group">
 		<%= f.label :password_confirmation %>
-		<div class="input">
+		<div class="controls">
 			<%= f.password_field :password_confirmation, :autocomplete => :off %>
 		</div>
 	</div>
-	<div class="clearfix">
+	<div class="control-group">
 		<%= f.label :share_info, "What contact information can Adotion Coordinators share with Approved Adopters?" %>
-		<div class="input">
+		<div class="controls">
 			<%= f.text_area :share_info, :class => "xlarge", :rows => "4" %>
 			<span class="help-inline">E-mail, Phone number, etc.<span>
 		</div>
 	</div>
 	
 	<h3>User Permissions</h3>
-	<div class="clearfix">
+	<div class="control-group">
 	<% if is_admin? %>
 		<label id="optionsCheckboxes">Check All that Apply</label>
-		<div class="input">
+		<div class="controls">
 			<ul class="inputs-list">
 				<li>
 					<label>

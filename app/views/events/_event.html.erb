@@ -5,60 +5,59 @@
 			<p><strong><%= event.title %></strong></p>
 		</div>
 	</div>
-	<div class="span4">
-		<div class="eventphoto">
-			<% if event.photo? %>
-				<%= link_to image_tag(event.photo.url(:medium)),event %>
-			<% else %>
-			&nbsp;
-			<% end %>
+	<div class="row">
+		<div class="span4">
+			<div class="eventphoto">
+				<% if event.photo? %>
+					<%= link_to image_tag(event.photo.url(:medium)),event.photo.url %>
+				<% else %>
+				&nbsp;
+				<% end %>
 
-		</div>
-	</div>
-	<div class="span12">
-		
-
-		
-		<div class="row">
-			<div class="span10 offset1">
-		<address>
-			<% if event.location_url? %>
-				<strong><%= link_to event.location_name, event.location_url %></strong><br />
-			<% else %>
-				<strong><%= event.location_name %></strong><br />
-			<% end %>
-			<%= event.address %><br />
-			<% if event.location_phone? %>
-				<abbr title="Phone">P: </abbr><%= event.location_phone %><br />
-			<% end %>
-		</address>
-		</div>
-		</div>
-		<a href="<%="http://maps.google.com/?q=#{event.latitude}%2C#{event.longitude}"%>">
-		<%= image_tag "http://maps.google.com/maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers=#{event.latitude}%2C#{event.longitude}"
-			 %></a>
-		<div class="row">
-			<div class="span8">
-				<p><%= event.description %></p>
 			</div>
 		</div>
-		<p><a href="/adopt" class="btn primary">Apply to Adopt</a>
-		
-		<% if can_edit_events? %>
-			<%= link_to  "edit", edit_event_path(event), :class => "btn small" %>
-		<% end %>
-
-		<% if is_admin? %>
-			  	<%= link_to  "delete",
-				 			  event,
-				 			  :method => :delete,
-				 			  :class => "btn small",
-				 			  :confirm => "You sure?",
-				 			  :title => "Delete #{event.title}" %>
+		<div class="span8">
+			<div class="">
+				<div class="span10">
+					<address>
+						<% if event.location_url? %>
+							<strong><%= link_to event.location_name, event.location_url %></strong><br />
+						<% else %>
+							<strong><%= event.location_name %></strong><br />
+						<% end %>
+						<%= event.address %><br />
+						<% if event.location_phone? %>
+							<abbr title="Phone">P: </abbr><%= event.location_phone %><br />
+						<% end %>
+					</address>
+				</div>
+			</div>
+			<a href="<%="http://maps.google.com/?q=#{event.latitude}%2C#{event.longitude}"%>">
+			<%= image_tag "http://maps.google.com/maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers=#{event.latitude}%2C#{event.longitude}"
+				 %></a>
+			<div class="row">
+				<div class="span8">
+					<p><%= event.description %></p>
+				</div>
+			</div>
+			<p><a href="/adopt" class="btn btn-primary">Apply to Adopt</a>
 			
-		<% end %>
+			<% if can_edit_events? %>
+				<%= link_to  "edit", edit_event_path(event), :class => "btn btn-small" %>
+			<% end %>
 
-		</p>
+			<% if is_admin? %>
+				  	<%= link_to  "delete",
+					 			  event,
+					 			  :method => :delete,
+					 			  :class => "btn btn-small",
+					 			  :confirm => "You sure?",
+					 			  :title => "Delete #{event.title}" %>
+				
+			<% end %>
+
+			</p>
+		</div>
 	</div>
 </div>
 <br />

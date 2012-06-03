@@ -30,7 +30,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.8)
-    anjlab-bootstrap-rails (2.0.3.2)
+    anjlab-bootstrap-rails (2.0.4.0)
       railties (>= 3.0)
       sass
     annotate (2.4.0)
@@ -249,7 +249,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  anjlab-bootstrap-rails (~> 2.0.3.2)
+  anjlab-bootstrap-rails (~> 2.0.4.0)
   annotate
   autotest
   autotest-fsevent (~> 0.2.8)

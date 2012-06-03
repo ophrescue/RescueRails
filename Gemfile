@@ -28,7 +28,7 @@ gem "mailhopper", "~> 0.1.0"
 gem "delayed_mailhopper", "~> 0.0.5"
 
 
-gem "anjlab-bootstrap-rails", "~> 2.0.3.2", :require => 'bootstrap-rails'
+gem "anjlab-bootstrap-rails", "~> 2.0.4.0", :require => 'bootstrap-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

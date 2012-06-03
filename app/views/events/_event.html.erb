@@ -5,7 +5,6 @@
 			<p><strong><%= event.title %></strong></p>
 		</div>
 	</div>
-
 	<div class="row">
 		<div class="span4">
 			<div class="eventphoto">
@@ -13,6 +12,8 @@
 					<%= link_to image_tag(event.photo.url(:medium)),event.photo.url %>
 				<% else %>
 				&nbsp;
+				<% end %>
+
 			</div>
 		</div>
 		<div class="span8">

@@ -1,33 +1,33 @@
 
 <h5>Reference #<%= @i %></h5>
 <% @i += 1 %>
-<div class="clearfix">
-  <%= rf.label :name, "Reference's Name" %>
-  <div class="input">
+<div class="control-group">
+  <%= rf.label :name, "Reference's Name", :class => "control-label" %>
+  <div class="controls">
   	<%= rf.text_field :name, :class => "required" %>
   </div>
 </div>
-<div class="clearfix">
-  <%= rf.label :phone, "Reference's Phone" %>
-  <div class="input">
+<div class="control-group">
+  <%= rf.label :phone, "Reference's Phone", :class => "control-label" %>
+  <div class="controls">
   	<%= rf.text_field :phone, :class => "required" %>
   </div>
 </div>
-<div class="clearfix">
-  <%= rf.label :email, "Reference's E-Mail" %>
-  <div class="input">
+<div class="control-group">
+  <%= rf.label :email, "Reference's E-Mail", :class => "control-label" %>
+  <div class="controls">
   	<%= rf.text_field :email, :class => "required" %>
   </div>
 </div>
-<div class="clearfix">
-  <%= rf.label :relationship, "What is the nature of your relationship?" %>
-  <div class="input">
+<div class="control-group">
+  <%= rf.label :relationship, "What is the nature of your relationship?", :class => "control-label" %>
+  <div class="controls">
   	<%= rf.text_field :relationship, :class => "required" %>
   </div>
 </div>
-<div class="clearfix">
-  <%= rf.label :whentocall, "What is the best time for us to call them?" %>
-  <div class="input">
+<div class="control-group">
+  <%= rf.label :whentocall, "What is the best time for us to call them?", :class => "control-label" %>
+  <div class="controls">
     <%= rf.text_field :whentocall, :class => "required" %>
   </div>
 </div>

@@ -1,93 +1,94 @@
 <div class="row">
-	<div class="span12 offset2">
+	<div class="span8">
 
-		<%= form_for @event, :html=> { :multipart => true } do |f| %>
+		<%= form_for @event, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
 			<%= render 'shared/error_messages', :object => f.object %>
-
-			<div class="clearfix">
-				<%= f.label :title %>
-				<div class="input">
-					<%= f.text_field :title %>
+			<fieldset>
+				<div class="control-group">
+					<%= f.label :title, nil, :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_field :title, :class => "input-xlarge" %>
+					</div>
 				</div>
-			</div>
 
-			<div class="clearfix">
-				<%= f.label :event_date, "Date" %>
-				<div class="input">
-					<%= f.text_field :event_date, :class => "small" %>
+				<div class="control-group">
+					<%= f.label :event_date, "Date" , :class => 'control-label'%>
+					<div class="controls">
+						<%= f.text_field :event_date, :class => "input-small" %>
+					</div>
 				</div>
-			</div>
 
-			<div class="clearfix">
-				<%= f.label :start_time, "Start Time" %>
-				<div class="input">
-					<%= f.text_field :start_time, :class => "small" %>
-					<span class="help-inline">(1 PM, 3:45pm, etc.)</span>
+				<div class="control-group">
+					<%= f.label :start_time, "Start Time", :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_field :start_time, :class => "input-small" %>
+						<span class="help-inline">(1 PM, 3:45pm, etc.)</span>
+					</div>
 				</div>
-			</div>
 
-			<div class="clearfix">
-				<%= f.label :end_time, "End Time" %>
-				<div class="input">
-					<%= f.text_field :end_time, :class => "small" %>
+				<div class="control-group">
+					<%= f.label :end_time, "End Time", :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_field :end_time, :class => "input-small" %>
+					</div>
 				</div>
-			</div>
 
-			<div class="clearfix">
-				<%= f.label :location_name, "Location Name" %>
-				<div class="input">
-					<%= f.text_field :location_name %>
+				<div class="control-group">
+					<%= f.label :location_name, "Location Name", :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_field :location_name %>
+					</div>
 				</div>
-			</div>
 
-			<div class="clearfix">
-				<%= f.label :location_name, "Location Website" %>
-				<div class="input">
-					<%= f.text_field :location_url %>
-					<span class="help-inline">Include http://</span>
+				<div class="control-group">
+					<%= f.label :location_name, "Location Website", :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_field :location_url %>
+						<span class="help-inline">Include http://</span>
+					</div>
 				</div>
-			</div>
 
-			<div class="clearfix">
-				<%= f.label :location_name, "Location Phone" %>
-				<div class="input">
-					<%= f.text_field :location_phone, :class => "small" %>
+				<div class="control-group">
+					<%= f.label :location_name, "Location Phone", :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_field :location_phone, :class => "input-small" %>
+					</div>
 				</div>
-			</div>
 
-			<div class="clearfix">
-				<%= f.label :address %>
-				<div class="input">
-					<%= f.text_field :address, :class => "xlarge" %>
+				<div class="control-group">
+					<%= f.label :address, nil , :class => 'control-label'%>
+					<div class="controls">
+						<%= f.text_field :address, :class => "input-xlarge" %>
+					</div>
 				</div>
-			</div>
 
-			<div class="clearfix">
-					<% if f.object.photo? %>
-						<%= f.label "Delete Image" %>
-						<div class="input">
-							<%= link_to image_tag(f.object.photo.url(:thumb)), f.object.photo.url(:original) %>
-							<%= f.check_box :photo_delete, {}, "1", "0" %>
-						</div>
-					<% else %>
-						<%= f.label "Image" %>
-						<div class="input">
-							<%= f.file_field :photo %>
-						</div>
-					<% end %>
-			</div>
-			<div class="clearfix">
-				<%= f.label :description %>
-				<div class="input">
-					<%= f.text_area :description, :class => "xlarge", :rows => "5", :value => "To be pre-approved, fill out our adoption application and be ready to take home your new dog right from the event!" %>
-					<span class="help-inline">Add more description as needed.</span>
+				<div class="control-group">
+						<% if f.object.photo? %>
+							<%= f.label "Delete Image" %>
+							<div class="controls">
+								<%= link_to image_tag(f.object.photo.url(:thumb)), f.object.photo.url(:original) %>
+								<%= f.check_box :photo_delete, {}, "1", "0" %>
+							</div>
+						<% else %>
+							<%= f.label "Image",nil, :class => 'control-label'%>
+							<div class="controls">
+								<%= f.file_field :photo %>
+							</div>
+						<% end %>
 				</div>
-				
-			</div>
+				<div class="control-group">
+					<%= f.label :description, nil, :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_area :description, :class => "input-xlarge", :rows => "5", :value => "To be pre-approved, fill out our adoption application and be ready to take home your new dog right from the event!" %>
+						<span class="help-inline">Add more description as needed.</span>
+					</div>
+					
+				</div>
 
-			<div class="actions">
-				<%= f.submit "Submit", :class => "btn primary" %>
-			</div>
+				<div class="actions well">
+					<%= f.submit "Submit", :class => "btn btn-primary" %>
+				</div>
+			</fieldset>
 
 		<% end %>
 

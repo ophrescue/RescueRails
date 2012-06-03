@@ -1,31 +1,31 @@
 <div id="own" class="step">
 <h3>Your New Dog</h3>
-<!-- 	<div class="clearfix">
-		<%= f.label :dog_tokens, "(Optional) Enter the names of any dogs you are interested in." %>
-		<div class="input">
+<!-- 	<div class="control-group">
+		<%= f.label :dog_tokens, "(Optional) Enter the names of any dogs you are interested in.", :class => "control-label" %>
+		<div class="controls">
 			<%= f.text_field :dog_tokens %>
 			<span class="help-inline">Optional</span>
 		</div>
 	</div> -->
 
-	<div class="clearfix">
-		<%= f.label :dog_name, "(Optional) What dogs are you interested in?" %>
-		<div class="input">
+	<div class="control-group">
+		<%= f.label :dog_name, "(Optional) What dogs are you interested in?", :class => "control-label" %>
+		<div class="controls">
 			<%= f.text_field :dog_name %>
 		</div>
 	</div>		
 
-	<div class="clearfix">
-		<%= f.label :dog_reqs, "Describe the type of dog you want to adopt.  Please include the two traits that are most important to you." %>
-		<div class="input">
-			<%= f.text_area :dog_reqs, :class => "xxlarge required", :rows => "3" %>
+	<div class="control-group">
+		<%= f.label :dog_reqs, "Describe the type of dog you want to adopt.  Please include the two traits that are most important to you.", :class => "control-label" %>
+		<div class="controls">
+			<%= f.text_area :dog_reqs, :class => "required input-xlarge", :rows => "3" %>
 			<span class="help-inline">Age, Weight, Activity Level, etc.</span>
 		</div>
 	</div>
 
-	<div class="clearfix">
-		<%= f.label :why_adopt, "Why do you want to make this dog a part of your family and how will you incorporate the dog into your existing family?" %>
-		<div class="input">
-			<%= f.text_area :why_adopt, :class => "required xxlarge", :rows => "5" %>
+	<div class="control-group">
+		<%= f.label :why_adopt, "Why do you want to make this dog a part of your family and how will you incorporate the dog into your existing family?", :class => "control-label" %>
+		<div class="controls">
+			<%= f.text_area :why_adopt, :class => "required input-xlarge", :rows => "5" %>
 		</div>
 	</div>

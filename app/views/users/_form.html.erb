@@ -1,186 +1,168 @@
-<%= form_for(@user) do |f| %>
-	<%= render 'shared/error_messages', :object => f.object %>
-	<div class="clearfix">
-		<%= f.label :name %>
-		<div class="input">
-			<%= f.text_field :name, :autocomplete => :off %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :title %>
-		<div class="input">
-			<%= f.text_field :title, :autocomplete => :off %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :email %>
-		<div class="input">
-			<%= f.text_field :email, :autocomplete => :off %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :phone %>
-		<div class="input">
-			<%= f.text_field :phone, :autocomplete => :off %>
-		</div>
-	</div>
-		<div class="clearfix">
-		<%= f.label :other_phone %>
-		<div class="input">
-			<%= f.text_field :other_phone, :autocomplete => :off %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :address1 %>
-		<div class="input">
-			<%= f.text_field :address1, :autocomplete => :off %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :address2 %>
-		<div class="input">
-			<%= f.text_field :address2, :autocomplete => :off %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :city %>
-		<div class="input">
-			<%= f.text_field :city, :autocomplete => :off %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :state %>
-		<div class="input">
-			<%= f.text_field :state, :autocomplete => :off %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :zip %>
-		<div class="input">
-			<%= f.text_field :zip, :autocomplete => :off %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :password %>
-		<div class="input">
-			<%= f.password_field :password, :autocomplete => :off %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :password_confirmation %>
-		<div class="input">
-			<%= f.password_field :password_confirmation, :autocomplete => :off %>
-		</div>
-	</div>
-	<div class="clearfix">
-		<%= f.label :share_info, "What contact information can Adotion Coordinators share with Approved Adopters?" %>
-		<div class="input">
-			<%= f.text_area :share_info, :class => "xlarge", :rows => "4" %>
-			<span class="help-inline">E-mail, Phone number, etc.<span>
-		</div>
-	</div>
-	
-	<h3>User Permissions</h3>
-	<div class="clearfix">
-	<% if is_admin? %>
-		<label id="optionsCheckboxes">Check All that Apply</label>
-		<div class="input">
-			<ul class="inputs-list">
-				<li>
-					<label>
-						<%= f.check_box :admin %>
-						<span><strong>Admin</strong> - Add/edit staff, set staff permissions, delete dogs</span>
-					</label>
-				</li>
-				<br />
-				<li>
-					<label>
-						<%= f.check_box :edit_all_adopters %>
-						<span><strong>Lead Adoption Coordinator</strong> - Process All Adoption Applications</span>
-					</label>
-				</li>
-				<li>
-					<label>
-						<%= f.check_box :edit_my_adopters %>
-						<span><strong>Adoption Coordinator</strong> - Can be Assigned Adoption Applications, and process them</span>
-					</label>
-				</li>
-				<br />
-				<li>
-					<label>
-						<%= f.check_box :edit_events %>
-						<span><strong>Manage Events</strong> - Add/Edit Events </span>
-					</label>
-				</li>
-				<li>
-					<label>
-						<%= f.check_box :edit_dogs %>
-						<span><strong>Manage Dogs</strong> - Can edit existing dog records (can not delete)</span>
-					</label>
-				</li>
-				<br />
-				<li>
-					<label>
-						<%= f.check_box :is_foster %>
-						<span><strong>Foster</strong> - This person can be selected as a foster on the dog edit screen.</span>
-					</label>
-				</li>
-				<br />
-				<li>
-					<label>
-						<%= f.check_box :locked %>
-						<span><strong>Lock</strong> - Will disable account, preventing user from logging in.</span>
-					</label>
-				</li>
-			</ul>
-		</div>
-		<% else %>
-		<div class="row">
-			<div class="span8 offset2">
-				<ul>
-					<% if @user.admin? %>
-						<li>Can Admin System</li>
-					<% else %>
-						<li>Cannot Admin System</li>
-					<% end %>
-
-					<% if @user.edit_all_adopters? %>
-						<li>Can Process All Applications</li>
-					<% else %>
-						<li> Cannot Process All Applications</li>
-					<% end %>
-
-					<% if @user.edit_my_adopters? || @user.edit_all_adopters? %>
-						<li>Can be Assigned Adoption Applications</li>
-					<% else %>
-						<li>Cannot be Assigned Adoption Applications</li>
-					<% end %>
-
-					<% if @user.edit_dogs?%>
-						<li>Can Add/Edit Dogs</li>
-					<% else %>
-						<li>Cannot Add/Edit Dogs</li>
-					<% end %>
-
-					<% if @user.is_foster? %>
-						<li>Is a Foster</li>
-					<% else %>
-						<li>Is not a Foster</li>
-					<% end %>
-
-					<% if @user.locked? %>
-						<li><span class="label error">Account Disabled</span></li>
-					<% else %>
-						<li><span class="label success">Account Active</span></li>
-					<% end %>
-				</ul>
+<%= form_for @user, :html=> { :multipart => true, :class => "form-horizontal" }  do |f| %>
+	<fieldset>
+		<%= render 'shared/error_messages', :object => f.object %>
+		<div class="control-group">
+			<%= f.label :name, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :name, :autocomplete => :off %>
 			</div>
 		</div>
-		<% end %>
-	</div>
-	
-	<div class="actions">
-		<%= f.submit "Update", :class => "btn primary" %>
-	</div>	
+		<div class="control-group">
+			<%= f.label :title, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :title, :autocomplete => :off %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :email, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :email, :autocomplete => :off %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :phone, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :phone, :autocomplete => :off %>
+			</div>
+		</div>
+			<div class="control-group">
+			<%= f.label :other_phone, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :other_phone, :autocomplete => :off %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :address1, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :address1, :autocomplete => :off %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :address2, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :address2, :autocomplete => :off %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :city, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :city, :autocomplete => :off %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :state, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :state, :autocomplete => :off %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :zip, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :zip, :autocomplete => :off %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :password, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.password_field :password, :autocomplete => :off %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :password_confirmation, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.password_field :password_confirmation, :autocomplete => :off %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :share_info, "What contact information can Adotion Coordinators share with Approved Adopters?", :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_area :share_info, :class => "xlarge", :rows => "4" %>
+				<span class="help-inline">E-mail, Phone number, etc.<span>
+			</div>
+		</div>
+		
+		<h3>User Permissions</h3>
+		<div class="control-group">
+		<% if is_admin? %>
+			<label id="optionsCheckboxes">Check All that Apply</label>
+			<div class="controls">
+				<label class="checkbox">
+					<%= f.check_box :admin %>
+					<span><strong>Admin</strong> - Add/edit staff, set staff permissions, delete dogs</span>
+				</label>
+				<label class="checkbox">
+					<%= f.check_box :edit_all_adopters %>
+					<span><strong>Lead Adoption Coordinator</strong> - Process All Adoption Applications</span>
+				</label>
+				<label class="checkbox">
+					<%= f.check_box :edit_my_adopters %>
+					<span><strong>Adoption Coordinator</strong> - Can be Assigned Adoption Applications, and process them</span>
+				</label>
+				<label class="checkbox">
+					<%= f.check_box :edit_events %>
+					<span><strong>Manage Events</strong> - Add/Edit Events </span>
+				</label>
+				<label class="checkbox">
+					<%= f.check_box :edit_dogs %>
+					<span><strong>Manage Dogs</strong> - Can edit existing dog records (can not delete)</span>
+				</label>
+				<label class="checkbox">
+					<%= f.check_box :is_foster %>
+					<span><strong>Foster</strong> - This person can be selected as a foster on the dog edit screen.</span>
+				</label>
+				<label class="checkbox">
+					<%= f.check_box :locked %>
+					<span><strong>Lock</strong> - Will disable account, preventing user from logging in.</span>
+				</label>
+			</div>
+			<% else %>
+			<div class="row">
+				<div class="span8 offset2">
+					<ul>
+						<% if @user.admin? %>
+							<li>Can Admin System</li>
+						<% else %>
+							<li>Cannot Admin System</li>
+						<% end %>
+
+						<% if @user.edit_all_adopters? %>
+							<li>Can Process All Applications</li>
+						<% else %>
+							<li> Cannot Process All Applications</li>
+						<% end %>
+
+						<% if @user.edit_my_adopters? || @user.edit_all_adopters? %>
+							<li>Can be Assigned Adoption Applications</li>
+						<% else %>
+							<li>Cannot be Assigned Adoption Applications</li>
+						<% end %>
+
+						<% if @user.edit_dogs?%>
+							<li>Can Add/Edit Dogs</li>
+						<% else %>
+							<li>Cannot Add/Edit Dogs</li>
+						<% end %>
+
+						<% if @user.is_foster? %>
+							<li>Is a Foster</li>
+						<% else %>
+							<li>Is not a Foster</li>
+						<% end %>
+
+						<% if @user.locked? %>
+							<li><span class="label error">Account Disabled</span></li>
+						<% else %>
+							<li><span class="label success">Account Active</span></li>
+						<% end %>
+					</ul>
+				</div>
+			</div>
+			<% end %>
+		</div>
+		
+		<div class="actions well">
+			<%= f.submit "Update", :class => "btn btn-primary" %>
+		</div>
+	</fieldset>
 <% end %>
 

@@ -1,180 +1,162 @@
 <div class="row">
 	<div class="span12 offset2">
-		<%= form_for @dog, :html=> { :multipart => true } do |f| %>
+		<%= form_for @dog, :html=> { :multipart => true, :class => "form-horizontal"  } do |f| %>
 			<%= render 'shared/error_messages', :object => f.object %>
-			<div class="clearfix">
-				<%= f.label :tracking_id, "OPH Tracking ID" %>
-				<div class="input">
-					<%= f.text_field :tracking_id %>
+			<fieldset>
+				<div class="control-group">
+					<%= f.label :tracking_id, "OPH Tracking ID", :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_field :tracking_id %>
+					</div>
 				</div>
-			</div>
-			<div class="clearfix">
-				<%= f.label :name %>
-				<div class="input">
-					<%= f.text_field :name %>
+				<div class="control-group">
+					<%= f.label :name, :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.text_field :name %>
+					</div>
 				</div>
-			</div>
-			<div class="clearfix">
-				<%= f.label :status %>
-				<div class="input">
-					<%= f.select(:status, Dog::STATUSES, :prompt => '-select-') %>
+				<div class="control-group">
+					<%= f.label :status, :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.select(:status, Dog::STATUSES, :prompt => '-select-') %>
+					</div>
 				</div>
-			</div>
-			<div class="clearfix">
-				<%= f.label :primary_breed_name %>
-				<div class="input">
-					<%= f.autocomplete_field :primary_breed_name, autocomplete_breed_name_dogs_path, :id_element => '#dog_primary_breed_id' %>
+				<div class="control-group">
+					<%= f.label :primary_breed_name, :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.autocomplete_field :primary_breed_name, autocomplete_breed_name_dogs_path, :id_element => '#dog_primary_breed_id' %>
+					</div>
+						<%= f.hidden_field :primary_breed_id %>
 				</div>
-					<%= f.hidden_field :primary_breed_id =%>
-			</div>
-			<div class="clearfix">
-				<%= f.label :secondary_breed_name %>
-				<div class="input">
-					<%= f.autocomplete_field :secondary_breed_name, autocomplete_breed_name_dogs_path, :id_element => '#dog_secondary_breed_id' %>
+				<div class="control-group">
+					<%= f.label :secondary_breed_name, :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.autocomplete_field :secondary_breed_name, autocomplete_breed_name_dogs_path, :id_element => '#dog_secondary_breed_id' %>
+					</div>
+					<%= f.hidden_field :secondary_breed_id %>	
 				</div>
-				<%= f.hidden_field :secondary_breed_id %>	
-			</div>
-			<div class="clearfix">
-				<%= f.label :gender %>
-				<div class="input">
-					<%= f.select(:gender, Dog::GENDERS, :prompt => '-select-', :class => "span2") %>
+				<div class="control-group">
+					<%= f.label :gender, :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.select(:gender, Dog::GENDERS, :prompt => '-select-', :class => "span2") %>
+					</div>
+				</div>	
+				<div class="control-group">
+					<%= f.label :age, :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.select(:age, Dog::AGES, :prompt => '-select-', :class => "span2") %>	
+					</div>
 				</div>
-			</div>	
-			<div class="clearfix">
-				<%= f.label :age %>
-				<div class="input">
-					<%= f.select(:age, Dog::AGES, :prompt => '-select-', :class => "span2") %>	
+				<div class="control-group">
+					<%= f.label :size, "Size when grown", :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.select(:size, Dog::SIZES, :prompt => '-select-', :class => "span2") %>
+					</div>
 				</div>
-			</div>
-			<div class="clearfix">
-				<%= f.label :size, "Size when grown" %>
-				<div class="input">
-					<%= f.select(:size, Dog::SIZES, :prompt => '-select-', :class => "span2") %>
+				<div class="control-group">
+					<%= f.label :intake_dt, "Intake Date", :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.text_field :intake_dt %>
+					</div>
 				</div>
-			</div>
-			<div class="clearfix">
-				<%= f.label :intake_dt, "Intake Date" %>
-				<div class="input">
-					<%= f.text_field :intake_dt %>
+				<div class="control-group">
+					<%= f.label :available_on_dt, "Available On Date", :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.text_field :available_on_dt %>
+					</div>
 				</div>
-			</div>
-			<div class="clearfix">
-				<%= f.label :available_on_dt, "Available On Date" %>
-				<div class="input">
-					<%= f.text_field :available_on_dt %>
-				</div>
-			</div>
-			<div class="clearfix">
-			<label id="optionsCheckboxes"><strong>Public Attributes</strong></label>
-				<div class="input">
-					<ul class="inputs-list">
-						<li>
-							<label><%= f.check_box :is_uptodateonshots %>
+				<div class="control-group">
+				<label id="optionsCheckboxes"><strong>Public Attributes</strong></label>
+					<div class="controls">
+						<label class="checkbox">
+							<%= f.check_box :is_uptodateonshots %>
 							<span><%= f.label :is_uptodateonshots, "Up-to-date on shots"  %></span>
-							</label>
-						</li>
-						<li>
-							<label><%= f.check_box :is_housetrained %>
+						</label>
+						<label class="checkbox">
+							<%= f.check_box :is_housetrained %>
 							<span><%= f.label :is_housetrained, "Is Housetrained" %></span>
-							</label>
-						</li>
-						<li>
-							<label><%= f.check_box :is_altered %>
+						</label>
+						<label class="checkbox">
+							<%= f.check_box :is_altered %>
 							<span><%= f.label :is_altered %></span>
-							</label>
-						</li>
-						<li>
-							<label><%= f.check_box :is_special_needs %>
+						</label>
+						<label class="checkbox">
+							<%= f.check_box :is_special_needs %>
 							<span><%= f.label :is_special_needs %></span>
-							</label>
-						</li>
-						<li>
-							<label><%= f.check_box :no_dogs %>
+						</label>
+						<label class="checkbox">
+							<%= f.check_box :no_dogs %>
 							<span><%= f.label :no_dogs %></span>
-							</label>
-						</li>
-						<li>
-							<label><%= f.check_box :no_cats %>
+						</label>
+						<label class="checkbox">
+							<%= f.check_box :no_cats %>
 							<span><%= f.label :no_cats %></span>
-							</label>
-						</li>
-						<li>
-							<label><%= f.check_box :no_kids %>
+						</label>
+						<label class="checkbox">
+							<%= f.check_box :no_kids %>
 							<span><%= f.label :no_kids %></span>
-							</label>
-						</li>
-					</ul>
+						</label>
+					</div>
 				</div>
-			</div>
 
-			<div class="clearfix">
-			<label id="optionsCheckboxes"><strong>Private Attributes</strong></label>
-				<div class="input">
-					<ul class="inputs-list">
-						<li>
-							<label><%= f.check_box :has_medical_need %>
-							<span><%= f.label :has_medical_need %></span>
-							</label>
-						</li>
-						<li>
-							<label><%= f.check_box :is_high_priority %>
-							<span><%= f.label "High Priority Dog" %></span>
-							</label>
-						</li>
-						<li>
-							<label><%= f.check_box :needs_photos %>
-							<span><%= f.label :needs_photos %></span>
-							</label>
-						</li>
-						<li>
-							<label><%= f.check_box :has_behavior_problem %>
-							<span><%= f.label :has_behavior_problem %></span>
-							</label>
-						</li>
-						<li>
-							<label><%= f.check_box :needs_foster %>
-							<span><%= f.label :needs_foster %></span>
-							</label>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<br />
-			<h3>Foster Assignments</h3>
-				<div class="clearfix">
-					<%= f.label :user_id %>
-					<div class="input">
-						<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
+				<div class="control-group">
+				<label id="optionsCheckboxes"><strong>Private Attributes</strong></label>
+					<div class="controls">
+						<label class="checkbox"><%= f.check_box :has_medical_need %>
+						<span><%= f.label :has_medical_need %></span>
+						</label>
+						<label class="checkbox"><%= f.check_box :is_high_priority %>
+						<span><%= f.label "High Priority Dog" %></span>
+						</label>
+						<label class="checkbox"><%= f.check_box :needs_photos %>
+						<span><%= f.label :needs_photos %></span>
+						</label>
+						<label class="checkbox"><%= f.check_box :has_behavior_problem %>
+						<span><%= f.label :has_behavior_problem %></span>
+						</label>
+						<label class="checkbox"><%= f.check_box :needs_foster %>
+						<span><%= f.label :needs_foster %></span>
+						</label>
+
 					</div>
 				</div>
-			<h3>New Photos</h3>
-			<div class="clearfix">
-			<%= f.fields_for :photos do |pf| %>
-				<% if pf.object.new_record? %>
-					<%= pf.file_field :photo %><br />
-				<% end %>
-			<% end %>
-			</div>
-			<h3>Existing Photos</h3>
+				<br />
+				<h3>Foster Assignments</h3>
+					<div class="control-group">
+						<%= f.label :user_id, :class => 'control-label' %>
+						<div class="controls">
+							<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
+						</div>
+					</div>
+				<h3>New Photos</h3>
+				<div class="control-group">
 				<%= f.fields_for :photos do |pf| %>
-					<% unless pf.object.new_record? %>
-					<div class="thumb">
-						<%= link_to image_tag(pf.object.photo.url(:thumb)), pf.object.photo.url(:original) %>
-						<%= pf.check_box :_destroy %>
-						<%= pf.label "Delete Photo" %>
-					</div>
+					<% if pf.object.new_record? %>
+						<%= pf.file_field :photo %><br />
 					<% end %>
 				<% end %>
-			<div class="clearfix">
-				<%= f.label "Public Description" %>
-				<div class="input">
-					<%= f.text_area :description, :class => "required xlarge", :rows => "5" %>
 				</div>
-			</div>
+				<h3>Existing Photos</h3>
+					<%= f.fields_for :photos do |pf| %>
+						<% unless pf.object.new_record? %>
+						<div class="thumb">
+							<%= link_to image_tag(pf.object.photo.url(:thumb)), pf.object.photo.url(:original) %>
+							<%= pf.check_box :_destroy %>
+							<%= pf.label "Delete Photo" %>
+						</div>
+						<% end %>
+					<% end %>
+				<div class="control-group">
+					<%= f.label "Public Description", :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_area :description, :class => "required input-xlarge", :rows => "5" %>
+					</div>
+				</div>
 
-			<div class="actions">
-				<%= f.submit "Submit", :class => "btn primary" %>
-			</div>
+				<div class="actions well">
+					<%= f.submit "Submit", :class => "btn btn-primary" %>
+				</div>
+			</fieldset>
 		<% end %>
 	</div>
 </div>

@@ -1,42 +1,60 @@
-body {
-	padding-top: 90px;
+/*body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}*/
+
+label.valid {
+  width: 24px;
+  height: 24px;
+  background: url(assets/img/valid.png) center center no-repeat;
+  display: inline-block;
+  text-indent: -9999px;
 }
 
 label.error {
-	color: red;
+  font-weight: bold;
+  color: #B94A48;
+  padding: 2px 8px;
+  margin-top: 2px;
+}
+
+span.error {
+  font-weight: bold;
+  color: #B94A48;
+  padding: 2px 8px;
+  margin-top: 2px;
 }
 
 input.error {
-	color: red;
+	color: #B94A48;
 }
 
-form .clearfix.error .error {
+form .control-group.error .error {
     color: #B94A48;
 }
 
-form .clearfix.error span.error {
+form .control-group.error span.error {
     padding-left: 5px;
 }
 
 .hero-unit {
-	background-image: url(hero_bg2.jpg);
+	background-image: url(hero_bg2.gif);
 	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: 940px 340px;
-	position: relative;
+	background-position: center;
+	background-color: #262425;
+	padding: 160px;
+/*	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;*/
 }
 
-#hero-dog  {
-	position:absolute;
-	left:30px;
-	top:250px;
+.carousel-inner {
+	background-repeat: no-repeat;
+	background-color: #262425;
+	text-align: center; 
 }
 
-#hero-adopt  {
-	position:absolute;
-	left:165px;
-	top:250px;
-}
+.carousel .item > img { display: inline-block; }
 
 .hero-unit h1 {
 	color: #FFFFFF;
@@ -47,23 +65,9 @@ form .clearfix.error span.error {
 	color: #FFFFFF;
 }
 
-.menu-dropdown, .dropdown-menu {
-  top: 63px;
-}
-
-.sidekick {
-	background-color: #ffffff;
-	border-radius: 6px 6px 6px 6px;
-	padding: 10px;
-}
-
 .sidekick h2 {
 	border-bottom: 2px solid #000000;
 	margin-bottom: 10px;
-}
-
-.topbar div > ul a, .nav a {
-	padding: 33px 10px 11px;
 }
 
 .article h2 {
@@ -77,9 +81,23 @@ form .clearfix.error span.error {
 }
 
 .eventphoto img {
+	border-radius: 6px 6px 6px 6px;
+}
+
+.gallery img{
 	display:block ; 
 	margin: auto ;
-	border-radius: 6px 6px 6px 6px;
+	border-radius: 6px 6px 6px 6px;	
+}
+
+.gallery h4 {
+	text-align: center;
+	color: #333333;
+}
+
+.gallery p {
+	text-align: center;
+	color: #333333;
 }
 
 img.floatLeft { 
@@ -102,17 +120,6 @@ img.floatRight {
 .event-title h3 {
 	border-bottom: 2px solid #000000;
 	margin-bottom: 10px;
-}
-
-.gallery p {
-	vertical-align: text-bottom;
-	text-align: center;
-}
-
-.gallery img {
-	display:block ; 
-	margin: auto ;
-	border-radius: 6px 6px 6px 6px;
 }
 
 td.sidebar {

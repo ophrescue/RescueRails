@@ -1,27 +1,27 @@
 <div id="rent" class="step">
-		<div class="clearfix">
-			<%= af.label :landlord_name, "Landlord's Name" %>
-			<div class="input">
+		<div class="control-group">
+			<%= af.label :landlord_name, "Landlord's Name", :class => "control-label" %>
+			<div class="controls">
 				<%= af.text_field :landlord_name, :class => "required" %>
 			</div>
 		</div>
-		<div class="clearfix">
-			<%= af.label :landlord_phone, "Landlord's Phone Number" %>
-			<div class="input">
+		<div class="control-group">
+			<%= af.label :landlord_phone, "Landlord's Phone Number", :class => "control-label" %>
+			<div class="controls">
 				<%= af.text_field :landlord_phone, :class => "required" %>
 			</div>
 		</div>
-		<div class="clearfix">
-			<%= af.label :rent_dog_restrictions, "What are the dog weight and breed restrictions?  " %>
-			<div class="input">
-			<%= af.text_area :rent_dog_restrictions, :class => "required xxlarge", :rows => "3" %>
+		<div class="control-group">
+			<%= af.label :rent_dog_restrictions, "What are the dog weight and breed restrictions?", :class => "control-label" %>
+			<div class="controls">
+			<%= af.text_area :rent_dog_restrictions, :class => "required input-xxlarge", :rows => "3" %>
 			<span class="help-inline">Please provide a website or description of pet restrictions.</span>
 			</div>
 		</div>
-		<div class="clearfix">
-			<%= af.label :rent_costs, "How will your rental costs increase by having a pet?" %>
-			<div class="input">
-				<%= af.text_area :rent_costs, :class => "required xxlarge", :rows => "3" %>
+		<div class="control-group">
+			<%= af.label :rent_costs, "How will your rental costs increase by having a pet?", :class => "control-label" %>
+			<div class="controls">
+				<%= af.text_area :rent_costs, :class => "required input-xxlarge", :rows => "3" %>
 				<span class="help-inline">Pet Deposts and Rent Increases</span>
 			</div>
 		</div>

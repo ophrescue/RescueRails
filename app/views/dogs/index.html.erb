@@ -1,43 +1,51 @@
 <div class="row">
-	<div class="span6">
+	<div class="span4">
 		<h1><%= @title %></h1>
 	</div>
+	<div class="span4 offset4">
 	<% if can_edit_dogs? %>
-		<div class="span6 offset4">
-			<%= link_to "Add a Dog", new_dog_path, :class => "btn small primary" %>
+			<%= link_to "Add a Dog", new_dog_path, :class => "btn btn-primary" %>
 			<% if session[:mgr_view] == true %>
-			<%= link_to("Gallery View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn small") %>
+			<%= link_to("Gallery View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
 			<% else %>
-			<%= link_to("Manager View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn small") %>
+			<%= link_to("Manager View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
 			<% end %>
-		</div>
 	<% end %>
 </div>
-<%= will_paginate @dogs %>
+</div>
 
-<% if can_edit_dogs? && session[:mgr_view] == true %>
-	<%= render 'manager' %>
-<% else %>
-	<table class="gallery">
-		<% @dogs.each_slice(3) do |slice| %>
- 			 <tr>
-				<% slice.each do |dog| %>
-					<td>
-						<div>
-		    			  	<% if dog.photos == [] %>
-								<%= link_to image_tag("no_photo-205x195.png", :alt => dog.name),dog %>
-							<% else %>
-								<%= link_to image_tag(dog.photos.first.photo.url(:thumb), :alt => dog.name),dog  %> 
+
+<div class="row">
+	<div class="span12">
+		<% if can_edit_dogs? && session[:mgr_view] == true %>
+			<%= render 'manager' %>
+		<% else %>
+			<%= will_paginate @dogs %>
+			<% @dogs.each_slice(3) do |slice| %>
+				<div class="row">
+					<div class="span12 gallery">
+						<ul class="thumbnails">
+							<% slice.each do |dog| %>
+					 			 <li class="span4">
+									<%= link_to dog, :class => "thumbnail" do %>
+					    			  	<% if dog.photos == [] %>
+											<%= image_tag("no_photo-320x320.png", :alt => dog.name) %>
+										<% else %>
+											<%= image_tag(dog.photos.first.photo.url(:medium), :alt => dog.name)  %> 
+										<% end %>
+										<h4><%= dog.name.titleize %></h4>
+										<p>
+											<%= dog.primary_breed.name.titleize unless !dog.primary_breed %><br/>
+											<%= dog.secondary_breed.name.titleize unless !dog.secondary_breed %>
+										</p>
+									<% end %>
+								</li>
 							<% end %>
-						</div>
-						<div>
-							<p><strong><%= dog.name %></strong></p>
-							<p><%= dog.primary_breed.name unless !dog.primary_breed %></p>
-						</div>
-					</td>
-			    <% end %>
-			  </tr>
+						</ul>
+					</div>
+				</div>
 			<% end %>
-		</table>
-<% end %>
-<%= will_paginate @dogs %>
+			<%= will_paginate @dogs %>
+		<% end %>
+	</div>
+</div>

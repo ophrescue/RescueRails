@@ -1,68 +1,57 @@
 <div id="other_pets" class="step">
-		<div class="clearfix">
-			<%= af.label :current_pets, "Please identify all dogs or cats you have owned over the past 10 years and where they are now." %>
-			<div class="input">
-				<%= af.text_area :current_pets, :class => "xxlarge", :rows => "3" %>
+		<div class="control-group">
+			<%= af.label :current_pets, "Please identify all dogs or cats you have owned over the past 10 years and where they are now.", :class => "control-label" %>
+			<div class="controls">
+				<%= af.text_area :current_pets, :class => "input-xxlarge", :rows => "3" %>
 				<span class="help-inline">Include name, age and breed</span>
 			</div>
 		</div>
-		<div class="clearfix">
-			<%= af.label :had_pets, "Are all your dogs/cats spayed/neutered?" %>
-			<div class="input">
-				<ul class="inputs-list">
-					<li>
-						<label>
-							<%= af.radio_button :current_pets_fixed, true, :class => "required"%>
-							<span>Yes</span>
-						</label>
-					</li>
-					<li>
-						<label>
-							<%= af.radio_button :current_pets_fixed, false %>
-							<span>No</span>
-						</label>
-					</li>
-				</ul>
+		<div class="control-group">
+			<%= af.label :had_pets, "Are all your dogs/cats spayed/neutered?", :class => "control-label" %>
+			<div class="controls">
+				<label class="radio">
+					<%= af.radio_button :current_pets_fixed, true, :class => "required"%>
+					<span>Yes</span>
+				</label>
+				<label class="radio">
+					<%= af.radio_button :current_pets_fixed, false %>
+					<span>No</span>
+				</label>
 			</div>
 		</div>
-		<div class="clearfix">
-			<%= af.label :why_not_fixed, "If no, please explain why." %>
-			<div class="input">
-				<%= af.text_area :why_not_fixed, :class => "xxlarge", :rows => "3"%>
+		<div class="control-group">
+			<%= af.label :why_not_fixed, "If no, please explain why.", :class => "control-label" %>
+			<div class="controls">
+				<%= af.text_area :why_not_fixed, :class => "input-xxlarge", :rows => "3"%>
 			</div>
 		</div>
-		<div class="clearfix">
-			<%= af.label :current_pets_uptodate, "Are all your pets up to date on routine vaccines?" %>
-			<div class="input">
-				<ul class="inputs-list">
-					<li>
-						<label>
-							<%= af.radio_button :current_pets_uptodate, true, :class => "required" %>
-							<span>Yes</span>
-						</label>
-					</li>
-					<li>
-						<label>
-							<%= af.radio_button :current_pets_uptodate, false %>
-							<span>No</span>
-						</label>
-					</li>
-				</ul>
+		<div class="control-group">
+			<%= af.label :current_pets_uptodate, "Are all your pets up to date on routine vaccines?", :class => "control-label"  %>
+			<div class="controls">
+				<label class="radio">
+					<%= af.radio_button :current_pets_uptodate, true, :class => "required" %>
+					<span>Yes</span>
+				</label>
+
+				<label class="radio">
+					<%= af.radio_button :current_pets_uptodate, false %>
+					<span>No</span>
+				</label>
 			</div>
 		</div>
-		<div class="clearfix">
-			<%= af.label :current_pets_uptodate_why, "If no, please explain why." %>
-			<div class="input">
-				<%= af.text_area :current_pets_uptodate_why, :class => "xxlarge", :rows => "3" %>
+		<div class="control-group">
+			<%= af.label :current_pets_uptodate_why, "If no, please explain why.", :class => "control-label" %>
+			<div class="controls">
+				<%= af.text_area :current_pets_uptodate_why, :class => "input-xxlarge", :rows => "3" %>
 			</div>
 		</div>
 
 		<h5>Please provide the name and number of a veterinarian who has seen these pets.</h5>
 		
-		<div class="clearfix">
-			<%= af.label :vet_info, "Veterinarian Information" %>
-			<div class="input">
-				<%= af.text_area :vet_info, :class => "xxlarge", :rows => "3" %>
+		<div class="control-group">
+			<%= af.label :vet_info, "Veterinarian Information", :class => "control-label" %>
+			<div class="controls">
+				<%= af.text_area :vet_info, :class => "input-xxlarge", :rows => "3" %>
 				<span class="help-inline">Include names, phone numbers</span>
 			</div>
 		</div>

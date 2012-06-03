@@ -2,49 +2,50 @@
   <h2>Adoption Application</h2>
 </div>
 <div class="row">
-  <div class="span12 offset2">
-    <%= form_for(@adopter) do |f| %>
-      <%= render 'shared/error_messages', :object => f.object %>
+  <div class="span8">
+    <%= form_for(@adopter, :html=> { :class => "form-horizontal" }) do |f| %>
+      <fieldset>
+        <%= render 'shared/error_messages', :object => f.object %>
 
-      <%= render 'adopters/steps/preq', :f => f %>
+        <%= render 'adopters/steps/preq', :f => f %>
 
-      <%= render 'adopters/steps/contact', :f => f %>
+        <%= render 'adopters/steps/contact', :f => f %>
 
-      <%= f.fields_for :adoption_app do |af| %>
-        <%= render 'adopters/steps/your_home', :af => af %>
-      <% end %>	
+        <%= f.fields_for :adoption_app do |af| %>
+          <%= render 'adopters/steps/your_home', :af => af %>
+        <% end %>	
 
-      <%= f.fields_for :adoption_app do |af| %>
+        <%= f.fields_for :adoption_app do |af| %>
 
-        <%= render 'adopters/steps/rental', :af => af %>
-      <% end %>
-
-      <%= render 'adopters/steps/dog', :f => f %>
-
-      <%= f.fields_for :adoption_app do |af| %>
-
-        <%= render 'adopters/steps/your_home2', :af => af %>
-
-        <%= render 'adopters/steps/new_dog_q', :af => af %>
-
-        <%= render 'adopters/steps/other_pets', :af => af %>
-
-      <% end %>
-
-      <div id="no_pets" class="step">
-        <h4>References</h4>
-        <p>Please provide three references; these cannot be immediate family members.</p>
-        <% @i = 1 %>
-        <%= f.fields_for :references do |builder| %>
-          <%= render 'adopters/steps/reference_fields', :rf => builder %>
+          <%= render 'adopters/steps/rental', :af => af %>
         <% end %>
-      </div>
 
-      <div id="Navigation" class="actions well">
-        <input class="btn large" id="back" value="Back" type="reset" />
-        <%= f.submit "Submit", :id =>"next", :class => "btn large primary", :disable_with => 'Saving...' %>
-      </div>
+        <%= render 'adopters/steps/dog', :f => f %>
 
+        <%= f.fields_for :adoption_app do |af| %>
+
+          <%= render 'adopters/steps/your_home2', :af => af %>
+
+          <%= render 'adopters/steps/new_dog_q', :af => af %>
+
+          <%= render 'adopters/steps/other_pets', :af => af %>
+
+        <% end %>
+
+        <div id="no_pets" class="step">
+          <h4>References</h4>
+          <p>Please provide three references; these cannot be immediate family members.</p>
+          <% @i = 1 %>
+          <%= f.fields_for :references do |builder| %>
+            <%= render 'adopters/steps/reference_fields', :rf => builder %>
+          <% end %>
+        </div>
+
+        <div id="Navigation" class="form-actions well">
+          <input class="btn btn-large" id="back" value="Back" type="reset" />
+          <%= f.submit "Submit", :id =>"next", :class => "btn btn-large btn-primary", :disable_with => 'Saving...' %>
+        </div>
+      </fieldset>
     <% end %>
   </div>
 </div>

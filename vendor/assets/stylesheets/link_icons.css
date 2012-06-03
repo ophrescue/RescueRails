@@ -23,10 +23,10 @@ a[class ~="popup"] {
    background: transparent url(icon_popup.gif) no-repeat center right;
 }
 
-a[href^='http:'] {
+/*a[href^='http:'] {
    padding-right: 18px;
    background: transparent url(icon_external.gif) no-repeat center right;	
-}
+}*/
 
 /*Disables the external icon for dogs in topbar*/
 .nav a {

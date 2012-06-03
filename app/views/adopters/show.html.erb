@@ -1,62 +1,52 @@
 <h5><%= link_to "Adoption Applications", :controller => "adopters", :status => "active"   %></h5>
 
 <div class="row">
-  <div class="span6">
+  <div class="span5">
     <h2><%= @adopter.name %></h2>
   </div>
 
-  <div class="span8 offset1">
-    <ul class="tabs">
-      <li class="active"><a href="#dog">Dog Choices</a></li>
-      <li><a href="#doginfo">Dog Info</a></li>
-      <% if @adopter.adoption_app.pets_branch == 'other_pets' %>
-        <li><a href="#otherpets">Pet Vet</a></li>
-      <% end %>
-      <% if @adopter.adoption_app.house_type == 'rent' %>
-        <li><a href="#rental">Rental</a></li>
-      <% end %>
-      <li><a href="#references">References</a></li>
-    </ul>
+  <div class="span6 offset1">
+
   </div>
 </div>
 
 <div class="row">
   <div class="span6">
-    <table class="zebra-striped bordered-table condensed-table">
+    <table class="table-striped table-bordered table-condensed">
       <tr>
         <td colspan="2">
           <% if @adopter.adoption_app.is_ofage == false %>
-            <span class="label warning">Under 21</span>
+            <span class="label label-warning">Under 21</span>
           <% end %>
 
           <% if @adopter.adoption_app.pets_branch == "no_pets" %>
-            <span class="label warning">First Time Dog Owner</span>
+            <span class="label label-warning">First Time Dog Owner</span>
           <% end %>
 
           <% if @adopter.adoption_app.max_hrs_alone > 5 %>
-            <span class="label warning"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span> 
+            <span class="label label-warning"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span> 
           <% else %>
-            <span class="label success"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span> 
+            <span class="label label-success"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span> 
           <% end %>
 
           <% if @adopter.adoption_app.current_pets_fixed == false %>
-            <span class="label important">Current Pets not Fixed</span> 
+            <span class="label label-important">Current Pets not Fixed</span> 
           <% end %>
 
           <% if @adopter.adoption_app.current_pets_fixed == true %>
-            <span class="label success">Current Pets Fixed</span> 
+            <span class="label label-success">Current Pets Fixed</span> 
           <% end %>
 
           <% if @adopter.adoption_app.current_pets_uptodate == false %>
-            <span class="label important">Current Pets Need Shots</span> 
+            <span class="label label-important">Current Pets Need Shots</span> 
           <% end %>
 
           <% if @adopter.adoption_app.current_pets_uptodate == true %>
-            <span class="label success">Current Pets Up to Date</span> 
+            <span class="label label-success">Current Pets Up to Date</span> 
           <% end %>
 
           <% if @adopter.adoption_app.house_type == "own" %>
-            <span class="label success">Owns Home </span> 
+            <span class="label label-success">Owns Home </span> 
           <% end %>
         </td>
       </tr>
@@ -138,159 +128,170 @@
         </td>
       </tr>
     </table>
+    <br />
   </div>
 
 
-  <div class="span8 offset1">
+  <div class="span6">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#dog" data-toggle="tab">Dog Choices</a></li>
+      <li><a href="#doginfo" data-toggle="tab">Dog Info</a></li>
+      <% if @adopter.adoption_app.pets_branch == 'other_pets' %>
+        <li><a href="#otherpets" data-toggle="tab">Pet Vet</a></li>
+      <% end %>
+      <% if @adopter.adoption_app.house_type == 'rent' %>
+        <li><a href="#rental" data-toggle="tab">Rental</a></li>
+      <% end %>
+      <li><a href="#references" data-toggle="tab">References</a></li>
+    </ul>
     <div class="pill-content">
+      <div class="tab-content">
+        <div id="dog" class="tab-pane active">
 
-      <div id="dog" class="active">
-
-        <table class="zebra-striped bordered-table condensed-table">
+          <table class="table-striped table-bordered table-condensed">
+            <tr>
+              <th>Ready to Adopt Date <br />(YYYY-MM-DD)</th>
+              <td><%= image_tag("pencil_go.png") %>
+              <%= best_in_place @adoption_app, :ready_to_adopt_dt, :type => :date %>
+            </td>
+          </tr>
+          <th>Dog Selections</th>
+          <!-- 					<td>
+            <% @adopter.dogs.each do |d| %>
+              <%= link_to d.name, d %>
+              (<%= d.status %>)
+              <br />
+            <% end %>
+          </td> -->
+          <td><%= image_tag("pencil_go.png") %><%= best_in_place @adopter, :dog_name %></td>
           <tr>
-            <th>Ready to Adopt Date <br />(YYYY-MM-DD)</th>
-            <td><%= image_tag("pencil_go.png") %>
-            <%= best_in_place @adoption_app, :ready_to_adopt_dt, :type => :date %>
-          </td>
-        </tr>
-        <th>Dog Selections</th>
-        <!-- 					<td>
-          <% @adopter.dogs.each do |d| %>
-            <%= link_to d.name, d %>
-            (<%= d.status %>)
-            <br />
-          <% end %>
-        </td> -->
-        <td><%= image_tag("pencil_go.png") %><%= best_in_place @adopter, :dog_name %></td>
-        <tr>
-          <th>Dog Requirements</th>
-          <td><%= image_tag("pencil_go.png") %><%= best_in_place @adopter, :dog_reqs %></td>
-        </tr>
-        <tr>
-          <th>Why Adopt</th>
-          <td><%= @adopter.why_adopt %></td>
-        </tr>
-      </table>
-    </div>
+            <th>Dog Requirements</th>
+            <td><%= image_tag("pencil_go.png") %><%= best_in_place @adopter, :dog_reqs %></td>
+          </tr>
+          <tr>
+            <th>Why Adopt</th>
+            <td><%= @adopter.why_adopt %></td>
+          </tr>
+        </table>
+      </div>
 
 
-    <div id="doginfo">
-      <table class="zebra-striped bordered-table condensed-table">
-        <tr>
-          <th>Dog Exercise</th>
-          <td><%= @adopter.adoption_app.dog_exercise %></td>
-        </tr>
-        <tr>
-          <th>When away, dog will stay: </th>
-          <td><%= @adopter.adoption_app.dog_stay_when_away %></td>
-        </tr>
-        <tr>
-          <th>Max Hours alone</th>
-          <td><%= @adopter.adoption_app.max_hrs_alone %></td>
-        </tr>
-        <tr>
-          <th>Dealing with Dog and Vacation</th>
-          <td><%= @adopter.adoption_app.dog_vacation %></td>
-        </tr>
-        <tr>
-          <th>Surrendered Pet Causes</th>
-          <td><%= @adopter.adoption_app.surrender_pet_causes %></td>
-        </tr>
-        <tr>
-          <th>Would you use training?</th>
-          <td><%= @adopter.adoption_app.training_explain %></td>
-        </tr>
-        <tr>
-          <th>Surrendered Pets?</th>
-          <td><%= @adopter.adoption_app.surrendered_pets %></td>
-        </tr>
-      </table>
-    </div>
+      <div id="doginfo" class="tab-pane">
+        <table class="table-striped table-bordered table-condensed">
+          <tr>
+            <th>Dog Exercise</th>
+            <td><%= @adopter.adoption_app.dog_exercise %></td>
+          </tr>
+          <tr>
+            <th>When away, dog will stay: </th>
+            <td><%= @adopter.adoption_app.dog_stay_when_away %></td>
+          </tr>
+          <tr>
+            <th>Max Hours alone</th>
+            <td><%= @adopter.adoption_app.max_hrs_alone %></td>
+          </tr>
+          <tr>
+            <th>Dealing with Dog and Vacation</th>
+            <td><%= @adopter.adoption_app.dog_vacation %></td>
+          </tr>
+          <tr>
+            <th>Surrendered Pet Causes</th>
+            <td><%= @adopter.adoption_app.surrender_pet_causes %></td>
+          </tr>
+          <tr>
+            <th>Would you use training?</th>
+            <td><%= @adopter.adoption_app.training_explain %></td>
+          </tr>
+          <tr>
+            <th>Surrendered Pets?</th>
+            <td><%= @adopter.adoption_app.surrendered_pets %></td>
+          </tr>
+        </table>
+      </div>
 
-    <div id="references">
+      <div id="references" class="tab-pane">
 
-      <table class="zebra-striped bordered-table condensed-table">
-        <thead>
-          <th>Name</th>
-          <th>Phone</th>
-          <th>E-mail</th>
-          <th>Relationship</th>
-          <th>When to Call</th>
-        </thead>
-        <%= render @adopter.references, :target => @adopter %>
-      </table>
-    </div>
+        <table class="table-striped table-bordered table-condensed">
+          <thead>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>E-mail</th>
+            <th>Relationship</th>
+            <th>When to Call</th>
+          </thead>
+          <%= render @adopter.references, :target => @adopter %>
+        </table>
+      </div>
 
-    <div id="rental">
+      <div id="rental" class="tab-pane">
 
-      <table class="zebra-striped bordered-table condensed-table">
-        <tr>
-          <th>Landlord Name</th>
-          <td><%= @adopter.adoption_app.landlord_name %></td>
-        </tr>
-        <tr>
-          <th>Landlord's Phone</th>
-          <td><%= @adopter.adoption_app.landlord_phone %></td>
-        </tr>
-        <tr>
-          <th>Dog Restrictions at Rental</th>
-          <td><%= @adopter.adoption_app.rent_dog_restrictions %></td>
-        </tr>
-        <tr>
-          <th>Expected Rental Costs</th>
-          <td><%= @adopter.adoption_app.rent_costs %></td>
-        </tr>
-      </table>
-    </div>
+        <table class="table-striped table-bordered table-condensed">
+          <tr>
+            <th>Landlord Name</th>
+            <td><%= @adopter.adoption_app.landlord_name %></td>
+          </tr>
+          <tr>
+            <th>Landlord's Phone</th>
+            <td><%= @adopter.adoption_app.landlord_phone %></td>
+          </tr>
+          <tr>
+            <th>Dog Restrictions at Rental</th>
+            <td><%= @adopter.adoption_app.rent_dog_restrictions %></td>
+          </tr>
+          <tr>
+            <th>Expected Rental Costs</th>
+            <td><%= @adopter.adoption_app.rent_costs %></td>
+          </tr>
+        </table>
+      </div>
 
 
-    <div id='otherpets'>
+      <div id='otherpets' class="tab-pane">
+        <table class="table-striped table-bordered table-condensed">
+          <tr>
+            <th>Current Pets</th>
+            <td><%= @adopter.adoption_app.current_pets %></td>
+          </tr>
+          <tr>
+            <th>Vet Info</th>
+            <td><%= @adopter.adoption_app.vet_info %></td>
+          </tr>
+          <tr>
+            <th>Are current pets fixed?</th>
+            <td><%= @adopter.adoption_app.current_pets_fixed %></td>
+          </tr>
+          <tr>
+            <th>Why not fixed?</th>
+            <td><%= @adopter.adoption_app.why_not_fixed %></td>
+          </tr>
+          <tr>
+            <th>Are current pets up to date on shots?</th>
+            <td><%= @adopter.adoption_app.current_pets_uptodate %></td>
+          </tr>
+          <tr>
+            <th>Why not up to date</th>
+            <td><%= @adopter.adoption_app.current_pets_uptodate_why %></td>
+          </tr>
 
-      <h3>Other Pets</h3>
-
-      <table class="zebra-striped bordered-table condensed-table">
-        <tr>
-          <th>Current Pets</th>
-          <td><%= @adopter.adoption_app.current_pets %></td>
-        </tr>
-        <tr>
-          <th>Vet Info</th>
-          <td><%= @adopter.adoption_app.vet_info %></td>
-        </tr>
-        <tr>
-          <th>Are current pets fixed?</th>
-          <td><%= @adopter.adoption_app.current_pets_fixed %></td>
-        </tr>
-        <tr>
-          <th>Why not fixed?</th>
-          <td><%= @adopter.adoption_app.why_not_fixed %></td>
-        </tr>
-        <tr>
-          <th>Are current pets up to date on shots?</th>
-          <td><%= @adopter.adoption_app.current_pets_uptodate %></td>
-        </tr>
-        <tr>
-          <th>Why not up to date</th>
-          <td><%= @adopter.adoption_app.current_pets_uptodate_why %></td>
-        </tr>
-
-      </table>
+        </table>
+      </div>
     </div>
   </div>
 </div>
 </div>
-
+<br />
 <div class="row">
 
-  <div class="span16">
-    <h4>Comments</h4>
+  <div class="span12">
+    <h4>Add Comment</h4>
 
     <%= form_for [@adopter, @adopter.comments.build], :html => {:id => "new_comment"} do |f| %>
-      <%= f.text_area :content, :class => "xxlarge", :rows => "3" %>
-      <%= f.submit "Post", :class => "btn primary" %>
+      <%= f.text_area :content, :class => "input-xxlarge", :rows => "5" %>
+      <%= f.submit "Post", :class => "btn btn-primary" %>
     <% end %>
+    <h4>Past Comments</h4>
     <div id="comment_table">
-      <table id="comments" class="zebra-striped bordered-table condensed-table">
+      <table id="comments" class="table-striped table-bordered table-condensed">
         <% @adopter.comments.each do |comment| %>
           <% if comment.id != nil %>
             <%= render 'comments/comment', :comment => comment %>

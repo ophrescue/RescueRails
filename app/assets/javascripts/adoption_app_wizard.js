@@ -9,7 +9,7 @@ $(function(){
 		outDuration: 200,
 		validationOptions : {
 			highlight: function(element, errorClass, validClass) {
-	    		$(element).parents("div[class='clearfix']").addClass('error').removeClass(validClass);
+	    		     $(element).parents("div[class='control-group']").addClass('error').removeClass(validClass);
 	  		},
       		unhighlight: function (element, errorClass, validClass) { 
        			$(element).parents(".error").removeClass('error'); 

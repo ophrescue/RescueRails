@@ -52,6 +52,8 @@ class Adopter < ActiveRecord::Base
               'workup',
               'approved',
               'adopted',
+              'completed',
+              'inactive',
               'withdrawn',
               'denied']
 

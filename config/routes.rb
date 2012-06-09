@@ -22,6 +22,8 @@ RescueRails::Application.routes.draw do
   match '/events/past',  :to => 'events#past'
   resources :events
 
+  resources :adoptions
+
   
 
   match '/signin',       :to => 'sessions#new'

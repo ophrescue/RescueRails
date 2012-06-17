@@ -19,6 +19,7 @@ class AdoptionsController < ApplicationController
 	def update
 		@adoption = Adoption.find(params[:id])
 		@adoption.update_attributes(params[:adoption])
+		respond_with @adopter
 	end
 
 	private

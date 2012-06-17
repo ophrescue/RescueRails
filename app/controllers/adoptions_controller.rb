@@ -7,6 +7,7 @@ class AdoptionsController < ApplicationController
 
 
 	def create
+		# @adopter = Adopter.find(params[:adoption][:adopter_id])
 	    @adoption = Adoption.new(params[:adoption])
 	    @adoption.relation_type = 'interested'
 	    if @adoption.save
@@ -16,6 +17,8 @@ class AdoptionsController < ApplicationController
 	end
 
 	def update
+		@adoption = Adoption.find(params[:id])
+		@adoption.update_attributes(params[:adoption])
 	end
 
 	private

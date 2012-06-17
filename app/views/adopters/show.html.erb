@@ -162,21 +162,21 @@
           <%= form_for(@adopter.adoptions.build(:adopter_id => @adopter.id)) do |ad| %>
             <fieldset>
               <div class="control-group">
-                <%= ad.label :dog_id, "Link Dogs", :class => "control-label" %>
+                <%= ad.label :dog_id, "Associate Dog with Application", :class => "control-label" %>
                 <div class="controls">
-                  <%= ad.collection_select :dog_id, Dog.order(:name), :id, :name, {}, {multiple: true} %>
+                  <%= ad.collection_select :dog_id, Dog.order(:name), :id, :name, {}%>
                 </div>
               </div>
               <div><%= ad.hidden_field :adopter_id %></div>
               <div id="Navigation">
-                <%= ad.submit "Submit", :class => "btn btn-small btn-primary", :disable_with => 'Saving...' %>
+                <%= ad.submit "Link Dog", :class => "btn btn-small btn-primary", :disable_with => 'Saving...' %>
               </div>
             </fieldset>
           <% end %>
 
             <% @adopter.dogs.each do |d| %>
               <%= link_to d.name, d %>
-              (<%= d.status %>)
+              (<%= d.status %>), <%= @adopter.name %> status with this dog is: <strong><%= best_in_place d.adoptions.first, :relation_type, :type => :select, :collection => Adoption::RELATION_TYPE.collect{|s| [s, s]} %></strong>
               <br />
             <% end %>
       </div>

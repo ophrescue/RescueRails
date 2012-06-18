@@ -143,6 +143,10 @@ th .desc {
 	background-image: url(down_arrow.gif);
 }
 
+.tab-content {
+  overflow: visible;
+}
+
 #edit_flag select, 
 #edit_assigned select, 
 #edit_status select {

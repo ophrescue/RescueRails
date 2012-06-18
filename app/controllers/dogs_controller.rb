@@ -9,19 +9,20 @@ class DogsController < ApplicationController
   def index
     if (can_edit_dogs?) && (cookies[:mgr_view] == true)
       @title = "Dog Manager"
+      if params[:status] == 'active'
+        statuses = ['adoptable', 'adoption pending', 'hold', 'return pending', 'coming soon']
+        @dogs = Dog.where("status IN (?)", statuses).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
+      elsif params.has_key? :status
+        @dogs = Dog.where(:status => params[:status]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
+      else
+        @dogs = Dog.where("name ilike ?", "%#{params[:q]}%").order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
+      end
     else
       @title = "Available Dogs"
-    end
-    ## Need to support the dog select drop down in the adopt app as well!
-
-    if params[:status] == 'active'
       statuses = ['adoptable', 'adoption pending', 'hold', 'return pending', 'coming soon']
       @dogs = Dog.where("status IN (?)", statuses).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
-    elsif params.has_key? :status
-      @dogs = Dog.where(:status => params[:status]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
-    else
-      @dogs = Dog.where("name ilike ?", "%#{params[:q]}%").order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
     end
+    ## Need to support the dog select drop down in the adopt app as well!
     
     respond_to do |format|
       format.html 

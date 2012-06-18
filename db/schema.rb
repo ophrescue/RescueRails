@@ -11,7 +11,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
 ActiveRecord::Schema.define(:version => 20120330164650) do
 
   create_table "adopters", :force => true do |t|
@@ -37,33 +36,33 @@ ActiveRecord::Schema.define(:version => 20120330164650) do
   end
 
   create_table "adoption_apps", :force => true do |t|
-    t.integer  "adopter_id"
-    t.string   "spouse_name",               :limit => 50
-    t.string   "other_household_names"
-    t.date     "ready_to_adopt_dt"
-    t.string   "house_type",                :limit => 40
-    t.text     "dog_exercise"
-    t.string   "dog_stay_when_away",        :limit => 100
-    t.text     "dog_vacation"
-    t.text     "current_pets"
-    t.text     "why_not_fixed"
-    t.boolean  "current_pets_uptodate"
-    t.text     "current_pets_uptodate_why"
-    t.string   "landlord_name",             :limit => 100
-    t.string   "landlord_phone",            :limit => 15
-    t.text     "rent_dog_restrictions"
-    t.text     "surrender_pet_causes"
-    t.text     "training_explain"
-    t.text     "surrendered_pets"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "how_did_you_hear"
-    t.string   "pets_branch"
-    t.boolean  "current_pets_fixed"
-    t.text     "rent_costs"
-    t.text     "vet_info"
-    t.integer  "max_hrs_alone"
-    t.boolean  "is_ofage"
+    t.integer   "adopter_id"
+    t.string    "spouse_name",               :limit => 50
+    t.string    "other_household_names"
+    t.date      "ready_to_adopt_dt"
+    t.string    "house_type",                :limit => 40
+    t.text      "dog_exercise"
+    t.string    "dog_stay_when_away",        :limit => 100
+    t.text      "dog_vacation"
+    t.text      "current_pets"
+    t.text      "why_not_fixed"
+    t.boolean   "current_pets_uptodate"
+    t.text      "current_pets_uptodate_why"
+    t.string    "landlord_name",             :limit => 100
+    t.string    "landlord_phone",            :limit => 15
+    t.text      "rent_dog_restrictions"
+    t.text      "surrender_pet_causes"
+    t.text      "training_explain"
+    t.text      "surrendered_pets"
+    t.timestamp "created_at",                :limit => 6
+    t.timestamp "updated_at",                :limit => 6
+    t.string    "how_did_you_hear"
+    t.string    "pets_branch"
+    t.boolean   "current_pets_fixed"
+    t.text      "rent_costs"
+    t.text      "vet_info"
+    t.integer   "max_hrs_alone"
+    t.boolean   "is_ofage"
   end
 
   add_index "adoption_apps", ["adopter_id"], :name => "index_adoption_apps_on_adopter_id"
@@ -186,20 +185,6 @@ ActiveRecord::Schema.define(:version => 20120330164650) do
   end
 
   add_index "events", ["event_date"], :name => "index_events_on_event_date"
-
-  create_table "fosters", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.integer  "dog_id",     :null => false
-    t.date     "start_date", :null => false
-    t.date     "end_date"
-    t.integer  "updated_by", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "fosters", ["dog_id"], :name => "index_fosters_on_dog_id"
-  add_index "fosters", ["user_id", "dog_id"], :name => "index_fosters_on_user_id_and_dog_id"
-  add_index "fosters", ["user_id"], :name => "index_fosters_on_user_id"
 
   create_table "histories", :force => true do |t|
     t.integer  "dog_id"

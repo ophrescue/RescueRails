@@ -15,6 +15,8 @@ class Adopter < ActiveRecord::Base
   accepts_nested_attributes_for :references
 
   has_many :adoptions, :dependent => :destroy
+  accepts_nested_attributes_for :adoptions
+
   has_many :dogs, :through => :adoptions
 
   has_one :adoption_app, :dependent => :destroy

@@ -147,37 +147,51 @@
     <div class="pill-content">
       <div class="tab-content">
         <div id="dog" class="tab-pane active">
+          <div class="row">
+            <div class="span3">
+              <table class="table-striped table-bordered table-condensed">
+                <th>Dog Selections</th>
+                <td><%= image_tag("pencil_go.png") %><%= best_in_place @adopter, :dog_name %></td>
+                <tr>
+                  <th>Dog Requirements</th>
+                  <td><%= image_tag("pencil_go.png") %><%= best_in_place @adopter, :dog_reqs %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+            <h3>Dogs</h3>
 
-          <table class="table-striped table-bordered table-condensed">
-            <tr>
-              <th>Ready to Adopt Date <br />(YYYY-MM-DD)</th>
-              <td><%= image_tag("pencil_go.png") %>
-              <%= best_in_place @adoption_app, :ready_to_adopt_dt, :type => :date %>
-            </td>
-          </tr>
-          <th>Dog Selections</th>
-          <!-- 					<td>
+          <%= form_for(@adopter.adoptions.build(:adopter_id => @adopter.id)) do |ad| %>
+            <fieldset>
+              <div class="control-group">
+                <%= ad.label :dog_id, "Associate Dog with Application", :class => "control-label" %>
+                <div class="controls">
+                  <%= ad.collection_select :dog_id, Dog.order(:name), :id, :name, {}%>
+                </div>
+              </div>
+              <div><%= ad.hidden_field :adopter_id %></div>
+              <div id="Navigation">
+                <%= ad.submit "Link Dog", :class => "btn btn-small btn-primary", :disable_with => 'Saving...' %>
+              </div>
+            </fieldset>
+          <% end %>
+
             <% @adopter.dogs.each do |d| %>
               <%= link_to d.name, d %>
-              (<%= d.status %>)
+              (<%= d.status %>), <%= @adopter.name %> status with this dog is <strong><%= best_in_place d.adoptions.first, :relation_type, :type => :select, :collection => Adoption::RELATION_TYPE.collect{|s| [s, s]} %></strong>
               <br />
             <% end %>
-          </td> -->
-          <td><%= image_tag("pencil_go.png") %><%= best_in_place @adopter, :dog_name %></td>
-          <tr>
-            <th>Dog Requirements</th>
-            <td><%= image_tag("pencil_go.png") %><%= best_in_place @adopter, :dog_reqs %></td>
-          </tr>
-          <tr>
-            <th>Why Adopt</th>
-            <td><%= @adopter.why_adopt %></td>
-          </tr>
-        </table>
       </div>
 
 
       <div id="doginfo" class="tab-pane">
         <table class="table-striped table-bordered table-condensed">
+          <tr>
+            <th>Ready to Adopt</th>
+            <td><%= image_tag("pencil_go.png") %>
+            <%= best_in_place @adoption_app, :ready_to_adopt_dt, :type => :date %>
+            </td>
+          </tr>
           <tr>
             <th>Dog Exercise</th>
             <td><%= @adopter.adoption_app.dog_exercise %></td>
@@ -185,10 +199,6 @@
           <tr>
             <th>When away, dog will stay: </th>
             <td><%= @adopter.adoption_app.dog_stay_when_away %></td>
-          </tr>
-          <tr>
-            <th>Max Hours alone</th>
-            <td><%= @adopter.adoption_app.max_hrs_alone %></td>
           </tr>
           <tr>
             <th>Dealing with Dog and Vacation</th>
@@ -205,6 +215,10 @@
           <tr>
             <th>Surrendered Pets?</th>
             <td><%= @adopter.adoption_app.surrendered_pets %></td>
+          </tr>
+          <tr>
+            <th>Why Adopt</th>
+            <td><%= @adopter.why_adopt %></td>
           </tr>
         </table>
       </div>

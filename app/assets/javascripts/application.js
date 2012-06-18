@@ -30,3 +30,5 @@
 //= require galleria-1.2.6
 //= require galleria.classic
 //= require rescuerails.js
+//= require chosen-jquery
+//= require adoption.js

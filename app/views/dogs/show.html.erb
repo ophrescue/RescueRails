@@ -87,19 +87,19 @@
 				<%= image_tag "needs_foster.gif" %><strong>Needs Foster</strong><br />
 			<% end %>
 			<h5>Foster</h5>
-			<% if @dog.user %>
-			<strong>Foster for <%= time_ago_in_words(@dog.foster_start_date) %>:</strong><br />
-			<%= link_to @dog.user.name, user_path(@dog.user) %><br />
-			<%= @dog.user.address1 %><br />
-			<%= @dog.user.city %>, <%= @dog.user.state %><br />
-			<%= @dog.user.phone %><br />
+			<% if @dog.user_id %>
+				<strong>Foster for <%= time_ago_in_words(@dog.foster_start_date) %>:</strong><br />
+				<%= link_to @dog.user.name, user_path(@dog.user) %><br />
+				<%= @dog.user.address1 %><br />
+				<%= @dog.user.city %>, <%= @dog.user.state %><br />
+				<%= @dog.user.phone %><br />
 			<% else %>
-			<p>No Foster Assigned</p>
+				<p>No Foster Assigned</p>
 			<% end %>
 			<h4>Adopter Info</h4>
 			<ul>
 			<% @dog.adopters.each do |a| %>
-				<li><%= link_to d.name, d %> - <%= d.status %></li>
+				<li><%= link_to a.name, a %> - <%= a.status %></li>
 			<% end %>
 			</ul>
 			<% end %>

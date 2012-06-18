@@ -30,6 +30,8 @@ class AdoptersController < ApplicationController
     @adopter = Adopter.find(params[:id])
     @adoption_app = @adopter.adoption_app
     @title = @adopter.name
+    @dogs_all = Dog.order("name").all
+    @adoption = Adoption.new
     @adopter_users = User.where(:edit_my_adopters => true).order("name")
   end
 

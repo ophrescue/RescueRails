@@ -7,7 +7,7 @@ class DogsController < ApplicationController
   before_filter :admin_user,        :only => [:destroy]
 
   def index
-    if (can_edit_dogs?) && (cookies[:mgr_view] == true)
+    if (can_edit_dogs?) && (session[:mgr_view] == true)
       @title = "Dog Manager"
       if params[:status] == 'active'
         statuses = ['adoptable', 'adoption pending', 'hold', 'return pending', 'coming soon']

@@ -1,0 +1,20 @@
+class Folder < ActiveRecord::Base
+	attr_accessible :description, :name, :attachments_attributes
+
+	has_many :attachments, :as => :attachable, :order => "updated_at DESC"
+	
+	accepts_nested_attributes_for :attachments, :allow_destroy => true
+
+end
+
+# == Schema Information
+#
+# Table name: resource_folders
+#
+#  id          :integer         not null, primary key
+#  name        :string(255)
+#  description :text
+#  created_at  :datetime        not null
+#  updated_at  :datetime        not null
+#
+

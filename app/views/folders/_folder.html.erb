@@ -1,0 +1,38 @@
+<h2><%= folder.name %></h2>
+
+<p><%= folder.description %></p>
+
+
+		<table class="table-striped table-bordered table-condensed">
+			<thead>
+				<tr>
+					<th>File Name</th>
+					<th>Description</th>
+					<th>Uploaded By</th>
+					<th>Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% folder.attachments.each do |attachment| %>
+				<% if attachment.id != nil %>
+					<%= render 'attachments/attachment', :attachment => attachment %>
+				<% end %>
+			<% end %>
+			</tbody>
+		</table>
+
+
+<%= form_for folder, :html=> { :multipart => true, :class => "form-horizontal"  } do |f| %>
+
+	<%= f.fields_for :attachments do |at| %>
+		<% if at.object.new_record? %>
+			<%= at.file_field :attachment %>
+		<% end %>
+		<%= at.hidden_field :updated_by_user_id, :value => current_user.id %>
+	<% end %>
+
+	<div class="actions well">
+		<%= f.submit "Submit", :class => "btn btn-primary" %>
+	</div>
+<% end %>

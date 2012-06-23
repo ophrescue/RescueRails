@@ -1,0 +1,18 @@
+<h1><%= @title %></h1>
+
+<% if is_admin? %>
+  <p>
+  <%= link_to "Create new Folder", new_folder_path %>
+  </p>
+<% end %>
+
+
+<% if !@folders.nil? %>
+
+  <%= render @folders %>
+
+<% else %>
+  <h3>No Folders Found</h3>
+<% end %>
+
+

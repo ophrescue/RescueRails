@@ -7,9 +7,10 @@ class Folder < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
-# Table name: resource_folders
+# Table name: folders
 #
 #  id          :integer         not null, primary key
 #  name        :string(255)

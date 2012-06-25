@@ -3,7 +3,7 @@
     <%= link_to attachment.attachment_file_name, attachment.attachment.url %>
   </td>
   <td>
-    Attachment Description
+    <%= attachment.description %>
   </td>
   <td>
     <%= link_to attachment.updated_by_user.name, attachment.updated_by_user %>
@@ -11,8 +11,9 @@
   <td>
 		<%= attachment.created_at %>
   </td>
-    <% if current_user == attachment.updated_by_user_id %>
-      <%= form_for attachment, :html => {:id => "delete_comment", :class => "delete_attachment"}, :method => :delete do |f| %>
+  <td>
+    <% if is_admin? %>
+      <%= form_for attachment, :html => {:id => "delete_attachment", :class => "delete_attachment"}, :method => :delete do |f| %>
         <%= f.submit "Delete", :class => "btn btn-danger btn-small" %>
       <% end %>
     <% else %>

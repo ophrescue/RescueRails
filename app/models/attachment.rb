@@ -7,7 +7,8 @@ class Attachment < ActiveRecord::Base
 					:attachment_file_size, 
 					:attachment_updated_at,
 					:attachment,
-					:updated_by_user_id
+					:updated_by_user_id,
+					:description
 
 	belongs_to :attachable, :polymorphic => true
 
@@ -24,6 +25,7 @@ class Attachment < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: attachments
@@ -38,5 +40,6 @@ end
 #  updated_by_user_id      :integer
 #  created_at              :datetime        not null
 #  updated_at              :datetime        not null
+#  description             :text
 #
 

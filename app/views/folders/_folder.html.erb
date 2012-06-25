@@ -1,4 +1,4 @@
-<h2><%= folder.name %></h2>
+<h2><i class="icon-folder-open"></i> <%= folder.name %></h2>
 
 <p><%= folder.description %></p>
 
@@ -22,17 +22,20 @@
 			</tbody>
 		</table>
 
+<% if is_admin? %>
+	<div class="actions">
+		<h5>Upload a new file</h5>
+	<%= form_for folder, :html=> { :multipart => true, :class => 'form-inline' } do |f| %>
 
-<%= form_for folder, :html=> { :multipart => true, :class => "form-horizontal"  } do |f| %>
-
-	<%= f.fields_for :attachments do |at| %>
-		<% if at.object.new_record? %>
-			<%= at.file_field :attachment %>
+		<%= f.fields_for :attachments do |at| %>
+			<% if at.object.new_record? %>
+				<%= at.file_field :attachment %>
+				<%= at.hidden_field :updated_by_user_id, :value => current_user.id %>
+				<%= at.label :description %>
+				<%= at.text_field :description %>
+			<% end %>
 		<% end %>
-		<%= at.hidden_field :updated_by_user_id, :value => current_user.id %>
-	<% end %>
-
-	<div class="actions well">
-		<%= f.submit "Submit", :class => "btn btn-primary" %>
+		<%= f.submit "Upload", :class => "btn btn-primary" %>
 	</div>
+	<% end %>
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120330164650) do
+ActiveRecord::Schema.define(:version => 20120625224631) do
 
   create_table "adopters", :force => true do |t|
     t.string   "name"
@@ -78,6 +78,19 @@ ActiveRecord::Schema.define(:version => 20120330164650) do
   add_index "adoptions", ["adopter_id", "dog_id"], :name => "index_connections_on_adopter_id_and_dog_id", :unique => true
   add_index "adoptions", ["adopter_id"], :name => "index_connections_on_adopter_id"
   add_index "adoptions", ["dog_id"], :name => "index_connections_on_dog_id"
+
+  create_table "attachments", :force => true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.integer  "updated_by_user_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.text     "description"
+  end
 
   create_table "breeds", :force => true do |t|
     t.string   "name"
@@ -185,6 +198,13 @@ ActiveRecord::Schema.define(:version => 20120330164650) do
   end
 
   add_index "events", ["event_date"], :name => "index_events_on_event_date"
+
+  create_table "folders", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "histories", :force => true do |t|
     t.integer  "dog_id"

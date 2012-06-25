@@ -5,6 +5,7 @@ class AdoptionApp < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: adoption_apps
@@ -28,8 +29,8 @@ end
 #  surrender_pet_causes      :text
 #  training_explain          :text
 #  surrendered_pets          :text
-#  created_at                :datetime
-#  updated_at                :datetime
+#  created_at                :timestamp(6)
+#  updated_at                :timestamp(6)
 #  how_did_you_hear          :string(255)
 #  pets_branch               :string(255)
 #  current_pets_fixed        :boolean

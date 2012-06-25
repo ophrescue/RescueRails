@@ -1,0 +1,5 @@
+<table id="attachments" class="table-striped table-bordered table-condensed">
+  <% @attachments.each do |a| %>
+    <%= render 'attachments/attachment', :attachment => a %>
+  <% end %>
+</table>

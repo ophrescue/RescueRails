@@ -1,0 +1,41 @@
+<h2><i class="icon-folder-open"></i> <%= folder.name %></h2>
+
+<p><%= folder.description %></p>
+
+
+		<table class="table-striped table-bordered table-condensed">
+			<thead>
+				<tr>
+					<th>File Name</th>
+					<th>Description</th>
+					<th>Uploaded By</th>
+					<th>Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% folder.attachments.each do |attachment| %>
+				<% if attachment.id != nil %>
+					<%= render 'attachments/attachment', :attachment => attachment %>
+				<% end %>
+			<% end %>
+			</tbody>
+		</table>
+
+<% if is_admin? %>
+	<div class="actions">
+		<h5>Upload a new file</h5>
+	<%= form_for folder, :html=> { :multipart => true, :class => 'form-inline' } do |f| %>
+
+		<%= f.fields_for :attachments do |at| %>
+			<% if at.object.new_record? %>
+				<%= at.file_field :attachment %>
+				<%= at.hidden_field :updated_by_user_id, :value => current_user.id %>
+				<%= at.label :description %>
+				<%= at.text_field :description %>
+			<% end %>
+		<% end %>
+		<%= f.submit "Upload", :class => "btn btn-primary" %>
+	</div>
+	<% end %>
+<% end %>

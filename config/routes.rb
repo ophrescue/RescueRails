@@ -23,6 +23,9 @@ RescueRails::Application.routes.draw do
   resources :events
 
   resources :adoptions
+
+  resources :folders
+  resources :attachments
   
 
   match '/signin',       :to => 'sessions#new'

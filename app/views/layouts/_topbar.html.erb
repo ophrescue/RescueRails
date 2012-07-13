@@ -49,7 +49,7 @@
                     <li><%= link_to "Applications",  :controller => "adopters", :status => "active" %></li>
                   <% end %>
                   <% if can_edit_dogs? %>
-                    <li><%= link_to "Manage Dogs", dogs_path %></li>
+                    <li><%= link_to "Manage Dogs", :controller => "dogs", :status => "active" %></li>
                   <% end %>
                   <li><%= link_to "Staff Resources", folders_path%></li>
   								<li><%= link_to "Users", users_path %></li>

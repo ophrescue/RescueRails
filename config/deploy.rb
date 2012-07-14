@@ -203,6 +203,22 @@ namespace :unicorn do
   end
 end
 
+desc "Dumps target database into development db"
+task :sync_db do
+  env   = ENV['RAILS_ENV'] || ENV['DB'] || 'production'
+  file  = "#{application}.sql.bz2"
+  remote_file = "#{shared}/log/#{file}"
+  run "pg_dump --clean --no-owner --no-privileges -U#{db_user} -h#{db_host} #{db_name}_#{env} | bzip2 > #{file}" do |ch, stream, out|
+    ch.send_data "#{db_password}\n" if out =~ /^Password:/
+    puts out
+  end
+  puts rsync = "rsync #{user}@#{domain}:#{file} tmp"
+  `#{rsync}`
+  puts depackage = "bzcat tmp/#{file} | psql #{local_db_dev}"
+  `#{depackage}`
+end
+
+
 # nginx setup
 set :nginx_directory_path,  "/etc/nginx" unless exists?(:nginx_directory_path)
 set :app_port, 80 unless exists?(:app_port)

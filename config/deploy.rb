@@ -42,6 +42,10 @@ ssh_options[:keys] = %w(/Users/mark/.ssh/unicorn)
 deployment_group =          "unicorn"
 rvm_ruby_string =           "ruby-1.9.3-p0@rescuerails"
 
+db_user =                   "unicorn"
+db_host =                   "localhost"
+db_name =                   "RescueRails"
+
 # You will be asked to enter domain names to deploy to. If you type nothing,
 # this value is used.
 default_nginx_domains =     "ophrescue.org"
@@ -207,12 +211,12 @@ desc "Dumps target database into development db"
 task :sync_db do
   env   = ENV['RAILS_ENV'] || ENV['DB'] || 'production'
   file  = "#{application}.sql.bz2"
-  remote_file = "#{shared}/log/#{file}"
+  remote_file = "#{shared_path}/log/#{file}"
   run "pg_dump --clean --no-owner --no-privileges -U#{db_user} -h#{db_host} #{db_name}_#{env} | bzip2 > #{file}" do |ch, stream, out|
     ch.send_data "#{db_password}\n" if out =~ /^Password:/
     puts out
   end
-  puts rsync = "rsync #{user}@#{domain}:#{file} tmp"
+  puts rsync = "rsync #{user}@#{default_nginx_domains}:#{file} tmp"
   `#{rsync}`
   puts depackage = "bzcat tmp/#{file} | psql #{local_db_dev}"
   `#{depackage}`

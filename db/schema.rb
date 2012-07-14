@@ -13,28 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20120625224631) do
 
-  create_table "adopters", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "phone"
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.string   "status"
-    t.string   "when_to_call"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "dog_reqs"
-    t.text     "why_adopt"
-    t.string   "dog_name"
-    t.string   "other_phone"
-    t.integer  "assigned_to_user_id"
-    t.string   "flag"
-    t.boolean  "is_subscribed",       :default => true
-  end
-
   create_table "adoption_apps", :force => true do |t|
     t.integer   "adopter_id"
     t.string    "spouse_name",               :limit => 50
@@ -68,11 +46,11 @@ ActiveRecord::Schema.define(:version => 20120625224631) do
   add_index "adoption_apps", ["adopter_id"], :name => "index_adoption_apps_on_adopter_id"
 
   create_table "adoptions", :force => true do |t|
-    t.integer  "adopter_id"
-    t.integer  "dog_id"
-    t.string   "relation_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "adopter_id"
+    t.integer   "dog_id"
+    t.string    "relation_type"
+    t.timestamp "created_at",    :limit => 6
+    t.timestamp "updated_at",    :limit => 6
   end
 
   add_index "adoptions", ["adopter_id", "dog_id"], :name => "index_connections_on_adopter_id_and_dog_id", :unique => true
@@ -93,66 +71,66 @@ ActiveRecord::Schema.define(:version => 20120625224631) do
   end
 
   create_table "breeds", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "name"
+    t.timestamp "created_at", :limit => 6
+    t.timestamp "updated_at", :limit => 6
   end
 
   add_index "breeds", ["name"], :name => "index_breeds_on_name"
 
   create_table "comments", :force => true do |t|
-    t.text     "content"
-    t.integer  "commentable_id"
-    t.string   "commentable_type"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text      "content"
+    t.integer   "commentable_id"
+    t.string    "commentable_type"
+    t.integer   "user_id"
+    t.timestamp "created_at",       :limit => 6
+    t.timestamp "updated_at",       :limit => 6
   end
 
   create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "priority",                :default => 0
+    t.integer   "attempts",                :default => 0
+    t.text      "handler"
+    t.text      "last_error"
+    t.timestamp "run_at",     :limit => 6
+    t.timestamp "locked_at",  :limit => 6
+    t.timestamp "failed_at",  :limit => 6
+    t.string    "locked_by"
+    t.timestamp "created_at", :limit => 6
+    t.timestamp "updated_at", :limit => 6
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "dogs", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "tracking_id"
-    t.integer  "primary_breed_id"
-    t.integer  "secondary_breed_id"
-    t.string   "status"
-    t.string   "age",                  :limit => 75
-    t.string   "size",                 :limit => 75
-    t.boolean  "is_altered"
-    t.string   "gender",               :limit => 6
-    t.boolean  "is_special_needs"
-    t.boolean  "no_dogs"
-    t.boolean  "no_cats"
-    t.boolean  "no_kids"
-    t.text     "description"
-    t.integer  "user_id"
-    t.date     "foster_start_date"
-    t.date     "adoption_date"
-    t.boolean  "is_uptodateonshots",                 :default => true
-    t.boolean  "is_housetrained",                    :default => true
-    t.date     "intake_dt"
-    t.date     "available_on_dt"
-    t.boolean  "has_medical_need",                   :default => false
-    t.boolean  "is_high_priority",                   :default => false
-    t.boolean  "needs_photos",                       :default => false
-    t.boolean  "has_behavior_problem",               :default => false
-    t.boolean  "needs_foster",                       :default => false
+    t.string    "name"
+    t.timestamp "created_at",           :limit => 6
+    t.timestamp "updated_at",           :limit => 6
+    t.integer   "tracking_id"
+    t.integer   "primary_breed_id"
+    t.integer   "secondary_breed_id"
+    t.string    "status"
+    t.string    "age",                  :limit => 75
+    t.string    "size",                 :limit => 75
+    t.boolean   "is_altered"
+    t.string    "gender",               :limit => 6
+    t.boolean   "is_special_needs"
+    t.boolean   "no_dogs"
+    t.boolean   "no_cats"
+    t.boolean   "no_kids"
+    t.text      "description"
+    t.integer   "user_id"
+    t.date      "foster_start_date"
+    t.date      "adoption_date"
+    t.boolean   "is_uptodateonshots",                 :default => true
+    t.boolean   "is_housetrained",                    :default => true
+    t.date      "intake_dt"
+    t.date      "available_on_dt"
+    t.boolean   "has_medical_need",                   :default => false
+    t.boolean   "is_high_priority",                   :default => false
+    t.boolean   "needs_photos",                       :default => false
+    t.boolean   "has_behavior_problem",               :default => false
+    t.boolean   "needs_foster",                       :default => false
   end
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"
@@ -164,37 +142,37 @@ ActiveRecord::Schema.define(:version => 20120625224631) do
   add_index "dogs", ["user_id"], :name => "index_dogs_on_user_id"
 
   create_table "emails", :force => true do |t|
-    t.string   "from_address",     :null => false
-    t.string   "reply_to_address"
-    t.string   "subject"
-    t.text     "to_address"
-    t.text     "cc_address"
-    t.text     "bcc_address"
-    t.text     "content"
-    t.datetime "sent_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "from_address",                  :null => false
+    t.string    "reply_to_address"
+    t.string    "subject"
+    t.text      "to_address"
+    t.text      "cc_address"
+    t.text      "bcc_address"
+    t.text      "content"
+    t.timestamp "sent_at",          :limit => 6
+    t.timestamp "created_at",       :limit => 6
+    t.timestamp "updated_at",       :limit => 6
   end
 
   create_table "events", :force => true do |t|
-    t.string   "title"
-    t.string   "location_name"
-    t.string   "address"
-    t.text     "description"
-    t.integer  "created_by_user"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.date     "event_date"
-    t.time     "start_time"
-    t.time     "end_time"
-    t.string   "location_url"
-    t.string   "location_phone"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
+    t.string    "title"
+    t.string    "location_name"
+    t.string    "address"
+    t.text      "description"
+    t.integer   "created_by_user"
+    t.timestamp "created_at",         :limit => 6
+    t.timestamp "updated_at",         :limit => 6
+    t.float     "latitude"
+    t.float     "longitude"
+    t.date      "event_date"
+    t.time      "start_time",         :limit => 6
+    t.time      "end_time",           :limit => 6
+    t.string    "location_url"
+    t.string    "location_phone"
+    t.string    "photo_file_name"
+    t.string    "photo_content_type"
+    t.integer   "photo_file_size"
+    t.timestamp "photo_updated_at",   :limit => 6
   end
 
   add_index "events", ["event_date"], :name => "index_events_on_event_date"
@@ -207,64 +185,64 @@ ActiveRecord::Schema.define(:version => 20120625224631) do
   end
 
   create_table "histories", :force => true do |t|
-    t.integer  "dog_id"
-    t.integer  "user_id"
-    t.date     "foster_start_date"
-    t.date     "foster_end_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "dog_id"
+    t.integer   "user_id"
+    t.date      "foster_start_date"
+    t.date      "foster_end_date"
+    t.timestamp "created_at",        :limit => 6
+    t.timestamp "updated_at",        :limit => 6
   end
 
   create_table "photos", :force => true do |t|
-    t.integer  "dog_id"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "dog_id"
+    t.string    "photo_file_name"
+    t.string    "photo_content_type"
+    t.integer   "photo_file_size"
+    t.timestamp "photo_updated_at",   :limit => 6
+    t.timestamp "created_at",         :limit => 6
+    t.timestamp "updated_at",         :limit => 6
   end
 
   add_index "photos", ["dog_id"], :name => "index_photos_on_dog_id"
 
   create_table "references", :force => true do |t|
-    t.integer  "adopter_id"
-    t.string   "name"
-    t.string   "email"
-    t.string   "phone"
-    t.string   "relationship"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "whentocall"
+    t.integer   "adopter_id"
+    t.string    "name"
+    t.string    "email"
+    t.string    "phone"
+    t.string    "relationship"
+    t.timestamp "created_at",   :limit => 6
+    t.timestamp "updated_at",   :limit => 6
+    t.string    "whentocall"
   end
 
   add_index "references", ["adopter_id"], :name => "index_references_on_adopter_id"
 
   create_table "users", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "encrypted_password"
-    t.string   "salt"
-    t.boolean  "admin",                  :default => false
-    t.string   "password_reset_token"
-    t.datetime "password_reset_sent_at"
-    t.boolean  "is_foster",              :default => false
-    t.string   "phone"
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.string   "title"
-    t.boolean  "edit_dogs",              :default => false
-    t.text     "share_info"
-    t.boolean  "edit_my_adopters",       :default => false
-    t.boolean  "edit_all_adopters",      :default => false
-    t.boolean  "locked",                 :default => false
-    t.boolean  "edit_events",            :default => false
-    t.string   "other_phone"
+    t.string    "name"
+    t.string    "email"
+    t.timestamp "created_at",             :limit => 6
+    t.timestamp "updated_at",             :limit => 6
+    t.string    "encrypted_password"
+    t.string    "salt"
+    t.boolean   "admin",                               :default => false
+    t.string    "password_reset_token"
+    t.timestamp "password_reset_sent_at", :limit => 6
+    t.boolean   "is_foster",                           :default => false
+    t.string    "phone"
+    t.string    "address1"
+    t.string    "address2"
+    t.string    "city"
+    t.string    "state"
+    t.string    "zip"
+    t.string    "title"
+    t.boolean   "edit_dogs",                           :default => false
+    t.text      "share_info"
+    t.boolean   "edit_my_adopters",                    :default => false
+    t.boolean   "edit_all_adopters",                   :default => false
+    t.boolean   "locked",                              :default => false
+    t.boolean   "edit_events",                         :default => false
+    t.string    "other_phone"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

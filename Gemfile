@@ -53,6 +53,8 @@ group :development do
   gem 'rspec-rails'
   gem 'annotate'
   gem 'faker'
+# When you need to debug just toss in:
+# require 'debugger'; debugger
   gem 'debugger', :require => 'ruby-debug'
   gem 'turn', :require => false
   gem 'autotest'

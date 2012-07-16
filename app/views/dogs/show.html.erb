@@ -113,7 +113,7 @@
 		<h4>Private Comments</h4>
 
 		<%= form_for [@dog, @dog.comments.build], :html => {:id => "new_comment"} do |f| %>
-				<%= f.text_area :content, :class => "xxlarge", :rows => "3" %>
+				<%= f.text_area :content, :class => "input-xxlarge", :rows => "6" %>
 			<%= f.submit "Post", :class => "btn primary" %>
 		<% end %>
 

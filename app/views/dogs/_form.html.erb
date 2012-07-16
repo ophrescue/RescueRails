@@ -128,28 +128,63 @@
 							<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
 						</div>
 					</div>
-				<h3>New Photos</h3>
-				<div class="control-group">
-				<%= f.fields_for :photos do |pf| %>
-					<% if pf.object.new_record? %>
-						<%= pf.file_field :photo %><br />
-					<% end %>
-				<% end %>
-				</div>
-				<h3>Existing Photos</h3>
-					<%= f.fields_for :photos do |pf| %>
-						<% unless pf.object.new_record? %>
-						<div class="thumb">
-							<%= link_to image_tag(pf.object.photo.url(:thumb)), pf.object.photo.url(:original) %>
-							<%= pf.check_box :_destroy %>
-							<%= pf.label "Delete Photo" %>
-						</div>
+				<div class="row sidekick">
+					<h2>Photos</h2>
+
+					<div class="span5">
+						<h3>New Photos</h3>
+						<div class="control-group">
+						<%= f.fields_for :photos do |pf| %>
+							<% if pf.object.new_record? %>
+								<%= pf.file_field :photo %><br />
+							<% end %>
 						<% end %>
-					<% end %>
+						</div>
+					</div>
+					<div class="span5">
+						<h3>Existing Photos</h3>
+							<%= f.fields_for :photos do |pf| %>
+								<% unless pf.object.new_record? %>
+								<div class="thumb">
+									<%= link_to image_tag(pf.object.photo.url(:thumb)), pf.object.photo.url(:original) %>
+									<%= pf.check_box :_destroy %>
+									<%= pf.label "Delete Photo" %>
+								</div>
+								<% end %>
+							<% end %>
+					</div>
+				</div>
+				<div class="row sidekick">
+					<h2>Documents</h2>
+					<div class="span5">
+						<h3>New Documents</h3>
+						<div class="control-group">
+						<%= f.fields_for :attachments do |af| %>
+							<% if af.object.new_record? %>
+								<%= af.file_field :attachment %><br />
+							<% end %>
+						<% end %>
+						</div>
+					</div>
+					<div class="span5">
+						<h3>Existing Documents</h3>
+							<%= f.fields_for :attachments do |af| %>
+								<% unless af.object.new_record? %>
+								<div class="thumb">
+									
+									<%= link_to af.object.attachment_file_name, af.object %>
+									<%= af.check_box :_destroy %> 
+									<%= af.label "Delete" %>
+									
+								</div>
+								<% end %>
+							<% end %>
+					</div>
+				</div>
 				<div class="control-group">
-					<%= f.label "Public Description", :class => 'control-label' %>
+					<h2>Public Description</h2>
 					<div class="controls">
-						<%= f.text_area :description, :class => "required input-xlarge", :rows => "5" %>
+						<%= f.text_area :description, :class => "required input-xxlarge", :rows => "8" %>
 					</div>
 				</div>
 

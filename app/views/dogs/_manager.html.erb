@@ -1,5 +1,12 @@
 <div class="row">
 	<div class="span12">
+		<%= form_tag dogs_path, :method => 'get' do %>
+		  <p>
+		  <%= text_field_tag :search, params[:search] %>
+		  <%= submit_tag "Search", :name => nil %>
+		  <%= link_to ' Clear Search', :controller => "dogs", :status => "active" %>
+		  </p>
+		<% end %>
 		<ul class="nav nav-tabs">
 			<% Dog::STATUSES.each do |status| %>
 			  <% if status == params[:status] %>

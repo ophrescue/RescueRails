@@ -31,7 +31,8 @@ class Dog < ActiveRecord::Base
 					:is_high_priority,
 					:needs_photos,    
 					:has_behavior_problem,
-					:needs_foster
+					:needs_foster,
+					:attachments_attributes
 
 
 	belongs_to :primary_breed, :class_name => 'Breed'
@@ -39,8 +40,10 @@ class Dog < ActiveRecord::Base
 
     has_many :comments, :as => :commentable, :order => "created_at DESC"
 
-	has_many :photos, :dependent => :destroy
+    has_many :attachments, :as => :attachable, :dependent => :destroy
+    accepts_nested_attributes_for :attachments, :allow_destroy => true
 
+	has_many :photos, :dependent => :destroy
 	accepts_nested_attributes_for :photos, :allow_destroy => true
 
 	has_many :histories, :dependent => :destroy

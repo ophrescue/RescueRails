@@ -9,7 +9,11 @@ class DogsController < ApplicationController
   def index
     if (can_edit_dogs?) && (session[:mgr_view] == true)
       @title = "Dog Manager"
-      if params[:status] == 'active'
+      if (params[:search].to_i > 0)
+        @dogs = Dog.where('tracking_id = ?', "#{params[:search].to_i}").paginate(:page => params[:page])
+      elsif params[:search]
+        @dogs = Dog.where('lower(name) LIKE ?', "%#{params[:search].downcase}%").paginate(:page => params[:page])
+      elsif params[:status] == 'active'
         statuses = ['adoptable', 'adoption pending', 'hold', 'return pending', 'coming soon']
         @dogs = Dog.where("status IN (?)", statuses).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
       elsif params.has_key? :status
@@ -18,7 +22,7 @@ class DogsController < ApplicationController
         @dogs = Dog.where("name ilike ?", "%#{params[:q]}%").order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
       end
     else
-      @title = "Available Dogs"
+      #@title = "Available Dogs"
       statuses = ['adoptable', 'adoption pending', 'hold', 'return pending', 'coming soon']
       @dogs = Dog.where("status IN (?)", statuses).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
     end
@@ -48,6 +52,7 @@ class DogsController < ApplicationController
     @dog.primary_breed_name = @dog.primary_breed.name unless @dog.primary_breed.nil?
     @dog.secondary_breed_name = @dog.secondary_breed.name unless @dog.secondary_breed.nil?
     4.times { @dog.photos.build }
+    3.times { @dog.attachments.build }
     @title = "Edit Dog"
   end
 

@@ -31,4 +31,4 @@
 //= require galleria.classic
 //= require rescuerails.js
 //= require chosen-jquery
-//= require adoption.js
+//= require chosen-calls.js

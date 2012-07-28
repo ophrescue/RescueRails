@@ -21,6 +21,9 @@ RescueRails::Application.configure do
   # Raise exceptions instead of rendering exception templates
   config.action_dispatch.show_exceptions = false
 
+  # Raise exception on mass assignment protection for Active Record models
+  config.active_record.mass_assignment_sanitizer = :strict
+
   # Disable request forgery protection in test environment
   config.action_controller.allow_forgery_protection    = false
 

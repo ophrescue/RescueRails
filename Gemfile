@@ -3,9 +3,9 @@
 ##
 source 'http://rubygems.org'
 
-gem "rails", "~> 3.2.3"
+gem "rails", "~> 3.2.7"
 
-gem "pg", "~> 0.13.2"
+gem "pg", "~> 0.14.0"
 gem 'will_paginate',  '~> 3.0.3'
 gem 'bootstrap-will_paginate', "~> 0.0.7"
 gem "gravatar_image_tag", "~> 1.1.2"
@@ -13,7 +13,7 @@ gem "rails3-jquery-autocomplete", "~> 1.0.7"
 gem "paperclip", "~> 3.0"
 gem "therubyracer", "~> 0.10.1", :platform => :ruby
 gem "geocoder", "~> 1.1.1"
-gem "best_in_place", "~> 1.0.6"
+gem "best_in_place", "~> 1.1.2"
 gem "gibbon", "~> 0.3.5"
 gem "exception_notification", "~> 2.6.1"
 
@@ -28,7 +28,7 @@ gem "mailhopper", "~> 0.1.0"
 gem "delayed_mailhopper", "~> 0.0.5"
 
 
-gem "anjlab-bootstrap-rails", "~> 2.0.4.0", :require => 'bootstrap-rails'
+gem "anjlab-bootstrap-rails", "~> 2.0.4.3", :require => 'bootstrap-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

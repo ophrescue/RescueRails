@@ -1,6 +1,8 @@
 class Photo < ActiveRecord::Base
 	belongs_to :dog
 
+	attr_accessible :photo      
+
 	has_attached_file :photo, 
 					  :styles => { :original => "1280x1024>",
 								   :large => "640x640",

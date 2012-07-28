@@ -1,92 +1,92 @@
-<h5><%= link_to "Available Dogs", :controller => "dogs", :status => "active"  %></h5>
-<table class="profile" summary="Dog information">
-	<tr>
-		<td class="main">
-			<h1>
-				<%= @dog.name %>
-			</h1>
+<div class="row">
+	<div class="span12">
+		<h5><%= link_to "Available Dogs", :controller => "dogs", :status => "active"  %></h5>
+			<h1><%= @dog.name %></h1>
 			<h3><%= @dog.primary_breed.name unless !@dog.primary_breed %></h3>
+
 			<% if can_edit_dogs? %>
 				<strong><%= link_to "Edit Dog", edit_dog_path(@dog), :class => "btn primary" %></strong><br />
 			<% end %>
-			<div id="galleria">
-			  	<% if @dog.photos == []  %>
-					<%= image_tag("no_photo-205x195.png", :alt => @dog.name) %>
-				<% else %>
-					<% for photo in @dog.photos %>
-						<%= link_to image_tag(photo.photo.url(:medium)), photo.photo.url(:original) %>
-					<% end %>
+	</div>
+</div>
+<div class="row">
+	<div class="span8">
+		<div id="galleria">
+		  	<% if @dog.photos == []  %>
+				<%= image_tag("no_photo-205x195.png", :alt => @dog.name) %>
+			<% else %>
+				<% for photo in @dog.photos %>
+					<%= link_to image_tag(photo.photo.url(:medium)), photo.photo.url(:original) %>
 				<% end %>
-			</div>
+			<% end %>
+		</div>
+		<div class="fb-like" data-href="<%= request.url %>" data-send="true" data-width="250" data-show-faces="false"></div>
 			<p> <%= @dog.description %></p>
-		<td class="sidebar round">
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<h3>About <%= @dog.name.titleize %></h3>
-			<br />
+	</div>
 
-			<strong>Dog ID:</strong>  <%= @dog.tracking_id %><br />
-			<strong>Status:</strong> 	<%= @dog.status.titleize %><br />
-			<strong>Age:</strong>   <%= @dog.age.titleize %><br />
-			<strong>Size:</strong>  <%= @dog.size.titleize %><br />
-			<strong>Gender:</strong>  <%= @dog.gender.titleize %><br />
-			<strong>Primary Breed:</strong> <%= @dog.primary_breed.name unless !@dog.primary_breed %><br />
-			<strong>Secondary Breed:</strong> <%= @dog.secondary_breed.name unless !@dog.secondary_breed %><br />
-			<br / >
+	<div class="span4">
+		<h3>About <%= @dog.name.titleize %></h3>
+		<ul class="unstyled">
+			<li>ID:  <%= @dog.tracking_id %></li>
+			<li><%= @dog.status.titleize %></li>
+			<li><%= @dog.age.titleize %></li>
+			<li><%= @dog.size.titleize %></li>
+			<li><%= @dog.gender.titleize %></li>
+			<li><%= @dog.primary_breed.name unless !@dog.primary_breed %></li>
+			<li><%= @dog.secondary_breed.name unless !@dog.secondary_breed %></li>
+
 			<% if @dog.is_uptodateonshots %>
-				<strong>Up To Date On Shots</strong><br />
+				<li>Up To Date On Shots</li>
 			<% end %>
+
 			<% if @dog.is_housetrained %>
-				<strong>Is Housetrained</strong><br />
+				<li>Housetrained</li>
 			<% end %>
+
 			<% if @dog.is_altered %>
-				<strong>Already Spayed/Neutered</strong><br />
+				<li>Already Spayed/Neutered</li>
 			<% end %>
+
 			<% if @dog.is_special_needs %>
-				<strong>Special Needs</strong><br />
+				<li>Special Needs</li>
 			<% end %>
 
 			<% if @dog.no_dogs %>
-				<strong>Not good with other dogs</strong><br />
+				<li>Not good with other dogs</li>
 			<% end %>
 
 			<% if @dog.no_cats %>
-				<strong>Not good with cats</strong><br />
+				<li>Not good with cats</li>
 			<% end %>
 
 			<% if @dog.no_kids %>
-				<strong>Not good for homes with small children</strong><br />
+				<li>Not good for homes with small children</li>
 			<% end %>
-			<div class="fb-like" data-href="<%= request.url %>" data-send="true" data-width="250" data-show-faces="false"></div>
-			<br />
-			<br />
-			<% if can_edit_dogs? %>
+		</ul>
+		
+		<br />
+		<br />
+		<% if signed_in? %>
 			<h4>Private Information</h4>
-			<h5>Dog Flags</h5>
 			<% if @dog.has_medical_need %>
-				<%= image_tag "has_medical_need.gif" %><strong>Has Medical Need</strong><br />
+				<%= image_tag "has_medical_need.gif" %>Has Medical Need<br />
 			<% end %>
 			<% if !@dog.is_altered %>
-				<%= image_tag "needs_alter.gif" %><strong>Needs Spay or Neuter</strong><br />
+				<%= image_tag "needs_alter.gif" %>Needs Spay or Neuter<br />
 			<% end %>
 			<% if @dog.is_high_priority %>
-				<%= image_tag "is_high_priority.gif" %><strong>High Priority</strong><br />
+				<%= image_tag "is_high_priority.gif" %>High Priority<br />
 			<% end %>
 			<% if @dog.needs_photos %>
-				<%= image_tag "needs_photos.gif" %><strong>Needs Photos</strong><br />
+				<%= image_tag "needs_photos.gif" %>Needs Photos<br />
 			<% end %>
 			<% if @dog.has_behavior_problem %>
-				<%= image_tag "has_behavior_problem.gif" %><strong>Has Behavior Problem</strong><br />
+				<%= image_tag "has_behavior_problem.gif" %>Has Behavior Problem<br />
 			<% end %>
 			<% if @dog.needs_foster %>
-				<%= image_tag "needs_foster.gif" %><strong>Needs Foster</strong><br />
+				<%= image_tag "needs_foster.gif" %>Needs Foster<br />
 			<% end %>
-			<h5>Foster</h5>
+			<br />
 			<% if @dog.user_id %>
 				<strong>Foster for <%= time_ago_in_words(@dog.foster_start_date) %>:</strong><br />
 				<%= link_to @dog.user.name, user_path(@dog.user) %><br />
@@ -96,20 +96,32 @@
 			<% else %>
 				<p>No Foster Assigned</p>
 			<% end %>
-			<h4>Adopter Info</h4>
-			<ul>
-			<% @dog.adopters.each do |a| %>
-				<li><%= link_to a.name, a %> - <%= a.status %></li>
+			<br />
+			<% if @dog.adopters.count > 0 %>
+				<h4>Adopter Info</h4>
+				<ul>
+				<% @dog.adopters.each do |a| %>
+					<li><%= link_to a.name, a %> - <%= a.status %></li>
+				<% end %>
+				</ul>
 			<% end %>
-			</ul>
+
+
+			<% if @dog.attachments %>
+				<h4>Attachments</h4>
+				<ul class="unstyled">
+					<% @dog.attachments.each do |a| %>
+						<li><i class="icon-file"></i><%= link_to a.attachment_file_name %></li>
+					<% end %>
+				</ul>
 			<% end %>
-		</td>
-	</tr>
-</table>
+		<% end %>
+	</div>
+</div>
 
 <% if can_edit_dogs? %>
 <div class="row">
-	<div class="span16">
+	<div class="span12">
 		<h4>Private Comments</h4>
 
 		<%= form_for [@dog, @dog.comments.build], :html => {:id => "new_comment"} do |f| %>
@@ -131,7 +143,7 @@
 <% end %>
 <script>
     $('#galleria').galleria({
-        width:500,
-        height:500
+    	responsive: true,
+    	imageCrop: false
     });
 </script>

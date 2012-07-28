@@ -147,6 +147,13 @@ th .desc {
   overflow: visible;
 }
 
+#galleria {
+	height:500px;
+	width:100%; 
+	min-width:300px
+}
+
+
 #edit_flag select, 
 #edit_assigned select, 
 #edit_status select {

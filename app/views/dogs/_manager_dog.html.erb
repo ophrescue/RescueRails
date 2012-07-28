@@ -1,6 +1,16 @@
 <tr>
 	<td><%= dog.tracking_id %></td>
 	<td><%= link_to dog.name.titleize, dog %></td>
+	<td>
+		<% if dog.attachments.count > 0 %>
+			<i class="icon-file"></i>
+			<%= dog.attachments.count %>
+		<% end %>
+		<% if dog.photos.count > 0 %>
+			<i class="icon-picture"></i>
+			<%= dog.photos.count %>
+		<% end %>
+	</td>
 	<td><%= dog.age.titleize %></td>
 	<td>
 		<% if dog.has_medical_need %>

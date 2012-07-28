@@ -68,10 +68,10 @@
 						<%= f.text_field :available_on_dt %>
 					</div>
 				</div>
-			</fieldset>
+
 	</div>
 	<div class="span6">
-		<fieldset>
+
 			<h3>Foster Assignment</h3>
 				<div class="control-group">
 					<%= f.label :user_id, "Name", :class => 'control-label' %>
@@ -133,7 +133,7 @@
 						</label>
 					</div>
 				</div>
-		</fieldset>
+
 	</div>
 
 		<div class="row sidekick">
@@ -156,8 +156,12 @@
 								<% unless pf.object.new_record? %>
 								<div class="thumb">
 									<%= link_to image_tag(pf.object.photo.url(:thumb)), pf.object.photo.url(:original) %>
-									<%= pf.check_box :_destroy %>
-									<%= pf.label "Delete Photo" %>
+
+									<label class="checkbox ">
+										<%= pf.check_box :_destroy %>
+										<span>Delete Photo</span>
+									</label>
+									
 								</div>
 								<% end %>
 							<% end %>
@@ -181,12 +185,14 @@
 							<h3>Existing Documents</h3>
 								<%= f.fields_for :attachments do |af| %>
 									<% unless af.object.new_record? %>
-									<div class="thumb">
-										
-										<%= link_to af.object.attachment_file_name, af.object %>
-										<%= af.check_box :_destroy %> 
-										<%= af.label "Delete" %>
-										
+									<div class="control-group">
+										<label class="control-label" for="delAttachment">
+											<i class="icon-file"></i><%= link_to af.object.attachment_file_name, af.object %>
+										</label>
+										<label class="checkbox">
+											<%= af.check_box :_destroy, :id => "delAttachment" %>
+											<span>Delete <%= af.object.attachment_file_name %></span>
+										</label>
 									</div>
 									<% end %>
 								<% end %>

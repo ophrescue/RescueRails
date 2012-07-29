@@ -8,6 +8,8 @@ class Event < ActiveRecord::Base
 	  				:end_time,
 	  				:location_name,
 	  				:location_url,
+	  				:photographer_name,
+	  				:photographer_url,
 	  				:location_phone,
 	  				:address,
 	  				:description,

@@ -165,6 +165,7 @@ describe User do
   end
 end
 
+
 # == Schema Information
 #
 # Table name: users
@@ -172,13 +173,13 @@ end
 #  id                     :integer         not null, primary key
 #  name                   :string(255)
 #  email                  :string(255)
-#  created_at             :datetime
-#  updated_at             :datetime
+#  created_at             :timestamp(6)
+#  updated_at             :timestamp(6)
 #  encrypted_password     :string(255)
 #  salt                   :string(255)
 #  admin                  :boolean         default(FALSE)
 #  password_reset_token   :string(255)
-#  password_reset_sent_at :datetime
+#  password_reset_sent_at :timestamp(6)
 #  is_foster              :boolean         default(FALSE)
 #  phone                  :string(255)
 #  address1               :string(255)

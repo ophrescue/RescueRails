@@ -3,6 +3,7 @@ class History < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :dog
 end
+
 # == Schema Information
 #
 # Table name: histories
@@ -12,7 +13,7 @@ end
 #  user_id           :integer
 #  foster_start_date :date
 #  foster_end_date   :date
-#  created_at        :datetime
-#  updated_at        :datetime
+#  created_at        :timestamp(6)
+#  updated_at        :timestamp(6)
 #
 

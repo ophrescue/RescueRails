@@ -13,6 +13,7 @@ class Adoption < ActiveRecord::Base
 	validates_inclusion_of :relation_type, :in => RELATION_TYPE	
 
 end
+
 # == Schema Information
 #
 # Table name: adoptions
@@ -21,7 +22,7 @@ end
 #  adopter_id    :integer
 #  dog_id        :integer
 #  relation_type :string(255)
-#  created_at    :datetime
-#  updated_at    :datetime
+#  created_at    :timestamp(6)
+#  updated_at    :timestamp(6)
 #
 

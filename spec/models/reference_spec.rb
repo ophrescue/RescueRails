@@ -4,6 +4,7 @@ describe Reference do
   pending "add some examples to (or delete) #{__FILE__}"
 end
 
+
 # == Schema Information
 #
 # Table name: references
@@ -14,8 +15,8 @@ end
 #  email        :string(255)
 #  phone        :string(255)
 #  relationship :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
+#  created_at   :timestamp(6)
+#  updated_at   :timestamp(6)
 #  whentocall   :string(255)
 #
 

@@ -108,14 +108,15 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: dogs
 #
 #  id                   :integer         not null, primary key
 #  name                 :string(255)
-#  created_at           :datetime
-#  updated_at           :datetime
+#  created_at           :timestamp(6)
+#  updated_at           :timestamp(6)
 #  tracking_id          :integer
 #  primary_breed_id     :integer
 #  secondary_breed_id   :integer

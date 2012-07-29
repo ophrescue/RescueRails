@@ -63,6 +63,7 @@ class Event < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: events
@@ -73,18 +74,20 @@ end
 #  address            :string(255)
 #  description        :text
 #  created_by_user    :integer
-#  created_at         :datetime
-#  updated_at         :datetime
+#  created_at         :timestamp(6)
+#  updated_at         :timestamp(6)
 #  latitude           :float
 #  longitude          :float
 #  event_date         :date
-#  start_time         :time
-#  end_time           :time
+#  start_time         :time(6)
+#  end_time           :time(6)
 #  location_url       :string(255)
 #  location_phone     :string(255)
 #  photo_file_name    :string(255)
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
-#  photo_updated_at   :datetime
+#  photo_updated_at   :timestamp(6)
+#  photographer_name  :string(255)
+#  photographer_url   :string(255)
 #
 

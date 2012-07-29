@@ -18,6 +18,7 @@ class Photo < ActiveRecord::Base
 	validates_attachment_size :photo, :less_than => 5.megabytes
 	validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/pjpeg']
 end
+
 # == Schema Information
 #
 # Table name: photos
@@ -27,8 +28,8 @@ end
 #  photo_file_name    :string(255)
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
-#  photo_updated_at   :datetime
-#  created_at         :datetime
-#  updated_at         :datetime
+#  photo_updated_at   :timestamp(6)
+#  created_at         :timestamp(6)
+#  updated_at         :timestamp(6)
 #
 

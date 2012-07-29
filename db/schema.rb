@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120729183033) do
+ActiveRecord::Schema.define(:version => 20120729231544) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -196,6 +196,8 @@ ActiveRecord::Schema.define(:version => 20120729183033) do
     t.string    "photo_content_type"
     t.integer   "photo_file_size"
     t.timestamp "photo_updated_at",   :limit => 6
+    t.string    "photographer_name"
+    t.string    "photographer_url"
   end
 
   add_index "events", ["event_date"], :name => "index_events_on_event_date"

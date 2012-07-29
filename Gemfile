@@ -23,9 +23,10 @@ end
 
 
 # Cool mail async stuff
-gem "delayed_job", "~> 2.1.4"
-gem "mailhopper", "~> 0.1.0"
-gem "delayed_mailhopper", "~> 0.0.5"
+gem "delayed_job", "~> 3.0.3"
+gem 'delayed_job_active_record'
+gem "mailhopper", "~> 0.2.0"
+gem "delayed_mailhopper", "~> 0.0.7"
 
 
 gem "anjlab-bootstrap-rails", "~> 2.0.4.3", :require => 'bootstrap-rails'

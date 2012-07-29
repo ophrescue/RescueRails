@@ -11,7 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120625224631) do
+ActiveRecord::Schema.define(:version => 20120729183033) do
+
+  create_table "adopters", :force => true do |t|
+    t.string    "name"
+    t.string    "email"
+    t.string    "phone"
+    t.string    "address1"
+    t.string    "address2"
+    t.string    "city"
+    t.string    "state"
+    t.string    "zip"
+    t.string    "status"
+    t.string    "when_to_call"
+    t.timestamp "created_at",          :limit => 6
+    t.timestamp "updated_at",          :limit => 6
+    t.text      "dog_reqs"
+    t.text      "why_adopt"
+    t.string    "dog_name"
+    t.string    "other_phone"
+    t.integer   "assigned_to_user_id"
+    t.string    "flag"
+    t.boolean   "is_subscribed",                    :default => true
+  end
 
   create_table "adoption_apps", :force => true do |t|
     t.integer   "adopter_id"
@@ -98,6 +120,7 @@ ActiveRecord::Schema.define(:version => 20120625224631) do
     t.string    "locked_by"
     t.timestamp "created_at", :limit => 6
     t.timestamp "updated_at", :limit => 6
+    t.string    "queue"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"

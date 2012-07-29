@@ -23,6 +23,7 @@ end
 
 
 # Cool mail async stuff
+gem "daemons", "~> 1.1.8"
 gem "delayed_job", "~> 3.0.3"
 gem 'delayed_job_active_record'
 gem "mailhopper", "~> 0.2.0"

@@ -106,6 +106,25 @@
 				</ul>
 			<% end %>
 
+			<h4>Ads</h4>
+			<ul>
+				<% if @dog.petfinder_ad_url %>
+					<li><%= link_to "Petfinder", @dog.petfinder_ad_url %></li>
+				<% else %>
+					<li><span class="label label-important">Needs Petfinder Ad</span></li>
+				<% end %>
+				<% if @dog.adoptapet_ad_url %>
+					<li><%= link_to "Adopt-A-Pet", @dog.adoptapet_ad_url %></li>
+				<% else %>
+					<li><span class="label label-important">Needs Adopt-A-Pet Ad</span></li>
+				<% end %>
+				<% if @dog.craigslist_ad_url %>
+					<li><%= link_to "Craigslist", @dog.craigslist_ad_url %></li>
+				<% else %>
+					<li><span class="label label-important">Needs Craigslist Ad</span></li>
+				<% end %>
+			</ul>
+
 
 			<% if @dog.attachments %>
 				<h4>Attachments</h4>

@@ -68,10 +68,35 @@
 						<%= f.text_field :available_on_dt %>
 					</div>
 				</div>
+				<h3>Ads</h3>
+				<div class="control-group">
+					<%= f.label :petfinder_ad_url, "Petfinder Ad Link", :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.text_field :petfinder_ad_url %>
+					</div>
+				</div>
+				<div class="control-group">
+					<%= f.label :adoptapet_ad_url, "Adopt-A-Pet Ad Link", :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.text_field :adoptapet_ad_url %>
+					</div>
+				</div>
+				<div class="control-group">
+					<%= f.label :craigslist_ad_url, "Craigslist Ad Link", :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.text_field :craigslist_ad_url %>
+					</div>
+				</div>
+				<div class="control-group">
+					<%= f.label :youtube_video_url, "YouTube Video Link", :class => 'control-label'  %>
+					<div class="controls">
+						<%= f.text_field :youtube_video_url %>
+					</div>
+				</div>		
+
 
 	</div>
 	<div class="span6">
-
 			<h3>Foster Assignment</h3>
 				<div class="control-group">
 					<%= f.label :user_id, "Name", :class => 'control-label' %>
@@ -133,6 +158,8 @@
 						</label>
 					</div>
 				</div>
+
+
 
 	</div>
 

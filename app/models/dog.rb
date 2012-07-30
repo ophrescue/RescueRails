@@ -32,7 +32,11 @@ class Dog < ActiveRecord::Base
 					:needs_photos,    
 					:has_behavior_problem,
 					:needs_foster,
-					:attachments_attributes
+					:attachments_attributes,
+					:petfinder_ad_url,
+					:adoptapet_ad_url,
+					:craigslist_ad_url,
+					:youtube_video_url
 
 
 	belongs_to :primary_breed, :class_name => 'Breed'
@@ -109,6 +113,7 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: dogs
@@ -142,5 +147,9 @@ end
 #  needs_photos         :boolean         default(FALSE)
 #  has_behavior_problem :boolean         default(FALSE)
 #  needs_foster         :boolean         default(FALSE)
+#  petfinder_ad_url     :string(255)
+#  adoptapet_ad_url     :string(255)
+#  craigslist_ad_url    :string(255)
+#  youtube_video_url    :string(255)
 #
 

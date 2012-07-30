@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120729231544) do
+ActiveRecord::Schema.define(:version => 20120730161355) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -154,6 +154,10 @@ ActiveRecord::Schema.define(:version => 20120729231544) do
     t.boolean   "needs_photos",                       :default => false
     t.boolean   "has_behavior_problem",               :default => false
     t.boolean   "needs_foster",                       :default => false
+    t.string    "petfinder_ad_url"
+    t.string    "adoptapet_ad_url"
+    t.string    "craigslist_ad_url"
+    t.string    "youtube_video_url"
   end
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"

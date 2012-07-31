@@ -19,6 +19,9 @@
 					<%= link_to image_tag(photo.photo.url(:medium)), photo.photo.url(:original) %>
 				<% end %>
 			<% end %>
+			<% if @dog.youtube_video_url %>
+				<%= link_to content_tag(:span, "Watch on YouTube", :class => "video"), @dog.youtube_video_url %>
+			<% end %>
 		</div>
 		<div class="fb-like" data-href="<%= request.url %>" data-send="true" data-width="250" data-show-faces="false"></div>
 			<p> <%= @dog.description %></p>

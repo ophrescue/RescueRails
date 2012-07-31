@@ -41,21 +41,15 @@ class DogsController < ApplicationController
 
   def new
     @dog = Dog.new
-    5.times { @dog.photos.build }
-    5.times { @dog.attachments.build }
-    @foster_users = User.where(:is_foster => true).order("name")
-    @breeds = Breed.all
+    load_instance_variables
     @title = "Add a New Dog"
   end
 
   def edit
-    @foster_users = User.where(:is_foster => true).order("name")
-    @breeds = Breed.all
     @dog = Dog.find(params[:id]) 
     @dog.primary_breed_name = @dog.primary_breed.name unless @dog.primary_breed.nil?
     @dog.secondary_breed_name = @dog.secondary_breed.name unless @dog.secondary_breed.nil?
-    5.times { @dog.photos.build }
-    5.times { @dog.attachments.build }
+    load_instance_variables
     @title = "Edit Dog"
   end
 
@@ -78,6 +72,7 @@ class DogsController < ApplicationController
       redirect_to dogs_path
     else
       @title = "Add a New Dog"
+      load_instance_variables
       render 'new'
     end
   end
@@ -100,6 +95,13 @@ class DogsController < ApplicationController
 
 
   private
+
+    def load_instance_variables
+      5.times { @dog.photos.build }
+      5.times { @dog.attachments.build }
+      @foster_users = User.where(:is_foster => true).order("name")
+      @breeds = Breed.all      
+    end
 
     def edit_dogs_user
       redirect_to(root_path) unless current_user.edit_dogs?

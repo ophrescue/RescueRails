@@ -21,7 +21,7 @@ class Attachment < ActiveRecord::Base
 
 
 	validates_attachment_presence :attachment
-	validates_attachment_size :attachment, :less_than => 5.megabytes
+	validates_attachment_size :attachment, :less_than => 10.megabytes
 
 end
 

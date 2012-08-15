@@ -6,6 +6,15 @@ class AdoptionsController < ApplicationController
 	respond_to :html, :json
 
 
+	def index
+		@adoptions = Adoption.all
+		render :layout => false
+	end
+
+	def show
+		@adoption = Adoption.find(params[:id])
+	end
+
 	def create
 		# @adopter = Adopter.find(params[:adoption][:adopter_id])
 	    @adoption = Adoption.new(params[:adoption])
@@ -20,6 +29,12 @@ class AdoptionsController < ApplicationController
 		@adoption = Adoption.find(params[:id])
 		@adoption.update_attributes(params[:adoption])
 		respond_with @adopter
+	end
+
+	def destroy
+		Adoption.find(params[:id]).destroy
+		flash[:warning] = "Dog removed from Application"
+		redirect_to :back
 	end
 
 	private

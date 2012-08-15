@@ -5,6 +5,7 @@ RescueRails::Application.routes.draw do
 
   resources :adopters do
     resources :comments
+    resources :adoptions
   end
 
   resources :adoption_app
@@ -14,6 +15,7 @@ RescueRails::Application.routes.draw do
   resources :users
   resources :dogs do
     resources :comments
+    resources :adoptions
   end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :password_resets

@@ -179,7 +179,10 @@
             <% @adopter.dogs.each do |d| %>
               <%= link_to d.name, d %>
               (<%= d.status %>), <%= @adopter.name %> status with this dog is <strong><%= best_in_place d.adoptions.first, :relation_type, :type => :select, :collection => Adoption::RELATION_TYPE.collect{|s| [s, s]} %></strong>
-              <br />
+                    <%= form_for d.adoptions.first, :html => {:id => "delete_adoption", :class => "delete_adoption", :style =>" display:inline!important;"}, :method => :delete do |f| %>
+                      <%= f.submit "X", :class => "btn btn-danger btn-small" %>
+                    <% end %>
+                  <br />
             <% end %>
       </div>
 

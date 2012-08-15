@@ -19,7 +19,7 @@
 					<%= link_to image_tag(photo.photo.url(:medium)), photo.photo.url(:original) %>
 				<% end %>
 			<% end %>
-			<% if @dog.youtube_video_url %>
+			<% if !@dog.youtube_video_url.blank? %>
 				<%= link_to content_tag(:span, "Watch on YouTube", :class => "video"), @dog.youtube_video_url %>
 			<% end %>
 		</div>
@@ -111,17 +111,17 @@
 
 			<h4>Ads</h4>
 			<ul>
-				<% if @dog.petfinder_ad_url %>
+				<% if !@dog.petfinder_ad_url.blank? %>
 					<li><%= link_to "Petfinder", @dog.petfinder_ad_url %></li>
 				<% else %>
 					<li><span class="label label-important">Needs Petfinder Ad</span></li>
 				<% end %>
-				<% if @dog.adoptapet_ad_url %>
+				<% if !@dog.adoptapet_ad_url.blank? %>
 					<li><%= link_to "Adopt-A-Pet", @dog.adoptapet_ad_url %></li>
 				<% else %>
 					<li><span class="label label-important">Needs Adopt-A-Pet Ad</span></li>
 				<% end %>
-				<% if @dog.craigslist_ad_url %>
+				<% if !@dog.craigslist_ad_url.blank? %>
 					<li><%= link_to "Craigslist", @dog.craigslist_ad_url %></li>
 				<% else %>
 					<li><span class="label label-important">Needs Craigslist Ad</span></li>

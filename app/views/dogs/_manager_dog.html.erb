@@ -8,7 +8,7 @@
 		<% if dog.photos.count > 0 %>
 			<i class="icon-picture"></i><%= dog.photos.count %>
 		<% end %>
-		<% if dog.youtube_video_url %>
+		<% if !dog.youtube_video_url.blank? %>
 			<a href="<%= dog.youtube_video_url %>"><i class="icon-facetime-video"></i></a>
 		<% end %>
 	</td>

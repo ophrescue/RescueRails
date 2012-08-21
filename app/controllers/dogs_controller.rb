@@ -60,6 +60,7 @@ class DogsController < ApplicationController
       redirect_to @dog
     else
       @title = "Edit Dog"
+      load_instance_variables
       render 'edit'
     end
   end

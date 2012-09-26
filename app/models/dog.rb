@@ -24,7 +24,6 @@ class Dog < ActiveRecord::Base
 					:foster_start_date,
 					:adoption_date,
 					:is_uptodateonshots,
-					:is_housetrained,
 					:intake_dt,
 					:available_on_dt,
 					:has_medical_need,

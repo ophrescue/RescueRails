@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730161355) do
+ActiveRecord::Schema.define(:version => 20120926213749) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -146,7 +146,6 @@ ActiveRecord::Schema.define(:version => 20120730161355) do
     t.date      "foster_start_date"
     t.date      "adoption_date"
     t.boolean   "is_uptodateonshots",                 :default => true
-    t.boolean   "is_housetrained",                    :default => true
     t.date      "intake_dt"
     t.date      "available_on_dt"
     t.boolean   "has_medical_need",                   :default => false

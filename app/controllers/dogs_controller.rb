@@ -3,6 +3,7 @@ class DogsController < ApplicationController
 
   autocomplete :breed, :name, :full => true
 
+  before_filter :authenticate,     :except => [:index, :show]
   before_filter :edit_dogs_user,   :except => [:index, :show, :delete]
   before_filter :admin_user,        :only => [:destroy]
 

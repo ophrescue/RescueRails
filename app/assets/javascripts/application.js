@@ -32,3 +32,4 @@
 //= require rescuerails.js
 //= require chosen-jquery
 //= require chosen-calls.js
+//= require photos.js.coffee

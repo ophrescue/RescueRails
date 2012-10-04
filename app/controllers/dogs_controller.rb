@@ -37,6 +37,7 @@ class DogsController < ApplicationController
 
   def show
     @dog = Dog.find(params[:id])
+    @dog.photos.sort_by!{|photo| photo.position}
     @title = @dog.name
   end
 
@@ -50,6 +51,7 @@ class DogsController < ApplicationController
     @dog = Dog.find(params[:id]) 
     @dog.primary_breed_name = @dog.primary_breed.name unless @dog.primary_breed.nil?
     @dog.secondary_breed_name = @dog.secondary_breed.name unless @dog.secondary_breed.nil?
+    @dog.photos.sort_by!{|photo| photo.position}
     load_instance_variables
     @title = "Edit Dog"
   end

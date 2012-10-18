@@ -15,7 +15,7 @@ class DogsController < ApplicationController
       elsif params[:search]
         @dogs = Dog.where('lower(name) LIKE ?', "%#{params[:search].downcase}%").paginate(:page => params[:page])
       elsif params[:status] == 'active'
-        statuses = ['adoptable', 'adoption pending', 'hold', 'return pending', 'coming soon']
+        statuses = ['adoptable', 'adoption pending', 'on hold', 'return pending', 'coming soon']
         @dogs = Dog.where("status IN (?)", statuses).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
       elsif params.has_key? :status
         @dogs = Dog.where(:status => params[:status]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
@@ -24,7 +24,7 @@ class DogsController < ApplicationController
       end
     else
       #@title = "Available Dogs"
-      statuses = ['adoptable', 'adoption pending', 'hold', 'return pending', 'coming soon']
+      statuses = ['adoptable', 'adoption pending', 'on hold', 'return pending', 'coming soon']
       @dogs = Dog.where("status IN (?)", statuses).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
     end
     ## Need to support the dog select drop down in the adopt app as well!

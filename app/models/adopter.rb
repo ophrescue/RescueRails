@@ -72,7 +72,7 @@ class Adopter < ActiveRecord::Base
               'approved',
               'adopted',
               'completed',
-              'inactive',
+              'standby',
               'withdrawn',
               'denied']
 

@@ -16,7 +16,7 @@ RescueRails::Application.routes.draw do
   resources :dogs do
     resources :comments
     resources :photos do
-      collection {post :sort}
+      collection { post :sort }
     end
     resources :adoptions
   end
@@ -31,10 +31,6 @@ RescueRails::Application.routes.draw do
 
   resources :folders
   resources :attachments
-
-  resources :photos do
-    collection {post :sort}
-  end
   
 
   match '/signin',       :to => 'sessions#new'

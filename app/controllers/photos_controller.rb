@@ -1,10 +1,9 @@
 class PhotosController < ApplicationController
 
 	def sort
-		render nothing: true
-	end
-
-	def show
+		params[:photo].each_with_index do |id, index|
+    		Photo.update_all({position: index+1}, {id: id})
+  		end
 		render nothing: true
 	end
 

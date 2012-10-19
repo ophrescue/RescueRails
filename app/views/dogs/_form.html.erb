@@ -163,8 +163,8 @@
 <div class="row sidekick">
 	<div class="span12">
 		<h2>Photos</h2>
-		<table class="table table-striped" id="photos" data-update-url="<%= sort_photos_url %>">
-			<tbody class="sortable_table">
+		<table class="table table-striped">
+			<tbody id="photos_sort" data-update-url="<%= sort_dog_photos_url(@dog) %>">
 				<%= f.fields_for :photos do |photo| %>
 					<% unless photo.object.new_record? %>
 						<%= content_tag_for(:tr, photo.object) do %>

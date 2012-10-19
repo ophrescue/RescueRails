@@ -15,8 +15,12 @@ RescueRails::Application.routes.draw do
   resources :users
   resources :dogs do
     resources :comments
+    resources :photos do
+      collection { post :sort }
+    end
     resources :adoptions
   end
+
   resources :sessions, :only => [:new, :create, :destroy]
   resources :password_resets
 

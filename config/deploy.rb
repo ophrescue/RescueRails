@@ -283,10 +283,10 @@ namespace :deploy do
   desc "Deploy and migrate the database - this will cause downtime during migrations"
   task :migrations do
     transaction do
-      update_code
-      web:disable
+      web.disable
+      deploy
       migrate
-      web:enable
+      web.enable
     end
     restart
   end

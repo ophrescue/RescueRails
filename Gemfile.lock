@@ -29,6 +29,7 @@ GEM
     activesupport (3.2.8)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    acts_as_list (0.1.8)
     addressable (2.3.2)
     anjlab-bootstrap-rails (2.1.1.1)
       railties (>= 3.0)
@@ -245,6 +246,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  acts_as_list (~> 0.1.8)
   anjlab-bootstrap-rails (>= 2.1)
   annotate
   autotest

@@ -46,7 +46,7 @@ class Dog < ActiveRecord::Base
     has_many :attachments, :as => :attachable, :dependent => :destroy
     accepts_nested_attributes_for :attachments, :allow_destroy => true
 
-	has_many :photos, :dependent => :destroy
+	has_many :photos, :dependent => :destroy, :order => "position"
 	accepts_nested_attributes_for :photos, :allow_destroy => true
 
 	has_many :histories, :dependent => :destroy

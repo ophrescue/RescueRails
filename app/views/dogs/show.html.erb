@@ -87,7 +87,7 @@
 			<% end %>
 			<br />
 			<% if @dog.user_id %>
-				<strong>Foster for <%= time_ago_in_words(@dog.foster_start_date) %>:</strong><br />
+				<strong>Foster</strong><br />
 				<%= link_to @dog.user.name, user_path(@dog.user) %><br />
 				<%= @dog.user.address1 %><br />
 				<%= @dog.user.city %>, <%= @dog.user.state %><br />

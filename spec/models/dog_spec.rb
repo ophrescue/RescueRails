@@ -1,17 +1,8 @@
-require 'spec_helper'
-
-describe Dog do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
-
-
-
-
 # == Schema Information
 #
 # Table name: dogs
 #
-#  id                   :integer         not null, primary key
+#  id                   :integer          not null, primary key
 #  name                 :string(255)
 #  created_at           :timestamp(6)
 #  updated_at           :timestamp(6)
@@ -29,20 +20,26 @@ end
 #  no_kids              :boolean
 #  description          :text
 #  user_id              :integer
-#  foster_start_date    :date
 #  adoption_date        :date
-#  is_uptodateonshots   :boolean         default(TRUE)
-#  is_housetrained      :boolean         default(TRUE)
+#  is_uptodateonshots   :boolean          default(TRUE)
 #  intake_dt            :date
 #  available_on_dt      :date
-#  has_medical_need     :boolean         default(FALSE)
-#  is_high_priority     :boolean         default(FALSE)
-#  needs_photos         :boolean         default(FALSE)
-#  has_behavior_problem :boolean         default(FALSE)
-#  needs_foster         :boolean         default(FALSE)
+#  has_medical_need     :boolean          default(FALSE)
+#  is_high_priority     :boolean          default(FALSE)
+#  needs_photos         :boolean          default(FALSE)
+#  has_behavior_problem :boolean          default(FALSE)
+#  needs_foster         :boolean          default(FALSE)
 #  petfinder_ad_url     :string(255)
 #  adoptapet_ad_url     :string(255)
 #  craigslist_ad_url    :string(255)
 #  youtube_video_url    :string(255)
 #
+
+require 'spec_helper'
+
+describe Dog do
+  pending "add some examples to (or delete) #{__FILE__}"
+end
+
+
 

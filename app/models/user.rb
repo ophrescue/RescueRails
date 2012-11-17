@@ -1,3 +1,34 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  name                   :string(255)
+#  email                  :string(255)
+#  created_at             :timestamp(6)
+#  updated_at             :timestamp(6)
+#  encrypted_password     :string(255)
+#  salt                   :string(255)
+#  admin                  :boolean          default(FALSE)
+#  password_reset_token   :string(255)
+#  password_reset_sent_at :timestamp(6)
+#  is_foster              :boolean          default(FALSE)
+#  phone                  :string(255)
+#  address1               :string(255)
+#  address2               :string(255)
+#  city                   :string(255)
+#  state                  :string(255)
+#  zip                    :string(255)
+#  title                  :string(255)
+#  edit_dogs              :boolean          default(FALSE)
+#  share_info             :text
+#  edit_my_adopters       :boolean          default(FALSE)
+#  edit_all_adopters      :boolean          default(FALSE)
+#  locked                 :boolean          default(FALSE)
+#  edit_events            :boolean          default(FALSE)
+#  other_phone            :string(255)
+#
+
 require 'digest'
 
 class User < ActiveRecord::Base
@@ -135,36 +166,4 @@ class User < ActiveRecord::Base
 
   
 end
-
-
-# == Schema Information
-#
-# Table name: users
-#
-#  id                     :integer         not null, primary key
-#  name                   :string(255)
-#  email                  :string(255)
-#  created_at             :timestamp(6)
-#  updated_at             :timestamp(6)
-#  encrypted_password     :string(255)
-#  salt                   :string(255)
-#  admin                  :boolean         default(FALSE)
-#  password_reset_token   :string(255)
-#  password_reset_sent_at :timestamp(6)
-#  is_foster              :boolean         default(FALSE)
-#  phone                  :string(255)
-#  address1               :string(255)
-#  address2               :string(255)
-#  city                   :string(255)
-#  state                  :string(255)
-#  zip                    :string(255)
-#  title                  :string(255)
-#  edit_dogs              :boolean         default(FALSE)
-#  share_info             :text
-#  edit_my_adopters       :boolean         default(FALSE)
-#  edit_all_adopters      :boolean         default(FALSE)
-#  locked                 :boolean         default(FALSE)
-#  edit_events            :boolean         default(FALSE)
-#  other_phone            :string(255)
-#
 

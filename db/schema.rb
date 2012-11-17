@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121004204628) do
+ActiveRecord::Schema.define(:version => 20121117232345) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -143,7 +143,6 @@ ActiveRecord::Schema.define(:version => 20121004204628) do
     t.boolean   "no_kids"
     t.text      "description"
     t.integer   "user_id"
-    t.date      "foster_start_date"
     t.date      "adoption_date"
     t.boolean   "is_uptodateonshots",                 :default => true
     t.date      "intake_dt"
@@ -210,15 +209,6 @@ ActiveRecord::Schema.define(:version => 20121004204628) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  create_table "histories", :force => true do |t|
-    t.integer   "dog_id"
-    t.integer   "user_id"
-    t.date      "foster_start_date"
-    t.date      "foster_end_date"
-    t.timestamp "created_at",        :limit => 6
-    t.timestamp "updated_at",        :limit => 6
   end
 
   create_table "photos", :force => true do |t|

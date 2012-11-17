@@ -1,16 +1,8 @@
-require 'spec_helper'
-
-describe AdoptionApp do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
-
-
-
 # == Schema Information
 #
 # Table name: adoption_apps
 #
-#  id                        :integer         not null, primary key
+#  id                        :integer          not null, primary key
 #  adopter_id                :integer
 #  spouse_name               :string(50)
 #  other_household_names     :string(255)
@@ -39,4 +31,11 @@ end
 #  max_hrs_alone             :integer
 #  is_ofage                  :boolean
 #
+
+require 'spec_helper'
+
+describe AdoptionApp do
+  pending "add some examples to (or delete) #{__FILE__}"
+end
+
 

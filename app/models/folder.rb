@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: folders
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Folder < ActiveRecord::Base
 	attr_accessible :description, :name, :attachments_attributes
 
@@ -6,16 +17,4 @@ class Folder < ActiveRecord::Base
 	accepts_nested_attributes_for :attachments, :allow_destroy => true
 
 end
-
-
-# == Schema Information
-#
-# Table name: folders
-#
-#  id          :integer         not null, primary key
-#  name        :string(255)
-#  description :text
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
-#
 

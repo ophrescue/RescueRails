@@ -5,7 +5,7 @@
 			<h3><%= @dog.primary_breed.name unless !@dog.primary_breed %></h3>
 
 			<% if can_edit_dogs? %>
-				<strong><%= link_to "Edit Dog", edit_dog_path(@dog), :class => "btn primary" %></strong><br />
+				<strong><%= link_to "Edit Dog", edit_dog_path(@dog), :class => "btn btn-primary btn-large" %></strong><br />
 			<% end %>
 	</div>
 </div>
@@ -67,6 +67,9 @@
 		<br />
 		<% if signed_in? %>
 			<h4>Private Information</h4>
+			<% if !@dog.microchip.blank? %>
+				Microchip: <%= @dog.microchip %><br />
+			<% end %>
 			<% if @dog.has_medical_need %>
 				<%= image_tag "has_medical_need.gif" %>Has Medical Need<br />
 			<% end %>
@@ -125,7 +128,7 @@
 			</ul>
 
 
-			<% if @dog.attachments %>
+			<% if !@dog.attachments.blank? %>
 				<h4>Attachments</h4>
 				<ul class="unstyled">
 					<% @dog.attachments.each do |a| %>
@@ -133,6 +136,26 @@
 					<% end %>
 				</ul>
 			<% end %>
+			<br />
+			<h4>Shot Records</h4>
+				<h5>1st Shots</h5>
+				<p><%= @dog.first_shots %></p>
+
+				<h5>2nd Shots</h5>
+				<p><%= @dog.second_shots %></p>
+
+				<h5>3rd Shots</h5>
+				<p><%= @dog.third_shots %></p>
+
+				<h5>Rabies</h5>
+				<p><%= @dog.rabies %></p>
+
+				<h5>Heartworm</h5>
+				<p><%= @dog.heartworm %></p>
+
+				<h5>Bordetella</h5>
+				<p><%= @dog.bordetella %></p>
+
 		<% end %>
 	</div>
 </div>

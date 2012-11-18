@@ -33,6 +33,13 @@
 #  adoptapet_ad_url     :string(255)
 #  craigslist_ad_url    :string(255)
 #  youtube_video_url    :string(255)
+#  first_shots          :string(255)
+#  second_shots         :string(255)
+#  third_shots          :string(255)
+#  rabies               :string(255)
+#  heartworm            :string(255)
+#  bordetella           :string(255)
+#  microchip            :string(255)
 #
 
 class Dog < ActiveRecord::Base
@@ -72,7 +79,14 @@ class Dog < ActiveRecord::Base
 					:petfinder_ad_url,
 					:adoptapet_ad_url,
 					:craigslist_ad_url,
-					:youtube_video_url
+					:youtube_video_url,
+					:first_shots,
+					:second_shots,
+					:third_shots,
+					:rabies,
+					:heartworm,
+					:bordetella,
+					:microchip
 
 
 	belongs_to :primary_breed, :class_name => 'Breed'

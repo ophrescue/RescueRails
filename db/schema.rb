@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121117232345) do
+ActiveRecord::Schema.define(:version => 20121118153316) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -156,6 +156,13 @@ ActiveRecord::Schema.define(:version => 20121117232345) do
     t.string    "adoptapet_ad_url"
     t.string    "craigslist_ad_url"
     t.string    "youtube_video_url"
+    t.string    "first_shots"
+    t.string    "second_shots"
+    t.string    "third_shots"
+    t.string    "rabies"
+    t.string    "heartworm"
+    t.string    "bordetella"
+    t.string    "microchip"
   end
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"

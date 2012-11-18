@@ -29,6 +29,12 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<%= f.label :microchip, :class => 'control-label'  %>
+			<div class="controls">
+				<%= f.text_field :microchip %>
+			</div>
+		</div>
+		<div class="control-group">
 			<%= f.label :primary_breed_name, :class => 'control-label'  %>
 			<div class="controls">
 				<%= f.collection_select(:primary_breed_id, @breeds, :id, :name, :prompt => '-select-') %>
@@ -157,6 +163,52 @@
 				</label>
 			</div>
 		</div>
+
+		<h3>Shot Records</h3>
+
+
+			<div class="control-group">
+				<%= f.label :first_shots, "First Shots", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :first_shots, :class => 'input-xlarge' %>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<%= f.label :second_shots, "Second Shots", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :second_shots, :class => 'input-xlarge' %>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<%= f.label :third_shots, "Third Shots", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :third_shots, :class => 'input-xlarge' %>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<%= f.label :rabies, "Rabies", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :rabies, :class => 'input-xlarge' %>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<%= f.label :heartworm, "Heartworm", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :heartworm, :class => 'input-xlarge' %>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<%= f.label :bordetella, "Bordetella", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :bordetella, :class => 'input-xlarge' %>
+				</div>
+			</div>
+
 	</div>
 </div>
 

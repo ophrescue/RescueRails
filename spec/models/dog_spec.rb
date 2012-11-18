@@ -33,6 +33,13 @@
 #  adoptapet_ad_url     :string(255)
 #  craigslist_ad_url    :string(255)
 #  youtube_video_url    :string(255)
+#  first_shots          :string(255)
+#  second_shots         :string(255)
+#  third_shots          :string(255)
+#  rabies               :string(255)
+#  heartworm            :string(255)
+#  bordetella           :string(255)
+#  microchip            :string(255)
 #
 
 require 'spec_helper'

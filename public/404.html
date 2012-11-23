@@ -12,6 +12,11 @@
       border-right-color: #999;
       border-bottom-color: #999;
     }
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
     h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
   </style>
     <script type='text/javascript'>
@@ -29,9 +34,15 @@
 
 <body>
   <!-- This file lives in public/404.html -->
+  
   <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
+    <h1><a href="/"><img src="/oph_logo.png"></a></img>404: That page doesn't exist!</h1>
+
+    <p>You may have mistyped the address or the page may have moved.  Head back to our <a href="/">home page</a>.
+    </p>
+    <p>If you found a broken link, please e-mail us at <strong><a href="mailto:admin@ophrescue.org">admin@ophrescue.org</a></strong>.  Thanks!</p>
   </div>
+  <br />
+  <a href="/"><img src="/noidea_dog.jpeg"></img></a>
 </body>
 </html>

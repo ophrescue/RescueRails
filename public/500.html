@@ -3,7 +3,7 @@
 <head>
   <title>We're sorry, but something went wrong (500)</title>
   <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
+    body { background-color: #fff; color: #666; text-align: left; font-family: arial, sans-serif; }
     div.dialog {
       width: 25em;
       padding: 0 4em;
@@ -12,7 +12,12 @@
       border-right-color: #999;
       border-bottom-color: #999;
     }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    h1 { font-size: 100%; color: #f00; line-height: 1.5em; text-align: center; }
   </style>
   <script type='text/javascript'>
     var _gaq = _gaq || [];
@@ -30,8 +35,14 @@
 <body>
   <!-- This file lives in public/500.html -->
   <div class="dialog">
-    <h1>We're sorry, but something went wrong.</h1>
-    <p>We've been notified about this issue and we'll take a look at it shortly.</p>
+    <h1><a href=/><img src="/oph_logo.png"></a>ERROR 500: That wasn't supposed to happen.</h1>
+    <p>Ok, so our rescue dogs aren't the best software developers.  They are getting a lot better though!</p> 
+
+    <p>Send us an e-mail at 
+        <strong><a href="mailto:admin@ophrescue.org">admin@ophrescue.org</a></strong> describing how you wound up at this error page.  Someone with hands instead of paws will get back to you reall soon, promise!</p>
   </div>
+  <br />
+  <a href="/"><img src="/noidea_dog.jpeg"></img></a>
+
 </body>
 </html>

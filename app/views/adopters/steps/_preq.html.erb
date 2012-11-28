@@ -1,5 +1,5 @@
 	<div class="step" id="first">
-			<div class="alert alert-block alert-success">
+			<div>
 				<p><strong>Thank you for considering adoption!</strong> Your personal information will not be shared with anyone outside of Operation Paws for Homes, Inc. It will be used to help ensure each dog goes to a well-suited home. To complete your application you will be asked to provide:</p>
 				<ul>
 					<li>Three personal references and phone numbers</li>
@@ -31,6 +31,18 @@
 						<span>I have never been convicted of animal abuse.</span>
 					</label>
 					<span for="adopter[pre_q_abuse]" generated="true" class="help-inline error"></span>
+
+					<label class="checkbox ">
+						<%= f.check_box :pre_q_limited_info, :class => "required" %>
+						<span>I understand that Operation Paws for Homes has limited information about a dog's background.</span>
+					</label>
+					<span for="adopter[pre_q_limited_info]" generated="true" class="help-inline error"></span>
+
+					<label class="checkbox ">
+						<%= f.check_box :pre_q_breed_info, :class => "required" %>
+						<span>I understand that Operation Paws for Homes does not, generally, have exact breed information about its dogs.</span>
+					</label>
+					<span for="adopter[pre_q_breed_info]" generated="true" class="help-inline error"></span>					
 
 					<label class="checkbox ">
 						<%= f.check_box :pre_q_reimbursement, :class => "required" %>

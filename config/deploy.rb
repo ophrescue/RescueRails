@@ -243,8 +243,8 @@ namespace :nginx do
   task :setup, :roles => :app , :except => { :no_release => true } do
     set :nginx_domains, Capistrano::CLI.ui.ask("Enter #{application} domain names:") { |q| q.default = default_nginx_domains}
     generate_config(nginx_template, nginx_host_config)
+    sudo "rm #{nginx_directory_path}/sites-available/rescuerails.tld"
     sudo "ln -s #{nginx_host_config} #{nginx_directory_path}/sites-available/"
-    sudo "ln -s #{nginx_host_config} #{nginx_directory_path}/sites-enabled/"
   end
 
   desc "Parses config file and outputs it to STDOUT (internal task)"

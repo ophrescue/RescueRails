@@ -12,9 +12,10 @@ server {
 
 # <%= application %> Server
 server {
-    listen 80;
-    client_max_body_size 500M;
-    server_name ophrescue.org;
+    listen                  80;
+    listen                  443 spdy ssl;
+    client_max_body_size    500M;
+    server_name             ophrescue.org;
 
     # ~2 seconds is often enough for most folks to parse HTML/CSS and
     # retrieve needed images/icons/frames, connections are cheap in
@@ -38,12 +39,6 @@ server {
     location @maintenance {
       rewrite  ^(.*)$  /system/maintenance.html last;
       break;
-    }
-
-    #OPH take care of redirects from old links to the old website
-
-    location ~ \.php$ {
-      rewrite ^ http://$host/ permanent;
     }
 
     location ~ ^/assets/ {

@@ -11,6 +11,10 @@ end
 
 module RescueRails
   class Application < Rails::Application
+
+    #Force SSL
+    config.force_ssl = true
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

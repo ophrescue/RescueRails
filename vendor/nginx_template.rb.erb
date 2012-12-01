@@ -6,9 +6,9 @@ upstream unicorn {
 server {
   listen              80;
   server_name         ophrescue.org;
-  rewrite             ^(.*) https://$host$1 permanent;
+  rewrite             ^(.*) https://$server_name$1 permanent;
 
-  location ~ \.(php|html)$ {
+  location ~ \.(php)$ {
     deny              all;
   }
 

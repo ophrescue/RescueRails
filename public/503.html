@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>We're sorry, but something went wrong (500)</title>
+  <style type="text/css">
+    body { background-color: #fff; color: #666; text-align: left; font-family: arial, sans-serif; }
+    div.dialog {
+      width: 25em;
+      padding: 0 4em;
+      margin: 4em auto 0 auto;
+      border: 1px solid #ccc;
+      border-right-color: #999;
+      border-bottom-color: #999;
+    }
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    h1 { font-size: 100%; color: #f00; line-height: 1.5em; text-align: center; }
+  </style>
+  <script type='text/javascript'>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-12286524-2']);
+    _gaq.push(['_trackEvent', 'Error', '500', 'page: ' + document.location.pathname + document.location.search + ' ref: ' + document.referrer ]);
+  
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+
+<body>
+  <!-- This file lives in public/500.html -->
+  <div class="dialog">
+    <h1><a href=/><img src="/oph_logo.png"></a>ERROR 503: That wasn't supposed to happen.</h1>
+    <p>Ok, so our rescue dogs aren't the best software developers.  They are getting a lot better though!</p> 
+
+    <p>Send us an e-mail at 
+        <strong><a href="mailto:admin@ophrescue.org">admin@ophrescue.org</a></strong> describing how you wound up at this error page.  Someone with hands instead of paws will get back to you soon, promise!</p>
+  </div>
+  <br />
+  <a href="/"><img src="/noidea_dog.jpeg"></img></a>
+
+</body>
+</html>

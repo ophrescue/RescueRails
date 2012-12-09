@@ -271,7 +271,7 @@ DEPENDENCIES
   gravatar_image_tag (~> 1.1.2)
   jquery-rails (~> 2.0.2)
   mailhopper (~> 0.2.0)
-  newrelic_rpm (~> 3.3.4.1)
+  newrelic_rpm
   paperclip (~> 3.0)
   pg (~> 0.14.0)
   rails (~> 3.2.7)

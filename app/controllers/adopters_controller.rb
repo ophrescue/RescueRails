@@ -27,6 +27,7 @@ class AdoptersController < ApplicationController
   end
 
   def show
+    session[:return_to] ||= request.referer
     @adopter = Adopter.find(params[:id])
     @adoption_app = @adopter.adoption_app
     @title = @adopter.name

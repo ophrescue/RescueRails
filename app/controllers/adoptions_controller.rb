@@ -7,8 +7,7 @@ class AdoptionsController < ApplicationController
 
 
 	def index
-		@adoptions = Adoption.all
-		render :layout => false
+		redirect_to :root
 	end
 
 	def show

@@ -175,15 +175,15 @@
               </div>
             </fieldset>
           <% end %>
-
+            <ul class="unstyled">
             <% @adopter.adoptions.find_each do |adp| %>
-              <%=  link_to adp.dog.name, adp.dog %>
+              <li><%=  link_to adp.dog.name, adp.dog %>
               (<%= adp.dog.status %>), <%= @adopter.name %> status with this dog is <strong><%= best_in_place adp, :relation_type, :type => :select, :collection => Adoption::RELATION_TYPE.collect{|s| [s, s]}%></strong>
                 <%= form_for adp, :html => {:id => "delete_adoption", :class => "delete_adoption", :style =>"display:inline!important;"}, :method => :delete do |f| %>
-                  <%= f.submit "X", :class => "btn btn-danger btn-small" %>
+                  <%= f.submit "X", :class => "btn btn-danger btn-small" %></li>
                     <% end %>
             <% end %>
-            <br />
+            </ul>
       </div>
 
 

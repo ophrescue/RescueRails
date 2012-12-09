@@ -51,3 +51,46 @@
       </div>
     </tr>
   </table>
+
+        <div class="row">
+        <div class="span8">
+          <h4>Permissions</h4>
+          <ul>
+            <% if @user.admin? %>
+              <li>Can Admin System</li>
+            <% else %>
+              <li>Cannot Admin System</li>
+            <% end %>
+
+            <% if @user.edit_all_adopters? %>
+              <li>Can Process All Applications</li>
+            <% else %>
+              <li> Cannot Process All Applications</li>
+            <% end %>
+
+            <% if @user.edit_my_adopters? || @user.edit_all_adopters? %>
+              <li>Can be Assigned Adoption Applications</li>
+            <% else %>
+              <li>Cannot be Assigned Adoption Applications</li>
+            <% end %>
+
+            <% if @user.edit_dogs?%>
+              <li>Can Add/Edit Dogs</li>
+            <% else %>
+              <li>Cannot Add/Edit Dogs</li>
+            <% end %>
+
+            <% if @user.is_foster? %>
+              <li>Is a Foster</li>
+            <% else %>
+              <li>Is Not a Foster</li>
+            <% end %>
+
+            <% if @user.locked? %>
+              <li><span class="label label-error">Account Disabled</span></li>
+            <% else %>
+              <li><span class="label label-success">Account Active</span></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>

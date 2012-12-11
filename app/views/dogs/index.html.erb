@@ -38,7 +38,9 @@
 											<strong><%= dog.status.titleize %></strong><br />
 											<%= dog.primary_breed.name.titleize unless !dog.primary_breed %><br />
 											<%= dog.secondary_breed.name.titleize unless !dog.secondary_breed %><br />
-											<%= dog.user.city unless !dog.user || !dog.user.city %> <%= dog.user.state unless !dog.user || !dog.user.state %>
+											<% if dog.user && dog.user.city && dog.user.state %>
+												<%= dog.user.city.titleize %>, <%= dog.user.state.upcase %><br />
+											<% end %>
 										</p>
 									<% end %>
 								</li>

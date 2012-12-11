@@ -31,6 +31,12 @@
 
 	<div class="span4">
 		<h3>About <%= @dog.name.titleize %></h3>
+
+		<% if @dog.user && @dog.user.city && @dog.user.state %>
+			<h5>Fostered in <%= @dog.user.city.titleize %>, <%= @dog.user.state.upcase %></h5>
+		<% end %>
+
+
 		<ul>
 			<li>ID:  <%= @dog.tracking_id %></li>
 			<li><%= @dog.status.titleize %></li>
@@ -63,6 +69,7 @@
 			<% if @dog.no_kids %>
 				<li>Not good for homes with small children</li>
 			<% end %>
+
 		</ul>
 		
 		<br />

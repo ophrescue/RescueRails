@@ -32,7 +32,7 @@
 	<div class="span4">
 		<h3>About <%= @dog.name.titleize %></h3>
 
-		<% if @dog.user && @dog.user.city && @dog.user.state %>
+		<% if @dog.user && !@dog.user.city.blank? && !@dog.user.state.blank? %>
 			<h5>Fostered in <%= @dog.user.city.titleize %>, <%= @dog.user.state.upcase %></h5>
 		<% end %>
 

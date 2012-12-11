@@ -24,12 +24,14 @@
 			<% end %>
 		</div>
 		<div class="fb-like" data-href="<%= request.url %>" data-send="true" data-width="250" data-show-faces="false"></div>
+		<div id="dogDescription" class="well">
 			<p> <%= @dog.description %></p>
+		</div>
 	</div>
 
 	<div class="span4">
 		<h3>About <%= @dog.name.titleize %></h3>
-		<ul class="unstyled">
+		<ul>
 			<li>ID:  <%= @dog.tracking_id %></li>
 			<li><%= @dog.status.titleize %></li>
 			<li><%= @dog.age.titleize %></li>

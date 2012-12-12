@@ -71,6 +71,9 @@ class DogsController < ApplicationController
   def create
     @foster_users = User.all
     @dog = Dog.new(params[:dog])
+    if @dog.tracking_id.blank?
+      @dog.tracking_id = Dog.connection.select_value("SELECT nextval('tracking_id_seq')")
+    end
     if @dog.save
       flash[:success] = "New Dog Added"
       redirect_to dogs_path

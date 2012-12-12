@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121118153316) do
+ActiveRecord::Schema.define(:version => 20121212192005) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20121118153316) do
   add_index "dogs", ["primary_breed_id"], :name => "index_dogs_on_primary_breed_id"
   add_index "dogs", ["secondary_breed_id"], :name => "index_dogs_on_secondary_breed_id"
   add_index "dogs", ["size"], :name => "index_dogs_on_size"
+  add_index "dogs", ["tracking_id"], :name => "index_dogs_on_tracking_id", :unique => true
   add_index "dogs", ["user_id"], :name => "index_dogs_on_user_id"
 
   create_table "emails", :force => true do |t|

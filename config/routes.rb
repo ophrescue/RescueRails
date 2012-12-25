@@ -33,24 +33,25 @@ RescueRails::Application.routes.draw do
   resources :attachments
   
 
-  match '/signin',       :to => 'sessions#new'
-  match '/signout',      :to => 'sessions#destroy'
-  match '/adopt',        :to => 'adopters#new'
+  match '/signin',              :to => 'sessions#new'
+  match '/signout',             :to => 'sessions#destroy'
+  match '/adopt',               :to => 'adopters#new'
 
-  match '/contact',      :to => 'pages#contact'
+  match '/contact',             :to => 'pages#contact'
 
-  root                   :to => 'pages#home'
-  match '/guide',        :to => 'pages#guide'
-  match '/aboutus',      :to => 'pages#aboutus'
-  match '/contributors', :to => 'pages#contributors'
-  match '/volunteer',    :to => 'pages#volunteer'
-  match '/k9',           :to => 'pages#k9'
-  match '/foster',       :to => 'pages#foster'
-  match '/fosterfaq',    :to => 'pages#fosterfaq'
+  root                          :to => 'pages#home'
+  match '/guide',               :to => 'pages#guide'
+  match '/aboutus',             :to => 'pages#aboutus'
+  match '/contributors',        :to => 'pages#contributors'
+  match '/volunteer',           :to => 'pages#volunteer'
+  match '/k9',                  :to => 'pages#k9'
+  match '/foster',              :to => 'pages#foster'
+  match '/fosterfaq',           :to => 'pages#fosterfaq'
   
-  match '/resources',    :to => 'pages#resources'
-  match '/puppyguide',   :to => 'pages#puppyguide'
-  match '/shopping',     :to => 'pages#shopping'
+  match '/resources',           :to => 'pages#resources'
+  match '/puppyguide',          :to => 'pages#puppyguide'
+  match '/shopping',            :to => 'pages#shopping'
+  match '/status_definitions',  :to => 'pages#status_definitions'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

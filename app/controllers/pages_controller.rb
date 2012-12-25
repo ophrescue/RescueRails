@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+
+  before_filter :authenticate, :only => [:status_definitions]
+
   def home
     @title = "All breed dog rescue based in VA, MD, DC and South Central PA"
   end
@@ -49,6 +52,10 @@ class PagesController < ApplicationController
 
   def shopping
     @title = "New Dog Shopping List"
+  end
+
+  def status_definitions
+    @title = "Adoption Application Status Definitions"
   end
 
 end

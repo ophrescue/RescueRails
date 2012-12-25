@@ -40,6 +40,7 @@
 #  heartworm            :string(255)
 #  bordetella           :string(255)
 #  microchip            :string(255)
+#  original_name        :string(255)
 #
 
 class Dog < ActiveRecord::Base
@@ -86,7 +87,8 @@ class Dog < ActiveRecord::Base
 					:rabies,
 					:heartworm,
 					:bordetella,
-					:microchip
+					:microchip,
+					:original_name
 
 
 	belongs_to :primary_breed, :class_name => 'Breed'

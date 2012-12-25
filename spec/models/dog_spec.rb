@@ -40,6 +40,7 @@
 #  heartworm            :string(255)
 #  bordetella           :string(255)
 #  microchip            :string(255)
+#  original_name        :string(255)
 #
 
 require 'spec_helper'

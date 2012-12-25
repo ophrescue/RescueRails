@@ -161,7 +161,7 @@
           </div>
             <h3>Dogs</h3>
 
-          <%= form_for(@adopter.adoptions.build(:adopter_id => @adopter.id)) do |ad| %>
+          <%= form_for(@adopter.adoptions.build(:adopter_id => @adopter.id),:html => {:id => "new_dog_link"}) do |ad| %>
             <fieldset>
               <div class="control-group">
                 <%= ad.label :dog_id, "Associate Dog with Application", :class => "control-label" %>
@@ -171,19 +171,21 @@
               </div>
               <div><%= ad.hidden_field :adopter_id %></div>
               <div id="Navigation">
-                <%= ad.submit "Link Dog", :class => "btn btn-small btn-primary", :disable_with => 'Saving...' %>
+                <%= ad.submit "Link Dog", :class => "btn btn-small btn-primary" %>
               </div>
             </fieldset>
           <% end %>
+          <div id="linked_dogs_table">
             <ul class="unstyled">
             <% @adopter.adoptions.find_each do |adp| %>
               <li><%=  link_to adp.dog.name, adp.dog %>
               (<%= adp.dog.status %>), <%= @adopter.name %> status with this dog is <strong><%= best_in_place adp, :relation_type, :type => :select, :collection => Adoption::RELATION_TYPE.collect{|s| [s, s]}%></strong>
-                <%= form_for adp, :html => {:id => "delete_adoption", :class => "delete_adoption", :style =>"display:inline!important;"}, :method => :delete do |f| %>
+                <%= form_for adp, :html => {:id => "delete_dog_link", :class => "delete_adoption", :style =>"display:inline!important;"}, :method => :delete do |f| %>
                   <%= f.submit "X", :class => "btn btn-danger btn-small" %></li>
                     <% end %>
             <% end %>
             </ul>
+          </div>
       </div>
 
 

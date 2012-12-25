@@ -29,7 +29,8 @@
 //= require jquery.scroll
 //= require galleria
 //= require galleria.classic
-//= require rescuerails.js
+//= require comments.js
+//= require dog_link.js
 //= require chosen-jquery
 //= require chosen-calls.js
 //= require photos.js.coffee

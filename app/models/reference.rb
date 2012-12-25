@@ -14,7 +14,7 @@
 #
 
 class Reference < ActiveRecord::Base
-
+	
 	belongs_to :adopter, :class_name => 'Adopter'
 	
 	attr_accessible :name,

@@ -10,6 +10,7 @@
 #
 
 class Folder < ActiveRecord::Base
+
 	attr_accessible :description, :name, :attachments_attributes
 
 	has_many :attachments, :as => :attachable, :order => "updated_at DESC"

@@ -210,6 +210,8 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    strip_attributes (1.1.1)
+      activemodel (~> 3.0)
     sys-uname (0.9.0)
       ffi (>= 1.0.0)
     therubyracer (0.10.2)
@@ -279,6 +281,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.2.3)
   spork
+  strip_attributes (~> 1.0)
   therubyracer (~> 0.10.1)
   thin (~> 1.3.1)
   turn

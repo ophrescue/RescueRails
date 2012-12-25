@@ -17,6 +17,7 @@ gem "best_in_place", "~> 1.1.2"
 gem "gibbon", "~> 0.3.5"
 gem "exception_notification", "~> 2.6.1"
 gem "acts_as_list", "~> 0.1.8"
+gem "strip_attributes", "~> 1.0"
 
 group :production do
   gem "unicorn", "~> 4.3.1"

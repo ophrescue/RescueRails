@@ -34,6 +34,8 @@ require 'digest'
 class User < ActiveRecord::Base
   attr_accessor :password
 
+  strip_attributes :only => :email
+
   attr_accessible :name, 
                   :email, 
                   :password, 
@@ -89,7 +91,7 @@ class User < ActiveRecord::Base
   end
   
   def self.authenticate(email, submitted_password)
-    user = find_by_email(email.downcase)
+    user = find_by_email(email.downcase.strip)
     return nil  if user.nil?
     return user if user.has_password?(submitted_password)
   end  

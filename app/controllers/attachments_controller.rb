@@ -3,6 +3,9 @@ class AttachmentsController < ApplicationController
 	respond_to :html, :json
 	before_filter :authenticate
 
+	def index
+		redirect_to :root
+	end
 
 	def destroy
 		Attachment.find(params[:id]).destroy

@@ -13,7 +13,7 @@
 		<div class="control-group">
 			<%= f.label :tracking_id, "OPH Tracking ID", :class => 'control-label' %>
 			<div class="controls">
-				<%= f.text_field :tracking_id %>
+				<%= f.text_field :tracking_id, :disabled => :edit_dogs_user? %>
 			</div>
 		</div>
 		<div class="control-group">
@@ -25,13 +25,17 @@
 		<div class="control-group">
 			<%= f.label :original_name, :class => 'control-label'  %>
 			<div class="controls">
-				<%= f.text_field :original_name %>
+				<%= f.text_field :original_name, :disabled => :edit_dogs_user? %>
 			</div>
 		</div>
 		<div class="control-group">
 			<%= f.label :status, :class => 'control-label'  %>
 			<div class="controls">
-				<%= f.select(:status, Dog::STATUSES, :prompt => '-select-') %>
+				<% if !:edit_dogs_user? %>
+					<%= f.select(:status, Dog::STATUSES, :prompt => '-select-') %>
+				<% else %>
+					<%= f.text_field :status, :disabled => true %>
+				<% end %>
 			</div>
 		</div>
 		<div class="control-group">
@@ -114,9 +118,12 @@
 		<h3>Foster Assignment</h3>
 
 		<div class="control-group">
-			<%= f.label :user_id, "Name", :class => 'control-label' %>
 			<div class="controls">
-				<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
+				<% if !:edit_dogs_user? %>
+					<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
+				<% else %>
+					<%= @dog.user.name %>
+				<% end %>
 			</div>
 		</div>
 		<div class="control-group">
@@ -275,10 +282,12 @@
 						<label class="control-label" for="delAttachment">
 							<i class="icon-file"></i><%= link_to af.object.attachment_file_name, af.object %>
 						</label>
-						<label class="checkbox">
-							<%= af.check_box :_destroy, :id => "delAttachment" %>
-							<span>Delete <%= af.object.attachment_file_name %></span>
-						</label>
+						<% if !:edit_dogs_user? %>
+							<label class="checkbox">
+								<%= af.check_box :_destroy, :id => "delAttachment" %>
+								<span>Delete <%= af.object.attachment_file_name %></span>
+							</label>
+						<% end %>
 					</div>
 				<% end %>
 			<% end %>

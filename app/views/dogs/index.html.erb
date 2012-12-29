@@ -3,12 +3,15 @@
 		<h1><%= @title %></h1>
 	</div>
 	<div class="span4 offset4">
-	<% if can_edit_dogs? %>
-			<%= link_to "Add a Dog", new_dog_path, :class => "btn btn-primary" %>
+	<% if signed_in? %>
+			<% if !:edit_dogs_user? %>
+				<%= link_to "Add a Dog", new_dog_path, :class => "btn btn-primary" %>
+			<% end %>
+
 			<% if session[:mgr_view] == true %>
-			<%= link_to("Gallery View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
+				<%= link_to("Gallery View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
 			<% else %>
-			<%= link_to("Manager View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
+				<%= link_to("Manager View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
 			<% end %>
 	<% end %>
 </div>
@@ -17,7 +20,7 @@
 
 <div class="row">
 	<div class="span12">
-		<% if can_edit_dogs? && session[:mgr_view] == true %>
+		<% if signed_in? && session[:mgr_view] == true %>
 			<%= render 'manager' %>
 		<% else %>
 			<%= will_paginate @dogs %>

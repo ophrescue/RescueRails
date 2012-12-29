@@ -75,9 +75,9 @@
             <% end %>
 
             <% if @user.edit_dogs?%>
-              <li>Can Add/Edit Dogs</li>
+              <li>Can add dogs and edit all dogs</li>
             <% else %>
-              <li>Cannot Add/Edit Dogs</li>
+              <li>Can only edit dogs they foster.</li>
             <% end %>
 
             <% if @user.is_foster? %>

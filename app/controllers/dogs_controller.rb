@@ -1,14 +1,15 @@
 class DogsController < ApplicationController
-  helper_method :sort_column, :sort_direction 
+  helper_method :sort_column, :sort_direction, :is_fostering_dog?
 
   autocomplete :breed, :name, :full => true
 
-  before_filter :authenticate,     :except => [:index, :show]
-  before_filter :edit_dogs_user,   :except => [:index, :show, :delete]
-  before_filter :admin_user,        :only => [:destroy]
+  before_filter :authenticate,                            :except => [:index, :show]
+  before_filter :fostering_dog_user, :edit_dogs_user,     :only => [:edit, :update]                                   
+  before_filter :edit_dogs_user,                          :only => [:new, :create]
+  before_filter :admin_user,                              :only => [:destroy]
 
   def index
-    if (can_edit_dogs?) && (session[:mgr_view] == true)
+    if (signed_in?) && (session[:mgr_view] == true)
       @title = "Dog Manager"
       if (params[:search].to_i > 0)
         @dogs = Dog.where('tracking_id = ?', "#{params[:search].to_i}").paginate(:page => params[:page])
@@ -121,7 +122,27 @@ class DogsController < ApplicationController
     def admin_user
       redirect_to(root_path) unless current_user.admin?
     end
-        
+
+    def is_fostering_dog?(*args)
+      if !signed_in?
+        return false
+      end
+
+      if args.length == 1
+        dog = Dog.find(:arg1)
+      else
+        if !dog
+          dog = Dog.find(params[:id])
+        end
+        dog.user_id == current_user.id
+      end
+    end
+
+
+    def fostering_dog_user
+      redirect_to(root_path) unless is_fostering_dog?
+    end
+
     def sort_column  
       Dog.column_names.include?(params[:sort]) ? params[:sort] : "tracking_id"  
     end  

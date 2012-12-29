@@ -88,7 +88,7 @@
 			<div class="controls">
 				<label class="checkbox">
 					<%= f.check_box :admin %>
-					<span><strong>Admin</strong> - Add/edit staff, set staff permissions, delete dogs</span>
+					<span><strong>Admin</strong> - Add/edit staff, set staff permissions.</span>
 				</label>
 				<label class="checkbox">
 					<%= f.check_box :edit_all_adopters %>
@@ -104,7 +104,7 @@
 				</label>
 				<label class="checkbox">
 					<%= f.check_box :edit_dogs %>
-					<span><strong>Manage Dogs</strong> - Can edit existing dog records (can not delete)</span>
+					<span><strong>Manage Dogs</strong> - If checked, user can add dogs, edit all dogs and all fields.  If unchecked, they can view all data for all dogs, and only edit some fields of dogs they are assigned to as fosters.  You probably want this unchecked for most people. </span>
 				</label>
 				<label class="checkbox">
 					<%= f.check_box :is_foster %>
@@ -138,9 +138,9 @@
 						<% end %>
 
 						<% if @user.edit_dogs?%>
-							<li>Can Add/Edit Dogs</li>
+							<li>Can Add/Edit all Dogs</li>
 						<% else %>
-							<li>Cannot Add/Edit Dogs</li>
+							<li>Can only edit dogs they are fostering</li>
 						<% end %>
 
 						<% if @user.is_foster? %>

@@ -4,7 +4,8 @@ class DogsController < ApplicationController
   autocomplete :breed, :name, :full => true
 
   before_filter :authenticate,                            :except => [:index, :show]
-  before_filter :fostering_dog_user, :edit_dogs_user,     :only => [:edit, :update]                                   
+  before_filter :edit_dog_check,                          :only => [:edit, :update]    
+  # before_filter :fostering_dog_user, :edit_dogs_user,     :only => [:edit, :update]                                   
   before_filter :edit_dogs_user,                          :only => [:new, :create]
   before_filter :admin_user,                              :only => [:destroy]
 
@@ -138,6 +139,9 @@ class DogsController < ApplicationController
       end
     end
 
+    def edit_dog_check
+      redirect_to(root_path) unless (is_fostering_dog? || current_user.edit_dogs?)
+    end
 
     def fostering_dog_user
       redirect_to(root_path) unless is_fostering_dog?

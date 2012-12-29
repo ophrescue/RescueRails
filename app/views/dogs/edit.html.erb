@@ -122,7 +122,7 @@
 				<% if !:edit_dogs_user? %>
 					<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
 				<% else %>
-					<%= @dog.user.name %>
+					<%= @dog.user ? @dog.user.name : "No Foster Assigned" %>
 				<% end %>
 			</div>
 		</div>

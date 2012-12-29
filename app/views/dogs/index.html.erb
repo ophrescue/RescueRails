@@ -4,7 +4,7 @@
 	</div>
 	<div class="span4 offset4">
 	<% if signed_in? %>
-			<% if :edit_dogs_user? %>
+			<% if can_edit_dogs? %>
 				<%= link_to "Add a Dog", new_dog_path, :class => "btn btn-primary" %>
 			<% end %>
 

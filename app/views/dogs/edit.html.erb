@@ -13,7 +13,7 @@
 		<div class="control-group">
 			<%= f.label :tracking_id, "OPH Tracking ID", :class => 'control-label' %>
 			<div class="controls">
-				<%= f.text_field :tracking_id, :disabled => :edit_dogs_user? %>
+				<%= f.text_field :tracking_id, :disabled => !can_edit_dogs? %>
 			</div>
 		</div>
 		<div class="control-group">
@@ -25,13 +25,13 @@
 		<div class="control-group">
 			<%= f.label :original_name, :class => 'control-label'  %>
 			<div class="controls">
-				<%= f.text_field :original_name, :disabled => :edit_dogs_user? %>
+				<%= f.text_field :original_name, :disabled => !can_edit_dogs? %>
 			</div>
 		</div>
 		<div class="control-group">
 			<%= f.label :status, :class => 'control-label'  %>
 			<div class="controls">
-				<% if !:edit_dogs_user? %>
+				<% if can_edit_dogs? %>
 					<%= f.select(:status, Dog::STATUSES, :prompt => '-select-') %>
 				<% else %>
 					<%= f.text_field :status, :disabled => true %>
@@ -119,7 +119,7 @@
 
 		<div class="control-group">
 			<div class="controls">
-				<% if !:edit_dogs_user? %>
+				<% if can_edit_dogs? %>
 					<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
 				<% else %>
 					<%= @dog.user ? @dog.user.name : "No Foster Assigned" %>

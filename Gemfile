@@ -3,9 +3,9 @@
 ##
 source 'http://rubygems.org'
 
-gem "rails", "~> 3.2.7"
+gem "rails", "~> 3.2.9"
 
-gem "pg", "~> 0.14.0"
+gem "pg", "~> 0.14.1"
 gem 'will_paginate',  '~> 3.0.3'
 gem 'bootstrap-will_paginate', "~> 0.0.7"
 gem "gravatar_image_tag", "~> 1.1.2"
@@ -20,7 +20,7 @@ gem "acts_as_list", "~> 0.1.8"
 gem "strip_attributes", "~> 1.0"
 
 group :production do
-  gem "unicorn", "~> 4.3.1"
+  gem "unicorn", "~> 4.5.0"
 end
 
 
@@ -32,7 +32,7 @@ gem "mailhopper", "~> 0.2.0"
 gem "delayed_mailhopper", "~> 0.0.7"
 
 
-gem 'anjlab-bootstrap-rails', '>= 2.1', :require => 'bootstrap-rails'
+gem 'anjlab-bootstrap-rails', '>= 2.2', :require => 'bootstrap-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

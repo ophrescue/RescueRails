@@ -282,7 +282,7 @@
 						<label class="control-label" for="delAttachment">
 							<i class="icon-file"></i><%= link_to af.object.attachment_file_name, af.object %>
 						</label>
-						<% if !:edit_dogs_user? %>
+						<% if can_edit_dogs? %>
 							<label class="checkbox">
 								<%= af.check_box :_destroy, :id => "delAttachment" %>
 								<span>Delete <%= af.object.attachment_file_name %></span>

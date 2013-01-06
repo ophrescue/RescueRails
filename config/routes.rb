@@ -31,7 +31,10 @@ RescueRails::Application.routes.draw do
 
   resources :folders
   resources :attachments
-  resources :banned_adopters
+
+  resources :banned_adopters do
+    collection { post :import }
+  end
   
 
   match '/signin',              :to => 'sessions#new'

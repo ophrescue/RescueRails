@@ -18,6 +18,8 @@ gem "gibbon", "~> 0.3.5"
 gem "exception_notification", "~> 2.6.1"
 gem "acts_as_list", "~> 0.1.8"
 gem "strip_attributes", "~> 1.0"
+gem 'to_xls'
+gem 'roo'
 
 group :production do
   gem "unicorn", "~> 4.5.0"

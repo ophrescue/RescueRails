@@ -5,10 +5,13 @@
 	<div class="span12">
 		<% if is_admin? %>
 			<p><%= link_to "Add", new_banned_adopter_path, :class => "btn btn-primary" %></p>
-			
 		<% end %>
 
 	<% if @banned_adopters.count > 0 %>
+		<p>
+			Download:
+			<%= link_to "Excel", banned_adopters_path(format: "xls") %>
+		</p>
 		<table class="table table-striped table-bordered">
 			<thead>
 				<tr>
@@ -29,6 +32,14 @@
 
 	<% end %>
 
+<% if is_admin? %>
+	<h2>Import Excel</h2>
+
+	<%= form_tag import_banned_adopters_path, multipart: true do %>
+		<%= file_field_tag :file %>
+		<%= submit_tag "Import", :class => "btn btn-primary btn-small" %>
+	<% end %>
+<% end %>
 
 	</div>
 </div>

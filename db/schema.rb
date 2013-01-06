@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121225055241) do
+ActiveRecord::Schema.define(:version => 20130105230945) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -91,6 +91,19 @@ ActiveRecord::Schema.define(:version => 20121225055241) do
     t.datetime "updated_at",              :null => false
     t.text     "description"
   end
+
+  create_table "banned_adopters", :force => true do |t|
+    t.string   "name",       :limit => 100
+    t.string   "phone",      :limit => 20
+    t.string   "email",      :limit => 100
+    t.string   "city",       :limit => 100
+    t.string   "state",      :limit => 2
+    t.text     "comment"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "banned_adopters", ["name"], :name => "index_banned_adopters_on_name"
 
   create_table "breeds", :force => true do |t|
     t.string    "name"

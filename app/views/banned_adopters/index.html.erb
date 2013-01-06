@@ -1,0 +1,34 @@
+<h1><%= @title %></h1>
+<br />
+
+<div class="row">
+	<div class="span12">
+		<% if is_admin? %>
+			<p><%= link_to "Add", new_banned_adopter_path, :class => "btn btn-primary" %></p>
+			
+		<% end %>
+
+	<% if @banned_adopters.count > 0 %>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Phone Number</th>
+					<th>Email</th>
+					<th>Location</th>
+					<th>Comment</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%= render @banned_adopters %>	
+			</tbody>
+		</table>
+	<% else %>
+
+		<h5>No Banned Adopters</h5>
+
+	<% end %>
+
+
+	</div>
+</div>

@@ -1,0 +1,58 @@
+<div class="row">
+	<div class="span8">
+
+		<%= form_for @banned_adopter, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
+			<%= render 'shared/error_messages', :object => f.object %>
+			<fieldset>
+				<div class="control-group">
+					<%= f.label :name, nil, :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_field :name, :class => "input-medium" %>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<%= f.label :phone, "Phone Number" , :class => 'control-label'%>
+					<div class="controls">
+						<%= f.text_field :phone, :class => "input-medium" %>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<%= f.label :email, "E-mail Address" , :class => 'control-label'%>
+					<div class="controls">
+						<%= f.text_field :email, :class => "input-medium" %>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<%= f.label :city, "City", :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_field :city, :class => "input-medium" %>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<%= f.label :state, "State", :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_field :state, :class => "input-small" %>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<%= f.label :comment, nil, :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_area :comment, :class => "input-xlarge", :rows => "5" %>
+					</div>
+					
+				</div>
+
+				<div class="actions well">
+					<%= f.submit "Submit", :class => "btn btn-primary" %>
+				</div>
+			</fieldset>
+
+		<% end %>
+
+	</div>
+</div>

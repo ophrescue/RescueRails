@@ -1,0 +1,15 @@
+<h5><%= link_to "Return to List", banned_adopters_path %></h5>
+
+<h1><%= @banned_adopter.name %></h1>
+
+<p><%= link_to "Edit", edit_banned_adopter_path(@banned_adopter), :class => "btn btn-primary btn-small" %></p>
+
+
+
+<ul class="unstyled">
+	<li><%= @banned_adopter.phone %></li>
+	<li><%= @banned_adopter.email %></li>
+	<li><%= @banned_adopter.city %>, <%= @banned_adopter.state %></li>
+</ul>
+
+<p><%= @banned_adopter.comment %></p>

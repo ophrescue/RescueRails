@@ -3,7 +3,7 @@
 ##
 source 'http://rubygems.org'
 
-gem "rails", "~> 3.2.9"
+gem "rails", "~> 3.2.11"
 
 gem "pg", "~> 0.14.1"
 gem 'will_paginate',  '~> 3.0.3'

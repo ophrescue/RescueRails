@@ -310,7 +310,7 @@
     <% end %>
     <h4>Past Comments</h4>
     <div id="comment_table">
-      <table id="comments" class="table-striped table-bordered table-condensed">
+      <table id="comments" class="table table-striped table-bordered table-condensed table-hover">
         <% @adopter.comments.each do |comment| %>
           <% if comment.id != nil %>
             <%= render 'comments/comment', :comment => comment %>

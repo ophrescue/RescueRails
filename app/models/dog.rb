@@ -88,7 +88,8 @@ class Dog < ActiveRecord::Base
 					:heartworm,
 					:bordetella,
 					:microchip,
-					:original_name
+					:original_name,
+					:fee
 
 
 	belongs_to :primary_breed, :class_name => 'Breed'

@@ -28,6 +28,14 @@
 				<%= f.text_field :microchip %>
 			</div>
 		</div>
+		<div class="control-group input-prepend input-append">
+			<%= f.label :fee, 'Adoption Fee',:class => 'control-label'%>
+			<div class="controls">
+				<span class="add-on">$</span>
+				<%= f.text_field :fee, :class => 'input-small' %>
+				<span class="add-on">.00</span>
+			</div>
+		</div>
 		<div class="control-group">
 			<%= f.label :primary_breed_name, :class => 'control-label'  %>
 			<div class="controls">

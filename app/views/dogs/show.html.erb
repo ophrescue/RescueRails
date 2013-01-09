@@ -82,6 +82,9 @@
 			<% if !@dog.microchip.blank? %>
 				Microchip: <%= @dog.microchip %><br />
 			<% end %>
+			<% if !@dog.fee.blank? %>
+				Adoption Fee: $<%= @dog.fee %><br />
+			<% end %>
 			<% if @dog.has_medical_need %>
 				<%= image_tag "has_medical_need.gif" %>Has Medical Need<br />
 			<% end %>

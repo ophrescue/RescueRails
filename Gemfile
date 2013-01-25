@@ -21,6 +21,8 @@ gem "strip_attributes", "~> 1.0"
 gem 'to_xls'
 gem 'roo'
 
+gem 'ZenTest', "= 4.8.3"
+
 group :production do
   gem "unicorn", "~> 4.5.0"
 end
@@ -47,7 +49,7 @@ end
 
 gem "jquery-rails", "~> 2.0.2"
 
-gem "newrelic_rpm"
+gem "newrelic_rpm", "~> 3.5.5.38"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

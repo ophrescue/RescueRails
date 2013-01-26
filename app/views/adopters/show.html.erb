@@ -121,7 +121,7 @@
       </tr>
 
       <tr>
-        <th>Status</i>
+        <th>Status <a href="/status_definitions" class="btn" target="_blank">?</a>
         </th>
         <td id="edit_status"><%= image_tag("pencil_go.png") %>
           <%= best_in_place @adopter, :status, :type => :select, :collection => [['none', 'none']].concat( Adopter::STATUSES.collect{|s| [s, s]} ), :nil => 'click to edit', :activator => '#edit_status' %>

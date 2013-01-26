@@ -9,7 +9,9 @@
   </head>
   <body>
   	<!--[if lte IE 6]><script src="js/ie6/warning.js"></script><script>window.onload=function(){e("/assets/ie6warn/")}</script><![endif]-->
-	<%= render 'layouts/topbar' %>
+	<% if @hide_topbar.nil? %>
+		<%= render 'layouts/topbar' %>
+	<% end %>
 	<div class="container">
 		<% flash.each do |key, value| %>
 			<% if value == "adoptsuccess" %>

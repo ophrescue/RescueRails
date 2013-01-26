@@ -55,6 +55,7 @@ class PagesController < ApplicationController
   end
 
   def status_definitions
+    @hide_topbar = true;
     @title = "Adoption Application Status Definitions"
   end
 

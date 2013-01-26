@@ -19,7 +19,7 @@
 #  no_cats              :boolean
 #  no_kids              :boolean
 #  description          :text
-#  user_id              :integer
+#  foster_id            :integer
 #  adoption_date        :date
 #  is_uptodateonshots   :boolean          default(TRUE)
 #  intake_dt            :date
@@ -41,6 +41,7 @@
 #  bordetella           :string(255)
 #  microchip            :string(255)
 #  original_name        :string(255)
+#  fee                  :integer
 #
 
 require 'spec_helper'

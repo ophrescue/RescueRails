@@ -40,7 +40,7 @@
           <tr>
             <td>Current Dogs</td>
             <td>        
-              <% @user.dogs.each do |d| %>
+              <% @user.foster_dogs.each do |d| %>
                 <%= link_to d.name, d %>
                   (<%= d.status %>)
                 <br />

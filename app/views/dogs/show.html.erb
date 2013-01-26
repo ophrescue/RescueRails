@@ -32,8 +32,8 @@
 	<div class="span4">
 		<h3>About <%= @dog.name.titleize %></h3>
 
-		<% if @dog.user && !@dog.user.city.blank? && !@dog.user.state.blank? %>
-			<h5>Fostered in <%= @dog.user.city.titleize %>, <%= @dog.user.state.upcase %></h5>
+		<% if @dog.foster && !@dog.foster.city.blank? && !@dog.foster.state.blank? %>
+			<h5>Fostered in <%= @dog.foster.city.titleize %>, <%= @dog.foster.state.upcase %></h5>
 		<% end %>
 
 
@@ -104,12 +104,12 @@
 				<%= image_tag "needs_foster.gif" %>Needs Foster<br />
 			<% end %>
 			<br />
-			<% if @dog.user_id %>
+			<% if @dog.foster_id %>
 				<strong>Foster</strong><br />
-				<%= link_to @dog.user.name, user_path(@dog.user) %><br />
-				<%= @dog.user.address1 %><br />
-				<%= @dog.user.city %>, <%= @dog.user.state %><br />
-				<%= @dog.user.phone %><br />
+				<%= link_to @dog.foster.name, user_path(@dog.foster) %><br />
+				<%= @dog.foster.address1 %><br />
+				<%= @dog.foster.city %>, <%= @dog.foster.state %><br />
+				<%= @dog.foster.phone %><br />
 			<% else %>
 				<p>No Foster Assigned</p>
 			<% end %>

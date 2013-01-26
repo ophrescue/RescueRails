@@ -135,7 +135,7 @@ class DogsController < ApplicationController
         if !dog
           dog = Dog.find(params[:id])
         end
-        dog.user_id == current_user.id
+        dog.foster_id == current_user.id
       end
     end
 

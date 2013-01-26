@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130109000333) do
+ActiveRecord::Schema.define(:version => 20130126215845) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(:version => 20130109000333) do
     t.boolean   "no_cats"
     t.boolean   "no_kids"
     t.text      "description"
-    t.integer   "user_id"
+    t.integer   "foster_id"
     t.date      "adoption_date"
     t.boolean   "is_uptodateonshots",                 :default => true
     t.date      "intake_dt"
@@ -181,13 +181,13 @@ ActiveRecord::Schema.define(:version => 20130109000333) do
   end
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"
+  add_index "dogs", ["foster_id"], :name => "index_dogs_on_user_id"
   add_index "dogs", ["gender"], :name => "index_dogs_on_gender"
   add_index "dogs", ["name"], :name => "index_dogs_on_name"
   add_index "dogs", ["primary_breed_id"], :name => "index_dogs_on_primary_breed_id"
   add_index "dogs", ["secondary_breed_id"], :name => "index_dogs_on_secondary_breed_id"
   add_index "dogs", ["size"], :name => "index_dogs_on_size"
   add_index "dogs", ["tracking_id"], :name => "index_dogs_on_tracking_id", :unique => true
-  add_index "dogs", ["user_id"], :name => "index_dogs_on_user_id"
 
   create_table "emails", :force => true do |t|
     t.string    "from_address",                  :null => false

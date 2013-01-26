@@ -19,7 +19,7 @@
 #  no_cats              :boolean
 #  no_kids              :boolean
 #  description          :text
-#  user_id              :integer
+#  foster_id            :integer
 #  adoption_date        :date
 #  is_uptodateonshots   :boolean          default(TRUE)
 #  intake_dt            :date
@@ -41,6 +41,7 @@
 #  bordetella           :string(255)
 #  microchip            :string(255)
 #  original_name        :string(255)
+#  fee                  :integer
 #
 
 class Dog < ActiveRecord::Base
@@ -65,7 +66,7 @@ class Dog < ActiveRecord::Base
 					:no_kids,
 					:description,
 					:photos_attributes,
-					:user_id,
+					:foster_id,
 					:foster_start_date,
 					:adoption_date,
 					:is_uptodateonshots,
@@ -103,7 +104,8 @@ class Dog < ActiveRecord::Base
 	has_many :photos, :dependent => :destroy, :order => "position"
 	accepts_nested_attributes_for :photos, :allow_destroy => true
 
-	belongs_to :user
+	belongs_to :foster, :class_name => "User"
+	# belongs_to :coordinator, :class_name => "User"	
 
 	has_many :adoptions, :dependent => :destroy
 	has_many :adopters, :through => :adoptions

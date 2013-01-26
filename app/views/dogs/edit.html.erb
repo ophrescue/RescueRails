@@ -128,12 +128,14 @@
 		<div class="control-group">
 			<div class="controls">
 				<% if can_edit_dogs? %>
-					<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
+					<%= f.collection_select(:foster_id, @foster_users, :id, :name, :prompt => '-select-') %>
 				<% else %>
-					<%= @dog.user ? @dog.user.name : "No Foster Assigned" %>
+					<%= @dog.foster ? @dog.foster.name : "No Foster Assigned" %>
 				<% end %>
 			</div>
 		</div>
+
+
 		<div class="control-group">
 			<label id="optionsCheckboxes"><h3>Public Attributes</h3></label>
 			<div class="controls">

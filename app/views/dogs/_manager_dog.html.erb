@@ -36,8 +36,8 @@
 	<% if (params[:status] == nil) || (params[:status] == "active")  %>
 		<td><%= dog.status.titleize %></td>
 	<% end %>
-	<td><%= dog.user ? link_to(dog.user.name, dog.user) : "Unassigned" %></td>
-	<td><%= dog.user ? "#{dog.user.city}, #{dog.user.state}" : "Unassigned" %></td>
+	<td><%= dog.foster ? link_to(dog.foster.name, dog.foster) : "Unassigned" %></td>
+	<td><%= dog.foster ? "#{dog.foster.city}, #{dog.foster.state}" : "Unassigned" %></td>
 	<td>
 		<% dog.adopters.each do |d| %>
 			<%= link_to d.name, d %>

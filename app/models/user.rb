@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
   before_save :encrypt_password, :unless => "password.blank?"
 
   has_many :histories
-  has_many :dogs
+  has_many :foster_dogs, :class_name => 'Dog', :foreign_key => 'foster_id'
 
   has_many :comments
 

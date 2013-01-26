@@ -42,6 +42,7 @@
 #  microchip            :string(255)
 #  original_name        :string(255)
 #  fee                  :integer
+#  coordinator_id       :integer
 #
 
 class Dog < ActiveRecord::Base
@@ -90,7 +91,8 @@ class Dog < ActiveRecord::Base
 					:bordetella,
 					:microchip,
 					:original_name,
-					:fee
+					:fee,
+					:coordinator_id
 
 
 	belongs_to :primary_breed, :class_name => 'Breed'
@@ -105,7 +107,7 @@ class Dog < ActiveRecord::Base
 	accepts_nested_attributes_for :photos, :allow_destroy => true
 
 	belongs_to :foster, :class_name => "User"
-	# belongs_to :coordinator, :class_name => "User"	
+	belongs_to :coordinator, :class_name => "User"	
 
 	has_many :adoptions, :dependent => :destroy
 	has_many :adopters, :through => :adoptions

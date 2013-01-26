@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130126215845) do
+ActiveRecord::Schema.define(:version => 20130126221416) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(:version => 20130126215845) do
     t.string    "microchip"
     t.string    "original_name"
     t.integer   "fee"
+    t.integer   "coordinator_id"
   end
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"

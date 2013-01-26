@@ -113,6 +113,7 @@ class DogsController < ApplicationController
       5.times { @dog.photos.build }
       5.times { @dog.attachments.build }
       @foster_users = User.where(:is_foster => true).order("name")
+      @coordinator_users = User.where(:edit_all_adopters => true).order("name")
       @breeds = Breed.all      
     end
 

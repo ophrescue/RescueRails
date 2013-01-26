@@ -42,6 +42,7 @@
 #  microchip            :string(255)
 #  original_name        :string(255)
 #  fee                  :integer
+#  coordinator_id       :integer
 #
 
 require 'spec_helper'

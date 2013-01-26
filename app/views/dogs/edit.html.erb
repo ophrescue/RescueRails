@@ -135,6 +135,17 @@
 			</div>
 		</div>
 
+		<h3>Adoption Coordinator</h3>
+
+		<div class="control-group">
+			<div class="controls">
+				<% if can_edit_all_adopters? %>
+					<%= f.collection_select(:coordinator_id, @coordinator_users, :id, :name, :prompt => '-select-') %>
+				<% else %>
+					<%= @dog.coordinator ? @dog.coordinator.name : "No Coordinator Assigned" %>
+				<% end %>
+			</div>
+		</div>
 
 		<div class="control-group">
 			<label id="optionsCheckboxes"><h3>Public Attributes</h3></label>

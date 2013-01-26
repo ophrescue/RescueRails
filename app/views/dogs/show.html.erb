@@ -114,6 +114,13 @@
 				<p>No Foster Assigned</p>
 			<% end %>
 			<br />
+			<% if @dog.coordinator_id %>
+				<strong>Adoption Coordinator</strong><br />
+				<%= link_to @dog.coordinator.name, user_path(@dog.coordinator) %>
+			<% else %>
+				<p>No Adoption Coordinator Assigned</p>
+			<% end %>
+			<br />
 			<% if @dog.adopters.count > 0 %>
 				<h4>Adopter Info</h4>
 				<ul>

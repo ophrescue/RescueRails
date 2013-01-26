@@ -77,6 +77,8 @@ class User < ActiveRecord::Base
   has_many :histories
   has_many :foster_dogs, :class_name => 'Dog', :foreign_key => 'foster_id'
 
+  has_many :coordinated_dogs, :class_name => 'Dog', :foreign_key => 'coordinator_id'
+
   has_many :comments
 
   has_many :assignments, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id'

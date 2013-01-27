@@ -55,7 +55,7 @@ gem "newrelic_rpm", "~> 3.5.5.38"
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Deploy with Capistrano
-gem "capistrano", "~> 2.12.0"
+gem "capistrano"
 
 group :development do
   gem 'rspec-rails'

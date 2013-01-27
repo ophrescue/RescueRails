@@ -94,7 +94,7 @@ set :group,               deployment_group
 set :deploy_to,           app_deployment_root
 set :runner,              deployment_user
 set :scm,                 :git
-set :rails_env,           :production
+set :rails_env,           "production"
 
 role :app,                server
 role :web,                server

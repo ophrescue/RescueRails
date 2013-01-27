@@ -19,7 +19,7 @@
 #  city                   :string(255)
 #  state                  :string(255)
 #  zip                    :string(255)
-#  title                  :string(255)
+#  duties                 :string(255)
 #  edit_dogs              :boolean          default(FALSE)
 #  share_info             :text
 #  edit_my_adopters       :boolean          default(FALSE)

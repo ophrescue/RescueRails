@@ -2,10 +2,9 @@
   <tr>
     <td class="main">
       <h1>
-        <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
-      <h4><%= @user.title %></h4>
+      <h4><%= @user.duties %></h4>
               <% if (@user == current_user || is_admin?) %>
           <strong><%= link_to( "Edit Profile", edit_user_path(@user)) %></strong>
         <% end %>
@@ -38,9 +37,19 @@
             <td><%= @user.share_info %></td>
           </tr>
           <tr>
-            <td>Current Dogs</td>
+            <td>Fostered Dogs</td>
             <td>        
               <% @user.foster_dogs.each do |d| %>
+                <%= link_to d.name, d %>
+                  (<%= d.status %>)
+                <br />
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>Coordinated Dogs</td>
+            <td>        
+              <% @user.coordinated_dogs.each do |d| %>
                 <%= link_to d.name, d %>
                   (<%= d.status %>)
                 <br />

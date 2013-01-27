@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130126221416) do
+ActiveRecord::Schema.define(:version => 20130127185850) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -278,7 +278,7 @@ ActiveRecord::Schema.define(:version => 20130126221416) do
     t.string    "city"
     t.string    "state"
     t.string    "zip"
-    t.string    "title"
+    t.string    "duties"
     t.boolean   "edit_dogs",                           :default => false
     t.text      "share_info"
     t.boolean   "edit_my_adopters",                    :default => false

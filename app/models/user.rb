@@ -82,6 +82,8 @@ class User < ActiveRecord::Base
   has_many :comments
 
   has_many :assignments, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id'
+
+  has_many :active_applications, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id', :conditions => {:status => ['new', 'pend response', 'workup', 'approved']}
   
   before_create :chimp_subscribe
 

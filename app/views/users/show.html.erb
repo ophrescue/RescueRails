@@ -56,6 +56,17 @@
               <% end %>
             </td>
           </tr>
+          <tr>
+            <td>Assigned Adoption Applications</td>
+            <td>        
+              <% @user.active_applications.each do |d| %>
+                <%= link_to d.name, d %>
+                  (<%= d.status %>)
+                <br />
+              <% end %>
+            </td>
+          </tr>
+
         </table>
       </div>
     </tr>

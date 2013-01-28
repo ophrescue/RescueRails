@@ -71,6 +71,7 @@ group :development do
   gem 'autotest-growl' , :platform => :ruby  
   gem 'thin', '~> 1.3.1'
   gem 'watir-webdriver', :platform => :ruby
+  gem 'better_errors'
 end
 
 group :test do

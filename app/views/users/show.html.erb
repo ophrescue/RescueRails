@@ -37,9 +37,9 @@
             <td><%= @user.share_info %></td>
           </tr>
           <tr>
-            <td>Fostered Dogs</td>
+            <td>Currently Fostered Dogs</td>
             <td>        
-              <% @user.foster_dogs.each do |d| %>
+              <% @user.current_foster_dogs.each do |d| %>
                 <%= link_to d.name, d %>
                   (<%= d.status %>)
                 <br />

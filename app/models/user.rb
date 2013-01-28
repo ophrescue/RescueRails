@@ -76,8 +76,9 @@ class User < ActiveRecord::Base
 
   has_many :histories
   has_many :foster_dogs, :class_name => 'Dog', :foreign_key => 'foster_id'
+  has_many :current_foster_dogs, :class_name => 'Dog', :foreign_key => 'foster_id', :conditions => {:status => ['adoptable', 'adoption pending', 'on hold', 'coming soon', 'return pending']}
 
-  has_many :coordinated_dogs, :class_name => 'Dog', :foreign_key => 'coordinator_id'
+  has_many :coordinated_dogs, :class_name => 'Dog', :foreign_key => 'coordinator_id', :conditions => {:status => ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']}
 
   has_many :comments
 

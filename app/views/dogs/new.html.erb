@@ -110,11 +110,20 @@
 		<h3>Foster Assignment</h3>
 
 		<div class="control-group">
-			<%= f.label :user_id, "Name", :class => 'control-label' %>
+			<%= f.label :foster_id, "Name", :class => 'control-label' %>
 			<div class="controls">
-				<%= f.collection_select(:user_id, @foster_users, :id, :name, :prompt => '-select-') %>
+				<%= f.collection_select(:foster_id, @foster_users, :id, :name, :prompt => '-select-') %>
 			</div>
 		</div>
+
+		<h3>Adoption Coordinator</h3>
+
+		<div class="control-group">
+			<div class="controls">
+				<%= f.collection_select(:coordinator_id, @coordinator_users, :id, :name, :prompt => '-select-') %>
+			</div>
+		</div>
+
 		<div class="control-group">
 			<label id="optionsCheckboxes"><h3>Public Attributes</h3></label>
 			<div class="controls">

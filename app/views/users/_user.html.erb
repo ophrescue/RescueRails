@@ -4,7 +4,7 @@
 	<td><%= user.phone %></td>
 	<td><%= user.city %>, <%= user.state %></td>
 	<td>
-		<% user.foster_dogs.each do |d| %>
+		<% user.current_foster_dogs.each do |d| %>
 			<%= link_to d.name, d %>
 			(<%= d.status %>)
 			<br />

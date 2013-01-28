@@ -69,9 +69,12 @@ group :development do
   gem 'autotest-rails-pure'
   gem 'autotest-fsevent', '~> 0.2.8' , :platform => :ruby
   gem 'autotest-growl' , :platform => :ruby  
-  gem 'thin', '~> 1.3.1'
+  gem 'pow'
+  gem 'powder'
   gem 'watir-webdriver', :platform => :ruby
   gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
 end
 
 group :test do

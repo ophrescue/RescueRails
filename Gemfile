@@ -56,6 +56,7 @@ gem "newrelic_rpm", "~> 3.5.5.38"
 
 # Deploy with Capistrano
 gem "capistrano"
+gem "rvm-capistrano"
 
 group :development do
   gem 'rspec-rails'

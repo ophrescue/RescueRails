@@ -230,6 +230,8 @@ GEM
       rspec-mocks (~> 2.12.0)
     ruby-ole (1.2.11.6)
     rubyzip (0.9.9)
+    rvm-capistrano (1.2.7)
+      capistrano (>= 2.0.0)
     sass (3.2.5)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -328,6 +330,7 @@ DEPENDENCIES
   rails3-jquery-autocomplete (~> 1.0.7)
   roo
   rspec-rails
+  rvm-capistrano
   sass-rails (~> 3.2.3)
   spork
   strip_attributes (~> 1.0)

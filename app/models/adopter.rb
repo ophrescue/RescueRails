@@ -56,7 +56,9 @@ class Adopter < ActiveRecord::Base
                   :pre_q_abuse, 
                   :pre_q_reimbursement, 
                   :adoption_app_attributes, 
-                  :references_attributes
+                  :references_attributes,
+                  :pre_q_limited_info,
+                  :pre_q_breed_info
 
   def dog_tokens=(ids)
     self.dog_ids = ids.split(",")

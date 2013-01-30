@@ -6,16 +6,16 @@
   <body>
       <h4><%= @adopter.name %></h4>
       <table style="border-collapse: collapse;font-size: 13px;margin-bottom: 18px;padding: 0;width: 600px"><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">id</td>
-          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.id %></td>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">
+            <%= link_to @adopter.id, adopter_url(@adopter) %></td>
         </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">email</td>
           <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.email %></td>
         </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">address</td>
-          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><address>
+          <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">
                 <%= @adopter.address1 %><br />
                 <%= @adopter.address2 %><br />
                 <%= @adopter.city %>,<%= @adopter.state %> <%= @adopter.zip %>
-              <address>
-          </address></address></td>
+              </td>
         </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">phone</td>
           <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.phone %></td>
         </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">other phone</td>

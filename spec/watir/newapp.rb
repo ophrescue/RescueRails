@@ -3,13 +3,15 @@
 require 'watir-webdriver'
 
 browser = Watir::Browser.new :chrome
-browser.goto 'localhost:3000/adopters/new'
+browser.goto 'https://rescuerails.dev/adopters/new'
 
 #Page one
 
 browser.checkbox(:name => 'adopter[pre_q_costs]').set
 browser.checkbox(:name => 'adopter[pre_q_surrender]').set
 browser.checkbox(:name => 'adopter[pre_q_abuse]').set
+browser.checkbox(:name => 'adopter[pre_q_limited_info]').set
+browser.checkbox(:name => 'adopter[pre_q_breed_info]').set
 browser.checkbox(:name => 'adopter[pre_q_reimbursement]').set
 
 browser.button(:name => 'commit').click
@@ -17,8 +19,8 @@ browser.button(:name => 'commit').click
 
 #Page Two
 
-browser.text_field(:id => 'adopter_name').set 'Mark Watir'
-browser.text_field(:id => 'adopter_email').set 'a.dmin@ophrescue.org'
+browser.text_field(:id => 'adopter_name').set 'Mark Watir 2'
+browser.text_field(:id => 'adopter_email').set 'a.dm.i.n@ophrescue.org'
 browser.text_field(:id => 'adopter_address1').set '642 S Ellwood Ave'
 browser.text_field(:id => 'adopter_address2').set 'Apt 3'
 browser.text_field(:id => 'adopter_city').set 'Baltimore'

@@ -5,8 +5,7 @@ class NewAdopterMailer < ActionMailer::Base
 
   def adopter_created(adopter_id)
   	@adopter = Adopter.find(adopter_id)
-  	@destination_email = Rails.env.production? ? "#{@adopter.name} <#{@adopter.email}>" : "admin@ophrescue.org"
-  	mail(:to => @destination_email,
+  	mail(:to => "#{@adopter.name} <#{@adopter.email}>" ,
     	 :subject =>     "Adoption Application Received!",
     	 :content_type => "text/html")
   end

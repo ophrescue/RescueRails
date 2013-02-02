@@ -5,12 +5,15 @@
     <title><%= title %></title>
     <%= csrf_meta_tag %>
 	<%= render 'layouts/stylesheets' %>
-	<%= javascript_include_tag "application" %>
-	<% if signed_in? %>
 	<script language='text/javascript'>
-		_gaq.push(["_setCustomVar", 1, "Staff", "yes", 1]);
+	    var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-12286524-2']);
+		_gaq.push(['_trackPageview']);
+		<% if signed_in? %>
+			_gaq.push(["_setCustomVar", 1, "Staff", "yes", 1]);
+		<% end %>
 	</script>
-	<% end %>
+	<%= javascript_include_tag "application" %>
   </head>
   <body>
   	<!--[if lte IE 6]><script src="js/ie6/warning.js"></script><script>window.onload=function(){e("/assets/ie6warn/")}</script><![endif]-->

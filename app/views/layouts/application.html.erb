@@ -5,20 +5,24 @@
     <title><%= title %></title>
     <%= csrf_meta_tag %>
 	<%= render 'layouts/stylesheets' %>
-	<script language='text/javascript'>
-	    var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-12286524-2']);
-		_gaq.push(['_trackPageview']);
-		<% if signed_in? %>
-			_gaq.push(["_setCustomVar", 1, "Staff", "yes", 1]);
-		<% end %>
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
-	</script>
 	<%= javascript_include_tag "application" %>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-12286524-2']);
+  _gaq.push(['_setDomainName', 'ophrescue.org']);
+  _gaq.push(['_trackPageview']);
+  _gaq.push(["_setCustomVar", 1, "Member", "yes", 1]);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
   </head>
   <body>
   	<!--[if lte IE 6]><script src="js/ie6/warning.js"></script><script>window.onload=function(){e("/assets/ie6warn/")}</script><![endif]-->

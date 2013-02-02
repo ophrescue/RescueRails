@@ -6,6 +6,11 @@
     <%= csrf_meta_tag %>
 	<%= render 'layouts/stylesheets' %>
 	<%= javascript_include_tag "application" %>
+	<% if signed_in? %>
+	<script language='text/javascript'>
+		_gaq.push(["_setCustomVar", 1, "Staff", "yes", 1]);
+	</script>
+	<% end %>
   </head>
   <body>
   	<!--[if lte IE 6]><script src="js/ie6/warning.js"></script><script>window.onload=function(){e("/assets/ie6warn/")}</script><![endif]-->

@@ -16,11 +16,12 @@ browser.checkbox(:name => 'adopter[pre_q_reimbursement]').set
 
 browser.button(:name => 'commit').click
 
+sleep(3)
 
 #Page Two
 
 browser.text_field(:id => 'adopter_name').set 'Mark Watir 2'
-browser.text_field(:id => 'adopter_email').set 'a.dm.i.n@ophrescue.org'
+browser.text_field(:id => 'adopter_email').set 'mark@ophrescue.org'
 browser.text_field(:id => 'adopter_address1').set '642 S Ellwood Ave'
 browser.text_field(:id => 'adopter_address2').set 'Apt 3'
 browser.text_field(:id => 'adopter_city').set 'Baltimore'
@@ -38,7 +39,7 @@ browser.radio(:id => 'adopter_adoption_app_attributes_house_type_rent').set
 
 browser.button(:name => 'commit').click
 
-
+sleep(3)
 
 browser.text_field(:id => 'adopter_adoption_app_attributes_landlord_name').set 'Miss Watir'
 browser.text_field(:id => 'adopter_adoption_app_attributes_landlord_phone').set '570123128148888'
@@ -47,7 +48,7 @@ browser.text_field(:id => 'adopter_adoption_app_attributes_rent_costs').set 'Mis
 
 browser.button(:name => 'commit').click
 
-
+sleep(3)
 browser.text_field(:id => 'adopter_dog_name').set 'Miss Watir'
 browser.text_field(:id => 'adopter_dog_reqs').set 'Miss Watir'
 browser.text_field(:id => 'adopter_why_adopt').set 'Miss Watir'
@@ -62,7 +63,7 @@ browser.radio(:id => 'adopter_adoption_app_attributes_pets_branch_other_pets').s
 
 browser.button(:name => 'commit').click
 
-
+sleep(3)
 browser.text_field(:id => 'adopter_adoption_app_attributes_current_pets').set 'Miss Watir'
 browser.radio(:id => 'adopter_adoption_app_attributes_current_pets_fixed_false').set
 browser.text_field(:id => 'adopter_adoption_app_attributes_why_not_fixed').set 'They are prefect just the way they are'
@@ -72,7 +73,7 @@ browser.text_field(:id => 'adopter_adoption_app_attributes_vet_info').set 'Dr. K
 
 browser.button(:name => 'commit').click
 
-
+sleep(3)
 browser.text_field(:id => 'adopter_references_attributes_0_name').set 'Miss Watir'
 browser.text_field(:id => 'adopter_references_attributes_0_phone').set '555-555-5555'
 browser.text_field(:id => 'adopter_references_attributes_0_email').set 'Miss@ophrescue.org'

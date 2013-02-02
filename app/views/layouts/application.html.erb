@@ -12,8 +12,9 @@
   _gaq.push(['_setAccount', 'UA-12286524-2']);
   _gaq.push(['_setDomainName', 'ophrescue.org']);
   _gaq.push(['_trackPageview']);
-  _gaq.push(["_setCustomVar", 1, "Member", "yes", 1]);
-
+  <% if signed_in? %>
+     _gaq.push(["_setCustomVar", 1, "Staff", "yes", 1]);
+  <% end %>
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';

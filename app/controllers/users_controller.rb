@@ -45,6 +45,7 @@ class UsersController < ApplicationController
   def update
     params[:user][:email].downcase!
     if @user.update_attributes(params[:user])
+      @user.update_attribute(:lastverified, Time.now)
       flash[:success] = "Profile updated."
       redirect_to @user
     else

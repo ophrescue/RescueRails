@@ -55,6 +55,12 @@
 				<%= content_tag(:div, value, :class => "alert alert-#{key}") %>
 			<% end %>
 		<% end %> 
+		<% if signed_in? && current_user.out_of_date? %>
+			<div class="alert alert-block alert-warning">
+				<p>Please verify your profile information!</p>
+				<p><%= link_to("Profile", current_user, :class => "btn btn-warning") %></p>
+			</div>
+		<% end %>
 		<%= yield %>
 
 			<%= render 'layouts/footer' %>

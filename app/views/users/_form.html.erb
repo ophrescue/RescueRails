@@ -62,6 +62,15 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<%= f.label :share_info, "What contact information can Adotion Coordinators share with Approved Adopters?", :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_area :share_info, :class => "xlarge", :rows => "4" %>
+				<span class="help-inline">E-mail, Phone number, etc.<span>
+			</div>
+		</div>
+
+		<h3>Password Change</h3>
+		<div class="control-group">
 			<%= f.label :password, :class => 'control-label' %>
 			<div class="controls">
 				<%= f.password_field :password, :autocomplete => :off %>
@@ -71,13 +80,6 @@
 			<%= f.label :password_confirmation, :class => 'control-label' %>
 			<div class="controls">
 				<%= f.password_field :password_confirmation, :autocomplete => :off %>
-			</div>
-		</div>
-		<div class="control-group">
-			<%= f.label :share_info, "What contact information can Adotion Coordinators share with Approved Adopters?", :class => 'control-label' %>
-			<div class="controls">
-				<%= f.text_area :share_info, :class => "xlarge", :rows => "4" %>
-				<span class="help-inline">E-mail, Phone number, etc.<span>
 			</div>
 		</div>
 		
@@ -161,7 +163,7 @@
 		</div>
 		
 		<div class="actions well">
-			<%= f.submit "Update", :class => "btn btn-primary" %>
+			<%= f.submit "Update / Verify", :class => "btn btn-primary" %>
 		</div>
 	</fieldset>
 <% end %>

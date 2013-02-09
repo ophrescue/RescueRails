@@ -114,6 +114,14 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
 
+  def out_of_date?
+    if !self.lastverified? || self.lastverified < 30.days.ago
+      return true
+    else
+      return false
+    end
+  end
+
   def send_password_reset
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now

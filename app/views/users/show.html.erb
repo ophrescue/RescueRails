@@ -6,8 +6,9 @@
       </h1>
       <h4><%= @user.duties %></h4>
               <% if (@user == current_user || is_admin?) %>
-          <strong><%= link_to( "Edit Profile", edit_user_path(@user)) %></strong>
+          <strong><%= link_to( "Update/Verify Profile", edit_user_path(@user), :class => "btn btn-primary") %></strong>
         <% end %>
+      <h3>Profile</h3>
       <div class="span6">
         <table class="table-striped table-bordered table-condensed">
           <tr>
@@ -43,6 +44,14 @@
             <% else %>
               <td>Unknown</td>
             <% end %>
+          </tr>
+          <tr>
+            <td>Contact Info Last Verified:</td>
+            <% if @user.lastverified? %>
+              <td><%= time_ago_in_words(@user.lastverified)%> ago</td>
+            <% else %>
+              <td>Never</td>
+            <% end %> 
           </tr>
           <tr>
             <td>Currently Fostered Dogs</td>

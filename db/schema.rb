@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130209190945) do
+ActiveRecord::Schema.define(:version => 20130209193822) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -287,6 +287,7 @@ ActiveRecord::Schema.define(:version => 20130209190945) do
     t.boolean   "edit_events",                         :default => false
     t.string    "other_phone"
     t.datetime  "lastlogin"
+    t.datetime  "lastverified"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

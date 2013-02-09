@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130209193822) do
+ActiveRecord::Schema.define(:version => 20130209205012) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -288,6 +288,8 @@ ActiveRecord::Schema.define(:version => 20130209193822) do
     t.string    "other_phone"
     t.datetime  "lastlogin"
     t.datetime  "lastverified"
+    t.boolean   "available_to_foster",                 :default => false
+    t.text      "foster_dog_types"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

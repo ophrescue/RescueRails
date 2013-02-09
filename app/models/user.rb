@@ -29,6 +29,8 @@
 #  other_phone            :string(255)
 #  lastlogin              :datetime
 #  lastverified           :datetime
+#  available_to_foster    :boolean          default(FALSE)
+#  foster_dog_types       :text
 #
 
 require 'digest'
@@ -57,7 +59,9 @@ class User < ActiveRecord::Base
                   :edit_dogs,
                   :edit_events,
                   :share_info,
-                  :locked
+                  :locked,
+                  :available_to_foster,
+                  :foster_dog_types
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   

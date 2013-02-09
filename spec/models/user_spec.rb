@@ -29,6 +29,8 @@
 #  other_phone            :string(255)
 #  lastlogin              :datetime
 #  lastverified           :datetime
+#  available_to_foster    :boolean          default(FALSE)
+#  foster_dog_types       :text
 #
 
 require 'spec_helper'

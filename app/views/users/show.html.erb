@@ -1,6 +1,5 @@
-<table class="profile" summary="Profile information">
-  <tr>
-    <td class="main">
+<div class="row">
+  <div class="span8">
       <h1>
         <%= @user.name %>
       </h1>
@@ -8,8 +7,8 @@
               <% if (@user == current_user || is_admin?) %>
           <strong><%= link_to( "Update/Verify Profile", edit_user_path(@user), :class => "btn btn-primary") %></strong>
         <% end %>
-      <h3>Profile</h3>
-      <div class="span6">
+      <h4>Profile</h4>
+        
         <table class="table-striped table-bordered table-condensed">
           <tr>
             <td>Address</td>
@@ -22,7 +21,6 @@
                 <%= @user.city %>, 
                 <%= @user.state %> 
                 <%= @user.zip %>
-
             </td>
           </tr>
           <tr>
@@ -54,16 +52,6 @@
             <% end %> 
           </tr>
           <tr>
-            <td>Currently Fostered Dogs</td>
-            <td>        
-              <% @user.current_foster_dogs.each do |d| %>
-                <%= link_to d.name, d %>
-                  (<%= d.status %>)
-                <br />
-              <% end %>
-            </td>
-          </tr>
-          <tr>
             <td>Coordinated Dogs</td>
             <td>        
               <% @user.coordinated_dogs.each do |d| %>
@@ -83,11 +71,38 @@
               <% end %>
             </td>
           </tr>
-
         </table>
       </div>
-    </tr>
-  </table>
+    </div>
+
+      <div class="row">
+        <div class="span8">
+          <h4>Fostering</h4>
+            <% if @user.available_to_foster %>
+              <p><span class="label label-success">Ready for Another Dog</span></p>
+            <% else %>
+              <p><span class="label label-important">Not Ready for Another Dog</span></p>
+            <% end %>
+            <table class="table-striped table-bordered table-condensed">
+              <tr>
+                <td>Current Dogs</td>
+                <td>        
+                  <% @user.current_foster_dogs.each do |d| %>
+                    <%= link_to d.name, d %>
+                      (<%= d.status %>)
+                    <br />
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td>What kind of dogs will you foster?</td>
+                <td><%= @user.foster_dog_types unless !@user.foster_dog_types? %></td>
+              </tr>
+
+            </table>
+        </div>
+      </div>
+
 
         <div class="row">
         <div class="span8">
@@ -124,7 +139,7 @@
             <% end %>
 
             <% if @user.locked? %>
-              <li><span class="label label-error">Account Disabled</span></li>
+              <li><span class="label label-important">Account Disabled</span></li>
             <% else %>
               <li><span class="label label-success">Account Active</span></li>
             <% end %>

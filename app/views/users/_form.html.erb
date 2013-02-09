@@ -69,6 +69,27 @@
 			</div>
 		</div>
 
+		<h3>Fostering</h3>
+
+		<div class="control-group">
+			<div class="controls">
+				<label class="radio">
+					<%= f.radio_button :available_to_foster, true %><span>Ready to foster another dog</span>
+				</label>
+				<label class="radio">
+					<%= f.radio_button :available_to_foster, false %><span>NOT ready to foster another dog</span>
+				</label>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label :foster_dog_types, "What types of dogs can you foster?", :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_area :foster_dog_types, :class => "xlarge", :rows => "4" %>
+				<span class="help-inline">Breeds, age, medical/training issues, etc.<span>
+			</div>
+		</div>
+
 		<h3>Password Change</h3>
 		<div class="control-group">
 			<%= f.label :password, :class => 'control-label' %>

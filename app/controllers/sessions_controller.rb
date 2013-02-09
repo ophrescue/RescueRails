@@ -17,6 +17,7 @@ class SessionsController < ApplicationController
       render 'new'
   	else
   		sign_in user
+      user.update_attribute(:lastlogin, Time.now)
   		redirect_to root_path
   	end
 

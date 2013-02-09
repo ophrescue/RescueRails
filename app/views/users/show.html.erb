@@ -37,6 +37,14 @@
             <td><%= @user.share_info %></td>
           </tr>
           <tr>
+            <td>Last Login</td>
+            <% if @user.lastlogin? %>
+              <td><%= time_ago_in_words(@user.lastlogin) %> ago</td>
+            <% else %>
+              <td>Unknown</td>
+            <% end %>
+          </tr>
+          <tr>
             <td>Currently Fostered Dogs</td>
             <td>        
               <% @user.current_foster_dogs.each do |d| %>

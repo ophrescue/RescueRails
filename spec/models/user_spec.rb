@@ -27,6 +27,7 @@
 #  locked                 :boolean          default(FALSE)
 #  edit_events            :boolean          default(FALSE)
 #  other_phone            :string(255)
+#  lastlogin              :datetime
 #
 
 require 'spec_helper'

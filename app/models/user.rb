@@ -27,6 +27,7 @@
 #  locked                 :boolean          default(FALSE)
 #  edit_events            :boolean          default(FALSE)
 #  other_phone            :string(255)
+#  lastlogin              :datetime
 #
 
 require 'digest'
@@ -55,7 +56,8 @@ class User < ActiveRecord::Base
                   :edit_dogs,
                   :edit_events,
                   :share_info,
-                  :locked
+                  :locked,
+                  :lastlogin
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   

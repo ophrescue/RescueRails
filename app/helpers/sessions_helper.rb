@@ -4,7 +4,7 @@ module SessionsHelper
 
 		if params[:remember_me] 
 			cookies.signed[:remember_token] = {:value => [user.id, user.salt],
-											   :expires => 30.days.from_now }
+											   :expires => 7.days.from_now }
 		else
 			cookies.signed[:remember_token] = [user.id, user.salt]
 		end

@@ -28,6 +28,7 @@
 #  edit_events            :boolean          default(FALSE)
 #  other_phone            :string(255)
 #  lastlogin              :datetime
+#  lastverified           :datetime
 #
 
 require 'digest'

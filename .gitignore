@@ -12,3 +12,4 @@ config/initializers/mailchimp.rb
 config/database.yml
 .rvmrc
 chromedriver.log
+.idea/

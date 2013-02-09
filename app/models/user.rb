@@ -56,8 +56,7 @@ class User < ActiveRecord::Base
                   :edit_dogs,
                   :edit_events,
                   :share_info,
-                  :locked,
-                  :lastlogin
+                  :locked
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   

@@ -119,7 +119,7 @@ class User < ActiveRecord::Base
   end
 
   def out_of_date?
-    if !self.lastverified?
+    if !self.lastverified? || (self.lastverified.to_date < 30.days.ago.to_date)
       return true
     else
       return false

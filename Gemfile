@@ -45,7 +45,7 @@ group :assets do
   gem "chosen-rails", "~> 0.9.8"
 end
 
-gem "jquery-rails", "~> 2.2.1"
+gem "jquery-rails", "~> 2.0.3"
 
 gem "newrelic_rpm", "~> 3.5.5.38"
 

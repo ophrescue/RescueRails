@@ -1,9 +1,9 @@
 ## If you're unfortunate enough to be developing in Windows, bundle with:
 ## bundle install --without-production 
 ##
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-gem "rails", "~> 3.2.11"
+gem "rails", "~> 3.2.12"
 
 gem "pg", "~> 0.14.1"
 gem 'will_paginate',  '~> 3.0.3'
@@ -21,10 +21,8 @@ gem "strip_attributes", "~> 1.0"
 gem 'to_xls'
 gem 'roo'
 
-gem 'ZenTest', "= 4.8.3"
-
 group :production do
-  gem "unicorn", "~> 4.5.0"
+  gem "unicorn", "~> 4.6.0"
 end
 
 

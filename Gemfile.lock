@@ -30,7 +30,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     acts_as_list (0.1.9)
-    anjlab-bootstrap-rails (2.3.0.0)
+    anjlab-bootstrap-rails (2.2.2.1)
       railties (>= 3.0)
       sass (>= 3.2)
     annotate (2.5.0)
@@ -266,7 +266,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list (~> 0.1.8)
-  anjlab-bootstrap-rails (>= 2.2)
+  anjlab-bootstrap-rails (~> 2.2.2.1)
   annotate
   autotest
   autotest-fsevent (~> 0.2.8)

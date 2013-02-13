@@ -11,11 +11,11 @@ gem 'bootstrap-will_paginate', "~> 0.0.7"
 gem "gravatar_image_tag", "~> 1.1.2"
 gem "rails3-jquery-autocomplete", "~> 1.0.7"
 gem "paperclip", "~> 3.0"
-gem "therubyracer", "~> 0.10.1", :platform => :ruby
+gem "therubyracer", "~> 0.11.3", :platform => :ruby
 gem "geocoder", "~> 1.1.1"
-gem "best_in_place", "~> 1.1.2"
-gem "gibbon", "~> 0.3.5"
-gem "exception_notification", "~> 2.6.1"
+gem "best_in_place", "~> 2.0.3"
+gem "gibbon", "~> 0.4.3"
+gem "exception_notification", "~> 3.0.1"
 gem "acts_as_list", "~> 0.1.8"
 gem "strip_attributes", "~> 1.0"
 gem 'to_xls'
@@ -45,7 +45,7 @@ group :assets do
   gem "chosen-rails", "~> 0.9.8"
 end
 
-gem "jquery-rails", "~> 2.0.2"
+gem "jquery-rails", "~> 2.2.1"
 
 gem "newrelic_rpm", "~> 3.5.5.38"
 
@@ -87,6 +87,6 @@ group :test do
   gem 'autotest-rails-pure'
   gem "autotest-fsevent", "~> 0.2.8" , :platform => :ruby
   gem 'autotest-growl', :platform => :ruby
-  gem "thin", "~> 1.3.1"
+  gem "thin", "~> 1.5.0"
   gem 'watir-webdriver', :platform => :ruby
 end

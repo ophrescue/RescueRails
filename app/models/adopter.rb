@@ -181,7 +181,7 @@ class Adopter < ActiveRecord::Base
 
 #Dupe Code Refactor at some point
 
-      if (self.status == 'adopted')
+      if (self.status == 'adopted') || (self.status == 'completed')
         groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Adopted from OPH'} ]
         adopt_date = Time.now.strftime("%m/%d/%Y")
       else

@@ -281,17 +281,6 @@ end
 
 namespace :deploy do
 
-  desc "Deploy and migrate the database - this will cause downtime during migrations"
-  task :migrations do
-    transaction do
-      web.disable
-      deploy
-      migrate
-      web.enable
-    end
-    restart
-  end
-
   desc "Symlinks setup_mail.rb, newrelic.yml, database.yml"
   task :symlink_configs, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/configs/newrelic.yml #{release_path}/config/newrelic.yml"

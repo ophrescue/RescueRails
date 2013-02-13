@@ -138,7 +138,7 @@ class User < ActiveRecord::Base
     gb = Gibbon.new
     gb.timeout = 5
 
-    list_id = '5e50e2be93'
+    list_id = '3c0c21203e'
 
     merge_vars = {
       'FNAME' => self.name,
@@ -156,11 +156,35 @@ class User < ActiveRecord::Base
 
   end
 
+    def chimp_unsubscribe
+
+      gb = Gibbon.new
+      gb.timeout = 5
+
+      list_id = '3c0c21203e'
+
+      response = gb.listUnsubscribe({
+        :id => list_id,
+        :email_address => self.email,
+        :delete_member => true,
+        :send_goodbye => false,
+        :send_notify => false
+        }) 
+
+    end
 
   def chimp_check
 
     if self.email_changed?
       self.chimp_subscribe
+    end
+
+    if self.locked_changed?
+      if self.locked?
+        self.chimp_unsubscribe
+      else
+        self.chimp_subscribe
+      end
     end
 
   end

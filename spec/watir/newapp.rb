@@ -21,7 +21,7 @@ sleep(1)
 #Page Two
 
 browser.text_field(:id => 'adopter_name').set 'Mark Watir'
-browser.text_field(:id => 'adopter_email').set 'm.a.r.k@ophrescue.org'
+browser.text_field(:id => 'adopter_email').set 'mark@ophrescue.org'
 browser.text_field(:id => 'adopter_address1').set '642 S Ellwood Ave'
 browser.text_field(:id => 'adopter_address2').set 'Apt 3'
 browser.text_field(:id => 'adopter_city').set 'Baltimore'

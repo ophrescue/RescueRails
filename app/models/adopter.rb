@@ -120,6 +120,7 @@ class Adopter < ActiveRecord::Base
 
       gb = Gibbon.new
       gb.timeout = 5
+      gb.throws_exceptions = false;
 
       list_id = '5e50e2be93'
 
@@ -181,6 +182,7 @@ class Adopter < ActiveRecord::Base
 
       gb = Gibbon.new
       gb.timeout = 5
+      gb.throws_exceptions = false;
 
       list_id = '5e50e2be93'
 

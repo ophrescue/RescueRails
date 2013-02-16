@@ -137,6 +137,7 @@ class User < ActiveRecord::Base
 
     gb = Gibbon.new
     gb.timeout = 5
+    gb.throws_exceptions = false;
 
     list_id = '3c0c21203e'
 
@@ -160,6 +161,7 @@ class User < ActiveRecord::Base
 
       gb = Gibbon.new
       gb.timeout = 5
+      gb.throws_exceptions = false;
 
       list_id = '3c0c21203e'
 

@@ -21,7 +21,7 @@
 #  other_phone         :string(255)
 #  assigned_to_user_id :integer
 #  flag                :string(255)
-#  is_subscribed       :boolean          default(TRUE)
+#  is_subscribed       :boolean          default(FALSE)
 #
 
 require 'spec_helper'

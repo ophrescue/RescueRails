@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130209205012) do
+ActiveRecord::Schema.define(:version => 20130216203554) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20130209205012) do
     t.string    "other_phone"
     t.integer   "assigned_to_user_id"
     t.string    "flag"
-    t.boolean   "is_subscribed",                    :default => true
+    t.boolean   "is_subscribed",                    :default => false
   end
 
   create_table "adoption_apps", :force => true do |t|

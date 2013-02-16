@@ -21,7 +21,7 @@
 #  other_phone         :string(255)
 #  assigned_to_user_id :integer
 #  flag                :string(255)
-#  is_subscribed       :boolean          default(TRUE)
+#  is_subscribed       :boolean          default(FALSE)
 #
 
 class Adopter < ActiveRecord::Base
@@ -123,64 +123,6 @@ class Adopter < ActiveRecord::Base
 
       list_id = '5e50e2be93'
 
-#Dupe Code Refactor at some point
-
-      if (self.status == 'adopted')
-        groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Adopted from OPH'} ]
-        adopt_date = Time.now.strftime("%m/%d/%Y")
-      else
-        groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Active Application'} ]
-        adopt_date = ''
-      end
-
-      merge_vars = {
-        'FNAME' => self.name,
-        'MMERGE2' => self.status,
-        'MMERGE3' => adopt_date,
-        'GROUPINGS' => [ { 'name' => 'OPH Target Segments', 'groups' => 'Active Application'} ]
-      }
-
-      double_optin = false
-
-      response = gb.listSubscribe({ :id => list_id,
-                                    :email_address => self.email,
-                                    :merge_vars => merge_vars,
-                                    :double_optin => double_optin,
-                                    :send_welcome => false
-      })
-
-      self.is_subscribed = true
-
-    end
-
-
-    def chimp_check
-
-
-      if self.status_changed?
-
-        if ((self.status == 'withdrawn') || (self.status == 'denied')) && (self.is_subscribed == true)
-          self.chimp_unsubscribe
-        elsif self.is_subscribed?
-          self.chimp_update
-        elsif self.is_subscribed == false
-          self.chimp_subscribe
-        end
-
-      end
-
-    end
-    
-
-    def chimp_update
-
-      gb = Gibbon.new
-      gb.timeout = 5
-
-      list_id = '5e50e2be93'
-
-#Dupe Code Refactor at some point
-
       if (self.status == 'adopted') || (self.status == 'completed')
         groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Adopted from OPH'} ]
         adopt_date = Time.now.strftime("%m/%d/%Y")
@@ -198,13 +140,41 @@ class Adopter < ActiveRecord::Base
 
       double_optin = false
 
-      response = gb.listUpdateMember({ :id => list_id,
-                                       :email_address => self.email,
-                                       :merge_vars => merge_vars,
-                                       :double_optin => double_optin,
-                                       :send_welcome => false
-      })
+
+      if self.is_subscribed?
+          response = gb.listUpdateMember({ :id => list_id,
+                             :email_address => self.email,
+                             :merge_vars => merge_vars,
+                             :double_optin => double_optin,
+                             :send_welcome => false
+          })
+      else
+          response = gb.listSubscribe({ :id => list_id,
+                                        :email_address => self.email,
+                                        :merge_vars => merge_vars,
+                                        :double_optin => double_optin,
+                                        :send_welcome => false
+          })
+
+          self.is_subscribed = true
+      end
     end
+
+
+    def chimp_check
+
+      if self.status_changed?
+
+        if ((self.status == 'withdrawn') || (self.status == 'denied')) && (self.is_subscribed?)
+          self.chimp_unsubscribe
+        else
+          self.chimp_subscribe
+        end
+
+      end
+
+    end
+    
 
 
     def chimp_unsubscribe

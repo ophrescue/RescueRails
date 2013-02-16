@@ -22,6 +22,7 @@
 #  assigned_to_user_id :integer
 #  flag                :string(255)
 #  is_subscribed       :boolean          default(FALSE)
+#  completed_date      :date
 #
 
 class Adopter < ActiveRecord::Base
@@ -126,16 +127,21 @@ class Adopter < ActiveRecord::Base
 
       if (self.status == 'adopted') || (self.status == 'completed')
         groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Adopted from OPH'} ]
-        adopt_date = Time.now.strftime("%m/%d/%Y")
       else
         groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Active Application'} ]
-        adopt_date = ''
+      end
+
+
+      if (self.status == 'completed')
+        completed_date = Time.now.strftime("%m/%d/%Y")
+      else
+        completed_date = ''
       end
 
       merge_vars = {
         'FNAME' => self.name,
         'MMERGE2' => self.status,
-        'MMERGE3' => adopt_date,
+        'MMERGE3' => completed_date,
         'GROUPINGS' => groups
       }
 

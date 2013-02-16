@@ -135,6 +135,23 @@ class Dog < ActiveRecord::Base
 	GENDERS = ['Male', 'Female']
 	validates_inclusion_of :gender, :in => GENDERS, :allow_blank => true
 
+
+	before_save :update_adoption_date
+
+
+
+	def update_adoption_date
+		return unless self.status_changed?
+		return unless self.status != 'completed'
+
+		if (self.status == 'adopted')
+			self.adoption_date = Date.today()
+		else
+			self.adoption_date = nil
+		end
+
+	end
+
 end
 
 

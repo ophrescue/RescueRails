@@ -115,11 +115,15 @@
 				</label>
 				<label class="checkbox">
 					<%= f.check_box :edit_all_adopters %>
-					<span><strong>Lead Adoption Coordinator</strong> - Process All Adoption Applications</span>
+					<span><strong>Adoption Coordinator</strong> - Process All Adoption Applications</span>
 				</label>
 				<label class="checkbox">
 					<%= f.check_box :edit_my_adopters %>
-					<span><strong>Adoption Coordinator</strong> - Can be Assigned Adoption Applications, and process them</span>
+					<span><strong>Assign Applications</strong> - Can be Assigned Adoption Applications</span>
+				</label>
+				<label class="checkbox">
+					<%= f.check_box :complete_adopters %>
+					<span><strong>Mark Apps as Completed</strong> - Can set an application to the completed status.  Do not grant this to anyone without express written permission from Jen.</span>
 				</label>
 				<label class="checkbox">
 					<%= f.check_box :edit_events %>
@@ -158,6 +162,12 @@
 							<li>Can be Assigned Adoption Applications</li>
 						<% else %>
 							<li>Cannot be Assigned Adoption Applications</li>
+						<% end %>
+
+						<% if @user.complete_adopters? %>
+							<li>Can set Adoption Applications to completed status.</li>
+						<% else %>
+							<li>Cannot set adoption applications to completed status.</li>
 						<% end %>
 
 						<% if @user.edit_dogs?%>

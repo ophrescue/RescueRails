@@ -1,4 +1,5 @@
 class AdoptersController < ApplicationController
+  include SessionsHelper
 
   before_filter :authenticate, :except => [:new, :create, :check_email]
   before_filter :edit_my_adopters_user, :only => [:index, :show, :edit, :update]
@@ -68,10 +69,17 @@ class AdoptersController < ApplicationController
   end
 
   def update
-    @adopter = Adopter.find(params[:id])
-    @adopter.update_attributes(params[:adopter])
-    flash[:success] = "Application Updated"
-    respond_with @adopter
+    if (params[:adopter][:status] == 'completed') && (!can_complete_adopters?)
+      flash[:error] = "You are not allowed to set an application to completed"
+      respond_with @adopter
+    else
+      @adopter = Adopter.find(params[:id])
+      @adopter.update_attributes(params[:adopter])
+      flash[:success] = "Application Updated"
+      respond_with @adopter
+    end
+
+
   end
 
   def check_email

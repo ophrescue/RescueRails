@@ -24,7 +24,6 @@
 #  is_subscribed       :boolean          default(FALSE)
 #  completed_date      :date
 #
-
 class Adopter < ActiveRecord::Base
 
   attr_accessor :pre_q_costs,
@@ -116,6 +115,7 @@ class Adopter < ActiveRecord::Base
   before_create :chimp_subscribe
 
   before_update :chimp_check
+
 
     def chimp_subscribe
 

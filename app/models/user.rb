@@ -141,11 +141,10 @@ class User < ActiveRecord::Base
     gb.timeout = 5
     gb.throws_exceptions = false;
 
-    list_id = '3c0c21203e'
+    list_id = 'aa86c27ddd'
 
     merge_vars = {
-      'FNAME' => self.name,
-      'GROUPINGS' => [ { 'name' => 'OPH Target Segments', 'groups' => 'Volunteer'} ]
+      'FNAME' => self.name
     }
 
     double_optin = false
@@ -165,7 +164,7 @@ class User < ActiveRecord::Base
       gb.timeout = 5
       gb.throws_exceptions = false;
 
-      list_id = '3c0c21203e'
+      list_id = 'aa86c27ddd'
 
       response = gb.listUnsubscribe({
         :id => list_id,

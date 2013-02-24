@@ -145,7 +145,7 @@ class Adopter < ActiveRecord::Base
         'GROUPINGS' => groups
       }
 
-      double_optin = false
+      double_optin = true
 
 
       if self.is_subscribed?

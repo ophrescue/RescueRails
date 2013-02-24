@@ -147,7 +147,7 @@ class User < ActiveRecord::Base
       'FNAME' => self.name
     }
 
-    double_optin = false
+    double_optin = true
 
     response = gb.listSubscribe({ :id => list_id,
                                   :email_address => self.email,

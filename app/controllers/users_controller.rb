@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def index
     @title = "All OPH Staff"
     if params[:search]
-      @users = User.where('lower(name) LIKE ?', "%#{params[:search].downcase}%").paginate(:page => params[:page])
+      @users = User.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(:page => params[:page])
     else
       @users = User.order("name").paginate(:page => params[:page])
     end

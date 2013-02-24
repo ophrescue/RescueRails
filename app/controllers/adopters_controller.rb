@@ -14,7 +14,7 @@ class AdoptersController < ApplicationController
     statuses = ['new', 'pend response', 'workup', 'approved']
 
     if params[:search]
-      @adopters = Adopter.where('lower(name) LIKE ?', "%#{params[:search].downcase}%")
+      @adopters = Adopter.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%")
     elsif params[:status] == 'active'
       @adopters = Adopter.where("status IN (?)", statuses).includes(:user, :comments, :dogs, :adoption_app)
       # @adopters = Adopter.find(:all, :include => [:user, :comments, :dogs, :adoption_app], :conditions => ["status IN ?", statuses])

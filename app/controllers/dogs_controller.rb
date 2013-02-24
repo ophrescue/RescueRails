@@ -15,7 +15,7 @@ class DogsController < ApplicationController
       if (params[:search].to_i > 0)
         @dogs = Dog.where('tracking_id = ?', "#{params[:search].to_i}").paginate(:page => params[:page])
       elsif params[:search]
-        @dogs = Dog.where('lower(name) LIKE ?', "%#{params[:search].downcase}%").paginate(:page => params[:page])
+        @dogs = Dog.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(:page => params[:page])
       elsif params[:status] == 'active'
         statuses = ['adoptable', 'adoption pending', 'on hold', 'return pending', 'coming soon']
         @dogs = Dog.where("status IN (?)", statuses).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)

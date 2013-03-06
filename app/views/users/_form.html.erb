@@ -123,15 +123,19 @@
 				</label>
 				<label class="checkbox">
 					<%= f.check_box :complete_adopters %>
-					<span><strong>Mark Apps as Completed</strong> - Can set an application to the completed status.  Do not grant this to anyone without express written permission from Jen.</span>
+					<span><strong>Mark Apps as Completed</strong> - Can set an application to the completed status.  Do not grant this to anyone without express permission from Jen.</span>
 				</label>
 				<label class="checkbox">
 					<%= f.check_box :edit_events %>
 					<span><strong>Manage Events</strong> - Add/Edit Events </span>
 				</label>
 				<label class="checkbox">
+					<%= f.check_box :add_dogs %>
+					<span><strong>Add Dogs</strong> - If checked, user can add dogs.</span>
+				</label>
+				<label class="checkbox">
 					<%= f.check_box :edit_dogs %>
-					<span><strong>Manage Dogs</strong> - If checked, user can add dogs, edit all dogs and all fields.  If unchecked, they can view all data for all dogs, and only edit some fields of dogs they are assigned to as fosters.  You probably want this unchecked for most people. </span>
+					<span><strong>Manage Dogs</strong> - If checked, user can edit all dogs and all fields.  If unchecked, they can view all data for all dogs, and only edit some fields of dogs they are assigned to as fosters.  You probably want this unchecked for most people. </span>
 				</label>
 				<label class="checkbox">
 					<%= f.check_box :is_foster %>
@@ -170,8 +174,14 @@
 							<li>Cannot set adoption applications to completed status.</li>
 						<% end %>
 
+						<% if @user.add_dogs?%>
+							<li>Can add dogs</li>
+						<% else %>
+							<li>Can not add dogs</li>
+						<% end %>
+
 						<% if @user.edit_dogs?%>
-							<li>Can Add/Edit all Dogs</li>
+							<li>Can edit all dogs</li>
 						<% else %>
 							<li>Can only edit dogs they are fostering</li>
 						<% end %>

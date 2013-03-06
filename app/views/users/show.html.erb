@@ -132,10 +132,16 @@
               <li>Cannot set adoption applications to completed status.</li>
             <% end %>
 
-            <% if @user.edit_dogs?%>
-              <li>Can add dogs and edit all dogs</li>
+            <% if @user.add_dogs?%>
+              <li>Can add dogs</li>
             <% else %>
-              <li>Can only edit dogs they foster.</li>
+              <li>Can not add dogs</li>
+            <% end %>
+
+            <% if @user.edit_dogs?%>
+              <li>Can edit all dogs</li>
+            <% else %>
+              <li>Can only edit dogs they are fostering</li>
             <% end %>
 
             <% if @user.is_foster? %>

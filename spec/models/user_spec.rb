@@ -32,6 +32,7 @@
 #  available_to_foster    :boolean          default(FALSE)
 #  foster_dog_types       :text
 #  complete_adopters      :boolean          default(FALSE)
+#  add_dogs               :boolean          default(FALSE)
 #
 
 require 'spec_helper'

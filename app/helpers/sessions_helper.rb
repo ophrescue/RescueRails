@@ -39,6 +39,10 @@ module SessionsHelper
 		current_user.edit_events? unless current_user.nil?
 	end
 
+	def can_add_dogs?
+		current_user.add_dogs? unless current_user.nil?
+	end
+
 	def can_edit_dogs?
 		current_user.edit_dogs? unless current_user.nil?
 	end

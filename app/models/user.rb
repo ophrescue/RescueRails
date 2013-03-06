@@ -32,6 +32,7 @@
 #  available_to_foster    :boolean          default(FALSE)
 #  foster_dog_types       :text
 #  complete_adopters      :boolean          default(FALSE)
+#  add_dogs               :boolean          default(FALSE)
 #
 
 require 'digest'
@@ -63,7 +64,8 @@ class User < ActiveRecord::Base
                   :locked,
                   :available_to_foster,
                   :foster_dog_types,
-                  :complete_adopters
+                  :complete_adopters,
+                  :add_dogs
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   

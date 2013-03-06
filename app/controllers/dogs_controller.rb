@@ -6,7 +6,7 @@ class DogsController < ApplicationController
   before_filter :authenticate,                            :except => [:index, :show]
   before_filter :edit_dog_check,                          :only => [:edit, :update]    
   # before_filter :fostering_dog_user, :edit_dogs_user,     :only => [:edit, :update]                                   
-  before_filter :edit_dogs_user,                          :only => [:new, :create]
+  before_filter :add_dogs_user,                          :only => [:new, :create]
   before_filter :admin_user,                              :only => [:destroy]
 
   def index
@@ -119,6 +119,10 @@ class DogsController < ApplicationController
 
     def edit_dogs_user
       redirect_to(root_path) unless current_user.edit_dogs?
+    end
+
+    def add_dogs_user
+      redirect_to(root_path) unless current_user.add_dogs?
     end
 
     def admin_user

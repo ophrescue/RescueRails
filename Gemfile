@@ -21,6 +21,7 @@ gem "strip_attributes", "~> 1.0"
 gem 'to_xls'
 gem 'roo'
 
+
 group :production do
   gem "unicorn", "~> 4.5.0"
 end
@@ -55,6 +56,7 @@ gem "newrelic_rpm", "~> 3.5.5.38"
 # Deploy with Capistrano
 gem "capistrano"
 gem "rvm-capistrano"
+gem "capistrano-maintenance", "~> 0.0.2"
 
 group :development do
   gem 'rspec-rails'

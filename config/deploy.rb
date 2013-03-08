@@ -24,7 +24,7 @@
 #$:.unshift File.expand_path("..", __FILE__)
 require 'capistrano'
 require 'capistrano/cli'
-
+require 'capistrano/maintenance'
 
 # ------------------------------------------------------------------------------- #
 # Project-specific
@@ -106,6 +106,9 @@ load 'deploy/assets'
 # Options necessary to make Ubuntu’s SSH happy
 ssh_options[:paranoid]    = false
 default_run_options[:pty] = true
+
+# Path to downtime file
+set :maintenance_template_path,       "./app/views/layouts/maintentance.html.erb"
  
 # Shared paths
 set :shared_path,           "#{deploy_to}/shared"
@@ -164,6 +167,7 @@ set :unicorn_runlevels,               "2 3 4 5"
 set :unicorn_stoplevels,              "0 1 6"
 set :unicorn_startorder,              "21"
 set :unicorn_killorder,               "19"
+
   
 # Unicorn deployment tasks
 namespace :unicorn do
@@ -319,22 +323,22 @@ namespace :deploy do
   end
 end
 
-namespace :deploy do
-  namespace :web do
-    task :disable, :roles => :web, :except => { :no_release => true } do
-      require 'erb'
-      on_rollback { run "rm #{shared_path}/system/maintenance.html" }
+# namespace :deploy do
+#   namespace :web do
+#     task :disable, :roles => :web, :except => { :no_release => true } do
+#       require 'erb'
+#       on_rollback { run "rm #{shared_path}/system/maintenance.html" }
 
-      reason = ENV['REASON']
-      deadline = ENV['UNTIL']
+#       reason = ENV['REASON']
+#       deadline = ENV['UNTIL']
 
-      template = File.read("./app/views/layouts/maintentance.html.erb")
-      result = ERB.new(template).result(binding)
+#       template = File.read("./app/views/layouts/maintentance.html.erb")
+#       result = ERB.new(template).result(binding)
 
-      put result, "#{shared_path}/system/maintenance.html", :mode => 0644
-    end
-  end
-end
+#       put result, "#{shared_path}/system/maintenance.html", :mode => 0644
+#     end
+#   end
+# end
 
 
 def parse_config(file)

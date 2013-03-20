@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="span12">
-		<% if is_admin? %>
+		<% if can_ban_adopters? %>
 			<p><%= link_to "Add", new_banned_adopter_path, :class => "btn btn-primary" %></p>
 		<% end %>
 
@@ -32,7 +32,7 @@
 
 	<% end %>
 
-<% if is_admin? %>
+<% if can_ban_adopters? %>
 	<h2>Import Excel</h2>
 
 	<%= form_tag import_banned_adopters_path, multipart: true do %>

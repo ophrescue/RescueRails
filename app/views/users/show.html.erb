@@ -132,6 +132,12 @@
               <li>Cannot set adoption applications to completed status.</li>
             <% end %>
 
+            <% if @user.ban_adopters? %>
+              <li>Can update the banned adopters list</li>
+            <% else %>
+              <li>Cannot update the banned adopters list</li>
+            <% end %>
+
             <% if @user.add_dogs?%>
               <li>Can add dogs</li>
             <% else %>

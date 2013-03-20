@@ -1,7 +1,7 @@
 class BannedAdoptersController < ApplicationController
 
 	before_filter :authenticate
-	before_filter :admin_user, :only => [:new, :create, :destroy, :edit, :update, :import]
+	before_filter :ban_adopters_user, :only => [:new, :create, :destroy, :edit, :update, :import]
 
 
 	def index
@@ -29,7 +29,7 @@ class BannedAdoptersController < ApplicationController
 			flash[:success] = "New Banned Adopter Added"
 			redirect_to banned_adopters_path
 		else
-			@title = "Add an Banend Adopter"
+			@title = "Add an Bannend Adopter"
 			render 'new'
 		end
 	end
@@ -59,8 +59,8 @@ class BannedAdoptersController < ApplicationController
 
 	private
 
-		def admin_user
-    		redirect_to(root_path) unless current_user.admin?
+		def ban_adopters_user
+    		redirect_to(root_path) unless current_user.ban_adopters?
     	end
 
 end

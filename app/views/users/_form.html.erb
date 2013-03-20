@@ -126,6 +126,10 @@
 					<span><strong>Mark Apps as Completed</strong> - Can set an application to the completed status.  Do not grant this to anyone without express permission from Jen.</span>
 				</label>
 				<label class="checkbox">
+					<%= f.check_box :ban_adopters %>
+					<span><strong>Banned Adopters</strong> - Allowed to update or edit the banned adopters list.</span>
+				</label>
+				<label class="checkbox">
 					<%= f.check_box :edit_events %>
 					<span><strong>Manage Events</strong> - Add/Edit Events </span>
 				</label>
@@ -172,6 +176,12 @@
 							<li>Can set Adoption Applications to completed status.</li>
 						<% else %>
 							<li>Cannot set adoption applications to completed status.</li>
+						<% end %>
+
+						<% if @user.ban_adopters? %>
+							<li>Can update the banned adopters list</li>
+						<% else %>
+							<li>Cannot update the banned adopters list</li>
 						<% end %>
 
 						<% if @user.add_dogs?%>

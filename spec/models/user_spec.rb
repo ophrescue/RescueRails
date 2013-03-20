@@ -33,6 +33,7 @@
 #  foster_dog_types       :text
 #  complete_adopters      :boolean          default(FALSE)
 #  add_dogs               :boolean          default(FALSE)
+#  ban_adopters           :boolean          default(FALSE)
 #
 
 require 'spec_helper'

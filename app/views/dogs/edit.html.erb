@@ -128,7 +128,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<% if can_edit_dogs? %>
-					<%= f.collection_select(:foster_id, @foster_users, :id, :name, :prompt => '-select-') %>
+					<%= f.collection_select(:foster_id, @foster_users, :id, :name, :include_blank => '-select-') %>
 				<% else %>
 					<%= @dog.foster ? @dog.foster.name : "No Foster Assigned" %>
 				<% end %>
@@ -140,7 +140,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<% if can_edit_all_adopters? %>
-					<%= f.collection_select(:coordinator_id, @coordinator_users, :id, :name, :prompt => '-select-') %>
+					<%= f.collection_select(:coordinator_id, @coordinator_users, :id, :name, :include_blank => '-select-' ) %>
 				<% else %>
 					<%= @dog.coordinator ? @dog.coordinator.name : "No Coordinator Assigned" %>
 				<% end %>

@@ -31,6 +31,12 @@
             <td>Phone</td>
             <td><%= @user.phone %></td>
           </tr>
+          <% if @user.other_phone? %>
+            <tr>
+              <td>Other Phone</td>
+              <td><%= @user.other_phone %></td>
+            </tr>
+          <% end %>
           <tr>
             <td>Can share with adopters:</td>
             <td><%= @user.share_info %></td>

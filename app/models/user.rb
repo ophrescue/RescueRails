@@ -34,6 +34,7 @@
 #  complete_adopters      :boolean          default(FALSE)
 #  add_dogs               :boolean          default(FALSE)
 #  ban_adopters           :boolean          default(FALSE)
+#  dl_resources           :boolean          default(TRUE)
 #
 
 require 'digest'
@@ -67,7 +68,8 @@ class User < ActiveRecord::Base
                   :foster_dog_types,
                   :complete_adopters,
                   :add_dogs,
-                  :ban_adopters
+                  :ban_adopters,
+                  :dl_resources
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   

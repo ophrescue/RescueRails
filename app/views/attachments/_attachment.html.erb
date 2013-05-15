@@ -9,7 +9,7 @@
     <%= link_to attachment.updated_by_user.name, attachment.updated_by_user %>
   </td>
   <td>
-		<%= attachment.created_at %>
+		<%= time_ago_in_words(attachment.created_at) %> ago
   </td>
   <td>
     <% if is_admin? %>

@@ -162,6 +162,12 @@
               <li>Is Not a Foster</li>
             <% end %>
 
+            <% if @user.dl_resources? %>
+              <li>Can Download Staff Resources</li>
+            <% else %>
+              <li>Cannot Download Staff Resources</li>
+            <% end %>
+
             <% if @user.locked? %>
               <li><span class="label label-important">Account Disabled</span></li>
             <% else %>

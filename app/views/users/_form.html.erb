@@ -146,6 +146,10 @@
 					<span><strong>Foster</strong> - This person can be selected as a foster on the dog edit screen.</span>
 				</label>
 				<label class="checkbox">
+					<%= f.check_box :dl_resources %>
+					<span><strong>Download Resources</strong> - This person can access the Staff Resources section.</span>
+				</label>
+				<label class="checkbox">
 					<%= f.check_box :locked %>
 					<span><strong>Lock</strong> - Will disable account, preventing user from logging in.</span>
 				</label>
@@ -200,6 +204,12 @@
 							<li>Is a Foster</li>
 						<% else %>
 							<li>Is not a Foster</li>
+						<% end %>
+
+						<% if @user.dl_resources? %>
+							<li>Can Download Staff Resources</li>
+						<% else %>
+							<li>Cannot Download Staff Resources</li>
 						<% end %>
 
 						<% if @user.locked? %>

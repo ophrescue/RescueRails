@@ -63,6 +63,10 @@ module SessionsHelper
 		current_user.ban_adopters unless current_user.nil?
 	end
 
+	def can_dl_resources?
+		current_user.dl_resources unless current_user.nil?
+	end
+
 	def sign_out
 		cookies.delete(:remember_token)
 		self.current_user = nil

@@ -1,6 +1,6 @@
 class FoldersController < ApplicationController
 
-  before_filter :authenticate
+  before_filter :dl_resource_user
   before_filter :admin_user, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
@@ -58,6 +58,10 @@ class FoldersController < ApplicationController
 
     def admin_user
       redirect_to(root_path) unless current_user.admin?
+    end
+
+    def dl_resource_user
+      redirect_to(root_path) unless current_user.dl_resources?
     end
 
 end

@@ -34,6 +34,7 @@
 #  complete_adopters      :boolean          default(FALSE)
 #  add_dogs               :boolean          default(FALSE)
 #  ban_adopters           :boolean          default(FALSE)
+#  dl_resources           :boolean          default(TRUE)
 #
 
 require 'spec_helper'

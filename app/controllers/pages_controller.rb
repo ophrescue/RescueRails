@@ -37,6 +37,10 @@ class PagesController < ApplicationController
   def adoptprocess
     @title = "Adoption Process"
   end
+
+  def insurance
+    @title = "Pet Insurance"
+  end
   
   def resources
     @title = "Resources for Adopters"

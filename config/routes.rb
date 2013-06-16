@@ -47,6 +47,7 @@ RescueRails::Application.routes.draw do
   match '/guide',               :to => 'pages#guide'
   match '/aboutus',             :to => 'pages#aboutus'
   match '/contributors',        :to => 'pages#contributors'
+  match '/insurance',           :to => 'pages#insurance'
   match '/volunteer',           :to => 'pages#volunteer'
   match '/k9',                  :to => 'pages#k9'
   match '/foster',              :to => 'pages#foster'
@@ -56,6 +57,7 @@ RescueRails::Application.routes.draw do
   match '/puppyguide',          :to => 'pages#puppyguide'
   match '/shopping',            :to => 'pages#shopping'
   match '/status_definitions',  :to => 'pages#status_definitions'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

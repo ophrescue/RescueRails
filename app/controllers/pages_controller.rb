@@ -67,4 +67,8 @@ class PagesController < ApplicationController
     @title = "Adoption Application Status Definitions"
   end
 
+  def terms
+    @title = "Terms and Conditions"
+  end
+
 end

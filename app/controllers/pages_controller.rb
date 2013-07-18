@@ -21,6 +21,10 @@ class PagesController < ApplicationController
   def contributers
     @title = "Contributers"
   end
+
+  def donate
+    @title = "Donate"
+  end
   
   def foster
     @title = "Fostering Opportunities"

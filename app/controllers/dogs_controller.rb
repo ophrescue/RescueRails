@@ -26,7 +26,7 @@ class DogsController < ApplicationController
       end
     else
       @title = "Available Dogs"
-      statuses = ['adoptable', 'adoption pending', 'on hold', 'coming soon']
+      statuses = ['adoptable', 'adoption pending', 'coming soon']
       @dogs = Dog.where("status IN (?)", statuses).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
     end
     ## Need to support the dog select drop down in the adopt app as well!

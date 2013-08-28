@@ -33,6 +33,8 @@
 									<%= link_to dog, :class => "thumbnail" do %>
 					    			  	<% if dog.photos == [] %>
 											<%= image_tag("no_photo-320x320.png", :alt => dog.name) %>
+										<% elsif dog.primary_breed %>
+											<%= image_tag(dog.photos.first.photo.url(:medium), :alt => dog.primary_breed.name)  %> 
 										<% else %>
 											<%= image_tag(dog.photos.first.photo.url(:medium), :alt => dog.name)  %> 
 										<% end %>

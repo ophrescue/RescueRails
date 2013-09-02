@@ -37,7 +37,7 @@
 		<% end %>
 
 
-		<ul>
+		<ul class="unstyled">
 			<li>ID:  <%= @dog.tracking_id %></li>
 			<li><%= @dog.status.titleize %></li>
 			<li><%= @dog.age.titleize %></li>
@@ -71,8 +71,12 @@
 			<% end %>
 
 		</ul>
-		
+
 		<br />
+
+		<%= link_to "Adopt Me!", new_adopter_path, :class => "btn btn-primary btn-large" %>
+		
+		
 		<br />
 		<% if signed_in? %>
 			<h4>Private Information</h4>

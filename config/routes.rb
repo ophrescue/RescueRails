@@ -47,6 +47,8 @@ RescueRails::Application.routes.draw do
   match '/guide',               :to => 'pages#guide'
   match '/aboutus',             :to => 'pages#aboutus'
   match '/contributors',        :to => 'pages#contributors'
+  match '/shelters',            :to => 'pages#shelters'
+
   match '/insurance',           :to => 'pages#insurance'
   match '/volunteer',           :to => 'pages#volunteer'
 #  match '/k9',                  :to => 'pages#k9'

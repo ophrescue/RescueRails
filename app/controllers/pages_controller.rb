@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_filter :authenticate, :only => [:status_definitions]
 
   def home
-    @title = "All breed dog rescue based in VA, MD, DC and South Central PA"
+    @title = "All breed dog rescue based in Virgina, Maryland, Washington DC and South Central PA"
   end
   
   def guide
@@ -20,6 +20,10 @@ class PagesController < ApplicationController
 
   def contributers
     @title = "Contributers"
+  end
+
+  def shelters
+    @title = "Partnering Shelters"
   end
 
   def donate

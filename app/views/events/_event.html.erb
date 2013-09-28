@@ -31,7 +31,7 @@
 						<% end %>
 					</address>
 				</div>
-				<% if event.photographer_name && event.photographer_url %>
+				<% if event.photographer_name? && event.photographer_url? %>
 					<p><i class="icon-camera"></i> <strong>Event Photographer:</strong> <%= link_to event.photographer_name, event.photographer_url %></p>
 				<% end %>
 			</div>

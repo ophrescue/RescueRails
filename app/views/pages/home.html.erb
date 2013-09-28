@@ -20,8 +20,15 @@
   <div class="row">
     <div class="span4 sidekick">
       <h2>Events</h2>
-       <p>Looking for the perfect new family member? Want to meet them in person first? Here is your chance!  Join Operation Paws for Homes and meet some wonderful dogs and learn more about how we can find the right dog for you at our next adoption event.</p>
-      <p><a class="btn btn-primary" href="/events">Upcoming Events &raquo;</a></p>
+       <ul class="unstyled">
+       <% if @events.count > 0 %>
+        <% @events.each do |event| %>
+          <li><%= event.event_date.strftime("%b %e") %> - <%= link_to event.title, event %> </li>
+        <% end %> 
+      </ul>
+
+       <% end %>
+      <p><a class="btn btn-primary" href="/events">More Events &raquo;</a></p>
     </div>
     <div class="span4 sidekick">
       <h2>Adoption Guide</h2>

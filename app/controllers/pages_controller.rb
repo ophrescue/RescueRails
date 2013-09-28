@@ -4,6 +4,10 @@ class PagesController < ApplicationController
 
   def home
     @title = "All breed dog rescue based in Virgina, Maryland, Washington DC and South Central PA"
+    @events = Event.find(:all,
+           :conditions => ["event_date >= ?", Date.today],
+           :limit => 5, 
+           :order => 'event_date')
   end
   
   def guide

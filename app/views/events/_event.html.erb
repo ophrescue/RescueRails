@@ -1,8 +1,8 @@
 <div class="row">
 	<div class="row event-title">
 		<div class="span8 offset4">
-			<h3><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %l:%M %P") %> to <%= event.end_time.strftime(" %l:%M %P") %></h3>
-			<p><strong><%= event.title %></strong></p>
+			<h3><%= event.title %></h3>
+			<p><strong><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %l:%M %P") %> to <%= event.end_time.strftime(" %l:%M %P") %></strong></p>
 		</div>
 	</div>
 	<div class="row">
@@ -43,7 +43,14 @@
 					<p><%= event.description %></p>
 				</div>
 			</div>
-			<p><a href="/adopt" class="btn btn-primary">Apply to Adopt</a>
+
+			<p>
+
+			<% if event.facebook_url? %>
+				<%= link_to "RSVP on Facebook", event.facebook_url, :class => "btn btn-primary" %>
+			<% end %>
+
+			<a href="/adopt" class="btn btn-primary">Apply to Adopt</a>
 			
 			<% if can_edit_events? %>
 				<%= link_to  "edit", edit_event_path(event), :class => "btn btn-small" %>

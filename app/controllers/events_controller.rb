@@ -19,10 +19,10 @@ class EventsController < ApplicationController
 							 :order => 'event_date')
 	end
 
-	# def show
-	# 	@title = "Events"
-	# 	@event = Event.find(params[:id])
-	# end
+	def show
+		@title = "Events"
+		@event = Event.find(params[:id])
+	end
 
 	def new
 		@title = "Add an Event"

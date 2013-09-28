@@ -1,6 +1,3 @@
-<h1><%= event.title %></h1>
-<p><%= event.location_name %><p>
-<p><%= event.start_datetime %></p>
-<p><%= event.end_datetime %></p>
-<p><%= event.address %></p>
-<p><%= event.description %></p>
+<h5><%= link_to "More Events", :events, :class => "btn btn-primary" %></h5>
+
+<%= render @event %>	

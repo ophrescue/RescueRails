@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130515024443) do
+ActiveRecord::Schema.define(:version => 20130928160759) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -225,6 +225,7 @@ ActiveRecord::Schema.define(:version => 20130515024443) do
     t.timestamp "photo_updated_at",   :limit => 6
     t.string    "photographer_name"
     t.string    "photographer_url"
+    t.string    "facebook_url"
   end
 
   add_index "events", ["event_date"], :name => "index_events_on_event_date"
@@ -261,6 +262,12 @@ ActiveRecord::Schema.define(:version => 20130515024443) do
   end
 
   add_index "references", ["adopter_id"], :name => "index_references_on_adopter_id"
+
+  create_table "teams", :force => true do |t|
+    t.string   "team_name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string    "name"
@@ -299,5 +306,12 @@ ActiveRecord::Schema.define(:version => 20130515024443) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["name"], :name => "index_users_on_name"
+
+  create_table "users_teams", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "team_id"
+  end
+
+  add_index "users_teams", ["user_id", "team_id"], :name => "index_users_teams_on_user_id_and_team_id", :unique => true
 
 end

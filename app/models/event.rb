@@ -47,7 +47,8 @@ class Event < ActiveRecord::Base
 					:photo_content_type,
 					:photo_file_size,    
 					:photo_updated_at,
-					:photo_delete   
+					:photo_delete,
+					:facebook_url   
 
 	validates_presence_of :title,
 					  	  :event_date,

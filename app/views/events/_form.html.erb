@@ -49,6 +49,14 @@
 				</div>
 
 				<div class="control-group">
+					<%= f.label :facebook_url, "Facebook Event URL", :class => 'control-label' %>
+					<div class="controls">
+						<%= f.text_field :facebook_url %>
+						<span class="help-inline">Include http://</span>
+					</div>
+				</div>
+
+				<div class="control-group">
 					<%= f.label :photographer_name, "Photographer Name", :class => 'control-label' %>
 					<div class="controls">
 						<%= f.text_field :photographer_name %>
@@ -66,7 +74,7 @@
 				<div class="control-group">
 					<%= f.label :location_phone, "Location Phone", :class => 'control-label' %>
 					<div class="controls">
-						<%= f.text_field :location_phone, :class => "input-small" %>
+						<%= f.text_field :location_phone, :class => "input-medium" %>
 					</div>
 				</div>
 

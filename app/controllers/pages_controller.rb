@@ -66,6 +66,10 @@ class PagesController < ApplicationController
     @title = "Volunteer Opportunities"
   end
 
+  def documentary
+    @title = "'600 Miles Home' Dog Rescue Documentary"
+  end
+
   def puppyguide
     @title = "Guide for Puppies"
   end

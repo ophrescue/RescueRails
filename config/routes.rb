@@ -50,6 +50,7 @@ RescueRails::Application.routes.draw do
   match '/partnerships',        :to => 'pages#partnerships'
   match '/shelters',            :to => 'pages#shelters'
 
+  match '/documentary',          :to => 'pages#documentary'
   match '/insurance',           :to => 'pages#insurance'
   match '/volunteer',           :to => 'pages#volunteer'
 #  match '/k9',                  :to => 'pages#k9'

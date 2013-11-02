@@ -63,6 +63,7 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'watir-webdriver', :platform => :ruby
+  gem "capybara", "~> 2.1.0"
 end
 
 group :development do

@@ -3,7 +3,7 @@
 ##
 source 'https://rubygems.org'
 
-gem "rails", "~> 3.2.13"
+gem "rails", "~> 3.2.14"
 
 gem "pg", "~> 0.14.1"
 gem 'will_paginate',  '~> 3.0.3'
@@ -58,37 +58,22 @@ gem "capistrano"
 gem "rvm-capistrano"
 gem "capistrano-maintenance", "~> 0.0.2"
 
+
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'watir-webdriver', :platform => :ruby
+end
+
 group :development do
+  gem 'quiet_assets'
   gem 'rspec-rails'
   gem 'annotate'
   gem 'faker'
-# When you need to debug just toss in:
-# require 'debugger'; debugger
-  gem 'debugger', :require => 'ruby-debug'
-  gem 'turn', :require => false
-  gem 'autotest'
-  gem 'autotest-rails-pure'
-  gem 'autotest-fsevent', '~> 0.2.8' , :platform => :ruby
-  gem 'autotest-growl' , :platform => :ruby  
   gem 'pow'
   gem 'powder'
   gem 'watir-webdriver', :platform => :ruby
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-end
-
-group :test do
-  gem 'rspec-rails'
-  gem 'webrat'
-  gem 'spork'
-  gem 'factory_girl_rails'
-  gem 'debugger', :require => 'ruby-debug'
-  gem 'turn', :require => false
-  gem 'autotest'
-  gem 'autotest-rails-pure'
-  gem "autotest-fsevent", "~> 0.2.8" , :platform => :ruby
-  gem 'autotest-growl', :platform => :ruby
-  gem "thin", "~> 1.5.0"
-  gem 'watir-webdriver', :platform => :ruby
 end

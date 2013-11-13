@@ -119,6 +119,7 @@ GEM
       thor (~> 0.14)
     json (1.8.1)
     kgio (2.8.1)
+    le (2.2.1)
     libv8 (3.11.8.17)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -276,6 +277,7 @@ DEPENDENCIES
   gibbon (~> 0.4.3)
   gravatar_image_tag (~> 1.1.2)
   jquery-rails (~> 2.0.3)
+  le
   mailhopper (~> 0.2.0)
   meta_request
   newrelic_rpm (~> 3.5.5.38)

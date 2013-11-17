@@ -5,7 +5,7 @@ require File.expand_path('../application', __FILE__)
 RescueRails::Application.initialize!
 
 if Rails.env.development?
-  Rails.logger = Le.new('8934d33d-a639-4ede-9442-1046d8a35cd2', debug: true)
+#  Rails.logger = Le.new('8934d33d-a639-4ede-9442-1046d8a35cd2', debug: true)
 else
   Rails.logger = Le.new('8934d33d-a639-4ede-9442-1046d8a35cd2')
 end

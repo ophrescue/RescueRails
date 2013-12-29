@@ -3,7 +3,7 @@
 ##
 source 'https://rubygems.org'
 
-gem "rails", "~> 3.2.14"
+gem "rails", "~> 3.2.15"
 
 gem "pg", "~> 0.14.1"
 gem 'will_paginate',  '~> 3.0.3'
@@ -44,12 +44,12 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem "chosen-rails", "~> 0.9.8"
+  gem "chosen-rails", "~> 1.0.2"
 end
 
 gem "jquery-rails", "~> 2.0.3"
 
-gem "newrelic_rpm", "~> 3.5.5.38"
+gem "newrelic_rpm"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -72,7 +72,6 @@ group :development do
   gem 'rspec-rails'
   gem 'annotate'
   gem 'faker'
-  gem 'pow'
   gem 'powder'
   gem 'watir-webdriver', :platform => :ruby
   gem 'better_errors'

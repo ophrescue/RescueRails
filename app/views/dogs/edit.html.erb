@@ -94,6 +94,16 @@
 				<%= f.text_field :available_on_dt %>
 			</div>
 		</div>
+		<div class="control-group">
+			<%= f.label :sponsored_by, "Sponsored by", :class => 'control-label' %>
+			<div class="controls">
+				<% if can_edit_dogs? %>
+					<%= f.text_field :sponsored_by %>
+				<% else %>
+					<%= @dog.sponsored_by ? @dog.sponsored_by : "No Sponsor" %>
+				<% end %>
+			</div>
+		</div>
 
 		<h3>Ads</h3>
 		<div class="control-group">

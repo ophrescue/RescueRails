@@ -3,9 +3,8 @@
 		<h5><%= link_to "Available Dogs", :controller => "dogs", :status => "active"  %></h5>
 			<h1><%= @dog.name %></h1>
 			<h3><%= @dog.primary_breed.name unless !@dog.primary_breed %></h3>
-
-			<% if can_edit_dogs? || is_fostering_dog? %>
-				<strong><%= link_to "Edit Dog", edit_dog_path(@dog), :class => "btn btn-primary btn-large" %></strong><br />
+			<% if @dog.sponsored_by? %>
+				<h5><em>Sponsored by <%= @dog.sponsored_by %></em></h5>
 			<% end %>
 	</div>
 </div>
@@ -24,6 +23,7 @@
 			<% end %>
 		</div>
 		<div class="fb-like" data-href="<%= request.url %>" data-send="true" data-width="250" data-show-faces="false"></div>
+
 		<div id="dogDescription" class="well">
 			<p> <%= simple_format(@dog.description) %></p>
 		</div>
@@ -79,6 +79,11 @@
 		 <%=   link_to "Adopt Me!", new_adopter_path, :class => "btn btn-primary btn-large"  %>
 		 <% end %>
 		
+
+		<% if can_edit_dogs? || is_fostering_dog? %>
+				<%= link_to "Edit Dog", edit_dog_path(@dog), :class => "btn btn-primary btn-large" %>
+		<% end %>
+
 		<br />
 		<% if signed_in? %>
 			<h4>Private Information</h4>

@@ -43,6 +43,7 @@
 #  original_name        :string(255)
 #  fee                  :integer
 #  coordinator_id       :integer
+#  sponsored_by         :string(255)
 #
 
 class Dog < ActiveRecord::Base
@@ -92,7 +93,8 @@ class Dog < ActiveRecord::Base
 					:microchip,
 					:original_name,
 					:fee,
-					:coordinator_id
+					:coordinator_id,
+					:sponsored_by
 
 
 	belongs_to :primary_breed, :class_name => 'Breed'

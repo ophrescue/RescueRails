@@ -23,6 +23,7 @@
 #  photo_updated_at   :timestamp(6)
 #  photographer_name  :string(255)
 #  photographer_url   :string(255)
+#  facebook_url       :string(255)
 #
 
 class Event < ActiveRecord::Base

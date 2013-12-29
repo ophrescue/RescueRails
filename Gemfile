@@ -48,6 +48,7 @@ group :assets do
 end
 
 gem "jquery-rails", "~> 2.0.3"
+gem "jquery-ui-rails", "~> 2.0.2"
 
 gem "newrelic_rpm"
 

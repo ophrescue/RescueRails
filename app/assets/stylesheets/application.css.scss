@@ -1,9 +1,13 @@
 //= require vendor
 
+/*
+ *= require jquery.ui.core
+ *= require jquery.ui.theme
+ *= require jquery.ui.datepicker
+ */
+
 @import "twitter/bootstrap";
 @import "twitter/bootstrap-responsive";
 @import "jquery-token/token-input.css";
-@import "jquery-ui/jquery-ui.css";
-@import "jquery-ui/jquery-ui.timepicker.css";
 @import "chosen.css";
 @import "custom.css.scss";

@@ -27,6 +27,26 @@
 
   </head>
   <body>
+  	<div id="fb-root"></div>
+		<script>
+		  window.fbAsyncInit = function() {
+		    // init the FB JS SDK
+		    FB.init({
+		      appId      : '1423317627905636',                        // App ID from the app dashboard
+		      status     : true,                                 // Check Facebook Login status
+		      xfbml      : true                                  // Look for social plugins on the page
+		    });
+
+		  };
+		  (function(){
+		     if (document.getElementById('facebook-jssdk')) {return;}
+		     var firstScriptElement = document.getElementsByTagName('script')[0];
+		     var facebookJS = document.createElement('script'); 
+		     facebookJS.id = 'facebook-jssdk';
+		     facebookJS.src = '//connect.facebook.net/en_US/all.js';
+		     firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
+		   }());
+		</script>
   	<!--[if lte IE 6]><script src="js/ie6/warning.js"></script><script>window.onload=function(){e("/assets/ie6warn/")}</script><![endif]-->
 	<% if @hide_topbar.nil? %>
 		<%= render 'layouts/topbar' %>

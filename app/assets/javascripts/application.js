@@ -7,7 +7,9 @@
 //= require warning
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
+//= require jquery.ui.datepicker
+//= require jquery.ui.widget
+//= require jquery.ui.sortable
 //= require jquery.purr
 //= require best_in_place
 //= require best_in_place_hook
@@ -23,7 +25,6 @@
 //= require jquery.tokeninput
 //= require dog_token
 //= require analytics
-//= require facebook
 //= require adoption_app_wizard
 //= require datepicker
 //= require jquery.scroll

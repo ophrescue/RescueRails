@@ -1,3 +1,9 @@
+var tagCheckRE = new RegExp("(\\w+)(\\s+)(\\w+)");
+
+jQuery.validator.addMethod("tagcheck", function(value, element) { 
+    return tagCheckRE.test(value);
+}, "Full name required.");
+
 $(function(){
 	$("#new_adopter").formwizard({ 
 	 	formPluginEnabled: false,
@@ -19,6 +25,7 @@ $(function(){
       		rules: {
       			"adopter[name]" : {
       				required: true,
+                              tagcheck: true,
       				maxlength: 50
       			},
       			"adopter[email]" : {

@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 
 gem "rails", "~> 3.2.16"
 
+gem 'dotenv-rails'
 gem "pg", "~> 0.14.1"
 gem 'will_paginate',  '~> 3.0.3'
 gem 'bootstrap-will_paginate', "~> 0.0.7"
@@ -20,6 +21,7 @@ gem "acts_as_list", "~> 0.1.8"
 gem "strip_attributes", "~> 1.0"
 gem 'to_xls'
 gem 'roo'
+
 
 
 group :production do

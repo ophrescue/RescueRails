@@ -25,6 +25,7 @@
 require 'capistrano'
 require 'capistrano/cli'
 require 'capistrano/maintenance'
+require 'dotenv/capistrano'
 
 # ------------------------------------------------------------------------------- #
 # Project-specific

@@ -40,5 +40,13 @@ class Attachment < ActiveRecord::Base
 	validates_attachment_presence :attachment
 	validates_attachment_size :attachment, :less_than => 10.megabytes
 
+	validates_attachment_content_type :attachment,
+	 :content_type => ['image/jpg','image/jpeg','image/pjpeg','image/png','image/x-png','image/gif','application/pdf',
+						'application/msword','applicationvnd.ms-word','applicaiton/vnd.openxmlformats-officedocument.wordprocessingm1.document',
+						'application/msexcel','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+						'application/mspowerpoint','application/vnd.ms-powerpoint','application/vnd.openxmlformats-officedocument.presentationml.presentation',
+						'text/plain'],
+	 :message => 'Images, Docs, PDF, Excel and Plain Text Only.'
+
 end
 

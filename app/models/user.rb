@@ -60,19 +60,6 @@ class User < ActiveRecord::Base
                   :share_info,
                   :available_to_foster,
                   :foster_dog_types
-
-
-  # attr_accessible :admin,
-  #                 :edit_all_adopters,
-  #                 :edit_my_adopters,
-  #                 :complete_adopters, 
-  #                 :ban_adopters,
-  #                 :edit_events,
-  #                 :add_dogs,
-  #                 :edit_dogs,
-  #                 :is_foster,
-  #                 :dl_resources,
-  #                 :locked
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   

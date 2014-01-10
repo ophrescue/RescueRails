@@ -40,7 +40,8 @@
 require 'digest'
 
 class User < ActiveRecord::Base
-  attr_accessor :password
+  attr_accessor :password,
+                :accessible
 
   strip_attributes :only => :email
 
@@ -48,8 +49,6 @@ class User < ActiveRecord::Base
                   :email, 
                   :password, 
                   :password_confirmation,
-                  :admin,
-                  :is_foster,
                   :phone,
                   :other_phone,
                   :address1,
@@ -58,18 +57,22 @@ class User < ActiveRecord::Base
                   :state,
                   :zip,
                   :duties,
-                  :edit_all_adopters,
-                  :edit_my_adopters,
-                  :edit_dogs,
-                  :edit_events,
                   :share_info,
-                  :locked,
                   :available_to_foster,
-                  :foster_dog_types,
-                  :complete_adopters,
-                  :add_dogs,
-                  :ban_adopters,
-                  :dl_resources
+                  :foster_dog_types
+
+
+  # attr_accessible :admin,
+  #                 :edit_all_adopters,
+  #                 :edit_my_adopters,
+  #                 :complete_adopters, 
+  #                 :ban_adopters,
+  #                 :edit_events,
+  #                 :add_dogs,
+  #                 :edit_dogs,
+  #                 :is_foster,
+  #                 :dl_resources,
+  #                 :locked
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
@@ -200,6 +203,14 @@ class User < ActiveRecord::Base
 
 
   private
+
+    def mass_assignment_authorizer(role = :default)
+      if accessible == :all
+        self.class.protected_attributes
+      else
+        super + (accessible || [])
+      end
+    end
 
     def encrypt_password
       self.salt = make_salt unless has_password?(password)

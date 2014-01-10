@@ -144,6 +144,12 @@
               <li>Cannot update the banned adopters list</li>
             <% end %>
 
+            <% if @user.edit_events? %>
+              <li>Can create and edit events</li>
+            <% else %>
+              <li>Cannot create and edit events</li>
+            <% end %>
+
             <% if @user.add_dogs?%>
               <li>Can add dogs</li>
             <% else %>

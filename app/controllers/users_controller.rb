@@ -25,7 +25,9 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(params[:user])
+    @user = User.new
+    @user.accessible = :all if current_user.admin?
+    @user.attributes = params[:user]
     @user.email.downcase!
     if @user.save
       flash[:success] = "Account created for " + @user.name
@@ -44,6 +46,7 @@ class UsersController < ApplicationController
 
   def update
     params[:user][:email].downcase!
+    @user.accessible = :all if current_user.admin?
     if @user.update_attributes(params[:user])
       @user.update_attribute(:lastverified, Time.now)
       flash[:success] = "Profile updated."

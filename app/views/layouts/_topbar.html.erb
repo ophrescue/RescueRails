@@ -42,7 +42,7 @@
                   <li class="divider"></li>
                   <li><a href="/contributors">Contributors</a></li>
                   <li><a href="/partnerships">Community Partnerships</a></li>
-                  <li><a href="/shelters">Partnering Shelters</a></li>
+                  <li><a href="/partner-shelters">Partnering Shelters</a></li>
                   <li><a href="/terms">Terms and Conditions</a></li>
                 </ul>
               </li>
@@ -57,7 +57,10 @@
                   <% end %>
                   <li><%= link_to "Manage Dogs", :controller => "dogs", :status => "active" %></li>
                   <% if can_dl_resources? %>
-                    <li><%= link_to "Staff Resources", folders_path%></li>
+                    <li><%= link_to "Staff Resources", folders_path %></li>
+                  <% end %>
+                  <% if can_edit_dogs? %>
+                    <li><%= link_to "Shelters", shelters_path %></li>
                   <% end %>
   								<li><%= link_to "Users", users_path %></li>
   								<li><%= link_to "My Profile", current_user %></li>

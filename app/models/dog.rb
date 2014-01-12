@@ -114,6 +114,8 @@ class Dog < ActiveRecord::Base
 	has_many :adoptions, :dependent => :destroy
 	has_many :adopters, :through => :adoptions
 
+	belongs_to :shelter
+
 	validates :name, :presence => true,
 					 :length   => { :maximum => 75 },
 					 :uniqueness => { :case_sensitive => false }

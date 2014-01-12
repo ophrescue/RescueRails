@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131229041358) do
+ActiveRecord::Schema.define(:version => 20140112175057) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20131229041358) do
     t.integer   "fee"
     t.integer   "coordinator_id"
     t.string    "sponsored_by"
+    t.integer   "shelter_id"
   end
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"
@@ -189,6 +190,7 @@ ActiveRecord::Schema.define(:version => 20131229041358) do
   add_index "dogs", ["name"], :name => "index_dogs_on_name"
   add_index "dogs", ["primary_breed_id"], :name => "index_dogs_on_primary_breed_id"
   add_index "dogs", ["secondary_breed_id"], :name => "index_dogs_on_secondary_breed_id"
+  add_index "dogs", ["shelter_id"], :name => "index_dogs_on_shelter_id"
   add_index "dogs", ["size"], :name => "index_dogs_on_size"
   add_index "dogs", ["tracking_id"], :name => "index_dogs_on_tracking_id", :unique => true
 
@@ -263,6 +265,12 @@ ActiveRecord::Schema.define(:version => 20131229041358) do
   end
 
   add_index "references", ["adopter_id"], :name => "index_references_on_adopter_id"
+
+  create_table "shelters", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "teams", :force => true do |t|
     t.string   "team_name"

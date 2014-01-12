@@ -1,0 +1,20 @@
+<h1><%= @title %></h1>
+<br />
+
+<div class="row">
+	<div class="span12">
+		<p><%= link_to "Add", new_shelter_path, :class => "btn btn-primary" %></p>
+
+
+	<% if @shelters.count > 0 %>
+		<ul>
+			<%= render @shelters %>	
+		</ul>
+	<% else %>
+
+		<h5>No Shelters</h5>
+
+	<% end %>
+
+	</div>
+</div>

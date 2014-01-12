@@ -35,6 +35,8 @@ RescueRails::Application.routes.draw do
   resources :banned_adopters do
     collection { post :import }
   end
+
+  resources :shelters
   
 
   match '/signin',              :to => 'sessions#new'
@@ -48,7 +50,7 @@ RescueRails::Application.routes.draw do
   match '/aboutus',             :to => 'pages#aboutus'
   match '/contributors',        :to => 'pages#contributors'
   match '/partnerships',        :to => 'pages#partnerships'
-  match '/shelters',            :to => 'pages#shelters'
+  match '/partner-shelters',            :to => 'pages#shelters'
 
   match '/documentary',          :to => 'pages#documentary'
   match '/insurance',           :to => 'pages#insurance'

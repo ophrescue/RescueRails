@@ -5,4 +5,5 @@ jQuery(function($){
 	$('#dog_secondary_breed_id').chosen();
 	$('#dog_foster_id').chosen();
 	$('#dog_coordinator_id').chosen();
+	$('#dog_shelter_id').chosen();
 });

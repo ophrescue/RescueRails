@@ -157,6 +157,18 @@
 			</div>
 		</div>
 
+		<h3>Source Shelter</h3>
+
+		<div class="control-group">
+			<div class="controls">
+				<% if can_edit_dogs? %>
+					<%= f.collection_select(:shelter_id, @shelters, :id, :name, :include_blank => '-select-' ) %>
+				<% else %>
+					<%= @dog.shelter ? @dog.shelter.name : "No Source Shelter Assigned" %>
+				<% end %>
+			</div>
+		</div>		
+
 		<div class="control-group">
 			<label id="optionsCheckboxes"><h3>Public Attributes</h3></label>
 			<div class="controls">

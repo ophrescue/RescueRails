@@ -1,1 +1,5 @@
-<li><%= link_to shelter.name, shelter unless !shelter.name %></li>
+<li>
+	<%= link_to shelter.name, shelter unless !shelter.name %> - 
+	<%= pluralize(shelter.dogs.count, 'dog') %>
+
+</li>

@@ -114,6 +114,7 @@
 			<% if @dog.needs_foster %>
 				<%= image_tag "needs_foster.gif" %>Needs Foster<br />
 			<% end %>
+
 			<br />
 			<% if @dog.foster_id %>
 				<strong>Foster</strong><br />
@@ -124,6 +125,7 @@
 			<% else %>
 				<p>No Foster Assigned</p>
 			<% end %>
+
 			<br />
 			<% if @dog.coordinator_id %>
 				<strong>Adoption Coordinator</strong><br />
@@ -131,6 +133,14 @@
 			<% else %>
 				<p>No Adoption Coordinator Assigned</p>
 			<% end %>
+
+			<br />
+			<% if @dog.shelter_id %>
+				<p><strong>Source Shelter:</strong> <%= @dog.shelter.name %></p>
+			<% else %>
+				<p>No Source Shelter Assigned</p>
+			<% end %>
+
 			<br />
 			<% if @dog.adopters.count > 0 %>
 				<h4>Adopter Info</h4>

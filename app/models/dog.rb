@@ -94,7 +94,8 @@ class Dog < ActiveRecord::Base
 					:original_name,
 					:fee,
 					:coordinator_id,
-					:sponsored_by
+					:sponsored_by,
+					:shelter_id
 
 
 	belongs_to :primary_breed, :class_name => 'Breed'

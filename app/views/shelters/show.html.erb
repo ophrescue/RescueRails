@@ -1,0 +1,8 @@
+<h1><%= @shelter.name %></h1>
+
+
+<ul>
+<% @shelter.dogs.each do |d| %>
+	<li><%= link_to d.name, dog_path(d) %></li>
+<% end %>
+</ul>

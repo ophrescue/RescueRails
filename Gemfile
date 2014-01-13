@@ -46,9 +46,9 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem "chosen-rails", "~> 1.0.2"
 end
 
+gem "chosen-rails", "~> 1.0.2"
 gem "jquery-rails", "~> 2.0.3"
 gem "jquery-ui-rails", "~> 2.0.2"
 

@@ -1,5 +1,6 @@
 class FoldersController < ApplicationController
 
+  before_filter :authenticate
   before_filter :dl_resource_user
   before_filter :admin_user, :only => [:new, :create, :edit, :update, :destroy]
 

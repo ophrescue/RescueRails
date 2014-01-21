@@ -14,7 +14,7 @@ $(document).ready( function () {
         //$('#comment_content').val('');
       },
       error: function() {
-        alert('error saving link');
+        alert('Dog already linked to this application');
       }
     });
   });

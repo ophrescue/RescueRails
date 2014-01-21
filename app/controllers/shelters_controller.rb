@@ -1,5 +1,6 @@
 class SheltersController < ApplicationController
 
+	before_filter :authenticate
 	before_filter :edit_dogs_user
 
 

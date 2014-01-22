@@ -37,6 +37,19 @@ form .control-group.error span.error {
     padding-left: 5px;
 }
 
+.brand { 
+  max-height: 40px; 
+  overflow: visible;
+}
+
+.brand-pad {
+  padding-top: 5px;
+}
+
+.logo {
+  margin-top: -10px;
+}
+
 .hero-unit {
 	background-image: url(hero_bg2.gif);
 	background-repeat: no-repeat;

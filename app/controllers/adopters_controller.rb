@@ -41,6 +41,7 @@ class AdoptersController < ApplicationController
     @title = "Adoption Application"
     @adopter = Adopter.new
     @adopter.adoption_app = AdoptionApp.new
+    @adopter.dog_name = params[:dog_name]
     3.times do
       @adopter.references.build
     end

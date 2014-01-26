@@ -76,7 +76,7 @@
 
 		<% case @dog.status   %>
 		<%	 when 'adoptable', 'adoption pending', 'coming soon'  %>
-		 <%=   link_to "Adopt Me!", new_adopter_path, :class => "btn btn-primary btn-large"  %>
+		 <%=   link_to "Adopt Me!", new_adopter_path(:dog_name => @dog.name), :class => "btn btn-primary btn-large"  %>
 		 <% end %>
 		
 

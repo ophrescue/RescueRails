@@ -83,6 +83,11 @@ class PagesController < ApplicationController
     @title = "Adoption Application Status Definitions"
   end
 
+  def dog_status_definitions
+    @hide_topbar = true;
+    @title = "Dog Status Definitions"
+  end
+
   def terms
     @title = "Terms and Conditions"
   end

@@ -39,7 +39,7 @@
 
 		<ul class="unstyled">
 			<li>ID:  <%= @dog.tracking_id %></li>
-			<li><%= @dog.status.titleize %></li>
+			<li><%= @dog.status.titleize %> (<a href="/dog-status-definitions" target="_blank">What does this mean?</a>)</li>
 			<li><%= @dog.age.titleize %></li>
 			<li><%= @dog.size.titleize %></li>
 			<li><%= @dog.gender.titleize %></li>

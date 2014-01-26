@@ -66,6 +66,7 @@ RescueRails::Application.routes.draw do
   match '/puppyguide',          :to => 'pages#puppyguide'
   match '/shopping',            :to => 'pages#shopping'
   match '/status_definitions',  :to => 'pages#status_definitions'
+  match '/dog-status-definitions', :to => 'pages#dog_status_definitions'
 
 
   # The priority is based upon order of creation:

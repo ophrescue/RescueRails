@@ -146,16 +146,15 @@ class Adopter < ActiveRecord::Base
 
     def chimp_subscribe
 
-      gb = Gibbon.new
-      gb.timeout = 5
-      gb.throws_exceptions = false;
+      gb = Gibbon::API.new
+      gb.timeout = 30
 
       list_id = '5e50e2be93'
 
       if (self.status == 'adopted') || (self.status == 'completed')
-        groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Adopted from OPH'} ]
+        groups = [ { :name => "OPH Target Segments", :groups => ["Adopted from OPH"]} ]
       else
-        groups = [ { 'name' => 'OPH Target Segments', 'groups' => 'Active Application'} ]
+        groups = [ { :name => "OPH Target Segments", :groups => ["Active Application"]} ]
       end
 
 
@@ -166,25 +165,25 @@ class Adopter < ActiveRecord::Base
       end
 
       merge_vars = {
-        'FNAME' => self.name,
-        'MMERGE2' => self.status,
-        'MMERGE3' => completed_date,
-        'GROUPINGS' => groups
+        :fname => self.name,
+        :mmerge2 => self.status,
+        :mmerge3 => completed_date,
+        :groupings => groups
       }
 
       double_optin = true
 
 
       if self.is_subscribed?
-          response = gb.listUpdateMember({ :id => list_id,
-                             :email_address => self.email,
+          response = gb.lists.update_member({ :id => list_id,
+                             :email => {:email => self.email},
                              :merge_vars => merge_vars,
                              :double_optin => double_optin,
                              :send_welcome => false
           })
       else
-          response = gb.listSubscribe({ :id => list_id,
-                                        :email_address => self.email,
+          response = gb.lists.subscribe({ :id => list_id,
+                                        :email => {:email => self.email},
                                         :merge_vars => merge_vars,
                                         :double_optin => double_optin,
                                         :send_welcome => false
@@ -209,19 +208,17 @@ class Adopter < ActiveRecord::Base
 
     end
     
-
-
     def chimp_unsubscribe
 
-      gb = Gibbon.new
-      gb.timeout = 5
+      gb = Gibbon::API.new
+      gb.timeout = 30
       gb.throws_exceptions = false;
 
       list_id = '5e50e2be93'
 
-      response = gb.listUnsubscribe({
+      response = gb.lists.unsubscribe({
         :id => list_id,
-        :email_address => self.email,
+        :email => {:email => self.email},
         :delete_member => true,
         :send_goodbye => false,
         :send_notify => false

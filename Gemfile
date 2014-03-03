@@ -3,7 +3,7 @@
 ##
 source 'https://rubygems.org'
 
-gem "rails", "~> 3.2.16"
+gem "rails", "~> 3.2.17"
 
 gem 'dotenv-rails'
 gem "pg", "~> 0.14.1"
@@ -15,7 +15,7 @@ gem "paperclip", "~> 3.0"
 gem "therubyracer", "~> 0.11.3", :platform => :ruby
 gem "geocoder", "~> 1.1.1"
 gem "best_in_place", "~> 2.0.3"
-gem "gibbon", "~> 0.4.3"
+gem "gibbon", "~> 1.1.1"
 gem "exception_notification", "~> 3.0.1"
 gem "acts_as_list", "~> 0.1.8"
 gem "strip_attributes", "~> 1.0"
@@ -34,7 +34,7 @@ end
 gem "daemons", "~> 1.1.8"
 gem "delayed_job", "~> 3.0.3"
 gem 'delayed_job_active_record'
-gem "mailhopper", "~> 0.2.0"
+gem "mailhopper", "~> 0.3.0"
 gem "delayed_mailhopper", "~> 0.0.7"
 
 

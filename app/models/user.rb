@@ -133,9 +133,8 @@ class User < ActiveRecord::Base
 
   def chimp_subscribe
 
-    gb = Gibbon.new
-    gb.timeout = 5
-    gb.throws_exceptions = false;
+    gb = Gibbon::API.new
+    gb.timeout = 30
 
     list_id = 'aa86c27ddd'
 
@@ -145,8 +144,8 @@ class User < ActiveRecord::Base
 
     double_optin = true
 
-    response = gb.listSubscribe({ :id => list_id,
-                                  :email_address => self.email,
+    response = gb.lists.subscribe({ :id => list_id,
+                                  :email => {:email => self.email},
                                   :merge_vars => merge_vars,
                                   :double_optin => double_optin,
                                   :send_welcome => false
@@ -156,15 +155,14 @@ class User < ActiveRecord::Base
 
     def chimp_unsubscribe
 
-      gb = Gibbon.new
-      gb.timeout = 5
-      gb.throws_exceptions = false;
+      gb = Gibbon::API.new
+      gb.timeout = 30
 
       list_id = 'aa86c27ddd'
 
-      response = gb.listUnsubscribe({
+      response = gb.lists.unsubscribe({
         :id => list_id,
-        :email_address => self.email,
+        :email => {:email => self.email},
         :delete_member => true,
         :send_goodbye => false,
         :send_notify => false

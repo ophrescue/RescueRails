@@ -37,7 +37,15 @@ class PagesController < ApplicationController
   def donate
     @title = "Donate"
   end
+
+  def sponsor
+    @title = "Sponsor a Dog"
+  end
   
+  def other_ways_to_give
+    @title = "Other Ways to Give"
+  end
+
   def foster
     @title = "Fostering Opportunities"
   end

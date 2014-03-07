@@ -85,6 +85,12 @@
 		<% end %>
 
 		<br />
+		<br />
+			<% if !@dog.sponsored_by? %>
+				<a href="/sponsor"><img src="/assets/paypal-sponsor-button.png"></a>
+			<% end %>
+
+		<br />
 		<% if signed_in? %>
 			<h4>Private Information</h4>
 			<% if !@dog.original_name.blank? %>

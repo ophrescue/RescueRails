@@ -34,6 +34,9 @@
 				<% if event.photographer_name? && event.photographer_url? %>
 					<p><i class="icon-camera"></i> <strong>Event Photographer:</strong> <%= link_to event.photographer_name, event.photographer_url %></p>
 				<% end %>
+				<% if event.photographer_name? && !event.photographer_url? %>
+					<p><i class="icon-camera"></i> <strong>Event Photographer:</strong> <%= event.photographer_name %></p>
+				<% end %>
 			</div>
 			<a href="<%="https://maps.google.com/?q=#{event.latitude}%2C#{event.longitude}"%>">
 			<%= image_tag "https://maps.google.com/maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers=#{event.latitude}%2C#{event.longitude}"

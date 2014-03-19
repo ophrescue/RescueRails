@@ -71,7 +71,7 @@ class PagesController < ApplicationController
   end
   
   def volunteer
-    @title = "Volunteer Opportunities"
+    @title = "Volunteer"
   end
 
   def documentary

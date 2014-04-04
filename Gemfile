@@ -26,7 +26,6 @@ gem 'roo'
 
 group :production do
   gem "unicorn", "~> 4.6.0"
-  gem "le"
 end
 
 

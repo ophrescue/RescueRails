@@ -136,7 +136,6 @@ GEM
       railties (>= 3.1.0)
     json (1.8.1)
     kgio (2.9.2)
-    le (2.2.3)
     libv8 (3.11.8.17)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -296,7 +295,6 @@ DEPENDENCIES
   gravatar_image_tag (~> 1.1.2)
   jquery-rails (~> 2.0.3)
   jquery-ui-rails (~> 2.0.2)
-  le
   mailhopper (~> 0.3.0)
   meta_request
   newrelic_rpm

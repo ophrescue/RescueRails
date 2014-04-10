@@ -60,6 +60,7 @@ RescueRails::Application.routes.draw do
   match '/fosterfaq',           :to => 'pages#fosterfaq'
   match '/donate',              :to => 'pages#donate'
   match '/sponsor',             :to => 'pages#sponsor'
+  match '/special-funds',       :to => 'pages#special_funds'
   match '/other-ways-to-give',  :to => 'pages#other_ways_to_give'
 
   match '/terms',                :to => 'pages#terms'

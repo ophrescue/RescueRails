@@ -38,6 +38,10 @@ class PagesController < ApplicationController
     @title = "Donate"
   end
 
+  def special_funds
+    @title = "Special Funds"
+  end
+
   def sponsor
     @title = "Sponsor a Dog"
   end

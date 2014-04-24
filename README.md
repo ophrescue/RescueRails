@@ -22,6 +22,7 @@ Create database.yml file, and use postgres
     rake db:setup
     rake db:seed
     
+You're also going to need to setup an auto incrementor in postgresql on the dogs.tracking_id column.  This isn't in the schema. :(
 
 Fire up the app and see what happens.  App is setup to run SSL always, might want to use POW as your webserver in dev.
 

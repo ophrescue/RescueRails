@@ -67,6 +67,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'watir-webdriver', :platform => :ruby
   gem "capybara", "~> 2.1.0"
+  gem 'faker'
 end
 
 group :development do

@@ -90,6 +90,7 @@ GEM
       compass (>= 0.12.2)
       sprockets (<= 2.11.0)
     daemons (1.1.9)
+    database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     delayed_job (3.0.5)
       activesupport (~> 3.0)
@@ -283,6 +284,7 @@ DEPENDENCIES
   chosen-rails (~> 1.0.2)
   coffee-rails (~> 3.2.1)
   daemons (~> 1.1.8)
+  database_cleaner
   delayed_job (~> 3.0.3)
   delayed_job_active_record
   delayed_mailhopper (~> 0.0.7)

@@ -60,17 +60,19 @@ gem 'capistrano-maintenance', '~> 0.0.2'
 group :development, :test do
   gem 'rspec-rails'
   gem 'watir-webdriver', platform: :ruby
+  gem 'faker'
 end
 
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara', '~> 2.1.0'
+  gem 'database_cleaner'
+  gem 'watir-webdriver', :platform => :ruby
 end
 
 group :development do
   gem 'quiet_assets'
   gem 'annotate'
-  gem 'faker'
   gem 'powder'
   gem 'better_errors'
   gem 'binding_of_caller'

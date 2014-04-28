@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Dog do
   describe '#update_adoption_date' do
-    let!(:dog) { create(:dog, :adoptable) }
+    let(:dog) { create(:dog, :adoptable) }
 
     context 'status did not change' do
       it 'does not update the date' do

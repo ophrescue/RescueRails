@@ -4,11 +4,13 @@
 
 [![Gemnasium](https://gemnasium.com/ophrescue/RescueRails.png)](https://gemnasium.com/ophrescue/RescueRails)
 
-
-
 Rails 3.2.x
 Ruby 1.9.x
 Postgresql 9.3.x
+
+### About
+RescueRails is the public facing website for Operation Paws for Homes, as well as the private system used by the rescue for managing dogs, adopters and staff.  The project is open on Githup for the benefit of our volunteer development team.  
+
 
 
 ### Setup in dev

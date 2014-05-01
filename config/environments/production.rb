@@ -26,6 +26,19 @@ RescueRails::Application.configure do
   # Path to imagemagick for paperclip gem
   Paperclip.options[:command_path] = "/usr/bin/"
 
+  # Paperclip & Amazon S3 Configuration
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['S3_BUCKET_NAME'],
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    },
+    :s3_protocol => 'https',
+    :url => ':s3_domain_url'
+  }
+
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 

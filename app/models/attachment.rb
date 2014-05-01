@@ -34,7 +34,8 @@ class Attachment < ActiveRecord::Base
 	has_attached_file :attachment, 
 					  :path => ":rails_root/public/system/attachments/:hash.:extension",
 					  :url  => "/system/attachments/:hash.:extension",
-					  :hash_secret => "e17ac013aa7f8f2fd095edfa012edb8c"
+					  :hash_secret => "e17ac013aa7f8f2fd095edfa012edb8c",
+					  :s3_permissions => :private
 
 
 	validates_attachment_presence :attachment

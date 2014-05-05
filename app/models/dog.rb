@@ -126,6 +126,7 @@ class Dog < ActiveRecord::Base
 
 	validates_presence_of :status
 
+  scope :not_associated, -> { where('id NOT IN (select dog_id from adoptions)') }
 
 	STATUSES = ['adoptable', 'adopted', 'adoption pending',
 				'on hold', 'not available', 'return pending', 'coming soon', 'completed']

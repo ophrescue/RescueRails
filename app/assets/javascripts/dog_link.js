@@ -7,11 +7,7 @@ $(document).ready( function () {
       url: this.action,
       data: $('#new_dog_link').serialize(),
       success: function (data) {
-        // so it worked, add to the comment list
         refresh_dogs();
-
-        // clear comment field for next comment
-        //$('#comment_content').val('');
       },
       error: function() {
         alert('Dog already linked to this application');
@@ -40,7 +36,6 @@ $(document).ready( function () {
   });
 
 });
-
 
 function refresh_dogs() {
   var url = window.location;

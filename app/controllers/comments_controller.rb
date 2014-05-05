@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     if @comment.save
       flash[:success] = "Comment Saved"
-      redirect_to :back
+      redirect_to request.referer
     else
       render :action => 'new'
     end

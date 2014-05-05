@@ -21,7 +21,7 @@ class AdoptionsController < ApplicationController
 	    if @adoption.save
 	      flash[:success] = "Dogs linked to Application"
 	    end
-	    redirect_to :back
+      redirect_to request.referer
 	end
 
 	def update
@@ -33,7 +33,7 @@ class AdoptionsController < ApplicationController
 	def destroy
 		Adoption.find(params[:id]).destroy
 		flash[:warning] = "Dog removed from Application"
-		redirect_to :back
+    redirect_to request.referer
 	end
 
 	private

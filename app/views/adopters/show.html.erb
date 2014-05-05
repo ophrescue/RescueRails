@@ -166,7 +166,7 @@
               <div class="control-group">
                 <%= ad.label :dog_id, "Associate Dog with Application", :class => "control-label" %>
                 <div class="controls">
-                  <%= ad.collection_select :dog_id, Dog.order(:name), :id, :name, {}%>
+                  <%= ad.collection_select :dog_id, Dog.not_associated.order(:name), :id, :name, {}%>
                 </div>
               </div>
               <div><%= ad.hidden_field :adopter_id %></div>

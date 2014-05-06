@@ -25,7 +25,7 @@
 require 'capistrano'
 require 'capistrano/cli'
 require 'capistrano/maintenance'
-require 'dotenv/capistrano'
+#require 'dotenv/capistrano'
 
 # ------------------------------------------------------------------------------- #
 # Project-specific
@@ -292,6 +292,7 @@ namespace :deploy do
     run "ln -nfs #{deploy_to}/shared/configs/initializers/setup_mail.rb #{release_path}/config/initializers/setup_mail.rb"
     run "ln -nfs #{deploy_to}/shared/configs/initializers/mailchimp.rb #{release_path}/config/initializers/mailchimp.rb"
     run "ln -nfs #{deploy_to}/shared/configs/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{deploy_to}/shared/.env.production #{release_path}/.env.production"
   end
 
   # Invoked during initial deployment

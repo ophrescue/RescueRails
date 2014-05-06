@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-	respond_to :html, :json
+  respond_to :html, :json
 
   def index
     @commentable = find_commentable
@@ -21,8 +21,8 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.build(params[:comment])
     @comment.user_id = current_user.id
     if @comment.save
-      flash[:success] = "Comment Saved"
-      redirect_to :back
+      flash[:success] = 'Comment Saved'
+      return handle_redirect
     else
       render :action => 'new'
     end
@@ -53,6 +53,14 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def handle_redirect
+    if request.xhr?
+      head 200
+    else
+      redirect_to request.referer
+    end
+  end
 
   def find_commentable
     params.each do |name, value|

@@ -79,8 +79,6 @@ class AdoptersController < ApplicationController
       flash[:success] = "Application Updated"
       respond_with @adopter
     end
-
-
   end
 
   def check_email

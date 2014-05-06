@@ -58,9 +58,10 @@ gem 'rvm-capistrano'
 gem 'capistrano-maintenance', '~> 0.0.2'
 
 group :development, :test do
+  gem 'faker'
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'watir-webdriver', platform: :ruby
-  gem 'faker'
 end
 
 group :test do

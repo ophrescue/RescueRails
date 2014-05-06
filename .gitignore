@@ -13,4 +13,4 @@ config/database.yml
 .rvmrc
 chromedriver.log
 .idea/
-.env*
+.env.*

@@ -11,7 +11,8 @@ gem 'will_paginate',  '~> 3.0.3'
 gem 'bootstrap-will_paginate', '~> 0.0.7'
 gem 'gravatar_image_tag', '~> 1.1.2'
 gem 'rails3-jquery-autocomplete', '~> 1.0.7'
-gem 'paperclip', '~> 3.0'
+gem 'paperclip', '~> 4.1.1'
+gem 'aws-sdk', '~> 1.39.0'
 gem 'therubyracer', '~> 0.11.3', platform: :ruby
 gem 'geocoder', '~> 1.1.1'
 gem 'best_in_place', '~> 2.0.3'
@@ -58,9 +59,10 @@ gem 'rvm-capistrano'
 gem 'capistrano-maintenance', '~> 0.0.2'
 
 group :development, :test do
+  gem 'faker'
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'watir-webdriver', platform: :ruby
-  gem 'faker'
 end
 
 group :test do

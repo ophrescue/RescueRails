@@ -28,68 +28,69 @@
 
 class Event < ActiveRecord::Base
 
-	attr_accessor :photo_delete
+  attr_accessor :photo_delete
 
-	attr_accessible :title,
-	  				:event_date,
-	  				:start_time,
-	  				:end_time,
-	  				:location_name,
-	  				:location_url,
-	  				:photographer_name,
-	  				:photographer_url,
-	  				:location_phone,
-	  				:address,
-	  				:description,
-					:latitude,
-					:longitude,
-					:photo,
-					:photo_file_name,
-					:photo_content_type,
-					:photo_file_size,    
-					:photo_updated_at,
-					:photo_delete,
-					:facebook_url   
+  attr_accessible :title,
+            :event_date,
+            :start_time,
+            :end_time,
+            :location_name,
+            :location_url,
+            :photographer_name,
+            :photographer_url,
+            :location_phone,
+            :address,
+            :description,
+          :latitude,
+          :longitude,
+          :photo,
+          :photo_file_name,
+          :photo_content_type,
+          :photo_file_size,    
+          :photo_updated_at,
+          :photo_delete,
+          :facebook_url   
 
-	validates_presence_of :title,
-					  	  :event_date,
-				  		  :start_time,
-				  		  :end_time,
-						  :location_name,
-						  :address,
-						  :description
+  validates_presence_of :title,
+                :event_date,
+                :start_time,
+                :end_time,
+              :location_name,
+              :address,
+              :description
 
-	validates_format_of :location_url, :with => URI::regexp(%w(http https))
+  validates_format_of :location_url, :with => URI::regexp(%w(http https))
 
-	before_save :set_user
+  before_save :set_user
 
-	geocoded_by :address
-	
-	after_validation :geocode,
- 	 	:if => lambda{ |obj| obj.address_changed? }
+  geocoded_by :address
+  
+  after_validation :geocode,
+    :if => lambda{ |obj| obj.address_changed? }
 
-	has_attached_file :photo,
-					  :styles => { :original => "1024x1024>",
-								   :medium => "205x300>",
-								   :thumb => "64x64>" },
-					  				:path => ":rails_root/public/system/event_photo/:id/:style/:filename",
-					  				:url  => "/system/event_photo/:id/:style/:filename"
+  has_attached_file :photo,
+            :styles => { :original => "1024x1024>",
+                   :medium => "205x300>",
+                   :thumb => "64x64>" },
+                    :path => ":rails_root/public/system/event_photo/:id/:style/:filename",
+                    :url  => "/system/event_photo/:id/:style/:filename",
+                    :s3_permissions => :public
 
-	
-	validates_attachment_size :photo, :less_than => 5.megabytes
-	validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/pjpeg']
+  
+  validates_attachment_size :photo, :less_than => 5.megabytes
+  validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/pjpeg']
 
-	before_save :delete_photo?
+  before_save :delete_photo?
 
 
-	def set_user
-		self.created_by_user = @current_user
-	end
+  def set_user
+    self.created_by_user = @current_user
+  end
 
-	private
-	  def delete_photo?
-	    self.photo.clear if self.photo_delete == "1"
-	  end
+  private
+    def delete_photo?
+      self.photo.clear if self.photo_delete == "1"
+    end
 
 
 end

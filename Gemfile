@@ -3,7 +3,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.17'
+gem 'rails', '~> 3.2.18'
 
 gem 'dotenv-rails'
 gem 'pg', '~> 0.14.1'

@@ -53,11 +53,6 @@ gem 'newrelic_rpm'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-# Deploy with Capistrano
-gem 'capistrano'
-gem 'rvm-capistrano'
-gem 'capistrano-maintenance', '~> 0.0.2'
-
 group :development, :test do
   gem 'faker'
   gem 'pry-rails'
@@ -72,6 +67,10 @@ group :test do
 end
 
 group :development do
+  gem 'capistrano', '~> 3.2.0'
+  gem 'capistrano-rails', '~> 1.1.1'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-rbenv', '~> 2.0.2'
   gem 'quiet_assets'
   gem 'annotate'
   gem 'powder'

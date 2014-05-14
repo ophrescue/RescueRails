@@ -34,12 +34,12 @@ set :pty, false
 # then bundle exec rspec spec would be run and would
 # have to pass before deployment would continue.
 #
-# set :tests, []
+set :tests, []
 
 # files we want symlinking to specific entries in shared.
-set :linked_files, %w{config/database.yml \
-                      config/newrelic.yml \
-                      config/initializers/setup_mail.rb \
+set :linked_files, %w{config/database.yml 
+                      config/newrelic.yml 
+                      config/initializers/setup_mail.rb 
                       .env.production }
 
 # dirs we want symlinking to shared
@@ -91,7 +91,7 @@ namespace :deploy do
   # only allow a deploy with passing tests to deployed
   before :deploy, "deploy:run_tests"
   # compile assets locally then rsync
-  after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
+  after 'deploy:symlink:shared', 'deploy:compile_assets'
   after :finishing, 'deploy:cleanup'
 
   # remove the default nginx configuration as it will tend

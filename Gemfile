@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2.18'
 
+gem 'dotenv'
 gem 'dotenv-deployment'
 gem 'pg', '~> 0.14.1'
 gem 'will_paginate',  '~> 3.0.3'
@@ -67,10 +68,10 @@ group :test do
 end
 
 group :development do
-  gem 'capistrano', '~> 3.2.0'
+  gem 'capistrano', '~> 3.1.0'
   gem 'capistrano-rails', '~> 1.1.1'
-  gem 'capistrano-bundler', :git => 'git@github.com:capistrano/bundler.git'
-  gem 'capistrano-rbenv', :git => 'git@github.com:capistrano/rbenv.git'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-rbenv', '~> 2.0'
   gem 'quiet_assets'
   gem 'annotate'
   gem 'powder'

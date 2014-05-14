@@ -4,17 +4,18 @@ lock '3.2.1'
 
 set :application, 'RescueRails'
 set :deploy_user, 'deploy'
-set :deploy_to, '/var/www/rescuerails'
 
 # setup repo details
 set :scm, :git
 set :repo_url, 'git@github.com:ophrescue/RescueRails.git'
 
+set :default_environment, { 'PATH' => '$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH' }
+
 # setup rbenv
-set :rbenv_type, :user
-set :rbenv_ruby, '2.1.1'
-set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
-set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+#set :rbenv_type, :user
+#set :rbenv_ruby, '2.1.1'
+#set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+#set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 
 #how many old releases we want to keep
 set :keep_releases, 5
@@ -69,19 +70,19 @@ set(:executable_config_files, %w(
 set(:symlinks, [
   {
     source: "nginx.conf",
-    link: "/etc/nginx/sites-enabled/#{fetch(:full_app_name)}"
+    link: "/etc/nginx/sites-enabled/{{full_app_name}}"
   },
   {
     source: "unicorn_init.sh",
-    link: "/etc/init.d/unicorn_#{fetch(:full_app_name)}"
+    link: "/etc/init.d/unicorn_{{full_app_name}}"
   },
   {
     source: "log_rotation",
-   link: "/etc/logrotate.d/#{fetch(:full_app_name)}"
+   link: "/etc/logrotate.d/{{full_app_name}}"
   },
   {
     source: "monit",
-    link: "/etc/monit/conf.d/#{fetch(:full_app_name)}.conf"
+    link: "/etc/monit/conf.d/{{full_app_name}}.conf"
   }
 ])
 
@@ -90,8 +91,8 @@ namespace :deploy do
   before :deploy, "deploy:check_revision"
   # only allow a deploy with passing tests to deployed
   before :deploy, "deploy:run_tests"
-  # compile assets locally then rsync
-  after 'deploy:symlink:shared', 'deploy:compile_assets'
+  ## compile assets locally then rsync
+  #after 'deploy:symlink:shared', 'deploy:compile_assets'
   after :finishing, 'deploy:cleanup'
 
   # remove the default nginx configuration as it will tend

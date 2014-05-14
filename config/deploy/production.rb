@@ -1,6 +1,7 @@
 
 set :stage, :production
-set :branch, "master"
+#set :branch, "master"
+set :branch, "deploy"
 
 # used in case we're deploying multiple versions of the same
 # app side by side. Also provides quick sanity checks when looking

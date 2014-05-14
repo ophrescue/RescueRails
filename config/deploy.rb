@@ -11,7 +11,7 @@ set :scm, :git
 set :repo_url, 'git@github.com:ophrescue/RescueRails.git'
 
 # setup rbenv
-set :rbenv_type, :system
+set :rbenv_type, :user
 set :rbenv_ruby, '2.1.1'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
@@ -23,10 +23,10 @@ set :keep_releases, 5
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-# set :log_level, :debug
+set :log_level, :debug
 
-# Default value for :pty is false
-# set :pty, true
+# Default value for :pty is false, use passwordless sudo
+set :pty, false
 
 # what specs should be run before deployment is allowed to
 # continue, see lib/capistrano/tasks/run_tests.cap

@@ -5,7 +5,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2.18'
 
-gem 'dotenv-rails'
+gem 'dotenv'
+gem 'dotenv-deployment'
 gem 'pg', '~> 0.14.1'
 gem 'will_paginate',  '~> 3.0.3'
 gem 'bootstrap-will_paginate', '~> 0.0.7'
@@ -53,11 +54,6 @@ gem 'newrelic_rpm'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-# Deploy with Capistrano
-gem 'capistrano'
-gem 'rvm-capistrano'
-gem 'capistrano-maintenance', '~> 0.0.2'
-
 group :development, :test do
   gem 'faker'
   gem 'pry-rails'
@@ -72,6 +68,10 @@ group :test do
 end
 
 group :development do
+  gem 'capistrano', '~> 3.1.0'
+  gem 'capistrano-rails', '~> 1.1.1'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-rbenv', '~> 2.0'
   gem 'quiet_assets'
   gem 'annotate'
   gem 'powder'

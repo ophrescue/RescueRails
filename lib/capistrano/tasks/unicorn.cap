@@ -1,0 +1,56 @@
+namespace :unicorn do
+  
+  desc 'Start unicorn application'
+  task :start do
+    on roles(:app), in: :sequence, wait: 5 do
+      within release_path do
+        execute :bundle, :exec, "/etc/init.d/unicorn_#{fetch(:full_app_name)} start"
+      end
+    end
+  end
+
+  desc 'Stop unicorn application'
+  task :stop do
+    on roles(:app), in: :sequence, wait: 5 do
+      within release_path do
+        execute :bundle, :exec, "/etc/init.d/unicorn_#{fetch(:full_app_name)} stop"
+      end
+    end
+  end
+
+  desc 'Force Stop unicorn application'
+  task :force_stop do
+    on roles(:app), in: :sequence, wait: 5 do
+      within release_path do
+        execute :bundle, :exec, "/etc/init.d/unicorn_#{fetch(:full_app_name)} force-stop"
+      end
+    end
+  end
+
+  desc 'Restart unicorn application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      within release_path do
+        execute :bundle, :exec, "/etc/init.d/unicorn_#{fetch(:full_app_name)} restart"
+      end
+    end
+  end
+
+  desc 'Upgrade unicorn application'
+  task :upgrade do
+    on roles(:app), in: :sequence, wait: 5 do
+      within release_path do
+        execute :bundle, :exec, "/etc/init.d/unicorn_#{fetch(:full_app_name)} upgrade"
+      end
+    end
+  end
+
+  desc 'reopen logs unicorn application'
+  task :reopen_logs do
+    on roles(:app), in: :sequence, wait: 5 do
+      within release_path do
+        execute :bundle, :exec, "/etc/init.d/unicorn_#{fetch(:full_app_name)} reopen-logs"
+      end
+    end
+  end
+end

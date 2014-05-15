@@ -56,12 +56,14 @@ set(:config_files, %w(
   monit
   unicorn.rb
   unicorn_init.sh
+  delayed_job.sh
 ))
  
 # which config files should be made executable after copying
 # by deploy:setup_config
 set(:executable_config_files, %w(
   unicorn_init.sh
+  delayed_job.sh
 ))
 
 # files which need to be symlinked to other parts of the
@@ -79,6 +81,10 @@ set(:symlinks, [
   {
     source: "log_rotation",
    link: "/etc/logrotate.d/{{full_app_name}}"
+  },
+  {
+    source: "delayed_job.sh",
+   link: "/etc/init.d/delayed_job_{{full_app_name}}"
   },
   {
     source: "monit",

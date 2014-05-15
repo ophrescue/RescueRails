@@ -20,3 +20,10 @@ check process unicorn
 
     group unicorn_workers
 <% end %>
+
+check process delayed_job
+  with pidfile <%= current_path %>/tmp/pids/delayed_job.pid
+  start program = cd /var/www/RescueRails_production/current && ( RBENV_ROOT=~/.rbenv RBENV_VERSION=2.1.1 RAILS_ENV=production RBENV_ROOT=~/.rbenv RBENV_VERSION=2.1.1 ~/.rbenv/bin/rbenv exec bundle exec script/delayed_job start
+    as uid deploy and gid deploy
+  stop program = cd /var/www/RescueRails_production/current && ( RBENV_ROOT=~/.rbenv RBENV_VERSION=2.1.1 RAILS_ENV=production RBENV_ROOT=~/.rbenv RBENV_VERSION=2.1.1 ~/.rbenv/bin/rbenv exec bundle exec script/delayed_job stop
+    as uid deploy and gid deploy

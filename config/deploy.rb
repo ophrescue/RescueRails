@@ -41,6 +41,7 @@ set :tests, []
 set :linked_files, %w{config/database.yml 
                       config/newrelic.yml 
                       config/initializers/setup_mail.rb 
+                      config/initializers/mailchimp.rb 
                       .env.production }
 
 # dirs we want symlinking to shared

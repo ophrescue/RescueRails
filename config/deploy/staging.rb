@@ -5,7 +5,7 @@ set :branch, "staging"
 # app side by side. Also provides quick sanity checks when looking
 # at filepaths
 set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
-#set :server_name, "husky.ophrescue.org"
+
 set :server_name, "beagle.ophrescue.org"
 
 server 'beagle.ophrescue.org', user: 'deploy', roles: %w{web app db}, primary: true

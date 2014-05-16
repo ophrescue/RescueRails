@@ -41,7 +41,7 @@ set :tests, []
 set :linked_files, %w{config/database.yml 
                       config/newrelic.yml 
                       config/initializers/setup_mail.rb 
-                      .env.production }
+                      .env.{{rails_env}} }
 
 # dirs we want symlinking to shared
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}

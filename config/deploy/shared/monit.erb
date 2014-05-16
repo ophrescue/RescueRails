@@ -23,9 +23,9 @@ check process unicorn
 
 check process delayed_job
   with pidfile <%= current_path %>/tmp/pids/delayed_job.pid
-  start program = "/etc/init.d/delayed_job_RescueRails_production start production"
+  start program = "/etc/init.d/delayed_job_<%= application %>_<%= fetch(:rails_env)%> start <%= fetch(:rails_env)%>"
   as uid deploy and gid deploy
-  stop program = "/etc/init.d/delayed_job_RescueRails_production stop production"
+  stop program = "/etc/init.d/delayed_job_<%= application %>_<%= fetch(:rails_env)%> stop <%= fetch(:rails_env)%>"
   as uid deploy and gid deploy
   if mem is greater than 300.0 MB for 1 cycles then restart
   if cpu is greater than 50% for 2 cycles then alert

@@ -1,5 +1,14 @@
 <div>
   <div class="row">
+    <div class="span2">
+      <img src="assets/logo.png" height="90" width="90" >
+    </div>
+    <div class="span10">
+      <h1>Operation Paws for Homes</h1>
+      <h5>Virginia, Maryland, Washington DC and South Central PA</h5>
+    </div>
+  </div>
+  <div class="row">
     <div class="span12">
       <div id="myCarousel" class="carousel slide">
         <div class="carousel-inner">
@@ -18,29 +27,15 @@
   </div>
 
   <div class="row">
-    <div class="span4 sidekick">
-      <h2>Events</h2>
-       <ul class="unstyled">
-       <% if @events.count > 0 %>
-        <% @events.each do |event| %>
-          <li><%= event.event_date.strftime("%b %e") %> - <%= link_to event.title, event %> </li>
-        <% end %> 
-      </ul>
-
-       <% end %>
-      <p><a class="btn btn-primary" href="/events">More Events &raquo;</a></p>
+    <div class="span4">
+      <a href="/donate"><img src="assets/home-contribute.jpg"></a>
     </div>
-    <div class="span4 sidekick">
-      <h2>Adoption Guide</h2>
-       <p>Adopting a dog saves lives! You must submit an adoption application, and it will take time to process it. We will interview your references and you. We will support you through the entire process to ensure you find a dog that is right for you. Our adoption fees are explained here. </p>
-      <p><a class="btn btn-primary" href="/guide">Adoption Guide &raquo;</a></p>
+    <div class="span4">
+      <a href="/volunteer"><img src="assets/home-get-involved.jpg"></a>
     </div>
-    <div class="span4 sidekick">
-      <h2>Donate</h2>
-      <p>Operation Paws for Homes is a 501(c)(3) dog rescue organization that is run by dedicated volunteers who help save dogs in need. Your generous donations directly help cover the costs of rescuing dogs in need.  We also work hard to support the shelters we work with in the south.  It is only due to the patronage of people like you that we can save dogs and give them a chance to find a forever home.</p>
-      <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donate%40ophrescue%2eorg&lc=US&item_name=Operation%20Paws%20for%20Homes&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"></a></p>
-      <p><a class="btn btn-primary" href="http://eepurl.com/h9oyk">Subscribe to Newsletter</a></p>
-      <div class="fb-like" data-href="https://www.facebook.com/pages/Operation-Paws-For-Homes/125971917423548" data-send="false" data-width="270" data-show-faces="true" data-font="arial"></div>
+    <div class="span4">
+      <a href="/events"><img src="assets/home-events.jpg"></a>
     </div>
   </div>
+
 </div>

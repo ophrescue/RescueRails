@@ -38,10 +38,10 @@ set :pty, false
 set :tests, []
 
 # files we want symlinking to specific entries in shared.
-set :linked_files, %w{config/database.yml 
+set :linked_files, %W{config/database.yml 
                       config/newrelic.yml 
                       config/initializers/setup_mail.rb 
-                      .env.production }
+                      .env.#{fetch(:stage)} }
 
 # dirs we want symlinking to shared
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}

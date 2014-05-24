@@ -4,8 +4,10 @@
 
 [![Gemnasium](https://gemnasium.com/ophrescue/RescueRails.png)](https://gemnasium.com/ophrescue/RescueRails)
 
+[![Build Status](https://travis-ci.org/ophrescue/RescueRails.svg?branch=travis)](https://travis-ci.org/ophrescue/RescueRails)
+
 Rails 3.2.x
-Ruby 1.9.x
+Ruby 2.1.1
 Postgresql 9.3.x
 
 ### About

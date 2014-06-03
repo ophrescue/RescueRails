@@ -14,11 +14,14 @@ class AdoptionsController < ApplicationController
   end
 
   def create
-    # @adopter = Adopter.find(params[:adoption][:adopter_id])
+    current_adoption = Adoption.where(
+      adopter_id: params[:adoption][:adopter_id],
+      dog_id: params[:adoption][:dog_id]
+    )
     @adoption = Adoption.new(params[:adoption])
     @adoption.relation_type = 'interested'
-    if @adoption.save
-      flash[:success] = "Dogs linked to Application"
+    if current_adoption.present? || @adoption.save
+      flash[:success] = 'Dogs linked to Application'
     end
     handle_redirect
   end

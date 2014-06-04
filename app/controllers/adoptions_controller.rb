@@ -1,7 +1,6 @@
 class AdoptionsController < ApplicationController
-
-  before_filter :edit_my_adopters_user, :only => [:update]
-  before_filter :edit_all_adopters_user, :only => [:update]
+  before_filter :edit_my_adopters_user, only: [:update]
+  before_filter :edit_all_adopters_user, only: [:update]
 
   respond_to :html, :json
 
@@ -14,11 +13,14 @@ class AdoptionsController < ApplicationController
   end
 
   def create
-    # @adopter = Adopter.find(params[:adoption][:adopter_id])
+    current_adoption = Adoption.where(
+      adopter_id: params[:adoption][:adopter_id],
+      dog_id: params[:adoption][:dog_id]
+    )
     @adoption = Adoption.new(params[:adoption])
     @adoption.relation_type = 'interested'
-    if @adoption.save
-      flash[:success] = "Dogs linked to Application"
+    if current_adoption.present? || @adoption.save
+      flash[:success] = 'Dogs linked to Application'
     end
     handle_redirect
   end
@@ -31,7 +33,7 @@ class AdoptionsController < ApplicationController
 
   def destroy
     Adoption.find(params[:id]).destroy
-    flash[:warning] = "Dog removed from Application"
+    flash[:warning] = 'Dog removed from Application'
     handle_redirect
   end
 
@@ -46,12 +48,12 @@ class AdoptionsController < ApplicationController
   end
 
   def edit_my_adopters_user
-    #TODO Figure out how to differentiate these
+    # TODO: Figure out how to differentiate these
     redirect_to(root_path) unless current_user.edit_my_adopters?
   end
 
   def edit_all_adopters_user
-    #TODO Figure out how to differentiate these
+    # TODO: Figure out how to differentiate these
     redirect_to(root_path) unless current_user.edit_all_adopters?
   end
 end

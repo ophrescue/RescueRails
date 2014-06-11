@@ -128,6 +128,7 @@ class Adopter < ActiveRecord::Base
               'workup',
               'approved',
               'adopted',
+              'adptd sn pend',
               'completed',
               'standby',
               'withdrawn',

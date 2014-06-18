@@ -8,9 +8,9 @@
             <div class="carousel-caption">
               <%= link_to "Available Dogs", dogs_path, :class => "btn btn-primary btn-large", :id => "hero-dog" %>
               <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
-              <% ## if Date.parse('2014-6-19') == Date.today %>
+              <% if Date.parse('2014-6-19') == Date.today %>
                 <%= link_to "Do More 24", "/do-more-24", :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
-              <% ## end %>
+              <% end %>
             </div>
           </div>
         </div>

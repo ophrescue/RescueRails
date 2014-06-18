@@ -244,7 +244,7 @@ GEM
     slop (3.5.0)
     spreadsheet (0.9.7)
       ruby-ole (>= 1.0)
-    sprockets (2.2.2)
+    sprockets (2.2.2.backport2)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)

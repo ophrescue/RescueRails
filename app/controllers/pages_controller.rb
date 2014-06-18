@@ -26,6 +26,10 @@ class PagesController < ApplicationController
     @title = "Contributers"
   end
 
+  def domore24
+    @title = "Do More 24"
+  end
+
   def partnerships
     @title = "Partnerships"
   end

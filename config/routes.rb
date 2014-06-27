@@ -58,7 +58,7 @@ RescueRails::Application.routes.draw do
 #  match '/k9',                  :to => 'pages#k9'
   match '/foster',              :to => 'pages#foster'
   match '/fosterfaq',           :to => 'pages#fosterfaq'
-  match '/donate',              :to => 'pages#donate'
+  match '/contribute',           :to => 'pages#contribute'
   match '/sponsor',             :to => 'pages#sponsor'
   match '/special-funds',       :to => 'pages#special_funds'
   match '/other-ways-to-give',  :to => 'pages#other_ways_to_give'
@@ -70,7 +70,6 @@ RescueRails::Application.routes.draw do
   match '/shopping',            :to => 'pages#shopping'
   match '/status_definitions',  :to => 'pages#status_definitions'
   match '/dog-status-definitions', :to => 'pages#dog_status_definitions'
-  match '/do-more-24',          :to => 'pages#domore24'
 
 
   # The priority is based upon order of creation:

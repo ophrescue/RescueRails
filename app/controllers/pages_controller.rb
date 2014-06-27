@@ -26,10 +26,6 @@ class PagesController < ApplicationController
     @title = "Contributers"
   end
 
-  def domore24
-    @title = "Do More 24"
-  end
-
   def partnerships
     @title = "Partnerships"
   end
@@ -38,8 +34,8 @@ class PagesController < ApplicationController
     @title = "Partnering Shelters"
   end
 
-  def donate
-    @title = "Donate"
+  def contribute
+    @title = "Contribute"
   end
 
   def special_funds

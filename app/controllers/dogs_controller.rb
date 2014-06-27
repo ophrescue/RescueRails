@@ -25,7 +25,7 @@ class DogsController < ApplicationController
         @dogs = Dog.where("name ilike ?", "%#{params[:q]}%").order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
       end
     else
-      @title = "Available Dogs"
+      @title = "Our Dogs"
       statuses = ['adoptable', 'adoption pending', 'coming soon']
       @dogs = Dog.where("status IN (?)", statuses).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
     end

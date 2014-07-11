@@ -3,7 +3,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.18'
+gem 'rails', '~> 3.2.19'
 
 gem 'dotenv'
 gem 'dotenv-deployment'
@@ -23,6 +23,7 @@ gem 'acts_as_list', '~> 0.1.8'
 gem 'strip_attributes', '~> 1.0'
 gem 'to_xls'
 gem 'roo'
+gem 'font-awesome-rails', '~> 4.1.0.0'
 
 group :production do
   gem 'unicorn', '~> 4.6.0'

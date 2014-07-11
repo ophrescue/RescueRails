@@ -1,49 +1,79 @@
-<div>
+<div class="container">
+  <div class="row">
+    <div class="span1 hidden-phone hidden-tablet">
+      <img src="assets/logo.png" >
+    </div>
+
+    <div class="span6 hidden-phone hidden-tablet">
+      <h2>Operation Paws for Homes</h2>
+      <h5>Virginia, Maryland, Washington DC and South Central PA</h5>
+    </div>
+
+    <div class="span7 hidden-desktop">
+      <h2>Operation Paws for Homes</h2>
+      <h5>Virginia, Maryland, Washington DC and South Central PA</h5>
+    </div>
+
+
+    <div class="span5 hidden-phone">
+      <span class="pull-right">
+        <a href="https://www.facebook.com/Operationpawsforhomes"><i class="fa fa-facebook-square fa-3x"></i></a>
+        <a href="https://twitter.com/RescueOPH"><i class="fa fa-twitter-square fa-3x"></i></a>
+        &nbsp; &nbsp; 
+          <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/"> <img src="assets/gnp-2014-award.jpg" title="2014 Top-rated nonprofits and charities" alt="2014 Top-rated nonprofits and charities" width="165" height="83"/> </a>
+        </span>
+    </div>
+  </div>
   <div class="row">
     <div class="span12">
-      <div id="myCarousel" class="carousel slide">
+      <div id="ophCarousel" class="carousel slide">
         <div class="carousel-inner">
           <div class="item active">
-            <img src="assets/hero_bg2.gif" alt="Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania">
+            <img src="assets/hero_bg3.jpg" alt="Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania">
             <div class="carousel-caption">
-              <%= link_to "Available Dogs", dogs_path, :class => "btn btn-primary btn-large", :id => "hero-dog" %>
+              <%= link_to "Our Dogs", dogs_path, :class => "btn btn-primary btn-large", :id => "hero-dog" %>
               <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
-              <% if Date.parse('2014-6-19') == Date.today %>
-                <%= link_to "Do More 24", "/do-more-24", :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
-              <% end %>
             </div>
           </div>
         </div>
-<!--         <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a> -->
+<!--         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="right carousel-control" href="#ophCarousel" data-slide="next">&rsaquo;</a> -->
       </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="span4 sidekick">
-      <h2>Events</h2>
-       <ul class="unstyled">
-       <% if @events.count > 0 %>
-        <% @events.each do |event| %>
-          <li><%= event.event_date.strftime("%b %e") %> - <%= link_to event.title, event %> </li>
-        <% end %> 
-      </ul>
-
-       <% end %>
-      <p><a class="btn btn-primary" href="/events">More Events &raquo;</a></p>
+    <div class="span4 eventphoto">
+      <a href="/contribute"><img src="assets/home-contribute.jpg"></a>
+      <br />
+      <br />
     </div>
-    <div class="span4 sidekick">
-      <h2>Adoption Guide</h2>
-       <p>Adopting a dog saves lives! You must submit an adoption application, and it will take time to process it. We will interview your references and you. We will support you through the entire process to ensure you find a dog that is right for you. Our adoption fees are explained here. </p>
-      <p><a class="btn btn-primary" href="/guide">Adoption Guide &raquo;</a></p>
+    <div class="span4 eventphoto">
+      <a href="/volunteer"><img src="assets/home-get-involved.jpg"></a>
+      <br />
+      <br />
     </div>
-    <div class="span4 sidekick">
-      <h2>Donate</h2>
-      <p>Operation Paws for Homes is a 501(c)(3) dog rescue organization that is run by dedicated volunteers who help save dogs in need. Your generous donations directly help cover the costs of rescuing dogs in need.  We also work hard to support the shelters we work with in the south.  It is only due to the patronage of people like you that we can save dogs and give them a chance to find a forever home.</p>
-      <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donate%40ophrescue%2eorg&lc=US&item_name=Operation%20Paws%20for%20Homes&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"></a></p>
-      <p><a class="btn btn-primary" href="http://eepurl.com/h9oyk">Subscribe to Newsletter</a></p>
-      <div class="fb-like" data-href="https://www.facebook.com/pages/Operation-Paws-For-Homes/125971917423548" data-send="false" data-width="270" data-show-faces="true" data-font="arial"></div>
+    <div class="span4 eventphoto">
+      <a href="/events"><img src="assets/home-events.jpg"></a>
+      <br />
+      <br />
     </div>
   </div>
+<br />
+  <div class="row">
+    <div class="span12 hidden-tablet hidden-desktop">
+      <span class="pull-right">
+        <a href="https://www.facebook.com/Operationpawsforhomes"><i class="fa fa-facebook-square fa-3x"></i></a>
+        <a href="https://twitter.com/RescueOPH"><i class="fa fa-twitter-square fa-3x"></i></a>
+        &nbsp; &nbsp; 
+          <a href="http://greatnonprofits.org/org/operation-paws-for-homes"> <img src="assets/gnp-2014-award.jpg" title="2014 Top-rated nonprofits and charities" alt="2014 Top-rated nonprofits and charities" width="165" height="83"/> </a>
+        </span>
+    </div>
+
+  </div>
+
+<script type="text/javascript"> 
+$('#ophCarousel').carousel();
+</script>
+
 </div>

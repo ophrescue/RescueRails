@@ -67,11 +67,11 @@
       <div class="controls">
         <%= f.select(:gender, Dog::GENDERS, :prompt => '-select-', :class => "span2") %>
       </div>
-    </div>  
+    </div>
     <div class="control-group">
       <%= f.label :age, :class => 'control-label'  %>
       <div class="controls">
-        <%= f.select(:age, Dog::AGES, :prompt => '-select-', :class => "span2") %>  
+        <%= f.select(:age, Dog::AGES, :prompt => '-select-', :class => "span2") %>
       </div>
     </div>
     <div class="control-group">
@@ -127,7 +127,7 @@
       <div class="controls">
         <%= f.text_field :youtube_video_url %>
       </div>
-    </div>    
+    </div>
   </div>
 
   <div class="span6">
@@ -165,7 +165,7 @@
           <%= @dog.shelter ? @dog.shelter.name : "No Source Shelter Assigned" %>
         <% end %>
       </div>
-    </div>    
+    </div>
 
     <div class="control-group">
       <label id="optionsCheckboxes"><h3>Public Attributes</h3></label>

@@ -1,5 +1,5 @@
 <tr>
-	<td id="attachment">
+  <td id="attachment">
     <%= link_to attachment.attachment_file_name, attachment.download_url %>
   </td>
   <td>
@@ -9,7 +9,7 @@
     <%= link_to attachment.updated_by_user.name, attachment.updated_by_user %>
   </td>
   <td>
-		<%= time_ago_in_words(attachment.created_at) %> ago
+    <%= time_ago_in_words(attachment.created_at) %> ago
   </td>
   <td>
     <% if is_admin? %>
@@ -19,6 +19,5 @@
     <% else %>
       <% #<button id="" class="btn disable">Delete</button> %>
     <% end %>
-	</td>
-
+  </td>
 </tr>

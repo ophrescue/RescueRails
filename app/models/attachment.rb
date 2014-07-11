@@ -49,5 +49,12 @@ class Attachment < ActiveRecord::Base
 						'text/plain'],
 	 :message => 'Images, Docs, PDF, Excel and Plain Text Only.'
 
+  def download_url(style_name=:original)
+    s3 = AWS::S3.new
+    @bucket ||= s3.buckets[attachment.bucket_name]
+    @bucket.objects[attachment.s3_object(style_name).key].url_for(:read,
+        :secure => true,
+        :expires => 300,
+        :response_content_disposition => "attachment; filename='#{attachment_file_name}'").to_s
+  end
 end
-

@@ -8,6 +8,7 @@ class Adopter < ActiveRecord::Base
                 :pre_q_breed_info
 
   attr_reader :dog_tokens
+  attr_accessor :updated_by_admin_user
 
   attr_accessible :name,
                   :email,
@@ -33,6 +34,21 @@ class Adopter < ActiveRecord::Base
                   :references_attributes,
                   :pre_q_limited_info,
                   :pre_q_breed_info
+
+  STATUSES = ['new',
+              'pend response',
+              'workup',
+              'approved',
+              'adopted',
+              'adptd sn pend',
+              'completed',
+              'standby',
+              'withdrawn',
+              'denied']
+
+  FLAGS = ['High', 'Low', 'On Hold']
+
+  AUDIT = %w(status flag dog_name)
 
   def dog_tokens=(ids)
     self.dog_ids = ids.split(',')
@@ -63,23 +79,30 @@ class Adopter < ActiveRecord::Base
   validates_presence_of :status
   validates_inclusion_of :status, in: STATUSES
 
-  STATUSES = ['new',
-              'pend response',
-              'workup',
-              'approved',
-              'adopted',
-              'adptd sn pend',
-              'completed',
-              'standby',
-              'withdrawn',
-              'denied']
-
-  FLAGS = ['High', 'Low', 'On Hold']
+  after_update :audit_changes
 
   before_create :chimp_subscribe
   before_update :chimp_check
 
-  after_save :audit_changes
+  def audit_changes
+    comment = Comment.new
+    comment.user = updated_by_admin_user
+    content = "#{updated_by_admin_user.name} has changed "
+    content += changes_to_sentence
+    comment.content = content
+    comments <<  comment
+  end
+
+  def changes_to_sentence
+    result = []
+    changed.each do |attr|
+      next if AUDIT.exclude?(attr)
+      old_value = send("#{attr}_was")
+      new_value  = send(attr)
+      result << "#{attr} from #{old_value} to #{new_value}"
+    end
+    result.join('\r')
+  end
 
   def chimp_subscribe
     gb = Gibbon::API.new

@@ -85,12 +85,16 @@ class Adopter < ActiveRecord::Base
   before_update :chimp_check
 
   def audit_changes
-    comment = Comment.new
+    return if updated_by_admin_user.blank?
+
+    comment = Comment.new(content: audit_content)
     comment.user = updated_by_admin_user
+    comments <<  comment
+  end
+
+  def audit_content
     content = "#{updated_by_admin_user.name} has changed "
     content += changes_to_sentence
-    comment.content = content
-    comments <<  comment
   end
 
   def changes_to_sentence

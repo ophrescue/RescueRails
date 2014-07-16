@@ -17,6 +17,13 @@ describe Adopter do
         expect{adopter.save}.to change{Comment.count}.by(1)
       end
     end
+
+    context 'no admin assigned to adopter' do
+      it 'does not make a comment' do
+        adopter.updated_by_admin_user = nil
+        expect{adopter.save}.to_not change{Comment.count}.by(1)
+      end
+    end
   end
 
   describe '#changes_to_sentence' do

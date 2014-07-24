@@ -43,20 +43,20 @@ class Adopter < ActiveRecord::Base
                   :address2,
                   :city,
                   :state,
-                  :zip,                
-                  :status,   
+                  :zip,
+                  :status,
                   :when_to_call,
-                  :dog_reqs,       
-                  :why_adopt,   
+                  :dog_reqs,
+                  :why_adopt,
                   :dog_name,
                   :other_phone,
                   :assigned_to_user_id,
                   :flag,
-                  :pre_q_costs, 
-                  :pre_q_surrender, 
-                  :pre_q_abuse, 
-                  :pre_q_reimbursement, 
-                  :adoption_app_attributes, 
+                  :pre_q_costs,
+                  :pre_q_surrender,
+                  :pre_q_abuse,
+                  :pre_q_reimbursement,
+                  :adoption_app_attributes,
                   :references_attributes,
                   :pre_q_limited_info,
                   :pre_q_breed_info
@@ -119,89 +119,89 @@ class Adopter < ActiveRecord::Base
   before_update :chimp_check
 
 
-    def chimp_subscribe
+  def chimp_subscribe
 
-      gb = Gibbon::API.new
-      gb.timeout = 30
+    gb = Gibbon::API.new
+    gb.timeout = 30
 
-      list_id = '5e50e2be93'
+    list_id = '5e50e2be93'
 
-      if (self.status == 'adopted') || (self.status == 'completed')
-        groups = [ { :name => "OPH Target Segments", :groups => ["Adopted from OPH"]} ]
-      else
-        groups = [ { :name => "OPH Target Segments", :groups => ["Active Application"]} ]
-      end
-
-
-      if (self.status == 'completed')
-        completed_date = Time.now.strftime("%m/%d/%Y")
-      else
-        completed_date = ''
-      end
-
-      merge_vars = {
-        :fname => self.name,
-        :mmerge2 => self.status,
-        :mmerge3 => completed_date,
-        :groupings => groups
-      }
-
-      double_optin = true
-
-
-      if self.is_subscribed?
-          response = gb.lists.update_member({ :id => list_id,
-                             :email => {:email => self.email},
-                             :merge_vars => merge_vars,
-                             :double_optin => double_optin,
-                             :send_welcome => false
-          })
-      else
-          response = gb.lists.subscribe({ :id => list_id,
-                                        :email => {:email => self.email},
-                                        :merge_vars => merge_vars,
-                                        :double_optin => double_optin,
-                                        :send_welcome => false
-          })
-
-          self.is_subscribed = true
-      end
+    if (self.status == 'adopted') || (self.status == 'completed')
+      groups = [ { :name => "OPH Target Segments", :groups => ["Adopted from OPH"]} ]
+    else
+      groups = [ { :name => "OPH Target Segments", :groups => ["Active Application"]} ]
     end
 
 
-    def chimp_check
-
-      if self.status_changed?
-
-        if ((self.status == 'withdrawn') || (self.status == 'denied')) && (self.is_subscribed?)
-          self.chimp_unsubscribe
-        else
-          self.chimp_subscribe
-        end
-
-      end
-
+    if (self.status == 'completed')
+      completed_date = Time.now.strftime("%m/%d/%Y")
+    else
+      completed_date = ''
     end
-    
-    def chimp_unsubscribe
 
-      gb = Gibbon::API.new
-      gb.timeout = 30
-      gb.throws_exceptions = false;
+    merge_vars = {
+      :fname => self.name,
+      :mmerge2 => self.status,
+      :mmerge3 => completed_date,
+      :groupings => groups
+    }
 
-      list_id = '5e50e2be93'
+    double_optin = true
 
-      response = gb.lists.unsubscribe({
-        :id => list_id,
-        :email => {:email => self.email},
-        :delete_member => true,
-        :send_goodbye => false,
-        :send_notify => false
+
+    if self.is_subscribed?
+        response = gb.lists.update_member({ :id => list_id,
+                           :email => {:email => self.email},
+                           :merge_vars => merge_vars,
+                           :double_optin => double_optin,
+                           :send_welcome => false
+        })
+    else
+        response = gb.lists.subscribe({ :id => list_id,
+                                      :email => {:email => self.email},
+                                      :merge_vars => merge_vars,
+                                      :double_optin => double_optin,
+                                      :send_welcome => false
         })
 
-      self.is_subscribed = 0   
+        self.is_subscribed = true
+    end
+  end
+
+
+  def chimp_check
+
+    if self.status_changed?
+
+      if ((self.status == 'withdrawn') || (self.status == 'denied')) && (self.is_subscribed?)
+        self.chimp_unsubscribe
+      else
+        self.chimp_subscribe
+      end
 
     end
+
+  end
+  
+  def chimp_unsubscribe
+
+    gb = Gibbon::API.new
+    gb.timeout = 30
+    gb.throws_exceptions = false;
+
+    list_id = '5e50e2be93'
+
+    response = gb.lists.unsubscribe({
+      :id => list_id,
+      :email => {:email => self.email},
+      :delete_member => true,
+      :send_goodbye => false,
+      :send_notify => false
+      })
+
+    self.is_subscribed = 0   
+
+  end
 
 end
 

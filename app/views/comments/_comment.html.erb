@@ -1,14 +1,14 @@
 <% if !comment.user %>
   <tr>
     <td id="user_name"><strong>Deleted User</strong><br />
-      <em><%= time_ago_in_words(comment.created_at) %> ago</em>
+      <em><%= comment.created_at.strftime('%m/%d/%Y %l:%M%P') %></em>
     </td>
     <td><%= comment.content %>
     </td>
 <% else %>
 <tr>
-	<td id="user_name"><strong><%= link_to comment.user.name, user_path(comment.user) %></strong><br />
-		<em><%= time_ago_in_words(comment.created_at) %> ago</em>
+  <td id="user_name"><strong><%= link_to comment.user.name, user_path(comment.user) %></strong><br />
+    <em><%= comment.created_at.strftime('%m/%d/%Y %l:%M%P') %></em>
     <% if current_user == comment.user %>
       <%= form_for comment, :html => {:id => "delete_comment", :class => "delete_comment"}, :method => :delete do |f| %>
         <%= f.submit "Delete", :class => "btn btn-danger btn-small" %>
@@ -16,7 +16,7 @@
     <% else %>
       <% #<button id="" class="btn disable">Delete</button> %>
     <% end %>
-	</td>
+  </td>
   <td><%= image_tag("pencil_go.png") if comment.user_id == current_user.try(:id) %><%= best_in_place_if comment.user_id == current_user.try(:id), comment, :content, :type => :textarea %></td>
 </tr>
 <% end %>

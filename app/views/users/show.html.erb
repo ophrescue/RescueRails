@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="span8">
+  <div class="span12">
       <h1>
         <%= @user.name %>
       </h1>
@@ -7,13 +7,16 @@
               <% if (@user == current_user || is_admin?) %>
           <strong><%= link_to( "Update/Verify Profile", edit_user_path(@user), :class => "btn btn-primary") %></strong>
         <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span6">
       <h4>Profile</h4>
-        
         <table class="table-striped table-bordered table-condensed">
           <tr>
             <td>Address</td>
             <td>
-
                 <%= @user.address1 %><br />
                 <% if @user.address2? %>
                   <%= @user.address2 %><br />
@@ -79,39 +82,52 @@
           </tr>
         </table>
       </div>
+
+      <div class="span6">
+        <h4>Fostering</h4>
+          <% if @user.is_foster? %>
+             <p><span class="label label-success">Listed as Foster</span></p>
+          <% else %>
+            <p><span class="label label-important">Not a Foster</span></p>           
+          <% end %>
+
+          <% if @user.available_to_foster %>
+            <p><span class="label label-success">Ready for Another Dog</span></p>
+          <% else %>
+            <p><span class="label label-important">Not Ready for Another Dog</span></p>
+          <% end %>
+
+          <% if @user.agreement %>
+             <p>
+              <span class="label label-success">Agreement on File</span> 
+              <%= link_to @user.agreement.attachment_file_name, @user.agreement.download_url %>
+             </p>
+          <% else %>
+            <p><span class="label label-important">No Agreement on File</span></p>  
+          <% end %>            
+
+          <table class="table-striped table-bordered table-condensed">
+            <tr>
+              <td>Current Dogs</td>
+              <td>
+                <% @user.current_foster_dogs.each do |d| %>
+                  <%= link_to d.name, d %>
+                    (<%= d.status %>)
+                  <br />
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td>What kind of dogs will you foster?</td>
+              <td><%= @user.foster_dog_types unless !@user.foster_dog_types? %></td>
+            </tr>
+          </table>
+      </div>
     </div>
 
-      <div class="row">
-        <div class="span8">
-          <h4>Fostering</h4>
-            <% if @user.available_to_foster %>
-              <p><span class="label label-success">Ready for Another Dog</span></p>
-            <% else %>
-              <p><span class="label label-important">Not Ready for Another Dog</span></p>
-            <% end %>
-            <table class="table-striped table-bordered table-condensed">
-              <tr>
-                <td>Current Dogs</td>
-                <td>        
-                  <% @user.current_foster_dogs.each do |d| %>
-                    <%= link_to d.name, d %>
-                      (<%= d.status %>)
-                    <br />
-                  <% end %>
-                </td>
-              </tr>
-              <tr>
-                <td>What kind of dogs will you foster?</td>
-                <td><%= @user.foster_dog_types unless !@user.foster_dog_types? %></td>
-              </tr>
 
-            </table>
-        </div>
-      </div>
-
-
-        <div class="row">
-        <div class="span8">
+    <div class="row">
+      <div class="span8">
           <h4>Permissions</h4>
           <ul>
             <% if @user.admin? %>

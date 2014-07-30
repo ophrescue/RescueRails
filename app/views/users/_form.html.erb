@@ -82,6 +82,19 @@
 			</div>
 		</div>
 
+    <div class="control-group">
+      <%= f.label :agreement, 'Foster Agreement', :class => 'control-label' %>
+      <div class="controls">
+      <%= f.fields_for :agreement do |af| %>
+        <% if af.object.new_record? %>
+          <%= af.file_field :attachment %>
+        <% else %>
+            <span>Overwrite Agreement:</span> <%= af.file_field :attachment %>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+
 		<div class="control-group">
 			<%= f.label :foster_dog_types, "What types of dogs can you foster?", :class => 'control-label' %>
 			<div class="controls">

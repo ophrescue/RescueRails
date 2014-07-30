@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @title = "Add a Staff Account"
+    init_fields
   end
   
   def create
@@ -42,6 +43,8 @@ class UsersController < ApplicationController
 
   def edit
     @title = "Edit Profile"
+    @user = User.find(params[:id])
+    init_fields
   end
 
   def update
@@ -64,6 +67,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def init_fields
+      @user.build_agreement unless @user.agreement
+    end
 
     def correct_user
       @user = User.find(params[:id])

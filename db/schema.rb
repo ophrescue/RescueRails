@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140112175057) do
+ActiveRecord::Schema.define(:version => 20140730015833) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -311,8 +311,10 @@ ActiveRecord::Schema.define(:version => 20140112175057) do
     t.boolean   "add_dogs",                            :default => false
     t.boolean   "ban_adopters",                        :default => false
     t.boolean   "dl_resources",                        :default => true
+    t.integer   "agreement_id"
   end
 
+  add_index "users", ["agreement_id"], :name => "index_users_on_agreement_id"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["name"], :name => "index_users_on_name"
 

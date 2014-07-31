@@ -82,26 +82,154 @@
 			</div>
 		</div>
 
-    <div class="control-group">
-      <%= f.label :agreement, 'Foster Agreement', :class => 'control-label' %>
-      <div class="controls">
-      <%= f.fields_for :agreement do |af| %>
-        <% if af.object.new_record? %>
-          <%= af.file_field :attachment %>
-        <% else %>
-            <span>Overwrite Agreement:</span> <%= af.file_field :attachment %>
-        <% end %>
+    <% if is_admin? %>
+        <div class="control-group">
+          <%= f.label :agreement, 'Foster Agreement', :class => 'control-label' %>
+          <div class="controls">
+          <%= f.fields_for :agreement do |af| %>
+            <% if af.object.new_record? %>
+              <%= af.file_field :attachment %>
+            <% else %>
+                <span>Agreement on File, overwrite?</span> <%= af.file_field :attachment %>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
       <% end %>
+
+    <div class="control-group">
+      <%= f.label :house_type, "Do you rent or own your home?", :class => "control-label" %>
+      <div class="controls">
+            <label>
+              <%= f.radio_button :house_type, 'rent', :class => "link required" %> 
+              <span>Rent</span>
+            </label>
+            <label>
+              <%= f.radio_button :house_type, 'own', :class => "link required" %> 
+              <span>Own</span>
+            </label>
       </div>
     </div>
 
-		<div class="control-group">
-			<%= f.label :foster_dog_types, "What types of dogs can you foster?", :class => 'control-label' %>
-			<div class="controls">
-				<%= f.text_area :foster_dog_types, :class => "xlarge", :rows => "4" %>
-				<span class="help-inline">Breeds, age, medical/training issues, etc.<span>
-			</div>
-		</div>
+    <div class="control-group">
+      <%= f.label :breed_restriction, "Any breed restrictions?", :class => "control-label" %>
+      <div class="controls">
+            <label>
+              <%= f.radio_button :breed_restriction, true, :class => "link required" %> 
+              <span>Yes</span>
+            </label>
+            <label>
+              <%= f.radio_button :breed_restriction, false, :class => "link required" %> 
+              <span>No</span>
+            </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :weight_restriction, "Any weight restrictions?", :class => "control-label" %>
+      <div class="controls">
+            <label>
+              <%= f.radio_button :weight_restriction, true, :class => "link required" %> 
+              <span>Yes</span>
+            </label>
+            <label>
+              <%= f.radio_button :weight_restriction, false, :class => "link required" %> 
+              <span>No</span>
+            </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :has_own_dogs, "Do you have your own dogs?", :class => "control-label" %>
+      <div class="controls">
+            <label>
+              <%= f.radio_button :has_own_dogs, true, :class => "link required" %> 
+              <span>Yes</span>
+            </label>
+            <label>
+              <%= f.radio_button :has_own_dogs, false, :class => "link required" %> 
+              <span>No</span>
+            </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :has_own_cats, "Do you have your own cats?", :class => "control-label" %>
+      <div class="controls">
+            <label>
+              <%= f.radio_button :has_own_cats, true, :class => "link required" %> 
+              <span>Yes</span>
+            </label>
+            <label>
+              <%= f.radio_button :has_own_cats, false, :class => "link required" %> 
+              <span>No</span>
+            </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :children_under_five, "Any children under five in your house ?", :class => "control-label" %>
+      <div class="controls">
+            <label>
+              <%= f.radio_button :children_under_five, true, :class => "link required" %> 
+              <span>Yes</span>
+            </label>
+            <label>
+              <%= f.radio_button :children_under_five, false, :class => "link required" %> 
+              <span>No</span>
+            </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :has_fenced_yard, "Do you have a fenced in yard?", :class => "control-label" %>
+      <div class="controls">
+            <label>
+              <%= f.radio_button :has_fenced_yard, true, :class => "link required" %> 
+              <span>Yes</span>
+            </label>
+            <label>
+              <%= f.radio_button :has_fenced_yard, false, :class => "link required" %> 
+              <span>No</span>
+            </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :can_foster_puppies, "Are you willing to foster puppies?", :class => "control-label" %>
+      <div class="controls">
+            <label>
+              <%= f.radio_button :can_foster_puppies, true, :class => "link required" %> 
+              <span>Yes</span>
+            </label>
+            <label>
+              <%= f.radio_button :can_foster_puppies, false, :class => "link required" %> 
+              <span>No</span>
+            </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :parvo_house, "Have you or anyone in your household ever had a dog with parvo?", :class => "control-label" %>
+      <div class="controls">
+            <label>
+              <%= f.radio_button :parvo_house, true, :class => "link required" %> 
+              <span>Yes</span>
+            </label>
+            <label>
+              <%= f.radio_button :parvo_house, false, :class => "link required" %> 
+              <span>No</span>
+            </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :foster_dog_types, "Please detail any fostering restrictions", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :foster_dog_types, :class => "xxlarge", :rows => "6" %>
+        <span class="help-inline">Weight, breed, medical, etc<span>
+      </div>
+    </div>
 
 		<h3>Password Change</h3>
 		<div class="control-group">
@@ -118,6 +246,20 @@
 		</div>
 		
 		<h3>User Permissions</h3>
+
+
+    <% if is_admin? %>
+      <div class="control-group">
+        <%= f.label :admin_comment, "Admins Only Comment", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_area :admin_comment, :class => "xxlarge", :rows => "6" %>
+          <span class="help-inline">Visible to staff with admin access<span>
+        </div>
+      </div>
+    <% end %>
+
+
+
 		<div class="control-group">
 		<% if is_admin? %>
 			<label id="optionsCheckboxes">Check All that Apply</label>

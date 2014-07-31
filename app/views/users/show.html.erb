@@ -104,7 +104,61 @@
              </p>
           <% else %>
             <p><span class="label label-important">No Agreement on File</span></p>  
-          <% end %>            
+          <% end %>
+
+          <% if @user.house_type == "own" %>
+            <p><span class="label label-success">Owns Home</span></p>
+          <% elsif @user.house_type == "rent" %>
+            <p><span class="label label-important">Rents Home</span></p>
+          <% end %>
+
+          <% if @user.breed_restriction? %>
+             <p><span class="label label-important">Breed Restricted</span></p>
+          <% else %>
+            <p><span class="label label-success">No Breed Restrictions</span></p>           
+          <% end %>
+
+          <% if @user.weight_restriction? %>
+             <p><span class="label label-important">Weight Restricted</span></p>
+          <% else %>
+            <p><span class="label label-success">No Weight Restrictions</span></p>           
+          <% end %>
+
+          <% if @user.has_own_dogs? %>
+             <p><span class="label label-important">Has own dogs</span></p>
+          <% else %>
+            <p><span class="label label-success">Doesn't have own dogs</span></p>           
+          <% end %>
+
+          <% if @user.has_own_cats? %>
+             <p><span class="label label-important">Has own cats</span></p>
+          <% else %>
+            <p><span class="label label-success">Doesn't have own cats</span></p>           
+          <% end %>
+
+          <% if @user.children_under_five? %>
+             <p><span class="label label-important">Has children under 5</span></p>
+          <% else %>
+            <p><span class="label label-success">No children under 5</span></p>           
+          <% end %>
+
+          <% if @user.has_fenced_yard? %>
+             <p><span class="label label-success">Has fenced in yard</span></p>
+          <% else %>
+            <p><span class="label label-important">No fenced in yard</span></p>           
+          <% end %>
+
+          <% if @user.can_foster_puppies? %>
+             <p><span class="label label-success">Can foster puppies</span></p>
+          <% else %>
+            <p><span class="label label-important">No puppies</span></p>           
+          <% end %>
+
+          <% if @user.parvo_house? %>
+             <p><span class="label label-important">Had parvo in home</span></p>
+          <% else %>
+            <p><span class="label label-success">No parvo in home</span></p>           
+          <% end %>
 
           <table class="table-striped table-bordered table-condensed">
             <tr>
@@ -118,7 +172,7 @@
               </td>
             </tr>
             <tr>
-              <td>What kind of dogs will you foster?</td>
+              <td>Foster Details</td>
               <td><%= @user.foster_dog_types unless !@user.foster_dog_types? %></td>
             </tr>
           </table>
@@ -127,7 +181,7 @@
 
 
     <div class="row">
-      <div class="span8">
+      <div class="span6">
           <h4>Permissions</h4>
           <ul>
             <% if @user.admin? %>
@@ -197,4 +251,10 @@
             <% end %>
           </ul>
         </div>
+        <% if is_admin? %>
+            <div class="row6">
+              <h4>Admin Notes</h4>
+              <p><%= @user.admin_comment %></p>
+            </div>
+        <% end %>
       </div>

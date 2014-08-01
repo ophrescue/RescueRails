@@ -313,15 +313,14 @@ ActiveRecord::Schema.define(:version => 20140730164853) do
     t.boolean   "dl_resources",                         :default => true
     t.integer   "agreement_id"
     t.string    "house_type",             :limit => 40
-    t.boolean   "breed_restriction",                    :default => false
-    t.boolean   "weight_restriction",                   :default => false
-    t.integer   "max_dog_weight"
-    t.boolean   "has_own_dogs",                         :default => false
-    t.boolean   "has_own_cats",                         :default => false
-    t.boolean   "children_under_five",                  :default => false
-    t.boolean   "has_fenced_yard",                      :default => false
-    t.boolean   "can_foster_puppies",                   :default => false
-    t.boolean   "parvo_house",                          :default => false
+    t.boolean   "breed_restriction"
+    t.boolean   "weight_restriction"
+    t.boolean   "has_own_dogs"
+    t.boolean   "has_own_cats"
+    t.boolean   "children_under_five"
+    t.boolean   "has_fenced_yard"
+    t.boolean   "can_foster_puppies"
+    t.boolean   "parvo_house"
     t.text      "admin_comment"
   end
 

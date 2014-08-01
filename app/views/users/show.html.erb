@@ -112,52 +112,68 @@
             <p><span class="label label-important">Rents Home</span></p>
           <% end %>
 
-          <% if @user.breed_restriction? %>
-             <p><span class="label label-important">Breed Restricted</span></p>
-          <% else %>
-            <p><span class="label label-success">No Breed Restrictions</span></p>           
+          <% unless @user.breed_restriction.nil? %>
+            <% if @user.breed_restriction? %>
+               <p><span class="label label-important">Breed Restricted</span></p>
+            <% else %>
+              <p><span class="label label-success">No Breed Restrictions</span></p>           
+            <% end %>
           <% end %>
 
-          <% if @user.weight_restriction? %>
-             <p><span class="label label-important">Weight Restricted</span></p>
-          <% else %>
-            <p><span class="label label-success">No Weight Restrictions</span></p>           
+          <% unless @user.weight_restriction.nil? %> 
+            <% if @user.weight_restriction? %>
+               <p><span class="label label-important">Weight Restricted</span></p>
+            <% else %>
+              <p><span class="label label-success">No Weight Restrictions</span></p>           
+            <% end %>
           <% end %>
 
-          <% if @user.has_own_dogs? %>
-             <p><span class="label label-important">Has own dogs</span></p>
-          <% else %>
-            <p><span class="label label-success">Doesn't have own dogs</span></p>           
+          <% unless @user.has_own_dogs.nil? %>
+            <% if @user.has_own_dogs? %>
+               <p><span class="label label-important">Has own dogs</span></p>
+            <% else %>
+              <p><span class="label label-success">Doesn't have own dogs</span></p>           
+            <% end %>
           <% end %>
 
-          <% if @user.has_own_cats? %>
-             <p><span class="label label-important">Has own cats</span></p>
-          <% else %>
-            <p><span class="label label-success">Doesn't have own cats</span></p>           
+          <% unless @user.has_own_cats.nil? %>
+            <% if @user.has_own_cats? %>
+               <p><span class="label label-important">Has own cats</span></p>
+            <% else %>
+              <p><span class="label label-success">Doesn't have own cats</span></p>           
+            <% end %>
           <% end %>
 
-          <% if @user.children_under_five? %>
-             <p><span class="label label-important">Has children under 5</span></p>
-          <% else %>
-            <p><span class="label label-success">No children under 5</span></p>           
+          <% unless @user.children_under_five.nil? %>
+            <% if @user.children_under_five? %>
+               <p><span class="label label-important">Has children under 5</span></p>
+            <% else %>
+              <p><span class="label label-success">No children under 5</span></p>           
+            <% end %>
           <% end %>
 
-          <% if @user.has_fenced_yard? %>
-             <p><span class="label label-success">Has fenced in yard</span></p>
-          <% else %>
-            <p><span class="label label-important">No fenced in yard</span></p>           
+          <% unless @user.has_fenced_yard.nil? %>
+            <% if @user.has_fenced_yard? %>
+               <p><span class="label label-success">Has fenced in yard</span></p>
+            <% else %>
+              <p><span class="label label-important">No fenced in yard</span></p>           
+            <% end %>
           <% end %>
 
-          <% if @user.can_foster_puppies? %>
-             <p><span class="label label-success">Can foster puppies</span></p>
-          <% else %>
-            <p><span class="label label-important">No puppies</span></p>           
+          <% unless @user.can_foster_puppies.nil? %>
+            <% if @user.can_foster_puppies? %>
+               <p><span class="label label-success">Can foster puppies</span></p>
+            <% else %>
+              <p><span class="label label-important">No puppies</span></p>           
+            <% end %>
           <% end %>
 
-          <% if @user.parvo_house? %>
-             <p><span class="label label-important">Had parvo in home</span></p>
-          <% else %>
-            <p><span class="label label-success">No parvo in home</span></p>           
+          <% unless @user.parvo_house.nil? %>
+            <% if @user.parvo_house? %>
+               <p><span class="label label-important">Had parvo in home</span></p>
+            <% else %>
+              <p><span class="label label-success">No parvo in home</span></p>           
+            <% end %>
           <% end %>
 
           <table class="table-striped table-bordered table-condensed">

@@ -45,6 +45,10 @@
             <td><%= @user.share_info %></td>
           </tr>
           <tr>
+            <td>Account Created</td>
+            <td><%= @user.created_at.strftime("%m/%d/%Y") %></td>
+          </tr>
+          <tr>
             <td>Last Login</td>
             <% if @user.lastlogin? %>
               <td><%= time_ago_in_words(@user.lastlogin) %> ago</td>

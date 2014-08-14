@@ -44,6 +44,7 @@
 #  fee                  :integer
 #  coordinator_id       :integer
 #  sponsored_by         :string(255)
+#  shelter_id           :integer
 #
 
 class Dog < ActiveRecord::Base

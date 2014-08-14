@@ -10,9 +10,31 @@
 
 <% if is_admin? %>
   <p>
-  <%= link_to "Create new Staff Account", new_user_path %>
+  <%= link_to "Create new Staff Account", new_user_path, :class => "btn btn-primary" %>
   </p>
 <% end %>
+
+<ul class="nav nav-tabs">
+  <li class="<%= 'active' if params[:admin] %>">
+    <%= link_to "Administrators", users_path(:admin => true) %>
+  </li>
+  <li class="<%= 'active' if params[:adoption_coordinator] %>">
+    <%= link_to "Adoption Coordinators", users_path(:adoption_coordinator => true) %>
+  </li>
+  <li class="<%= 'active' if params[:event_planner] %>">
+    <%= link_to "Event Planners", users_path(:event_planner => true) %>
+  </li>
+  <li class="<%= 'active' if params[:dog_adder] %>">
+    <%= link_to "Add Dogs", users_path(:dog_adder => true) %>
+  </li>
+  <li class="<%= 'active' if params[:dog_editor] %>">
+    <%= link_to "Edit Dogs", users_path(:dog_editor => true) %>
+  </li>
+  <li class="<%= 'active' if params[:foster] %>">
+    <%= link_to "Fosters", users_path(:foster => true) %>
+  </li>
+</ul>
+
 <%= will_paginate @users %>
 
 <% if !@users.nil? %>

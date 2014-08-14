@@ -24,6 +24,7 @@ gem 'strip_attributes', '~> 1.0'
 gem 'to_xls'
 gem 'roo'
 gem 'font-awesome-rails', '~> 4.1.0.0'
+gem 'has_scope'
 
 group :production do
   gem 'unicorn', '~> 4.6.0'

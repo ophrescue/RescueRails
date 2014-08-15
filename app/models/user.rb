@@ -102,13 +102,13 @@ class User < ActiveRecord::Base
   before_create :chimp_subscribe
   before_update :chimp_check
 
-  scope :active,                  -> { where(:locked => false)}
-  scope :admin,                   -> { active.where(:admin => true) }
-  scope :adoption_coordinator,    -> { active.where(:edit_my_adopters => true)}
-  scope :event_planner,           -> { active.where(:edit_events => true)}
-  scope :dog_adder,               -> { active.where(:add_dogs => true)}
-  scope :dog_editor,              -> { active.where(:edit_dogs => true)}
-  scope :foster,                  -> { active.where(:is_foster => true)}
+  scope :active,                  -> { where(locked: false)}
+  scope :admin,                   -> { active.where(admin: true) }
+  scope :adoption_coordinator,    -> { active.where(edit_my_adopters: true)}
+  scope :event_planner,           -> { active.where(edit_events: true)}
+  scope :dog_adder,               -> { active.where(add_dogs: true)}
+  scope :dog_editor,              -> { active.where(edit_dogs: true)}
+  scope :foster,                  -> { active.where(is_foster: true)}
 
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

@@ -35,6 +35,17 @@
 #  add_dogs               :boolean          default(FALSE)
 #  ban_adopters           :boolean          default(FALSE)
 #  dl_resources           :boolean          default(TRUE)
+#  agreement_id           :integer
+#  house_type             :string(40)
+#  breed_restriction      :boolean
+#  weight_restriction     :boolean
+#  has_own_dogs           :boolean
+#  has_own_cats           :boolean
+#  children_under_five    :boolean
+#  has_fenced_yard        :boolean
+#  can_foster_puppies     :boolean
+#  parvo_house            :boolean
+#  admin_comment          :text
 #
 
 # require 'spec_helper'

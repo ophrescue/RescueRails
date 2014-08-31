@@ -15,4 +15,7 @@ $(function() {
 		$("#dog_available_on_dt").datepicker({ 
 								dateFormat: 'yy-mm-dd'
 									});
+    $("#dog_adoption_date").datepicker({ 
+                dateFormat: 'yy-mm-dd'
+                  });
 	});

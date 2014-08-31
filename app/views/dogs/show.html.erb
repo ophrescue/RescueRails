@@ -144,6 +144,8 @@
 				<%= image_tag "needs_foster.gif" %>Needs Foster<br />
 			<% end %>
 
+
+
 			<br />
 			<% if @dog.foster_id %>
 				<strong>Foster</strong><br />
@@ -180,8 +182,16 @@
 				</ul>
 			<% end %>
 
+      <h4>Dates</h4>
+      <ul class="unstyled">
+        <li><%= "Available: " + @dog.available_on_dt.strftime("%m/%d/%Y") unless @dog.available_on_dt.blank?  %></li>
+        <li><%= "Intake: " + @dog.intake_dt.strftime("%m/%d/%Y") unless @dog.intake_dt.blank?  %></li>
+        <li><%= "Adopted: " + @dog.adoption_date.strftime("%m/%d/%Y") unless @dog.adoption_date.blank?  %></li>
+
+      </ul>
+
 			<h4>Ads</h4>
-			<ul>
+			<ul class="unstyled">
 				<% if !@dog.petfinder_ad_url.blank? %>
 					<li><%= link_to "Petfinder", @dog.petfinder_ad_url %></li>
 				<% else %>

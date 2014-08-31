@@ -2,6 +2,7 @@
 # bundle install --without-production
 
 source 'https://rubygems.org'
+ruby '2.1.1'
 
 gem 'rails', '~> 3.2.19'
 

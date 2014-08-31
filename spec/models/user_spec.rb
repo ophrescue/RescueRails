@@ -46,6 +46,8 @@
 #  can_foster_puppies     :boolean
 #  parvo_house            :boolean
 #  admin_comment          :text
+#  is_photographer        :boolean
+#  writes_newsletter      :boolean
 #
 
 # require 'spec_helper'

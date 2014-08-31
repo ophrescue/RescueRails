@@ -300,6 +300,14 @@
 					<%= f.check_box :is_foster %>
 					<span><strong>Foster</strong> - This person can be selected as a foster on the dog edit screen.</span>
 				</label>
+        <label class="checkbox">
+          <%= f.check_box :is_photographer %>
+          <span><strong>Photographer</strong> - Gives no permissions, justs for staff filtering.</span>
+        </label>
+        <label class="checkbox">
+          <%= f.check_box :writes_newsletter %>
+          <span><strong>Newsletter</strong> - Gives no permissions, justs for staff filtering.</span>
+        </label>
 				<label class="checkbox">
 					<%= f.check_box :dl_resources %>
 					<span><strong>Download Resources</strong> - This person can access the Staff Resources section.</span>
@@ -312,67 +320,7 @@
 			<% else %>
 			<div class="row">
 				<div class="span8 offset2">
-					<ul>
-						<% if @user.admin? %>
-							<li>Can Admin System</li>
-						<% else %>
-							<li>Cannot Admin System</li>
-						<% end %>
-
-						<% if @user.edit_all_adopters? %>
-							<li>Can Process All Applications</li>
-						<% else %>
-							<li> Cannot Process All Applications</li>
-						<% end %>
-
-						<% if @user.edit_my_adopters? || @user.edit_all_adopters? %>
-							<li>Can be Assigned Adoption Applications</li>
-						<% else %>
-							<li>Cannot be Assigned Adoption Applications</li>
-						<% end %>
-
-						<% if @user.complete_adopters? %>
-							<li>Can set Adoption Applications to completed status.</li>
-						<% else %>
-							<li>Cannot set adoption applications to completed status.</li>
-						<% end %>
-
-						<% if @user.ban_adopters? %>
-							<li>Can update the banned adopters list</li>
-						<% else %>
-							<li>Cannot update the banned adopters list</li>
-						<% end %>
-
-						<% if @user.add_dogs?%>
-							<li>Can add dogs</li>
-						<% else %>
-							<li>Can not add dogs</li>
-						<% end %>
-
-						<% if @user.edit_dogs?%>
-							<li>Can edit all dogs</li>
-						<% else %>
-							<li>Can only edit dogs they are fostering</li>
-						<% end %>
-
-						<% if @user.is_foster? %>
-							<li>Is a Foster</li>
-						<% else %>
-							<li>Is not a Foster</li>
-						<% end %>
-
-						<% if @user.dl_resources? %>
-							<li>Can Download Staff Resources</li>
-						<% else %>
-							<li>Cannot Download Staff Resources</li>
-						<% end %>
-
-						<% if @user.locked? %>
-							<li><span class="label error">Account Disabled</span></li>
-						<% else %>
-							<li><span class="label success">Account Active</span></li>
-						<% end %>
-					</ul>
+					<%= render 'permissions' %>
 				</div>
 			</div>
 			<% end %>

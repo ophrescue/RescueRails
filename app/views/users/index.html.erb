@@ -30,6 +30,12 @@
   <li class="<%= 'active' if params[:dog_editor] %>">
     <%= link_to "Edit Dogs", users_path(:dog_editor => true) %>
   </li>
+  <li class="<%= 'active' if params[:photographer] %>">
+    <%= link_to "Photographer", users_path(:photographer => true) %>
+  </li>
+  <li class="<%= 'active' if params[:newsletter] %>">
+    <%= link_to "Newsletter", users_path(:newsletter => true) %>
+  </li>
   <li class="<%= 'active' if params[:foster] %>">
     <%= link_to "Fosters", users_path(:foster => true) %>
   </li>

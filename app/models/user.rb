@@ -111,6 +111,8 @@ class User < ActiveRecord::Base
   scope :dog_adder,               -> { active.where(add_dogs: true)}
   scope :dog_editor,              -> { active.where(edit_dogs: true)}
   scope :foster,                  -> { active.where(is_foster: true)}
+  scope :photographer,            -> { active.where(is_photographer: true)}
+  scope :newsletter,              -> { active.where(writes_newsletter: true)}
 
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

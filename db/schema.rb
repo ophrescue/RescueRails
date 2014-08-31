@@ -322,8 +322,8 @@ ActiveRecord::Schema.define(:version => 20140831180756) do
     t.boolean   "can_foster_puppies"
     t.boolean   "parvo_house"
     t.text      "admin_comment"
-    t.boolean   "is_photographer"
-    t.boolean   "writes_newsletter"
+    t.boolean   "is_photographer",                      :default => false
+    t.boolean   "writes_newsletter",                    :default => false
   end
 
   add_index "users", ["agreement_id"], :name => "index_users_on_agreement_id"

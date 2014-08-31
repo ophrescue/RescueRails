@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   has_scope :dog_adder, :type => :boolean
   has_scope :dog_editor, :type => :boolean
   has_scope :foster, :type => :boolean
+  has_scope :photographer, :type => :boolean
+  has_scope :newsletter, :type => :boolean
 
 
   def index

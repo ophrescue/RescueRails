@@ -10,9 +10,6 @@
 //= require jquery.ui.datepicker
 //= require jquery.ui.widget
 //= require jquery.ui.sortable
-//= require jquery.purr
-//= require best_in_place
-//= require best_in_place_hook
 //= require autocomplete-rails
 //= require bbq
 //= require jquery.form.wizard

@@ -1,0 +1,10 @@
+<table class="table-striped table-bordered table-condensed">
+  <thead>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>E-mail</th>
+    <th>Relationship</th>
+    <th>When to Call</th>
+  </thead>
+  <%= render @adopter.references, :target => @adopter %>
+</table>

@@ -23,6 +23,7 @@
 //= require jquery.maskedinput
 //= require msk_input.cfg
 //= require jquery.tokeninput
+//= require rescue_rails
 //= require dog_token
 //= require analytics
 //= require adoption_app_wizard

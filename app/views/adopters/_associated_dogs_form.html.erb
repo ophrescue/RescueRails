@@ -1,0 +1,14 @@
+<%= form_for(@adopter.adoptions.build(:adopter_id => @adopter.id),:html => {:id => "new_dog_link"}) do |ad| %>
+  <fieldset>
+    <div class="control-group">
+      <%= ad.label :dog_id, "Associate Dog with Application", :class => "control-label" %>
+      <div class="controls">
+        <%= ad.collection_select :dog_id, Dog.order(:name), :id, :name, {}%>
+      </div>
+    </div>
+    <div><%= ad.hidden_field :adopter_id %></div>
+    <div id="Navigation">
+      <%= ad.submit "Link Dog", :class => "btn btn-small btn-primary" %>
+    </div>
+  </fieldset>
+<% end %>

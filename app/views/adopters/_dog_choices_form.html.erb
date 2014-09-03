@@ -1,0 +1,10 @@
+<%= form_for @adopter, remote: true, html: { class: 'form-horizontal' } do |f| %>
+  <table class="table-striped table-bordered table-condensed">
+    <th>Dog Selections</th>
+    <td><%= f.text_field :dog_name %></td>
+    <tr>
+      <th>Dog Requirements</th>
+      <td><%= f.text_field :dog_reqs %></td>
+    </tr>
+  </table>
+<% end %>

@@ -39,9 +39,6 @@ GEM
     aws-sdk (1.39.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
-    best_in_place (2.0.3)
-      jquery-rails
-      rails (~> 3.1)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -294,7 +291,6 @@ DEPENDENCIES
   anjlab-bootstrap-rails (~> 2.2.2.1)
   annotate
   aws-sdk (~> 1.39.0)
-  best_in_place (~> 2.0.3)
   better_errors
   binding_of_caller
   bootstrap-will_paginate (~> 0.0.7)

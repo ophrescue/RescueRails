@@ -115,12 +115,9 @@ class Adopter < ActiveRecord::Base
   validates_inclusion_of :status, :in => STATUSES
 
   before_create :chimp_subscribe
-
   before_update :chimp_check
 
-
   def chimp_subscribe
-
     gb = Gibbon::API.new
     gb.timeout = 30
 
@@ -131,7 +128,6 @@ class Adopter < ActiveRecord::Base
     else
       groups = [ { :name => "OPH Target Segments", :groups => ["Active Application"]} ]
     end
-
 
     if (self.status == 'completed')
       completed_date = Time.now.strftime("%m/%d/%Y")
@@ -147,7 +143,6 @@ class Adopter < ActiveRecord::Base
     }
 
     double_optin = true
-
 
     if self.is_subscribed?
         response = gb.lists.update_member({ :id => list_id,
@@ -170,38 +165,30 @@ class Adopter < ActiveRecord::Base
 
 
   def chimp_check
-
     if self.status_changed?
-
       if ((self.status == 'withdrawn') || (self.status == 'denied')) && (self.is_subscribed?)
         self.chimp_unsubscribe
       else
         self.chimp_subscribe
       end
-
     end
-
   end
   
   def chimp_unsubscribe
-
     gb = Gibbon::API.new
     gb.timeout = 30
     gb.throws_exceptions = false;
 
     list_id = '5e50e2be93'
 
-    response = gb.lists.unsubscribe({
+    gb.lists.unsubscribe({
       :id => list_id,
       :email => {:email => self.email},
       :delete_member => true,
       :send_goodbye => false,
       :send_notify => false
-      })
+    })
 
     self.is_subscribed = 0   
-
   end
-
 end
-

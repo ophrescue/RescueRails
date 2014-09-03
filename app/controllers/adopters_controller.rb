@@ -72,12 +72,15 @@ class AdoptersController < ApplicationController
   def update
     if (params[:adopter][:status] == 'completed') && (!can_complete_adopters?)
       flash[:error] = "You are not allowed to set an application to completed"
-      respond_with @adopter
     else
       @adopter = Adopter.find(params[:id])
       @adopter.update_attributes(params[:adopter])
       flash[:success] = "Application Updated"
-      respond_with @adopter
+    end
+
+    respond_with(@adopter) do |format|
+      format.html { render }
+      format.json { render json: @adopter }
     end
   end
 

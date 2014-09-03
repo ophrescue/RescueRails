@@ -1,4 +1,5 @@
-$(document).ready( function () {
+$( function () {
+  $('.edit_comment #comment_content').live('change', RescueRails.saveParentForm);
 
   $('#new_comment').submit( function(e) {
     e.preventDefault();
@@ -38,7 +39,6 @@ $(document).ready( function () {
       },
     });
   });
-
 });
 
 
@@ -46,9 +46,5 @@ function refresh_comments() {
   var url = window.location + '/comments';
   $.get(url, function(data) {
     $('#comment_table').html(data);
-    $('.best_in_place').best_in_place();
   });
-}
-
-function delete_comment() {
 }

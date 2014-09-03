@@ -1,0 +1,27 @@
+<table class="table-striped table-bordered table-condensed">
+  <tr>
+    <th>Current Pets</th>
+    <td><%= @adopter.adoption_app.current_pets %></td>
+  </tr>
+  <tr>
+    <th>Vet Info</th>
+    <td><%= @adopter.adoption_app.vet_info %></td>
+  </tr>
+  <tr>
+    <th>Are current pets fixed?</th>
+    <td><%= @adopter.adoption_app.current_pets_fixed %></td>
+  </tr>
+  <tr>
+    <th>Why not fixed?</th>
+    <td><%= @adopter.adoption_app.why_not_fixed %></td>
+  </tr>
+  <tr>
+    <th>Are current pets up to date on shots?</th>
+    <td><%= @adopter.adoption_app.current_pets_uptodate %></td>
+  </tr>
+  <tr>
+    <th>Why not up to date</th>
+    <td><%= @adopter.adoption_app.current_pets_uptodate_why %></td>
+  </tr>
+
+</table>

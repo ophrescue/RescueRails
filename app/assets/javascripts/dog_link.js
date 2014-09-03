@@ -1,4 +1,4 @@
-$(document).ready( function () {
+$( function () {
 
   $('#new_dog_link').submit( function(e) {
     e.preventDefault();
@@ -7,11 +7,7 @@ $(document).ready( function () {
       url: this.action,
       data: $('#new_dog_link').serialize(),
       success: function (data) {
-        // so it worked, add to the comment list
         refresh_dogs();
-
-        // clear comment field for next comment
-        //$('#comment_content').val('');
       },
       error: function() {
         alert('Dog already linked to this application');
@@ -26,7 +22,6 @@ $(document).ready( function () {
       url: this.action,
       data: $(this).serialize(),
       success: function (data) {
-        // so it worked, add to the comment list
         refresh_dogs();
       },
       statusCode: {
@@ -45,7 +40,4 @@ $(document).ready( function () {
 function refresh_dogs() {
   var url = window.location;
   $('#linked_dogs_table').load(url+' #linked_dogs_table');
-}
-
-function delete_comment() {
 }

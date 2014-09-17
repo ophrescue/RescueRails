@@ -1,5 +1,10 @@
-<%= form_for @adopter, html: { class: 'form-horizontal' } do |f| %>
+<%= form_for @adopter, html: { class: 'form-horizontal edit-adopter' } do |f| %>
   <table class="table-striped table-bordered table-condensed">
+    <tr>
+      <td colspan="2">
+        <a id="toggle-edit" class="btn btn-primary">Edit Address Info</a>
+      </td>
+    </tr>
     <tr>
       <td colspan="2">
         <% if @adopter.adoption_app.is_ofage == false %>
@@ -43,7 +48,9 @@
     </tr>
     <tr>
       <th>E-mail</th>
-      <td><%= f.text_field :email %></td>
+      <td>
+        <%= f.text_field :email, class: "editable", disabled: "disabled" %>
+      </td>
     </tr>
     <tr>
       <th>Primary Phone</th>
@@ -72,27 +79,27 @@
     <tr>
       <th>Street Address</th>
       <td>
-        <%= f.text_field :address1 %>
+        <%= f.text_field :address1, disabled: "disabled"%>
         <br/>
-        <%= f.text_field :address2 %>
+        <%= f.text_field :address2, disabled: "disabled" %>
       </td>
     </tr>
     <tr>
       <th>City</th>
       <td>
-        <%= f.text_field :city%>
+        <%= f.text_field :city, disabled: "disabled" %>
       </td>
     </tr>
     <tr>
       <th>State</th>
       <td>
-        <%= f.text_field :state %>
+        <%= f.text_field :state, disabled: "disabled" %>
       </td>
     </tr>
     <tr>
       <th>Zip</th>
       <td>
-        <%= f.text_field :zip%>
+        <%= f.text_field :zip, disabled: "disabled" %>
       </td>
     </tr>
     <tr>
@@ -101,6 +108,18 @@
       </th>
       <td><%= @adopter.adoption_app.how_did_you_hear %></td>
     </tr>
+    <tr>
+      <td colspan="2">
+        <%= f.submit "Save Address Info", class: "btn adopter-save", disabled: "disabled" %>
+      </td>
+    </tr>
+  </table>
+<% end %>
+
+<hr class="separator">
+
+<%= form_for @adopter, html: { class: 'form-horizontal' } do |f| %>
+  <table class="table-striped table-bordered table-condensed">
     <tr>
       <th>Flag:
       </th>
@@ -116,7 +135,6 @@
         <%= f.select(:assigned_to_user_id, [['No One', 'No One']].concat( @adopter_users.collect {|u| [u.name, u.id] }), {}, { class: 'input-medium' }) %>
       </td>
     </tr>
-
     <tr>
       <th>Status <a href="/status_definitions" class="btn" target="_blank">?</a>
       </th>
@@ -124,10 +142,9 @@
         <%= f.select :status, [['none', 'none']].concat( Adopter::STATUSES.collect{|s| [s, s]} ) %>
       </td>
     </tr>
-
     <tr>
       <td colspan=2>
-        <%= f.submit %>
+        <%= f.submit "Update", class: "btn adopter-save" %>
       </td>
     </tr>
   </table>

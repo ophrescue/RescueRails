@@ -1,6 +1,6 @@
 /*body {
-	padding-top: 60px;
-	padding-bottom: 40px;
+  padding-top: 60px;
+  padding-bottom: 40px;
 }*/
 
 label.valid {
@@ -26,7 +26,7 @@ span.error {
 }
 
 input.error {
-	color: #B94A48;
+  color: #B94A48;
 }
 
 form .control-group.error .error {
@@ -59,70 +59,70 @@ form .control-group.error span.error {
 }
 
 // .hero-unit {
-// 	background-image: url(hero_bg2.gif);
-// 	background-repeat: no-repeat;
-// 	background-position: center;
-// 	background-color: #262425;
-// 	padding: 160px;
-// /*	-webkit-border-radius: 6px;
-// 	-moz-border-radius: 6px;
-// 	border-radius: 6px;*/
+//  background-image: url(hero_bg2.gif);
+//  background-repeat: no-repeat;
+//  background-position: center;
+//  background-color: #262425;
+//  padding: 160px;
+// /* -webkit-border-radius: 6px;
+//  -moz-border-radius: 6px;
+//  border-radius: 6px;*/
 // }
 
 .carousel-inner {
-	background-repeat: no-repeat;
-	background-color: #262425;
-	text-align: center; 
+  background-repeat: no-repeat;
+  background-color: #262425;
+  text-align: center; 
 }
 
 .carousel .item > img { display: inline-block; }
 
 // .hero-unit h1 {
-// 	color: #FFFFFF;
-// 	font-size: 37px;
+//  color: #FFFFFF;
+//  font-size: 37px;
 // }
 
 // .hero-unit p {
-// 	color: #FFFFFF;
+//  color: #FFFFFF;
 // }
 
 .sidekick h2 {
-	border-bottom: 2px solid #000000;
-	margin-bottom: 10px;
+  border-bottom: 2px solid #000000;
+  margin-bottom: 10px;
 }
 
 .article h2 {
-	border-bottom: 1px solid #000000;
-	margin-bottom: 10px;
-	margin-top: 30px;
+  border-bottom: 1px solid #000000;
+  margin-bottom: 10px;
+  margin-top: 30px;
 }
 
 .article li {
-	color: #404040;
+  color: #404040;
 }
 
 .eventphoto img {
-	border-radius: 6px 6px 6px 6px;
+  border-radius: 6px 6px 6px 6px;
 }
 
 .gallery img{
-	display:block ; 
-	margin: auto ;
-	border-radius: 6px 6px 6px 6px;	
+  display:block ; 
+  margin: auto ;
+  border-radius: 6px 6px 6px 6px; 
 }
 
 .gallery h4 {
-	text-align: center;
-	color: #333333;
+  text-align: center;
+  color: #333333;
 }
 
 .gallery p {
-	text-align: center;
-	color: #333333;
+  text-align: center;
+  color: #333333;
 }
 
 .gallery a.thumbnail {
-	padding-top: 22px;
+  padding-top: 22px;
 }
 
 img.floatLeft { 
@@ -138,17 +138,17 @@ img.floatRight {
 }
 
 .event-title {
-	padding: 5px;
-	margin-bottom: 10px;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 .event-title h3 {
-	border-bottom: 2px solid #000000;
-	margin-bottom: 10px;
+  border-bottom: 2px solid #000000;
+  margin-bottom: 10px;
 }
 
 td.icons {
-	white-space: nowrap;
+  white-space: nowrap;
 }
 
 th .current {
@@ -158,11 +158,11 @@ th .current {
 }
 
 th .asc {
-	background-image: url(up_arrow.gif);
+  background-image: url(up_arrow.gif);
 }
 
 th .desc {
-	background-image: url(down_arrow.gif);
+  background-image: url(down_arrow.gif);
 }
 
 .tab-content {
@@ -170,9 +170,9 @@ th .desc {
 }
 
 #galleria {
-	height:500px;
-	width:100%; 
-	min-width:300px
+  height:500px;
+  width:100%; 
+  min-width:300px
 }
 
 #photos_sort {
@@ -187,10 +187,18 @@ th .desc {
   width: 100px;
 }
 
+table {
+  width: 100%;
+}
+
+input.adopter-save {
+  margin: 10px;
+}
+
 div #dogDescription {
-	margin-top: 25px;
+  margin-top: 25px;
 }
 
 div .fb-like {
-	margin-top: 25px;
+  margin-top: 25px;
 };

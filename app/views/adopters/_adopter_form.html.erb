@@ -49,7 +49,8 @@
     <tr>
       <th>E-mail</th>
       <td>
-        <%= f.text_field :email, class: "editable", disabled: "disabled" %>
+        <div class='read-only'><%= @adopter.email %></div>
+        <div class='editable'><%= f.text_field :email %></div>
       </td>
     </tr>
     <tr>
@@ -79,27 +80,31 @@
     <tr>
       <th>Street Address</th>
       <td>
-        <%= f.text_field :address1, disabled: "disabled"%>
-        <br/>
-        <%= f.text_field :address2, disabled: "disabled" %>
+        <div class="editable mb-5"><%= f.text_field :address1 %></div>
+        <div class="read-only mb-5"><%= @adopter.address1 %></div>
+        <div class="editable"><%= f.text_field :address2 %></div>
+        <div class="read-only"><%= @adopter.address2 %></div>
       </td>
     </tr>
     <tr>
       <th>City</th>
       <td>
-        <%= f.text_field :city, disabled: "disabled" %>
+        <div class="editable"><%= f.text_field :city%></div>
+        <div class="read-only"><%= @adopter.city %></div>
       </td>
     </tr>
     <tr>
       <th>State</th>
       <td>
-        <%= f.text_field :state, disabled: "disabled" %>
+        <div class="editable"><%= f.text_field :state%></div>
+        <div class="read-only"><%= @adopter.state %></div>
       </td>
     </tr>
     <tr>
       <th>Zip</th>
       <td>
-        <%= f.text_field :zip, disabled: "disabled" %>
+        <div class="editable"><%= f.text_field :zip%></div>
+        <div class="read-only"><%= @adopter.zip %></div>
       </td>
     </tr>
     <tr>

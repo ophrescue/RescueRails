@@ -1,12 +1,7 @@
-<table class="table-striped table-bordered table-condensed">
+<table class="table table-striped table-bordered table-condensed">
   <tr>
     <th>Ready to Adopt</th>
-    <td>
-      <%= form_for @adoption_app, format: :json, html: { id: 'edit_adoption_date', class: 'form-horizontal' } do |f| %>
-        <%= f.text_field :ready_to_adopt_dt %>
-        <div id="status-icon" class=""></div>
-      <% end %>
-    </td>
+    <td><%= @adopter.adoption_app.ready_to_adopt_dt.strftime("%B %e, %Y") %></td>
   </tr>
   <tr>
     <th>Dog Exercise</th>

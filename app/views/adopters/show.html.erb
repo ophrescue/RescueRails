@@ -9,11 +9,11 @@
 </div>
 
 <div class="row">
-  <div class="span6">
+  <div class="span4">
     <%= render 'adopter_form' %>
   </div>
 
-  <div class="span6">
+  <div class="span8">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#dog" data-toggle="tab">Dog Choices</a></li>
       <li><a href="#doginfo" data-toggle="tab">Dog Info</a></li>
@@ -31,7 +31,7 @@
         <div id="dog" class="tab-pane active">
           <div class="row">
             <div class="span3">
-              <%= render 'dog_choices_form' %>
+              <%= render 'dog_choices' %>
             </div>
           </div>
 
@@ -45,7 +45,7 @@
                 <%= form_for adp, method: :put, format: :json do |f| %>
                   (<%= adp.dog.status %>), 
                   <%= @adopter.name %> status with this dog is 
-                  <%= f.select :relation_type, options_for_select(Adoption::RELATION_TYPE.collect{|s| [s, s]}, adp.relation_type), class: 'select-ch' %>
+                  <%= f.select :relation_type, options_for_select(Adoption::RELATION_TYPE.collect{|s| [s, s]}, adp.relation_type), {}, class: 'input-medium' %>
                   <div id="status-icon"></div>
                 <% end %>
                 <%= form_for adp, :html => {:id => "delete_dog_link", :class => "delete_adoption", :style =>"display:inline!important;"}, :method => :delete do |f| %>

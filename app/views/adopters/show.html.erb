@@ -38,8 +38,9 @@
           <h3>Dogs</h3>
           <%= render 'associated_dogs_form' %>
 
-          <div id="linked_dogs_table">
+          <div id="linked_dogs_table" class="row">
             <% @adopter.adoptions.find_each do |adp| %>
+              <div class="span6">
                 <%= form_for adp, html: {method: :put}, format: :json do |f| %>
                   <%=  link_to adp.dog.name, adp.dog %>
                   (<%= adp.dog.status %>), 
@@ -47,9 +48,12 @@
                   <%= f.select :relation_type, options_for_select(Adoption::RELATION_TYPE.collect{|s| [s, s]}, adp.relation_type), {}, class: 'input-medium' %>
                   <div id="status-icon"></div>
                 <% end %>
+              </div>
+              <div class="span1">
                 <%= form_for adp, html: {id: "delete_dog_link", class: "delete_adoption"}, method: :delete do |f| %>
                   <%= f.submit "X", class: "btn btn-danger btn-small" %>
                 <% end %>
+              </div>
             <% end %>
           </div>
         </div>

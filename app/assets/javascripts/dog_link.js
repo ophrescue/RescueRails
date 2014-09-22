@@ -17,21 +17,23 @@ $( function () {
 
   $('#delete_dog_link').live('submit', function(e) {
     e.preventDefault();
-    $.ajax({
-      type: 'POST',
-      url: this.action,
-      data: $(this).serialize(),
-      success: function (data) {
-        refresh_dogs();
-      },
-      statusCode: {
-        401: function() {
-          alert('not authorized to delete this link');
-        }
-      },
-      error: function() {
-      },
-    });
+    if(confirm('Are you sure you would like to delete this?')) {
+      $.ajax({
+        type: 'POST',
+        url: this.action,
+        data: $(this).serialize(),
+        success: function (data) {
+          refresh_dogs();
+        },
+        statusCode: {
+          401: function() {
+            alert('not authorized to delete this link');
+          }
+        },
+        error: function() {
+        },
+      });
+    }
   });
 
 });

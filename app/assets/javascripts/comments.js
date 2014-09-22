@@ -22,22 +22,24 @@ $( function () {
 
   $('#delete_comment').live('submit', function(e) {
     e.preventDefault();
-    $.ajax({
-      type: 'POST',
-      url: this.action,
-      data: $(this).serialize(),
-      success: function (data) {
-        // so it worked, add to the comment list
-        refresh_comments();
-      },
-      statusCode: {
-        401: function() {
-          alert('not authorized to delete this comment');
-        }
-      },
-      error: function() {
-      },
-    });
+    if(confirm('Are you sure you want to delete this?')) {
+      $.ajax({
+        type: 'POST',
+        url: this.action,
+        data: $(this).serialize(),
+        success: function (data) {
+          // so it worked, add to the comment list
+          refresh_comments();
+        },
+        statusCode: {
+          401: function() {
+            alert('not authorized to delete this comment');
+          }
+        },
+        error: function() {
+        },
+      });
+    }
   });
 });
 

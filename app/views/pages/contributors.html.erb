@@ -20,31 +20,153 @@
 
     <h3>Sporting Dog Sponsors - $1,000</h3>
 
-    <ul class="thumbnails">
-      <li class="span4">
-        <a href="https://www.jezwater.com/" class="thumbnail thumbnail-no-border">
-          <img src="https://www.jezwater.com/wp-content/themes/twentyfourteen/images/jezwater-logo.jpg">
-        </a>
-      </li>
-      <li class="span4">
-        <a href="http://www.lindsaycars.com" class="thumbnail thumbnail-no-border">
-          <img src="http://pictures.dealer.com/l/lindsayautomotive/0380/ece04ef24046387201a01f91b214ddb2.jpg">
-        </a>
-      </li>
-      <li class="span4">
-        <a href="http://mydogsvoyce.com/" class="thumbnail thumbnail-no-border">
-          <img src="http://mydogsvoyce.com/sites/all/themes/i4c/images/150x44xvoyce-logo.png.pagespeed.ic.Z_Qjs7Z2eK.png">
-        </a>
-      </li>
-    </ul>
+    <% sponsors_1k = 
+        { url: "https://www.jezwater.com/", 
+          img: "jezwater.jpg"
+          },
+        { url: "http://www.lindsaycars.com", 
+          img: "lindsay-auto.jpg"
+          },
+        { url: "http://mydogsvoyce.com/", 
+          img: "voyce.jpg"
+          }
+    %>
+
+    <% sponsors_1k.each_slice(3) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span4">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <img src="/assets/sponsors/<%= spon[:img] %>">
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
 
     <h3>Herding Dog Sponsors - $500</h3>
 
+    <% sponsors_500 =
+      { url: "http://www.hermandorfer.com/",
+        img: "hermandorfer.jpg"
+      },
+      { url: "http://www.millertoyota.com/",
+        img: "miller-toyota.jpg"
+      }
+    %>
+
+    <% sponsors_500.each_slice(3) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span4">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <img src="/assets/sponsors/<%= spon[:img] %>">
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
     <h3>Working Dog Sponsors - $250</h3>
+
+    <% sponsors_250 =
+      { url: "https://www.novec.com/",
+        img: "novec.jpg"
+      },
+      { url: "http://www.walkingdogsva.com/",
+        img: "wtd_llc.png"
+      },
+      { url: "http://www.fvcbank.com/",
+        img: "fvcbank.jpg"
+      },
+      { url: "http://caringhandsvet.com/",
+        img: "ch_ah.jpg"
+      },
+      { url: "http://wildcalling.com/",
+        img: "wild_calling.jpg"
+      },
+      { url: "http://www.manassassubaru.com/index.htm",
+        img: "browns.jpg"
+      },
+      { url: "http://www.parkwayvetclinic.com/",
+        img: "parkway.png"
+      },
+      { url: "http://www.vetreferralcenter.com/index.htm",
+        img: "vetref.jpg"
+      },
+      { url: "https://www.gmmllc.com/jkinzer/",
+        img: "jkinzer.png"
+      },
+      { url: "http://novapetvet.com/",
+        img: "nvva.jpg"
+      }
+    %>
+
+    <% sponsors_250.each_slice(3) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span4">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <img src="/assets/sponsors/<%= spon[:img] %>">
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
 
     <h3>Hunting Dog Sponsors - $100</h3>
 
-    
+    <% sponsors_100 =
+      { url: "http://www.americandisposal.com",
+        img: "american_disposal.png"
+      },
+      { url: "http://www.valleyenergy.org/",
+        img: "valley_energy.jpg"
+      },
+      { url: "http://www.townandcountryanimalh.com/",
+        img: "tnc_anim_hosp.jpg"
+      },
+      { url: "http://www.clocktowervets.com/",
+        img: "clocktower.jpg"
+      },
+      { url: "http://www.affectionatepetcare.com/",
+        img: "affectionate_pc.jpg"
+      },
+      { url: "http://us.petvalu.com/location/5213",
+        img: "petvalu.jpg"
+      },
+      { url: "http://www.unionstreetpublichouse.com/",
+        img: "union_street.jpg"
+      }
+    %>
+
+    <% sponsors_100.each_slice(3) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span4">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <img src="/assets/sponsors/<%= spon[:img] %>">
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>    
 
 
 			<h2>Contributors</h2>

@@ -1,0 +1,34 @@
+<table class="table table-striped table-bordered table-condensed">
+  <tr>
+    <th>Ready to Adopt</th>
+    <td><%= @adopter.adoption_app.ready_to_adopt_dt.strftime("%B %e, %Y") %></td>
+  </tr>
+  <tr>
+    <th>Dog Exercise</th>
+    <td><%= @adopter.adoption_app.dog_exercise %></td>
+  </tr>
+  <tr>
+    <th>When away, dog will stay: </th>
+    <td><%= @adopter.adoption_app.dog_stay_when_away %></td>
+  </tr>
+  <tr>
+    <th>Dealing with Dog and Vacation</th>
+    <td><%= @adopter.adoption_app.dog_vacation %></td>
+  </tr>
+  <tr>
+    <th>Surrendered Pet Causes</th>
+    <td><%= @adopter.adoption_app.surrender_pet_causes %></td>
+  </tr>
+  <tr>
+    <th>Would you use training?</th>
+    <td><%= @adopter.adoption_app.training_explain %></td>
+  </tr>
+  <tr>
+    <th>Surrendered Pets?</th>
+    <td><%= @adopter.adoption_app.surrendered_pets %></td>
+  </tr>
+  <tr>
+    <th>Why Adopt</th>
+    <td><%= @adopter.why_adopt %></td>
+  </tr>
+</table>

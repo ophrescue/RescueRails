@@ -72,13 +72,16 @@ class AdoptersController < ApplicationController
   def update
     if (params[:adopter][:status] == 'completed') && (!can_complete_adopters?)
       flash[:error] = "You are not allowed to set an application to completed"
-      respond_with @adopter
     else
       @adopter = Adopter.find(params[:id])
       @adopter.updated_by_admin_user = current_user
       @adopter.update_attributes(params[:adopter])
       flash[:success] = "Application Updated"
-      respond_with @adopter
+    end
+
+    respond_with(@adopter) do |format|
+      format.html { render }
+      format.json { render json: @adopter }
     end
   end
 
@@ -94,7 +97,7 @@ class AdoptersController < ApplicationController
 
   def edit_my_adopters_user
     #TODO Figure out how to differentiate these
-    redirect_to(root_path) unless current_user.edit_my_adopters?
+    redirect_to(root_path) unless current_user.edit_my_adopters? || current_user.edit_all_adopters?
   end
 
   def edit_all_adopters_user

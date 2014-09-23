@@ -35,6 +35,19 @@
 #  add_dogs               :boolean          default(FALSE)
 #  ban_adopters           :boolean          default(FALSE)
 #  dl_resources           :boolean          default(TRUE)
+#  agreement_id           :integer
+#  house_type             :string(40)
+#  breed_restriction      :boolean
+#  weight_restriction     :boolean
+#  has_own_dogs           :boolean
+#  has_own_cats           :boolean
+#  children_under_five    :boolean
+#  has_fenced_yard        :boolean
+#  can_foster_puppies     :boolean
+#  parvo_house            :boolean
+#  admin_comment          :text
+#  is_photographer        :boolean
+#  writes_newsletter      :boolean
 #
 
 require 'digest'
@@ -81,19 +94,25 @@ class User < ActiveRecord::Base
   has_many :histories
   has_many :foster_dogs, :class_name => 'Dog', :foreign_key => 'foster_id'
   has_many :current_foster_dogs, :class_name => 'Dog', :foreign_key => 'foster_id', :conditions => {:status => ['adoptable', 'adoption pending', 'on hold', 'coming soon', 'return pending']}
-
   has_many :coordinated_dogs, :class_name => 'Dog', :foreign_key => 'coordinator_id', :conditions => {:status => ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']}
-
   has_many :comments
-
+  has_one :agreement, as: :attachable, class_name: 'Attachment' ,dependent: :destroy
+  accepts_nested_attributes_for :agreement
   has_many :assignments, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id'
-
   has_many :active_applications, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id', :conditions => {:status => ['new', 'pend response', 'workup', 'approved']}
   
   before_create :chimp_subscribe
-
   before_update :chimp_check
 
+  scope :active,                  -> { where(locked: false)}
+  scope :admin,                   -> { active.where(admin: true) }
+  scope :adoption_coordinator,    -> { active.where(edit_my_adopters: true)}
+  scope :event_planner,           -> { active.where(edit_events: true)}
+  scope :dog_adder,               -> { active.where(add_dogs: true)}
+  scope :dog_editor,              -> { active.where(edit_dogs: true)}
+  scope :foster,                  -> { active.where(is_foster: true)}
+  scope :photographer,            -> { active.where(is_photographer: true)}
+  scope :newsletter,              -> { active.where(writes_newsletter: true)}
 
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

@@ -4,13 +4,22 @@ class UsersController < ApplicationController
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user, :only => [:new, :create, :destroy]
 
+  has_scope :admin, :type => :boolean
+  has_scope :adoption_coordinator, :type => :boolean
+  has_scope :event_planner, :type => :boolean
+  has_scope :dog_adder, :type => :boolean
+  has_scope :dog_editor, :type => :boolean
+  has_scope :foster, :type => :boolean
+  has_scope :photographer, :type => :boolean
+  has_scope :newsletter, :type => :boolean
+
 
   def index
-    @title = "All OPH Staff"
+    @title = "Staff Directory"
     if params[:search]
       @users = User.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(:page => params[:page])
     else
-      @users = User.where(:locked => false).order("name").paginate(:page => params[:page])
+      @users = apply_scopes(User).active.order("name").paginate(:page => params[:page])
     end
   end
 
@@ -22,6 +31,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @title = "Add a Staff Account"
+    init_fields
   end
   
   def create
@@ -42,6 +52,8 @@ class UsersController < ApplicationController
 
   def edit
     @title = "Edit Profile"
+    @user = User.find(params[:id])
+    init_fields
   end
 
   def update
@@ -64,6 +76,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def init_fields
+      @user.build_agreement unless @user.agreement
+    end
 
     def correct_user
       @user = User.find(params[:id])

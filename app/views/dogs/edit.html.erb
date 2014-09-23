@@ -93,6 +93,12 @@
       </div>
     </div>
     <div class="control-group">
+      <%= f.label :adoption_date, "Adoption Date", :class => 'control-label'  %>
+      <div class="controls">
+        <%= f.text_field :adoption_date %>
+      </div>
+    </div>
+    <div class="control-group">
       <%= f.label :sponsored_by, "Sponsored by", :class => 'control-label' %>
       <div class="controls">
         <% if can_edit_dogs? %>

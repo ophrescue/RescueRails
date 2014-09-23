@@ -2,6 +2,7 @@
 # bundle install --without-production
 
 source 'https://rubygems.org'
+ruby '2.1.1'
 
 gem 'rails', '~> 3.2.19'
 
@@ -16,7 +17,6 @@ gem 'paperclip', '~> 4.1.1'
 gem 'aws-sdk', '~> 1.39.0'
 gem 'therubyracer', '~> 0.11.3', platform: :ruby
 gem 'geocoder', '~> 1.1.1'
-gem 'best_in_place', '~> 2.0.3'
 gem 'gibbon', '~> 1.1.1'
 gem 'exception_notification', '~> 3.0.1'
 gem 'acts_as_list', '~> 0.1.8'
@@ -24,6 +24,7 @@ gem 'strip_attributes', '~> 1.0'
 gem 'to_xls'
 gem 'roo'
 gem 'font-awesome-rails', '~> 4.1.0.0'
+gem 'has_scope'
 
 group :production do
   gem 'unicorn', '~> 4.6.0'

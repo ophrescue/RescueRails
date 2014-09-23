@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140112175057) do
+ActiveRecord::Schema.define(:version => 20140831180756) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -285,10 +285,10 @@ ActiveRecord::Schema.define(:version => 20140112175057) do
     t.timestamp "updated_at",             :limit => 6
     t.string    "encrypted_password"
     t.string    "salt"
-    t.boolean   "admin",                               :default => false
+    t.boolean   "admin",                                :default => false
     t.string    "password_reset_token"
     t.timestamp "password_reset_sent_at", :limit => 6
-    t.boolean   "is_foster",                           :default => false
+    t.boolean   "is_foster",                            :default => false
     t.string    "phone"
     t.string    "address1"
     t.string    "address2"
@@ -296,23 +296,37 @@ ActiveRecord::Schema.define(:version => 20140112175057) do
     t.string    "state"
     t.string    "zip"
     t.string    "duties"
-    t.boolean   "edit_dogs",                           :default => false
+    t.boolean   "edit_dogs",                            :default => false
     t.text      "share_info"
-    t.boolean   "edit_my_adopters",                    :default => false
-    t.boolean   "edit_all_adopters",                   :default => false
-    t.boolean   "locked",                              :default => false
-    t.boolean   "edit_events",                         :default => false
+    t.boolean   "edit_my_adopters",                     :default => false
+    t.boolean   "edit_all_adopters",                    :default => false
+    t.boolean   "locked",                               :default => false
+    t.boolean   "edit_events",                          :default => false
     t.string    "other_phone"
     t.datetime  "lastlogin"
     t.datetime  "lastverified"
-    t.boolean   "available_to_foster",                 :default => false
+    t.boolean   "available_to_foster",                  :default => false
     t.text      "foster_dog_types"
-    t.boolean   "complete_adopters",                   :default => false
-    t.boolean   "add_dogs",                            :default => false
-    t.boolean   "ban_adopters",                        :default => false
-    t.boolean   "dl_resources",                        :default => true
+    t.boolean   "complete_adopters",                    :default => false
+    t.boolean   "add_dogs",                             :default => false
+    t.boolean   "ban_adopters",                         :default => false
+    t.boolean   "dl_resources",                         :default => true
+    t.integer   "agreement_id"
+    t.string    "house_type",             :limit => 40
+    t.boolean   "breed_restriction"
+    t.boolean   "weight_restriction"
+    t.boolean   "has_own_dogs"
+    t.boolean   "has_own_cats"
+    t.boolean   "children_under_five"
+    t.boolean   "has_fenced_yard"
+    t.boolean   "can_foster_puppies"
+    t.boolean   "parvo_house"
+    t.text      "admin_comment"
+    t.boolean   "is_photographer",                      :default => false
+    t.boolean   "writes_newsletter",                    :default => false
   end
 
+  add_index "users", ["agreement_id"], :name => "index_users_on_agreement_id"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["name"], :name => "index_users_on_name"
 

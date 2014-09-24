@@ -2,7 +2,7 @@
 	<div class="span12">
 		<div class="article">
 
-		<h1>Sponsors & Contributors</h1>
+		<h1>Sponsors and Contributors</h1>
 
 		<p>Operation Paws for Homes is a 501(c)(3) organization and is 100% donor funded.
 		OPH receives no funding from federal, state, or county governments.  As a result, OPH 
@@ -18,199 +18,167 @@
 		them the opportunity to find caring, loving forever homes.  Saying thank you doesn’t 
 		seem to be enough for the support, but we do know it is a great start!</p>
 
+    <h3>Sporting Dog Sponsors - $1,000</h3>
 
-		<h3>Big Dog Sponsors</h3>
+    <% sponsors_1k = 
+        { url: "https://www.jezwater.com/", 
+          img: "jezwater.jpg"
+          },
+        { url: "http://www.lindsaycars.com", 
+          img: "lindsay-auto.jpg"
+          },
+        { url: "http://mydogsvoyce.com/", 
+          img: "voyce.jpg"
+          }
+    %>
 
-			<address>
-				<strong><a href="http://lawyersadvantage.com/">Lawyers Advantage</a></strong> <br>
-				8000 Main Street<br>
-				Ellicott City, MD 21043<br>
-			</address>
+    <% sponsors_1k.each_slice(3) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span4">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <img src="/assets/sponsors/<%= spon[:img] %>">
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
 
-			<address>
-				<strong><a href="http://www.jezwater.com/">JezWater</a></strong>
-			</address>
+    <h3>Herding Dog Sponsors - $500</h3>
 
-			<address>
-				<strong>Emerald Title and Escrow</strong> <br>
-				Gaithersburg, MD <br>
-				301-947-9080 <br>
-			</address>
+    <% sponsors_500 =
+      { url: "http://www.hermandorfer.com/",
+        img: "hermandorfer.jpg"
+      },
+      { url: "http://www.millertoyota.com/",
+        img: "miller-toyota.jpg"
+      },
+      {
+        url: "http://vienna.hopecenter.com/",
+        img: "hope_vienna.jpg"
+      }
+    %>
 
-			<address>
-				<strong>DVM Professional Corp</strong> <br>
-				Burke, VA <br>
-			</address>
+    <% sponsors_500.each_slice(3) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span4">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <img src="/assets/sponsors/<%= spon[:img] %>">
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
 
-			<address>
-				<strong><a href="http://www.hermandorfer.com">Hermandorfer & Associates</a></strong> <br>
-				Long & Foster  <br>
-				6045 Burke Centre Parkway  <br>
-				Burke, VA 22015  <br>
-			</address>
+    <h3>Working Dog Sponsors - $250</h3>
 
+    <% sponsors_250 =
+      { url: "https://www.novec.com/",
+        img: "novec.jpg"
+      },
+      { url: "http://www.walkingdogsva.com/",
+        img: "wtd_llc.png"
+      },
+      { url: "http://www.fvcbank.com/",
+        img: "fvcbank.jpg"
+      },
+      { url: "http://caringhandsvet.com/",
+        img: "ch_ah.jpg"
+      },
+      { url: "http://wildcalling.com/",
+        img: "wild_calling.jpg"
+      },
+      { url: "http://www.manassassubaru.com/index.htm",
+        img: "browns.jpg"
+      },
+      { url: "http://www.parkwayvetclinic.com/",
+        img: "parkway.png"
+      },
+      { url: "http://www.vetreferralcenter.com/index.htm",
+        img: "vetref.jpg"
+      },
+      { url: "https://www.gmmllc.com/jkinzer/",
+        img: "jkinzer.png"
+      },
+      { url: "http://novapetvet.com/",
+        img: "nvva.jpg"
+      },
+      { url: "http://www.unionstreetpublichouse.com/",
+        img: "union_street.jpg"
+      },
+      {
+        url: "https://www.facebook.com/pages/Emerald-Title-Escrow-Inc/349639139594",
+        img: "emerald.jpg",
+      },
+      {
+        url: "http://www.inmemoriampetservices.com/",
+        img: "in_memoriam.jpg",
+      }
+    %>
 
-			<address>
-				<strong><a href="www.mooreconstructiongroup.com">Moore Construction Group</a></strong> <br>
-			1-888-48-MOORE
-			</address>
+    <% sponsors_250.each_slice(3) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span4">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <img src="/assets/sponsors/<%= spon[:img] %>">
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
 
-			<address>
-				<strong><a href="www.parkwayvetclinic.com">Parkway Vet Clinic</a></strong> <br>
-				5743 Burke Centre Parkway <br>
-				Burke, VA 22015-2204 <br>
-			</address>
+    <h3>Hunting Dog Sponsors - $100</h3>
 
-			<address>
-				<strong><a href="http://novapetvet.com/">Northern Virginia Veterinary Associates</a></strong> <br>
-				Area hospitals with locations in Centreville, Chantilly, Fairfax Station, and Falls Church.<br>
+    <% sponsors_100 =
+      { url: "http://www.americandisposal.com",
+        img: "american_disposal.png"
+      },
+      { url: "http://www.valleyenergy.org/",
+        img: "valley_energy.jpg"
+      },
+      { url: "http://www.townandcountryanimalh.com/",
+        img: "tnc_anim_hosp.jpg"
+      },
+      { url: "http://www.clocktowervets.com/",
+        img: "clocktower.jpg"
+      },
+      { url: "http://www.affectionatepetcare.com/",
+        img: "affectionate_pc.jpg"
+      },
+      { url: "http://us.petvalu.com/location/5213",
+        img: "petvalu.jpg"
+      }
+    %>
 
-			</address>
-
-			<address>
-				<strong><a href="http://www.fvcbank.com/">First Virginia Community Bank</a></strong> <br>
-				Community bank with locations in Manassas, Reston, Arlington, and Fairfax, Virginia.<br>
-
-			</address>
-
-			<address>
-				<strong><a href="http://www.caringhandsvet.com/">Caring Hands Animal Hospital</a></strong> <br>
-				Full service veterinary in Alexandria, Arlington, Ashburn, Bristow, and Centreville, VA<br>
-				
-			</address>
-
-			<address>
-				<strong><a href="http://www.hopecenter.com/">The Hope Center</a></strong> <br>
-				140 Park St SE  <br>
-				Vienna, VA 22180<br>
-				(703) 281-5121<br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.petvalu.com/">PetValu</a></strong> <br>
-				5750 Union Mills Road <br>
-				Clifton, VA 20124<br>
-				(703) 266-3696 <br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.sunsetpetservices.com/">Sunset Pet Services</a></strong> <br>
-				5521 Vine St  <br>
-				Alexandria, VA 22310 <br>
-			</address>
-
-			<address>
-				<strong><a href="http://vitacoco.com/">Vita Coco</a></strong> <br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.forpetssakeofalexandria.com/">For Pets Sake</a></strong> <br>
-				1537 N Quaker Ln<br>
-				Alexandria, VA 22302<br>
-				(703) 931-2600 <br>
-			</address>
-
-
-		<h3>Medium Dog Sponsors</h3>
-
-			<address>
-				<strong><a href="http://www.valleyenergy.org/">Valley Energy</a></strong><br>
-				Purcellville, VA <br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.outdoorhomecenter.com/">Outdoor Home Center </a></strong><br>
-				Manassas, VA <br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.bankersinsurance.net/">Bankers Insurance</a></strong><br>
-				Fairfax, VA  <br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.novec.com/">NOVEC</a></strong><br>
-			</address>
-
-			<address> 
-				<strong><a href="http://www.americandisposal.com">American Disposal Services</a></strong> <br>
-				P.O. Box 1326 <br>
-				Centerville, VA 20122 <br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.kavaliro.com">Kavaliro</a></strong> <br>
-				Kavaliro is a full-service staffing agency specializing in technology. <br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.clocktowervets.com">Clocktower Vets</a></strong> <br>
-				2451 Centreville Road <br>
-				Herndon, Virginia 20171 <br>
-				703-713-1200 <br>
-			</address>
-
-			<address>
-				<strong>Jonathan and Kelly Carmack</strong> <br>
-				Proud parents of Misha (formerly Tiara while a foster dog with OPH!) <br>
-			</address>
-
-			<address>
-				<strong><a href="http://novapetvet.com/centreville-square-animal-hospital">Centreville Square Animal Clinic</a></strong> <br>
-				Centreville, Virginia  <br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.onestepabovellc.com/">One Step Above</a></strong> <br>
-				York, PA<br>
-			</address>
-
-
-			<address>
-				<strong><a href="http://www.yourdogsbestfriends.com/">Your Dog’s Best Friends Doggie Daycare</a></strong> <br>
-				Alexandria, Virginia<br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.academydoor.com/">Academy Door and Control Corp</a></strong> <br>
-				Chantilly, Virginia <br>
-			</address>
-
-			<address>
-				<strong>Matthew Shepard and James Johnson</strong> <br>
-			</address>
-
-			<address>
-				<strong><a href="http://phyllispatterson.com/">Phyllis Patterson Real Estate</a></strong> <br>
-				Alexandria, Virginia <br>
-			</address>
-
-			<address>
-				<strong>Ann Brody Cove</strong> <br>
-			</address>
-
-			<address>
-				<strong><a href="http://wesellsportinggoods.com/">W.E. Sell Sporting Goods</a></strong> <br>
-				Hanover, PA <br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.popchips.com/">PopChips</a></strong> <br>
-			</address>
-
-			<address>
-				<strong><a href="http://sitmeanssit.com/dog-training-mu/fairfax-dog-training/">Sit Means Sit</a></strong> <br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.thedogparkva.biz/">The Dog Park Boutique</a></strong> <br>
-				Alexandria, Virginia <br>
-			</address>
-
-			<address>
-				<strong><a href="http://www.otsfd.com/">Old Towne School for Dogs</a></strong> <br>
-				Alexandria, Virginia <br>
-			</address>
+    <% sponsors_100.each_slice(3) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span4">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <img src="/assets/sponsors/<%= spon[:img] %>">
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>    
 
 
 			<h2>Contributors</h2>

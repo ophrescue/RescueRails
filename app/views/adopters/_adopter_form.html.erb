@@ -2,11 +2,6 @@
   <table class="table table-striped table-bordered table-condensed">
     <tr>
       <td colspan="2">
-        <a id="toggle-edit" class="btn btn-primary">Edit Address Info</a>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
         <% if @adopter.adoption_app.is_ofage == false %>
           <span class="label label-warning">Under 21</span>
         <% end %>
@@ -115,7 +110,8 @@
     </tr>
     <tr>
       <td colspan="2">
-        <%= f.submit "Save Address Info", class: "btn adopter-save", disabled: "disabled" %>
+        <a id="toggle-edit" class="btn btn-primary">Edit Address</a>
+        <%= f.submit "Save Address", class: "btn adopter-save", disabled: "disabled" %>
       </td>
     </tr>
   </table>

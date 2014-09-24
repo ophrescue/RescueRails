@@ -28,7 +28,11 @@ class AdoptionsController < ApplicationController
   def update
     @adoption = Adoption.find(params[:id])
     @adoption.update_attributes(params[:adoption])
-    respond_with @adopter
+
+    respond_with(@adoption) do |format|
+      format.html { render }
+      format.json { render json: @adopter }
+    end
   end
 
   def destroy

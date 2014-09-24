@@ -10,9 +10,6 @@
 //= require jquery.ui.datepicker
 //= require jquery.ui.widget
 //= require jquery.ui.sortable
-//= require jquery.purr
-//= require best_in_place
-//= require best_in_place_hook
 //= require autocomplete-rails
 //= require bbq
 //= require jquery.form.wizard
@@ -23,6 +20,7 @@
 //= require jquery.maskedinput
 //= require msk_input.cfg
 //= require jquery.tokeninput
+//= require rescue_rails
 //= require dog_token
 //= require analytics
 //= require adoption_app_wizard
@@ -35,3 +33,4 @@
 //= require chosen-jquery
 //= require chosen-calls.js
 //= require photos.js.coffee
+//= require adoption_form

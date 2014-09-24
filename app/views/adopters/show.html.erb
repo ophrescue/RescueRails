@@ -5,134 +5,15 @@
     <h2><%= @adopter.name %></h2>
   </div>
 
-  <div class="span6 offset1">
-
-  </div>
+  <div class="span6 offset1"></div>
 </div>
 
 <div class="row">
-  <div class="span6">
-    <table class="table-striped table-bordered table-condensed">
-      <tr>
-        <td colspan="2">
-          <% if @adopter.adoption_app.is_ofage == false %>
-            <span class="label label-warning">Under 21</span>
-          <% end %>
-
-          <% if @adopter.adoption_app.pets_branch == "no_pets" %>
-            <span class="label label-warning">First Time Dog Owner</span>
-          <% end %>
-
-          <% if @adopter.adoption_app.max_hrs_alone > 5 %>
-            <span class="label label-warning"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span> 
-          <% else %>
-            <span class="label label-success"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span> 
-          <% end %>
-
-          <% if @adopter.adoption_app.current_pets_fixed == false %>
-            <span class="label label-important">Current Pets not Fixed</span> 
-          <% end %>
-
-          <% if @adopter.adoption_app.current_pets_fixed == true %>
-            <span class="label label-success">Current Pets Fixed</span> 
-          <% end %>
-
-          <% if @adopter.adoption_app.current_pets_uptodate == false %>
-            <span class="label label-important">Current Pets Need Shots</span> 
-          <% end %>
-
-          <% if @adopter.adoption_app.current_pets_uptodate == true %>
-            <span class="label label-success">Current Pets Up to Date</span> 
-          <% end %>
-
-          <% if @adopter.adoption_app.house_type == "own" %>
-            <span class="label label-success">Owns Home </span> 
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <th>Application Submitted</th>
-        <td><%= time_ago_in_words(@adopter.created_at) %> ago</td>
-      </tr>
-      <tr>
-        <th>E-mail</th>
-        <td><%= @adopter.email %></td>
-      </tr>
-      <tr>
-        <th>Primary Phone</th>
-        <td><%= @adopter.phone %></td>
-      </tr>
-      <% if @adopter.other_phone? %>
-        <tr>
-          <th>Other Phone</th>
-          <td><%= @adopter.other_phone %></td>
-        </tr>
-      <% end %>
-      <tr>
-        <th>Best Time to Call</th>
-        <td>
-          <%= @adopter.when_to_call %>
-        </td>
-      </tr>
-      <tr>
-        <th>Spouse's Name</th>
-        <td><%= @adopter.adoption_app.spouse_name %></td>
-      </tr>
-      <tr>
-        <th>Others in Household</th>
-        <td><%= @adopter.adoption_app.other_household_names %></td>
-      </tr>
-      <tr>
-        <th>Address</th>
-        <td>
-          <address>
-            <%= @adopter.address1 %><br />
-            <% if @adopter.address2? %>
-              <%= @adopter.address2 %><br />
-            <% end %>
-            <%= @adopter.city %>, 
-            <%= @adopter.state %> 
-            <%= @adopter.zip %>
-          </address>
-        </td>
-      </tr>
-      <tr>
-        <th>
-          Heard about us from
-        </th>
-        <td><%= @adopter.adoption_app.how_did_you_hear %></td>
-      </tr>
-      <tr>
-        <th>Flag:
-        </th>
-        <td id="edit_flag"><%= image_tag("pencil_go.png") %>
-          <%= best_in_place @adopter, :flag, :type => :select, :collection => [['Undefined', 'Undefined']].concat( Adopter::FLAGS.collect{|s| [s, s]} ), :nil => 'click to edit', :activator => '#edit_flag' %>
-
-        </td>
-      </tr>
-      <tr>
-        <th>
-          Assigned To:
-        </th>
-        <td id="edit_assigned"><%= image_tag("pencil_go.png") %>
-          <%= best_in_place @adopter, :assigned_to_user_id, :type => :select, :collection => [['No One', 'No One']].concat( @adopter_users.collect {|u| [u.id, u.name] }), :nil => 'click to edit', :activator => "#edit_assigned" %>
-
-        </td>
-      </tr>
-
-      <tr>
-        <th>Status <a href="/status_definitions" class="btn" target="_blank">?</a>
-        </th>
-        <td id="edit_status"><%= image_tag("pencil_go.png") %>
-          <%= best_in_place @adopter, :status, :type => :select, :collection => [['none', 'none']].concat( Adopter::STATUSES.collect{|s| [s, s]} ), :nil => 'click to edit', :activator => '#edit_status' %>
-        </td>
-      </tr>
-    </table>
-    <br />
+  <div class="span4">
+    <%= render 'adopter_form' %>
   </div>
 
-
-  <div class="span6">
+  <div class="span8">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#dog" data-toggle="tab">Dog Choices</a></li>
       <li><a href="#doginfo" data-toggle="tab">Dog Info</a></li>
@@ -144,188 +25,75 @@
       <% end %>
       <li><a href="#references" data-toggle="tab">References</a></li>
     </ul>
+
     <div class="pill-content">
       <div class="tab-content">
         <div id="dog" class="tab-pane active">
           <div class="row">
             <div class="span3">
-              <table class="table-striped table-bordered table-condensed">
-                <th>Dog Selections</th>
-                <td><%= image_tag("pencil_go.png") %><%= best_in_place @adopter, :dog_name %></td>
-                <tr>
-                  <th>Dog Requirements</th>
-                  <td><%= image_tag("pencil_go.png") %><%= best_in_place @adopter, :dog_reqs %></td>
-                </tr>
-              </table>
+              <%= render 'dog_choices' %>
             </div>
           </div>
-            <h3>Dogs</h3>
 
-          <%= form_for(@adopter.adoptions.build(:adopter_id => @adopter.id),:html => {:id => "new_dog_link"}) do |ad| %>
-            <fieldset>
-              <div class="control-group">
-                <%= ad.label :dog_id, "Associate Dog with Application", :class => "control-label" %>
-                <div class="controls">
-                  <%= ad.collection_select :dog_id, Dog.order(:name), :id, :name, {}%>
-                </div>
-              </div>
-              <div><%= ad.hidden_field :adopter_id %></div>
-              <div id="Navigation">
-                <%= ad.submit "Link Dog", :class => "btn btn-small btn-primary" %>
-              </div>
-            </fieldset>
-          <% end %>
-          <div id="linked_dogs_table">
-            <ul class="unstyled">
+          <h3>Dogs</h3>
+          <%= render 'associated_dogs_form' %>
+
+          <div id="linked_dogs_table" class="row">
             <% @adopter.adoptions.find_each do |adp| %>
-              <li><%=  link_to adp.dog.name, adp.dog %>
-              (<%= adp.dog.status %>), <%= @adopter.name %> status with this dog is <strong><%= best_in_place adp, :relation_type, :type => :select, :collection => Adoption::RELATION_TYPE.collect{|s| [s, s]}%></strong>
-                <%= form_for adp, :html => {:id => "delete_dog_link", :class => "delete_adoption", :style =>"display:inline!important;"}, :method => :delete do |f| %>
-                  <%= f.submit "X", :class => "btn btn-danger btn-small" %></li>
-                    <% end %>
+              <div class="span6">
+                <%= form_for adp, html: {method: :put}, format: :json do |f| %>
+                  <%=  link_to adp.dog.name, adp.dog %>
+                  (<%= adp.dog.status %>), 
+                  <%= @adopter.name %> status with this dog is 
+                  <%= f.select :relation_type, options_for_select(Adoption::RELATION_TYPE.collect{|s| [s, s]}, adp.relation_type), {}, class: 'input-medium' %>
+                  <div id="status-icon"></div>
+                <% end %>
+              </div>
+              <div class="span1">
+                <%= form_for adp, html: {id: "delete_dog_link", class: "delete_adoption"}, method: :delete do |f| %>
+                  <%= f.submit "X", class: "btn btn-danger btn-small" %>
+                <% end %>
+              </div>
             <% end %>
-            </ul>
           </div>
-      </div>
+        </div>
 
+        <div id="doginfo" class="tab-pane">
+          <%= render 'adopter_dog_info' %>
+        </div>
 
-      <div id="doginfo" class="tab-pane">
-        <table class="table-striped table-bordered table-condensed">
-          <tr>
-            <th>Ready to Adopt</th>
-            <td><%= image_tag("pencil_go.png") %>
-            <%= best_in_place @adoption_app, :ready_to_adopt_dt, :type => :date %>
-            </td>
-          </tr>
-          <tr>
-            <th>Dog Exercise</th>
-            <td><%= @adopter.adoption_app.dog_exercise %></td>
-          </tr>
-          <tr>
-            <th>When away, dog will stay: </th>
-            <td><%= @adopter.adoption_app.dog_stay_when_away %></td>
-          </tr>
-          <tr>
-            <th>Dealing with Dog and Vacation</th>
-            <td><%= @adopter.adoption_app.dog_vacation %></td>
-          </tr>
-          <tr>
-            <th>Surrendered Pet Causes</th>
-            <td><%= @adopter.adoption_app.surrender_pet_causes %></td>
-          </tr>
-          <tr>
-            <th>Would you use training?</th>
-            <td><%= @adopter.adoption_app.training_explain %></td>
-          </tr>
-          <tr>
-            <th>Surrendered Pets?</th>
-            <td><%= @adopter.adoption_app.surrendered_pets %></td>
-          </tr>
-          <tr>
-            <th>Why Adopt</th>
-            <td><%= @adopter.why_adopt %></td>
-          </tr>
-        </table>
-      </div>
+        <div id="references" class="tab-pane">
+          <%= render 'adopter_references' %>
+        </div>
 
-      <div id="references" class="tab-pane">
+        <div id="rental" class="tab-pane">
+          <%= render 'adopter_rental' %>
+        </div>
 
-        <table class="table-striped table-bordered table-condensed">
-          <thead>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>E-mail</th>
-            <th>Relationship</th>
-            <th>When to Call</th>
-          </thead>
-          <%= render @adopter.references, :target => @adopter %>
-        </table>
-      </div>
-
-      <div id="rental" class="tab-pane">
-
-        <table class="table-striped table-bordered table-condensed">
-          <tr>
-            <th>Landlord Name</th>
-            <td><%= @adopter.adoption_app.landlord_name %></td>
-          </tr>
-          <tr>
-            <th>Landlord's Phone</th>
-            <td><%= @adopter.adoption_app.landlord_phone %></td>
-          </tr>
-          <tr>
-            <th>Dog Restrictions at Rental</th>
-            <td><%= @adopter.adoption_app.rent_dog_restrictions %></td>
-          </tr>
-          <tr>
-            <th>Expected Rental Costs</th>
-            <td><%= @adopter.adoption_app.rent_costs %></td>
-          </tr>
-        </table>
-      </div>
-
-
-      <div id='otherpets' class="tab-pane">
-        <table class="table-striped table-bordered table-condensed">
-          <tr>
-            <th>Current Pets</th>
-            <td><%= @adopter.adoption_app.current_pets %></td>
-          </tr>
-          <tr>
-            <th>Vet Info</th>
-            <td><%= @adopter.adoption_app.vet_info %></td>
-          </tr>
-          <tr>
-            <th>Are current pets fixed?</th>
-            <td><%= @adopter.adoption_app.current_pets_fixed %></td>
-          </tr>
-          <tr>
-            <th>Why not fixed?</th>
-            <td><%= @adopter.adoption_app.why_not_fixed %></td>
-          </tr>
-          <tr>
-            <th>Are current pets up to date on shots?</th>
-            <td><%= @adopter.adoption_app.current_pets_uptodate %></td>
-          </tr>
-          <tr>
-            <th>Why not up to date</th>
-            <td><%= @adopter.adoption_app.current_pets_uptodate_why %></td>
-          </tr>
-
-        </table>
+        <div id='otherpets' class="tab-pane">
+          <%= render 'adopter_other_pets' %>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
-<br />
+
 <div class="row">
-
   <div class="span12">
-    <h4>Add Comment</h4>
 
-    <%= form_for [@adopter, @adopter.comments.build], :html => {:id => "new_comment"} do |f| %>
-      <%= f.text_area :content, :class => "input-xxlarge", :rows => "5" %>
-      <%= f.submit "Post", :class => "btn btn-primary" %>
-    <% end %>
+    <h4>Add Comment</h4>
+    <%= render 'adopter_comment_form' %>
+
     <h4>Past Comments</h4>
     <div id="comment_table">
-      <table id="comments" class="table table-striped table-bordered table-condensed table-hover">
-        <% @adopter.comments.each do |comment| %>
-          <% if comment.id != nil %>
-            <%= render 'comments/comment', :comment => comment %>
-          <% end %>
-        <% end %>
-      </table>
+      <%= render 'adopter_comments' %>
     </div>
 
   </div>
-
 </div>
 
 <script>
-  $(function () {
-    $('.tabs').tabs()
-  })
+  $(function() {
+    $('select#adoption_relation_type').live('change', RescueRails.saveParentForm);
+   });
 </script>
-

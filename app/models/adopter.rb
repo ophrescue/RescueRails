@@ -74,7 +74,7 @@ class Adopter < ActiveRecord::Base
 
   FLAGS = ['High', 'Low', 'On Hold']
 
-  AUDIT = %w(status flag dog_name)
+  AUDIT = %w(status flag name email phone address1 address2 city state zip)
 
   def dog_tokens=(ids)
     self.dog_ids = ids.split(',')
@@ -131,7 +131,7 @@ class Adopter < ActiveRecord::Base
       new_value  = send(attr)
       result << "#{attr} from #{old_value} to #{new_value}"
     end
-    result.join('\r')
+    result.join(' * ')
   end
 
   def chimp_subscribe

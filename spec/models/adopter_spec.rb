@@ -1,12 +1,15 @@
 require 'spec_helper'
 
 describe Adopter do
-  let!(:admin) { create(:user, :admin) }
-  let!(:adopter) { create(:adopter) }
+  let(:admin) { create(:user, :admin) }
+  let(:adopter) { create(:adopter) }
 
-  before(:each) do
-    Adopter.any_instance.stub(:chimp_check)
-    Adopter.any_instance.stub(:chimp_subscribe)
+  before do
+    Adopter.any_instance.stub(:chimp_check).and_return(true)
+    Adopter.any_instance.stub(:chimp_subscribe).and_return(true)
+    User.any_instance.stub(:chimp_subscribe).and_return(true)
+    User.any_instance.stub(:chimp_check).and_return(true)
+
     adopter.updated_by_admin_user = admin
     adopter.status = 'completed'
   end
@@ -35,8 +38,9 @@ describe Adopter do
 
     context 'many attributes have changed' do
       it 'cretes a human readable version' do
-        adopter.dog_name = 'fido'
-        expect(adopter.changes_to_sentence).to eq('status from new to completed\rdog_name from  to fido')
+        old_name = adopter.name
+        adopter.name = 'fido'
+        expect(adopter.changes_to_sentence).to eq("status from new to completed\\rname from #{old_name} to fido")
       end
     end
   end

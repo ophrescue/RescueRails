@@ -1,29 +1,30 @@
 <tr>
-	<td><%= adopter.id %></td>
-	<td><%= adopter.adoption_app.ready_to_adopt_dt.blank? ? " " : adopter.adoption_app.ready_to_adopt_dt.strftime('%m/%d/%y') %></td>
-	<td><%= adopter.flag %></td>
-	<% if (params[:status] == nil) || (params[:status] == "active")  %>
-		<td><%= adopter.status.titleize %></td>
-	<% end %>
-	<td><%= link_to adopter.name, adopter %></td>
-<!-- 	<td>
-		<% adopter.dogs.each do |d| %>
-			<%= link_to d.name, d %>
-			(<%= d.status %>)
-			<br />
-		<% end %>
-	</td> -->
-	<td><%= truncate(adopter.dog_name, :length => 30) %></td>
-	<td>
-		<% if adopter.user %>
-			<%=	link_to adopter.user.name, adopter.user %>
-		<% else %>
-		 	Unassigned
-		<% end %>
-	</td>
-	<% if adopter.comments.first %>
-	<td><%= truncate(adopter.comments.first.content, :length => 80) %></td>
-	<% else %>
-	<td>None</td>
-	<% end %>
+  <td><%= adopter.id %></td>
+  <td><%= adopter.adoption_app.ready_to_adopt_dt.blank? ? " " : adopter.adoption_app.ready_to_adopt_dt.strftime('%m/%d/%y') %></td>
+  <td><%= adopter.flag %></td>
+  <% if (params[:status] == nil) || (params[:status] == "active")  %>
+    <td><%= adopter.status.titleize %></td>
+  <% end %>
+  <td><%= link_to adopter.name, adopter %></td>
+<!--  <td>
+    <% adopter.dogs.each do |d| %>
+      <%= link_to d.name, d %>
+      (<%= d.status %>)
+      <br />
+    <% end %>
+  </td> -->
+  <td><%= truncate(adopter.dog_name, :length => 30) %></td>
+  <td>
+    <% if adopter.user %>
+      <%= link_to adopter.user.name, adopter.user %>
+    <% else %>
+      Unassigned
+    <% end %>
+  </td>
+  <% if adopter.comments.first %>
+  <td><%= adopter.comments.first.updated_at.strftime('%m/%d/%Y %l:%M%P') %></td>
+  <td><%= truncate(adopter.comments.first.content, :length => 80) %></td>
+  <% else %>
+  <td colspan="2">None</td>
+  <% end %>
 </tr>

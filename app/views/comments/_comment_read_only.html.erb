@@ -1,0 +1,11 @@
+<tr>
+  <td id="user_name">
+    <% if !comment.user %>
+      <strong>Deleted User</strong><br />
+    <% else %>
+      <strong><%= link_to comment.user.name, user_path(comment.user) %></strong><br />
+    <% end %>
+      <em><%= comment.created_at.strftime('%m/%d/%Y %l:%M%P') %></em>
+  </td>
+  <td><%= comment.content %></td>
+</tr>

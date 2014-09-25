@@ -49,114 +49,114 @@
 
 class Dog < ActiveRecord::Base
 
-	attr_accessor   :primary_breed_name,
-					:secondary_breed_name
+  attr_accessor   :primary_breed_name,
+          :secondary_breed_name
 
-	attr_accessible :name, 
-					:tracking_id, 
-					:primary_breed_id,
-					:primary_breed_name,
-					:secondary_breed_id,
-					:secondary_breed_name,
-					:status,
-					:age,
-					:size,
-					:is_altered,
-					:gender,
-					:is_special_needs,
-					:no_dogs,
-					:no_cats,
-					:no_kids,
-					:description,
-					:photos_attributes,
-					:foster_id,
-					:foster_start_date,
-					:adoption_date,
-					:is_uptodateonshots,
-					:intake_dt,
-					:available_on_dt,
-					:has_medical_need,
-					:is_high_priority,
-					:needs_photos,    
-					:has_behavior_problem,
-					:needs_foster,
-					:attachments_attributes,
-					:petfinder_ad_url,
-					:adoptapet_ad_url,
-					:craigslist_ad_url,
-					:youtube_video_url,
-					:first_shots,
-					:second_shots,
-					:third_shots,
-					:rabies,
-					:heartworm,
-					:bordetella,
-					:microchip,
-					:original_name,
-					:fee,
-					:coordinator_id,
-					:sponsored_by,
-					:shelter_id
+  attr_accessible :name, 
+          :tracking_id, 
+          :primary_breed_id,
+          :primary_breed_name,
+          :secondary_breed_id,
+          :secondary_breed_name,
+          :status,
+          :age,
+          :size,
+          :is_altered,
+          :gender,
+          :is_special_needs,
+          :no_dogs,
+          :no_cats,
+          :no_kids,
+          :description,
+          :photos_attributes,
+          :foster_id,
+          :foster_start_date,
+          :adoption_date,
+          :is_uptodateonshots,
+          :intake_dt,
+          :available_on_dt,
+          :has_medical_need,
+          :is_high_priority,
+          :needs_photos,    
+          :has_behavior_problem,
+          :needs_foster,
+          :attachments_attributes,
+          :petfinder_ad_url,
+          :adoptapet_ad_url,
+          :craigslist_ad_url,
+          :youtube_video_url,
+          :first_shots,
+          :second_shots,
+          :third_shots,
+          :rabies,
+          :heartworm,
+          :bordetella,
+          :microchip,
+          :original_name,
+          :fee,
+          :coordinator_id,
+          :sponsored_by,
+          :shelter_id
 
 
-	belongs_to :primary_breed, :class_name => 'Breed'
-	belongs_to :secondary_breed, :class_name => 'Breed'
+  belongs_to :primary_breed, :class_name => 'Breed'
+  belongs_to :secondary_breed, :class_name => 'Breed'
 
     has_many :comments, :as => :commentable, :order => "created_at DESC"
 
     has_many :attachments, :as => :attachable, :dependent => :destroy
     accepts_nested_attributes_for :attachments, :allow_destroy => true
 
-	has_many :photos, :dependent => :destroy, :order => "position"
-	accepts_nested_attributes_for :photos, :allow_destroy => true
+  has_many :photos, :dependent => :destroy, :order => "position"
+  accepts_nested_attributes_for :photos, :allow_destroy => true
 
-	belongs_to :foster, :class_name => "User"
-	belongs_to :coordinator, :class_name => "User"	
+  belongs_to :foster, :class_name => "User"
+  belongs_to :coordinator, :class_name => "User"  
 
-	has_many :adoptions, :dependent => :destroy
-	has_many :adopters, :through => :adoptions
+  has_many :adoptions, :dependent => :destroy
+  has_many :adopters, :through => :adoptions
 
-	belongs_to :shelter
+  belongs_to :shelter
 
-	validates :name, :presence => true,
-					 :length   => { :maximum => 75 },
-					 :uniqueness => { :case_sensitive => false }
+  validates :name, :presence => true,
+           :length   => { :maximum => 75 },
+           :uniqueness => { :case_sensitive => false }
 
-	validates :tracking_id, :uniqueness => true,
-							:presence => true
+  validates :tracking_id, :uniqueness => true,
+              :presence => true
 
-	validates_presence_of :status
-
-
-	STATUSES = ['adoptable', 'adopted', 'adoption pending',
-				'on hold', 'not available', 'return pending', 'coming soon', 'completed']
-	validates_inclusion_of :status, :in => STATUSES
-
-	AGES = ['baby', 'young', 'adult', 'senior']		
-	validates_inclusion_of :age, :in => AGES, :allow_blank => true
-
-	SIZES = ['small', 'medium', 'large','extra large']	
-	validates_inclusion_of :size, :in => SIZES, :allow_blank => true
-	
-	GENDERS = ['Male', 'Female']
-	validates_inclusion_of :gender, :in => GENDERS, :allow_blank => true
+  validates_presence_of :status
 
 
-	before_save :update_adoption_date
+  STATUSES = ['adoptable', 'adopted', 'adoption pending',
+        'on hold', 'not available', 'return pending', 'coming soon', 'completed']
+  validates_inclusion_of :status, :in => STATUSES
+
+  AGES = ['baby', 'young', 'adult', 'senior']   
+  validates_inclusion_of :age, :in => AGES, :allow_blank => true
+
+  SIZES = ['small', 'medium', 'large','extra large']  
+  validates_inclusion_of :size, :in => SIZES, :allow_blank => true
+  
+  GENDERS = ['Male', 'Female']
+  validates_inclusion_of :gender, :in => GENDERS, :allow_blank => true
+
+
+  before_save :update_adoption_date
 
 
 
-	def update_adoption_date
-		return unless self.status_changed?
-		return unless self.status != 'completed'
+  def update_adoption_date
+    return unless self.status_changed?
+    return unless self.status != 'completed'
 
-		if (self.status == 'adopted')
-			self.adoption_date = Date.today()
-		else
-			self.adoption_date = nil
-		end
+    if (self.status == 'adopted')
+      self.adoption_date = Date.today()
+    else
+      self.adoption_date = nil
+    end
 
-	end
+  end
 
 end
 

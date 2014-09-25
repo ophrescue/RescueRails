@@ -11,20 +11,6 @@ describe AdoptersController do
     end
 
   describe "POST 'create'" do
-    describe "failure" do
-      
-      before(:each) do
-        @attr = { :name => "", :email => "", :password => "",
-                  :password_confirmation => "" }
-      end
-      
-      it "should not create a user" do
-        lambda do
-          post :create, :user => @attr
-        end.should_not change(User, :count)
-      end
-      
-    end
 
     describe "success" do
 

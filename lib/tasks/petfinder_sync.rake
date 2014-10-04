@@ -4,12 +4,12 @@ namespace :petfinder_sync do
   require 'net/ftp'
 
   desc "TODO Export Petfinder Records to CSV and Top 3 Photos"
-  task :export_records => :environment do
+  task export_records: :environment do
     path = "/tmp/"
     filename = 'petfinder_' + Date.today.to_s + '.csv'   #TODO Change to PetFinder Format
 
-    dogs = Dog.where(:status => "adoptable")     #TODO Change Filter
-    CSV.open(path + filename, "wt", :force_quotes => "true", :col_sep => ",") do |csv|
+    dogs = Dog.where(status: "adoptable")     #TODO Change Filter
+    CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
 
       dogs.each do |d|
         csv << [d.id.to_s, 
@@ -41,7 +41,7 @@ namespace :petfinder_sync do
   end
 
   desc "FTP Upload to Petfinder"
-  task :upload_files => :environment do
+  task upload_files: :environment do
   end
 
 end

@@ -144,7 +144,20 @@ class Dog < ActiveRecord::Base
 
   before_save :update_adoption_date
 
-
+  def to_pf(status)
+    case status
+    when "adoptable"
+      return "A"
+    when "adoption pending"
+      return "P"
+    when "on hold"
+      return "H"
+    when "return pending"
+      return "H"
+    when "coming soon"
+      return "H"
+    end
+  end
 
   def update_adoption_date
     return unless self.status_changed?

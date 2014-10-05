@@ -6,9 +6,9 @@ namespace :petfinder_sync do
   desc "TODO Export Petfinder Records to CSV and Top 3 Photos"
   task export_records: :environment do
     path = "/tmp/"
-    filename = 'petfinder_' + Date.today.to_s + '.csv'   #TODO Change to PetFinder Format
+    filename = 'VA600.csv'
 
-    dogs = Dog.where(status: "adoptable")     #TODO Change Filter
+    dogs = Dog.where({ status: ["adoptable", "adoption pending", "on hold", "return pending", "coming soon"]})
     CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
 
       dogs.each do |d|
@@ -22,7 +22,7 @@ namespace :petfinder_sync do
                 d.age,
                 d.description,
                 "Dog",
-                d.status,                   #TODO Convert to PetFinder Format
+                d.to_pf(d.status),   #Feel like this should look like d.status.to_pf
                 "",                         #Shots
                 d.is_altered ? "1" : "",         #Altered
                 d.no_dogs ? "1" : "",            #NoDogs

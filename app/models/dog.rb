@@ -132,6 +132,15 @@ class Dog < ActiveRecord::Base
         'on hold', 'not available', 'return pending', 'coming soon', 'completed']
   validates_inclusion_of :status, :in => STATUSES
 
+  PETFINDER_STATUS = 
+  {
+    "adoptable" => "A",
+    "adoption pending" => "P",
+    "on hold" => "H",
+    "return pending" => "H",
+    "coming soon" => "H"
+  }.freeze
+
   AGES = ['baby', 'young', 'adult', 'senior']   
   validates_inclusion_of :age, :in => AGES, :allow_blank => true
 
@@ -144,19 +153,8 @@ class Dog < ActiveRecord::Base
 
   before_save :update_adoption_date
 
-  def to_pf(status)
-    case status
-    when "adoptable"
-      return "A"
-    when "adoption pending"
-      return "P"
-    when "on hold"
-      return "H"
-    when "return pending"
-      return "H"
-    when "coming soon"
-      return "H"
-    end
+  def to_petfinder_status
+    PETFINDER_STATUS[self.status]
   end
 
   def update_adoption_date

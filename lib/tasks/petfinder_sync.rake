@@ -22,7 +22,7 @@ namespace :petfinder_sync do
                 d.age,
                 d.description,
                 "Dog",
-                d.to_pf(d.status),   #Feel like this should look like d.status.to_pf
+                d.to_petfinder_status,   #Feel like this should look like d.status.to_pf
                 "",                         #Shots
                 d.is_altered ? "1" : "",         #Altered
                 d.no_dogs ? "1" : "",            #NoDogs

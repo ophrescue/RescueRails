@@ -20,7 +20,7 @@ namespace :petfinder_sync do
                 d.gender,
                 d.size,
                 d.age,
-                d.description,
+                d.description.gsub("\n", "&#10"),
                 "Dog",
                 d.to_petfinder_status,
                 "",                         #Shots

@@ -43,6 +43,7 @@ namespace :petfinder_sync do
                 ]
           ## Photo Export Code
           counter = 0
+          d.photos.sort!{|a,b| b.updated_at <=> a.updated_at }
           d.photos[0..2].each do |p|
             counter += 1
             begin 

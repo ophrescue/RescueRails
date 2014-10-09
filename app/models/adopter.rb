@@ -128,7 +128,7 @@ class Adopter < ActiveRecord::Base
     changed.each do |attr|
       next if AUDIT.exclude?(attr)
       if attr == "assigned_to_user_id"
-        new_value =  user.present? ? user.name : "No One"
+        new_value = user.present? ? user.name : "No One"
         result << "assigned application to #{new_value}"
       else
         old_value = send("#{attr}_was")

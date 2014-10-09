@@ -122,13 +122,6 @@
 <%= form_for @adopter, html: { class: 'form-horizontal' } do |f| %>
   <table class="table-striped table-bordered table-condensed">
     <tr>
-      <th>Flag:
-      </th>
-      <td>
-        <%= f.select :flag, [['Undefined', 'Undefined']].concat( Adopter::FLAGS.collect{|s| [s, s]} ) %>
-      </td>
-    </tr>
-    <tr>
       <th>
         Assigned To:
       </th>

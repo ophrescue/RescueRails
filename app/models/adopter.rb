@@ -74,7 +74,7 @@ class Adopter < ActiveRecord::Base
 
   FLAGS = ['High', 'Low', 'On Hold']
 
-  AUDIT = %w(status flag assigned_to_user_id email phone address1 address2 city state zip)
+  AUDIT = %w(status assigned_to_user_id email phone address1 address2 city state zip)
 
   def dog_tokens=(ids)
     self.dog_ids = ids.split(',')

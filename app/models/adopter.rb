@@ -74,7 +74,7 @@ class Adopter < ActiveRecord::Base
 
   FLAGS = ['High', 'Low', 'On Hold']
 
-  AUDIT = %w(status flag name email phone address1 address2 city state zip)
+  AUDIT = %w(status flag assigned_to_user_id email phone address1 address2 city state zip)
 
   def dog_tokens=(ids)
     self.dog_ids = ids.split(',')
@@ -119,7 +119,7 @@ class Adopter < ActiveRecord::Base
   end
 
   def audit_content
-    content = "#{updated_by_admin_user.name} has changed "
+    content = "#{updated_by_admin_user.name} has "
     content += changes_to_sentence
   end
 
@@ -127,9 +127,14 @@ class Adopter < ActiveRecord::Base
     result = []
     changed.each do |attr|
       next if AUDIT.exclude?(attr)
-      old_value = send("#{attr}_was")
-      new_value  = send(attr)
-      result << "#{attr} from #{old_value} to #{new_value}"
+      if attr == "assigned_to_user_id"
+        new_value = user.name
+        result << "assigned application to #{new_value}"
+      else
+        old_value = send("#{attr}_was")
+        new_value  = send(attr)
+        result << "changed #{attr} from #{old_value} to #{new_value}"
+      end
     end
     result.join(' * ')
   end

@@ -214,7 +214,12 @@
 				<h4>Attachments</h4>
 				<ul class="unstyled">
 					<% @dog.attachments.each do |a| %>
-						<li><i class="icon-file"></i><%= link_to a.attachment_file_name, a.download_url %></li>
+						<li>
+              <%= link_to a.download_url do %>
+                <i class="fa fa-cloud-download"></i>
+              <% end %>
+              <%= link_to a.attachment_file_name, a %>
+            </li>
 					<% end %>
 				</ul>
 			<% end %>

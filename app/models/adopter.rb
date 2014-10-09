@@ -74,7 +74,7 @@ class Adopter < ActiveRecord::Base
 
   FLAGS = ['High', 'Low', 'On Hold']
 
-  AUDIT = %w(status flag assigned_to_user_id email phone address1 address2 city state zip)
+  AUDIT = %w(status assigned_to_user_id email phone address1 address2 city state zip)
 
   def dog_tokens=(ids)
     self.dog_ids = ids.split(',')
@@ -128,7 +128,7 @@ class Adopter < ActiveRecord::Base
     changed.each do |attr|
       next if AUDIT.exclude?(attr)
       if attr == "assigned_to_user_id"
-        new_value = user.name
+        new_value =  user.present? ? user.name : "No One"
         result << "assigned application to #{new_value}"
       else
         old_value = send("#{attr}_was")

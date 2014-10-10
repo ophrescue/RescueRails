@@ -112,6 +112,7 @@ class Adopter < ActiveRecord::Base
 
   def audit_changes
     return if updated_by_admin_user.blank?
+    return unless changed?
 
     comment = Comment.new(content: audit_content)
     comment.user = updated_by_admin_user

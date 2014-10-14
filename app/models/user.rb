@@ -72,8 +72,18 @@ class User < ActiveRecord::Base
                   :duties,
                   :share_info,
                   :available_to_foster,
-                  :foster_dog_types
-  
+                  :foster_dog_types,
+                  :house_type,
+                  :breed_restriction,
+                  :weight_restriction,
+                  :has_own_dogs,
+                  :has_own_cats,
+                  :children_under_five,
+                  :has_fenced_yard,
+                  :can_foster_puppies,
+                  :parvo_house
+
+
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates :name,  :presence   => true,

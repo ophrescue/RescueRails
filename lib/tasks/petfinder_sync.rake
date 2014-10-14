@@ -5,13 +5,18 @@ namespace :petfinder_sync do
   require 'open-uri'
   require 'fileutils'
 
+  path = "/tmp/petfinder/"
+  photo_path = path + "photos/"
+  filename = 'VA600.csv'
+
   desc "Export Petfinder Records to CSV and Top 3 Photos"
   task export_records: :environment do
-    path = "/tmp/petfinder/"
-    filename = 'VA600.csv'
 
     FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
     FileUtils::Verbose.mkdir(path)
+
+    FileUtils::Verbose.rm_r(photo_path) if Dir.exists?(photo_path)
+    FileUtils::Verbose.mkdir(photo_path)
 
     dogs = Dog.where({ status: ["adoptable", "adoption pending", "on hold", "return pending", "coming soon"]})
     CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
@@ -49,9 +54,9 @@ namespace :petfinder_sync do
             begin 
               open(p.photo.url(:large)).read
             rescue OpenURI::HTTPError => error
-                puts "Photo not found"
+                puts "Photo not found for dog " + d.id.to_s
             else 
-                open(path + d.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
+                open(photo_path + d.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
                    file << open(p.photo.url(:large)).read
                  end
             end
@@ -61,7 +66,21 @@ namespace :petfinder_sync do
   end
 
   desc "FTP Upload to Petfinder"
-  task upload_files: :environment do
+  task upload: :environment do
+
+    ftp = Net::FTP.new
+    ftp.connect('members.petfinder.com',21)
+    ftp.login(ENV['PETFINDER_FTP_USER'], ENV['PETFINDER_FTP_PW'])
+    ftp.chdir('/import/')
+    ftp.putbinaryfile(path + filename, filename)
+    ftp.chdir('/import/photos/')
+
+    Dir.foreach(photo_path) do |file|
+      next if file == '.' or file == '..'
+      ftp.putbinaryfile(photo_path + file, file)
+    end
+
+    ftp.close
   end
 
 end

@@ -4,7 +4,7 @@ RescueRails::Application.routes.draw do
   match "/dogs/switch_view" => "dogs#switch_view"
 
   resources :adopters do
-    resources :comments
+    resources :comments, except: %i(destroy edit update)
     resources :adoptions
   end
 

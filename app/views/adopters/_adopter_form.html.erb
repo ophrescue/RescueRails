@@ -122,18 +122,11 @@
 <%= form_for @adopter, html: { class: 'form-horizontal' } do |f| %>
   <table class="table-striped table-bordered table-condensed">
     <tr>
-      <th>Flag:
-      </th>
-      <td>
-        <%= f.select :flag, [['Undefined', 'Undefined']].concat( Adopter::FLAGS.collect{|s| [s, s]} ) %>
-      </td>
-    </tr>
-    <tr>
       <th>
         Assigned To:
       </th>
       <td>
-        <%= f.select(:assigned_to_user_id, [['No One', 'No One']].concat( @adopter_users.collect {|u| [u.name, u.id] }), {}, { class: 'input-medium' }) %>
+        <%= f.select(:assigned_to_user_id, [['No One', nil]].concat( @adopter_users.collect {|u| [u.name, u.id] }), {}, { class: 'input-medium' }) %>
       </td>
     </tr>
     <tr>

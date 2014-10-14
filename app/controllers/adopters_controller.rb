@@ -74,6 +74,7 @@ class AdoptersController < ApplicationController
       flash[:error] = "You are not allowed to set an application to completed"
     else
       @adopter = Adopter.find(params[:id])
+      @adopter.updated_by_admin_user = current_user
       @adopter.update_attributes(params[:adopter])
       flash[:success] = "Application Updated"
     end

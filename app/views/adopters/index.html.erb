@@ -1,74 +1,74 @@
 <div class="row">
-	<div class="span12">
-		<h1><%= @title %></h1>
-		<ul class="nav nav-pills">
-		  <li class="active"><a href="#">My Apps</a></li>
-		  <li><a href="#">Open Apps</a></li>
-		  <li><a href="#">All Apps</a></li>
-		</ul>
-	</div>
+  <div class="span12">
+    <h1><%= @title %></h1>
+    <ul class="nav nav-pills">
+      <li class="active"><a href="#">My Apps</a></li>
+      <li><a href="#">Open Apps</a></li>
+      <li><a href="#">All Apps</a></li>
+    </ul>
+  </div>
 </div>
 
 <div class="row">
-	<div class="span12">
-		<ul class="nav nav-tabs">
-			<% Adopter::STATUSES.each do |status| %>
-			  <% if status == params[:status] %>
-			  	<li class="active">
-			  <% else %>
-			    <li>
-			  <% end %>		  
-			    <%= link_to status.titleize, :controller => "adopters", :status => status %>
-			  </li>
-			<% end %>
-				<% if params[:status] == nil %>
-					<li class="active">
-				<% else %>
-					<li>
-				<% end %>
-				<%= link_to "All", adopters_path %>
-			</li>
-			<% if params[:status] == "active" %>
-				<li class="active">
-			<% else %>
-				<li>	
-			<% end %>
-				<%= link_to "Active", :controller => "adopters", :status => "active" %>
-			</li>
-		</ul>
-	</div>
+  <div class="span12">
+    <ul class="nav nav-tabs">
+      <% Adopter::STATUSES.each do |status| %>
+        <% if status == params[:status] %>
+        <li class="active">
+    <% else %>
+        <li>
+    <% end %>
+      <%= link_to status.titleize, :controller => "adopters", :status => status %>
+      </li>
+    <% end %>
+      <% if params[:status] == nil %>
+        <li class="active">
+    <% else %>
+        <li>
+    <% end %>
+      <%= link_to "All", adopters_path %>
+      </li>
+      <% if params[:status] == "active" %>
+        <li class="active">
+    <% else %>
+        <li>
+    <% end %>
+      <%= link_to "Active", :controller => "adopters", :status => "active" %>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <%= form_tag adopters_path, :method => 'get' do %>
   <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
+<%= text_field_tag :search, params[:search] %>
+<%= submit_tag "Search", :name => nil %>
+</p>
 <% end %>
 
 <% if !@adopters.nil? %>
 
-<table class="table-striped table-bordered table-condensed" id="adopt-sort">
-	<thead>
-		<tr>
-			<th>id</th>
-			<th>RTA</th>
-			<th>Flag</th>
-			<% if (params[:status] == nil) || (params[:status] == "active")%>
-			<th>Status</th>
-			<% end %>
-			<th>Name</th>
-			<th>Dogs</th>
-			<th>Assigned To</th>
-			<th>Last Comment</th>
-		</tr>
-	</thead>
-	<tbody>
-	<%= render @adopters %>
-	</tbody>
+  <table class="table-striped table-bordered table-condensed" id="adopt-sort">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>RTA</th>
+      <% if (params[:status] == nil) || (params[:status] == "active")%>
+        <th>Status</th>
+    <% end %>
+      <th>Name</th>
+      <th>Dogs</th>
+      <th>Assigned To</th>
+      <th>Last Comment Date</th>
+      <th>Last Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= render @adopters %>
+  </tbody>
 </table>
 <% else %>
-<h3>No Records Found</h3>
+  <h3>No Records Found</h3>
 <% end %>
 
 

@@ -13,6 +13,7 @@
 		<% end %>
 	</td>
 	<td><%= dog.age.titleize %></td>
+  <td><%= dog.size.titleize %></td>
 	<td>
 		<% if dog.has_medical_need %>
 			<%= image_tag "has_medical_need.gif", :title => "Medical Need", :size => "18x18" %>

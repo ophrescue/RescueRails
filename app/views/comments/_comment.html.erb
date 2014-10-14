@@ -1,18 +1,11 @@
-<% if !comment.user %>
-  <tr>
-    <td id="user_name"><strong>Deleted User</strong><br />
-      <em><%= comment.created_at.strftime('%m/%d/%Y %l:%M%P') %></em>
-    </td>
-    <td><%= simple_format(comment.content) %>
-    </td>
-  </tr>
-<% else %>
 <tr>
-  <td id="user_name"><strong><%= link_to comment.user.name, user_path(comment.user) %></strong><br />
-    <em><%= comment.created_at.strftime('%m/%d/%Y %l:%M%P') %></em>
+  <td id="user_name">
+    <% if !comment.user %>
+      <strong>Deleted User</strong><br />
+    <% else %>
+      <strong><%= link_to comment.user.name, user_path(comment.user) %></strong><br />
+    <% end %>
+      <em><%= comment.created_at.strftime('%m/%d/%Y %l:%M%P') %></em>
   </td>
-  <td>
-      <%= simple_format(comment.content) %>
-  </td>
-
-<% end %>
+  <td><%= simple_format(comment.content) %></td>
+</tr>

@@ -1,7 +1,7 @@
 <table id="comments" class="table table-striped table-bordered table-condensed table-hover">
   <% @adopter.comments.each do |comment| %>
     <% if comment.id != nil %>
-      <%= render 'comments/comment_read_only', :comment => comment %>
+      <%= render 'comments/comment', :comment => comment %>
     <% end %>
   <% end %>
 </table>

@@ -52,6 +52,8 @@ gem 'jquery-rails', '~> 2.0.3'
 gem 'jquery-ui-rails', '~> 2.0.2'
 
 gem 'newrelic_rpm'
+gem 'rollbar', '~> 1.1.0'
+gem 'sucker_punch', '~> 1.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

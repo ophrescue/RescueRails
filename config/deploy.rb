@@ -29,6 +29,10 @@ set :log_level, :debug
 # Default value for :pty is false, use passwordless sudo
 set :pty, false
 
+set :rollbar_token, ENV['ROLLBAR_ACCESS_TOKEN']
+set :rollbar_env, Proc.new { fetch :stage }
+set :rollbar_role, Proc.new { :app }
+
 # what specs should be run before deployment is allowed to
 # continue, see lib/capistrano/tasks/run_tests.cap
 #If you were to have this as set :tests, []

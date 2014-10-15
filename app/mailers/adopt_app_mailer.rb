@@ -7,7 +7,7 @@ class AdoptAppMailer < ActionMailer::Base
   	@destination_email = Rails.env.production? ? "adopt@ophrescue.org" : "admin@ophrescue.org"
   	@adopter = Adopter.find(adopter_id)
     mail(:to => @destination_email,
-  		 :reply_to => "#{@adopter.name} <#{@adopter.email}>",
+  		 :reply_to => "#{@adopter.email}",
        :subject =>     "PLEASE RESPOND #{@adopter.name} for #{@adopter.dog_name} [OPH Adoption]",
     	 :content_type => "text/html")
   end

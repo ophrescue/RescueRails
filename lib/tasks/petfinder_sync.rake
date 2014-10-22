@@ -9,8 +9,8 @@ namespace :petfinder_sync do
   photo_path = path + "photos/"
   filename = 'VA600.csv'
 
-  desc "Export Petfinder Records to CSV and Top 3 Photos"
-  task export_records: :environment do
+  desc "Export Records to CSV with Top 3 Photos, upload to Petfinder"
+  task export_upload: :environment do
 
     FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
     FileUtils::Verbose.mkdir(path)
@@ -63,11 +63,8 @@ namespace :petfinder_sync do
           end
       end
     end
-  end
 
-  desc "FTP Upload to Petfinder"
-  task upload: :environment do
-
+    ## Being Upload
     ftp = Net::FTP.new
     ftp.connect('members.petfinder.com',21)
     ftp.login(ENV['PETFINDER_FTP_USER'], ENV['PETFINDER_FTP_PW'])

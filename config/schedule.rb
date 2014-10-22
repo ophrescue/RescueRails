@@ -6,7 +6,10 @@
 
 set :output, 'log/whenever.log'
 
+job_type :rbenv_rake, %Q{export PATH=/opt/rbenv/shims:/opt/rbenv/bin:/usr/bin:$PATH; eval "$(rbenv init -)"; \
+                         cd :path && :environment_variable=:environment bundle exec rake :task --silent :output }
+
+
 every :day, at: '2:30am' do
-  rake "petfinder_sync:export_records"
-  rake "petfinder_sync:upload"
+  rbenv_rake "petfinder_sync:export_upload"
 end

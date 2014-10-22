@@ -6,7 +6,7 @@
 
 set :output, 'log/whenever.log'
 
-job_type :rbenv_rake, %Q{export PATH=/opt/rbenv/shims:/opt/rbenv/bin:/usr/bin:$PATH; eval "$(rbenv init -)"; \
+job_type :rbenv_rake, %Q{export PATH=/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin:/usr/bin:$PATH; eval "$(rbenv init -)"; \
                          cd :path && :environment_variable=:environment bundle exec rake :task --silent :output }
 
 

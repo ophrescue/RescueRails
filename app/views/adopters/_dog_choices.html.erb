@@ -1,6 +1,11 @@
 <table class="table table-striped table-bordered table-condensed">
   <th>Dog Selections</th>
-  <td><%= @adopter.dog_name %></td>
+  <td>
+    <%= form_for @adopter, format: :json, html: { class: 'form-horizontal' } do |f| %>
+      <%= f.text_field :dog_name %>
+      <div id="status-icon" class=""></div>
+    <% end %>
+  </td>
   <tr>
     <th>Dog Requirements</th>
     <td><%= @adopter.dog_reqs %></td>

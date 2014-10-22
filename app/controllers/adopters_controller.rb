@@ -24,11 +24,12 @@ class AdoptersController < ApplicationController
       @adopters = Adopter.find(:all, :include => [:user, :comments, :dogs, :adoption_app])
     end
 
+    session[:last_search] = request.url
     # @adopters = Adopter.paginate(:page => params[:page])
   end
 
   def show
-    session[:return_to] ||= request.referer
+    session[:last_search] ||= adopters_url
     @adopter = Adopter.find(params[:id])
     @adoption_app = @adopter.adoption_app
     @title = @adopter.name

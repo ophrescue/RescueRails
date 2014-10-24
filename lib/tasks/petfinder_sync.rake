@@ -12,6 +12,8 @@ namespace :petfinder_sync do
   desc "Export Records to CSV with Top 3 Photos, upload to Petfinder"
   task export_upload: :environment do
 
+    puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Petfinder Export Start"
+
     FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
     FileUtils::Verbose.mkdir(path)
 
@@ -27,10 +29,10 @@ namespace :petfinder_sync do
                 d.name,
                 d.primary_breed ? d.primary_breed.name : "",
                 d.secondary_breed ? d.secondary_breed.name : "",
-                d.gender,
-                d.size,
-                d.age,
-                d.description.gsub("\n", "&#10"),
+                d.to_petfinder_gender,
+                d.to_petfinder_size,
+                d.age.titleize,
+                d.description.gsub(/[\r]+/, "&#10;"),
                 "Dog",
                 d.to_petfinder_status,
                 "",                              #Shots
@@ -64,12 +66,16 @@ namespace :petfinder_sync do
       end
     end
 
+    puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Petfinder Export Completed"
+    puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Begin Upload"
+
     ## Being Upload
     ftp = Net::FTP.new
     ftp.connect('members.petfinder.com',21)
     ftp.login(ENV['PETFINDER_FTP_USER'], ENV['PETFINDER_FTP_PW'])
     ftp.chdir('/import/')
     ftp.putbinaryfile(path + filename, filename)
+
     ftp.chdir('/import/photos/')
 
     Dir.foreach(photo_path) do |file|
@@ -78,6 +84,7 @@ namespace :petfinder_sync do
     end
 
     ftp.close
+    puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Upload Completed"
   end
 
 end

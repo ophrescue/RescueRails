@@ -141,6 +141,20 @@ class Dog < ActiveRecord::Base
     "coming soon" => "H"
   }.freeze
 
+  PETFINDER_SIZE =
+  {
+    "small" => "S",
+    "medium" => "M",
+    "large" => "L",
+    "extra large" => "XL"
+  }.freeze
+
+  PETFINDER_GENDER =
+  {
+    "Male" => "M",
+    "Female" => "F"
+  }
+
   AGES = ['baby', 'young', 'adult', 'senior']   
   validates_inclusion_of :age, :in => AGES, :allow_blank => true
 
@@ -155,6 +169,14 @@ class Dog < ActiveRecord::Base
 
   def to_petfinder_status
     PETFINDER_STATUS[self.status]
+  end
+
+  def to_petfinder_size
+    PETFINDER_SIZE[self.size]
+  end
+
+  def to_petfinder_gender
+    PETFINDER_GENDER[self.gender]
   end
 
   def update_adoption_date

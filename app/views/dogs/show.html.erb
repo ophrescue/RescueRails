@@ -1,256 +1,258 @@
 <div class="row">
-	<div class="span12">
-		<h5><%= link_to "Available Dogs", :controller => "dogs", :status => "active"  %></h5>
-			<h1><%= @dog.name %></h1>
-			<h3><%= @dog.primary_breed.name unless !@dog.primary_breed %></h3>
-			<% if @dog.sponsored_by? %>
-				<h5><em>Sponsored by <%= @dog.sponsored_by %></em></h5>
-			<% end %>
-	</div>
+  <div class="span12">
+    <h5><%= link_to "Available Dogs", :controller => "dogs", :status => "active"  %></h5>
+    <h1><%= @dog.name %></h1>
+    <h3><%= @dog.primary_breed.name unless !@dog.primary_breed %></h3>
+    <% if @dog.sponsored_by? %>
+      <h5><em>Sponsored by <%= @dog.sponsored_by %></em></h5>
+  <% end %>
+  </div>
 </div>
+
 <div class="row">
-	<div class="span8">
-		<div id="galleria">
-		  	<% if @dog.photos == []  %>
-				<%= image_tag("no_photo-205x195.png", :alt => @dog.name) %>
-			<% else %>
-				<% for photo in @dog.photos %>
-					<%= link_to image_tag(photo.photo.url(:medium)), photo.photo.url(:original) %>
-				<% end %>
-			<% end %>
-			<% if !@dog.youtube_video_url.blank? %>
-				<%= link_to content_tag(:span, "Watch on YouTube", :class => "video"), @dog.youtube_video_url %>
-			<% end %>
-		</div>
-		<div class="fb-like" data-href="<%= request.url %>" data-send="true" data-width="250" data-show-faces="false"></div>
-
-		<div id="dogDescription" class="well">
-			<p> <%= simple_format(@dog.description) %></p>
-		</div>
-
-<% if signed_in? %>
-<div class="row">
-	<div class="span8">
-		<h4>Private Comments</h4>
-
-		<%= form_for [@dog, @dog.comments.build], :html => {:id => "new_comment"} do |f| %>
-				<%= f.text_area :content, :class => "input-xxlarge", :rows => "6" %>
-			<%= f.submit "Post", :class => "btn btn-primary" %>
-		<% end %>
-
-    <div id="comment_table">
-      <table class="table table-striped table-bordered table-condensed table-hover">
-        <% @dog.comments.each do |comment| %>
-            <% if comment.id != nil %>
-                <%= render 'comments/comment', :comment => comment %>
-              <% end %>
+  <div class="span8">
+    <div id="galleria">
+      <% if @dog.photos.public.empty?  %>
+        <%= image_tag("no_photo-205x195.png", :alt => @dog.name) %>
+      <% else %>
+        <% for photo in @dog.photos.public %>
+          <%= link_to image_tag(photo.photo.url(:medium)), photo.photo.url(:original) %>
         <% end %>
-      </table>
+      <% end %>
+
+      <% if !@dog.youtube_video_url.blank? %>
+        <%= link_to content_tag(:span, "Watch on YouTube", :class => "video"), @dog.youtube_video_url %>
+      <% end %>
     </div>
-	</div>
-</div>
-<% end %>
 
-	</div>
+    <div class="fb-like" data-href="<%= request.url %>" data-send="true" data-width="250" data-show-faces="false"></div>
 
-	<div class="span4">
-		<h3>About <%= @dog.name.titleize %></h3>
+    <div id="dogDescription" class="well">
+      <p> <%= simple_format(@dog.description) %></p>
+    </div>
 
-		<% if @dog.foster && !@dog.foster.city.blank? && !@dog.foster.state.blank? %>
-			<h5>Fostered in <%= @dog.foster.city.titleize %>, <%= @dog.foster.state.upcase %></h5>
-		<% end %>
+    <% if signed_in? %>
+      <div class="row">
+        <div class="span8">
+          <h4>Private Comments</h4>
 
+          <%= form_for [@dog, @dog.comments.build], :html => {:id => "new_comment"} do |f| %>
+            <%= f.text_area :content, :class => "input-xxlarge", :rows => "6" %>
+            <%= f.submit "Post", :class => "btn btn-primary" %>
+          <% end %>
 
-		<ul class="unstyled">
-			<li>ID:  <%= @dog.tracking_id %></li>
-			<li><%= @dog.status.titleize %> (<a href="/dog-status-definitions" target="_blank">What does this mean?</a>)</li>
-			<li><%= @dog.age.titleize %></li>
-			<li><%= @dog.size.titleize %></li>
-			<li><%= @dog.gender.titleize %></li>
-			<li><%= @dog.primary_breed.name unless !@dog.primary_breed %></li>
-			<li><%= @dog.secondary_breed.name unless !@dog.secondary_breed %></li>
-
-			<% if @dog.is_uptodateonshots %>
-				<li>Up To Date On Shots</li>
-			<% end %>
-
-			<% if @dog.is_altered %>
-				<li>Already Spayed/Neutered</li>
-			<% end %>
-
-			<% if @dog.is_special_needs %>
-				<li>Special Needs</li>
-			<% end %>
-
-			<% if @dog.no_dogs %>
-				<li>Not good with other dogs</li>
-			<% end %>
-
-			<% if @dog.no_cats %>
-				<li>Not good with cats</li>
-			<% end %>
-
-			<% if @dog.no_kids %>
-				<li>Not good for homes with small children</li>
-			<% end %>
-
-		</ul>
-
-		<br />
-
-		<% case @dog.status   %>
-		<%	 when 'adoptable', 'adoption pending', 'coming soon'  %>
-		 <%=   link_to "Adopt Me!", new_adopter_path(:dog_name => @dog.name), :class => "btn btn-primary btn-large"  %>
-		 <% end %>
-		
-
-		<% if can_edit_dogs? || is_fostering_dog? %>
-				<%= link_to "Edit Dog", edit_dog_path(@dog), :class => "btn btn-primary btn-large" %>
-		<% end %>
-
-		<br />
-		<br />
-
-			<a href="/sponsor"><img src="/assets/paypal-sponsor-button.png"></a>
-
-		<br />
-		<% if signed_in? %>
-			<h4>Private Information</h4>
-			<% if !@dog.original_name.blank? %>
-			    Original Name: <%= @dog.original_name.titleize %><br />
-			<% end %>
-			<% if !@dog.microchip.blank? %>
-				Microchip: <%= @dog.microchip %><br />
-			<% end %>
-			<% if !@dog.fee.blank? %>
-				Adoption Fee: $<%= @dog.fee %><br />
-			<% end %>
-			<% if @dog.has_medical_need %>
-				<%= image_tag "has_medical_need.gif" %>Has Medical Need<br />
-			<% end %>
-			<% if !@dog.is_altered %>
-				<%= image_tag "needs_alter.gif" %>Needs Spay or Neuter<br />
-			<% end %>
-			<% if @dog.is_high_priority %>
-				<%= image_tag "is_high_priority.gif" %>High Priority<br />
-			<% end %>
-			<% if @dog.needs_photos %>
-				<%= image_tag "needs_photos.gif" %>Needs Photos<br />
-			<% end %>
-			<% if @dog.has_behavior_problem %>
-				<%= image_tag "has_behavior_problem.gif" %>Has Behavior Problem<br />
-			<% end %>
-			<% if @dog.needs_foster %>
-				<%= image_tag "needs_foster.gif" %>Needs Foster<br />
-			<% end %>
-
-
-
-			<br />
-			<% if @dog.foster_id %>
-				<strong>Foster</strong><br />
-				<%= link_to @dog.foster.name, user_path(@dog.foster) %><br />
-				<%= @dog.foster.address1 %><br />
-				<%= @dog.foster.city %>, <%= @dog.foster.state %><br />
-				<%= @dog.foster.phone %><br />
-			<% else %>
-				<p>No Foster Assigned</p>
-			<% end %>
-
-			<br />
-			<% if @dog.coordinator_id %>
-				<strong>Adoption Coordinator</strong><br />
-				<%= link_to @dog.coordinator.name, user_path(@dog.coordinator) %>
-			<% else %>
-				<p>No Adoption Coordinator Assigned</p>
-			<% end %>
-
-			<br />
-			<% if @dog.shelter_id %>
-				<p><strong>Source Shelter:</strong> <%= @dog.shelter.name %></p>
-			<% else %>
-				<p>No Source Shelter Assigned</p>
-			<% end %>
-
-			<br />
-			<% if @dog.adopters.count > 0 %>
-				<h4>Adopter Info</h4>
-				<ul>
-				<% @dog.adopters.each do |a| %>
-					<li><%= link_to a.name, a %> - <%= a.status %></li>
-				<% end %>
-				</ul>
-			<% end %>
-
-      <h4>Dates</h4>
-      <ul class="unstyled">
-        <li><%= "Available: " + @dog.available_on_dt.strftime("%m/%d/%Y") unless @dog.available_on_dt.blank?  %></li>
-        <li><%= "Intake: " + @dog.intake_dt.strftime("%m/%d/%Y") unless @dog.intake_dt.blank?  %></li>
-        <li><%= "Adopted: " + @dog.adoption_date.strftime("%m/%d/%Y") unless @dog.adoption_date.blank?  %></li>
-
-      </ul>
-
-			<h4>Ads</h4>
-			<ul class="unstyled">
-				<% if !@dog.petfinder_ad_url.blank? %>
-					<li><%= link_to "Petfinder", @dog.petfinder_ad_url %></li>
-				<% else %>
-					<li><span class="label label-important">Needs Petfinder Ad</span></li>
-				<% end %>
-				<% if !@dog.adoptapet_ad_url.blank? %>
-					<li><%= link_to "Adopt-A-Pet", @dog.adoptapet_ad_url %></li>
-				<% else %>
-					<li><span class="label label-important">Needs Adopt-A-Pet Ad</span></li>
-				<% end %>
-				<% if !@dog.craigslist_ad_url.blank? %>
-					<li><%= link_to "Craigslist", @dog.craigslist_ad_url %></li>
-				<% else %>
-					<li><span class="label label-important">Needs Craigslist Ad</span></li>
-				<% end %>
-			</ul>
-
-
-			<% if !@dog.attachments.blank? %>
-				<h4>Attachments</h4>
-				<ul class="unstyled">
-					<% @dog.attachments.each do |a| %>
-						<li>
-              <%= link_to a.download_url do %>
-                <i class="fa fa-cloud-download"></i>
+          <div id="comment_table">
+            <table class="table table-striped table-bordered table-condensed table-hover">
+              <% @dog.comments.each do |comment| %>
+                <% if comment.id != nil %>
+                  <%= render 'comments/comment', :comment => comment %>
+                <% end %>
               <% end %>
-              <%= link_to a.attachment_file_name, a %>
-            </li>
-					<% end %>
-				</ul>
-			<% end %>
-			<br />
-			<h4>Shot Records</h4>
-				<h5>1st Shots</h5>
-				<p><%= @dog.first_shots %></p>
+            </table>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-				<h5>2nd Shots</h5>
-				<p><%= @dog.second_shots %></p>
+  <div class="span4">
+    <h3>About <%= @dog.name.titleize %></h3>
 
-				<h5>3rd Shots</h5>
-				<p><%= @dog.third_shots %></p>
+    <% if @dog.foster && !@dog.foster.city.blank? && !@dog.foster.state.blank? %>
+      <h5>Fostered in <%= @dog.foster.city.titleize %>, <%= @dog.foster.state.upcase %></h5>
+    <% end %>
 
-				<h5>Rabies</h5>
-				<p><%= @dog.rabies %></p>
 
-				<h5>Heartworm</h5>
-				<p><%= @dog.heartworm %></p>
+    <ul class="unstyled">
+      <li>ID:  <%= @dog.tracking_id %></li>
+      <li><%= @dog.status.titleize %> (<a href="/dog-status-definitions" target="_blank">What does this mean?</a>)</li>
+      <li><%= @dog.age.titleize %></li>
+      <li><%= @dog.size.titleize %></li>
+      <li><%= @dog.gender.titleize %></li>
+      <li><%= @dog.primary_breed.name unless !@dog.primary_breed %></li>
+      <li><%= @dog.secondary_breed.name unless !@dog.secondary_breed %></li>
 
-				<h5>Bordetella</h5>
-				<p><%= @dog.bordetella %></p>
+      <% if @dog.is_uptodateonshots %>
+        <li>Up To Date On Shots</li>
+    <% end %>
 
-		<% end %>
-	</div>
+      <% if @dog.is_altered %>
+        <li>Already Spayed/Neutered</li>
+    <% end %>
+
+      <% if @dog.is_special_needs %>
+        <li>Special Needs</li>
+    <% end %>
+
+      <% if @dog.no_dogs %>
+        <li>Not good with other dogs</li>
+    <% end %>
+
+      <% if @dog.no_cats %>
+        <li>Not good with cats</li>
+    <% end %>
+
+      <% if @dog.no_kids %>
+        <li>Not good for homes with small children</li>
+    <% end %>
+
+    </ul>
+
+    <br />
+
+    <% case @dog.status   %>
+    <%   when 'adoptable', 'adoption pending', 'coming soon'  %>
+      <%=   link_to "Adopt Me!", new_adopter_path(:dog_name => @dog.name), :class => "btn btn-primary btn-large"  %>
+  <% end %>
+
+
+    <% if can_edit_dogs? || is_fostering_dog? %>
+      <%= link_to "Edit Dog", edit_dog_path(@dog), :class => "btn btn-primary btn-large" %>
+  <% end %>
+
+    <br />
+    <br />
+
+    <a href="/sponsor"><img src="/assets/paypal-sponsor-button.png"></a>
+
+    <br />
+    <% if signed_in? %>
+      <h4>Private Information</h4>
+    <% if !@dog.original_name.blank? %>
+      Original Name: <%= @dog.original_name.titleize %><br />
+  <% end %>
+    <% if !@dog.microchip.blank? %>
+      Microchip: <%= @dog.microchip %><br />
+  <% end %>
+    <% if !@dog.fee.blank? %>
+      Adoption Fee: $<%= @dog.fee %><br />
+  <% end %>
+    <% if @dog.has_medical_need %>
+      <%= image_tag "has_medical_need.gif" %>Has Medical Need<br />
+  <% end %>
+    <% if !@dog.is_altered %>
+      <%= image_tag "needs_alter.gif" %>Needs Spay or Neuter<br />
+  <% end %>
+    <% if @dog.is_high_priority %>
+      <%= image_tag "is_high_priority.gif" %>High Priority<br />
+  <% end %>
+    <% if @dog.needs_photos %>
+      <%= image_tag "needs_photos.gif" %>Needs Photos<br />
+  <% end %>
+    <% if @dog.has_behavior_problem %>
+      <%= image_tag "has_behavior_problem.gif" %>Has Behavior Problem<br />
+  <% end %>
+    <% if @dog.needs_foster %>
+      <%= image_tag "needs_foster.gif" %>Needs Foster<br />
+  <% end %>
+
+
+
+    <br />
+    <% if @dog.foster_id %>
+      <strong>Foster</strong><br />
+    <%= link_to @dog.foster.name, user_path(@dog.foster) %><br />
+    <%= @dog.foster.address1 %><br />
+    <%= @dog.foster.city %>, <%= @dog.foster.state %><br />
+    <%= @dog.foster.phone %><br />
+  <% else %>
+      <p>No Foster Assigned</p>
+  <% end %>
+
+    <br />
+    <% if @dog.coordinator_id %>
+      <strong>Adoption Coordinator</strong><br />
+    <%= link_to @dog.coordinator.name, user_path(@dog.coordinator) %>
+  <% else %>
+      <p>No Adoption Coordinator Assigned</p>
+  <% end %>
+
+    <br />
+    <% if @dog.shelter_id %>
+      <p><strong>Source Shelter:</strong> <%= @dog.shelter.name %></p>
+  <% else %>
+      <p>No Source Shelter Assigned</p>
+  <% end %>
+
+    <br />
+    <% if @dog.adopters.count > 0 %>
+      <h4>Adopter Info</h4>
+    <ul>
+      <% @dog.adopters.each do |a| %>
+        <li><%= link_to a.name, a %> - <%= a.status %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+    <h4>Dates</h4>
+    <ul class="unstyled">
+      <li><%= "Available: " + @dog.available_on_dt.strftime("%m/%d/%Y") unless @dog.available_on_dt.blank?  %></li>
+      <li><%= "Intake: " + @dog.intake_dt.strftime("%m/%d/%Y") unless @dog.intake_dt.blank?  %></li>
+      <li><%= "Adopted: " + @dog.adoption_date.strftime("%m/%d/%Y") unless @dog.adoption_date.blank?  %></li>
+
+    </ul>
+
+    <h4>Ads</h4>
+    <ul class="unstyled">
+      <% if !@dog.petfinder_ad_url.blank? %>
+        <li><%= link_to "Petfinder", @dog.petfinder_ad_url %></li>
+    <% else %>
+        <li><span class="label label-important">Needs Petfinder Ad</span></li>
+    <% end %>
+      <% if !@dog.adoptapet_ad_url.blank? %>
+        <li><%= link_to "Adopt-A-Pet", @dog.adoptapet_ad_url %></li>
+    <% else %>
+        <li><span class="label label-important">Needs Adopt-A-Pet Ad</span></li>
+    <% end %>
+      <% if !@dog.craigslist_ad_url.blank? %>
+        <li><%= link_to "Craigslist", @dog.craigslist_ad_url %></li>
+    <% else %>
+        <li><span class="label label-important">Needs Craigslist Ad</span></li>
+    <% end %>
+    </ul>
+
+
+    <% if !@dog.attachments.blank? %>
+      <h4>Attachments</h4>
+    <ul class="unstyled">
+      <% @dog.attachments.each do |a| %>
+        <li>
+      <%= link_to a.download_url do %>
+        <i class="fa fa-cloud-download"></i>
+    <% end %>
+      <%= link_to a.attachment_file_name, a %>
+      </li>
+    <% end %>
+    </ul>
+  <% end %>
+    <br />
+    <h4>Shot Records</h4>
+    <h5>1st Shots</h5>
+    <p><%= @dog.first_shots %></p>
+
+    <h5>2nd Shots</h5>
+    <p><%= @dog.second_shots %></p>
+
+    <h5>3rd Shots</h5>
+    <p><%= @dog.third_shots %></p>
+
+    <h5>Rabies</h5>
+    <p><%= @dog.rabies %></p>
+
+    <h5>Heartworm</h5>
+    <p><%= @dog.heartworm %></p>
+
+    <h5>Bordetella</h5>
+    <p><%= @dog.bordetella %></p>
+
+  <% end %>
+  </div>
 </div>
 
 
 <script>
-    $('#galleria').galleria({
-    	responsive: true,
-    	imageCrop: false
-    });
+$('#galleria').galleria({
+responsive: true,
+imageCrop: false
+});
 </script>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140831180756) do
+ActiveRecord::Schema.define(:version => 20141029025221) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -249,6 +249,7 @@ ActiveRecord::Schema.define(:version => 20140831180756) do
     t.timestamp "created_at",         :limit => 6
     t.timestamp "updated_at",         :limit => 6
     t.integer   "position"
+    t.boolean   "is_private",                      :default => false
   end
 
   add_index "photos", ["dog_id"], :name => "index_photos_on_dog_id"

@@ -24,7 +24,7 @@ namespace :petfinder_sync do
     CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
 
       dogs.each do |d|
-        csv << [d.id.to_s, 
+        csv << [d.id.to_s,
                 d.tracking_id.to_s,
                 d.name,
                 d.primary_breed ? d.primary_breed.name : "",
@@ -44,20 +44,23 @@ namespace :petfinder_sync do
                 "",                              #Declawed
                 d.is_special_needs ? "1" : "",   #specialNeeds
                 "",                              #Mix
-                d.photos.count >= 1 ? d.id.to_s + "-1.jpg" : "", #Photo1 filename
-                d.photos.count >= 2 ? d.id.to_s + "-2.jpg" : "", #Photo2 filename
-                d.photos.count >= 3 ? d.id.to_s + "-3.jpg" : ""  #Photo3 filename
+                d.photos.public.count >= 1 ? d.id.to_s + "-1.jpg" : "", #Photo1 filename
+                d.photos.public.count >= 2 ? d.id.to_s + "-2.jpg" : "", #Photo2 filename
+                d.photos.public.count >= 3 ? d.id.to_s + "-3.jpg" : ""  #Photo3 filename
                 ]
+
           ## Photo Export Code
+          next if d.photos.public.empty?
+
           counter = 0
-          d.photos.sort!{|a,b| b.updated_at <=> a.updated_at }
-          d.photos[0..2].each do |p|
+          d.photos.public.sort!{|a,b| b.updated_at <=> a.updated_at }
+          d.photos.public[0..2].each do |p|
             counter += 1
-            begin 
+            begin
               open(p.photo.url(:large)).read
             rescue OpenURI::HTTPError => error
                 puts "Photo not found for dog " + d.id.to_s
-            else 
+            else
                 open(photo_path + d.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
                    file << open(p.photo.url(:large)).read
                  end

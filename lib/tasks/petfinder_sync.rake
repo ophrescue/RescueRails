@@ -20,6 +20,10 @@ namespace :petfinder_sync do
     FileUtils::Verbose.rm_r(photo_path) if Dir.exists?(photo_path)
     FileUtils::Verbose.mkdir(photo_path)
 
+    desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs/"
+    desc_suffix1 = "To adopt this dog, or any OPH dog, fill out the simple online application at https://ophrescue.org &#10;"
+    desc_siffix2 = "Operation Paws for Homes, Inc. (OPH) rescues dogs of all breeds and ages from high-kill shelters  in NC, VA, MD, and SC, reducing the numbers being euthanized. With limited resources, the shelters are forced to put down 50-90% of the animals that come in the front door. OPH provides pet adoption services to families located in VA, DC, MD, PA and neighboring states. OPH is a 501(c)(3) organization and is 100% donor funded.  OPH does not operate a shelter or have a physical location. We rely on foster families who open their homes to give love and attention to each dog before finding a forever home."
+
     dogs = Dog.where({ status: ["adoptable", "adoption pending", "on hold", "return pending", "coming soon"]})
     CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
 
@@ -32,7 +36,7 @@ namespace :petfinder_sync do
                 d.to_petfinder_gender,
                 d.to_petfinder_size,
                 d.age.titleize,
-                d.description.gsub(/\r\n?/, "&#10;"),
+                desc_prefix + d.id.to_s + "&#10;&#10;" + d.description.gsub(/\r\n?/, "&#10;") + "&#10;" + desc_suffix1 + desc_siffix2,
                 "Dog",
                 d.to_petfinder_status,
                 "",                              #Shots

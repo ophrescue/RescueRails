@@ -1,60 +1,60 @@
 <div class="row">
-	<div class="span4">
-		<h1><%= @title %></h1>
-	</div>
-	<div class="span4 offset4">
-	<% if signed_in? %>
-			<% if can_add_dogs? %>
-				<%= link_to "Add a Dog", new_dog_path, :class => "btn btn-primary" %>
-			<% end %>
+  <div class="span4">
+    <h1><%= @title %></h1>
+  </div>
+  <div class="span4 offset4">
+  <% if signed_in? %>
+      <% if can_add_dogs? %>
+        <%= link_to "Add a Dog", new_dog_path, :class => "btn btn-primary" %>
+      <% end %>
 
-			<% if session[:mgr_view] == true %>
-				<%= link_to("Gallery View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
-			<% else %>
-				<%= link_to("Manager View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
-			<% end %>
-	<% end %>
+      <% if session[:mgr_view] == true %>
+        <%= link_to("Gallery View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
+      <% else %>
+        <%= link_to("Manager View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
+      <% end %>
+  <% end %>
 </div>
 </div>
 
 
 <div class="row">
-	<div class="span12">
-		<% if signed_in? && session[:mgr_view] == true %>
-			<%= render 'manager' %>
-		<% else %>
-			<%= will_paginate @dogs %>
-			<% @dogs.each_slice(3) do |slice| %>
-				<div class="row">
-					<div class="span12 gallery">
-						<ul class="thumbnails">
-							<% slice.each do |dog| %>
-					 			 <li class="span4">
-									<%= link_to dog, :class => "thumbnail" do %>
-					    			  	<% if dog.photos == [] %>
-											<%= image_tag("no_photo-320x320.png", :alt => dog.name) %>
-										<% elsif dog.primary_breed %>
-											<%= image_tag(dog.photos.first.photo.url(:medium), :alt => dog.primary_breed.name)  %> 
-										<% else %>
-											<%= image_tag(dog.photos.first.photo.url(:medium), :alt => dog.name)  %> 
-										<% end %>
-										<h4><%= dog.name.titleize %></h4>
-										<p>
-											<strong><%= dog.status.titleize %></strong><br />
-											<%= dog.primary_breed.name.titleize unless !dog.primary_breed %><br />
-											<%= dog.secondary_breed.name.titleize unless !dog.secondary_breed %><br />
-											<% if dog.foster && !dog.foster.city.blank? && !dog.foster.state.blank? %>
-												<%= dog.foster.city.titleize %>, <%= dog.foster.state.upcase %><br />
-											<% end %>
-										</p>
-									<% end %>
-								</li>
-							<% end %>
-						</ul>
-					</div>
-				</div>
-			<% end %>
-			<%= will_paginate @dogs %>
-		<% end %>
-	</div>
+  <div class="span12">
+    <% if signed_in? && session[:mgr_view] == true %>
+      <%= render 'manager' %>
+    <% else %>
+      <%= will_paginate @dogs %>
+      <% @dogs.each_slice(3) do |slice| %>
+        <div class="row">
+          <div class="span12 gallery">
+            <ul class="thumbnails">
+              <% slice.each do |dog| %>
+                 <li class="span4">
+                  <%= link_to dog, :class => "thumbnail" do %>
+                    <% if dog.photos.public.empty? %>
+                      <%= image_tag("no_photo-320x320.png", :alt => dog.name) %>
+                    <% elsif dog.primary_breed %>
+                      <%= image_tag(dog.photos.public.first.photo.url(:medium), :alt => dog.primary_breed.name)  %> 
+                    <% else %>
+                      <%= image_tag(dog.photos.public.first.photo.url(:medium), :alt => dog.name)  %> 
+                    <% end %>
+                    <h4><%= dog.name.titleize %></h4>
+                    <p>
+                      <strong><%= dog.status.titleize %></strong><br />
+                      <%= dog.primary_breed.name.titleize unless !dog.primary_breed %><br />
+                      <%= dog.secondary_breed.name.titleize unless !dog.secondary_breed %><br />
+                      <% if dog.foster && !dog.foster.city.blank? && !dog.foster.state.blank? %>
+                        <%= dog.foster.city.titleize %>, <%= dog.foster.state.upcase %><br />
+                      <% end %>
+                    </p>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+      <%= will_paginate @dogs %>
+    <% end %>
+  </div>
 </div>

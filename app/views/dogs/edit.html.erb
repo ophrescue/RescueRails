@@ -287,6 +287,10 @@
               </td>
               <td>
                 <label class="checkbox ">
+                  <%= photo.check_box :is_private %>
+                  <span>Private Photo</span>
+                </label>
+                <label class="checkbox ">
                   <%= photo.check_box :_destroy %>
                   <span>Delete Photo</span>
                 </label>

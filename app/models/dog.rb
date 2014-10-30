@@ -102,10 +102,10 @@ class Dog < ActiveRecord::Base
   belongs_to :primary_breed, :class_name => 'Breed'
   belongs_to :secondary_breed, :class_name => 'Breed'
 
-    has_many :comments, :as => :commentable, :order => "created_at DESC"
+  has_many :comments, :as => :commentable, :order => "created_at DESC"
 
-    has_many :attachments, :as => :attachable, :dependent => :destroy
-    accepts_nested_attributes_for :attachments, :allow_destroy => true
+  has_many :attachments, :as => :attachable, :dependent => :destroy
+  accepts_nested_attributes_for :attachments, :allow_destroy => true
 
   has_many :photos, :dependent => :destroy, :order => "position"
   accepts_nested_attributes_for :photos, :allow_destroy => true

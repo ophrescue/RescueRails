@@ -32,15 +32,15 @@ describe Adopter do
   describe '#changes_to_sentence' do
     context 'an attribute changes' do
       it 'creates a human readable version' do
-        expect(adopter.changes_to_sentence).to eq('status from new to completed')
+        expect(adopter.changes_to_sentence).to eq('changed status from new to completed')
       end
     end
 
     context 'many attributes have changed' do
       it 'cretes a human readable version' do
-        old_name = adopter.name
-        adopter.name = 'fido'
-        expect(adopter.changes_to_sentence).to eq("status from new to completed\\rname from #{old_name} to fido")
+        old_zip = adopter.zip
+        adopter.zip = old_zip + '-1'
+        expect(adopter.changes_to_sentence).to eq("changed status from new to completed * changed zip from #{old_zip} to #{old_zip}-1")
       end
     end
   end

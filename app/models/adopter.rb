@@ -111,12 +111,20 @@ class Adopter < ActiveRecord::Base
   before_update :chimp_check
 
   def audit_changes
+    return unless audit_attributes_changed?
     return if updated_by_admin_user.blank?
-    return unless changed?
 
     comment = Comment.new(content: audit_content)
     comment.user = updated_by_admin_user
     comments <<  comment
+  end
+
+  def audit_attributes_changed?
+    changed_audit_attributes.present?
+  end
+
+  def changed_audit_attributes
+    changed & AUDIT
   end
 
   def audit_content
@@ -126,8 +134,7 @@ class Adopter < ActiveRecord::Base
 
   def changes_to_sentence
     result = []
-    changed.each do |attr|
-      next if AUDIT.exclude?(attr)
+    changed_audit_attributes.each do |attr|
       if attr == "assigned_to_user_id"
         new_value = user.present? ? user.name : "No One"
         result << "assigned application to #{new_value}"

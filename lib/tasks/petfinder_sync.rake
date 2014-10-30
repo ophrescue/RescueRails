@@ -32,7 +32,7 @@ namespace :petfinder_sync do
                 d.to_petfinder_gender,
                 d.to_petfinder_size,
                 d.age.titleize,
-                d.description.gsub(/[\r]+/, "&#10;"),
+                d.description.gsub(/\r\n?/, "&#10;"),
                 "Dog",
                 d.to_petfinder_status,
                 "",                              #Shots
@@ -70,24 +70,29 @@ namespace :petfinder_sync do
     end
 
     puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Petfinder Export Completed"
-    puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Begin Upload"
 
-    ## Being Upload
-    ftp = Net::FTP.new
-    ftp.connect('members.petfinder.com',21)
-    ftp.login(ENV['PETFINDER_FTP_USER'], ENV['PETFINDER_FTP_PW'])
-    ftp.chdir('/import/')
-    ftp.putbinaryfile(path + filename, filename)
+    if Rails.env.production? 
+      puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Begin Upload"
+      ## Being Upload
+      ftp = Net::FTP.new
+      ftp.connect('members.petfinder.com',21)
+      ftp.login(ENV['PETFINDER_FTP_USER'], ENV['PETFINDER_FTP_PW'])
+      ftp.chdir('/import/')
+      ftp.putbinaryfile(path + filename, filename)
 
-    ftp.chdir('/import/photos/')
+      ftp.chdir('/import/photos/')
 
-    Dir.foreach(photo_path) do |file|
-      next if file == '.' or file == '..'
-      ftp.putbinaryfile(photo_path + file, file)
+      Dir.foreach(photo_path) do |file|
+        next if file == '.' or file == '..'
+        ftp.putbinaryfile(photo_path + file, file)
+      end
+
+      ftp.close
+      puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Upload Completed"
+    else
+      puts "Not production, skipping upload"
     end
 
-    ftp.close
-    puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Upload Completed"
   end
 
 end

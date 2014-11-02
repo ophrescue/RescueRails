@@ -4,7 +4,7 @@
 source 'https://rubygems.org'
 ruby '2.1.1'
 
-gem 'rails', '~> 3.2.19'
+gem 'rails', '~> 3.2.20'
 
 gem 'dotenv'
 gem 'dotenv-deployment'

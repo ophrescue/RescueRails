@@ -61,7 +61,10 @@ gem 'sucker_punch', '~> 1.0'
 
 group :development, :test do
   gem 'faker'
+  gem 'pry-byebug'
+  gem 'pry-doc'
   gem 'pry-rails'
+  gem 'pry-stack_explorer'
   gem 'rspec-rails'
   gem 'watir-webdriver', platform: :ruby
 end

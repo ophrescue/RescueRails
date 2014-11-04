@@ -14,7 +14,7 @@ describe Adopter do
     adopter.status = 'completed'
   end
 
-  describe '#audit_changes' do
+  describe '.audit_changes' do
     context 'an attribute changes on an adopter' do
       it 'creates a comment' do
         expect{adopter.save}.to change{Comment.count}.by(1)
@@ -24,12 +24,12 @@ describe Adopter do
     context 'no admin assigned to adopter' do
       it 'does not make a comment' do
         adopter.updated_by_admin_user = nil
-        expect{adopter.save}.to_not change{Comment.count}.by(1)
+        expect{adopter.save}.to_not change{Comment.count}
       end
     end
   end
 
-  describe '#changes_to_sentence' do
+  describe '.changes_to_sentence' do
     context 'an attribute changes' do
       it 'creates a human readable version' do
         expect(adopter.changes_to_sentence).to eq('changed status from new to completed')

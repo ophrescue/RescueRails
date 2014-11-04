@@ -50,7 +50,7 @@
 require 'spec_helper'
 
 describe Dog do
-  describe '#update_adoption_date' do
+  describe '.update_adoption_date' do
     let(:dog) { create(:dog, :adoptable) }
 
     context 'status did not change' do
@@ -71,7 +71,6 @@ describe Dog do
 
     context 'status changed to adopted' do
       it 'updates the date' do
-        old_date = dog.adoption_date
         dog.update_attribute(:status, 'adopted')
         expect(dog.adoption_date).to eq(Date.today())
       end

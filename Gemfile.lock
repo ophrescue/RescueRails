@@ -93,15 +93,9 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-<<<<<<< HEAD
     coffee-script-source (1.8.0)
     colorize (0.7.3)
     compass (1.0.1)
-=======
-    coffee-script-source (1.7.0)
-    columnize (0.8.9)
-    compass (0.12.6)
->>>>>>> add-model-specs-factories
       chunky_png (~> 1.2)
       compass-core (~> 1.0.1)
       compass-import-once (~> 1.0.5)
@@ -207,15 +201,11 @@ GEM
       yard (~> 0.8)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
-<<<<<<< HEAD
-    quiet_assets (1.0.3)
-=======
     pry-stack_explorer (0.4.9.1)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
-    quiet_assets (1.0.2)
->>>>>>> add-model-specs-factories
       railties (>= 3.1, < 5.0)
+    quiet_assets (1.0.3)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)

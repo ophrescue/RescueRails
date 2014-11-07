@@ -35,9 +35,15 @@
               <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
             </div>
           </div>
+          <div class="item">
+            <img src="assets/5k.jpg" alt="Operation Paws for Homes Fast and Furriest 5k Run Walk">
+            <div class="carousel-caption low">
+              <%= link_to "Get Involved", "http://ophfastandfurriest5k.weebly.com", :class => "btn btn-large", :id => "hero-dog" %>
+            </div>
+          </div>
         </div>
-<!--         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
-        <a class="right carousel-control" href="#ophCarousel" data-slide="next">&rsaquo;</a> -->
+        <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="right carousel-control" href="#ophCarousel" data-slide="next">&rsaquo;</a>
       </div>
     </div>
   </div>
@@ -73,7 +79,9 @@
   </div>
 
 <script type="text/javascript"> 
-$('#ophCarousel').carousel();
+$('#ophCarousel').carousel({
+   interval: 6000
+});
 </script>
 
 </div>

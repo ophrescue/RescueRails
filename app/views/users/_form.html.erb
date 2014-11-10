@@ -224,6 +224,21 @@
     </div>
 
     <div class="control-group">
+      <%= f.label :is_transporter, "Are you willing to assist with dog transport? (You will receive additional emails)", :class => "control-label" %>
+      <div class="controls">
+            <label>
+              <%= f.radio_button :is_transporter, true, :class => "link required" %> 
+              <span>Yes</span>
+            </label>
+            <label>
+              <%= f.radio_button :is_transporter, false, :class => "link required" %> 
+              <span>No</span>
+            </label>
+      </div>
+    </div>
+
+
+    <div class="control-group">
       <%= f.label :foster_dog_types, "Please detail any fostering restrictions", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_area :foster_dog_types, :class => "xxlarge", :rows => "6" %>

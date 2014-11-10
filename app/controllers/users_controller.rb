@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   has_scope :foster, :type => :boolean
   has_scope :photographer, :type => :boolean
   has_scope :newsletter, :type => :boolean
+  has_scope :transporter, :type => :boolean
 
 
   def index

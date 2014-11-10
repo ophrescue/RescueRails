@@ -81,7 +81,8 @@ class User < ActiveRecord::Base
                   :children_under_five,
                   :has_fenced_yard,
                   :can_foster_puppies,
-                  :parvo_house
+                  :parvo_house,
+                  :is_transporter
 
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -123,6 +124,7 @@ class User < ActiveRecord::Base
   scope :foster,                  -> { active.where(is_foster: true)}
   scope :photographer,            -> { active.where(is_photographer: true)}
   scope :newsletter,              -> { active.where(writes_newsletter: true)}
+  scope :transporter,             -> { active.where(is_transporter: true)}
 
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

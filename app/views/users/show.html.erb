@@ -180,6 +180,14 @@
             <% end %>
           <% end %>
 
+          <% unless @user.is_transporter.nil? %>
+            <% if @user.is_transporter? %>
+               <p><span class="label label-success">Available for Transport</span></p>
+            <% else %>
+              <p><span class="label label-important">Not Available for Transport</span></p>           
+            <% end %>
+          <% end %>
+
           <table class="table-striped table-bordered table-condensed">
             <tr>
               <td>Current Dogs</td>

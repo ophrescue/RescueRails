@@ -18,9 +18,8 @@ APP_ROOT=<%= current_path %>
 
 # env
 RBENV_ROOT="/home/$USER/.rbenv"
-PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
-SET_PATH="cd $APP_ROOT; rbenv rehash; rbenv local $RBENV_RUBY_VERSION"
-DAEMON="bundle exec unicorn"
+SET_PATH="cd $APP_ROOT; $RBENV_ROOT/bin/rbenv rehash; $RBENV_ROOT/bin/rbenv local $RBENV_RUBY_VERSION"
+DAEMON="$RBENV_ROOT/shims/bundle exec unicorn_rails"
 DAEMON_OPTS="-c <%= "#{shared_path}/config/unicorn.rb" %> -E $ENV -D"
 CMD="$SET_PATH; $DAEMON $DAEMON_OPTS"
 NAME=unicorn

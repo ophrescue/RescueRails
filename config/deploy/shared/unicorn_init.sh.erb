@@ -35,6 +35,11 @@ sig () {
 oldsig () {
         test -s $OLD_PID && kill -$1 `cat $OLD_PID`
 }
+
+workersig () {
+  workerpid="$APP_ROOT/tmp/pids/unicorn.$2.pid"
+  test -s "$workerpid" && kill -$1 `cat $workerpid`
+}
  
 case ${1-help} in
 start)
@@ -59,6 +64,10 @@ upgrade)
         echo >&2 "Couldn't upgrade, starting '$CMD' instead"
         su - $USER -c "$CMD"
         ;;
+kill_worker)
+  workersig QUIT $2 && exit 0
+  echo >&2 "Worker not running"
+  ;;
 rotate)
         sig USR1 && echo rotated logs OK && exit 0
         echo >&2 "Couldn't rotate logs" && exit 1

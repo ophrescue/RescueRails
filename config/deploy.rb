@@ -122,7 +122,7 @@ namespace :deploy do
   after 'deploy:publishing', 'deploy:restart'
 
   task :restart do
-    invoke 'unicorn:restart'
+    invoke 'unicorn:upgrade'
     invoke 'delayed_job:restart'
   end
 end

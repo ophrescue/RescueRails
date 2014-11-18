@@ -4,7 +4,7 @@
 source 'https://rubygems.org'
 ruby '2.1.1'
 
-gem 'rails', '~> 3.2.20'
+gem 'rails', '~> 3.2.21'
 
 gem 'dotenv'
 gem 'dotenv-deployment'
@@ -28,7 +28,7 @@ gem 'has_scope'
 gem 'whenever', '~> 0.9.3', :require => false
 
 group :production do
-  gem 'unicorn', '~> 4.6.0'
+  gem 'unicorn', '~> 4.8.3'
 end
 
 # Cool mail async stuff

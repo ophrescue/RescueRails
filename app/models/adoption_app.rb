@@ -33,35 +33,31 @@
 #
 
 class AdoptionApp < ActiveRecord::Base
+  attr_accessible :adopter_id,
+                  :spouse_name,
+                  :other_household_names,
+                  :ready_to_adopt_dt,
+                  :house_type,
+                  :dog_exercise,
+                  :dog_stay_when_away,
+                  :dog_vacation,
+                  :current_pets,
+                  :why_not_fixed,
+                  :current_pets_uptodate,
+                  :current_pets_uptodate_why,
+                  :landlord_name,
+                  :landlord_phone,
+                  :rent_dog_restrictions,
+                  :surrender_pet_causes,
+                  :training_explain,
+                  :surrendered_pets,
+                  :how_did_you_hear,
+                  :pets_branch,
+                  :current_pets_fixed,
+                  :rent_costs,
+                  :vet_info,
+                  :max_hrs_alone,
+                  :is_ofage
 
-	belongs_to :adopter, :class_name => 'Adopter'
-	
-	attr_accessible :adopter_id,
-					:spouse_name,
-					:other_household_names,
-					:ready_to_adopt_dt,
-					:house_type,
-					:dog_exercise,
-					:dog_stay_when_away,
-					:dog_vacation,
-					:current_pets,
-					:why_not_fixed,
-					:current_pets_uptodate,
-					:current_pets_uptodate_why,
-					:landlord_name,
-					:landlord_phone,
-					:rent_dog_restrictions,
-					:surrender_pet_causes,
-					:training_explain,
-					:surrendered_pets,
-					:how_did_you_hear,
-					:pets_branch,
-					:current_pets_fixed,
-					:rent_costs,
-					:vet_info,
-					:max_hrs_alone,
-					:is_ofage
-
+  belongs_to :adopter, :class_name => 'Adopter'
 end
-
-

@@ -76,21 +76,16 @@ class Adopter < ActiveRecord::Base
 
   AUDIT = %w(status assigned_to_user_id email phone address1 address2 city state zip)
 
-  def dog_tokens=(ids)
-    self.dog_ids = ids.split(',')
-  end
-
   has_many :references, dependent: :destroy
   accepts_nested_attributes_for :references
 
   has_many :adoptions, dependent: :destroy
   accepts_nested_attributes_for :adoptions
 
-  has_many :dogs, through: :adoptions
-
   has_one :adoption_app, dependent: :destroy
   accepts_nested_attributes_for :adoption_app
 
+  has_many :dogs, through: :adoptions
   has_many :comments, as: :commentable, order: 'created_at DESC'
 
   belongs_to :user, class_name: 'User', primary_key: 'id', foreign_key: 'assigned_to_user_id'
@@ -105,10 +100,14 @@ class Adopter < ActiveRecord::Base
   validates_presence_of :status
   validates_inclusion_of :status, in: STATUSES
 
-  after_update :audit_changes
-
   before_create :chimp_subscribe
   before_update :chimp_check
+
+  after_update :audit_changes
+
+  def dog_tokens=(ids)
+    self.dog_ids = ids.split(',')
+  end
 
   def audit_changes
     return unless audit_attributes_changed?

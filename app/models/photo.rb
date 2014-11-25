@@ -23,11 +23,11 @@ class Photo < ActiveRecord::Base
                   :is_private
 
   has_attached_file :photo,
-            :styles => { :original => "1280x1024>",
-                   :large => "640x640",
-                   :medium => "320x320",
-                   :thumb => "x195",
-                   :minithumb => "x64#" },
+            :styles => { :original => '1280x1024>',
+                   :large => '640x640',
+                   :medium => '320x320',
+                   :thumb => 'x195',
+                   :minithumb => 'x64#' },
             :s3_permissions => :public_read,
             :path => ":rails_root/public/system/dog_photo/:hash.:extension",
             :url  => "/system/dog_photo/:hash.:extension",
@@ -35,8 +35,8 @@ class Photo < ActiveRecord::Base
 
 
   validates_attachment_presence :photo
-  validates_attachment_size :photo, :less_than => 10.megabytes
-  validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/pjpeg']
+  validates_attachment_size :photo, less_than: 10.megabytes
+  validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
 
   scope :public, -> { where(is_private: false) }
   scope :private, -> { where(is_private: true) }

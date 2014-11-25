@@ -58,9 +58,9 @@ class User < ActiveRecord::Base
 
   strip_attributes :only => :email
 
-  attr_accessible :name, 
-                  :email, 
-                  :password, 
+  attr_accessible :name,
+                  :email,
+                  :password,
                   :password_confirmation,
                   :phone,
                   :other_phone,
@@ -84,22 +84,21 @@ class User < ActiveRecord::Base
                   :parvo_house,
                   :is_transporter
 
-
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  
+
   validates :name,  :presence   => true,
                     :length     => { :maximum => 50 }
-  
+
   validates :email, :presence   => true,
                     :format     => { :with => email_regex },
                     :uniqueness => { :case_sensitive => false }
-                    
+
   #Automatically creates the virtual attribute 'password_confirmation'.
   validates :password, :presence      => true,
                        :confirmation  => true,
                        :length        => { :within => 8..40 },
                        :unless => Proc.new { |a| a.password.blank? }
-                       
+
   before_save :encrypt_password, :unless => "password.blank?"
 
   has_many :histories
@@ -108,14 +107,15 @@ class User < ActiveRecord::Base
   has_many :coordinated_dogs, :class_name => 'Dog', :foreign_key => 'coordinator_id', :conditions => {:status => ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']}
   has_many :comments
   has_one :agreement, as: :attachable, class_name: 'Attachment' ,dependent: :destroy
-  accepts_nested_attributes_for :agreement
   has_many :assignments, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id'
   has_many :active_applications, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id', :conditions => {:status => ['new', 'pend response', 'workup', 'approved']}
-  
+
+  accepts_nested_attributes_for :agreement
+
   before_create :chimp_subscribe
   before_update :chimp_check
 
-  scope :active,                  -> { where(locked: false)}
+  scope :active,                  -> { where(locked: false) }
   scope :admin,                   -> { active.where(admin: true) }
   scope :adoption_coordinator,    -> { active.where(edit_my_adopters: true)}
   scope :event_planner,           -> { active.where(edit_events: true)}
@@ -129,13 +129,13 @@ class User < ActiveRecord::Base
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
   end
-  
+
   def self.authenticate(email, submitted_password)
     user = find_by_email(email.downcase.strip)
     return nil  if user.nil?
     return user if user.has_password?(submitted_password)
-  end  
-  
+  end
+
   def self.authenticate_with_salt(id, cookie_salt)
     user = find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
@@ -148,73 +148,62 @@ class User < ActiveRecord::Base
   end
 
   def out_of_date?
-    if !self.lastverified? || (self.lastverified.to_date < 30.days.ago.to_date)
-      return true
-    else
-      return false
-    end
+    lastverified.blank? || (lastverified.to_date < 30.days.ago.to_date)
   end
 
   def send_password_reset
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
-    save!(:validate => false)
+    save!(validate: false)
     UserMailer.password_reset(self).deliver
   end
 
   def chimp_subscribe
-
     gb = Gibbon::API.new
     gb.timeout = 30
 
     list_id = 'aa86c27ddd'
 
     merge_vars = {
-      'FNAME' => self.name
+      'FNAME' => name
     }
 
-    double_optin = true
-
-    response = gb.lists.subscribe({ :id => list_id,
-                                  :email => {:email => self.email},
-                                  :merge_vars => merge_vars,
-                                  :double_optin => double_optin,
-                                  :send_welcome => false
-    })
-
+    gb.lists.subscribe(
+      id: list_id,
+      email: { email: email },
+      merge_vars: merge_vars,
+      double_optin: true,
+      send_welcome: false
+    )
   end
 
-    def chimp_unsubscribe
+  def chimp_unsubscribe
+    gb = Gibbon::API.new
+    gb.timeout = 30
 
-      gb = Gibbon::API.new
-      gb.timeout = 30
+    list_id = 'aa86c27ddd'
 
-      list_id = 'aa86c27ddd'
-
-      response = gb.lists.unsubscribe({
-        :id => list_id,
-        :email => {:email => self.email},
-        :delete_member => true,
-        :send_goodbye => false,
-        :send_notify => false
-        }) 
-
-    end
+    gb.lists.unsubscribe({
+      id: list_id,
+      email: {email: email},
+      delete_member: true,
+      send_goodbye: false,
+      send_notify: false
+    })
+  end
 
   def chimp_check
-
-    if self.email_changed?
-      self.chimp_subscribe
+    if email_changed?
+      chimp_subscribe
     end
 
-    if self.locked_changed?
-      if self.locked?
-        self.chimp_unsubscribe
+    if locked_changed?
+      if locked?
+        chimp_unsubscribe
       else
-        self.chimp_subscribe
+        chimp_subscribe
       end
     end
-
   end
 
 
@@ -232,19 +221,16 @@ class User < ActiveRecord::Base
       self.salt = make_salt unless has_password?(password)
       self.encrypted_password = encrypt(password)
     end
-    
+
     def encrypt(string)
-      secure_hash("#{salt}--#{string}")  
+      secure_hash("#{salt}--#{string}")
     end
-    
+
     def make_salt
       secure_hash("#{Time.now.utc}--#{password}")
     end
-    
+
     def secure_hash(string)
       Digest::SHA2.hexdigest(string)
     end
-
-  
 end
-

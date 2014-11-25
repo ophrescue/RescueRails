@@ -14,13 +14,12 @@
 #
 
 class BannedAdopter < ActiveRecord::Base
-
   attr_accessible :name,
-  				  :phone,
-  				  :email,
-  				  :city,
-  				  :state,
-  				  :comment
+                  :phone,
+                  :email,
+                  :city,
+                  :state,
+                  :comment
 
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
@@ -32,11 +31,11 @@ class BannedAdopter < ActiveRecord::Base
   end
 
   def self.import(file)
-  	CSV.foreach(file.path, headers: true) do |row|
+    CSV.foreach(file.path, headers: true) do |row|
       banned_adopter = find_by_id(row["ID"]) || new
       banned_adopter.attributes = row.to_hash.slice(*accessible_attributes)
-  		banned_adopter.save!
-  	end 
+      banned_adopter.save!
+    end 
   end
 
   def self.import(file)
@@ -49,6 +48,4 @@ class BannedAdopter < ActiveRecord::Base
       banned_adopter.save!
     end
   end
-
-
 end

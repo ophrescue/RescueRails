@@ -8,6 +8,7 @@ FactoryGirl.define do
     city { Faker::Address.city }
     state { Faker::Address.state }
     zip { Faker::Address.zip }
+    lastverified { Time.now }
 
     trait :admin do
       admin true

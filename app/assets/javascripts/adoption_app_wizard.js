@@ -5,35 +5,35 @@ jQuery.validator.addMethod("tagcheck", function(value, element) {
 }, "Full name required.");
 
 $(function(){
-	$("#new_adopter").formwizard({ 
-	 	formPluginEnabled: false,
+  $("#new_adopter").formwizard({ 
+    formPluginEnabled: false,
     focusFirstInput : true,
-	 	historyEnabled : true,
-	 	validationEnabled: true,
-	 	disableUIStyles : true,
-		inDuration : 200,
-		outDuration: 200,
-		validationOptions : {
-			highlight: function(element, errorClass, validClass) {
-	    		     $(element).parents("div[class='control-group']").addClass('error').removeClass(validClass);
-	  		},
-      		unhighlight: function (element, errorClass, validClass) { 
-       			$(element).parents(".error").removeClass('error'); 
-      		},
-      		errorElement: 'span',
-      		errorClass: 'error',
-      		rules: {
-      			"adopter[name]" : {
-      				required: true,
+    historyEnabled : true,
+    validationEnabled: true,
+    disableUIStyles : true,
+    inDuration : 200,
+    outDuration: 200,
+    validationOptions : {
+      highlight: function(element, errorClass, validClass) {
+               $(element).parents("div[class='control-group']").addClass('error').removeClass(validClass);
+        },
+          unhighlight: function (element, errorClass, validClass) { 
+            $(element).parents(".error").removeClass('error'); 
+          },
+          errorElement: 'span',
+          errorClass: 'error',
+          rules: {
+            "adopter[name]" : {
+              required: true,
                               tagcheck: true,
-      				maxlength: 50
-      			},
-      			"adopter[email]" : {
-      				required: true,
-      				email: true,
+              maxlength: 50
+            },
+            "adopter[email]" : {
+              required: true,
+              email: true,
                               maxlength: 250,
                               remote: "/adopters/check_email"
-      			},
+            },
                         "adopter[address1]" : {
                               maxlength: 250
                         },
@@ -44,17 +44,17 @@ $(function(){
                               required: true,
                               maxlength: 250
                         },
-      			"adopter[state]" : {
+            "adopter[state]" : {
                               required: true,
-      				minlength: 2,
+              minlength: 2,
                               maxlength: 2
-      			},
-      			"adopter[zip]" : {
+            },
+            "adopter[zip]" : {
                               required: true,
-      				digits: true,
-      				minlength: 5,
-      				maxlength: 5
-      			},
+              digits: true,
+              minlength: 5,
+              maxlength: 5
+            },
                         "adopter[when_to_call]" : {
                               maxlength: 250
                         },
@@ -137,13 +137,10 @@ $(function(){
                               required: false,
                               email: true    
                         }
-      		},
-      		messages : {
-      		  "adopter[email]" : {remote: "Application on file: please email adopt@ophrescue.org for updates." }
-      		}
-	 	}
-	 });
+          },
+          messages : {
+            "adopter[email]" : {remote: "Application on file: please email adopt@ophrescue.org for updates." }
+          }
+    }
+   });
 });
-
-
-

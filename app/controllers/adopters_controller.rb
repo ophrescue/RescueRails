@@ -4,7 +4,7 @@ class AdoptersController < ApplicationController
   before_filter :authenticate, :except => [:new, :create, :check_email]
   before_filter :edit_my_adopters_user, :only => [:index, :show, :edit, :update]
   before_filter :edit_all_adopters_user, :only => [:index, :show, :edit, :update]
-  before_filter :admin_user,   :only => [:destroy]
+  before_filter :admin_user, :only => [:destroy]
 
   respond_to :html, :json
 
@@ -25,7 +25,6 @@ class AdoptersController < ApplicationController
     end
 
     session[:last_search] = request.url
-    # @adopters = Adopter.paginate(:page => params[:page])
   end
 
   def show
@@ -106,5 +105,4 @@ class AdoptersController < ApplicationController
     #TODO Figure out how to differentiate these
     redirect_to(root_path) unless current_user.edit_all_adopters?
   end
-
 end

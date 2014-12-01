@@ -60,6 +60,7 @@ class AdoptersController < ApplicationController
         a.relation_type = 'interested'
         a.save
       end
+
       NewAdopterMailer.adopter_created(@adopter.id).deliver
       AdoptAppMailer.adopt_app(@adopter.id).deliver
       flash[:success] = "adoptsuccess"
@@ -87,10 +88,10 @@ class AdoptersController < ApplicationController
   end
 
   def check_email
-    @adopter = Adopter.find_by_email(params[:adopter][:email])
+    adopter_exists = Adopter.where(email: params[:adopter][:email]).exists?
 
     respond_to do |format|
-      format.json { render :json => !@adopter }
+      format.json { render :json => !adopter_exists }
     end
   end
 

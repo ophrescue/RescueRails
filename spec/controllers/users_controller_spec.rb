@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsersController do
+describe UsersController, type: :controller do
   render_views
   
   describe "GET 'show'" do

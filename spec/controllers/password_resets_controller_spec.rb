@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PasswordResetsController do
+describe PasswordResetsController, type: :controller do
 
   describe "GET 'new'" do
     it "should be successful" do

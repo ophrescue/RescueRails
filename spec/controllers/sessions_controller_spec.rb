@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SessionsController do
+describe SessionsController, type: :controller do
   render_views
 
   describe "GET 'new'" do

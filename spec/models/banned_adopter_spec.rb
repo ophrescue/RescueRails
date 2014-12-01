@@ -5,7 +5,7 @@ describe AdoptionApp do
 
   context 'has a valid factory' do
     it 'saves' do
-      expect(banned_adopter.valid?).to be_true
+      expect(banned_adopter.valid?).to eq(true)
     end
   end
 end

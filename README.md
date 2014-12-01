@@ -11,7 +11,7 @@ Ruby 2.1.1
 Postgresql 9.3.x
 
 ### About
-RescueRails is the public facing website for Operation Paws for Homes, as well as the private system used by the rescue for managing dogs, adopters and staff.  The project is open on Githup for the benefit of our volunteer development team.  
+RescueRails is the public facing website for Operation Paws for Homes, as well as the private system used by the rescue for managing dogs, adopters and staff.  The project is open on GitHub for the benefit of our volunteer development team.  
 
 
 

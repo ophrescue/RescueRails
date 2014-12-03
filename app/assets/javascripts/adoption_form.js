@@ -23,6 +23,6 @@ $( function(){
       isEditing = !isEditing;
     });
 
-    $('input#adopter_dog_name').on('blur', RescueRails.saveParentForm);
+    $('textarea#adopter_dog_name').on('blur', RescueRails.saveParentForm);
   }
 });

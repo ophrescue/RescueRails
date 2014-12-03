@@ -2,7 +2,7 @@
   <th>Dog Selections</th>
   <td>
     <%= form_for @adopter, format: :json, html: { class: 'form-horizontal' } do |f| %>
-      <%= f.text_field :dog_name %>
+      <%= f.text_area :dog_name, rows: 5, cols: 40 %>
       <div id="status-icon" class=""></div>
     <% end %>
   </td>

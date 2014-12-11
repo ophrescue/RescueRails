@@ -21,7 +21,9 @@
 <div class="row">
   <div class="span12">
     <% if signed_in? && session[:mgr_view] == true %>
-      <%= render 'manager' %>
+      <% cache ['manager', params[:page] || 1], expires_in: 10.minutes do %>
+        <%= render 'manager' %>
+      <% end %>
     <% else %>
       <% cache params[:page] || 1, expires_in: 10.minutes do %>
       <%= will_paginate @dogs %>

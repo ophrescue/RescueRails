@@ -8,7 +8,6 @@ gem 'rails', '~> 3.2.21'
 
 gem 'dotenv'
 gem 'dotenv-deployment'
-gem 'pg', '~> 0.14.1'
 gem 'will_paginate',  '~> 3.0.3'
 gem 'bootstrap-will_paginate', '~> 0.0.7'
 gem 'gravatar_image_tag', '~> 1.1.2'
@@ -26,6 +25,10 @@ gem 'roo'
 gem 'font-awesome-rails', '~> 4.1.0.0'
 gem 'has_scope'
 gem 'whenever', '~> 0.9.3', :require => false
+
+# datas
+gem 'dalli'
+gem 'pg', '~> 0.14.1'
 
 group :production do
   gem 'unicorn', '~> 4.8.3'

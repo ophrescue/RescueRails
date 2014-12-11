@@ -19,6 +19,16 @@ RescueRails::Application.configure do
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
+  config.cache_store = :dalli_store
+
+  # Setup rack cache
+  config.action_dispatch.rack_cache = {
+    :verbose      => false,
+    :metastore    => Dalli::Client.new,
+    :entitystore  => 'file:tmp/cache/rack/body',
+    :allow_reload => false
+  }
+
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 

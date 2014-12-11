@@ -23,6 +23,16 @@ RescueRails::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  config.cache_store = :dalli_store
+
+  # Setup rack cache
+  config.action_dispatch.rack_cache = {
+    :verbose      => false,
+    :metastore    => Dalli::Client.new,
+    :entitystore  => 'file:tmp/cache/rack/body',
+    :allow_reload => false
+  }
+
   # Path to imagemagick for paperclip gem
   Paperclip.options[:command_path] = "/usr/bin/"
 

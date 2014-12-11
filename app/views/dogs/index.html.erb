@@ -23,6 +23,7 @@
     <% if signed_in? && session[:mgr_view] == true %>
       <%= render 'manager' %>
     <% else %>
+      <% cache params[:page] || 1, expires_in: 10.minutes do %>
       <%= will_paginate @dogs %>
       <% @dogs.each_slice(3) do |slice| %>
         <div class="row">
@@ -53,6 +54,7 @@
             </ul>
           </div>
         </div>
+      <% end %>
       <% end %>
       <%= will_paginate @dogs %>
     <% end %>

@@ -5,7 +5,24 @@
     <% else %>
       <strong><%= link_to comment.user.name, user_path(comment.user) %></strong><br />
     <% end %>
-      <em><%= comment.created_at.strftime('%m/%d/%Y %l:%M%P') %></em>
+    <em><%= comment.created_at.strftime('%m/%d/%Y %l:%M%P') %></em><br />
+    <%= form_for comment, html: { class: 'edit-comment' }  do |fc| %>
+      <% if current_user == comment.user %>
+        <a class="toggle-edit-comment btn btn-primary btn-small" data-id="<%= comment.id %>" id="toggle-edit-comment-<%= comment.id %>">
+          Edit
+        </a>
+        <%= fc.submit "Save", class: "save-edit-comment btn btn-primary btn-small",
+        id: "save-edit-comment-#{comment.id}" %>
+      <% end %>
   </td>
-  <td><%= simple_format(comment.content) %></td>
+  
+  <td>
+    <div class="editable-comment" id="editable-comment-<%= comment.id %>">
+      <%= fc.text_area :content, :class => "span8", :rows => "6" %>
+    </div>
+  <% end %>
+    <div class="read-only-comment" id="read-only-comment-<%= comment.id %>">
+      <%= simple_format(comment.content) %>
+    </div>
+  </td>
 </tr>

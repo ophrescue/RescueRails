@@ -1,5 +1,30 @@
 $( function () {
-  $('.edit_comment #comment_content').live('change', RescueRails.saveParentForm);
+  //$('.edit_comment #comment_content').live('change', RescueRails.saveParentForm);
+  
+  if ( $('.edit-comment').length > 0) {
+    $('.toggle-edit-comment').each(function(){
+      var isEditing = false;
+
+      $(this).click(function(){
+        if (isEditing) {
+          $('#editable-comment-'+$(this).data('id')).hide();
+          $('#read-only-comment-'+$(this).data('id')).show();
+          $('#toggle-edit-comment-'+$(this).data('id')).addClass('btn-primary').text('Edit');
+          $('#save-edit-comment-'+$(this).data('id')).hide();
+        }
+        else {
+          $('#editable-comment-'+$(this).data('id')).show();
+          $('#read-only-comment-'+$(this).data('id')).hide();
+          $('#toggle-edit-comment-'+$(this).data('id')).removeClass('btn-primary').text('Cancel');
+          $('#save-edit-comment-'+$(this).data('id')).show();
+        }
+
+        isEditing = !isEditing
+      });
+
+
+    });
+  }
 
   $('#new_comment').submit( function(e) {
     e.preventDefault();

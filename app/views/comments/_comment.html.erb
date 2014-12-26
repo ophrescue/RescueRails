@@ -1,28 +1,28 @@
-<tr>
-  <td id="user_name">
-    <% if !comment.user %>
-      <strong>Deleted User</strong><br />
-    <% else %>
-      <strong><%= link_to comment.user.name, user_path(comment.user) %></strong><br />
-    <% end %>
-    <em><%= comment.created_at.strftime('%m/%d/%Y %l:%M%P') %></em><br />
+<div class="row">
+  <div class="span12 edit-comment">
+    <%= form_for comment, html: {method: :put}, format: :json do |fc| %>
+      <div class="comment-header"><small>
+        <% if !comment.user %>
+          <strong>Deleted User</strong>
+        <% else %>
+          <strong><%= link_to comment.user.name, user_path(comment.user) %></strong>
+        <% end %>
+        <em><%= comment.created_at.strftime('%m/%d/%Y %l:%M%P') %></em>
 
-    <% if current_user == comment.user %>
-      <%= form_for comment, html: { class: 'edit-comment' }  do |fc| %>
-        <a class="toggle-edit-comment btn btn-primary btn-small" data-id="<%= comment.id %>" id="toggle-edit-comment-<%= comment.id %>">
-          Edit
-        </a>
-        <%= fc.submit "Save", class: "save-edit-comment btn btn-primary btn-small",
-        id: "save-edit-comment-#{comment.id}" %>
-  </td>
-  <td>
-    <div class="editable-comment" id="editable-comment-<%= comment.id %>">
-      <%= fc.text_area :content, :class => "span8", :rows => "6" %>
-    </div>
+        <% if current_user == comment.user %>
+          <a class="toggle-edit-comment btn btn-primary btn-small">Edit</a>
+          <%= fc.submit "Save", class: "save-edit-comment btn btn-primary btn-small" %>
+        <% end %>
+        </small>
+      </div>
+
+      <div class="editable-comment">
+        <%= fc.text_area :content, :class => "span8", :rows => "6" %>
+      </div>
+
+      <div class="read-only-comment">
+        <%= simple_format(comment.content) %>
+      </div>
     <% end %>
-  <% end %>
-    <div class="read-only-comment" id="read-only-comment-<%= comment.id %>">
-      <%= simple_format(comment.content) %>
-    </div>
-  </td>
-</tr>
+  </div>
+</div>

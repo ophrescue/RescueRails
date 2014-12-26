@@ -5,21 +5,22 @@ $( function () {
     $('.toggle-edit-comment').each(function(){
       var isEditing = false;
 
-      $(this).click(function(){
+      $(this).on('click', function() {
+
         if (isEditing) {
-          $('#editable-comment-'+$(this).data('id')).hide();
-          $('#read-only-comment-'+$(this).data('id')).show();
-          $('#toggle-edit-comment-'+$(this).data('id')).addClass('btn-primary').text('Edit');
-          $('#save-edit-comment-'+$(this).data('id')).hide();
+          $(event.target).parents('.edit-comment').find('.read-only-comment').show();
+          $(event.target).parents('.edit-comment').find('.editable-comment').hide();
+          $(event.target).parents('.edit-comment').find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
+          $(event.target).parents('.edit-comment').find('.save-edit-comment').hide();
         }
         else {
-          $('#editable-comment-'+$(this).data('id')).show();
-          $('#read-only-comment-'+$(this).data('id')).hide();
-          $('#toggle-edit-comment-'+$(this).data('id')).removeClass('btn-primary').text('Cancel');
-          $('#save-edit-comment-'+$(this).data('id')).show();
+          $(event.target).parents('.edit-comment').find('.read-only-comment').hide();
+          $(event.target).parents('.edit-comment').find('.editable-comment').show();
+          $(event.target).parents('.edit-comment').find('.toggle-edit-comment').removeClass('btn-primary').text('Cancel');
+          $(event.target).parents('.edit-comment').find('.save-edit-comment').show();
         }
 
-        isEditing = !isEditing
+        isEditing = !isEditing;
       });
 
 

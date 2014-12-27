@@ -1,7 +1,5 @@
-<div class="row">
-  <% @adopter.comments.each do |comment| %>
-    <% if comment.id != nil %>
-      <%= render 'comments/comment', :comment => comment %>
-    <% end %>
+<% @adopter.comments.each do |comment| %>
+  <% if comment.id != nil %>
+    <%= render 'comments/comment', :comment => comment %>
   <% end %>
-</div>
+<% end %>

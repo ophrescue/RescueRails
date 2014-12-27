@@ -25,6 +25,17 @@ $( function () {
     });
   }
 
+  $('.save-edit-comment').click(function() {
+    var $parent = $(event.target).parents('.edit-comment')
+    
+    $parent.find('.read-only-comment').show();
+    $parent.find('.editable-comment').hide();
+    $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
+    $parent.find('.save-edit-comment').hide();
+    refresh_comments();
+
+  });
+
   $('#new_comment').submit( function(e) {
     e.preventDefault();
     $.ajax({

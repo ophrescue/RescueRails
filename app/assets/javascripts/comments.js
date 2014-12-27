@@ -30,10 +30,10 @@ $( function () {
         $parent.find('.editable-comment').hide();
         $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
         $parent.find('.save-edit-comment').hide();
-        isEditing = !isEditing;
-        refresh_comments();
-      });
 
+        refresh_comments();
+        isEditing = false;
+      });
     });
   }
 

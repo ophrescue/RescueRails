@@ -1,29 +1,27 @@
 $( function () {
-  //$('.edit_comment #comment_content').live('change', RescueRails.saveParentForm);
-  
+
   if ( $('.edit-comment').length > 0) {
     $('.toggle-edit-comment').each(function(){
       var isEditing = false;
 
-      $(this).on('click', function() {
+      $(this).click(function() {
+
+        var $parent = $(event.target).parents('.edit-comment')
 
         if (isEditing) {
-          $(event.target).parents('.edit-comment').find('.read-only-comment').show();
-          $(event.target).parents('.edit-comment').find('.editable-comment').hide();
-          $(event.target).parents('.edit-comment').find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
-          $(event.target).parents('.edit-comment').find('.save-edit-comment').hide();
+          $parent.find('.read-only-comment').show();
+          $parent.find('.editable-comment').hide();
+          $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
+          $parent.find('.save-edit-comment').hide();
         }
         else {
-          $(event.target).parents('.edit-comment').find('.read-only-comment').hide();
-          $(event.target).parents('.edit-comment').find('.editable-comment').show();
-          $(event.target).parents('.edit-comment').find('.toggle-edit-comment').removeClass('btn-primary').text('Cancel');
-          $(event.target).parents('.edit-comment').find('.save-edit-comment').show();
+          $parent.find('.read-only-comment').hide();
+          $parent.find('.editable-comment').show();
+          $parent.find('.toggle-edit-comment').removeClass('btn-primary').text('Cancel');
+          $parent.find('.save-edit-comment').show();
         }
-
         isEditing = !isEditing;
       });
-
-
     });
   }
 

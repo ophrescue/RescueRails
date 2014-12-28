@@ -21,19 +21,24 @@ $( function () {
           $parent.find('.save-edit-comment').show();
         }
         isEditing = !isEditing;
+
+        $('.save-edit-comment').click(function() {
+          var $parent = $(event.target).parents('.edit-comment')
+
+          RescueRails.saveParentForm();
+          
+          //Need some kind of id variable to pass here?
+          //refresh_comment();
+          $parent.find('.editable-comment').hide();
+          $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
+          $parent.find('.save-edit-comment').hide();
+          $parent.find('.read-only-comment').show();
+
+          isEditing = !isEditing;
+        });
+
       });
 
-      $('.save-edit-comment').click(function() {
-        var $parent = $(event.target).parents('.edit-comment')
-      
-        $parent.find('.read-only-comment').show();
-        $parent.find('.editable-comment').hide();
-        $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
-        $parent.find('.save-edit-comment').hide();
-
-        refresh_comments();
-        isEditing = false;
-      });
     });
   }
 
@@ -81,6 +86,12 @@ $( function () {
   });
 });
 
+function refresh_comment(id) {
+  var url = window.location + '/comments' + id;
+  $.get(url, function(data) {
+    $('#comment_id').html(data);
+  })
+}
 
 function refresh_comments() {
   var url = window.location + '/comments';

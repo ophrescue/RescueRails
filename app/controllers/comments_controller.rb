@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
 
   def show
     @comment = Comment.find(params[:id])
+    render :layout => false
   end
 
   def new

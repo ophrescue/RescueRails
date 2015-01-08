@@ -1,4 +1,3 @@
-<% cache ['available', @dog] do %>
   <div class="row">
     <div class="span12">
       <h5><%= link_to "Available Dogs", :controller => "dogs", :status => "active"  %></h5>
@@ -9,7 +8,6 @@
     <% end %>
     </div>
   </div>
-<% end %>
 
 <div class="row">
   <div class="span8">
@@ -57,7 +55,6 @@
     <% end %>
   </div>
 
-  <% cache ['about', 'public', @dog] do %>
     <div class="span4">
       <h3>About <%= @dog.name.titleize %></h3>
 
@@ -104,7 +101,6 @@
       <% if ['adoptable', 'adoption pending', 'coming soon'].include?(@dog.status)  %>
         <%= link_to "Adopt Me!", new_adopter_path(dog_name: @dog.name), class: 'btn btn-primary btn-large' %>
       <% end %>
-  <% end %>
 
       <% if can_edit_dogs? || is_fostering_dog? %>
         <%= link_to "Edit Dog", edit_dog_path(@dog), :class => "btn btn-primary btn-large" %>
@@ -117,7 +113,7 @@
 
       <br />
       <% if signed_in? %>
-        <% cache ['about', 'private', @dog] do %>
+
         <h4>Private Information</h4>
         <% if @dog.original_name.present? %>
           Original Name: <%= @dog.original_name.titleize %><br />
@@ -246,7 +242,7 @@
 
         <h5>Bordetella</h5>
         <p><%= @dog.bordetella %></p>
-      <% end %>
+
     <% end %>
   </div>
 </div>

@@ -1,6 +1,6 @@
 $( function () {
 
-  if ( $('.edit-comment').length > 0) {
+  if ( $('.edit_comment').length > 0) {
     $('.toggle-edit-comment').each(function(){
       var isEditing = false;
 
@@ -22,21 +22,21 @@ $( function () {
         }
         isEditing = !isEditing;
 
-        $('.save-edit-comment').click(function() {
-          var $parent = $(event.target).parents('.edit-comment')
+      });
 
-          RescueRails.saveParentForm();
-          
-          //Need some kind of id variable to pass here?
-          //refresh_comment();
-          $parent.find('.editable-comment').hide();
-          $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
-          $parent.find('.save-edit-comment').hide();
-          $parent.find('.read-only-comment').show();
+      $('.save-edit-comment').click(function() {
+        var $parent = $(event.target).parents('.edit-comment')
 
-          isEditing = !isEditing;
-        });
+        save_comment();
+        
+        //Need some kind of id variable to pass here?
+        refresh_comment("8201");
+        $parent.find('.editable-comment').hide();
+        $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
+        $parent.find('.save-edit-comment').hide();
+        $parent.find('.read-only-comment').show();
 
+        isEditing = !isEditing;
       });
 
     });
@@ -86,10 +86,21 @@ $( function () {
   });
 });
 
+function save_comment() {
+    var $form = $(this).parents('#edit_comment_8201');
+    var serialized_form = $form.serialize();
+
+    $.ajax({
+      url: $form.attr('action'),
+      type: 'POST',
+      data: serialized_form
+    })
+}
+
 function refresh_comment(id) {
-  var url = window.location + '/comments' + id;
+  var url = window.location + '/comments/' + id;
   $.get(url, function(data) {
-    $('#comment_id').html(data);
+    $('#comment_content_8201').html(data);
   })
 }
 

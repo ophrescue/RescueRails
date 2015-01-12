@@ -21,7 +21,7 @@
         <%= fc.text_area :content, :class => "span8", :rows => "6" %>
       </div>
 
-      <div class="read-only-comment">
+      <div class="read-only-comment" id="comment_content_<%=comment.id%>">
         <%= simple_format(comment.content) %>
       </div>
     <% end %>

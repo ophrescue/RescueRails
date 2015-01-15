@@ -5,41 +5,24 @@ $( function () {
       var isEditing = false;
 
       $(this).click(function() {
-
-        var $parent = $(event.target).parents('.edit-comment')
-
+        var $parent = $(event.target).parents('form.edit_comment')
         if (isEditing) {
-          $parent.find('.read-only-comment').show();
-          $parent.find('.editable-comment').hide();
-          $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
-          $parent.find('.save-edit-comment').hide();
+          showComment($parent);
         }
         else {
-          $parent.find('.read-only-comment').hide();
-          $parent.find('.editable-comment').show();
-          $parent.find('.toggle-edit-comment').removeClass('btn-primary').text('Cancel');
-          $parent.find('.save-edit-comment').show();
+          editComment($parent);
         }
         isEditing = !isEditing;
-
       });
+    });
 
-      $('.save-edit-comment').click(function() {
-        var $parent = $(event.target).parents('.edit-comment')
+    $('.save-edit-comment').click(function() {
+      var $parent = $(event.target).parents('form.edit_comment')
 
-        save_comment($parent);
-        
-        $parent.find('.editable-comment').hide();
-        $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
-        $parent.find('.save-edit-comment').hide();
-        $parent.find('.read-only-comment').show();
-
-        isEditing = !isEditing;
-      });
-
+      saveComment($parent);
+      showComment($parent);
     });
   }
-
 
 
   $('#new_comment').submit( function(e) {
@@ -84,16 +67,34 @@ $( function () {
   });
 });
 
-function save_comment($parent) {
-  var $form = $parent
+function editComment($parent) {
+  $parent.find('.read-only-comment').hide();
+  $parent.find('.editable-comment').show();
+  $parent.find('.toggle-edit-comment').removeClass('btn-primary').text('Cancel');
+  $parent.find('.save-edit-comment').show();
+}
+
+function showComment($parent) {
+  $parent.find('.read-only-comment').show();
+  $parent.find('.editable-comment').hide();
+  $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
+  $parent.find('.save-edit-comment').hide();
+}
+
+
+function saveComment($parent) {
+  var $url = $form.attr('action');
   var serialized_form = $form.serialize();
 
   $.ajax({
-        url: $form.attr('action'),
+        url: $url,
         type: 'POST',
         data: serialized_form
-      }).success(function(data) {
-          $parent.find('.read-only-comment').html(data);
+      }).success(function($url) {
+          $.get($url, function(data) {
+            $parent.find('.read-only-comment').html(data);
+          })
+          
         }).error( function() {
           $parent.find('.read-only-comment').html("Comment update error.");
           })

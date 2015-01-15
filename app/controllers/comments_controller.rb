@@ -38,7 +38,6 @@ class CommentsController < ApplicationController
     if @comment.user_id == current_user.id
       @comment.update_attributes(params[:comment])
       respond_with @comment.content
-      end
     else
       # return a not authorized
       respond_with @comment, :status => :unauthorized

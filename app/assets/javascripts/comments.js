@@ -90,7 +90,7 @@ function saveComment($form) {
         url: $url,
         type: 'POST',
         data: serialized_form
-      }).success(function($url) {
+      }).success(function() {
           $.get($url, function(data) {
             $form.find('.read-only-comment').html(data);
           })

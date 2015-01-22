@@ -16,9 +16,9 @@ $( function () {
       });
     });
 
-    $('.save-edit-comment').click(function() {
-      var $parent = $(event.target).parents('form.edit_comment')
-
+    $('button.save-edit-comment').click(function() {
+      var $parent = $(event.target).parents('form.edit_comment');
+     
       saveComment($parent);
       showComment($parent);
     });
@@ -82,7 +82,7 @@ function showComment($parent) {
 }
 
 
-function saveComment($parent) {
+function saveComment($form) {
   var $url = $form.attr('action');
   var serialized_form = $form.serialize();
 
@@ -92,11 +92,11 @@ function saveComment($parent) {
         data: serialized_form
       }).success(function($url) {
           $.get($url, function(data) {
-            $parent.find('.read-only-comment').html(data);
+            $form.find('.read-only-comment').html(data);
           })
           
         }).error( function() {
-          $parent.find('.read-only-comment').html("Comment update error.");
+          $form.find('.read-only-comment').html("Comment update error.");
           })
 }
 

@@ -1,11 +1,12 @@
 $( function () {
 
   if ( $('.edit_comment').length > 0) {
-    $('.toggle-edit-comment').each(function(){
-      var isEditing = false;
+    var isEditing = false;
 
+    $('.toggle-edit-comment').each(function(){
       $(this).click(function() {
-        var $parent = $(event.target).parents('form.edit_comment')
+        var $parent = $(event.target).parents('form.edit_comment');
+
         if (isEditing) {
           showComment($parent);
         }
@@ -18,9 +19,11 @@ $( function () {
 
     $('button.save-edit-comment').click(function() {
       var $parent = $(event.target).parents('form.edit_comment');
-     
+
       saveComment($parent);
       showComment($parent);
+
+      isEditing = !isEditing;
     });
   }
 

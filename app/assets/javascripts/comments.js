@@ -2,20 +2,18 @@ $( function () {
 
   if ( $('.edit_comment').length > 0) {
 
-    $('.toggle-edit-comment').each(function(){
-      var isEditing = false;
+    $('.toggle-edit-comment').click(function(){
+      var $parent = $(event.target).parents('form.edit_comment');
+      isEditing = $($parent).data("editing");
 
-      $(this).click(function() {
-        var $parent = $(event.target).parents('form.edit_comment');
+      if (isEditing) {
+        showComment($parent);
+      }
+      else {
+        editComment($parent);
+      }
+      $($parent).data("editing", !isEditing);
 
-        if (isEditing) {
-          showComment($parent);
-        }
-        else {
-          editComment($parent);
-        }
-        isEditing = !isEditing;
-      });
     });
 
     $('button.save-edit-comment').click(function() {

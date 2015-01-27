@@ -85,15 +85,15 @@ function showComment($parent) {
 
 
 function saveComment($form) {
-  var $url = $form.attr('action');
+  var url = $form.attr('action');
   var serialized_form = $form.serialize();
 
   $.ajax({
-        url: $url,
+        url: url,
         type: 'POST',
         data: serialized_form
       }).success(function() {
-          $.get($url, function(data) {
+          $.get(url, function(data) {
             $form.find('.read-only-comment').html(data);
           })
           

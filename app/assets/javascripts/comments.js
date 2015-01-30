@@ -2,8 +2,8 @@ $( function () {
 
   if ( $('.edit_comment').length > 0) {
 
-    $(document).on('click', '.toggle-edit-comment', function(){
-      var $parent = $(event.target).parents('form.edit_comment');
+    $(document).on('click', '.toggle-edit-comment', function(e){
+      var $parent = $(e.target).parents('form.edit_comment');
       isEditing = $($parent).data("editing");
 
       if (isEditing) {
@@ -16,8 +16,8 @@ $( function () {
 
     });
 
-    $(document).on('click', 'button.save-edit-comment', function(){
-      var $parent = $(event.target).parents('form.edit_comment');
+    $(document).on('click', 'button.save-edit-comment', function(e){
+      var $parent = $(e.target).parents('form.edit_comment');
 
       saveComment($parent);
       $parent.find('.toggle-edit-comment').click();

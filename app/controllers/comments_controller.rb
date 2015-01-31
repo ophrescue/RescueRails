@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
 
   def show
     @comment = Comment.find(params[:id])
+    render :layout => false
   end
 
   def new
@@ -36,7 +37,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     if @comment.user_id == current_user.id
       @comment.update_attributes(params[:comment])
-      respond_with @comment
+      render json: nil, status: :ok
     else
       # return a not authorized
       respond_with @comment, :status => :unauthorized

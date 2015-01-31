@@ -34,21 +34,20 @@
     <% if signed_in? %>
       <div class="row">
         <div class="span8">
-          <h4>Private Comments</h4>
+          <h4>Add Comment</h4>
 
           <%= form_for [@dog, @dog.comments.build], :html => {:id => "new_comment"} do |f| %>
             <%= f.text_area :content, :class => "input-xxlarge", :rows => "6" %>
             <%= f.submit "Post", :class => "btn btn-primary" %>
           <% end %>
 
+          <h4>Past Comments</h4>
           <div id="comment_table">
-            <table class="table table-striped table-bordered table-condensed table-hover">
               <% @dog.comments.each do |comment| %>
                 <% if comment.id != nil %>
                   <%= render 'comments/comment', :comment => comment %>
                 <% end %>
               <% end %>
-            </table>
           </div>
         </div>
       </div>

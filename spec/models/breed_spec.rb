@@ -5,7 +5,7 @@ describe Breed do
 
   context 'has a valid factory' do
     it 'is valid' do
-      expect(breed.valid?).to be_true
+      expect(create(:breed)).to be_valid
     end
   end
 end

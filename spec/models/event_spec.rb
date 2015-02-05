@@ -5,7 +5,7 @@ describe Event do
 
   context 'has a valid factory' do
     it 'is valid' do
-      expect(event.valid?).to eq(true)
+      expect(build(:event)).to be_valid
     end
   end
 end

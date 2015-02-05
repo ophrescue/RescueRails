@@ -4,8 +4,8 @@ describe AdoptionApp do
   let(:banned_adopter) { build(:banned_adopter) }
 
   context 'has a valid factory' do
-    it 'saves' do
-      expect(banned_adopter.valid?).to eq(true)
+    it 'is valid' do
+      expect(build(:banned_adopter)).to be_valid
     end
   end
 end

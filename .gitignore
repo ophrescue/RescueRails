@@ -13,3 +13,4 @@ config/database.yml
 chromedriver.log
 .idea/
 .env.*
+coverage

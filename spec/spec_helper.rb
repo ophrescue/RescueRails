@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start 'rails'
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
@@ -36,5 +39,37 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+  end
+end
+
+class User
+  def chimp_subscribe
+    # no-op
+  end
+
+  def chimp_unsubscribe
+    # these happen in callbacks
+    # return true to not block
+    true
+  end
+end
+
+class Adopter
+  def chimp_subscribe
+    # these happen in callbacks
+    # return true to not block
+    true
+  end
+
+  def chimp_unsubscribe
+    # these happen in callbacks
+    # return true to not block
+    true
+  end
+
+  def chimp_check
+    # these happen in callbacks
+    # return true to not block
+    true
   end
 end

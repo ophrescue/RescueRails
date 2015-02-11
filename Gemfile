@@ -73,9 +73,10 @@ group :development, :test do
 end
 
 group :test do
-  gem 'factory_girl_rails'
   gem 'capybara', '~> 2.2.0'
   gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'coveralls', require: false
 end
 
 group :development do

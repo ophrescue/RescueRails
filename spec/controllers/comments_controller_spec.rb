@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CommentsController do
+describe CommentsController, type: :controller do
   let!(:user) { build(:user) }
   before(:each) do
     user.stub(:chimp_subscribe).and_return(true)

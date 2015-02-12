@@ -6,6 +6,8 @@
 
 [![Build Status](https://travis-ci.org/ophrescue/RescueRails.svg?branch=travis)](https://travis-ci.org/ophrescue/RescueRails)
 
+[![Coverage Status](https://coveralls.io/repos/ophrescue/RescueRails/badge.svg)](https://coveralls.io/r/ophrescue/RescueRails)
+
 Rails 3.2.x
 Ruby 2.1.1
 Postgresql 9.3.x

@@ -5,7 +5,7 @@ describe PasswordResetsController, type: :controller do
   describe "GET 'new'" do
     it "should be successful" do
       get 'new'
-      response.should be_success
+      expect(response).to be_success
     end
   end
 

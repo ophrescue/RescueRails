@@ -3,9 +3,9 @@ require 'spec_helper'
 describe CommentsController, type: :controller do
   let!(:user) { build(:user) }
   before(:each) do
-    user.stub(:chimp_subscribe).and_return(true)
+    allow(User).to receive(:chimp_subscribe).and_return(true)
     user.save
-    controller.stub(:current_user).and_return(user)
+    allow(controller).to receive(:current_user).and_return(user)
   end
 
   describe 'POST #create' do

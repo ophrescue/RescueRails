@@ -5,7 +5,7 @@ describe Shelter do
 
   context 'has a valid factory' do
     it 'is valid' do
-      expect(shelter.valid?).to eq(true)
+      expect(build(:shelter)).to be_valid
     end
   end
 end

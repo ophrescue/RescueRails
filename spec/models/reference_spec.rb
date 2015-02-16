@@ -5,7 +5,7 @@ describe Reference do
 
   context 'has a valid factory' do
     it 'is valid' do
-      expect(reference.valid?).to be_true
+      expect(reference).to be_valid
     end
   end
 end

@@ -5,7 +5,7 @@ describe Comment do
 
   context 'has a valid factory' do
     it 'is valid' do
-      expect(comment.valid?).to eq(true)
+      expect(build(:comment)).to be_valid
     end
   end
 end

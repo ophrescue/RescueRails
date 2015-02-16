@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe User do
   before do
-    User.any_instance.stub(:chimp_subscribe).and_return(true)
-    User.any_instance.stub(:chimp_unsubscribe).and_return(true)
+    allow(User).to receive(:chimp_check).and_return(true)
+    allow(User).to receive(:chimp_subscribe).and_return(true)
   end
 
   describe '#out_of_date?' do

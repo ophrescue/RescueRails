@@ -5,10 +5,11 @@ describe Adopter do
   let(:adopter) { create(:adopter) }
 
   before do
-    Adopter.any_instance.stub(:chimp_check).and_return(true)
-    Adopter.any_instance.stub(:chimp_subscribe).and_return(true)
-    User.any_instance.stub(:chimp_subscribe).and_return(true)
-    User.any_instance.stub(:chimp_check).and_return(true)
+    allow(Adopter).to receive(:chimp_check).and_return(true)
+    allow(Adopter).to receive(:chimp_subscribe).and_return(true)
+    allow(User).to receive(:chimp_check).and_return(true)
+    allow(User).to receive(:chimp_subscribe).and_return(true)
+
 
     adopter.updated_by_admin_user = admin
     adopter.status = 'completed'

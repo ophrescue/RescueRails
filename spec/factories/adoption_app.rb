@@ -18,25 +18,12 @@ FactoryGirl.define do
     surrender_pet_causes 'if it bit me'
     training_explain 'i like training'
     surrendered_pets 'never'
+    how_did_you_hear 'google ad'
+    pets_branch 'other_pets'
     current_pets_fixed true
+    rent_costs '$500 pet deposit'
+    vet_info 'Dr. Spaceman Baltimore MD'
     max_hrs_alone 3
     is_ofage true
-
-    # TODO look into these fields
-
-    # has_yard true
-    # has_fence false
-    # has_parks true
-    # dog_at_night 'In a crate'
-    # have_pets true
-    # had_pets true
-    # prior_pets 'none'
-    # vet_name 'Dr Kreiger'
-    # vet_phone '1-800-DOG-MD4U'
-    # rent_deposit '500'
-    # rent_increase '200'
-    # plan_training 'go to dog school'
-    # has_new_dog_exp true
-    # why_adopt 'dogs are cute and stuff'
   end
 end

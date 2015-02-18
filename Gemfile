@@ -69,6 +69,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-stack_explorer'
   gem 'rspec-rails'
+  gem 'json_spec'
   gem 'watir-webdriver', platform: :ruby
 end
 

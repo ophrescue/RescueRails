@@ -1,13 +1,13 @@
 class DogsController < ApplicationController
-  helper_method :sort_column, :sort_direction, :is_fostering_dog?
+  helper_method :is_fostering_dog?
 
-  autocomplete :breed, :name, :full => true
+  autocomplete :breed, :name, full: true
 
-  before_filter :authenticate,                            :except => [:index, :show]
-  before_filter :edit_dog_check,                          :only => [:edit, :update]    
-  # before_filter :fostering_dog_user, :edit_dogs_user,     :only => [:edit, :update]                                   
-  before_filter :add_dogs_user,                          :only => [:new, :create]
-  before_filter :admin_user,                              :only => [:destroy]
+  before_filter :authenticate, except: %i(index show)
+  before_filter :edit_dog_check, only: %i(edit update)
+  before_filter :add_dogs_user, only: %i(new create)
+  before_filter :admin_user, only: %i(destroy)
+  before_filter :load_dog, only: %i(show edit update destroy)
 
   def index
     is_manager = signed_in? && session[:mgr_view]
@@ -22,7 +22,6 @@ class DogsController < ApplicationController
   end
 
   def show
-    @dog = Dog.find(params[:id])
     sort_dog_photos
     @title = @dog.name
   end
@@ -34,7 +33,6 @@ class DogsController < ApplicationController
   end
 
   def edit
-    @dog = Dog.find(params[:id]) 
     @dog.primary_breed_name = @dog.primary_breed.name unless @dog.primary_breed.nil?
     @dog.secondary_breed_name = @dog.secondary_breed.name unless @dog.secondary_breed.nil?
     sort_dog_photos
@@ -43,7 +41,6 @@ class DogsController < ApplicationController
   end
 
   def update
-    @dog = Dog.find(params[:id])
     if @dog.update_attributes(params[:dog])
       flash[:success] = "Dog updated."
       redirect_to @dog
@@ -71,7 +68,7 @@ class DogsController < ApplicationController
   end
 
   def destroy
-    Dog.find(params[:id]).destroy
+    @dog.destroy
     flash[:success] = "Dog deleted."
     redirect_to dogs_path
   end
@@ -88,6 +85,10 @@ class DogsController < ApplicationController
 
 
   private
+
+    def load_dog
+      @dog = Dog.find(params[:id])
+    end
 
     def sort_dog_photos
       @dog.photos.sort_by!{|photo| photo.position}

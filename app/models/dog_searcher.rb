@@ -25,9 +25,9 @@ class DogSearcher
       @dogs = Dog.where("status IN (?)", PUBLIC_STATUSES)
     end
 
-    includes
-    sort
-    paginate
+    with_includes
+    with_sorting
+    for_page(@params[:page])
 
     @dogs
   end
@@ -54,16 +54,16 @@ class DogSearcher
     @params.has_key? :status
   end
 
-  def includes
+  def with_includes
     @dogs = @dogs.includes(:photos, :primary_breed)
   end
 
-  def sort
+  def with_sorting
     @dogs = @dogs.order(sort_column + ' ' + sort_direction)
   end
 
-  def paginate
-    @dogs = @dogs.paginate(:per_page => PER_PAGE, :page => @params[:page])
+  def for_page(page = nil)
+    @dogs = @dogs.paginate(per_page: PER_PAGE, page: page || 1)
   end
 
   def sort_column

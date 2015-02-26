@@ -7,7 +7,7 @@ class EventsController < ApplicationController
 		@title = "Upcoming Events"
 		@events = Event.find(:all,
 							 :conditions => ["event_date >= ?", Date.today],
-							 :limit => 20, 
+							 :limit => 30, 
 							 :order => 'event_date')
 	end
 
@@ -15,7 +15,7 @@ class EventsController < ApplicationController
 		@title = "Past Events"
 		@events = Event.find(:all,
 							 :conditions => ["event_date <= ?", Date.today],
-							 :limit => 20, 
+							 :limit => 30, 
 							 :order => 'event_date')
 	end
 

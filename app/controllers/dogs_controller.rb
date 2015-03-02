@@ -1,35 +1,19 @@
 class DogsController < ApplicationController
-  helper_method :sort_column, :sort_direction, :is_fostering_dog?
+  helper_method :is_fostering_dog?
 
-  autocomplete :breed, :name, :full => true
+  autocomplete :breed, :name, full: true
 
-  before_filter :authenticate,                            :except => [:index, :show]
-  before_filter :edit_dog_check,                          :only => [:edit, :update]    
-  # before_filter :fostering_dog_user, :edit_dogs_user,     :only => [:edit, :update]                                   
-  before_filter :add_dogs_user,                          :only => [:new, :create]
-  before_filter :admin_user,                              :only => [:destroy]
+  before_filter :authenticate, except: %i(index show)
+  before_filter :edit_dog_check, only: %i(edit update)
+  before_filter :add_dogs_user, only: %i(new create)
+  before_filter :admin_user, only: %i(destroy)
+  before_filter :load_dog, only: %i(show edit update destroy)
 
   def index
-    if (signed_in?) && (session[:mgr_view] == true)
-      @title = "Dog Manager"
-      if (params[:search].to_i > 0)
-        @dogs = Dog.where('tracking_id = ?', "#{params[:search].to_i}").paginate(:page => params[:page])
-      elsif params[:search]
-        @dogs = Dog.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(:page => params[:page])
-      elsif params[:status] == 'active'
-        statuses = ['adoptable', 'adoption pending', 'on hold', 'return pending', 'coming soon']
-        @dogs = Dog.where("status IN (?)", statuses).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
-      elsif params.has_key? :status
-        @dogs = Dog.where(:status => params[:status]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
-      else
-        @dogs = Dog.where("name ilike ?", "%#{params[:q]}%").order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
-      end
-    else
-      @title = "Our Dogs"
-      statuses = ['adoptable', 'adoption pending', 'coming soon']
-      @dogs = Dog.where("status IN (?)", statuses).order(sort_column + ' ' + sort_direction).paginate(:per_page => 30, :page => params[:page]).includes(:photos, :primary_breed)
-    end
-    ## Need to support the dog select drop down in the adopt app as well!
+    is_manager = signed_in? && session[:mgr_view]
+
+    @title = is_manager ? "Dog Manager" : "Our Dogs"
+    @dogs = DogSearcher.search(params: params, manager: is_manager)
 
     respond_to do |format|
       format.html 
@@ -38,7 +22,6 @@ class DogsController < ApplicationController
   end
 
   def show
-    @dog = Dog.find(params[:id])
     sort_dog_photos
     @title = @dog.name
   end
@@ -50,7 +33,6 @@ class DogsController < ApplicationController
   end
 
   def edit
-    @dog = Dog.find(params[:id]) 
     @dog.primary_breed_name = @dog.primary_breed.name unless @dog.primary_breed.nil?
     @dog.secondary_breed_name = @dog.secondary_breed.name unless @dog.secondary_breed.nil?
     sort_dog_photos
@@ -59,7 +41,6 @@ class DogsController < ApplicationController
   end
 
   def update
-    @dog = Dog.find(params[:id])
     if @dog.update_attributes(params[:dog])
       flash[:success] = "Dog updated."
       redirect_to @dog
@@ -87,7 +68,7 @@ class DogsController < ApplicationController
   end
 
   def destroy
-    Dog.find(params[:id]).destroy
+    @dog.destroy
     flash[:success] = "Dog deleted."
     redirect_to dogs_path
   end
@@ -104,6 +85,10 @@ class DogsController < ApplicationController
 
 
   private
+
+    def load_dog
+      @dog = Dog.find(params[:id])
+    end
 
     def sort_dog_photos
       @dog.photos.sort_by!{|photo| photo.position}
@@ -152,13 +137,4 @@ class DogsController < ApplicationController
     def fostering_dog_user
       redirect_to(root_path) unless is_fostering_dog?
     end
-
-    def sort_column  
-      Dog.column_names.include?(params[:sort]) ? params[:sort] : "tracking_id"  
-    end  
-      
-    def sort_direction  
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"  
-    end  
-
 end

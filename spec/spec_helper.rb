@@ -29,6 +29,7 @@ RSpec.configure do |config|
   config.order = 'random'
 
   config.include FactoryGirl::Syntax::Methods
+  config.include JsonSpec::Helpers
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)

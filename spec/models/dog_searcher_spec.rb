@@ -21,7 +21,7 @@ describe DogSearcher do
       context 'search by name' do
         let!(:found_dog) { create(:dog, name: 'oscar') }
         let!(:other_dog) { create(:dog, name: 'meyer') }
-        let(:params) { { search: 'oscar' } }
+        let(:params) { { search: 'Oscar' } }
 
         it 'finds the correct dog' do
           expect(results).to include(found_dog)

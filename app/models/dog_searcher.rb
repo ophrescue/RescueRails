@@ -13,13 +13,13 @@ class DogSearcher
       if tracking_id_search?
         @dogs = Dog.where('tracking_id = ?', "#{@params[:search].to_i}")
       elsif name_search?
-        @dogs = Dog.where('lower(name) LIKE ?', "%#{@params[:search].downcase.strip}%")
+        @dogs = Dog.where('dogs.name ILIKE ?', "%#{@params[:search].strip}%")
       elsif active_status_search?
         @dogs = Dog.where("status IN (?)", ACTIVE_STATUSES)
       elsif status_search?
         @dogs = Dog.where(:status => @params[:status])
       else
-        @dogs = Dog.where("name ilike ?", "%#{@params[:q]}%")
+        @dogs = Dog.where("dogs.name ILIKE ?", "%#{@params[:q]}%")
       end
     else
       @dogs = Dog.where("status IN (?)", PUBLIC_STATUSES)

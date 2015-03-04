@@ -47,7 +47,7 @@ namespace :adoptapet_sync do
                   d.age,
                   d.to_petfinder_gender,
                   d.to_petfinder_size,
-                  d.description.gsub(/\r\n?/, "&#10;"),
+                  d.description.gsub(/\r\n?/, "<br>"),
                   "Available",                      #status
                   d.no_kids ? "N" : "Y",            #GoodWKids
                   d.no_cats ? "N" : "Y",            #GoodWCats

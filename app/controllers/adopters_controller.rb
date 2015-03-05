@@ -5,33 +5,20 @@ class AdoptersController < ApplicationController
   before_filter :edit_my_adopters_user, :only => [:index, :show, :edit, :update]
   before_filter :edit_all_adopters_user, :only => [:index, :show, :edit, :update]
   before_filter :admin_user, :only => [:destroy]
+  before_filter :load_adopter, only: %i(show update)
 
   respond_to :html, :json
 
   def index
     @title = "Adoption Applications"
-
-    statuses = ['new', 'pend response', 'workup', 'approved']
-
-    if params[:search]
-      @adopters = Adopter.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%")
-    elsif params[:status] == 'active'
-      @adopters = Adopter.where("status IN (?)", statuses).includes(:user, :comments, :dogs, :adoption_app)
-      # @adopters = Adopter.find(:all, :include => [:user, :comments, :dogs, :adoption_app], :conditions => ["status IN ?", statuses])
-    elsif params.has_key? :status
-      @adopters = Adopter.where(:status => params[:status]).includes(:user, :comments, :dogs, :adoption_app)
-    else
-      @adopters = Adopter.find(:all, :include => [:user, :comments, :dogs, :adoption_app])
-    end
-
     session[:last_search] = request.url
+    @adopters = AdopterSearcher.search(params: params)
   end
 
   def show
-    session[:last_search] ||= adopters_url
-    @adopter = Adopter.find(params[:id])
-    @adoption_app = @adopter.adoption_app
     @title = @adopter.name
+    session[:last_search] ||= adopters_url
+    @adoption_app = @adopter.adoption_app
     @dogs_all = Dog.order("name").all
     @adoption = Adoption.new
     @adopter_users = User.where(:edit_my_adopters => true).order("name")
@@ -71,8 +58,6 @@ class AdoptersController < ApplicationController
   end
 
   def update
-    @adopter = Adopter.find(params[:id])
-
     if (params[:adopter][:status] == 'completed') && (!can_complete_adopters?)
       flash[:error] = "You are not allowed to set an application to completed"
     else
@@ -96,6 +81,10 @@ class AdoptersController < ApplicationController
   end
 
   private
+
+  def load_adopter
+    @adopter = Adopter.find(params[:id])
+  end
 
   def edit_my_adopters_user
     #TODO Figure out how to differentiate these

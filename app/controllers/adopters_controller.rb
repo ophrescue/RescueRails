@@ -82,7 +82,7 @@ class AdoptersController < ApplicationController
 
   private
 
-  def laod_adopter
+  def load_adopter
     @adopter = Adopter.find(params[:id])
   end
 

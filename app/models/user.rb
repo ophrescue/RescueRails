@@ -93,6 +93,13 @@ class User < ActiveRecord::Base
                     :format     => { :with => email_regex },
                     :uniqueness => { :case_sensitive => false }
 
+  validates :state, :length     => { :is => 2 }
+
+  validates_format_of :zip,
+                    with: /\A\d{5}-\d{4}|\A\d{5}\z/,
+                    message: "should be 12345 or 12345-1234",
+                    allow_blank: true
+
   #Automatically creates the virtual attribute 'password_confirmation'.
   validates :password, :presence      => true,
                        :confirmation  => true,

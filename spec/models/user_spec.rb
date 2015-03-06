@@ -12,12 +12,10 @@ describe User do
     context 'with valid fields' do
       it 'should accept a two letter state' do
         user = build(:user, state: 'PA')
-        user.valid?
         expect(user).to be_valid
       end
       it 'should accet a 5 digit zipcode' do
-        user =build(:user, zip: '12345')
-        user.valid?
+        user = build(:user, zip: '12345')
         expect(user).to be_valid
       end
     end

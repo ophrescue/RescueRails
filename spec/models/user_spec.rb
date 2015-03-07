@@ -6,6 +6,35 @@ describe User do
     allow(User).to receive(:chimp_subscribe).and_return(true)
   end
 
+
+  describe 'contact information' do
+
+    context 'with valid fields' do
+      it 'should accept a two letter state' do
+        user = build(:user, state: 'PA')
+        expect(user).to be_valid
+      end
+      it 'should accet a 5 digit zipcode' do
+        user = build(:user, zip: '12345')
+        expect(user).to be_valid
+      end
+    end
+
+    context 'with invalid fields' do
+      it 'is invalid with a state more than 2 letters' do
+        user = build(:user, state: 'Penn')
+        user.valid?
+        expect(user.errors[:state]).to include('is the wrong length (should be 2 characters)')
+      end
+      it 'is invalid with a zip code of more than 5 characters' do
+        user = build(:user, zip: 'virgina')
+        user.valid?
+        expect(user.errors[:zip]).to include('should be 12345 or 12345-1234')
+      end
+    end
+  end
+
+
   describe '#out_of_date?' do
 
     context 'user has no last_verified date' do

@@ -14,6 +14,8 @@ namespace :adoptapet_sync do
     FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
     FileUtils::Verbose.mkdir(path)
 
+    FileUtils::Verbose.cp "#{Rails.root.to_s}/lib/tasks/import.cfg", path
+
     STATES.each do |state|
 
       filename = "pets_#{state}.csv"
@@ -28,6 +30,8 @@ namespace :adoptapet_sync do
           "coming soon"],
           users: {state: state}
          })
+
+      desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs/"
 
       CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
 
@@ -47,7 +51,7 @@ namespace :adoptapet_sync do
                   d.age,
                   d.to_petfinder_gender,
                   d.to_petfinder_size,
-                  d.description.gsub(/\r\n?/, "<br>"),
+                  desc_prefix + d.id.to_s + "<br>" + d.description.gsub(/\r\n?/, "<br>"),
                   "Available",                      #status
                   d.no_kids ? "N" : "Y",            #GoodWKids
                   d.no_cats ? "N" : "Y",            #GoodWCats
@@ -63,10 +67,20 @@ namespace :adoptapet_sync do
       end
       puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Adoptapet #{state} Export Complete"
 
-      #Add Step to copy import.cfg to /tmp/adoptapet/
-      #Add FTP upload step for each state here
+      if Rails.env.production?
+        puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Begin Upload for #{state}"
+        ## Being Upload
+        ftp = Net::FTP.new
+        ftp.connect('autoupload.adoptapet.com',21)
+        ftp.login(ENV["ADOPTAPET_#{state}_USER"], ENV["ADOPTAPET_#{state}_PW"])
+        ftp.putbinaryfile(path + filename, pets.csv)
+        ftp.putbinaryfile(path + import.cfg, import.cfg)
 
-
+        ftp.close
+        puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Upload Completed for #{state}"
+      else
+        puts "Not production, skipping upload"
+      end
     end
 
 

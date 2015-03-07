@@ -119,6 +119,7 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :agreement
 
+  before_save :upcase_state
   before_create :chimp_subscribe
   before_update :chimp_check
 
@@ -215,6 +216,10 @@ class User < ActiveRecord::Base
 
 
   private
+
+    def upcase_state
+      self.state.upcase!
+    end
 
     def mass_assignment_authorizer(role = :default)
       if accessible == :all

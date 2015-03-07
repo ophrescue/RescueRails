@@ -18,6 +18,10 @@ describe User do
         user = build(:user, zip: '12345')
         expect(user).to be_valid
       end
+      it 'should save a state abbreviation in all caps' do
+        user = create(:user, state: 'pa')
+        expect(user.state).to eq('PA')
+      end
     end
 
     context 'with invalid fields' do

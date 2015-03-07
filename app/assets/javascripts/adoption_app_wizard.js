@@ -29,7 +29,12 @@ $(function(){
               maxlength: 50
             },
             "adopter[email]" : {
-              required: true,
+              required: {
+                depends:function(){
+                  $(this).val($.trim($(this).val()));
+                  return true;
+                }
+              },
               email: true,
                               maxlength: 250,
                               remote: "/adopters/check_email"

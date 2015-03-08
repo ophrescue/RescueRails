@@ -61,7 +61,8 @@ namespace :adoptapet_sync do
                   photo_urls[0],
                   photo_urls[1],
                   photo_urls[2],
-                  photo_urls[3]
+                  photo_urls[3],
+                  d.youtube_video_url ? d.youtube_video_url : ""
           ]
         end
       end

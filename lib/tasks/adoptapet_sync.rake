@@ -74,8 +74,8 @@ namespace :adoptapet_sync do
         ftp = Net::FTP.new
         ftp.connect('autoupload.adoptapet.com',21)
         ftp.login(ENV["ADOPTAPET_#{state}_USER"], ENV["ADOPTAPET_#{state}_PW"])
-        ftp.putbinaryfile(path + filename, pets.csv)
-        ftp.putbinaryfile(path + import.cfg, import.cfg)
+        ftp.putbinaryfile(path + filename, "pets.csv")
+        ftp.putbinaryfile(path + import.cfg, "import.cfg")
 
         ftp.close
         puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Upload Completed for #{state}"

@@ -12,4 +12,5 @@ job_type :rbenv_rake, %Q{export PATH=/home/deploy/.rbenv/shims:/home/deploy/.rbe
 
 every :day, at: '2:30am' do
   rbenv_rake "petfinder_sync:export_upload"
+  rbenv_rake "adoptapet_sync:export_upload"
 end

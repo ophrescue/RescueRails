@@ -21,8 +21,8 @@
                 <% if @user.address2? %>
                   <%= @user.address2 %><br />
                 <% end %>
-                <%= @user.city %>, 
-                <%= @user.state %> 
+                <%= @user.city %>,
+                <%= @user.state %>
                 <%= @user.zip %>
             </td>
           </tr>
@@ -62,11 +62,11 @@
               <td><%= time_ago_in_words(@user.lastverified)%> ago</td>
             <% else %>
               <td>Never</td>
-            <% end %> 
+            <% end %>
           </tr>
           <tr>
             <td>Coordinated Dogs</td>
-            <td>        
+            <td>
               <% @user.coordinated_dogs.each do |d| %>
                 <%= link_to d.name, d %>
                   (<%= d.status %>)
@@ -76,7 +76,7 @@
           </tr>
           <tr>
             <td>Assigned Adoption Applications</td>
-            <td>        
+            <td>
               <% @user.active_applications.each do |d| %>
                 <%= link_to d.name, d %>
                   (<%= d.status %>)
@@ -92,7 +92,7 @@
           <% if @user.is_foster? %>
              <p><span class="label label-success">Listed as Foster</span></p>
           <% else %>
-            <p><span class="label label-important">Not a Foster</span></p>           
+            <p><span class="label label-important">Not a Foster</span></p>
           <% end %>
 
           <% if @user.available_to_foster %>
@@ -103,11 +103,11 @@
 
           <% if @user.agreement %>
              <p>
-              <span class="label label-success">Agreement on File</span> 
+              <span class="label label-success">Agreement on File</span>
               <%= link_to @user.agreement.attachment_file_name, @user.agreement.download_url %>
              </p>
           <% else %>
-            <p><span class="label label-important">No Agreement on File</span></p>  
+            <p><span class="label label-important">No Agreement on File</span></p>
           <% end %>
 
           <% if @user.house_type == "own" %>
@@ -120,15 +120,15 @@
             <% if @user.breed_restriction? %>
                <p><span class="label label-important">Breed Restricted</span></p>
             <% else %>
-              <p><span class="label label-success">No Breed Restrictions</span></p>           
+              <p><span class="label label-success">No Breed Restrictions</span></p>
             <% end %>
           <% end %>
 
-          <% unless @user.weight_restriction.nil? %> 
+          <% unless @user.weight_restriction.nil? %>
             <% if @user.weight_restriction? %>
                <p><span class="label label-important">Weight Restricted</span></p>
             <% else %>
-              <p><span class="label label-success">No Weight Restrictions</span></p>           
+              <p><span class="label label-success">No Weight Restrictions</span></p>
             <% end %>
           <% end %>
 
@@ -136,7 +136,7 @@
             <% if @user.has_own_dogs? %>
                <p><span class="label label-important">Has own dogs</span></p>
             <% else %>
-              <p><span class="label label-success">Doesn't have own dogs</span></p>           
+              <p><span class="label label-success">Doesn't have own dogs</span></p>
             <% end %>
           <% end %>
 
@@ -144,7 +144,7 @@
             <% if @user.has_own_cats? %>
                <p><span class="label label-important">Has own cats</span></p>
             <% else %>
-              <p><span class="label label-success">Doesn't have own cats</span></p>           
+              <p><span class="label label-success">Doesn't have own cats</span></p>
             <% end %>
           <% end %>
 
@@ -152,7 +152,7 @@
             <% if @user.children_under_five? %>
                <p><span class="label label-important">Has children under 5</span></p>
             <% else %>
-              <p><span class="label label-success">No children under 5</span></p>           
+              <p><span class="label label-success">No children under 5</span></p>
             <% end %>
           <% end %>
 
@@ -160,7 +160,7 @@
             <% if @user.has_fenced_yard? %>
                <p><span class="label label-success">Has fenced in yard</span></p>
             <% else %>
-              <p><span class="label label-important">No fenced in yard</span></p>           
+              <p><span class="label label-important">No fenced in yard</span></p>
             <% end %>
           <% end %>
 
@@ -168,7 +168,7 @@
             <% if @user.can_foster_puppies? %>
                <p><span class="label label-success">Can foster puppies</span></p>
             <% else %>
-              <p><span class="label label-important">No puppies</span></p>           
+              <p><span class="label label-important">No puppies</span></p>
             <% end %>
           <% end %>
 
@@ -176,7 +176,7 @@
             <% if @user.parvo_house? %>
                <p><span class="label label-important">Had parvo in home</span></p>
             <% else %>
-              <p><span class="label label-success">No parvo in home</span></p>           
+              <p><span class="label label-success">No parvo in home</span></p>
             <% end %>
           <% end %>
 
@@ -184,7 +184,7 @@
             <% if @user.is_transporter? %>
                <p><span class="label label-success">Available for Transport</span></p>
             <% else %>
-              <p><span class="label label-important">Not Available for Transport</span></p>           
+              <p><span class="label label-important">Not Available for Transport</span></p>
             <% end %>
           <% end %>
 

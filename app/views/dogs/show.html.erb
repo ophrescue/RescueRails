@@ -192,20 +192,25 @@
 
         <h4>Ads</h4>
         <ul class="unstyled">
-        <% if !@dog.petfinder_ad_url.blank? %>
-          <li><%= link_to "Petfinder", @dog.petfinder_ad_url %></li>
-        <% else %>
-          <li><span class="label label-important">Needs Petfinder Ad</span></li>
+          <li><a href="https://www.petfinder.com/pet-search?shelter_id=VA600">Petfinder</a></li>
+        <% if @dog.foster_id %>
+          <% if @dog.foster.state == "MD" %>
+            <li><a href="http://www.adoptapet.com/shelter80736-dogs.html">Adoptapet MD</a></li>
+          <% elsif @dog.foster.state == "PA" %>
+            <li><a href="http://www.adoptapet.com/shelter84558-dogs.html">Adoptapet PA</a></li>
+          <% elsif @dog.foster.state == "VA" %>
+            <li><a href="http://www.adoptapet.com/shelter79954-dogs.html">Adoptapet VA</a></li>
+          <% else %>
+            <li><a href="">Adoptapet N/A for <%= @dog.foster.state %></a></li>
+          <% end %>
+          <% else %>
+            <li>Foster Needed for Adoptapet</li>
         <% end %>
-        <% if !@dog.adoptapet_ad_url.blank? %>
-          <li><%= link_to "Adopt-A-Pet", @dog.adoptapet_ad_url %></li>
-        <% else %>
-          <li><span class="label label-important">Needs Adopt-A-Pet Ad</span></li>
-        <% end %>
+
         <% if !@dog.craigslist_ad_url.blank? %>
           <li><%= link_to "Craigslist", @dog.craigslist_ad_url %></li>
         <% else %>
-          <li><span class="label label-important">Needs Craigslist Ad</span></li>
+          <li>Needs Craigslist Ad</li>
         <% end %>
         </ul>
 

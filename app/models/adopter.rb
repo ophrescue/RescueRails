@@ -190,7 +190,7 @@ class Adopter < ActiveRecord::Base
   def chimp_check
     return unless status_changed?
 
-    if (status == 'withdrawn' || status == 'denied') && is_subscribed?
+    if (status == 'denied') && is_subscribed?
       chimp_unsubscribe
     else
       chimp_subscribe

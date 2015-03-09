@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+
   before_filter :authenticate
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user, :only => [:new, :create, :destroy]
@@ -28,13 +28,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @title = @user.name
   end
-  
+
   def new
     @user = User.new
     @title = "Add a Staff Account"
     init_fields
   end
-  
+
   def create
     @user = User.new
     @user.accessible = :all if current_user.admin?
@@ -80,6 +80,7 @@ class UsersController < ApplicationController
 
     def init_fields
       @user.build_agreement unless @user.agreement
+      @foster_users = User.where(:locked => false).order("name")
     end
 
     def correct_user
@@ -90,8 +91,5 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to(root_path) unless current_user.admin?
     end
-
-
-
 
 end

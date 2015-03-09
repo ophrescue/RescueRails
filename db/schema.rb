@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141110033813) do
+ActiveRecord::Schema.define(:version => 20150309012213) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -326,10 +326,12 @@ ActiveRecord::Schema.define(:version => 20141110033813) do
     t.boolean   "is_photographer",                      :default => false
     t.boolean   "writes_newsletter",                    :default => false
     t.boolean   "is_transporter",                       :default => false
+    t.integer   "mentor_id"
   end
 
   add_index "users", ["agreement_id"], :name => "index_users_on_agreement_id"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["mentor_id"], :name => "index_users_on_mentor_id"
   add_index "users", ["name"], :name => "index_users_on_name"
 
   create_table "users_teams", :id => false, :force => true do |t|

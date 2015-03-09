@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: adoptions
+#
+#  id            :integer          not null, primary key
+#  adopter_id    :integer
+#  dog_id        :integer
+#  relation_type :string(255)
+#  created_at    :timestamp(6)
+#  updated_at    :timestamp(6)
+#
+
 require 'spec_helper'
 
 describe Adoption do

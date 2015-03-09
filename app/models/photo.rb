@@ -11,6 +11,7 @@
 #  created_at         :timestamp(6)
 #  updated_at         :timestamp(6)
 #  position           :integer
+#  is_private         :boolean          default(FALSE)
 #
 
 class Photo < ActiveRecord::Base

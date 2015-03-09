@@ -46,8 +46,10 @@
 #  can_foster_puppies     :boolean
 #  parvo_house            :boolean
 #  admin_comment          :text
-#  is_photographer        :boolean
-#  writes_newsletter      :boolean
+#  is_photographer        :boolean          default(FALSE)
+#  writes_newsletter      :boolean          default(FALSE)
+#  is_transporter         :boolean          default(FALSE)
+#  mentor_id              :integer
 #
 
 require 'digest'
@@ -82,7 +84,8 @@ class User < ActiveRecord::Base
                   :has_fenced_yard,
                   :can_foster_puppies,
                   :parvo_house,
-                  :is_transporter
+                  :is_transporter,
+                  :mentor_id
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -116,7 +119,8 @@ class User < ActiveRecord::Base
   has_one :agreement, as: :attachable, class_name: 'Attachment' ,dependent: :destroy
   has_many :assignments, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id'
   has_many :active_applications, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id', :conditions => {:status => ['new', 'pend response', 'workup', 'approved']}
-
+  belongs_to :mentor, :class_name => 'User', :foreign_key => 'mentor_id'
+  has_many :mentees, :class_name => 'User', :foreign_key => 'mentor_id'
   accepts_nested_attributes_for :agreement
 
   before_save :upcase_state

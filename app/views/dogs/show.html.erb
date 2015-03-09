@@ -31,6 +31,15 @@
       <p> <%= simple_format(@dog.description) %></p>
     </div>
 
+    <div class="row">
+      <div class="span8 centered">
+        <% if ['adoptable', 'adoption pending', 'coming soon'].include?(@dog.status)  %>
+          <%= link_to "Apply To Adopt", new_adopter_path(dog_name: @dog.name), class: 'btn btn-primary btn-large' %>
+        <% end %>
+        <a href="/guide" class="btn btn-primary btn-large">Adoption Guide</a>
+      </div>
+    </div>
+
     <% if signed_in? %>
       <div class="row">
         <div class="span8">

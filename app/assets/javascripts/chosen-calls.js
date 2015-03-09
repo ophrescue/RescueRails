@@ -6,4 +6,5 @@ jQuery(function($){
 	$('#dog_foster_id').chosen();
 	$('#dog_coordinator_id').chosen();
 	$('#dog_shelter_id').chosen();
+  $('#user_mentor_id').chosen();
 });

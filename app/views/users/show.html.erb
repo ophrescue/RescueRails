@@ -89,6 +89,11 @@
 
       <div class="span6">
         <h4>Fostering</h4>
+          <% if @user.mentor_id %>
+            <p>Mentor: <%= link_to @user.mentor.name, user_path(@user.mentor) %></p>
+          <% else %>
+            <p>No Mentor Assigned</p>
+          <% end %>
           <% if @user.is_foster? %>
              <p><span class="label label-success">Listed as Foster</span></p>
           <% else %>
@@ -195,6 +200,15 @@
                 <% @user.current_foster_dogs.each do |d| %>
                   <%= link_to d.name, d %>
                     (<%= d.status %>)
+                  <br />
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td>Foster Mentees</td>
+              <td>
+                <% @user.mentees.each do |m| %>
+                  <%= link_to m.name, m %>
                   <br />
                 <% end %>
               </td>

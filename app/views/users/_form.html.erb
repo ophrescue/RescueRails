@@ -71,7 +71,17 @@
 
     <h3>Fostering</h3>
 
+    <% if is_admin? %>
+      <div class="control-group">
+        <%= f.label :mentor_id, "Mentor", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.collection_select(:mentor_id, @foster_users, :id, :name, :include_blank => '-select-') %>
+        </div>
+      </div>
+    <% end %>
+
     <div class="control-group">
+      <%= f.label :available_to_foster, "Foster Status", :class => 'control-label' %>
       <div class="controls">
         <label class="radio">
           <%= f.radio_button :available_to_foster, true %><span>Ready to foster another dog</span>

@@ -80,6 +80,7 @@ class UsersController < ApplicationController
 
     def init_fields
       @user.build_agreement unless @user.agreement
+      @foster_users = User.where(:locked => false).order("name")
     end
 
     def correct_user

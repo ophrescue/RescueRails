@@ -4,12 +4,8 @@ class PagesController < ApplicationController
 
   def home
     @title = "All breed dog rescue based in Virgina, Maryland, Washington DC and South Central PA"
-    @events = Event.find(:all,
-           :conditions => ["event_date >= ?", Date.today],
-           :limit => 5, 
-           :order => 'event_date')
   end
-  
+
   def guide
     @title = "Adoption Guide"
   end
@@ -17,7 +13,7 @@ class PagesController < ApplicationController
   def aboutus
     @title = "About Us"
   end
-  
+
   def contact
     @title = "Contact Us"
   end
@@ -45,7 +41,7 @@ class PagesController < ApplicationController
   def sponsor
     @title = "Sponsor a Dog"
   end
-  
+
   def other_ways_to_give
     @title = "Other Ways to Give"
   end
@@ -53,15 +49,15 @@ class PagesController < ApplicationController
   def foster
     @title = "Fostering Opportunities"
   end
-  
+
   def fosterfaq
     @title = "Foster Frequently Asked Questions"
   end
-  
+
   def newsletter
     @title = "Newsletter"
   end
-  
+
   def adoptprocess
     @title = "Adoption Process"
   end
@@ -69,11 +65,11 @@ class PagesController < ApplicationController
   def insurance
     @title = "Pet Insurance"
   end
-  
+
   def resources
     @title = "Resources for Adopters"
   end
-  
+
   def volunteer
     @title = "Volunteer"
   end

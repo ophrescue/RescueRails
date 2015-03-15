@@ -47,6 +47,7 @@ class UsersController < ApplicationController
       @title = "Add a Staff Account"
       @user.password = ""
       @user.password_confirmation = ""
+      init_fields
       render 'new'
     end
   end
@@ -66,6 +67,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       @title = "Edit Profile"
+      init_fields
       render 'edit'
     end
   end

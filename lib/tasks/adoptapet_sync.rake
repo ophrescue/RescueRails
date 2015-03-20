@@ -25,8 +25,6 @@ namespace :adoptapet_sync do
       dogs = Dog.joins(:foster).where(
         { status: ["adoptable",
           "adoption pending",
-          "on hold",
-          "return pending",
           "coming soon"],
           users: {state: state}
          })

@@ -1,0 +1,20 @@
+<% if @users.present? %>
+  <table class="table-striped table-bordered table-condensed" id="user-sort">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Duties</th>
+        <th>Phone</th>
+        <th>Location</th>
+        <th>Fostered Dogs</th>
+        <th>Coordinated Dogs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @users %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>No Records Found</h3>
+<% end %>
+

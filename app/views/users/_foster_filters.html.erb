@@ -1,0 +1,93 @@
+<h4>Foster Filters</h4>
+
+<form>
+  <input type="hidden" name="foster" value="true"/>
+
+  <div class="row">
+    <div class="span5">
+      <span class="filter-label pull-right">Available</p>
+    </div>
+    <div class="span3">
+      <%= select_tag "available_to_foster", options_for_select(@options, params[:available_to_foster]), class: 'input-mini' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span5">
+      <span class="filter-label pull-right">Waiver</p>
+    </div>
+    <div class="span3">
+      <%= select_tag "available_to_foster", options_for_select(@options, params[:available_to_foster]), class: 'input-mini' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span5">
+      <span class="filter-label pull-right">House</p>
+    </div>
+    <div class="span3">
+      <%= select_tag "house_type", options_for_select(@rent_options, params[:house_type]), class: 'input-mini' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span5">
+      <span class="filter-label pull-right">Own Dogs</p>
+    </div>
+    <div class="span3">
+      <%= select_tag "has_dogs", options_for_select(@options, params[:has_dogs]), class: 'input-mini' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span5">
+      <span class="filter-label pull-right">Own Cats</p>
+    </div>
+    <div class="span3">
+      <%= select_tag "has_cats", options_for_select(@options, params[:has_cats]), class: 'input-mini' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span5">
+      <span class="filter-label pull-right">Kids Under 5</p>
+    </div>
+    <div class="span3">
+      <%= select_tag "has_children_under_five", options_for_select(@options, params[:has_children_under_five]), class: 'input-mini' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span5">
+      <span class="filter-label pull-right">Fence</p>
+    </div>
+    <div class="span3">
+      <%= select_tag "has_fence", options_for_select(@options, params[:has_fence]), class: 'input-mini' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span5">
+      <span class="filter-label pull-right">Puppies Ok</p>
+    </div>
+    <div class="span3">
+      <%= select_tag "puppies_ok", options_for_select(@options, params[:puppies_ok]), class: 'input-mini' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span5">
+      <span class="filter-label pull-right">Parvo Home</p>
+    </div>
+    <div class="span3">
+      <%= select_tag "has_parvo_house", options_for_select(@options, params[:has_parvo_house]), class: 'input-mini' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span8">
+      <button type="submit" class="btn">Filter</button>
+    </div>
+  </div>
+
+</form>

@@ -55,6 +55,8 @@
 require 'digest'
 
 class User < ActiveRecord::Base
+  include Filterable
+
   attr_accessor :password,
                 :accessible
 
@@ -128,15 +130,23 @@ class User < ActiveRecord::Base
   before_update :chimp_check
 
   scope :active,                  -> { where(locked: false) }
-  scope :admin,                   -> { active.where(admin: true) }
-  scope :adoption_coordinator,    -> { active.where(edit_my_adopters: true)}
-  scope :event_planner,           -> { active.where(edit_events: true)}
-  scope :dog_adder,               -> { active.where(add_dogs: true)}
-  scope :dog_editor,              -> { active.where(edit_dogs: true)}
-  scope :foster,                  -> { active.where(is_foster: true)}
-  scope :photographer,            -> { active.where(is_photographer: true)}
-  scope :newsletter,              -> { active.where(writes_newsletter: true)}
-  scope :transporter,             -> { active.where(is_transporter: true)}
+  scope :admin,                   -> (status = true) { where(admin: status) }
+  scope :adoption_coordinator,    -> (status = true) { where(edit_my_adopters: status) }
+  scope :event_planner,           -> (status = true) { where(edit_events: status) }
+  scope :dog_adder,               -> (status = true) { where(add_dogs: status) }
+  scope :dog_editor,              -> (status = true) { where(edit_dogs: status) }
+  scope :foster,                  -> (status = true) { where(is_foster: status) }
+  scope :photographer,            -> (status = true) { where(is_photographer: status) }
+  scope :newsletter,              -> (status = true) { where(writes_newsletter: status) }
+  scope :transporter,             -> (status = true) { where(is_transporter: status) }
+
+  scope :house_type,              -> (type) { where(house_type: type) }
+  scope :has_dogs,                -> (status = true) { where(has_own_dogs: status) }
+  scope :has_cats,                -> (status = true) { where(has_own_cats: status) }
+  scope :has_fence,               -> (status = true) { where(has_fenced_yard: status) }
+  scope :has_children_under_five, -> (status = true) { where(children_under_five: status) }
+  scope :puppies_ok,              -> (status = true) { where(can_foster_puppies: status) }
+  scope :has_parvo_house,         -> (status = true) { where(parvo_house: status) }
 
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

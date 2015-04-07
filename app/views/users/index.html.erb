@@ -44,27 +44,23 @@
   </li>
 </ul>
 
+
+
 <%= will_paginate @users %>
 
-<% if !@users.nil? %>
-
-  <table class="table-striped table-bordered table-condensed" id="user-sort">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Duties</th>
-        <th>Phone</th>
-        <th>Location</th>
-        <th>Fostered Dogs</th>
-        <th>Coordinated Dogs</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render @users %>
-    </tbody>
-  </table>
+<% if params[:foster] == 'true' %>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+        <%= render 'foster_filters' %>
+      </div>
+      <div class="span10">
+        <%= render 'user_table' %>
+      </div>
+    </div>
+  </div>
 <% else %>
-  <h3>No Records Found</h3>
+  <%= render 'user_table' %>
 <% end %>
 
 <%= will_paginate @users %>

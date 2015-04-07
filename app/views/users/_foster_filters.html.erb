@@ -8,10 +8,10 @@
     <%= select_tag "available_to_foster", options_for_select(@options, params[:available_to_foster]), class: 'input-mini' %>
   </label>
 
-  <label class="pull-right">
-    Waiver
-    <%= select_tag "available_to_foster", options_for_select(@options, params[:available_to_foster]), class: 'input-mini' %>
-  </label>
+  <%# <label class="pull-right"> %>
+  <%#   Waiver %>
+  <%#   <%= select_tag "available_to_foster", options_for_select(@options, params[:available_to_foster]), class: 'input-mini' %1> %>
+  <%# </label> %>
 
   <label class="pull-right">
     House
@@ -48,8 +48,8 @@
     <%= select_tag "has_parvo_house", options_for_select(@options, params[:has_parvo_house]), class: 'input-mini' %>
   </label>
 
-  <div class="row">
-    <div class="span8">
+  <div class="row pull-right">
+    <div class="span12">
       <button type="submit" class="btn">Filter</button>
     </div>
   </div>

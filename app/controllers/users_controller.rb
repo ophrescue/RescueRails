@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @rent_options = OWN_RENT_OPTIONS
 
     if params[:search]
-      @users = User.active.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(:page => params[:page])
+      @users = User.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(:page => params[:page])
     else
       @users = User.active.filter(filtering_params).order("name").paginate(:page => params[:page])
     end

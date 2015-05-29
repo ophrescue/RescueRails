@@ -133,7 +133,7 @@
       <th>Status <a href="/status_definitions" class="btn" target="_blank">?</a>
       </th>
       <td>
-        <%= f.select :status, [['none', 'none']].concat( Adopter::STATUSES.collect{|s| [s, s]} ) %>
+        <%= f.select :status, Adopter::STATUSES.collect{|s| [s, s]} %>
       </td>
     </tr>
     <tr>

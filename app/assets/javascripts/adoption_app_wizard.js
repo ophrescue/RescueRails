@@ -1,11 +1,11 @@
 var tagCheckRE = new RegExp("(\\w+)(\\s+)(\\w+)");
 
-jQuery.validator.addMethod("tagcheck", function(value, element) { 
+jQuery.validator.addMethod("tagcheck", function(value, element) {
     return tagCheckRE.test(value);
 }, "Full name required.");
 
 $(function(){
-  $("#new_adopter").formwizard({ 
+  $("#new_adopter").formwizard({
     formPluginEnabled: false,
     focusFirstInput : true,
     historyEnabled : true,
@@ -17,8 +17,8 @@ $(function(){
       highlight: function(element, errorClass, validClass) {
                $(element).parents("div[class='control-group']").addClass('error').removeClass(validClass);
         },
-          unhighlight: function (element, errorClass, validClass) { 
-            $(element).parents(".error").removeClass('error'); 
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).parents(".error").removeClass('error');
           },
           errorElement: 'span',
           errorClass: 'error',
@@ -83,7 +83,7 @@ $(function(){
                               maxlength: 250
                         },
                         "adopter[adoption_app_attributes][rent_dog_restrictions]" : {
-                              maxlength: 250
+                              maxlength: 1000
                         },
                         "adopter[adoption_app_attributes][rent_costs]" : {
                               maxlength: 250
@@ -92,59 +92,59 @@ $(function(){
                               maxlength: 250
                         },
                         "adopter[dog_reqs]" : {
-                              maxlength: 250
+                              maxlength: 1000
                         },
                         "adopter[why_adopt]" : {
-                              maxlength: 250
+                              maxlength: 1000
                         },
                         "adopter[adoption_app_attributes][dog_exercise]" : {
-                              maxlength: 250
+                              maxlength: 1000
                         },
                         "adopter[adoption_app_attributes][max_hrs_alone]" : {
                               number: true,
                               required: true
                         },
                         "adopter[adoption_app_attributes][dog_vacation]" : {
-                              maxlength: 250
+                              maxlength: 1000
                         },
                         "adopter[adoption_app_attributes][training_explain]" : {
-                              maxlength: 250
+                              maxlength: 1000
                         },
                         "adopter[adoption_app_attributes][surrender_pet_causes]" : {
-                              maxlength: 250
+                              maxlength: 1000
                         },
                         "adopter[adoption_app_attributes][surrendered_pets]" : {
-                              maxlength: 250
+                              maxlength: 1000
                         },
                         "adopter[adoption_app_attributes][current_pets]" : {
                               required: true,
-                              maxlength: 250
+                              maxlength: 1000
                         },
                         "adopter[adoption_app_attributes][why_not_fixed]" : {
-                              maxlength: 250
+                              maxlength: 1000
                         },
                         "adopter[adoption_app_attributes][current_pets_uptodate_why]" : {
-                              maxlength: 250
+                              maxlength: 1000
                         },
                         "adopter[adoption_app_attributes][vet_info]" : {
                               required: true,
-                              maxlength: 250
+                              maxlength: 1000
                         },
                         "adopter[references_attributes][0][email]" : {
                               required: false,
-                              email: true    
+                              email: true
                         },
                         "adopter[references_attributes][1][email]" : {
                               required: false,
-                              email: true    
+                              email: true
                         },
                         "adopter[references_attributes][2][email]" : {
                               required: false,
-                              email: true    
+                              email: true
                         }
           },
           messages : {
-            "adopter[email]" : {remote: "Application on file: please email adopt@ophrescue.org for updates." }
+            "adopter[email]" : {remote: "Do not use this form! Please email adopt@ophrescue.org for updates on an existing app or to adopt another dog from us." }
           }
     }
    });

@@ -15,9 +15,8 @@
 #
 
 class Photo < ActiveRecord::Base
-  acts_as_list
-
   belongs_to :dog
+  acts_as_list scope: :dog
 
   attr_accessible :photo,
                   :position,

@@ -18,7 +18,7 @@ gem 'therubyracer', '~> 0.11.3', platform: :ruby
 gem 'geocoder', '~> 1.1.1'
 gem 'gibbon', '~> 1.1.1'
 gem 'exception_notification', '~> 3.0.1'
-gem 'acts_as_list', '~> 0.1.8'
+gem 'acts_as_list', '~> 0.7.2'
 gem 'strip_attributes', '~> 1.0'
 gem 'to_xls'
 gem 'roo'

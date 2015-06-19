@@ -21,6 +21,11 @@ module RescueRails
       #{config.root}/app/models/concerns
     )
 
+    # Load defaults from config/*.env in config
+    #Dotenv.load *Dir.glob(Rails.root.join("config/**/*.env"), File::FNM_DOTMATCH)
+
+    # Override any existing variables if an environment-specific file exists
+    Dotenv.overload *Dir.glob(Rails.root.join(".env.#{Rails.env}"), File::FNM_DOTMATCH)
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

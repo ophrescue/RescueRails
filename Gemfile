@@ -4,10 +4,10 @@
 source 'https://rubygems.org'
 ruby '2.1.1'
 
-gem 'rails', '~> 3.2.21'
+gem 'rails', '~> 3.2.22'
 
 gem 'dotenv'
-gem 'dotenv-deployment'
+gem 'dotenv-rails'
 gem 'will_paginate',  '~> 3.0.3'
 gem 'bootstrap-will_paginate', '~> 0.0.7'
 gem 'gravatar_image_tag', '~> 1.1.2'

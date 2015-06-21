@@ -21,7 +21,7 @@ gem 'exception_notification', '~> 3.0.1'
 gem 'acts_as_list', '~> 0.7.2'
 gem 'strip_attributes', '~> 1.0'
 gem 'to_xls'
-gem 'roo'
+gem 'roo', '~>1.13.2'
 gem 'font-awesome-rails', '~> 4.1.0.0'
 gem 'has_scope'
 gem 'whenever', '~> 0.9.3', :require => false

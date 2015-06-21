@@ -12,4 +12,4 @@
 	<li><%= @banned_adopter.city %>, <%= @banned_adopter.state %></li>
 </ul>
 
-<p><%= @banned_adopter.comment %></p>
+<p><%= simple_format(@banned_adopter.comment) %></p>

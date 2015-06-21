@@ -1,7 +1,5 @@
 <tr>
 	<td><%= link_to banned_adopter.name, banned_adopter unless !banned_adopter.name %></td>
-	<td><%= banned_adopter.phone unless !banned_adopter.phone %></td>
-	<td><%= banned_adopter.email unless !banned_adopter.email %></td>
 	<td><%= banned_adopter.city unless !banned_adopter.city %>, <%= banned_adopter.state unless !banned_adopter.state %></td>
-	<td><%= banned_adopter.comment unless !banned_adopter.comment %></td>
+	<td><%= simple_format(banned_adopter.comment) unless !banned_adopter.comment %></td>
 </tr>

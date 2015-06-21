@@ -16,8 +16,6 @@
 			<thead>
 				<tr>
 					<th>Name</th>
-					<th>Phone Number</th>
-					<th>Email</th>
 					<th>Location</th>
 					<th>Comment</th>
 				</tr>
@@ -31,15 +29,6 @@
 		<h5>No Banned Adopters</h5>
 
 	<% end %>
-
-<% if can_ban_adopters? %>
-	<h2>Import Excel</h2>
-
-	<%= form_tag import_banned_adopters_path, multipart: true do %>
-		<%= file_field_tag :file %>
-		<%= submit_tag "Import", :class => "btn btn-primary btn-small" %>
-	<% end %>
-<% end %>
 
 	</div>
 </div>

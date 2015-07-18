@@ -53,13 +53,21 @@
     <div class="control-group">
       <%= f.label :primary_breed_name, :class => 'control-label'  %>
       <div class="controls">
-        <%= f.collection_select(:primary_breed_id, @breeds, :id, :name, :prompt => '-select-') %>
+        <% if can_add_dogs? %>
+          <%= f.collection_select(:primary_breed_id, @breeds, :id, :name, :prompt => '-select-') %>
+        <% else %>
+          <%= @dog.primary_breed_id ? @dog.primary_breed.name : "None Assigned" %>
+        <% end %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :secondary_breed_name, :class => 'control-label'  %>
       <div class="controls">
-        <%= f.collection_select(:secondary_breed_id, @breeds, :id, :name, :prompt => '-select-') %>
+        <% if can_add_dogs? %>
+          <%= f.collection_select(:secondary_breed_id, @breeds, :id, :name, :prompt => '-select-') %>
+        <% else %>
+          <%= @dog.secondary_breed_id ? @dog.secondary_breed.name : "None Assigned" %>
+        <% end %>
       </div>
     </div>
     <div class="control-group">

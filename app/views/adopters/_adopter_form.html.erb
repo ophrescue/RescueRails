@@ -11,29 +11,29 @@
         <% end %>
 
         <% if @adopter.adoption_app.max_hrs_alone > 5 %>
-          <span class="label label-warning"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span> 
+          <span class="label label-warning"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span>
         <% else %>
-          <span class="label label-success"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span> 
+          <span class="label label-success"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span>
         <% end %>
 
         <% if @adopter.adoption_app.current_pets_fixed == false %>
-          <span class="label label-important">Current Pets not Fixed</span> 
+          <span class="label label-important">Current Pets not Fixed</span>
         <% end %>
 
         <% if @adopter.adoption_app.current_pets_fixed == true %>
-          <span class="label label-success">Current Pets Fixed</span> 
+          <span class="label label-success">Current Pets Fixed</span>
         <% end %>
 
         <% if @adopter.adoption_app.current_pets_uptodate == false %>
-          <span class="label label-important">Current Pets Need Shots</span> 
+          <span class="label label-important">Current Pets Need Shots</span>
         <% end %>
 
         <% if @adopter.adoption_app.current_pets_uptodate == true %>
-          <span class="label label-success">Current Pets Up to Date</span> 
+          <span class="label label-success">Current Pets Up to Date</span>
         <% end %>
 
         <% if @adopter.adoption_app.house_type == "own" %>
-          <span class="label label-success">Owns Home </span> 
+          <span class="label label-success">Owns Home </span>
         <% end %>
       </td>
     </tr>
@@ -50,12 +50,18 @@
     </tr>
     <tr>
       <th>Primary Phone</th>
-      <td><%= @adopter.phone %></td>
+      <td>
+        <div class='read-only'><%= @adopter.phone %></div>
+        <div class='editable'><%= f.text_field :phone %></div>
+      </td>
     </tr>
     <% if @adopter.other_phone? %>
       <tr>
         <th>Other Phone</th>
-        <td><%= @adopter.other_phone %></td>
+        <td>
+          <div class='read-only'><%= @adopter.other_phone %></div>
+          <div class='editable'><%= f.text_field :other_phone %></div>
+        </td>
       </tr>
     <% end %>
     <tr>
@@ -110,8 +116,8 @@
     </tr>
     <tr>
       <td colspan="2">
-        <a id="toggle-edit" class="btn btn-primary">Edit Address</a>
-        <%= f.submit "Save Address", class: "btn adopter-save", disabled: "disabled" %>
+        <a id="toggle-edit" class="btn btn-primary">Edit Info</a>
+        <%= f.submit "Save Info", class: "btn adopter-save", disabled: "disabled" %>
       </td>
     </tr>
   </table>

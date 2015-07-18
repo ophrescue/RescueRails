@@ -11,29 +11,29 @@
         <% end %>
 
         <% if @adopter.adoption_app.max_hrs_alone > 5 %>
-          <span class="label label-warning"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span> 
+          <span class="label label-warning"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span>
         <% else %>
-          <span class="label label-success"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span> 
+          <span class="label label-success"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span>
         <% end %>
 
         <% if @adopter.adoption_app.current_pets_fixed == false %>
-          <span class="label label-important">Current Pets not Fixed</span> 
+          <span class="label label-important">Current Pets not Fixed</span>
         <% end %>
 
         <% if @adopter.adoption_app.current_pets_fixed == true %>
-          <span class="label label-success">Current Pets Fixed</span> 
+          <span class="label label-success">Current Pets Fixed</span>
         <% end %>
 
         <% if @adopter.adoption_app.current_pets_uptodate == false %>
-          <span class="label label-important">Current Pets Need Shots</span> 
+          <span class="label label-important">Current Pets Need Shots</span>
         <% end %>
 
         <% if @adopter.adoption_app.current_pets_uptodate == true %>
-          <span class="label label-success">Current Pets Up to Date</span> 
+          <span class="label label-success">Current Pets Up to Date</span>
         <% end %>
 
         <% if @adopter.adoption_app.house_type == "own" %>
-          <span class="label label-success">Owns Home </span> 
+          <span class="label label-success">Owns Home </span>
         <% end %>
       </td>
     </tr>

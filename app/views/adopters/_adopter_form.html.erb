@@ -50,12 +50,18 @@
     </tr>
     <tr>
       <th>Primary Phone</th>
-      <td><%= @adopter.phone %></td>
+      <td>
+        <div class='read-only'><%= @adopter.phone %></div>
+        <div class='editable'><%= f.text_field :phone %></div>
+      </td>
     </tr>
     <% if @adopter.other_phone? %>
       <tr>
         <th>Other Phone</th>
-        <td><%= @adopter.other_phone %></td>
+        <td>
+          <div class='read-only'><%= @adopter.other_phone %></div>
+          <div class='editable'><%= f.text_field :other_phone %></div>
+        </td>
       </tr>
     <% end %>
     <tr>
@@ -110,8 +116,8 @@
     </tr>
     <tr>
       <td colspan="2">
-        <a id="toggle-edit" class="btn btn-primary">Edit Address</a>
-        <%= f.submit "Save Address", class: "btn adopter-save", disabled: "disabled" %>
+        <a id="toggle-edit" class="btn btn-primary">Edit Info</a>
+        <%= f.submit "Save Info", class: "btn adopter-save", disabled: "disabled" %>
       </td>
     </tr>
   </table>

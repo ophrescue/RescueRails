@@ -9,7 +9,7 @@ $( function(){
         $('form.edit-adopter .to-disable').attr('disabled', 'disabled');
         $('.editable').hide();
         $('.read-only').show();
-        $('a#toggle-edit').addClass('btn-primary').text("Edit Address");
+        $('a#toggle-edit').addClass('btn-primary').text("Edit Info");
         $('input.adopter-save').removeClass('btn-primary');
       }
       else {

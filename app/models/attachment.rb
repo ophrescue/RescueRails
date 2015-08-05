@@ -52,6 +52,6 @@ class Attachment < ActiveRecord::Base
       :read,
       secure: true,
       expires: 300,
-      response_content_disposition: "attachment; filename='#{attachment_file_name}'").to_s
+      response_content_disposition: "attachment; filename=#{attachment_file_name}").to_s
   end
 end

@@ -37,7 +37,6 @@ RescueRails::Application.routes.draw do
   end
 
   resources :shelters
-  
 
   match '/signin',              :to => 'sessions#new'
   match '/signout',             :to => 'sessions#destroy'
@@ -65,12 +64,12 @@ RescueRails::Application.routes.draw do
   match '/other-ways-to-give',  :to => 'pages#other_ways_to_give'
 
   match '/terms',                :to => 'pages#terms'
-  
   match '/resources',           :to => 'pages#resources'
   match '/puppyguide',          :to => 'pages#puppyguide'
   match '/shopping',            :to => 'pages#shopping'
   match '/status_definitions',  :to => 'pages#status_definitions'
   match '/dog-status-definitions', :to => 'pages#dog_status_definitions'
+  match 'education-and-outreach', :to => 'pages#education_and_outreach'
 
 
   # The priority is based upon order of creation:

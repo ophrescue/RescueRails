@@ -13,8 +13,6 @@ end
 module RescueRails
   class Application < Rails::Application
 
-    config.force_ssl = true
-
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W(

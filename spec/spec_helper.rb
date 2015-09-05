@@ -15,12 +15,16 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/rails'
 
+#Poltergeist with PhantomJS
+require 'capybara/poltergeist'
+#Capybara.javascript_driver = :poltergeist
+
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |file| require file }
 
 RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
-  
+
 
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
@@ -45,6 +49,16 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+  end
+end
+
+
+# https://github.com/thoughtbot/capybara-webkit/issues/303
+def send_keys_inputmask(location, keys)
+  len = keys.length - 1
+  find(location).click
+  (0..keys.length - 1).each_with_index do |e,i|
+    find(location).native.send_keys keys[i]
   end
 end
 

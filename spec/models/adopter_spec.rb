@@ -25,7 +25,7 @@
 #  completed_date      :date
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Adopter do
   let(:admin) { create(:user, :admin) }

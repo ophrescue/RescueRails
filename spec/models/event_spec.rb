@@ -26,7 +26,7 @@
 #  facebook_url       :string(255)
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Event do
   let(:event) { build(:event) }

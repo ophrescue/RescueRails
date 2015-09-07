@@ -11,7 +11,7 @@
 #  updated_at       :timestamp(6)
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Comment do
   let(:comment) { build(:comment) }

@@ -32,7 +32,7 @@
 #  is_ofage                  :boolean
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe AdoptionApp do
   let(:adoption_app) { build(:adoption_app) }

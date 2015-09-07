@@ -8,7 +8,7 @@
 #  updated_at :datetime         not null
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Shelter do
   let(:shelter) { build(:shelter) }

@@ -47,7 +47,7 @@
 #  shelter_id           :integer
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Dog do
   describe '.update_adoption_date' do

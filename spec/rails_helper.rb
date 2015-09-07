@@ -54,14 +54,14 @@ RSpec.configure do |config|
   end
 end
 
+# Keep only the screenshots generated from the last failing test suite
+Capybara::Screenshot.prune_strategy = :keep_last_run
+
 #Use this method to simulate keypress entries
-# https://github.com/thoughtbot/capybara-webkit/issues/303
+
 def send_keys_inputmask(location, keys)
-  len = keys.length - 1
-  find(location).click
-  (0..keys.length - 1).each_with_index do |e,i|
-    find(location).native.send_keys keys[i]
-  end
+  find(location).trigger('click')
+  find(location).native.send_keys(keys)
 end
 
 class User

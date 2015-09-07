@@ -23,9 +23,8 @@ feature 'Apply for Adoption' do
     fill_in('adopter_state', :with => 'MD')
     fill_in('adopter_zip', :with => '21224')
 
-
-    send_keys_inputmask('#adopter_phone', '1234567890')
-    send_keys_inputmask('#adopter_other_phone', '0987654321')
+    send_keys_inputmask('input#adopter_phone', '1234567890')
+    send_keys_inputmask('input#adopter_other_phone', '0987654321')
 
     fill_in('adopter_when_to_call', :with => 'Anytime After 3pm')
     fill_in('adopter_adoption_app_attributes_spouse_name', :with => 'Miss Watir')
@@ -38,7 +37,7 @@ feature 'Apply for Adoption' do
     click_button('Next')
 
     fill_in('adopter_adoption_app_attributes_landlord_name', :with => 'Jane LandLord')
-    send_keys_inputmask('#adopter_adoption_app_attributes_landlord_phone', '5704431234')
+    send_keys_inputmask('input#adopter_adoption_app_attributes_landlord_phone', '5704431234')
     fill_in('adopter_adoption_app_attributes_rent_dog_restrictions', :with => 'No dogs over 50 lbs')
     fill_in('adopter_adoption_app_attributes_rent_costs', :with => 'Rent Goes Up $50 a month')
 
@@ -68,28 +67,26 @@ feature 'Apply for Adoption' do
     click_button('Next')
 
     fill_in('adopter_references_attributes_0_name', :with => 'Miss Watir')
-    send_keys_inputmask('#adopter_references_attributes_0_phone', '555-222-1111')
+    send_keys_inputmask('input#adopter_references_attributes_0_phone', '1111111111')
     fill_in('adopter_references_attributes_0_email', :with => 'Miss@ophrescue.org')
     fill_in('adopter_references_attributes_0_relationship', :with => 'Friend')
     fill_in('adopter_references_attributes_0_whentocall', :with => 'After 5pm')
 
     fill_in('adopter_references_attributes_1_name', :with => 'Miss Watir')
-    send_keys_inputmask('#adopter_references_attributes_1_phone','555-222-1111')
+    send_keys_inputmask('input#adopter_references_attributes_1_phone','2222222222')
     fill_in('adopter_references_attributes_1_email', :with => 'Miss@ophrescue.org')
     fill_in('adopter_references_attributes_1_relationship', :with => 'Friend')
     fill_in('adopter_references_attributes_1_whentocall', :with => 'After 5pm')
 
     fill_in('adopter_references_attributes_2_name', :with => 'Miss Watir')
-    send_keys_inputmask('#adopter_references_attributes_2_phone','555-222-1111')
+    send_keys_inputmask('input#adopter_references_attributes_2_phone','3333333333')
     fill_in('adopter_references_attributes_2_email', :with => 'Miss@ophrescue.org')
     fill_in('adopter_references_attributes_2_relationship', :with => 'Friend')
     fill_in('adopter_references_attributes_2_whentocall', :with => 'After 5pm')
 
-    # click_button('Submit')
+    click_button('Submit')
 
-    #TODO add expectations to verify test and do database cleaner stuff
+    expect(page).to have_content 'Success! Your adoption application has been submitted'
 
-
-    #select('Option', :from => "Select Box")
   end
 end

@@ -29,7 +29,6 @@ Fire up the app and see what happens.  App is setup to run SSL always, might wan
 See `db/seeds.rb` for default admin login info
 
 
-There is also a watir script in `/spec/watir` that will execute a test of the Adoption application.  You'll need to configure watir on your machine.
 
 
 

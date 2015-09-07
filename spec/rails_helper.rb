@@ -1,6 +1,5 @@
 require 'simplecov'
 require 'coveralls'
-require 'capybara-screenshot/rspec'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::HTMLFormatter,
@@ -15,6 +14,8 @@ require 'rspec/rails'
 # Capybara integration
 require 'capybara/rspec'
 require 'capybara/rails'
+
+require 'capybara-screenshot/rspec'
 
 #Poltergeist with PhantomJS
 require 'capybara/poltergeist'

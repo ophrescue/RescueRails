@@ -70,7 +70,6 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'rspec-rails'
   gem 'json_spec'
-  gem 'watir-webdriver', platform: :ruby
 end
 
 group :test do

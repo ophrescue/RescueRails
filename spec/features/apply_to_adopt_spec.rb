@@ -73,17 +73,20 @@ feature 'Apply for Adoption' do
     fill_in('adopter_references_attributes_0_whentocall', :with => 'After 5pm')
 
     fill_in('adopter_references_attributes_1_name', :with => 'Miss Watir')
-    send_keys_inputmask('input#adopter_references_attributes_1_phone','2222222222')
+    #TODO Needs a little sleep here for some reason to keep things rolling
+    find('input#adopter_references_attributes_1_phone').trigger('click')
+    sleep(1)
+    find('input#adopter_references_attributes_1_phone').native.send_keys('2222222222')
+    #screenshot_and_open_image
     fill_in('adopter_references_attributes_1_email', :with => 'Miss@ophrescue.org')
     fill_in('adopter_references_attributes_1_relationship', :with => 'Friend')
     fill_in('adopter_references_attributes_1_whentocall', :with => 'After 5pm')
 
     fill_in('adopter_references_attributes_2_name', :with => 'Miss Watir')
-    send_keys_inputmask('input#adopter_references_attributes_2_phone','3333333333')
+    send_keys_inputmask('input#adopter_references_attributes_2_phone', '3333333333')
     fill_in('adopter_references_attributes_2_email', :with => 'Miss@ophrescue.org')
     fill_in('adopter_references_attributes_2_relationship', :with => 'Friend')
     fill_in('adopter_references_attributes_2_whentocall', :with => 'After 5pm')
-
     click_button('Submit')
 
     expect(page).to have_content 'Success! Your adoption application has been submitted'

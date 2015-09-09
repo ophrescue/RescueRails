@@ -8,13 +8,13 @@ gem 'rails', '~> 3.2.22'
 
 gem 'dotenv'
 gem 'dotenv-rails'
-gem 'will_paginate',  '~> 3.0.3'
-gem 'bootstrap-will_paginate', '~> 0.0.7'
-gem 'gravatar_image_tag', '~> 1.1.2'
+gem 'will_paginate',  '~> 3.0.7'
+gem 'bootstrap-will_paginate', '~> 0.0.10'
+gem 'gravatar_image_tag', '~> 1.2.0'
 gem 'rails3-jquery-autocomplete', '~> 1.0.7'
-gem 'paperclip', '~> 4.1.1'
+gem 'paperclip', '~> 4.3.0'
 gem 'aws-sdk', '~> 1.39.0'
-gem 'therubyracer', '~> 0.11.3', platform: :ruby
+gem 'therubyracer', '~> 0.11.0', platform: :ruby
 gem 'geocoder', '~> 1.1.1'
 gem 'gibbon', '~> 1.1.1'
 gem 'exception_notification', '~> 3.0.1'
@@ -28,10 +28,10 @@ gem 'whenever', '~> 0.9.3', :require => false
 
 # datas
 gem 'dalli'
-gem 'pg', '~> 0.14.1'
+gem 'pg', '~> 0.18.3'
 
 group :production do
-  gem 'unicorn', '~> 4.8.3'
+  gem 'unicorn', '~> 4.9.0'
 end
 
 # Cool mail async stuff
@@ -56,8 +56,8 @@ gem 'jquery-rails', '~> 2.0.3'
 gem 'jquery-ui-rails', '~> 2.0.2'
 
 gem 'newrelic_rpm'
-gem 'rollbar', '~> 1.4.4'
-gem 'sucker_punch', '~> 1.0'
+gem 'rollbar', '~> 2.2.1'
+gem 'sucker_punch', '~> 1.5.1'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

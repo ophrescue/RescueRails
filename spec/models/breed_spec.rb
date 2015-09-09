@@ -8,7 +8,7 @@
 #  updated_at :timestamp(6)
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Breed do
   let(:breed) { build(:breed) }

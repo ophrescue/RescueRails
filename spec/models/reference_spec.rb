@@ -13,7 +13,7 @@
 #  whentocall   :string(255)
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Reference do
   let(:reference) { build(:reference) }

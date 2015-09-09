@@ -70,14 +70,15 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'rspec-rails'
   gem 'json_spec'
-  gem 'watir-webdriver', platform: :ruby
 end
 
 group :test do
-  gem 'capybara', '~> 2.2.0'
+  gem 'capybara', '~> 2.5.0'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'coveralls', require: false
+  gem 'poltergeist'
+  gem 'capybara-screenshot'
 end
 
 group :development do

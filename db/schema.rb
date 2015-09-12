@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(:version => 20150912175211) do
     t.integer   "coordinator_id"
     t.string    "sponsored_by"
     t.integer   "shelter_id"
-    t.text      "medical_notes"
+    t.text      "medical_summary"
   end
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"

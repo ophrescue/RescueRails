@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150309012213) do
+ActiveRecord::Schema.define(:version => 20150912175211) do
 
   create_table "adopters", :force => true do |t|
     t.string    "name"
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(:version => 20150309012213) do
     t.integer   "coordinator_id"
     t.string    "sponsored_by"
     t.integer   "shelter_id"
+    t.text      "medical_notes"
   end
 
   add_index "dogs", ["age"], :name => "index_dogs_on_age"

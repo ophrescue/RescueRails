@@ -43,6 +43,15 @@
     <% if signed_in? %>
       <div class="row">
         <div class="span8">
+          <h4>Medical Summary</h4>
+          <%= @dog.medical_summary %>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="span8">
           <h4>Add Comment</h4>
 
           <%= form_for [@dog, @dog.comments.build], :html => {:id => "new_comment"} do |f| %>

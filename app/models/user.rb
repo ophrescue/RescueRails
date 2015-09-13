@@ -56,6 +56,7 @@ require 'digest'
 
 class User < ActiveRecord::Base
   include Filterable
+  # include ActiveModel::ForbiddenAttributesProtection
 
   attr_accessor :password,
                 :accessible

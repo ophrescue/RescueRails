@@ -27,4 +27,4 @@ before_script:
  - "gem install travis-artifacts"
 
 after_failure:
- - "travis-artifacts upload --path tmp/capybara/screenshot*"
+ - "travis-artifacts upload --path tmp/capybara/"

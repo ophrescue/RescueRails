@@ -75,7 +75,8 @@ feature 'Apply for Adoption' do
 
     fill_in('adopter_references_attributes_1_name', :with => 'Miss Watir')
     find('input#adopter_references_attributes_1_phone').trigger('click')
-    find('input#adopter_references_attributes_1_phone').native.send_keys('2222222222')
+    sleep(2)  #TODO fix this dirty hack
+    send_keys_inputmask('input#adopter_references_attributes_1_phone', '2222222222')
     fill_in('adopter_references_attributes_1_email', :with => 'Miss@ophrescue.org')
     fill_in('adopter_references_attributes_1_relationship', :with => 'Friend')
     fill_in('adopter_references_attributes_1_whentocall', :with => 'After 5pm')

@@ -17,6 +17,8 @@ describe UsersController, type: :controller do
         }.to change(User, :count).by(2)
       end
 
+      it 'can modify the users permissions'
+
     end
 
     context 'logged in as normal user' do
@@ -29,6 +31,8 @@ describe UsersController, type: :controller do
           post :create, user: attributes_for(:user)
         }.to change(User, :count).by(1)
       end
+
+      it 'is unable to modify their own permissions'
 
     end
 

@@ -15,6 +15,7 @@ feature 'Apply for Adoption' do
 
     click_button('Next')
 
+    expect(page).to have_content('Contact Information')
     fill_in('adopter_name', :with => 'Test Adopter')
     fill_in('adopter_email', :with => 'fake@ophrescue.org')
     fill_in('adopter_address1', :with => '642 S Ellwood Ave')
@@ -35,14 +36,14 @@ feature 'Apply for Adoption' do
     choose('adopter_adoption_app_attributes_house_type_rent')
 
     click_button('Next')
-    sleep(2)
+    expect(page).to have_content("Landlord's Name")
     fill_in('adopter_adoption_app_attributes_landlord_name', :with => 'Jane LandLord')
     send_keys_inputmask('input#adopter_adoption_app_attributes_landlord_phone', '5704431234')
     fill_in('adopter_adoption_app_attributes_rent_dog_restrictions', :with => 'No dogs over 50 lbs')
     fill_in('adopter_adoption_app_attributes_rent_costs', :with => 'Rent Goes Up $50 a month')
 
     click_button('Next')
-    sleep(2)
+    expect(page).to have_content('Your New Dog')
     fill_in('adopter_dog_name', :with => 'Rex and Precious')
     fill_in('adopter_dog_reqs', :with => 'Dog Under 50lbs')
     fill_in('adopter_why_adopt', :with => 'Want to love them and hold them')
@@ -56,7 +57,7 @@ feature 'Apply for Adoption' do
     choose('adopter_adoption_app_attributes_pets_branch_other_pets')
 
     click_button('Next')
-    sleep(2)
+    expect(page).to have_content('Please identify all dogs or cats')
     fill_in('adopter_adoption_app_attributes_current_pets', :with => 'I have a dog named Phily')
     choose('adopter_adoption_app_attributes_current_pets_fixed_false')
     fill_in('adopter_adoption_app_attributes_why_not_fixed', :with => 'They are prefect just the way they are')
@@ -65,7 +66,7 @@ feature 'Apply for Adoption' do
     fill_in('adopter_adoption_app_attributes_vet_info', :with => 'Dr. Kreiger 555-555-5555')
 
     click_button('Next')
-    sleep(2)
+    expect(page).to have_content('Reference')
     fill_in('adopter_references_attributes_0_name', :with => 'Miss Watir')
     send_keys_inputmask('input#adopter_references_attributes_0_phone', '1111111111')
     fill_in('adopter_references_attributes_0_email', :with => 'Miss@ophrescue.org')
@@ -73,11 +74,8 @@ feature 'Apply for Adoption' do
     fill_in('adopter_references_attributes_0_whentocall', :with => 'After 5pm')
 
     fill_in('adopter_references_attributes_1_name', :with => 'Miss Watir')
-    #TODO Needs a little sleep here for some reason to keep things rolling
     find('input#adopter_references_attributes_1_phone').trigger('click')
-    sleep(1)
     find('input#adopter_references_attributes_1_phone').native.send_keys('2222222222')
-    #screenshot_and_open_image
     fill_in('adopter_references_attributes_1_email', :with => 'Miss@ophrescue.org')
     fill_in('adopter_references_attributes_1_relationship', :with => 'Friend')
     fill_in('adopter_references_attributes_1_whentocall', :with => 'After 5pm')

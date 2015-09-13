@@ -3,7 +3,7 @@ require 'rails_helper'
 describe UsersController, type: :controller do
 
   describe 'User creation' do
-    let(:admin) {create(:admin)}
+    let(:admin) {create(:user, :admin)}
     let(:hacker) {create(:user)}
 
     context 'logged in as an admin' do

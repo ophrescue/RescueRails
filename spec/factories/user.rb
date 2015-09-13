@@ -10,7 +10,7 @@ FactoryGirl.define do
     zip { Faker::Address.zip }
     lastverified { Time.now }
 
-    factory :admin do
+    trait :admin do
       admin true
       edit_dogs true
       edit_my_adopters true

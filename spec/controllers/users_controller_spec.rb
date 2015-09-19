@@ -17,7 +17,12 @@ describe UsersController, type: :controller do
         }.to change(User, :count).by(1)
       end
 
-      it 'can modify the users permissions'
+      it 'can modify the users permissions' do
+        #post :create, build(:user, edit_dogs: FALSE)
+        #verify the edit_dogs is false in the database
+        #put udate edit_dogs to true for this record
+        #verify edit_dogs is true for this record
+      end
 
     end
 
@@ -32,7 +37,12 @@ describe UsersController, type: :controller do
         }.to change(User, :count).by(0)
       end
 
-      it 'is unable to modify their own permissions'
+      it 'is unable to modify their own permissions' do
+        #post :create, build(:user, edit_dogs: FALSE)
+        #verify the edit_dogs is false in the database
+        #put udate edit_dogs to true for this record
+        #verify edit_dogs is STILL FALSE/generate error for this record
+      end
 
     end
 

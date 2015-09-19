@@ -126,7 +126,7 @@ class User < ActiveRecord::Base
   has_many :mentees, :class_name => 'User', :foreign_key => 'mentor_id'
   accepts_nested_attributes_for :agreement
 
-  before_save :upcase_state
+  before_save :format_cleanup
   before_create :chimp_subscribe
   before_update :chimp_check
 
@@ -232,8 +232,9 @@ class User < ActiveRecord::Base
 
   private
 
-    def upcase_state
+    def format_cleanup
       self.state.upcase!
+      self.email.downcase!
     end
 
     # def mass_assignment_authorizer(role = :default)

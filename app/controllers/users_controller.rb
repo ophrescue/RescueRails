@@ -25,16 +25,13 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new(user_params)
+    @user = User.new
     @title = "Add a Staff Account"
     init_fields
   end
 
   def create
     @user = User.new(user_params)
-    # @user.accessible = :all if current_user.admin?
-    @user.attributes = params[:user]
-    @user.email.downcase!
     if @user.save
       flash[:success] = "Account created for " + @user.name
       redirect_to users_path
@@ -54,7 +51,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    params[:user][:email].downcase!
     @user.accessible = :all if current_user.admin?
     if @user.update_attributes(params[:user])
       @user.update_attribute(:lastverified, Time.now)

@@ -3,8 +3,8 @@ require 'rails_helper'
 describe UsersController, type: :controller do
 
   describe 'User creation' do
-    let(:admin) {create(:user, :admin)}
-    let(:hacker) {create(:user)}
+    let!(:admin) {create(:user, :admin)}
+    let!(:hacker) {create(:user)}
 
     context 'logged in as an admin' do
       before :each do
@@ -14,7 +14,7 @@ describe UsersController, type: :controller do
       it 'is able to create a user' do
         expect{
           post :create, user: attributes_for(:user)
-        }.to change(User, :count).by(2)
+        }.to change(User, :count).by(1)
       end
 
       it 'can modify the users permissions'
@@ -29,7 +29,7 @@ describe UsersController, type: :controller do
       it 'is unable to create a user' do
         expect{
           post :create, user: attributes_for(:user)
-        }.to change(User, :count).by(1)
+        }.to change(User, :count).by(0)
       end
 
       it 'is unable to modify their own permissions'

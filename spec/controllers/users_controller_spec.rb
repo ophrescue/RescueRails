@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe UsersController, type: :controller do
 
-  describe 'User creation' do
-    let!(:admin) {create(:user, :admin)}
-    let!(:hacker) {create(:user)}
+  let!(:admin) {create(:user, :admin)}
+  let!(:hacker) {create(:user)}
 
+  describe 'POST create' do
     context 'logged in as an admin' do
       before :each do
         allow(controller).to receive(:current_user) { admin }
@@ -16,14 +16,6 @@ describe UsersController, type: :controller do
           post :create, user: attributes_for(:user)
         }.to change(User, :count).by(1)
       end
-
-      it 'can modify the users permissions' do
-        #post :create, build(:user, edit_dogs: FALSE)
-        #verify the edit_dogs is false in the database
-        #put udate edit_dogs to true for this record
-        #verify edit_dogs is true for this record
-      end
-
     end
 
     context 'logged in as normal user' do
@@ -37,14 +29,50 @@ describe UsersController, type: :controller do
         }.to change(User, :count).by(0)
       end
 
-      it 'is unable to modify their own permissions' do
-        #post :create, build(:user, edit_dogs: FALSE)
-        #verify the edit_dogs is false in the database
-        #put udate edit_dogs to true for this record
-        #verify edit_dogs is STILL FALSE/generate error for this record
+    end
+
+  end
+
+  describe 'PUT update' do
+    before :each do
+      @test_user = create(:user)
+    end
+
+    context 'logged in as admin' do
+      before :each do
+        allow(controller).to receive(:current_user) { admin }
+      end
+
+      it 'locates the requested user' do
+        put :update, id: @test_user, user: attributes_for(:user)
+        expect(assigns(:user)).to eq(@test_user)
+      end
+
+      it 'updates the users permissions' do
+        put :update, id: @test_user,
+          user: attributes_for(:user, admin: TRUE, edit_dogs: TRUE)
+        @test_user.reload
+        expect(@test_user.admin).to eq(TRUE)
+        expect(@test_user.edit_dogs).to eq(TRUE)
+      end
+
+    end
+
+    context 'logged in as normal user' do
+      before :each do
+        allow(controller).to receive(:current_user) { hacker }
+      end
+
+      it 'is unable to modify user permissions' do
+        put :update, id: @test_user,
+          user: attributes_for(:user, admin: TRUE, edit_dogs: TRUE)
+        @test_user.reload
+        expect(@test_user.admin).to eq(FALSE)
+        expect(@test_user.edit_dogs).to eq(FALSE)
       end
 
     end
 
   end
+
 end

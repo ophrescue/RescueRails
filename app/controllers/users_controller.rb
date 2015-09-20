@@ -52,7 +52,7 @@ class UsersController < ApplicationController
 
   def update
     @user.accessible = :all if current_user.admin?
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       @user.update_attribute(:lastverified, Time.now)
       flash[:success] = "Profile updated."
       redirect_to @user

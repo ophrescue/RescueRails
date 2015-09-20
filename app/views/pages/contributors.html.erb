@@ -20,46 +20,36 @@
 
     <h3>Sporting Dog Sponsors - $1,000</h3>
 
-    <% sponsors_1k = 
-        { url: "https://www.jezwater.com/", 
-          img: "jezwater.jpg"
-          },
-        { url: "http://www.lindsaycars.com", 
-          img: "lindsay-auto.jpg"
-          },
-        { url: "http://mydogsvoyce.com/", 
-          img: "voyce.jpg"
-          }
-    %>
 
-    <% sponsors_1k.each_slice(3) do |slice| %>
+
       <div class="row">
         <div class="span12">
           <ul class="thumbnails">
-          <% slice.each do |spon| %>
             <li class="span4">
-              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <img src="/assets/sponsors/<%= spon[:img] %>">
+              <a href="http://www.dullesmotorcars.com" class="thumbnail thumbnail-no-border">
+                <img src="/assets/sponsors/dulles-motorcars.png">
               </a>
             </li>
-          <% end %>
           </ul>
         </div>
       </div>
-    <% end %>
 
     <h3>Herding Dog Sponsors - $500</h3>
 
     <% sponsors_500 =
-      { url: "http://www.hermandorfer.com/",
-        img: "hermandorfer.jpg"
-      },
-      { url: "http://www.millertoyota.com/",
-        img: "miller-toyota.jpg"
+      { url: "http://www.fvcbank.com/",
+        img: "fvcbank.jpg"
       },
       {
-        url: "http://vienna.hopecenter.com/",
-        img: "hope_vienna.jpg"
+        url: "http://www.novadogmagazine.com",
+        img: "novadog-magazine.png"
+      },
+      { url: "https://www.facebook.com/pages/Emerald-Title-Escrow-Inc/349639139594",
+        img: "emerald.jpg"
+      },
+      {
+        url: "http://noahsarknova.com",
+        img: "noahs-ark-animal-hospital.jpg"
       }
     %>
 
@@ -85,43 +75,29 @@
       { url: "https://www.novec.com/",
         img: "novec.jpg"
       },
-      { url: "http://www.walkingdogsva.com/",
-        img: "wtd_llc.png"
+      { url: "http://vrc-nova.com",
+        img: "vrc-nova.png"
       },
-      { url: "http://www.fvcbank.com/",
-        img: "fvcbank.jpg"
+      { url: "http://petvalu.com/",
+        img: "petvalu.jpg"
       },
-      { url: "http://caringhandsvet.com/",
-        img: "ch_ah.jpg"
+      { url: "http://vienna.hopecenter.com",
+        img: "hope_vienna.jpg"
       },
-      { url: "http://wildcalling.com/",
-        img: "wild_calling.jpg"
-      },
-      { url: "http://www.manassassubaru.com/index.htm",
-        img: "browns.jpg"
-      },
-      { url: "http://www.parkwayvetclinic.com/",
-        img: "parkway.png"
-      },
-      { url: "http://www.vetreferralcenter.com/index.htm",
-        img: "vetref.jpg"
-      },
-      { url: "https://www.gmmllc.com/jkinzer/",
-        img: "jkinzer.png"
-      },
-      { url: "http://novapetvet.com/",
-        img: "nvva.jpg"
-      },
-      { url: "http://www.unionstreetpublichouse.com/",
-        img: "union_street.jpg"
+      { url: "http://www.thedogparkva.biz/",
+        img: "the_dog_park.png"
       },
       {
-        url: "https://www.facebook.com/pages/Emerald-Title-Escrow-Inc/349639139594",
-        img: "emerald.jpg",
+        url: "http://www.affordablepetsurgery.com/",
+        img: "helping_hands.jpg"
       },
       {
-        url: "http://www.inmemoriampetservices.com/",
-        img: "in_memoriam.jpg",
+        url: "http://www.formostgc.com/",
+        img: "formost.png"
+      },
+      {
+        url: "http://huxleyandkent.com/",
+        img: "huxley_kent.png"
       }
     %>
 
@@ -144,23 +120,14 @@
     <h3>Hunting Dog Sponsors - $100</h3>
 
     <% sponsors_100 =
-      { url: "http://www.americandisposal.com",
-        img: "american_disposal.png"
-      },
       { url: "http://www.valleyenergy.org/",
         img: "valley_energy.jpg"
-      },
-      { url: "http://www.townandcountryanimalh.com/",
-        img: "tnc_anim_hosp.jpg"
       },
       { url: "http://www.clocktowervets.com/",
         img: "clocktower.jpg"
       },
       { url: "http://www.affectionatepetcare.com/",
         img: "affectionate_pc.jpg"
-      },
-      { url: "http://us.petvalu.com/location/5213",
-        img: "petvalu.jpg"
       }
     %>
 
@@ -178,8 +145,52 @@
           </ul>
         </div>
       </div>
-    <% end %>    
+    <% end %>
 
+    <h3>Additional Sponsors</h3>
+
+    <% sponsors =
+      {
+        url: "http://www.thevirginia-marylanddog.com/",
+        img: "thevmdog.jpg"
+      },
+      {
+        url: "http://www.yummychummies.com/",
+        img: "yummy_chummies.png"
+      },
+      {
+        url: "http://www.naturesvariety.com/",
+        img: "natures_variety.gif"
+      },
+      {
+        url: "http://www.kindsnacks.com/",
+        img: "kind_snacks.jpg"
+      },
+      {
+        url: "http://bluebuffalo.com/",
+        img: "blue_buffalo.png"
+      },
+      {
+        url: "http://www.scoe10x.com/",
+        img: "scoe10x.gif"
+      }
+    %>
+
+    <% sponsors.each_slice(3) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span4">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <img src="/assets/sponsors/<%= spon[:img] %>">
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
 
       <h2>Contributors</h2>
 
@@ -265,6 +276,9 @@
       is a terrific site for community outreach and adoption events.  We will be participating in their Mega Adoption Event weekend on September 21st.  
       The Petco is very generous and supportive of adopters by providing discounts on necessary items and providing dog obedience classes.</p>
 
+      <p><strong><a href="http://stores.petsmart.com/1817">PetSmart Abingdon, MD</a> - </strong>The PetSmart in Abingdon, MD has a very supportive staff that is always excited to host an OPH event. They have been very generous with their monthly donation of supplies for the dogs in foster care. PetSmart also donates funds to OPH for each dog that is adopted at an event they host.</p>
+
+      <p><strong><a href="http://www.uptownpetboutique.com/">Uptown Pet Bistro and Boutique</a></strong> - Uptown Pet Bistro and Boutique is one of our most popular event locations in Fairfax, VA. This unique boutique is a great place to find one of a kind items for your pampered pet. The Boutique owner is extremely knowledgeable about organic dog food, treats and supplements. Be sure to stop by and take advantage of Uptown Pet Bistro and Boutique's customer appreciation sales!</p>
 
       <h3>Boarding Facilities</h3>
 

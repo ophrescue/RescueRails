@@ -56,38 +56,40 @@ require 'digest'
 
 class User < ActiveRecord::Base
   include Filterable
+  attr_protected #disable whitelist in this model
+  include ActiveModel::ForbiddenAttributesProtection
 
   attr_accessor :password,
                 :accessible
 
   strip_attributes :only => :email
 
-  attr_accessible :name,
-                  :email,
-                  :password,
-                  :password_confirmation,
-                  :phone,
-                  :other_phone,
-                  :address1,
-                  :address2,
-                  :city,
-                  :state,
-                  :zip,
-                  :duties,
-                  :share_info,
-                  :available_to_foster,
-                  :foster_dog_types,
-                  :house_type,
-                  :breed_restriction,
-                  :weight_restriction,
-                  :has_own_dogs,
-                  :has_own_cats,
-                  :children_under_five,
-                  :has_fenced_yard,
-                  :can_foster_puppies,
-                  :parvo_house,
-                  :is_transporter,
-                  :mentor_id
+  # attr_accessible :name,
+  #                 :email,
+  #                 :password,
+  #                 :password_confirmation,
+  #                 :phone,
+  #                 :other_phone,
+  #                 :address1,
+  #                 :address2,
+  #                 :city,
+  #                 :state,
+  #                 :zip,
+  #                 :duties,
+  #                 :share_info,
+  #                 :available_to_foster,
+  #                 :foster_dog_types,
+  #                 :house_type,
+  #                 :breed_restriction,
+  #                 :weight_restriction,
+  #                 :has_own_dogs,
+  #                 :has_own_cats,
+  #                 :children_under_five,
+  #                 :has_fenced_yard,
+  #                 :can_foster_puppies,
+  #                 :parvo_house,
+  #                 :is_transporter,
+  #                 :mentor_id
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -113,7 +115,6 @@ class User < ActiveRecord::Base
 
   before_save :encrypt_password, :unless => "password.blank?"
 
-  has_many :histories
   has_many :foster_dogs, :class_name => 'Dog', :foreign_key => 'foster_id'
   has_many :current_foster_dogs, :class_name => 'Dog', :foreign_key => 'foster_id', :conditions => {:status => ['adoptable', 'adoption pending', 'on hold', 'coming soon', 'return pending']}
   has_many :coordinated_dogs, :class_name => 'Dog', :foreign_key => 'coordinator_id', :conditions => {:status => ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']}
@@ -125,7 +126,7 @@ class User < ActiveRecord::Base
   has_many :mentees, :class_name => 'User', :foreign_key => 'mentor_id'
   accepts_nested_attributes_for :agreement
 
-  before_save :upcase_state
+  before_save :format_cleanup
   before_create :chimp_subscribe
   before_update :chimp_check
 
@@ -231,17 +232,18 @@ class User < ActiveRecord::Base
 
   private
 
-    def upcase_state
+    def format_cleanup
       self.state.upcase!
+      self.email.downcase!
     end
 
-    def mass_assignment_authorizer(role = :default)
-      if accessible == :all
-        self.class.protected_attributes
-      else
-        super + (accessible || [])
-      end
-    end
+    # def mass_assignment_authorizer(role = :default)
+    #   if accessible == :all
+    #     self.class.protected_attributes
+    #   else
+    #     super + (accessible || [])
+    #   end
+    # end
 
     def encrypt_password
       self.salt = make_salt unless has_password?(password)

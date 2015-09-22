@@ -26,6 +26,8 @@ gem 'font-awesome-rails', '~> 4.1.0.0'
 gem 'has_scope'
 gem 'whenever', '~> 0.9.3', :require => false
 
+gem 'strong_parameters'  #In Prep for Rails 4 Migration
+
 # datas
 gem 'dalli'
 gem 'pg', '~> 0.18.3'

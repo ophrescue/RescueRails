@@ -31,10 +31,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new
-    @user.accessible = :all if current_user.admin?
-    @user.attributes = params[:user]
-    @user.email.downcase!
+    @user = User.new(user_params)
     if @user.save
       flash[:success] = "Account created for " + @user.name
       redirect_to users_path
@@ -54,9 +51,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    params[:user][:email].downcase!
-    @user.accessible = :all if current_user.admin?
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       @user.update_attribute(:lastverified, Time.now)
       flash[:success] = "Profile updated."
       redirect_to @user
@@ -75,6 +70,39 @@ class UsersController < ApplicationController
 
   private
 
+    def user_params
+      if current_user && current_user.admin?
+        params.require(:user).permit!
+      else
+        params.require(:user).permit( :name,
+                                      :email,
+                                      :password,
+                                      :password_confirmation,
+                                      :phone,
+                                      :other_phone,
+                                      :address1,
+                                      :address2,
+                                      :city,
+                                      :state,
+                                      :zip,
+                                      :duties,
+                                      :share_info,
+                                      :available_to_foster,
+                                      :foster_dog_types,
+                                      :house_type,
+                                      :breed_restriction,
+                                      :weight_restriction,
+                                      :has_own_dogs,
+                                      :has_own_cats,
+                                      :children_under_five,
+                                      :has_fenced_yard,
+                                      :can_foster_puppies,
+                                      :parvo_house,
+                                      :is_transporter,
+                                      :mentor_id)
+      end
+    end
+
     def init_fields
       @user.build_agreement unless @user.agreement
       @foster_users = User.where(:locked => false).order("name")
@@ -89,11 +117,11 @@ class UsersController < ApplicationController
       redirect_to(root_path) unless current_user.admin?
     end
 
-    def filtering_params
-      params.slice(:admin, :adoption_coordinator, :event_planner,
-                   :dog_adder, :dog_editor, :photographer, :foster,
-                   :newsletter, :has_dogs, :has_cats, :house_type, :has_children_under_five,
-                   :has_fence, :puppies_ok, :has_parvo_house, :transporter
-                  )
-    end
+    # def filtering_params
+    #   params.slice(:admin, :adoption_coordinator, :event_planner,
+    #                :dog_adder, :dog_editor, :photographer, :foster,
+    #                :newsletter, :has_dogs, :has_cats, :house_type, :has_children_under_five,
+    #                :has_fence, :puppies_ok, :has_parvo_house, :transporter
+    #               )
+    # end
 end

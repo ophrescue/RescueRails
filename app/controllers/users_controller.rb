@@ -51,7 +51,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.accessible = :all if current_user.admin?
     if @user.update_attributes(user_params)
       @user.update_attribute(:lastverified, Time.now)
       flash[:success] = "Profile updated."

@@ -34,26 +34,16 @@ describe UsersController, type: :controller do
   end
 
   describe 'PUT update' do
-    before :each do
-      @test_user = create(:user)
-    end
+    let(:test_user) { create(:user, admin: FALSE) }
+    let(:request) { -> {put :update, id: test_user.id, user: attributes_for(:user, admin: TRUE)} }
 
     context 'logged in as admin' do
       before :each do
         allow(controller).to receive(:current_user) { admin }
       end
 
-      it 'locates the requested user' do
-        put :update, id: @test_user, user: attributes_for(:user)
-        expect(assigns(:user)).to eq(@test_user)
-      end
-
       it 'updates the users permissions' do
-        put :update, id: @test_user,
-          user: attributes_for(:user, admin: TRUE, edit_dogs: TRUE)
-        @test_user.reload
-        expect(@test_user.admin).to eq(TRUE)
-        expect(@test_user.edit_dogs).to eq(TRUE)
+        expect { request.call }.to change{ test_user.reload.admin }.from(FALSE).to(TRUE)
       end
 
     end
@@ -64,11 +54,7 @@ describe UsersController, type: :controller do
       end
 
       it 'is unable to modify user permissions' do
-        put :update, id: @test_user,
-          user: attributes_for(:user, admin: TRUE, edit_dogs: TRUE)
-        @test_user.reload
-        expect(@test_user.admin).to eq(FALSE)
-        expect(@test_user.edit_dogs).to eq(FALSE)
+        expect { request.call }.to_not change{ test_user.reload.admin }
       end
 
     end

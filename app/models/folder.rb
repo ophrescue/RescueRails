@@ -10,7 +10,9 @@
 #
 
 class Folder < ActiveRecord::Base
-  attr_accessible :description, :name, :attachments_attributes
+  attr_protected #disables whitelist in model TODO Remove after strong params 100% implemented
+  include ActiveModel::ForbiddenAttributesProtection
+
   has_many :attachments, as: :attachable, order: 'updated_at DESC'
 
   accepts_nested_attributes_for :attachments, allow_destroy: true

@@ -23,7 +23,7 @@ class SheltersController < ApplicationController
   end
 
   def create
-    @shelter = Shelter.new(params[:shelter])
+    @shelter = Shelter.new(shelter_params)
     if @shelter.save
       flash[:success] = "New Source Shelter Added"
       redirect_to shelters_path
@@ -40,7 +40,7 @@ class SheltersController < ApplicationController
 
   def update
     @shelter = Shelter.find(params[:id])
-      if @shelter.update_attributes(params[:shelter])
+      if @shelter.update_attributes(shelter_params)
         flash[:success] = "Record updated."
         redirect_to shelters_path
       else
@@ -52,7 +52,11 @@ class SheltersController < ApplicationController
   private
 
     def edit_dogs_user
-        redirect_to(root_path) unless current_user.edit_dogs?
-      end
+      redirect_to(root_path) unless current_user.edit_dogs?
+    end
+
+    def shelter_params
+      params.require(:shelter).permit(:name)
+    end
 
 end

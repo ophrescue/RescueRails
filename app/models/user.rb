@@ -64,33 +64,6 @@ class User < ActiveRecord::Base
 
   strip_attributes :only => :email
 
-  # attr_accessible :name,
-  #                 :email,
-  #                 :password,
-  #                 :password_confirmation,
-  #                 :phone,
-  #                 :other_phone,
-  #                 :address1,
-  #                 :address2,
-  #                 :city,
-  #                 :state,
-  #                 :zip,
-  #                 :duties,
-  #                 :share_info,
-  #                 :available_to_foster,
-  #                 :foster_dog_types,
-  #                 :house_type,
-  #                 :breed_restriction,
-  #                 :weight_restriction,
-  #                 :has_own_dogs,
-  #                 :has_own_cats,
-  #                 :children_under_five,
-  #                 :has_fenced_yard,
-  #                 :can_foster_puppies,
-  #                 :parvo_house,
-  #                 :is_transporter,
-  #                 :mentor_id
-
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :name,  :presence   => true,
@@ -236,14 +209,6 @@ class User < ActiveRecord::Base
       self.state.upcase!
       self.email.downcase!
     end
-
-    # def mass_assignment_authorizer(role = :default)
-    #   if accessible == :all
-    #     self.class.protected_attributes
-    #   else
-    #     super + (accessible || [])
-    #   end
-    # end
 
     def encrypt_password
       self.salt = make_salt unless has_password?(password)

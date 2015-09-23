@@ -27,28 +27,10 @@
 #
 
 class Event < ActiveRecord::Base
-  attr_accessor :photo_delete
+  attr_protected #disables whitelist in model TODO Remove after strong params 100% implemented
+  include ActiveModel::ForbiddenAttributesProtection
 
-  attr_accessible :title,
-                  :event_date,
-                  :start_time,
-                  :end_time,
-                  :location_name,
-                  :location_url,
-                  :photographer_name,
-                  :photographer_url,
-                  :location_phone,
-                  :address,
-                  :description,
-                  :latitude,
-                  :longitude,
-                  :photo,
-                  :photo_file_name,
-                  :photo_content_type,
-                  :photo_file_size,
-                  :photo_updated_at,
-                  :photo_delete,
-                  :facebook_url
+  attr_accessor :photo_delete
 
   validates_presence_of :title,
                         :event_date,

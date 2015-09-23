@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @title = "Upcoming Events"
     @events = Event.find(:all,
                :conditions => ["event_date >= ?", Date.today],
-               :limit => 30, 
+               :limit => 30,
                :order => 'event_date')
   end
 
@@ -15,7 +15,7 @@ class EventsController < ApplicationController
     @title = "Past Events"
     @events = Event.find(:all,
                :conditions => ["event_date <= ?", Date.today],
-               :limit => 30, 
+               :limit => 30,
                :order => 'event_date')
   end
 
@@ -37,7 +37,7 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     @event.photo_delete = params[:event][:photo_delete]
-      if @event.update_attributes(params[:event])
+      if @event.update_attributes(event_params)
         flash[:success] = "Event updated."
         redirect_to events_path
       else
@@ -47,7 +47,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(params[:event])
+    @event = Event.new(event_params)
     if @event.save
       flash[:success] = "New Event Added"
       redirect_to events_path
@@ -68,6 +68,30 @@ class EventsController < ApplicationController
 
       def edit_events_user
         redirect_to(root_path) unless current_user.edit_events?
+      end
+
+      def event_params
+        params.require(:event).permit(:title,
+                                      :event_date,
+                                      :start_time,
+                                      :end_time,
+                                      :location_name,
+                                      :location_url,
+                                      :photographer_name,
+                                      :photographer_url,
+                                      :location_phone,
+                                      :address,
+                                      :description,
+                                      :latitude,
+                                      :longitude,
+                                      :photo,
+                                      :photo_file_name,
+                                      :photo_content_type,
+                                      :photo_file_size,
+                                      :photo_updated_at,
+                                      :photo_delete,
+                                      :facebook_url
+                                      )
       end
 
 end

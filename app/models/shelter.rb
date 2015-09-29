@@ -9,7 +9,8 @@
 #
 
 class Shelter < ActiveRecord::Base
-  attr_accessible :name
+  attr_protected #disables whitelist in model TODO Remove after strong params 100% implemented
+  include ActiveModel::ForbiddenAttributesProtection
 
   has_many :dogs
 end

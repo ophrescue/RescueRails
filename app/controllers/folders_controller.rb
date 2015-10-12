@@ -59,7 +59,12 @@ class FoldersController < ApplicationController
     def folder_params
       params.require(:folder).permit( :description,
                                       :name,
-                                      :attachments_attributes)
+                                      attachments_attributes:
+                                      [
+                                       :attachment,
+                                       :description,
+                                       :updated_by_user_id
+                                       ])
     end
 
     def admin_user

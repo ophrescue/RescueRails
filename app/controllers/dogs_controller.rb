@@ -16,7 +16,7 @@ class DogsController < ApplicationController
     @dogs = DogSearcher.search(params: params, manager: is_manager)
 
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render :json => @dogs.map(&:attributes) }
     end
   end
@@ -41,7 +41,7 @@ class DogsController < ApplicationController
   end
 
   def update
-    if @dog.update_attributes(params[:dog])
+    if @dog.update_attributes(dog_params)
       flash[:success] = "Dog updated."
       redirect_to @dog
     else
@@ -53,7 +53,7 @@ class DogsController < ApplicationController
 
   def create
     @foster_users = User.all
-    @dog = Dog.new(params[:dog])
+    @dog = Dog.new(dog_params)
     if @dog.tracking_id.blank?
       @dog.tracking_id = Dog.connection.select_value("SELECT nextval('tracking_id_seq')")
     end
@@ -86,6 +86,69 @@ class DogsController < ApplicationController
 
   private
 
+    def dog_params
+      params.require(:dog).permit(  :name,
+                                    :tracking_id,
+                                    :primary_breed_id,
+                                    :primary_breed_name,
+                                    :secondary_breed_id,
+                                    :secondary_breed_name,
+                                    :status,
+                                    :age,
+                                    :size,
+                                    :is_altered,
+                                    :gender,
+                                    :is_special_needs,
+                                    :no_dogs,
+                                    :no_cats,
+                                    :no_kids,
+                                    :description,
+                                    :photos_attributes,
+                                    :foster_id,
+                                    :foster_start_date,
+                                    :adoption_date,
+                                    :is_uptodateonshots,
+                                    :intake_dt,
+                                    :available_on_dt,
+                                    :has_medical_need,
+                                    :is_high_priority,
+                                    :needs_photos,
+                                    :has_behavior_problem,
+                                    :needs_foster,
+                                    :attachments_attributes,
+                                    :petfinder_ad_url,
+                                    :adoptapet_ad_url,
+                                    :craigslist_ad_url,
+                                    :youtube_video_url,
+                                    :first_shots,
+                                    :second_shots,
+                                    :third_shots,
+                                    :rabies,
+                                    :heartworm,
+                                    :bordetella,
+                                    :microchip,
+                                    :original_name,
+                                    :fee,
+                                    :coordinator_id,
+                                    :sponsored_by,
+                                    :shelter_id,
+                                    :medical_summary,
+                                    attachments_attributes:
+                                    [
+                                      :attachment,
+                                      :description,
+                                      :updated_by_user_id
+                                    ],
+                                    photos_attributes:
+                                    [
+                                      :photo,
+                                      :position,
+                                      :is_private
+                                    ]
+
+                                  )
+    end
+
     def load_dog
       @dog = Dog.find(params[:id])
     end
@@ -100,7 +163,7 @@ class DogsController < ApplicationController
       @foster_users = User.where(:is_foster => true).order("name")
       @coordinator_users = User.where(:edit_all_adopters => true).order("name")
       @shelters = Shelter.order("name")
-      @breeds = Breed.all      
+      @breeds = Breed.all
     end
 
     def edit_dogs_user

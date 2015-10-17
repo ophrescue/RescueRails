@@ -22,4 +22,21 @@ describe DogsController, type: :controller do
     end
 
   end
+
+  describe 'POST create' do
+    let!(:admin) {create(:user, :admin)}
+
+    context 'logged in as dog adder admin' do
+
+      before :each do
+        allow(controller).to receive(:current_user) { admin }
+      end
+
+      it 'is able to create a dog' do
+        expect{
+          post :create, dog: attributes_for(:dog)
+        }.to change(Dog, :count).by(1)
+      end
+    end
+  end
 end

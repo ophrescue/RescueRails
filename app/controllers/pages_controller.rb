@@ -30,8 +30,8 @@ class PagesController < ApplicationController
     @title = "Partnering Shelters"
   end
 
-  def contribute
-    @title = "Contribute"
+  def donate
+    @title = "Donate"
   end
 
   def special_funds

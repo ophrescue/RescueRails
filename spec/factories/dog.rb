@@ -3,8 +3,13 @@ FactoryGirl.define do
     sequence(:tracking_id) { |n| n }
     name { Faker::Name.name }
     status 'adoption pending'
-    association :attachment
-    association :photo
+
+    factory :dog_with_photo_and_attachment do
+      after(:build) do |dog|
+        build(:attachment, dog: dog)
+        build(:photo, dog: dog)
+      end
+    end
 
     trait :adoptable do
       status 'adoptable'

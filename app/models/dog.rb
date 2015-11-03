@@ -48,54 +48,10 @@
 #
 
 class Dog < ActiveRecord::Base
-  attr_accessor :primary_breed_name, :secondary_breed_name
+  attr_protected #disables whitelist in model TODO Remove after strong params 100% implemented
+  include ActiveModel::ForbiddenAttributesProtection
 
-  attr_accessible :name,
-                  :tracking_id,
-                  :primary_breed_id,
-                  :primary_breed_name,
-                  :secondary_breed_id,
-                  :secondary_breed_name,
-                  :status,
-                  :age,
-                  :size,
-                  :is_altered,
-                  :gender,
-                  :is_special_needs,
-                  :no_dogs,
-                  :no_cats,
-                  :no_kids,
-                  :description,
-                  :photos_attributes,
-                  :foster_id,
-                  :foster_start_date,
-                  :adoption_date,
-                  :is_uptodateonshots,
-                  :intake_dt,
-                  :available_on_dt,
-                  :has_medical_need,
-                  :is_high_priority,
-                  :needs_photos,
-                  :has_behavior_problem,
-                  :needs_foster,
-                  :attachments_attributes,
-                  :petfinder_ad_url,
-                  :adoptapet_ad_url,
-                  :craigslist_ad_url,
-                  :youtube_video_url,
-                  :first_shots,
-                  :second_shots,
-                  :third_shots,
-                  :rabies,
-                  :heartworm,
-                  :bordetella,
-                  :microchip,
-                  :original_name,
-                  :fee,
-                  :coordinator_id,
-                  :sponsored_by,
-                  :shelter_id,
-                  :medical_summary
+  attr_accessor :primary_breed_name, :secondary_breed_name
 
   belongs_to :primary_breed, :class_name => 'Breed'
   belongs_to :secondary_breed, :class_name => 'Breed'

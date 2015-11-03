@@ -4,6 +4,13 @@ FactoryGirl.define do
     name { Faker::Name.name }
     status 'adoption pending'
 
+    factory :dog_with_photo_and_attachment do
+      after(:build) do |dog|
+        build(:attachment, dog: dog)
+        build(:photo, dog: dog)
+      end
+    end
+
     trait :adoptable do
       status 'adoptable'
     end

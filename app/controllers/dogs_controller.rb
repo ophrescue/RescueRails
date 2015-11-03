@@ -137,13 +137,17 @@ class DogsController < ApplicationController
                                     [
                                       :attachment,
                                       :description,
-                                      :updated_by_user_id
+                                      :updated_by_user_id,
+                                      :_destroy,
+                                      :id
                                     ],
                                     photos_attributes:
                                     [
                                       :photo,
                                       :position,
-                                      :is_private
+                                      :is_private,
+                                      :_destroy,
+                                      :id
                                     ]
 
                                   )

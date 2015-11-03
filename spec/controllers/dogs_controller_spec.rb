@@ -7,7 +7,7 @@ describe DogsController, type: :controller do
   describe 'GET #index' do
 
     context 'user is logged in' do
-      let!(:dog) { create(:dog) }
+      let!(:dog) { create(:dog_with_photo_and_attachment) }
       let(:params) { {} }
 
       subject(:get_index) { get :index, params.merge(format: :json), {mgr_view: true} }
@@ -36,15 +36,15 @@ describe DogsController, type: :controller do
 
       it 'is able to create a dog' do
         expect{
-          post :create, dog: attributes_for(:dog)
+          post :create, dog: attributes_for(:dog_with_photo_and_attachment)
         }.to change(Dog, :count).by(1)
       end
     end
   end
 
   describe 'PUT update' do
-    let(:test_dog) {create(:dog, name: 'Old Dog Name') }
-    let(:request) { -> {put :update, id: test_dog.id, dog: attributes_for(:dog, name: 'New Dog Name')}}
+    let(:test_dog) {create(:dog_with_photo_and_attachment, name: 'Old Dog Name') }
+    let(:request) { -> {put :update, id: test_dog.id, dog: attributes_for(:dog_with_photo_and_attachment, name: 'New Dog Name')}}
 
     context 'logged in as admin' do
       before :each do
@@ -54,6 +54,11 @@ describe DogsController, type: :controller do
       it 'updates the dog name' do
         expect { request.call }.to change{ test_dog.reload.name }.from('Old Dog Name').to('New Dog Name')
       end
+
+      it 'adds a new photo to the dog'
+
+      it 'adds a new attachment to the dog'
+
     end
   end
 

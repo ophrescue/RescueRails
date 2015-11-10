@@ -352,9 +352,13 @@
 
 <div class="control-group sidekick">
   <h2>Medical Summary</h2>
-  <div class="controls">
-    <%= f.text_area :medical_summary, :class => "input-xxlarge", :rows => "8" %>
-  </div>
+  <% if can_add_dogs? %>
+    <div class="controls">
+      <%= f.text_area :medical_summary, :class => "input-xxlarge", :rows => "8" %>
+    </div>
+  <% else %>
+    <p><%= @dog.medical_summary %></p>
+  <% end %>
 </div>
 
 <div class="actions well">

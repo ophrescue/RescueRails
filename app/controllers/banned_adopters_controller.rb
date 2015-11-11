@@ -24,12 +24,12 @@ class BannedAdoptersController < ApplicationController
   end
 
   def create
-    @banned_adopter = BannedAdopter.new(params[:banned_adopter])
+    @banned_adopter = BannedAdopter.new(banned_adopter_params)
     if @banned_adopter.save
       flash[:success] = "New Banned Adopter Added"
       redirect_to banned_adopters_path
     else
-      @title = "Add an Bannend Adopter"
+      @title = "Add a Banned Adopter"
       render 'new'
     end
   end
@@ -40,27 +40,36 @@ class BannedAdoptersController < ApplicationController
   end
 
   def update
-    @banned_adopter = BannedAdopter.find(params[:id])
-      if @banned_adopter.update_attributes(params[:banned_adopter])
-        flash[:success] = "Record updated."
-        redirect_to banned_adopters_path
-      else
-        @title = "Edit"
-        render 'edit'
-      end
+    @banned_adopter = BannedAdopter.find_by_id(params[:id])
+    if @banned_adopter.update_attributes(banned_adopter_params)
+      flash[:success] = "Record updated."
+      redirect_to banned_adopters_path
+    else
+      @title = "Edit"
+      render 'edit'
+    end
   end
 
-  def import
-    BannedAdopter.import(params[:file])
-    flash[:success] = "Banned Adopter List Imported."
-    redirect_to banned_adopters_path
-  end
+  # def import
+  #   BannedAdopter.import(params[:file])
+  #   flash[:success] = "Banned Adopter List Imported."
+  #   redirect_to banned_adopters_path
+  # end
 
 
   private
 
     def ban_adopters_user
         redirect_to(root_path) unless current_user.ban_adopters?
-      end
+    end
+
+    def banned_adopter_params
+      params.require(:banned_adopter).permit( :name,
+                                              :phone,
+                                              :email,
+                                              :city,
+                                              :state,
+                                              :comment)
+    end
 
 end

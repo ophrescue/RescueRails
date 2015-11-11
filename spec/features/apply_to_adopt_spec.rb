@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 feature 'Apply for Adoption' do
+
+  let!(:admin) {create(:user, :admin)}
+
   scenario "Renter fills out adoption application", js: true do
 
     visit root_path
     click_link 'Apply for Adoption'
-
     check('adopter_pre_q_costs')
     check('adopter_pre_q_surrender')
     check('adopter_pre_q_abuse')
@@ -68,6 +70,8 @@ feature 'Apply for Adoption' do
     click_button('Next')
     expect(page).to have_content('Reference')
     fill_in('adopter_references_attributes_0_name', :with => 'Miss Watir')
+    find('input#adopter_references_attributes_0_phone').trigger('click')
+    sleep(2)  #TODO fix this dirty hack
     send_keys_inputmask('input#adopter_references_attributes_0_phone', '1111111111')
     fill_in('adopter_references_attributes_0_email', :with => 'Miss@ophrescue.org')
     fill_in('adopter_references_attributes_0_relationship', :with => 'Friend')
@@ -82,6 +86,8 @@ feature 'Apply for Adoption' do
     fill_in('adopter_references_attributes_1_whentocall', :with => 'After 5pm')
 
     fill_in('adopter_references_attributes_2_name', :with => 'Miss Watir')
+    find('input#adopter_references_attributes_1_phone').trigger('click')
+    sleep(2)  #TODO fix this dirty hack
     send_keys_inputmask('input#adopter_references_attributes_2_phone', '3333333333')
     fill_in('adopter_references_attributes_2_email', :with => 'Miss@ophrescue.org')
     fill_in('adopter_references_attributes_2_relationship', :with => 'Friend')
@@ -89,6 +95,14 @@ feature 'Apply for Adoption' do
     click_button('Submit')
 
     expect(page).to have_content 'Success! Your adoption application has been submitted'
+
+    ## Now Login and Verify Contents display correctly
+
+    visit '/signin'
+    fill_in('session_email', with: admin.email )
+    fill_in('session_password', with: admin.password )
+    click_button('Sign in')
+    expect(page).to have_no_content('Invalid')
 
   end
 end

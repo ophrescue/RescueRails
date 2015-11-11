@@ -14,11 +14,7 @@
 #
 
 class Reference < ActiveRecord::Base
-  attr_accessible :name,
-                  :phone,
-                  :email,
-                  :relationship,
-                  :whentocall
+  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :adopter, :class_name => 'Adopter'
 end

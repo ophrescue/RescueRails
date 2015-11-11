@@ -26,6 +26,8 @@
 #
 
 class Adopter < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
+
   attr_accessor :pre_q_costs,
                 :pre_q_surrender,
                 :pre_q_abuse,
@@ -35,31 +37,6 @@ class Adopter < ActiveRecord::Base
 
   attr_reader :dog_tokens
   attr_accessor :updated_by_admin_user
-
-  attr_accessible :name,
-                  :email,
-                  :phone,
-                  :address1,
-                  :address2,
-                  :city,
-                  :state,
-                  :zip,
-                  :status,
-                  :when_to_call,
-                  :dog_reqs,
-                  :why_adopt,
-                  :dog_name,
-                  :other_phone,
-                  :assigned_to_user_id,
-                  :flag,
-                  :pre_q_costs,
-                  :pre_q_surrender,
-                  :pre_q_abuse,
-                  :pre_q_reimbursement,
-                  :adoption_app_attributes,
-                  :references_attributes,
-                  :pre_q_limited_info,
-                  :pre_q_breed_info
 
   STATUSES = ['new',
               'pend response',

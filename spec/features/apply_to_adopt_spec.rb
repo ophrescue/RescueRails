@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 feature 'Apply for Adoption' do
-
-  let!(:admin) {create(:user, :admin)}
+  self.use_transactional_fixtures = false
 
   scenario "Renter fills out adoption application", js: true do
+
+    admin = create(:user)
 
     visit root_path
     click_link 'Apply for Adoption'

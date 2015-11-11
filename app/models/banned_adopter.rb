@@ -14,12 +14,8 @@
 #
 
 class BannedAdopter < ActiveRecord::Base
-  attr_accessible :name,
-                  :phone,
-                  :email,
-                  :city,
-                  :state,
-                  :comment
+  attr_protected #disables whitelist in model TODO Remove after strong params 100% implemented
+  include ActiveModel::ForbiddenAttributesProtection
 
   # def self.open_spreadsheet(file)
   #   case File.extname(file.original_filename)

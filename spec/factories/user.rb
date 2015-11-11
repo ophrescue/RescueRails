@@ -18,6 +18,7 @@ FactoryGirl.define do
       edit_events true
       complete_adopters true
       add_dogs true
+      ban_adopters true
     end
   end
 end

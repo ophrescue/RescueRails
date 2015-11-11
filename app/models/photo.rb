@@ -15,12 +15,10 @@
 #
 
 class Photo < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
+
   belongs_to :dog
   acts_as_list scope: :dog
-
-  attr_accessible :photo,
-                  :position,
-                  :is_private
 
   has_attached_file :photo,
             :styles => { :original => '1280x1024>',

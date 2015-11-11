@@ -53,7 +53,7 @@ describe SheltersController, type: :controller do
         allow(controller).to receive(:current_user) { hacker }
       end
 
-      it 'is unable to modify user permissions' do
+      it 'is unable to modify shelter' do
         expect { request.call }.to_not change{ test_shelter.reload.name }
       end
 

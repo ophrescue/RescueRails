@@ -53,7 +53,7 @@ describe BannedAdoptersController, type: :controller do
         allow(controller).to receive(:current_user) { hacker }
       end
 
-      it 'is unable to modify user permissions' do
+      it 'is unable to modify banned adopter' do
         expect { request.call }.to_not change{ test_banned_adopter.reload.name }
       end
 

@@ -1,11 +1,9 @@
 require 'rails_helper'
 
 feature 'Apply for Adoption' do
-  self.use_transactional_fixtures = false
+  let!(:admin) {create(:user, :admin)}
 
   scenario "Renter fills out adoption application", js: true do
-
-    admin = create(:user)
 
     visit root_path
     click_link 'Apply for Adoption'
@@ -103,7 +101,22 @@ feature 'Apply for Adoption' do
     fill_in('session_email', with: admin.email )
     fill_in('session_password', with: admin.password )
     click_button('Sign in')
-    expect(page).to have_no_content('Invalid')
+    expect(page).to have_content('Staff')
+
+
+    visit '/adopters'
+    expect(page).to have_content('Adoption Applications')
+    click_link('Test Adopter')
+
+    expect(page).to have_content('Test Adopter')
+    expect(page).to have_content('fake@ophrescue.org')
+    expect(page).to have_content('642 S Ellwood Ave')
+    expect(page).to have_content('Apt 3')
+    expect(page).to have_content('Baltimore')
+    expect(page).to have_content('MD')
+    expect(page).to have_content('21224')
+
+    #expect(page).to have_field("My Field", with: "the value of the field")
 
   end
 end

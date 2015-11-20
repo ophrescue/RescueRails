@@ -12,8 +12,9 @@
 #
 
 class Comment < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
+
   belongs_to :commentable, polymorphic: true
   belongs_to :user
 
-  attr_accessible :content
 end

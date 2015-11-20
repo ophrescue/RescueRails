@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :adoption_app do
-    adopter
     spouse_name { Faker::Name.name }
     other_household_names 'other household'
     ready_to_adopt_dt '2020-01-01'

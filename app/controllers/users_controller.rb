@@ -112,7 +112,8 @@ class UsersController < ApplicationController
                                      :is_photographer,
                                      :writes_newsletter,
                                      :is_transporter,
-                                     :mentor_id
+                                     :mentor_id,
+                                     :lastverified
           )
       else
         params.require(:user).permit( :name,

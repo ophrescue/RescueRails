@@ -7,7 +7,7 @@ class AdoptionAppController < ApplicationController
 
   def update
     @adopter = AdoptionApp.find(params[:id])
-    @adopter.update_attributes(params[:adoption_app])
+    @adopter.update_attributes(adoption_app_params)
 
     respond_with(@adopter) do |format|
       format.html { render }
@@ -16,6 +16,35 @@ class AdoptionAppController < ApplicationController
   end
 
   private
+
+    def adoption_app_params
+      params.require(:adoption_app).permit( :adopter_id,
+                                            :spouse_name,
+                                            :other_household_names,
+                                            :ready_to_adopt_dt,
+                                            :house_type,
+                                            :dog_exercise,
+                                            :dog_stay_when_away,
+                                            :dog_vacation,
+                                            :current_pets,
+                                            :why_not_fixed,
+                                            :current_pets_uptodate,
+                                            :current_pets_uptodate_why,
+                                            :landlord_name,
+                                            :landlord_phone,
+                                            :rent_dog_restrictions,
+                                            :surrender_pet_causes,
+                                            :training_explain,
+                                            :surrendered_pets,
+                                            :how_did_you_hear,
+                                            :pets_branch,
+                                            :current_pets_fixed,
+                                            :rent_costs,
+                                            :vet_info,
+                                            :max_hrs_alone,
+                                            :is_ofage
+                                          )
+    end
 
     def edit_my_adopters_user
       #TODO Figure out how to differentiate these

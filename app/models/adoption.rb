@@ -11,12 +11,10 @@
 #
 
 class Adoption < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
+
   belongs_to :dog
   belongs_to :adopter
-
-  attr_accessible :relation_type,
-                  :dog_id,
-                  :adopter_id
 
   RELATION_TYPE = ['interested', 'adopted', 'returned',
         'pending adoption', 'pending return', 'trial adoption']

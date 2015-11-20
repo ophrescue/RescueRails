@@ -17,7 +17,7 @@ class AdoptionsController < ApplicationController
       adopter_id: params[:adoption][:adopter_id],
       dog_id: params[:adoption][:dog_id]
     )
-    @adoption = Adoption.new(params[:adoption])
+    @adoption = Adoption.new(adoption_params)
     @adoption.relation_type = 'interested'
     if current_adoption.present? || @adoption.save
       flash[:success] = 'Dogs linked to Application'
@@ -27,7 +27,7 @@ class AdoptionsController < ApplicationController
 
   def update
     @adoption = Adoption.find(params[:id])
-    @adoption.update_attributes(params[:adoption])
+    @adoption.update_attributes(adoption_params)
 
     respond_with(@adoption) do |format|
       format.html { render }
@@ -42,6 +42,13 @@ class AdoptionsController < ApplicationController
   end
 
   private
+
+  def adoption_params
+    params.require(:adoption).permit( :relation_type,
+                                      :dog_id,
+                                      :adopter_id
+                                     )
+  end
 
   def handle_redirect
     if request.xhr?

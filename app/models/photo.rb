@@ -15,7 +15,6 @@
 #
 
 class Photo < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :dog
   acts_as_list scope: :dog

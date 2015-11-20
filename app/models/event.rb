@@ -27,8 +27,6 @@
 #
 
 class Event < ActiveRecord::Base
-  attr_protected #disables whitelist in model TODO Remove after strong params 100% implemented
-  include ActiveModel::ForbiddenAttributesProtection
 
   attr_accessor :photo_delete
 

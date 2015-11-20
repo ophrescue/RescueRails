@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
 
   def create
     @commentable = find_commentable
-    @comment = @commentable.comments.build(params[:comment])
+    @comment = @commentable.comments.build(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
       flash[:success] = 'Comment Saved'
@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     if @comment.user_id == current_user.id
-      @comment.update_attributes(params[:comment])
+      @comment.update_attributes(comment_params)
       render json: nil, status: :ok
     else
       # return a not authorized
@@ -57,6 +57,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
 
   def handle_redirect
     if request.xhr?

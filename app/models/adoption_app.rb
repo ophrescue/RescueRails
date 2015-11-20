@@ -33,7 +33,6 @@
 #
 
 class AdoptionApp < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :adopter, :class_name => 'Adopter'
 end

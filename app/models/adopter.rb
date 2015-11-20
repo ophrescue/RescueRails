@@ -26,7 +26,6 @@
 #
 
 class Adopter < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   attr_accessor :pre_q_costs,
                 :pre_q_surrender,

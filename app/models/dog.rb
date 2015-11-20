@@ -48,8 +48,6 @@
 #
 
 class Dog < ActiveRecord::Base
-  attr_protected #disables whitelist in model TODO Remove after strong params 100% implemented
-  include ActiveModel::ForbiddenAttributesProtection
 
   attr_accessor :primary_breed_name, :secondary_breed_name
 

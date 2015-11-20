@@ -16,7 +16,6 @@
 #
 
 class Attachment < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :attachable, polymorphic: true
   belongs_to :updated_by_user, class_name: 'User'

@@ -56,8 +56,6 @@ require 'digest'
 
 class User < ActiveRecord::Base
   include Filterable
-  attr_protected #disables whitelist in model TODO Remove after strong params 100% implemented
-  include ActiveModel::ForbiddenAttributesProtection
 
   attr_accessor :password,
                 :accessible

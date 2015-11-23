@@ -51,17 +51,17 @@ class Dog < ActiveRecord::Base
 
   attr_accessor :primary_breed_name, :secondary_breed_name
 
-  belongs_to :primary_breed, :class_name => 'Breed'
-  belongs_to :secondary_breed, :class_name => 'Breed'
-  belongs_to :foster, :class_name => "User"
-  belongs_to :coordinator, :class_name => "User"
+  belongs_to :primary_breed, class_name: 'Breed'
+  belongs_to :secondary_breed, class_name: 'Breed'
+  belongs_to :foster, class_name: "User"
+  belongs_to :coordinator, class_name: "User"
   belongs_to :shelter
 
-  has_many :comments, :as => :commentable, -> {order 'created_at DESC'}
-  has_many :attachments, :as => :attachable, :dependent => :destroy
-  has_many :photos, :dependent => :destroy, -> {order 'position ASC'}
-  has_many :adoptions, :dependent => :destroy
-  has_many :adopters, :through => :adoptions
+  has_many :comments, -> {order 'created_at DESC'}, as: :commentable
+  has_many :attachments, as: :attachable, :dependent => :destroy
+  has_many :photos, -> {order 'position ASC'}, dependent: :destroy
+  has_many :adoptions, dependent: :destroy
+  has_many :adopters, through: :adoptions
 
   accepts_nested_attributes_for :attachments, :allow_destroy => true
   accepts_nested_attributes_for :photos, :allow_destroy => true

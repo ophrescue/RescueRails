@@ -57,9 +57,9 @@ class Dog < ActiveRecord::Base
   belongs_to :coordinator, :class_name => "User"
   belongs_to :shelter
 
-  has_many :comments, :as => :commentable, :order => "created_at DESC"
+  has_many :comments, :as => :commentable, -> {order 'created_at DESC'}
   has_many :attachments, :as => :attachable, :dependent => :destroy
-  has_many :photos, :dependent => :destroy, :order => "position ASC"
+  has_many :photos, :dependent => :destroy, -> {order 'position ASC'}
   has_many :adoptions, :dependent => :destroy
   has_many :adopters, :through => :adoptions
 

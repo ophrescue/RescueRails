@@ -83,8 +83,10 @@ Rails.application.configure do
   }
 
   # Exception Notification
-  config.middleware.use ExceptionNotifier,
-  sender_address: 'info@ophrescue.org',
-  exception_recipients: 'admin@ophrescue.org'
+  config.middleware.use ExceptionNotification::Rack,
+    email: {
+      sender_address: 'info@ophrescue.org',
+      exception_recipients: 'admin@ophrescue.org'
+    }
 
 end

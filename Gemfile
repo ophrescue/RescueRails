@@ -1,31 +1,29 @@
-# If you're unfortunate enough to be developing in Windows, bundle with:
-# bundle install --without-production
-
 source 'https://rubygems.org'
-ruby '2.1.1'
+ruby   '2.2.3'
 
 gem 'rails', '~> 4.2.4'
+gem 'rack-cache'
 
+gem 'acts_as_list', '~> 0.7.2'
+gem 'aws-sdk', '~> 1.39.0'
+gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'dotenv'
 gem 'dotenv-rails'
-gem 'will_paginate',  '~> 3.0.7'
-gem 'bootstrap-will_paginate', '~> 0.0.10'
-gem 'gravatar_image_tag', '~> 1.2.0'
-gem 'rails4-autocomplete'
-gem 'paperclip', '~> 4.3.2'
-gem 'aws-sdk', '~> 1.39.0'
-gem 'therubyracer', '~> 0.12.2', platform: :ruby
+gem 'exception_notification'
+gem 'font-awesome-rails'
 gem 'geocoder', '~> 1.1.1'
 gem 'gibbon', '~> 1.1.1'
-gem 'exception_notification'
-gem 'acts_as_list', '~> 0.7.2'
-gem 'strip_attributes', '~> 1.0'
-gem 'to_xls'
-gem 'roo', '~>1.13.2'
-gem 'font-awesome-rails'
+gem 'gravatar_image_tag', '~> 1.2.0'
 gem 'has_scope'
-gem 'whenever', '~> 0.9.4', :require => false
+gem 'paperclip', '~> 4.3.2'
+gem 'rails4-autocomplete'
 gem 'responders', '~> 2.0'
+gem 'roo', '~>1.13.2'
+gem 'strip_attributes', '~> 1.0'
+gem 'therubyracer', '~> 0.12.2', platform: :ruby
+gem 'to_xls'
+gem 'whenever', '~> 0.9.4', :require => false
+gem 'will_paginate',  '~> 3.0.7'
 
 # datas
 gem 'dalli'

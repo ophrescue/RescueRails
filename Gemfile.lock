@@ -249,6 +249,8 @@ GEM
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
+    rack-cache (1.2)
+      rack (>= 0.4)
     rack-contrib (1.4.0)
       git-version-bump (~> 0.15)
       rack (~> 1.4)
@@ -436,6 +438,7 @@ DEPENDENCIES
   pry-rails
   pry-stack_explorer
   quiet_assets
+  rack-cache
   rails (~> 4.2.4)
   rails4-autocomplete
   responders (~> 2.0)
@@ -451,3 +454,6 @@ DEPENDENCIES
   unicorn
   whenever (~> 0.9.4)
   will_paginate (~> 3.0.7)
+
+BUNDLED WITH
+   1.10.6

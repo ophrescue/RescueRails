@@ -153,37 +153,11 @@ class User < ActiveRecord::Base
   end
 
   def chimp_subscribe
-    gb = Gibbon::API.new
-    gb.timeout = 30
-
-    list_id = 'aa86c27ddd'
-
-    merge_vars = {
-      'FNAME' => name
-    }
-
-    gb.lists.subscribe(
-      id: list_id,
-      email: { email: email },
-      merge_vars: merge_vars,
-      double_optin: true,
-      send_welcome: false
-    )
+    MailChimpService.subscribe(name, email)
   end
 
   def chimp_unsubscribe
-    gb = Gibbon::API.new
-    gb.timeout = 30
-
-    list_id = 'aa86c27ddd'
-
-    gb.lists.unsubscribe({
-      id: list_id,
-      email: {email: email},
-      delete_member: true,
-      send_goodbye: false,
-      send_notify: false
-    })
+    MailChimpService.unsubscribe(email)
   end
 
   def chimp_check
@@ -199,7 +173,6 @@ class User < ActiveRecord::Base
       end
     end
   end
-
 
   private
 

@@ -35,6 +35,6 @@ class Photo < ActiveRecord::Base
   validates_attachment_size :photo, less_than: 10.megabytes
   validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
 
-  scope :public, -> { where(is_private: false) }
-  scope :private, -> { where(is_private: true) }
+  scope :visible, -> { where(is_private: false) }
+  scope :hidden, -> { where(is_private: true) }
 end

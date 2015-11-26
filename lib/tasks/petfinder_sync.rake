@@ -48,17 +48,17 @@ namespace :petfinder_sync do
                 "",                              #Declawed
                 d.is_special_needs ? "1" : "",   #specialNeeds
                 "",                              #Mix
-                d.photos.public.count >= 1 ? d.id.to_s + "-1.jpg" : "", #Photo1 filename
-                d.photos.public.count >= 2 ? d.id.to_s + "-2.jpg" : "", #Photo2 filename
-                d.photos.public.count >= 3 ? d.id.to_s + "-3.jpg" : ""  #Photo3 filename
+                d.photos.visible.count >= 1 ? d.id.to_s + "-1.jpg" : "", #Photo1 filename
+                d.photos.visible.count >= 2 ? d.id.to_s + "-2.jpg" : "", #Photo2 filename
+                d.photos.visible.count >= 3 ? d.id.to_s + "-3.jpg" : ""  #Photo3 filename
                 ]
 
           ## Photo Export Code
-          next if d.photos.public.empty?
+          next if d.photos.visible.empty?
 
           counter = 0
-          d.photos.public.sort!{|a,b| b.updated_at <=> a.updated_at }
-          d.photos.public[0..2].each do |p|
+          d.photos.visible.sort!{|a,b| b.updated_at <=> a.updated_at }
+          d.photos.visible[0..2].each do |p|
             counter += 1
             begin
               open(p.photo.url(:large)).read

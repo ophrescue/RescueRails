@@ -12,10 +12,10 @@
 <div class="row">
   <div class="span8">
     <div id="galleria">
-      <% if @dog.photos.public.empty?  %>
+      <% if @dog.photos.visible.empty?  %>
         <%= image_tag("no_photo-205x195.png", :alt => @dog.name) %>
       <% else %>
-        <% for photo in @dog.photos.public %>
+        <% for photo in @dog.photos.visible %>
           <%= link_to image_tag(photo.photo.url(:medium)), photo.photo.url(:original) %>
         <% end %>
       <% end %>

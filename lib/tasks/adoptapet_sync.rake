@@ -35,8 +35,8 @@ namespace :adoptapet_sync do
 
         dogs.each do |d|
           photo_urls = Array.new
-          d.photos.public.sort!{|a,b| b.updated_at <=> a.updated_at }
-          d.photos.public[0..3].each do |p|
+          d.photos.visible.sort!{|a,b| b.updated_at <=> a.updated_at }
+          d.photos.visible[0..3].each do |p|
             photo_urls << p.photo.url(:large)
           end
 

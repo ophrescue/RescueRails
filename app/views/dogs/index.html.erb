@@ -31,12 +31,12 @@
               <% slice.each do |dog| %>
                  <li class="span4">
                   <%= link_to dog, :class => "thumbnail" do %>
-                    <% if dog.photos.public.empty? %>
+                    <% if dog.photos.visible.empty? %>
                       <%= image_tag("no_photo-320x320.png", :alt => dog.name) %>
                     <% elsif dog.primary_breed %>
-                      <%= image_tag(dog.photos.public.first.photo.url(:medium), :alt => dog.primary_breed.name)  %> 
+                      <%= image_tag(dog.photos.visible.first.photo.url(:medium), :alt => dog.primary_breed.name)  %> 
                     <% else %>
-                      <%= image_tag(dog.photos.public.first.photo.url(:medium), :alt => dog.name)  %> 
+                      <%= image_tag(dog.photos.visible.first.photo.url(:medium), :alt => dog.name)  %> 
                     <% end %>
                     <h4><%= dog.name.titleize %></h4>
                     <p>

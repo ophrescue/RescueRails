@@ -86,7 +86,7 @@ Rails.application.configure do
   #----------
 
   #Action Mailer Configuration
-  config.action_mailer.default_url_options = { :host => "ophrescue.org", :protocol => "https://" }
+  config.action_mailer.default_url_options = { :host => "beagle.ophrescue.org", :protocol => "https://" }
 
   #Force SSL
   config.force_ssl = true

@@ -65,7 +65,7 @@ Rails.application.configure do
   config.assets.compress = false
 
   #Action Mailer Configuration
-  config.action_mailer.default_url_options = { :host => "rescuerails.dev", :protocol => "https://" }
+  config.action_mailer.default_url_options = { :host => "rescuerails.dev", :protocol => "http://" }
 
   # Paperclip Configuration
   Paperclip.options[:command_path] = "/usr/local/bin/"

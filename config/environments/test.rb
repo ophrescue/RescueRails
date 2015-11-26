@@ -46,6 +46,9 @@ Rails.application.configure do
   # My Configs
   #----------------
 
+  #Action Mailer Configuration
+  config.action_mailer.default_url_options = { :host => "ophrescue.org", :protocol => "https://" }
+
   # Log error messages when you accidentally call methods on nil
   config.whiny_nils = true
 end

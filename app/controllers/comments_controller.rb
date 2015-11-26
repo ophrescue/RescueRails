@@ -8,12 +8,12 @@ class CommentsController < ApplicationController
   def index
     @commentable = find_commentable
     @comments = @commentable.comments
-    render :layout => false
+    render layout: false
   end
 
   def show
     @comment = Comment.find(params[:id])
-    render :layout => false
+    render layout: false
   end
 
   def new
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
       flash[:success] = 'Comment Saved'
       return handle_redirect
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -43,7 +43,7 @@ class CommentsController < ApplicationController
       render json: nil, status: :ok
     else
       # return a not authorized
-      respond_with @comment, :status => :unauthorized
+      respond_with @comment, status: :unauthorized
     end
   end
 
@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
     if @comment.user == current_user
       @comment.destroy
     else
-      respond_with @comment, :status => :unauthorized
+      respond_with @comment, status: :unauthorized
     end
   end
 

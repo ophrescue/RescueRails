@@ -34,5 +34,5 @@
 
 class AdoptionApp < ActiveRecord::Base
 
-  belongs_to :adopter, :class_name => 'Adopter'
+  belongs_to :adopter, class_name: 'Adopter'
 end

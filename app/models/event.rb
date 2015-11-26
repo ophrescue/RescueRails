@@ -38,7 +38,7 @@ class Event < ActiveRecord::Base
                         :address,
                         :description
 
-  validates_format_of :location_url, :with => URI::regexp(%w(http https))
+  validates_format_of :location_url, with: URI::regexp(%w(http https))
 
   before_save :set_user
   before_save :delete_photo!
@@ -46,19 +46,19 @@ class Event < ActiveRecord::Base
   geocoded_by :address
 
   after_validation :geocode,
-    :if => lambda{ |obj| obj.address_changed? }
+    if: lambda{ |obj| obj.address_changed? }
 
   has_attached_file :photo,
-    :styles => { :original => "1024x1024>",
-                 :medium => "205x300>",
-                 :thumb => "64x64>" },
-                 :path => ":rails_root/public/system/event_photo/:id/:style/:filename",
-                 :url  => "/system/event_photo/:id/:style/:filename",
-                 :s3_permissions => :public_read
+    styles: { original: "1024x1024>",
+                 medium: "205x300>",
+                 thumb: "64x64>" },
+                 path: ":rails_root/public/system/event_photo/:id/:style/:filename",
+                 url: "/system/event_photo/:id/:style/:filename",
+                 s3_permissions: :public_read
 
 
-  validates_attachment_size :photo, :less_than => 5.megabytes
-  validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/pjpeg']
+  validates_attachment_size :photo, less_than: 5.megabytes
+  validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
 
   def set_user
     self.created_by_user = @current_user

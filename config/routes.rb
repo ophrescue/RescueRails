@@ -21,10 +21,10 @@ RescueRails::Application.routes.draw do
     resources :adoptions
   end
 
-  resources :sessions, :only => [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy]
   resources :password_resets
 
-  get '/events/past',  :to => 'events#past'
+  get '/events/past',  to: 'events#past'
   resources :events
 
   resources :adoptions

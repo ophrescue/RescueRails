@@ -1,11 +1,11 @@
 class CreateFosters < ActiveRecord::Migration
   def change
     create_table :fosters do |t|
-      t.integer :user_id, :null => false
-      t.integer :dog_id, :null => false
-      t.date :start_date, :null => false
+      t.integer :user_id, null: false
+      t.integer :dog_id, null: false
+      t.date :start_date, null: false
       t.date :end_date
-      t.integer :updated_by, :null => false
+      t.integer :updated_by, null: false
 
       t.timestamps
     end

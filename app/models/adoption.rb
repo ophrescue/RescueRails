@@ -18,5 +18,5 @@ class Adoption < ActiveRecord::Base
   RELATION_TYPE = ['interested', 'adopted', 'returned',
         'pending adoption', 'pending return', 'trial adoption']
 
-  validates_inclusion_of :relation_type, :in => RELATION_TYPE
+  validates_inclusion_of :relation_type, in: RELATION_TYPE
 end

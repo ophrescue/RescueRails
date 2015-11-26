@@ -3,7 +3,7 @@
 class CreateEmails < ActiveRecord::Migration
   def self.up
     create_table :emails do |t|
-      t.string :from_address, :null => false
+      t.string :from_address, null: false
 
       t.string :reply_to_address,
                :subject

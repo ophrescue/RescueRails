@@ -17,7 +17,7 @@ class DogsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @dogs.map(&:attributes) }
+      format.json { render json: @dogs.map(&:attributes) }
     end
   end
 
@@ -164,8 +164,8 @@ class DogsController < ApplicationController
     def load_instance_variables
       5.times { @dog.photos.build }
       5.times { @dog.attachments.build }
-      @foster_users = User.where(:is_foster => true).order("name")
-      @coordinator_users = User.where(:edit_all_adopters => true).order("name")
+      @foster_users = User.where(is_foster: true).order("name")
+      @coordinator_users = User.where(edit_all_adopters: true).order("name")
       @shelters = Shelter.order("name")
       @breeds = Breed.all
     end

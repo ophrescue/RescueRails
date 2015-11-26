@@ -3,8 +3,8 @@ module SessionsHelper
 	def sign_in(user)
 
 		if params[:remember_me] 
-			cookies.signed[:remember_token] = {:value => [user.id, user.salt],
-											   :expires => 7.days.from_now }
+			cookies.signed[:remember_token] = {value: [user.id, user.salt],
+											   expires: 7.days.from_now }
 		else
 			cookies.signed[:remember_token] = [user.id, user.salt]
 		end
@@ -27,7 +27,7 @@ module SessionsHelper
 		if current_user.locked?
 			cookies.delete(:remember_token)
 			self.current_user = nil
-			redirect_to root, :error => "Your Account is Locked"
+			redirect_to root, error: "Your Account is Locked"
 		end
 	end
 
@@ -82,7 +82,7 @@ module SessionsHelper
 
 	def deny_access
 		store_location
-		redirect_to signin_path, :notice => "Please sign in to access this page"
+		redirect_to signin_path, notice: "Please sign in to access this page"
 	end
 
 	def redirect_back_or(default)

@@ -20,15 +20,15 @@ class Photo < ActiveRecord::Base
   acts_as_list scope: :dog
 
   has_attached_file :photo,
-            :styles => { :original => '1280x1024>',
-                   :large => '640x640',
-                   :medium => '320x320',
-                   :thumb => 'x195',
-                   :minithumb => 'x64#' },
-            :s3_permissions => :public_read,
-            :path => ":rails_root/public/system/dog_photo/:hash.:extension",
-            :url  => "/system/dog_photo/:hash.:extension",
-            :hash_secret => "80fd0acd1674d7efdda5b913a7110d5c955e2d73"
+            styles: { original: '1280x1024>',
+                   large: '640x640',
+                   medium: '320x320',
+                   thumb: 'x195',
+                   minithumb: 'x64#' },
+            s3_permissions: :public_read,
+            path: ":rails_root/public/system/dog_photo/:hash.:extension",
+            url: "/system/dog_photo/:hash.:extension",
+            hash_secret: "80fd0acd1674d7efdda5b913a7110d5c955e2d73"
 
 
   validates_attachment_presence :photo

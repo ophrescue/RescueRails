@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
 
-  before_filter :authenticate, :only => [:status_definitions]
+  before_filter :authenticate, only: [:status_definitions]
 
   def home
     @title = "All breed dog rescue based in Virgina, Maryland, Washington DC and South Central PA"

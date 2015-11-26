@@ -87,7 +87,7 @@ Rails.application.configure do
   #----------
 
   #Action Mailer Configuration
-  config.action_mailer.default_url_options = { :host => "ophrescue.org", :protocol => "https://" }
+  config.action_mailer.default_url_options = { host: "ophrescue.org", protocol: "https://" }
 
   #Force SSL
   config.force_ssl = true
@@ -96,10 +96,10 @@ Rails.application.configure do
 
   # Setup rack cache
   config.action_dispatch.rack_cache = {
-    :verbose      => false,
-    :metastore    => Dalli::Client.new,
-    :entitystore  => 'file:tmp/cache/rack/body',
-    :allow_reload => false
+    verbose: false,
+    metastore: Dalli::Client.new,
+    entitystore: 'file:tmp/cache/rack/body',
+    allow_reload: false
   }
 
   # Path to imagemagick for paperclip gem
@@ -107,14 +107,14 @@ Rails.application.configure do
 
   # Paperclip & Amazon S3 Configuration
   config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => ENV['S3_BUCKET_NAME'],
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    storage: :s3,
+    s3_credentials: {
+      bucket: ENV['S3_BUCKET_NAME'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
     },
-    :s3_protocol => 'https',
-    :url => ':s3_domain_url'
+    s3_protocol: 'https',
+    url: ':s3_domain_url'
   }
 
   # Exception Notification

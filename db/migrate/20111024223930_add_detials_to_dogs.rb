@@ -4,10 +4,10 @@ class AddDetialsToDogs < ActiveRecord::Migration
   	add_column :dogs, :primary_breed_id, :integer
     add_column :dogs, :secondary_breed_id, :integer
     add_column :dogs, :status, :string
-  	add_column :dogs, :age, :string, :limit => 75
-  	add_column :dogs, :size, :string, :limit => 75
+  	add_column :dogs, :age, :string, limit: 75
+  	add_column :dogs, :size, :string, limit: 75
   	add_column :dogs, :is_altered, :boolean
-  	add_column :dogs, :gender, :string, :limit => 6
+  	add_column :dogs, :gender, :string, limit: 6
   	add_column :dogs, :is_special_needs, :boolean
   	add_column :dogs, :no_dogs, :boolean
   	add_column :dogs, :no_cats, :boolean

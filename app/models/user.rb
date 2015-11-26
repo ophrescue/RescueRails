@@ -60,18 +60,18 @@ class User < ActiveRecord::Base
   attr_accessor :password,
                 :accessible
 
-  strip_attributes :only => :email
+  strip_attributes only: :email
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  validates :name,  :presence   => true,
-                    :length     => { :maximum => 50 }
+  validates :name,  presence: true,
+                    length: { maximum: 50 }
 
-  validates :email, :presence   => true,
-                    :format     => { :with => email_regex },
-                    :uniqueness => { :case_sensitive => false }
+  validates :email, presence: true,
+                    format: { with: email_regex },
+                    uniqueness: { case_sensitive: false }
 
-  validates :state, :length     => { :is => 2 }
+  validates :state, length: { is: 2 }
 
   validates_format_of :zip,
                     with: /\A\d{5}-\d{4}|\A\d{5}\z/,
@@ -79,22 +79,22 @@ class User < ActiveRecord::Base
                     allow_blank: true
 
   #Automatically creates the virtual attribute 'password_confirmation'.
-  validates :password, :presence      => true,
-                       :confirmation  => true,
-                       :length        => { :within => 8..40 },
-                       :unless => Proc.new { |a| a.password.blank? }
+  validates :password, presence: true,
+                       confirmation: true,
+                       length: { within: 8..40 },
+                       unless: Proc.new { |a| a.password.blank? }
 
-  before_save :encrypt_password, :unless => "password.blank?"
+  before_save :encrypt_password, unless: "password.blank?"
 
   has_many :foster_dogs, class_name: 'Dog', foreign_key: 'foster_id'
   has_many :current_foster_dogs, -> { where(status: ['adoptable', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'foster_id'
-  has_many :coordinated_dogs, -> { where(status: ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, :class_name => 'Dog', foreign_key: 'coordinator_id'
+  has_many :coordinated_dogs, -> { where(status: ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'coordinator_id'
   has_many :comments
   has_one :agreement, as: :attachable, class_name: 'Attachment' ,dependent: :destroy
-  has_many :assignments, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id'
-  has_many :active_applications, -> { where(status: ['new', 'pend response', 'workup', 'approved']) }, :class_name => 'Adopter', :foreign_key => 'assigned_to_user_id'
-  belongs_to :mentor, :class_name => 'User', :foreign_key => 'mentor_id'
-  has_many :mentees, :class_name => 'User', :foreign_key => 'mentor_id'
+  has_many :assignments, class_name: 'Adopter', foreign_key: 'assigned_to_user_id'
+  has_many :active_applications, -> { where(status: ['new', 'pend response', 'workup', 'approved']) }, class_name: 'Adopter', foreign_key: 'assigned_to_user_id'
+  belongs_to :mentor, class_name: 'User', foreign_key: 'mentor_id'
+  has_many :mentees, class_name: 'User', foreign_key: 'mentor_id'
   accepts_nested_attributes_for :agreement
 
   before_save :format_cleanup

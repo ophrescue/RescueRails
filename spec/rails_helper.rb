@@ -28,6 +28,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |file| require file }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.include LoginMacros
   config.include ActiveSupport::Testing::TimeHelpers
   config.include FactoryGirl::Syntax::Methods
   config.include JsonSpec::Helpers, type: :request

@@ -100,12 +100,7 @@ feature 'Apply for Adoption' do
 
     ## Now Login and Verify Contents display correctly
 
-    visit '/signin'
-    fill_in('session_email', with: admin.email )
-    fill_in('session_password', with: admin.password )
-    click_button('Sign in')
-    expect(page).to have_content('Staff')
-
+    sign_in(admin)
 
     visit '/adopters'
     expect(page).to have_content('Adoption Applications')

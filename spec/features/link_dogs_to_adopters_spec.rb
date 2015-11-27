@@ -8,11 +8,7 @@ feature 'Link Dogs to Adoption Applications via Adoption model', js: true do
     admin = create(:user, :admin)
     test_dog = create(:dog)
 
-    visit '/signin'
-    fill_in('session_email', with: admin.email )
-    fill_in('session_password', with: admin.password )
-    click_button('Sign in')
-    expect(page).to have_content('Staff')
+    sign_in(admin)
 
     visit '/adopters'
     expect(page).to have_content('Adoption Applications')

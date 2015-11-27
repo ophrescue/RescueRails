@@ -49,7 +49,7 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 
-gem 'chosen-rails', '~> 1.0.2'
+gem 'chosen-rails', '~> 1.4.3'
 gem 'jquery-rails', '~> 2.0.3'
 gem 'jquery-ui-rails', '~> 2.0.2'
 

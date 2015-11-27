@@ -158,7 +158,7 @@ class DogsController < ApplicationController
     end
 
     def sort_dog_photos
-      @dog.photos.sort_by!{|photo| photo.position}
+      @dog.photos.order("position")
     end
 
     def load_instance_variables

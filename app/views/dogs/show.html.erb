@@ -82,9 +82,9 @@
       <ul class="unstyled">
         <li>ID:  <%= @dog.tracking_id %></li>
         <li><%= @dog.status.titleize %> (<a href="/dog-status-definitions" target="_blank">What does this mean?</a>)</li>
-        <li><%= @dog.age.titleize %></li>
-        <li><%= @dog.size.titleize %></li>
-        <li><%= @dog.gender.titleize %></li>
+        <li><%= @dog.age.titleize unless !@dog.age %></li>
+        <li><%= @dog.size.titleize unless !@dog.size %></li>
+        <li><%= @dog.gender.titleize unless !@dog.gender %></li>
         <li><%= @dog.primary_breed.name unless !@dog.primary_breed %></li>
         <li><%= @dog.secondary_breed.name unless !@dog.secondary_breed %></li>
 

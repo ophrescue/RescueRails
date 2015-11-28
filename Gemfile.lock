@@ -58,9 +58,9 @@ GEM
     bootstrap-will_paginate (0.0.10)
       will_paginate
     builder (3.2.2)
-    byebug (8.2.0)
+    byebug (8.2.1)
     callsite (0.0.11)
-    capistrano (3.2.1)
+    capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
@@ -297,7 +297,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rollbar (2.6.2)
+    rollbar (2.6.3)
       multi_json
     roo (1.13.2)
       nokogiri
@@ -404,10 +404,10 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-will_paginate (~> 0.0.10)
-  capistrano (~> 3.2.1)
-  capistrano-bundler (~> 1.1.2)
-  capistrano-rails (~> 1.1.1)
-  capistrano-rbenv (~> 2.0)
+  capistrano (~> 3.4.0)
+  capistrano-bundler (~> 1.1.4)
+  capistrano-rails (~> 1.1.5)
+  capistrano-rbenv (~> 2.0.3)
   capybara (~> 2.5.0)
   capybara-screenshot
   chosen-rails (~> 1.4.3)

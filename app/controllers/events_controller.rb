@@ -5,18 +5,16 @@ class EventsController < ApplicationController
 
   def index
     @title = "Upcoming Events"
-    @events = Event.find(:all,
-               conditions: ["event_date >= ?", Date.today],
-               limit: 30,
-               order: 'event_date')
+    @events = Event.where("event_date >= ?", Date.today)
+                   .limit(30)
+                   .order('event_date DESC')
   end
 
   def past
     @title = "Past Events"
-    @events = Event.find(:all,
-               conditions: ["event_date <= ?", Date.today],
-               limit: 30,
-               order: 'event_date')
+    @events = Event.where("event_date < ?", Date.today)
+                   .limit(30)
+                   .order('event_date DESC')
   end
 
   def show

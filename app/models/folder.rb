@@ -11,7 +11,7 @@
 
 class Folder < ActiveRecord::Base
 
-  has_many :attachments, as: :attachable, order: 'updated_at DESC'
+  has_many :attachments, -> { order('updated_at DESC') }, as: :attachable
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
 end

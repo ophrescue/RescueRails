@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="span1 hidden-phone hidden-tablet">
-      <img src="assets/logo.png" >
+      <%= image_tag "logo.png" %>
     </div>
 
     <div class="span6 hidden-phone hidden-tablet">
@@ -20,8 +20,10 @@
         <a href="https://www.facebook.com/Operationpawsforhomes"><i class="fa fa-facebook-square fa-3x"></i></a>
         <a href="https://twitter.com/RescueOPH"><i class="fa fa-twitter-square fa-3x"></i></a>
         <a href="http://instagram.com/operationpawsforhomes"><i class="fa fa-instagram fa-3x"></i></a>
-        &nbsp; &nbsp; 
-          <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/"> <img src="assets/gnp-2015-award.png" title="2015 Top-rated nonprofits and charities" alt="2015 Top-rated nonprofits and charities" width="165" height="83"/> </a>
+        &nbsp; &nbsp;
+          <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/">
+            <%= image_tag "gnp-2015-award.png", size: "165x83", alt: "2015 Top-rated nonprofits and charities" %>
+          </a>
         </span>
     </div>
   </div>
@@ -30,20 +32,20 @@
       <div id="ophCarousel" class="carousel slide">
         <div class="carousel-inner">
           <div class="item active">
-            <img src="assets/hero_bg3.jpg" alt="Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania">
+            <%= image_tag "hero_bg3.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
             <div class="carousel-caption">
               <%= link_to "Our Dogs", dogs_path, :class => "btn btn-primary btn-large", :id => "hero-dog" %>
               <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
             </div>
           </div>
           <div class="item">
-            <img src="assets/webchikabanner.jpg" alt="Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania">
+            <%= image_tag "webchikabanner.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
             <div class="carousel-caption">
               <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
             </div>
           </div>
           <div class="item">
-            <img src="assets/savedate-banner.jpg" alt="Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania">
+            <%= image_tag "savedate-banner.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
           </div>
         </div>
         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
@@ -53,17 +55,17 @@
   </div>
   <div class="row">
     <div class="span4 eventphoto">
-      <a href="/donate"><img src="assets/home-donate.jpg"></a>
+      <a href="/donate"><%= image_tag "home-donate.jpg" %></a>
       <br />
       <br />
     </div>
     <div class="span4 eventphoto">
-      <a href="/volunteer"><img src="assets/home-get-involved.jpg"></a>
+      <a href="/volunteer"><%= image_tag "home-get-involved.jpg" %></a>
       <br />
       <br />
     </div>
     <div class="span4 eventphoto">
-      <a href="/events"><img src="assets/home-events.jpg"></a>
+      <a href="/events"><%= image_tag "home-events.jpg" %></a>
       <br />
       <br />
     </div>
@@ -75,19 +77,21 @@
         <a href="https://www.facebook.com/Operationpawsforhomes"><i class="fa fa-facebook-square fa-3x"></i></a>
         <a href="https://twitter.com/RescueOPH"><i class="fa fa-twitter-square fa-3x"></i></a>
         <a href="http://instagram.com/operationpawsforhomes"><i class="fa fa-instagram fa-3x"></i></a>
-        &nbsp; &nbsp; 
-          <a href="http://greatnonprofits.org/org/operation-paws-for-homes"> <img src="assets/gnp-2014-award.jpg" title="2014 Top-rated nonprofits and charities" alt="2014 Top-rated nonprofits and charities" width="165" height="83"/> </a>
+        &nbsp; &nbsp;
+          <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/">
+            <%= image_tag "gnp-2015-award.png", size: "165x83", alt: "2015 Top-rated nonprofits and charities" %>
+          </a>
         </span>
     </div>
     <div class="row">
       <div class="span12">
-        <a href="http://adoptapet.com"><img src="assets/approved-rescue-badge.png"></a>
+        <a href="http://adoptapet.com"><%= image_tag "approved-rescue-badge.png" %></a>
       </div>
     </div>
 
   </div>
 
-<script type="text/javascript"> 
+<script type="text/javascript">
 $('#ophCarousel').carousel({
    interval: 6000
 });

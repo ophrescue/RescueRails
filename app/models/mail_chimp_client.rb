@@ -9,13 +9,13 @@ class MailChimpClient
     @gibbon.timeout = 30
   end
 
-  def subscribe(name, email)
+  def user_subscribe(name, email)
     merge_vars = {
       'FNAME' => name
     }
 
     gibbon.lists.subscribe(
-      id: LIST_ID,
+      id: USER_LIST_ID,
       email: { email: email },
       merge_vars: merge_vars,
       double_optin: true,
@@ -23,9 +23,11 @@ class MailChimpClient
     )
   end
 
-  def unsubscribe(email)
+  def user_unsubscribe(email)
+    gibbon.throws_exceptions = false
+
     gibbon.lists.unsubscribe({
-      id: LIST_ID,
+      id: USER_LIST_ID,
       email: {email: email},
       delete_member: true,
       send_goodbye: false,

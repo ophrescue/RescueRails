@@ -153,11 +153,11 @@ class User < ActiveRecord::Base
   end
 
   def chimp_subscribe
-    MailChimpService.subscribe(name, email)
+    MailChimpService.user_subscribe(name, email)
   end
 
   def chimp_unsubscribe
-    MailChimpService.unsubscribe(email)
+    MailChimpService.user_unsubscribe(email)
   end
 
   def chimp_check

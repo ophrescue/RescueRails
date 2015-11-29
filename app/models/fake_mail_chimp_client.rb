@@ -1,8 +1,8 @@
 class FakeMailChimpClient
-  def subscribe(name, email)
+  def user_subscribe(name, email)
   end
 
-  def unsubscribe(email)
+  def user_unsubscribe(email)
   end
 
   def adopter_subscribe(email, is_subscribed, merge_vars)

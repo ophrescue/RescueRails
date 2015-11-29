@@ -6,12 +6,12 @@ class MailChimpService
     @client = klass.new
   end
 
-  def self.subscribe(name, email)
-    new.client.subscribe(name, email)
+  def self.user_subscribe(name, email)
+    new.client.user_subscribe(name, email)
   end
 
-  def self.unsubscribe(name, email)
-    new.client.unsubscribe(name, email)
+  def self.user_unsubscribe(email)
+    new.client.user_unsubscribe(email)
   end
 
   def self.adopter_subscribe(email, is_subscribed, merge_vars)

@@ -38,15 +38,44 @@
               <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
             </div>
           </div>
-          <div class="item">
-            <%= image_tag "webchikabanner.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
-            <div class="carousel-caption">
-              <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
-            </div>
-          </div>
+
+      <% if Time.now.to_date < ("2015-12-01".to_date) %>
           <div class="item">
             <%= image_tag "savedate-banner.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
           </div>
+
+      <% elsif Time.now.to_date == ("2015-12-01".to_date) %>
+          <div class="item">
+            <%= image_tag "givingtuesday.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+            <div class="carousel-caption">
+              <%= link_to "Donate Now", "http://bit.ly/1H5Bcj0", :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
+            </div>
+          </div>
+
+      <% elsif Time.now.between?(("2015-12-02".to_date),("2015-12-08".to_date))%>
+          <div class="item">
+            <%= image_tag "givingtuesday_ty.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+          </div>
+      <% end %>
+
+
+       <% if Time.now.between?(("2015-12-01".to_date),("2015-12-31".to_date)) %>
+            <div class="item">
+              <%= image_tag "webbannertitan.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+              <div class="carousel-caption">
+                <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
+              </div>
+            </div>
+          <% else %>
+            <div class="item">
+              <%= image_tag "webchikabanner.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+              <div class="carousel-caption">
+                <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
+              </div>
+            </div>
+        <% end %>
+
+
         </div>
         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
         <a class="right carousel-control" href="#ophCarousel" data-slide="next">&rsaquo;</a>
@@ -88,7 +117,6 @@
         <a href="http://adoptapet.com"><%= image_tag "approved-rescue-badge.png" %></a>
       </div>
     </div>
-
   </div>
 
 <script type="text/javascript">

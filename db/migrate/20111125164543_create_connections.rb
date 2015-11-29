@@ -10,7 +10,7 @@ class CreateConnections < ActiveRecord::Migration
 
     add_index :connections, :adopter_id
     add_index :connections, :dog_id
-    add_index :connections, [:adopter_id, :dog_id], :unique => true
+    add_index :connections, [:adopter_id, :dog_id], unique: true
 
   end
 end

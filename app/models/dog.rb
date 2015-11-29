@@ -51,34 +51,34 @@ class Dog < ActiveRecord::Base
 
   attr_accessor :primary_breed_name, :secondary_breed_name
 
-  belongs_to :primary_breed, :class_name => 'Breed'
-  belongs_to :secondary_breed, :class_name => 'Breed'
-  belongs_to :foster, :class_name => "User"
-  belongs_to :coordinator, :class_name => "User"
+  belongs_to :primary_breed, class_name: 'Breed'
+  belongs_to :secondary_breed, class_name: 'Breed'
+  belongs_to :foster, class_name: "User"
+  belongs_to :coordinator, class_name: "User"
   belongs_to :shelter
 
-  has_many :comments, :as => :commentable, :order => "created_at DESC"
-  has_many :attachments, :as => :attachable, :dependent => :destroy
-  has_many :photos, :dependent => :destroy, :order => "position ASC"
-  has_many :adoptions, :dependent => :destroy
-  has_many :adopters, :through => :adoptions
+  has_many :comments, -> {order 'created_at DESC'}, as: :commentable
+  has_many :attachments, as: :attachable, dependent: :destroy
+  has_many :photos, -> {order 'position ASC'}, dependent: :destroy
+  has_many :adoptions, dependent: :destroy
+  has_many :adopters, through: :adoptions
 
-  accepts_nested_attributes_for :attachments, :allow_destroy => true
-  accepts_nested_attributes_for :photos, :allow_destroy => true
+  accepts_nested_attributes_for :attachments, allow_destroy: true
+  accepts_nested_attributes_for :photos, allow_destroy: true
 
-  validates :name, :presence => true,
-           :length   => { :maximum => 75 },
-           :uniqueness => { :case_sensitive => false }
+  validates :name, presence: true,
+           length: { maximum: 75 },
+           uniqueness: { case_sensitive: false }
 
-  validates :tracking_id, :uniqueness => true,
-              :presence => true
+  validates :tracking_id, uniqueness: true,
+              presence: true
 
   validates_presence_of :status
 
 
   STATUSES = ['adoptable', 'adopted', 'adoption pending',
         'on hold', 'not available', 'return pending', 'coming soon', 'completed']
-  validates_inclusion_of :status, :in => STATUSES
+  validates_inclusion_of :status, in: STATUSES
 
   PETFINDER_STATUS =
   {
@@ -104,13 +104,13 @@ class Dog < ActiveRecord::Base
   }
 
   AGES = ['baby', 'young', 'adult', 'senior']
-  validates_inclusion_of :age, :in => AGES, :allow_blank => true
+  validates_inclusion_of :age, in: AGES, allow_blank: true
 
   SIZES = ['small', 'medium', 'large','extra large']
-  validates_inclusion_of :size, :in => SIZES, :allow_blank => true
+  validates_inclusion_of :size, in: SIZES, allow_blank: true
 
   GENDERS = ['Male', 'Female']
-  validates_inclusion_of :gender, :in => GENDERS, :allow_blank => true
+  validates_inclusion_of :gender, in: GENDERS, allow_blank: true
 
   before_save :update_adoption_date
 

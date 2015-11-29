@@ -17,7 +17,7 @@ class DogSearcher
       elsif active_status_search?
         @dogs = Dog.where("status IN (?)", ACTIVE_STATUSES)
       elsif status_search?
-        @dogs = Dog.where(:status => @params[:status])
+        @dogs = Dog.where(status: @params[:status])
       else
         @dogs = Dog.where("dogs.name ILIKE ?", "%#{@params[:q]}%")
       end

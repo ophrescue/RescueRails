@@ -17,12 +17,11 @@ class DogsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @dogs.map(&:attributes) }
+      format.json { render json: @dogs.map(&:attributes) }
     end
   end
 
   def show
-    sort_dog_photos
     @title = @dog.name
   end
 
@@ -35,7 +34,6 @@ class DogsController < ApplicationController
   def edit
     @dog.primary_breed_name = @dog.primary_breed.name unless @dog.primary_breed.nil?
     @dog.secondary_breed_name = @dog.secondary_breed.name unless @dog.secondary_breed.nil?
-    sort_dog_photos
     load_instance_variables
     @title = "Edit Dog"
   end
@@ -157,15 +155,11 @@ class DogsController < ApplicationController
       @dog = Dog.find(params[:id])
     end
 
-    def sort_dog_photos
-      @dog.photos.sort_by!{|photo| photo.position}
-    end
-
     def load_instance_variables
       5.times { @dog.photos.build }
       5.times { @dog.attachments.build }
-      @foster_users = User.where(:is_foster => true).order("name")
-      @coordinator_users = User.where(:edit_all_adopters => true).order("name")
+      @foster_users = User.where(is_foster: true).order("name")
+      @coordinator_users = User.where(edit_all_adopters: true).order("name")
       @shelters = Shelter.order("name")
       @breeds = Breed.all
     end

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   before_filter :authenticate
-  before_filter :correct_user, :only => [:edit, :update]
-  before_filter :admin_user, :only => [:new, :create, :destroy]
+  before_filter :correct_user, only: [:edit, :update]
+  before_filter :admin_user, only: [:new, :create, :destroy]
 
   YES_NO_OPTIONS = [['Any', ''], ['Yes', 't'], ['No', 'f']]
   OWN_RENT_OPTIONS = [['Any', ''], ['Own', 'own'], ['Rent', 'rent']]
@@ -13,9 +13,9 @@ class UsersController < ApplicationController
     @rent_options = OWN_RENT_OPTIONS
 
     if params[:search]
-      @users = User.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(:page => params[:page])
+      @users = User.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(page: params[:page])
     else
-      @users = User.active.filter(filtering_params).order("name").paginate(:page => params[:page])
+      @users = User.active.filter(filtering_params).order("name").paginate(page: params[:page])
     end
   end
 
@@ -147,7 +147,7 @@ class UsersController < ApplicationController
 
     def init_fields
       @user.build_agreement unless @user.agreement
-      @foster_users = User.where(:locked => false).order("name")
+      @foster_users = User.where(locked: false).order("name")
     end
 
     def correct_user

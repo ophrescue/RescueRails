@@ -1,6 +1,6 @@
 # config valid only for Capistrano 3.1
 # Source: http://www.talkingquickly.co.uk/2014/01/deploying-rails-apps-to-a-vps-with-capistrano-v3/
-lock '3.2.1'
+lock '3.4.0'
 
 set :application, 'RescueRails'
 set :deploy_user, 'deploy'
@@ -13,7 +13,7 @@ set :default_environment, { 'PATH' => '$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
 
 # setup rbenv
 set :rbenv_type, :user
-set :rbenv_ruby, '2.1.1'
+set :rbenv_ruby, '2.2.3'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 

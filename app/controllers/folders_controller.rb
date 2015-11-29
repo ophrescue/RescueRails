@@ -2,7 +2,7 @@ class FoldersController < ApplicationController
 
   before_filter :authenticate
   before_filter :dl_resource_user
-  before_filter :admin_user, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :admin_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @title = "Staff Resources"

@@ -1,10 +1,10 @@
 class AdoptersController < ApplicationController
   include SessionsHelper
 
-  before_filter :authenticate, :except => [:new, :create, :check_email]
-  before_filter :edit_my_adopters_user, :only => [:index, :show, :edit, :update]
-  before_filter :edit_all_adopters_user, :only => [:index, :show, :edit, :update]
-  before_filter :admin_user, :only => [:destroy]
+  before_filter :authenticate, except: [:new, :create, :check_email]
+  before_filter :edit_my_adopters_user, only: [:index, :show, :edit, :update]
+  before_filter :edit_all_adopters_user, only: [:index, :show, :edit, :update]
+  before_filter :admin_user, only: [:destroy]
   before_filter :load_adopter, only: %i(show update)
 
   respond_to :html, :json
@@ -21,7 +21,7 @@ class AdoptersController < ApplicationController
     @adoption_app = @adopter.adoption_app
     @dogs_all = Dog.order("name").all
     @adoption = Adoption.new
-    @adopter_users = User.where(:edit_my_adopters => true).order("name")
+    @adopter_users = User.where(edit_my_adopters: true).order("name")
   end
 
   def new
@@ -48,10 +48,10 @@ class AdoptersController < ApplicationController
         a.save
       end
 
-      NewAdopterMailer.adopter_created(@adopter.id).deliver
-      AdoptAppMailer.adopt_app(@adopter.id).deliver
+      NewAdopterMailer.adopter_created(@adopter.id).deliver_later
+      AdoptAppMailer.adopt_app(@adopter.id).deliver_later
       flash[:success] = "adoptsuccess"
-      redirect_to root_path(:adoptapp => "complete")
+      redirect_to root_path(adoptapp: "complete")
     else
       render 'new'
     end
@@ -76,7 +76,7 @@ class AdoptersController < ApplicationController
     adopter_exists = Adopter.where(email: params[:adopter][:email]).exists?
 
     respond_to do |format|
-      format.json { render :json => !adopter_exists }
+      format.json { render json: !adopter_exists }
     end
   end
 

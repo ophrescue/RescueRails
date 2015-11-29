@@ -62,7 +62,7 @@ class Adopter < ActiveRecord::Base
   accepts_nested_attributes_for :adoption_app
 
   has_many :dogs, through: :adoptions
-  has_many :comments, as: :commentable, order: 'created_at DESC'
+  has_many :comments, -> { order('created_at DESC') }, as: :commentable
 
   belongs_to :user, class_name: 'User', primary_key: 'id', foreign_key: 'assigned_to_user_id'
 
@@ -123,11 +123,6 @@ class Adopter < ActiveRecord::Base
   end
 
   def chimp_subscribe
-    gb = Gibbon::API.new
-    gb.timeout = 30
-
-    list_id = '5e50e2be93'
-
     if (status == 'adopted') || (status == 'completed')
       groups = [{ name: 'OPH Target Segments', groups: ['Adopted from OPH'] }]
     else
@@ -146,21 +141,8 @@ class Adopter < ActiveRecord::Base
       mmerge3: completed_date,
       groupings: groups
     }
-
-    list_data = {
-      id: list_id,
-      email: { email: email },
-      merge_vars: merge_vars,
-      double_optin: true,
-      send_welcome: false
-    }
-
-    if is_subscribed?
-      gb.lists.update_member(list_data)
-    else
-      gb.lists.subscribe(list_data)
-      self.is_subscribed = true
-    end
+    MailChimpService.adopter_subscribe(email, is_subscribed?, merge_vars)
+    self.is_subscribed = true
   end
 
   def chimp_check
@@ -174,19 +156,7 @@ class Adopter < ActiveRecord::Base
   end
 
   def chimp_unsubscribe
-    gb = Gibbon::API.new
-    gb.timeout = 30
-    gb.throws_exceptions = false
-
-    list_id = '5e50e2be93'
-
-    gb.lists.unsubscribe(
-      id: list_id,
-      email: { email: email },
-      delete_member: true,
-      send_goodbye: false,
-      send_notify: false
-    )
+    MailChimpService.adopter_unsubscribe(email)
     self.is_subscribed = 0
   end
 end

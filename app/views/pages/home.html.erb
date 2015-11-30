@@ -42,6 +42,9 @@
       <% if Time.now.to_date < ("2015-12-01".to_date) %>
           <div class="item">
             <%= image_tag "savedate-banner.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+            <div class="carousel-caption">
+              <%= link_to "Donate Now", "http://bit.ly/1H5Bcj0", :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
+            </div>
           </div>
 
       <% elsif Time.now.to_date == ("2015-12-01".to_date) %>

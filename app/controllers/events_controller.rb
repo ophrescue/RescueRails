@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @title = "Upcoming Events"
     @events = Event.where("event_date >= ?", Date.today)
                    .limit(30)
-                   .order('event_date DESC')
+                   .order('event_date ASC')
   end
 
   def past

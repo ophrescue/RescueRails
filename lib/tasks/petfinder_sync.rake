@@ -57,7 +57,7 @@ namespace :petfinder_sync do
           next if d.photos.visible.empty?
 
           counter = 0
-          d.photos.visible.sort!{|a,b| b.updated_at <=> a.updated_at }
+          d.photos.visible.order('updated_at desc')
           d.photos.visible[0..2].each do |p|
             counter += 1
             begin

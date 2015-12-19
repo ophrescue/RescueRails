@@ -1,77 +1,77 @@
 <div class="row">
-	<div class="row event-title">
-		<div class="span8 offset4">
-			<h3><%= event.title %></h3>
-			<p><strong><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %l:%M %P") %> to <%= event.end_time.strftime(" %l:%M %P") %></strong></p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			<div class="eventphoto">
-				<% if event.photo? %>
-					<%= link_to image_tag(event.photo.url(:medium)),event.photo.url %>
-				<% else %>
-				&nbsp;
-				<% end %>
+  <div class="row event-title">
+    <div class="span8 offset4">
+      <h3><%= event.title %></h3>
+      <p><strong><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %l:%M %P") %> to <%= event.end_time.strftime(" %l:%M %P") %></strong></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <div class="eventphoto">
+        <% if event.photo? %>
+          <%= link_to image_tag(event.photo.url(:medium)),event.photo.url %>
+        <% else %>
+        &nbsp;
+        <% end %>
 
-			</div>
-		</div>
-		<div class="span8">
-			<div class="">
-				<div class="span10">
-					<address>
-						<% if event.location_url? %>
-							<strong><%= link_to event.location_name, event.location_url %></strong><br />
-						<% else %>
-							<strong><%= event.location_name %></strong><br />
-						<% end %>
-						<%= event.address %><br />
-						<% if event.location_phone? %>
-							<abbr title="Phone">P: </abbr><%= event.location_phone %><br />
-						<% end %>
-					</address>
-				</div>
-				<% if event.photographer_name? && event.photographer_url? %>
-					<p><i class="icon-camera"></i> <strong>Event Photographer:</strong> <%= link_to event.photographer_name, event.photographer_url %></p>
-				<% end %>
-				<% if event.photographer_name? && !event.photographer_url? %>
-					<p><i class="icon-camera"></i> <strong>Event Photographer:</strong> <%= event.photographer_name %></p>
-				<% end %>
-			</div>
-			<a href="<%="https://maps.google.com/?q=#{event.latitude}%2C#{event.longitude}"%>">
-			<%= image_tag "https://maps.google.com/maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers=#{event.latitude}%2C#{event.longitude}"
-				 %></a>
-			<div class="row">
-				<div class="span8">
-					<p><%= event.description %></p>
-				</div>
-			</div>
+      </div>
+    </div>
+    <div class="span8">
+      <div class="">
+        <div class="span10">
+          <address>
+            <% if event.location_url? %>
+              <strong><%= link_to event.location_name, event.location_url %></strong><br />
+            <% else %>
+              <strong><%= event.location_name %></strong><br />
+            <% end %>
+            <%= event.address %><br />
+            <% if event.location_phone? %>
+              <abbr title="Phone">P: </abbr><%= event.location_phone %><br />
+            <% end %>
+          </address>
+        </div>
+        <% if event.photographer_name? && event.photographer_url? %>
+          <p><i class="icon-camera"></i> <strong>Event Photographer:</strong> <%= link_to event.photographer_name, event.photographer_url %></p>
+        <% end %>
+        <% if event.photographer_name? && !event.photographer_url? %>
+          <p><i class="icon-camera"></i> <strong>Event Photographer:</strong> <%= event.photographer_name %></p>
+        <% end %>
+      </div>
+      <a href="<%="https://maps.google.com/?q=#{event.latitude}%2C#{event.longitude}"%>">
+      <%= image_tag "https://maps.google.com/maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers=#{event.latitude}%2C#{event.longitude}"
+         %></a>
+      <div class="row">
+        <div class="span8">
+          <p><%= event.description %></p>
+        </div>
+      </div>
 
-			<p>
+      <p>
 
-			<% if event.facebook_url? %>
-				<%= link_to "RSVP on Facebook", event.facebook_url, :class => "btn btn-primary" %>
-			<% end %>
+      <% if event.facebook_url? %>
+        <%= link_to "RSVP on Facebook", event.facebook_url, :class => "btn btn-primary" %>
+      <% end %>
 
-			<a href="/adopt" class="btn btn-primary">Apply to Adopt</a>
-			
-			<% if can_edit_events? %>
-				<%= link_to  "edit", edit_event_path(event), :class => "btn btn-small" %>
-			<% end %>
+      <a href="/adopt" class="btn btn-primary">Apply to Adopt</a>
 
-			<% if is_admin? %>
-				  	<%= link_to  "delete",
-					 			  event,
-					 			  :method => :delete,
-					 			  :class => "btn btn-small",
-					 			  :confirm => "You sure?",
-					 			  :title => "Delete #{event.title}" %>
-				
-			<% end %>
+      <% if can_edit_events? %>
+        <%= link_to  "edit", edit_event_path(event), :class => "btn btn-small" %>
+      <% end %>
 
-			</p>
-		</div>
-	</div>
+      <% if can_edit_events? %>
+            <%= link_to  "delete",
+                  event,
+                  :method => :delete,
+                  :class => "btn btn-small",
+                  :confirm => "You sure?",
+                  :title => "Delete #{event.title}" %>
+
+      <% end %>
+
+      </p>
+    </div>
+  </div>
 </div>
 <br />
 <br />

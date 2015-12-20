@@ -32,7 +32,9 @@ class Adopter < ActiveRecord::Base
                 :pre_q_abuse,
                 :pre_q_reimbursement,
                 :pre_q_limited_info,
-                :pre_q_breed_info
+                :pre_q_breed_info,
+                :pre_q_dog_adjust,
+                :pre_q_courtesy
 
   attr_reader :dog_tokens
   attr_accessor :updated_by_admin_user

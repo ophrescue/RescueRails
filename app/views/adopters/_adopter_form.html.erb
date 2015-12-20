@@ -51,7 +51,7 @@
     <tr>
       <th>Primary Phone</th>
       <td>
-        <div class='read-only'><%= @adopter.phone %></div>
+        <div class='read-only'><span class="tel value"><%= @adopter.phone %></span></div>
         <div class='editable'><%= f.text_field :phone %></div>
       </td>
     </tr>
@@ -59,7 +59,7 @@
       <tr>
         <th>Other Phone</th>
         <td>
-          <div class='read-only'><%= @adopter.other_phone %></div>
+          <div class='read-only'><span class="tel value"><%= @adopter.other_phone %><span></div>
           <div class='editable'><%= f.text_field :other_phone %></div>
         </td>
       </tr>

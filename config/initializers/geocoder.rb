@@ -6,7 +6,7 @@ Geocoder.configure(
 
   language: :en,              # ISO-639 language code
 
-  use_https: true,            # use HTTPS for lookup requests? (if supported)
+  use_https: Rails.env.production?,            # use HTTPS for lookup requests? (if supported)
 
   api_key: ENV['GOOGLE_MAPS_GEOCODE'],               # API key for geocoding service
   # cache: nil,                 # cache object (must respond to #[], #[]=, and #keys)

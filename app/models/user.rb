@@ -86,6 +86,9 @@ class User < ActiveRecord::Base
                        length: { within: 8..40 },
                        unless: Proc.new { |a| a.password.blank? }
 
+  geocoded_by :full_street_address
+  after_validation :geocode
+
   before_save :encrypt_password, unless: "password.blank?"
 
   has_many :foster_dogs, class_name: 'Dog', foreign_key: 'foster_id'
@@ -177,6 +180,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+    def full_street_address
+      [address1, address2, city, state, zip].compact.join(', ')
+    end
 
     def format_cleanup
       self.state.upcase!

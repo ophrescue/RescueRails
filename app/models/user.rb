@@ -5,13 +5,13 @@
 #  id                     :integer          not null, primary key
 #  name                   :string(255)
 #  email                  :string(255)
-#  created_at             :timestamp(6)
-#  updated_at             :timestamp(6)
+#  created_at             :datetime
+#  updated_at             :datetime
 #  encrypted_password     :string(255)
 #  salt                   :string(255)
 #  admin                  :boolean          default(FALSE)
 #  password_reset_token   :string(255)
-#  password_reset_sent_at :timestamp(6)
+#  password_reset_sent_at :datetime
 #  is_foster              :boolean          default(FALSE)
 #  phone                  :string(255)
 #  address1               :string(255)
@@ -50,6 +50,8 @@
 #  writes_newsletter      :boolean          default(FALSE)
 #  is_transporter         :boolean          default(FALSE)
 #  mentor_id              :integer
+#  latitude               :float
+#  longitude              :float
 #
 
 require 'digest'
@@ -83,6 +85,9 @@ class User < ActiveRecord::Base
                        confirmation: true,
                        length: { within: 8..40 },
                        unless: Proc.new { |a| a.password.blank? }
+
+  geocoded_by :full_street_address
+  after_validation :geocode
 
   before_save :encrypt_password, unless: "password.blank?"
 
@@ -175,6 +180,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+    def full_street_address
+      [address1, address2, city, state, zip].compact.join(', ')
+    end
 
     def format_cleanup
       self.state.upcase!

@@ -13,8 +13,8 @@
 #  zip                 :string(255)
 #  status              :string(255)
 #  when_to_call        :string(255)
-#  created_at          :timestamp(6)
-#  updated_at          :timestamp(6)
+#  created_at          :datetime
+#  updated_at          :datetime
 #  dog_reqs            :text
 #  why_adopt           :text
 #  dog_name            :string(255)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150912175211) do
+ActiveRecord::Schema.define(version: 20151220183400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 20150912175211) do
     t.string   "name",                 limit: 255
     t.datetime "created_at",                       precision: 6
     t.datetime "updated_at",                       precision: 6
-    t.integer  "tracking_id",                                    default: 0
+    t.integer  "tracking_id"
     t.integer  "primary_breed_id"
     t.integer  "secondary_breed_id"
     t.string   "status",               limit: 255
@@ -331,10 +331,13 @@ ActiveRecord::Schema.define(version: 20150912175211) do
     t.boolean  "writes_newsletter",                                default: false
     t.boolean  "is_transporter",                                   default: false
     t.integer  "mentor_id"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "users", ["agreement_id"], name: "index_users_on_agreement_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude", using: :btree
   add_index "users", ["mentor_id"], name: "index_users_on_mentor_id", using: :btree
   add_index "users", ["name"], name: "index_users_on_name", using: :btree
 

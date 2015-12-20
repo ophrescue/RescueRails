@@ -4,8 +4,8 @@
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
-#  created_at :timestamp(6)
-#  updated_at :timestamp(6)
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 require 'rails_helper'

@@ -4,8 +4,8 @@
 #
 #  id                   :integer          not null, primary key
 #  name                 :string(255)
-#  created_at           :timestamp(6)
-#  updated_at           :timestamp(6)
+#  created_at           :datetime
+#  updated_at           :datetime
 #  tracking_id          :integer
 #  primary_breed_id     :integer
 #  secondary_breed_id   :integer
@@ -45,6 +45,7 @@
 #  coordinator_id       :integer
 #  sponsored_by         :string(255)
 #  shelter_id           :integer
+#  medical_summary      :text
 #
 
 require 'rails_helper'

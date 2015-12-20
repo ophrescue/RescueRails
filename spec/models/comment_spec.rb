@@ -7,8 +7,8 @@
 #  commentable_id   :integer
 #  commentable_type :string(255)
 #  user_id          :integer
-#  created_at       :timestamp(6)
-#  updated_at       :timestamp(6)
+#  created_at       :datetime
+#  updated_at       :datetime
 #
 
 require 'rails_helper'

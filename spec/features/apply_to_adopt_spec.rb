@@ -13,6 +13,8 @@ feature 'Apply for Adoption' do
     check('adopter_pre_q_limited_info')
     check('adopter_pre_q_breed_info')
     check('adopter_pre_q_reimbursement')
+    check('adopter_pre_q_dog_adjust')
+    check('adopter_pre_q_courtesy')
 
     click_button('Next')
 

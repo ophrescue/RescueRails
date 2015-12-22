@@ -16,12 +16,15 @@ describe UsersController, type: :controller do
         smith = create(:user, name: 'Jane Smith')
         jones = create(:user, name: 'Frank Jones')
         get :index
-        #expect(assigns(:users)).not_to be_nil
+        expect(assigns(:users)).not_to be_nil
         #expect(assigns(:users)).to contain([smith, jones])
       end
     end
 
     context 'name search' do
+      before :each do
+        allow(controller).to receive(:current_user) { admin }
+      end
       it "returns the searched for user" do
         smith = create(:user, name: 'Jane Smith')
         jones = create(:user, name: 'Frank Jones')
@@ -32,6 +35,9 @@ describe UsersController, type: :controller do
     end
 
     context 'location search' do
+      before :each do
+        allow(controller).to receive(:current_user) { admin }
+      end
       it "returns users near the searched location" do
         get :index, location: '21224'
         expect(assigns(:users)).not_to be_nil

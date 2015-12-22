@@ -16,8 +16,7 @@ describe UsersController, type: :controller do
         smith = create(:user, name: 'Jane Smith')
         jones = create(:user, name: 'Frank Jones')
         get :index
-        expect(assigns(:users)).not_to be_nil
-        #expect(assigns(:users)).to contain([smith, jones])
+        expect(assigns(:users)).to match_array([jones, smith, admin, hacker])
       end
     end
 
@@ -26,11 +25,10 @@ describe UsersController, type: :controller do
         allow(controller).to receive(:current_user) { admin }
       end
       it "returns the searched for user" do
-        smith = create(:user, name: 'Jane Smith')
+        smith = create(:user, name: 'Jane Smithbot')
         jones = create(:user, name: 'Frank Jones')
-        get :index , seach: 'S'
-        expect(assigns(:users)).not_to be_nil
-        #expect(assigns(:users)).to have_attributes([smith])
+        get :index , search: 'Smithbot'
+        expect(assigns(:users)).to match_array([smith])
       end
     end
 

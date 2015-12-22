@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151220183400) do
+ActiveRecord::Schema.define(version: 20151222214453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20151220183400) do
     t.boolean  "is_subscribed",                                 default: false
     t.date     "completed_date"
   end
+
+  add_index "adopters", ["assigned_to_user_id"], name: "index_adopters_on_assigned_to_user_id", using: :btree
 
   create_table "adoption_apps", force: :cascade do |t|
     t.integer  "adopter_id"
@@ -126,6 +128,9 @@ ActiveRecord::Schema.define(version: 20151220183400) do
     t.datetime "updated_at",                   precision: 6
   end
 
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",                             default: 0
     t.integer  "attempts",                             default: 0
@@ -189,6 +194,7 @@ ActiveRecord::Schema.define(version: 20151220183400) do
   end
 
   add_index "dogs", ["age"], name: "index_dogs_on_age", using: :btree
+  add_index "dogs", ["coordinator_id"], name: "index_dogs_on_coordinator_id", using: :btree
   add_index "dogs", ["foster_id"], name: "index_dogs_on_user_id", using: :btree
   add_index "dogs", ["gender"], name: "index_dogs_on_gender", using: :btree
   add_index "dogs", ["name"], name: "index_dogs_on_name", using: :btree

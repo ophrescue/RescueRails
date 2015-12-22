@@ -2,8 +2,42 @@ require 'rails_helper'
 
 describe UsersController, type: :controller do
 
-  let!(:admin) {create(:user, :admin)}
-  let!(:hacker) {create(:user)}
+  let!(:admin) {create(:user, :admin, name: 'Admin')}
+  let!(:hacker) {create(:user, name: 'Hacker')}
+
+  describe 'GET index' do
+
+    context 'default index list' do
+      before :each do
+        allow(controller).to receive(:current_user) { admin }
+      end
+
+      it "returns all users" do
+        smith = create(:user, name: 'Jane Smith')
+        jones = create(:user, name: 'Frank Jones')
+        get :index
+        #expect(assigns(:users)).not_to be_nil
+        #expect(assigns(:users)).to contain([smith, jones])
+      end
+    end
+
+    context 'name search' do
+      it "returns the searched for user" do
+        smith = create(:user, name: 'Jane Smith')
+        jones = create(:user, name: 'Frank Jones')
+        get :index , seach: 'S'
+        expect(assigns(:users)).not_to be_nil
+        #expect(assigns(:users)).to have_attributes([smith])
+      end
+    end
+
+    context 'location search' do
+      it "returns users near the searched location" do
+        get :index, location: '21224'
+        expect(assigns(:users)).not_to be_nil
+      end
+    end
+  end
 
   describe 'POST create' do
     context 'logged in as an admin' do

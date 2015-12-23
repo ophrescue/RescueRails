@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
     if params[:search]
       @users = User.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(page: params[:page])
+    elsif params[:location]
+      @users = User.active.near(params[:location], 30).paginate(page: params[:page])
     else
       @users = User.active.filter(filtering_params).order("name").paginate(page: params[:page])
     end

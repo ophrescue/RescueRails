@@ -1,16 +1,22 @@
 <h1><%= @title %></h1>
 
-<%= form_tag users_path, :method => 'get' do %>
-  <p>
-  <%= text_field_tag :search, params[:search] %>
-  <%= submit_tag "Search", :name => nil %>
-  <%= link_to ' Clear Search', users_path %>
-  </p>
-<% end %>
-
 <% if is_admin? %>
   <p>
   <%= link_to "Create new Staff Account", new_user_path, :class => "btn btn-primary" %>
+  </p>
+<% end %>
+
+<%= form_tag users_path, :method => 'get' do %>
+  <p>Lookup by name 
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<%= form_tag users_path, :method => 'get' do %>
+  <p>Find active volunteers near 
+  <%= text_field_tag :location, params[:location], :placeholder => 'City, State or Zip...' %>
+  <%= submit_tag "Locate", :name => nil %>
   </p>
 <% end %>
 

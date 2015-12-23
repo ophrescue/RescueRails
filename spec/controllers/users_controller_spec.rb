@@ -38,7 +38,7 @@ describe UsersController, type: :controller do
       end
       it "returns users near the searched location" do
         get :index, location: '21224'
-        expect(assigns(:users)).not_to be_nil
+        expect(User).to receive(:near).and_call_original
       end
     end
   end

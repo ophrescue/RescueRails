@@ -37,8 +37,8 @@ describe UsersController, type: :controller do
         allow(controller).to receive(:current_user) { admin }
       end
       it "returns users near the searched location" do
-        get :index, location: '21224'
         expect(User).to receive(:near).and_call_original
+        get :index, location: '21224'
       end
     end
   end

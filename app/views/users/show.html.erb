@@ -32,12 +32,12 @@
           </tr>
           <tr>
             <td>Phone</td>
-            <td><%= @user.phone %></td>
+            <td><span class="tel value"><%= @user.phone %></span></td>
           </tr>
           <% if @user.other_phone? %>
             <tr>
               <td>Other Phone</td>
-              <td><%= @user.other_phone %></td>
+              <td><span class="tel value"><%= @user.other_phone %></span></td>
             </tr>
           <% end %>
           <tr>

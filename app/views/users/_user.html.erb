@@ -1,7 +1,7 @@
 <tr>
   <td><%= link_to user.name, user %></td>
   <td><%= user.duties %></td>
-  <td><%= user.phone %></td>
+  <td><span class="tel value"><%= user.phone %></span></td>
   <td><%= user.city %>, <%= user.state %></td>
   <td>
     <% user.current_foster_dogs.each do |d| %>

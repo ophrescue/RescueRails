@@ -1,20 +1,20 @@
 <tr>
-	<td><%= link_to user.name, user %></td>
-	<td><%= user.duties %></td>
-	<td><%= user.phone %></td>
-	<td><%= user.city %>, <%= user.state %></td>
-	<td>
-		<% user.current_foster_dogs.each do |d| %>
-			<%= link_to d.name, d %>
-			(<%= d.status %>)
-			<br />
-		<% end %>
-	</td>
-	<td>
-		<% user.coordinated_dogs.each do |d| %>
-			<%= link_to d.name, d %>
-			(<%= d.status %>)
-			<br />
-		<% end %>
-	</td>
+  <td><%= link_to user.name, user %></td>
+  <td><%= user.duties %></td>
+  <td><%= user.phone %></td>
+  <td><%= user.city %>, <%= user.state %></td>
+  <td>
+    <% user.current_foster_dogs.each do |d| %>
+      <%= link_to d.name, d %>
+      (<%= d.status %>)
+      <br />
+    <% end %>
+  </td>
+  <td>
+    <% user.coordinated_dogs.each do |d| %>
+      <%= link_to d.name, d %>
+      (<%= d.status %>)
+      <br />
+    <% end %>
+  </td>
 </tr>

@@ -49,21 +49,23 @@
       <% end %>
 
 
-       <% if Time.now.between?(("2015-12-01".to_date),("2015-12-31".to_date)) %>
-            <div class="item">
-              <%= image_tag "webbannertitan.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
-              <div class="carousel-caption">
-                <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
-              </div>
+     <% if Time.now.between?(("2015-12-26".to_date),("2016-01-03".to_date)) %>
+          <div class="item">
+            <%= image_tag "webbannerhalloween.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+            <div class="carousel-caption">
+              <%= link_to "Our Dogs", dogs_path, :class => "btn btn-primary btn-large", :id => "hero-dog" %>
+              <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
             </div>
-          <% else %>
-            <div class="item">
-              <%= image_tag "webchikabanner.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
-              <div class="carousel-caption">
-                <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
-              </div>
+          </div>
+        <% elsif Time.now.between?(("2016-01-04".to_date),("2016-01-31".to_date)) %>
+          <div class="item">
+            <%= image_tag "webbannerjan.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+            <div class="carousel-caption">
+              <%= link_to "Our Dogs", dogs_path, :class => "btn btn-primary btn-large", :id => "hero-dog" %>
+              <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
             </div>
-        <% end %>
+          </div>
+      <% end %>
 
 
         </div>

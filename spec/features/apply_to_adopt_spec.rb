@@ -65,7 +65,7 @@ feature 'Apply for Adoption' do
     choose('adopter_adoption_app_attributes_pets_branch_other_pets')
 
     click_button('Next')
-    expect(page).to have_content('Please identify all dogs or cats')
+    expect(page).to have_content('Please list all dogs or cats')
     fill_in('adopter_adoption_app_attributes_current_pets', with: 'I have a dog named Archer')
     choose('adopter_adoption_app_attributes_current_pets_fixed_false')
     fill_in('adopter_adoption_app_attributes_why_not_fixed', with: 'They are perfect just the way they are')

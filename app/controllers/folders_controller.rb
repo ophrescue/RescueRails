@@ -27,7 +27,7 @@ class FoldersController < ApplicationController
     @folder = Folder.new(folder_params)
     if @folder.save
       flash[:success] = "New Folder Added"
-      redirect_to folders_path
+      handle_redirect
     end
   end
 
@@ -35,10 +35,10 @@ class FoldersController < ApplicationController
     @folder = Folder.find(params[:id])
     if @folder.update_attributes(folder_params)
       flash[:success] = "Folder Updated"
-      redirect_to folders_path
+      handle_redirect
     else
-      @title = "Edit Folder"
-      render 'edit'
+      flash[:error] = "Upload Error"
+      handle_redirect
     end
   end
 
@@ -51,7 +51,7 @@ class FoldersController < ApplicationController
   def destroy
     Folder.find(params[:id]).destroy
     flash[:success] = "Folder Deleted"
-    redirect_to folders_path
+    handle_redirect
   end
 
   private

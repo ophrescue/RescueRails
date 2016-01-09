@@ -62,14 +62,6 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:content)
   end
 
-  def handle_redirect
-    if request.xhr?
-      head 200
-    else
-      redirect_to request.referer
-    end
-  end
-
   def find_commentable
     params.each do |name, value|
       if name =~ /(.+)_id$/

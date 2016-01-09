@@ -15,25 +15,6 @@
             <%= f.text_field :description %>
           </div>
         </div>
-        <h3>New Files</h3>
-        <div class="control-group">
-        <%= f.fields_for :attachments do |pf| %>
-          <% if pf.object.new_record? %>
-            <%= pf.file_field :attachment %><br />
-          <% end %>
-        <% end %>
-        </div>
-        <h3>Existing Files</h3>
-          <%= f.fields_for :attachments do |pf| %>
-            <% unless pf.object.new_record? %>
-            <div class="thumb">
-              <%= link_to pf.object.photo.url(:original) %>
-              <%= pf.check_box :_destroy %>
-              <%= pf.label "Delete attachment" %>
-            </div>
-            <% end %>
-          <% end %>
-
         <div class="actions well">
           <%= f.submit "Submit", :class => "btn btn-primary" %>
         </div>

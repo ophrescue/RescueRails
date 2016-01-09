@@ -1,43 +1,43 @@
 <div class="row">
-	<div class="span12">
-		<%= form_for @folder, :html=> { :multipart => true, :class => "form-horizontal"  } do |f| %>
-			<%= render 'shared/error_messages', :object => f.object %>
-			<fieldset>
-				<div class="control-group">
-					<%= f.label :name, "Folder Name", :class => 'control-label' %>
-					<div class="controls">
-						<%= f.text_field :name %>
-					</div>
-				</div>
-				<div class="control-group">
-					<%= f.label :description, :class => 'control-label'  %>
-					<div class="controls">
-						<%= f.text_field :description %>
-					</div>
-				</div>
-				<h3>New Files</h3>
-				<div class="control-group">
-				<%= f.fields_for :attachments do |pf| %>
-					<% if pf.object.new_record? %>
-						<%= pf.file_field :attachment %><br />
-					<% end %>
-				<% end %>
-				</div>
-				<h3>Existing Files</h3>
-					<%= f.fields_for :attachments do |pf| %>
-						<% unless pf.object.new_record? %>
-						<div class="thumb">
-							<%= link_to pf.object.photo.url(:original) %>
-							<%= pf.check_box :_destroy %>
-							<%= pf.label "Delete attachment" %>
-						</div>
-						<% end %>
-					<% end %>
+  <div class="span12">
+    <%= form_for @folder, :html=> { :multipart => true, :class => "form-horizontal"  } do |f| %>
+      <%= render 'shared/error_messages', :object => f.object %>
+      <fieldset>
+        <div class="control-group">
+          <%= f.label :name, "Folder Name", :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :name %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :description, :class => 'control-label'  %>
+          <div class="controls">
+            <%= f.text_field :description %>
+          </div>
+        </div>
+        <h3>New Files</h3>
+        <div class="control-group">
+        <%= f.fields_for :attachments do |pf| %>
+          <% if pf.object.new_record? %>
+            <%= pf.file_field :attachment %><br />
+          <% end %>
+        <% end %>
+        </div>
+        <h3>Existing Files</h3>
+          <%= f.fields_for :attachments do |pf| %>
+            <% unless pf.object.new_record? %>
+            <div class="thumb">
+              <%= link_to pf.object.photo.url(:original) %>
+              <%= pf.check_box :_destroy %>
+              <%= pf.label "Delete attachment" %>
+            </div>
+            <% end %>
+          <% end %>
 
-				<div class="actions well">
-					<%= f.submit "Submit", :class => "btn btn-primary" %>
-				</div>
-			</fieldset>
-		<% end %>
-	</div>
+        <div class="actions well">
+          <%= f.submit "Submit", :class => "btn btn-primary" %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
 </div>

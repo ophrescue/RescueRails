@@ -40,25 +40,14 @@
             </div>
           </div>
 
-      <% if Time.now.between?(("2015-12-09".to_date),("2016-04-11".to_date))%>
-          <div class="item">
-            <%= image_tag "fastfurriestwebbanner.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
-              <div class="carousel-caption">
-                <%= link_to "Register", "http://www.ophfastandfurriest.com/", :class => "btn btn-warning btn-large", :id => "hero-adopt" %>
-              </div>
-          </div>
-      <% end %>
-
-
-     <% if Time.now.between?(("2015-12-26".to_date),("2016-01-03".to_date)) %>
-          <div class="item">
-            <%= image_tag "webbannerhalloween.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+     <% if Time.now.between?(("2016-01-01".to_date),("2016-02-08".to_date)) %>
+         <div class="item">
+            <%= image_tag "puppybowl2016.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
             <div class="carousel-caption">
-              <%= link_to "Our Dogs", dogs_path, :class => "btn btn-primary btn-large", :id => "hero-dog" %>
-              <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
+              <%= link_to "Join the Party", "https://www.facebook.com/events/520438464784367/", :class => "btn btn-warning btn-large", :id => "hero-dog" %>
             </div>
           </div>
-        <% elsif Time.now.between?(("2016-01-04".to_date),("2016-01-31".to_date)) %>
+      <% else  %>
           <div class="item">
             <%= image_tag "webbannerjan.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
             <div class="carousel-caption">
@@ -68,6 +57,14 @@
           </div>
       <% end %>
 
+      <% if Time.now.between?(("2015-12-09".to_date),("2016-04-11".to_date))%>
+          <div class="item">
+            <%= image_tag "fastfurriestwebbanner.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+              <div class="carousel-caption">
+                <%= link_to "Register", "http://www.ophfastandfurriest.com/", :class => "btn btn-warning btn-large", :id => "hero-adopt" %>
+              </div>
+          </div>
+      <% end %>
 
         </div>
         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>

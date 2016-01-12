@@ -10,7 +10,7 @@ class AttachmentsController < ApplicationController
   def destroy
     Attachment.find(params[:id]).destroy
     flash[:success] = "Attachment Deleted"
-    redirect_to folders_path
+    handle_redirect
   end
 
   def show

@@ -19,10 +19,6 @@
           <%= link_to image_tag(photo.photo.url(:medium)), photo.photo.url(:original) %>
         <% end %>
       <% end %>
-
-      <% if @dog.youtube_video_url.present? %>
-        <%= link_to content_tag(:span, "Watch on YouTube", :class => "video"), @dog.youtube_video_url %>
-      <% end %>
     </div>
 
     <div class="fb-like" data-href="<%= request.url %>" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>

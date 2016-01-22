@@ -1,26 +1,26 @@
 a[href $='.pdf'] {
    padding-right: 18px;
-   background: transparent url(icon_pdf.gif) no-repeat center right;
+   background: transparent image-url("icon_pdf.gif") no-repeat center right;
 }
 
 a[href $='.doc'] {
    padding-right: 18px;
-   background: transparent url(icon_doc.gif) no-repeat center right;
+   background: transparent image-url("icon_doc.gif") no-repeat center right;
 }
 
 a[href $='.docx'] {
    padding-right: 18px;
-   background: transparent url(icon_doc.gif) no-repeat center right;
+   background: transparent image-url("icon_doc.gif") no-repeat center right;
 }
 
 a[href ^="mailto:"] {
    padding-right: 20px;
-   background: transparent url(icon_mail.gif) no-repeat center right;
+   background: transparent image-url("icon_mail.gif") no-repeat center right;
 }
 
 a[class ~="popup"] {
    padding-right: 18px;
-   background: transparent url(icon_popup.gif) no-repeat center right;
+   background: transparent image-url("icon_popup.gif") no-repeat center right;
 }
 
 /*a[href^='http:'] {

@@ -6,7 +6,7 @@
 label.valid {
   width: 24px;
   height: 24px;
-  background: url(assets/img/valid.png) center center no-repeat;
+  background: image-url("valid.png") center center no-repeat;
   display: inline-block;
   text-indent: -9999px;
 }
@@ -173,11 +173,11 @@ th .current {
 }
 
 th .asc {
-  background-image: url(up_arrow.gif);
+  background-image: image-url("up_arrow.gif");
 }
 
 th .desc {
-  background-image: url(down_arrow.gif);
+  background-image: image-url("down_arrow.gif");
 }
 
 .tab-content {

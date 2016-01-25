@@ -52,6 +52,7 @@
 #  mentor_id              :integer
 #  latitude               :float
 #  longitude              :float
+#  dl_locked_resources    :boolean          default(FALSE)
 #
 
 require 'rails_helper'

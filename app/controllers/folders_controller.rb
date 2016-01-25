@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: folders
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  locked      :boolean          default(FALSE)
+#
+
 class FoldersController < ApplicationController
 
   before_filter :authenticate

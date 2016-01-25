@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: adoptions
+#
+#  id            :integer          not null, primary key
+#  adopter_id    :integer
+#  dog_id        :integer
+#  relation_type :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 class AdoptionsController < ApplicationController
   before_filter :edit_my_adopters_user, only: [:update]
   before_filter :edit_all_adopters_user, only: [:update]

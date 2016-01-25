@@ -18,7 +18,11 @@ class FoldersController < ApplicationController
 
   def index
     @title = "Staff Resources"
-    @folders = Folder.all
+    if current_user.dl_locked_resources
+      @folders = Folder.order(:name)
+    else
+      @folders = Folder.where(locked: FALSE).order(:name)
+    end
     @folders.each do |a|
       a.attachments.build
     end
@@ -26,6 +30,10 @@ class FoldersController < ApplicationController
 
   def show
     @folder = Folder.find(params[:id])
+    if @folder.locked && !current_user.dl_locked_resources?
+      flash[:error] = "You do not have permission to view this folder"
+      redirect_to action: "index"
+    end
     @folder.attachments.build
     @title = @folder.name
   end
@@ -47,7 +55,7 @@ class FoldersController < ApplicationController
     @folder = Folder.find(params[:id])
     if @folder.update_attributes(folder_params)
       flash[:success] = "Folder Updated"
-      handle_redirect
+      redirect_to @folder
     else
       flash[:error] = "Upload Error"
       handle_redirect
@@ -55,7 +63,7 @@ class FoldersController < ApplicationController
   end
 
   def edit
-    @folder = Foster.find(params[:id])
+    @folder = Folder.find(params[:id])
     @folder.attachments.build
     @title = "Edit Folder"
   end
@@ -71,6 +79,7 @@ class FoldersController < ApplicationController
     def folder_params
       params.require(:folder).permit( :description,
                                       :name,
+                                      :locked,
                                       attachments_attributes:
                                       [
                                        :attachment,

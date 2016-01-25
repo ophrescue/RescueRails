@@ -157,6 +157,7 @@ class UsersController < ApplicationController
                                      :add_dogs,
                                      :ban_adopters,
                                      :dl_resources,
+                                     :dl_locked_resources,
                                      :agreement_id,
                                      :house_type,
                                      :breed_restriction,

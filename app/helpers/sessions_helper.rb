@@ -54,7 +54,7 @@ module SessionsHelper
   def can_edit_my_adopters?
     current_user.edit_my_adopters unless current_user.nil?
   end
-    
+
   def can_complete_adopters?
     current_user.complete_adopters unless current_user.nil?
   end
@@ -65,6 +65,10 @@ module SessionsHelper
 
   def can_dl_resources?
     current_user.dl_resources unless current_user.nil?
+  end
+
+  def can_dl_locked_resources?
+    current_user.dl_locked_resources unless current_user.nil?
   end
 
   def sign_out

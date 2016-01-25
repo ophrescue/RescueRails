@@ -19,6 +19,7 @@ FactoryGirl.define do
       complete_adopters true
       add_dogs true
       ban_adopters true
+      dl_locked_resources true
     end
   end
 end

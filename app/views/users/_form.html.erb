@@ -338,6 +338,10 @@
           <span><strong>Download Resources</strong> - This person can access the Staff Resources section.</span>
         </label>
         <label class="checkbox">
+          <%= f.check_box :dl_locked_resources %>
+          <span><strong>Download Restricted Resources</strong> - This person can access Restricted folders in the Staff Resources section.  Download Resources permission needed too.</span>
+        </label>
+        <label class="checkbox">
           <%= f.check_box :locked %>
           <span><strong>Lock</strong> - Will disable account, preventing user from logging in.</span>
         </label>

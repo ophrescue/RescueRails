@@ -15,6 +15,19 @@
             <%= f.text_field :description %>
           </div>
         </div>
+        <div class="control-group">
+          <%= f.label :locked, "Folder Permissions", :class => "control-label" %>
+          <div class="controls">
+            <label>
+              <%= f.radio_button :locked, :true %>
+              <span><i class="fa fa-lock"></i> Restricted Folder</span>
+            </label>
+            <label>
+              <%= f.radio_button :locked, :false %>
+              <span><i class="fa fa-unlock"></i> Unrestricted Folder</span>
+            </label>
+          </div>
+        </div>
         <div class="actions well">
           <%= f.submit "Submit", :class => "btn btn-primary" %>
         </div>

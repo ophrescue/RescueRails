@@ -26,13 +26,13 @@ describe FoldersController, type: :controller do
       end
 
       it 'is able to view files in standard folders' do
-        unlocked_folder = create :folder
+        unlocked_folder = create(:folder, :unlocked)
         get :show, id: unlocked_folder
         expect(assigns(:folder)).to eq unlocked_folder
       end
 
       it 'is NOT able to view files in restricted folders' do
-        locked_folder = create(:folder, locked: TRUE)
+        locked_folder = create(:folder, :locked)
         get :show, id: locked_folder
         expect(response).to redirect_to folders_path
       end
@@ -44,13 +44,13 @@ describe FoldersController, type: :controller do
         allow(controller).to receive(:current_user) { no_access_user }
       end
       it 'is NOT able to view files in standard folders' do
-        unlocked_folder = create :folder
+        unlocked_folder = create(:folder, :unlocked)
         get :show, id: unlocked_folder
         expect(response).to redirect_to root_path
       end
 
       it 'is NOT able to view files in restricted folders' do
-        locked_folder = create(:folder, locked: TRUE)
+        locked_folder = create(:folder, :locked)
         get :show, id: locked_folder
         expect(response).to redirect_to root_path
       end

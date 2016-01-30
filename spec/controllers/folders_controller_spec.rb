@@ -67,7 +67,7 @@ describe FoldersController, type: :controller do
         expect(assigns(:folder)).to eq unlocked_folder
       end
       it 'is able to view files in restricted folders' do
-        locked_folder = create(:folder, locked: TRUE)
+        locked_folder = create(:folder, :locked)
         get :show, id: locked_folder
         expect(assigns(:folder)).to eq locked_folder
       end

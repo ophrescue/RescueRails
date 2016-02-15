@@ -69,5 +69,9 @@ module RescueRails
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    # Attempt to resolve InvalidAuthenticityToken errors in Mobile Safari and Mobile Chrome
+    # https://github.com/rails/rails/issues/21948#issuecomment-163995796
+    config.action_dispatch.default_headers.merge!('Cache-Control' => 'no-store, no-cache')
+
   end
 end

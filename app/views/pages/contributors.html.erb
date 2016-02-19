@@ -20,17 +20,34 @@
 
     <h3>Sporting Dog and Big Dog Sponsors - $1,000</h3>
 
+    <% sponsors_1000 =
+      { url: "http://www.fvcbank.com/",
+        img: "dulles-motorcars.png"
+      },
+      {
+        url: "http://www.thelubecenter.com/locations/Frederick-Rt-40-at-Fredericktowne-Mall",
+        img: "thelubecenter.png"
+      },
+      { url: "http://blueridgeholdings.com/",
+        img: "blueridgeholdings.png"
+      }
+    %>
+
+    <% sponsors_1000.each_slice(3) do |slice| %>
       <div class="row">
         <div class="span12">
           <ul class="thumbnails">
+          <% slice.each do |spon| %>
             <li class="span4">
-              <a href="http://www.dullesmotorcars.com" class="thumbnail thumbnail-no-border">
-                <%= image_tag "sponsors/dulles-motorcars.png" %>
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <%= image_tag "sponsors/"+spon[:img] %>
               </a>
             </li>
+          <% end %>
           </ul>
         </div>
       </div>
+    <% end %>
 
     <h3>Herding Dog and Medium Dog Sponsors - $500</h3>
 

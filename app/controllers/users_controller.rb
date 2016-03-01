@@ -174,6 +174,7 @@ class UsersController < ApplicationController
                                      :writes_newsletter,
                                      :is_transporter,
                                      :mentor_id,
+                                     :training_team,
                                      :lastverified
           )
       else
@@ -224,7 +225,7 @@ class UsersController < ApplicationController
       params.slice(:admin, :adoption_coordinator, :event_planner,
                    :dog_adder, :dog_editor, :photographer, :foster,
                    :newsletter, :has_dogs, :has_cats, :house_type, :has_children_under_five,
-                   :has_fence, :puppies_ok, :has_parvo_house, :transporter
+                   :has_fence, :puppies_ok, :has_parvo_house, :transporter, :training_team
                   )
     end
 

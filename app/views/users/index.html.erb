@@ -48,6 +48,9 @@
   <li class="<%= 'active' if params[:transporter] %>">
     <%= link_to "Transporter", users_path(:transporter => true) %>
   </li>
+  <li class="<%= 'active' if params[:training_team] %>">
+    <%= link_to "Training", users_path(:training_team => true) %>
+  </li>
 </ul>
 
 

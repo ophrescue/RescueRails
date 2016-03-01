@@ -99,6 +99,26 @@ describe UsersController, type: :controller do
         get :index, location: '21224'
       end
     end
+
+    context 'tab filter' do
+      before :each do
+        allow(controller).to receive(:current_user) { admin }
+      end
+
+      it "returns the training team members" do
+        smith = create(:user, name: 'Jane Smithbot', training_team: TRUE)
+        jones = create(:user, name: 'Frank Jones')
+        get :index, training_team: TRUE
+        expect(assigns(:users)).to match_array([smith])
+      end
+
+      it "returns the newsletter team members" do
+        smith = create(:user, name: 'Jane Smithbot', writes_newsletter: TRUE)
+        jones = create(:user, name: 'Frank Jones')
+        get :index, newsletter: TRUE
+        expect(assigns(:users)).to match_array([smith])
+      end
+    end
   end
 
   describe 'POST create' do

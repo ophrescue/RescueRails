@@ -72,6 +72,12 @@
     <li>Cannot Download Staff Resources</li>
   <% end %>
 
+  <% if @user.training_team? %>
+    <li>Is a member of the training team</li>
+  <%else%>
+    <li>Is not a member of the training team</li>
+  <% end %>
+
   <% if @user.dl_locked_resources? %>
     <li>Can Download Restricted Staff Resources</li>
   <% else %>

@@ -327,11 +327,15 @@
         </label>
         <label class="checkbox">
           <%= f.check_box :is_photographer %>
-          <span><strong>Photographer</strong> - Gives no permissions, justs for staff filtering.</span>
+          <span><strong>Photographer</strong> - Adds user to the Photographer Tab</span>
         </label>
         <label class="checkbox">
           <%= f.check_box :writes_newsletter %>
-          <span><strong>Newsletter</strong> - Gives no permissions, justs for staff filtering.</span>
+          <span><strong>Newsletter Team</strong> - Adds user to the Newsletter Team Tab</span>
+        </label>
+        <label class="checkbox">
+          <%= f.check_box :training_team %>
+          <span><strong>Training Team</strong> - Adds user to the Training Team Tab</span>
         </label>
         <label class="checkbox">
           <%= f.check_box :dl_resources %>

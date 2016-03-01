@@ -53,6 +53,7 @@
 #  latitude               :float
 #  longitude              :float
 #  dl_locked_resources    :boolean          default(FALSE)
+#  training_team          :boolean          default(FALSE)
 #
 
 require 'digest'
@@ -117,6 +118,7 @@ class User < ActiveRecord::Base
   scope :photographer,            -> (status = true) { where(is_photographer: status) }
   scope :newsletter,              -> (status = true) { where(writes_newsletter: status) }
   scope :transporter,             -> (status = true) { where(is_transporter: status) }
+  scope :training_team,           -> (status = true) { where(training_team: status)}
 
   scope :house_type,              -> (type) { where(house_type: type) }
   scope :has_dogs,                -> (status = true) { where(has_own_dogs: status) }

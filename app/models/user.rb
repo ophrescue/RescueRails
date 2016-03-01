@@ -53,6 +53,7 @@
 #  latitude               :float
 #  longitude              :float
 #  dl_locked_resources    :boolean          default(FALSE)
+#  training_team          :boolean          default(FALSE)
 #
 
 require 'digest'

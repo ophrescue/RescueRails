@@ -10,10 +10,13 @@
           <span class="label label-warning">First Time Dog Owner</span>
         <% end %>
 
-        <% if @adopter.adoption_app.max_hrs_alone > 5 %>
-          <span class="label label-warning"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span>
+        <% case %>
+        <% when @adopter.adoption_app.max_hrs_alone.nil? %>
+           <span class="label label-warning">?? hrs alone</span>
+        <% when @adopter.adoption_app.max_hrs_alone > 5 %>
+            <span class="label label-warning"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span>
         <% else %>
-          <span class="label label-success"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span>
+            <span class="label label-success"><%= @adopter.adoption_app.max_hrs_alone %> hrs alone</span>
         <% end %>
 
         <% if @adopter.adoption_app.current_pets_fixed == false %>

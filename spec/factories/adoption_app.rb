@@ -24,5 +24,32 @@ FactoryGirl.define do
     vet_info 'Dr. Spaceman Baltimore MD'
     max_hrs_alone 3
     is_ofage true
+
+    factory :adoption_app_null do
+      spouse_name ''
+      other_household_names nil
+      ready_to_adopt_dt nil
+      house_type 'own'
+      dog_exercise nil
+      dog_stay_when_away nil
+      dog_vacation nil
+      current_pets nil
+      why_not_fixed nil
+      current_pets_uptodate nil
+      current_pets_uptodate_why nil
+      landlord_name nil
+      landlord_phone nil
+      rent_dog_restrictions nil
+      surrender_pet_causes nil
+      training_explain nil
+      surrendered_pets nil
+      how_did_you_hear ''
+      pets_branch nil
+      current_pets_fixed true
+      rent_costs nil
+      vet_info nil
+      max_hrs_alone nil
+      is_ofage true
+    end
   end
 end

@@ -14,5 +14,11 @@ FactoryGirl.define do
         create(:adoption_app, adopter: adopter)
       end
     end
+
+    factory :adopter_with_null_app do
+      after(:create) do |adopter|
+        create(:adoption_app_null, adopter: adopter)
+      end
+    end
   end
 end

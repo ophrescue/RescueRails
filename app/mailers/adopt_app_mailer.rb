@@ -1,5 +1,5 @@
 class AdoptAppMailer < ActionMailer::Base
-  default from: "Operation Paws for Homes <info@ophrescue.org>" ,
+  default from: "Operation Paws for Homes <adopt@ophrescue.org>" ,
       return_path: 'adopt@ophrescue.org',
       reply_to: 'adopt@ophrescue.org'
 

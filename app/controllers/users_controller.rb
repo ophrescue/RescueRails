@@ -175,7 +175,15 @@ class UsersController < ApplicationController
                                      :is_transporter,
                                      :mentor_id,
                                      :training_team,
-                                     :lastverified
+                                     :lastverified,
+                                      agreement_attributes:
+                                      [
+                                        :attachment,
+                                        :description,
+                                        :updated_by_user_id,
+                                        :_destroy,
+                                        :id
+                                      ]
           )
       else
         params.require(:user).permit( :name,
@@ -203,7 +211,16 @@ class UsersController < ApplicationController
                                       :can_foster_puppies,
                                       :parvo_house,
                                       :is_transporter,
-                                      :mentor_id)
+                                      :mentor_id,
+                                      agreement_attributes:
+                                      [
+                                        :attachment,
+                                        :description,
+                                        :updated_by_user_id,
+                                        :_destroy,
+                                        :id
+                                      ]
+                                    )
       end
     end
 

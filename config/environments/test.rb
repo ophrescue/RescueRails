@@ -51,4 +51,9 @@ Rails.application.configure do
 
   # Log error messages when you accidentally call methods on nil
   config.whiny_nils = true
+
+  # Custom path for test files that get uploaded via Paperclip
+  # Files are deleted after run in spec_helper.rb
+  Paperclip::Attachment.default_options[:path] = "#{Rails.root}/spec/test_files/:class/:id_partition/:style.:extension"
+
 end

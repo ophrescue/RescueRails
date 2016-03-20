@@ -51,4 +51,9 @@ Rails.application.configure do
 
   # Log error messages when you accidentally call methods on nil
   config.whiny_nils = true
+
+  # Paperclip Configuration
+  config.paperclip_defaults = {
+    storage: :file
+  }
 end

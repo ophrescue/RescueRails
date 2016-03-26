@@ -100,7 +100,22 @@
             <% if af.object.new_record? %>
               <%= af.file_field :attachment %>
             <% else %>
-                <span>Agreement on File, overwrite?</span> <%= af.file_field :attachment %>
+                <span>Foster Agreement on File, overwrite?</span> <%= af.file_field :attachment %>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if is_admin? %>
+        <div class="control-group">
+          <%= f.label :confidentiality_agreement, 'Confidentiality Agreement', :class => 'control-label' %>
+          <div class="controls">
+          <%= f.fields_for :confidentiality_agreement do |af| %>
+            <% if af.object.new_record? %>
+              <%= af.file_field :attachment %>
+            <% else %>
+                <span>Confidentiality Agreement on File, overwrite?</span> <%= af.file_field :attachment %>
             <% end %>
           <% end %>
           </div>

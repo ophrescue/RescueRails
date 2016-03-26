@@ -115,6 +115,15 @@
             <p><span class="label label-important">No Foster Agreement on File</span></p>
           <% end %>
 
+          <% if @user.confidentiality_agreement %>
+             <p>
+              <span class="label label-success">Confidentiality Agreement on File</span>
+              <%= link_to @user.confidentiality_agreement.attachment_file_name, @user.confidentiality_agreement.download_url %>
+             </p>
+          <% else %>
+            <p><span class="label label-important">No Confidentiality Agreement on File</span></p>
+          <% end %>
+
           <% if @user.house_type == "own" %>
             <p><span class="label label-success">Owns Home</span></p>
           <% elsif @user.house_type == "rent" %>

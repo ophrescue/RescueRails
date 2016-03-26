@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160301021842) do
+ActiveRecord::Schema.define(version: 20160326193338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -291,40 +291,40 @@ ActiveRecord::Schema.define(version: 20160301021842) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                   limit: 255
-    t.string   "email",                  limit: 255
-    t.datetime "created_at",                         precision: 6
-    t.datetime "updated_at",                         precision: 6
-    t.string   "encrypted_password",     limit: 255
-    t.string   "salt",                   limit: 255
-    t.boolean  "admin",                                            default: false
-    t.string   "password_reset_token",   limit: 255
-    t.datetime "password_reset_sent_at",             precision: 6
-    t.boolean  "is_foster",                                        default: false
-    t.string   "phone",                  limit: 255
-    t.string   "address1",               limit: 255
-    t.string   "address2",               limit: 255
-    t.string   "city",                   limit: 255
-    t.string   "state",                  limit: 255
-    t.string   "zip",                    limit: 255
-    t.string   "duties",                 limit: 255
-    t.boolean  "edit_dogs",                                        default: false
+    t.string   "name",                         limit: 255
+    t.string   "email",                        limit: 255
+    t.datetime "created_at",                               precision: 6
+    t.datetime "updated_at",                               precision: 6
+    t.string   "encrypted_password",           limit: 255
+    t.string   "salt",                         limit: 255
+    t.boolean  "admin",                                                  default: false
+    t.string   "password_reset_token",         limit: 255
+    t.datetime "password_reset_sent_at",                   precision: 6
+    t.boolean  "is_foster",                                              default: false
+    t.string   "phone",                        limit: 255
+    t.string   "address1",                     limit: 255
+    t.string   "address2",                     limit: 255
+    t.string   "city",                         limit: 255
+    t.string   "state",                        limit: 255
+    t.string   "zip",                          limit: 255
+    t.string   "duties",                       limit: 255
+    t.boolean  "edit_dogs",                                              default: false
     t.text     "share_info"
-    t.boolean  "edit_my_adopters",                                 default: false
-    t.boolean  "edit_all_adopters",                                default: false
-    t.boolean  "locked",                                           default: false
-    t.boolean  "edit_events",                                      default: false
-    t.string   "other_phone",            limit: 255
+    t.boolean  "edit_my_adopters",                                       default: false
+    t.boolean  "edit_all_adopters",                                      default: false
+    t.boolean  "locked",                                                 default: false
+    t.boolean  "edit_events",                                            default: false
+    t.string   "other_phone",                  limit: 255
     t.datetime "lastlogin"
     t.datetime "lastverified"
-    t.boolean  "available_to_foster",                              default: false
+    t.boolean  "available_to_foster",                                    default: false
     t.text     "foster_dog_types"
-    t.boolean  "complete_adopters",                                default: false
-    t.boolean  "add_dogs",                                         default: false
-    t.boolean  "ban_adopters",                                     default: false
-    t.boolean  "dl_resources",                                     default: true
+    t.boolean  "complete_adopters",                                      default: false
+    t.boolean  "add_dogs",                                               default: false
+    t.boolean  "ban_adopters",                                           default: false
+    t.boolean  "dl_resources",                                           default: true
     t.integer  "agreement_id"
-    t.string   "house_type",             limit: 40
+    t.string   "house_type",                   limit: 40
     t.boolean  "breed_restriction"
     t.boolean  "weight_restriction"
     t.boolean  "has_own_dogs"
@@ -334,14 +334,15 @@ ActiveRecord::Schema.define(version: 20160301021842) do
     t.boolean  "can_foster_puppies"
     t.boolean  "parvo_house"
     t.text     "admin_comment"
-    t.boolean  "is_photographer",                                  default: false
-    t.boolean  "writes_newsletter",                                default: false
-    t.boolean  "is_transporter",                                   default: false
+    t.boolean  "is_photographer",                                        default: false
+    t.boolean  "writes_newsletter",                                      default: false
+    t.boolean  "is_transporter",                                         default: false
     t.integer  "mentor_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.boolean  "dl_locked_resources",                              default: false
-    t.boolean  "training_team",                                    default: false
+    t.boolean  "dl_locked_resources",                                    default: false
+    t.boolean  "training_team",                                          default: false
+    t.integer  "confidentiality_agreement_id"
   end
 
   add_index "users", ["agreement_id"], name: "index_users_on_agreement_id", using: :btree

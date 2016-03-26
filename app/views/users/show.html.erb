@@ -108,11 +108,11 @@
 
           <% if @user.agreement %>
              <p>
-              <span class="label label-success">Agreement on File</span>
+              <span class="label label-success">Foster Agreement on File</span>
               <%= link_to @user.agreement.attachment_file_name, @user.agreement.download_url %>
              </p>
           <% else %>
-            <p><span class="label label-important">No Agreement on File</span></p>
+            <p><span class="label label-important">No Foster Agreement on File</span></p>
           <% end %>
 
           <% if @user.house_type == "own" %>

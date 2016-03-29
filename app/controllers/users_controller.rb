@@ -236,6 +236,7 @@ class UsersController < ApplicationController
 
     def init_fields
       @user.build_agreement unless @user.agreement
+      @user.build_confidentiality_agreement unless @user.confidentiality_agreement
       @foster_users = User.where(locked: false).order("name")
     end
 

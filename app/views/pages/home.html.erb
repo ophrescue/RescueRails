@@ -39,13 +39,15 @@
               <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
             </div>
           </div>
+      <% if Time.now.between?(("2015-12-09".to_date),("2016-04-21".to_date))%>
           <div class="item">
-            <%= image_tag "webbannerjan.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
-            <div class="carousel-caption">
-              <%= link_to "Our Dogs", dogs_path, :class => "btn btn-primary btn-large", :id => "hero-dog" %>
-              <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
-            </div>
+            <%= image_tag "spring-action-2016.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+              <div class="carousel-caption">
+                <%= link_to "Donate", "http://bit.ly/oph2016s2a", :class => "btn btn-primary btn-large", :id => "hero-dog" %>
+                <%= link_to "Learn More", "https://www.facebook.com/events/1667302643528078/", :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
+              </div>
           </div>
+      <% end %>
       <% if Time.now.between?(("2015-12-09".to_date),("2016-04-11".to_date))%>
           <div class="item">
             <%= image_tag "fastfurriestwebbanner.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>

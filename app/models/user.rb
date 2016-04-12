@@ -99,10 +99,12 @@ class User < ActiveRecord::Base
   has_many :coordinated_dogs, -> { where(status: ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'coordinator_id'
   has_many :comments
 
-  has_one :agreement, as: :attachable, class_name: 'Attachment' ,dependent: :destroy
+  has_one :agreement, -> {where(agreement_type: Attachment::AGREEMENT_TYPE_FOSTER)},
+          as: :attachable, class_name: 'Attachment', dependent: :destroy
   accepts_nested_attributes_for :agreement
 
-  has_one :confidentiality_agreement, as: :attachable, class_name: 'Attachment', dependent: :destroy
+  has_one :confidentiality_agreement, -> {where(agreement_type: Attachment::AGREEMENT_TYPE_CONFIDENTIALITY)} ,
+          as: :attachable, class_name: 'Attachment', dependent: :destroy
   accepts_nested_attributes_for :confidentiality_agreement
 
   has_many :assignments, class_name: 'Adopter', foreign_key: 'assigned_to_user_id'

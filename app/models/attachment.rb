@@ -13,6 +13,7 @@
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  description             :text
+#  agreement_type          :string
 #
 
 class Attachment < ActiveRecord::Base
@@ -35,6 +36,9 @@ class Attachment < ActiveRecord::Base
             'application/mspowerpoint','application/vnd.ms-powerpoint','application/vnd.openxmlformats-officedocument.presentationml.presentation',
             'text/plain'],
    message: 'Images, Docs, PDF, Excel and Plain Text Only.'
+
+  AGREEMENT_TYPE_FOSTER = 'foster'
+  AGREEMENT_TYPE_CONFIDENTIALITY = 'confidentiality'
 
   def download_url(style_name = :original)
     s3 = AWS::S3.new

@@ -97,11 +97,11 @@
           <%= f.label :agreement, 'Foster Agreement', :class => 'control-label' %>
           <div class="controls">
           <%= f.fields_for :agreement do |af| %>
-            <% if af.object.new_record? %>
+            <% if af.object.persisted? %>
               <%= af.file_field :attachment %>
-            <% else %>
-                <span>Foster Agreement on File, overwrite?</span> <%= af.file_field :attachment %>
+                <span>Foster Agreement on File, overwrite?</span>
             <% end %>
+            <%= af.file_field :attachment %>
           <% end %>
           </div>
         </div>
@@ -112,11 +112,10 @@
           <%= f.label :confidentiality_agreement, 'Confidentiality Agreement', :class => 'control-label' %>
           <div class="controls">
           <%= f.fields_for :confidentiality_agreement do |af| %>
-            <% if af.object.new_record? %>
-              <%= af.file_field :attachment %>
-            <% else %>
-                <span>Confidentiality Agreement on File, overwrite?</span> <%= af.file_field :attachment %>
+            <% if af.object.persisted? %>
+              <span>Confidentiality Agreement on File, overwrite?</span>
             <% end %>
+            <%= af.file_field :attachment %>
           <% end %>
           </div>
         </div>

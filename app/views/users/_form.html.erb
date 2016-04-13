@@ -98,7 +98,6 @@
           <div class="controls">
           <%= f.fields_for :agreement do |af| %>
             <% if af.object.persisted? %>
-              <%= af.file_field :attachment %>
                 <span>Foster Agreement on File, overwrite?</span>
             <% end %>
             <%= af.file_field :attachment %>

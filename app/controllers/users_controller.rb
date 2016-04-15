@@ -2,58 +2,59 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  name                   :string(255)
-#  email                  :string(255)
-#  created_at             :datetime
-#  updated_at             :datetime
-#  encrypted_password     :string(255)
-#  salt                   :string(255)
-#  admin                  :boolean          default(FALSE)
-#  password_reset_token   :string(255)
-#  password_reset_sent_at :datetime
-#  is_foster              :boolean          default(FALSE)
-#  phone                  :string(255)
-#  address1               :string(255)
-#  address2               :string(255)
-#  city                   :string(255)
-#  state                  :string(255)
-#  zip                    :string(255)
-#  duties                 :string(255)
-#  edit_dogs              :boolean          default(FALSE)
-#  share_info             :text
-#  edit_my_adopters       :boolean          default(FALSE)
-#  edit_all_adopters      :boolean          default(FALSE)
-#  locked                 :boolean          default(FALSE)
-#  edit_events            :boolean          default(FALSE)
-#  other_phone            :string(255)
-#  lastlogin              :datetime
-#  lastverified           :datetime
-#  available_to_foster    :boolean          default(FALSE)
-#  foster_dog_types       :text
-#  complete_adopters      :boolean          default(FALSE)
-#  add_dogs               :boolean          default(FALSE)
-#  ban_adopters           :boolean          default(FALSE)
-#  dl_resources           :boolean          default(TRUE)
-#  agreement_id           :integer
-#  house_type             :string(40)
-#  breed_restriction      :boolean
-#  weight_restriction     :boolean
-#  has_own_dogs           :boolean
-#  has_own_cats           :boolean
-#  children_under_five    :boolean
-#  has_fenced_yard        :boolean
-#  can_foster_puppies     :boolean
-#  parvo_house            :boolean
-#  admin_comment          :text
-#  is_photographer        :boolean          default(FALSE)
-#  writes_newsletter      :boolean          default(FALSE)
-#  is_transporter         :boolean          default(FALSE)
-#  mentor_id              :integer
-#  latitude               :float
-#  longitude              :float
-#  dl_locked_resources    :boolean          default(FALSE)
-#  training_team          :boolean          default(FALSE)
+#  id                           :integer          not null, primary key
+#  name                         :string(255)
+#  email                        :string(255)
+#  created_at                   :datetime
+#  updated_at                   :datetime
+#  encrypted_password           :string(255)
+#  salt                         :string(255)
+#  admin                        :boolean          default(FALSE)
+#  password_reset_token         :string(255)
+#  password_reset_sent_at       :datetime
+#  is_foster                    :boolean          default(FALSE)
+#  phone                        :string(255)
+#  address1                     :string(255)
+#  address2                     :string(255)
+#  city                         :string(255)
+#  state                        :string(255)
+#  zip                          :string(255)
+#  duties                       :string(255)
+#  edit_dogs                    :boolean          default(FALSE)
+#  share_info                   :text
+#  edit_my_adopters             :boolean          default(FALSE)
+#  edit_all_adopters            :boolean          default(FALSE)
+#  locked                       :boolean          default(FALSE)
+#  edit_events                  :boolean          default(FALSE)
+#  other_phone                  :string(255)
+#  lastlogin                    :datetime
+#  lastverified                 :datetime
+#  available_to_foster          :boolean          default(FALSE)
+#  foster_dog_types             :text
+#  complete_adopters            :boolean          default(FALSE)
+#  add_dogs                     :boolean          default(FALSE)
+#  ban_adopters                 :boolean          default(FALSE)
+#  dl_resources                 :boolean          default(TRUE)
+#  agreement_id                 :integer
+#  house_type                   :string(40)
+#  breed_restriction            :boolean
+#  weight_restriction           :boolean
+#  has_own_dogs                 :boolean
+#  has_own_cats                 :boolean
+#  children_under_five          :boolean
+#  has_fenced_yard              :boolean
+#  can_foster_puppies           :boolean
+#  parvo_house                  :boolean
+#  admin_comment                :text
+#  is_photographer              :boolean          default(FALSE)
+#  writes_newsletter            :boolean          default(FALSE)
+#  is_transporter               :boolean          default(FALSE)
+#  mentor_id                    :integer
+#  latitude                     :float
+#  longitude                    :float
+#  dl_locked_resources          :boolean          default(FALSE)
+#  training_team                :boolean          default(FALSE)
+#  confidentiality_agreement_id :integer
 #
 
 class UsersController < ApplicationController
@@ -159,7 +160,6 @@ class UsersController < ApplicationController
                                      :ban_adopters,
                                      :dl_resources,
                                      :dl_locked_resources,
-                                     :agreement_id,
                                      :house_type,
                                      :breed_restriction,
                                      :weight_restriction,
@@ -176,7 +176,17 @@ class UsersController < ApplicationController
                                      :mentor_id,
                                      :training_team,
                                      :lastverified,
+                                     :agreement_id,
+                                     :confidentiality_agreement_id,
                                       agreement_attributes:
+                                      [
+                                        :attachment,
+                                        :description,
+                                        :updated_by_user_id,
+                                        :_destroy,
+                                        :id
+                                      ],
+                                      confidentiality_agreement_attributes:
                                       [
                                         :attachment,
                                         :description,
@@ -226,6 +236,7 @@ class UsersController < ApplicationController
 
     def init_fields
       @user.build_agreement unless @user.agreement
+      @user.build_confidentiality_agreement unless @user.confidentiality_agreement
       @foster_users = User.where(locked: false).order("name")
     end
 

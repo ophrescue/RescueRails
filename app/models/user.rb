@@ -2,58 +2,59 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  name                   :string(255)
-#  email                  :string(255)
-#  created_at             :datetime
-#  updated_at             :datetime
-#  encrypted_password     :string(255)
-#  salt                   :string(255)
-#  admin                  :boolean          default(FALSE)
-#  password_reset_token   :string(255)
-#  password_reset_sent_at :datetime
-#  is_foster              :boolean          default(FALSE)
-#  phone                  :string(255)
-#  address1               :string(255)
-#  address2               :string(255)
-#  city                   :string(255)
-#  state                  :string(255)
-#  zip                    :string(255)
-#  duties                 :string(255)
-#  edit_dogs              :boolean          default(FALSE)
-#  share_info             :text
-#  edit_my_adopters       :boolean          default(FALSE)
-#  edit_all_adopters      :boolean          default(FALSE)
-#  locked                 :boolean          default(FALSE)
-#  edit_events            :boolean          default(FALSE)
-#  other_phone            :string(255)
-#  lastlogin              :datetime
-#  lastverified           :datetime
-#  available_to_foster    :boolean          default(FALSE)
-#  foster_dog_types       :text
-#  complete_adopters      :boolean          default(FALSE)
-#  add_dogs               :boolean          default(FALSE)
-#  ban_adopters           :boolean          default(FALSE)
-#  dl_resources           :boolean          default(TRUE)
-#  agreement_id           :integer
-#  house_type             :string(40)
-#  breed_restriction      :boolean
-#  weight_restriction     :boolean
-#  has_own_dogs           :boolean
-#  has_own_cats           :boolean
-#  children_under_five    :boolean
-#  has_fenced_yard        :boolean
-#  can_foster_puppies     :boolean
-#  parvo_house            :boolean
-#  admin_comment          :text
-#  is_photographer        :boolean          default(FALSE)
-#  writes_newsletter      :boolean          default(FALSE)
-#  is_transporter         :boolean          default(FALSE)
-#  mentor_id              :integer
-#  latitude               :float
-#  longitude              :float
-#  dl_locked_resources    :boolean          default(FALSE)
-#  training_team          :boolean          default(FALSE)
+#  id                           :integer          not null, primary key
+#  name                         :string(255)
+#  email                        :string(255)
+#  created_at                   :datetime
+#  updated_at                   :datetime
+#  encrypted_password           :string(255)
+#  salt                         :string(255)
+#  admin                        :boolean          default(FALSE)
+#  password_reset_token         :string(255)
+#  password_reset_sent_at       :datetime
+#  is_foster                    :boolean          default(FALSE)
+#  phone                        :string(255)
+#  address1                     :string(255)
+#  address2                     :string(255)
+#  city                         :string(255)
+#  state                        :string(255)
+#  zip                          :string(255)
+#  duties                       :string(255)
+#  edit_dogs                    :boolean          default(FALSE)
+#  share_info                   :text
+#  edit_my_adopters             :boolean          default(FALSE)
+#  edit_all_adopters            :boolean          default(FALSE)
+#  locked                       :boolean          default(FALSE)
+#  edit_events                  :boolean          default(FALSE)
+#  other_phone                  :string(255)
+#  lastlogin                    :datetime
+#  lastverified                 :datetime
+#  available_to_foster          :boolean          default(FALSE)
+#  foster_dog_types             :text
+#  complete_adopters            :boolean          default(FALSE)
+#  add_dogs                     :boolean          default(FALSE)
+#  ban_adopters                 :boolean          default(FALSE)
+#  dl_resources                 :boolean          default(TRUE)
+#  agreement_id                 :integer
+#  house_type                   :string(40)
+#  breed_restriction            :boolean
+#  weight_restriction           :boolean
+#  has_own_dogs                 :boolean
+#  has_own_cats                 :boolean
+#  children_under_five          :boolean
+#  has_fenced_yard              :boolean
+#  can_foster_puppies           :boolean
+#  parvo_house                  :boolean
+#  admin_comment                :text
+#  is_photographer              :boolean          default(FALSE)
+#  writes_newsletter            :boolean          default(FALSE)
+#  is_transporter               :boolean          default(FALSE)
+#  mentor_id                    :integer
+#  latitude                     :float
+#  longitude                    :float
+#  dl_locked_resources          :boolean          default(FALSE)
+#  training_team                :boolean          default(FALSE)
+#  confidentiality_agreement_id :integer
 #
 
 require 'digest'
@@ -97,12 +98,19 @@ class User < ActiveRecord::Base
   has_many :current_foster_dogs, -> { where(status: ['adoptable', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'foster_id'
   has_many :coordinated_dogs, -> { where(status: ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'coordinator_id'
   has_many :comments
-  has_one :agreement, as: :attachable, class_name: 'Attachment' ,dependent: :destroy
+
+  has_one :agreement, -> {where(agreement_type: Attachment::AGREEMENT_TYPE_FOSTER)},
+          as: :attachable, class_name: 'Attachment', dependent: :destroy
+  accepts_nested_attributes_for :agreement
+
+  has_one :confidentiality_agreement, -> {where(agreement_type: Attachment::AGREEMENT_TYPE_CONFIDENTIALITY)} ,
+          as: :attachable, class_name: 'Attachment', dependent: :destroy
+  accepts_nested_attributes_for :confidentiality_agreement
+
   has_many :assignments, class_name: 'Adopter', foreign_key: 'assigned_to_user_id'
   has_many :active_applications, -> { where(status: ['new', 'pend response', 'workup', 'approved']) }, class_name: 'Adopter', foreign_key: 'assigned_to_user_id'
   belongs_to :mentor, class_name: 'User', foreign_key: 'mentor_id'
   has_many :mentees, class_name: 'User', foreign_key: 'mentor_id'
-  accepts_nested_attributes_for :agreement
 
   before_save :format_cleanup
   before_create :chimp_subscribe

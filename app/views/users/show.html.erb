@@ -108,11 +108,20 @@
 
           <% if @user.agreement %>
              <p>
-              <span class="label label-success">Agreement on File</span>
-              <%= link_to @user.agreement.attachment_file_name, @user.agreement.download_url %>
+              <span class="label label-success">Foster Agreement on File</span>
+              <%= link_to @user.agreement.attachment_file_name, @user.agreement.download_url, id: "foster-agreement-dl" %>
              </p>
           <% else %>
-            <p><span class="label label-important">No Agreement on File</span></p>
+            <p><span class="label label-important">No Foster Agreement on File</span></p>
+          <% end %>
+
+          <% if @user.confidentiality_agreement %>
+             <p>
+              <span class="label label-success">Confidentiality Agreement on File</span>
+              <%= link_to @user.confidentiality_agreement.attachment_file_name, @user.confidentiality_agreement.download_url, id: "confidentiality-agreement-dl" %>
+             </p>
+          <% else %>
+            <p><span class="label label-important">No Confidentiality Agreement on File</span></p>
           <% end %>
 
           <% if @user.house_type == "own" %>

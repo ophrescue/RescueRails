@@ -3,6 +3,7 @@ class UserSubscribeJob < ActiveJob::Base
 
   def perform(name, email)
     klass = Rails.env.test? ? FakeMailChimpClient : MailChimpClient
-    klass.user_subscribe(name, email)
+    @client = klass.new
+    @client.user_subscribe(name, email)
   end
 end

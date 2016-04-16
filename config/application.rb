@@ -73,5 +73,8 @@ module RescueRails
     # https://github.com/rails/rails/issues/21948#issuecomment-163995796
     config.action_dispatch.default_headers.merge!('Cache-Control' => 'no-store, no-cache')
 
+    # Running DelayedJob as our ActiveJob Backend
+    config.active_job.queue_adapter = :delayed_job
+
   end
 end

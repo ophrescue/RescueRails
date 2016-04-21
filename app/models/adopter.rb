@@ -143,7 +143,7 @@ class Adopter < ActiveRecord::Base
       mmerge3: completed_date,
       groupings: groups
     }
-    MailChimpService.adopter_subscribe(email, is_subscribed?, merge_vars)
+    AdopterSubscribeJob.perform_later(email, is_subscribed?, merge_vars)
     self.is_subscribed = true
   end
 
@@ -158,7 +158,7 @@ class Adopter < ActiveRecord::Base
   end
 
   def chimp_unsubscribe
-    MailChimpService.adopter_unsubscribe(email)
+    AdopterUnsubscribeJob.perform_later(email)
     self.is_subscribed = 0
   end
 end

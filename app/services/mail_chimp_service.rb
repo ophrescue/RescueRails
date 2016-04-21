@@ -7,8 +7,7 @@ class MailChimpService
   end
 
   def self.user_subscribe(name, email)
-    UserSubscribeJob.perform_later(name, email)
-    #new.client.user_subscribe(name, email)
+    new.client.user_subscribe(name, email)
   end
 
   def self.user_unsubscribe(email)

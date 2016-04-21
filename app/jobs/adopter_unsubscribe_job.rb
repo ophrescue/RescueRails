@@ -1,7 +1,7 @@
 class AdopterUnsubscribeJob < ActiveJob::Base
   queue_as :default
 
-  def perform(*args)
-    # Do something later
+  def perform(email)
+    MailChimpService.adopter_unsubscribe(email)
   end
 end

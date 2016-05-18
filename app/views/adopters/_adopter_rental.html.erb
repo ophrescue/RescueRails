@@ -8,6 +8,14 @@
     <td><%= @adopter.adoption_app.landlord_phone %></td>
   </tr>
   <tr>
+    <th>Landlord's Email</th>
+    <td>
+      <% if @adopter.adoption_app.landlord_email.present? %>
+        <%= mail_to @adopter.adoption_app.landlord_email %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
     <th>Dog Restrictions at Rental</th>
     <td><%= @adopter.adoption_app.rent_dog_restrictions %></td>
   </tr>

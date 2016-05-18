@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412010043) do
+ActiveRecord::Schema.define(version: 20160518003429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20160412010043) do
     t.text     "vet_info"
     t.integer  "max_hrs_alone"
     t.boolean  "is_ofage"
+    t.string   "landlord_email"
   end
 
   add_index "adoption_apps", ["adopter_id"], name: "index_adoption_apps_on_adopter_id", using: :btree

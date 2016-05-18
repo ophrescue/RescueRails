@@ -46,6 +46,7 @@ feature 'Apply for Adoption' do
     click_button('Next')
     expect(page).to have_content("Landlord's Name")
     fill_in('adopter_adoption_app_attributes_landlord_name', with: 'Jane LandLord')
+    fill_in('adopter_adoption_app_attributes_landlord_email', with: 'jane@landlords.com')
     send_keys_inputmask('input#adopter_adoption_app_attributes_landlord_phone', '5704431234')
     fill_in('adopter_adoption_app_attributes_rent_dog_restrictions', with: 'No dogs over 50 lbs')
     fill_in('adopter_adoption_app_attributes_rent_costs', with: 'Rent Goes Up $50 a month')
@@ -149,6 +150,7 @@ feature 'Apply for Adoption' do
     click_link('Rental')
     expect(page).to have_content('Jane LandLord')
     expect(page).to have_content('(570) 443-1234')
+    expect(page).to have_content('jane@landlords.com')
     expect(page).to have_content('No dogs over 50 lbs')
     expect(page).to have_content('Rent Goes Up $50 a month')
 

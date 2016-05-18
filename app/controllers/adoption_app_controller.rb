@@ -32,6 +32,7 @@ class AdoptionAppController < ApplicationController
                                             :current_pets_uptodate_why,
                                             :landlord_name,
                                             :landlord_phone,
+                                            :landlord_email,
                                             :rent_dog_restrictions,
                                             :surrender_pet_causes,
                                             :training_explain,

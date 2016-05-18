@@ -12,6 +12,12 @@
       </div>
     </div>
     <div class="control-group">
+      <%= af.label :landlord_email, "Landlord's Email", :class => "control-label" %>
+      <div class="controls">
+        <%= af.text_field :landlord_email %>
+      </div>
+    </div>
+    <div class="control-group">
       <%= af.label :rent_dog_restrictions, "What are the dog weight and breed restrictions?", :class => "control-label" %>
       <div class="controls">
       <%= af.text_area :rent_dog_restrictions, :class => "required input-xxlarge", :rows => "3" %>

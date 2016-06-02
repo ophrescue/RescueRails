@@ -50,7 +50,7 @@ gem 'coffee-rails'
 gem 'uglifier'
 
 gem 'chosen-rails', '~> 1.4.3'
-gem 'jquery-rails', '~> 2.0.3'
+gem 'jquery-rails', '~> 3.1.3'
 gem 'jquery-ui-rails', '~> 2.0.2'
 
 gem 'newrelic_rpm'

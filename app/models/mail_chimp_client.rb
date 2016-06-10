@@ -2,7 +2,7 @@ class MailChimpClient
   attr_reader :gibbon
 
   def initialize
-    @gibbon = Gibbon::API.new
+    @gibbon = Gibbon::Request.new
     @gibbon.timeout = 30
   end
 

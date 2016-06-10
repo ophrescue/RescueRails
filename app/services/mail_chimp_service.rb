@@ -14,8 +14,8 @@ class MailChimpService
     new.client.user_unsubscribe(email)
   end
 
-  def self.adopter_subscribe(email, is_subscribed, merge_vars)
-    new.client.adopter_subscribe(email, is_subscribed, merge_vars)
+  def self.adopter_subscribe(email, merge_vars)
+    new.client.adopter_subscribe(email, merge_vars)
   end
 
   def self.adopter_unsubscribe(email)

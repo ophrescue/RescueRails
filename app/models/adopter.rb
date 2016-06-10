@@ -143,7 +143,7 @@ class Adopter < ActiveRecord::Base
       mmerge3: completed_date,
       groupings: groups
     }
-    AdopterSubscribeJob.perform_later(email, is_subscribed?, merge_vars)
+    AdopterSubscribeJob.perform_later(email, merge_vars)
     self.is_subscribed = true
   end
 

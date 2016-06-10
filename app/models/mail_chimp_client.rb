@@ -6,63 +6,47 @@ class MailChimpClient
     @gibbon.timeout = 30
   end
 
+  def subscribe(list_id, email, merge_vars)
+    gibbon.lists(list_id).members(hashed(email)).upsert(
+      body: {
+        email_address: email,
+        status: 'subscribed',
+        merge_fields: merge_vars
+      }
+    )
+  end
+
+  def unsubscribe(list_id, email)
+    gibbon.throws_exceptions = false
+    gibbon.lists(list_id).members(hashed(email)).delete
+    gibbon.throws_exceptions = true
+  end
+
   def user_subscribe(name, email)
     merge_vars = {
       'FNAME' => name
     }
 
-    gibbon.lists.subscribe(
-      id: user_list_id,
-      email: { email: email },
-      merge_vars: merge_vars,
-      double_optin: true,
-      send_welcome: false
-    )
+    subscribe(USER_LIST_ID, email, merge_vars)
   end
 
   def user_unsubscribe(email)
-    gibbon.throws_exceptions = false
-
-    gibbon.lists.unsubscribe(
-      id: user_list_id,
-      email: { email: email },
-      delete_member: true,
-      send_goodbye: false,
-      send_notify: false
-    )
+    unsubscribe(USER_LIST_ID, email)
   end
 
-  def adopter_subscribe(email, is_subscribed, merge_vars)
-    list_data = {
-      id: adopter_list_id,
-      email: { email: email },
-      merge_vars: merge_vars,
-      double_optin: true,
-      send_welcome: false
-    }
-
-    if is_subscribed
-      gibbon.lists.update_member(list_data)
-    else
-      gibbon.lists.subscribe(list_data)
-    end
+  def adopter_subscribe(email, merge_vars)
+    subscribe(ADOPTER_LIST_ID, email, merge_vars)
   end
 
   def adopter_unsubscribe(email)
-    gibbon.throws_exceptions = false
-
-    gibbon.lists.unsubscribe(
-      id: adopter_list_id,
-      email: { email: email },
-      delete_member: true,
-      send_goodbye: false,
-      send_notify: false
-    )
-
-    gibbon.throws_exceptions = true
+    unsubscribe(ADOPTER_LIST_ID, email)
   end
 
   private
+
+  def hashed(email)
+    Digest::MD5.hexdigest(email.downcase)
+  end
 
   def config(key)
     Rails.application.config_for(:mailchimp)

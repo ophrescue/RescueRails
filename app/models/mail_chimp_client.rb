@@ -10,7 +10,7 @@ class MailChimpClient
     gibbon.lists(list_id).members(hashed(email)).upsert(
       body: {
         email_address: email,
-        status: 'subscribed',
+        status: 'pending',
         merge_fields: merge_vars
       }
     )

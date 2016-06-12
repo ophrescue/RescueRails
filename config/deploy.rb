@@ -1,6 +1,6 @@
 # config valid only for Capistrano 3.1
 # Source: http://www.talkingquickly.co.uk/2014/01/deploying-rails-apps-to-a-vps-with-capistrano-v3/
-lock '3.4.0'
+lock '3.4.1'
 
 set :application, 'RescueRails'
 set :deploy_user, 'deploy'

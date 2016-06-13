@@ -17,9 +17,7 @@ class MailChimpClient
   end
 
   def unsubscribe(list_id, email)
-    gibbon.throws_exceptions = false
-    gibbon.lists(list_id).members(hashed(email)).delete
-    gibbon.throws_exceptions = true
+    gibbon.lists(list_id).members(hashed(email)).update(body: { status: "unsubscribed" })
   end
 
   def user_subscribe(name, email)

@@ -32,16 +32,6 @@
     <div class="span12">
       <div id="ophCarousel" class="carousel slide">
         <div class="carousel-inner">
-
-        <% if Time.now.between?(("2016-04-01".to_date),("2016-05-22".to_date))%>
-          <div class="item active">
-            <%= image_tag "gibbs-banner.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
-            <div class="carousel-caption">
-              <%= link_to "Our Dogs", dogs_path, :class => "btn btn-primary btn-large", :id => "hero-dog" %>
-              <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
-            </div>
-          </div>
-        <% else %>
           <div class="item active">
             <%= image_tag "hero_bg4.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
             <div class="carousel-caption">
@@ -49,22 +39,13 @@
               <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
             </div>
           </div>
-      <% end %>
 
-      <% if Time.now.between?(("2016-05-01".to_date),("2016-05-22".to_date))%>
+      <% if Time.now.between?(("2016-06-01".to_date),("2016-09-25".to_date))%>
           <div class="item">
-            <%= image_tag "pins-4-pups-2016.jpg", alt: "Pins4Pups May 21st" %>
+            <%= image_tag "bww-2016.jpg", alt: "Bark Wag Wine September 24, 2016" %>
               <div class="carousel-caption">
-                <%= link_to "Learn More", "https://www.facebook.com/events/1714875105455438/", :class => "btn btn-primary btn-large" %>
-              </div>
-          </div>
-      <% end %>
-
-      <% if Time.now.between?(("2016-05-01".to_date),("2016-05-30".to_date))%>
-          <div class="item">
-            <%= image_tag "bark-in-the-park-2016.jpg", alt: "Bark In the Park May 29th" %>
-              <div class="carousel-caption">
-                <%= link_to "Buy Tickets", "http://bit.ly/1U8A8Qx", :class => "btn btn-primary btn-large" %>
+                <%= link_to "Tickets", "http://www.barkwagwine.com/", :class => "btn btn-primary btn-large" %>
+                <%= link_to "Sponsors", "http://www.barkwagwine.com/sponsors", :class => "btn btn-primary btn-large" %>
               </div>
           </div>
       <% end %>

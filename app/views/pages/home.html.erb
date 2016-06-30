@@ -32,6 +32,7 @@
     <div class="span12">
       <div id="ophCarousel" class="carousel slide">
         <div class="carousel-inner">
+
           <div class="item active">
             <%= image_tag "hero_bg4.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
             <div class="carousel-caption">
@@ -39,6 +40,16 @@
               <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
             </div>
           </div>
+
+      <% if Time.now.between?(("2016-06-01".to_date),("2016-07-07".to_date))%>
+          <div class="item">
+            <%= image_tag "playball-07-2016.gif", alt: "Bowie Baysox and Harrisburg Senators Fundraisers" %>
+              <div class="carousel-caption">
+                <%= link_to "Baysox Tickets", "http://www.milb.com/index.jsp?sid=t418", :class => "btn btn-primary btn-large" %>
+                <%= link_to "Senators Tickets", "http://bit.ly/harrisburgsenatorswnw", :class => "btn btn-primary btn-large" %>
+              </div>
+          </div>
+      <% end %>
 
       <% if Time.now.between?(("2016-06-01".to_date),("2016-09-25".to_date))%>
           <div class="item">

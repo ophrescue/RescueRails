@@ -126,6 +126,7 @@ class Adopter < ActiveRecord::Base
 
   def chimp_subscribe
     if (status == 'adopted') || (status == 'completed')
+      #TODO Need to rework to use the Interests stuff as per Gibbon website
       groups = [{ name: 'OPH Target Segments', groups: ['Adopted from OPH'] }]
     else
       groups = [{ name: 'OPH Target Segments', groups: ['Active Application'] }]
@@ -141,7 +142,7 @@ class Adopter < ActiveRecord::Base
       fname: name,
       mmerge2: status,
       mmerge3: completed_date,
-      groupings: groups
+      #groupings: groups
     }
     AdopterSubscribeJob.perform_later(email, merge_vars)
     self.is_subscribed = true

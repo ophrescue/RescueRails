@@ -1,6 +1,14 @@
 class MailChimpClient
   attr_reader :gibbon
 
+#TODO These should probably get moved to ENV Variables?
+  USER_LIST_ID = 'aa86c27ddd'.freeze
+  ADOPTER_LIST_ID = '5e50e2be93'.freeze
+
+  INTEREST_SUPPORTER = 'f64cb9ee99'.freeze
+  INTEREST_ACTIVE_APPLICATION = 'f188dcc7d6'.freeze
+  INTEREST_ADOPTED_FROM_OPH = '38e640c912'.freeze
+
   def initialize
     @gibbon = Gibbon::Request.new
     @gibbon.timeout = 30
@@ -12,6 +20,11 @@ class MailChimpClient
         email_address: email,
         status: 'pending',
         merge_fields: merge_vars
+  #TODO      interests: {
+  #TODO        INTEREST_SUPPORTER: true/false
+  #TODO        INTEREST_ACTIVE_APPLICATION: true/false
+  #TODO        INTEREST_ADOPTED_FROM_OPH: true/false
+        }
       }
     )
   end

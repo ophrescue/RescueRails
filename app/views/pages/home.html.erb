@@ -51,7 +51,16 @@
           </div>
       <% end %>
 
-      <% if Time.now.between?(("2016-06-01".to_date),("2016-09-25".to_date))%>
+      <% if Time.now.between?(("2016-07-05".to_date),("2016-08-04".to_date))%>
+          <div class="item">
+            <%= image_tag "mfa-spc-2016.jpg", alt: "Michelson Found Animals Saving Pets Challenge" %>
+              <div class="carousel-caption">
+                <%= link_to "Donate Now", "https://www.crowdrise.com/operation-paws-for-homes-sp2016", :class => "btn btn-primary btn-large" %>
+              </div>
+          </div>
+      <% end %>
+
+      <% if Time.now.between?(("2016-07-01".to_date),("2016-09-25".to_date))%>
           <div class="item">
             <%= image_tag "bww-2016.jpg", alt: "Bark Wag Wine September 24, 2016" %>
               <div class="carousel-caption">

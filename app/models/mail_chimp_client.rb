@@ -2,6 +2,7 @@ class MailChimpClient
   attr_reader :gibbon
 
 #TODO These should probably get moved to ENV Variables?
+## Prod Env Params
   USER_LIST_ID = 'aa86c27ddd'.freeze
   ADOPTER_LIST_ID = '5e50e2be93'.freeze
 
@@ -9,21 +10,28 @@ class MailChimpClient
   INTEREST_ACTIVE_APPLICATION = 'f188dcc7d6'.freeze
   INTEREST_ADOPTED_FROM_OPH = '38e640c912'.freeze
 
+## Dev Dummy Env Params
+#  USER_LIST_ID = 'xxxxxxxx'.freeze
+#  ADOPTER_LIST_ID = 'xxxxxxxx'.freeze
+
+#  INTEREST_SUPPORTER = 'xxxxxxxx'.freeze
+#  INTEREST_ACTIVE_APPLICATION = 'xxxxxxxx'.freeze
+#  INTEREST_ADOPTED_FROM_OPH = 'xxxxxxxx'.freeze
+
   def initialize
-    @gibbon = Gibbon::Request.new
+    @gibbon = Gibbon::Request.new(debug: true)
     @gibbon.timeout = 30
   end
 
-  def subscribe(list_id, email, merge_vars)
+  def subscribe(list_id, email, merge_vars, interests)
     gibbon.lists(list_id).members(hashed(email)).upsert(
       body: {
         email_address: email,
         status: 'pending',
-        merge_fields: merge_vars
-  #TODO      interests: {
-  #TODO        INTEREST_SUPPORTER: true/false
-  #TODO        INTEREST_ACTIVE_APPLICATION: true/false
-  #TODO        INTEREST_ADOPTED_FROM_OPH: true/false
+        merge_fields: merge_vars,
+        interests: {
+          "#{INTEREST_ACTIVE_APPLICATION}": interests[:active_application],
+          "#{INTEREST_ADOPTED_FROM_OPH}": interests[:adopted_from_oph]
         }
       }
     )
@@ -37,16 +45,17 @@ class MailChimpClient
     merge_vars = {
       'FNAME' => name
     }
+    interests = nil
 
-    subscribe(USER_LIST_ID, email, merge_vars)
+    subscribe(USER_LIST_ID, email, merge_vars, interests)
   end
 
   def user_unsubscribe(email)
     unsubscribe(USER_LIST_ID, email)
   end
 
-  def adopter_subscribe(email, merge_vars)
-    subscribe(ADOPTER_LIST_ID, email, merge_vars)
+  def adopter_subscribe(email, merge_vars, interests)
+    subscribe(ADOPTER_LIST_ID, email, merge_vars, interests)
   end
 
   def adopter_unsubscribe(email)

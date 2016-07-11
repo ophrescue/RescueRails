@@ -1,0 +1,22 @@
+default: &default
+  user_list_id: '45bcfcdc54'
+  adopter_list_id: '73321c4601'
+  interest_supporter: = '55217'
+  interest_active_application: = '55221'
+  interest_adopted_from_oph: = '55225'
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+staging:
+  <<: *default
+
+production:
+  user_list_id: <%= ENV['MAILCHIMP_USER_LIST_ID'] %>
+  adopter_list_id: <%= ENV['MAILCHIMP_ADOPTER_LIST_ID'] %>
+  interest_supporter: = '55217'
+  interest_active_application: = '55221'
+  interest_adopted_from_oph: = '55225'

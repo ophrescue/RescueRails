@@ -15,8 +15,6 @@ staging:
   <<: *default
 
 production:
+  <<: *default
   user_list_id: <%= ENV['MAILCHIMP_USER_LIST_ID'] %>
   adopter_list_id: <%= ENV['MAILCHIMP_ADOPTER_LIST_ID'] %>
-  interest_supporter: = '55217'
-  interest_active_application: = '55221'
-  interest_adopted_from_oph: = '55225'

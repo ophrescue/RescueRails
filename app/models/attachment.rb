@@ -22,10 +22,7 @@ class Attachment < ActiveRecord::Base
   belongs_to :updated_by_user, class_name: 'User'
 
   has_attached_file :attachment,
-            path: ':rails_root/public/system/attachments/:hash.:extension',
-            url: '/system/attachments/:hash.:extension',
-            hash_secret: 'e17ac013aa7f8f2fd095edfa012edb8c',
-            s3_permissions: :private
+                    s3_permissions: 'private'
 
   validates_attachment_presence :attachment
   validates_attachment_size :attachment, less_than: 10.megabytes

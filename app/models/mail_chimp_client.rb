@@ -1,9 +1,6 @@
 class MailChimpClient
   attr_reader :gibbon
 
-  USER_LIST_ID = 'aa86c27ddd'.freeze
-  ADOPTER_LIST_ID = '5e50e2be93'.freeze
-
   def initialize
     @gibbon = Gibbon::API.new
     @gibbon.timeout = 30
@@ -15,7 +12,7 @@ class MailChimpClient
     }
 
     gibbon.lists.subscribe(
-      id: USER_LIST_ID,
+      id: user_list_id,
       email: { email: email },
       merge_vars: merge_vars,
       double_optin: true,
@@ -26,18 +23,18 @@ class MailChimpClient
   def user_unsubscribe(email)
     gibbon.throws_exceptions = false
 
-    gibbon.lists.unsubscribe({
-      id: USER_LIST_ID,
-      email: {email: email},
+    gibbon.lists.unsubscribe(
+      id: user_list_id,
+      email: { email: email },
       delete_member: true,
       send_goodbye: false,
       send_notify: false
-    })
+    )
   end
 
   def adopter_subscribe(email, is_subscribed, merge_vars)
     list_data = {
-      id: ADOPTER_LIST_ID,
+      id: adopter_list_id,
       email: { email: email },
       merge_vars: merge_vars,
       double_optin: true,
@@ -55,7 +52,7 @@ class MailChimpClient
     gibbon.throws_exceptions = false
 
     gibbon.lists.unsubscribe(
-      id: ADOPTER_LIST_ID,
+      id: adopter_list_id,
       email: { email: email },
       delete_member: true,
       send_goodbye: false,
@@ -63,5 +60,20 @@ class MailChimpClient
     )
 
     gibbon.throws_exceptions = true
+  end
+
+  private
+
+  def config(key)
+    Rails.application.config_for(:mailchimp)
+         .with_indifferent_access[key]
+  end
+
+  def user_list_id
+    config(:user_list_id)
+  end
+
+  def adopter_list_id
+    config(:adopter_list_id)
   end
 end

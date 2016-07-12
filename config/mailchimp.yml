@@ -1,0 +1,25 @@
+default: &default
+  user_list_id: '45bcfcdc54'
+  adopter_list_id: '73321c4601'
+  interest_supporter: = 'ce0f3791c7'
+  interest_active_application: = '5946f7f039'
+  interest_adopted_from_oph: = '003e2d991a'
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+staging:
+  <<: *default
+  user_list_id: <%= ENV['MAILCHIMP_USER_LIST_ID'] %>
+  adopter_list_id: <%= ENV['MAILCHIMP_ADOPTER_LIST_ID'] %>
+
+production:
+  <<: *default
+  user_list_id: <%= ENV['MAILCHIMP_USER_LIST_ID'] %>
+  adopter_list_id: <%= ENV['MAILCHIMP_ADOPTER_LIST_ID'] %>
+  interest_supporter: = 'f64cb9ee99'
+  interest_active_application: = 'f188dcc7d6'
+  interest_adopted_from_oph: = '38e640c912'

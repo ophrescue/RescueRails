@@ -1,9 +1,9 @@
 Paperclip::Attachment.default_options[:storage] = :s3
 Paperclip::Attachment.default_options[:s3_permissions] = 'private'
 Paperclip::Attachment.default_options[:s3_credentials] = {
-  access_key_id: 'AKIAIE6CHWJQEXJKDHPA',
-  secret_access_key: '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',
-  bucket: 'oph-dogs',
-  s3_region: 'us-west-2'
+  access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+  secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+  bucket: ENV['S3_BUCKET_NAME'],
+  s3_region: ENV['AWS_REGION']
 }
 Paperclip::Attachment.default_options[:url] = ":s3_domain_url"

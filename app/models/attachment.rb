@@ -15,9 +15,7 @@
 #  description             :text
 #  agreement_type          :string
 #
-
 class Attachment < ActiveRecord::Base
-
   belongs_to :attachable, polymorphic: true
   belongs_to :updated_by_user, class_name: 'User'
 
@@ -41,12 +39,15 @@ class Attachment < ActiveRecord::Base
   AGREEMENT_TYPE_CONFIDENTIALITY = 'confidentiality'
 
   def download_url(style_name = :original)
-    s3 = AWS::S3.new
-    @bucket ||= s3.buckets[attachment.bucket_name]
-    @bucket.objects[attachment.s3_object(style_name).key].url_for(
-      :read,
+    s3 = Aws::S3::Client.new
+    resource = Aws::S3::Resource.new(client: s3)
+
+    @bucket ||= resource.bucket(ENV['S3_BUCKET_NAME'])
+
+    @bucket.object(attachment.s3_object(style_name).key).presigned_url(
+      :get,
       secure: true,
-      expires: 300,
-      response_content_disposition: "attachment; filename=#{attachment_file_name}").to_s
+      expires_in: 300,
+      response_content_disposition: "attachment; filename=#{attachment_file_name}")
   end
 end

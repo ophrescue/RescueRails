@@ -46,14 +46,14 @@
       </div>
     </div>
 
-    <h5>Please provide the name and number of a veterinarian who has seen these pets.</h5>
+    <h5>Please provide the name and phone number of a veterinarian who has seen these pets.</h5>
 
     <div class="control-group">
-      <%= af.label :vet_info, "Veterinarian Information", :class => "control-label" %>
+      <%= af.label :vet_info, "Veterinarian Name and Phone Number", :class => "control-label" %>
       <div class="controls">
         <%= af.text_area :vet_info, :class => "input-xxlarge", :rows => "3" %>
-        <span class="help-inline">Include names, phone numbers</span>
+        <span class="help-inline">Failure to include your Vet's Phone Number will delay your application</span>
       </div>
     </div>
-    <p><span class="label important">Important</span> Call your vet and give permission to release your pet records to Operation Paws for Homes.</p>
+    <p><span class="label label-important">Important</span> Call your vet and give permission to release your pet records to Operation Paws for Homes.</p>
 </div>

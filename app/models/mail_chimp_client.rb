@@ -10,11 +10,11 @@ class MailChimpClient
     gibbon.lists(list_id).members(hashed(email)).upsert(
       body: {
         email_address: email,
-        status: 'pending',
+        status_if_new: 'pending',
         merge_fields: merge_vars,
         interests: {
-          "#{INTEREST_ACTIVE_APPLICATION}": interests[:active_application],
-          "#{INTEREST_ADOPTED_FROM_OPH}": interests[:adopted_from_oph]
+          interest_active_application => interests.fetch(:active_application, false),
+          interest_adopted_from_oph => interests.fetch(:adopted_from_oph, false)
         }
       }
     )
@@ -31,7 +31,7 @@ class MailChimpClient
     merge_vars = {
       'FNAME' => name
     }
-    interests = nil
+    interests = {}
 
     subscribe(user_list_id, email, merge_vars, interests)
   end
@@ -65,5 +65,17 @@ class MailChimpClient
 
   def adopter_list_id
     config(:adopter_list_id)
+  end
+
+  def interest_active_application
+    config(:interest_active_application)
+  end
+
+  def interest_supporter
+    config(:interest_supporter)
+  end
+
+  def interest_adopted_from_oph
+    config(:interest_adopted_from_oph)
   end
 end

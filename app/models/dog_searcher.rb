@@ -1,5 +1,5 @@
 class DogSearcher
-  PER_PAGE = 30
+  PER_PAGE = 9
   ACTIVE_STATUSES = ['adoptable', 'adoption pending', 'on hold', 'return pending', 'coming soon']
   PUBLIC_STATUSES = ['adoptable', 'adoption pending', 'coming soon']
 

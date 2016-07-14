@@ -55,8 +55,8 @@
           <th>Last Comment</th>
         </tr>
       </thead>
-      <tbody>
-      <%= render :partial => "manager_dog", :collection => @dogs, :as => :dog %>
+      <tbody id="dogs">
+        <%= render :partial => "manager_dog", :collection => @dogs, :as => :dog %>
       </tbody>
     </table>
     <%= will_paginate @dogs %>

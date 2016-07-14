@@ -1,0 +1,7 @@
+<% if signed_in? && session[:mgr_view] == true %>
+  $('#dogs').append('<%= escape_javascript render :partial => "manager_dog", :collection => @dogs, :as => :dog %>');
+<% else %>
+  $('#dogs').append('<%= escape_javascript render @dogs %>');
+<% end %>
+
+$('div.pagination').replaceWith('<%= escape_javascript will_paginate(@dogs) %>');

@@ -1,0 +1,20 @@
+ <li class="span4">
+  <%= link_to dog, :class => "thumbnail" do %>
+    <% if dog.photos.visible.empty? %>
+      <%= image_tag("no_photo-320x320.png", :alt => dog.name) %>
+    <% elsif dog.primary_breed %>
+      <%= image_tag(dog.photos.visible.first.photo.url(:medium), :alt => dog.primary_breed.name)  %> 
+    <% else %>
+      <%= image_tag(dog.photos.visible.first.photo.url(:medium), :alt => dog.name)  %> 
+    <% end %>
+    <h4><%= dog.name.titleize %></h4>
+    <p>
+      <strong><%= dog.status.titleize %></strong><br />
+      <%= dog.primary_breed.name.titleize unless !dog.primary_breed %><br />
+      <%= dog.secondary_breed.name.titleize unless !dog.secondary_breed %><br />
+      <% if dog.foster && !dog.foster.city.blank? && !dog.foster.state.blank? %>
+        <%= dog.foster.city.titleize %>, <%= dog.foster.state.upcase %><br />
+      <% end %>
+    </p>
+  <% end %>
+</li>

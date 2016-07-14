@@ -1,23 +1,6 @@
 class MailChimpClient
   attr_reader :gibbon
 
-#TODO These should probably get moved to ENV Variables?
-## Prod Env Params
-  USER_LIST_ID = 'aa86c27ddd'.freeze
-  ADOPTER_LIST_ID = '5e50e2be93'.freeze
-
-  INTEREST_SUPPORTER = 'f64cb9ee99'.freeze
-  INTEREST_ACTIVE_APPLICATION = 'f188dcc7d6'.freeze
-  INTEREST_ADOPTED_FROM_OPH = '38e640c912'.freeze
-
-## Dev Dummy Env Params
-#  USER_LIST_ID = 'xxxxxxxx'.freeze
-#  ADOPTER_LIST_ID = 'xxxxxxxx'.freeze
-
-#  INTEREST_SUPPORTER = 'xxxxxxxx'.freeze
-#  INTEREST_ACTIVE_APPLICATION = 'xxxxxxxx'.freeze
-#  INTEREST_ADOPTED_FROM_OPH = 'xxxxxxxx'.freeze
-
   def initialize
     @gibbon = Gibbon::Request.new(debug: true)
     @gibbon.timeout = 30
@@ -38,7 +21,10 @@ class MailChimpClient
   end
 
   def unsubscribe(list_id, email)
-    gibbon.lists(list_id).members(hashed(email)).update(body: { status: "unsubscribed" })
+    gibbon
+      .lists(list_id)
+      .members(hashed(email))
+      .update(body: { status: 'unsubscribed' })
   end
 
   def user_subscribe(name, email)
@@ -47,19 +33,19 @@ class MailChimpClient
     }
     interests = nil
 
-    subscribe(USER_LIST_ID, email, merge_vars, interests)
+    subscribe(user_list_id, email, merge_vars, interests)
   end
 
   def user_unsubscribe(email)
-    unsubscribe(USER_LIST_ID, email)
+    unsubscribe(user_list_id, email)
   end
 
   def adopter_subscribe(email, merge_vars, interests)
-    subscribe(ADOPTER_LIST_ID, email, merge_vars, interests)
+    subscribe(adopter_list_id, email, merge_vars, interests)
   end
 
   def adopter_unsubscribe(email)
-    unsubscribe(ADOPTER_LIST_ID, email)
+    unsubscribe(adopter_list_id, email)
   end
 
   private

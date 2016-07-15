@@ -144,9 +144,9 @@ class Adopter < ActiveRecord::Base
     end
 
     merge_vars = {
-      fname: name,
-      mmerge2: status,
-      mmerge3: completed_date,
+      'FNAME' => name,
+      'MMERGE2' => status,
+      'MMERGE3' => completed_date
     }
     AdopterSubscribeJob.perform_later(email, merge_vars, interests)
     self.is_subscribed = true

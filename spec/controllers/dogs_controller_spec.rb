@@ -74,7 +74,7 @@ describe DogsController, type: :controller do
 
   describe 'POST create' do
     context 'logged in as dog adder admin' do
-      before :each do
+      before do
         allow(controller).to receive(:current_user) { admin }
       end
 
@@ -98,6 +98,36 @@ describe DogsController, type: :controller do
       it 'updates the dog name' do
         expect { request.call }.to change { test_dog.reload.name }.from('Old Dog Name').to('New Dog Name')
       end
+    end
+  end
+
+  describe 'GET switch_view' do
+    let(:request) { get :switch_view, nil, mgr_view: mgr_view }
+    let(:mgr_view) { true }
+
+    before do
+      allow(controller).to receive(:current_user) { admin }
+      request
+    end
+
+    context 'mgr_view is true' do
+      let(:mgr_view) { true }
+
+      it 'sets mgr_view to false' do
+        expect(session[:mgr_view]).to eq(false)
+      end
+    end
+
+    context 'mgr_view is false' do
+      let(:mgr_view) { false }
+
+      it 'sets mgr_view to true' do
+        expect(session[:mgr_view]).to eq(true)
+      end
+    end
+
+    it 'redirects to /dogs' do
+      expect(response).to redirect_to dogs_path
     end
   end
 end

@@ -1,5 +1,4 @@
 RescueRails::Application.routes.draw do
-
   get "/adopters/check_email", to: "adopters#check_email"
   get "/dogs/switch_view", to: "dogs#switch_view"
 
@@ -24,7 +23,7 @@ RescueRails::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :password_resets
 
-  get '/events/past',  to: 'events#past'
+  get '/events/past', to: 'events#past'
   resources :events
 
   resources :adoptions
@@ -71,5 +70,4 @@ RescueRails::Application.routes.draw do
   get '/status_definitions',        to: 'pages#status_definitions'
   get '/dog-status-definitions',    to: 'pages#dog_status_definitions'
   get '/education-and-outreach',    to: 'pages#education_and_outreach'
-
 end

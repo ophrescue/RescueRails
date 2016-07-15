@@ -47,65 +47,87 @@
 #  shelter_id           :integer
 #  medical_summary      :text
 #
-
 require 'rails_helper'
 
 describe DogsController, type: :controller do
-
-  let!(:admin) {create(:user, :admin)}
+  let!(:admin) { create(:user, :admin) }
 
   describe 'GET #index' do
-
     context 'user is logged in' do
       let!(:dog) { create(:dog) }
       let(:params) { {} }
 
-      subject(:get_index) { get :index, params.merge(format: :json), {mgr_view: true} }
+      subject(:get_index) { get :index, nil, mgr_view: true }
 
       before do
         allow(DogSearcher).to receive(:search).and_return([dog])
         allow(controller).to receive(:signed_in?).and_return(true)
       end
 
-      it 'returns dog as json' do
+      it 'renders successfully' do
         get_index
 
-        expect([dog].to_json).to be_json_eql(response.body)
+        expect(response).to render_template(:index)
       end
     end
-
   end
 
   describe 'POST create' do
-
     context 'logged in as dog adder admin' do
-
-      before :each do
+      before do
         allow(controller).to receive(:current_user) { admin }
       end
 
       it 'is able to create a dog' do
-        expect{
+        expect do
           post :create, dog: attributes_for(:dog_with_photo_and_attachment)
-        }.to change(Dog, :count).by(1)
+        end.to change(Dog, :count).by(1)
       end
     end
   end
 
   describe 'PUT update' do
-    let(:test_dog) {create(:dog, name: 'Old Dog Name') }
-    let(:request) { -> {put :update, id: test_dog.id, dog: attributes_for(:dog, name: 'New Dog Name')}}
+    let(:test_dog) { create(:dog, name: 'Old Dog Name') }
+    let(:request) { -> { put :update, id: test_dog.id, dog: attributes_for(:dog, name: 'New Dog Name') } }
 
     context 'logged in as admin' do
       before :each do
-        allow(controller).to receive(:current_user) {admin}
+        allow(controller).to receive(:current_user) { admin }
       end
 
       it 'updates the dog name' do
-        expect { request.call }.to change{ test_dog.reload.name }.from('Old Dog Name').to('New Dog Name')
+        expect { request.call }.to change { test_dog.reload.name }.from('Old Dog Name').to('New Dog Name')
       end
-
     end
   end
 
+  describe 'GET switch_view' do
+    let(:request) { get :switch_view, nil, mgr_view: mgr_view }
+    let(:mgr_view) { true }
+
+    before do
+      allow(controller).to receive(:current_user) { admin }
+      request
+    end
+
+    context 'mgr_view is true' do
+      let(:mgr_view) { true }
+
+      it 'sets mgr_view to false' do
+        expect(session[:mgr_view]).to eq(false)
+      end
+    end
+
+    context 'mgr_view is false' do
+      let(:mgr_view) { false }
+
+      it 'sets mgr_view to true' do
+        expect(session[:mgr_view]).to eq(true)
+      end
+    end
+
+    it 'redirects to /dogs' do
+      expect(response).to redirect_to dogs_path
+    end
+  end
 end

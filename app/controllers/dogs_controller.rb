@@ -64,11 +64,6 @@ class DogsController < ApplicationController
 
     @title = is_manager ? "Dog Manager" : "Our Dogs"
     @dogs = DogSearcher.search(params: params, manager: is_manager)
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @dogs.map(&:attributes) }
-    end
   end
 
   def show

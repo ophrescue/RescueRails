@@ -31,9 +31,14 @@ class MailChimpClient
     merge_vars = {
       'FNAME' => name
     }
-    interests = {}
 
-    subscribe(user_list_id, email, merge_vars, interests)
+    gibbon.lists(user_list_id).members(hashed(email)).upsert(
+      body: {
+        email_address: email,
+        status_if_new: 'pending',
+        merge_fields: merge_vars,
+      }
+    )
   end
 
   def user_unsubscribe(email)

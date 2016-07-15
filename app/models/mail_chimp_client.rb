@@ -2,8 +2,29 @@ class MailChimpClient
   attr_reader :gibbon
 
   def initialize
-    @gibbon = Gibbon::API.new
+    @gibbon = Gibbon::Request.new(debug: true)
     @gibbon.timeout = 30
+  end
+
+  def subscribe(list_id, email, merge_vars, interests)
+    gibbon.lists(list_id).members(hashed(email)).upsert(
+      body: {
+        email_address: email,
+        status_if_new: 'pending',
+        merge_fields: merge_vars,
+        interests: {
+          interest_active_application => interests.fetch(:active_application, false),
+          interest_adopted_from_oph => interests.fetch(:adopted_from_oph, false)
+        }
+      }
+    )
+  end
+
+  def unsubscribe(list_id, email)
+    gibbon
+      .lists(list_id)
+      .members(hashed(email))
+      .update(body: { status: 'unsubscribed' })
   end
 
   def user_subscribe(name, email)
@@ -11,58 +32,32 @@ class MailChimpClient
       'FNAME' => name
     }
 
-    gibbon.lists.subscribe(
-      id: user_list_id,
-      email: { email: email },
-      merge_vars: merge_vars,
-      double_optin: true,
-      send_welcome: false
+    gibbon.lists(user_list_id).members(hashed(email)).upsert(
+      body: {
+        email_address: email,
+        status_if_new: 'pending',
+        merge_fields: merge_vars,
+      }
     )
   end
 
   def user_unsubscribe(email)
-    gibbon.throws_exceptions = false
-
-    gibbon.lists.unsubscribe(
-      id: user_list_id,
-      email: { email: email },
-      delete_member: true,
-      send_goodbye: false,
-      send_notify: false
-    )
+    unsubscribe(user_list_id, email)
   end
 
-  def adopter_subscribe(email, is_subscribed, merge_vars)
-    list_data = {
-      id: adopter_list_id,
-      email: { email: email },
-      merge_vars: merge_vars,
-      double_optin: true,
-      send_welcome: false
-    }
-
-    if is_subscribed
-      gibbon.lists.update_member(list_data)
-    else
-      gibbon.lists.subscribe(list_data)
-    end
+  def adopter_subscribe(email, merge_vars, interests)
+    subscribe(adopter_list_id, email, merge_vars, interests)
   end
 
   def adopter_unsubscribe(email)
-    gibbon.throws_exceptions = false
-
-    gibbon.lists.unsubscribe(
-      id: adopter_list_id,
-      email: { email: email },
-      delete_member: true,
-      send_goodbye: false,
-      send_notify: false
-    )
-
-    gibbon.throws_exceptions = true
+    unsubscribe(adopter_list_id, email)
   end
 
   private
+
+  def hashed(email)
+    Digest::MD5.hexdigest(email.downcase)
+  end
 
   def config(key)
     Rails.application.config_for(:mailchimp)
@@ -75,5 +70,17 @@ class MailChimpClient
 
   def adopter_list_id
     config(:adopter_list_id)
+  end
+
+  def interest_active_application
+    config(:interest_active_application)
+  end
+
+  def interest_supporter
+    config(:interest_supporter)
+  end
+
+  def interest_adopted_from_oph
+    config(:interest_adopted_from_oph)
   end
 end

@@ -1,1 +1,1 @@
-Gibbon::API.throws_exceptions = false
+Gibbon::Request.throws_exceptions = false

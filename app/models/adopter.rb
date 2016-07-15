@@ -126,9 +126,15 @@ class Adopter < ActiveRecord::Base
 
   def chimp_subscribe
     if (status == 'adopted') || (status == 'completed')
-      groups = [{ name: 'OPH Target Segments', groups: ['Adopted from OPH'] }]
+      interests = {
+        adopted_from_oph: true,
+        active_application: false
+      }
     else
-      groups = [{ name: 'OPH Target Segments', groups: ['Active Application'] }]
+      interests = {
+        adopted_from_oph: false,
+        active_application: true
+      }
     end
 
     if (status == 'completed')
@@ -138,12 +144,11 @@ class Adopter < ActiveRecord::Base
     end
 
     merge_vars = {
-      fname: name,
-      mmerge2: status,
-      mmerge3: completed_date,
-      groupings: groups
+      'FNAME' => name,
+      'MMERGE2' => status,
+      'MMERGE3' => completed_date
     }
-    AdopterSubscribeJob.perform_later(email, is_subscribed?, merge_vars)
+    AdopterSubscribeJob.perform_later(email, merge_vars, interests)
     self.is_subscribed = true
   end
 

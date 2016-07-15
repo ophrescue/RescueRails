@@ -162,13 +162,15 @@ GEM
       railties (>= 3.0.0)
     faker (1.6.3)
       i18n (~> 0.5)
+    faraday (0.9.2)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.10)
     font-awesome-rails (4.6.3.0)
       railties (>= 3.2, < 5.1)
     geocoder (1.2.14)
-    gibbon (1.1.5)
-      httparty
-      multi_json (>= 1.9.0)
+    gibbon (2.2.4)
+      faraday (>= 0.9.1)
+      multi_json (>= 1.11.0)
     git-version-bump (0.15.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -177,9 +179,6 @@ GEM
       actionpack (>= 4.1, < 5.1)
       activesupport (>= 4.1, < 5.1)
     hitimes (1.2.4)
-    httparty (0.13.7)
-      json (~> 1.8)
-      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jmespath (1.3.0)
     jquery-rails (2.0.3)
@@ -214,7 +213,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.12.1)
-    multi_xml (0.5.5)
+    multipart-post (2.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.1.1)
@@ -418,7 +417,7 @@ DEPENDENCIES
   faker
   font-awesome-rails
   geocoder (~> 1.2.13)
-  gibbon (~> 1.1.1)
+  gibbon
   gravatar_image_tag (~> 1.2.0)
   has_scope
   jquery-rails (~> 2.0.3)

@@ -74,14 +74,33 @@ describe DogsController, type: :controller do
 
   describe 'POST create' do
     context 'logged in as dog adder admin' do
+      subject(:post_create) do
+        post :create, dog: attributes_for(:dog_with_photo_and_attachment)
+      end
+
       before do
         allow(controller).to receive(:current_user) { admin }
       end
 
-      it 'is able to create a dog' do
-        expect do
-          post :create, dog: attributes_for(:dog_with_photo_and_attachment)
-        end.to change(Dog, :count).by(1)
+      context 'params are valid' do
+        it 'is able to create a dog' do
+          expect { post_create }.to change(Dog, :count).by(1)
+        end
+
+        it 'redirects to dogs#index' do
+          post_create
+          expect(response).to redirect_to(dogs_path)
+        end
+
+        context 'dog tracking id is blank' do
+          let(:dog_params) { attributes_for(:dog_with_photo_and_attachment, tracking_id: nil) }
+
+          it 'gets next value from tracking_id_seq' do
+            expect(Dog).to receive(:next_tracking_id)
+
+            post :create, dog: dog_params
+          end
+        end
       end
     end
   end
@@ -128,6 +147,34 @@ describe DogsController, type: :controller do
 
     it 'redirects to /dogs' do
       expect(response).to redirect_to dogs_path
+    end
+  end
+
+  describe 'is_fostering_dog?' do
+    let(:args) { [] }
+    subject { controller.send(:is_fostering_dog?, args) }
+
+    context 'not signed in' do
+      before do
+        allow(controller).to receive(:signed_in?) { false }
+      end
+
+      it 'returns false' do
+        expect(subject).to eq(false)
+      end
+    end
+
+    context 'signed in' do
+      let(:dog) { create(:dog) }
+      let(:args) { [dog.id] }
+
+      before do
+        allow(controller).to receive(:signed_in?) { true }
+      end
+
+      it 'assigns dog' do
+        expect(Dog).to receive(:find) { dog }
+      end
     end
   end
 end

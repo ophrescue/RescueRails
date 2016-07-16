@@ -138,4 +138,8 @@ class Dog < ActiveRecord::Base
   def adopted?
     status == 'adopted'
   end
+
+  def next_tracking_id
+    connection.select_value("SELECT nextval('tracking_id_seq')")
+  end
 end

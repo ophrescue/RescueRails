@@ -95,11 +95,9 @@ class DogsController < ApplicationController
   end
 
   def create
-    @foster_users = User.all
     @dog = Dog.new(dog_params)
-    if @dog.tracking_id.blank?
-      @dog.tracking_id = Dog.connection.select_value("SELECT nextval('tracking_id_seq')")
-    end
+    @dog.tracking_id = Dog.next_tracking_id if @dog.tracking_id.blank?
+
     if @dog.save
       flash[:success] = "New Dog Added"
       redirect_to dogs_path
@@ -126,121 +124,120 @@ class DogsController < ApplicationController
     redirect_to dogs_path
   end
 
-
   private
 
-    def dog_params
-      params.require(:dog).permit(  :name,
-                                    :tracking_id,
-                                    :primary_breed_id,
-                                    :primary_breed_name,
-                                    :secondary_breed_id,
-                                    :secondary_breed_name,
-                                    :status,
-                                    :age,
-                                    :size,
-                                    :is_altered,
-                                    :gender,
-                                    :is_special_needs,
-                                    :no_dogs,
-                                    :no_cats,
-                                    :no_kids,
+  def dog_params
+    params.require(:dog).permit(  :name,
+                                  :tracking_id,
+                                  :primary_breed_id,
+                                  :primary_breed_name,
+                                  :secondary_breed_id,
+                                  :secondary_breed_name,
+                                  :status,
+                                  :age,
+                                  :size,
+                                  :is_altered,
+                                  :gender,
+                                  :is_special_needs,
+                                  :no_dogs,
+                                  :no_cats,
+                                  :no_kids,
+                                  :description,
+                                  :photos_attributes,
+                                  :foster_id,
+                                  :foster_start_date,
+                                  :adoption_date,
+                                  :is_uptodateonshots,
+                                  :intake_dt,
+                                  :available_on_dt,
+                                  :has_medical_need,
+                                  :is_high_priority,
+                                  :needs_photos,
+                                  :has_behavior_problem,
+                                  :needs_foster,
+                                  :attachments_attributes,
+                                  :petfinder_ad_url,
+                                  :adoptapet_ad_url,
+                                  :craigslist_ad_url,
+                                  :youtube_video_url,
+                                  :first_shots,
+                                  :second_shots,
+                                  :third_shots,
+                                  :rabies,
+                                  :heartworm,
+                                  :bordetella,
+                                  :microchip,
+                                  :original_name,
+                                  :fee,
+                                  :coordinator_id,
+                                  :sponsored_by,
+                                  :shelter_id,
+                                  :medical_summary,
+                                  attachments_attributes:
+                                  [
+                                    :attachment,
                                     :description,
-                                    :photos_attributes,
-                                    :foster_id,
-                                    :foster_start_date,
-                                    :adoption_date,
-                                    :is_uptodateonshots,
-                                    :intake_dt,
-                                    :available_on_dt,
-                                    :has_medical_need,
-                                    :is_high_priority,
-                                    :needs_photos,
-                                    :has_behavior_problem,
-                                    :needs_foster,
-                                    :attachments_attributes,
-                                    :petfinder_ad_url,
-                                    :adoptapet_ad_url,
-                                    :craigslist_ad_url,
-                                    :youtube_video_url,
-                                    :first_shots,
-                                    :second_shots,
-                                    :third_shots,
-                                    :rabies,
-                                    :heartworm,
-                                    :bordetella,
-                                    :microchip,
-                                    :original_name,
-                                    :fee,
-                                    :coordinator_id,
-                                    :sponsored_by,
-                                    :shelter_id,
-                                    :medical_summary,
-                                    attachments_attributes:
-                                    [
-                                      :attachment,
-                                      :description,
-                                      :updated_by_user_id,
-                                      :_destroy,
-                                      :id
-                                    ],
-                                    photos_attributes:
-                                    [
-                                      :photo,
-                                      :position,
-                                      :is_private,
-                                      :_destroy,
-                                      :id
-                                    ]
+                                    :updated_by_user_id,
+                                    :_destroy,
+                                    :id
+                                  ],
+                                  photos_attributes:
+                                  [
+                                    :photo,
+                                    :position,
+                                    :is_private,
+                                    :_destroy,
+                                    :id
+                                  ]
 
-                                  )
+                                )
+  end
+
+  def load_dog
+    @dog = Dog.find(params[:id])
+  end
+
+  def load_instance_variables
+    5.times { @dog.photos.build }
+    5.times { @dog.attachments.build }
+    @foster_users = User.where(is_foster: true).order("name")
+    @coordinator_users = User.where(edit_all_adopters: true).order("name")
+    @shelters = Shelter.order("name")
+    @breeds = Breed.all
+  end
+
+  def edit_dogs_user
+    redirect_to(root_path) unless current_user.edit_dogs?
+  end
+
+  def add_dogs_user
+    redirect_to(root_path) unless current_user.add_dogs?
+  end
+
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
+  end
+
+  def is_fostering_dog?(*args)
+    if !signed_in?
+      return false
     end
 
-    def load_dog
-      @dog = Dog.find(params[:id])
-    end
-
-    def load_instance_variables
-      5.times { @dog.photos.build }
-      5.times { @dog.attachments.build }
-      @foster_users = User.where(is_foster: true).order("name")
-      @coordinator_users = User.where(edit_all_adopters: true).order("name")
-      @shelters = Shelter.order("name")
-      @breeds = Breed.all
-    end
-
-    def edit_dogs_user
-      redirect_to(root_path) unless current_user.edit_dogs?
-    end
-
-    def add_dogs_user
-      redirect_to(root_path) unless current_user.add_dogs?
-    end
-
-    def admin_user
-      redirect_to(root_path) unless current_user.admin?
-    end
-
-    def is_fostering_dog?(*args)
-      if !signed_in?
-        return false
+    if args.length == 1
+      dog = Dog.find(:arg1)
+    else
+      if !dog
+        dog = Dog.find(params[:id])
       end
-
-      if args.length == 1
-        dog = Dog.find(:arg1)
-      else
-        if !dog
-          dog = Dog.find(params[:id])
-        end
-        dog.foster_id == current_user.id
-      end
+      dog.foster_id == current_user.id
     end
+  end
 
-    def edit_dog_check
-      redirect_to(root_path) unless (is_fostering_dog? || current_user.edit_dogs?)
-    end
+  def edit_dog_check
+    redirect_to(root_path) unless (is_fostering_dog? || current_user.edit_dogs?)
+  end
 
-    def fostering_dog_user
-      redirect_to(root_path) unless is_fostering_dog?
-    end
+  def fostering_dog_user
+    redirect_to(root_path) unless is_fostering_dog?
+  end
 end

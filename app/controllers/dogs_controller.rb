@@ -49,7 +49,7 @@
 #
 
 class DogsController < ApplicationController
-  helper_method :is_fostering_dog?
+  helper_method :fostering_dog?
 
   autocomplete :breed, :name, full: true
 
@@ -115,11 +115,7 @@ class DogsController < ApplicationController
   end
 
   def switch_view
-    if !session[:mgr_view]
-      session[:mgr_view] = true
-    else
-      session[:mgr_view] = false
-    end
+    session[:mgr_view] = !session[:mgr_view]
 
     redirect_to dogs_path
   end
@@ -218,26 +214,13 @@ class DogsController < ApplicationController
     redirect_to(root_path) unless current_user.admin?
   end
 
-  def is_fostering_dog?(*args)
-    if !signed_in?
-      return false
-    end
+  def fostering_dog?
+    return false unless signed_in?
 
-    if args.length == 1
-      dog = Dog.find(:arg1)
-    else
-      if !dog
-        dog = Dog.find(params[:id])
-      end
-      dog.foster_id == current_user.id
-    end
+    @dog.foster_id == current_user.id
   end
 
   def edit_dog_check
-    redirect_to(root_path) unless (is_fostering_dog? || current_user.edit_dogs?)
-  end
-
-  def fostering_dog_user
-    redirect_to(root_path) unless is_fostering_dog?
+    redirect_to(root_path) unless fostering_dog? || current_user.edit_dogs?
   end
 end

@@ -115,7 +115,7 @@
         <%= link_to "Adopt Me!", new_adopter_path(dog_name: @dog.name), class: 'btn btn-primary btn-large' %>
       <% end %>
 
-      <% if can_edit_dogs? || is_fostering_dog? %>
+      <% if can_edit_dogs? || fostering_dog? %>
         <%= link_to "Edit Dog", edit_dog_path(@dog), :class => "btn btn-primary btn-large" %>
       <% end %>
 

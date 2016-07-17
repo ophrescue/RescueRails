@@ -150,9 +150,8 @@ describe DogsController, type: :controller do
     end
   end
 
-  describe 'is_fostering_dog?' do
-    let(:args) { [] }
-    subject { controller.send(:is_fostering_dog?, args) }
+  describe 'fostering_dog?' do
+    subject { controller.send(:fostering_dog?) }
 
     context 'not signed in' do
       before do
@@ -165,15 +164,26 @@ describe DogsController, type: :controller do
     end
 
     context 'signed in' do
-      let(:dog) { create(:dog) }
-      let(:args) { [dog.id] }
-
       before do
         allow(controller).to receive(:signed_in?) { true }
+        allow(controller).to receive(:current_user) { admin }
+        controller.instance_variable_set(:@dog, dog)
       end
 
-      it 'assigns dog' do
-        expect(Dog).to receive(:find) { dog }
+      context 'dog foster is the current user' do
+        let(:dog) { create(:dog, foster_id: admin.id) }
+
+        it 'returns true' do
+          expect(subject).to eq(true)
+        end
+      end
+
+      context 'dog foster is not the current user' do
+        let(:dog) { create(:dog, foster_id: admin.id + 1) }
+
+        it 'returns false' do
+          expect(subject).to eq(false)
+        end
       end
     end
   end

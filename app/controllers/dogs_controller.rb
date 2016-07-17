@@ -54,10 +54,10 @@ class DogsController < ApplicationController
   autocomplete :breed, :name, full: true
 
   before_filter :authenticate, except: %i(index show)
-  before_filter :edit_dog_check, only: %i(edit update)
-  before_filter :add_dogs_user, only: %i(new create)
   before_filter :admin_user, only: %i(destroy)
+  before_filter :add_dogs_user, only: %i(new create)
   before_filter :load_dog, only: %i(show edit update destroy)
+  before_filter :edit_dog_check, only: %i(edit update)
 
   def index
     is_manager = signed_in? && session[:mgr_view]

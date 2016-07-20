@@ -78,20 +78,6 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="span12">
-
-    <h4>Add Comment</h4>
-    <%= render 'adopter_comment_form' %>
-
-    <h4>Past Comments</h4>
-    <div id="comment_table">
-      <%= render 'adopter_comments' %>
-    </div>
-
-  </div>
-</div>
-
 <%= form_for @adoption_app, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
   <div class="row">
     <div class="span12">
@@ -127,10 +113,24 @@
   </div>
   <div class="row>">
     <div class="span12">
-      <%= f.submit "Save", :class => "btn btn-primary" %>
+      <%= f.submit "Update Documents", :class => "btn btn-primary" %>
     </div>
   </div>
 <% end %>
+
+<div class="row">
+  <div class="span12">
+
+    <h4>Add Comment</h4>
+    <%= render 'adopter_comment_form' %>
+
+    <h4>Past Comments</h4>
+    <div id="comment_table">
+      <%= render 'adopter_comments' %>
+    </div>
+
+  </div>
+</div>
 
 <script>
   $(function() {

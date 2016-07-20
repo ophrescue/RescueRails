@@ -78,6 +78,46 @@
   </div>
 </div>
 
+<%= form_for @adoption_app, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
+  <div class="row">
+    <div class="span12">
+      <h2>Documents</h2>
+      <div class="span5">
+        <h3>New Documents</h3>
+        <div class="control-group">
+          <%= f.fields_for :attachments do |af| %>
+            <% if af.object.new_record? %>
+              <%= af.file_field :attachment %><br />
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="span5">
+        <h3>Existing Documents</h3>
+          <%= f.fields_for :attachments do |af| %>
+            <% if af.object.persisted? %>
+              <div class="control-group">
+                <label for="delAttachment">
+                  <i class="icon-file"></i><%= link_to af.object.attachment_file_name, af.object.download_url %>
+                </label>
+                <label class="checkbox">
+                  <%= af.check_box :_destroy, :id => "delAttachment" %>
+                  <span>Delete <%= af.object.attachment_file_name %></span>
+                </label>
+              </div>
+            <% end %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row>">
+    <div class="span12">
+      <%= f.submit "Update Documents", :class => "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
 <div class="row">
   <div class="span12">
 

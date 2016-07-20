@@ -1,5 +1,4 @@
 class AdoptionAppController < ApplicationController
-
   before_filter :edit_my_adopters_user, only: [:update]
   before_filter :edit_all_adopters_user, only: [:update]
 
@@ -10,7 +9,7 @@ class AdoptionAppController < ApplicationController
     @adopter.update_attributes(adoption_app_params)
 
     respond_with(@adopter) do |format|
-      format.html { render }
+      format.html { handle_redirect }
       format.json { render json: @adopter }
     end
   end
@@ -18,32 +17,40 @@ class AdoptionAppController < ApplicationController
   private
 
     def adoption_app_params
-      params.require(:adoption_app).permit( :adopter_id,
-                                            :spouse_name,
-                                            :other_household_names,
-                                            :ready_to_adopt_dt,
-                                            :house_type,
-                                            :dog_exercise,
-                                            :dog_stay_when_away,
-                                            :dog_vacation,
-                                            :current_pets,
-                                            :why_not_fixed,
-                                            :current_pets_uptodate,
-                                            :current_pets_uptodate_why,
-                                            :landlord_name,
-                                            :landlord_phone,
-                                            :landlord_email,
-                                            :rent_dog_restrictions,
-                                            :surrender_pet_causes,
-                                            :training_explain,
-                                            :surrendered_pets,
-                                            :how_did_you_hear,
-                                            :pets_branch,
-                                            :current_pets_fixed,
-                                            :rent_costs,
-                                            :vet_info,
-                                            :max_hrs_alone,
-                                            :is_ofage
+      params.require(:adoption_app).permit(:adopter_id,
+                                           :spouse_name,
+                                           :other_household_names,
+                                           :ready_to_adopt_dt,
+                                           :house_type,
+                                           :dog_exercise,
+                                           :dog_stay_when_away,
+                                           :dog_vacation,
+                                           :current_pets,
+                                           :why_not_fixed,
+                                           :current_pets_uptodate,
+                                           :current_pets_uptodate_why,
+                                           :landlord_name,
+                                           :landlord_phone,
+                                           :landlord_email,
+                                           :rent_dog_restrictions,
+                                           :surrender_pet_causes,
+                                           :training_explain,
+                                           :surrendered_pets,
+                                           :how_did_you_hear,
+                                           :pets_branch,
+                                           :current_pets_fixed,
+                                           :rent_costs,
+                                           :vet_info,
+                                           :max_hrs_alone,
+                                           :is_ofage,
+                                            attachments_attributes:
+                                            [
+                                              :attachment,
+                                              :description,
+                                              :updated_by_user_id,
+                                              :_destroy,
+                                              :id
+                                            ]
                                           )
     end
 

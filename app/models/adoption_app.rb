@@ -33,6 +33,8 @@
 #
 
 class AdoptionApp < ActiveRecord::Base
-
   belongs_to :adopter, class_name: 'Adopter'
+
+  has_many :attachments, as: :attachable, dependent: :destroy
+  accepts_nested_attributes_for :attachments, allow_destroy: true
 end

@@ -53,8 +53,7 @@ class Event < ActiveRecord::Base
                  medium: "205x300>",
                  thumb: "64x64>" },
                  path: ":rails_root/public/system/event_photo/:id/:style/:filename",
-                 url: "/system/event_photo/:id/:style/:filename",
-                 s3_permissions: :public_read
+                 url: "/system/event_photo/:id/:style/:filename"
 
 
   validates_attachment_size :photo, less_than: 5.megabytes

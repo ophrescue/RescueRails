@@ -1,7 +1,8 @@
 class DogSearcher
   PER_PAGE = 30
-  ACTIVE_STATUSES = ['adoptable', 'adoption pending', 'on hold', 'return pending', 'coming soon']
-  PUBLIC_STATUSES = ['adoptable', 'adoption pending', 'coming soon']
+
+  ACTIVE_STATUSES = ['adoptable', 'adoption pending', 'on hold', 'return pending', 'coming soon'].freeze
+  PUBLIC_STATUSES = ['adoptable', 'adoption pending', 'coming soon'].freeze
 
   def initialize(params: {}, manager: false)
     @params = params
@@ -33,7 +34,7 @@ class DogSearcher
   end
 
   def self.search(params: {}, manager: false)
-    self.new(params: params, manager: manager).search
+    new(params: params, manager: manager).search
   end
 
   private
@@ -51,7 +52,7 @@ class DogSearcher
   end
 
   def status_search?
-    @params.has_key? :status
+    @params.key? :status
   end
 
   def with_includes
@@ -71,6 +72,6 @@ class DogSearcher
   end
 
   def sort_direction
-    %w[asc desc].include?(@params[:direction]) ? @params[:direction] : 'asc'
+    %w(asc desc).include?(@params[:direction]) ? @params[:direction] : 'asc'
   end
 end

@@ -64,8 +64,8 @@
                   <ul class="dropdown-menu">
                     <% if can_edit_my_adopters? || can_edit_all_adopters? %>
                       <li><%= link_to "Applications",  :controller => "adopters", :status => "active" %></li>
-                      <li><%= link_to "DNA List", :controller => "banned_adopters" %></li>
                     <% end %>
+                    <li><%= link_to "DNA List", :controller => "banned_adopters" %></li>
                     <li><%= link_to "Manage Dogs", :controller => "dogs", :status => "active" %></li>
                     <% if can_dl_resources? %>
                       <li><%= link_to "Staff Resources", folders_path %></li>

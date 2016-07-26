@@ -140,6 +140,10 @@ form .control-group.error span.error {
   padding-top: 22px;
 }
 
+.gallery li {
+  height: 478px;
+}
+
 img.floatLeft {
     float: left;
     margin: 4px;
@@ -241,6 +245,10 @@ div .fb-like {
 
 .mb-5 {
   margin-bottom: 5px;
+}
+
+.thumb-box {
+  min-height: 478px;
 }
 
 .thumbnail-no-border {

@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe DogSearcher do
   describe '.search' do
-
     context 'is a manager' do
       let(:manager) { true }
       let(:results) { DogSearcher.search(params: params, manager: manager) }
@@ -23,7 +22,18 @@ describe DogSearcher do
         let!(:other_dog) { create(:dog, name: 'meyer') }
         let(:params) { { search: 'Oscar' } }
 
-        it 'finds the correct dog' do
+        it 'finds the correct dog by name' do
+          expect(results).to include(found_dog)
+          expect(results).to_not include(other_dog)
+        end
+      end
+
+      context 'search by microchip' do
+        let!(:found_dog) { create(:dog, name: 'oscar', microchip: 'ABC123') }
+        let!(:other_dog) { create(:dog, name: 'meyer') }
+        let(:params) { { search: 'ABC123' } }
+
+        it 'finds the correct dog by microchip' do
           expect(results).to include(found_dog)
           expect(results).to_not include(other_dog)
         end

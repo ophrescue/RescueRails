@@ -12,9 +12,9 @@ class DogSearcher
   def search
     if @manager
       if tracking_id_search?
-        @dogs = Dog.where('tracking_id = ?', "#{@params[:search].to_i}")
-      elsif name_search?
-        @dogs = Dog.where('dogs.name ILIKE ?', "%#{@params[:search].strip}%")
+        @dogs = Dog.where('tracking_id = ?', search_term)
+      elsif text_search?
+        @dogs = Dog.where('dogs.name ILIKE ? OR dogs.microchip = ?', "%#{search_term}%", search_term)
       elsif active_status_search?
         @dogs = Dog.where("status IN (?)", ACTIVE_STATUSES)
       elsif status_search?
@@ -43,8 +43,12 @@ class DogSearcher
     @params[:search].to_i > 0
   end
 
-  def name_search?
+  def text_search?
     @params[:search].present?
+  end
+
+  def search_term
+    @params[:search].strip
   end
 
   def active_status_search?

@@ -48,7 +48,7 @@ class DogSearcher
   end
 
   def search_term
-    @params[:search].strip
+    @params[:search].to_s.strip
   end
 
   def active_status_search?

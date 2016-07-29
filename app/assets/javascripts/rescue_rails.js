@@ -24,7 +24,7 @@ window.RescueRails = {
 };
 
 $(document).ready(function() {
-  if ($('ul.pagination').length) {
+  if ($('#dogs-index ul.pagination').length) {
     $(window).scroll(function() {
       var url = $('ul.pagination .next_page a').attr('href');
       if ((url && url !== '#') && $(window).scrollTop() > $(document).height() - $(window).height() - 300) {
@@ -35,4 +35,3 @@ $(document).ready(function() {
     return $(window).scroll();
   }
 });
-

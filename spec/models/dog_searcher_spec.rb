@@ -7,13 +7,28 @@ describe DogSearcher do
       let(:results) { DogSearcher.search(params: params, manager: manager) }
 
       context 'by tracking id' do
-        let!(:found_dog) { create(:dog, tracking_id: 1) }
-        let!(:other_dog) { create(:dog, tracking_id: 100) }
-        let(:params) { { search: 1 } }
+        context 'search by tracking_id int' do
+          let!(:found_dog) { create(:dog, tracking_id: 1) }
+          let!(:other_dog) { create(:dog, tracking_id: 100) }
+          let(:params) { { search: 1 } }
 
-        it 'finds the correct dog' do
-          expect(results).to include(found_dog)
-          expect(results).to_not include(other_dog)
+          it 'finds the correct dog' do
+            expect(results).to include(found_dog)
+            expect(results).to_not include(other_dog)
+          end
+        end
+
+        context 'search by microchip int' do
+          let!(:found_dog) do
+            create(:dog, name: 'oscar', microchip: 123_456, tracking_id: 1)
+          end
+          let!(:other_dog) { create(:dog, name: 'meyer', tracking_id: 11) }
+          let(:params) { { search: 123_456 } }
+
+          it 'finds the correct dog by microchip' do
+            expect(results).to include(found_dog)
+            expect(results).to_not include(other_dog)
+          end
         end
       end
 
@@ -28,7 +43,7 @@ describe DogSearcher do
         end
       end
 
-      context 'search by microchip' do
+      context 'search by microchip string' do
         let!(:found_dog) { create(:dog, name: 'oscar', microchip: 'ABC123') }
         let!(:other_dog) { create(:dog, name: 'meyer') }
         let(:params) { { search: 'ABC123' } }

@@ -1,7 +1,14 @@
 class DogSearcher
   PER_PAGE = 30
 
-  ACTIVE_STATUSES = ['adoptable', 'adoption pending', 'on hold', 'return pending', 'coming soon'].freeze
+  ACTIVE_STATUSES = [
+    'adoptable',
+    'adoption pending',
+    'on hold',
+    'return pending',
+    'coming soon'
+  ].freeze
+
   PUBLIC_STATUSES = ['adoptable', 'adoption pending', 'coming soon'].freeze
 
   def initialize(params: {}, manager: false)
@@ -12,9 +19,17 @@ class DogSearcher
   def search
     if @manager
       if tracking_id_search?
-        @dogs = Dog.where('tracking_id = ?', search_term)
+        @dogs = Dog.where(
+          'tracking_id = ? OR dogs.microchip = ?',
+          search_term,
+          search_term
+        )
       elsif text_search?
-        @dogs = Dog.where('dogs.name ILIKE ? OR dogs.microchip = ?', "%#{search_term}%", search_term)
+        @dogs = Dog.where(
+          'dogs.name ILIKE ? OR dogs.microchip = ?',
+          "%#{search_term}%",
+          search_term
+        )
       elsif active_status_search?
         @dogs = Dog.where("status IN (?)", ACTIVE_STATUSES)
       elsif status_search?

@@ -18,7 +18,7 @@ require 'capybara/rails'
 
 require 'capybara-screenshot/rspec'
 
-#Poltergeist with PhantomJS
+# Poltergeist with PhantomJS
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
 
@@ -60,9 +60,7 @@ end
 # Keep only the screenshots generated from the last failing test suite
 Capybara::Screenshot.prune_strategy = :keep_last_run
 
-#Use this method to simulate keypress entries
-
+# Use this method to simulate keypress entries
 def send_keys_inputmask(location, keys)
-  find(location).trigger('click')
   find(location).native.send_keys(keys)
 end

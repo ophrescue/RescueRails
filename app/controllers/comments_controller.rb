@@ -14,7 +14,7 @@
 class CommentsController < ApplicationController
   include SessionsHelper
 
-  before_filter :authenticate
+  before_action :authenticate
 
   respond_to :html, :json
 
@@ -45,30 +45,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit
-    @comment = Comment.find(params[:id])
-  end
-
-  def update
-    @comment = Comment.find(params[:id])
-    if @comment.user_id == current_user.id
-      @comment.update_attributes(comment_params)
-      render json: nil, status: :ok
-    else
-      # return a not authorized
-      respond_with @comment, status: :unauthorized
-    end
-  end
-
-  def destroy
-    @comment = Comment.find(params[:id])
-    if @comment.user == current_user
-      @comment.destroy
-    else
-      respond_with @comment, status: :unauthorized
-    end
-  end
-
   private
 
   def comment_params
@@ -77,11 +53,14 @@ class CommentsController < ApplicationController
 
   def find_commentable
     params.each do |name, value|
-      if name =~ /(.+)_id$/
-        return $1.classify.constantize.find(value)
+      matches = /(.+)_id$/.match(name)
+
+      if matches.present?
+        klass = matches[1]
+        return klass.classify.constantize.find(value)
       end
     end
+
     nil
   end
-
 end

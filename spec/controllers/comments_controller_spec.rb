@@ -14,10 +14,9 @@
 require 'rails_helper'
 
 describe CommentsController, type: :controller do
-  let!(:user) { build(:user) }
+  let!(:user) { create(:user) }
+
   before(:each) do
-    allow(User).to receive(:chimp_subscribe).and_return(true)
-    user.save
     allow(controller).to receive(:current_user).and_return(user)
   end
 
@@ -34,9 +33,35 @@ describe CommentsController, type: :controller do
     context 'an ajax call is made' do
       it 'should succeed' do
         dog = create(:dog)
-        xhr :post, :create, { dog_id: dog.id, comment: FactoryGirl.attributes_for(:comment) }
+        xhr :post, :create, dog_id: dog.id, comment: FactoryGirl.attributes_for(:comment)
         expect(response.status).to eq(200)
         expect(response).not_to be_redirect
+      end
+    end
+  end
+
+  describe '#find_commentable' do
+    subject { controller.send(:find_commentable) }
+
+    let(:dog) { create(:dog) }
+
+    before do
+      allow(controller).to receive(:params) { params }
+    end
+
+    context 'params contains _id param' do
+      let(:params) { { dog_id: dog.id } }
+
+      it 'returns dog' do
+        expect(subject).to eq(dog)
+      end
+    end
+
+    context 'params does not contain _id param' do
+      let(:params) { { something: 1 } }
+
+      it 'returns nil' do
+        expect(subject).to be_nil
       end
     end
   end

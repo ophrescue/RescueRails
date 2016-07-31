@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :adoption_app do
     spouse_name { Faker::Name.name }
     other_household_names 'other household'
-    ready_to_adopt_dt '2020-01-01'
+    ready_to_adopt_dt { Faker::Date.between(2.days.ago, Time.zone.today) }
     house_type 'rent'
     dog_exercise 'will go to the gym'
     dog_stay_when_away 'In a crate'

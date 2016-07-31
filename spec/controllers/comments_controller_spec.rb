@@ -40,6 +40,37 @@ describe CommentsController, type: :controller do
     end
   end
 
+  describe 'PUT #update' do
+    subject { put :update, id: comment.id, comment: { content: 'Hi' } }
+
+    let(:user) { create(:user) }
+    let(:comment) { create(:comment, user_id: user.id) }
+
+    before do
+      allow(controller).to receive(:current_user) { current_user }
+    end
+
+    context 'user created comment being updated' do
+      let(:current_user) { user }
+
+      it 'updates the comment' do
+        expect_any_instance_of(Comment).to receive(:update_attributes)
+        subject
+        expect(response).to be_ok
+      end
+    end
+
+    context 'user did not create comment being updated' do
+      let(:current_user) { create(:user) }
+
+      it 'returns unauthorized' do
+        subject
+
+        expect(response).to be_unauthorized
+      end
+    end
+  end
+
   describe '#find_commentable' do
     subject { controller.send(:find_commentable) }
 

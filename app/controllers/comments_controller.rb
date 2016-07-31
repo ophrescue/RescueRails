@@ -48,9 +48,9 @@ class CommentsController < ApplicationController
   def update
     if @comment.user_id == current_user.id
       @comment.update_attributes(comment_params)
-      render json: nil, status: :ok
+      head :ok
     else
-      respond_with @comment, status: :unauthorized
+      head :unauthorized
     end
   end
 

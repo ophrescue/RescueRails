@@ -28,3 +28,10 @@ en:
       status_definitions: 'Adoption Application Status Definitions'
       dog_status_definitions: 'Dog Status Definitions'
       terms: 'Terms and Conditions'
+    adopters:
+      index: 'Adoption Applications'
+      new: 'Adoption Application'
+    banned_adopters:
+      index: 'Do Not Adopt List'
+      new: 'Add a Banned Adopter'
+      edit: 'Edit'

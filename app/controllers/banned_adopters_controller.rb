@@ -32,7 +32,6 @@ class BannedAdoptersController < ApplicationController
   end
 
   def new
-    @title = "Add a Banned Adopter"
     @banned_adopter = BannedAdopter.new
   end
 
@@ -42,13 +41,11 @@ class BannedAdoptersController < ApplicationController
       flash[:success] = "New Banned Adopter Added"
       redirect_to banned_adopters_path
     else
-      @title = "Add a Banned Adopter"
       render 'new'
     end
   end
 
   def edit
-    @title = "Edit"
     @banned_adopter = BannedAdopter.find(params[:id])
   end
 
@@ -58,7 +55,6 @@ class BannedAdoptersController < ApplicationController
       flash[:success] = "Record updated."
       redirect_to banned_adopters_path
     else
-      @title = "Edit"
       render 'edit'
     end
   end

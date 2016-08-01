@@ -18,11 +18,10 @@ class BannedAdoptersController < ApplicationController
   before_action :ban_adopters_user, only: [:new, :create, :destroy, :edit, :update, :import]
 
   def index
-    @title = "Do Not Adopt List"
     @banned_adopters = BannedAdopter.order(:name)
     respond_to do |format|
       format.html
-      format.xls { send_data @banned_adopters.to_xls(filename: 'banned_adopters.xls', columns: [:id, :name, :phone, :email, :city, :state, :comment], headers: ['id', 'Name', 'Phone Number', 'Email Address', 'City', 'State', 'Comment']) }
+      format.xls render_banned_adopters_xls
     end
   end
 
@@ -67,17 +66,41 @@ class BannedAdoptersController < ApplicationController
 
   private
 
-    def ban_adopters_user
-        redirect_to(root_path) unless current_user.ban_adopters?
-    end
+  def ban_adopters_user
+    redirect_to(root_path) unless current_user.ban_adopters?
+  end
 
-    def banned_adopter_params
-      params.require(:banned_adopter).permit( :name,
-                                              :phone,
-                                              :email,
-                                              :city,
-                                              :state,
-                                              :comment)
-    end
+  def banned_adopter_params
+    params.require(:banned_adopter)
+      .permit(:name,
+              :phone,
+              :email,
+              :city,
+              :state,
+              :comment)
+  end
 
+  def render_banned_adopters_xls
+    send_data @banned_adopters.to_xls(
+      filename: 'banned_adopters.xls',
+      columns: [
+        :id,
+        :name,
+        :phone,
+        :email,
+        :city,
+        :state,
+        :comment
+      ],
+      headers: [
+        'id',
+        'Name',
+        'Phone Number',
+        'Email Address',
+        'City',
+        'State',
+        'Comment'
+      ]
+    )
+  end
 end

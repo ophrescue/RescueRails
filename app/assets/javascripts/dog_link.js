@@ -15,7 +15,7 @@ $( function () {
     });
   });
 
-  $('#delete_dog_link').live('submit', function(e) {
+  $('#linked_dogs_table').on('submit', '#delete_dog_link', function(e) {
     e.preventDefault();
     if(confirm('Are you sure you would like to delete this?')) {
       $.ajax({
@@ -37,7 +37,6 @@ $( function () {
   });
 
 });
-
 
 function refresh_dogs() {
   var url = window.location;

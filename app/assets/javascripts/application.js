@@ -7,9 +7,7 @@
 //= require warning
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.datepicker
-//= require jquery.ui.widget
-//= require jquery.ui.sortable
+//= require jquery-ui
 //= require autocomplete-rails
 //= require bbq
 //= require jquery.form.wizard
@@ -17,7 +15,7 @@
 //= require twitter/bootstrap
 //= require jquery.tablesorter.min
 //= require jquery.tablesorter.cfg
-//= require jquery.maskedinput
+//= require jquery.inputmask
 //= require msk_input.cfg
 //= require jquery.tokeninput
 //= require rescue_rails
@@ -31,5 +29,5 @@
 //= require dog_link.js
 //= require chosen-jquery
 //= require chosen-calls.js
-//= require photos.js.coffee
+//= require photos.js
 //= require adoption_form

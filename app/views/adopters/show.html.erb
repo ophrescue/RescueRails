@@ -134,6 +134,7 @@
 
 <script>
   $(function() {
-    $('select#adoption_relation_type').live('change', RescueRails.saveParentForm);
+      $('#linked_dogs_table')
+        .on('change', 'select#adoption_relation_type', RescueRails.saveParentForm);
    });
 </script>

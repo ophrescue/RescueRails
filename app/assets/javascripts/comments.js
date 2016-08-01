@@ -1,7 +1,6 @@
 $( function () {
 
   if ( $('.edit_comment').length > 0) {
-
     $(document).on('click', '.toggle-edit-comment', function(e){
       var $parent = $(e.target).parents('form.edit_comment');
       isEditing = $($parent).data("editing");
@@ -43,28 +42,6 @@ $( function () {
       }
     });
   });
-
-  $('#delete_comment').live('submit', function(e) {
-    e.preventDefault();
-    if(confirm('Are you sure you want to delete this?')) {
-      $.ajax({
-        type: 'POST',
-        url: this.action,
-        data: $(this).serialize(),
-        success: function (data) {
-          // so it worked, add to the comment list
-          refresh_comments();
-        },
-        statusCode: {
-          401: function() {
-            alert('not authorized to delete this comment');
-          }
-        },
-        error: function() {
-        },
-      });
-    }
-  });
 });
 
 function editComment($parent) {
@@ -81,7 +58,6 @@ function showComment($parent) {
   $parent.find('.save-edit-comment').hide();
 }
 
-
 function saveComment($form) {
   var url = $form.attr('action');
   var serialized_form = $form.serialize();
@@ -94,7 +70,7 @@ function saveComment($form) {
           $.get(url, function(data) {
             $form.find('.read-only-comment').html(data);
           })
-          
+
         }).error( function() {
           $form.find('.read-only-comment').html("Comment update error.");
           })

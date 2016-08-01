@@ -27,12 +27,8 @@ feature 'Apply for Adoption' do
     fill_in('adopter_state', with: 'MD')
     fill_in('adopter_zip', with: '21224')
 
-    find('input#adopter_phone').trigger('click')
-    sleep(1)  #TODO fix this dirty hack
     send_keys_inputmask('input#adopter_phone', '1234567890')
 
-    find('input#adopter_other_phone').trigger('click')
-    sleep(1)  #TODO fix this dirty hack
     send_keys_inputmask('input#adopter_other_phone', '0987654321')
 
     fill_in('adopter_when_to_call', with: 'Anytime After 3pm')
@@ -77,8 +73,6 @@ feature 'Apply for Adoption' do
     click_button('Next')
     expect(page).to have_content('Reference')
     fill_in('adopter_references_attributes_0_name', with: 'First Reference')
-    find('input#adopter_references_attributes_0_phone').trigger('click')
-    sleep(1)  #TODO fix this dirty hack
     send_keys_inputmask('input#adopter_references_attributes_0_phone', '1111111111')
     fill_in('adopter_references_attributes_0_email', with: 'first@reference.org')
     fill_in('adopter_references_attributes_0_relationship', with: 'Friend')

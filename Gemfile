@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby   '2.2.3'
+ruby   '2.3.1'
 
 gem 'rails', '~> 4.2.4'
 gem 'rack-cache'
@@ -46,12 +46,11 @@ gem 'anjlab-bootstrap-rails', '~> 2.2.2.1', require: 'bootstrap-rails'
 # in production environments by default.
 
 gem 'sass-rails'
-gem 'coffee-rails'
 gem 'uglifier'
 
-gem 'chosen-rails', '~> 1.4.3'
-gem 'jquery-rails', '~> 2.0.3'
-gem 'jquery-ui-rails', '~> 2.0.2'
+gem 'chosen-rails'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 gem 'newrelic_rpm'
 gem 'rollbar'
@@ -71,7 +70,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', '~> 2.5.0'
+  gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'coveralls', require: false

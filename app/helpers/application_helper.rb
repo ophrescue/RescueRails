@@ -1,9 +1,8 @@
 module ApplicationHelper
   def logo
-    image_tag("logo.png", alt: "Operation Paws for Homes")
+    image_tag('logo.png', alt: 'Operation Paws for Homes')
   end
 
-  #Return of title on a per-page basis.
   def title
     @title ||= I18n.t("title.#{controller_name}.#{action_name}")
 
@@ -15,7 +14,7 @@ module ApplicationHelper
   end
 
   def base_title
-    "Operation Paws for Homes"
+    'Operation Paws for Homes'
   end
 
   def sortable(column, title = nil)

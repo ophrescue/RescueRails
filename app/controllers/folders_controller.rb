@@ -11,18 +11,17 @@
 #
 
 class FoldersController < ApplicationController
-
-  before_filter :authenticate
-  before_filter :dl_resource_user
-  before_filter :admin_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate
+  before_action :dl_resource_user
+  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @title = "Staff Resources"
-    if current_user.dl_locked_resources
-      @folders = Folder.order(:name)
+    @folders = if current_user.dl_locked_resources
+      Folder.order(:name)
     else
-      @folders = Folder.where(locked: FALSE).order(:name)
+      Folder.where(locked: FALSE).order(:name)
     end
+
     @folders.each do |a|
       a.attachments.build
     end
@@ -30,21 +29,23 @@ class FoldersController < ApplicationController
 
   def show
     @folder = Folder.find(params[:id])
+
     if @folder.locked && !current_user.dl_locked_resources?
       flash[:error] = "You do not have permission to view this folder"
-      redirect_to action: "index"
+      return redirect_to action: "index"
     end
+
     @folder.attachments.build
     @title = @folder.name
   end
 
   def new
     @folder = Folder.new
-    @title = "Create a New Folder"
   end
 
   def create
     @folder = Folder.new(folder_params)
+
     if @folder.save
       flash[:success] = "New Folder Added"
       handle_redirect
@@ -65,7 +66,6 @@ class FoldersController < ApplicationController
   def edit
     @folder = Folder.find(params[:id])
     @folder.attachments.build
-    @title = "Edit Folder"
   end
 
   def destroy
@@ -76,24 +76,23 @@ class FoldersController < ApplicationController
 
   private
 
-    def folder_params
-      params.require(:folder).permit( :description,
-                                      :name,
-                                      :locked,
-                                      attachments_attributes:
-                                      [
-                                       :attachment,
-                                       :description,
-                                       :updated_by_user_id
-                                       ])
-    end
+  def folder_params
+    params.require(:folder)
+      .permit(:description,
+              :name,
+              :locked,
+              attachments_attributes: [
+                :attachment,
+                :description,
+                :updated_by_user_id
+              ])
+  end
 
-    def admin_user
-      redirect_to(root_path) unless current_user.admin?
-    end
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
+  end
 
-    def dl_resource_user
-      redirect_to(root_path) unless current_user.dl_resources?
-    end
-
+  def dl_resource_user
+    redirect_to(root_path) unless current_user.dl_resources?
+  end
 end

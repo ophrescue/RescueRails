@@ -35,3 +35,27 @@ en:
       index: 'Do Not Adopt List'
       new: 'Add a Banned Adopter'
       edit: 'Edit'
+    dogs:
+      new: 'Add a New Dog'
+      edit: 'Edit Dog'
+    events:
+      destroy: 'Events'
+      edit: 'Edit Event'
+      index: 'Upcoming Events'
+      past: 'Past Events'
+      show: 'Events'
+      new: 'Add an Event'
+    folders:
+      edit: 'Edit Folder'
+      index: 'Staff Resources'
+      new: 'Create a New Folder'
+    sessions:
+      new: 'Sign In'
+    shelters:
+      edit: 'Edit'
+      index: 'Source Shelters'
+      new: 'Add a Source Shelter'
+    users:
+      edit: 'Edit Profile'
+      index: 'Staff Directory'
+      new: 'Add a Staff Account'

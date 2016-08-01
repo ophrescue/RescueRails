@@ -58,16 +58,14 @@
 #
 
 class UsersController < ApplicationController
-
-  before_filter :authenticate
-  before_filter :correct_user, only: [:edit, :update]
-  before_filter :admin_user, only: [:new, :create, :destroy]
+  before_action :authenticate
+  before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: [:new, :create, :destroy]
 
   YES_NO_OPTIONS = [['Any', ''], ['Yes', 't'], ['No', 'f']]
   OWN_RENT_OPTIONS = [['Any', ''], ['Own', 'own'], ['Rent', 'rent']]
 
   def index
-    @title = "Staff Directory"
     @options = YES_NO_OPTIONS
     @rent_options = OWN_RENT_OPTIONS
 
@@ -87,7 +85,6 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @title = "Add a Staff Account"
     init_fields
   end
 
@@ -97,7 +94,6 @@ class UsersController < ApplicationController
       flash[:success] = "Account created for " + @user.name
       redirect_to users_path
     else
-      @title = "Add a Staff Account"
       @user.password = ""
       @user.password_confirmation = ""
       init_fields
@@ -106,7 +102,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @title = "Edit Profile"
     @user = User.find(params[:id])
     init_fields
   end
@@ -117,7 +112,6 @@ class UsersController < ApplicationController
       flash[:success] = "Profile updated."
       redirect_to @user
     else
-      @title = "Edit Profile"
       init_fields
       render 'edit'
     end
@@ -131,130 +125,126 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      if current_user && current_user.admin?
-        params.require(:user).permit(:name,
-                                     :email,
-                                     :password,
-                                     :password_confirmation,
-                                     :admin,
-                                     :is_foster,
-                                     :phone,
-                                     :address1,
-                                     :address2,
-                                     :city,
-                                     :state,
-                                     :zip,
-                                     :duties,
-                                     :edit_dogs,
-                                     :share_info,
-                                     :edit_my_adopters,
-                                     :edit_all_adopters,
-                                     :locked,
-                                     :edit_events,
-                                     :other_phone,
-                                     :available_to_foster,
-                                     :foster_dog_types,
-                                     :complete_adopters,
-                                     :add_dogs,
-                                     :ban_adopters,
-                                     :dl_resources,
-                                     :dl_locked_resources,
-                                     :house_type,
-                                     :breed_restriction,
-                                     :weight_restriction,
-                                     :has_own_dogs,
-                                     :has_own_cats,
-                                     :children_under_five,
-                                     :has_fenced_yard,
-                                     :can_foster_puppies,
-                                     :parvo_house,
-                                     :admin_comment,
-                                     :is_photographer,
-                                     :writes_newsletter,
-                                     :is_transporter,
-                                     :mentor_id,
-                                     :training_team,
-                                     :lastverified,
-                                     :agreement_id,
-                                     :confidentiality_agreement_id,
-                                      agreement_attributes:
-                                      [
-                                        :attachment,
-                                        :description,
-                                        :updated_by_user_id,
-                                        :_destroy,
-                                        :id
-                                      ],
-                                      confidentiality_agreement_attributes:
-                                      [
-                                        :attachment,
-                                        :description,
-                                        :updated_by_user_id,
-                                        :_destroy,
-                                        :id
-                                      ]
-          )
-      else
-        params.require(:user).permit( :name,
-                                      :email,
-                                      :password,
-                                      :password_confirmation,
-                                      :phone,
-                                      :other_phone,
-                                      :address1,
-                                      :address2,
-                                      :city,
-                                      :state,
-                                      :zip,
-                                      :duties,
-                                      :share_info,
-                                      :available_to_foster,
-                                      :foster_dog_types,
-                                      :house_type,
-                                      :breed_restriction,
-                                      :weight_restriction,
-                                      :has_own_dogs,
-                                      :has_own_cats,
-                                      :children_under_five,
-                                      :has_fenced_yard,
-                                      :can_foster_puppies,
-                                      :parvo_house,
-                                      :is_transporter,
-                                      :mentor_id,
-                                      agreement_attributes:
-                                      [
-                                        :attachment,
-                                        :description,
-                                        :updated_by_user_id,
-                                        :_destroy,
-                                        :id
-                                      ]
-                                    )
-      end
+  def user_params
+    if current_user && current_user.admin?
+      params.require(:user)
+        .permit(:name,
+                :email,
+                :password,
+                :password_confirmation,
+                :admin,
+                :is_foster,
+                :phone,
+                :address1,
+                :address2,
+                :city,
+                :state,
+                :zip,
+                :duties,
+                :edit_dogs,
+                :share_info,
+                :edit_my_adopters,
+                :edit_all_adopters,
+                :locked,
+                :edit_events,
+                :other_phone,
+                :available_to_foster,
+                :foster_dog_types,
+                :complete_adopters,
+                :add_dogs,
+                :ban_adopters,
+                :dl_resources,
+                :dl_locked_resources,
+                :house_type,
+                :breed_restriction,
+                :weight_restriction,
+                :has_own_dogs,
+                :has_own_cats,
+                :children_under_five,
+                :has_fenced_yard,
+                :can_foster_puppies,
+                :parvo_house,
+                :admin_comment,
+                :is_photographer,
+                :writes_newsletter,
+                :is_transporter,
+                :mentor_id,
+                :training_team,
+                :lastverified,
+                :agreement_id,
+                :confidentiality_agreement_id,
+                agreement_attributes: [
+                  :attachment,
+                  :description,
+                  :updated_by_user_id,
+                  :_destroy,
+                  :id
+                ],
+                confidentiality_agreement_attributes: [
+                  :attachment,
+                  :description,
+                  :updated_by_user_id,
+                  :_destroy,
+                  :id
+                ])
+    else
+      params.require(:user)
+        .permit(:name,
+                :email,
+                :password,
+                :password_confirmation,
+                :phone,
+                :other_phone,
+                :address1,
+                :address2,
+                :city,
+                :state,
+                :zip,
+                :duties,
+                :share_info,
+                :available_to_foster,
+                :foster_dog_types,
+                :house_type,
+                :breed_restriction,
+                :weight_restriction,
+                :has_own_dogs,
+                :has_own_cats,
+                :children_under_five,
+                :has_fenced_yard,
+                :can_foster_puppies,
+                :parvo_house,
+                :is_transporter,
+                :mentor_id,
+                agreement_attributes: [
+                  :attachment,
+                  :description,
+                  :updated_by_user_id,
+                  :_destroy,
+                  :id
+                ])
     end
+  end
 
-    def init_fields
-      @user.build_agreement unless @user.agreement
-      @user.build_confidentiality_agreement unless @user.confidentiality_agreement
-      @foster_users = User.where(locked: false).order("name")
-    end
+  def init_fields
+    @user.build_agreement unless @user.agreement
+    @user.build_confidentiality_agreement unless @user.confidentiality_agreement
+    @foster_users = User.where(locked: false).order("name")
+  end
 
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_path) unless (current_user?(@user) || current_user.admin?)
-    end
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_path) unless (current_user?(@user) || current_user.admin?)
+  end
 
-    def admin_user
-      redirect_to(root_path) unless current_user.admin?
-    end
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
+  end
 
-    def filtering_params
-      params.slice(:admin, :adoption_coordinator, :event_planner,
-                   :dog_adder, :dog_editor, :photographer, :foster,
-                   :newsletter, :has_dogs, :has_cats, :house_type, :has_children_under_five,
-                   :has_fence, :puppies_ok, :has_parvo_house, :transporter, :training_team
-                  )
-    end
-
+  def filtering_params
+    params.slice(:admin, :adoption_coordinator, :event_planner,
+                 :dog_adder, :dog_editor, :photographer, :foster,
+                 :newsletter, :has_dogs, :has_cats, :house_type, :has_children_under_five,
+                 :has_fence, :puppies_ok, :has_parvo_house, :transporter, :training_team
+                )
+  end
 end

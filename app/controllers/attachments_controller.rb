@@ -17,9 +17,8 @@
 #
 
 class AttachmentsController < ApplicationController
-
   respond_to :html, :json
-  before_filter :authenticate
+  before_action :authenticate
 
   def index
     redirect_to :root
@@ -28,6 +27,7 @@ class AttachmentsController < ApplicationController
   def destroy
     Attachment.find(params[:id]).destroy
     flash[:success] = "Attachment Deleted"
+
     handle_redirect
   end
 
@@ -35,5 +35,4 @@ class AttachmentsController < ApplicationController
     @attachment = Attachment.find(params[:id])
     redirect_to(@attachment.attachment.expiring_url(10))
   end
-
 end

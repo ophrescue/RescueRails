@@ -2,4 +2,29 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  title:
+    pages:
+      home: 'All breed dog rescue based in Virgina, Maryland, Washington DC and South Central PA'
+      guide: 'Adoption Guide'
+      aboutus: 'About Us'
+      contact: 'Contact Us'
+      contributers: 'Contributers'
+      partnerships: 'Partnerships'
+      shelters: 'Partering Shelters'
+      dontate: 'Donate'
+      special_funds: 'Special Funds'
+      sponsor: 'Sponsor a Dog'
+      other_ways_to_give: 'Other Ways to Give'
+      foster: 'Fostering Opportunities'
+      fosterfaq: 'Foster Frequently Asked Questions'
+      newsletter: 'Newsletter'
+      adoptprocess: 'Adoption Process'
+      insurance: 'Pet Insurance'
+      resources: 'Resources for Adopters'
+      volunteer: 'Volunteer'
+      documentary: "'600 Miles Home' Dog Rescue Documentary"
+      puppyguide: 'Guide For Puppies'
+      shopping: 'New Dog Shopping List'
+      status_definitions: 'Adoption Application Status Definitions'
+      dog_status_definitions: 'Dog Status Definitions'
+      terms: 'Terms and Conditions'

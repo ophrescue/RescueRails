@@ -14,17 +14,15 @@
 #
 
 class BannedAdoptersController < ApplicationController
-
-  before_filter :authenticate
-  before_filter :ban_adopters_user, only: [:new, :create, :destroy, :edit, :update, :import]
-
+  before_action :authenticate
+  before_action :ban_adopters_user, only: [:new, :create, :destroy, :edit, :update, :import]
 
   def index
     @title = "Do Not Adopt List"
     @banned_adopters = BannedAdopter.order(:name)
     respond_to do |format|
       format.html
-      format.xls {send_data @banned_adopters.to_xls(filename: 'banned_adopters.xls', columns: [:id, :name, :phone, :email, :city, :state, :comment], headers: ['id', 'Name', 'Phone Number', 'Email Address', 'City', 'State', 'Comment'])}
+      format.xls { send_data @banned_adopters.to_xls(filename: 'banned_adopters.xls', columns: [:id, :name, :phone, :email, :city, :state, :comment], headers: ['id', 'Name', 'Phone Number', 'Email Address', 'City', 'State', 'Comment']) }
     end
   end
 
@@ -70,7 +68,6 @@ class BannedAdoptersController < ApplicationController
   #   flash[:success] = "Banned Adopter List Imported."
   #   redirect_to banned_adopters_path
   # end
-
 
   private
 

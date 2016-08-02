@@ -13,3 +13,4 @@ chromedriver.log
 .idea/
 .env.*
 coverage
+.powenv

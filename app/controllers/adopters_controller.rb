@@ -36,8 +36,6 @@ class AdoptersController < ApplicationController
 
   def index
     session[:last_search] = request.url
-
-    @title = "Adoption Applications"
     @adopters = AdopterSearcher.search(params: params)
   end
 
@@ -52,7 +50,6 @@ class AdoptersController < ApplicationController
   end
 
   def new
-    @title = "Adoption Application"
     @adopter = Adopter.new
     @adopter.adoption_app = AdoptionApp.new
     @adopter.dog_name = params[:dog_name]

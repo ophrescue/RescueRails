@@ -53,11 +53,11 @@ class DogsController < ApplicationController
 
   autocomplete :breed, :name, full: true
 
-  before_filter :authenticate, except: %i(index show)
-  before_filter :admin_user, only: %i(destroy)
-  before_filter :add_dogs_user, only: %i(new create)
-  before_filter :load_dog, only: %i(show edit update destroy)
-  before_filter :edit_dog_check, only: %i(edit update)
+  before_action :authenticate, except: %i(index show)
+  before_action :admin_user, only: %i(destroy)
+  before_action :add_dogs_user, only: %i(new create)
+  before_action :load_dog, only: %i(show edit update destroy)
+  before_action :edit_dog_check, only: %i(edit update)
 
   def index
     is_manager = signed_in? && session[:mgr_view]
@@ -73,14 +73,12 @@ class DogsController < ApplicationController
   def new
     @dog = Dog.new
     load_instance_variables
-    @title = "Add a New Dog"
   end
 
   def edit
     @dog.primary_breed_name = @dog.primary_breed.name unless @dog.primary_breed.nil?
     @dog.secondary_breed_name = @dog.secondary_breed.name unless @dog.secondary_breed.nil?
     load_instance_variables
-    @title = "Edit Dog"
   end
 
   def update
@@ -88,7 +86,6 @@ class DogsController < ApplicationController
       flash[:success] = "Dog updated."
       redirect_to @dog
     else
-      @title = "Edit Dog"
       load_instance_variables
       render 'edit'
     end
@@ -102,7 +99,6 @@ class DogsController < ApplicationController
       flash[:success] = "New Dog Added"
       redirect_to dogs_path
     else
-      @title = "Add a New Dog"
       load_instance_variables
       render 'new'
     end
@@ -123,70 +119,69 @@ class DogsController < ApplicationController
   private
 
   def dog_params
-    params.require(:dog).permit(  :name,
-                                  :tracking_id,
-                                  :primary_breed_id,
-                                  :primary_breed_name,
-                                  :secondary_breed_id,
-                                  :secondary_breed_name,
-                                  :status,
-                                  :age,
-                                  :size,
-                                  :is_altered,
-                                  :gender,
-                                  :is_special_needs,
-                                  :no_dogs,
-                                  :no_cats,
-                                  :no_kids,
-                                  :description,
-                                  :photos_attributes,
-                                  :foster_id,
-                                  :foster_start_date,
-                                  :adoption_date,
-                                  :is_uptodateonshots,
-                                  :intake_dt,
-                                  :available_on_dt,
-                                  :has_medical_need,
-                                  :is_high_priority,
-                                  :needs_photos,
-                                  :has_behavior_problem,
-                                  :needs_foster,
-                                  :attachments_attributes,
-                                  :petfinder_ad_url,
-                                  :adoptapet_ad_url,
-                                  :craigslist_ad_url,
-                                  :youtube_video_url,
-                                  :first_shots,
-                                  :second_shots,
-                                  :third_shots,
-                                  :rabies,
-                                  :heartworm,
-                                  :bordetella,
-                                  :microchip,
-                                  :original_name,
-                                  :fee,
-                                  :coordinator_id,
-                                  :sponsored_by,
-                                  :shelter_id,
-                                  :medical_summary,
-                                  attachments_attributes:
-                                  [
-                                    :attachment,
-                                    :description,
-                                    :updated_by_user_id,
-                                    :_destroy,
-                                    :id
-                                  ],
-                                  photos_attributes:
-                                  [
-                                    :photo,
-                                    :position,
-                                    :is_private,
-                                    :_destroy,
-                                    :id
-                                  ]
-
-                                )
+    params.require(:dog)
+      .permit(:name,
+              :tracking_id,
+              :primary_breed_id,
+              :primary_breed_name,
+              :secondary_breed_id,
+              :secondary_breed_name,
+              :status,
+              :age,
+              :size,
+              :is_altered,
+              :gender,
+              :is_special_needs,
+              :no_dogs,
+              :no_cats,
+              :no_kids,
+              :description,
+              :photos_attributes,
+              :foster_id,
+              :foster_start_date,
+              :adoption_date,
+              :is_uptodateonshots,
+              :intake_dt,
+              :available_on_dt,
+              :has_medical_need,
+              :is_high_priority,
+              :needs_photos,
+              :has_behavior_problem,
+              :needs_foster,
+              :attachments_attributes,
+              :petfinder_ad_url,
+              :adoptapet_ad_url,
+              :craigslist_ad_url,
+              :youtube_video_url,
+              :first_shots,
+              :second_shots,
+              :third_shots,
+              :rabies,
+              :heartworm,
+              :bordetella,
+              :microchip,
+              :original_name,
+              :fee,
+              :coordinator_id,
+              :sponsored_by,
+              :shelter_id,
+              :medical_summary,
+              attachments_attributes:
+              [
+                :attachment,
+                :description,
+                :updated_by_user_id,
+                :_destroy,
+                :id
+              ],
+              photos_attributes:
+              [
+                :photo,
+                :position,
+                :is_private,
+                :_destroy,
+                :id
+              ])
   end
 
   def load_dog

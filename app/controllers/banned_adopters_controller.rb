@@ -14,17 +14,14 @@
 #
 
 class BannedAdoptersController < ApplicationController
-
-  before_filter :authenticate
-  before_filter :ban_adopters_user, only: [:new, :create, :destroy, :edit, :update, :import]
-
+  before_action :authenticate
+  before_action :ban_adopters_user, only: [:new, :create, :destroy, :edit, :update, :import]
 
   def index
-    @title = "Do Not Adopt List"
     @banned_adopters = BannedAdopter.order(:name)
     respond_to do |format|
       format.html
-      format.xls {send_data @banned_adopters.to_xls(filename: 'banned_adopters.xls', columns: [:id, :name, :phone, :email, :city, :state, :comment], headers: ['id', 'Name', 'Phone Number', 'Email Address', 'City', 'State', 'Comment'])}
+      format.xls render_banned_adopters_xls
     end
   end
 
@@ -34,7 +31,6 @@ class BannedAdoptersController < ApplicationController
   end
 
   def new
-    @title = "Add a Banned Adopter"
     @banned_adopter = BannedAdopter.new
   end
 
@@ -44,13 +40,11 @@ class BannedAdoptersController < ApplicationController
       flash[:success] = "New Banned Adopter Added"
       redirect_to banned_adopters_path
     else
-      @title = "Add a Banned Adopter"
       render 'new'
     end
   end
 
   def edit
-    @title = "Edit"
     @banned_adopter = BannedAdopter.find(params[:id])
   end
 
@@ -60,7 +54,6 @@ class BannedAdoptersController < ApplicationController
       flash[:success] = "Record updated."
       redirect_to banned_adopters_path
     else
-      @title = "Edit"
       render 'edit'
     end
   end
@@ -71,20 +64,43 @@ class BannedAdoptersController < ApplicationController
   #   redirect_to banned_adopters_path
   # end
 
-
   private
 
-    def ban_adopters_user
-        redirect_to(root_path) unless current_user.ban_adopters?
-    end
+  def ban_adopters_user
+    redirect_to(root_path) unless current_user.ban_adopters?
+  end
 
-    def banned_adopter_params
-      params.require(:banned_adopter).permit( :name,
-                                              :phone,
-                                              :email,
-                                              :city,
-                                              :state,
-                                              :comment)
-    end
+  def banned_adopter_params
+    params.require(:banned_adopter)
+      .permit(:name,
+              :phone,
+              :email,
+              :city,
+              :state,
+              :comment)
+  end
 
+  def render_banned_adopters_xls
+    send_data @banned_adopters.to_xls(
+      filename: 'banned_adopters.xls',
+      columns: [
+        :id,
+        :name,
+        :phone,
+        :email,
+        :city,
+        :state,
+        :comment
+      ],
+      headers: [
+        'id',
+        'Name',
+        'Phone Number',
+        'Email Address',
+        'City',
+        'State',
+        'Comment'
+      ]
+    )
+  end
 end

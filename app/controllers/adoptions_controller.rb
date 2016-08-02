@@ -11,8 +11,8 @@
 #
 
 class AdoptionsController < ApplicationController
-  before_filter :edit_my_adopters_user, only: [:update]
-  before_filter :edit_all_adopters_user, only: [:update]
+  before_action :edit_my_adopters_user, only: [:update]
+  before_action :edit_all_adopters_user, only: [:update]
 
   respond_to :html, :json
 
@@ -26,14 +26,16 @@ class AdoptionsController < ApplicationController
 
   def create
     current_adoption = Adoption.where(
-      adopter_id: params[:adoption][:adopter_id],
-      dog_id: params[:adoption][:dog_id]
+      adopter_id: adoption_params[:adopter_id],
+      dog_id: adoption_params[:dog_id]
     )
     @adoption = Adoption.new(adoption_params)
     @adoption.relation_type = 'interested'
+
     if current_adoption.present? || @adoption.save
       flash[:success] = 'Dogs linked to Application'
     end
+
     handle_redirect
   end
 
@@ -50,24 +52,17 @@ class AdoptionsController < ApplicationController
   def destroy
     Adoption.find(params[:id]).destroy
     flash[:warning] = 'Dog removed from Application'
+
     handle_redirect
   end
 
   private
 
   def adoption_params
-    params.require(:adoption).permit( :relation_type,
-                                      :dog_id,
-                                      :adopter_id
-                                     )
-  end
-
-  def handle_redirect
-    if request.xhr?
-      head 200
-    else
-      redirect_to request.referer
-    end
+    params.require(:adoption)
+      .permit(:relation_type,
+              :dog_id,
+              :adopter_id)
   end
 
   def edit_my_adopters_user

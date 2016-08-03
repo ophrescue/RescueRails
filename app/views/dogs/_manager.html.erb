@@ -1,11 +1,10 @@
 <div class="row">
+<br />
   <div class="span12">
-    <%= form_tag dogs_path, :method => 'get' do %>
-      <p>
-      <%= text_field_tag :search, params[:search] %>
+    <%= form_tag dogs_path, :method => 'get', :class => 'form-inline' do %>
+      <%= text_field_tag :search, params[:search], placeholder: 'ID, Name or Microchip' %>
       <%= submit_tag "Search", :name => nil %>
       <%= link_to ' Clear Search', :controller => "dogs", :status => "active" %>
-      </p>
     <% end %>
     <ul class="nav nav-tabs">
       <% Dog::STATUSES.each do |status| %>

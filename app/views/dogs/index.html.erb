@@ -3,7 +3,7 @@
     <h1><%= @title %></h1>
   </div>
   <div class="span4 offset4">
-  <% if signed_in? %>
+    <% if signed_in? %>
       <% if can_add_dogs? %>
         <%= link_to "Add a Dog", new_dog_path, :class => "btn btn-primary" %>
       <% end %>
@@ -13,22 +13,22 @@
       <% else %>
         <%= link_to("Manager View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
       <% end %>
-  <% end %>
-</div>
-</div>
-
-
-<div class="row">
-  <div class="span12">
-    <% if signed_in? && session[:mgr_view] == true %>
-      <%= render 'manager' %>
-    <% else %>
-      <div class="gallery">
-        <ul id="dogs" class="thumbnails">
-          <%= render @dogs %>
-        </ul>
-      </div>
-      <%= will_paginate @dogs %>
     <% end %>
   </div>
 </div>
+
+<%= will_paginate @dogs %>
+
+<div id="dogs">
+  <% if signed_in? && session[:mgr_view] == true %>
+
+    <%= render 'manager' %>
+
+  <% else %>
+
+    <%= render 'dog_rows' %>
+
+  <% end %>
+</div>
+
+<%= will_paginate @dogs %>

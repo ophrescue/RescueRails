@@ -1,11 +1,11 @@
 class NewAdopterMailer < ActionMailer::Base
-  default from: 'Operation Paws for Homes <adopt@ophrescue.org>' ,
+  default from: 'Operation Paws for Homes <adopt@ophrescue.org>',
           return_path: 'adopt@ophrescue.org',
           reply_to: 'adopt@ophrescue.org'
 
   def adopter_created(adopter_id)
     @adopter = Adopter.find(adopter_id)
-    mail(to: "#{@adopter.email}" ,
+    mail(to: "#{@adopter.email}",
          subject: 'Adoption Application Received!',
          content_type: 'text/html')
   end

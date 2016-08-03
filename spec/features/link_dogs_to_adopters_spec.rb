@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Link Dogs to Adoption Applications via Adoption model', js: true do
-  let!(:test_applicant) {create(:adopter_with_app)}
+  let!(:test_applicant) { create(:adopter_with_app) }
 
   scenario 'Happy Path' do
 

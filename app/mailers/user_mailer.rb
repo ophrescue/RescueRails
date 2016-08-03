@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "Operation Paws for Homes <info@ophrescue.org>" 
+  default from: "Operation Paws for Homes <info@ophrescue.org>"
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #

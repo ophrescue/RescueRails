@@ -7,7 +7,7 @@ describe AdopterSearcher do
     context 'by name' do
       let!(:found_adopter) { create(:adopter, name: 'Frank') }
       let!(:other_adopter) { create(:adopter, name: 'Tom') }
-      let(:params) { {search: 'frank'} }
+      let(:params) { { search: 'frank' } }
 
       it 'finds the correct adopter' do
         expect(results).to include(found_adopter)
@@ -18,7 +18,7 @@ describe AdopterSearcher do
     context 'by active status' do
       let!(:found_adopter) { create(:adopter, status: 'new') }
       let!(:other_adopter) { create(:adopter, status: 'denied') }
-      let(:params) { {status: 'active'} }
+      let(:params) { { status: 'active' } }
 
       it 'finds the correct adopter' do
         expect(results).to include(found_adopter)
@@ -29,7 +29,7 @@ describe AdopterSearcher do
     context 'by status' do
       let!(:found_adopter) { create(:adopter, status: 'denied') }
       let!(:other_adopter) { create(:adopter, status: 'new') }
-      let(:params) { {status: 'denied'} }
+      let(:params) { { status: 'denied' } }
 
       it 'finds the correct adopter' do
         expect(results).to include(found_adopter)
@@ -40,7 +40,7 @@ describe AdopterSearcher do
     context 'all adopters' do
       let!(:found_adopter) { create(:adopter, status: 'denied') }
       let!(:other_adopter) { create(:adopter, status: 'new') }
-      let(:params) { { } }
+      let(:params) { {} }
 
       it 'finds the correct adopter' do
         expect(results).to include(found_adopter)

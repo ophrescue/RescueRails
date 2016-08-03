@@ -101,7 +101,7 @@ describe User do
   describe '#out_of_date?' do
 
     context 'user has no last_verified date' do
-      let(:user) { create(:user, lastverified: nil ) }
+      let(:user) { create(:user, lastverified: nil) }
 
       it 'returns true' do
         expect(user.out_of_date?).to eq(true)
@@ -109,7 +109,7 @@ describe User do
     end
 
     context 'user was last_verified over 30 days ago' do
-      let(:user) { create(:user, lastverified: 31.days.ago ) }
+      let(:user) { create(:user, lastverified: 31.days.ago) }
 
       it 'returns true' do
         expect(user.out_of_date?).to eq(true)
@@ -117,7 +117,7 @@ describe User do
     end
 
     context 'user has last_verified of today' do
-      let(:user) { create(:user, lastverified: Time.now ) }
+      let(:user) { create(:user, lastverified: Time.now) }
 
       it 'returns false' do
         expect(user.out_of_date?).to eq(false)

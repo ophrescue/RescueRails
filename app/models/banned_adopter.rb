@@ -29,7 +29,7 @@ class BannedAdopter < ActiveRecord::Base
   #     banned_adopter = find_by_id(row["ID"]) || new
   #     banned_adopter.attributes = row.to_hash.slice(*accessible_attributes)
   #     banned_adopter.save!
-  #   end 
+  #   end
   # end
 
   # def self.import(file)

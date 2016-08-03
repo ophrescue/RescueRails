@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
                     message: "should be 12345 or 12345-1234",
                     allow_blank: true
 
-  #Automatically creates the virtual attribute 'password_confirmation'.
+  # Automatically creates the virtual attribute 'password_confirmation'.
   validates :password, presence: true,
                        confirmation: true,
                        length: { within: 8..40 },
@@ -99,11 +99,11 @@ class User < ActiveRecord::Base
   has_many :coordinated_dogs, -> { where(status: ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'coordinator_id'
   has_many :comments
 
-  has_one :agreement, -> {where(agreement_type: Attachment::AGREEMENT_TYPE_FOSTER)},
+  has_one :agreement, -> { where(agreement_type: Attachment::AGREEMENT_TYPE_FOSTER) },
           as: :attachable, class_name: 'Attachment', dependent: :destroy
   accepts_nested_attributes_for :agreement
 
-  has_one :confidentiality_agreement, -> {where(agreement_type: Attachment::AGREEMENT_TYPE_CONFIDENTIALITY)} ,
+  has_one :confidentiality_agreement, -> { where(agreement_type: Attachment::AGREEMENT_TYPE_CONFIDENTIALITY) },
           as: :attachable, class_name: 'Attachment', dependent: :destroy
   accepts_nested_attributes_for :confidentiality_agreement
 
@@ -126,7 +126,7 @@ class User < ActiveRecord::Base
   scope :photographer,            -> (status = true) { where(is_photographer: status) }
   scope :newsletter,              -> (status = true) { where(writes_newsletter: status) }
   scope :transporter,             -> (status = true) { where(is_transporter: status) }
-  scope :training_team,           -> (status = true) { where(training_team: status)}
+  scope :training_team,           -> (status = true) { where(training_team: status) }
 
   scope :house_type,              -> (type) { where(house_type: type) }
   scope :has_dogs,                -> (status = true) { where(has_own_dogs: status) }

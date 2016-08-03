@@ -46,7 +46,7 @@ class Event < ActiveRecord::Base
   geocoded_by :address
 
   after_validation :geocode,
-    if: lambda{ |obj| obj.address_changed? }
+    if: lambda { |obj| obj.address_changed? }
 
   has_attached_file :photo,
     styles: { original: "1024x1024>",

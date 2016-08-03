@@ -58,9 +58,9 @@ class Dog < ActiveRecord::Base
   belongs_to :coordinator, class_name: "User"
   belongs_to :shelter
 
-  has_many :comments, -> {order 'created_at DESC'}, as: :commentable
+  has_many :comments, -> { order 'created_at DESC' }, as: :commentable
   has_many :attachments, as: :attachable, dependent: :destroy
-  has_many :photos, -> {order 'position ASC'}, dependent: :destroy
+  has_many :photos, -> { order 'position ASC' }, dependent: :destroy
   has_many :adoptions, dependent: :destroy
   has_many :adopters, through: :adoptions
 
@@ -107,7 +107,7 @@ class Dog < ActiveRecord::Base
   AGES = ['baby', 'young', 'adult', 'senior']
   validates_inclusion_of :age, in: AGES, allow_blank: true
 
-  SIZES = ['small', 'medium', 'large','extra large']
+  SIZES = ['small', 'medium', 'large', 'extra large']
   validates_inclusion_of :size, in: SIZES, allow_blank: true
 
   GENDERS = ['Male', 'Female']

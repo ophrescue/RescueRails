@@ -12,8 +12,8 @@ require 'rails_helper'
 
 describe SheltersController, type: :controller do
 
-  let!(:admin) {create(:user, :admin)}
-  let!(:hacker) {create(:user)}
+  let!(:admin) { create(:user, :admin) }
+  let!(:hacker) { create(:user) }
 
   describe 'POST create' do
     context 'logged in as an admin' do
@@ -45,7 +45,7 @@ describe SheltersController, type: :controller do
 
   describe 'PUT update' do
     let(:test_shelter) { create(:shelter, name: 'BARCS') }
-    let(:request) { -> {put :update, id: test_shelter.id, shelter: attributes_for(:shelter, name: 'New Shelter')} }
+    let(:request) { -> { put :update, id: test_shelter.id, shelter: attributes_for(:shelter, name: 'New Shelter') } }
 
     context 'logged in as admin' do
       before :each do
@@ -53,7 +53,7 @@ describe SheltersController, type: :controller do
       end
 
       it 'updates the shelter name' do
-        expect { request.call }.to change{ test_shelter.reload.name }.from('BARCS').to('New Shelter')
+        expect { request.call }.to change { test_shelter.reload.name }.from('BARCS').to('New Shelter')
       end
 
     end
@@ -64,7 +64,7 @@ describe SheltersController, type: :controller do
       end
 
       it 'is unable to modify shelter' do
-        expect { request.call }.to_not change{ test_shelter.reload.name }
+        expect { request.call }.to_not change { test_shelter.reload.name }
       end
 
     end

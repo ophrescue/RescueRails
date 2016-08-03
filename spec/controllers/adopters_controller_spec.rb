@@ -45,14 +45,14 @@ describe AdoptersController, type: :controller do
         subject(:create) { post :create, adopter: adopter }
 
         it 'create an adopter' do
-          expect{ create }.to change{ Adopter.count }.by(1)
+          expect { create }.to change { Adopter.count }.by(1)
         end
       end
 
   end
 
   describe 'GET check_email' do
-    subject(:check_email) { xhr :get, :check_email, adopter: { email: adopter.email} }
+    subject(:check_email) { xhr :get, :check_email, adopter: { email: adopter.email } }
 
     context 'email exists' do
       let!(:adopter) { create(:adopter) }

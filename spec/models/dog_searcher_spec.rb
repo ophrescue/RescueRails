@@ -20,10 +20,16 @@ describe DogSearcher do
 
         context 'search by microchip int' do
           let!(:found_dog) do
-            create(:dog, name: 'oscar', microchip: 123_456, tracking_id: 1)
+            create(:dog, name: 'oscar',
+                         microchip: 982_000_000_000_000,
+                         tracking_id: 1)
           end
-          let!(:other_dog) { create(:dog, name: 'meyer', tracking_id: 11) }
-          let(:params) { { search: 123_456 } }
+          let!(:other_dog) do
+            create(:dog, name: 'meyer',
+                         microchip: 982_000_000_999_999,
+                         tracking_id: 11)
+          end
+          let(:params) { { search: 982_000_000_000_000 } }
 
           it 'finds the correct dog by microchip' do
             expect(results).to include(found_dog)

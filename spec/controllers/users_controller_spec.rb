@@ -61,10 +61,11 @@ require 'rails_helper'
 
 describe UsersController, type: :controller do
 
-  let!(:admin) {create(:user, :admin, name: 'Admin')}
-  let!(:hacker) {create(:user, name: 'Hacker')}
+  let!(:admin) { create(:user, :admin, name: 'Admin') }
+  let!(:hacker) { create(:user, name: 'Hacker') }
 
   describe 'GET index' do
+    let(:jones) { create(:user, name: 'Frank Jones') }
 
     context 'default index list' do
       before :each do
@@ -73,7 +74,6 @@ describe UsersController, type: :controller do
 
       it "returns all users" do
         smith = create(:user, name: 'Jane Smith')
-        jones = create(:user, name: 'Frank Jones')
         get :index
         expect(assigns(:users)).to match_array([jones, smith, admin, hacker])
       end
@@ -85,8 +85,7 @@ describe UsersController, type: :controller do
       end
       it "returns the searched for user" do
         smith = create(:user, name: 'Jane Smithbot')
-        jones = create(:user, name: 'Frank Jones')
-        get :index , search: 'Smithbot'
+        get :index, search: 'Smithbot'
         expect(assigns(:users)).to match_array([smith])
       end
     end
@@ -108,14 +107,12 @@ describe UsersController, type: :controller do
 
       it "returns the training team members" do
         smith = create(:user, name: 'Jane Smithbot', training_team: TRUE)
-        jones = create(:user, name: 'Frank Jones')
         get :index, training_team: TRUE
         expect(assigns(:users)).to match_array([smith])
       end
 
       it "returns the newsletter team members" do
         smith = create(:user, name: 'Jane Smithbot', writes_newsletter: TRUE)
-        jones = create(:user, name: 'Frank Jones')
         get :index, newsletter: TRUE
         expect(assigns(:users)).to match_array([smith])
       end
@@ -152,7 +149,7 @@ describe UsersController, type: :controller do
 
   describe 'PUT update' do
     let(:test_user) { create(:user, admin: FALSE) }
-    let(:request) { -> {put :update, id: test_user.id, user: attributes_for(:user, admin: TRUE)} }
+    let(:request) { -> { put :update, id: test_user.id, user: attributes_for(:user, admin: TRUE) } }
 
     context 'logged in as admin' do
       before :each do
@@ -160,7 +157,7 @@ describe UsersController, type: :controller do
       end
 
       it 'updates the users permissions' do
-        expect { request.call }.to change{ test_user.reload.admin }.from(FALSE).to(TRUE)
+        expect { request.call }.to change { test_user.reload.admin }.from(FALSE).to(TRUE)
       end
 
     end
@@ -171,7 +168,7 @@ describe UsersController, type: :controller do
       end
 
       it 'is unable to modify user permissions' do
-        expect { request.call }.to_not change{ test_user.reload.admin }
+        expect { request.call }.to_not change { test_user.reload.admin }
       end
 
     end

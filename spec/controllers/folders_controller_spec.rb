@@ -14,9 +14,9 @@ require 'rails_helper'
 
 describe FoldersController, type: :controller do
 
-  let!(:admin) {create(:user, :admin)}
-  let!(:no_access_user) {create(:user, dl_resources: FALSE)}
-  let!(:dl_resources_user) {create(:user, dl_resources: TRUE, dl_locked_resources: FALSE)}
+  let!(:admin) { create(:user, :admin) }
+  let!(:no_access_user) { create(:user, dl_resources: FALSE) }
+  let!(:dl_resources_user) { create(:user, dl_resources: TRUE, dl_locked_resources: FALSE) }
 
   describe 'GET #show' do
 

@@ -10,7 +10,7 @@
 # ones to be over-ridden
 # if the target file name is the same as the source then
 # the second parameter can be left out
-def smart_template(from, to=nil)
+def smart_template(from, to = nil)
   to ||= from
   full_to_path = "#{shared_path}/config/#{to}"
   if from_erb_path = template_file(from)

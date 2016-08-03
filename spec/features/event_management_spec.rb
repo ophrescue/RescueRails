@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Manage Events', js: true do
 
-  let!(:admin) {create(:user, :admin)}
+  let!(:admin) { create(:user, :admin) }
 
   scenario 'Post and View an Event' do
     sign_in(admin)

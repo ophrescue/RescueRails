@@ -19,4 +19,3 @@ RSpec.configure do |config|
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
   end
 end
-

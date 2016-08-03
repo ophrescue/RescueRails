@@ -45,14 +45,14 @@ describe Adopter do
   describe '.audit_changes' do
     context 'an attribute changes on an adopter' do
       it 'creates a comment' do
-        expect{adopter.save}.to change{Comment.count}.by(1)
+        expect { adopter.save }.to change { Comment.count }.by(1)
       end
     end
 
     context 'no admin assigned to adopter' do
       it 'does not make a comment' do
         adopter.updated_by_admin_user = nil
-        expect{adopter.save}.to_not change{Comment.count}
+        expect { adopter.save }.to_not change { Comment.count }
       end
     end
   end

@@ -22,6 +22,6 @@ module ApplicationHelper
     css_class = (column == params[:sort]) ? "current #{params[:direction]}" : nil
     direction = (column == params[:sort] && params[:direction] == "asc") ? "desc" : "asc"
     status = params[:status]
-    link_to title, {sort: column, direction: direction, status: status}, {class: css_class}
+    link_to title, { sort: column, direction: direction, status: status }, { class: css_class }
   end
 end

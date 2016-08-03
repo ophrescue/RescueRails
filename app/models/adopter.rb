@@ -106,7 +106,7 @@ class Adopter < ActiveRecord::Base
 
   def audit_content
     content = "#{updated_by_admin_user.name} has "
-    content += changes_to_sentence
+    content + changes_to_sentence
   end
 
   def changes_to_sentence
@@ -117,7 +117,7 @@ class Adopter < ActiveRecord::Base
         result << "assigned application to #{new_value}"
       else
         old_value = send("#{attr}_was")
-        new_value  = send(attr)
+        new_value = send(attr)
         result << "changed #{attr} from #{old_value} to #{new_value}"
       end
     end

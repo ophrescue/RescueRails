@@ -1,5 +1,5 @@
-#Computes a Topological Sort of Active Record Models
-#From https://github.com/rails/strong_parameters
+# Computes a Topological Sort of Active Record Models
+# From https://github.com/rails/strong_parameters
 # Execute it with 'rails runner'.
 
 require 'tsort'

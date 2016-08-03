@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 feature 'Attach an agreement to a user', js: true do
-  let!(:admin) {create(:user, :admin)}
-  let!(:user) {create(:user)}
+  let!(:admin) { create(:user, :admin) }
+  let!(:user) { create(:user) }
 
   before :each do
     allow_any_instance_of(Attachment).to receive(:download_url).and_return('http://')
@@ -19,7 +19,7 @@ feature 'Attach an agreement to a user', js: true do
     click_link('Update/Verify Profile')
     expect(page).to have_content('Edit Staff Account')
 
-    page.attach_file('user_agreement_attributes_attachment','public/docs/blue-ridge-bloodbank.pdf')
+    page.attach_file('user_agreement_attributes_attachment', 'public/docs/blue-ridge-bloodbank.pdf')
     click_button('Update / Verify')
 
     expect(page).to have_no_css('#confidentiality-agreement-dl')
@@ -39,7 +39,7 @@ feature 'Attach an agreement to a user', js: true do
     click_link('Update/Verify Profile')
     expect(page).to have_content('Edit Staff Account')
 
-    page.attach_file('user_confidentiality_agreement_attributes_attachment','public/docs/guide-to-adopting.pdf')
+    page.attach_file('user_confidentiality_agreement_attributes_attachment', 'public/docs/guide-to-adopting.pdf')
     click_button('Update / Verify')
 
     expect(page).to have_no_css('#foster-agreement-dl')

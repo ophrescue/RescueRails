@@ -24,7 +24,6 @@ class AdopterSearcher
     end
 
     with_includes
-    with_sort
     for_page(@params[:page])
 
     @adopters
@@ -50,10 +49,6 @@ class AdopterSearcher
 
   def name_search?
     @params[:search].present?
-  end
-
-  def with_sort
-    @adopters = @adopters.order(id: :asc)
   end
 
   def for_page(page = nil)

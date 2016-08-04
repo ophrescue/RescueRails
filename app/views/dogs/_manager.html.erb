@@ -32,7 +32,7 @@
       </li>
     </ul>
 
-    <% if !@dogs.nil? %>
+    <% if @dogs.any? %>
 
     <table class="table-striped table-bordered table-condensed">
       <thead>
@@ -56,9 +56,8 @@
         <%= render :partial => "manager_dog", :collection => @dogs, :as => :dog %>
       </tbody>
     </table>
-    <%= will_paginate @dogs %>
     <% else %>
-    <h3>No Records Found</h3>
+      <h3>No Records Found</h3>
     <% end %>
   </div>
 </div>

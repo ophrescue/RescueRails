@@ -21,7 +21,7 @@ class BannedAdoptersController < ApplicationController
     @banned_adopters = BannedAdopter.order(:name)
     respond_to do |format|
       format.html
-      format.xls render_banned_adopters_xls
+      format.xls { render_banned_adopters_xls }
     end
   end
 
@@ -37,7 +37,7 @@ class BannedAdoptersController < ApplicationController
   def create
     @banned_adopter = BannedAdopter.new(banned_adopter_params)
     if @banned_adopter.save
-      flash[:success] = "New Banned Adopter Added"
+      flash[:success] = 'New Banned Adopter Added'
       redirect_to banned_adopters_path
     else
       render 'new'
@@ -51,18 +51,12 @@ class BannedAdoptersController < ApplicationController
   def update
     @banned_adopter = BannedAdopter.find_by_id(params[:id])
     if @banned_adopter.update_attributes(banned_adopter_params)
-      flash[:success] = "Record updated."
+      flash[:success] = 'Record updated.'
       redirect_to banned_adopters_path
     else
       render 'edit'
     end
   end
-
-  # def import
-  #   BannedAdopter.import(params[:file])
-  #   flash[:success] = "Banned Adopter List Imported."
-  #   redirect_to banned_adopters_path
-  # end
 
   private
 
@@ -72,12 +66,12 @@ class BannedAdoptersController < ApplicationController
 
   def banned_adopter_params
     params.require(:banned_adopter)
-      .permit(:name,
-              :phone,
-              :email,
-              :city,
-              :state,
-              :comment)
+          .permit(:name,
+                  :phone,
+                  :email,
+                  :city,
+                  :state,
+                  :comment)
   end
 
   def render_banned_adopters_xls

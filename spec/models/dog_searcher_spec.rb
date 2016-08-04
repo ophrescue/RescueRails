@@ -2,19 +2,39 @@ require 'rails_helper'
 
 describe DogSearcher do
   describe '.search' do
-
     context 'is a manager' do
       let(:manager) { true }
       let(:results) { DogSearcher.search(params: params, manager: manager) }
 
       context 'by tracking id' do
-        let!(:found_dog) { create(:dog, tracking_id: 1) }
-        let!(:other_dog) { create(:dog, tracking_id: 100) }
-        let(:params) { { search: 1 } }
+        context 'search by tracking_id int' do
+          let!(:found_dog) { create(:dog, tracking_id: 1) }
+          let!(:other_dog) { create(:dog, tracking_id: 100) }
+          let(:params) { { search: 1 } }
 
-        it 'finds the correct dog' do
-          expect(results).to include(found_dog)
-          expect(results).to_not include(other_dog)
+          it 'finds the correct dog' do
+            expect(results).to include(found_dog)
+            expect(results).to_not include(other_dog)
+          end
+        end
+
+        context 'search by microchip int' do
+          let!(:found_dog) do
+            create(:dog, name: 'oscar',
+                         microchip: 982_000_000_000_000,
+                         tracking_id: 1)
+          end
+          let!(:other_dog) do
+            create(:dog, name: 'meyer',
+                         microchip: 982_000_000_999_999,
+                         tracking_id: 11)
+          end
+          let(:params) { { search: 982_000_000_000_000 } }
+
+          it 'finds the correct dog by microchip' do
+            expect(results).to include(found_dog)
+            expect(results).to_not include(other_dog)
+          end
         end
       end
 
@@ -23,7 +43,18 @@ describe DogSearcher do
         let!(:other_dog) { create(:dog, name: 'meyer') }
         let(:params) { { search: 'Oscar' } }
 
-        it 'finds the correct dog' do
+        it 'finds the correct dog by name' do
+          expect(results).to include(found_dog)
+          expect(results).to_not include(other_dog)
+        end
+      end
+
+      context 'search by microchip string' do
+        let!(:found_dog) { create(:dog, name: 'oscar', microchip: 'ABC123') }
+        let!(:other_dog) { create(:dog, name: 'meyer') }
+        let(:params) { { search: 'ABC123' } }
+
+        it 'finds the correct dog by microchip' do
           expect(results).to include(found_dog)
           expect(results).to_not include(other_dog)
         end

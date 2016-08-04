@@ -1,0 +1,3 @@
+$('#adopters').append('<%= escape_javascript render @adopters %>');
+
+$('div.pagination').replaceWith('<%= escape_javascript will_paginate(@adopters) %>');

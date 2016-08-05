@@ -73,7 +73,7 @@ describe DogsController, type: :controller do
   end
 
   describe 'GET #show' do
-    include_context 'signed in'
+    include_context 'signed in admin'
 
     let(:dog) { create(:dog) }
 
@@ -84,7 +84,7 @@ describe DogsController, type: :controller do
   end
 
   describe 'GET #edit' do
-    include_context 'signed in'
+    include_context 'signed in admin'
 
     let(:dog) { create(:dog) }
 
@@ -186,7 +186,7 @@ describe DogsController, type: :controller do
     end
 
     context 'signed in' do
-      include_context 'signed in'
+      include_context 'signed in admin'
 
       before do
         controller.instance_variable_set(:@dog, dog)

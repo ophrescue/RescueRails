@@ -29,10 +29,6 @@ class CommentsController < ApplicationController
     render layout: false
   end
 
-  def new
-    @comment = Comment.new
-  end
-
   def create
     @commentable = find_commentable
     @comment = @commentable.comments.build(comment_params)

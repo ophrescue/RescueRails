@@ -30,25 +30,78 @@ require 'rails_helper'
 describe AdoptersController, type: :controller do
   render_views
 
-  describe "GET 'new'" do
-    it "should be successful" do
+  RSpec.shared_context 'signed in' do
+    let(:admin) { create(:user, :admin) }
+
+    before do
+      allow(controller).to receive(:current_user) { admin }
+    end
+  end
+
+  describe 'GET index' do
+    include_context 'signed in'
+
+    it 'should be successful' do
+      get :index
+      expect(response).to be_success
+    end
+  end
+
+  describe 'GET show' do
+    let(:adopter) { create(:adopter_with_app) }
+
+    include_context 'signed in'
+
+    it 'should be successful' do
+      get :show, id: adopter.id
+      expect(response).to be_success
+    end
+  end
+
+  describe 'GET new' do
+    it 'should be successful' do
       get :new
       expect(response).to be_success
     end
   end
 
-    describe "POST 'create'" do
+  describe 'POST create' do
+    let(:adoption_app) { attributes_for(:adoption_app) }
+    let(:adopter) { attributes_for(:adopter, adoption_app_attributes: adoption_app) }
+    subject(:create) { post :create, adopter: adopter }
 
-      context 'success' do
-        let(:adoption_app) { attributes_for(:adoption_app) }
-        let(:adopter) { attributes_for(:adopter, adoption_app_attributes: adoption_app) }
-        subject(:create) { post :create, adopter: adopter }
+    it 'create an adopter' do
+      expect { create }.to change { Adopter.count }.by(1)
+    end
+  end
 
-        it 'create an adopter' do
-          expect { create }.to change { Adopter.count }.by(1)
-        end
+  describe 'PUT update' do
+    let(:adopter) { create(:adopter_with_app) }
+
+    include_context 'signed in'
+
+    context 'can complete adopters' do
+      before do
+        allow(controller).to receive(:can_complete_adopters?) { true }
       end
 
+      it 'should be successful' do
+        put :update, id: adopter.id, adopter: { status: 'completed' }
+        expect(flash[:success]).to be
+        expect(response).to redirect_to adopter_url(adopter)
+      end
+    end
+
+    context 'cannot complete adopters' do
+      before do
+        allow(controller).to receive(:can_complete_adopters?) { false }
+      end
+
+      it 'sets flash error' do
+        put :update, id: adopter.id, adopter: { status: 'completed' }
+        expect(flash[:error]).to be
+      end
+    end
   end
 
   describe 'GET check_email' do

@@ -72,6 +72,43 @@ describe DogsController, type: :controller do
     end
   end
 
+  describe 'GET #show' do
+    include_context 'signed in'
+
+    let(:dog) { create(:dog) }
+
+    it 'is successful' do
+      get :show, id: dog.id
+      expect(response).to be_success
+    end
+  end
+
+  describe 'GET #edit' do
+    include_context 'signed in'
+
+    let(:dog) { create(:dog) }
+
+    it 'is successful' do
+      get :edit, id: dog.id
+      expect(response).to be_success
+    end
+  end
+
+  describe 'PUT update' do
+    let(:test_dog) { create(:dog, name: 'Old Dog Name') }
+    let(:request) { -> { put :update, id: test_dog.id, dog: attributes_for(:dog, name: 'New Dog Name') } }
+
+    context 'logged in as admin' do
+      before :each do
+        allow(controller).to receive(:current_user) { admin }
+      end
+
+      it 'updates the dog name' do
+        expect { request.call }.to change { test_dog.reload.name }.from('Old Dog Name').to('New Dog Name')
+      end
+    end
+  end
+
   describe 'POST create' do
     context 'logged in as dog adder admin' do
       subject(:post_create) do
@@ -101,21 +138,6 @@ describe DogsController, type: :controller do
             post :create, dog: dog_params
           end
         end
-      end
-    end
-  end
-
-  describe 'PUT update' do
-    let(:test_dog) { create(:dog, name: 'Old Dog Name') }
-    let(:request) { -> { put :update, id: test_dog.id, dog: attributes_for(:dog, name: 'New Dog Name') } }
-
-    context 'logged in as admin' do
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
-      end
-
-      it 'updates the dog name' do
-        expect { request.call }.to change { test_dog.reload.name }.from('Old Dog Name').to('New Dog Name')
       end
     end
   end
@@ -164,9 +186,9 @@ describe DogsController, type: :controller do
     end
 
     context 'signed in' do
+      include_context 'signed in'
+
       before do
-        allow(controller).to receive(:signed_in?) { true }
-        allow(controller).to receive(:current_user) { admin }
         controller.instance_variable_set(:@dog, dog)
       end
 

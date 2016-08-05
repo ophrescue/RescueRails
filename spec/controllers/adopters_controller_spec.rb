@@ -30,14 +30,6 @@ require 'rails_helper'
 describe AdoptersController, type: :controller do
   render_views
 
-  RSpec.shared_context 'signed in' do
-    let(:admin) { create(:user, :admin) }
-
-    before do
-      allow(controller).to receive(:current_user) { admin }
-    end
-  end
-
   describe 'GET index' do
     include_context 'signed in'
 

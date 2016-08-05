@@ -46,7 +46,8 @@
 </p>
 <% end %>
 
-<% if !@adopters.nil? %>
+<% if @adopters.any? %>
+  <%= will_paginate @adopters %>
 
   <table class="table-striped table-bordered table-condensed" id="adopt-sort">
   <thead>
@@ -63,10 +64,12 @@
       <th>Last Comment</th>
     </tr>
   </thead>
-  <tbody>
-  <%= render @adopters %>
+  <tbody id="adopters">
+    <%= render @adopters %>
   </tbody>
 </table>
+
+<%= will_paginate @adopters %>
 <% else %>
   <h3>No Records Found</h3>
 <% end %>

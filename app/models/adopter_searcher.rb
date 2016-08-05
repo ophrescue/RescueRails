@@ -1,5 +1,12 @@
 class AdopterSearcher
-  STATUSES = ['new', 'pend response', 'workup', 'approved']
+  PER_PAGE = 30
+
+  STATUSES = [
+    'new',
+    'pend response',
+    'workup',
+    'approved'
+  ].freeze
 
   def initialize(params: {})
     @params = params
@@ -17,6 +24,7 @@ class AdopterSearcher
     end
 
     with_includes
+    for_page(@params[:page])
 
     @adopters
   end
@@ -41,5 +49,9 @@ class AdopterSearcher
 
   def name_search?
     @params[:search].present?
+  end
+
+  def for_page(page = nil)
+    @adopters = @adopters.paginate(per_page: PER_PAGE, page: page || 1)
   end
 end

@@ -30,6 +30,7 @@
 #  vet_info                  :text
 #  max_hrs_alone             :integer
 #  is_ofage                  :boolean
+#  landlord_email            :string
 #
 
 class AdoptionApp < ActiveRecord::Base

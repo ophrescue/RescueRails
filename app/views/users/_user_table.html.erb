@@ -6,8 +6,12 @@
         <th>Duties</th>
         <th>Phone</th>
         <th>Location</th>
-        <th>Fostered Dogs</th>
-        <th>Coordinated Dogs</th>
+        <% if params[:foster_mentor] == 'true' %>
+          <th>Mentees</th>
+        <% else %>
+          <th>Fostered Dogs</th>
+          <th>Coordinated Dogs</th>
+        <% end %>
       </tr>
     </thead>
     <tbody id="users_tbody">
@@ -17,4 +21,3 @@
 <% else %>
   <h3>No Records Found</h3>
 <% end %>
-

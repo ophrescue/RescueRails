@@ -51,6 +51,9 @@
   <li class="<%= 'active' if params[:training_team] %>">
     <%= link_to "Training", users_path(:training_team => true) %>
   </li>
+  <li class="<%= 'active' if params[:foster_mentor] %>">
+    <%= link_to "Foster Mentor", users_path(:foster_mentor => true) %>
+  </li>
 </ul>
 
 <% if params[:foster] == 'true' %>

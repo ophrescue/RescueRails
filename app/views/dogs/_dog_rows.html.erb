@@ -15,11 +15,12 @@
               <h4><%= dog.name.titleize %></h4>
               <p>
               <strong><%= dog.status.titleize %></strong><br />
-              <%= dog.primary_breed.name.titleize unless !dog.primary_breed %><br />
-              <%= dog.secondary_breed.name.titleize unless !dog.secondary_breed %><br />
               <% if dog.foster && !dog.foster.city.blank? && !dog.foster.state.blank? %>
                 <%= dog.foster.city.titleize %>, <%= dog.foster.state.upcase %><br />
               <% end %>
+              <%= dog.gender unless !dog.gender %>  <%= dog.age.titleize unless !dog.age %><br /> 
+              <%= dog.primary_breed.name.titleize unless !dog.primary_breed %><br />
+              <%= dog.secondary_breed.name.titleize unless !dog.secondary_breed %><br />
               </p>
             <% end %>
           </li>

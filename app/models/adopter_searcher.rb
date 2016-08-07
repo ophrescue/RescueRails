@@ -16,14 +16,15 @@ class AdopterSearcher
     @adopters = Adopter
 
     if name_search?
-      @adopters = @adopters.where('adopters.name ILIKE ?', "%#{@params[:search].strip}%").order(id: :desc)
+      @adopters = @adopters.where('adopters.name ILIKE ?', "%#{@params[:search].strip}%")
     elsif active_status_search?
-      @adopters = @adopters.where('status IN (?)', STATUSES).order(id: :desc)
+      @adopters = @adopters.where('status IN (?)', STATUSES)
     elsif status_search?
-      @adopters = @adopters.where(status: @params[:status]).order(id: :desc)
+      @adopters = @adopters.where(status: @params[:status])
     end
 
     with_includes
+    with_sort
     for_page(@params[:page])
 
     @adopters
@@ -34,6 +35,10 @@ class AdopterSearcher
   end
 
   private
+
+  def with_sort
+    @adopters = @adopters.order(id: :desc)
+  end
 
   def with_includes
     @adopters = @adopters.includes(:user, :comments, :dogs, :adoption_app)

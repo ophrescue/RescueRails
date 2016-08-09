@@ -55,6 +55,7 @@
 #  dl_locked_resources          :boolean          default(FALSE)
 #  training_team                :boolean          default(FALSE)
 #  confidentiality_agreement_id :integer
+#  foster_mentor                :boolean          default(FALSE)
 #
 
 require 'digest'
@@ -127,6 +128,7 @@ class User < ActiveRecord::Base
   scope :newsletter,              -> (status = true) { where(writes_newsletter: status) }
   scope :transporter,             -> (status = true) { where(is_transporter: status) }
   scope :training_team,           -> (status = true) { where(training_team: status) }
+  scope :foster_mentor,           -> (status = true) { where(foster_mentor: status) }
 
   scope :house_type,              -> (type) { where(house_type: type) }
   scope :has_dogs,                -> (status = true) { where(has_own_dogs: status) }

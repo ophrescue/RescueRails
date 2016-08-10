@@ -18,7 +18,7 @@
               <% if dog.foster && dog.foster.city.present? && dog.foster.state.present? %>
                 <%= dog.foster.city.titleize %>, <%= dog.foster.state.upcase %><br />
               <% end %>
-              <%= dog.gender %> - <%= dog.age.titleize %><br />
+              <%= dog.gender %> - <%= dog.age.try(:titleize) %><br />
               <%= dog.primary_breed ? dog.primary_breed.name.titleize : "" %><br />
               <%= dog.secondary_breed ? dog.secondary_breed.name.titleize : "" %><br />
               </p>

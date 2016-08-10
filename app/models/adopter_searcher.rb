@@ -18,9 +18,9 @@ class AdopterSearcher
     if name_search?
       @adopters = @adopters.where('adopters.name ILIKE ?', "%#{@params[:search].strip}%")
     elsif active_status_search?
-      @adopters = @adopters.where('status IN (?)', STATUSES)
+      @adopters = @adopters.where('adopters.status IN (?)', STATUSES)
     elsif status_search?
-      @adopters = @adopters.where(status: @params[:status])
+      @adopters = @adopters.where('adopters.status = ?', status: @params[:status])
     end
 
     with_includes
@@ -37,8 +37,14 @@ class AdopterSearcher
   private
 
   def with_sorting
-    # if params[:sort] == 'assigned_to' sort by association to adopters.user.name?
-    @adopters = @adopters.order(sort_column + ' ' + sort_direction)
+    if @params[:sort] == 'assigned_to'
+      with_join_for_sort
+      column = 'users.name'
+    else
+      column = sort_column
+    end
+
+    @adopters = @adopters.order(column + ' ' + sort_direction)
   end
 
   def sort_column
@@ -51,6 +57,10 @@ class AdopterSearcher
 
   def with_includes
     @adopters = @adopters.includes(:user, :comments, :dogs, :adoption_app)
+  end
+
+  def with_join_for_sort
+    @adopters = @adopters.joins('LEFT OUTER JOIN users on adopters.assigned_to_user_id = users.id')
   end
 
   def active_status_search?

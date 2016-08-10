@@ -49,17 +49,17 @@
 <% if @adopters.any? %>
   <%= will_paginate @adopters %>
 
-  <table class="table-striped table-bordered table-condensed" id="adopt-sort">
+  <table class="table-striped table-bordered table-condensed">
   <thead>
     <tr>
-      <th>id</th>
+      <th><%= sortable "id" %></th>
       <th>RTA</th>
       <% if (params[:status] == nil) || (params[:status] == "active")%>
         <th>Status</th>
     <% end %>
       <th>Name</th>
       <th>Dogs</th>
-      <th>Assigned To</th>
+      <th><%= sortable "assigned_to" %></th>
       <th>Last Comment Date</th>
       <th>Last Comment</th>
     </tr>

@@ -24,7 +24,7 @@ class AdopterSearcher
     end
 
     with_includes
-    with_sort
+    with_sorting
     for_page(@params[:page])
 
     @adopters
@@ -36,8 +36,17 @@ class AdopterSearcher
 
   private
 
-  def with_sort
-    @adopters = @adopters.order(id: :desc)
+  def with_sorting
+    # if params[:sort] == 'assigned_to' sort by association to adopters.user.name?
+    @adopters = @adopters.order(sort_column + ' ' + sort_direction)
+  end
+
+  def sort_column
+    Adopter.column_names.include?(@params[:sort]) ? @params[:sort] : 'id'
+  end
+
+  def sort_direction
+    %w(asc desc).include?(@params[:direction]) ? @params[:direction] : 'desc'
   end
 
   def with_includes

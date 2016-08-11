@@ -13,13 +13,24 @@
 require 'rails_helper'
 
 describe FoldersController, type: :controller do
-
   let!(:admin) { create(:user, :admin) }
-  let!(:no_access_user) { create(:user, dl_resources: FALSE) }
-  let!(:dl_resources_user) { create(:user, dl_resources: TRUE, dl_locked_resources: FALSE) }
+  let!(:no_access_user) { create(:user, dl_resources: false) }
+  let!(:dl_resources_user) { create(:user, dl_resources: true, dl_locked_resources: false) }
+
+  describe 'GET #index' do
+    context 'logged in with standard folder access' do
+      before :each do
+        allow(controller).to receive(:current_user) { dl_resources_user }
+      end
+
+      it 'is successful' do
+        get :index
+        expect(response).to be_success
+      end
+    end
+  end
 
   describe 'GET #show' do
-
     context 'logged in with standard folder access' do
       before :each do
         allow(controller).to receive(:current_user) { dl_resources_user }
@@ -38,7 +49,6 @@ describe FoldersController, type: :controller do
       end
     end
 
-
     context 'logged in without any folder access' do
       before :each do
         allow(controller).to receive(:current_user) { no_access_user }
@@ -55,7 +65,6 @@ describe FoldersController, type: :controller do
         expect(response).to redirect_to root_path
       end
     end
-
 
     context 'logged in with restricted folder access' do
       before :each do
@@ -74,4 +83,59 @@ describe FoldersController, type: :controller do
     end
   end
 
+  describe 'GET #new' do
+    include_context 'signed in admin'
+
+    it 'is successful' do
+      get :new
+      expect(response).to be_success
+    end
+  end
+
+  describe 'PUT #update' do
+    include_context 'signed in admin'
+
+    let(:folder) { create(:folder) }
+
+    it 'is successful' do
+      put :update, id: folder.id, folder: { name: 'Big Folder' }
+      expect(flash[:success]).to be_present
+      expect(response).to redirect_to folder_path(folder)
+    end
+  end
+
+  describe 'POST #create' do
+    include_context 'signed in admin'
+
+    it 'is successful' do
+      request.env['HTTP_REFERER'] = '/'
+      post :create, folder: attributes_for(:folder)
+      expect(flash[:success]).to be_present
+      expect(response).to redirect_to root_path
+    end
+  end
+
+  describe 'GET #edit' do
+    include_context 'signed in admin'
+
+    let(:folder) { create(:folder) }
+
+    it 'is successful' do
+      get :edit, id: folder.id
+      expect(response).to be_success
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    include_context 'signed in admin'
+
+    let(:folder) { create(:folder) }
+
+    it 'is successful' do
+      request.env['HTTP_REFERER'] = '/'
+      delete :destroy, id: folder.id
+      expect(flash[:success]).to be_present
+      expect(response).to redirect_to root_path
+    end
+  end
 end

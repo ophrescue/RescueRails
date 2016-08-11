@@ -19,7 +19,7 @@ window.RescueRails = {
       $status.addClass('fa fa-times');
       $status.show();
       $status.fadeOut(3000);
-    })
+    });
   }
 };
 
@@ -28,6 +28,7 @@ $(document).ready(function() {
     $(window).scroll(function() {
       var url = $('ul.pagination .next_page a').attr('href');
       if ((url && url !== '#') && $(window).scrollTop() > $(document).height() - $(window).height() - 300) {
+        window.history.replaceState({}, '', url);
         $('ul.pagination').text("Please Wait...");
         return $.getScript(url);
       }

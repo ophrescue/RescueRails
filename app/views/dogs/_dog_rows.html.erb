@@ -8,18 +8,19 @@
               <% if dog.photos == [] %>
                 <%= image_tag("no_photo-320x320.png", :alt => dog.name) %>
               <% elsif dog.primary_breed %>
-                <%= image_tag(dog.photos.first.photo.url(:medium), :alt => dog.primary_breed.name)  %> 
+                <%= image_tag(dog.photos.visible.first.photo.url(:medium), :alt => dog.primary_breed.name)  %>
               <% else %>
-                <%= image_tag(dog.photos.first.photo.url(:medium), :alt => dog.name)  %> 
+                <%= image_tag(dog.photos.visible.first.photo.url(:medium), :alt => dog.name)  %>
               <% end %>
               <h4><%= dog.name.titleize %></h4>
               <p>
               <strong><%= dog.status.titleize %></strong><br />
-              <%= dog.primary_breed.name.titleize unless !dog.primary_breed %><br />
-              <%= dog.secondary_breed.name.titleize unless !dog.secondary_breed %><br />
-              <% if dog.foster && !dog.foster.city.blank? && !dog.foster.state.blank? %>
+              <% if dog.foster && dog.foster.city.present? && dog.foster.state.present? %>
                 <%= dog.foster.city.titleize %>, <%= dog.foster.state.upcase %><br />
               <% end %>
+              <%= dog.gender %> - <%= dog.age.try(:titleize) %><br />
+              <%= dog.primary_breed ? dog.primary_breed.name.titleize : "" %><br />
+              <%= dog.secondary_breed ? dog.secondary_breed.name.titleize : "" %><br />
               </p>
             <% end %>
           </li>

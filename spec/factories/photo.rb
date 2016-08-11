@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :photo do
-    attachment_file_name { 'test.png' }
-    attachment_content_type { 'image/png' }
-    attachment_file_size { 1024 }
+    photo_file_name { 'test.png' }
+    photo_content_type { 'image/png' }
+    photo_file_size { 1024 }
+    sequence(:position)
   end
 end

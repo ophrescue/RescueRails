@@ -9,7 +9,7 @@ RescueRails::Application.routes.draw do
 
   resources :adoption_app
 
-  resources :comments
+  resources :comments, except: %i(new)
 
   resources :users
   resources :dogs do

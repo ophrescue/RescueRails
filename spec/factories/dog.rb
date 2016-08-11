@@ -7,7 +7,7 @@ FactoryGirl.define do
 
     factory :dog_with_photo_and_attachment do
       after(:build) do |dog|
-        build(:attachment, dog: dog)
+        build(:attachment, attachable: dog)
         build(:photo, dog: dog)
       end
     end

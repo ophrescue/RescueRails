@@ -20,7 +20,7 @@ class AdopterSearcher
     elsif active_status_search?
       @adopters = @adopters.where('adopters.status IN (?)', STATUSES)
     elsif status_search?
-      @adopters = @adopters.where('adopters.status = ?', status: @params[:status])
+      @adopters = @adopters.where(status: @params[:status])
     end
 
     with_includes

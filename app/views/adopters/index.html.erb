@@ -53,12 +53,12 @@
   <thead>
     <tr>
       <th><%= sortable "id" %></th>
-      <th>RTA</th>
+      <th><%= sortable "ready_to_adopt_dt", "RTA" %></th>
       <% if (params[:status] == nil) || (params[:status] == "active")%>
         <th>Status</th>
     <% end %>
-      <th>Name</th>
-      <th>Dogs</th>
+      <th><%= sortable "name" %></th>
+      <th><%= sortable "dogs" %></th>
       <th><%= sortable "assigned_to" %></th>
       <th>Last Comment Date</th>
       <th>Last Comment</th>

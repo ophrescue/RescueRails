@@ -38,8 +38,11 @@ class AdopterSearcher
 
   def with_sorting
     if @params[:sort] == 'assigned_to'
-      with_join_for_sort
+      with_join_users_for_sort
       column = 'users.name'
+    elsif @params[:sort] == 'comments.updated_at'
+      with_join_comments_for_sort
+      column = 'comments.updated_at'
     else
       column = sort_column
     end
@@ -59,7 +62,11 @@ class AdopterSearcher
     @adopters = @adopters.includes(:user, :comments, :dogs, :adoption_app)
   end
 
-  def with_join_for_sort
+  def with_join_comments_for_sort
+    @adopters = @adopters.joins('LEFT OUTER JOIN comments on adopters.id = commentable_id WHERE commentable_type = "Adopter" ')
+  end
+
+  def with_join_users_for_sort
     @adopters = @adopters.joins('LEFT OUTER JOIN users on adopters.assigned_to_user_id = users.id')
   end
 

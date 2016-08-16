@@ -42,7 +42,7 @@ class AdopterSearcher
       column = 'users.name'
     elsif @params[:sort] == 'comments.updated_at'
       with_join_comments_for_sort
-      column = 'comments.updated_at'
+      column = 'CASE WHEN comments.updated_at IS NULL THEN 0 ELSE 1 END desc, comments.updated_at'
     else
       column = sort_column
     end
@@ -63,11 +63,11 @@ class AdopterSearcher
   end
 
   def with_join_comments_for_sort
-    @adopters = @adopters.joins('LEFT OUTER JOIN comments on adopters.id = commentable_id WHERE commentable_type = "Adopter" ')
+    @adopters = @adopters.joins("LEFT JOIN (SELECT commentable_id, max(updated_at) as updated_at FROM comments WHERE commentable_type = 'Adopter' GROUP BY commentable_id) AS comments ON adopters.id = comments.commentable_id")
   end
 
   def with_join_users_for_sort
-    @adopters = @adopters.joins('LEFT OUTER JOIN users on adopters.assigned_to_user_id = users.id')
+    @adopters = @adopters.joins('LEFT OUTER JOIN users ON adopters.assigned_to_user_id = users.id')
   end
 
   def active_status_search?

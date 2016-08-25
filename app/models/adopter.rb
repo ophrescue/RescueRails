@@ -46,6 +46,7 @@ class Adopter < ActiveRecord::Base
               'adopted',
               'adptd sn pend',
               'completed',
+              'returned',
               'standby',
               'withdrawn',
               'denied']

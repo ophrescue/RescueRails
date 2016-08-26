@@ -31,7 +31,6 @@ RSpec.configure do |config|
   config.include LoginMacros
   config.include ActiveSupport::Testing::TimeHelpers
   config.include FactoryGirl::Syntax::Methods
-  config.include JsonSpec::Helpers, type: :request
   config.include Rack::Test::Methods, type: :request
 
   # Disable Rails transactional fixtures in favor of DatabaseCleaner

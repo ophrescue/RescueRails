@@ -39,9 +39,6 @@ GEM
     acts_as_list (0.7.6)
       activerecord (>= 3.0)
     addressable (2.4.0)
-    anjlab-bootstrap-rails (2.2.2.1)
-      railties (>= 3.0)
-      sass (>= 3.2)
     annotate (2.7.1)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 12.0)
@@ -89,10 +86,6 @@ GEM
       launchy
     celluloid (0.16.0)
       timers (~> 4.0.0)
-    chosen-rails (1.5.2)
-      coffee-rails (>= 3.2)
-      railties (>= 3.0)
-      sass-rails (>= 3.2)
     chronic (0.10.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -100,13 +93,6 @@ GEM
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
-    coffee-rails (4.2.1)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.2.x)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
     coveralls (0.8.15)
       json (>= 1.8, < 3)
@@ -164,12 +150,6 @@ GEM
     hitimes (1.2.4)
     i18n (0.7.0)
     jmespath (1.3.1)
-    jquery-rails (4.1.1)
-      rails-dom-testing (>= 1, < 3)
-      railties (>= 4.2.0)
-      thor (>= 0.14, < 2.0)
-    jquery-ui-rails (5.0.5)
-      railties (>= 3.2.16)
     json (1.8.3)
     kgio (2.10.0)
     launchy (2.4.3)
@@ -281,27 +261,23 @@ GEM
       nokogiri
       rubyzip
       spreadsheet (> 0.6.4)
-    rspec (3.5.0)
-      rspec-core (~> 3.5.0)
-      rspec-expectations (~> 3.5.0)
-      rspec-mocks (~> 3.5.0)
-    rspec-core (3.5.2)
-      rspec-support (~> 3.5.0)
-    rspec-expectations (3.5.0)
+    rspec-core (3.5.0.beta3)
+      rspec-support (= 3.5.0.beta3)
+    rspec-expectations (3.5.0.beta3)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.5.0)
-    rspec-mocks (3.5.0)
+      rspec-support (= 3.5.0.beta3)
+    rspec-mocks (3.5.0.beta3)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.5.0)
-    rspec-rails (3.5.1)
+      rspec-support (= 3.5.0.beta3)
+    rspec-rails (3.5.0.beta3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec-core (~> 3.5.0)
-      rspec-expectations (~> 3.5.0)
-      rspec-mocks (~> 3.5.0)
-      rspec-support (~> 3.5.0)
-    rspec-support (3.5.0)
+      rspec-core (= 3.5.0.beta3)
+      rspec-expectations (= 3.5.0.beta3)
+      rspec-mocks (= 3.5.0.beta3)
+      rspec-support (= 3.5.0.beta3)
+    rspec-support (3.5.0.beta3)
     rubocop (0.42.0)
       parser (>= 2.3.1.1, < 3.0)
       powerpack (~> 0.1)
@@ -355,7 +331,7 @@ GEM
       spreadsheet
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (3.0.1)
+    uglifier (3.0.2)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.1.0)
     unicorn (5.1.0)
@@ -376,7 +352,6 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list (~> 0.7.2)
-  anjlab-bootstrap-rails (~> 2.2.2.1)
   annotate
   aws-sdk (>= 2.0.34)
   better_errors
@@ -388,7 +363,6 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.0.3)
   capybara
   capybara-screenshot
-  chosen-rails
   coveralls
   daemons
   dalli
@@ -407,8 +381,6 @@ DEPENDENCIES
   gibbon
   gravatar_image_tag (~> 1.2.0)
   has_scope
-  jquery-rails
-  jquery-ui-rails
   mailhopper
   meta_request
   newrelic_rpm
@@ -422,12 +394,12 @@ DEPENDENCIES
   pry-stack_explorer
   quiet_assets
   rack-cache
-  rails (~> 4.2.7.1)
+  rails (= 4.2.7.1)
   rails4-autocomplete
   responders (~> 2.0)
   rollbar
   roo (~> 1.13.2)
-  rspec-rails
+  rspec-rails (= 3.5.0.beta3)
   rubocop
   sass-rails
   strip_attributes (~> 1.0)

@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 ruby   '2.3.1'
 
-gem 'rails', '~> 4.2.7.1'
+gem 'rails', '4.2.7.1'
+# gem 'rails', '~> 5.0'
+
 gem 'rack-cache'
 
 gem 'acts_as_list', '~> 0.7.2'
@@ -40,17 +42,11 @@ gem 'delayed_job_active_record'
 gem 'mailhopper'
 gem 'delayed_mailhopper'
 
-gem 'anjlab-bootstrap-rails', '~> 2.2.2.1', require: 'bootstrap-rails'
-
 # Gems used only for assets and not required
 # in production environments by default.
 
 gem 'sass-rails'
 gem 'uglifier'
-
-gem 'chosen-rails'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
 
 gem 'newrelic_rpm'
 gem 'rollbar'
@@ -65,7 +61,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'pry-stack_explorer'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '3.5.0.beta3'
 end
 
 group :test do

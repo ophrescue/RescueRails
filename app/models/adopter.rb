@@ -25,7 +25,7 @@
 #  completed_date      :date
 #
 
-class Adopter < ActiveRecord::Base
+class Adopter < ApplicationRecord
 
   attr_accessor :pre_q_costs,
                 :pre_q_surrender,

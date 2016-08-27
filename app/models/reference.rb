@@ -13,7 +13,7 @@
 #  whentocall   :string(255)
 #
 
-class Reference < ActiveRecord::Base
+class Reference < ApplicationRecord
 
   belongs_to :adopter, class_name: 'Adopter'
 end

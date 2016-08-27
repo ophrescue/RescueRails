@@ -57,7 +57,7 @@ describe DogsController, type: :controller do
       let!(:dog) { create(:dog) }
       let(:params) { {} }
 
-      subject(:get_index) { get :index, nil, mgr_view: true }
+      subject(:get_index) { get :index, params: {}, session: { mgr_view: true } }
 
       before do
         allow(DogSearcher).to receive(:search).and_return([dog])
@@ -78,7 +78,7 @@ describe DogsController, type: :controller do
     let(:dog) { create(:dog) }
 
     it 'is successful' do
-      get :show, id: dog.id
+      get :show, params: { id: dog.id }
       expect(response).to be_success
     end
   end
@@ -89,14 +89,14 @@ describe DogsController, type: :controller do
     let(:dog) { create(:dog) }
 
     it 'is successful' do
-      get :edit, id: dog.id
+      get :edit, params: { id: dog.id }
       expect(response).to be_success
     end
   end
 
   describe 'PUT update' do
     let(:test_dog) { create(:dog, name: 'Old Dog Name') }
-    let(:request) { -> { put :update, id: test_dog.id, dog: attributes_for(:dog, name: 'New Dog Name') } }
+    let(:request) { -> { put :update, params: { id: test_dog.id, dog: attributes_for(:dog, name: 'New Dog Name') } } }
 
     context 'logged in as admin' do
       before :each do
@@ -112,7 +112,7 @@ describe DogsController, type: :controller do
   describe 'POST create' do
     context 'logged in as dog adder admin' do
       subject(:post_create) do
-        post :create, dog: attributes_for(:dog_with_photo_and_attachment)
+        post :create, params: { dog: attributes_for(:dog_with_photo_and_attachment) }
       end
 
       before do
@@ -135,7 +135,7 @@ describe DogsController, type: :controller do
           it 'gets next value from tracking_id_seq' do
             expect(Dog).to receive(:next_tracking_id)
 
-            post :create, dog: dog_params
+            post :create, params: { dog: dog_params }
           end
         end
       end
@@ -143,7 +143,7 @@ describe DogsController, type: :controller do
   end
 
   describe 'GET switch_view' do
-    let(:request) { get :switch_view, nil, mgr_view: mgr_view }
+    let(:request) { get :switch_view, params: {}, session: { mgr_view: mgr_view } }
     let(:mgr_view) { true }
 
     before do

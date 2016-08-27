@@ -72,7 +72,7 @@ describe UsersController, type: :controller do
         allow(controller).to receive(:current_user) { admin }
       end
 
-      it "returns all users" do
+      it 'returns all users' do
         smith = create(:user, name: 'Jane Smith')
         get :index
         expect(assigns(:users)).to match_array([jones, smith, admin, hacker])
@@ -83,9 +83,9 @@ describe UsersController, type: :controller do
       before :each do
         allow(controller).to receive(:current_user) { admin }
       end
-      it "returns the searched for user" do
+      it 'returns the searched for user' do
         smith = create(:user, name: 'Jane Smithbot')
-        get :index, search: 'Smithbot'
+        get :index, params: { search: 'Smithbot' }
         expect(assigns(:users)).to match_array([smith])
       end
     end
@@ -94,9 +94,9 @@ describe UsersController, type: :controller do
       before :each do
         allow(controller).to receive(:current_user) { admin }
       end
-      it "returns users near the searched location" do
+      it 'returns users near the searched location' do
         expect(User).to receive(:near).and_call_original
-        get :index, location: '21224'
+        get :index, params: { location: '21224' }
       end
     end
 
@@ -105,15 +105,15 @@ describe UsersController, type: :controller do
         allow(controller).to receive(:current_user) { admin }
       end
 
-      it "returns the training team members" do
+      it 'returns the training team members' do
         smith = create(:user, name: 'Jane Smithbot', training_team: TRUE)
-        get :index, training_team: TRUE
+        get :index, params: { training_team: TRUE }
         expect(assigns(:users)).to match_array([smith])
       end
 
-      it "returns the newsletter team members" do
+      it 'returns the newsletter team members' do
         smith = create(:user, name: 'Jane Smithbot', writes_newsletter: TRUE)
-        get :index, newsletter: TRUE
+        get :index, params: { newsletter: TRUE }
         expect(assigns(:users)).to match_array([smith])
       end
     end
@@ -127,7 +127,7 @@ describe UsersController, type: :controller do
 
       it 'is able to create a user' do
         expect{
-          post :create, user: attributes_for(:user)
+          post :create, params: { user: attributes_for(:user) }
         }.to change(User, :count).by(1)
       end
     end
@@ -139,7 +139,7 @@ describe UsersController, type: :controller do
 
       it 'is unable to create a user' do
         expect{
-          post :create, user: attributes_for(:user)
+          post :create, params: { user: attributes_for(:user) }
         }.to change(User, :count).by(0)
       end
 
@@ -149,7 +149,7 @@ describe UsersController, type: :controller do
 
   describe 'PUT update' do
     let(:test_user) { create(:user, admin: FALSE) }
-    let(:request) { -> { put :update, id: test_user.id, user: attributes_for(:user, admin: TRUE) } }
+    let(:request) { -> { put :update, params: { id: test_user.id, user: attributes_for(:user, admin: TRUE) } } }
 
     context 'logged in as admin' do
       before :each do

@@ -48,7 +48,7 @@
 #  medical_summary      :text
 #
 
-class Dog < ActiveRecord::Base
+class Dog < ApplicationRecord
 
   attr_accessor :primary_breed_name, :secondary_breed_name
 

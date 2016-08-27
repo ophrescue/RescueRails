@@ -1,4 +1,4 @@
-class UserSubscribeJob < ActiveJob::Base
+class UserSubscribeJob < ApplicationJob
   queue_as :default
 
   def perform(name, email)

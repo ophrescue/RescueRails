@@ -8,7 +8,7 @@
 #  updated_at :datetime         not null
 #
 
-class Shelter < ActiveRecord::Base
+class Shelter < ApplicationRecord
 
   has_many :dogs
 end

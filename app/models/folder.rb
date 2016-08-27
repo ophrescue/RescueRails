@@ -10,7 +10,7 @@
 #  locked      :boolean          default(FALSE)
 #
 
-class Folder < ActiveRecord::Base
+class Folder < ApplicationRecord
 
   has_many :attachments, -> { order('updated_at DESC') }, as: :attachable
 

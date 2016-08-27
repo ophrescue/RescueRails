@@ -1,4 +1,4 @@
-class UserUnsubscribeJob < ActiveJob::Base
+class UserUnsubscribeJob < ApplicationJob
   queue_as :default
 
   def perform(email)

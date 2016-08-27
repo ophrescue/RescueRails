@@ -21,7 +21,7 @@ describe EventsController, type: :controller do
     let(:event) { create(:event) }
 
     it 'is successful' do
-      get :show, id: event.id
+      get :show, params: { id: event.id }
       expect(response).to be_success
     end
   end
@@ -41,7 +41,7 @@ describe EventsController, type: :controller do
     let(:event) { create(:event) }
 
     it 'is successful' do
-      get :edit, id: event.id
+      get :edit, params: { id: event.id }
       expect(response).to be_success
     end
   end
@@ -52,7 +52,7 @@ describe EventsController, type: :controller do
     let(:event) { create(:event) }
 
     it 'is successful' do
-      put :update, id: event.id, event: { title: 'Event' }
+      put :update, params: { id: event.id, event: { title: 'Event' } }
       expect(flash[:success]).to be
       expect(response).to redirect_to events_path
     end
@@ -62,7 +62,7 @@ describe EventsController, type: :controller do
     include_context 'signed in admin'
 
     it 'is successful' do
-      post :create, event: attributes_for(:event)
+      post :create, params: { event: attributes_for(:event) }
       expect(flash[:success]).to be
       expect(response).to redirect_to events_path
     end
@@ -74,7 +74,7 @@ describe EventsController, type: :controller do
     let(:event) { create(:event) }
 
     it 'is successful' do
-      delete :destroy, id: event.id
+      delete :destroy, params: { id: event.id }
       expect(flash[:danger]).to be
       expect(response).to redirect_to events_path
     end

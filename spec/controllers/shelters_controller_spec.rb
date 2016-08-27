@@ -28,7 +28,7 @@ describe SheltersController, type: :controller do
     let(:shelter) { create(:shelter) }
 
     it 'is successful' do
-      get :show, id: shelter.id
+      get :show, params: { id: shelter.id }
       expect(response).to be_success
     end
   end
@@ -48,7 +48,7 @@ describe SheltersController, type: :controller do
     let(:shelter) { create(:shelter) }
 
     it 'is successful' do
-      get :edit, id: shelter.id
+      get :edit, params: { id: shelter.id }
       expect(response).to be_success
     end
   end
@@ -59,7 +59,7 @@ describe SheltersController, type: :controller do
 
       it 'is able to create a shelter' do
         expect{
-          post :create, shelter: attributes_for(:shelter)
+          post :create, params: { shelter: attributes_for(:shelter) }
         }.to change(Shelter, :count).by(1)
       end
     end
@@ -71,7 +71,7 @@ describe SheltersController, type: :controller do
 
       it 'is unable to create a shelter' do
         expect{
-          post :create, shelter: attributes_for(:shelter)
+          post :create, params: { shelter: attributes_for(:shelter) }
         }.to_not change(Shelter, :count)
       end
     end
@@ -79,7 +79,7 @@ describe SheltersController, type: :controller do
 
   describe 'PUT #update' do
     let(:test_shelter) { create(:shelter, name: 'BARCS') }
-    let(:request) { -> { put :update, id: test_shelter.id, shelter: attributes_for(:shelter, name: 'New Shelter') } }
+    let(:request) { -> { put :update, params: { id: test_shelter.id, shelter: attributes_for(:shelter, name: 'New Shelter') } } }
 
     context 'logged in as admin' do
       include_context 'signed in admin'

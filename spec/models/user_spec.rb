@@ -118,7 +118,7 @@ describe User do
     end
 
     context 'user has last_verified of today' do
-      let(:user) { create(:user, lastverified: Time.now) }
+      let(:user) { create(:user, lastverified: Time.zone.now) }
 
       it 'returns false' do
         expect(user.out_of_date?).to eq(false)

@@ -26,7 +26,7 @@ describe CommentsController, type: :controller do
     let(:dog) { create(:dog) }
 
     it 'is successful' do
-      get :index, dog_id: dog.id
+      get :index, params: { dog_id: dog.id }
       expect(response).to be_success
     end
   end
@@ -37,7 +37,7 @@ describe CommentsController, type: :controller do
     let(:comment) { create(:comment) }
 
     it 'is successful' do
-      get :show, id: comment.id
+      get :show, params: { id: comment.id }
       expect(response).to be_success
     end
   end
@@ -47,7 +47,7 @@ describe CommentsController, type: :controller do
       it 'should succeed' do
         request.env['HTTP_REFERER'] = '/'
         dog = create(:dog)
-        post :create, { dog_id: dog.id, comment: FactoryGirl.attributes_for(:comment) }
+        post :create, params: { dog_id: dog.id, comment: FactoryGirl.attributes_for(:comment) }
         expect(response).to redirect_to(root_path)
       end
     end
@@ -55,7 +55,7 @@ describe CommentsController, type: :controller do
     context 'an ajax call is made' do
       it 'should succeed' do
         dog = create(:dog)
-        xhr :post, :create, dog_id: dog.id, comment: FactoryGirl.attributes_for(:comment)
+        post :create, xhr: true, params: { dog_id: dog.id, comment: FactoryGirl.attributes_for(:comment) }
         expect(response.status).to eq(200)
         expect(response).not_to be_redirect
       end
@@ -63,7 +63,7 @@ describe CommentsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    subject { put :update, id: comment.id, comment: { content: 'Hi' } }
+    subject { put :update, params: { id: comment.id, comment: { content: 'Hi' } } }
 
     let(:user) { create(:user) }
     let(:comment) { create(:comment, user_id: user.id) }

@@ -38,13 +38,13 @@ describe FoldersController, type: :controller do
 
       it 'is able to view files in standard folders' do
         unlocked_folder = create(:folder, :unlocked)
-        get :show, id: unlocked_folder
+        get :show, params: { id: unlocked_folder }
         expect(assigns(:folder)).to eq unlocked_folder
       end
 
       it 'is NOT able to view files in restricted folders' do
         locked_folder = create(:folder, :locked)
-        get :show, id: locked_folder
+        get :show, params: { id: locked_folder }
         expect(response).to redirect_to folders_path
       end
     end
@@ -55,13 +55,13 @@ describe FoldersController, type: :controller do
       end
       it 'is NOT able to view files in standard folders' do
         unlocked_folder = create(:folder, :unlocked)
-        get :show, id: unlocked_folder
+        get :show, params: { id: unlocked_folder }
         expect(response).to redirect_to root_path
       end
 
       it 'is NOT able to view files in restricted folders' do
         locked_folder = create(:folder, :locked)
-        get :show, id: locked_folder
+        get :show, params: { id: locked_folder }
         expect(response).to redirect_to root_path
       end
     end
@@ -72,12 +72,12 @@ describe FoldersController, type: :controller do
       end
       it 'is able to view files in standard folders' do
         unlocked_folder = create :folder
-        get :show, id: unlocked_folder
+        get :show, params: { id: unlocked_folder }
         expect(assigns(:folder)).to eq unlocked_folder
       end
       it 'is able to view files in restricted folders' do
         locked_folder = create(:folder, :locked)
-        get :show, id: locked_folder
+        get :show, params: { id: locked_folder }
         expect(assigns(:folder)).to eq locked_folder
       end
     end
@@ -98,7 +98,7 @@ describe FoldersController, type: :controller do
     let(:folder) { create(:folder) }
 
     it 'is successful' do
-      put :update, id: folder.id, folder: { name: 'Big Folder' }
+      put :update, params: { id: folder.id, folder: { name: 'Big Folder' } }
       expect(flash[:success]).to be_present
       expect(response).to redirect_to folder_path(folder)
     end
@@ -109,7 +109,7 @@ describe FoldersController, type: :controller do
 
     it 'is successful' do
       request.env['HTTP_REFERER'] = '/'
-      post :create, folder: attributes_for(:folder)
+      post :create, params: { folder: attributes_for(:folder) }
       expect(flash[:success]).to be_present
       expect(response).to redirect_to root_path
     end
@@ -121,7 +121,7 @@ describe FoldersController, type: :controller do
     let(:folder) { create(:folder) }
 
     it 'is successful' do
-      get :edit, id: folder.id
+      get :edit, params: { id: folder.id }
       expect(response).to be_success
     end
   end
@@ -133,7 +133,7 @@ describe FoldersController, type: :controller do
 
     it 'is successful' do
       request.env['HTTP_REFERER'] = '/'
-      delete :destroy, id: folder.id
+      delete :destroy, params: { id: folder.id }
       expect(flash[:success]).to be_present
       expect(response).to redirect_to root_path
     end

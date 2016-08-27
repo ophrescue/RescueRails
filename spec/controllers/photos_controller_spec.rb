@@ -8,7 +8,7 @@ describe PhotosController, type: :controller do
 
   describe 'POST #sort' do
     it 'is successful' do
-      post :sort, dog_id: dog.id, photo: [photo]
+      post :sort, params: { dog_id: dog.id, photo: [photo] }
       expect(response).to be_successful
     end
   end

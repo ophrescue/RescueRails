@@ -15,7 +15,7 @@ a[href $='.docx'] {
 
 a[href ^="mailto:"] {
    padding-right: 20px;
-   background: transparent image-url("icon_mail.gif") no-repeat center right;
+   background: transparent image-url("icon_mailto.gif") no-repeat center right;
 }
 
 a[class ~="popup"] {

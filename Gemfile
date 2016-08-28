@@ -21,7 +21,6 @@ gem 'rails4-autocomplete'
 gem 'responders'
 gem 'roo', '~>1.13.2'
 gem 'strip_attributes'
-gem 'therubyracer', '~> 0.12.2', platform: :ruby
 gem 'to_xls'
 gem 'whenever', '~> 0.9.4', require: false
 gem 'will_paginate'

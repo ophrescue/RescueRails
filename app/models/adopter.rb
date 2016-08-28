@@ -113,8 +113,8 @@ class Adopter < ApplicationRecord
   def changes_to_sentence
     result = []
     changed_audit_attributes.each do |attr|
-      if attr == "assigned_to_user_id"
-        new_value = user.present? ? user.name : "No One"
+      if attr == 'assigned_to_user_id'
+        new_value = user.present? ? user.name : 'No One'
         result << "assigned application to #{new_value}"
       else
         old_value = send("#{attr}_was")
@@ -122,7 +122,7 @@ class Adopter < ApplicationRecord
         result << "changed #{attr} from #{old_value} to #{new_value}"
       end
     end
-    result.join(' * ')
+    result.sort.join(' * ')
   end
 
   def chimp_subscribe

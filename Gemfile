@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 ruby   '2.3.1'
 
 gem 'rails', '4.2.7.1'
-# gem 'rails', '~> 5.0'
-
 gem 'rack-cache'
 
 gem 'acts_as_list', '~> 0.7.2'

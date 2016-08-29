@@ -5,14 +5,13 @@
 // the compiled file.
 //
 //= require warning
-//= require jquery
-//= require jquery_ujs
+//= require jquery2
 //= require jquery-ui
 //= require autocomplete-rails
 //= require bbq
 //= require jquery.form.wizard
 //= require jquery.validate
-//= require twitter/bootstrap
+//= require bootstrap
 //= require jquery.tablesorter.min
 //= require jquery.tablesorter.cfg
 //= require jquery.inputmask
@@ -27,7 +26,6 @@
 //= require galleria.classic
 //= require comments.js
 //= require dog_link.js
-//= require chosen-jquery
-//= require chosen-calls.js
+//= require chosen.jquery
 //= require photos.js
 //= require adoption_form

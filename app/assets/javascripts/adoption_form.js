@@ -1,6 +1,8 @@
 $( function(){ 
 // ghetto namespace
   if ( $('.edit-adopter').length > 0) {
+    $('.chosen-select').chosen();
+
     var isEditing = false;
 
     $('a#toggle-edit').on('click', function(e) {

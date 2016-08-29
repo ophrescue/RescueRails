@@ -385,7 +385,7 @@ DEPENDENCIES
   responders
   rollbar
   roo (~> 1.13.2)
-  rspec-rails
+  rspec-rails (= 3.5.2)
   rubocop
   sass-rails
   strip_attributes

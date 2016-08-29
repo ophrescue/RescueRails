@@ -61,10 +61,10 @@ describe AdoptersController, type: :controller do
     let(:adoption_app) { attributes_for(:adoption_app) }
     let(:adopter) { attributes_for(:adopter, adoption_app_attributes: adoption_app) }
 
-    it 'create an adopter' do
-      expect do
-        post :create, params: { adopter: adopter }
-      end.to change { Adopter.count }.by(1)
+    it 'creates an adopter' do
+      post :create, params: { adopter: adopter }
+
+      expect(response).to redirect_to root_path(adoptapp: 'complete')
     end
   end
 

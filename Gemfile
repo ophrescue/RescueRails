@@ -4,26 +4,26 @@ ruby   '2.3.1'
 gem 'rails', '4.2.7.1'
 gem 'rack-cache'
 
-gem 'acts_as_list', '~> 0.7.2'
-gem 'aws-sdk', '>= 2.0.34'
+gem 'acts_as_list'
+gem 'aws-sdk'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'dotenv'
 gem 'dotenv-rails'
 gem 'exception_notification'
 gem 'font-awesome-rails'
-gem 'geocoder', '~> 1.2.13'
+gem 'geocoder'
 gem 'gibbon'
-gem 'gravatar_image_tag', '~> 1.2.0'
+gem 'gravatar_image_tag'
 gem 'has_scope'
-gem 'paperclip', '~> 5.0.0'
+gem 'paperclip'
 gem 'rails4-autocomplete'
-gem 'responders', '~> 2.0'
+gem 'responders'
 gem 'roo', '~>1.13.2'
-gem 'strip_attributes', '~> 1.0'
+gem 'strip_attributes'
 gem 'therubyracer', '~> 0.12.2', platform: :ruby
 gem 'to_xls'
 gem 'whenever', '~> 0.9.4', require: false
-gem 'will_paginate', '~> 3.0.7'
+gem 'will_paginate'
 
 # datas
 gem 'dalli'
@@ -50,25 +50,23 @@ gem 'newrelic_rpm'
 gem 'rollbar'
 gem 'sucker_punch', '~> 1.5.1'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
 group :development, :test do
   gem 'faker'
+  gem 'json_spec'
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'pry-stack_explorer'
-  gem 'rspec-rails', '3.5.0.beta3'
+  gem 'rspec-rails'
 end
 
 group :test do
   gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'coveralls', require: false
   gem 'database_cleaner'
   gem 'factory_girl_rails'
-  gem 'coveralls', require: false
   gem 'poltergeist'
-  gem 'capybara-screenshot'
 end
 
 group :development do

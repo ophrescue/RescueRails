@@ -52,7 +52,6 @@ gem 'sucker_punch', '~> 1.5.1'
 
 group :development, :test do
   gem 'faker'
-  gem 'json_spec'
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'

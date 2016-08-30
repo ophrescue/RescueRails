@@ -29,3 +29,4 @@
 //= require chosen.jquery
 //= require photos.js
 //= require adoption_form
+//= require jquery_ujs

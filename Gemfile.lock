@@ -36,7 +36,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    acts_as_list (0.7.6)
+    acts_as_list (0.8.0)
       activerecord (>= 3.0)
     addressable (2.4.0)
     annotate (2.7.1)
@@ -44,12 +44,12 @@ GEM
       rake (>= 10.4, < 12.0)
     arel (6.0.3)
     ast (2.3.0)
-    aws-sdk (2.5.3)
-      aws-sdk-resources (= 2.5.3)
-    aws-sdk-core (2.5.3)
+    aws-sdk (2.5.6)
+      aws-sdk-resources (= 2.5.6)
+    aws-sdk-core (2.5.6)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.5.3)
-      aws-sdk-core (= 2.5.3)
+    aws-sdk-resources (2.5.6)
+      aws-sdk-core (= 2.5.6)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -74,7 +74,7 @@ GEM
     capistrano-rbenv (2.0.4)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
-    capybara (2.7.1)
+    capybara (2.8.1)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -136,7 +136,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     font-awesome-rails (4.6.3.1)
       railties (>= 3.2, < 5.1)
-    geocoder (1.2.14)
+    geocoder (1.3.7)
     gibbon (2.2.4)
       faraday (>= 0.9.1)
       multi_json (>= 1.11.0)
@@ -181,7 +181,7 @@ GEM
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
-    paperclip (5.0.0)
+    paperclip (5.1.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       cocaine (~> 0.5.5)
@@ -253,7 +253,7 @@ GEM
     raindrops (0.17.0)
     rake (11.2.2)
     ref (2.0.0)
-    responders (2.2.0)
+    responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     rollbar (2.12.0)
       multi_json
@@ -261,23 +261,23 @@ GEM
       nokogiri
       rubyzip
       spreadsheet (> 0.6.4)
-    rspec-core (3.5.0.beta3)
-      rspec-support (= 3.5.0.beta3)
-    rspec-expectations (3.5.0.beta3)
+    rspec-core (3.5.2)
+      rspec-support (~> 3.5.0)
+    rspec-expectations (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (= 3.5.0.beta3)
-    rspec-mocks (3.5.0.beta3)
+      rspec-support (~> 3.5.0)
+    rspec-mocks (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (= 3.5.0.beta3)
-    rspec-rails (3.5.0.beta3)
+      rspec-support (~> 3.5.0)
+    rspec-rails (3.5.2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec-core (= 3.5.0.beta3)
-      rspec-expectations (= 3.5.0.beta3)
-      rspec-mocks (= 3.5.0.beta3)
-      rspec-support (= 3.5.0.beta3)
-    rspec-support (3.5.0.beta3)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
+      rspec-support (~> 3.5.0)
+    rspec-support (3.5.0)
     rubocop (0.42.0)
       parser (>= 2.3.1.1, < 3.0)
       powerpack (~> 0.1)
@@ -342,7 +342,7 @@ GEM
     websocket-extensions (0.1.2)
     whenever (0.9.7)
       chronic (>= 0.6.3)
-    will_paginate (3.0.7)
+    will_paginate (3.1.0)
     xpath (2.0.0)
       nokogiri (~> 1.3)
     yard (0.9.5)
@@ -351,9 +351,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts_as_list (~> 0.7.2)
+  acts_as_list
   annotate
-  aws-sdk (>= 2.0.34)
+  aws-sdk
   better_errors
   binding_of_caller
   bootstrap-will_paginate (~> 0.0.10)
@@ -377,14 +377,14 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
-  geocoder (~> 1.2.13)
+  geocoder
   gibbon
-  gravatar_image_tag (~> 1.2.0)
+  gravatar_image_tag
   has_scope
   mailhopper
   meta_request
   newrelic_rpm
-  paperclip (~> 5.0.0)
+  paperclip
   pg
   poltergeist
   powder
@@ -396,20 +396,20 @@ DEPENDENCIES
   rack-cache
   rails (= 4.2.7.1)
   rails4-autocomplete
-  responders (~> 2.0)
+  responders
   rollbar
   roo (~> 1.13.2)
-  rspec-rails (= 3.5.0.beta3)
+  rspec-rails
   rubocop
   sass-rails
-  strip_attributes (~> 1.0)
+  strip_attributes
   sucker_punch (~> 1.5.1)
   therubyracer (~> 0.12.2)
   to_xls
   uglifier
   unicorn
   whenever (~> 0.9.4)
-  will_paginate (~> 3.0.7)
+  will_paginate
 
 RUBY VERSION
    ruby 2.2.3p173

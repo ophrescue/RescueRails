@@ -18,53 +18,27 @@
     them the opportunity to find caring, loving forever homes.  Saying thank you doesn’t 
     seem to be enough for the support, but we do know it is a great start!</p>
 
-    <h3>Sporting Dog and Big Dog Sponsors - $1,000</h3>
+    <h3>Sporting Dog - $1,000 Sponsorship</h3>
 
-    <% sponsors_1000 =
-      { url: "http://www.fvcbank.com/",
-        img: "dulles-motorcars.png"
-      },
-      {
-        url: "http://www.thelubecenter.com/locations/Frederick-Rt-40-at-Fredericktowne-Mall",
-        img: "thelubecenter.png"
-      },
-      { url: "http://blueridgeholdings.com/",
-        img: "blueridgeholdings.png"
-      }
-    %>
+    <a href="http://www.millertoyota.com/"><%= image_tag "sponsors/miller-toyota.jpg" %></a>
 
-    <% sponsors_1000.each_slice(3) do |slice| %>
-      <div class="row">
-        <div class="span12">
-          <ul class="thumbnails">
-          <% slice.each do |spon| %>
-            <li class="span4">
-              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag "sponsors/"+spon[:img] %>
-              </a>
-            </li>
-          <% end %>
-          </ul>
-        </div>
-      </div>
-    <% end %>
-
-    <h3>Herding Dog and Medium Dog Sponsors - $500</h3>
+    <h3>Herding Dog - $500 Sponsorship</h3>
 
     <% sponsors_500 =
       { url: "http://www.fvcbank.com/",
         img: "fvcbank.jpg"
       },
-      {
-        url: "http://www.novadogmagazine.com",
+      { url: "http://www.novadogmagazine.com",
         img: "novadog-magazine.png"
       },
-      { url: "https://www.facebook.com/pages/Emerald-Title-Escrow-Inc/349639139594",
-        img: "emerald.jpg"
+      { url: "http://us.petvalu.com/",
+        img: "petvalu.jpg"
       },
-      {
-        url: "http://noahsarknova.com",
-        img: "noahs-ark-animal-hospital.jpg"
+      { url: "http://www.hermandorfer.com/",
+        img: "hermandorfer.jpg"
+      },
+      { url: "http://www.petloverscompanion.com/",
+        img: "petloverscompanion.jpg"
       }
     %>
 
@@ -84,60 +58,31 @@
       </div>
     <% end %>
 
-    <h3>Working Dog and Small Dog Sponsors - $250</h3>
+    <h3>Working Dog - $250 Sponsorship</h3>
 
     <% sponsors_250 =
+      { url: "http://www.catherinesellshomes.com/",
+        img: "catherinesellshomes.jpg"
+      },
+      { url: "http://www.allfriendspetcare.com/home.aspx",
+        img: "allfriendspetcare.jpg"
+      },
+      { url: "http://www.cornerbakerycafe.com/",
+        img: "cornerbakerycafe.jpg"
+      },
       { url: "https://www.novec.com/",
         img: "novec.jpg"
       },
-      { url: "http://vrc-nova.com",
-        img: "vrc-nova.png"
-      },
-      { url: "http://petvalu.com/",
-        img: "petvalu.jpg"
-      },
-      { url: "http://vienna.hopecenter.com",
-        img: "hope_vienna.jpg"
-      },
-      { url: "http://www.thedogparkva.biz/",
-        img: "the_dog_park.png"
-      },
-      {
-        url: "http://www.formostgc.com/",
-        img: "formost.png"
-      },
-      {
-        url: "http://huxleyandkent.com/",
+      { url: "http://huxleyandkent.com/",
         img: "huxley_kent.png"
       },
-      {
-        url: "http://caringhandsvet.com/",
+      { url: "http://caringhandsvet.com/",
         img: "ch_ah.jpg"
       },
-      {
-        url: "http://www.millertoyota.com/",
-        img: "miller-toyota.jpg"
-      },
-      {
-        url: "https://www.fcbmd.com/",
-        img: "fcbmd.png"
-      },
-      {
-        url: "http://www.creeksidecanine.com/",
-        img: "creeksidecanine.png"
-      },
-      {
-        url: "http://www.mynewfeet.com/",
-        img: "mynewfeet.png"
-      },
-      {
-        url: "http://www.cvcavets.com/maryland.asp",
-        img: "cvcavets.png"
-      },
-      {
-        url: "https://www.commonmarket.coop",
-        img: "commonmarket.png"
+      { url: "http://care.com",
+        img: "care.png"
       }
+
     %>
 
     <% sponsors_250.each_slice(3) do |slice| %>
@@ -156,29 +101,20 @@
       </div>
     <% end %>
 
-    <h3>Hunting Dog and Lap Dog Sponsors - $100</h3>
+    <h3>Hunting Dog - $100 Sponsorship</h3>
 
     <% sponsors_100 =
       { url: "http://www.valleyenergy.org/",
         img: "valley_energy.jpg"
       },
-      { url: "http://www.clocktowervets.com/",
-        img: "clocktower.jpg"
-      },
-      {
-        url: "http://www.affordablepetsurgery.com/",
-        img: "helping_hands.jpg"
-      },
       { url: "http://www.affectionatepetcare.com/",
         img: "affectionate_pc.jpg"
       },
-      {
-        url: "http://www.rjocorporate.com/",
-        img: "rjocorporate.png"
+      { url: "http://www.meltgourmetcheeseburgers.com/",
+        img: "melt.jpg"
       },
-      {
-        url: "http://www.countryinns.com/",
-        img: "countryinns.png"
+      { url: "http://autotechcarcare.com/",
+        img: "autotechcarcare.jpg"
       }
     %>
 
@@ -198,88 +134,35 @@
       </div>
     <% end %>
 
-    <h3>Additional Sponsors</h3>
+    <h3>In-Kind Product Sponsorship</h3>
 
     <% sponsors =
-      {
-        url: "http://www.thevirginia-marylanddog.com/",
-        img: "thevmdog.jpg"
-      },
-      {
-        url: "http://www.yummychummies.com/",
-        img: "yummy_chummies.png"
-      },
-      {
-        url: "http://www.naturesvariety.com/",
-        img: "natures_variety.gif"
-      },
-      {
-        url: "http://www.kindsnacks.com/",
+      { url: "http://www.kindsnacks.com/",
         img: "kind_snacks.jpg"
       },
-      {
-        url: "http://bluebuffalo.com/",
+      { url: "http://bluebuffalo.com/",
         img: "blue_buffalo.jpg"
       },
-      {
-        url: "http://www.scoe10x.com/",
-        img: "scoe10x.gif"
+      { url: "http://www.formostgc.com/",
+        img: "formost.png"
       },
-      {
-        url: "https://bimbobakeriesusa.com/",
-        img: "bimbobakeriesusa.png"
+      { url: "http://chewy.com",
+        img: "chewy.png"
       },
-      {
-        url: "http://www.iftheshoefits.biz/",
-        img: "iftheshoefits.png"
+      { url: "https://www.vippetcare.com/",
+        img: "vippetcare.png"
       },
-      {
-        url: "https://naturesbakery.com/",
-        img: "naturesbakery.jpg"
+      { url: "http://brusters.com/",
+        img: "brusters.png"
       },
-      {
-        url: "http://www.uncleralphscookies.com/",
-        img: "uncleralphscookies.png"
+      { url: "https://chipotle.com/",
+        img: "chipotle.jpg"
       },
-      {
-        url: "http://www.mdpetgazette.com/",
-        img: "mdpetgazette.png"
+      { url: "http://www.vetstreet.com/",
+        img: "vetstreet.jpg"
       },
-      {
-        url: "http://www.milb.com/index.jsp?sid=t493",
-        img: "milb.png"
-      },
-      {
-        url: "http://us.naturespath.com/",
-        img: "naturespath.png"
-      },
-      {
-        url: "http://www.wegmans.com/webapp/wcs/stores/servlet/HomepageView?storeId=10052&catalogId=10002&langId=-1",
-        img: "wegmans.png"
-      },
-      {
-        url: "http://www.costco.com/",
-        img: "costco.jpg"
-      },
-      {
-        url: "http://www.rawrev.com/",
-        img: "rawrev.png"
-      },
-      {
-        url: "http://www.petpoisonhelpline.com/",
-        img: "petpoisonhelpline.jpg"
-      },
-      {
-        url: "https://www.saraenglanddesigns.com/",
-        img: "saraenglanddesigns.png"
-      },
-      {
-        url: "https://www.glorydaysgrill.com/locations/maryland/frederick/",
-        img: "glorydaysgrill.jpg"
-      },
-      {
-        url: "http://petsonwheels.org/",
-        img: "petsonwheels.png"
+      { url: "http://www.tasteofthewildpetfood.com/",
+        img: "tasteofthewildpetfood.jpg"
       }
     %>
 

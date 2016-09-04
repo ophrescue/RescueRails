@@ -31,6 +31,12 @@
 #  max_hrs_alone             :integer
 #  is_ofage                  :boolean
 #  landlord_email            :string
+#  shot_dhpp_dhlpp           :boolean
+#  shot_fpv_fhv_fcv          :boolean
+#  shot_rabies               :boolean
+#  shot_bordetella           :boolean
+#  shot_heartworm            :boolean
+#  shot_flea_tick            :boolean
 #
 
 require 'rails_helper'

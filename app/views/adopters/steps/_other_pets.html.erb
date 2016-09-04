@@ -25,20 +25,93 @@
         <%= af.text_area :why_not_fixed, :class => "input-xxlarge", :rows => "3"%>
       </div>
     </div>
+
+    <h5>Are all the pets in your household up to date on these medications?</h5>
+
     <div class="control-group">
-      <%= af.label :current_pets_uptodate, "Are all your pets up to date on routine vaccines?", :class => "control-label"  %>
+      <%= af.label :shot_dhpp_dhlpp, "DHPP/DHLPP (dogs only)", :class => "control-label"  %>
       <div class="controls">
         <label class="radio">
-          <%= af.radio_button :current_pets_uptodate, true, :class => "required" %>
+          <%= af.radio_button :shot_dhpp_dhlpp, true, :class => "required" %>
           <span>Yes</span>
         </label>
-
         <label class="radio">
-          <%= af.radio_button :current_pets_uptodate, false %>
+          <%= af.radio_button :shot_dhpp_dhlpp, false %>
           <span>No</span>
         </label>
       </div>
     </div>
+
+    <div class="control-group">
+      <%= af.label :shot_fpv_fhv_fcv, "FPV/FHV/FCV (cats only)", :class => "control-label"  %>
+      <div class="controls">
+        <label class="radio">
+          <%= af.radio_button :shot_fpv_fhv_fcv, true, :class => "required" %>
+          <span>Yes</span>
+        </label>
+        <label class="radio">
+          <%= af.radio_button :shot_fpv_fhv_fcv, false %>
+          <span>No</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= af.label :shot_rabies, "Rabies", :class => "control-label"  %>
+      <div class="controls">
+        <label class="radio">
+          <%= af.radio_button :shot_rabies, true, :class => "required" %>
+          <span>Yes</span>
+        </label>
+        <label class="radio">
+          <%= af.radio_button :shot_rabies, false %>
+          <span>No</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= af.label :shot_bordetella, "Bordetella (dogs only)", :class => "control-label"  %>
+      <div class="controls">
+        <label class="radio">
+          <%= af.radio_button :shot_bordetella, true, :class => "required" %>
+          <span>Yes</span>
+        </label>
+        <label class="radio">
+          <%= af.radio_button :shot_bordetella, false %>
+          <span>No</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= af.label :shot_heartworm, "Heartworm preventative (dogs only)", :class => "control-label"  %>
+      <div class="controls">
+        <label class="radio">
+          <%= af.radio_button :shot_heartworm, true, :class => "required" %>
+          <span>Yes</span>
+        </label>
+        <label class="radio">
+          <%= af.radio_button :shot_heartworm, false %>
+          <span>No</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= af.label :shot_flea_tick, "Flea/Tick preventative", :class => "control-label"  %>
+      <div class="controls">
+        <label class="radio">
+          <%= af.radio_button :shot_flea_tick, true, :class => "required" %>
+          <span>Yes</span>
+        </label>
+        <label class="radio">
+          <%= af.radio_button :shot_flea_tick, false %>
+          <span>No</span>
+        </label>
+      </div>
+    </div>
+
     <div class="control-group">
       <%= af.label :current_pets_uptodate_why, "If no, please explain why.", :class => "control-label" %>
       <div class="controls">

@@ -69,7 +69,12 @@ feature 'Apply for Adoption' do
     fill_in('adopter_adoption_app_attributes_current_pets', with: 'I have a dog named Archer')
     choose('adopter_adoption_app_attributes_current_pets_fixed_false')
     fill_in('adopter_adoption_app_attributes_why_not_fixed', with: 'They are perfect just the way they are')
-    choose('adopter_adoption_app_attributes_current_pets_uptodate_true')
+    choose('adopter_adoption_app_attributes_shot_dhpp_dhlpp_true')
+    choose('adopter_adoption_app_attributes_shot_fpv_fhv_fcv_true')
+    choose('adopter_adoption_app_attributes_shot_rabies_true')
+    choose('adopter_adoption_app_attributes_shot_bordetella_true')
+    choose('adopter_adoption_app_attributes_shot_heartworm_true')
+    choose('adopter_adoption_app_attributes_shot_flea_tick_false')
     fill_in('adopter_adoption_app_attributes_current_pets_uptodate_why', with: 'They do not like shots')
     fill_in('adopter_adoption_app_attributes_vet_info', with: 'Dr. Kreiger 555-555-5555')
 
@@ -115,7 +120,6 @@ feature 'Apply for Adoption' do
 
     expect(page).to have_content('4 hrs alone')
     expect(page).to have_content('Current Pets not Fixed')
-    expect(page).to have_content('Current Pets Up to Date')
     expect(page).to have_content('fake@ophrescue.org')
     expect(page).to have_content('(123) 456-7890')
     expect(page).to have_content('Anytime After 3pm')
@@ -143,7 +147,6 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('I have a dog named Archer')
     expect(page).to have_content('Dr. Kreiger 555-555-5555')
     expect(page).to have_content('They are perfect just the way they are')
-    expect(page).to have_content('true')
     expect(page).to have_content('They do not like shots')
 
     click_link('Rental')

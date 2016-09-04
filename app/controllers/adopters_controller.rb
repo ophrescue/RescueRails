@@ -150,7 +150,13 @@ class AdoptersController < ApplicationController
                                       :rent_costs,
                                       :vet_info,
                                       :max_hrs_alone,
-                                      :is_ofage
+                                      :is_ofage,
+                                      :shot_dhpp_dhlpp,
+                                      :shot_fpv_fhv_fcv,
+                                      :shot_rabies,
+                                      :shot_bordetella,
+                                      :shot_heartworm,
+                                      :shot_flea_tick
                                     ],
                                     references_attributes:
                                     [

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160806200340) do
+ActiveRecord::Schema.define(version: 20160904204259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,12 @@ ActiveRecord::Schema.define(version: 20160806200340) do
     t.integer  "max_hrs_alone"
     t.boolean  "is_ofage"
     t.string   "landlord_email"
+    t.boolean  "shot_dhpp_dhlpp"
+    t.boolean  "shot_fpv_fhv_fcv"
+    t.boolean  "shot_rabies"
+    t.boolean  "shot_bordetella"
+    t.boolean  "shot_heartworm"
+    t.boolean  "shot_flea_tick"
   end
 
   add_index "adoption_apps", ["adopter_id"], name: "index_adoption_apps_on_adopter_id", using: :btree

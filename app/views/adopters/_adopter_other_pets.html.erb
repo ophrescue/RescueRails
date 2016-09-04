@@ -19,6 +19,25 @@
     <th>Are current pets up to date on shots?</th>
     <td><%= @adopter.adoption_app.current_pets_uptodate %></td>
   </tr>
+    <th>DHPP/DHLPP (dogs only)</th>
+    <td><%= @adopter.adoption_app.shot_dhpp_dhlpp %></td>
+  </tr>
+    <th>FPV/FHV/FCV (cats only)</th>
+    <td><%= @adopter.adoption_app.shot_fpv_fhv_fcv %></td>
+  </tr>
+    <th>Rabies</th>
+    <td><%= @adopter.adoption_app.shot_rabies %></td>
+  </tr>
+    <th>Bordetella (dogs only)</th>
+    <td><%= @adopter.adoption_app.shot_bordetella %></td>
+  </tr>
+    <th>Heartworm preventative (dogs only)</th>
+    <td><%= @adopter.adoption_app.shot_heartworm %></td>
+  </tr>
+    <th>Flea/Tick preventative</th>
+    <td><%= @adopter.adoption_app.shot_flea_tick %></td>
+  </tr>
+
   <tr>
     <th>Why not up to date</th>
     <td><%= @adopter.adoption_app.current_pets_uptodate_why %></td>

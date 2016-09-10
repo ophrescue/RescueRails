@@ -21,7 +21,7 @@
         <div class="control-group">
           <%= f.label :start_time, "Start Time", :class => 'control-label' %>
           <div class="controls">
-            <%= f.text_field :start_time, :class => "input-small" %>
+            <%= f.text_field :start_time, :class => "input-medium" %>
             <span class="help-inline">(1 PM, 3:45pm, etc.)</span>
           </div>
         </div>
@@ -29,7 +29,7 @@
         <div class="control-group">
           <%= f.label :end_time, "End Time", :class => 'control-label' %>
           <div class="controls">
-            <%= f.text_field :end_time, :class => "input-small" %>
+            <%= f.text_field :end_time, :class => "input-medium" %>
           </div>
         </div>
 
@@ -43,7 +43,7 @@
         <div class="control-group">
           <%= f.label :location_url, "Location Website", :class => 'control-label' %>
           <div class="controls">
-            <%= f.text_field :location_url %>
+            <%= f.text_field :location_url, :class => "input-xxlarge" %>
             <span class="help-inline">Include http://</span>
           </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="control-group">
           <%= f.label :facebook_url, "Facebook Event URL", :class => 'control-label' %>
           <div class="controls">
-            <%= f.text_field :facebook_url %>
+            <%= f.text_field :facebook_url, :class => "input-xxlarge" %>
             <span class="help-inline">Include http://</span>
           </div>
         </div>
@@ -66,7 +66,7 @@
         <div class="control-group">
           <%= f.label :photographer_url, "Photographer Website", :class => 'control-label' %>
           <div class="controls">
-            <%= f.text_field :photographer_url %>
+            <%= f.text_field :photographer_url, :class => "input-xxlarge" %>
             <span class="help-inline">Include http://</span>
           </div>
         </div>
@@ -102,7 +102,8 @@
         <div class="control-group">
           <%= f.label :description, nil, :class => 'control-label' %>
           <div class="controls">
-            <%= f.text_area :description, :class => "input-xlarge", :rows => "5" %>
+            <%= f.text_area :description, :class => "input-xxlarge", :rows => "20" %>
+            <span class="help-inline">Description now supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>!</span>
           </div>
         </div>
 

@@ -27,7 +27,7 @@
 #
 
 class EventsController < ApplicationController
-  before_action :edit_events_user, except: [:index, :show]
+  before_action :edit_events_user, except: [:index, :show, :past]
 
   def index
     @events =

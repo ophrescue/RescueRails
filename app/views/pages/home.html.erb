@@ -41,34 +41,19 @@
             </div>
           </div>
 
-      <% if Time.now.between?(("2016-06-01".to_date),("2016-07-07".to_date))%>
           <div class="item">
-            <%= image_tag "playball-07-2016.gif", alt: "Bowie Baysox and Harrisburg Senators Fundraisers" %>
+            <%= image_tag "mooilab-banner.jpg", alt: "Mooilab" %>
               <div class="carousel-caption">
-                <%= link_to "Baysox Tickets", "https://www.ticketreturn.com/prod2/buy.asp?EventID=176575&Desc=Bowie+Baysox+vs+Trenton+Thunder+on+7%2F4%2F2016+Tickets", :class => "btn btn-primary btn-large" %>
-                <%= link_to "Senators Tickets", "http://bit.ly/harrisburgsenatorswnw", :class => "btn btn-primary btn-large" %>
+                <%= link_to "Information", "https://www.mooilab.com/", :class => "btn btn-primary btn-large" %>
               </div>
           </div>
-      <% end %>
 
-      <% if Time.now.between?(("2016-07-05".to_date),("2016-08-04".to_date))%>
-          <div class="item">
-            <%= image_tag "mfa-spc-2016.jpg", alt: "Michelson Found Animals Saving Pets Challenge" %>
-              <div class="carousel-caption">
-                <%= link_to "Donate Now", "https://www.crowdrise.com/operation-paws-for-homes-sp2016", :class => "btn btn-primary btn-large" %>
-              </div>
-          </div>
-      <% end %>
-
-      <% if Time.now.between?(("2016-07-01".to_date),("2016-09-25".to_date))%>
-          <div class="item">
-            <%= image_tag "bww-2016.jpg", alt: "Bark Wag Wine September 24, 2016" %>
-              <div class="carousel-caption">
-                <%= link_to "Tickets", "http://www.barkwagwine.com/", :class => "btn btn-primary btn-large" %>
-                <%= link_to "Sponsors", "http://www.barkwagwine.com/sponsors", :class => "btn btn-primary btn-large" %>
-              </div>
-          </div>
-      <% end %>
+        <div class="item">
+          <%= image_tag "lustreart.jpg", alt: "LustreArt Pet Portaits" %>
+            <div class="carousel-caption">
+              <%= link_to "Information", "https://www.facebook.com/LustreArt/", :class => "btn btn-primary btn-large" %>
+            </div>
+        </div>
 
         </div>
         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
@@ -76,6 +61,13 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="span12">
+      <div class="well well-small">2016 Combined Federal Campaign of the National Capital Area (CFCNCA) <strong>#44590</strong></div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="span4 eventphoto">
       <a href="/donate"><%= image_tag "home-donate.jpg" %></a>

@@ -244,6 +244,7 @@ GEM
     rainbow (2.1.0)
     raindrops (0.17.0)
     rake (11.2.2)
+    redcarpet (3.3.4)
     ref (2.0.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
@@ -385,6 +386,7 @@ DEPENDENCIES
   rails (= 5.0.0.1)
   rails-controller-testing
   rails4-autocomplete
+  redcarpet
   responders
   rollbar
   roo (~> 1.13.2)

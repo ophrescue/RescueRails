@@ -25,6 +25,7 @@ gem 'strip_attributes'
 gem 'to_xls'
 gem 'whenever', '~> 0.9.4', require: false
 gem 'will_paginate'
+gem 'record_tag_helper', '~> 1.0'
 
 # datas
 gem 'dalli'

@@ -46,6 +46,7 @@ feature 'Apply for Adoption' do
     expect(page).to have_content("Landlord's Name")
     fill_in('adopter_adoption_app_attributes_landlord_name', with: 'Jane LandLord')
     fill_in('adopter_adoption_app_attributes_landlord_email', with: 'jane@landlords.com')
+    sleep(1)
     send_keys_inputmask('input#adopter_adoption_app_attributes_landlord_phone', '5704431234')
     fill_in('adopter_adoption_app_attributes_rent_dog_restrictions', with: 'No dogs over 50 lbs')
     fill_in('adopter_adoption_app_attributes_rent_costs', with: 'Rent Goes Up $50 a month')

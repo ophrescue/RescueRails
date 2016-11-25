@@ -34,7 +34,7 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods, type: :request
 
   # Disable Rails transactional fixtures in favor of DatabaseCleaner
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # Attempt to automatically mix in behaviours based on file location
   # i.e. `get`, `post` in controller specs

@@ -21,6 +21,6 @@ class PhotosController < ApplicationController
       photo.update_attribute(:position, index + 1)
     end
 
-    render nothing: true
+    head :ok
   end
 end

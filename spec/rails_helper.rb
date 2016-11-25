@@ -36,21 +36,6 @@ RSpec.configure do |config|
   # Disable Rails transactional fixtures in favor of DatabaseCleaner
   config.use_transactional_fixtures = false
 
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-
-    FactoryGirl.reload
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
-
   # Attempt to automatically mix in behaviours based on file location
   # i.e. `get`, `post` in controller specs
   config.infer_spec_type_from_file_location!

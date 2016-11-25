@@ -5,7 +5,7 @@ describe PasswordResetsController, type: :controller do
     let!(:user) { create(:user, password_reset_token: 'aaa') }
 
     it 'should be successful' do
-      get :edit, id: 'aaa'
+      get :edit, params: { id: 'aaa' }
       expect(response).to be_success
     end
   end
@@ -28,7 +28,7 @@ describe PasswordResetsController, type: :controller do
       it 'is successful' do
         expect(user).to receive(:send_password_reset)
 
-        post :create, email: Faker::Internet.email
+        post :create, params: { email: Faker::Internet.email }
         expect(flash[:success]).to be_present
         expect(response).to redirect_to root_url
       end
@@ -40,7 +40,7 @@ describe PasswordResetsController, type: :controller do
       end
 
       it 'sets flash error' do
-        post :create, email: Faker::Internet.email
+        post :create, params: { email: Faker::Internet.email }
         expect(response).to render_template :new
         expect(flash[:error]).to be_present
       end
@@ -51,7 +51,7 @@ describe PasswordResetsController, type: :controller do
     context 'password reset sent less than 2 hours ago' do
       let!(:user) { create(:user, password_reset_token: 'aaa', password_reset_sent_at: 1.day.ago) }
       it 'sets alerts' do
-        put :update, id: 'aaa', user: { password: 'aaa', password_confirmation: 'aaa' }
+        put :update, params: { id: 'aaa', user: { password: 'aaa', password_confirmation: 'aaa' } }
         expect(response).to redirect_to new_password_reset_path
       end
     end
@@ -59,7 +59,7 @@ describe PasswordResetsController, type: :controller do
     context 'password reset sent more than 2 hours' do
       let!(:user) { create(:user, password_reset_token: 'aaa', password_reset_sent_at: 1.hour.ago) }
       it 'is successful' do
-        put :update, id: 'aaa', user: { password: 'aaaaaaaaa', password_confirmation: 'aaaaaaaaa' }
+        put :update, params: { id: 'aaa', user: { password: 'aaaaaaaaa', password_confirmation: 'aaaaaaaaa' } }
         expect(response).to redirect_to root_url
       end
     end

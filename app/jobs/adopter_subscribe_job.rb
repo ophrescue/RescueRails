@@ -1,4 +1,4 @@
-class AdopterSubscribeJob < ActiveJob::Base
+class AdopterSubscribeJob < ApplicationJob
   queue_as :default
 
   def perform(email, merge_vars, interests)

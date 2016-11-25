@@ -45,7 +45,7 @@ describe AdoptersController, type: :controller do
     include_context 'signed in admin'
 
     it 'should be successful' do
-      get :show, id: adopter.id
+      get :show, params: { id: adopter.id }
       expect(response).to be_success
     end
   end
@@ -60,10 +60,11 @@ describe AdoptersController, type: :controller do
   describe 'POST create' do
     let(:adoption_app) { attributes_for(:adoption_app) }
     let(:adopter) { attributes_for(:adopter, adoption_app_attributes: adoption_app) }
-    subject(:create) { post :create, adopter: adopter }
 
-    it 'create an adopter' do
-      expect { create }.to change { Adopter.count }.by(1)
+    it 'creates an adopter' do
+      post :create, params: { adopter: adopter }
+
+      expect(response).to redirect_to root_path(adoptapp: 'complete')
     end
   end
 
@@ -78,7 +79,7 @@ describe AdoptersController, type: :controller do
       end
 
       it 'should be successful' do
-        put :update, id: adopter.id, adopter: { status: 'completed' }
+        put :update, params: { id: adopter.id, adopter: { status: 'completed' } }
         expect(flash[:success]).to be
         expect(response).to redirect_to adopter_url(adopter)
       end
@@ -90,14 +91,14 @@ describe AdoptersController, type: :controller do
       end
 
       it 'sets flash error' do
-        put :update, id: adopter.id, adopter: { status: 'completed' }
+        put :update, params: { id: adopter.id, adopter: { status: 'completed' } }
         expect(flash[:error]).to be
       end
     end
   end
 
   describe 'GET check_email' do
-    subject(:check_email) { xhr :get, :check_email, adopter: { email: adopter.email } }
+    subject(:check_email) { get :check_email, xhr: true, params: { adopter: { email: adopter.email } } }
 
     context 'email exists' do
       let!(:adopter) { create(:adopter) }

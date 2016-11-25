@@ -14,7 +14,7 @@
 #  is_private         :boolean          default(FALSE)
 #
 
-class Photo < ActiveRecord::Base
+class Photo < ApplicationRecord
 
   belongs_to :dog
   acts_as_list scope: :dog

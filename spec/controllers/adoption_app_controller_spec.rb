@@ -9,7 +9,7 @@ describe AdoptionAppController, type: :controller do
 
     it 'is successful' do
       request.env['HTTP_REFERER'] = '/'
-      put :update, id: adoption_app.id, adoption_app: { spouse_name: 'spouse' }
+      put :update, params: { id: adoption_app.id, adoption_app: { spouse_name: 'spouse' } }
       expect(response).to redirect_to(root_path)
     end
   end

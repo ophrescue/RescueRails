@@ -26,7 +26,7 @@
 #  facebook_url       :string(255)
 #
 
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
 
   attr_accessor :photo_delete
 

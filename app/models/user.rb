@@ -60,7 +60,7 @@
 
 require 'digest'
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include Filterable
 
   attr_accessor :password,

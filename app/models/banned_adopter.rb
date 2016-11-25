@@ -13,7 +13,7 @@
 #  updated_at :datetime         not null
 #
 
-class BannedAdopter < ActiveRecord::Base
+class BannedAdopter < ApplicationRecord
 
   # def self.open_spreadsheet(file)
   #   case File.extname(file.original_filename)

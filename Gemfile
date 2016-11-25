@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 ruby   '2.3.1'
 
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.0.0.1'
+
 gem 'rack-cache'
 
 gem 'acts_as_list'
@@ -21,10 +22,10 @@ gem 'redcarpet'
 gem 'responders'
 gem 'roo', '~>1.13.2'
 gem 'strip_attributes'
-gem 'therubyracer', '~> 0.12.2', platform: :ruby
 gem 'to_xls'
 gem 'whenever', '~> 0.9.4', require: false
 gem 'will_paginate'
+gem 'record_tag_helper', '~> 1.0'
 
 # datas
 gem 'dalli'
@@ -44,6 +45,7 @@ gem 'delayed_mailhopper'
 # Gems used only for assets and not required
 # in production environments by default.
 
+gem 'therubyracer', platforms: :ruby
 gem 'sass-rails'
 gem 'uglifier'
 
@@ -57,7 +59,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'pry-stack_explorer'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '3.5.2'
 end
 
 group :test do
@@ -67,6 +69,7 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'poltergeist'
+  gem 'rails-controller-testing'
 end
 
 group :development do
@@ -77,9 +80,6 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1.4'
   gem 'capistrano-rails', '~> 1.1.5'
   gem 'capistrano-rbenv', '~> 2.0.3'
-  gem 'delorean'
-  gem 'meta_request'
   gem 'powder'
-  gem 'quiet_assets'
   gem 'rubocop'
 end

@@ -8,7 +8,7 @@
 #  updated_at :datetime
 #
 
-class Breed < ActiveRecord::Base
+class Breed < ApplicationRecord
 
   has_many :primary_breed_dogs, class_name: 'Dog', foreign_key: 'primary_breed_id'
   has_many :secondary_breed_dogs, class_name: 'Dog', foreign_key: 'secondary_breed_id'

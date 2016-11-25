@@ -34,7 +34,7 @@ describe BannedAdoptersController, type: :controller do
     let(:banned_adopter) { create(:banned_adopter) }
 
     it 'is successful' do
-      get :show, id: banned_adopter.id
+      get :show, params: { id: banned_adopter.id }
       expect(response).to be_successful
     end
   end
@@ -50,7 +50,7 @@ describe BannedAdoptersController, type: :controller do
     let(:banned_adopter) { create(:banned_adopter) }
 
     it 'is successful' do
-      get :edit, id: banned_adopter.id
+      get :edit, params: { id: banned_adopter.id }
       expect(response).to be_successful
     end
   end
@@ -60,7 +60,7 @@ describe BannedAdoptersController, type: :controller do
 
       it 'is able to create a banned adopter' do
         expect {
-          post :create, banned_adopter: attributes_for(:banned_adopter)
+          post :create, params: { banned_adopter: attributes_for(:banned_adopter) }
         }.to change(BannedAdopter, :count).by(1)
       end
     end
@@ -72,7 +72,7 @@ describe BannedAdoptersController, type: :controller do
 
       it 'is unable to create a banned adopter' do
         expect{
-          post :create, banned_adopter: attributes_for(:banned_adopter)
+          post :create, params: { banned_adopter: attributes_for(:banned_adopter) }
         }.not_to change(BannedAdopter, :count)
       end
     end
@@ -80,7 +80,7 @@ describe BannedAdoptersController, type: :controller do
 
   describe 'PUT update' do
     let(:test_banned_adopter) { create(:banned_adopter, name: 'Joe Smith') }
-    let(:request) { -> { put :update, id: test_banned_adopter.id, banned_adopter: attributes_for(:banned_adopter, name: 'Tom Jones') } }
+    let(:request) { -> { put :update, params: { id: test_banned_adopter.id, banned_adopter: attributes_for(:banned_adopter, name: 'Tom Jones') } } }
 
     context 'logged in as admin' do
       before :each do

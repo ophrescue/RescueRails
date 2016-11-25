@@ -15,7 +15,7 @@
 #  description             :text
 #  agreement_type          :string
 #
-class Attachment < ActiveRecord::Base
+class Attachment < ApplicationRecord
   belongs_to :attachable, polymorphic: true
   belongs_to :updated_by_user, class_name: 'User'
 

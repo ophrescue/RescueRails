@@ -10,7 +10,7 @@
 #  updated_at    :datetime
 #
 
-class Adoption < ActiveRecord::Base
+class Adoption < ApplicationRecord
 
   belongs_to :dog
   belongs_to :adopter

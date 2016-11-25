@@ -39,7 +39,7 @@
 #  shot_flea_tick            :boolean
 #
 
-class AdoptionApp < ActiveRecord::Base
+class AdoptionApp < ApplicationRecord
   belongs_to :adopter, class_name: 'Adopter'
 
   has_many :attachments, as: :attachable, dependent: :destroy

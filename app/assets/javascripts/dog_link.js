@@ -41,4 +41,5 @@ $( function () {
 function refresh_dogs() {
   var url = window.location;
   $('#linked_dogs_table').load(url+' #linked_dogs_table');
+  $('#link_dog_submit').prop('disabled', false);
 }

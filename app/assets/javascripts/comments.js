@@ -36,6 +36,9 @@ $( function () {
 
         // clear comment field for next comment
         $('#comment_content').val('');
+
+        // Turn the POST button back on
+        $('#comment_submit').prop('disabled', false);
       },
       error: function() {
         alert('error saving comment');

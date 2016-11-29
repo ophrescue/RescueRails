@@ -52,7 +52,7 @@
 
           <%= form_for [@dog, @dog.comments.build], :html => {:id => "new_comment"} do |f| %>
             <%= f.text_area :content, :class => "input-xxlarge", :rows => "6" %>
-            <%= f.submit "Post", :class => "btn btn-primary" %>
+            <%= f.submit "Post", :id => "comment_submit", :class => "btn btn-primary" %>
           <% end %>
 
           <h4>Past Comments</h4>

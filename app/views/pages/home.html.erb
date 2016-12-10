@@ -41,19 +41,24 @@
             </div>
           </div>
 
+  <% if Time.now.between?(("2016-05-01".to_date),("2016-12-12".to_date))%>
           <div class="item">
-            <%= image_tag "giving-tuesday-2016.jpg", alt: "Giving Tuesday 2016" %>
-              <div class="carousel-caption">
-                <a class="btn btn-primary btn-large" href="https://givingtuesday.razoo.com/us/story/B9pd1f" onclick="trackOutboundLink('https://givingtuesday.razoo.com/us/story/B9pd1f'); return false;">Donate</a>
-              </div>
+            <%= image_tag "oph-santa-sips-2016.jpg", alt: "Sips for Santa" %>
+            <div class="carousel-caption">
+              <%= link_to "More Info", "http://www.linganorewines.com/", :class => "btn btn-primary btn-large" %>
+            </div>
           </div>
+  <% end %>
 
+<% if Time.now.between?(("2016-05-01".to_date),("2017-04-10".to_date))%>
           <div class="item">
-            <%= image_tag "mooilab-banner.jpg", alt: "Mooilab" %>
+            <%= image_tag "fastfurriestwebbanner.jpg", alt: "Fast and Furriest 2017" %>
               <div class="carousel-caption">
-                <%= link_to "Information", "https://www.mooilab.com/", :class => "btn btn-primary btn-large" %>
+                <%= link_to "Register", "https://endurancecui.active.com/event-reg/select-race?e=39440953", :class => "btn btn-warning btn-large" %>
+                <%= link_to "About", "http://ophfastandfurriest3.weebly.com/", :class => "btn btn-warning btn-large" %>
               </div>
           </div>
+  <% end %>
 
         </div>
         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>

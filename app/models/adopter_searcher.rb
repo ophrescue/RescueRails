@@ -5,6 +5,7 @@ class AdopterSearcher
     'new',
     'pend response',
     'workup',
+    'ready for final',
     'approved'
   ].freeze
 

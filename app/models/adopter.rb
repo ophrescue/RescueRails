@@ -42,6 +42,7 @@ class Adopter < ApplicationRecord
   STATUSES = ['new',
               'pend response',
               'workup',
+              'ready for final',
               'approved',
               'adopted',
               'adptd sn pend',

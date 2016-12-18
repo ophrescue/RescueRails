@@ -1,6 +1,6 @@
 var tagCheckRE = new RegExp("(\\w+)(\\s+)(\\w+)");
 
-var relationshipRegExp = new RegExp('\\b(mother|father|mom|dad|brother|roommate|sister|son|aunt|uncle|cousin|wife|husband|in law|grandfather|grandmother|spouse)\\b','gi');
+var relationshipRegExp = new RegExp('\\b(mother|father|mom|dad|brother|sister|son|aunt|uncle|cousin|wife|husband|in law|grandfather|grandmother|spouse)\\b','gi');
 
 jQuery.validator.addMethod("tagcheck", function(value, element) {
     return tagCheckRE.test(value);
@@ -8,7 +8,7 @@ jQuery.validator.addMethod("tagcheck", function(value, element) {
 
 jQuery.validator.addMethod("referenceRelationship", function(value, element) {
       return !relationshipRegExp.test(value);
-}, "Sorry, references must not be related to you or live with you.")
+}, "Sorry, references can not be related to you.")
 
 $(function(){
   $("#new_adopter").formwizard({

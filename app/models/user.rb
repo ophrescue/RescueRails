@@ -109,7 +109,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :confidentiality_agreement
 
   has_many :assignments, class_name: 'Adopter', foreign_key: 'assigned_to_user_id'
-  has_many :active_applications, -> { where(status: ['new', 'pend response', 'workup', 'approved']) }, class_name: 'Adopter', foreign_key: 'assigned_to_user_id'
+  has_many :active_applications, -> { where(status: ['new', 'pend response', 'workup', 'ready for final', 'approved']) }, class_name: 'Adopter', foreign_key: 'assigned_to_user_id'
   belongs_to :mentor, class_name: 'User', foreign_key: 'mentor_id'
   has_many :mentees, class_name: 'User', foreign_key: 'mentor_id'
 

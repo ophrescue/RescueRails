@@ -98,15 +98,8 @@
             </td>
           </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">why_not_fixed </td>
             <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.why_not_fixed %></td>
-          </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">current_pets_uptodate</td>
-            <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">
-              <% if @adopter.adoption_app.current_pets_uptodate? %>
-                <span class="label success" style="background-color: #46A546;border-radius: 3px 3px 3px 3px;color: white;font-size: 9.75px;font-weight: bold;padding: 1px 3px 2px;text-transform: uppercase;white-space: nowrap">Pets are up to date</span>
-              <% else %>
-                <span class="label important" style="background-color: #C43C35;border-radius: 3px 3px 3px 3px;color: white;font-size: 9.75px;font-weight: bold;padding: 1px 3px 2px;text-transform: uppercase;white-space: nowrap">pets need shots</span>
-              <% end %>
-            </td>
-          </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">current_pets_uptodate_why</td>
+          </tr>
+          <tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">current_pets_uptodate_why</td>
           <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.current_pets_uptodate_why %></td>
         </tr><tr><td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top">vet_info</td>
             <td style="line-height: 18px;padding: 10px 10px 9px;text-align: left;border-top: 1px solid #DDD;vertical-align: top"><%= @adopter.adoption_app.vet_info %></td>

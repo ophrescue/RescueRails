@@ -1,8 +1,14 @@
 var tagCheckRE = new RegExp("(\\w+)(\\s+)(\\w+)");
 
+var relationshipRegExp = new RegExp('\\b(mother|father|mom|dad|brother|sister|son|aunt|uncle|cousin|wife|husband|in law|grandfather|grandmother|spouse)\\b','gi');
+
 jQuery.validator.addMethod("tagcheck", function(value, element) {
     return tagCheckRE.test(value);
 }, "Full name required.");
+
+jQuery.validator.addMethod("referenceRelationship", function(value, element) {
+      return !relationshipRegExp.test(value);
+}, "Sorry, references can not be related to you.")
 
 $(function(){
   $("#new_adopter").formwizard({
@@ -134,13 +140,25 @@ $(function(){
                               required: false,
                               email: true
                         },
+                        "adopter[references_attributes][0][relationship]" : {
+                              required: true,
+                              referenceRelationship: true
+                        },
                         "adopter[references_attributes][1][email]" : {
                               required: false,
                               email: true
                         },
+                        "adopter[references_attributes][1][relationship]" : {
+                              required: true,
+                              referenceRelationship: true
+                        },
                         "adopter[references_attributes][2][email]" : {
                               required: false,
                               email: true
+                        },
+                        "adopter[references_attributes][2][relationship]" : {
+                              required: true,
+                              referenceRelationship: true
                         }
           },
           messages : {

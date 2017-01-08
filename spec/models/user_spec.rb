@@ -56,6 +56,8 @@
 #  training_team                :boolean          default(FALSE)
 #  confidentiality_agreement_id :integer
 #  foster_mentor                :boolean          default(FALSE)
+#  public_relations             :boolean          default(FALSE)
+#  fundraising                  :boolean          default(FALSE)
 #
 
 require 'rails_helper'

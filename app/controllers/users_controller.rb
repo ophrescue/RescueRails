@@ -171,6 +171,8 @@ class UsersController < ApplicationController
                 :mentor_id,
                 :training_team,
                 :foster_mentor,
+                :public_relations,
+                :fundraising,
                 :lastverified,
                 :agreement_id,
                 :confidentiality_agreement_id,
@@ -245,7 +247,7 @@ class UsersController < ApplicationController
     params.slice(:admin, :adoption_coordinator, :event_planner,
                  :dog_adder, :dog_editor, :photographer, :foster,
                  :newsletter, :has_dogs, :has_cats, :house_type, :has_children_under_five,
-                 :has_fence, :puppies_ok, :has_parvo_house, :transporter, :training_team, :foster_mentor
+                 :has_fence, :puppies_ok, :has_parvo_house, :transporter, :training_team, :foster_mentor, :public_relations, :fundraising
                 )
   end
 end

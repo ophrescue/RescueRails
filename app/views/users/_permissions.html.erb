@@ -72,16 +72,28 @@
     <li>Not on Newsletter Team</li>
   <% end %>
 
-  <% if @user.dl_resources? %>
-    <li>Can Download Staff Resources</li>
-  <% else %>
-    <li>Cannot Download Staff Resources</li>
-  <% end %>
-
   <% if @user.training_team? %>
     <li>Is a member of the training team</li>
   <%else%>
     <li>Is not a member of the training team</li>
+  <% end %>
+
+  <% if @user.public_relations? %>
+    <li>Is a member of the public relations team</li>
+  <%else%>
+    <li>Is not a member of the public relations team</li>
+  <% end %>
+
+  <% if @user.fundraising? %>
+    <li>Is a member of the fundraising team</li>
+  <%else%>
+    <li>Is not a member of the fundraising team</li>
+  <% end %>
+
+  <% if @user.dl_resources? %>
+    <li>Can Download Staff Resources</li>
+  <% else %>
+    <li>Cannot Download Staff Resources</li>
   <% end %>
 
   <% if @user.dl_locked_resources? %>

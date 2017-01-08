@@ -116,6 +116,18 @@ describe UsersController, type: :controller do
         get :index, params: { newsletter: TRUE }
         expect(assigns(:users)).to match_array([smith])
       end
+
+      it 'returns the public relations team members' do
+        smith = create(:user, name: 'Jane Smithbot', public_relations: TRUE)
+        get :index, params: { public_relations: TRUE }
+        expect(assigns(:users)).to match_array([smith])
+      end
+
+      it 'returns the fundraising team members' do
+        smith = create(:user, name: 'Jane Smithbot', fundraising: TRUE)
+        get :index, params: { fundraising: TRUE }
+        expect(assigns(:users)).to match_array([smith])
+      end
     end
   end
 

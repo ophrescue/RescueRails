@@ -34,10 +34,6 @@
 
         <div id="no_pets" class="step">
           <h4>References</h4>
-          <div class="alert alert-info">
-          <h4>Important!</h4>
-          <p>Please provide three references.  <strong>These references can not be related by blood or marriage to anyone living in your household.</strong></p>
-          </div>
           <% @i = 1 %>
           <%= f.fields_for :references do |builder| %>
             <%= render 'adopters/steps/reference_fields', :rf => builder %>

@@ -4,7 +4,7 @@ $(document).ready(function () {
         if (this.value == 'own') {
             $(".own-home-auth").show();
         }
-        else if (this.value == 'rent') {
+        else {
             $(".own-home-auth").hide();
         }
     });

@@ -42,12 +42,20 @@
     <%= af.label :house_type, "Do you rent or own your home?", :class => "control-label" %>
     <div class="controls">
       <label>
-        <%= af.radio_button :house_type, 'rent', :class => "link required" %>
+        <%= af.radio_button :house_type, 'rent', :class => "link required residence-auth-pop" %>
         <span>Rent</span>
       </label>
       <label>
-        <%= af.radio_button :house_type, 'own', :class => "link required" %>
+        <%= af.radio_button :house_type, 'own', :class => "link required residence-auth-pop" %>
         <span>Own</span>
+      </label>
+    </div>
+  </div>
+  <div class="control-group own-home-auth">
+    <%= af.label :verify_home_auth, "I authorize Operation Paws for Homes to verify my home ownership.", :class => "control-label" %>
+    <div class="controls">
+      <label class="checkbox">
+        <%= af.check_box :verify_home_auth, :class => "required"  %>
       </label>
     </div>
   </div>

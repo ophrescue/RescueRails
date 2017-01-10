@@ -20,6 +20,7 @@
 //= require rescue_rails
 //= require analytics
 //= require adoption_app_wizard
+//= require adoption_app_home_auth
 //= require datepicker
 //= require jquery.scroll
 //= require galleria

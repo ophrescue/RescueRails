@@ -23,6 +23,7 @@ class AdoptionAppController < ApplicationController
               :other_household_names,
               :ready_to_adopt_dt,
               :house_type,
+              :verify_home_auth,
               :dog_exercise,
               :dog_stay_when_away,
               :dog_vacation,

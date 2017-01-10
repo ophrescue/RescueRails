@@ -37,6 +37,7 @@
 #  shot_bordetella           :boolean
 #  shot_heartworm            :boolean
 #  shot_flea_tick            :boolean
+#  verify_home_auth          :boolean          default(FALSE)
 #
 
 require 'rails_helper'

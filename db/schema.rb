@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108171855) do
+ActiveRecord::Schema.define(version: 20170110012637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20170108171855) do
     t.boolean  "shot_bordetella"
     t.boolean  "shot_heartworm"
     t.boolean  "shot_flea_tick"
+    t.boolean  "verify_home_auth",                                    default: false
     t.index ["adopter_id"], name: "index_adoption_apps_on_adopter_id", using: :btree
   end
 

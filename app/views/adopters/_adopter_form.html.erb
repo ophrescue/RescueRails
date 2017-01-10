@@ -74,6 +74,12 @@
       <th>Others in Household</th>
       <td><%= @adopter.adoption_app.other_household_names %></td>
     </tr>
+    <% if @adopter.adoption_app.verify_home_auth == true %>
+    <tr>
+      <th></th>
+      <td>Authorized to verify home ownership</td>
+    </tr>
+    <% end %>
     <tr>
       <th>Street Address</th>
       <td>

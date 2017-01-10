@@ -8,7 +8,7 @@ jQuery.validator.addMethod("tagcheck", function(value, element) {
 
 jQuery.validator.addMethod("referenceRelationship", function(value, element) {
       return !relationshipRegExp.test(value);
-}, "Sorry, references can not be related to you.")
+}, "Sorry, references can not be related to you.");
 
 $(function(){
   $("#new_adopter").formwizard({

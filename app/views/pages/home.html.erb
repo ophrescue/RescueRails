@@ -41,13 +41,28 @@
             </div>
           </div>
 
-
+<% if Time.now.between?(("2017-01-01".to_date),("2017-01-22".to_date))%>
+          <div class="item">
+            <%= image_tag "bnr-training-seminar-2017-01-21.jpg", alt: "Training Seminar" %>
+            <div class="carousel-caption">
+              <%= link_to "Event Info", "https://www.facebook.com/events/334213446964957??ti=ia", :class => "btn btn-primary btn-large" %>
+            </div>
+          </div>
+<% elsif Time.now.between?(("2017-01-22".to_date),("2017-02-06".to_date))%>
+          <div class="item">
+            <%= image_tag "pupplybowl2017.jpg", alt: "Puppy Bowl Viewing Party" %>
+            <div class="carousel-caption">
+              <%= link_to "Event Info", "https://www.facebook.com/events/184150525326656??ti=ia", :class => "btn btn-primary btn-large" %>
+            </div>
+          </div>
+<% else %>
           <div class="item">
             <%= image_tag "lustreart.jpg", alt: "Lustre Art" %>
             <div class="carousel-caption">
               <%= link_to "Contact", "https://www.facebook.com/LustreArt", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
+<% end %>
 
 <% if Time.now.between?(("2016-05-01".to_date),("2017-04-10".to_date))%>
           <div class="item">
@@ -57,7 +72,7 @@
                 <%= link_to "About", "http://ophfastandfurriest3.weebly.com/", :class => "btn btn-warning btn-large" %>
               </div>
           </div>
-  <% end %>
+<% end %>
 
         </div>
         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>

@@ -66,8 +66,6 @@ RescueRails::Application.routes.draw do
   get '/terms',                       to: 'pages#terms'
   get '/resources',                   to: 'pages#resources'
   get '/tips-for-finding-lost-pets',  to: 'pages#tips_for_finding_lost_pets'
-  get '/puppyguide',                  to: 'pages#puppyguide'
-  get '/shopping',                    to: 'pages#shopping'
   get '/status_definitions',          to: 'pages#status_definitions'
   get '/dog-status-definitions',      to: 'pages#dog_status_definitions'
   get '/education-and-outreach',      to: 'pages#education_and_outreach'

@@ -41,18 +41,11 @@
             </div>
           </div>
 
-<% if Time.now.between?(("2017-01-01".to_date),("2017-01-22".to_date))%>
+<% if Time.now.between?(("2017-01-01".to_date),("2017-03-04".to_date))%>
           <div class="item">
-            <%= image_tag "bnr-training-seminar-2017-01-21.jpg", alt: "Training Seminar" %>
+            <%= image_tag "banner-stpat-2017.jpg", alt: "St Patricks Day Walk" %>
             <div class="carousel-caption">
-              <%= link_to "Event Info", "https://www.facebook.com/events/334213446964957??ti=ia", :class => "btn btn-primary btn-large" %>
-            </div>
-          </div>
-<% elsif Time.now.between?(("2017-01-22".to_date),("2017-02-06".to_date))%>
-          <div class="item">
-            <%= image_tag "puppybowl2017.jpg", alt: "Puppy Bowl Viewing Party" %>
-            <div class="carousel-caption">
-              <%= link_to "Event Info", "https://www.facebook.com/events/184150525326656??ti=ia", :class => "btn btn-primary btn-large" %>
+              <%= link_to "Event Info", "https://www.facebook.com/events/1822611124669960/", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
 <% else %>

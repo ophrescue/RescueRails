@@ -8,6 +8,7 @@ $( function () {
       data: $('#new_dog_link').serialize(),
       success: function (data) {
         refresh_dogs();
+        clear_autocomplete();
       },
       error: function() {
         alert('Dog already linked to this application');
@@ -15,7 +16,7 @@ $( function () {
     });
   });
 
-  $('#linked_dogs_table').on('submit', '#delete_dog_link', function(e) {
+  $('#parent_linked_dogs_table').on('submit', '#delete_dog_link', function(e) {
     e.preventDefault();
     if(confirm('Are you sure you would like to delete this?')) {
       $.ajax({
@@ -40,6 +41,11 @@ $( function () {
 
 function refresh_dogs() {
   var url = window.location;
-  $('#linked_dogs_table').load(url+' #linked_dogs_table');
+  $('#parent_linked_dogs_table').load(url+' #linked_dogs_table');
   $('#link_dog_submit').prop('disabled', false);
+}
+
+function clear_autocomplete() {
+  $('#autocomplete_label').val('');
+  $('#adoption_dog_id').val('');
 }

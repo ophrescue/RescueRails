@@ -10,8 +10,9 @@ $( function () {
         refresh_dogs();
         clear_autocomplete();
       },
-      error: function() {
-        alert('Dog already linked to this application');
+      error: function(a, b, c) {
+        $('#link_dog_submit').prop('disabled', false);
+        alert(b + ': ' + c);
       }
     });
   });

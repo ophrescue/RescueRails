@@ -11,8 +11,10 @@
 #
 
 class AdoptionsController < ApplicationController
-  before_action :edit_my_adopters_user, only: [:update]
-  before_action :edit_all_adopters_user, only: [:update]
+  before_action :edit_my_adopters_user, only: %i(update)
+  before_action :edit_all_adopters_user, only: %i(update)
+  before_action :load_dog, only: %i(create)
+  before_action :load_adopter, only: %i(create)
 
   respond_to :html, :json
 
@@ -25,14 +27,10 @@ class AdoptionsController < ApplicationController
   end
 
   def create
-    current_adoption = Adoption.where(
-      adopter_id: adoption_params[:adopter_id],
-      dog_id: adoption_params[:dog_id]
-    )
-    @adoption = Adoption.new(adoption_params)
+    @adoption = Adoption.find_or_initialize_by(create_params)
     @adoption.relation_type = 'interested'
 
-    if current_adoption.present? || @adoption.save
+    if @adoption.save!
       flash[:success] = 'Dogs linked to Application'
     end
 
@@ -58,11 +56,23 @@ class AdoptionsController < ApplicationController
 
   private
 
+  def load_dog
+    @dog = Dog.find(adoption_params[:dog_id])
+  end
+
+  def load_adopter
+    @adopter = Adopter.find(adoption_params[:adopter_id])
+  end
+
+  def create_params
+    { dog: @dog, adopter: @adopter }
+  end
+
   def adoption_params
     params.require(:adoption)
-      .permit(:relation_type,
-              :dog_id,
-              :adopter_id)
+          .permit(:relation_type,
+                  :dog_id,
+                  :adopter_id)
   end
 
   def edit_my_adopters_user

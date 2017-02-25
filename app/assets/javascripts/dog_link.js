@@ -2,6 +2,7 @@ $( function () {
 
   $('#new_dog_link').submit( function(e) {
     e.preventDefault();
+
     $.ajax({
       type: 'POST',
       url: this.action,

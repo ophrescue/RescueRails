@@ -60,10 +60,9 @@ class DogsController < ApplicationController
   before_action :edit_dog_check, only: %i(edit update)
 
   def index
-    is_manager = signed_in?
+    @title = session[:mgr_view] ? 'Dog Manager' : 'Our Dogs'
 
-    @title = is_manager ? 'Dog Manager' : 'Our Dogs'
-    @dogs = DogSearcher.search(params: params, manager: is_manager)
+    @dogs = DogSearcher.search(params: params, manager: signed_in?)
 
     respond_to do |format|
       format.html { render :index }

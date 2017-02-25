@@ -13,8 +13,9 @@
 class AdoptionsController < ApplicationController
   before_action :edit_my_adopters_user, only: %i(update)
   before_action :edit_all_adopters_user, only: %i(update)
-  before_action :load_dog, only: %i(create)
   before_action :load_adopter, only: %i(create)
+  before_action :load_adoption, only: %i(show update destroy)
+  before_action :load_dog, only: %i(create)
 
   respond_to :html, :json
 
@@ -22,23 +23,16 @@ class AdoptionsController < ApplicationController
     redirect_to :root
   end
 
-  def show
-    @adoption = Adoption.find(params[:id])
-  end
-
   def create
     @adoption = Adoption.find_or_initialize_by(create_params)
     @adoption.relation_type = 'interested'
 
-    if @adoption.save!
-      flash[:success] = 'Dogs linked to Application'
-    end
+    flash[:success] = 'Dogs linked to Application' if @adoption.save!
 
     handle_redirect
   end
 
   def update
-    @adoption = Adoption.find(params[:id])
     @adoption.update_attributes(adoption_params)
 
     respond_with(@adoption) do |format|
@@ -48,7 +42,7 @@ class AdoptionsController < ApplicationController
   end
 
   def destroy
-    Adoption.find(params[:id]).destroy
+    @adoption.destroy
     flash[:warning] = 'Dog removed from Application'
 
     handle_redirect
@@ -56,13 +50,18 @@ class AdoptionsController < ApplicationController
 
   private
 
-  def load_dog
-    @dog = Dog.find(adoption_params[:dog_id])
+  def load_adoption
+    @adoption = Adoption.find(params[:id])
   end
 
   def load_adopter
     @adopter = Adopter.find(adoption_params[:adopter_id])
   end
+
+  def load_dog
+    @dog = Dog.find(adoption_params[:dog_id])
+  end
+
 
   def create_params
     { dog: @dog, adopter: @adopter }

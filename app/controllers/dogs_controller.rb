@@ -60,10 +60,14 @@ class DogsController < ApplicationController
   before_action :edit_dog_check, only: %i(edit update)
 
   def index
-    is_manager = signed_in? && session[:mgr_view]
+    @title = session[:mgr_view] ? 'Dog Manager' : 'Our Dogs'
 
-    @title = is_manager ? "Dog Manager" : "Our Dogs"
-    @dogs = DogSearcher.search(params: params, manager: is_manager)
+    @dogs = DogSearcher.search(params: params, manager: signed_in?)
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @dogs }
+    end
   end
 
   def show
@@ -83,7 +87,7 @@ class DogsController < ApplicationController
 
   def update
     if @dog.update_attributes(dog_params)
-      flash[:success] = "Dog updated."
+      flash[:success] = 'Dog updated.'
       redirect_to @dog
     else
       load_instance_variables

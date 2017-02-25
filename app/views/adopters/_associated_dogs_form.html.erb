@@ -3,7 +3,8 @@
     <div class="control-group">
       <%= ad.label :dog_id, "Associate Dog with Application", :class => "control-label" %>
       <div class="controls">
-        <%= ad.collection_select :dog_id, Dog.order(:name), :id, :name, {}, { class: 'chosen-select' }%>
+        <input id="autocomplete_label" name="adoption_dog_name" class='autocomplete'>
+        <input id="adoption_dog_id" type="hidden" name="adoption[dog_id]" class='chosen-select'>
       </div>
     </div>
     <div><%= ad.hidden_field :adopter_id %></div>

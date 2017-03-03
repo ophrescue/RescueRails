@@ -62,7 +62,9 @@ class DogsController < ApplicationController
   def index
     @title = session[:mgr_view] ? 'Dog Manager' : 'Our Dogs'
 
-    @dogs = DogSearcher.search(params: params, manager: signed_in?)
+    do_manager_view = signed_in? && session[:mgr_view]
+
+    @dogs = DogSearcher.search(params: params, manager: do_manager_view)
 
     respond_to do |format|
       format.html { render :index }

@@ -54,22 +54,52 @@ describe DogsController, type: :controller do
 
   describe 'GET #index' do
     context 'user is logged in' do
-      let!(:dog) { create(:dog) }
+      let!(:adoptable_dog) { create(:dog, name: 'adoptable', status: 'adoptable') }
+      let!(:adoption_pending_dog) { create(:dog, name: 'adoption pending', status: 'adoption pending') }
+      let!(:coming_soon_dog) { create(:dog, name: 'coming soon', status: 'coming soon') }
+      let!(:adopted_dog) { create(:dog, name: 'adopted', status: 'adopted') }
+      let!(:on_hold_dog) { create(:dog, name: 'on hold', status: 'on hold') }
+      let!(:not_available_dog) { create(:dog, name: 'not available', status: 'not available') }
+
       let(:params) { {} }
 
-      subject(:get_index) { get :index, params: {}, session: { mgr_view: true } }
-
       before do
-        allow(DogSearcher).to receive(:search).and_return([dog])
         allow(controller).to receive(:signed_in?).and_return(true)
       end
 
-      it 'renders successfully' do
+      it 'in manager mode all dogs are returned' do
+        get :index, params: {}, session: { mgr_view: true }
+
+        expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog])
+
+      end
+
+      it 'in gallery mode only publicly viewable dogs are returned' do
+        get :index, params: {}, session: { mgr_view: false } 
+
+        expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog])
+      end
+
+
+    end
+
+    context 'public user' do
+      let!(:adoptable_dog) { create(:dog, status: 'adoptable') }
+      let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending') }
+      let!(:coming_soon_dog) { create(:dog, status: 'coming soon') }
+      let!(:adopted_dog) { create(:dog, status: 'adopted') }
+      let!(:on_hold_dog) { create(:dog, status: 'on hold') }
+      let!(:not_available_dog) { create(:dog, status: 'not available') }
+
+      subject(:get_index) { get :index, params: {} }
+
+      it 'Only adoptable, adoption pending or coming soon dogs should be displayed' do
         get_index
 
-        expect(response).to render_template(:index)
+        expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog])
       end
     end
+    
   end
 
   describe 'GET #show' do

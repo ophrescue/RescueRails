@@ -1,7 +1,7 @@
 $( function() {
   if ( $('.edit-adopter').length > 0) {
     var remoteSource = function(request, response) {
-      $.getJSON('/dogs?search=' + request.term, function(data) {
+      $.getJSON('/dogs?all_dogs=true&search=' + request.term, function(data) {
         var results = [];
         data.forEach( function(item) {
           results.push({label: item.name, value: item.id});

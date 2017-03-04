@@ -80,6 +80,13 @@ describe DogsController, type: :controller do
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog])
       end
 
+      it 'with all dogs paramater set all dogs are returned' do
+        get :index, params: {all_dogs: true}, session: { mgr_view: true }
+
+        expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog])
+      end
+
+
 
     end
 

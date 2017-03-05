@@ -5,9 +5,9 @@ $( function() {
         var results = [];
         data.forEach( function(item) {
           results.push({label: item.name, value: item.id});
-        })
+        });
         response(results);
-      })
+      });
     };
 
     var itemSelected = function(e, ui) {
@@ -21,10 +21,19 @@ $( function() {
       return false;
     };
 
+    var responseHandler = function(event, ui) {
+      if (ui.content.length == 1) {
+        ui.item = ui.content[0];
+        $(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
+        $(this).autocomplete('close');
+      }
+    };
+
     $('.autocomplete')
       .autocomplete({
         focus: focusEvent,
         minLength: 2,
+        response: responseHandler,
         select: itemSelected,
         source: remoteSource
       });

@@ -62,7 +62,14 @@ class DogsController < ApplicationController
   def index
     @title = session[:mgr_view] ? 'Dog Manager' : 'Our Dogs'
 
-    do_manager_view = signed_in? && session[:mgr_view]
+    if signed_in? && session[:mgr_view]
+      do_manager_view = true
+    elsif signed_in? && params[:all_dogs] == "true"
+      do_manager_view = true
+    else
+      do_manager_view = false
+    end
+
 
     @dogs = DogSearcher.search(params: params, manager: do_manager_view)
 
@@ -174,6 +181,7 @@ class DogsController < ApplicationController
               :sponsored_by,
               :shelter_id,
               :medical_summary,
+              :all_dogs,
               attachments_attributes:
               [
                 :attachment,

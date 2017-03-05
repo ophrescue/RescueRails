@@ -23,6 +23,7 @@ $( function() {
 
     var responseHandler = function(event, ui) {
       if (ui.content.length == 1) {
+        $('#autocomplete_label').blur();
         ui.item = ui.content[0];
         $(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
         $(this).autocomplete('close');

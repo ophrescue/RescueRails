@@ -5,7 +5,8 @@ feature 'Link Dogs to Adoption Applications via Adoption model', js: true do
 
   scenario 'Happy Path' do
     admin = create(:user, :admin)
-    test_dog = create(:dog)
+    create(:dog, name: 'Bark')
+    create(:dog, name: 'Bart')
 
     sign_in(admin)
 
@@ -16,19 +17,16 @@ feature 'Link Dogs to Adoption Applications via Adoption model', js: true do
     expect(page).to have_content(test_applicant.name)
     expect(page).to have_no_content('status with this dog is')
 
-    select_from_autocomplete('autocomplete_label', with: test_dog.name)
+    select_from_autocomplete('autocomplete_label', with: 'Bar', click: 'Bark')
 
     click_button('Link Dog')
     expect(page).to have_content(test_applicant.name + ' status with this dog is')
     expect(page).to have_select('adoption_relation_type', selected: 'interested')
-
 
     select 'returned', from: 'adoption_relation_type'
     expect(page).to have_select('adoption_relation_type', selected: 'returned')
 
     click_button('X')
     expect(page).to have_no_content(test_applicant.name + ' status with this dog is')
-
   end
-
 end

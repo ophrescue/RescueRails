@@ -26,6 +26,7 @@
 #
 
 class Adopter < ApplicationRecord
+  include Auditable
 
   attr_accessor :pre_q_costs,
                 :pre_q_surrender,
@@ -54,7 +55,9 @@ class Adopter < ApplicationRecord
 
   FLAGS = ['High', 'Low', 'On Hold']
 
-  AUDIT = %w(status assigned_to_user_id email phone address1 address2 city state zip)
+  def attributes_to_audit
+    %w(status assigned_to_user_id email phone address1 address2 city state zip)
+  end
 
   has_many :references, dependent: :destroy
   accepts_nested_attributes_for :references
@@ -83,32 +86,12 @@ class Adopter < ApplicationRecord
   before_create :chimp_subscribe
   before_update :chimp_check
 
-  after_update :audit_changes
-
   def dog_tokens=(ids)
     self.dog_ids = ids.split(',')
   end
 
-  def audit_changes
-    return unless audit_attributes_changed?
-    return if updated_by_admin_user.blank?
-
-    comment = Comment.new(content: audit_content)
-    comment.user = updated_by_admin_user
-    comments <<  comment
-  end
-
-  def audit_attributes_changed?
-    changed_audit_attributes.present?
-  end
-
-  def changed_audit_attributes
-    changed & AUDIT
-  end
-
-  def audit_content
-    content = "#{updated_by_admin_user.name} has "
-    content + changes_to_sentence
+  def attributes_to_audit
+    %w(status assigned_to_user_id email phone address1 address2 city state zip)
   end
 
   def changes_to_sentence

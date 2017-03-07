@@ -51,6 +51,7 @@
 #
 
 class Dog < ApplicationRecord
+  include Auditable
 
   attr_accessor :primary_breed_name, :secondary_breed_name
 
@@ -116,6 +117,10 @@ class Dog < ApplicationRecord
   validates_inclusion_of :gender, in: GENDERS, allow_blank: true
 
   before_save :update_adoption_date
+
+  def attributes_to_audit
+    %w(status)
+  end
 
   def to_petfinder_status
     PETFINDER_STATUS[status]

@@ -51,6 +51,7 @@
 #
 
 class Dog < ApplicationRecord
+  include Auditable
 
   attr_accessor :primary_breed_name, :secondary_breed_name
 
@@ -73,15 +74,12 @@ class Dog < ApplicationRecord
            length: { maximum: 75 },
            uniqueness: { case_sensitive: false }
 
-  validates :tracking_id, uniqueness: true,
-              presence: true
-
-  validates_presence_of :status
-
+  validates :tracking_id, uniqueness: true, presence: true
 
   STATUSES = ['adoptable', 'adopted', 'adoption pending',
-        'on hold', 'not available', 'return pending', 'coming soon', 'completed']
+        'on hold', 'not available', 'return pending', 'coming soon','completed']
   validates_inclusion_of :status, in: STATUSES
+  validates_presence_of :status
 
   PETFINDER_STATUS =
   {
@@ -116,6 +114,10 @@ class Dog < ApplicationRecord
   validates_inclusion_of :gender, in: GENDERS, allow_blank: true
 
   before_save :update_adoption_date
+
+  def attributes_to_audit
+    %w(status)
+  end
 
   def to_petfinder_status
     PETFINDER_STATUS[status]

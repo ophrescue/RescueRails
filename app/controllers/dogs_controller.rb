@@ -95,7 +95,7 @@ class DogsController < ApplicationController
   end
 
   def update
-    @dog.updated_by_admin_user= current_user
+    @dog.updated_by_admin_user = current_user
 
     if @dog.update_attributes(dog_params)
       flash[:success] = 'Dog updated.'

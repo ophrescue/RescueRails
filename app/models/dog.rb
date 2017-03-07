@@ -74,15 +74,12 @@ class Dog < ApplicationRecord
            length: { maximum: 75 },
            uniqueness: { case_sensitive: false }
 
-  validates :tracking_id, uniqueness: true,
-              presence: true
-
-  validates_presence_of :status
-
+  validates :tracking_id, uniqueness: true, presence: true
 
   STATUSES = ['adoptable', 'adopted', 'adoption pending',
-        'on hold', 'not available', 'return pending', 'coming soon', 'completed']
+        'on hold', 'not available', 'return pending', 'coming soon','completed']
   validates_inclusion_of :status, in: STATUSES
+  validates_presence_of :status
 
   PETFINDER_STATUS =
   {

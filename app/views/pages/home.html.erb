@@ -41,11 +41,11 @@
             </div>
           </div>
 
-<% if Time.now.between?(("2017-01-01".to_date),("2017-03-04".to_date))%>
+<% if Time.now.between?(("2017-03-04".to_date),("2017-03-19".to_date))%>
           <div class="item">
-            <%= image_tag "banner-stpat-2017.jpg", alt: "St Patricks Day Walk" %>
+            <%= image_tag "banner-shop-2017-03.jpg", alt: "Shop for a great cause" %>
             <div class="carousel-caption">
-              <%= link_to "Event Info", "https://www.facebook.com/events/1822611124669960/", :class => "btn btn-primary btn-large" %>
+              <a class="btn btn-primary btn-large" href="https://www.facebook.com/events/360799277651822/" onclick="trackOutboundLink('https://www.facebook.com/events/360799277651822/'); return false;">Event Info</a>
             </div>
           </div>
 <% else %>

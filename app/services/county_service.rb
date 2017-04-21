@@ -8,7 +8,9 @@ class CountyService
 
   def self.fetch_from_google(zip)
     result = Geocoder.search(zip)
-    google_result = Geocoder::Result::Google.new(result[0].data)
+    return if result.empty?
+
+    google_result = Geocoder::Result::Google.new(result[0]&.data)
     google_result.sub_state
   end
 end

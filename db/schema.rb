@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110012637) do
+ActiveRecord::Schema.define(version: 20170418220414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170110012637) do
     t.string   "flag",                limit: 255
     t.boolean  "is_subscribed",                                 default: false
     t.date     "completed_date"
+    t.string   "county"
     t.index ["assigned_to_user_id"], name: "index_adopters_on_assigned_to_user_id", using: :btree
   end
 

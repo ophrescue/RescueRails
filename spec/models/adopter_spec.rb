@@ -27,7 +27,7 @@
 
 require 'rails_helper'
 
-describe Adopter do
+RSpec.describe Adopter do
   let(:admin) { create(:user, :admin) }
   let(:adopter) { create(:adopter) }
 
@@ -40,6 +40,28 @@ describe Adopter do
 
     adopter.updated_by_admin_user = admin
     adopter.status = 'completed'
+  end
+
+  describe '.populate_county' do
+    context 'zip changed' do
+      before do
+        adopter.zip = '12345'
+      end
+
+      it 'calls county service' do
+        expect(CountyService).to receive(:fetch) { '12345' }
+
+        adopter.save
+      end
+    end
+
+    context 'zip did not change' do
+      it 'does not call CountyService' do
+        expect(CountyService).not_to receive(:fetch)
+
+        adopter.save
+      end
+    end
   end
 
   describe '.audit_changes' do

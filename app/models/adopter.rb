@@ -85,6 +85,13 @@ class Adopter < ApplicationRecord
 
   before_create :chimp_subscribe
   before_update :chimp_check
+  before_save :populate_county
+
+  def populate_county
+    return unless zip_changed?
+
+    self.county = CountyService.fetch(zip)
+  end
 
   def dog_tokens=(ids)
     self.dog_ids = ids.split(',')

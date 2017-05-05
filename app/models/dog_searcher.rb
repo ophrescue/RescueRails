@@ -38,7 +38,7 @@ class DogSearcher
         @dogs = Dog.where("dogs.name ILIKE ?", "%#{@params[:q]}%")
       end
     else
-      @dogs = Dog.where("status IN (?)", PUBLIC_STATUSES)
+      @dogs = Dog.includes(:photos, :foster, :primary_breed, :secondary_breed).where("status IN (?)", PUBLIC_STATUSES)
     end
 
     with_includes

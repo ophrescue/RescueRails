@@ -17,28 +17,30 @@ class DogSearcher
   end
 
   def search
+    @dogs = Dog.includes(:photos, :foster)
     if @manager
+      @dogs = @dogs.includes(:adopters, :comments)
       if tracking_id_search?
-        @dogs = Dog.where(
+        @dogs = @dogs.where(
           'tracking_id = ? OR dogs.microchip = ?',
           search_term,
           search_term
         )
       elsif text_search?
-        @dogs = Dog.where(
+        @dogs = @dogs.where(
           'dogs.name ILIKE ? OR dogs.microchip = ?',
           "%#{search_term}%",
           search_term
         )
       elsif active_status_search?
-        @dogs = Dog.where("status IN (?)", ACTIVE_STATUSES)
+        @dogs = @dogs.where("status IN (?)", ACTIVE_STATUSES)
       elsif status_search?
-        @dogs = Dog.where(status: @params[:status])
+        @dogs = @dogs.where(status: @params[:status])
       else
-        @dogs = Dog.where("dogs.name ILIKE ?", "%#{@params[:q]}%")
+        @dogs = @dogs.where("dogs.name ILIKE ?", "%#{@params[:q]}%")
       end
     else
-      @dogs = Dog.where("status IN (?)", PUBLIC_STATUSES)
+      @dogs = @dogs.includes(:primary_breed, :secondary_breed).where("status IN (?)", PUBLIC_STATUSES)
     end
 
     with_includes

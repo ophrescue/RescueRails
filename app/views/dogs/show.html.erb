@@ -128,69 +128,74 @@
       <% if signed_in? %>
 
         <h4>Private Information</h4>
+        <ul class="fa-ul">
         <% if @dog.original_name.present? %>
-          Original Name: <%= @dog.original_name.titleize %><br />
+          <li><strong>Original Name:</strong> <%= @dog.original_name.titleize %></li>
         <% end %>
         <% if !@dog.microchip.blank? %>
-          Microchip: <%= @dog.microchip %><br />
+          <li><strong>Microchip:</strong> <%= @dog.microchip %></li>
         <% end %>
         <% if !@dog.fee.blank? %>
-          Adoption Fee: $<%= @dog.fee %><br />
+          <li><strong>Adoption Fee:</strong> $<%= @dog.fee %></li>
+        <% end %>
+        <% if @dog.medical_review_complete %>
+          <li><i class="fa-li fa fa-lg fa-check-circle text-success" aria-hidden="true"></i>Medical Review Complete</li>
+        <% else %>
+          <li class="text-error"><i class="fa-li fa fa-lg fa-exclamation-circle" aria-hidden="true"></i>Medical Review Required</li>
         <% end %>
         <% if @dog.has_medical_need %>
-          <%= image_tag "has_medical_need.gif" %>Has Medical Need<br />
+          <li><%= image_tag "has_medical_need.gif" %>Has Medical Need</li>
         <% end %>
         <% if !@dog.is_altered %>
-          <%= image_tag "needs_alter.gif" %>Needs Spay or Neuter<br />
+          <li><%= image_tag "needs_alter.gif" %>Needs Spay or Neuter</li>
         <% end %>
         <% if @dog.is_high_priority %>
-          <%= image_tag "is_high_priority.gif" %>High Priority<br />
+          <li><%= image_tag "is_high_priority.gif" %>High Priority</li>
         <% end %>
         <% if @dog.needs_photos %>
-          <%= image_tag "needs_photos.gif" %>Needs Photos<br />
+          <li><%= image_tag "needs_photos.gif" %>Needs Photos</li>
         <% end %>
         <% if @dog.has_behavior_problem %>
-          <%= image_tag "has_behavior_problem.gif" %>Has Behavior Problem<br />
+          <li><%= image_tag "has_behavior_problem.gif" %>Has Behavior Problem</li>
         <% end %>
         <% if @dog.needs_foster %>
-          <%= image_tag "needs_foster.gif" %>Needs Foster<br />
+          <li><%= image_tag "needs_foster.gif" %>Needs Foster</li>
         <% end %>
+        </ul>
 
-        <br />
+        <h4>Foster</h4>
+        <ul class="unstyled">
         <% if @dog.foster_id %>
-          <strong>Foster</strong><br />
-          <%= link_to @dog.foster.name, user_path(@dog.foster) %><br />
-          <%= @dog.foster.address1 %><br />
-          <%= @dog.foster.city %>, <%= @dog.foster.state %><br />
-          <%= @dog.foster.phone %><br />
+          <li><%= link_to @dog.foster.name, user_path(@dog.foster) %></li>
+          <li><%= @dog.foster.address1 %></li>
+          <li><%= @dog.foster.city %>, <%= @dog.foster.state %></li>
+          <li><%= @dog.foster.phone %></li>
         <% else %>
-          <p>No Foster Assigned</p>
+          <li>No Foster Assigned</li>
         <% end %>
+        </ul>
 
-        <br />
+        <h4>Adoption Coordinator</h4>
+        <ul class="unstyled">
         <% if @dog.coordinator_id %>
-          <strong>Adoption Coordinator</strong>
-          <br/>
-          <%= link_to @dog.coordinator.name, user_path(@dog.coordinator) %>
+          <li><%= link_to @dog.coordinator.name, user_path(@dog.coordinator) %></li>
         <% else %>
-          <p>No Adoption Coordinator Assigned</p>
+          <li>No Adoption Coordinator Assigned</li>
         <% end %>
+        </ul>
 
-        <br />
-
+        <h4>Source Shelter</h4>
+        <ul class="unstyled">
         <% if @dog.shelter_id %>
-          <p>
-            <strong>Source Shelter:</strong> <%= @dog.shelter.name %>
-          </p>
+          <li><%= @dog.shelter.name %></li>
         <% else %>
-          <p>No Source Shelter Assigned</p>
+          <li>No Source Shelter Assigned</li>
         <% end %>
-
-        <br />
+        </ul>
 
         <% if @dog.adopters.count > 0 %>
           <h4>Adopter Info</h4>
-          <ul>
+          <ul class="unstyled">
           <% @dog.adopters.each do |a| %>
             <li><%= link_to a.name, a %> - <%= a.status %></li>
           <% end %>

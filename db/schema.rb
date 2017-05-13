@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418220414) do
+ActiveRecord::Schema.define(version: 20170513172145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,17 +150,17 @@ ActiveRecord::Schema.define(version: 20170418220414) do
   end
 
   create_table "dogs", force: :cascade do |t|
-    t.string   "name",                   limit: 255
-    t.datetime "created_at",                         precision: 6
-    t.datetime "updated_at",                         precision: 6
+    t.string   "name",                    limit: 255
+    t.datetime "created_at",                          precision: 6
+    t.datetime "updated_at",                          precision: 6
     t.integer  "tracking_id"
     t.integer  "primary_breed_id"
     t.integer  "secondary_breed_id"
-    t.string   "status",                 limit: 255
-    t.string   "age",                    limit: 75
-    t.string   "size",                   limit: 75
+    t.string   "status",                  limit: 255
+    t.string   "age",                     limit: 75
+    t.string   "size",                    limit: 75
     t.boolean  "is_altered"
-    t.string   "gender",                 limit: 6
+    t.string   "gender",                  limit: 6
     t.boolean  "is_special_needs"
     t.boolean  "no_dogs"
     t.boolean  "no_cats"
@@ -168,33 +168,34 @@ ActiveRecord::Schema.define(version: 20170418220414) do
     t.text     "description"
     t.integer  "foster_id"
     t.date     "adoption_date"
-    t.boolean  "is_uptodateonshots",                               default: true
+    t.boolean  "is_uptodateonshots",                                default: true
     t.date     "intake_dt"
     t.date     "available_on_dt"
-    t.boolean  "has_medical_need",                                 default: false
-    t.boolean  "is_high_priority",                                 default: false
-    t.boolean  "needs_photos",                                     default: false
-    t.boolean  "has_behavior_problem",                             default: false
-    t.boolean  "needs_foster",                                     default: false
-    t.string   "petfinder_ad_url",       limit: 255
-    t.string   "adoptapet_ad_url",       limit: 255
-    t.string   "craigslist_ad_url",      limit: 255
-    t.string   "youtube_video_url",      limit: 255
-    t.string   "first_shots",            limit: 255
-    t.string   "second_shots",           limit: 255
-    t.string   "third_shots",            limit: 255
-    t.string   "rabies",                 limit: 255
-    t.string   "vac_4dx",                limit: 255
-    t.string   "bordetella",             limit: 255
-    t.string   "microchip",              limit: 255
-    t.string   "original_name",          limit: 255
+    t.boolean  "has_medical_need",                                  default: false
+    t.boolean  "is_high_priority",                                  default: false
+    t.boolean  "needs_photos",                                      default: false
+    t.boolean  "has_behavior_problem",                              default: false
+    t.boolean  "needs_foster",                                      default: false
+    t.string   "petfinder_ad_url",        limit: 255
+    t.string   "adoptapet_ad_url",        limit: 255
+    t.string   "craigslist_ad_url",       limit: 255
+    t.string   "youtube_video_url",       limit: 255
+    t.string   "first_shots",             limit: 255
+    t.string   "second_shots",            limit: 255
+    t.string   "third_shots",             limit: 255
+    t.string   "rabies",                  limit: 255
+    t.string   "vac_4dx",                 limit: 255
+    t.string   "bordetella",              limit: 255
+    t.string   "microchip",               limit: 255
+    t.string   "original_name",           limit: 255
     t.integer  "fee"
     t.integer  "coordinator_id"
-    t.string   "sponsored_by",           limit: 255
+    t.string   "sponsored_by",            limit: 255
     t.integer  "shelter_id"
     t.text     "medical_summary"
     t.string   "heartworm_preventative"
     t.string   "flea_tick_preventative"
+    t.boolean  "medical_review_complete",                           default: false
     t.index ["age"], name: "index_dogs_on_age", using: :btree
     t.index ["coordinator_id"], name: "index_dogs_on_coordinator_id", using: :btree
     t.index ["foster_id"], name: "index_dogs_on_user_id", using: :btree

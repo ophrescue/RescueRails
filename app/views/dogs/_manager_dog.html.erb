@@ -5,6 +5,9 @@
   <td><%= dog.age ? dog.age.titleize : " " %></td>
   <td><%= dog.size ? dog.size.titleize : " " %></td>
   <td>
+    <% if !dog.medical_review_complete %>
+      <span class="fa fa-lg fa-exclamation-circle text-error" aria-hidden="true" title="Medical Review Incomplete"></span>
+    <% end %>
     <% if dog.has_medical_need %>
       <%= image_tag "has_medical_need.gif", :title => "Medical Need", :size => "18x18" %>
     <% end %>

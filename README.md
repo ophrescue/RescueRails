@@ -28,8 +28,8 @@ Fire up the app and see what happens.  App is setup to run SSL always, might wan
 See `db/seeds.rb` for default admin login info
 
 
-### Licensing and reuse
-* Source code written for this project has been licensed under the Apache 2.0 license, which appears in the headers of the files.
+### Licensing
+* Source code written for this project has been licensed under the Apache 2.0 license
 * 3rd party libraries that may appear are licensed as identified.
 * Logos and images remain copyright of their respective owners.
 * Documents appearing in public\docs remain property of Operation Paws for Homes, Inc. and may not be reused without written permission.

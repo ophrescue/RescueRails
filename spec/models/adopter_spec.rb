@@ -23,6 +23,7 @@
 #  flag                :string(255)
 #  is_subscribed       :boolean          default(FALSE)
 #  completed_date      :date
+#  county              :string
 #
 
 require 'rails_helper'

@@ -26,7 +26,9 @@
   <% else %>
 
     <div id="dogs">
-      <%= render 'dog_rows' %>
+      <% cache @dogs do %>
+        <%= render 'dog_rows' %>
+      <% end %>
     </div>
 
   <% end %>

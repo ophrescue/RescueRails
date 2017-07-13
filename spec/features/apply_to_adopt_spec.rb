@@ -14,6 +14,8 @@ feature 'Apply for Adoption' do
     check('adopter_pre_q_reimbursement')
     check('adopter_pre_q_dog_adjust')
     check('adopter_pre_q_courtesy')
+    check('adopter_pre_q_travel')
+    check('adopter_pre_q_hold')
 
     click_button('Next')
 
@@ -183,6 +185,8 @@ feature 'Apply for Adoption' do
     check('adopter_pre_q_reimbursement')
     check('adopter_pre_q_dog_adjust')
     check('adopter_pre_q_courtesy')
+    check('adopter_pre_q_travel')
+    check('adopter_pre_q_hold')
 
     click_button('Next')
 

@@ -51,7 +51,9 @@ class Adopter < ApplicationRecord
                 :pre_q_limited_info,
                 :pre_q_breed_info,
                 :pre_q_dog_adjust,
-                :pre_q_courtesy
+                :pre_q_courtesy,
+                :pre_q_travel,
+                :pre_q_hold
 
   attr_reader :dog_tokens
   attr_accessor :updated_by_admin_user

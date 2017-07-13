@@ -4,7 +4,7 @@
         <p>Thank you for choosing Operation Paws for Homes to adopt your rescue dog. To complete your application you will need to provide:</p>
 
         <ol>
-          <li>Three personal references, not related by blood or marriage, with phone numbers</li>
+          <li>Three personal references, not related to you by blood or marriage, with phone numbers and email addresses we can reach them at.</li>
           <li>Phone number for your vet to verify current cats and dogs are spayed/neutered and up to date on shots</li>
           <li>If you rent, the phone number of your landlord to verify your pet policy</li>
         </ol>
@@ -42,25 +42,25 @@
 
           <label class="checkbox ">
             <%= f.check_box :pre_q_limited_info, :class => "required" %>
-            <span>I understand that OPH has limited information about a dog's background.</span>
+            <span>I understand that OPH has limited information about a dog's background. All available information will be disclosed to adopters. OPH had no knowledge of the dog’s past behavior or medical history. It is understood that the dogs react differently in different environments. All provided information is based on information reported by the shelter and observed in the foster home. With different environmental factors, the dog may act differently or require an adjustment period in your home. </span>
           </label>
           <span for="adopter[pre_q_limited_info]" generated="true" class="help-inline error"></span>
 
           <label class="checkbox ">
             <%= f.check_box :pre_q_breed_info, :class => "required" %>
-            <span>I understand that OPH does not, generally, have exact breed information about its dogs.</span>
+            <span>I understand that OPH does not, generally, have exact breed information about its dogs.  I understand OPH does not DNA test the dogs coming into the program.  Listed breeds are an educated guess made by veterinarians, shelter staff, and OPH volunteers without the benefit of parental history or DNA testing.</span>
           </label>
           <span for="adopter[pre_q_breed_info]" generated="true" class="help-inline error"></span>
 
           <label class="checkbox ">
             <%= f.check_box :pre_q_reimbursement, :class => "required" %>
-            <span>I understand that a rescue dog may require professional training or unexpected medical services. OPH must be contacted for help with any problems during the initial transition, and will not be responsible for reimbursement of any expenses without prior consent.</span>
+            <span>I understand that a rescue dog may require professional training or unexpected medical services. I understand that each dog has been examined by a veterinarian and all known medical issues will be addressed and/or disclosed to potential adopters to the best of the organization’s ability. I understand that some conditions may be dormant, not seen, or happen in the future. I understand that as an adopter, it is my financial responsibility to obtain any medical care needed once I have adopted a dog.  If a medical condition is noticed immediately following adoption, OPH must be contacted immediately if assistance is sought from the organization.  OPH will not be responsible for reimbursement of any expenses that an adopter incurs without prior consent from OPH.</span>
           </label>
           <span for="adopter[pre_q_reimbursement]" generated="true" class="help-inline error"></span>
 
           <label class="checkbox ">
             <%= f.check_box :pre_q_dog_adjust, :class => "required" %>
-            <span>I understand that it may take a dog up to thirty days to adjust to living in my home.</span>
+            <span>I understand that it may take a dog up to thirty days to adjust to living in my home.  Each dog has been through many changes beginning with an unknown past (for most dogs) to life in a shelter, to life in a foster home or a partner boarding facility, and – finally - to your home. These changes can be overwhelming to any living creature. Please be patient and understand that the stress of change may cause behavior variances.  Some dogs will require professional training.</span>
           </label>
           <span for="adopter[pre_q_dog_adjust]" generated="true" class="help-inline error"></span>
 
@@ -69,6 +69,18 @@
             <span>I understand that OPH Adoption Coordinators and Fosters are volunteers.  I will treat them with courtesy throughout the adoption process, or they have the right to terminate my adoption application.</span>
           </label>
           <span for="adopter[pre_q_courtesy]" generated="true" class="help-inline error"></span>
+
+          <label class="checkbox ">
+            <%= f.check_box :pre_q_travel, :class => "required" %>
+            <span>I understand that OPH is a foster home based program powered by volunteers.  In addition to foster homes, dogs may be housed at partner doggie day cares or boarding facilities.  The general location of each dog is identified in their OPH profile. It is the responsibility of a potential adopter to travel to the location of the dog for a “meet and greet” as part of the adoption process.  OPH is unable to deliver dogs to potential adopters due to limited volunteer resources. </span>
+          </label>
+          <span for="adopter[pre_q_travel]" generated="true" class="help-inline error"></span>
+
+          <label class="checkbox ">
+            <%= f.check_box :pre_q_hold, :class => "required" %>
+            <span>I understand that a dog can only be placed on hold for 7 days once my application is approved. OPH partners with animal shelters that often have euthanasia rates of 50%- 90% without rescue assistance.  For this reason, we are not able to place dogs on hold for a single applicant for more than 7 days post application approval.  We cannot make exceptions for vacation or work schedules beyond this time period as this can mean euthanasia for another dog at a partner shelter.  OPH volunteers are happy to work with you to find a dog that meets your availability. <strong>We adopt to the first approved and available adopter.</strong></span>
+          </label>
+          <span for="adopter[pre_q_hold]" generated="true" class="help-inline error"></span>
 
         </div>
 

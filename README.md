@@ -21,7 +21,15 @@ Create database.yml file, and use postgres
     rake db:setup
     rake db:seed
 
-You're also going to need to setup an auto incrementor in postgresql on the dogs.tracking_id column.  This isn't in the schema. :(
+You're also going to need to setup the auto incrementor in postgresql on the dogs.tracking_id column.  Run these commands for both your development and test databases:
+
+```
+psql   //launch Postgresql command line
+\list  //to get a list of your databases if you don't remember
+\connect TheNameOfYourDatabase
+CREATE SEQUENCE tracking_id_seq START 1;
+\q    //quit and return to command prompt.
+```
 
 Fire up the app and see what happens.  App is setup to run SSL always, might want to use POW as your webserver in dev.
 

@@ -4,7 +4,7 @@
     <div class="control-group">
       <%= f.label :name, :class => 'control-label' %>
       <div class="controls">
-        <% if current_user.admin? %>
+        <% if is_admin? %>
           <%= f.text_field :name, :autocomplete => :off%>
         <% else %>
           <%= f.text_field :name, :autocomplete => :off , :disabled => true %>
@@ -20,7 +20,7 @@
     <div class="control-group">
       <%= f.label :email, :class => 'control-label' %>
       <div class="controls">
-        <% if current_user.admin? %>
+        <% if is_admin? %>
           <%= f.text_field :email, :autocomplete => :off %>
         <% else %>
           <%= f.text_field :email, :autocomplete => :off, :disabled => true %>

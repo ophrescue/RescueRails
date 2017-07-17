@@ -206,9 +206,7 @@ class UsersController < ApplicationController
                 ])
     else
       params.require(:user)
-        .permit(:name,
-                :email,
-                :password,
+        .permit(:password,
                 :password_confirmation,
                 :phone,
                 :other_phone,

@@ -4,7 +4,12 @@
     <div class="control-group">
       <%= f.label :name, :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :name, :autocomplete => :off %>
+        <% if is_admin? %>
+          <%= f.text_field :name, :autocomplete => :off%>
+        <% else %>
+          <%= f.text_field :name, :autocomplete => :off , :disabled => true %>
+          <span class="help-inline">Contact an <a href='/users?admin=true'>Admin</a> to change your name.<span>
+        <% end %>
       </div>
     </div>
     <div class="control-group">
@@ -16,7 +21,12 @@
     <div class="control-group">
       <%= f.label :email, :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :email, :autocomplete => :off %>
+        <% if is_admin? %>
+          <%= f.text_field :email, :autocomplete => :off %>
+        <% else %>
+          <%= f.text_field :email, :autocomplete => :off, :disabled => true %>
+          <span class="help-inline">Contact an <a href='/users?admin=true'>Admin</a> to change your email.<span>
+        <% end %>
       </div>
     </div>
     <div class="control-group">
@@ -389,4 +399,3 @@
     </div>
   </fieldset>
 <% end %>
-

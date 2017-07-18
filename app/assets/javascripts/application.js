@@ -31,3 +31,4 @@
 //= require photos.js
 //= require adoption_form
 //= require jquery_ujs
+//= require bootstrap-multiselect

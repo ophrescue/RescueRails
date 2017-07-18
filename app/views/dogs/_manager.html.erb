@@ -1,11 +1,55 @@
 <div class="row">
-<br />
   <div class="span12">
     <%= form_tag dogs_path, :method => 'get', :class => 'form-inline' do %>
       <%= text_field_tag :search, params[:search], placeholder: 'ID, Name or Microchip' %>
       <%= submit_tag "Search", :name => nil %>
       <%= link_to ' Clear Search', :controller => "dogs", :status => "active" %>
     <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+  <div class="well well-small">
+    <%= form_tag dogs_path, :method => 'get', :class => 'form-inline' do %>
+        <%= label_tag :age, 'Age:' %>
+        <%= select_tag :age, options_for_select(Dog::AGES), {id: 'ageSelect', multiple: 'multiple'} %>
+
+        <%= label_tag :size, 'Size:' %>
+        <%= select_tag :size, options_for_select(Dog::SIZES), {id: 'sizeSelect', multiple: 'multiple'} %>
+
+      <label class="label-filter">Flags:</label>
+          <select id="flagSelect" multiple="multiple">
+              <option value="1">High Priority</option>
+              <option value="2">Medical Need</option>
+              <option value="mrc">Medical Review Needed</option>
+              <option value="3">Behavior Problems</option>
+              <option value="3">Needs Foster</option>
+              <option value="4">No Kids</option>
+              <option value="5">No Cats</option>
+              <option value="6">No Dogs</option>
+          </select>
+        <%= label_tag :status, 'Status:' %>
+        <%= select_tag :status, options_for_select(Dog::STATUSES), {id: 'statusSelect', multiple: 'multiple'} %>
+
+      <button type="submit" class="btn btn-primary">Filter</button>
+    <% end %>
+  </div>
+
+<script id="example">
+$('#ageSelect').multiselect({
+  nonSelectedText: 'Any'
+});
+$('#sizeSelect').multiselect({
+  nonSelectedText: 'Any'
+});
+$('#flagSelect').multiselect({
+  nonSelectedText: 'Any'
+});
+$('#statusSelect').multiselect({
+  nonSelectedText: 'Any'
+});
+</script>
     <ul class="nav nav-tabs">
       <% Dog::STATUSES.each do |status| %>
         <% if status == params[:status] %>

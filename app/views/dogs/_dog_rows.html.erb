@@ -3,7 +3,7 @@
     <div class="span12 gallery">
       <ul class="thumbnails">
         <% slice.each do |dog| %>
-          <% cache dog %>
+          <% cache dog do %>
             <li class="span4">
               <%= link_to dog, :class => "thumbnail" do %>
                 <% if dog.photos == [] %>

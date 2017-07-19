@@ -47,12 +47,21 @@
             </div>
           </div>
 <% end %>
+<% if Time.now.between?(("2017-03-04".to_date),("2017-07-30".to_date))%>
+          <div class="item">
+            <%= image_tag "banner-wholefoods-2017-7.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+            <div class="carousel-caption">
+              <%= link_to "Register", "https://wholefoodsmarketdogdaysofsummer.eventbrite.com/?aff=nova", :class => "btn btn-primary btn-large" %>
+            </div>
+          </div>
+<% else %>
           <div class="item">
             <%= image_tag "lustreart.jpg", alt: "Lustre Art" %>
             <div class="carousel-caption">
               <%= link_to "Contact", "https://www.facebook.com/LustreArt", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
+<% end %>
         </div>
         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
         <a class="right carousel-control" href="#ophCarousel" data-slide="next">&rsaquo;</a>

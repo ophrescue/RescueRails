@@ -1,5 +1,6 @@
 <tr>
   <td><%= link_to user.name, user %></td>
+  <td><%= user.email %></td>
   <td><%= user.duties %></td>
   <td><span class="tel value"><%= user.phone %></span></td>
   <td><%= user.city %>, <%= user.state %></td>
@@ -8,7 +9,7 @@
       <% user.mentees.each do |m| %>
         <%= link_to m.name, m %>
         <br/>
-      <% end %>
+      <% end g%>
     </td>
   <% else %>
     <td>

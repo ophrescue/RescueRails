@@ -82,9 +82,13 @@ class UsersController < ApplicationController
   def index
     @options = YES_NO_OPTIONS
     @rent_options = OWN_RENT_OPTIONS
-
+    email_check = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
     if params[:search]
-      @users = User.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(page: params[:page])
+      if params[:search].match(email_check)
+        @users = User.where('lower(email) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(page: params[:page])
+      else
+        @users = User.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(page: params[:page])
+      end
     elsif params[:location]
       @users = User.active.near(params[:location], 30).paginate(page: params[:page])
     else

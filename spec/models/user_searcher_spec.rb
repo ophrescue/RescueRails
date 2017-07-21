@@ -10,8 +10,7 @@ describe UserSearcher do
       let(:params) { { search: 'Ann' } }
 
       it 'finds the correct user by name' do
-        expect(results).to include(found_user)
-        expect(results).to_not include(other_user)
+        expect(results).to match_array([found_user])
       end
     end
 
@@ -21,8 +20,7 @@ describe UserSearcher do
       let(:params) { { search: 'ann@test.com' } }
 
       it 'finds the correct user by email' do
-        expect(results).to include(found_user)
-        expect(results).to_not include(other_user)
+        expect(results).to match_array([found_user])
       end
     end
 
@@ -31,7 +29,7 @@ describe UserSearcher do
       let(:params) { { location: 'Brooklyn' } }
 
       it 'finds the correct user by location' do
-        expect(results).to include(found_user)
+        expect(results).to match_array([found_user])
       end
     end
   end

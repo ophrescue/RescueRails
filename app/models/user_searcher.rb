@@ -7,7 +7,7 @@ class UserSearcher
   end
 
   def search
-    @users = User.all
+    @users = User
 
     if text_search?
       if email_search?

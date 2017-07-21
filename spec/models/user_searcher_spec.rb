@@ -6,7 +6,6 @@ describe UserSearcher do
 
     context 'search by name' do
       let!(:found_user) { create(:user, name: 'Ann') }
-      let!(:other_user) { create(:user, name: 'Bob') }
       let(:params) { { search: 'Ann' } }
 
       it 'finds the correct user by name' do
@@ -16,7 +15,6 @@ describe UserSearcher do
 
     context 'search by email' do
       let!(:found_user) { create(:user, email: 'ann@test.com') }
-      let!(:other_user) { create(:user, email: 'bob@test.com') }
       let(:params) { { search: 'ann@test.com' } }
 
       it 'finds the correct user by email' do

@@ -2,7 +2,7 @@
   <div class="span12">
     <%= form_tag dogs_path, :method => 'get', :class => 'form-inline' do %>
       <%= text_field_tag :search, params[:search], placeholder: 'ID, Name or Microchip' %>
-      <%= submit_tag "Search", :name => nil %>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
       <%= link_to ' Clear Search', :controller => "dogs", :status => "active" %>
     <% end %>
   </div>
@@ -31,50 +31,24 @@
           </select>
         <%= label_tag :status, 'Status:' %>
         <%= select_tag :status, options_for_select(Dog::STATUSES), {id: 'statusSelect', multiple: 'multiple'} %>
-
-      <button type="submit" class="btn btn-primary">Filter</button>
+        <%= submit_tag "Filter", class: "btn btn-primary"%>
     <% end %>
   </div>
 
-<script id="example">
-$('#ageSelect').multiselect({
-  nonSelectedText: 'Any'
-});
-$('#sizeSelect').multiselect({
-  nonSelectedText: 'Any'
-});
-$('#flagSelect').multiselect({
-  nonSelectedText: 'Any'
-});
-$('#statusSelect').multiselect({
-  nonSelectedText: 'Any'
-});
-</script>
-    <ul class="nav nav-tabs">
-      <% Dog::STATUSES.each do |status| %>
-        <% if status == params[:status] %>
-          <li class="active">
-        <% else %>
-          <li>
-        <% end %>
-          <%= link_to status.titleize, :controller => "dogs", :status => status %>
-        </li>
-      <% end %>
-        <% if params[:status] == nil %>
-          <li class="active">
-        <% else %>
-          <li>
-        <% end %>
-        <%= link_to "All", dogs_path %>
-      </li>
-      <% if params[:status] == "active" %>
-        <li class="active">
-      <% else %>
-        <li>
-      <% end %>
-        <%= link_to "Active", :controller => "dogs", :status => "active" %>
-      </li>
-    </ul>
+    <script id="example">
+    $('#ageSelect').multiselect({
+      nonSelectedText: 'Any'
+    });
+    $('#sizeSelect').multiselect({
+      nonSelectedText: 'Any'
+    });
+    $('#flagSelect').multiselect({
+      nonSelectedText: 'Any'
+    });
+    $('#statusSelect').multiselect({
+      nonSelectedText: 'Any'
+    });
+    </script>
 
     <% if @dogs.any? %>
 

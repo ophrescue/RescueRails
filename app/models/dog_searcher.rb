@@ -43,7 +43,7 @@ class DogSearcher
       elsif status_search?
         @dogs = @dogs.where(status: @params[:status])
       else
-        @dogs = @dogs.where("dogs.name ILIKE ?", "%#{@params[:q]}%")
+        @dogs = @dogs.filter(filtering_params)
       end
     else
       @dogs = @dogs.includes(:primary_breed, :secondary_breed).where("status IN (?)", PUBLIC_STATUSES)
@@ -94,6 +94,13 @@ class DogSearcher
 
   def for_page(page = nil)
     @dogs = @dogs.paginate(per_page: PER_PAGE, page: page || 1)
+  end
+
+  def filtering_params
+    @params.slice(:age,
+                  :size,
+                  :status
+                 )
   end
 
   def sort_column

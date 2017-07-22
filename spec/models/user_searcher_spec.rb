@@ -14,7 +14,7 @@ describe UserSearcher do
     end
 
     context 'search by email' do
-      let!(:found_user) { create(:user, email: 'ann@test.com') }
+      let!(:found_user) { create(:user, name: 'Ann', email: 'ann@test.com') }
       let(:params) { { search: 'ann@test.com' } }
 
       it 'finds the correct user by email' do

@@ -3,27 +3,29 @@
     <div class="span12 gallery">
       <ul class="thumbnails">
         <% slice.each do |dog| %>
-          <li class="span4">
-            <%= link_to dog, :class => "thumbnail" do %>
-              <% if dog.photos == [] %>
-                <%= image_tag("no_photo-320x320.png", :alt => dog.name) %>
-              <% elsif dog.primary_breed %>
-                <%= image_tag(dog.photos.visible.first.photo.url(:medium), :alt => dog.primary_breed.name)  %>
-              <% else %>
-                <%= image_tag(dog.photos.visible.first.photo.url(:medium), :alt => dog.name)  %>
+          <% cache dog do %>
+            <li class="span4">
+              <%= link_to dog, :class => "thumbnail" do %>
+                <% if dog.photos == [] %>
+                  <%= image_tag("no_photo-320x320.png", :alt => dog.name) %>
+                <% elsif dog.primary_breed %>
+                  <%= image_tag(dog.photos.visible.first.photo.url(:medium), :alt => dog.primary_breed.name)  %>
+                <% else %>
+                  <%= image_tag(dog.photos.visible.first.photo.url(:medium), :alt => dog.name)  %>
+                <% end %>
+                <h4><%= dog.name.titleize %></h4>
+                <p>
+                <strong><%= dog.status.titleize %></strong><br />
+                <% if dog.foster && dog.foster.city.present? && dog.foster.state.present? %>
+                  <%= dog.foster.city.titleize %>, <%= dog.foster.state.upcase %><br />
+                <% end %>
+                <%= dog.gender %> - <%= dog.age.try(:titleize) %><br />
+                <%= dog.primary_breed ? dog.primary_breed.name.titleize : "" %><br />
+                <%= dog.secondary_breed ? dog.secondary_breed.name.titleize : "" %><br />
+                </p>
               <% end %>
-              <h4><%= dog.name.titleize %></h4>
-              <p>
-              <strong><%= dog.status.titleize %></strong><br />
-              <% if dog.foster && dog.foster.city.present? && dog.foster.state.present? %>
-                <%= dog.foster.city.titleize %>, <%= dog.foster.state.upcase %><br />
-              <% end %>
-              <%= dog.gender %> - <%= dog.age.try(:titleize) %><br />
-              <%= dog.primary_breed ? dog.primary_breed.name.titleize : "" %><br />
-              <%= dog.secondary_breed ? dog.secondary_breed.name.titleize : "" %><br />
-              </p>
-            <% end %>
-          </li>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </div>

@@ -82,14 +82,7 @@ class UsersController < ApplicationController
   def index
     @options = YES_NO_OPTIONS
     @rent_options = OWN_RENT_OPTIONS
-
-    if params[:search]
-      @users = User.where('lower(name) LIKE ?', "%#{params[:search].downcase.strip}%").paginate(page: params[:page])
-    elsif params[:location]
-      @users = User.active.near(params[:location], 30).paginate(page: params[:page])
-    else
-      @users = User.active.filter(filtering_params).order("name").paginate(page: params[:page])
-    end
+    @users = UserSearcher.search(params: params)
   end
 
   def show
@@ -253,13 +246,5 @@ class UsersController < ApplicationController
 
   def admin_user
     redirect_to(root_path) unless current_user.admin?
-  end
-
-  def filtering_params
-    params.slice(:admin, :adoption_coordinator, :event_planner,
-                 :dog_adder, :dog_editor, :photographer, :foster,
-                 :newsletter, :has_dogs, :has_cats, :house_type, :has_children_under_five,
-                 :has_fence, :puppies_ok, :has_parvo_house, :transporter, :training_team, :foster_mentor, :public_relations, :fundraising
-                )
   end
 end

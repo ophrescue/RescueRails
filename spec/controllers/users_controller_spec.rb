@@ -90,6 +90,17 @@ describe UsersController, type: :controller do
       end
     end
 
+    context 'email search' do
+      before :each do
+        allow(controller).to receive(:current_user) { admin }
+      end
+      it 'returns the searched for user email' do
+        smith = create(:user, name: 'Jane Smithbot', email: 'b@test.com')
+        get :index, params: { search: 'b@test.com' }
+        expect(assigns(:users)).to match_array([smith])
+      end
+    end
+
     context 'location search' do
       before :each do
         allow(controller).to receive(:current_user) { admin }

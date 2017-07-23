@@ -23,6 +23,8 @@ class AdopterSearcher
     'approved'
   ].freeze
 
+  EMAIL_CHECK = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+
   def initialize(params: {})
     @params = params
   end
@@ -30,8 +32,12 @@ class AdopterSearcher
   def search
     @adopters = Adopter
 
-    if name_search?
-      @adopters = @adopters.where('adopters.name ILIKE ?', "%#{@params[:search].strip}%")
+    if @params[:search]
+      if email_search?
+        @adopters = @adopters.where('adopters.email ILIKE ?', "%#{@params[:search].strip}%")
+      else
+        @adopters = @adopters.where('adopters.name ILIKE ?', "%#{@params[:search].strip}%")
+      end
     elsif active_status_search?
       @adopters = @adopters.where('adopters.status IN (?)', STATUSES)
     elsif status_search?
@@ -95,6 +101,10 @@ class AdopterSearcher
 
   def name_search?
     @params[:search].present?
+  end
+
+  def email_search?
+    @params[:search].match(EMAIL_CHECK)
   end
 
   def for_page(page = nil)

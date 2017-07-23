@@ -15,6 +15,14 @@ describe AdopterSearcher do
       end
     end
 
+    context 'by email' do
+      let!(:found_adopter) { create(:adopter, name: 'Frank', email: 'frank@test.com') }
+      let(:params) { { search: 'frank' } }
+      it 'finds the correct adopter' do
+        expect(results).to match_array([found_adopter])
+      end
+    end
+
     context 'by active status' do
       let!(:found_adopter) { create(:adopter, status: 'new') }
       let!(:other_adopter) { create(:adopter, status: 'denied') }

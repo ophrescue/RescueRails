@@ -6,17 +6,15 @@
   </p>
 <% end %>
 
-<%= form_tag users_path, :method => 'get' do %>
+<%= form_tag users_path, :method => 'get', :class => 'form-inline' do %>
   <%= text_field_tag :search, params[:search], placeholder: 'Search by Name or Email' %>
   <%= submit_tag "Search", :name => nil %>
-  </p>
 <% end %>
 
-<%= form_tag users_path, :method => 'get' do %>
-  <p>Find active volunteers near
+<%= form_tag users_path, :method => 'get',  :class => 'form-inline'  do %>
+  <%= label_tag :location, 'Find active volunteers near' %>
   <%= text_field_tag :location, params[:location], :placeholder => 'City, State or Zip...' %>
   <%= submit_tag "Locate", :name => nil %>
-  </p>
 <% end %>
 
 <ul class="nav nav-tabs">

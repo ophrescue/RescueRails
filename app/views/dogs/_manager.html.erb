@@ -16,7 +16,7 @@
         <%= select_tag :age, options_for_select(Dog::AGES), {id: 'ageSelect', multiple: 'multiple'} %>
 
         <%= label_tag :size, 'Size:' %>
-        <%= select_tag :size, options_for_select(Dog::SIZES), {id: 'sizeSelect', multiple: 'multiple'} %>
+        <%= select_tag :dsize, options_for_select(Dog::SIZES), {id: 'sizeSelect', multiple: 'multiple'} %>
 
       <label class="label-filter">Flags:</label>
           <select id="flagSelect" multiple="multiple">

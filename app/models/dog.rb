@@ -131,9 +131,9 @@ class Dog < ApplicationRecord
 
   before_save :update_adoption_date
 
-  scope :age,    -> (age)    {where age: age}
-  scope :dsize,   -> (size)   {where size: dsize}
-  scope :status, -> (status) {where status: status}
+  scope :is_age,    -> (age)    {where age: age}
+  scope :is_size,   -> (size)   {where size: size}
+  scope :is_status, -> (status) {where status: status}
 
   def attributes_to_audit
     %w(status)

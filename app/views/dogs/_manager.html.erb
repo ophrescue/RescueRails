@@ -12,11 +12,11 @@
   <div class="span12">
   <div class="well well-small">
     <%= form_tag dogs_path, :method => 'get', :class => 'form-inline' do %>
-        <%= label_tag :age, 'Age:' %>
-        <%= select_tag :age, options_for_select(Dog::AGES), {id: 'ageSelect', multiple: 'multiple'} %>
+        <%= label_tag :is_age, 'Age:' %>
+        <%= select_tag :is_age, options_for_select(Dog::AGES), {id: 'ageSelect', multiple: 'multiple'} %>
 
-        <%= label_tag :size, 'Size:' %>
-        <%= select_tag :dsize, options_for_select(Dog::SIZES), {id: 'sizeSelect', multiple: 'multiple'} %>
+        <%= label_tag :is_size, 'Size:' %>
+        <%= select_tag :is_size, options_for_select(Dog::SIZES), {id: 'sizeSelect', multiple: 'multiple'} %>
 
       <label class="label-filter">Flags:</label>
           <select id="flagSelect" multiple="multiple">
@@ -29,8 +29,8 @@
               <option value="5">No Cats</option>
               <option value="6">No Dogs</option>
           </select>
-        <%= label_tag :status, 'Status:' %>
-        <%= select_tag :status, options_for_select(Dog::STATUSES), {id: 'statusSelect', multiple: 'multiple'} %>
+        <%= label_tag :is_status, 'Status:' %>
+        <%= select_tag :is_status, options_for_select(Dog::STATUSES), {id: 'statusSelect', multiple: 'multiple'} %>
         <%= submit_tag "Filter", class: "btn btn-primary"%>
     <% end %>
   </div>

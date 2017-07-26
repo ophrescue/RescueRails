@@ -22,6 +22,7 @@
           <select id="flagSelect" multiple="multiple">
               <option value="1">High Priority</option>
               <option value="2">Medical Need</option>
+              <option value="7">Special Needs</option>
               <option value="mrc">Medical Review Needed</option>
               <option value="3">Behavior Problems</option>
               <option value="3">Needs Foster</option>
@@ -29,9 +30,14 @@
               <option value="5">No Cats</option>
               <option value="6">No Dogs</option>
           </select>
+
         <%= label_tag :is_status, 'Status:' %>
         <%= select_tag :is_status, options_for_select(Dog::STATUSES, selected: params[:is_status]), {id: 'statusSelect', multiple: true} %>
-        <%= submit_tag "Filter", class: "btn btn-primary"%>
+
+        <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+          <i class="fa fa-filter" aria-hidden="true"></i> Filter
+        <% end %>
+
     <% end %>
   </div>
 

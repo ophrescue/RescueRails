@@ -71,7 +71,9 @@ class DogSearcher
   private
 
   def tracking_id_search?
-    @params[:search].to_i > 0 && @params[:search].to_i < 2_147_483_647
+    return false if @params[:search].to_s.match(/[A-z]/)
+    @params[:search].to_i > 0 &&
+    @params[:search].to_i < 2_147_483_647
   end
 
   def text_search?

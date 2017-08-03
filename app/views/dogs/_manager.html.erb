@@ -18,6 +18,7 @@
         <%= label_tag :is_size, 'Size:' %>
         <%= select_tag :is_size, options_for_select(Dog::SIZES, selected: params[:is_size]), {id: 'sizeSelect', multiple: true} %>
 
+<!--
       <label class="label-filter">Flags:</label>
           <select id="flagSelect" multiple="multiple">
               <option value="1">High Priority</option>
@@ -31,12 +32,16 @@
               <option value="6">No Dogs</option>
           </select>
 
+-->
+
         <%= label_tag :is_status, 'Status:' %>
         <%= select_tag :is_status, options_for_select(Dog::STATUSES, selected: params[:is_status]), {id: 'statusSelect', multiple: true} %>
 
         <%= button_tag(type: "submit", class: "btn btn-primary") do %>
           <i class="fa fa-filter" aria-hidden="true"></i> Filter
         <% end %>
+
+        <%= link_to '<i class="fa fa-times-circle-o" aria-hidden="true"></i> Reset filter and show all active dogs '.html_safe, :controller => "dogs", :is_status => DogSearcher::ACTIVE_STATUSES %>
 
     <% end %>
   </div>

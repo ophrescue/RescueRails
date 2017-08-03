@@ -58,6 +58,9 @@ module ApplicationHelper
     direction = (column == params[:sort] && params[:direction] == 'asc') ? 'desc' : 'asc'
     status = params[:status]
     search_term = params[:search]
-    link_to title, { sort: column, direction: direction, status: status, search: search_term }, { class: css_class }
+    is_status = params[:is_status]
+    is_age = params[:is_age]
+    is_size = params[:is_size]
+    link_to title, { sort: column, direction: direction, status: status, search: search_term, is_size: is_size, is_age: is_age, is_status:is_status }, { class: css_class }
   end
 end

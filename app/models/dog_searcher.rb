@@ -99,7 +99,8 @@ class DogSearcher
   def filtering_params
     @params.slice(:is_age,
                   :is_size,
-                  :is_status
+                  :is_status,
+                  :is_flagged
                  )
   end
 

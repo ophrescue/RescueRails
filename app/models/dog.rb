@@ -120,6 +120,19 @@ class Dog < ApplicationRecord
     "Female" => "F"
   }
 
+  FILTER_FLAGS = [
+    'High Priority',
+    'Medical Need',
+    'Special Needs',
+    'Medical Review Needed',
+    'Behavior Problems',
+    'Foster Needed',
+    'Spay Neuter Needed',
+    'No Cats',
+    'No Dogs',
+    'No Kids'
+  ]
+
   AGES = ['baby', 'young', 'adult', 'senior']
   validates_inclusion_of :age, in: AGES, allow_blank: true
 
@@ -131,9 +144,10 @@ class Dog < ApplicationRecord
 
   before_save :update_adoption_date
 
-  scope :is_age,    -> (age)    {where age: age}
-  scope :is_size,   -> (size)   {where size: size}
-  scope :is_status, -> (status) {where status: status}
+  scope :is_age,     -> (age)    {where age: age}
+  scope :is_size,    -> (size)   {where size: size}
+  scope :is_status,  -> (status) {where status: status}
+  scope :is_flagged, -> (flags) {where is_high_priority: true}
 
   def attributes_to_audit
     %w(status)

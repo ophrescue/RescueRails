@@ -18,21 +18,8 @@
         <%= label_tag :is_size, 'Size:' %>
         <%= select_tag :is_size, options_for_select(Dog::SIZES, selected: params[:is_size]), {id: 'sizeSelect', multiple: true} %>
 
-<!--
-      <label class="label-filter">Flags:</label>
-          <select id="flagSelect" multiple="multiple">
-              <option value="1">High Priority</option>
-              <option value="2">Medical Need</option>
-              <option value="7">Special Needs</option>
-              <option value="mrc">Medical Review Needed</option>
-              <option value="3">Behavior Problems</option>
-              <option value="3">Needs Foster</option>
-              <option value="4">No Kids</option>
-              <option value="5">No Cats</option>
-              <option value="6">No Dogs</option>
-          </select>
-
--->
+        <%= label_tag :is_flagged, 'Flags:' %>
+        <%= select_tag :is_flagged, options_for_select(Dog::FILTER_FLAGS, selected: params[:is_flagged]), {id: 'flagSelect', multiple: true} %>
 
         <%= label_tag :is_status, 'Status:' %>
         <%= select_tag :is_status, options_for_select(Dog::STATUSES, selected: params[:is_status]), {id: 'statusSelect', multiple: true} %>

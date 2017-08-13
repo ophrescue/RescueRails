@@ -145,6 +145,7 @@ class User < ApplicationRecord
   scope :transporter,             -> (status = true) { where(is_transporter: status) }
   scope :training_team,           -> (status = true) { where(training_team: status) }
   scope :foster_mentor,           -> (status = true) { where(foster_mentor: status) }
+  scope :translator,              -> (status = true) { where(translator: status) }
   scope :public_relations,        -> (status = true) { where(public_relations: status)}
   scope :fundraising,             -> (status = true) { where(fundraising: status)}
 

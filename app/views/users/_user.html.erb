@@ -13,7 +13,7 @@
         <br/>
       <% end %>
     </td>
-  <% else %>
+  <% elsif !params[:translator] %>
     <td>
       <% user.current_foster_dogs.each do |d| %>
         <%= link_to d.name, d %>

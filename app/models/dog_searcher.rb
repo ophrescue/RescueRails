@@ -100,7 +100,8 @@ class DogSearcher
     @params.slice(:is_age,
                   :is_size,
                   :is_status,
-                  :is_flagged
+                  :cb_high_priority,
+                  :cb_medical_review_needed
                  )
   end
 

@@ -147,7 +147,25 @@ class Dog < ApplicationRecord
   scope :is_age,     -> (age)    {where age: age}
   scope :is_size,    -> (size)   {where size: size}
   scope :is_status,  -> (status) {where status: status}
-  scope :is_flagged, -> (flags) {where is_high_priority: true}
+  scope :cb_high_priority, -> (is_high_priority) {where is_high_priority: true}
+  scope :cb_medical_review_needed, ->  (medical_review_complete) {where medical_review_complete: false}
+
+
+  # scope :is_flagged, -> (flags) {
+  #   if flags.include? 'High Priority'
+  #     where is_high_priority: true
+  #   end
+  # }
+
+  # def self.is_flagged(flags)
+  #   if (flags.include? 'High Priority')
+  #     where(is_high_priority: true)
+  #   end
+  #   if (flags.include? 'Medical Review Needed')
+  #     where(medical_review_complete: false)
+  #   end
+  # end
+
 
   def attributes_to_audit
     %w(status)

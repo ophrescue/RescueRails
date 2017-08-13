@@ -28,6 +28,12 @@
           <i class="fa fa-filter" aria-hidden="true"></i> Filter
         <% end %>
 
+        <%= label_tag :cb_high_priority, 'High Priority'%>
+        <%= check_box_tag :cb_high_priority, '1' , params[:cb_high_priority] %>
+
+        <%= label_tag :cb_medical_review_needed, 'Medical Review Needed'%>
+        <%= check_box_tag :cb_medical_review_needed, '1', params[:cb_medical_review_needed] %>
+
         <%= link_to '<i class="fa fa-times-circle-o" aria-hidden="true"></i> Reset filter and show all active dogs '.html_safe, :controller => "dogs", :is_status => DogSearcher::ACTIVE_STATUSES %>
 
     <% end %>

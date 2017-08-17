@@ -41,6 +41,12 @@
               <td><span class="tel value"><%= @user.other_phone %></span></td>
             </tr>
           <% end %>
+          <% if @user.translator %>
+            <tr>
+              <td>Translation Language(s)</td>
+              <td><%= @user.known_languages %></td>
+            </tr>
+          <% end %>
           <tr>
             <td>Can share with adopters:</td>
             <td><%= @user.share_info %></td>

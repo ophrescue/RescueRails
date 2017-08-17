@@ -183,6 +183,8 @@ class UsersController < ApplicationController
                 :lastverified,
                 :agreement_id,
                 :confidentiality_agreement_id,
+                :translator,
+                :known_languages,
                 agreement_attributes: [
                   :attachment,
                   :description,
@@ -223,6 +225,8 @@ class UsersController < ApplicationController
                 :parvo_house,
                 :is_transporter,
                 :mentor_id,
+                :translator,
+                :known_languages,
                 agreement_attributes: [
                   :attachment,
                   :description,

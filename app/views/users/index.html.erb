@@ -57,6 +57,9 @@
   <li class="<%= 'active' if params[:foster_mentor] %>">
     <%= link_to "Foster Mentor", users_path(:foster_mentor => true) %>
   </li>
+  <li class="<%= 'active' if params[:translator] %>">
+    <%= link_to "Translators", users_path(translator: true) %>
+  </li>
 </ul>
 
 <% if params[:foster] == 'true' %>

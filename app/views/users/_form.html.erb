@@ -72,7 +72,19 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :share_info, "What contact information can Adotion Coordinators share with Approved Adopters?", :class => 'control-label' %>
+      <%= f.label :translator,'Are you able to translate English into one or more languages?', class: 'control-label' %>
+      <div class="controls">
+        <%= f.check_box :translator %> <span class="help-inline">Yes, I can translate English into one or more languages</span>
+      </div>
+    </div>
+      <div class="control-group">
+        <%= f.label :known_languages,'If box above is checked, please list language(s)', class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :known_languages, autocomplete: :off %>
+        </div>
+      </div>
+    <div class="control-group">
+      <%= f.label :share_info, "What contact information can Adoption Coordinators share with Approved Adopters?", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_area :share_info, :class => "xlarge", :rows => "4" %>
         <span class="help-inline">E-mail, Phone number, etc.<span>

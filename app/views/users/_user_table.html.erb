@@ -3,14 +3,14 @@
     <thead>
       <tr>
         <th>Name</th>
+        <% if params[:translator] %>
+        <th> Known Languages </th>
+        <% end %>
         <th>Duties</th>
         <th>Phone</th>
         <th>Location</th>
         <% if params[:foster_mentor] == 'true' %>
           <th>Mentees</th>
-        <% else %>
-          <th>Fostered Dogs</th>
-          <th>Coordinated Dogs</th>
         <% end %>
       </tr>
     </thead>

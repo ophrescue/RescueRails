@@ -6,6 +6,12 @@
       <% if @dog.sponsored_by? %>
         <h5><em>Sponsored by <%= @dog.sponsored_by %></em></h5>
     <% end %>
+    <% if ['adopted', 'completed', 'not available'].include?(@dog.status)%>
+      <div class="alert alert-error">
+        <h4>Sorry, this dog is no longer available for adoption!</h4>
+        Please see our gallery of <%= link_to "available dogs", :controller => "dogs", :status => "active"  %>.
+      </div>
+    <% end %>
     </div>
   </div>
 

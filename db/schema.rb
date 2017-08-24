@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513172145) do
+ActiveRecord::Schema.define(version: 20170813121555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -347,6 +347,8 @@ ActiveRecord::Schema.define(version: 20170513172145) do
     t.boolean  "foster_mentor",                                          default: false
     t.boolean  "public_relations",                                       default: false
     t.boolean  "fundraising",                                            default: false
+    t.boolean  "translator",                                             default: false, null: false
+    t.string   "known_languages",              limit: 255
     t.index ["agreement_id"], name: "index_users_on_agreement_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude", using: :btree

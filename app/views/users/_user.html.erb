@@ -1,5 +1,8 @@
 <tr>
   <td><%= link_to user.name, user %></td>
+  <% if params[:translator] %>
+    <td> <%= user.known_languages %> </td>
+  <% end %>
   <td><%= user.duties %></td>
   <td><span class="tel value"><%= user.phone %></span></td>
   <td><%= user.city %>, <%= user.state %></td>
@@ -8,21 +11,6 @@
       <% user.mentees.each do |m| %>
         <%= link_to m.name, m %>
         <br/>
-      <% end %>
-    </td>
-  <% else %>
-    <td>
-      <% user.current_foster_dogs.each do |d| %>
-        <%= link_to d.name, d %>
-        (<%= d.status %>)
-        <br />
-      <% end %>
-    </td>
-    <td>
-      <% user.coordinated_dogs.each do |d| %>
-        <%= link_to d.name, d %>
-        (<%= d.status %>)
-        <br />
       <% end %>
     </td>
   <% end %>

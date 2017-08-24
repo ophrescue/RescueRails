@@ -9,10 +9,8 @@
 
 <% if !@folders.nil? %>
 
-  <%= render @folders %>
+  <%= render 'folder_table' %>
 
 <% else %>
   <h3>No Folders Found</h3>
 <% end %>
-
-

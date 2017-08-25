@@ -22,12 +22,12 @@
         <%= select_tag :is_status, options_for_select(Dog::STATUSES, selected: params[:is_status]), {id: 'statusSelect', multiple: true} %>
 
         <%= label_tag :flag_dropdown, 'Flags' %>
-        <div class="btn-group" id="flagDropdown">
+        <div class="btn-group">
           <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
             Flags
             <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu flag-dropdown-menu">
             <li>
               <%= check_box_tag :cb_high_priority, '1' , params[:cb_high_priority] %>
               <%= label_tag :cb_high_priority, 'High Priority'%>

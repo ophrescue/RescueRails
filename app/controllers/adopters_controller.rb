@@ -141,7 +141,7 @@ class AdoptersController < ApplicationController
                                     [
                                       :adopter_id,
                                       :spouse_name,
-                                      :other_household_names,
+                                      :other_fhold_names,
                                       :ready_to_adopt_dt,
                                       :house_type,
                                       :verify_home_auth,

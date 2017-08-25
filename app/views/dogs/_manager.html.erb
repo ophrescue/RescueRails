@@ -18,23 +18,67 @@
         <%= label_tag :is_size, 'Size:' %>
         <%= select_tag :is_size, options_for_select(Dog::SIZES, selected: params[:is_size]), {id: 'sizeSelect', multiple: true} %>
 
-        <%= label_tag :is_flagged, 'Flags:' %>
-        <%= select_tag :is_flagged, options_for_select(Dog::FILTER_FLAGS, selected: params[:is_flagged]), {id: 'flagSelect', multiple: true} %>
-
         <%= label_tag :is_status, 'Status:' %>
         <%= select_tag :is_status, options_for_select(Dog::STATUSES, selected: params[:is_status]), {id: 'statusSelect', multiple: true} %>
+
+        <%= label_tag :flag_dropdown, 'Flags' %>
+        <div class="btn-group" id="flagDropdown">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            Flags
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <%= check_box_tag :cb_high_priority, '1' , params[:cb_high_priority] %>
+              <%= label_tag :cb_high_priority, 'High Priority'%>
+            </li>
+            <li>
+              <%= check_box_tag :cb_medical_review_needed, '1', params[:cb_medical_review_needed] %>
+              <%= label_tag :cb_medical_review_needed, 'Medical Review Needed'%>
+            </li>
+            <li>
+              <%= check_box_tag :cb_medical_need, '1', params[:cb_medical_need] %>
+              <%= label_tag :cb_medical_need, 'Medical Need'%>
+            </li>
+            <li>
+              <%= check_box_tag :cb_special_needs, '1', params[:cb_special_needs] %>
+              <%= label_tag :cb_special_needs, 'Special Needs'%>
+            </li>
+            <li>
+              <%= check_box_tag :cb_behavior_problems, '1', params[:cb_behavior_problems] %>
+              <%= label_tag :cb_behavior_problems, 'Behavior Problems'%>
+            </li>
+            <li>
+              <%= check_box_tag :cb_foster_needed, '1', params[:cb_foster_needed] %>
+              <%= label_tag :cb_foster_needed, 'Foster Needed'%>
+            </li>
+            <li>
+              <%= check_box_tag :cb_spay_neuter_needed, '1', params[:cb_spay_neuter_needed] %>
+              <%= label_tag :cb_spay_neuter_needed, 'Spay/Neuter Needed'%>
+            </li>
+            <li>
+              <%= check_box_tag :cb_no_cats, '1', params[:cb_no_cats] %>
+              <%= label_tag :cb_no_cats, 'No Cats'%>
+            </li>
+            <li>
+              <%= check_box_tag :cb_no_dogs, '1', params[:cb_no_dogs] %>
+              <%= label_tag :cb_no_dogs, 'No Dogs'%>
+            </li>
+            <li>
+              <%= check_box_tag :cb_no_kids, '1', params[:cb_no_kids] %>
+              <%= label_tag :cb_no_kids, 'No Kids'%>
+            </li>
+          </ul>
+        </div>
 
         <%= button_tag(type: "submit", class: "btn btn-primary") do %>
           <i class="fa fa-filter" aria-hidden="true"></i> Filter
         <% end %>
 
-        <%= label_tag :cb_high_priority, 'High Priority'%>
-        <%= check_box_tag :cb_high_priority, '1' , params[:cb_high_priority] %>
 
-        <%= label_tag :cb_medical_review_needed, 'Medical Review Needed'%>
-        <%= check_box_tag :cb_medical_review_needed, '1', params[:cb_medical_review_needed] %>
 
-        <%= link_to '<i class="fa fa-times-circle-o" aria-hidden="true"></i> Reset filter and show all active dogs '.html_safe, :controller => "dogs", :is_status => DogSearcher::ACTIVE_STATUSES %>
+
+        <%= link_to '<i class="fa fa-times-circle-o" aria-hidden="true"></i> Reset '.html_safe, :controller => "dogs", :is_status => DogSearcher::ACTIVE_STATUSES %>
 
     <% end %>
   </div>
@@ -44,10 +88,7 @@
       nonSelectedText: 'Any'
     });
     $('#sizeSelect').multiselect({
-      nonSelectedText: 'Any'
-    });
-    $('#flagSelect').multiselect({
-      nonSelectedText: 'Any'
+      nonSelectedText: 'Any',
     });
     $('#statusSelect').multiselect({
       nonSelectedText: 'Any'

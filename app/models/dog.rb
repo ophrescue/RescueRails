@@ -144,28 +144,19 @@ class Dog < ApplicationRecord
 
   before_save :update_adoption_date
 
-  scope :is_age,     -> (age)    {where age: age}
-  scope :is_size,    -> (size)   {where size: size}
-  scope :is_status,  -> (status) {where status: status}
-  scope :cb_high_priority, -> (is_high_priority) {where is_high_priority: true}
-  scope :cb_medical_review_needed, ->  (medical_review_complete) {where medical_review_complete: false}
-
-
-  # scope :is_flagged, -> (flags) {
-  #   if flags.include? 'High Priority'
-  #     where is_high_priority: true
-  #   end
-  # }
-
-  # def self.is_flagged(flags)
-  #   if (flags.include? 'High Priority')
-  #     where(is_high_priority: true)
-  #   end
-  #   if (flags.include? 'Medical Review Needed')
-  #     where(medical_review_complete: false)
-  #   end
-  # end
-
+  scope :is_age,                      -> (age)    {where age: age}
+  scope :is_size,                     -> (size)   {where size: size}
+  scope :is_status,                   -> (status) {where status: status}
+  scope :cb_high_priority,            -> (is_high_priority) {where is_high_priority: true}
+  scope :cb_medical_need,             -> (has_medical_need) {where has_medical_need: true}
+  scope :cb_medical_review_needed,    -> (medical_review_complete) {where medical_review_complete: false}
+  scope :cb_special_needs,            -> (is_special_needs) {where is_special_needs: true}
+  scope :cb_behavior_problems,        -> (has_behavior_problem) {where has_behavior_problem: true}
+  scope :cb_foster_needed,            -> (needs_foster) {where needs_foster: true}
+  scope :cb_spay_neuter_needed,       -> (is_altered) {where is_altered: false}
+  scope :cb_no_cats,                  -> (no_cats) {where no_cats: true}
+  scope :cb_no_dogs,                  -> (no_dogs) {where no_dogs: true}
+  scope :cb_no_kids,                  -> (no_kids) {where no_kids: true}
 
   def attributes_to_audit
     %w(status)

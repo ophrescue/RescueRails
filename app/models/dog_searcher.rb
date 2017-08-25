@@ -100,8 +100,16 @@ class DogSearcher
     @params.slice(:is_age,
                   :is_size,
                   :is_status,
-                  :cb_high_priority,
-                  :cb_medical_review_needed
+                   :cb_high_priority,
+                   :cb_medical_need,
+                   :cb_medical_review_needed,
+                   :cb_special_needs,
+                   :cb_behavior_problems,
+                   :cb_foster_needed,
+                   :cb_spay_neuter_needed,
+                   :cb_no_cats,
+                   :cb_no_dogs,
+                   :cb_no_kids,
                  )
   end
 

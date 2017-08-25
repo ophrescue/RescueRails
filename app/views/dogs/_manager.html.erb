@@ -22,7 +22,7 @@
         <%= select_tag :is_status, options_for_select(Dog::STATUSES, selected: params[:is_status]), {id: 'statusSelect', multiple: true} %>
 
         <%= label_tag :flag_dropdown, 'Flags' %>
-        <div class="btn-group">
+        <div class="btn-group" id=flagDropdown>
           <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
             Flags
             <span class="caret"></span>
@@ -75,9 +75,6 @@
           <i class="fa fa-filter" aria-hidden="true"></i> Filter
         <% end %>
 
-
-
-
         <%= link_to '<i class="fa fa-times-circle-o" aria-hidden="true"></i> Reset '.html_safe, :controller => "dogs", :is_status => DogSearcher::ACTIVE_STATUSES %>
 
     <% end %>
@@ -92,6 +89,11 @@
     });
     $('#statusSelect').multiselect({
       nonSelectedText: 'Any'
+    });
+    $('#flagDropdown .dropdown-menu').on({
+      "click":function(e){
+          e.stopPropagation();
+        }
     });
     </script>
 

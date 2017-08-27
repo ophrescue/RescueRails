@@ -13,20 +13,5 @@
         <br/>
       <% end %>
     </td>
-  <% elsif !params[:translator] %>
-    <td>
-      <% user.current_foster_dogs.each do |d| %>
-        <%= link_to d.name, d %>
-        (<%= d.status %>)
-        <br />
-      <% end %>
-    </td>
-    <td>
-      <% user.coordinated_dogs.each do |d| %>
-        <%= link_to d.name, d %>
-        (<%= d.status %>)
-        <br />
-      <% end %>
-    </td>
   <% end %>
 </tr>

@@ -1,2 +1,17 @@
-<h2><i class="fa fa-folder-open"></i> <%= link_to folder.name, folder  %>
-</h2><p><%= folder.description %></p>
+<tr>
+  <td>
+    <%= link_to folder_path(folder) do %>
+      <i class="fa fa-folder-o" aria-hidden="true"></i>
+      <span><%= folder.name %></span>
+    <% end %>
+  </td>
+  <td><%= folder.description %></td>
+  <td><%= folder.created_at.strftime("%B %d, %Y") %></td>
+  <td>
+    <% if folder.locked %>
+      <i class="fa fa-lock">
+    <% else %>
+      <i class="fa fa-unlock">
+    <% end %>
+  </td>
+</tr>

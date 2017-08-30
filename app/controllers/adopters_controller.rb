@@ -141,7 +141,7 @@ class AdoptersController < ApplicationController
                                     [
                                       :adopter_id,
                                       :spouse_name,
-                                      :other_fhold_names,
+                                      :other_household_names,
                                       :ready_to_adopt_dt,
                                       :house_type,
                                       :verify_home_auth,
@@ -166,6 +166,7 @@ class AdoptersController < ApplicationController
                                       :vet_info,
                                       :max_hrs_alone,
                                       :is_ofage,
+                                      :child_of_age,
                                       :shot_dhpp_dhlpp,
                                       :shot_fpv_fhv_fcv,
                                       :shot_rabies,

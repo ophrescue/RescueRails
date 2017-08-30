@@ -37,29 +37,33 @@
         <%= af.label :other_household_names, "Is there anyone under 18 years old?", :class => "control-label" %>
         <div class="controls">
             <label>
-                <%= af.check_box :other_household_names, {}, "Yes", "No" %>
+                <%= af.check_box :child_of_age, {}, "Yes", "No" %>
             </label>
             <div id="household_names" style="display:none;">
                 <%= af.text_field :other_household_names %>
                 <span>Please Enter Name and Age</span>
             </div>
-            <div id ="add_person">
+            <div id ="add_person" style="display:none">
                 <a>Add Person</a>
             </div>
+            
         </div>
         <script type ="text/javascript">
-            var checkbox = document.getElementById('adopter_adoption_app_attributes_other_household_names');
+            var checkbox = document.getElementById('adopter_adoption_app_attributes_child_of_age');
             var details_div = document.getElementById('household_names');
+            var add_person = document.getElementById('add_person')
             checkbox.onchange = function() {
                 if(this.checked) {
                     details_div.style['display'] = 'block';
+                    add_person.style['display'] = 'block'
                 }  else {
                     details_div.style['display'] = 'none';
+                    add_person.style['display'] = 'none'
                 }
             };
+
             
-            
-            document.getElementById('add_person').onclick = function(){
+            add_person.onclick = function(){
                 details_div.innerHTML = details_div.innerHTML + '<input type="text">';
             };
 

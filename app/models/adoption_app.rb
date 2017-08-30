@@ -52,7 +52,7 @@
 #  shot_heartworm            :boolean
 #  shot_flea_tick            :boolean
 #  verify_home_auth          :boolean          default(FALSE)
-#
+#  child_of_age              :boolean
 
 class AdoptionApp < ApplicationRecord
   belongs_to :adopter, class_name: 'Adopter'

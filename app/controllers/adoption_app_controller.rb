@@ -59,6 +59,7 @@ class AdoptionAppController < ApplicationController
               :vet_info,
               :max_hrs_alone,
               :is_ofage,
+              :child_of_age,
               :shot_dhpp_dhlpp,
               :shot_fpv_fhv_fcv,
               :shot_rabies,

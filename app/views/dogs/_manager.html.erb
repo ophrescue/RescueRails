@@ -10,8 +10,8 @@
 
 <div class="row">
   <div class="span12">
-  <div class="well well-small">
-    <%= form_tag dogs_path, :method => 'get', :class => 'form-inline' do %>
+    <div class="well well-small">
+      <%= form_tag dogs_path, :method => 'get', :class => 'form-inline' do %>
         <%= label_tag :is_age, 'Age:' %>
         <%= select_tag :is_age, options_for_select(Dog::AGES, selected: params[:is_age]), {id: 'ageSelect', multiple: true} %>
 
@@ -77,10 +77,13 @@
 
         <%= link_to '<i class="fa fa-times-circle-o" aria-hidden="true"></i> Reset '.html_safe, :controller => "dogs", :is_status => DogSearcher::ACTIVE_STATUSES %>
 
-    <% end %>
+      <% end %>
+    </div>
   </div>
+</div>
 
-    <script id="example">
+
+<script id="example">
     $('#ageSelect').multiselect({
       nonSelectedText: 'Any'
     });
@@ -95,10 +98,13 @@
           e.stopPropagation();
         }
     });
-    </script>
+</script>
 
     <% if @dogs.any? %>
 
+
+<div class="row">
+  <div class="span12">
     <table class="table-striped table-bordered table-condensed">
       <thead>
         <tr>

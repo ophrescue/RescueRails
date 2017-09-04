@@ -5,8 +5,9 @@ class FolderSearcher
   end
 
   def search
-    @folders = Attachment.where('lower(attachment_file_name) LIKE ?', "%#{search_term}%").map do |a|
-                    Folder.find_by_id(a.attachable_id.to_i)
+    query = 'attachment_file_name ILIKE :search OR description ILIKE :search'
+    @folders = Attachment.where(query, search: "%#{search_term.strip}%").map do |a|
+                  Folder.find_by_id(a.attachable_id.to_i)
                end
     @folders
   end
@@ -16,14 +17,7 @@ class FolderSearcher
     new(params: params).search
   end
 
-
-
-
   private
-
-  def text_search?
-    @params[:search].present?
-  end
 
   def search_term
     @params[:search]

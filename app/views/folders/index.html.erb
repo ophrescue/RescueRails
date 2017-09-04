@@ -6,11 +6,16 @@
   </p>
 <% end %>
 
+<%= form_tag folders_path, :method => 'get', :class => 'form-inline' do %>
+  <%= text_field_tag :search, params[:search], placeholder: 'Search by file name' %>
+  <%= submit_tag "Search", :name => nil %>
+<% end %>
+
 
 <% if !@folders.nil? %>
-
   <%= render 'folder_table' %>
-
-<% else %>
-  <h3>No Folders Found</h3>
+<% elsif params[:search] %>
+  <% @attachments.each do |a| %>
+    <%= render 'folder_table' %>
+  <% end %>
 <% end %>

@@ -30,7 +30,12 @@ class FoldersController < ApplicationController
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @folders = Folder.order(:name)
+    if params[:search]
+      @folders = FolderSearcher.search(params: params)
+    else
+      @folders = Folder.order(:name)
+    end
+
 
     @folders.each do |a|
       a.attachments.build

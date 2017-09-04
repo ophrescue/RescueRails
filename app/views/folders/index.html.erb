@@ -15,7 +15,7 @@
 <% if !@folders.nil? %>
   <%= render 'folder_table' %>
 <% elsif params[:search] %>
-  <% @attachments.each do |a| %>
-    <%= render 'folder_table' %>
-  <% end %>
+  <%= render 'folder_table' %>
+<% else %>
+  <span>No Folders Added Yet</span>
 <% end %>

@@ -6,6 +6,19 @@
     <% end %>
   </td>
   <td><%= folder.description %></td>
+  <% if params[:search] %>
+    <td>
+      <ul>
+        <% folder.attachments.each do |a| %>
+          <% if a.attachment_file_name %>
+            <li> <%= link_to(a.attachment_file_name,
+                             a.download_url) %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </td>
+  <% end %>
   <td><%= folder.created_at.strftime("%B %d, %Y") %></td>
   <td>
     <% if folder.locked %>

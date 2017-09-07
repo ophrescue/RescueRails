@@ -1,96 +1,62 @@
-<div class="control-group">
+  <div class="control-group">
     <%= af.label :spouse_name, "Spouse/Partner's name", :class => "control-label" %>
     <div class="controls">
-        <%= af.text_field :spouse_name %>
+      <%= af.text_field :spouse_name %>
     </div>
-</div>
-<div class="control-group">
-
-    <div class="control-group">
-        <%= af.label :how_did_you_hear, "How did you hear about us?", :class => "control-label" %>
-        <div class="controls">
-            <%= af.text_field :how_did_you_hear %>
-            <span class="help-inline">Google, Craigslist, Petfinder, etc.</span>
-        </div>
+  </div>
+  <div class="control-group">
+    <%= af.label :other_household_names, "Other Household Members", :class => "control-label" %>
+    <div class="controls">
+      <%= af.text_field :other_household_names %>
+      <span class="help-inline">Please include names and ages.</span>
     </div>
-    <div class="control-group">
-        <%= af.label :ready_to_adopt_dt, "How soon do you want to adopt?", :class => "control-label" %>
-        <div class="controls">
-            <%= af.text_field :ready_to_adopt_dt, :class => "required" %>
-            <span class="help-inline">Enter as YYYY-MM-DD</span>
-        </div>
+  </div>
+  <div class="control-group">
+    <%= af.label :how_did_you_hear, "How did you hear about us?", :class => "control-label" %>
+    <div class="controls">
+      <%= af.text_field :how_did_you_hear %>
+      <span class="help-inline">Google, Craigslist, Petfinder, etc.</span>
     </div>
-    <div class="control-group">
-        <%= af.label :is_ofage, "Are you at least 21 years old?", :class => "control-label" %>
-        <div class="controls">
-            <label>
-                <%= af.radio_button :is_ofage, true, :class => "required" %>
-                <span>Yes</span>
-            </label>
-            <label>
-                <%= af.radio_button :is_ofage, false, :class => "required" %>
-                <span>No</span>
-            </label>
-        </div>
+  </div>
+  <div class="control-group">
+    <%= af.label :ready_to_adopt_dt, "How soon do you want to adopt?", :class => "control-label" %>
+    <div class="controls">
+      <%= af.text_field :ready_to_adopt_dt, :class => "required" %>
+      <span class="help-inline">Enter as YYYY-MM-DD</span>
     </div>
-    <div class="control-group">
-        <%= af.label :other_household_names, "Is there anyone under 18 years old?", :class => "control-label" %>
-        <div class="controls">
-            <label>
-                <%= af.check_box :child_of_age, {}, "Yes", "No" %>
-            </label>
-            <div id="household_names" style="display:none;">
-                <%= af.text_field :other_household_names %>
-                <span>Please Enter Name and Age</span>
-            </div>
-            <div id ="add_person" style="display:none">
-                <a>Add Person</a>
-            </div>
-            
-        </div>
-        <script type ="text/javascript">
-            var checkbox = document.getElementById('adopter_adoption_app_attributes_child_of_age');
-            var details_div = document.getElementById('household_names');
-            var add_person = document.getElementById('add_person')
-            checkbox.onchange = function() {
-                if(this.checked) {
-                    details_div.style['display'] = 'block';
-                    add_person.style['display'] = 'block'
-                }  else {
-                    details_div.style['display'] = 'none';
-                    add_person.style['display'] = 'none'
-                }
-            };
-
-            
-            add_person.onclick = function(){
-                details_div.innerHTML = details_div.innerHTML + '<input type="text" name="adopter_adoption_app_attributes_other_household_names">';
-            };
-
-        </script>
-
-
+  </div>
+  <div class="control-group">
+    <%= af.label :is_ofage, "Are you at least 21 years old?", :class => "control-label" %>
+    <div class="controls">
+      <label>
+        <%= af.radio_button :is_ofage, true, :class => "required" %>
+        <span>Yes</span>
+      </label>
+      <label>
+        <%= af.radio_button :is_ofage, false, :class => "required" %>
+        <span>No</span>
+      </label>
     </div>
-
-    <div class="control-group">
-        <%= af.label :house_type, "Do you rent or own your home?", :class => "control-label" %>
-        <div class="controls">
-            <label>
-                <%= af.radio_button :house_type, 'rent', :class => "link required residence-auth-pop" %>
-                <span>Rent</span>
-            </label>
-            <label>
-                <%= af.radio_button :house_type, 'own', :class => "link required residence-auth-pop" %>
-                <span>Own</span>
-            </label>
-        </div>
+  </div>
+  <div class="control-group">
+    <%= af.label :house_type, "Do you rent or own your home?", :class => "control-label" %>
+    <div class="controls">
+      <label>
+        <%= af.radio_button :house_type, 'rent', :class => "link required residence-auth-pop" %>
+        <span>Rent</span>
+      </label>
+      <label>
+        <%= af.radio_button :house_type, 'own', :class => "link required residence-auth-pop" %>
+        <span>Own</span>
+      </label>
     </div>
-    <div class="control-group own-home-auth">
-        <%= af.label :verify_home_auth, "I authorize Operation Paws for Homes to verify my home ownership.", :class => "control-label" %>
-        <div class="controls">
-            <label class="checkbox">
-                <%= af.check_box :verify_home_auth, :class => "required"  %>
-            </label>
-        </div>
+  </div>
+  <div class="control-group own-home-auth">
+    <%= af.label :verify_home_auth, "I authorize Operation Paws for Homes to verify my home ownership.", :class => "control-label" %>
+    <div class="controls">
+      <label class="checkbox">
+        <%= af.check_box :verify_home_auth, :class => "required"  %>
+      </label>
     </div>
+  </div>
 </div>

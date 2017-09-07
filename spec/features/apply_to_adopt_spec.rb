@@ -40,8 +40,7 @@ feature 'Apply for Adoption' do
     fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2012-12-13')
     choose('adopter_adoption_app_attributes_is_ofage_true')
     choose('adopter_adoption_app_attribute_child_of_age_true')
-    fill_in('adopter_adoption_app_attributes_other_household_names', with: 'Rachel 29')
-    click_link('Add Person')
+    fill_in('adopter_adoption_app_attributes_other_household_names', with: 'Rachel 29', with: 'Morgan 24')
     fill_in('adopter_adoption_app_attributes_other_household_names', with: 'Morgan 24')
     choose('adopter_adoption_app_attributes_house_type_rent')
 

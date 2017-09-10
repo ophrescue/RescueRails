@@ -38,10 +38,6 @@ class DogSearcher
         @dogs = @dogs.where('tracking_id = :search OR microchip = :search', search: search_term )
       elsif text_search? && !tracking_id_search?
         @dogs = @dogs.where('microchip ILIKE :search OR name ILIKE :search', search: "%#{search_term.strip}%")
-      elsif active_status_search?
-        @dogs = @dogs.where("status IN (?)", ACTIVE_STATUSES)
-      elsif status_search?
-        @dogs = @dogs.where(status: @params[:status])
       else
         @dogs = @dogs.filter(filtering_params)
       end

@@ -24,48 +24,48 @@
         <%= label_tag :flag_dropdown, 'Flags' %>
         <div class="btn-group" id=flagDropdown>
           <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-            Flags
+            <span id=flagCount>0 selected</span>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu flag-dropdown-menu">
             <li>
-              <%= check_box_tag :cb_high_priority, '1' , params[:cb_high_priority] %>
+              <%= check_box_tag :cb_high_priority, '1' , params[:cb_high_priority], class: "dog_filter_cb" %>
               <%= label_tag :cb_high_priority, 'High Priority'%>
             </li>
             <li>
-              <%= check_box_tag :cb_medical_review_needed, '1', params[:cb_medical_review_needed] %>
+              <%= check_box_tag :cb_medical_review_needed, '1', params[:cb_medical_review_needed], class: "dog_filter_cb" %>
               <%= label_tag :cb_medical_review_needed, 'Medical Review Needed'%>
             </li>
             <li>
-              <%= check_box_tag :cb_medical_need, '1', params[:cb_medical_need] %>
+              <%= check_box_tag :cb_medical_need, '1', params[:cb_medical_need], class: "dog_filter_cb" %>
               <%= label_tag :cb_medical_need, 'Medical Need'%>
             </li>
             <li>
-              <%= check_box_tag :cb_special_needs, '1', params[:cb_special_needs] %>
+              <%= check_box_tag :cb_special_needs, '1', params[:cb_special_needs], class: "dog_filter_cb" %>
               <%= label_tag :cb_special_needs, 'Special Needs'%>
             </li>
             <li>
-              <%= check_box_tag :cb_behavior_problems, '1', params[:cb_behavior_problems] %>
+              <%= check_box_tag :cb_behavior_problems, '1', params[:cb_behavior_problems], class: "dog_filter_cb" %>
               <%= label_tag :cb_behavior_problems, 'Behavior Problems'%>
             </li>
             <li>
-              <%= check_box_tag :cb_foster_needed, '1', params[:cb_foster_needed] %>
+              <%= check_box_tag :cb_foster_needed, '1', params[:cb_foster_needed], class: "dog_filter_cb" %>
               <%= label_tag :cb_foster_needed, 'Foster Needed'%>
             </li>
             <li>
-              <%= check_box_tag :cb_spay_neuter_needed, '1', params[:cb_spay_neuter_needed] %>
+              <%= check_box_tag :cb_spay_neuter_needed, '1', params[:cb_spay_neuter_needed], class: "dog_filter_cb" %>
               <%= label_tag :cb_spay_neuter_needed, 'Spay/Neuter Needed'%>
             </li>
             <li>
-              <%= check_box_tag :cb_no_cats, '1', params[:cb_no_cats] %>
+              <%= check_box_tag :cb_no_cats, '1', params[:cb_no_cats], class: "dog_filter_cb" %>
               <%= label_tag :cb_no_cats, 'No Cats'%>
             </li>
             <li>
-              <%= check_box_tag :cb_no_dogs, '1', params[:cb_no_dogs] %>
+              <%= check_box_tag :cb_no_dogs, '1', params[:cb_no_dogs], class: "dog_filter_cb" %>
               <%= label_tag :cb_no_dogs, 'No Dogs'%>
             </li>
             <li>
-              <%= check_box_tag :cb_no_kids, '1', params[:cb_no_kids] %>
+              <%= check_box_tag :cb_no_kids, '1', params[:cb_no_kids], class: "dog_filter_cb" %>
               <%= label_tag :cb_no_kids, 'No Kids'%>
             </li>
           </ul>

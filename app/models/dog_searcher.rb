@@ -72,14 +72,6 @@ class DogSearcher
     @params[:search]
   end
 
-  def active_status_search?
-    @params[:status] == 'active'
-  end
-
-  def status_search?
-    @params.key? :status
-  end
-
   def with_includes
     @dogs = @dogs.includes(:photos, :primary_breed)
   end

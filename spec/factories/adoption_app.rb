@@ -24,6 +24,7 @@ FactoryGirl.define do
     vet_info 'Dr. Spaceman Baltimore MD'
     max_hrs_alone 3
     is_ofage true
+    has_family_under_18 true
 
     factory :adoption_app_null do
       spouse_name ''
@@ -50,6 +51,7 @@ FactoryGirl.define do
       vet_info nil
       max_hrs_alone nil
       is_ofage true
+      has_family_under_18 true
     end
   end
 end

@@ -198,6 +198,13 @@ class UsersController < ApplicationController
                   :updated_by_user_id,
                   :_destroy,
                   :id
+                ],
+                code_of_conduct_agreement_attributes: [
+                  :attachment,
+                  :description,
+                  :updated_by_user_id,
+                  :_destroy,
+                  :id
                 ])
     else
       params.require(:user)
@@ -226,20 +233,14 @@ class UsersController < ApplicationController
                 :is_transporter,
                 :mentor_id,
                 :translator,
-                :known_languages,
-                agreement_attributes: [
-                  :attachment,
-                  :description,
-                  :updated_by_user_id,
-                  :_destroy,
-                  :id
-                ])
+                :known_languages)
     end
   end
 
   def init_fields
     @user.build_agreement unless @user.agreement
     @user.build_confidentiality_agreement unless @user.confidentiality_agreement
+    @user.build_code_of_conduct_agreement unless @user.code_of_conduct_agreement
     @foster_users = User.where(locked: false).order("name")
   end
 

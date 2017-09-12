@@ -48,4 +48,26 @@ feature 'Attach an agreement to a user', js: true do
     end
 
   end
+
+  scenario 'Admin attaches a code of conduct agreement to a user' do
+    sign_in(admin)
+
+    visit '/users'
+    expect(page).to have_content('Staff Directory')
+    click_link(user.name)
+    expect(page).to have_content(user.name)
+    expect(page).to have_content('No Code of Conduct Agreement on File')
+    click_link('Update/Verify Profile')
+    expect(page).to have_content('Edit Staff Account')
+
+    page.attach_file('user_code_of_conduct_agreement_attributes_attachment', 'public/docs/new-puppy-info.pdf')
+    click_button('Update / Verify')
+
+    expect(page).to have_no_css('#foster-agreement-dl')
+    expect(page).to have_no_css('#confidentiality-agreement-dl')
+    within('#code-of-conduct-agreement-dl') do
+      expect(page).to have_content 'new-puppy-info'
+    end
+
+  end
 end

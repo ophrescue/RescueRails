@@ -73,8 +73,8 @@ class Dog < ApplicationRecord
 
   belongs_to :primary_breed, class_name: 'Breed'
   belongs_to :secondary_breed, class_name: 'Breed'
-  belongs_to :foster, class_name: "User"
-  belongs_to :coordinator, class_name: "User"
+  belongs_to :foster, class_name: 'User'
+  belongs_to :coordinator, class_name: 'User'
   belongs_to :shelter
 
   has_many :comments, -> { order 'created_at DESC' }, as: :commentable
@@ -93,31 +93,31 @@ class Dog < ApplicationRecord
   validates :tracking_id, uniqueness: true, presence: true
 
   STATUSES = ['adoptable', 'adopted', 'adoption pending',
-        'on hold', 'not available', 'return pending', 'coming soon','completed']
+        'on hold', 'not available', 'return pending', 'coming soon', 'completed']
   validates_inclusion_of :status, in: STATUSES
   validates_presence_of :status
 
   PETFINDER_STATUS =
   {
-    "adoptable" => "A",
-    "adoption pending" => "P",
-    "on hold" => "H",
-    "return pending" => "H",
-    "coming soon" => "H"
+    'adoptable' => 'A',
+    'adoption pending' => 'P',
+    'on hold' => 'H',
+    'return pending' => 'H',
+    'coming soon' => 'H'
   }.freeze
 
   PETFINDER_SIZE =
   {
-    "small" => "S",
-    "medium" => "M",
-    "large" => "L",
-    "extra large" => "XL"
+    'small' => 'S',
+    'medium' => 'M',
+    'large' => 'L',
+    'extra large' => 'XL'
   }.freeze
 
   PETFINDER_GENDER =
   {
-    "Male" => "M",
-    "Female" => "F"
+    'Male' => 'M',
+    'Female' => 'F'
   }
 
   FILTER_FLAGS = [
@@ -133,33 +133,33 @@ class Dog < ApplicationRecord
     'No Kids'
   ]
 
-  AGES = ['baby', 'young', 'adult', 'senior']
+  AGES = %w[baby young adult senior]
   validates_inclusion_of :age, in: AGES, allow_blank: true
 
   SIZES = ['small', 'medium', 'large', 'extra large']
   validates_inclusion_of :size, in: SIZES, allow_blank: true
 
-  GENDERS = ['Male', 'Female']
+  GENDERS = %w[Male Female]
   validates_inclusion_of :gender, in: GENDERS, allow_blank: true
 
   before_save :update_adoption_date
 
-  scope :is_age,                      -> (age)    {where age: age}
-  scope :is_size,                     -> (size)   {where size: size}
-  scope :is_status,                   -> (status) {where status: status}
-  scope :cb_high_priority,            -> (is_high_priority) {where is_high_priority: true}
-  scope :cb_medical_need,             -> (has_medical_need) {where has_medical_need: true}
-  scope :cb_medical_review_needed,    -> (medical_review_complete) {where medical_review_complete: false}
-  scope :cb_special_needs,            -> (is_special_needs) {where is_special_needs: true}
-  scope :cb_behavior_problems,        -> (has_behavior_problem) {where has_behavior_problem: true}
-  scope :cb_foster_needed,            -> (needs_foster) {where needs_foster: true}
-  scope :cb_spay_neuter_needed,       -> (is_altered) {where is_altered: false}
-  scope :cb_no_cats,                  -> (no_cats) {where no_cats: true}
-  scope :cb_no_dogs,                  -> (no_dogs) {where no_dogs: true}
-  scope :cb_no_kids,                  -> (no_kids) {where no_kids: true}
+  scope :is_age,                      ->(age) { where age: age }
+  scope :is_size,                     ->(size) { where size: size }
+  scope :is_status,                   ->(status) { where status: status }
+  scope :cb_high_priority,            ->(_) { where is_high_priority: true }
+  scope :cb_medical_need,             ->(_) { where has_medical_need: true }
+  scope :cb_medical_review_needed,    ->(_) { where medical_review_complete: false }
+  scope :cb_special_needs,            ->(_) { where is_special_needs: true }
+  scope :cb_behavior_problems,        ->(_) { where has_behavior_problem: true }
+  scope :cb_foster_needed,            ->(_) { where needs_foster: true }
+  scope :cb_spay_neuter_needed,       ->(_) { where is_altered: false }
+  scope :cb_no_cats,                  ->(_) { where no_cats: true }
+  scope :cb_no_dogs,                  ->(_) { where no_dogs: true }
+  scope :cb_no_kids,                  ->(_) { where no_kids: true }
 
   def attributes_to_audit
-    %w(status)
+    %w[status]
   end
 
   def to_petfinder_status

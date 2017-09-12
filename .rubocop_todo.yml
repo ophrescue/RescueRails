@@ -292,7 +292,7 @@ Style/Lambda:
 
 # Offense count: 2
 # Cop supports --auto-correct.
-Style/MethodCallParentheses:
+Style/MethodCallWithoutArgsParentheses:
   Exclude:
     - 'app/models/dog.rb'
     - 'spec/models/dog_spec.rb'

@@ -34,15 +34,15 @@ class DogSearcher
     @dogs = Dog.includes(:photos, :foster)
     if @manager
       @dogs = @dogs.includes(:adopters, :comments)
-      if text_search? && tracking_id_search?
-        @dogs = @dogs.where('tracking_id = :search OR microchip = :search', search: search_term )
-      elsif text_search? && !tracking_id_search?
-        @dogs = @dogs.where('microchip ILIKE :search OR name ILIKE :search', search: "%#{search_term.strip}%")
-      else
-        @dogs = @dogs.filter(filtering_params)
-      end
+      @dogs = if text_search? && tracking_id_search?
+                @dogs.where('tracking_id = :search OR microchip = :search', search: search_term)
+              elsif text_search? && !tracking_id_search?
+                @dogs.where('microchip ILIKE :search OR name ILIKE :search', search: "%#{search_term.strip}%")
+              else
+                @dogs.filter(filtering_params)
+              end
     else
-      @dogs = @dogs.includes(:primary_breed, :secondary_breed).where("status IN (?)", PUBLIC_STATUSES)
+      @dogs = @dogs.includes(:primary_breed, :secondary_breed).where('status IN (?)', PUBLIC_STATUSES)
     end
 
     with_includes
@@ -60,8 +60,8 @@ class DogSearcher
 
   def tracking_id_search?
     @params[:search].scan(/\D/).empty? &&
-    @params[:search].to_i > 0 &&
-    @params[:search].to_i < 2_147_483_647
+      @params[:search].to_i > 0 &&
+      @params[:search].to_i < 2_147_483_647
   end
 
   def text_search?
@@ -88,17 +88,16 @@ class DogSearcher
     @params.slice(:is_age,
                   :is_size,
                   :is_status,
-                   :cb_high_priority,
-                   :cb_medical_need,
-                   :cb_medical_review_needed,
-                   :cb_special_needs,
-                   :cb_behavior_problems,
-                   :cb_foster_needed,
-                   :cb_spay_neuter_needed,
-                   :cb_no_cats,
-                   :cb_no_dogs,
-                   :cb_no_kids,
-                 )
+                  :cb_high_priority,
+                  :cb_medical_need,
+                  :cb_medical_review_needed,
+                  :cb_special_needs,
+                  :cb_behavior_problems,
+                  :cb_foster_needed,
+                  :cb_spay_neuter_needed,
+                  :cb_no_cats,
+                  :cb_no_dogs,
+                  :cb_no_kids)
   end
 
   def sort_column
@@ -106,6 +105,6 @@ class DogSearcher
   end
 
   def sort_direction
-    %w(asc desc).include?(@params[:direction]) ? @params[:direction] : 'asc'
+    %w[asc desc].include?(@params[:direction]) ? @params[:direction] : 'asc'
   end
 end

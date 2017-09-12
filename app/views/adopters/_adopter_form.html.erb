@@ -1,140 +1,140 @@
 <%= form_for @adopter, html: { class: 'form-horizontal edit-adopter' } do |f| %>
-  <table class="table table-striped table-bordered table-condensed">
-    <tr>
-      <td colspan="2">
-        <% if @adopter.adoption_app.is_ofage == false %>
-          <span class="label label-warning">Under 21</span>
-        <% end %>
+<table class="table table-striped table-bordered table-condensed">
+  <tr>
+    <td colspan="2">
+      <% if @adopter.adoption_app.is_ofage == false %>
+      <span class="label label-warning">Under 18</span>
+      <% end %>
 
-        <% if @adopter.adoption_app.pets_branch == "no_pets" %>
-          <span class="label label-warning">First Time Dog Owner</span>
-        <% end %>
+      <% if @adopter.adoption_app.pets_branch == "no_pets" %>
+      <span class="label label-warning">First Time Dog Owner</span>
+      <% end %>
 
-        <%= max_hours_alone_label(@adopter.adoption_app.max_hrs_alone) %>
+      <%= max_hours_alone_label(@adopter.adoption_app.max_hrs_alone) %>
 
-        <% if @adopter.adoption_app.current_pets_fixed == false %>
-          <span class="label label-important">Current Pets not Fixed</span>
-        <% end %>
+      <% if @adopter.adoption_app.current_pets_fixed == false %>
+      <span class="label label-important">Current Pets not Fixed</span>
+      <% end %>
 
-        <% if @adopter.adoption_app.current_pets_fixed == true %>
-          <span class="label label-success">Current Pets Fixed</span>
-        <% end %>
+      <% if @adopter.adoption_app.current_pets_fixed == true %>
+      <span class="label label-success">Current Pets Fixed</span>
+      <% end %>
 
-        <% if @adopter.adoption_app.current_pets_uptodate == false %>
-          <span class="label label-important">Current Pets Need Shots</span>
-        <% end %>
+      <% if @adopter.adoption_app.current_pets_uptodate == false %>
+      <span class="label label-important">Current Pets Need Shots</span>
+      <% end %>
 
-        <% if @adopter.adoption_app.current_pets_uptodate == true %>
-          <span class="label label-success">Current Pets Up to Date</span>
-        <% end %>
+      <% if @adopter.adoption_app.current_pets_uptodate == true %>
+      <span class="label label-success">Current Pets Up to Date</span>
+      <% end %>
 
-        <% if @adopter.adoption_app.house_type == "own" %>
-          <span class="label label-success">Owns Home </span>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <th align="right">Application Submitted</th>
-      <td><%= time_ago_in_words(@adopter.created_at) %> ago</td>
-    </tr>
-    <tr>
-      <th>E-mail</th>
-      <td>
-        <div class='read-only'><%= @adopter.email %></div>
-        <div class='editable'><%= f.text_field :email %></div>
-      </td>
-    </tr>
-    <tr>
-      <th>Primary Phone</th>
-      <td>
-        <div class='read-only'><span class="tel value"><%= @adopter.phone %></span></div>
-        <div class='editable'><%= f.text_field :phone %></div>
-      </td>
-    </tr>
-    <% if @adopter.other_phone? %>
+      <% if @adopter.adoption_app.house_type == "own" %>
+      <span class="label label-success">Owns Home </span>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th align="right">Application Submitted</th>
+    <td><%= time_ago_in_words(@adopter.created_at) %> ago</td>
+  </tr>
+  <tr>
+    <th>E-mail</th>
+    <td>
+      <div class='read-only'><%= @adopter.email %></div>
+      <div class='editable'><%= f.text_field :email %></div>
+    </td>
+  </tr>
+  <tr>
+    <th>Primary Phone</th>
+    <td>
+      <div class='read-only'><span class="tel value"><%= @adopter.phone %></span></div>
+      <div class='editable'><%= f.text_field :phone %></div>
+    </td>
+  </tr>
+  <% if @adopter.other_phone? %>
+  <tr>
+    <th>Other Phone</th>
+    <td>
+      <div class='read-only'><span class="tel value"><%= @adopter.other_phone %><span></div>
+        <div class='editable'><%= f.text_field :other_phone %></div>
+        </td>
+        </tr>
+      <% end %>
       <tr>
-        <th>Other Phone</th>
+        <th>Best Time to Call</th>
         <td>
-          <div class='read-only'><span class="tel value"><%= @adopter.other_phone %><span></div>
-          <div class='editable'><%= f.text_field :other_phone %></div>
+          <%= @adopter.when_to_call %>
         </td>
       </tr>
-    <% end %>
-    <tr>
-      <th>Best Time to Call</th>
-      <td>
-        <%= @adopter.when_to_call %>
-      </td>
-    </tr>
-    <tr>
-      <th>Spouse's Name</th>
-      <td><%= @adopter.adoption_app.spouse_name %></td>
-    </tr>
-    <tr>
-      <th>Others in Household</th>
-      <td><%= @adopter.adoption_app.other_household_names %></td>
-    </tr>
-    <% if @adopter.adoption_app.verify_home_auth == true %>
-    <tr>
-      <th></th>
-      <td>Authorized to verify home ownership</td>
-    </tr>
-    <% end %>
-    <tr>
-      <th>Street Address</th>
-      <td>
-        <div class="editable mb-5"><%= f.text_field :address1 %></div>
-        <div class="read-only mb-5"><%= @adopter.address1 %></div>
-        <div class="editable"><%= f.text_field :address2 %></div>
-        <div class="read-only"><%= @adopter.address2 %></div>
-      </td>
-    </tr>
-    <tr>
-      <th>City</th>
-      <td>
-        <div class="editable"><%= f.text_field :city%></div>
-        <div class="read-only"><%= @adopter.city %></div>
-      </td>
-    </tr>
-    <tr>
-      <th>State</th>
-      <td>
-        <div class="editable"><%= f.text_field :state%></div>
-        <div class="read-only"><%= @adopter.state %></div>
-      </td>
-    </tr>
-    <tr>
-      <th>Zip</th>
-      <td>
-        <div class="editable"><%= f.text_field :zip%></div>
-        <div class="read-only"><%= @adopter.zip %></div>
-      </td>
-    </tr>
-    <tr>
-      <th>County</th>
-      <td>
-        <div class="editable"><%= @adopter.county %></div>
-        <div class="read-only"><%= @adopter.county %></div>
-      </td>
-    </tr>
-    <tr>
-      <th>
-        Heard about us from
-      </th>
-      <td><%= @adopter.adoption_app.how_did_you_hear %></td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <a id="toggle-edit" class="btn btn-primary">Edit Info</a>
-        <%= f.submit "Save Info", class: "btn adopter-save", disabled: "disabled" %>
-      </td>
-    </tr>
-  </table>
-<% end %>
+      <tr>
+        <th>Spouse's Name</th>
+        <td><%= @adopter.adoption_app.spouse_name %></td>
+      </tr>
+      <tr>
+        <th>Others in Household</th>
+        <td><%= @adopter.adoption_app.other_household_names %></td>
+      </tr>
+      <% if @adopter.adoption_app.verify_home_auth == true %>
+      <tr>
+        <th></th>
+        <td>Authorized to verify home ownership</td>
+      </tr>
+      <% end %>
+      <tr>
+        <th>Street Address</th>
+        <td>
+          <div class="editable mb-5"><%= f.text_field :address1 %></div>
+          <div class="read-only mb-5"><%= @adopter.address1 %></div>
+          <div class="editable"><%= f.text_field :address2 %></div>
+          <div class="read-only"><%= @adopter.address2 %></div>
+        </td>
+      </tr>
+      <tr>
+        <th>City</th>
+        <td>
+          <div class="editable"><%= f.text_field :city%></div>
+          <div class="read-only"><%= @adopter.city %></div>
+        </td>
+      </tr>
+      <tr>
+        <th>State</th>
+        <td>
+          <div class="editable"><%= f.text_field :state%></div>
+          <div class="read-only"><%= @adopter.state %></div>
+        </td>
+      </tr>
+      <tr>
+        <th>Zip</th>
+        <td>
+          <div class="editable"><%= f.text_field :zip%></div>
+          <div class="read-only"><%= @adopter.zip %></div>
+        </td>
+      </tr>
+      <tr>
+        <th>County</th>
+        <td>
+          <div class="editable"><%= @adopter.county %></div>
+          <div class="read-only"><%= @adopter.county %></div>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Heard about us from
+        </th>
+        <td><%= @adopter.adoption_app.how_did_you_hear %></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <a id="toggle-edit" class="btn btn-primary">Edit Info</a>
+          <%= f.submit "Save Info", class: "btn adopter-save", disabled: "disabled" %>
+        </td>
+      </tr>
+</table>
+  <% end %>
 
-<hr class="separator">
+  <hr class="separator">
 
-<%= form_for @adopter, html: { class: 'form-horizontal' } do |f| %>
+  <%= form_for @adopter, html: { class: 'form-horizontal' } do |f| %>
   <table class="table-striped table-bordered table-condensed">
     <tr>
       <th>
@@ -157,4 +157,4 @@
       </td>
     </tr>
   </table>
-<% end %>
+  <% end %>

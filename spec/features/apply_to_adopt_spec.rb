@@ -40,7 +40,9 @@ feature 'Apply for Adoption' do
     fill_in('adopter_adoption_app_attributes_how_did_you_hear', with: 'Google and Craigslist')
     fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2012-12-13')
     choose('adopter_adoption_app_attributes_is_ofage_true')
+    choose('adopter_adoption_app_attributes_has_family_under_18_true')
     choose('adopter_adoption_app_attributes_house_type_rent')
+    
 
     click_button('Next')
     expect(page).to have_content("Landlord's Name")

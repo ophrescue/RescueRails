@@ -142,6 +142,20 @@
         </div>
       <% end %>
 
+      <% if is_admin? %>
+        <div class="control-group">
+          <%= f.label :code_of_conduct_agreement, 'Code of Conduct Agreement', :class => 'control-label' %>
+          <div class="controls">
+          <%= f.fields_for :code_of_conduct_agreement do |af| %>
+            <% if af.object.persisted? %>
+              <span>Code of Conduct Agreement on File, overwrite?</span>
+            <% end %>
+            <%= af.file_field :attachment %>
+          <% end %>
+          </div>
+        </div>
+      <% end %>
+
     <div class="control-group">
       <%= f.label :house_type, "Do you rent or own your home?", :class => "control-label" %>
       <div class="controls">

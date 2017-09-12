@@ -131,6 +131,15 @@
             <p><span class="label label-important">No Confidentiality Agreement on File</span></p>
           <% end %>
 
+          <% if @user.code_of_conduct_agreement %>
+             <p>
+              <span class="label label-success">Code of Conduct Agreement on File</span>
+              <%= link_to @user.code_of_conduct_agreement.attachment_file_name, @user.code_of_conduct_agreement.download_url, id: "code-of-conduct-agreement-dl" %>
+             </p>
+          <% else %>
+            <p><span class="label label-important">No Code of Conduct Agreement on File</span></p>
+          <% end %>
+
           <% if @user.house_type == "own" %>
             <p><span class="label label-success">Owns Home</span></p>
           <% elsif @user.house_type == "rent" %>

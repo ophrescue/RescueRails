@@ -76,9 +76,6 @@ class Adopter < ApplicationRecord
   def attributes_to_audit
     %w(status assigned_to_user_id email phone address1 address2 city state zip)
   end
-  has_many :household_names, dependent: :destroy
-  accepts_nested_attributes_for :household_names
-    
   has_many :references, dependent: :destroy
   accepts_nested_attributes_for :references
 

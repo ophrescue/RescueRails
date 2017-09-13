@@ -39,6 +39,7 @@
 #  shot_flea_tick            :boolean
 #  verify_home_auth          :boolean          default(FALSE)
 #  has_family_under18        :boolean          default(nil)
+
 require 'rails_helper'
 
 describe AdoptionApp do

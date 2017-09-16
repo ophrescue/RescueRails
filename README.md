@@ -35,6 +35,9 @@ Fire up the app and see what happens.  App is setup to run SSL always, might wan
 
 See `db/seeds.rb` for default admin login info
 
+### Running Tests
+
+You'll need phantomjs installed to run the ```rspec``` test suite. 
 
 ### Contributing
 

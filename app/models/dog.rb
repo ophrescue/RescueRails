@@ -92,7 +92,7 @@ class Dog < ApplicationRecord
 
   validates :tracking_id, uniqueness: true, presence: true
 
-  STATUSES = ['adoptable', 'adopted', 'adoption pending',
+  STATUSES = ['adoptable', 'adopted', 'adoption pending', 'trial adoption',
         'on hold', 'not available', 'return pending', 'coming soon', 'completed']
   validates_inclusion_of :status, in: STATUSES
   validates_presence_of :status

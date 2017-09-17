@@ -39,6 +39,19 @@
     </div>
   </div>
   <div class="control-group">
+    <%= af.label :has_family_under_18, "Is there anyone living at your home under the age of 18?", :class => "control-label" %>
+    <div class ="controls">
+      <label>
+        <%= af.radio_button :has_family_under_18, true, :class => "required" %>
+        <span>Yes</span>
+      </label>
+      <label>
+        <%= af.radio_button :has_family_under_18, false, :class => "required" %>
+        <span>No</span>
+      </label>
+    </div>
+</div>
+  <div class="control-group">
     <%= af.label :house_type, "Do you rent or own your home?", :class => "control-label" %>
     <div class="controls">
       <label>

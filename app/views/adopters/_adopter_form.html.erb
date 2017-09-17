@@ -2,7 +2,7 @@
   <table class="table table-striped table-bordered table-condensed">
     <tr>
       <td colspan="2">
-        <% if @adopter.adoption_app.has_family_under_18 == false %>
+        <% if @adopter.adoption_app.has_family_under_18 == true %>
           <span class="label label-warning">Has Family Under 18</span>
         <% end %>
         <% if @adopter.adoption_app.is_ofage == false %>

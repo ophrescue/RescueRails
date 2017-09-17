@@ -122,6 +122,7 @@ feature 'Apply for Adoption' do
 
     expect(page).to have_content('4 hrs alone')
     expect(page).to have_content('Current Pets not Fixed')
+    expect(page).to have_content('Has Family Under 18')
     expect(page).to have_content('fake@ophrescue.org')
     expect(page).to have_content('(123) 456-7890')
     expect(page).to have_content('Anytime After 3pm')
@@ -288,6 +289,7 @@ feature 'Apply for Adoption' do
 
     expect(page).to have_content('4 hrs alone')
     expect(page).to have_content('Current Pets not Fixed')
+    expect(page).to have_content('Has Family Under 18')
     expect(page).to have_content('fake@ophrescue.org')
     expect(page).to have_content('(123) 456-7890')
     expect(page).to have_content('Anytime After 3pm')

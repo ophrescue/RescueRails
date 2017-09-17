@@ -11,7 +11,6 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-
 # == Schema Information
 #
 # Table name: users
@@ -72,6 +71,9 @@
 #  foster_mentor                :boolean          default(FALSE)
 #  public_relations             :boolean          default(FALSE)
 #  fundraising                  :boolean          default(FALSE)
+#  translator                   :boolean          default(FALSE), not null
+#  known_languages              :string(255)
+#  code_of_conduct_agreement_id :integer
 #
 
 require 'digest'

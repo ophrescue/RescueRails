@@ -11,7 +11,6 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-
 # == Schema Information
 #
 # Table name: adoption_apps
@@ -52,7 +51,8 @@
 #  shot_heartworm            :boolean
 #  shot_flea_tick            :boolean
 #  verify_home_auth          :boolean          default(FALSE)
-#  has_family_under_18       :boolean          default(nil)
+#  has_family_under_18       :boolean
+#
 
 class AdoptionApp < ApplicationRecord
   belongs_to :adopter, class_name: 'Adopter'

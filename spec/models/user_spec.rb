@@ -58,6 +58,9 @@
 #  foster_mentor                :boolean          default(FALSE)
 #  public_relations             :boolean          default(FALSE)
 #  fundraising                  :boolean          default(FALSE)
+#  translator                   :boolean          default(FALSE), not null
+#  known_languages              :string(255)
+#  code_of_conduct_agreement_id :integer
 #
 
 require 'rails_helper'

@@ -197,6 +197,7 @@ class DogsController < ApplicationController
               :sponsored_by,
               :shelter_id,
               :medical_summary,
+              :behavior_summary,
               :medical_review_complete,
               :all_dogs,
               attachments_attributes:

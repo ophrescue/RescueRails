@@ -49,6 +49,7 @@
 #  heartworm_preventative  :string
 #  flea_tick_preventative  :string
 #  medical_review_complete :boolean          default(FALSE)
+#  behavior_summary        :text
 #
 
 require 'rails_helper'

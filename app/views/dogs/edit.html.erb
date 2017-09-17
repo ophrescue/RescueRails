@@ -372,6 +372,17 @@
   <% end %>
 </div>
 
+<div class="control-group sidekick">
+  <h2>Behavior Summary</h2>
+  <% if can_add_dogs? %>
+    <div class="controls">
+      <%= f.text_area :behavior_summary, :class => "input-xxlarge", :rows => "8" %>
+    </div>
+  <% else %>
+    <p><%= @dog.behavior_summary %></p>
+  <% end %>
+</div>
+
 <div class="actions well">
   <%= f.submit "Submit", :class => "btn btn-primary" %>
 </div>

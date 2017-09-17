@@ -11,7 +11,6 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-
 # == Schema Information
 #
 # Table name: dogs
@@ -63,6 +62,7 @@
 #  heartworm_preventative  :string
 #  flea_tick_preventative  :string
 #  medical_review_complete :boolean          default(FALSE)
+#  behavior_summary        :text
 #
 
 class Dog < ApplicationRecord

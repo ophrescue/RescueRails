@@ -137,8 +137,8 @@ describe DogsController, type: :controller do
   end
 
   describe 'PUT update' do
-    let(:test_dog) { create(:dog, name: 'Old Dog Name') }
-    let(:request) { -> { put :update, params: { id: test_dog.id, dog: attributes_for(:dog, name: 'New Dog Name') } } }
+    let(:test_dog) { create(:dog, name: 'Old Dog Name', behavior_summary: 'Mean Doggy') }
+    let(:request) { -> { put :update, params: { id: test_dog.id, dog: attributes_for(:dog, name: 'New Dog Name', behavior_summary: 'This is a good doggy') } } }
 
     context 'logged in as admin' do
       before :each do
@@ -147,6 +147,10 @@ describe DogsController, type: :controller do
 
       it 'updates the dog name' do
         expect { request.call }.to change { test_dog.reload.name }.from('Old Dog Name').to('New Dog Name')
+      end
+
+      it 'updates the behavior summary' do
+        expect { request.call }.to change { test_dog.reload.behavior_summary }.from('Mean Doggy').to('This is a good doggy')
       end
     end
   end

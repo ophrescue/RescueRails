@@ -6,10 +6,10 @@ class FolderSearcher
 
   def search
     query = 'attachment_file_name ILIKE :search OR description ILIKE :search'
-    @folders = Attachment.where(query, search: "%#{search_term.strip}%").map do |a|
-                  Folder.find_by_id(a.attachable_id.to_i)
-               end
-    @folders
+    @folder = Attachment.where(query, search: "%#{search_term.strip}%").map do |a|
+                a
+    end
+    @folder
   end
 
 
@@ -24,6 +24,6 @@ class FolderSearcher
   end
 
   def for_page(page = nil)
-    @folders = @folders.paginate(per_page: PER_PAGE, page: page || 1)
+    @folder = @folder.paginate(per_page: PER_PAGE, page: page || 1)
   end
 end

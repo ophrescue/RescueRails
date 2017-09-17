@@ -31,14 +31,12 @@ class FoldersController < ApplicationController
 
   def index
     if params[:search]
-      @folders = FolderSearcher.search(params: params)
+      @folder = FolderSearcher.search(params: params)
     else
-      @folders = Folder.order(:name)
-    end
-
-
-    @folders.each do |a|
-      a.attachments.build
+      @folder = Folder.order(:name)
+      @folder.each do |a|
+        a.attachments.build
+      end
     end
   end
 

@@ -1,18 +1,21 @@
-<% if @folders.any? %>
+<% if @folder.any? %>
   <table class="table-striped table-bordered table-condensed" id="folder-sort">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Description</th>
         <% if params[:search] %>
-          <th> Files </th>
+          <th> File </th>
+          <th> File Description </th>
+          <th> Last Updated </th>
+        <% else %>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Created</th>
+          <th>Access</th>
         <% end %>
-        <th>Created</th>
-        <th>Access</th>
       </tr>
     </thead>
     <tbody id="folder_tbody">
-      <%= render @folders %>
+      <%= render @folder %>
     </tbody>
   </table>
 <% else %>

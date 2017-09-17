@@ -1,3 +1,18 @@
+<% if params[:search] %>
+  <tr>
+      <% if attachment.attachment_file_name %>
+        <td>
+          <%= link_to(attachment.attachment_file_name, attachment.download_url) %>
+        </td>
+        <td>
+          <%= attachment.description %>
+        </td>
+        <td>
+          <%= attachment.updated_at.strftime("%B %d, %Y") %>
+        </td>
+      <% end %>
+  </tr>
+<% else %>
 <tr>
   <td id="attachment">
     <%= link_to attachment.attachment_file_name, attachment.download_url %>
@@ -21,3 +36,4 @@
     <% end %>
   </td>
 </tr>
+<% end %>

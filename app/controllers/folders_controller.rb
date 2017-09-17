@@ -31,7 +31,7 @@ class FoldersController < ApplicationController
 
   def index
     if params[:search]
-      @folder = FolderSearcher.search(params: params)
+      @folder = FolderSearcher.search(current_user, params: params)
     else
       @folder = Folder.order(:name)
       @folder.each do |a|

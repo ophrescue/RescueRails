@@ -52,13 +52,15 @@ class Event < ApplicationRecord
                         :address,
                         :description
 
-  validates_format_of :location_url, with: URI::regexp(%w(http https))
+  validates_format_of :location_url, with: URI::regexp(%w[http https])
 
   validates :title, length: { maximum: 255 }
   validates :location_name, length: { maximum: 255 }
   validates :address, length: { maximum: 255 }
   validates :location_url, length: { maximum: 255 }
-  validates :facebook_url, length: { maximum: 255 }, message: "When entering Facebook URLs remove everything after the ? (you just need https://facebooks.com/events/12345/)"
+  validates :facebook_url,
+            length: { maximum: 255 },
+            message: 'When entering Facebook URLs remove everything after the ? (you just need https://facebooks.com/events/12345/)'
 
   before_save :set_user
   before_save :delete_photo!
@@ -66,14 +68,14 @@ class Event < ApplicationRecord
   geocoded_by :address
 
   after_validation :geocode,
-    if: lambda { |obj| obj.address_changed? }
+                   if: lambda { |obj| obj.address_changed? }
 
   has_attached_file :photo,
-    styles: { original: "1024x1024>",
-                 medium: "205x300>",
-                 thumb: "64x64>" },
-                 path: ":rails_root/public/system/event_photo/:id/:style/:filename",
-                 url: "/system/event_photo/:id/:style/:filename"
+                    styles: { original: '1024x1024>',
+                               medium: '205x300>',
+                               thumb: '64x64>' },
+                    path: ':rails_root/public/system/event_photo/:id/:style/:filename',
+                    url: '/system/event_photo/:id/:style/:filename'
 
 
   validates_attachment_size :photo, less_than: 5.megabytes

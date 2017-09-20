@@ -54,6 +54,12 @@ class Event < ApplicationRecord
 
   validates_format_of :location_url, with: URI::regexp(%w(http https))
 
+  validates :title, length: { maximum: 255 }
+  validates :location_name, length: { maximum: 255 }
+  validates :address, length: { maximum: 255 }
+  validates :location_url, length: { maximum: 255 }
+  validates :facebook_url, length: { maximum: 255 }, message: "When entering Facebook URLs remove everything after the ? (you just need https://facebooks.com/events/12345/)"
+
   before_save :set_user
   before_save :delete_photo!
 

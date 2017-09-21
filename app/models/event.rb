@@ -61,7 +61,7 @@ class Event < ApplicationRecord
   validates :facebook_url,
             length: { maximum: 255 },
             allow_blank: true,
-            presence: { message: 'Remove everything after the ? (You just need https://facebooks.com/events/12345/)' }
+            presence: { message: 'Remove everything after the ? (You just need https://facebook.com/events/12345.../)' }
 
   before_save :set_user
   before_save :delete_photo!

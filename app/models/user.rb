@@ -81,6 +81,9 @@ require 'digest'
 class User < ApplicationRecord
   include Filterable
 
+  alias_attribute :state, :region
+  alias_attribute :zip, :postal_code
+
   attr_accessor :password,
                 :accessible
 

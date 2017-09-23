@@ -2,7 +2,7 @@
   <table class="table-striped table-bordered table-condensed" id="folder-sort">
     <thead>
       <tr>
-        <% if params[:search] %>
+        <% if params[:search].present? %>
           <th> File </th>
           <th> File Description </th>
           <th> Last Updated </th>

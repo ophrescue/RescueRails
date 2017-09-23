@@ -30,7 +30,7 @@ class FoldersController < ApplicationController
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    if params[:search]
+    if params[:search].present?
       @folder = FolderSearcher.search(current_user, params: params)
     else
       @folder = Folder.order(:name)

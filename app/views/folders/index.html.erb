@@ -19,7 +19,7 @@
 
 <% if !@folder.nil? %>
   <%= render 'folder_table' %>
-<% elsif params[:search] %>
+<% elsif params[:search].present? %>
   <%= render 'folder_table' %>
 <% else %>
   <span>No Folders</span>

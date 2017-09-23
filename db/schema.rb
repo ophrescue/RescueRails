@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170917020834) do
+ActiveRecord::Schema.define(version: 20170923045153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -308,8 +308,8 @@ ActiveRecord::Schema.define(version: 20170917020834) do
     t.string   "address1",                     limit: 255
     t.string   "address2",                     limit: 255
     t.string   "city",                         limit: 255
-    t.string   "state",                        limit: 255
-    t.string   "zip",                          limit: 255
+    t.string   "region",                       limit: 255,                                            comment: "Postal region - state or province"
+    t.string   "postal_code",                  limit: 255,                                            comment: "Postal code - ZIP codes for US addresses"
     t.string   "duties",                       limit: 255
     t.boolean  "edit_dogs",                                              default: false
     t.text     "share_info"

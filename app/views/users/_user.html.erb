@@ -5,7 +5,7 @@
   <% end %>
   <td><%= user.duties %></td>
   <td><span class="tel value"><%= user.phone %></span></td>
-  <td><%= user.city %>, <%= user.state %></td>
+  <td><%= user.city %>, <%= user.region %></td>
   <% if params[:foster_mentor] == 'true' %>
     <td>
       <% user.mentees.each do |m| %>

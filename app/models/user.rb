@@ -30,8 +30,8 @@
 #  address1                     :string(255)
 #  address2                     :string(255)
 #  city                         :string(255)
-#  state                        :string(255)
-#  zip                          :string(255)
+#  region                       :string(2)
+#  postal_code                  :string(255)
 #  duties                       :string(255)
 #  edit_dogs                    :boolean          default(FALSE)
 #  share_info                   :text
@@ -81,9 +81,6 @@ require 'digest'
 class User < ApplicationRecord
   include Filterable
 
-  alias_attribute :state, :region
-  alias_attribute :zip, :postal_code
-
   attr_accessor :password,
                 :accessible
 
@@ -98,9 +95,9 @@ class User < ApplicationRecord
                     format: { with: email_regex },
                     uniqueness: { case_sensitive: false }
 
-  validates :state, length: { is: 2 }
+  validates :region, length: { is: 2 }
 
-  validates_format_of :zip,
+  validates_format_of :postal_code,
                     with: /\A\d{5}-\d{4}|\A\d{5}\z/,
                     message: "should be 12345 or 12345-1234",
                     allow_blank: true
@@ -223,11 +220,11 @@ class User < ApplicationRecord
   private
 
     def full_street_address
-      [address1, address2, city, state, zip].compact.join(', ')
+      [address1, address2, city, region, postal_code].compact.join(', ')
     end
 
     def format_cleanup
-      self.state.upcase!
+      self.region.upcase!
       self.email.downcase!
     end
 

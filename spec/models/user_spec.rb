@@ -17,8 +17,8 @@
 #  address1                     :string(255)
 #  address2                     :string(255)
 #  city                         :string(255)
-#  state                        :string(255)
-#  zip                          :string(255)
+#  region                       :string(2)
+#  postal_code                  :string(255)
 #  duties                       :string(255)
 #  edit_dogs                    :boolean          default(FALSE)
 #  share_info                   :text
@@ -76,29 +76,29 @@ describe User do
 
     context 'with valid fields' do
       it 'should accept a two letter state' do
-        user = build(:user, state: 'PA')
+        user = build(:user, region: 'PA')
         expect(user).to be_valid
       end
-      it 'should accet a 5 digit zipcode' do
-        user = build(:user, zip: '12345')
+      it 'should accept a 5 digit ZIP code' do
+        user = build(:user, postal_code: '12345')
         expect(user).to be_valid
       end
       it 'should save a state abbreviation in all caps' do
-        user = create(:user, state: 'pa')
-        expect(user.state).to eq('PA')
+        user = create(:user, region: 'pa')
+        expect(user.region).to eq('PA')
       end
     end
 
     context 'with invalid fields' do
       it 'is invalid with a state more than 2 letters' do
-        user = build(:user, state: 'Penn')
+        user = build(:user, region: 'Penn')
         user.valid?
-        expect(user.errors[:state]).to include('is the wrong length (should be 2 characters)')
+        expect(user.errors[:region]).to include('is the wrong length (should be 2 characters)')
       end
       it 'is invalid with a zip code of more than 5 characters' do
-        user = build(:user, zip: 'virgina')
+        user = build(:user, postal_code: 'virgina')
         user.valid?
-        expect(user.errors[:zip]).to include('should be 12345 or 12345-1234')
+        expect(user.errors[:postal_code]).to include('should be 12345 or 12345-1234')
       end
     end
   end

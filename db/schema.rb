@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170917020834) do
+ActiveRecord::Schema.define(version: 20170920014235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -352,6 +352,7 @@ ActiveRecord::Schema.define(version: 20170917020834) do
     t.boolean  "translator",                                             default: false, null: false
     t.string   "known_languages",              limit: 255
     t.integer  "code_of_conduct_agreement_id"
+    t.string   "country",                      limit: 3,                                              comment: "Country as a ISO 3166-1 alpha-3 code"
     t.index ["agreement_id"], name: "index_users_on_agreement_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude", using: :btree

@@ -1,0 +1,1535 @@
+
+Randomized with seed 57827
+
+Manage Events
+[31m  Post and View an Event (FAILED - 1)[0m
+
+UserSearcher
+  .search
+    search by name
+[32m      finds the correct user by name[0m
+    search by email
+[32m      finds the correct user by email[0m
+    search by location
+[32m      finds the correct user by location[0m
+
+DogsController
+  GET switch_view
+[32m    redirects to /dogs[0m
+    mgr_view is false
+[32m      sets mgr_view to true[0m
+    mgr_view is true
+[32m      sets mgr_view to false[0m
+  GET #edit
+[32m    is successful[0m
+  PUT update
+    logged in as admin
+[32m      updates the dog name[0m
+  GET #show
+[32m    is successful[0m
+  fostering_dog?
+    signed in
+      dog foster is the current user
+[32m        returns true[0m
+      dog foster is not the current user
+[32m        returns false[0m
+    not signed in
+[32m      returns false[0m
+  GET #index
+    user is logged in
+[32m      in gallery mode only publicly viewable dogs are returned[0m
+[32m      with all dogs paramater set all dogs are returned[0m
+[32m      can filter by age, size and flags[0m
+[32m      in manager mode all dogs are returned[0m
+    public user
+[32m      Only adoptable, adoption pending or coming soon dogs should be displayed[0m
+  POST create
+    logged in as dog adder admin
+      params are valid
+[32m        is able to create a dog[0m
+[32m        redirects to dogs#index[0m
+        dog tracking id is blank
+[32m          gets next value from tracking_id_seq[0m
+
+CommentsController
+  #find_commentable
+    params does not contain _id param
+[32m      returns nil[0m
+    params contains _id param
+[32m      returns dog[0m
+  PUT #update
+    user did not create comment being updated
+[32m      returns unauthorized[0m
+    user created comment being updated
+[32m      updates the comment[0m
+  GET #show
+[32m    is successful[0m
+  GET #index
+[32m    is successful[0m
+  POST #create
+    a form post is made
+[32m      should succeed[0m
+    an ajax call is made
+[32m      should succeed[0m
+
+Adopter
+  .populate_county
+    zip did not change
+[32m      does not call CountyService[0m
+    zip changed
+[32m      calls county service[0m
+  .changes_to_sentence
+    many attributes have changed
+[32m      cretes a human readable version[0m
+    an attribute changes
+[32m      creates a human readable version[0m
+  .audit_changes
+    no admin assigned to adopter
+[32m      does not make a comment[0m
+    an attribute changes on an adopter
+[32m      creates a comment[0m
+
+Edit User Profile
+[31m  Admin is presented with non-disabled name field (FAILED - 2)[0m
+[31m  Admin is presented with non-disabled email field (FAILED - 3)[0m
+[31m  User is presented with disabled email field (FAILED - 4)[0m
+[31m  User is presented with disabled name field (FAILED - 5)[0m
+
+Attach an agreement to a user
+[31m  Admin attaches a confidentiality agreement to a user (FAILED - 6)[0m
+[31m  Admin attaches a code of conduct agreement to a user (FAILED - 7)[0m
+[31m  Admin attaches a foster agreement to a user (FAILED - 8)[0m
+
+AdoptersController
+  GET new
+[32m    should be successful[0m
+  GET index
+[32m    should be successful[0m
+  PUT update
+    cannot complete adopters
+[32m      sets flash error[0m
+    can complete adopters
+[32m      should be successful[0m
+  GET check_email
+    email does not exist
+[32m      returns true[0m
+    email exists
+[32m      returns false[0m
+  POST create
+[32m    creates an adopter[0m
+  GET show
+[32m    should be successful[0m
+
+Manage Dogs
+[31m  View an existing dog (FAILED - 9)[0m
+
+AdopterSearcher
+  .search
+    by status
+[32m      finds the correct adopter[0m
+    all adopters
+[32m      finds the correct adopter[0m
+    by email
+[32m      finds the correct adopter[0m
+    by name
+[32m      finds the correct adopter[0m
+    by active status
+[32m      finds the correct adopter[0m
+
+Sign in as Admin
+[31m  Valid User (FAILED - 10)[0m
+
+Apply for Adoption
+[31m  Home Owner fills out adoption application (FAILED - 11)[0m
+[31m  Renter fills out adoption application (FAILED - 12)[0m
+
+Event
+  has a valid factory
+[32m    is valid[0m
+
+SheltersController
+  PUT #update
+    logged in as admin
+[32m      updates the shelter name[0m
+    logged in as normal user
+[32m      is unable to modify shelter[0m
+  GET #edit
+[32m    is successful[0m
+  GET #show
+[32m    is successful[0m
+  POST #create
+    logged in as an admin
+[32m      is able to create a shelter[0m
+    logged in as normal shelter
+[32m      is unable to create a shelter[0m
+  GET #new
+[32m    is successful[0m
+  GET #index
+[32m    is successful[0m
+
+DogSearcher
+  .search
+    is not a manager
+[32m      finds the correct dog[0m
+    is a manager
+      search by name in q param
+[32m        finds the correct dog[0m
+      searching with no params returns no results
+[32m        contains 0 dogs[0m
+      search by any status
+[32m        finds the correct dog[0m
+      by tracking id
+        search by tracking_id int
+[32m          finds the correct dog[0m
+        search by microchip int
+[32m          finds the correct dog by microchip[0m
+      search by microchip string
+[32m        finds the correct dog by microchip[0m
+      search by name
+[32m        finds the correct dog by name[0m
+
+UsersController
+  PUT update
+    logged in as normal user
+[32m      is unable to modify user permissions[0m
+    logged in as admin
+[32m      updates the users permissions[0m
+  GET index
+    email search
+[32m      returns the searched for user email[0m
+    name search
+[32m      returns the searched for user[0m
+    location search
+[32m      returns users near the searched location[0m
+    default index list
+[32m      returns all users[0m
+    tab filter
+[32m      returns the translator team mebers[0m
+[32m      returns the newsletter team members[0m
+[32m      returns the public relations team members[0m
+[32m      returns the training team members[0m
+[32m      returns the fundraising team members[0m
+  POST create
+    logged in as normal user
+[32m      is unable to create a user[0m
+    logged in as an admin
+[32m      is able to create a user[0m
+
+FoldersController
+  GET #show
+    logged in without any folder access
+[32m      is NOT able to view files in restricted folders[0m
+[32m      is NOT able to view files in standard folders[0m
+    logged in with standard folder access
+[32m      is NOT able to view files in restricted folders[0m
+[32m      is able to view files in standard folders[0m
+    logged in with restricted folder access
+[32m      is able to view files in restricted folders[0m
+[32m      is able to view files in standard folders[0m
+  PUT #update
+[32m    is successful[0m
+  DELETE #destroy
+[32m    is successful[0m
+  GET #new
+[32m    is successful[0m
+  GET #index
+    logged in with standard folder access
+[32m      is successful[0m
+  GET #edit
+[32m    is successful[0m
+  POST #create
+[32m    is successful[0m
+
+Edit Adopter Form
+[31m  Admin edits adopter (FAILED - 13)[0m
+
+AdoptionApp
+  has a valid factory
+[32m    is valid[0m
+
+View a mostly nil Adoption App without crashing
+[31m  Adoptor barely fills out adoption application (FAILED - 14)[0m
+
+Shelter
+  has a valid factory
+[32m    is valid[0m
+
+AdoptionApp
+  has a valid factory
+[32m    saves[0m
+
+Link Dogs to Adoption Applications via Adoption model
+[31m  Happy Path (FAILED - 15)[0m
+
+Adoption
+  has a valid factory
+[32m    saves[0m
+
+BannedAdoptersController
+  GET index
+[32m    is successful[0m
+  GET edit
+[32m    is successful[0m
+  POST create
+    logged in as normal user
+[32m      is unable to create a banned adopter[0m
+    logged in as an admin
+[32m      is able to create a banned adopter[0m
+  GET new
+[32m    is successful[0m
+  PUT update
+    logged in as normal user
+[32m      is unable to modify banned adopter[0m
+    logged in as admin
+[32m      updates the banned adopter name[0m
+  GET show
+[32m    is successful[0m
+
+PhotosController
+  POST #sort
+[32m    is successful[0m
+
+Breed
+  has a valid factory
+[32m    is valid[0m
+
+Dog
+  .update_adoption_date
+    status changed to completed
+[32m      does not update the date[0m
+    status did not change
+[32m      does not update the date[0m
+    status changed to adopted
+[32m      updates the date[0m
+    status changed to value that is not complete or adopted
+[32m      updates the date to nil[0m
+
+Comment
+  has a valid factory
+[32m    is valid[0m
+
+EventsController
+  GET #edit
+[32m    is successful[0m
+  POST #create
+[32m    is successful[0m
+  GET #index
+[32m    is successful[0m
+  GET #show
+[32m    is successful[0m
+  GET #past
+[32m    is successful[0m
+  PUT #update
+[32m    is successful[0m
+  POST #delete
+[32m    is successful[0m
+  GET #new
+[32m    is successful[0m
+
+CountyService
+  .fetch
+[32m    should eq "10013"[0m
+
+Home Page
+[31m  visitor can view events (FAILED - 16)[0m
+
+Reference
+  has a valid factory
+[32m    is valid[0m
+
+PasswordResetsController
+  GET #edit
+[32m    should be successful[0m
+  GET #new
+[32m    should be successful[0m
+  PUT #update
+    password reset sent less than 2 hours ago
+[32m      sets alerts[0m
+    password reset sent more than 2 hours
+[32m      is successful[0m
+  POST #create
+    user not found
+[32m      sets flash error[0m
+    user found
+[32m      is successful[0m
+
+User
+  #out_of_date?
+    user has no last_verified date
+[32m      returns true[0m
+    user was last_verified over 30 days ago
+[32m      returns true[0m
+    user has last_verified of today
+[32m      returns false[0m
+  contact information
+    with valid fields
+[32m      should save a state abbreviation in all caps[0m
+[32m      should accet a 5 digit zipcode[0m
+[32m      should accept a two letter state[0m
+    with invalid fields
+[32m      is invalid with a state more than 2 letters[0m
+[32m      is invalid with a zip code of more than 5 characters[0m
+
+Reset Password
+[31m  User exists (FAILED - 17)[0m
+[31m  User does not exist (FAILED - 18)[0m
+
+AdoptionAppController
+  PUT update
+[32m    is successful[0m
+
+Failures:
+
+  1) Manage Events Post and View an Event
+     [31mGot 0 failures and 3 other errors:[0m
+
+     1.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/signin[1;31m'[0m[31m[0m[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+          [36m# ./spec/support/login_macros.rb:4:in `sign_in'[0m
+          [36m# ./spec/features/event_management_spec.rb:8:in `block (2 levels) in <top (required)>'[0m
+
+     1.2) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+     1.3) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  2) Edit User Profile Admin is presented with non-disabled name field
+     [31mGot 0 failures and 3 other errors:[0m
+
+     2.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/signin[1;31m'[0m[31m[0m[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+          [36m# ./spec/support/login_macros.rb:4:in `sign_in'[0m
+          [36m# ./spec/features/edit_user_profile_spec.rb:6:in `block (2 levels) in <top (required)>'[0m
+
+     2.2) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+     2.3) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  3) Edit User Profile Admin is presented with non-disabled email field 
+     [31mGot 0 failures and 3 other errors:[0m
+
+     3.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/signin[1;31m'[0m[31m[0m[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+          [36m# ./spec/support/login_macros.rb:4:in `sign_in'[0m
+          [36m# ./spec/features/edit_user_profile_spec.rb:14:in `block (2 levels) in <top (required)>'[0m
+
+     3.2) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+     3.3) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  4) Edit User Profile User is presented with disabled email field
+     [31mGot 0 failures and 3 other errors:[0m
+
+     4.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/signin[1;31m'[0m[31m[0m[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+          [36m# ./spec/support/login_macros.rb:4:in `sign_in'[0m
+          [36m# ./spec/features/edit_user_profile_spec.rb:34:in `block (2 levels) in <top (required)>'[0m
+
+     4.2) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+     4.3) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  5) Edit User Profile User is presented with disabled name field
+     [31mGot 0 failures and 3 other errors:[0m
+
+     5.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/signin[1;31m'[0m[31m[0m[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+          [36m# ./spec/support/login_macros.rb:4:in `sign_in'[0m
+          [36m# ./spec/features/edit_user_profile_spec.rb:24:in `block (2 levels) in <top (required)>'[0m
+
+     5.2) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+     5.3) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  6) Attach an agreement to a user Admin attaches a confidentiality agreement to a user
+     [31mGot 0 failures and 3 other errors:[0m
+
+     6.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/signin[1;31m'[0m[31m[0m[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+          [36m# ./spec/support/login_macros.rb:4:in `sign_in'[0m
+          [36m# ./spec/features/attach_agreement_to_user_spec.rb:32:in `block (2 levels) in <top (required)>'[0m
+
+     6.2) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+     6.3) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  7) Attach an agreement to a user Admin attaches a code of conduct agreement to a user
+     [31mGot 0 failures and 3 other errors:[0m
+
+     7.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/signin[1;31m'[0m[31m[0m[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+          [36m# ./spec/support/login_macros.rb:4:in `sign_in'[0m
+          [36m# ./spec/features/attach_agreement_to_user_spec.rb:53:in `block (2 levels) in <top (required)>'[0m
+
+     7.2) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+     7.3) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  8) Attach an agreement to a user Admin attaches a foster agreement to a user
+     [31mGot 0 failures and 3 other errors:[0m
+
+     8.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/signin[1;31m'[0m[31m[0m[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+          [36m# ./spec/support/login_macros.rb:4:in `sign_in'[0m
+          [36m# ./spec/features/attach_agreement_to_user_spec.rb:12:in `block (2 levels) in <top (required)>'[0m
+
+     8.2) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+     8.3) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  9) Manage Dogs View an existing dog
+     [31mGot 0 failures and 3 other errors:[0m
+
+     9.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/dogs[1;31m'[0m[31m[0m[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+          [36m# ./spec/features/manage_dogs_spec.rb:7:in `block (2 levels) in <top (required)>'[0m
+
+     9.2) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+     9.3) [31mFailure/Error:[0m
+          [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+          [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+          [31m[0m
+          [31mCliver::Dependency::NotFound:[0m
+          [31m  Could not find an executable ["phantomjs"] on your path.[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+          [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  10) Sign in as Admin Valid User
+      [31mGot 0 failures and 3 other errors:[0m
+
+      10.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/signin[1;31m'[0m[31m[0m[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+            [36m# ./spec/features/user_signin_spec.rb:8:in `block (2 levels) in <top (required)>'[0m
+
+      10.2) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+      10.3) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  11) Apply for Adoption Home Owner fills out adoption application
+      [31mGot 0 failures and 3 other errors:[0m
+
+      11.1) [31mFailure/Error: [0mvisit root_path[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+            [36m# ./spec/features/apply_to_adopt_spec.rb:179:in `block (2 levels) in <top (required)>'[0m
+
+      11.2) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+      11.3) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  12) Apply for Adoption Renter fills out adoption application
+      [31mGot 0 failures and 3 other errors:[0m
+
+      12.1) [31mFailure/Error: [0mvisit root_path[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+            [36m# ./spec/features/apply_to_adopt_spec.rb:7:in `block (2 levels) in <top (required)>'[0m
+
+      12.2) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+      12.3) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  13) Edit Adopter Form Admin edits adopter
+      [31mGot 0 failures and 3 other errors:[0m
+
+      13.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/signin[1;31m'[0m[31m[0m[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+            [36m# ./spec/support/login_macros.rb:4:in `sign_in'[0m
+            [36m# ./spec/features/edit_adopter_spec.rb:8:in `block (2 levels) in <top (required)>'[0m
+
+      13.2) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+      13.3) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  14) View a mostly nil Adoption App without crashing Adoptor barely fills out adoption application
+      [31mGot 0 failures and 3 other errors:[0m
+
+      14.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/signin[1;31m'[0m[31m[0m[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+            [36m# ./spec/support/login_macros.rb:4:in `sign_in'[0m
+            [36m# ./spec/features/view_adoption_app_spec.rb:9:in `block (2 levels) in <top (required)>'[0m
+
+      14.2) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+      14.3) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  15) Link Dogs to Adoption Applications via Adoption model Happy Path
+      [31mGot 0 failures and 3 other errors:[0m
+
+      15.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/signin[1;31m'[0m[31m[0m[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+            [36m# ./spec/support/login_macros.rb:4:in `sign_in'[0m
+            [36m# ./spec/features/link_dogs_to_adopters_spec.rb:11:in `block (2 levels) in <top (required)>'[0m
+
+      15.2) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+      15.3) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  16) Home Page visitor can view events
+      [31mGot 0 failures and 3 other errors:[0m
+
+      16.1) [31mFailure/Error: [0mvisit root_path[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+            [36m# ./spec/features/home_page_spec.rb:5:in `block (2 levels) in <top (required)>'[0m
+
+      16.2) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+      16.3) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  17) Reset Password User exists
+      [31mGot 0 failures and 3 other errors:[0m
+
+      17.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/password_resets/new[1;31m'[0m[31m[0m[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+            [36m# ./spec/features/password_reset_spec.rb:8:in `block (2 levels) in <top (required)>'[0m
+
+      17.2) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+      17.3) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+  18) Reset Password User does not exist
+      [31mGot 0 failures and 3 other errors:[0m
+
+      18.1) [31mFailure/Error: [0mvisit [31m[1;31m'[0m[31m/password_resets/new[1;31m'[0m[31m[0m[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:97:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:269:in `visit'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/dsl.rb:50:in `block (2 levels) in <module:DSL>'[0m
+            [36m# ./spec/features/password_reset_spec.rb:15:in `block (2 levels) in <top (required)>'[0m
+
+      18.2) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:101:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:217:in `current_url'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:55:in `block in after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:351:in `using_session'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:54:in `after_failed_example'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-screenshot-1.0.14/lib/capybara-screenshot/rspec.rb:84:in `block (2 levels) in <top (required)>'[0m
+
+      18.3) [31mFailure/Error:[0m
+            [31m  [0mraise [1;34;4mDependency[0m::[1;34;4mNotFound[0m.new([0m
+            [31m    [0m[31m[1;31m"[0m[31mCould not find an executable #{@executables}[0m[31m on your path.[1;31m"[0m[31m[0m)[0m
+            [31m[0m
+            [31mCliver::Dependency::NotFound:[0m
+            [31m  Could not find an executable ["phantomjs"] on your path.[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:143:in `raise_not_found!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver/dependency.rb:116:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/cliver-0.3.2/lib/cliver.rb:24:in `detect!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:48:in `initialize'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `new'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/client.rb:14:in `start'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:44:in `client'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:25:in `browser'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/poltergeist-1.15.0/lib/capybara/poltergeist/driver.rb:184:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/session.rb:127:in `reset!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `block in reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reverse_each'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara.rb:314:in `reset_sessions!'[0m
+            [36m# /Users/brandon/.rvm/gems/ruby-2.3.1/gems/capybara-2.14.3/lib/capybara/rspec.rb:22:in `block (2 levels) in <top (required)>'[0m
+
+Finished in 6.13 seconds (files took 3.32 seconds to load)
+[31m151 examples, 18 failures[0m
+
+Failed examples:
+
+[31mrspec ./spec/features/event_management_spec.rb:7[0m [36m# Manage Events Post and View an Event[0m
+[31mrspec ./spec/features/edit_user_profile_spec.rb:5[0m [36m# Edit User Profile Admin is presented with non-disabled name field[0m
+[31mrspec ./spec/features/edit_user_profile_spec.rb:13[0m [36m# Edit User Profile Admin is presented with non-disabled email field [0m
+[31mrspec ./spec/features/edit_user_profile_spec.rb:33[0m [36m# Edit User Profile User is presented with disabled email field[0m
+[31mrspec ./spec/features/edit_user_profile_spec.rb:23[0m [36m# Edit User Profile User is presented with disabled name field[0m
+[31mrspec ./spec/features/attach_agreement_to_user_spec.rb:31[0m [36m# Attach an agreement to a user Admin attaches a confidentiality agreement to a user[0m
+[31mrspec ./spec/features/attach_agreement_to_user_spec.rb:52[0m [36m# Attach an agreement to a user Admin attaches a code of conduct agreement to a user[0m
+[31mrspec ./spec/features/attach_agreement_to_user_spec.rb:11[0m [36m# Attach an agreement to a user Admin attaches a foster agreement to a user[0m
+[31mrspec ./spec/features/manage_dogs_spec.rb:5[0m [36m# Manage Dogs View an existing dog[0m
+[31mrspec ./spec/features/user_signin_spec.rb:5[0m [36m# Sign in as Admin Valid User[0m
+[31mrspec ./spec/features/apply_to_adopt_spec.rb:178[0m [36m# Apply for Adoption Home Owner fills out adoption application[0m
+[31mrspec ./spec/features/apply_to_adopt_spec.rb:6[0m [36m# Apply for Adoption Renter fills out adoption application[0m
+[31mrspec ./spec/features/edit_adopter_spec.rb:7[0m [36m# Edit Adopter Form Admin edits adopter[0m
+[31mrspec ./spec/features/view_adoption_app_spec.rb:7[0m [36m# View a mostly nil Adoption App without crashing Adoptor barely fills out adoption application[0m
+[31mrspec ./spec/features/link_dogs_to_adopters_spec.rb:6[0m [36m# Link Dogs to Adoption Applications via Adoption model Happy Path[0m
+[31mrspec ./spec/features/home_page_spec.rb:4[0m [36m# Home Page visitor can view events[0m
+[31mrspec ./spec/features/password_reset_spec.rb:7[0m [36m# Reset Password User exists[0m
+[31mrspec ./spec/features/password_reset_spec.rb:14[0m [36m# Reset Password User does not exist[0m
+
+Randomized with seed 57827
+

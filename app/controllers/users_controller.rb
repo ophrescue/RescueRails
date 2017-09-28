@@ -69,7 +69,7 @@
 #  dl_locked_resources          :boolean          default(FALSE)
 #  training_team                :boolean          default(FALSE)
 #  confidentiality_agreement_id :integer
-#
+#  medical_behavior_permission  :boolean          default(FALSE)
 
 class UsersController < ApplicationController
   before_action :authenticate
@@ -185,6 +185,7 @@ class UsersController < ApplicationController
                 :confidentiality_agreement_id,
                 :translator,
                 :known_languages,
+                :medical_behavior_permission,
                 agreement_attributes: [
                   :attachment,
                   :description,

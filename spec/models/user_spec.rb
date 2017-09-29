@@ -66,11 +66,48 @@
 require 'rails_helper'
 
 describe User do
+
+  describe '#chimp_check' do
+    before do
+      allow(User).to receive(:chimp_subscribe)
+      allow(User).to receive(:chimp_unsubscribe)
+    end
+
+    it 'subscribes email is changed' do
+      user = create(:user, lastverified: nil)
+
+      # Change user's email to trigger the subscription
+      user.email = "new_email@test.com"
+      
+      expect(UserSubscribeJob).to receive(:perform_later)
+      user.chimp_check
+    end
+
+    it 'unsubscribes when user changed to locked' do
+      user = create(:user, lastverified: nil, locked: false)
+      
+      # Lock the user's account to trigger unsubscription
+      user.locked = true
+
+      expect(UserUnsubscribeJob).to receive(:perform_later)
+      user.chimp_check
+    end
+
+    it 'subscribes when user is changed to unlocked' do
+      user = create(:user, lastverified: nil, locked: true)
+      
+      # Unlock the user's account to trigger subscription
+      user.locked = false
+
+      expect(UserSubscribeJob).to receive(:perform_later)
+      user.chimp_check
+    end
+  end
+
   before do
     allow(User).to receive(:chimp_check).and_return(true)
     allow(User).to receive(:chimp_subscribe).and_return(true)
   end
-
 
   describe 'contact information' do
 

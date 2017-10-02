@@ -308,8 +308,8 @@ ActiveRecord::Schema.define(version: 20170927205500) do
     t.string   "address1",                     limit: 255
     t.string   "address2",                     limit: 255
     t.string   "city",                         limit: 255
-    t.string   "state",                        limit: 255
-    t.string   "zip",                          limit: 255
+    t.string   "region",                       limit: 2,                                              comment: "Region (state or province) as a 2 character ISO 3166-2 code"
+    t.string   "postal_code",                  limit: 255,                                            comment: "Postal code - ZIP code for US addresses"
     t.string   "duties",                       limit: 255
     t.boolean  "edit_dogs",                                              default: false
     t.text     "share_info"

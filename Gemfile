@@ -6,7 +6,7 @@ gem 'rails', '5.0.3'
 gem 'rack-cache'
 
 gem 'acts_as_list'
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 2'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'dotenv'
 gem 'dotenv-rails'

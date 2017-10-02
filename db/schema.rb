@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170923045153) do
+ActiveRecord::Schema.define(version: 20171002180436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -256,6 +256,19 @@ ActiveRecord::Schema.define(version: 20170923045153) do
     t.boolean  "locked",                  default: false
   end
 
+  create_table "fosters", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "dog_id",     null: false
+    t.date     "start_date", null: false
+    t.date     "end_date"
+    t.integer  "updated_by", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["dog_id"], name: "index_fosters_on_dog_id", using: :btree
+    t.index ["user_id", "dog_id"], name: "index_fosters_on_user_id_and_dog_id", using: :btree
+    t.index ["user_id"], name: "index_fosters_on_user_id", using: :btree
+  end
+
   create_table "photos", force: :cascade do |t|
     t.integer  "dog_id"
     t.string   "photo_file_name",    limit: 255
@@ -352,6 +365,7 @@ ActiveRecord::Schema.define(version: 20170923045153) do
     t.boolean  "translator",                                             default: false, null: false
     t.string   "known_languages",              limit: 255
     t.integer  "code_of_conduct_agreement_id"
+    t.boolean  "boarding_buddies",                                       default: false, null: false
     t.index ["agreement_id"], name: "index_users_on_agreement_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude", using: :btree

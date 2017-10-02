@@ -185,6 +185,7 @@ class UsersController < ApplicationController
                 :confidentiality_agreement_id,
                 :translator,
                 :known_languages,
+                :boarding_buddies,
                 agreement_attributes: [
                   :attachment,
                   :description,

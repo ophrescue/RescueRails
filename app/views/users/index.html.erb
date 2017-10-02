@@ -60,6 +60,9 @@
   <li class="<%= 'active' if params[:translator] %>">
     <%= link_to "Translators", users_path(translator: true) %>
   </li>
+  <li class="<%= 'active' if params[:boarding_buddy] %>">
+    <%= link_to "Boarding Buddies", users_path(boarding_buddy: true) %>
+  </li>
 </ul>
 
 <% if params[:foster] == 'true' %>

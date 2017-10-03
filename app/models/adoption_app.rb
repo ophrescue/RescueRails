@@ -59,4 +59,12 @@ class AdoptionApp < ApplicationRecord
 
   has_many :attachments, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :attachments, allow_destroy: true
+
+  validates :ready_to_adopt_dt, presence: true
+  validates :dog_stay_when_away, presence: true, length: { maximum: 100 }
+  validates :landlord_name, allow_blank: true, length: { maximum: 100 }
+  validates :spouse_name, allow_blank: true, length: { maximum: 255 }
+  validates :other_household_names, allow_blank: true, length: { maximum: 255 }
+  validates :how_did_you_hear, allow_blank: true, length: { maximum: 255 }
+
 end

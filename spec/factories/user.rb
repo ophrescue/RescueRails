@@ -20,6 +20,7 @@ FactoryGirl.define do
       add_dogs true
       ban_adopters true
       dl_locked_resources true
+      medical_behavior_permission true
     end
   end
 end

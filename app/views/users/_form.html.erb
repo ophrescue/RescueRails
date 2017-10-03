@@ -364,7 +364,11 @@
         </label>
         <label class="checkbox">
           <%= f.check_box :add_dogs %>
-          <span><strong>Add Dogs</strong> - If checked, user can add dogs and update the medical summary</span>
+          <span><strong>Add Dogs</strong> - If checked, user can add dogs.</span>
+        </label>
+        <label class="checkbox">
+          <%= f.check_box :medical_behavior_permission %>
+          <span><strong>Manage Medical and Behavior Summaries</strong> - If checked, user can edit Medical and Behavior Summaries.</span>
         </label>
         <label class="checkbox">
           <%= f.check_box :edit_dogs %>

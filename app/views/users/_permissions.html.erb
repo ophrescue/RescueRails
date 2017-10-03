@@ -37,11 +37,17 @@
   <% end %>
 
   <% if @user.add_dogs?%>
-    <li>Can add dogs and update the medical summary</li>
+    <li>Can add dogs</li>
   <% else %>
-    <li>Can not add dogs or update the medical summary</li>
+    <li>Can not add dogs</li>
   <% end %>
-
+  
+  <% if @user.medical_behavior_permission? %>
+    <li>Can manage medical and behavior summaries</li>
+  <% else %>
+    <li>Can not manage medical and behavior summaries</li>
+  <% end %>
+  
   <% if @user.edit_dogs?%>
     <li>Can edit all dogs</li>
   <% else %>

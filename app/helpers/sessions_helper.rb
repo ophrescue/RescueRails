@@ -56,6 +56,10 @@ module SessionsHelper
   def can_add_dogs?
     current_user.add_dogs? unless current_user.nil?
   end
+  
+  def can_manage_medical_behavior_summaries?
+    current_user.medical_behavior_permission? unless current_user.nil?
+  end
 
   def can_edit_dogs?
     current_user.edit_dogs? unless current_user.nil?
@@ -76,7 +80,7 @@ module SessionsHelper
   def can_ban_adopters?
     current_user.ban_adopters unless current_user.nil?
   end
-
+  
   def can_dl_resources?
     current_user.dl_resources unless current_user.nil?
   end

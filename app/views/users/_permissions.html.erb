@@ -95,6 +95,12 @@
   <%else%>
     <li>Is not a member of the fundraising team</li>
   <% end %>
+  
+  <% if @user.boarding_buddies? %>
+    <li>Is a Boarding Buddy</li>
+  <%else%>
+    <li>Is not a Boarding Buddy</li>
+  <% end %>
 
   <% if @user.dl_resources? %>
     <li>Can Download Staff Resources</li>

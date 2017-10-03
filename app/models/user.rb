@@ -74,7 +74,7 @@
 #  translator                   :boolean          default(FALSE), not null
 #  known_languages              :string(255)
 #  code_of_conduct_agreement_id :integer
-#
+#  boarding_buddies             :boolean          default(FALSE)
 
 require 'digest'
 
@@ -158,7 +158,7 @@ class User < ApplicationRecord
   scope :public_relations,        -> (status = true) { where(public_relations: status)}
   scope :fundraising,             -> (status = true) { where(fundraising: status)}
   scope :medical_behavior,        -> (status = true) { where(medical_behavior_permission: status)}
-
+  scope :boarding_buddy,          -> (status = true) { where(boarding_buddies: status)}
   scope :house_type,              -> (type) { where(house_type: type) }
   scope :has_dogs,                -> (status = true) { where(has_own_dogs: status) }
   scope :has_cats,                -> (status = true) { where(has_own_cats: status) }

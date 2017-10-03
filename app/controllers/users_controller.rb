@@ -186,6 +186,7 @@ class UsersController < ApplicationController
                 :translator,
                 :known_languages,
                 :medical_behavior_permission,
+                :boarding_buddies,
                 agreement_attributes: [
                   :attachment,
                   :description,

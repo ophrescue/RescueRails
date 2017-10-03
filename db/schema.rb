@@ -256,19 +256,6 @@ ActiveRecord::Schema.define(version: 20171002180436) do
     t.boolean  "locked",                  default: false
   end
 
-  create_table "fosters", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "dog_id",     null: false
-    t.date     "start_date", null: false
-    t.date     "end_date"
-    t.integer  "updated_by", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["dog_id"], name: "index_fosters_on_dog_id", using: :btree
-    t.index ["user_id", "dog_id"], name: "index_fosters_on_user_id_and_dog_id", using: :btree
-    t.index ["user_id"], name: "index_fosters_on_user_id", using: :btree
-  end
-
   create_table "photos", force: :cascade do |t|
     t.integer  "dog_id"
     t.string   "photo_file_name",    limit: 255

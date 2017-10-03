@@ -12,7 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-
 # == Schema Information
 #
 # Table name: adopters
@@ -73,10 +72,6 @@ class Adopter < ApplicationRecord
 
   FLAGS = ['High', 'Low', 'On Hold']
 
-  def attributes_to_audit
-    %w(status assigned_to_user_id email phone address1 address2 city state zip)
-  end
-
   has_many :references, dependent: :destroy
   accepts_nested_attributes_for :references
 
@@ -120,7 +115,7 @@ class Adopter < ApplicationRecord
   end
 
   def attributes_to_audit
-    %w(status assigned_to_user_id email phone address1 address2 city state zip)
+    %w[status assigned_to_user_id email phone address1 address2 city state zip]
   end
 
   def changes_to_sentence

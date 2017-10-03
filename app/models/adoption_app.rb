@@ -66,5 +66,4 @@ class AdoptionApp < ApplicationRecord
   validates :spouse_name, allow_blank: true, length: { maximum: 255 }
   validates :other_household_names, allow_blank: true, length: { maximum: 255 }
   validates :how_did_you_hear, allow_blank: true, length: { maximum: 255 }
-
 end

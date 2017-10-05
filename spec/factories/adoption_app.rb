@@ -29,10 +29,10 @@ FactoryGirl.define do
     factory :adoption_app_null do
       spouse_name ''
       other_household_names nil
-      ready_to_adopt_dt nil
+      ready_to_adopt_dt '2019-08-21'
       house_type 'own'
       dog_exercise nil
-      dog_stay_when_away nil
+      dog_stay_when_away 'here'
       dog_vacation nil
       current_pets nil
       why_not_fixed nil

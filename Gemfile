@@ -18,6 +18,7 @@ gem 'gravatar_image_tag'
 gem 'has_scope'
 gem 'paperclip'
 gem 'rails4-autocomplete'
+gem 'record_tag_helper', '~> 1.0'
 gem 'redcarpet'
 gem 'responders'
 gem 'roo', '~>1.13.2'
@@ -25,7 +26,6 @@ gem 'strip_attributes'
 gem 'to_xls'
 gem 'whenever', '~> 0.9.4', require: false
 gem 'will_paginate'
-gem 'record_tag_helper', '~> 1.0'
 
 # datas
 gem 'dalli'
@@ -39,14 +39,14 @@ end
 gem 'daemons'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
-gem 'mailhopper'
 gem 'delayed_mailhopper'
+gem 'mailhopper'
 
 # Gems used only for assets and not required
 # in production environments by default.
 
-gem 'therubyracer', platforms: :ruby
 gem 'sass-rails'
+gem 'therubyracer', platforms: :ruby
 gem 'uglifier'
 
 gem 'newrelic_rpm'

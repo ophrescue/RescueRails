@@ -76,12 +76,6 @@ Layout/EmptyLines:
     - 'spec/models/adopter_spec.rb'
     - 'spec/models/user_spec.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Layout/EmptyLinesAroundMethodBody:
-  Exclude:
-    - 'app/helpers/sessions_helper.rb'
-
 # Offense count: 4
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

@@ -40,18 +40,18 @@ namespace :adoptapet_sync do
                   "Dog",
                   d.primary_breed ? d.primary_breed.name : "",
                   d.secondary_breed ? d.secondary_breed.name : "",
-                  "N",                             #PureBreed
+                  "N",                             # PureBreed
                   d.name,
                   d.age,
                   d.to_petfinder_gender,
                   d.to_petfinder_size,
                   desc_prefix + d.id.to_s + "<br>" + d.description.gsub(/\r\n?/, "<br>"),
-                  "Available",                      #status
-                  d.no_kids ? "N" : "Y",            #GoodWKids
-                  d.no_cats ? "N" : "Y",            #GoodWCats
-                  d.no_dogs ? "N" : "Y",            #GoodWDogs
-                  d.is_altered ? "Y" : "N",         #SpayedNeutered
-                  d.is_special_needs ? "Y" : "N",    #SpecialNeeds
+                  "Available",                      # status
+                  d.no_kids ? "N" : "Y",            # GoodWKids
+                  d.no_cats ? "N" : "Y",            # GoodWCats
+                  d.no_dogs ? "N" : "Y",            # GoodWDogs
+                  d.is_altered ? "Y" : "N",         # SpayedNeutered
+                  d.is_special_needs ? "Y" : "N",    # SpecialNeeds
                   photo_urls[0],
                   photo_urls[1],
                   photo_urls[2],

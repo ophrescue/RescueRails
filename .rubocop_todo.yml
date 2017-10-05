@@ -86,13 +86,6 @@ Layout/IndentationWidth:
   Exclude:
     - 'lib/tasks/petfinder_sync.rake'
 
-# Offense count: 19
-# Cop supports --auto-correct.
-Layout/LeadingCommentSpace:
-  Exclude:
-    - 'lib/tasks/adoptapet_sync.rake'
-    - 'lib/tasks/petfinder_sync.rake'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

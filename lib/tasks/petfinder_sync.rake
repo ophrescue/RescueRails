@@ -36,18 +36,18 @@ namespace :petfinder_sync do
                 desc_prefix + d.id.to_s + "&#10;&#10;" + d.description.gsub(/\r\n?/, "&#10;") + "&#10;" + desc_suffix1 + desc_siffix2,
                 "Dog",
                 d.to_petfinder_status,
-                "",                              #Shots
-                d.is_altered ? "1" : "",         #Altered
-                d.no_dogs ? "1" : "",            #NoDogs
-                d.no_cats ? "1" : "",            #NoCats
-                d.no_kids ? "1" : "",            #NoKids
-                "",                              #Housetrained
-                "",                              #Declawed
-                d.is_special_needs ? "1" : "",   #specialNeeds
-                "",                              #Mix
-                d.photos.visible.count >= 1 ? d.id.to_s + "-1.jpg" : "", #Photo1 filename
-                d.photos.visible.count >= 2 ? d.id.to_s + "-2.jpg" : "", #Photo2 filename
-                d.photos.visible.count >= 3 ? d.id.to_s + "-3.jpg" : ""  #Photo3 filename
+                "",                              # Shots
+                d.is_altered ? "1" : "",         # Altered
+                d.no_dogs ? "1" : "",            # NoDogs
+                d.no_cats ? "1" : "",            # NoCats
+                d.no_kids ? "1" : "",            # NoKids
+                "",                              # Housetrained
+                "",                              # Declawed
+                d.is_special_needs ? "1" : "",   # specialNeeds
+                "",                              # Mix
+                d.photos.visible.count >= 1 ? d.id.to_s + "-1.jpg" : "", # Photo1 filename
+                d.photos.visible.count >= 2 ? d.id.to_s + "-2.jpg" : "", # Photo2 filename
+                d.photos.visible.count >= 3 ? d.id.to_s + "-3.jpg" : ""  # Photo3 filename
                 ]
 
           ## Photo Export Code

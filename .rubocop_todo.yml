@@ -306,16 +306,6 @@ Rails/Date:
     - 'spec/factories/event.rb'
     - 'spec/models/dog_spec.rb'
 
-# Offense count: 6
-# Cop supports --auto-correct.
-# Configuration parameters: Whitelist.
-# Whitelist: find_by_sql
-Rails/DynamicFindBy:
-  Exclude:
-    - 'app/controllers/banned_adopters_controller.rb'
-    - 'app/controllers/password_resets_controller.rb'
-    - 'app/models/user.rb'
-
 # Offense count: 3
 Rails/FilePath:
   Exclude:

@@ -63,7 +63,7 @@ class BannedAdoptersController < ApplicationController
   end
 
   def update
-    @banned_adopter = BannedAdopter.find_by_id(params[:id])
+    @banned_adopter = BannedAdopter.find_by(id: params[:id])
     if @banned_adopter.update_attributes(banned_adopter_params)
       flash[:success] = 'Record updated.'
       redirect_to banned_adopters_path

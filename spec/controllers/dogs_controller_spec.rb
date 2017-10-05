@@ -72,7 +72,6 @@ describe DogsController, type: :controller do
         get :index, params: {}, session: { mgr_view: true }
 
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
-
       end
 
       it 'in gallery mode only publicly viewable dogs are returned' do
@@ -111,7 +110,6 @@ describe DogsController, type: :controller do
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog])
       end
     end
-
   end
 
   describe 'GET #show' do

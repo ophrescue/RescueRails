@@ -1,5 +1,4 @@
 namespace :adoptapet_sync do
-
   require 'csv'
   require 'net/ftp'
   require 'open-uri'
@@ -10,14 +9,12 @@ namespace :adoptapet_sync do
 
   desc "Export Records to CSV for adoptapet"
   task export_upload: :environment do
-
     FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
     FileUtils::Verbose.mkdir(path)
 
     FileUtils::Verbose.cp "#{Rails.root.to_s}/lib/tasks/import.cfg", path
 
     STATES.each do |state|
-
       filename = "pets_#{state}.csv"
 
       puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Adoptapet #{state} Export Start"
@@ -32,7 +29,6 @@ namespace :adoptapet_sync do
       desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs/"
 
       CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
-
         dogs.each do |d|
           photo_urls = Array.new
           d.photos.visible.order('updated_at desc')
@@ -81,8 +77,5 @@ namespace :adoptapet_sync do
         puts "Not production, skipping upload"
       end
     end
-
-
-
   end
 end

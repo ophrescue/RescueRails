@@ -1,5 +1,4 @@
 namespace :petfinder_sync do
-
   require 'csv'
   require 'net/ftp'
   require 'open-uri'
@@ -11,7 +10,6 @@ namespace :petfinder_sync do
 
   desc "Export Records to CSV with Top 3 Photos, upload to Petfinder"
   task export_upload: :environment do
-
     puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Petfinder Export Start"
 
     FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
@@ -26,7 +24,6 @@ namespace :petfinder_sync do
 
     dogs = Dog.where({ status: ["adoptable", "adoption pending", "coming soon"]})
     CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
-
       dogs.each do |d|
         csv << [d.id.to_s,
                 d.tracking_id.to_s,
@@ -96,7 +93,5 @@ namespace :petfinder_sync do
     else
       puts "Not production, skipping upload"
     end
-
   end
-
 end

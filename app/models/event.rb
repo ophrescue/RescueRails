@@ -41,7 +41,6 @@
 #
 
 class Event < ApplicationRecord
-
   attr_accessor :photo_delete
 
   validates_presence_of :title,

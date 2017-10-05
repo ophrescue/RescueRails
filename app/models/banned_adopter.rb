@@ -28,7 +28,6 @@
 #
 
 class BannedAdopter < ApplicationRecord
-
   # def self.open_spreadsheet(file)
   #   case File.extname(file.original_filename)
   #   when '.csv' then Roo::Csv.new(file.path, nil, :ignore)

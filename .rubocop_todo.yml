@@ -196,14 +196,6 @@ Layout/TrailingBlankLines:
     - 'spec/features/manage_medical_behavior_summaries_spec.rb'
     - 'spec/support/database_cleaner.rb'
 
-# Offense count: 7
-# Cop supports --auto-correct.
-Layout/TrailingWhitespace:
-  Exclude:
-    - 'app/helpers/sessions_helper.rb'
-    - 'spec/features/edit_user_profile_spec.rb'
-    - 'spec/features/manage_medical_behavior_summaries_spec.rb'
-
 # Offense count: 4
 Lint/AmbiguousBlockAssociation:
   Exclude:

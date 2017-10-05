@@ -93,7 +93,6 @@ describe DogsController, type: :controller do
       end
     end
 
-
     context 'public user' do
       let!(:adoptable_dog) { create(:dog, status: 'adoptable') }
       let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending') }

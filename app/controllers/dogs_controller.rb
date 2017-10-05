@@ -84,7 +84,6 @@ class DogsController < ApplicationController
       do_manager_view = false
     end
 
-
     @dogs = DogSearcher.search(params: params, manager: do_manager_view)
 
     respond_to do |format|

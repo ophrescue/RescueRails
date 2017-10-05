@@ -13,7 +13,6 @@
 #    limitations under the License.
 
 module SessionsHelper
-
   def sign_in(user)
     if params[:remember_me]
       cookies.signed[:remember_token] = { value: [user.id, user.salt],
@@ -128,5 +127,4 @@ module SessionsHelper
     def clear_return_to
       session[:return_to] = nil
     end
-
 end

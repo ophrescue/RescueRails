@@ -57,14 +57,6 @@ Layout/ClosingParenthesisIndentation:
 
 # Offense count: 3
 # Cop supports --auto-correct.
-# Configuration parameters: AllowForAlignment, ForceEqualSignAlignment.
-Layout/ExtraSpacing:
-  Exclude:
-    - 'config.ru'
-    - 'lib/tasks/adoptapet_sync.rake'
-
-# Offense count: 3
-# Cop supports --auto-correct.
 # Configuration parameters: IndentationWidth.
 Layout/IndentAssignment:
   Exclude:

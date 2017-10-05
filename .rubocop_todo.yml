@@ -57,6 +57,13 @@ Layout/ClosingParenthesisIndentation:
 
 # Offense count: 3
 # Cop supports --auto-correct.
+# Configuration parameters: AllowForAlignment, ForceEqualSignAlignment.
+Layout/ExtraSpacing:
+  Exclude:
+    - 'lib/tasks/adoptapet_sync.rake'
+
+# Offense count: 3
+# Cop supports --auto-correct.
 # Configuration parameters: IndentationWidth.
 Layout/IndentAssignment:
   Exclude:
@@ -124,14 +131,6 @@ Layout/MultilineMethodCallIndentation:
     - 'app/controllers/dogs_controller.rb'
     - 'app/controllers/events_controller.rb'
     - 'app/controllers/users_controller.rb'
-
-# Offense count: 5
-# Cop supports --auto-correct.
-Layout/SpaceAfterComma:
-  Exclude:
-    - 'lib/tasks/adoptapet_sync.rake'
-    - 'lib/tasks/petfinder_sync.rake'
-    - 'spec/controllers/dogs_controller_spec.rb'
 
 # Offense count: 8
 # Cop supports --auto-correct.

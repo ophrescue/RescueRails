@@ -76,7 +76,7 @@ namespace :petfinder_sync do
       puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Begin Upload"
       ## Being Upload
       ftp = Net::FTP.new
-      ftp.connect('members.petfinder.com',21)
+      ftp.connect('members.petfinder.com', 21)
       ftp.login(ENV['PETFINDER_FTP_USER'], ENV['PETFINDER_FTP_PW'])
       ftp.chdir('/import/')
       ftp.putbinaryfile(path + filename, filename)

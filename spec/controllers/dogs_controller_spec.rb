@@ -60,7 +60,7 @@ describe DogsController, type: :controller do
       let!(:adopted_dog) { create(:dog, name: 'adopted', status: 'adopted', is_special_needs: false) }
       let!(:on_hold_dog) { create(:dog, name: 'on hold', status: 'on hold', is_special_needs: false) }
       let!(:not_available_dog) { create(:dog, name: 'not available', status: 'not available', is_special_needs: false) }
-      let!(:baby_small_special_needs_dog) { create(:dog, name: 'filter pup' ,status: 'adoptable', age: 'baby', size: 'small', is_special_needs: true) }
+      let!(:baby_small_special_needs_dog) { create(:dog, name: 'filter pup' , status: 'adoptable', age: 'baby', size: 'small', is_special_needs: true) }
 
       let(:params) { {} }
 

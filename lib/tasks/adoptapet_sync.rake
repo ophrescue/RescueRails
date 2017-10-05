@@ -5,7 +5,7 @@ namespace :adoptapet_sync do
   require 'fileutils'
 
   path = "/tmp/adoptapet/"
-  STATES = ['PA','MD','VA']
+  STATES = ['PA', 'MD', 'VA']
 
   desc "Export Records to CSV for adoptapet"
   task export_upload: :environment do
@@ -66,7 +66,7 @@ namespace :adoptapet_sync do
         puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Begin Upload for #{state}"
         ## Being Upload
         ftp = Net::FTP.new
-        ftp.connect('autoupload.adoptapet.com',21)
+        ftp.connect('autoupload.adoptapet.com', 21)
         ftp.login(ENV["ADOPTAPET_#{state}_USER"], ENV["ADOPTAPET_#{state}_PW"])
         ftp.putbinaryfile(path + filename, "pets.csv")
         ftp.putbinaryfile(path + "import.cfg", "import.cfg")

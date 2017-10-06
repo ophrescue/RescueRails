@@ -70,7 +70,9 @@
 #  training_team                :boolean          default(FALSE)
 #  confidentiality_agreement_id :integer
 #  medical_behavior_permission  :boolean          default(FALSE)
+#  boarding_buddies             :boolean          default(FALSE)
 #  social_media_manager         :boolean          default(FALSE)
+#  graphic_design               :boolean          default(FALSE)
 class UsersController < ApplicationController
   before_action :authenticate
   before_action :correct_user, only: [:edit, :update]

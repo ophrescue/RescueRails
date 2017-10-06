@@ -7,9 +7,8 @@ class FolderSearcher
   def search
     query = 'attachment_file_name ILIKE :search OR description ILIKE :search'
     search = "%#{search_term.strip}%"
-    attachment = Attachment.where(query, search: search).map do |a|
-      next if locked_folder?(a) && !@user.dl_locked_resources?
-      a
+    attachment = Attachment.where(query, search: search).reject do |a|
+      locked_folder?(a) && !@user.dl_locked_resources?
     end.compact
 
     attachment
@@ -26,7 +25,7 @@ class FolderSearcher
   end
 
   def locked_folder?(a)
-    Folder.find_by(a.attachable_id.to_i).locked?
+    Folder.find_by_id(a.attachable_id).locked?
   end
 
   # def for_page(page = nil)

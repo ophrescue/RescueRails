@@ -51,6 +51,9 @@
   <li class="<%= 'active' if params[:public_relations] %>">
     <%= link_to "Public Relations", users_path(:public_relations => true) %>
   </li>
+  <li class="<%= 'active' if params[:social_media] %>">
+    <%= link_to "Social Media", users_path(social_media: true) %>
+  </li>
   <li class="<%= 'active' if params[:fundraising] %>">
     <%= link_to "Fundraising", users_path(:fundraising => true) %>
   </li>
@@ -62,6 +65,7 @@
   </li>
   <li class="<%='active' if  params[:medical_behavior] %>">
     <%= link_to "Medical/Behavior Managers", users_path(medical_behavior: true) %>
+  </li>
   <li class="<%= 'active' if params[:boarding_buddy] %>">
     <%= link_to "Boarding Buddies", users_path(boarding_buddy: true) %>
   </li>

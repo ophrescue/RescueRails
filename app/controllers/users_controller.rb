@@ -70,7 +70,7 @@
 #  training_team                :boolean          default(FALSE)
 #  confidentiality_agreement_id :integer
 #  medical_behavior_permission  :boolean          default(FALSE)
-
+#  social_media_manager         :boolean          default(FALSE)
 class UsersController < ApplicationController
   before_action :authenticate
   before_action :correct_user, only: [:edit, :update]
@@ -187,6 +187,7 @@ class UsersController < ApplicationController
                 :known_languages,
                 :medical_behavior_permission,
                 :boarding_buddies,
+                :social_media_manager,
                 agreement_attributes: [
                   :attachment,
                   :description,

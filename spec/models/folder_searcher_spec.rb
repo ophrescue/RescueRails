@@ -6,9 +6,9 @@ describe FolderSearcher do
     let!(:all_access_user) { create(:user, dl_resources: true, dl_locked_resources: true) }
     let(:restricted_search) { FolderSearcher.search(some_access_user, params: params) }
     let(:unrestricted_search) { FolderSearcher.search(all_access_user, params: params) }
-    let!(:dog_folder_unlocked) {create(:folder, name: 'dog', locked: false)}
+    let!(:dog_folder_unlocked) { create(:folder, name: 'dog', locked: false) }
     let!(:doggie_file) { create(:attachment, attachment_file_name: 'Doggies.pdf', attachable_id: dog_folder_unlocked.id) }
-    let!(:dog_folder_locked) {create(:folder, name: 'dog', locked: true)}
+    let!(:dog_folder_locked) { create(:folder, name: 'dog', locked: true) }
     let!(:doggie2_file) { create(:attachment, attachment_file_name: 'Doggies2.pdf', attachable_id: dog_folder_locked.id) }
     let(:params) { { search: 'Doggies' } }
 

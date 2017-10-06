@@ -28,8 +28,8 @@
     </td>
     <td>
       <% if is_admin? %>
-        <%= form_for attachment, :html => {:id => "delete_attachment", :class => "delete_attachment"}, :method => :delete do |f| %>
-          <%= f.submit "Delete", :class => "btn btn-danger btn-small" %>
+        <%= form_for attachment, html: {id: "delete_attachment", class: "delete_attachment"}, method: :delete do |f| %>
+          <%= f.submit "Delete", class: "btn btn-danger btn-small" %>
         <% end %>
       <% else %>
         <% #<button id="" class="btn disable">Delete</button> %>

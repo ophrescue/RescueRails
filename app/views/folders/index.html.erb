@@ -8,7 +8,7 @@
 <%= link_to "All Folders", folders_path, class: 'btn btn-primary'%>
 <br/>
 <br/>
-<%= form_tag folders_path, :method => 'get', :class => 'form-inline' do %>
+<%= form_tag folders_path, method: 'get', class: 'form-inline' do %>
   <%= text_field_tag :search,
                      params[:search],
                      placeholder: 'Search file name or description' %>

@@ -27,7 +27,7 @@
 class FoldersController < ApplicationController
   before_action :authenticate
   before_action :dl_resource_user
-  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :admin_user, only: %i[new create edit update destroy]
 
   def index
     if params[:search].present?

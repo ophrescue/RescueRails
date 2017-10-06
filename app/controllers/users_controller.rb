@@ -188,6 +188,7 @@ class UsersController < ApplicationController
                 :medical_behavior_permission,
                 :boarding_buddies,
                 :social_media_manager,
+                :graphic_design,
                 agreement_attributes: [
                   :attachment,
                   :description,

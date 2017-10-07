@@ -10,6 +10,7 @@ describe FolderSearcher do
     let!(:doggie_file) { create(:attachment, attachable_type: 'Folder', attachment_file_name: 'Doggies.pdf', attachable_id: dog_folder_unlocked.id) }
     let!(:dog_folder_locked) { create(:folder, name: 'dog', locked: true) }
     let!(:doggie2_file) { create(:attachment, attachable_type: 'Folder', attachment_file_name: 'Doggies2.pdf', attachable_id: dog_folder_locked.id) }
+    let!(:dog_profile_photo) { create(:attachment, attachable_type: 'Dog', attachment_file_name: 'Doggies.png')}
     let(:params) { { search: 'Doggies' } }
 
     context 'normal user searches for file' do

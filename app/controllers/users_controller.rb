@@ -69,7 +69,7 @@
 #  dl_locked_resources          :boolean          default(FALSE)
 #  training_team                :boolean          default(FALSE)
 #  confidentiality_agreement_id :integer
-#
+#  medical_behavior_permission  :boolean          default(FALSE)
 
 class UsersController < ApplicationController
   before_action :authenticate
@@ -185,6 +185,8 @@ class UsersController < ApplicationController
                 :confidentiality_agreement_id,
                 :translator,
                 :known_languages,
+                :medical_behavior_permission,
+                :boarding_buddies,
                 agreement_attributes: [
                   :attachment,
                   :description,
@@ -193,6 +195,13 @@ class UsersController < ApplicationController
                   :id
                 ],
                 confidentiality_agreement_attributes: [
+                  :attachment,
+                  :description,
+                  :updated_by_user_id,
+                  :_destroy,
+                  :id
+                ],
+                code_of_conduct_agreement_attributes: [
                   :attachment,
                   :description,
                   :updated_by_user_id,
@@ -226,20 +235,14 @@ class UsersController < ApplicationController
                 :is_transporter,
                 :mentor_id,
                 :translator,
-                :known_languages,
-                agreement_attributes: [
-                  :attachment,
-                  :description,
-                  :updated_by_user_id,
-                  :_destroy,
-                  :id
-                ])
+                :known_languages)
     end
   end
 
   def init_fields
     @user.build_agreement unless @user.agreement
     @user.build_confidentiality_agreement unless @user.confidentiality_agreement
+    @user.build_code_of_conduct_agreement unless @user.code_of_conduct_agreement
     @foster_users = User.where(locked: false).order("name")
   end
 

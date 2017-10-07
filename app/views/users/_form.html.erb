@@ -142,6 +142,20 @@
         </div>
       <% end %>
 
+      <% if is_admin? %>
+        <div class="control-group">
+          <%= f.label :code_of_conduct_agreement, 'Code of Conduct Agreement', :class => 'control-label' %>
+          <div class="controls">
+          <%= f.fields_for :code_of_conduct_agreement do |af| %>
+            <% if af.object.persisted? %>
+              <span>Code of Conduct Agreement on File, overwrite?</span>
+            <% end %>
+            <%= af.file_field :attachment %>
+          <% end %>
+          </div>
+        </div>
+      <% end %>
+
     <div class="control-group">
       <%= f.label :house_type, "Do you rent or own your home?", :class => "control-label" %>
       <div class="controls">
@@ -350,7 +364,11 @@
         </label>
         <label class="checkbox">
           <%= f.check_box :add_dogs %>
-          <span><strong>Add Dogs</strong> - If checked, user can add dogs and update the medical summary</span>
+          <span><strong>Add Dogs</strong> - If checked, user can add dogs.</span>
+        </label>
+        <label class="checkbox">
+          <%= f.check_box :medical_behavior_permission %>
+          <span><strong>Manage Medical and Behavior Summaries</strong> - If checked, user can edit Medical and Behavior Summaries.</span>
         </label>
         <label class="checkbox">
           <%= f.check_box :edit_dogs %>
@@ -383,6 +401,10 @@
         <label class="checkbox">
           <%= f.check_box :fundraising %>
           <span><strong>Fundraising</strong> - Adds user to the Fundraising Tab</span>
+        </label>
+        <label class="checkbox">
+          <%= f.check_box :boarding_buddies %>
+          <span><strong>Boarding Buddies</strong> - User is a Boarding Buddy</span>
         </label>
         <label class="checkbox">
           <%= f.check_box :dl_resources %>

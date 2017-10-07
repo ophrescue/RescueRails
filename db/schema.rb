@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170813121555) do
+ActiveRecord::Schema.define(version: 20171002180436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20170813121555) do
     t.boolean  "shot_heartworm"
     t.boolean  "shot_flea_tick"
     t.boolean  "verify_home_auth",                                    default: false
+    t.boolean  "has_family_under_18"
     t.index ["adopter_id"], name: "index_adoption_apps_on_adopter_id", using: :btree
   end
 
@@ -196,6 +197,7 @@ ActiveRecord::Schema.define(version: 20170813121555) do
     t.string   "heartworm_preventative"
     t.string   "flea_tick_preventative"
     t.boolean  "medical_review_complete",                           default: false
+    t.text     "behavior_summary"
     t.index ["age"], name: "index_dogs_on_age", using: :btree
     t.index ["coordinator_id"], name: "index_dogs_on_coordinator_id", using: :btree
     t.index ["foster_id"], name: "index_dogs_on_user_id", using: :btree
@@ -232,8 +234,8 @@ ActiveRecord::Schema.define(version: 20170813121555) do
     t.float    "latitude"
     t.float    "longitude"
     t.date     "event_date"
-    t.time     "start_time"
-    t.time     "end_time"
+    t.time     "start_time",                     precision: 6
+    t.time     "end_time",                       precision: 6
     t.string   "location_url",       limit: 255
     t.string   "location_phone",     limit: 255
     t.string   "photo_file_name",    limit: 255
@@ -306,8 +308,8 @@ ActiveRecord::Schema.define(version: 20170813121555) do
     t.string   "address1",                     limit: 255
     t.string   "address2",                     limit: 255
     t.string   "city",                         limit: 255
-    t.string   "state",                        limit: 255
-    t.string   "zip",                          limit: 255
+    t.string   "region",                       limit: 2,                                              comment: "Region (state or province) as a 2 character ISO 3166-2 code"
+    t.string   "postal_code",                  limit: 255,                                            comment: "Postal code - ZIP code for US addresses"
     t.string   "duties",                       limit: 255
     t.boolean  "edit_dogs",                                              default: false
     t.text     "share_info"
@@ -349,6 +351,9 @@ ActiveRecord::Schema.define(version: 20170813121555) do
     t.boolean  "fundraising",                                            default: false
     t.boolean  "translator",                                             default: false, null: false
     t.string   "known_languages",              limit: 255
+    t.integer  "code_of_conduct_agreement_id"
+    t.boolean  "boarding_buddies",                                       default: false, null: false
+    t.boolean  "medical_behavior_permission",                            default: false
     t.index ["agreement_id"], name: "index_users_on_agreement_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude", using: :btree

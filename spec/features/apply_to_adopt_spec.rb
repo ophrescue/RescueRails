@@ -40,6 +40,7 @@ feature 'Apply for Adoption' do
     fill_in('adopter_adoption_app_attributes_how_did_you_hear', with: 'Google and Craigslist')
     fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2012-12-13')
     choose('adopter_adoption_app_attributes_is_ofage_true')
+    choose('adopter_adoption_app_attributes_has_family_under_18_true')
     choose('adopter_adoption_app_attributes_house_type_rent')
 
     click_button('Next')
@@ -121,6 +122,7 @@ feature 'Apply for Adoption' do
 
     expect(page).to have_content('4 hrs alone')
     expect(page).to have_content('Current Pets not Fixed')
+    expect(page).to have_content('Has Family Under 18')
     expect(page).to have_content('fake@ophrescue.org')
     expect(page).to have_content('(123) 456-7890')
     expect(page).to have_content('Anytime After 3pm')
@@ -213,6 +215,7 @@ feature 'Apply for Adoption' do
     fill_in('adopter_adoption_app_attributes_how_did_you_hear', with: 'Google and Craigslist')
     fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2012-12-13')
     choose('adopter_adoption_app_attributes_is_ofage_true')
+    choose('adopter_adoption_app_attributes_has_family_under_18_true')
     choose('adopter_adoption_app_attributes_house_type_own')
     check('adopter_adoption_app_attributes_verify_home_auth')
 
@@ -286,6 +289,7 @@ feature 'Apply for Adoption' do
 
     expect(page).to have_content('4 hrs alone')
     expect(page).to have_content('Current Pets not Fixed')
+    expect(page).to have_content('Has Family Under 18')
     expect(page).to have_content('fake@ophrescue.org')
     expect(page).to have_content('(123) 456-7890')
     expect(page).to have_content('Anytime After 3pm')

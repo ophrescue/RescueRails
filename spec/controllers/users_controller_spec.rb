@@ -55,7 +55,7 @@
 #  dl_locked_resources          :boolean          default(FALSE)
 #  training_team                :boolean          default(FALSE)
 #  confidentiality_agreement_id :integer
-#
+#  medical_behavior_permission  :boolean          defualt(FALSE)
 
 require 'rails_helper'
 

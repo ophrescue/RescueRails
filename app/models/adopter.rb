@@ -12,7 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-
 # == Schema Information
 #
 # Table name: adopters
@@ -73,10 +72,6 @@ class Adopter < ApplicationRecord
 
   FLAGS = ['High', 'Low', 'On Hold']
 
-  def attributes_to_audit
-    %w(status assigned_to_user_id email phone address1 address2 city state zip)
-  end
-
   has_many :references, dependent: :destroy
   accepts_nested_attributes_for :references
 
@@ -93,10 +88,14 @@ class Adopter < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :phone, presence: true, length: { in: 10..25 }
-  validates :address1, presence: true
-  validates :city, presence: true
+  validates :address1, presence: true, length: { maximum: 255 }
+  validates :address2, allow_blank: true, length: { maximum: 255 }
+  validates :city, presence: true, length: { maximum: 255 }
   validates :state, presence: true, length: { is: 2 }
   validates :zip, presence: true, length: { in: 5..10 }
+  validates :when_to_call, allow_blank: true, length: { maximum: 255 }
+  validates :dog_name, allow_blank: true, length: { maximum: 255 }
+  validates :other_phone, allow_blank: true, length: { maximum: 255 }
 
   validates_presence_of :status
   validates_inclusion_of :status, in: STATUSES
@@ -116,7 +115,7 @@ class Adopter < ApplicationRecord
   end
 
   def attributes_to_audit
-    %w(status assigned_to_user_id email phone address1 address2 city state zip)
+    %w[status assigned_to_user_id email phone address1 address2 city state zip]
   end
 
   def changes_to_sentence

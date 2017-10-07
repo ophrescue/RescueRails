@@ -51,6 +51,7 @@ class Attachment < ApplicationRecord
 
   AGREEMENT_TYPE_FOSTER = 'foster'
   AGREEMENT_TYPE_CONFIDENTIALITY = 'confidentiality'
+  AGREEMENT_TYPE_CODE_OF_CONDUCT = 'code of conduct'
 
   def download_url(style_name = :original)
     s3 = Aws::S3::Client.new

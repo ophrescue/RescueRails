@@ -11,7 +11,6 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-
 # == Schema Information
 #
 # Table name: adoption_apps
@@ -52,6 +51,7 @@
 #  shot_heartworm            :boolean
 #  shot_flea_tick            :boolean
 #  verify_home_auth          :boolean          default(FALSE)
+#  has_family_under_18       :boolean
 #
 
 class AdoptionApp < ApplicationRecord
@@ -59,4 +59,11 @@ class AdoptionApp < ApplicationRecord
 
   has_many :attachments, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :attachments, allow_destroy: true
+
+  validates :ready_to_adopt_dt, presence: true
+  validates :dog_stay_when_away, presence: true, length: { maximum: 100 }
+  validates :landlord_name, allow_blank: true, length: { maximum: 100 }
+  validates :spouse_name, allow_blank: true, length: { maximum: 255 }
+  validates :other_household_names, allow_blank: true, length: { maximum: 255 }
+  validates :how_did_you_hear, allow_blank: true, length: { maximum: 255 }
 end

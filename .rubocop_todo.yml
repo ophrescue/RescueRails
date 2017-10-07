@@ -102,7 +102,7 @@ Style/Alias:
 
 # Offense count: 6
 # Cop supports --auto-correct.
-Style/AlignArray:
+Layout/AlignArray:
   Exclude:
     - 'app/models/adoption.rb'
     - 'app/models/attachment.rb'
@@ -112,7 +112,7 @@ Style/AlignArray:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedHashRocketStyle, EnforcedColonStyle, EnforcedLastArgumentHashStyle, SupportedLastArgumentHashStyles.
 # SupportedLastArgumentHashStyles: always_inspect, always_ignore, ignore_implicit, ignore_explicit
-Style/AlignHash:
+Layout/AlignHash:
   Exclude:
     - 'app/helpers/sessions_helper.rb'
     - 'app/mailers/adopt_app_mailer.rb'
@@ -187,7 +187,7 @@ Style/EmptyCaseCondition:
 
 # Offense count: 8
 # Cop supports --auto-correct.
-Style/EmptyLines:
+Layout/EmptyLines:
   Exclude:
     - 'app/models/dog.rb'
     - 'app/models/event.rb'
@@ -200,14 +200,14 @@ Style/EmptyLines:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: empty_lines, no_empty_lines
-Style/EmptyLinesAroundBlockBody:
+Layout/EmptyLinesAroundBlockBody:
   Enabled: false
 
 # Offense count: 12
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: empty_lines, no_empty_lines
-Style/EmptyLinesAroundClassBody:
+Layout/EmptyLinesAroundClassBody:
   Exclude:
     - 'app/models/adopter.rb'
     - 'app/models/adoption.rb'
@@ -223,7 +223,7 @@ Style/EmptyLinesAroundClassBody:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/EmptyLinesAroundMethodBody:
+Layout/EmptyLinesAroundMethodBody:
   Exclude:
     - 'app/helpers/sessions_helper.rb'
 
@@ -231,7 +231,7 @@ Style/EmptyLinesAroundMethodBody:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: empty_lines, no_empty_lines
-Style/EmptyLinesAroundModuleBody:
+Layout/EmptyLinesAroundModuleBody:
   Exclude:
     - 'app/helpers/sessions_helper.rb'
     - 'spec/support/login_macros.rb'
@@ -261,7 +261,7 @@ Style/IfUnlessModifier:
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: IndentationWidth.
-Style/IndentAssignment:
+Layout/IndentAssignment:
   Exclude:
     - 'app/models/dog.rb'
 
@@ -269,7 +269,7 @@ Style/IndentAssignment:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: normal, rails
-Style/IndentationConsistency:
+Layout/IndentationConsistency:
   Exclude:
     - 'app/helpers/sessions_helper.rb'
     - 'app/models/user.rb'
@@ -278,7 +278,7 @@ Style/IndentationConsistency:
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: Width.
-Style/IndentationWidth:
+Layout/IndentationWidth:
   Exclude:
     - 'spec/controllers/adopters_controller_spec.rb'
 
@@ -301,7 +301,7 @@ Style/MethodCallWithoutArgsParentheses:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: symmetrical, new_line, same_line
-Style/MultilineMethodCallBraceLayout:
+Layout/MultilineMethodCallBraceLayout:
   Exclude:
     - 'app/controllers/adopters_controller.rb'
     - 'app/controllers/users_controller.rb'
@@ -311,7 +311,7 @@ Style/MultilineMethodCallBraceLayout:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, IndentationWidth.
 # SupportedStyles: aligned, indented, indented_relative_to_receiver
-Style/MultilineMethodCallIndentation:
+Layout/MultilineMethodCallIndentation:
   Exclude:
     - 'app/models/mail_chimp_client.rb'
 

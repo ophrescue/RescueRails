@@ -38,6 +38,7 @@
 #  shot_heartworm            :boolean
 #  shot_flea_tick            :boolean
 #  verify_home_auth          :boolean          default(FALSE)
+#  has_family_under_18       :boolean
 #
 
 require 'rails_helper'

@@ -35,6 +35,13 @@ Fire up the app and see what happens.  App is setup to run SSL always, might wan
 
 See `db/seeds.rb` for default admin login info
 
+### Running Tests
+
+You'll need phantomjs installed to run the ```rspec``` test suite. 
+
+### Contributing
+
+Submit a volunteer application at https://ophrescue.org/volunteer if you'd like to be part of the team.  Pull Requests from non-team members will still be considered.  Work item priority is tracked on Waffle.io [![Stories in Ready](https://badge.waffle.io/ophrescue/rescuerails.png?label=ready&title=Ready)](https://waffle.io/ophrescue/rescuerails?utm_source=badge)
 
 ### Licensing
 * Source code written for this project has been licensed under the Apache 2.0 license

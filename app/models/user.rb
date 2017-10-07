@@ -11,7 +11,6 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-
 # == Schema Information
 #
 # Table name: users
@@ -72,12 +71,18 @@
 #  foster_mentor                :boolean          default(FALSE)
 #  public_relations             :boolean          default(FALSE)
 #  fundraising                  :boolean          default(FALSE)
-#
+#  translator                   :boolean          default(FALSE), not null
+#  known_languages              :string(255)
+#  code_of_conduct_agreement_id :integer
+#  boarding_buddies             :boolean          default(FALSE)
 
 require 'digest'
 
 class User < ApplicationRecord
   include Filterable
+
+  alias_attribute :state, :region
+  alias_attribute :zip, :postal_code
 
   attr_accessor :password,
                 :accessible
@@ -124,6 +129,10 @@ class User < ApplicationRecord
           as: :attachable, class_name: 'Attachment', dependent: :destroy
   accepts_nested_attributes_for :confidentiality_agreement
 
+  has_one :code_of_conduct_agreement, -> { where(agreement_type: Attachment::AGREEMENT_TYPE_CODE_OF_CONDUCT) },
+          as: :attachable, class_name: 'Attachment', dependent: :destroy
+  accepts_nested_attributes_for :code_of_conduct_agreement
+
   has_many :assignments, class_name: 'Adopter', foreign_key: 'assigned_to_user_id'
   has_many :active_applications, -> { where(status: ['new', 'pend response', 'workup', 'ready for final', 'approved']) }, class_name: 'Adopter', foreign_key: 'assigned_to_user_id'
   belongs_to :mentor, class_name: 'User', foreign_key: 'mentor_id'
@@ -148,7 +157,8 @@ class User < ApplicationRecord
   scope :translator,              -> (status = true) { where(translator: status) }
   scope :public_relations,        -> (status = true) { where(public_relations: status)}
   scope :fundraising,             -> (status = true) { where(fundraising: status)}
-
+  scope :medical_behavior,        -> (status = true) { where(medical_behavior_permission: status)}
+  scope :boarding_buddy,          -> (status = true) { where(boarding_buddies: status)}
   scope :house_type,              -> (type) { where(house_type: type) }
   scope :has_dogs,                -> (status = true) { where(has_own_dogs: status) }
   scope :has_cats,                -> (status = true) { where(has_own_cats: status) }

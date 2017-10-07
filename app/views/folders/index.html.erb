@@ -5,12 +5,22 @@
   <%= link_to "New Folder", new_folder_path, class: "btn btn-primary" %>
   </p>
 <% end %>
+<%= link_to "All Folders", folders_path, class: 'btn btn-primary'%>
+<br/>
+<br/>
+<%= form_tag folders_path, method: 'get', class: 'form-inline' do %>
+  <%= text_field_tag :search,
+                     params[:search],
+                     placeholder: 'Search file name or description' %>
+  <%= submit_tag "Search", name: nil %>
+<% end %>
 
 
-<% if !@folders.nil? %>
 
+<% if !@folder.nil? %>
   <%= render 'folder_table' %>
-
+<% elsif params[:search].present? %>
+  <%= render 'folder_table' %>
 <% else %>
-  <h3>No Folders Found</h3>
+  <span>No Folders</span>
 <% end %>

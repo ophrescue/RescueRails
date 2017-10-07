@@ -1,13 +1,23 @@
-<table class="table-striped table-bordered table-condensed" id="folder-sort">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Created</th>
-      <th>Access</th>
-    </tr>
-  </thead>
-  <tbody id="folder_tbody">
-    <%= render @folders %>
-  </tbody>
-</table>
+<% if @folder.any? %>
+  <table class="table-striped table-bordered table-condensed" id="folder-sort">
+    <thead>
+      <tr>
+        <% if params[:search].present? %>
+          <th> File </th>
+          <th> File Description </th>
+          <th> Last Updated </th>
+        <% else %>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Created</th>
+          <th>Access</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody id="folder_tbody">
+      <%= render @folder %>
+    </tbody>
+  </table>
+<% else %>
+<h3>No Records Found</h3>
+<% end %>

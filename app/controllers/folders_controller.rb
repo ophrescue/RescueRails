@@ -27,13 +27,16 @@
 class FoldersController < ApplicationController
   before_action :authenticate
   before_action :dl_resource_user
-  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :admin_user, only: %i[new create edit update destroy]
 
   def index
-    @folders = Folder.order(:name)
-
-    @folders.each do |a|
-      a.attachments.build
+    if params[:search].present?
+      @folder = FolderSearcher.search(current_user, params: params)
+    else
+      @folder = Folder.order(:name)
+      @folder.each do |a|
+        a.attachments.build
+      end
     end
   end
 

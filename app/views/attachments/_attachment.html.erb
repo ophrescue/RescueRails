@@ -1,23 +1,39 @@
-<tr>
-  <td id="attachment">
-    <%= link_to attachment.attachment_file_name, attachment.download_url %>
-  </td>
-  <td>
-    <%= attachment.description %>
-  </td>
-  <td>
-    <%= link_to attachment.updated_by_user.name, attachment.updated_by_user %>
-  </td>
-  <td>
-    <%= time_ago_in_words(attachment.created_at) %> ago
-  </td>
-  <td>
-    <% if is_admin? %>
-      <%= form_for attachment, :html => {:id => "delete_attachment", :class => "delete_attachment"}, :method => :delete do |f| %>
-        <%= f.submit "Delete", :class => "btn btn-danger btn-small" %>
-      <% end %>
-    <% else %>
-      <% #<button id="" class="btn disable">Delete</button> %>
+<% if params[:search].present? %>
+  <tr>
+    <% if attachment.attachment_file_name %>
+      <td>
+        <%= link_to(attachment.attachment_file_name, attachment.download_url) %>
+      </td>
+      <td>
+        <%= attachment.description %>
+      </td>
+      <td>
+        <%= attachment.updated_at.strftime("%B %d, %Y") %>
+      </td>
     <% end %>
-  </td>
-</tr>
+  </tr>
+<% else %>
+  <tr>
+    <td id="attachment">
+      <%= link_to attachment.attachment_file_name, attachment.download_url %>
+    </td>
+    <td>
+      <%= attachment.description %>
+    </td>
+    <td>
+      <%= link_to attachment.updated_by_user.name, attachment.updated_by_user %>
+    </td>
+    <td>
+      <%= time_ago_in_words(attachment.created_at) %> ago
+    </td>
+    <td>
+      <% if is_admin? %>
+        <%= form_for attachment, html: {id: "delete_attachment", class: "delete_attachment"}, method: :delete do |f| %>
+          <%= f.submit "Delete", class: "btn btn-danger btn-small" %>
+        <% end %>
+      <% else %>
+        <% #<button id="" class="btn disable">Delete</button> %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

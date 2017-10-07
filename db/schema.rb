@@ -234,8 +234,8 @@ ActiveRecord::Schema.define(version: 20171002180436) do
     t.float    "latitude"
     t.float    "longitude"
     t.date     "event_date"
-    t.time     "start_time"
-    t.time     "end_time"
+    t.time     "start_time",                     precision: 6
+    t.time     "end_time",                       precision: 6
     t.string   "location_url",       limit: 255
     t.string   "location_phone",     limit: 255
     t.string   "photo_file_name",    limit: 255
@@ -352,8 +352,8 @@ ActiveRecord::Schema.define(version: 20171002180436) do
     t.boolean  "translator",                                             default: false, null: false
     t.string   "known_languages",              limit: 255
     t.integer  "code_of_conduct_agreement_id"
-    t.boolean  "medical_behavior_permission",                            default: false
     t.boolean  "boarding_buddies",                                       default: false, null: false
+    t.boolean  "medical_behavior_permission",                            default: false
     t.index ["agreement_id"], name: "index_users_on_agreement_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude", using: :btree

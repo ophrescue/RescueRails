@@ -38,7 +38,6 @@ RSpec.describe Adopter do
     allow(User).to receive(:chimp_check).and_return(true)
     allow(User).to receive(:chimp_subscribe).and_return(true)
 
-
     adopter.updated_by_admin_user = admin
     adopter.status = 'completed'
   end

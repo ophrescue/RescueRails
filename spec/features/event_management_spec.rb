@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 feature 'Manage Events', js: true do
-
   let!(:admin) { create(:user, :admin) }
 
   scenario 'Post and View an Event' do
@@ -27,5 +26,4 @@ feature 'Manage Events', js: true do
 
     expect(page).to have_content(test_event.title)
   end
-
 end

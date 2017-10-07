@@ -76,7 +76,6 @@ class AdoptionsController < ApplicationController
     @dog = Dog.find(adoption_params[:dog_id])
   end
 
-
   def create_params
     { dog: @dog, adopter: @adopter }
   end

@@ -16,8 +16,8 @@ feature 'manage medical and behavior summaries', js: true do
     click_button('Submit')
     expect(page).to have_content('Medical records up to date.')
   end
-  
-  
+
+
   scenario 'Edit Behavior Summary' do
     test_dog = create(:dog)
     sign_in(admin)
@@ -31,5 +31,5 @@ feature 'manage medical and behavior summaries', js: true do
     fill_in('dog_behavior_summary', with: 'The dog has ADHD.')
     click_button('Submit')
     expect(page).to have_content('The dog has ADHD.')
-  end 
-end 
+  end
+end

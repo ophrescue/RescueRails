@@ -41,7 +41,6 @@
 #
 
 class Event < ApplicationRecord
-
   attr_accessor :photo_delete
 
   validates_presence_of :title,
@@ -77,7 +76,6 @@ class Event < ApplicationRecord
                                thumb: '64x64>' },
                     path: ':rails_root/public/system/event_photo/:id/:style/:filename',
                     url: '/system/event_photo/:id/:style/:filename'
-
 
   validates_attachment_size :photo, less_than: 5.megabytes
   validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']

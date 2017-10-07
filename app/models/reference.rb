@@ -28,6 +28,5 @@
 #
 
 class Reference < ApplicationRecord
-
   belongs_to :adopter, class_name: 'Adopter'
 end

@@ -60,7 +60,6 @@
 require 'rails_helper'
 
 describe UsersController, type: :controller do
-
   let!(:admin) { create(:user, :admin, name: 'Admin') }
   let!(:hacker) { create(:user, name: 'Hacker') }
 
@@ -171,9 +170,7 @@ describe UsersController, type: :controller do
           post :create, params: { user: attributes_for(:user) }
         }.to change(User, :count).by(0)
       end
-
     end
-
   end
 
   describe 'PUT update' do
@@ -188,7 +185,6 @@ describe UsersController, type: :controller do
       it 'updates the users permissions' do
         expect { request.call }.to change { test_user.reload.admin }.from(FALSE).to(TRUE)
       end
-
     end
 
     context 'logged in as normal user' do
@@ -199,9 +195,6 @@ describe UsersController, type: :controller do
       it 'is unable to modify user permissions' do
         expect { request.call }.to_not change { test_user.reload.admin }
       end
-
     end
-
   end
-
 end

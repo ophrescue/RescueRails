@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 feature 'Reset Password' do
-
   let!(:admin) { create(:user, :admin) }
 
   scenario 'User exists' do
@@ -17,5 +16,4 @@ feature 'Reset Password' do
     click_button('Reset Password')
     expect(page).to have_content('Unknown Email Address')
   end
-
 end

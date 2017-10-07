@@ -26,13 +26,9 @@ class UserSearcher
     @users
   end
 
-
   def self.search(params: {})
     new(params: params).search
   end
-
-
-
 
   private
 

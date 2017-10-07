@@ -57,7 +57,6 @@ describe BannedAdoptersController, type: :controller do
 
   describe 'POST create' do
     context 'logged in as an admin' do
-
       it 'is able to create a banned adopter' do
         expect {
           post :create, params: { banned_adopter: attributes_for(:banned_adopter) }

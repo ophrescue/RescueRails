@@ -46,7 +46,6 @@ feature 'Attach an agreement to a user', js: true do
     within('#confidentiality-agreement-dl') do
       expect(page).to have_content 'what-to-buy-ahead-of-time'
     end
-
   end
 
   scenario 'Admin attaches a code of conduct agreement to a user' do
@@ -68,6 +67,5 @@ feature 'Attach an agreement to a user', js: true do
     within('#code-of-conduct-agreement-dl') do
       expect(page).to have_content 'new-puppy-info'
     end
-
   end
 end

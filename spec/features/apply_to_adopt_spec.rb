@@ -336,5 +336,4 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('(333) 333-3333')
     expect(page).to have_content('After 3pm')
   end
-
 end

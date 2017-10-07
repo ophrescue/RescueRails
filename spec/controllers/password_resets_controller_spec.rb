@@ -20,15 +20,16 @@ describe PasswordResetsController, type: :controller do
   describe 'POST #create' do
     context 'user found' do
       let(:user) { instance_double(User) }
+      let(:email) { Faker::Internet.email }
 
       before do
-        allow(User).to receive(:find_by_email) { user }
+        allow(User).to receive(:find_by).with(email: email) { user }
       end
 
       it 'is successful' do
         expect(user).to receive(:send_password_reset)
 
-        post :create, params: { email: Faker::Internet.email }
+        post :create, params: { email: email }
         expect(flash[:success]).to be_present
         expect(response).to redirect_to root_url
       end

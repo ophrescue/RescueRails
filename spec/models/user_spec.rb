@@ -71,9 +71,7 @@ describe User do
     allow(User).to receive(:chimp_subscribe).and_return(true)
   end
 
-
   describe 'contact information' do
-
     context 'with valid fields' do
       it 'should accept a two letter state' do
         user = build(:user, state: 'PA')
@@ -103,9 +101,7 @@ describe User do
     end
   end
 
-
   describe '#out_of_date?' do
-
     context 'user has no last_verified date' do
       let(:user) { create(:user, lastverified: nil) }
 

@@ -17,7 +17,7 @@ feature 'Edit User Profile', js: true do
     click_link('Update/Verify Profile')
     expect(page.find_field('Email').disabled?).to eq(false)
   end
-  
+
   # field still appears visually on the screen but is not detectable because it
   # is disabled
   scenario 'User is presented with disabled name field' do

@@ -13,9 +13,7 @@
 #    limitations under the License.
 
 module SessionsHelper
-
   def sign_in(user)
-
     if params[:remember_me]
       cookies.signed[:remember_token] = { value: [user.id, user.salt],
                          expires: 7.days.from_now }
@@ -56,7 +54,7 @@ module SessionsHelper
   def can_add_dogs?
     current_user.add_dogs? unless current_user.nil?
   end
-  
+
   def can_manage_medical_behavior_summaries?
     current_user.medical_behavior_permission? unless current_user.nil?
   end
@@ -80,7 +78,7 @@ module SessionsHelper
   def can_ban_adopters?
     current_user.ban_adopters unless current_user.nil?
   end
-  
+
   def can_dl_resources?
     current_user.dl_resources unless current_user.nil?
   end
@@ -129,5 +127,4 @@ module SessionsHelper
     def clear_return_to
       session[:return_to] = nil
     end
-
 end

@@ -1,5 +1,4 @@
 namespace :petfinder_sync do
-
   require 'csv'
   require 'net/ftp'
   require 'open-uri'
@@ -11,7 +10,6 @@ namespace :petfinder_sync do
 
   desc "Export Records to CSV with Top 3 Photos, upload to Petfinder"
   task export_upload: :environment do
-
     puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Petfinder Export Start"
 
     FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
@@ -26,7 +24,6 @@ namespace :petfinder_sync do
 
     dogs = Dog.where({ status: ["adoptable", "adoption pending", "coming soon"]})
     CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
-
       dogs.each do |d|
         csv << [d.id.to_s,
                 d.tracking_id.to_s,
@@ -39,18 +36,18 @@ namespace :petfinder_sync do
                 desc_prefix + d.id.to_s + "&#10;&#10;" + d.description.gsub(/\r\n?/, "&#10;") + "&#10;" + desc_suffix1 + desc_siffix2,
                 "Dog",
                 d.to_petfinder_status,
-                "",                              #Shots
-                d.is_altered ? "1" : "",         #Altered
-                d.no_dogs ? "1" : "",            #NoDogs
-                d.no_cats ? "1" : "",            #NoCats
-                d.no_kids ? "1" : "",            #NoKids
-                "",                              #Housetrained
-                "",                              #Declawed
-                d.is_special_needs ? "1" : "",   #specialNeeds
-                "",                              #Mix
-                d.photos.visible.count >= 1 ? d.id.to_s + "-1.jpg" : "", #Photo1 filename
-                d.photos.visible.count >= 2 ? d.id.to_s + "-2.jpg" : "", #Photo2 filename
-                d.photos.visible.count >= 3 ? d.id.to_s + "-3.jpg" : ""  #Photo3 filename
+                "",                              # Shots
+                d.is_altered ? "1" : "",         # Altered
+                d.no_dogs ? "1" : "",            # NoDogs
+                d.no_cats ? "1" : "",            # NoCats
+                d.no_kids ? "1" : "",            # NoKids
+                "",                              # Housetrained
+                "",                              # Declawed
+                d.is_special_needs ? "1" : "",   # specialNeeds
+                "",                              # Mix
+                d.photos.visible.count >= 1 ? d.id.to_s + "-1.jpg" : "", # Photo1 filename
+                d.photos.visible.count >= 2 ? d.id.to_s + "-2.jpg" : "", # Photo2 filename
+                d.photos.visible.count >= 3 ? d.id.to_s + "-3.jpg" : ""  # Photo3 filename
                 ]
 
           ## Photo Export Code
@@ -79,7 +76,7 @@ namespace :petfinder_sync do
       puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Begin Upload"
       ## Being Upload
       ftp = Net::FTP.new
-      ftp.connect('members.petfinder.com',21)
+      ftp.connect('members.petfinder.com', 21)
       ftp.login(ENV['PETFINDER_FTP_USER'], ENV['PETFINDER_FTP_PW'])
       ftp.chdir('/import/')
       ftp.putbinaryfile(path + filename, filename)
@@ -96,7 +93,5 @@ namespace :petfinder_sync do
     else
       puts "Not production, skipping upload"
     end
-
   end
-
 end

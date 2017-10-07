@@ -60,7 +60,7 @@ describe DogsController, type: :controller do
       let!(:adopted_dog) { create(:dog, name: 'adopted', status: 'adopted', is_special_needs: false) }
       let!(:on_hold_dog) { create(:dog, name: 'on hold', status: 'on hold', is_special_needs: false) }
       let!(:not_available_dog) { create(:dog, name: 'not available', status: 'not available', is_special_needs: false) }
-      let!(:baby_small_special_needs_dog) { create(:dog, name: 'filter pup' ,status: 'adoptable', age: 'baby', size: 'small', is_special_needs: true) }
+      let!(:baby_small_special_needs_dog) { create(:dog, name: 'filter pup' , status: 'adoptable', age: 'baby', size: 'small', is_special_needs: true) }
 
       let(:params) { {} }
 
@@ -72,7 +72,6 @@ describe DogsController, type: :controller do
         get :index, params: {}, session: { mgr_view: true }
 
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
-
       end
 
       it 'in gallery mode only publicly viewable dogs are returned' do
@@ -94,7 +93,6 @@ describe DogsController, type: :controller do
       end
     end
 
-
     context 'public user' do
       let!(:adoptable_dog) { create(:dog, status: 'adoptable') }
       let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending') }
@@ -111,7 +109,6 @@ describe DogsController, type: :controller do
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog])
       end
     end
-
   end
 
   describe 'GET #show' do

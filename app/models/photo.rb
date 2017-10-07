@@ -29,7 +29,6 @@
 #
 
 class Photo < ApplicationRecord
-
   belongs_to :dog, touch: true
   acts_as_list scope: :dog
 

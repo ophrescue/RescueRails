@@ -31,7 +31,7 @@
     <td><%= dog.status.titleize %></td>
   <% end %>
   <td><%= dog.foster ? link_to(dog.foster.name, dog.foster) : "Unassigned" %></td>
-  <td><%= dog.foster ? "#{dog.foster.city}, #{dog.foster.state}" : "Unassigned" %></td>
+  <td><%= dog.foster ? "#{dog.foster.city}, #{dog.foster.region}" : "Unassigned" %></td>
   <td>
     <% dog.adopters.each do |d| %>
       <%= link_to d.name, d %>

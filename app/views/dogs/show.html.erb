@@ -84,8 +84,8 @@
     <div class="span4">
       <h3>About <%= @dog.name.titleize %></h3>
 
-      <% if @dog.foster && @dog.foster.city.present? && @dog.foster.state.present? %>
-        <h5>Fostered in <%= @dog.foster.city.titleize %>, <%= @dog.foster.state.upcase %></h5>
+      <% if @dog.foster && @dog.foster.city.present? && @dog.foster.region.present? %>
+        <h5>Fostered in <%= @dog.foster.city.titleize %>, <%= @dog.foster.region.upcase %></h5>
       <% end %>
 
       <ul class="unstyled">
@@ -181,7 +181,7 @@
         <% if @dog.foster_id %>
           <li><%= link_to @dog.foster.name, user_path(@dog.foster) %></li>
           <li><%= @dog.foster.address1 %></li>
-          <li><%= @dog.foster.city %>, <%= @dog.foster.state %></li>
+          <li><%= @dog.foster.city %>, <%= @dog.foster.region %></li>
           <li><%= @dog.foster.phone %></li>
         <% else %>
           <li>No Foster Assigned</li>
@@ -226,14 +226,14 @@
         <ul class="unstyled">
           <li><a href="https://www.petfinder.com/pet-search?shelter_id=VA600">Petfinder</a></li>
         <% if @dog.foster_id %>
-          <% if @dog.foster.state == "MD" %>
+          <% if @dog.foster.region == "MD" %>
             <li><a href="http://www.adoptapet.com/shelter80736-dogs.html">Adoptapet MD</a></li>
-          <% elsif @dog.foster.state == "PA" %>
+          <% elsif @dog.foster.region == "PA" %>
             <li><a href="http://www.adoptapet.com/shelter84558-dogs.html">Adoptapet PA</a></li>
-          <% elsif @dog.foster.state == "VA" %>
+          <% elsif @dog.foster.region == "VA" %>
             <li><a href="http://www.adoptapet.com/shelter79954-dogs.html">Adoptapet VA</a></li>
           <% else %>
-            <li><a href="">Adoptapet N/A for <%= @dog.foster.state %></a></li>
+            <li><a href="">Adoptapet N/A for <%= @dog.foster.region %></a></li>
           <% end %>
           <% else %>
             <li>Foster Needed for Adoptapet</li>

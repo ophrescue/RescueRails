@@ -354,7 +354,7 @@ ActiveRecord::Schema.define(version: 20171006162426) do
     t.integer  "code_of_conduct_agreement_id"
     t.boolean  "boarding_buddies",                                       default: false, null: false
     t.boolean  "medical_behavior_permission",                            default: false
-    t.boolean  "social_media_manager"
+    t.boolean  "social_media_manager",                                   default: false, null: false
     t.boolean  "graphic_design",                                         default: false, null: false
     t.index ["agreement_id"], name: "index_users_on_agreement_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree

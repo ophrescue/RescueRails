@@ -31,8 +31,8 @@
 #  address1                     :string(255)
 #  address2                     :string(255)
 #  city                         :string(255)
-#  state                        :string(255)
-#  zip                          :string(255)
+#  region                       :string(2)
+#  postal_code                  :string(255)
 #  duties                       :string(255)
 #  edit_dogs                    :boolean          default(FALSE)
 #  share_info                   :text
@@ -147,8 +147,8 @@ class UsersController < ApplicationController
                 :address1,
                 :address2,
                 :city,
-                :state,
-                :zip,
+                :region,
+                :postal_code,
                 :duties,
                 :edit_dogs,
                 :share_info,
@@ -221,8 +221,8 @@ class UsersController < ApplicationController
                 :address1,
                 :address2,
                 :city,
-                :state,
-                :zip,
+                :region,
+                :postal_code,
                 :duties,
                 :share_info,
                 :available_to_foster,

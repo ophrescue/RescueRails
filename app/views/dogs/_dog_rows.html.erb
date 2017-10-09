@@ -16,8 +16,8 @@
                 <h4><%= dog.name.titleize %></h4>
                 <p>
                 <strong><%= dog.status.titleize %></strong><br />
-                <% if dog.foster && dog.foster.city.present? && dog.foster.state.present? %>
-                  <%= dog.foster.city.titleize %>, <%= dog.foster.state.upcase %><br />
+                <% if dog.foster && dog.foster.city.present? && dog.foster.region.present? %>
+                  <%= dog.foster.city.titleize %>, <%= dog.foster.region.upcase %><br />
                 <% end %>
                 <%= dog.gender %> - <%= dog.age.try(:titleize) %><br />
                 <%= dog.primary_breed ? dog.primary_breed.name.titleize : "" %><br />

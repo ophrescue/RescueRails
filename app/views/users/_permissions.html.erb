@@ -65,7 +65,13 @@
   <% else %>
     <li>Not a Foster Mentor</li>
   <% end %>
-
+  
+  <% if @user.graphic_design? %>
+    <li>Is part of the graphic design team</li>
+  <% else %>
+    <li>Is not part of the graphic design team</li>
+  <% end %>
+  
   <% if @user.is_photographer? %>
     <li>OPH Photographer</li>
   <% else %>
@@ -84,6 +90,12 @@
     <li>Is not a member of the training team</li>
   <% end %>
 
+   <% if @user.social_media_manager %>
+    <li>Is a member of the social media team</li>
+  <%else%>
+    <li>Is not a memeber of the social media team</li>
+  <%end%>
+  
   <% if @user.public_relations? %>
     <li>Is a member of the public relations team</li>
   <%else%>

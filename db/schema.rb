@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002180436) do
+ActiveRecord::Schema.define(version: 20171006162426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -354,6 +354,8 @@ ActiveRecord::Schema.define(version: 20171002180436) do
     t.integer  "code_of_conduct_agreement_id"
     t.boolean  "boarding_buddies",                                       default: false, null: false
     t.boolean  "medical_behavior_permission",                            default: false
+    t.boolean  "social_media_manager"
+    t.boolean  "graphic_design",                                         default: false, null: false
     t.index ["agreement_id"], name: "index_users_on_agreement_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude", using: :btree

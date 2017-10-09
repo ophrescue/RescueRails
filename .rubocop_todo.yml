@@ -106,17 +106,6 @@ Layout/MultilineMethodCallBraceLayout:
     - 'app/models/user_searcher.rb'
     - 'lib/tasks/adoptapet_sync.rake'
 
-# Offense count: 11
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, IndentationWidth.
-# SupportedStyles: aligned, indented, indented_relative_to_receiver
-Layout/MultilineMethodCallIndentation:
-  Exclude:
-    - 'app/controllers/adoption_app_controller.rb'
-    - 'app/controllers/dogs_controller.rb'
-    - 'app/controllers/events_controller.rb'
-    - 'app/controllers/users_controller.rb'
-
 # Offense count: 8
 # Cop supports --auto-correct.
 # Configuration parameters: AllowForAlignment.
@@ -209,14 +198,6 @@ Lint/DeprecatedClassMethods:
   Exclude:
     - 'lib/tasks/adoptapet_sync.rake'
     - 'lib/tasks/petfinder_sync.rake'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleAlignWith, SupportedStylesAlignWith, AutoCorrect.
-# SupportedStylesAlignWith: keyword, variable, start_of_line
-Lint/EndAlignment:
-  Exclude:
-    - 'app/helpers/adopters_helper.rb'
 
 # Offense count: 1
 Lint/Loop:

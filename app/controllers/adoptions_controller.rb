@@ -81,10 +81,11 @@ class AdoptionsController < ApplicationController
   end
 
   def adoption_params
-    params.require(:adoption)
-          .permit(:relation_type,
-                  :dog_id,
-                  :adopter_id)
+    params
+      .require(:adoption)
+      .permit(:relation_type,
+              :dog_id,
+              :adopter_id)
   end
 
   def edit_my_adopters_user

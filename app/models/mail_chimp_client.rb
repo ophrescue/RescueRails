@@ -74,8 +74,9 @@ class MailChimpClient
   end
 
   def config(key)
-    Rails.application.config_for(:mailchimp)
-         .with_indifferent_access[key]
+    Rails
+      .application.config_for(:mailchimp)
+      .with_indifferent_access[key]
   end
 
   def user_list_id

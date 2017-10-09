@@ -79,13 +79,14 @@ class BannedAdoptersController < ApplicationController
   end
 
   def banned_adopter_params
-    params.require(:banned_adopter)
-          .permit(:name,
-                  :phone,
-                  :email,
-                  :city,
-                  :state,
-                  :comment)
+    params
+      .require(:banned_adopter)
+      .permit(:name,
+              :phone,
+              :email,
+              :city,
+              :state,
+              :comment)
   end
 
   def render_banned_adopters_xls

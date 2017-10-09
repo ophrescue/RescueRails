@@ -5,7 +5,7 @@ FactoryGirl.define do
     status 'adoption pending'
     sequence(:microchip) { |n| "MC-#{n}" }
 
-    factory :dog_with_photo_attachment do
+    factory :dog_with_photo_and_attachment do
       after(:build) do |dog|
         build(:attachment, attachable: dog)
         build(:photo, dog: dog)

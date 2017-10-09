@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'View Dogs', js: true do
   let!(:admin) { create(:user, :admin) }
   let!(:test_foster) { create(:user) }
-  let!(:test_dog) { create(:dog_with_photo_attachment, foster_id: test_foster.id) }
+  let!(:test_dog) { create(:dog_with_photo_and_attachment, foster_id: test_foster.id) }
 
   scenario 'View a dog from the public view' do
     visit '/dogs'

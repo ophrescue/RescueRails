@@ -43,8 +43,3 @@ end
 
 # Keep only the screenshots generated from the last failing test suite
 Capybara::Screenshot.prune_strategy = :keep_last_run
-
-# Use this method to simulate keypress entries
-def send_keys_inputmask(location, keys)
-  find(location).native.send_keys(keys)
-end

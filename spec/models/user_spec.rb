@@ -67,6 +67,15 @@ require 'rails_helper'
 
 describe User do
 
+  describe '#new' do 
+
+    # This test is only valid until international users are supported (#437 )
+    it 'defaults country to USA' do
+      user = User.new
+      expect(user.country).to eq('USA')
+    end
+  end
+
   describe '#chimp_check' do
     before do
       allow(User).to receive(:chimp_subscribe)

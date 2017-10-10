@@ -9,6 +9,7 @@ FactoryGirl.define do
     region { Faker::Address.state_abbr }
     postal_code { Faker::Address.zip }
     lastverified { Time.now }
+    country { 'USA' }
 
     trait :admin do
       admin true

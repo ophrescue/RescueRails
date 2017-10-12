@@ -28,11 +28,9 @@ feature 'Apply for Adoption' do
     fill_in('adopter_state', with: 'MD')
     fill_in('adopter_zip', with: '21224')
 
-    find('input#adopter_phone').trigger('click')
-    send_keys_inputmask('input#adopter_phone', '1234567890')
+    find('input#adopter_phone').trigger('click').set('1234567890')
 
-    find('input#adopter_other_phone').trigger('click')
-    send_keys_inputmask('input#adopter_other_phone', '0987654321')
+    find('input#adopter_other_phone').trigger('click').set('0987654321')
 
     fill_in('adopter_when_to_call', with: 'Anytime After 3pm')
     fill_in('adopter_adoption_app_attributes_spouse_name', with: 'Miss Watir')
@@ -47,8 +45,7 @@ feature 'Apply for Adoption' do
     expect(page).to have_content("Landlord's Name")
     fill_in('adopter_adoption_app_attributes_landlord_name', with: 'Jane LandLord')
     fill_in('adopter_adoption_app_attributes_landlord_email', with: 'jane@landlords.com')
-    sleep(1)
-    send_keys_inputmask('input#adopter_adoption_app_attributes_landlord_phone', '5704431234')
+    find('input#adopter_adoption_app_attributes_landlord_phone').set('5704431234')
     fill_in('adopter_adoption_app_attributes_rent_dog_restrictions', with: 'No dogs over 50 lbs')
     fill_in('adopter_adoption_app_attributes_rent_costs', with: 'Rent Goes Up $50 a month')
 
@@ -84,26 +81,20 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('Reference')
     fill_in('adopter_references_attributes_0_name', with: 'First Reference')
 
-    find('input#adopter_references_attributes_0_phone').trigger('click')
-    sleep(1)  # TODO: fix this dirty hack
-    send_keys_inputmask('input#adopter_references_attributes_0_phone', '1111111111')
+    find('input#adopter_references_attributes_0_phone').trigger('click').set('1111111111')
 
     fill_in('adopter_references_attributes_0_email', with: 'first@reference.org')
     fill_in('adopter_references_attributes_0_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_0_whentocall', with: 'After 1pm')
 
     fill_in('adopter_references_attributes_1_name', with: 'Second Reference')
-    find('input#adopter_references_attributes_1_phone').trigger('click')
-    sleep(1)  # TODO: fix this dirty hack
-    send_keys_inputmask('input#adopter_references_attributes_1_phone', '2222222222')
+    find('input#adopter_references_attributes_1_phone').trigger('click').set('2222222222')
     fill_in('adopter_references_attributes_1_email', with: 'second@reference.org')
     fill_in('adopter_references_attributes_1_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_1_whentocall', with: 'After 2pm')
 
     fill_in('adopter_references_attributes_2_name', with: 'Third Reference')
-    find('input#adopter_references_attributes_2_phone').trigger('click')
-    sleep(1)  # TODO: fix this dirty hack
-    send_keys_inputmask('input#adopter_references_attributes_2_phone', '3333333333')
+    find('input#adopter_references_attributes_2_phone').trigger('click').set('3333333333')
     fill_in('adopter_references_attributes_2_email', with: 'third@reference.org')
     fill_in('adopter_references_attributes_2_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_2_whentocall', with: 'After 3pm')
@@ -201,13 +192,9 @@ feature 'Apply for Adoption' do
     fill_in('adopter_state', with: 'MD')
     fill_in('adopter_zip', with: '21224')
 
-    find('input#adopter_phone').trigger('click')
-    sleep(1)  # TODO: fix this dirty hack
-    send_keys_inputmask('input#adopter_phone', '1234567890')
+    find('input#adopter_phone').trigger('click').set('1234567890')
 
-    find('input#adopter_other_phone').trigger('click')
-    sleep(1)  # TODO: fix this dirty hack
-    send_keys_inputmask('input#adopter_other_phone', '0987654321')
+    find('input#adopter_other_phone').trigger('click').set('0987654321')
 
     fill_in('adopter_when_to_call', with: 'Anytime After 3pm')
     fill_in('adopter_adoption_app_attributes_spouse_name', with: 'Miss Watir')
@@ -251,26 +238,20 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('Reference')
     fill_in('adopter_references_attributes_0_name', with: 'First Reference')
 
-    find('input#adopter_references_attributes_0_phone').trigger('click')
-    sleep(1)  # TODO: fix this dirty hack
-    send_keys_inputmask('input#adopter_references_attributes_0_phone', '1111111111')
+    find('input#adopter_references_attributes_0_phone').trigger('click').set('1111111111')
 
     fill_in('adopter_references_attributes_0_email', with: 'first@reference.org')
     fill_in('adopter_references_attributes_0_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_0_whentocall', with: 'After 1pm')
 
     fill_in('adopter_references_attributes_1_name', with: 'Second Reference')
-    find('input#adopter_references_attributes_1_phone').trigger('click')
-    sleep(1)  # TODO: fix this dirty hack
-    send_keys_inputmask('input#adopter_references_attributes_1_phone', '2222222222')
+    find('input#adopter_references_attributes_1_phone').trigger('click').set('2222222222')
     fill_in('adopter_references_attributes_1_email', with: 'second@reference.org')
     fill_in('adopter_references_attributes_1_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_1_whentocall', with: 'After 2pm')
 
     fill_in('adopter_references_attributes_2_name', with: 'Third Reference')
-    find('input#adopter_references_attributes_2_phone').trigger('click')
-    sleep(1)  # TODO: fix this dirty hack
-    send_keys_inputmask('input#adopter_references_attributes_2_phone', '3333333333')
+    find('input#adopter_references_attributes_2_phone').trigger('click').set('3333333333')
     fill_in('adopter_references_attributes_2_email', with: 'third@reference.org')
     fill_in('adopter_references_attributes_2_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_2_whentocall', with: 'After 3pm')

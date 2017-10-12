@@ -14,7 +14,8 @@ User.destroy_all
           email: "test@test.com",
           password: "foobar99",
           password_confirmation: "foobar99",
-          region: 'NY'
+          region: 'NY',
+          country: 'USA'
 }
 
  user = User.create!(@attr)

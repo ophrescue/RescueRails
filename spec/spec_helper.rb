@@ -1,3 +1,12 @@
+require 'simplecov'
+require 'coveralls'
+
+SimpleCov.formatters = [
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+SimpleCov.start
+
 RSpec.configure do |config|
   # Use documentation formatter when running a single file.
   config.default_formatter = 'doc' if config.files_to_run.one?

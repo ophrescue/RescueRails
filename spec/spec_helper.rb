@@ -5,7 +5,7 @@ SimpleCov.formatters = [
   SimpleCov::Formatter::HTMLFormatter,
   Coveralls::SimpleCov::Formatter
 ]
-SimpleCov.start
+SimpleCov.start 'rails'
 
 RSpec.configure do |config|
   # Use documentation formatter when running a single file.

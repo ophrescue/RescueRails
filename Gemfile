@@ -8,6 +8,7 @@ gem 'rack-cache'
 gem 'acts_as_list'
 gem 'aws-sdk', '~> 2'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
+gem "countries", "~> 2.1"
 gem 'dotenv'
 gem 'dotenv-rails'
 gem 'exception_notification'

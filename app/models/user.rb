@@ -79,7 +79,6 @@
 #  social_media_manager         :boolean          default(FALSE)
 #  graphic_design               :boolean          default(FALSE)
 
-
 require 'digest'
 
 class User < ApplicationRecord

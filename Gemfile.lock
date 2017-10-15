@@ -274,6 +274,8 @@ GEM
       nokogiri
       rubyzip
       spreadsheet (> 0.6.4)
+    rspec-collection_matchers (1.1.3)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -419,6 +421,7 @@ DEPENDENCIES
   responders
   rollbar
   roo (~> 1.13.2)
+  rspec-collection_matchers
   rspec-rails (= 3.5.2)
   rubocop
   sass-rails

@@ -47,6 +47,16 @@ describe DogSearcher do
           expect(results).to include(found_dog)
           expect(results).to_not include(other_dog)
         end
+
+        context 'dogs with similar names' do
+          let!(:tt) { create(:dog, name: 'tt') }
+          let!(:butter) { create(:dog, name: 'butter') }
+          let(:params) { { search: 'tt' } }
+
+          it 'shows dog first with text at start of name' do
+            expect(results).to eq([tt, butter])
+          end
+        end
       end
 
       context 'search by microchip string' do

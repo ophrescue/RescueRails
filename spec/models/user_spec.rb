@@ -66,13 +66,24 @@
 require 'rails_helper'
 
 describe User do
-
-  describe '#new' do 
-
-    # This test is only valid until international users are supported (#437 )
+  describe '#new' do
+    # This test is only valid until international users are supported (#437)
+    # When removed, it's likely appropriate to add a "presence" test
     it 'defaults country to USA' do
       user = User.new
       expect(user.country).to eq('USA')
+    end
+  end
+
+  describe 'valid?' do
+    it 'is invalid when country is not recognized' do
+      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'CA', country: 'ZZZ')
+      expect(user).to_not be_valid
+    end
+
+    it 'is invalid when country is not supported' do
+      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'CA', country: 'ALB')
+      expect(user).to_not be_valid
     end
   end
 
@@ -87,14 +98,14 @@ describe User do
 
       # Change user's email to trigger the subscription
       user.email = "new_email@test.com"
-      
+
       expect(UserSubscribeJob).to receive(:perform_later)
       user.chimp_check
     end
 
     it 'unsubscribes when user changed to locked' do
       user = create(:user, lastverified: nil, locked: false)
-      
+
       # Lock the user's account to trigger unsubscription
       user.locked = true
 
@@ -104,7 +115,7 @@ describe User do
 
     it 'subscribes when user is changed to unlocked' do
       user = create(:user, lastverified: nil, locked: true)
-      
+
       # Unlock the user's account to trigger subscription
       user.locked = false
 

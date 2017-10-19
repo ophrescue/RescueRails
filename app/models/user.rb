@@ -79,7 +79,6 @@
 #  social_media_manager         :boolean          default(FALSE)
 #  graphic_design               :boolean          default(FALSE)
 
-
 require 'digest'
 
 class User < ApplicationRecord
@@ -111,6 +110,9 @@ class User < ApplicationRecord
                        confirmation: true,
                        length: { within: 8..40 },
                        unless: Proc.new { |a| a.password.blank? }
+
+  validates :country, length: { is: 3 }
+  validate :country_is_supported
 
   geocoded_by :full_street_address
   after_validation :geocode
@@ -256,5 +258,17 @@ class User < ApplicationRecord
 
     def default_country_to_usa
       self.country ||= "USA"
+    end
+
+    def country_is_supported
+      country = ISO3166::Country.find_country_by_alpha3(self.country)
+      if country.nil?
+        errors.add(:country, "is not recognized.")
+        return
+      end
+
+      unless CountryService.supported_country? country
+        errors.add(:country, "is not supported. Must be one of: #{CountryService.supported_country_names.join(', ')}.")
+      end
     end
 end

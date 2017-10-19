@@ -77,7 +77,10 @@ class DogSearcher
   end
 
   def with_sorting
-    @dogs = @dogs.order(sort_column + ' ' + sort_direction)
+    sort_string = "#{sort_column} #{sort_direction}"
+    sort_string = "case when name ilike '#{search_term}%' then 1 else 2 end, #{sort_string}" if text_search?
+
+    @dogs = @dogs.order(sort_string)
   end
 
   def for_page(page = nil)

@@ -4,7 +4,7 @@ class RegionValidator < ActiveModel::Validator
   def validate(record)
     country = ISO3166::Country.find_country_by_alpha3(record.country)
 
-    unless country
+    if country.nil?
       record.errors[:region] << "cannot be validated without a value for country."
       return
     end

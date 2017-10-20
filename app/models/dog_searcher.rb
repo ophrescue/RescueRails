@@ -77,14 +77,27 @@ class DogSearcher
   end
 
   def with_sorting
-    sort = if text_search?
-      sort_string = "case when name ilike ? then 1 else 2 end, ? ?"
-      [sort_string, search_term + '%', sort_column, sort_direction]
-    else
-      ['? ?', sort_column, sort_direction]
-    end
+    @dogs = @dogs.order(sort_column + ' ' + sort_direction)
 
-    @dogs.order(sort)
+    #
+    # Progress on #649
+    #
+    # sort = if text_search?
+    #   sort_string = "case when name ilike ? then 1 else 2 end, ? ?"
+    #   [sort_string, search_term + '%', sort_column, sort_direction]
+    # else
+    #   ['? ?', sort_column, sort_direction]
+    # end
+
+    # @dogs.order(sort)
+  end
+
+  def sort_column
+    Dog.column_names.include?(@params[:sort]) ? @params[:sort] : 'tracking_id'
+  end
+
+  def sort_direction
+    %w[asc desc].include?(@params[:direction]) ? @params[:direction] : 'asc'
   end
 
   def for_page(page = nil)
@@ -107,11 +120,4 @@ class DogSearcher
                   :cb_no_kids)
   end
 
-  def sort_column
-    Dog.column_names.include?(@params[:sort]) ? @params[:sort] : 'tracking_id'
-  end
-
-  def sort_direction
-    %w[asc desc].include?(@params[:direction]) ? @params[:direction] : 'asc'
-  end
 end

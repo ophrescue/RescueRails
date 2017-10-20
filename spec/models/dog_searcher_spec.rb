@@ -47,15 +47,39 @@ describe DogSearcher do
           expect(results).to include(found_dog)
           expect(results).to_not include(other_dog)
         end
+      end
 
-        context 'dogs with similar names' do
-          let!(:tt) { create(:dog, name: 'tt') }
-          let!(:butter) { create(:dog, name: 'butter') }
-          let(:params) { { search: 'tt' } }
+      context 'dogs with similar names' do
+        let!(:tt) { create(:dog, name: 'tt', tracking_id: 10) }
+        let!(:butter) { create(:dog, name: 'butter', tracking_id: 5) }
+        let(:params) { { search: 'tt' } }
 
-          it 'shows dog first with text at start of name' do
-            expect(results).to eq([tt, butter])
-          end
+        it 'shows dog with lowest tracking_id first' do
+          expect(results).to eq([butter, tt])
+        end
+      end
+
+      context 'sorting dogs by name' do
+        let!(:tt) { create(:dog, name: 'tt') }
+        let!(:butter) { create(:dog, name: 'butter') }
+        let!(:stutter) { create(:dog, name: 'stutter') }
+        let!(:mutter) { create(:dog, name: 'mutter') }
+        let(:params) { { search: 'tt', sort: 'name', direction: 'asc' } }
+
+        it 'shows dogs in order by name ascending' do
+          expect(results).to eq([butter, mutter, stutter, tt])
+        end
+      end
+
+      context 'sorting dogs by name descending' do
+        let!(:tt) { create(:dog, name: 'tt') }
+        let!(:butter) { create(:dog, name: 'butter') }
+        let!(:stutter) { create(:dog, name: 'stutter') }
+        let!(:mutter) { create(:dog, name: 'mutter') }
+        let(:params) { { search: 'tt', sort: 'name', direction: 'desc' } }
+
+        it 'shows dogs in order by name descending' do
+          expect(results).to eq([tt, stutter, mutter, butter])
         end
       end
 
@@ -69,17 +93,6 @@ describe DogSearcher do
           expect(results).to_not include(other_dog)
         end
       end
-
-      # context 'search by active status' do
-      #   let!(:found_dog) { create(:dog, :adoptable) }
-      #   let!(:other_dog) { create(:dog, :completed) }
-      #   let(:params) { { status: 'active' } }
-
-      #   it 'finds the correct dog' do
-      #     expect(results).to include(found_dog)
-      #     expect(results).to_not include(other_dog)
-      #   end
-      # end
 
       context 'search by any status' do
         let!(:found_dog) { create(:dog, :completed) }

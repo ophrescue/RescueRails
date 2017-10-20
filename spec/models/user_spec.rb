@@ -156,6 +156,11 @@ describe User do
         user.valid?
         expect(user.errors[:postal_code]).to include('should be 12345 or 12345-1234')
       end
+      it 'is invalid with a zip code that starts valid but contains more digits' do
+        user = build(:user, postal_code: '12345-12345')
+        user.valid?
+        expect(user.errors[:postal_code]).to include('should be 12345 or 12345-1234')
+      end
     end
   end
 

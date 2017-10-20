@@ -101,7 +101,7 @@ class User < ApplicationRecord
   validates :region, length: { is: 2 }
 
   validates_format_of :postal_code,
-                    with: /\A\d{5}-\d{4}|\A\d{5}\z/,
+                    with: /\A\d{5}(?:-\d{4})?\z/,
                     message: "should be 12345 or 12345-1234",
                     allow_blank: true
 

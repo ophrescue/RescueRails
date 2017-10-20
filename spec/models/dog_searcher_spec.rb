@@ -54,8 +54,8 @@ describe DogSearcher do
         let!(:butter) { create(:dog, name: 'butter', tracking_id: 5) }
         let(:params) { { search: 'tt' } }
 
-        it 'shows dog with lowest tracking_id first' do
-          expect(results).to eq([butter, tt])
+        it 'shows dog with name starting with search term first' do
+          expect(results).to eq([tt, butter])
         end
       end
 
@@ -67,7 +67,7 @@ describe DogSearcher do
         let(:params) { { search: 'tt', sort: 'name', direction: 'asc' } }
 
         it 'shows dogs in order by name ascending' do
-          expect(results).to eq([butter, mutter, stutter, tt])
+          expect(results).to eq([tt, butter, mutter, stutter])
         end
       end
 

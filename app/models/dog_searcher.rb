@@ -77,19 +77,14 @@ class DogSearcher
   end
 
   def with_sorting
-    @dogs = @dogs.order(sort_column + ' ' + sort_direction)
+    sort = "#{sort_column} #{sort_direction}"
 
-    #
-    # Progress on #649
-    #
-    # sort = if text_search?
-    #   sort_string = "case when name ilike ? then 1 else 2 end, ? ?"
-    #   [sort_string, search_term + '%', sort_column, sort_direction]
-    # else
-    #   ['? ?', sort_column, sort_direction]
-    # end
+    if text_search?
+      sort_string = "case when name ilike ? then 1 else 2 end, #{sort}"
+      sort = [sort_string, search_term + '%']
+    end
 
-    # @dogs.order(sort)
+    @dogs = @dogs.order(sort)
   end
 
   def sort_column
@@ -119,5 +114,4 @@ class DogSearcher
                   :cb_no_dogs,
                   :cb_no_kids)
   end
-
 end

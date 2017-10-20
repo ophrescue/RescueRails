@@ -148,17 +148,17 @@ describe User do
     context 'with invalid fields' do
       it 'is invalid with a state more than 2 letters' do
         user = build(:user, region: 'Penn')
-        user.valid?
+        expect(user).not_to be_valid
         expect(user.errors[:region]).to include('is the wrong length (should be 2 characters)')
       end
       it 'is invalid with a zip code of more than 5 characters' do
         user = build(:user, postal_code: 'virgina')
-        user.valid?
+        expect(user).not_to be_valid
         expect(user.errors[:postal_code]).to include('should be 12345 or 12345-1234')
       end
-      it 'is invalid with a zip code that starts valid but contains more digits' do
+      it 'is invalid when it starts with a valid zip code but contains extra characters' do
         user = build(:user, postal_code: '12345-12345')
-        user.valid?
+        expect(user).not_to be_valid
         expect(user.errors[:postal_code]).to include('should be 12345 or 12345-1234')
       end
     end

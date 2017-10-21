@@ -20,7 +20,31 @@
 
     <h3>Sporting Dog - $1,000 Sponsorship</h3>
 
-    <a href="http://www.millertoyota.com/"><%= image_tag "sponsors/miller-toyota.jpg" %></a>
+    <% sponsors_1000 =
+      { url: "http://www.millertoyota.com/",
+        img: "millertoyota.png"
+      },
+      {
+        url: "http://www.royalpethaven.com/",
+        img: "royalpethaven.jpg"
+      }
+    %>
+
+    <% sponsors_1000.each_slice(3) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span4">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <%= image_tag "sponsors/"+spon[:img] %>
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
 
     <h3>Herding Dog - $500 Sponsorship</h3>
 
@@ -28,17 +52,8 @@
       { url: "http://www.fvcbank.com/",
         img: "fvcbank.jpg"
       },
-      { url: "http://www.novadogmagazine.com",
-        img: "novadog-magazine.png"
-      },
-      { url: "http://us.petvalu.com/",
-        img: "petvalu.jpg"
-      },
-      { url: "http://www.hermandorfer.com/",
-        img: "hermandorfer.jpg"
-      },
-      { url: "http://www.petloverscompanion.com/",
-        img: "petloverscompanion.jpg"
+      { url: "https://vcahospitals.com/southpaws",
+        img: "vcahospitals.jpg"
       }
     %>
 
@@ -61,26 +76,45 @@
     <h3>Working Dog - $250 Sponsorship</h3>
 
     <% sponsors_250 =
-      { url: "http://www.catherinesellshomes.com/",
-        img: "catherinesellshomes.jpg"
-      },
-      { url: "http://www.allfriendspetcare.com/home.aspx",
-        img: "allfriendspetcare.jpg"
-      },
-      { url: "http://www.cornerbakerycafe.com/",
-        img: "cornerbakerycafe.jpg"
-      },
-      { url: "https://www.novec.com/",
+      {
+        url: "https://www.novec.com/",
         img: "novec.jpg"
       },
-      { url: "http://huxleyandkent.com/",
+      {
+        url: "http://www.walkingdogsva.com/",
+        img: "walkingdogsva.jpg"
+      },
+      {
+        url: "http://huxleyandkent.com/",
         img: "huxley_kent.png"
       },
-      { url: "http://caringhandsvet.com/",
-        img: "ch_ah.jpg"
+      {
+        url: "https://www.homeagain.com/",
+        img: "homeagain.png"
       },
-      { url: "http://care.com",
-        img: "care.png"
+      {
+        url: "http://www.dogtranquility.com/",
+        img: "dogtranquility.png"
+      },
+      {
+        url: "http://monument-title.com/",
+        img: "monument-title.png"
+      },
+      {
+        url: "https://www.burkecentrepetsitting.com/",
+        img: "burkecentrepetsitting.jpg"
+      },
+      {
+        url: "http://www.naturesnibbles.com/",
+        img: "naturesnibbles.jpg"
+      },
+      {
+        url: "http://www.poop911.com/",
+        img: "poop911.png"
+      },
+      {
+        url: "http://www.freshwaveworks.com/",
+        img: "freshwaveworks.png"
       }
 
     %>
@@ -92,7 +126,7 @@
           <% slice.each do |spon| %>
             <li class="span4">
               <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag "sponsors/"+spon[:img] %>
+                <%= image_tag("sponsors/"+spon[:img], size: '250') %>
               </a>
             </li>
           <% end %>
@@ -104,17 +138,25 @@
     <h3>Hunting Dog - $100 Sponsorship</h3>
 
     <% sponsors_100 =
-      { url: "http://www.valleyenergy.org/",
+      {
+        url: "http://www.valleyenergy.org/",
         img: "valley_energy.jpg"
       },
-      { url: "http://www.affectionatepetcare.com/",
+      {
+        url: "http://www.affectionatepetcare.com/",
         img: "affectionate_pc.jpg"
       },
-      { url: "http://www.meltgourmetcheeseburgers.com/",
-        img: "melt.jpg"
+      {
+        url: "http://caringhandsvet.com/",
+        img: "caringhandsvet.png"
       },
-      { url: "http://autotechcarcare.com/",
-        img: "autotechcarcare.jpg"
+      {
+        url: "http://www.awoiponline.com/",
+        img: "awoiponline.jpg"
+      },
+      {
+        url: "https://rudysfriendsdogtraining.com/",
+        img: "rudysfriendsdogtraining.jpg"
       }
     %>
 
@@ -137,32 +179,44 @@
     <h3>In-Kind Product Sponsorship</h3>
 
     <% sponsors =
-      { url: "http://www.kindsnacks.com/",
-        img: "kind_snacks.jpg"
-      },
-      { url: "http://bluebuffalo.com/",
-        img: "blue_buffalo.jpg"
-      },
-      { url: "http://www.formostgc.com/",
-        img: "formost.png"
-      },
-      { url: "http://chewy.com",
-        img: "chewy.png"
+      { url: "http://www.1800petmeds.com/",
+        img: "1800petmeds.jpg"
       },
       { url: "https://www.vippetcare.com/",
         img: "vippetcare.png"
       },
-      { url: "http://brusters.com/",
-        img: "brusters.png"
+      { url: "https://www.pureinsurance.com/",
+        img: "pureinsurance.jpg"
       },
-      { url: "https://chipotle.com/",
-        img: "chipotle.jpg"
+      { url: "https://naturvet.com/",
+        img: "naturvet.png"
       },
-      { url: "http://www.vetstreet.com/",
-        img: "vetstreet.jpg"
+      { url: "http://www.chocolatebar.com/",
+        img: "chocolatebar.png"
       },
-      { url: "http://www.tasteofthewildpetfood.com/",
-        img: "tasteofthewildpetfood.jpg"
+      { url: "https://www.fizzionclean.com/",
+        img: "fizzionclean.png"
+      },
+      { url: "https://enjoylifefoods.com/",
+        img: "enjoylifefoods.png"
+      },
+      { url: "https://www.kindsnacks.com/",
+        img: "kind_snacks.jpg"
+      },
+      { url: "http://browniebrittle.com/",
+        img: "browniebrittle.jpg"
+      },
+      { url: "http://www.invisibleglass.com/",
+        img: "invisibleglass.jpg"
+      },
+      { url: "http://www.formostgc.com/",
+        img: "formostgc.png"
+      },
+      { url: "https://www.stellaandchewys.com/",
+        img: "stellaandchewys.jpg"
+      },
+      { url: "http://www.abuelita.com/",
+        img: "abuelita.jpg"
       }
     %>
 

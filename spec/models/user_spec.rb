@@ -148,8 +148,8 @@ describe User do
     context 'with invalid fields' do
       it 'is invalid with a state more than 2 letters' do
         user = build(:user, region: 'Penn')
-        expect(user).not_to be_valid
-        expect(user.errors[:region]).to include('is the wrong length (should be 2 characters)')
+        user.valid?
+        expect(user.errors[:region]).to include('State is the wrong length (should be 2 letters).')
       end
       it 'is invalid with a zip code of more than 5 characters' do
         user = build(:user, postal_code: 'virgina')

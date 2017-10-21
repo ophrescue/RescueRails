@@ -98,8 +98,6 @@ class User < ApplicationRecord
                     format: { with: email_regex },
                     uniqueness: { case_sensitive: false }
 
-  validates :region, length: { is: 2 }
-
   validates_format_of :postal_code,
                     with: /\A\d{5}(?:-\d{4})?\z/,
                     message: "should be 12345 or 12345-1234",
@@ -113,6 +111,8 @@ class User < ApplicationRecord
 
   validates :country, length: { is: 3 }
   validate :country_is_supported
+
+  validates_with RegionValidator
 
   geocoded_by :full_street_address
   after_validation :geocode

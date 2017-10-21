@@ -68,7 +68,7 @@ RSpec.describe PostalCodeValidator do
       end
     end
 
-    context 'for Candian addresses' do
+    context 'for Canadian addresses' do
       before :each do
         @postal_code_test.country = 'CAN'
       end

@@ -59,27 +59,29 @@ describe DogSearcher do
         end
       end
 
-      context 'sorting dogs by name' do
+      context 'searching for dogs by name with an asc sort' do
         let!(:tt) { create(:dog, name: 'tt') }
         let!(:butter) { create(:dog, name: 'butter') }
         let!(:stutter) { create(:dog, name: 'stutter') }
-        let!(:mutter) { create(:dog, name: 'mutter') }
+        let!(:zutter) { create(:dog, name: 'zutter') }
+        let!(:frank) { create(:dog, name: 'frank')}
         let(:params) { { search: 'tt', sort: 'name', direction: 'asc' } }
 
-        it 'shows dogs in order by name ascending' do
-          expect(results).to eq([tt, butter, mutter, stutter])
+        it 'shows dogs in order by name ascending (a-z)' do
+          expect(results).to eq(butter, stutter, tt, zutter])
         end
       end
 
-      context 'sorting dogs by name descending' do
+      context 'searching for dogs by name with a desc sort' do
         let!(:tt) { create(:dog, name: 'tt') }
         let!(:butter) { create(:dog, name: 'butter') }
         let!(:stutter) { create(:dog, name: 'stutter') }
-        let!(:mutter) { create(:dog, name: 'mutter') }
+        let!(:zutter) { create(:dog, name: 'zutter') }
+        let!(:frank) { create(:dog, name: 'frank')}
         let(:params) { { search: 'tt', sort: 'name', direction: 'desc' } }
 
-        it 'shows dogs in order by name descending' do
-          expect(results).to eq([tt, stutter, mutter, butter])
+        it 'shows dogs in order by name descending (z-a)' do
+          expect(results).to eq([zutter, tt, stutter, butter])
         end
       end
 

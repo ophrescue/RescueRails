@@ -8,7 +8,7 @@ feature 'View Dogs', js: true do
   scenario 'View a dog from the public view' do
     visit '/dogs'
     expect(page).to have_content(test_dog.name.titleize)
-    click_link(test_dog.name)
+    click_link(test_dog.name.titleize)
     expect(page).to have_content(test_dog.name.titleize)
   end
 
@@ -17,7 +17,7 @@ feature 'View Dogs', js: true do
     visit '/dogs'
     click_link("Manager View")
     expect(page).to have_content(test_dog.name.titleize)
-    click_link(test_dog.name)
+    click_link(test_dog.name.titleize)
     expect(page).to have_content(test_dog.name.titleize)
   end
 end

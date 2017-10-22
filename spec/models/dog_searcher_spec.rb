@@ -64,11 +64,11 @@ describe DogSearcher do
         let!(:butter) { create(:dog, name: 'butter') }
         let!(:stutter) { create(:dog, name: 'stutter') }
         let!(:zutter) { create(:dog, name: 'zutter') }
-        let!(:frank) { create(:dog, name: 'frank')}
+        let!(:frank) { create(:dog, name: 'frank') }
         let(:params) { { search: 'tt', sort: 'name', direction: 'asc' } }
 
         it 'shows dogs in order by name ascending (a-z)' do
-          expect(results).to eq(butter, stutter, tt, zutter])
+          expect(results).to eq([tt, butter, stutter, zutter])
         end
       end
 
@@ -77,11 +77,11 @@ describe DogSearcher do
         let!(:butter) { create(:dog, name: 'butter') }
         let!(:stutter) { create(:dog, name: 'stutter') }
         let!(:zutter) { create(:dog, name: 'zutter') }
-        let!(:frank) { create(:dog, name: 'frank')}
+        let!(:frank) { create(:dog, name: 'frank') }
         let(:params) { { search: 'tt', sort: 'name', direction: 'desc' } }
 
         it 'shows dogs in order by name descending (z-a)' do
-          expect(results).to eq([zutter, tt, stutter, butter])
+          expect(results).to eq([zutter, stutter, butter, tt])
         end
       end
 

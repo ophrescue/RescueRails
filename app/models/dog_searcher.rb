@@ -35,12 +35,12 @@ class DogSearcher
     if @manager
       @dogs = @dogs.includes(:adopters, :comments)
       @dogs = if text_search? && tracking_id_search?
-                @dogs.where('tracking_id = :search OR microchip = :search', search: search_term)
-              elsif text_search? && !tracking_id_search?
-                @dogs.where('microchip ILIKE :search OR name ILIKE :search', search: "%#{search_term.strip}%")
-              else
-                @dogs.filter(filtering_params)
-              end
+        @dogs.where('tracking_id = :search OR microchip = :search', search: search_term)
+      elsif text_search? && !tracking_id_search?
+        @dogs.where('microchip ILIKE :search OR name ILIKE :search', search: "%#{search_term.strip}%")
+      else
+        @dogs.filter(filtering_params)
+      end
     else
       @dogs = @dogs.includes(:primary_breed, :secondary_breed).where('status IN (?)', PUBLIC_STATUSES)
     end

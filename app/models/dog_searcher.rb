@@ -79,7 +79,7 @@ class DogSearcher
   def with_sorting
     sort = "#{sort_column} #{sort_direction}"
 
-    if text_search? && name_sort?
+    if text_search? && unspecified_sort?
       sort_string = "case when name ilike ? then 1 else 2 end #{sort_direction}, #{sort}"
       sort = [sort_string, search_term + '%']
     end
@@ -87,8 +87,8 @@ class DogSearcher
     @dogs = @dogs.order(sort)
   end
 
-  def name_sort?
-    @params[:sort].blank? || @params[:sort] == 'name'
+  def unspecified_sort?
+    @params[:sort].blank?
   end
 
   def sort_column

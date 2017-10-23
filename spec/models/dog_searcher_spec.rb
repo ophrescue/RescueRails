@@ -68,7 +68,7 @@ describe DogSearcher do
         let(:params) { { search: 'tt', sort: 'name', direction: 'asc' } }
 
         it 'shows dogs in order by name ascending (a-z)' do
-          expect(results).to eq([tt, butter, stutter, zutter])
+          expect(results).to eq([butter, stutter, tt, zutter])
         end
       end
 
@@ -81,7 +81,7 @@ describe DogSearcher do
         let(:params) { { search: 'tt', sort: 'name', direction: 'desc' } }
 
         it 'shows dogs in order by name descending (z-a)' do
-          expect(results).to eq([zutter, stutter, butter, tt])
+          expect(results).to eq([zutter, tt, stutter, butter])
         end
       end
 

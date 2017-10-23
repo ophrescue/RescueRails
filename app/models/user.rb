@@ -98,11 +98,6 @@ class User < ApplicationRecord
                     format: { with: email_regex },
                     uniqueness: { case_sensitive: false }
 
-  validates_format_of :postal_code,
-                    with: /\A\d{5}(?:-\d{4})?\z/,
-                    message: "should be 12345 or 12345-1234",
-                    allow_blank: true
-
   # Automatically creates the virtual attribute 'password_confirmation'.
   validates :password, presence: true,
                        confirmation: true,
@@ -113,6 +108,7 @@ class User < ApplicationRecord
   validate :country_is_supported
 
   validates_with RegionValidator
+  validates_with PostalCodeValidator
 
   geocoded_by :full_street_address
   after_validation :geocode

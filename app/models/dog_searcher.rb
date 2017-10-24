@@ -35,12 +35,12 @@ class DogSearcher
     if @manager
       @dogs = @dogs.includes(:adopters, :comments)
       @dogs = if text_search? && tracking_id_search?
-                @dogs.where('tracking_id = :search OR microchip = :search', search: search_term)
-              elsif text_search? && !tracking_id_search?
-                @dogs.where('microchip ILIKE :search OR name ILIKE :search', search: "%#{search_term.strip}%")
-              else
-                @dogs.filter(filtering_params)
-              end
+        @dogs.where('tracking_id = :search OR microchip = :search', search: search_term)
+      elsif text_search? && !tracking_id_search?
+        @dogs.where('microchip ILIKE :search OR name ILIKE :search', search: "%#{search_term.strip}%")
+      else
+        @dogs.filter(filtering_params)
+      end
     else
       @dogs = @dogs.includes(:primary_breed, :secondary_breed).where('status IN (?)', PUBLIC_STATUSES)
     end
@@ -77,19 +77,18 @@ class DogSearcher
   end
 
   def with_sorting
-    @dogs = @dogs.order(sort_column + ' ' + sort_direction)
+    sort = "#{sort_column} #{sort_direction}"
 
-    #
-    # Progress on #649
-    #
-    # sort = if text_search?
-    #   sort_string = "case when name ilike ? then 1 else 2 end, ? ?"
-    #   [sort_string, search_term + '%', sort_column, sort_direction]
-    # else
-    #   ['? ?', sort_column, sort_direction]
-    # end
+    if text_search? && unspecified_sort?
+      sort_string = "case when name ilike ? then 1 else 2 end #{sort_direction}, #{sort}"
+      sort = [sort_string, search_term + '%']
+    end
 
-    # @dogs.order(sort)
+    @dogs = @dogs.order(sort)
+  end
+
+  def unspecified_sort?
+    @params[:sort].blank?
   end
 
   def sort_column
@@ -119,5 +118,4 @@ class DogSearcher
                   :cb_no_dogs,
                   :cb_no_kids)
   end
-
 end

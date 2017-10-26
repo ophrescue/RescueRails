@@ -12,11 +12,9 @@ class PostalCodeValidator < ActiveModel::Validator
       return
     end
 
-    postal_code = record.postal_code.delete(' ').upcase
-
-    if country.eql?(ISO3166::Country[:us]) && !postal_code.match(ZIP_CODE_REGEX)
+    if country.eql?(ISO3166::Country[:us]) && !record.postal_code.match(ZIP_CODE_REGEX)
       record.errors[:postal_code] << "should be 12345 or 12345-1234"
-    elsif country.eql?(ISO3166::Country[:ca]) && !postal_code.match(POSTAL_CODE_REGEX)
+    elsif country.eql?(ISO3166::Country[:ca]) && !record.postal_code.match(POSTAL_CODE_REGEX)
       record.errors[:postal_code] << "is not valid"
     end
   end

@@ -85,6 +85,30 @@ describe User do
       user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'CA', country: 'ALB')
       expect(user).to_not be_valid
     end
+
+    it 'removes whitespace from Canadian postal codes' do
+      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'ON', country: 'CAN')
+      user.postal_code = "   K 2 J 0 A     1   "
+
+      expect(user).to be_valid
+      expect(user.postal_code).to eq('K2J0A1')
+    end
+
+    it 'removes whitespace from American ZIP codes' do
+      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'CA', country: 'USA')
+      user.postal_code = " 12    3 4 5   "
+
+      expect(user).to be_valid
+      expect(user.postal_code).to eq('12345')
+    end
+
+    it 'converts postal codes to uppercase' do
+      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'ON', country: 'CAN')
+      user.postal_code = "k2j0a1"
+
+      expect(user).to be_valid
+      expect(user.postal_code).to eq('K2J0A1')
+    end
   end
 
   describe '#chimp_check' do

@@ -12,6 +12,7 @@ gem "countries", "~> 2.1"
 gem 'dotenv'
 gem 'dotenv-rails'
 gem 'exception_notification'
+gem 'exception_notification-rake', '~> 0.3.0'
 gem 'font-awesome-rails'
 gem 'geocoder'
 gem 'gibbon'

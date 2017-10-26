@@ -76,6 +76,8 @@ Rails.application.configure do
   }
 
   # Exception Notification
+  ExceptionNotifier::Rake.configure
+
   config.middleware.use ExceptionNotification::Rack,
     email: {
       sender_address: 'info@ophrescue.org',

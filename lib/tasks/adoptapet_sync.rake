@@ -23,7 +23,7 @@ namespace :adoptapet_sync do
         { status: ["adoptable",
           "adoption pending",
           "coming soon"],
-          users: {state: state}
+          users: {region: state}
          })
 
       desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs/"

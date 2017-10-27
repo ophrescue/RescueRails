@@ -258,8 +258,8 @@ class User < ApplicationRecord
     end
 
     def sanitize_postal_code
-      return unless self.postal_code
-      self.postal_code = self.postal_code.delete(' ').upcase
+      return if postal_code.blank?
+      self.postal_code = postal_code.delete(' ').upcase
     end
 
     def country_is_supported

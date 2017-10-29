@@ -232,8 +232,8 @@ class User < ApplicationRecord
     end
 
     def format_cleanup
-      self.region.upcase!
-      self.email.downcase!
+      region.upcase!
+      email.downcase!
     end
 
     def encrypt_password

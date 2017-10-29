@@ -555,13 +555,6 @@ Style/RedundantReturn:
   Exclude:
     - 'lib/capistrano/template.rb'
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/RedundantSelf:
-  Exclude:
-    - 'app/models/adopter_searcher.rb'
-    - 'app/models/user.rb'
-
 # Offense count: 13
 # Cop supports --auto-correct.
 # Configuration parameters: ConvertCodeThatCanStartToReturnNil.

@@ -544,12 +544,6 @@ Style/Proc:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/RedundantParentheses:
-  Exclude:
-    - 'app/controllers/adopters_controller.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 # Configuration parameters: AllowMultipleReturnValues.
 Style/RedundantReturn:
   Exclude:

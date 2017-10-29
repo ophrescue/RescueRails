@@ -602,14 +602,6 @@ Style/TernaryParentheses:
     - 'app/helpers/application_helper.rb'
     - 'app/models/user.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline, SupportedStylesForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInLiteral:
-  Exclude:
-    - 'app/models/mail_chimp_client.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/UnneededInterpolation:

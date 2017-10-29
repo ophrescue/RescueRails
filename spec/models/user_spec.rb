@@ -109,6 +109,20 @@ describe User do
       expect(user).to be_valid
       expect(user.postal_code).to eq('K2J0A1')
     end
+
+    it 'converts Canadian province to uppercase' do
+      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'on', country: 'CAN')
+
+      expect(user).to be_valid
+      expect(user.region).to eq('ON')
+    end
+
+    it 'converts American state to uppercase' do
+      user = User.new(region: 'on', name: Faker::Name.name, email: 'test@example.com', country: 'USA')
+
+      expect(user).to be_valid
+      expect(user.region).to eq('ON')
+    end
   end
 
   describe '#chimp_check' do

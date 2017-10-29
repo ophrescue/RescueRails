@@ -138,6 +138,8 @@ class User < ApplicationRecord
   has_many :mentees, class_name: 'User', foreign_key: 'mentor_id'
 
   before_validation :sanitize_postal_code
+  before_validation :sanitize_region
+
   before_save :format_cleanup
   before_create :chimp_subscribe
   before_update :chimp_check
@@ -260,6 +262,11 @@ class User < ApplicationRecord
     def sanitize_postal_code
       return if postal_code.blank?
       self.postal_code = postal_code.delete(' ').upcase
+    end
+
+    def sanitize_region
+      return if region.blank?
+      self.region = region.delete(' ').upcase
     end
 
     def country_is_supported

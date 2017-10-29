@@ -171,8 +171,6 @@ class User < ApplicationRecord
   scope :puppies_ok,              -> (status = true) { where(can_foster_puppies: status) }
   scope :has_parvo_house,         -> (status = true) { where(parvo_house: status) }
 
-  after_initialize :default_country_to_usa
-
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
   end
@@ -253,10 +251,6 @@ class User < ApplicationRecord
 
     def secure_hash(string)
       Digest::SHA2.hexdigest(string)
-    end
-
-    def default_country_to_usa
-      self.country ||= "USA"
     end
 
     def sanitize_postal_code

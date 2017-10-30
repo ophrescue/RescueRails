@@ -59,13 +59,6 @@ Layout/ExtraSpacing:
   Exclude:
     - 'lib/tasks/adoptapet_sync.rake'
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: IndentationWidth.
-Layout/IndentAssignment:
-  Exclude:
-    - 'app/models/dog.rb'
-
 # Offense count: 16
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

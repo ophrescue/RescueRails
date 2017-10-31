@@ -1,6 +1,6 @@
 class PostalCodeValidator < ActiveModel::Validator
-  ZIP_CODE_REGEX = /\A\d{5}(?:-\d{4})?\z/
-  POSTAL_CODE_REGEX = /\A[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]\Z/
+  VALID_US_ZIP_CODE = /\A\d{5}(?:-\d{4})?\z/
+  VALID_CANADIAN_POSTAL_CODE = /\A[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]\Z/
 
   def validate(record)
     return if record.postal_code.blank?
@@ -12,9 +12,9 @@ class PostalCodeValidator < ActiveModel::Validator
       return
     end
 
-    if country.eql?(ISO3166::Country[:us]) && !record.postal_code.match(ZIP_CODE_REGEX)
+    if country.eql?(ISO3166::Country[:us]) && !record.postal_code.match(VALID_US_ZIP_CODE)
       record.errors[:postal_code] << "should be 12345 or 12345-1234"
-    elsif country.eql?(ISO3166::Country[:ca]) && !record.postal_code.match(POSTAL_CODE_REGEX)
+    elsif country.eql?(ISO3166::Country[:ca]) && !record.postal_code.match(VALID_CANADIAN_POSTAL_CODE)
       record.errors[:postal_code] << "is not valid"
     end
   end

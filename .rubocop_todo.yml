@@ -573,15 +573,6 @@ Style/SymbolArray:
     - 'app/controllers/users_controller.rb'
     - 'script/topological_sort.rb'
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, AllowSafeAssignment.
-# SupportedStyles: require_parentheses, require_no_parentheses, require_parentheses_when_complex
-Style/TernaryParentheses:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/user.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/UnneededInterpolation:

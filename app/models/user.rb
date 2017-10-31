@@ -183,7 +183,7 @@ class User < ApplicationRecord
 
   def self.authenticate_with_salt(id, cookie_salt)
     user = find_by(id: id)
-    (user && user.salt == cookie_salt) ? user : nil
+    user && user.salt == cookie_salt ? user : nil
   end
 
   def out_of_date?

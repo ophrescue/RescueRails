@@ -138,6 +138,8 @@ class User < ApplicationRecord
   has_many :mentees, class_name: 'User', foreign_key: 'mentor_id'
 
   before_validation :sanitize_postal_code
+  before_validation :sanitize_region
+
   before_save :format_cleanup
   before_create :chimp_subscribe
   before_update :chimp_check
@@ -168,8 +170,6 @@ class User < ApplicationRecord
   scope :has_children_under_five, -> (status = true) { where(children_under_five: status) }
   scope :puppies_ok,              -> (status = true) { where(can_foster_puppies: status) }
   scope :has_parvo_house,         -> (status = true) { where(parvo_house: status) }
-
-  after_initialize :default_country_to_usa
 
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
@@ -253,13 +253,14 @@ class User < ApplicationRecord
       Digest::SHA2.hexdigest(string)
     end
 
-    def default_country_to_usa
-      self.country ||= "USA"
-    end
-
     def sanitize_postal_code
       return if postal_code.blank?
       self.postal_code = postal_code.delete(' ').upcase
+    end
+
+    def sanitize_region
+      return if region.blank?
+      self.region = region.delete(' ').upcase
     end
 
     def country_is_supported

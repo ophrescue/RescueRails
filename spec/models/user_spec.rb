@@ -66,16 +66,15 @@
 require 'rails_helper'
 
 describe User do
-  describe '#new' do
-    # This test is only valid until international users are supported (#437)
-    # When removed, it's likely appropriate to add a "presence" test
-    it 'defaults country to USA' do
-      user = User.new
-      expect(user.country).to eq('USA')
-    end
-  end
-
   describe 'valid?' do
+    it 'requires country' do
+      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'CA')
+      expect(user).to_not be_valid
+
+      user.country = 'USA'
+      expect(user).to be_valid
+    end
+
     it 'is invalid when country is not recognized' do
       user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'CA', country: 'ZZZ')
       expect(user).to_not be_valid
@@ -108,6 +107,20 @@ describe User do
 
       expect(user).to be_valid
       expect(user.postal_code).to eq('K2J0A1')
+    end
+
+    it 'converts Canadian province to uppercase' do
+      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'on', country: 'CAN')
+
+      expect(user).to be_valid
+      expect(user.region).to eq('ON')
+    end
+
+    it 'converts American state to uppercase' do
+      user = User.new(region: 'on', name: Faker::Name.name, email: 'test@example.com', country: 'USA')
+
+      expect(user).to be_valid
+      expect(user.region).to eq('ON')
     end
   end
 

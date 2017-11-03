@@ -163,6 +163,7 @@ class User < ApplicationRecord
   scope :boarding_buddy,          -> (status = true) { where(boarding_buddies: status)}
   scope :social_media,            -> (status = true) { where(social_media_manager: status)}
   scope :graphic_designer,        -> (status = true) { where(graphic_design: status)}
+  scope :volunteer_supporter,     -> (status = true) { where(volunteer_support: status)}
   scope :house_type,              -> (type) { where(house_type: type) }
   scope :has_dogs,                -> (status = true) { where(has_own_dogs: status) }
   scope :has_cats,                -> (status = true) { where(has_own_cats: status) }

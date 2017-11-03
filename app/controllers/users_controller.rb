@@ -192,6 +192,7 @@ class UsersController < ApplicationController
                 :boarding_buddies,
                 :social_media_manager,
                 :graphic_design,
+                :volunteer_support,
                 agreement_attributes: [
                   :attachment,
                   :description,
@@ -260,4 +261,5 @@ class UsersController < ApplicationController
   def admin_user
     redirect_to(root_path) unless current_user.admin?
   end
+  
 end

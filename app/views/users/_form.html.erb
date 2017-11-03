@@ -429,6 +429,10 @@
           <span><strong>Download Restricted Resources</strong> - This person can access Restricted folders in the Staff Resources section.  Download Resources permission needed too.</span>
         </label>
         <label class="checkbox">
+          <%= f.check_box :volunteer_support %>
+          <span><strong>Volunteer Support</strong>- This person is not an active volunteer and has very limited functionality. </span>
+        </label>
+        <label class="checkbox">
           <%= f.check_box :locked %>
           <span><strong>Lock</strong> - Will disable account, preventing user from logging in.</span>
         </label>

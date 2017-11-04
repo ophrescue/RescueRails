@@ -70,7 +70,7 @@ group :test do
   gem 'capybara-screenshot'
   gem 'coveralls', require: false
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'poltergeist'
   gem 'rails-controller-testing'
 end

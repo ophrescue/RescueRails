@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :photo do
     photo_file_name { 'test.png' }
     photo_content_type { 'image/png' }

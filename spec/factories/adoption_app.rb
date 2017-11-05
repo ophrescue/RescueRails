@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :adoption_app do
     spouse_name { Faker::Name.name }
     other_household_names 'other household'

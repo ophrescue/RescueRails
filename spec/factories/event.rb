@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :event do
     title 'A Dog Event'
     location_name 'Westminster'

@@ -55,7 +55,7 @@ GEM
     aws-sdk-resources (2.10.78)
       aws-sdk-core (= 2.10.78)
     aws-sigv4 (1.0.2)
-    better_errors (2.3.0)
+    better_errors (2.4.0)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
@@ -126,7 +126,7 @@ GEM
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
-    erubi (1.6.1)
+    erubi (1.7.0)
     erubis (2.7.0)
     exception_notification (4.2.2)
       actionmailer (>= 4.0, < 6)
@@ -135,10 +135,10 @@ GEM
       exception_notification (~> 4.2.0)
       rake (>= 0.9.0)
     execjs (2.7.0)
-    factory_girl (4.8.1)
+    factory_bot (4.8.2)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.8.0)
-      factory_girl (~> 4.8.0)
+    factory_bot_rails (4.8.2)
+      factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
     faker (1.8.4)
       i18n (~> 0.5)
@@ -399,7 +399,7 @@ DEPENDENCIES
   dotenv-rails
   exception_notification
   exception_notification-rake (~> 0.3.0)
-  factory_girl_rails
+  factory_bot_rails
   faker
   font-awesome-rails
   geocoder

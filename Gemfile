@@ -62,7 +62,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-stack_explorer'
   gem 'rspec-collection_matchers'
-  gem 'rspec-rails', '3.5.2'
+  gem 'rspec-rails'
 end
 
 group :test do

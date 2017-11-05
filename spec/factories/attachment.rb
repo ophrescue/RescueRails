@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :attachment do
     attachment_file_name { 'test.pdf' }
     attachment_content_type { 'application/pdf' }

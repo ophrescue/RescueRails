@@ -126,10 +126,10 @@
     <li>Cannot Download Restricted Staff Resources</li>
   <% end %>
   
-  <% if @user.volunteer_support? %>
-    <li>Is not an Active Volunteer</li>
-  <% else %>
+  <% if @user.active? %>
     <li>Is an Active Volunteer</li>
+  <% else %>
+    <li>Is not an Active Volunteer</li>
   <% end %>
 
   <% if @user.locked? %>

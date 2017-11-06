@@ -72,8 +72,8 @@
   <li class="<%= 'active' if params[:boarding_buddy] %>">
     <%= link_to "Boarding Buddies", users_path(boarding_buddy: true) %>
   </li>
-  <li class="<%='active' if params[:volunteer_supporter] %>">
-    <%= link_to "Volunteer Supporters", users_path(volunteer_supporter: true) %>
+  <li class="<%='active' if params[:active_volunteer] %>">
+    <%= link_to "Active Volunteers", users_path(active_volunteer: true) %>
   </li>
 </ul>
 

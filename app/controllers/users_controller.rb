@@ -192,7 +192,7 @@ class UsersController < ApplicationController
                 :boarding_buddies,
                 :social_media_manager,
                 :graphic_design,
-                :volunteer_support,
+                :active,
                 agreement_attributes: [
                   :attachment,
                   :description,

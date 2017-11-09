@@ -164,6 +164,7 @@ class User < ApplicationRecord
   scope :social_media,            -> (status = true) { where(social_media_manager: status)}
   scope :graphic_designer,        -> (status = true) { where(graphic_design: status)}
   scope :active_volunteer,        -> (status = true) { where(active: status)}
+  scope :not_active_volunteer,    -> (status = false) { where(active:status)}
   scope :house_type,              -> (type) { where(house_type: type) }
   scope :has_dogs,                -> (status = true) { where(has_own_dogs: status) }
   scope :has_cats,                -> (status = true) { where(has_own_cats: status) }

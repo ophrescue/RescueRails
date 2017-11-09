@@ -22,6 +22,7 @@ FactoryGirl.define do
       ban_adopters true
       dl_locked_resources true
       medical_behavior_permission true
+      active true
     end
   end
 end

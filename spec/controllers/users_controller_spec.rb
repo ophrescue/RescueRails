@@ -139,10 +139,16 @@ describe UsersController, type: :controller do
         expect(assigns(:users)).to match_array([smith])
       end
 
-      it 'returns the translator team mebers' do
+      it 'returns the translator team members' do
         smith = create(:user, name: 'Jane Smithbot', translator: TRUE)
         get :index, params: { translator: TRUE }
         expect(assigns(:users)).to match_array([smith])
+      end
+      
+      it 'returns the active team members' do
+        smith = create(:user, name: 'Jane Smithbot', active: TRUE)
+        get :index, params: { active_volunteer: TRUE }
+        expect(assigns(:users)).to match_array([smith, admin])
       end
     end
   end

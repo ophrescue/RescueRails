@@ -151,20 +151,20 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('Rent Goes Up $50 a month')
 
     click_link('References')
-    expect(page).to have_content('First Reference')
-    expect(page).to have_content('first@reference.org')
-    expect(page).to have_content('(111) 111-1111')
-    expect(page).to have_content('After 1pm')
+    expect(page).to have_field("adopter_references_attributes_0_name", with: "Third Reference")
+    expect(page).to have_field("adopter_references_attributes_0_email", with: "third@reference.org")
+    expect(page).to have_field("adopter_references_attributes_0_phone", with: "(333) 333-3333")
+    expect(page).to have_field("adopter_references_attributes_0_whentocall", with: "After 3pm")
 
-    expect(page).to have_content('Second Reference')
-    expect(page).to have_content('second@reference.org')
-    expect(page).to have_content('(222) 222-2222')
-    expect(page).to have_content('After 2pm')
+    expect(page).to have_field("adopter_references_attributes_1_name", with: "Second Reference")
+    expect(page).to have_field("adopter_references_attributes_1_email", with: "second@reference.org")
+    expect(page).to have_field("adopter_references_attributes_1_phone", with: "(222) 222-2222")
+    expect(page).to have_field("adopter_references_attributes_1_whentocall", with: "After 2pm")
 
-    expect(page).to have_content('Third Reference')
-    expect(page).to have_content('third@reference.org')
-    expect(page).to have_content('(333) 333-3333')
-    expect(page).to have_content('After 3pm')
+    expect(page).to have_field("adopter_references_attributes_2_name", with: "First Reference")
+    expect(page).to have_field("adopter_references_attributes_2_email", with: "first@reference.org")
+    expect(page).to have_field("adopter_references_attributes_2_phone", with: "(111) 111-1111")
+    expect(page).to have_field("adopter_references_attributes_2_whentocall", with: "After 1pm")
   end
 
   scenario "Home Owner fills out adoption application", js: true do
@@ -302,19 +302,19 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('They do not like shots')
 
     click_link('References')
-    expect(page).to have_content('First Reference')
-    expect(page).to have_content('first@reference.org')
-    expect(page).to have_content('(111) 111-1111')
-    expect(page).to have_content('After 1pm')
+    expect(page).to have_field("adopter_references_attributes_0_name", with: "Third Reference")
+    expect(page).to have_field("adopter_references_attributes_0_email", with: "third@reference.org")
+    expect(page).to have_field("adopter_references_attributes_0_phone", with: "(333) 333-3333")
+    expect(page).to have_field("adopter_references_attributes_0_whentocall", with: "After 3pm")
 
-    expect(page).to have_content('Second Reference')
-    expect(page).to have_content('second@reference.org')
-    expect(page).to have_content('(222) 222-2222')
-    expect(page).to have_content('After 2pm')
+    expect(page).to have_field("adopter_references_attributes_1_name", with: "Second Reference")
+    expect(page).to have_field("adopter_references_attributes_1_email", with: "second@reference.org")
+    expect(page).to have_field("adopter_references_attributes_1_phone", with: "(222) 222-2222")
+    expect(page).to have_field("adopter_references_attributes_1_whentocall", with: "After 2pm")
 
-    expect(page).to have_content('Third Reference')
-    expect(page).to have_content('third@reference.org')
-    expect(page).to have_content('(333) 333-3333')
-    expect(page).to have_content('After 3pm')
+    expect(page).to have_field("adopter_references_attributes_2_name", with: "First Reference")
+    expect(page).to have_field("adopter_references_attributes_2_email", with: "first@reference.org")
+    expect(page).to have_field("adopter_references_attributes_2_phone", with: "(111) 111-1111")
+    expect(page).to have_field("adopter_references_attributes_2_whentocall", with: "After 1pm")
   end
 end

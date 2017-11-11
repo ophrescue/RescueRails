@@ -176,6 +176,7 @@ class AdoptersController < ApplicationController
                                     ],
                                     references_attributes:
                                     [
+                                      :id,
                                       :name,
                                       :phone,
                                       :email,

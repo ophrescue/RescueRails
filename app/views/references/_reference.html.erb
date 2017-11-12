@@ -1,5 +1,5 @@
 <%= form_for @adopter do |f| %>
-  <%= f.fields_for :references do |rf| %>
+  <%= f.fields_for :references, f.object.references.order(:name) do |rf| %>
     <tr>
       <td>
         <%= rf.text_field :name %>
@@ -8,7 +8,7 @@
         <span class="tel value"><%= rf.text_field :phone %></span>
       </td>
       <td>
-        <%= rf.text_field :email %>
+        <%= rf.text_field :email %></div>
       </td>
       <td>
         <%= rf.text_field :relationship %>
@@ -17,7 +17,7 @@
         <%= rf.text_field :whentocall %>
       </td>
       <td>
-        <%= rf.submit "Save", :id => "ref_edit", class: "btn btn-primary" %>
+        <%= rf.submit "Save", class: "btn btn-primary" %>
       </td>
     </tr>
   <% end %>

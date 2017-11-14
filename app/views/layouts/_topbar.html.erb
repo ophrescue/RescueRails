@@ -66,7 +66,7 @@
                     <% if can_edit_my_adopters? || can_edit_all_adopters? %>
                       <li><%= link_to "Applications",  :controller => "adopters", :status => "active" %></li>
                     <% end %>
-                    <% if current_user.active? == true %>
+                    <% if current_user.active? || current_user.admin? %>
                       <li><%= link_to "DNA List", :controller => "banned_adopters" %></li>
                       <li><%= link_to "Manage Dogs", :controller => "dogs", :status => "active" %></li>
                       <li><%= link_to "Users", users_path %></li>

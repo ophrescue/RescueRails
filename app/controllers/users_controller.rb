@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   before_action :authenticate
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:new, :create, :destroy]
-  before_action :active_user, :except => [:edit, :update, :show]
+  before_action :active_user, :except => [:show, :edit, :update]
 
   YES_NO_OPTIONS = [['Any', ''], ['Yes', 't'], ['No', 'f']]
   OWN_RENT_OPTIONS = [['Any', ''], ['Own', 'own'], ['Rent', 'rent']]

@@ -203,4 +203,19 @@ describe UsersController, type: :controller do
       end
     end
   end
+  
+  describe 'a not active user' do
+    let(:test_user) { create(:user, admin: FALSE, active: FALSE) }
+    
+    context 'logged in as an active user' do
+      before :each do
+        allow(controller).to receive(:current_user) { test_user }
+      end
+      
+      it 'cannot visit visit users index' do
+        get(:index)
+        expect(test_user).to redirect_to('/')
+      end
+    end
+  end 
 end

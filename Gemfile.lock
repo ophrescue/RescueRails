@@ -389,7 +389,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.0.3)
   capybara
   capybara-screenshot
-  countries (~> 2.1)
+  countries
   coveralls
   daemons
   dalli
@@ -444,4 +444,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.15.4
+   1.16.0

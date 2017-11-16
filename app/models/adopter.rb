@@ -39,6 +39,7 @@
 #  completed_date      :date
 #  county              :string
 #
+require 'pry'
 
 class Adopter < ApplicationRecord
   include Auditable
@@ -130,6 +131,7 @@ class Adopter < ApplicationRecord
         result << "changed #{attr} from #{old_value} to #{new_value}"
       end
     end
+
     result.sort.join(' * ')
   end
 

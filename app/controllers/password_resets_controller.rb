@@ -11,10 +11,12 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-
 class PasswordResetsController < ApplicationController
+  skip_around_action :set_current_user
+
   def create
     user = User.find_by(email: params[:email].downcase)
+
     if user
       user.send_password_reset
       flash[:success] = 'Email sent with password reset instructions'

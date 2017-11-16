@@ -24,8 +24,10 @@ feature 'Edit Reference Form', js: true do
     end
 
     expect(page).to have_content('Application Updated')
-    
+
     click_link('References')
     expect(page).to have_field("adopter_references_attributes_0_name", with: 'First Reference')
+
+    expect(page).to have_content("#{admin.name} has changed name from #{reference.name} to First Reference")
   end
 end

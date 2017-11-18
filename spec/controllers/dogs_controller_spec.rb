@@ -70,25 +70,21 @@ describe DogsController, type: :controller do
 
       it 'in manager mode all dogs are returned' do
         get :index, params: {}, session: { mgr_view: true }
-
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
       end
 
       it 'in gallery mode only publicly viewable dogs are returned' do
         get :index, params: {}, session: { mgr_view: false }
-
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, baby_small_special_needs_dog])
       end
 
       it 'with all dogs paramater set all dogs are returned' do
         get :index, params: {all_dogs: true}, session: { mgr_view: true }
-
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
       end
 
       it 'can filter by age, size and flags' do
         get :index, params: {is_age: 'baby', is_size: 'small', cb_special_needs: true}, session: {mgr_view: true }
-
         expect(assigns(:dogs)).to match_array([baby_small_special_needs_dog])
       end
     end
@@ -105,9 +101,9 @@ describe DogsController, type: :controller do
 
       it 'Only adoptable, adoption pending or coming soon dogs should be displayed' do
         get_index
-
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog])
       end
+
     end
   end
 

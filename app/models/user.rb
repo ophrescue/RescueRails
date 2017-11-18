@@ -74,10 +74,13 @@
 #  translator                   :boolean          default(FALSE), not null
 #  known_languages              :string(255)
 #  code_of_conduct_agreement_id :integer
+#  boarding_buddies             :boolean          default(FALSE), not null
 #  medical_behavior_permission  :boolean          default(FALSE)
-#  boarding_buddies             :boolean          default(FALSE)
-#  social_media_manager         :boolean          default(FALSE)
-#  graphic_design               :boolean          default(FALSE)
+#  social_media_manager         :boolean          default(FALSE), not null
+#  graphic_design               :boolean          default(FALSE), not null
+#  country                      :string(3)        not null
+#  active                       :boolean          default(FALSE), not null
+#
 
 require 'digest'
 

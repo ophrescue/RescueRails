@@ -35,6 +35,10 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def active_user?
+    current_user.active? unless current_user.nil?
+  end
+
   def is_locked?
     if current_user.locked?
       cookies.delete(:remember_token)

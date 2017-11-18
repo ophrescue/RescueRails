@@ -62,11 +62,12 @@ require 'rails_helper'
 describe UsersController, type: :controller do
   let!(:admin) { create(:user, :admin, name: 'Admin') }
   let!(:hacker) { create(:user, name: 'Hacker') }
+  let!(:inactive_user) { create(:user, admin: FALSE, active: FALSE) }
 
   describe 'GET index' do
     let(:jones) { create(:user, name: 'Frank Jones') }
 
-    context 'default index list' do
+    context 'Logged in as an Admin User' do
       before :each do
         allow(controller).to receive(:current_user) { admin }
       end
@@ -74,45 +75,24 @@ describe UsersController, type: :controller do
       it 'returns all users' do
         smith = create(:user, name: 'Jane Smith')
         get :index
-        expect(assigns(:users)).to match_array([jones, smith, admin, hacker])
+        expect(assigns(:users)).to match_array([jones, smith, admin, hacker, inactive_user])
       end
-    end
 
-    context 'name search' do
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
-      end
       it 'returns the searched for user' do
         smith = create(:user, name: 'Jane Smithbot')
         get :index, params: { search: 'Smithbot' }
         expect(assigns(:users)).to match_array([smith])
       end
-    end
 
-    context 'email search' do
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
-      end
       it 'returns the searched for user email' do
         smith = create(:user, name: 'Jane Smithbot', email: 'b@test.com')
         get :index, params: { search: 'b@test.com' }
         expect(assigns(:users)).to match_array([smith])
       end
-    end
 
-    context 'location search' do
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
-      end
       it 'returns users near the searched location' do
         expect(User).to receive(:near).and_call_original
         get :index, params: { location: '21224' }
-      end
-    end
-
-    context 'tab filter' do
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
       end
 
       it 'returns the training team members' do
@@ -150,6 +130,25 @@ describe UsersController, type: :controller do
         get :index, params: { active_volunteer: TRUE }
         expect(assigns(:users)).to match_array([smith, admin])
       end
+    end
+
+    context 'logged in as an inactive user' do
+      before :each do
+        allow(controller).to receive(:current_user) { inactive_user }
+      end
+      
+      it 'cannot view users index' do
+        get(:index)
+        expect(inactive_user).to redirect_to('/')
+      end
+
+    end
+  end
+
+  describe 'GET show' do
+    context 'logged in as an inactive user' do
+      it 'cannot view another users profile'
+      it 'can view their own profile'
     end
   end
 
@@ -203,19 +202,4 @@ describe UsersController, type: :controller do
       end
     end
   end
-  
-  describe 'a not active user' do
-    let(:test_user) { create(:user, admin: FALSE, active: FALSE) }
-    
-    context 'logged in as an active user' do
-      before :each do
-        allow(controller).to receive(:current_user) { test_user }
-      end
-      
-      it 'cannot visit visit users index' do
-        get(:index)
-        expect(test_user).to redirect_to('/')
-      end
-    end
-  end 
 end

@@ -10,6 +10,12 @@ FactoryBot.define do
     postal_code { Faker::Address.zip }
     lastverified { Time.now }
     country { 'USA' }
+    active true
+    admin false
+
+    trait :inactive_user do
+      active false
+    end
 
     trait :admin do
       admin true

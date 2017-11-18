@@ -76,8 +76,9 @@
 class UsersController < ApplicationController
   before_action :authenticate
   before_action :correct_user, only: [:edit, :update]
+  before_action :active_user, only: [:index]
+  before_action :show_other_users, only: [:show]
   before_action :admin_user, only: [:new, :create, :destroy]
-  before_action :active_user, :except => [:show, :edit, :update]
 
   YES_NO_OPTIONS = [['Any', ''], ['Yes', 't'], ['No', 'f']]
   OWN_RENT_OPTIONS = [['Any', ''], ['Own', 'own'], ['Rent', 'rent']]
@@ -253,11 +254,16 @@ class UsersController < ApplicationController
     @user.build_code_of_conduct_agreement unless @user.code_of_conduct_agreement
     @foster_users = User.where(locked: false).order("name")
   end
-  
-   def active_user
-    redirect_to(root_path) unless (current_user.active? || current_user.admin?)
-   end
-  
+
+  def active_user
+    redirect_to(root_path) unless current_user.active?
+  end
+
+  def show_other_users
+    @user = User.find(params[:id])
+    redirect_to(root_path) unless (current_user?(@user) || current_user.active?)
+  end
+
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_path) unless (current_user?(@user) || current_user.admin?)
@@ -266,7 +272,5 @@ class UsersController < ApplicationController
   def admin_user
     redirect_to(root_path) unless current_user.admin?
   end
-  
- 
-  
+
 end

@@ -8,7 +8,7 @@ gem 'rack-cache'
 gem 'acts_as_list'
 gem 'aws-sdk', '~> 2'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
-gem "countries", "~> 2.1"
+gem "countries"
 gem 'dotenv'
 gem 'dotenv-rails'
 gem 'exception_notification'
@@ -62,7 +62,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-stack_explorer'
   gem 'rspec-collection_matchers'
-  gem 'rspec-rails', '3.5.2'
+  gem 'rspec-rails'
 end
 
 group :test do
@@ -70,7 +70,7 @@ group :test do
   gem 'capybara-screenshot'
   gem 'coveralls', require: false
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'poltergeist'
   gem 'rails-controller-testing'
 end

@@ -47,7 +47,7 @@ describe CommentsController, type: :controller do
       it 'should succeed' do
         request.env['HTTP_REFERER'] = '/'
         dog = create(:dog)
-        post :create, params: { dog_id: dog.id, comment: FactoryGirl.attributes_for(:comment) }
+        post :create, params: { dog_id: dog.id, comment: FactoryBot.attributes_for(:comment) }
         expect(response).to redirect_to(root_path)
       end
     end
@@ -55,7 +55,7 @@ describe CommentsController, type: :controller do
     context 'an ajax call is made' do
       it 'should succeed' do
         dog = create(:dog)
-        post :create, xhr: true, params: { dog_id: dog.id, comment: FactoryGirl.attributes_for(:comment) }
+        post :create, xhr: true, params: { dog_id: dog.id, comment: FactoryBot.attributes_for(:comment) }
         expect(response.status).to eq(200)
         expect(response).not_to be_redirect
       end

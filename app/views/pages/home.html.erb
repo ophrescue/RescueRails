@@ -39,16 +39,21 @@
               <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
             </div>
           </div>
-<% if Time.now.between?(("2017-03-04".to_date),("2017-10-26".to_date))%>
+<% if Time.now.between?(("2017-11-17".to_date),("2017-12-01".to_date))%>
           <div class="item">
-            <%= image_tag "halloween-banner-2017.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+            <%= image_tag "giving-tuesday-2017.jpg", alt: "Giving Tuesday" %>
+            <div class="carousel-caption">
+              <%= link_to "Donate Now", "https://join.ophrescue.org/givingtuesday2017", :class => "btn btn-primary btn-large" %>
+            </div>
           </div>
 <% end %>
-<% if Time.now.between?(("2017-03-04".to_date),("2017-07-30".to_date))%>
+
+<% if Time.now.between?(("2017-11-17".to_date),("2018-04-09".to_date))%>
           <div class="item">
-            <%= image_tag "banner-wholefoods-2017-7.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+            <%= image_tag "fastfurriestwebbanner-2018.jpg", alt: "Fast and Furriest 5k is April 8th, 2018" %>
             <div class="carousel-caption">
-              <%= link_to "Register", "https://wholefoodsmarketdogdaysofsummer.eventbrite.com/?aff=nova", :class => "btn btn-primary btn-large" %>
+              <%= link_to "Register", "https://www.active.com/frederick-md/running/distance-running-races/4th-annual-fast-and-furriest-5k-1m-fun-walk-event-2018", :class => "btn btn-primary btn-large" %>
+              <%= link_to "Sponsorship Info", "https://oph5k.weebly.com/sponsorship-info.html", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
 <% else %>

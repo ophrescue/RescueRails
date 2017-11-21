@@ -37,7 +37,11 @@ See `db/seeds.rb` for default admin login info
 
 ### Running Tests
 
-You'll need phantomjs installed to run the ```rspec``` test suite. 
+Tests are run via Headless Chrome, which will require Gogle Chrome and Chromedriver.
+
+```
+brew install chromedriver
+```
 
 ### Contributing
 

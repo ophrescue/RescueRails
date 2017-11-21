@@ -28,15 +28,16 @@ feature 'Apply for Adoption' do
     fill_in('adopter_state', with: 'MD')
     fill_in('adopter_zip', with: '21224')
 
-    find('input#adopter_phone').trigger('click').set('1234567890')
-
-    find('input#adopter_other_phone').trigger('click').set('0987654321')
+    fill_in('adopter_phone', with: '1234567890')
+    fill_in('adopter_other_phone', with: '0987654321')
 
     fill_in('adopter_when_to_call', with: 'Anytime After 3pm')
     fill_in('adopter_adoption_app_attributes_spouse_name', with: 'Miss Watir')
     fill_in('adopter_adoption_app_attributes_other_household_names', with: 'Rachel 29, Morgan 24')
     fill_in('adopter_adoption_app_attributes_how_did_you_hear', with: 'Google and Craigslist')
     fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2012-12-13')
+    find("input#adopter_adoption_app_attributes_ready_to_adopt_dt").send_keys(:enter)
+
     choose('adopter_adoption_app_attributes_is_ofage_true')
     choose('adopter_adoption_app_attributes_has_family_under_18_true')
     choose('adopter_adoption_app_attributes_house_type_rent')
@@ -80,21 +81,19 @@ feature 'Apply for Adoption' do
     click_button('Next')
     expect(page).to have_content('Reference')
     fill_in('adopter_references_attributes_0_name', with: 'First Reference')
-
-    find('input#adopter_references_attributes_0_phone').trigger('click').set('1111111111')
-
+    fill_in('adopter_references_attributes_0_phone', with: '1111111111')
     fill_in('adopter_references_attributes_0_email', with: 'first@reference.org')
     fill_in('adopter_references_attributes_0_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_0_whentocall', with: 'After 1pm')
 
     fill_in('adopter_references_attributes_1_name', with: 'Second Reference')
-    find('input#adopter_references_attributes_1_phone').trigger('click').set('2222222222')
+    fill_in('adopter_references_attributes_1_phone', with: '2222222222')
     fill_in('adopter_references_attributes_1_email', with: 'second@reference.org')
     fill_in('adopter_references_attributes_1_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_1_whentocall', with: 'After 2pm')
 
     fill_in('adopter_references_attributes_2_name', with: 'Third Reference')
-    find('input#adopter_references_attributes_2_phone').trigger('click').set('3333333333')
+    fill_in('adopter_references_attributes_2_phone', with: '3333333333')
     fill_in('adopter_references_attributes_2_email', with: 'third@reference.org')
     fill_in('adopter_references_attributes_2_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_2_whentocall', with: 'After 3pm')
@@ -192,15 +191,16 @@ feature 'Apply for Adoption' do
     fill_in('adopter_state', with: 'MD')
     fill_in('adopter_zip', with: '21224')
 
-    find('input#adopter_phone').trigger('click').set('1234567890')
-
-    find('input#adopter_other_phone').trigger('click').set('0987654321')
+    fill_in('adopter_phone', with: '1234567890')
+    fill_in('adopter_other_phone', with: '0987654321')
 
     fill_in('adopter_when_to_call', with: 'Anytime After 3pm')
     fill_in('adopter_adoption_app_attributes_spouse_name', with: 'Miss Watir')
     fill_in('adopter_adoption_app_attributes_other_household_names', with: 'Rachel 29, Morgan 24')
     fill_in('adopter_adoption_app_attributes_how_did_you_hear', with: 'Google and Craigslist')
     fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2012-12-13')
+    find("input#adopter_adoption_app_attributes_ready_to_adopt_dt").send_keys(:enter)
+
     choose('adopter_adoption_app_attributes_is_ofage_true')
     choose('adopter_adoption_app_attributes_has_family_under_18_true')
     choose('adopter_adoption_app_attributes_house_type_own')
@@ -237,21 +237,19 @@ feature 'Apply for Adoption' do
     click_button('Next')
     expect(page).to have_content('Reference')
     fill_in('adopter_references_attributes_0_name', with: 'First Reference')
-
-    find('input#adopter_references_attributes_0_phone').trigger('click').set('1111111111')
-
+    fill_in('adopter_references_attributes_0_phone', with: '1111111111')
     fill_in('adopter_references_attributes_0_email', with: 'first@reference.org')
     fill_in('adopter_references_attributes_0_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_0_whentocall', with: 'After 1pm')
 
     fill_in('adopter_references_attributes_1_name', with: 'Second Reference')
-    find('input#adopter_references_attributes_1_phone').trigger('click').set('2222222222')
+    fill_in('adopter_references_attributes_1_phone', with: '2222222222')
     fill_in('adopter_references_attributes_1_email', with: 'second@reference.org')
     fill_in('adopter_references_attributes_1_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_1_whentocall', with: 'After 2pm')
 
     fill_in('adopter_references_attributes_2_name', with: 'Third Reference')
-    find('input#adopter_references_attributes_2_phone').trigger('click').set('3333333333')
+    fill_in('adopter_references_attributes_2_phone', with: '3333333333')
     fill_in('adopter_references_attributes_2_email', with: 'third@reference.org')
     fill_in('adopter_references_attributes_2_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_2_whentocall', with: 'After 3pm')

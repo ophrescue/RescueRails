@@ -186,12 +186,6 @@ class User < ApplicationRecord
     (user && user.salt == cookie_salt) ? user : nil
   end
 
-  def generate_token(column)
-    begin
-      self[column] = SecureRandom.urlsafe_base64
-    end while User.exists?(column => self[column])
-  end
-
   def out_of_date?
     lastverified.blank? || (lastverified.to_date < 30.days.ago.to_date)
   end
@@ -226,6 +220,12 @@ class User < ApplicationRecord
   end
 
   private
+
+    def generate_token(column)
+      begin
+        self[column] = SecureRandom.urlsafe_base64
+      end while User.exists?(column => self[column])
+    end
 
     def full_street_address
       [address1, address2, city, region, postal_code].compact.join(', ')

@@ -1,7 +1,0 @@
-development:
-  adapter: postgresql
-  database: RescueRails_development
-
-test:
-  adapter: postgresql
-  database: RescueRails_test

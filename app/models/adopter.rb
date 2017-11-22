@@ -39,7 +39,6 @@
 #  completed_date      :date
 #  county              :string
 #
-require 'pry'
 
 class Adopter < ApplicationRecord
   include Auditable

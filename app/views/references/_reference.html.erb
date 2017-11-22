@@ -1,24 +1,31 @@
-<%= form_for @adopter do |f| %>
+<%= form_for @adopter, html: { class: 'form-horizontal' } do |f| %>
   <%= f.fields_for :references, f.object.references.order(:name) do |rf| %>
-    <tr>
-      <td>
-        <%= rf.text_field :name %>
-      </td>
-      <td>
-        <span class="tel value"><%= rf.text_field :phone %></span>
-      </td>
-      <td>
-        <%= rf.text_field :email %></div>
-      </td>
-      <td>
-        <%= rf.text_field :relationship %>
-      </td>
-      <td>
-        <%= rf.text_field :whentocall %>
-      </td>
-      <td>
-        <%= rf.submit "Save", class: "btn btn-primary" %>
-      </td>
-    </tr>
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+        <th>Name</th>
+        <td><%= rf.text_field :name %></td>
+      </tr>
+      <tr>
+        <th>Phone</th>
+        <td><span class="tel value"><%= rf.text_field :phone %></span></td>
+      </tr>
+      <tr>
+        <th>E-mail</th>
+        <td><%= rf.text_field :email %></td>
+      </tr>
+      <tr>
+        <th>Relationship</th>
+        <td><%= rf.text_field :relationship %></td>
+      </tr>
+      <tr>
+        <th>When to Call</th>
+        <td><%= rf.text_field :whentocall %></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <%= rf.submit "Save", class: "btn btn-primary" %>
+        </td>
+      </tr>
+    </table>
   <% end %>
 <% end %>

@@ -1,8 +1,7 @@
+dist: trusty
 language: ruby
 cache:
   - bundler
-  - directories:
-    - travis_phantomjs
 
 sudo : false
 rvm:
@@ -13,6 +12,10 @@ bundler_args: --without production
 addons:
   postgresql: "9.3"
   chrome: stable
+
+before_install:
+  # start your web application and listen on localhost
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 
 env:
   global:

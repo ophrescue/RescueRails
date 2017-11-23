@@ -37,7 +37,7 @@ See `db/seeds.rb` for default admin login info
 
 ### Running Tests
 
-Tests are run via Headless Chrome, which will require Gogle Chrome and Chromedriver.
+Tests are run via Headless Chrome, which will require Google Chrome and ChromeDriver.
 
 ```
 brew install chromedriver

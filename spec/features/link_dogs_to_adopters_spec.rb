@@ -26,7 +26,9 @@ feature 'Link Dogs to Adoption Applications via Adoption model', js: true do
     select 'returned', from: 'adoption_relation_type'
     expect(page).to have_select('adoption_relation_type', selected: 'returned')
 
-    click_button('X')
+    accept_confirm do
+      click_button('X')
+    end
     expect(page).to have_no_content(test_applicant.name + ' status with this dog is')
   end
 end

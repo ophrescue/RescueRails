@@ -183,7 +183,7 @@ class User < ApplicationRecord
 
   def self.authenticate_with_salt(id, cookie_salt)
     user = find_by(id: id)
-    (user && user.salt == cookie_salt) ? user : nil
+    user && user.salt == cookie_salt ? user : nil
   end
 
   def out_of_date?
@@ -232,8 +232,8 @@ class User < ApplicationRecord
     end
 
     def format_cleanup
-      self.region.upcase!
-      self.email.downcase!
+      region.upcase!
+      email.downcase!
     end
 
     def encrypt_password

@@ -50,7 +50,7 @@ class MailChimpClient
       body: {
         email_address: email,
         status_if_new: 'pending',
-        merge_fields: merge_vars,
+        merge_fields: merge_vars
       }
     )
   end

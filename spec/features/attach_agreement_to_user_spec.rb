@@ -19,7 +19,7 @@ feature 'Attach an agreement to a user', js: true do
     click_link('Update/Verify Profile')
     expect(page).to have_content('Edit Staff Account')
 
-    page.attach_file('user_agreement_attributes_attachment', 'public/docs/spay-neuter-agreement.pdf')
+    page.attach_file('user_agreement_attributes_attachment', Rails.root.join("public", "docs", "spay-neuter-agreement.pdf"))
     click_button('Update / Verify')
 
     expect(page).to have_no_css('#confidentiality-agreement-dl')
@@ -39,7 +39,7 @@ feature 'Attach an agreement to a user', js: true do
     click_link('Update/Verify Profile')
     expect(page).to have_content('Edit Staff Account')
 
-    page.attach_file('user_confidentiality_agreement_attributes_attachment', 'public/docs/what-to-buy-ahead-of-time.pdf')
+    page.attach_file('user_confidentiality_agreement_attributes_attachment', Rails.root.join("public", "docs", "what-to-buy-ahead-of-time.pdf"))
     click_button('Update / Verify')
 
     expect(page).to have_no_css('#foster-agreement-dl')
@@ -59,7 +59,7 @@ feature 'Attach an agreement to a user', js: true do
     click_link('Update/Verify Profile')
     expect(page).to have_content('Edit Staff Account')
 
-    page.attach_file('user_code_of_conduct_agreement_attributes_attachment', 'public/docs/new-puppy-info.pdf')
+    page.attach_file('user_code_of_conduct_agreement_attributes_attachment', Rails.root.join("public", "docs", "new-puppy-info.pdf"))
     click_button('Update / Verify')
 
     expect(page).to have_no_css('#foster-agreement-dl')

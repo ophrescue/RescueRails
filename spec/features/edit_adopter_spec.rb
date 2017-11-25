@@ -14,12 +14,12 @@ feature 'Edit Adopter Form', js: true do
     expect(first('.read-only').visible?).to be true
     expect(first('.editable')).to be_nil
 
-    find('#toggle-edit').trigger('click')
+    find('#toggle-edit').click
 
     expect(first('.read-only')).to be_nil
     expect(first('.editable').visible?).to be true
 
-    find('#toggle-edit').trigger('click')
+    find('#toggle-edit').click
 
     expect(first('.read-only').visible?).to be true
     expect(first('.editable')).to be_nil

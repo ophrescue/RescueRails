@@ -54,8 +54,8 @@ module ApplicationHelper
 
   def sortable(column, title = nil)
     title ||= column.titleize
-    css_class = (column == params[:sort]) ? "current #{params[:direction]}" : nil
-    direction = (column == params[:sort] && params[:direction] == 'asc') ? 'desc' : 'asc'
+    css_class = column == params[:sort] ? "current #{params[:direction]}" : nil
+    direction = column == params[:sort] && params[:direction] == 'asc' ? 'desc' : 'asc'
     status = params[:status]
     search_term = params[:search]
     is_status = params[:is_status]

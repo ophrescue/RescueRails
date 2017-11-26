@@ -1,17 +1,45 @@
-<tr>
-  <td>
-    <%= reference.name %>
-  </td>
-  <td>
-    <span class="tel value"><%= reference.phone %></span>
-  </td>
-  <td>
-    <%= reference.email %>
-  </td>
-  <td>
-    <%= reference.relationship %>
-  </td>
-  <td>
-    <%= reference.whentocall %>
-  </td>
-</tr>
+<%= form_for @adopter, html: { class: 'form-horizontal edit-reference' } do |f| %>
+  <%= f.fields_for :references, f.object.references.order(:name) do |rf| %>
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+        <th class="span2">Name</th>
+        <td>
+          <div class='ref-read-only'><%= rf.object.name %></div>
+          <div class='ref-editable'><%= rf.text_field :name %></div>
+        </td>
+      </tr>
+      <tr>
+        <th>Phone</th>
+        <td>
+          <div class='ref-read-only'><span class="tel value"><%= rf.object.phone %></span></div>
+          <div class='ref-editable'><%= rf.text_field :phone %></div>
+        </td>
+      </tr>
+      <tr>
+        <th>E-mail</th>
+        <td>
+          <div class='ref-read-only'><%= rf.object.email %></div>
+          <div class='ref-editable'><%= rf.text_field :email %></div>
+        </td>
+      </tr>
+      <tr>
+        <th>Relationship</th>
+        <td>
+          <div class='ref-read-only'><%= rf.object.relationship %></div>
+          <div class='ref-editable'><%= rf.text_field :relationship %></div>
+        </td>
+      </tr>
+      <tr>
+        <th>When to Call</th>
+        <td>
+          <div class='ref-read-only'><%= rf.object.whentocall %></div>
+          <div class='ref-editable'><%= rf.text_field :whentocall %></div>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+  <p>
+    <a id="toggle-edit-ref" class="btn btn-primary">Edit References</a>
+    <%= f.submit "Save References", class: "btn reference-save", disabled: "disabled" %>
+  </p>
+<% end %>

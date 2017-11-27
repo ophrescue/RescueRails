@@ -52,7 +52,7 @@ class AdopterSearcher
   end
 
   def self.search(params: {})
-    self.new(params: params).search
+    new(params: params).search
   end
 
   private

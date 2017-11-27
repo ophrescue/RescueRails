@@ -97,8 +97,7 @@ class Dog < ApplicationRecord
   validates_inclusion_of :status, in: STATUSES
   validates_presence_of :status
 
-  PETFINDER_STATUS =
-  {
+  PETFINDER_STATUS = {
     'adoptable' => 'A',
     'adoption pending' => 'P',
     'on hold' => 'H',
@@ -106,19 +105,17 @@ class Dog < ApplicationRecord
     'coming soon' => 'H'
   }.freeze
 
-  PETFINDER_SIZE =
-  {
+  PETFINDER_SIZE = {
     'small' => 'S',
     'medium' => 'M',
     'large' => 'L',
     'extra large' => 'XL'
   }.freeze
 
-  PETFINDER_GENDER =
-  {
+  PETFINDER_GENDER = {
     'Male' => 'M',
     'Female' => 'F'
-  }
+  }.freeze
 
   FILTER_FLAGS = [
     'High Priority',

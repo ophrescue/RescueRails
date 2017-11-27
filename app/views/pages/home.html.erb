@@ -48,6 +48,15 @@
           </div>
 <% end %>
 
+<% if Time.now.between?(("2017-11-17".to_date),("2017-12-03".to_date))%>
+          <div class="item">
+            <%= image_tag "christmas-parade-banner-2017.jpg", alt: "OPH Christmas Walk Parade" %>
+            <div class="carousel-caption">
+              <%= link_to "RSVP", "https://www.facebook.com/events/898971253588694/", :class => "btn btn-primary btn-large" %>
+            </div>
+          </div>
+<% end %>
+
 <% if Time.now.between?(("2017-11-17".to_date),("2018-04-09".to_date))%>
           <div class="item">
             <%= image_tag "fastfurriestwebbanner-2018.jpg", alt: "Fast and Furriest 5k is April 8th, 2018" %>

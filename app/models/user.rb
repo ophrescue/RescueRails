@@ -189,13 +189,7 @@ class User < ApplicationRecord
 
   def self.authenticate_with_salt(id, cookie_salt)
     user = find_by(id: id)
-    (user && user.salt == cookie_salt) ? user : nil
-  end
-
-  def generate_token(column)
-    begin
-      self[column] = SecureRandom.urlsafe_base64
-    end while User.exists?(column => self[column])
+    user && user.salt == cookie_salt ? user : nil
   end
 
   def out_of_date?
@@ -233,13 +227,19 @@ class User < ApplicationRecord
 
   private
 
+    def generate_token(column)
+      begin
+        self[column] = SecureRandom.urlsafe_base64
+      end while User.exists?(column => self[column])
+    end
+
     def full_street_address
       [address1, address2, city, region, postal_code].compact.join(', ')
     end
 
     def format_cleanup
-      self.region.upcase!
-      self.email.downcase!
+      region.upcase!
+      email.downcase!
     end
 
     def encrypt_password

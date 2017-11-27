@@ -46,7 +46,6 @@
 #  sponsored_by         :string(255)
 #  shelter_id           :integer
 #  medical_summary      :text
-#
 require 'rails_helper'
 
 describe DogsController, type: :controller do
@@ -103,10 +102,9 @@ describe DogsController, type: :controller do
         get_index
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog])
       end
-
     end
   end
-
+  
   describe 'GET #show' do
     include_context 'signed in admin'
 

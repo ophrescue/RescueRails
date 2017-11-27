@@ -430,7 +430,7 @@
         </label>
         <label class="checkbox">
           <%= f.check_box :active %>
-          <span><strong>Active Volunteer</strong>- This person is an active volunteer. </span>
+          <span><strong>Active Volunteer</strong>- This person is an active volunteer and currently working with OPH (i.e. working at the shelter, going to events, etc..).</span>
         </label>
         <label class="checkbox">
           <%= f.check_box :locked %>
@@ -445,7 +445,6 @@
       </div>
       <% end %>
     </div>
-
     <div class="actions well">
       <%= f.submit "Update / Verify", :class => "btn btn-primary" %>
     </div>

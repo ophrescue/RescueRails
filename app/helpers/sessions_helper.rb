@@ -36,7 +36,7 @@ module SessionsHelper
   end
 
   def active_user?
-    current_user.active? unless current_user.nil?
+    current_user&.active?
   end
 
   def is_locked?

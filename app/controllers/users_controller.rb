@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   before_action :authenticate
   before_action :correct_user, only: [:edit, :update]
   before_action :active_user, only: [:index]
-  before_action :show_other_users, only: [:show]
+  before_action :allowed_to_see_user, only: [:show]
   before_action :admin_user, only: [:new, :create, :destroy]
 
   YES_NO_OPTIONS = [['Any', ''], ['Yes', 't'], ['No', 'f']]
@@ -259,7 +259,7 @@ class UsersController < ApplicationController
     redirect_to(root_path) unless current_user.active?
   end
 
-  def show_other_users
+  def allowed_to_see_user
     @user = User.find(params[:id])
     redirect_to(root_path) unless (current_user?(@user) || current_user.active?)
   end
@@ -272,5 +272,4 @@ class UsersController < ApplicationController
   def admin_user
     redirect_to(root_path) unless current_user.admin?
   end
-
 end

@@ -67,7 +67,7 @@ feature 'View Dogs', js: true do
       sign_in(inactive_user)
     end
 
-    scenario 'can not use the Manager View' do
+    scenario 'cannot view the Manager View' do
       visit '/dogs'
       expect(page).to have_no_content('Manager View')
     end

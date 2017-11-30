@@ -96,38 +96,38 @@ describe UsersController, type: :controller do
       end
 
       it 'returns the training team members' do
-        smith = create(:user, name: 'Jane Smithbot', training_team: TRUE)
-        get :index, params: { training_team: TRUE }
+        smith = create(:user, name: 'Jane Smithbot', training_team: true)
+        get :index, params: { training_team: true }
         expect(assigns(:users)).to match_array([smith])
       end
 
       it 'returns the newsletter team members' do
-        smith = create(:user, name: 'Jane Smithbot', writes_newsletter: TRUE)
-        get :index, params: { newsletter: TRUE }
+        smith = create(:user, name: 'Jane Smithbot', writes_newsletter: true)
+        get :index, params: { newsletter: true }
         expect(assigns(:users)).to match_array([smith])
       end
 
       it 'returns the public relations team members' do
-        smith = create(:user, name: 'Jane Smithbot', public_relations: TRUE)
-        get :index, params: { public_relations: TRUE }
+        smith = create(:user, name: 'Jane Smithbot', public_relations: true)
+        get :index, params: { public_relations: true }
         expect(assigns(:users)).to match_array([smith])
       end
 
       it 'returns the fundraising team members' do
-        smith = create(:user, name: 'Jane Smithbot', fundraising: TRUE)
-        get :index, params: { fundraising: TRUE }
+        smith = create(:user, name: 'Jane Smithbot', fundraising: true)
+        get :index, params: { fundraising: true }
         expect(assigns(:users)).to match_array([smith])
       end
 
       it 'returns the translator team members' do
-        smith = create(:user, name: 'Jane Smithbot', translator: TRUE)
-        get :index, params: { translator: TRUE }
+        smith = create(:user, name: 'Jane Smithbot', translator: true)
+        get :index, params: { translator: true }
         expect(assigns(:users)).to match_array([smith])
       end
-      
+
       it 'returns the active team members' do
-        smith = create(:user, name: 'Jane Smithbot', active: TRUE)
-        get :index, params: { active_volunteer: TRUE }
+        smith = create(:user, name: 'Jane Smithbot', active: true)
+        get :index, params: { active_volunteer: true }
         expect(assigns(:users)).to match_array([smith, admin, active_user])
       end
     end
@@ -136,12 +136,11 @@ describe UsersController, type: :controller do
       before :each do
         allow(controller).to receive(:current_user) { inactive_user }
       end
-      
+
       it 'cannot view users index' do
         get(:index)
         expect(inactive_user).to redirect_to('/')
       end
-
     end
   end
 
@@ -202,8 +201,8 @@ describe UsersController, type: :controller do
   end
 
   describe 'PATCH update' do
-    let!(:test_user) { create(:user, name: 'Original Name', admin: FALSE) }
-    let(:change_permissions_request) { -> { patch :update, params: { id: test_user.id, user: attributes_for(:user, admin: TRUE) } } }
+    let!(:test_user) { create(:user, name: 'Original Name', admin: false) }
+    let(:change_permissions_request) { -> { patch :update, params: { id: test_user.id, user: attributes_for(:user, admin: true) } } }
     let(:change_name_request) { -> { patch :update, params: { id: test_user.id, user: attributes_for(:user, name: 'New Name') } } }
 
     context 'logged in as admin' do
@@ -212,7 +211,7 @@ describe UsersController, type: :controller do
       end
 
       it 'updates the users permissions' do
-        expect { change_permissions_request.call }.to change { test_user.reload.admin }.from(FALSE).to(TRUE)
+        expect { change_permissions_request.call }.to change { test_user.reload.admin }.from(false).to(true)
       end
     end
 
@@ -230,13 +229,12 @@ describe UsersController, type: :controller do
         expect(active_user.reload.city).to eq 'New York'
       end
 
-      it 'is not able to edit another user\'s profile' do
+      it "is not able to edit another user's profile" do
         expect { change_name_request.call }.to_not change { test_user.reload.name }
       end
-
     end
 
-    context 'logged in as inactive active user' do
+    context 'logged in as inactive user' do
       before :each do
         allow(controller).to receive(:current_user) { inactive_user }
       end
@@ -253,8 +251,6 @@ describe UsersController, type: :controller do
       it 'is not able to edit another user\'s profile' do
         expect { change_name_request.call }.to_not change { test_user.reload.name }
       end
-
     end
-
   end
 end

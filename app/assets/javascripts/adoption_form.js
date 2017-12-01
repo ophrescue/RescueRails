@@ -71,8 +71,8 @@ $( function() {
 
     $('#references').on('click', 'a#toggle-edit-ref', function() {
       if (isRefEditing) {
-        // find all disabled fields in .edit-reference and enable them
-        $('form.edit-reference .to-disable').attr('disabled', 'disabled');
+        // find all enabled fields in .edit-reference and disable them
+        $('form.edit-reference .to-disable').prop("disabled", true);
         $('.ref-editable').hide();
         $('.ref-read-only').show();
         $('a#toggle-edit-ref').addClass('btn-primary').text("Edit References");

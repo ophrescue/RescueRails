@@ -16,9 +16,9 @@ class UserSearcher
         @users = @users.where('lower(name) LIKE ?', "%#{search_term}%")
       end
     elsif location_search?
-      @users = @users.active.near(@params[:location], 30)
+      @users = @users.unlocked.near(@params[:location], 30)
     else
-      @users = @users.active.filter(filtering_params).order('name')
+      @users = @users.unlocked.filter(filtering_params).order('name')
     end
 
     for_page(@params[:page])

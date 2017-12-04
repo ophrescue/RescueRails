@@ -29,6 +29,7 @@
 
 class BannedAdoptersController < ApplicationController
   before_action :authenticate
+  before_action :active_user
   before_action :ban_adopters_user, only: [:new, :create, :destroy, :edit, :update, :import]
 
   def index
@@ -76,6 +77,10 @@ class BannedAdoptersController < ApplicationController
 
   def ban_adopters_user
     redirect_to(root_path) unless current_user.ban_adopters?
+  end
+
+  def active_user
+    redirect_to(root_path) unless current_user.active?
   end
 
   def banned_adopter_params

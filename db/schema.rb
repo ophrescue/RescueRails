@@ -357,7 +357,7 @@ ActiveRecord::Schema.define(version: 20171103212000) do
     t.boolean  "social_media_manager",                                   default: false, null: false
     t.boolean  "graphic_design",                                         default: false, null: false
     t.string   "country",                      limit: 3,                                 null: false, comment: "Country as a ISO 3166-1 alpha-3 code"
-    t.boolean  "active",                                                 default: false, null: false
+    t.boolean  "active",                                                 default: false, null: false, comment: "if false user is a candiate volunteer and should only be able to see and edit their profile"
     t.index ["agreement_id"], name: "index_users_on_agreement_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude", using: :btree

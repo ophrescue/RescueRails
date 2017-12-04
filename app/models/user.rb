@@ -80,7 +80,6 @@
 #  graphic_design               :boolean          default(FALSE), not null
 #  country                      :string(3)        not null
 #  active                       :boolean          default(FALSE), not null
-#
 
 require 'digest'
 
@@ -176,7 +175,7 @@ class User < ApplicationRecord
   scope :puppies_ok,              -> (status = true) { where(can_foster_puppies: status) }
   scope :has_parvo_house,         -> (status = true) { where(parvo_house: status) }
 
-  
+
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
   end

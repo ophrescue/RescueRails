@@ -27,5 +27,9 @@
 class Folder < ApplicationRecord
   has_many :attachments, -> { order('updated_at DESC') }, as: :attachable
 
+  scope :locked, -> { where(locked: true) }
+  scope :unlocked, -> { where(locked: false) }
+  scope :with_attachments, -> { joins(:attachments).includes(:attachments) }
+
   accepts_nested_attributes_for :attachments, allow_destroy: true
 end

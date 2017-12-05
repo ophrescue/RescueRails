@@ -80,7 +80,7 @@ class DogsController < ApplicationController
       do_manager_view = true
     elsif signed_in? && params[:all_dogs] == "true"
       do_manager_view = true
-    elsif 
+    else
       do_manager_view = false
     end
 

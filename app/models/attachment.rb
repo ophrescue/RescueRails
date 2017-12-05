@@ -54,15 +54,6 @@ class Attachment < ApplicationRecord
   AGREEMENT_TYPE_CODE_OF_CONDUCT = 'code of conduct'
 
   def download_url(style_name = :original)
-    s3 = Aws::S3::Client.new
-    resource = Aws::S3::Resource.new(client: s3)
-
-    @bucket ||= resource.bucket(ENV['S3_BUCKET_NAME'])
-
-    @bucket.object(attachment.s3_object(style_name).key).presigned_url(
-      :get,
-      secure: true,
-      expires_in: 300,
-      response_content_disposition: "attachment; filename=#{attachment_file_name}")
+    attachment.expiring_url(3600, style_name)
   end
 end

@@ -17,6 +17,12 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<%= f.label :original_name, :class => 'control-label'  %>
+			<div class="controls">
+				<%= f.text_field :original_name %>
+			</div>
+		</div>
+		<div class="control-group">
 			<%= f.label :status, :class => 'control-label'  %>
 			<div class="controls">
 				<%= f.select(:status, Dog::STATUSES, :prompt => '-select-') %>
@@ -53,11 +59,11 @@
 			<div class="controls">
 				<%= f.select(:gender, Dog::GENDERS, :prompt => '-select-', :class => "span2") %>
 			</div>
-		</div>	
+		</div>
 		<div class="control-group">
 			<%= f.label :age, :class => 'control-label'  %>
 			<div class="controls">
-				<%= f.select(:age, Dog::AGES, :prompt => '-select-', :class => "span2") %>	
+				<%= f.select(:age, Dog::AGES, :prompt => '-select-', :class => "span2") %>
 			</div>
 		</div>
 		<div class="control-group">
@@ -78,6 +84,18 @@
 				<%= f.text_field :available_on_dt %>
 			</div>
 		</div>
+		<div class="control-group">
+			<%= f.label :adoption_date, "Adoption Date", :class => 'control-label'  %>
+			<div class="controls">
+				<%= f.text_field :adoption_date %>
+			</div>
+		</div>
+		<div class="control-group">
+      <%= f.label :sponsored_by, "Sponsored by", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :sponsored_by %>
+      </div>
+    </div>
 
 		<h3>Ads</h3>
 		<div class="control-group">
@@ -103,7 +121,7 @@
 			<div class="controls">
 				<%= f.text_field :youtube_video_url %>
 			</div>
-		</div>		
+		</div>
 	</div>
 
 	<div class="span6">
@@ -121,6 +139,14 @@
 		<div class="control-group">
 			<div class="controls">
 				<%= f.collection_select(:coordinator_id, @coordinator_users, :id, :name, :prompt => '-select-') %>
+			</div>
+		</div>
+
+		<h3>Source Shelter</h3>
+
+		<div class="control-group">
+			<div class="controls">
+				<%= f.collection_select(:shelter_id, @shelters, :id, :name, :include_blank => '-select-' ) %>
 			</div>
 		</div>
 
@@ -238,10 +264,19 @@
 </div>
 
 <div class="row sidekick">
-	<div class="span12">
-		<h2>Photos</h2>
-			<p>Photos can be added after you create the dog</p>
-	</div>
+  <div class="span12">
+    <h2>Photos</h2>
+		<div class="span5">
+			<h3>New Photos</h3>
+	      <div class="control-group">
+	        <%= f.fields_for :photos do |photo| %>
+	          <% if photo.object.new_record? %>
+	            <%= photo.file_field :photo %><br />
+	          <% end %>
+	        <% end %>
+	      </div>
+		</div>
+  </div>
 </div>
 
 <div class="row sidekick">
@@ -276,6 +311,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="control-group sidekick">
 	<h2>Public Description</h2>
 	<div class="controls">
@@ -283,8 +319,25 @@
 	</div>
 </div>
 
+<div class="control-group sidekick">
+  <h2>Medical Summary</h2>
+  <% if can_manage_medical_behavior_summaries? %>
+    <div class="controls">
+      <%= f.text_area :medical_summary, :class => "input-xxlarge", :rows => "8" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="control-group sidekick">
+  <h2>Behavior Summary</h2>
+  <% if can_manage_medical_behavior_summaries? %>
+    <div class="controls">
+      <%= f.text_area :behavior_summary, :class => "input-xxlarge", :rows => "8" %>
+    </div>
+  <% end %>
+</div>
+
 <div class="actions well">
 	<%= f.submit "Submit", :class => "btn btn-primary" %>
 </div>
 <% end %>
-

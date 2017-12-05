@@ -429,6 +429,10 @@
           <span><strong>Download Restricted Resources</strong> - This person can access Restricted folders in the Staff Resources section.  Download Resources permission needed too.</span>
         </label>
         <label class="checkbox">
+          <%= f.check_box :active %>
+          <span><strong>Active Volunteer</strong>- This person is an active volunteer and currently working with OPH (i.e. working at the shelter, going to events, etc..).</span>
+        </label>
+        <label class="checkbox">
           <%= f.check_box :locked %>
           <span><strong>Lock</strong> - Will disable account, preventing user from logging in.</span>
         </label>
@@ -441,7 +445,6 @@
       </div>
       <% end %>
     </div>
-
     <div class="actions well">
       <%= f.submit "Update / Verify", :class => "btn btn-primary" %>
     </div>

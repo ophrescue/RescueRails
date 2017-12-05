@@ -74,6 +74,7 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem 'rack_session_access'
 end
 
 group :development do

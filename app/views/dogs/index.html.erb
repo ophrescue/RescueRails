@@ -10,7 +10,7 @@
 
       <% if session[:mgr_view] == true %>
         <%= link_to("Gallery View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
-      <% else %>
+      <% elsif current_user.active %>
         <%= link_to("Manager View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
       <% end %>
     <% end %>

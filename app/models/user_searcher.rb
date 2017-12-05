@@ -16,9 +16,9 @@ class UserSearcher
         @users = @users.where('lower(name) LIKE ?', "%#{search_term}%")
       end
     elsif location_search?
-      @users = @users.active.near(@params[:location], 30)
+      @users = @users.unlocked.near(@params[:location], 30)
     else
-      @users = @users.active.filter(filtering_params).order('name')
+      @users = @users.unlocked.filter(filtering_params).order('name')
     end
 
     for_page(@params[:page])
@@ -56,7 +56,7 @@ class UserSearcher
     @params.slice(:admin, :adoption_coordinator, :event_planner,
                  :dog_adder, :dog_editor, :photographer, :foster,
                  :newsletter, :has_dogs, :has_cats, :house_type, :has_children_under_five,
-                 :has_fence, :puppies_ok, :has_parvo_house, :transporter, :training_team, :foster_mentor, :translator, :public_relations, :fundraising, :medical_behavior, :boarding_buddy, :social_media, :graphic_designer
+                 :has_fence, :puppies_ok, :has_parvo_house, :transporter, :training_team, :foster_mentor, :translator, :public_relations, :fundraising, :medical_behavior, :boarding_buddy, :social_media, :graphic_designer, :active_volunteer, :inactive_volunteer
                 )
   end
 end

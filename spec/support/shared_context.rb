@@ -7,9 +7,9 @@ RSpec.shared_context 'signed in admin' do
 end
 
 RSpec.shared_context 'signed in user' do
-  let(:admin) { create(:user, :admin) }
+  let(:user) { create(:user) }
 
   before do
-    allow(controller).to receive(:current_user) { admin }
+    allow(controller).to receive(:current_user) { user }
   end
 end

@@ -68,10 +68,11 @@ end
 group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
+  gem 'capybara-selenium'
+  gem 'chromedriver-helper'
   gem 'coveralls', require: false
   gem 'database_cleaner'
   gem 'factory_bot_rails'
-  gem 'poltergeist'
   gem 'rails-controller-testing'
   gem 'rack_session_access'
 end

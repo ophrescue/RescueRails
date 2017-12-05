@@ -62,19 +62,6 @@ Rails.application.configure do
   # Paperclip Configuration
   Paperclip.options[:command_path] = "/usr/local/bin/"
 
-  # Paperclip & Amazon S3 Configuration
-  config.paperclip_defaults = {
-    storage: :s3,
-    s3_credentials: {
-      bucket: ENV['S3_BUCKET_NAME'],
-      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
-    },
-    s3_protocol: 'https',
-    s3_region: ENV['AWS_REGION'],
-    url: ':s3_domain_url'
-  }
-
   # Exception Notification
   ExceptionNotifier::Rake.configure
 

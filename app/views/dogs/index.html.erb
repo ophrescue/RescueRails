@@ -20,15 +20,12 @@
 <%= will_paginate @dogs %>
 
   <% if signed_in? && session[:mgr_view] == true %>
-
     <%= render 'manager' %>
-
+    
   <% else %>
-
     <div id="dogs">
-
-        <%= render 'dog_rows' %>
-
+      <%= render 'dog_rows' %>
+      
     </div>
 
   <% end %>

@@ -54,4 +54,7 @@ Rails.application.configure do
   # Files are deleted after run in spec_helper.rb
   Paperclip::Attachment.default_options[:path] = "#{Rails.root}/spec/test_files/:class/:id_partition/:style.:extension"
 
+  # Access to rack session
+  config.middleware.use RackSessionAccess::Middleware
+
 end

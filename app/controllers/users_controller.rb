@@ -76,6 +76,8 @@
 class UsersController < ApplicationController
   before_action :authenticate
   before_action :correct_user, only: [:edit, :update]
+  before_action :active_user, only: [:index]
+  before_action :allowed_to_see_user, only: [:show]
   before_action :admin_user, only: [:new, :create, :destroy]
 
   YES_NO_OPTIONS = [['Any', ''], ['Yes', 't'], ['No', 'f']]
@@ -192,6 +194,7 @@ class UsersController < ApplicationController
                 :boarding_buddies,
                 :social_media_manager,
                 :graphic_design,
+                :active,
                 agreement_attributes: [
                   :attachment,
                   :description,
@@ -250,6 +253,15 @@ class UsersController < ApplicationController
     @user.build_confidentiality_agreement unless @user.confidentiality_agreement
     @user.build_code_of_conduct_agreement unless @user.code_of_conduct_agreement
     @foster_users = User.where(locked: false).order("name")
+  end
+
+  def active_user
+    redirect_to(root_path) unless current_user.active?
+  end
+
+  def allowed_to_see_user
+    @user = User.find(params[:id])
+    redirect_to(root_path) unless (current_user?(@user) || current_user.active?)
   end
 
   def correct_user

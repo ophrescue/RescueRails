@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <% if signed_in? %>
+    <% if active_user? %>
       <div class="row">
         <div class="span8">
           <h4>Medical Summary</h4>
@@ -138,7 +138,7 @@
       <a href="/sponsor"><%= image_tag "paypal-sponsor-button.png" %></a>
 
       <br />
-      <% if signed_in? %>
+      <% if active_user? %>
 
         <h4>Private Information</h4>
         <ul class="fa-ul">

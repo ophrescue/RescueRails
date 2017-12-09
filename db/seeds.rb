@@ -11,7 +11,7 @@
 User.destroy_all
 
 @attr = { name: "Admin User",
-          email: "test@test.com",
+          email: "test3@test.com",
           password: "foobar99",
           password_confirmation: "foobar99",
           region: 'NY',

@@ -1,6 +1,6 @@
 feature 'Edit User Profile', js: true do
   let!(:admin) { create(:user, :admin) }
-  let!(:user) { create(:user) }
+  let!(:user) { create(:user, active: true) }
 
   scenario 'Admin is presented with non-disabled name field' do
     sign_in(admin)

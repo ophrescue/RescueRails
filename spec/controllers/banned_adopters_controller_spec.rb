@@ -18,15 +18,33 @@ require 'rails_helper'
 describe BannedAdoptersController, type: :controller do
   let!(:admin) { create(:user, :admin) }
   let!(:hacker) { create(:user) }
+  let!(:inactive_user) { create(:user, :inactive_user)}
 
   before :each do
     allow(controller).to receive(:current_user) { admin }
   end
 
   describe 'GET index' do
-    it 'is successful' do
-      get :index
-      expect(response).to be_successful
+    context 'logged in as admin' do
+      before :each do
+        allow(controller).to receive(:current_user) { admin }
+      end
+
+      it 'is successful' do
+        get :index
+        expect(response).to be_successful
+      end
+    end
+
+    context 'logged in as inactive user' do
+      before :each do
+        allow(controller).to receive(:current_user) { inactive_user }
+      end
+
+      it 'is unable to access' do
+        get :index
+        expect(response).to redirect_to root_url
+      end
     end
   end
 

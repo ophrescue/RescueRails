@@ -1,5 +1,6 @@
 require 'simplecov'
 require 'coveralls'
+require "rack_session_access/capybara"
 
 SimpleCov.formatters = [
   SimpleCov::Formatter::HTMLFormatter,

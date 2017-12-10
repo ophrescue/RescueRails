@@ -4,7 +4,7 @@
 
 Rails 5.0.x
 Ruby 2.3.1
-Postgresql
+Postgresql 9.4.x
 
 ### About
 RescueRails is the public facing website for Operation Paws for Homes, as well as the private system used by the rescue for managing dogs, adopters and staff.

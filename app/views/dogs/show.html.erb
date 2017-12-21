@@ -68,14 +68,40 @@
             <%= f.submit "Post", :id => "comment_submit", :class => "btn btn-primary" %>
           <% end %>
 
-          <h4>Past Comments</h4>
-          <div id="comment_table">
-              <% @dog.comments.each do |comment| %>
-                <% if comment.id != nil %>
-                  <%= render 'comments/comment', :comment => comment %>
+          <div class="tabbable">
+            <ul class="nav nav-tabs">
+              <li>
+                <a href="#all_table" data-toggle="tab">All</a>
+              </li>
+              <li class="active">
+                <a href="#comment_table" data-toggle="tab">Comments</a>
+              </li>
+              <li>
+                <a href="#history_table" data-toggle="tab">History</a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <div class="tab-pane" id="all_table">
+                <p>Display All Items Here.</p>
+              </div>
+              <div class="tab-pane active" id="comment_table">
+                <% @dog.comments.each do |comment| %>
+                  <% if comment.id != nil %>
+                    <%= render 'comments/comment', :comment => comment %>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
+              <div class="tab-pane" id="history_table">
+                <% @dog.audits.each do |audit| %>
+                  <% if audit.id != nil %>
+                    <%= render 'audits/audit', :audit => audit %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     <% end %>

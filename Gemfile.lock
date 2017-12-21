@@ -49,6 +49,8 @@ GEM
       io-like (~> 0.3.0)
     arel (7.1.4)
     ast (2.3.0)
+    audited (4.5.0)
+      activerecord (>= 4.0, < 5.2)
     aws-sdk (2.10.94)
       aws-sdk-resources (= 2.10.94)
     aws-sdk-core (2.10.94)
@@ -391,6 +393,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   annotate
+  audited (~> 4.5)
   aws-sdk (~> 2)
   better_errors
   binding_of_caller

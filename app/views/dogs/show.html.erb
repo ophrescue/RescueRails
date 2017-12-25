@@ -83,7 +83,7 @@
 
             <div class="tab-content">
               <div class="tab-pane" id="all_table">
-                <p>Display All Items Here.</p>
+                <p>Display all items here somehow?</p>
               </div>
               <div class="tab-pane active" id="comment_table">
                 <% @dog.comments.each do |comment| %>
@@ -93,7 +93,7 @@
                 <% end %>
               </div>
               <div class="tab-pane" id="history_table">
-                <% @dog.audits.each do |audit| %>
+                <% @dog.audits.reverse_each do |audit| %>
                   <% if audit.id != nil %>
                     <%= render 'audits/audit', :audit => audit %>
                   <% end %>

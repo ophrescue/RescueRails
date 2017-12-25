@@ -7,17 +7,26 @@
           <% else %>
             <strong><%= link_to audit.user.name, user_path(audit.user) %></strong>
           <% end %>
-          <em><%= audit.created_at.strftime('%m/%d/%Y %l:%M%P') %></em>
+          <% if audit.action == 'update' %>
+            made changes on
+          <% elsif audit.action == 'create'%>
+            created
+          <% end %>
+          <%= audit.created_at.strftime('%m/%d/%Y %l:%M%P') %>
         </small>
       </div>
-
-    <%= audit.auditable_type %> <br/>
-    <%= audit.action %> <br/>
-    <ul>
-    <% audit.audited_changes.each do |key, value| %>
-        <li><%= key %> - <%= value %> </li>
-    <% end %>
-    <ul>
+    <table class="table">
+      <thead>
+        <th>Field</th><th>Old Value</th><th>New Value</th>
+      </thead>
+      <tbody>
+        <% audit.audited_changes.each do |key, value| %>
+          <tr>
+            <td><%= key.titleize %></td><td><%= value[0] %></td><td><%= value[1] %></td>
+          </tr>
+        <% end%>
+      </tbody>
+    </table>
   </div>
 </div>
 <hr/>

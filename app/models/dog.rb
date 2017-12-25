@@ -66,6 +66,7 @@
 #
 
 class Dog < ApplicationRecord
+  audited
   include Auditable
   include Filterable
 

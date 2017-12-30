@@ -41,6 +41,7 @@
 #
 
 class Adopter < ApplicationRecord
+  audited on: :update
   include Auditable
 
   attr_accessor :pre_q_costs,

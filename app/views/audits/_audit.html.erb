@@ -10,23 +10,25 @@
           <% if audit.action == 'update' %>
             made changes on
           <% elsif audit.action == 'create'%>
-            created
+            created this <%= audit.auditable_type %> on
           <% end %>
           <%= audit.created_at.strftime('%m/%d/%Y %l:%M%P') %>
         </small>
       </div>
-    <table class="table">
-      <thead>
-        <th>Field</th><th>Old Value</th><th>New Value</th>
-      </thead>
-      <tbody>
-        <% audit.audited_changes.each do |key, value| %>
-          <tr>
-            <td><%= key.titleize %></td><td><%= value[0] %></td><td><%= value[1] %></td>
-          </tr>
-        <% end%>
-      </tbody>
-    </table>
+      <% if audit.action == 'update' %>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <th>Field</th><th>Old Value</th><th>New Value</th>
+          </thead>
+          <tbody>
+            <% audit.audited_changes.each do |key, value| %>
+              <tr>
+                <td><%= key.titleize %></td><td><%= value[0] %></td><td><%= value[1] %></td>
+              </tr>
+            <% end%>
+          </tbody>
+        </table>
+      <% end %>
   </div>
 </div>
 <hr/>

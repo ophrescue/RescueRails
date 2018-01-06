@@ -70,7 +70,7 @@ $(function(){
                               maxlength: 250
                         },
                         "adopter[adoption_app_attributes][spouse_name]" : {
-                              maxlength: 250
+                              maxlength: 50
                         },
                         "adopter[adoption_app_attributes][other_household_names]" : {
                               maxlength: 250

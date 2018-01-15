@@ -36,6 +36,7 @@ RescueRails::Application.routes.draw do
   end
 
   resources :shelters
+  resources :waitlists
 
   root                         to: 'pages#home'
 

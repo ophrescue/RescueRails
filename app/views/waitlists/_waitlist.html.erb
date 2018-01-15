@@ -1,0 +1,6 @@
+<li>
+	<%= link_to waitlist.name, waitlist unless !waitlist.name %> <br />
+  <%= waitlist.description %>
+	<p>Dogs: <%= waitlist.dogs.count %><br />
+  Applications: <%= waitlist.adopter_waitlists.count %></p>
+</li>

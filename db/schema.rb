@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221012248) do
+ActiveRecord::Schema.define(version: 20180114023802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adopter_waitlists", force: :cascade do |t|
+    t.integer  "rank"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "adopter_id"
+    t.integer  "waitlist_id"
+  end
 
   create_table "adopters", force: :cascade do |t|
     t.string   "name",                limit: 255
@@ -220,6 +228,7 @@ ActiveRecord::Schema.define(version: 20171221012248) do
     t.string   "flea_tick_preventative"
     t.boolean  "medical_review_complete",                           default: false
     t.text     "behavior_summary"
+    t.integer  "waitlist_id"
     t.index ["age"], name: "index_dogs_on_age", using: :btree
     t.index ["coordinator_id"], name: "index_dogs_on_coordinator_id", using: :btree
     t.index ["foster_id"], name: "index_dogs_on_user_id", using: :btree
@@ -230,6 +239,7 @@ ActiveRecord::Schema.define(version: 20171221012248) do
     t.index ["shelter_id"], name: "index_dogs_on_shelter_id", using: :btree
     t.index ["size"], name: "index_dogs_on_size", using: :btree
     t.index ["tracking_id"], name: "index_dogs_on_tracking_id", unique: true, using: :btree
+    t.index ["waitlist_id"], name: "index_dogs_on_waitlist_id", using: :btree
   end
 
   create_table "emails", force: :cascade do |t|
@@ -391,6 +401,13 @@ ActiveRecord::Schema.define(version: 20171221012248) do
     t.integer "user_id"
     t.integer "team_id"
     t.index ["user_id", "team_id"], name: "index_users_teams_on_user_id_and_team_id", unique: true, using: :btree
+  end
+
+  create_table "waitlists", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end

@@ -63,7 +63,7 @@
 #  flea_tick_preventative  :string
 #  medical_review_complete :boolean          default(FALSE)
 #  behavior_summary        :text
-#
+#  waitlist_id             :integer
 
 class Dog < ApplicationRecord
   include Auditable
@@ -76,6 +76,7 @@ class Dog < ApplicationRecord
   belongs_to :foster, class_name: 'User'
   belongs_to :coordinator, class_name: 'User'
   belongs_to :shelter
+  belongs_to :waitlist
 
   has_many :comments, -> { order 'created_at DESC' }, as: :commentable
   has_many :attachments, as: :attachable, dependent: :destroy

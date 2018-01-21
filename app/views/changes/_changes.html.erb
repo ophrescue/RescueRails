@@ -21,6 +21,9 @@
         </div>
         <div class="tab-pane" id="history_table">
           <% if parent.audits.count > 0 %>
+            <% parent.associated_audits.each do |audit| %>
+              <%= render 'audits/audit', :audit => audit %>
+            <% end %>
             <% parent.audits.reverse_each do |audit| %>
               <%= render 'audits/audit', :audit => audit %>
             <% end %>

@@ -21,7 +21,7 @@
 # updated_at    :datetime
 #
 class WaitlistsController < ApplicationController
-  before_action :authenticate, except: %i(new create)
+  before_action :authenticate
   before_action :admin_user, only: [:new, :create, :destroy]
 
   def index
@@ -33,9 +33,41 @@ class WaitlistsController < ApplicationController
     @title = @waitlist.name
   end
 
+  def new
+    @waitlist = Waitlist.new
+  end
+
+  def create
+    @waitlist = Waitlist.new(waitlist_params)
+    if @waitlist.save
+      flash[:success] = "New Waitlist Added"
+      redirect_to waitlists_path
+    else
+      render 'new'
+    end
+  end
+
+  def edit
+    @waitlist = Waitlist.find(params[:id])
+  end
+
+  def update
+    @waitlist = Waitlist.find(params[:id])
+    if @waitlist.update_attributes(waitlist_params)
+      flash[:success] = "Record updated."
+      redirect_to waitlists_path
+    else
+      render 'edit'
+    end
+  end
+
   private
 
   def admin_user
     redirect_to(root_path) unless current_user.admin?
+  end
+
+  def waitlist_params
+    params.require(:waitlist).permit(:name, :description)
   end
 end

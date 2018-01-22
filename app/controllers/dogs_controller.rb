@@ -94,6 +94,7 @@ class DogsController < ApplicationController
 
   def show
     @title = @dog.name
+    @waitlist = @dog.waitlist
   end
 
   def new

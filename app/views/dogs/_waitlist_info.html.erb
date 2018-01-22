@@ -1,0 +1,5 @@
+<ul class="unstyled">
+  <% @waitlist.adopter_waitlists.find_each do |wa| %>
+    <li><%= wa.rank %>. <%= wa.adopter.name %></li>
+  <% end %>
+</ul>

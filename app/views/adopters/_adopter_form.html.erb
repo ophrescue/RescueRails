@@ -161,3 +161,11 @@
     </tr>
   </table>
 <% end %>
+
+<hr class="separator">
+<h4>Waitlist</h4>
+<ul class="unstyled">
+  <% @adopter.adopter_waitlists.find_each do |wa| %>
+    <li><%= link_to "#{wa.rank} place on #{wa.waitlist.name}", wa.waitlist %></li>
+  <% end %>
+</ul>

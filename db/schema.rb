@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114023802) do
+ActiveRecord::Schema.define(version: 20180116030025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(version: 20180114023802) do
     t.boolean  "medical_review_complete",                           default: false
     t.text     "behavior_summary"
     t.integer  "waitlist_id"
+    t.integer  "rank"
     t.index ["age"], name: "index_dogs_on_age", using: :btree
     t.index ["coordinator_id"], name: "index_dogs_on_coordinator_id", using: :btree
     t.index ["foster_id"], name: "index_dogs_on_user_id", using: :btree

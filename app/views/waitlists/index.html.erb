@@ -3,18 +3,17 @@
 
 <div class="row">
 	<div class="span12">
-		<p><%= link_to "New Waitlist", new_waitlist_path, :class => "btn btn-primary" %></p>
+		<% if is_admin? %>
+			<p><%= link_to "New Waitlist", new_waitlist_path, :class => "btn btn-primary" %></p>
+		<% end %>
 
-
-	<% if @waitlists.count > 0 %>
-		<ul>
-			<%= render @waitlists %>
-		</ul>
-	<% else %>
-
-		<h5>No Waitlists</h5>
-
-	<% end %>
+		<% if @waitlists.count > 0 %>
+			<ul class="unstyled">
+				<%= render @waitlists %>
+			</ul>
+		<% else %>
+			<h5>No Waitlists</h5>
+		<% end %>
 
 	</div>
 </div>

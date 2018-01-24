@@ -163,6 +163,10 @@ class Adopter < ApplicationRecord
     self.is_subscribed = true
   end
 
+  def comments_and_audits
+    comments + audits
+  end
+
   def chimp_check
     return unless status_changed?
 

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby   '2.3.1'
 
-gem 'rails', '5.0.3'
+gem 'rails', '5.0.6'
 
 gem 'rack-cache'
 
@@ -32,7 +32,7 @@ gem 'will_paginate'
 
 # datas
 gem 'dalli'
-gem 'pg'
+gem 'pg', '~> 0.21.0'
 
 group :production do
   gem 'unicorn'

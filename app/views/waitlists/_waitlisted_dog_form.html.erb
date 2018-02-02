@@ -1,0 +1,17 @@
+<%= form_for @waitlist, html: { :class => "from-horizontal" } do |f| %>
+  <%= f.fields_for :dogs do |d| %>
+    <tr>
+      <td><%= d.object.tracking_id %></td>
+      <td><%= d.object.name %></td>
+    </tr>
+  <% end %>
+<h3>Add Dog</h3>
+  <div class="control-group">
+    <div class="controls">
+      <%= f.fields_for :dogs do |d| %>
+        <%= d.collection_select(:waitlist_id, @dogs, :id, :name, include_blank: '-select-') %>
+        <%= d.submit "Add Dog", :id => "add_dog_submit", :class => "btn btn-small btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

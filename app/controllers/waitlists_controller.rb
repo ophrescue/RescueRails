@@ -20,8 +20,11 @@
 # created_at    :datetime
 # updated_at    :datetime
 #
+
 class WaitlistsController < ApplicationController
   before_action :authenticate
+  before_action :edit_my_adopters_user, only: %i(create update destroy)
+  before_action :edit_all_adopters_user, only: %i(create update destroy)
   before_action :admin_user, only: [:new, :create, :destroy]
 
   def index
@@ -31,6 +34,13 @@ class WaitlistsController < ApplicationController
   def show
     @waitlist = Waitlist.find(params[:id])
     @title = @waitlist.name
+    @adopter_waitlists = @waitlist.adopter_waitlists
+
+    # add adopter
+    @adopters = Adopter.all
+
+    # add dog
+    @dogs = Dog.where(waitlist_id: nil)
   end
 
   def new
@@ -39,8 +49,16 @@ class WaitlistsController < ApplicationController
 
   def create
     @waitlist = Waitlist.new(waitlist_params)
+
+    # if params.fetch(:waitlist, {}).fetch(:adopter_params, true)
+    #   @waitlist.adopter_waitlists.each do |a|
+    #     a.rank = @waitlist.adopter_waitlists.select('MAX(rank)+1')
+    #     a.save
+    #   end
+    # end
+
     if @waitlist.save
-      flash[:success] = "New Waitlist Added"
+      flash[:success] = "Waitlist Added"
       redirect_to waitlists_path
     else
       render 'new'
@@ -51,15 +69,21 @@ class WaitlistsController < ApplicationController
     @waitlist = Waitlist.find(params[:id])
   end
 
-  def update
-    @waitlist = Waitlist.find(params[:id])
-    if @waitlist.update_attributes(waitlist_params)
-      flash[:success] = "Record updated."
-      redirect_to waitlists_path
-    else
-      render 'edit'
-    end
-  end
+  # def update
+  #   @waitlist = Waitlist.find(params[:id])
+  #
+  #   if params.fetch(:waitlist, {}).fetch(:adopter_params, true)
+  #     @waitlist.adopter_waitlists.rank = @waitlist.adopter_waitlists.select('MAX(rank)+1')
+  #   else
+  #   end
+  #
+  #   if @waitlist.update_attributes(waitlist_params)
+  #     flash[:success] = "Record updated."
+  #     redirect_to waitlists_path
+  #   else
+  #     render 'edit'
+  #   end
+  # end
 
   private
 
@@ -68,6 +92,18 @@ class WaitlistsController < ApplicationController
   end
 
   def waitlist_params
-    params.require(:waitlist).permit(:name, :description)
+    params.require(:waitlist).permit(:name,
+                                     :description,
+                                     dogs_attributes:
+                                     [
+                                       :id,
+                                       :waitlist_id
+                                     ],
+                                     adopter_waitlists_attributes:
+                                     [
+                                       :waitlist_id,
+                                       :adopter_id,
+                                       :rank
+                                     ])
   end
 end

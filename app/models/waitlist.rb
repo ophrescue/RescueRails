@@ -21,8 +21,11 @@
 #  description         :string(255)
 
 class Waitlist < ApplicationRecord
-  has_many :dogs
+  has_many :dogs, -> { order 'rank ASC'}
+  accepts_nested_attributes_for :dogs
 
-  has_many :adopter_waitlists, dependent: :destroy
+  has_many :adopter_waitlists, -> { order 'rank ASC' }, dependent: :destroy
+  accepts_nested_attributes_for :adopter_waitlists
+
   has_many :adopters, through: :adopter_waitlists
 end

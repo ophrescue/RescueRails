@@ -34,3 +34,4 @@
 //= require bootstrap-multiselect
 //= require dog-filter
 //= require jquery.ui.touch-punch.min
+//= require waitlist

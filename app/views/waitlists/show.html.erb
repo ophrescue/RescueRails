@@ -24,8 +24,14 @@
         </tbody>
       </table>
       <h3>Add Adopter</h3>
-      <%= form_with(model:[@waitlist, @waitlist.adopter_waitlists.build], local: true) do |f| %>
-        
+      <%= form_for :waitlist, method: 'post', :html => {:id => "new_adopter_add", :class => "form-horizontal"} do |f| %>
+        <% f.fields_for :adopter_waitlists, @waitlist.adopter_waitlists.build(:waitlist => @waitlist_id) do |aw| %>
+          <%= aw.collection_select(:adopter_id, @adopters, :id, :name, include_blank: '-select-') %><br /><br />
+          <div><%= aw.hidden_field :waitlist_id %></div>
+          <div id="Navigation">
+            <%= aw.submit "Add Adopter", :id => "add_adopter_submit", :class => "btn btn-small btn-primary" %>
+          </div>
+        <% end %>
       <% end %>
     <% else %>
       <table class="table table-striped table-bordered table-condensed">

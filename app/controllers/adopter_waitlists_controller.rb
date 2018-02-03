@@ -6,12 +6,16 @@ class AdopterWaitlistsController < ApplicationController
 
   respond_to :html, :json
 
+  def index
+    redirect_to :root
+  end
+
   def create
     @adopter_waitlist = AdopterWaitlist.find_or_initialize_by(create_params)
 
-    # flash[:success] = 'Adpter added to the waitlist' if @adopter_waitlist.save!
+    flash[:success] = 'Adpter added to the waitlist' if @adopter_waitlist.save!
 
-    # handle_redirect
+    handle_redirect
   end
 
   private
@@ -36,7 +40,8 @@ class AdopterWaitlistsController < ApplicationController
     params
       .require(:adopter_waitlist)
       .permit(:waitlist_id,
-              :adopter_id)
+              :adopter_id,
+              :rank)
   end
 
   def edit_my_adopters_user

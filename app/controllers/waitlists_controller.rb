@@ -50,13 +50,6 @@ class WaitlistsController < ApplicationController
   def create
     @waitlist = Waitlist.new(waitlist_params)
 
-    # if params.fetch(:waitlist, {}).fetch(:adopter_params, true)
-    #   @waitlist.adopter_waitlists.each do |a|
-    #     a.rank = @waitlist.adopter_waitlists.select('MAX(rank)+1')
-    #     a.save
-    #   end
-    # end
-
     if @waitlist.save
       flash[:success] = "Waitlist Added"
       redirect_to waitlists_path
@@ -69,21 +62,16 @@ class WaitlistsController < ApplicationController
     @waitlist = Waitlist.find(params[:id])
   end
 
-  # def update
-  #   @waitlist = Waitlist.find(params[:id])
-  #
-  #   if params.fetch(:waitlist, {}).fetch(:adopter_params, true)
-  #     @waitlist.adopter_waitlists.rank = @waitlist.adopter_waitlists.select('MAX(rank)+1')
-  #   else
-  #   end
-  #
-  #   if @waitlist.update_attributes(waitlist_params)
-  #     flash[:success] = "Record updated."
-  #     redirect_to waitlists_path
-  #   else
-  #     render 'edit'
-  #   end
-  # end
+  def update
+    @waitlist = Waitlist.find(params[:id])
+
+    if @waitlist.update_attributes(waitlist_params)
+      flash[:success] = "Record updated."
+      redirect_to waitlists_path
+    else
+      render 'edit'
+    end
+  end
 
   private
 

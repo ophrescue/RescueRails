@@ -2,9 +2,6 @@ $(function() {
   $('#new_adopter_add').submit(function(e) {
     e.preventDefault();
 
-    console.log($('#new_adopter_add').serialize());
-    console.log(this.action);
-
     $.ajax({
       type: 'POST',
       url: this.action + '/adopter_waitlists',

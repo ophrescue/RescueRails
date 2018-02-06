@@ -94,4 +94,14 @@ class WaitlistsController < ApplicationController
                                        :rank
                                      ])
   end
+
+  def edit_my_adopters_user
+    # TODO Figure out how to differentiate these
+    redirect_to(root_path) unless current_user.edit_my_adopters? || current_user.edit_all_adopters?
+  end
+
+  def edit_all_adopters_user
+    # TODO Figure out how to differentiate these
+    redirect_to(root_path) unless current_user.edit_all_adopters?
+  end
 end

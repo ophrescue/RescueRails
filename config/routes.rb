@@ -5,7 +5,7 @@ RescueRails::Application.routes.draw do
   resources :adopters do
     resources :comments, except: %i(destroy edit update)
     resources :adoptions
-    resources :waitlists
+    resources :adopter_waitlists
   end
 
   resources :adoption_app
@@ -28,6 +28,7 @@ RescueRails::Application.routes.draw do
   resources :events
 
   resources :adoptions
+  resources :adopter_waitlists
 
   resources :folders
   resources :attachments

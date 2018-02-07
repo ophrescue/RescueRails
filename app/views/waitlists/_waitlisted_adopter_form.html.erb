@@ -2,10 +2,7 @@
   <fieldset>
     <div class="control-group">
       <%= wa.label :adopter_id, "Add adopter to the waitlist", :class => "control-label" %>
-      <div class="controls">
-        <input id="autocomplete_label" name="waitlist_adopter_name" class='autocomplete'>
-        <input id="waitlist_adopter_id" type="hidden" name="adopter_waitlist[adopter_id]" class='chosen-select'>
-      </div>
+      <%= wa.collection_select(:adopter_id, @adopters, :id, :name, include_blank: '-select-') %><br /><br />
     </div>
     <div><%= wa.hidden_field :waitlist_id %></div>
     <div id="navigation">

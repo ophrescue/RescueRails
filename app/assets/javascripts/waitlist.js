@@ -1,11 +1,11 @@
 $(function() {
-  $('#new_adopter_add').submit(function(e) {
+  $('#new_adopter_link').submit(function(e) {
     e.preventDefault();
 
     $.ajax({
       type: 'POST',
-      url: this.action + '/adopter_waitlists',
-      data: $('#new_adopter_add').serialize(),
+      url: this.action,
+      data: $('#new_adopter_link').serialize(),
       success: function (data) {
         alert('success')
       },

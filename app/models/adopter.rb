@@ -84,7 +84,7 @@ class Adopter < ApplicationRecord
   has_many :dogs, through: :adoptions
   has_many :comments, -> { order('created_at DESC') }, as: :commentable
 
-  has_many :adopter_waitlists
+  has_many :adopter_waitlists, dependent: :destroy
   has_many :waitlists, through: :adopter_waitlists
 
   belongs_to :user, class_name: 'User', primary_key: 'id', foreign_key: 'assigned_to_user_id'

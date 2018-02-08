@@ -158,12 +158,20 @@ class Dog < ApplicationRecord
   scope :cb_no_dogs,                  ->(_) { where no_dogs: true }
   scope :cb_no_kids,                  ->(_) { where no_kids: true }
 
-  def comments_and_audits
-    comments + audits
+  def adopted?
+    status == 'adopted'
   end
 
   def attributes_to_audit
     %w[status]
+  end
+
+  def audits_and_associated_audits
+    audits + associated_audits
+  end
+
+  def comments_and_audits_and_associated_audits
+    comments + audits + associated_audits
   end
 
   def to_petfinder_status
@@ -184,10 +192,6 @@ class Dog < ApplicationRecord
 
     self.adoption_date = nil
     self.adoption_date = Date.today() if adopted?
-  end
-
-  def adopted?
-    status == 'adopted'
   end
 
   def self.next_tracking_id

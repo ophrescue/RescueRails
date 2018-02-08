@@ -120,6 +120,10 @@ class Adopter < ApplicationRecord
     %w[status assigned_to_user_id email phone address1 address2 city state zip]
   end
 
+  def audits_and_associated_audits
+    audits + associated_audits
+  end
+
   def changes_to_sentence
     result = []
     changed_audit_attributes.each do |attr|
@@ -163,8 +167,8 @@ class Adopter < ApplicationRecord
     self.is_subscribed = true
   end
 
-  def comments_and_audits
-    comments + audits
+  def comments_and_audits_and_associated_audits
+    comments + audits + associated_audits
   end
 
   def chimp_check

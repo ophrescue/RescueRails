@@ -13,7 +13,7 @@
 
       <div class="tab-content">
         <div class="tab-pane" id="all_table">
-          <% parent.comments_and_audits.each do |thing| %>
+          <% parent.comments_and_audits_and_associated_audits.each do |thing| %>
             <% if thing.id.present? %>
               <%= render thing %>
             <% end %>
@@ -21,18 +21,15 @@
         </div>
         <div class="tab-pane active" id="comment_table">
           <% parent.comments.each do |comment| %>
-            <% if comment.id != nil %>
+            <% if comment.id.present? %>
               <%= render comment %>
             <% end %>
           <% end %>
         </div>
         <div class="tab-pane" id="history_table">
-          <% if parent.audits.count > 0 %>
-            <% parent.associated_audits.each do |audit| %>
+          <% parent.audits_and_associated_audits.each do |audit| %>
+            <% if audit.id.present? %>
               <%= render audit %>
-            <% end %>
-            <% parent.audits.reverse_each do |audit| %>
-              <%= render audit  %>
             <% end %>
           <% end %>
         </div>

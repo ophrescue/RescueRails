@@ -3,7 +3,7 @@ language: ruby
 cache:
   - bundler
 
-sudo : false
+sudo: required
 rvm:
   - 2.3.1
 

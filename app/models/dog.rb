@@ -72,6 +72,8 @@ class Dog < ApplicationRecord
 
   attr_accessor :primary_breed_name, :secondary_breed_name
 
+  has_associated_audits
+
   belongs_to :primary_breed, class_name: 'Breed'
   belongs_to :secondary_breed, class_name: 'Breed'
   belongs_to :foster, class_name: 'User'
@@ -155,6 +157,10 @@ class Dog < ApplicationRecord
   scope :cb_no_cats,                  ->(_) { where no_cats: true }
   scope :cb_no_dogs,                  ->(_) { where no_dogs: true }
   scope :cb_no_kids,                  ->(_) { where no_kids: true }
+
+  def comments_and_audits
+    comments + audits
+  end
 
   def attributes_to_audit
     %w[status]

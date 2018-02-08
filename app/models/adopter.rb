@@ -121,7 +121,7 @@ class Adopter < ApplicationRecord
   end
 
   def audits_and_associated_audits
-    audits + associated_audits
+    (audits + associated_audits).sort_by(&:created_at)
   end
 
   def changes_to_sentence
@@ -168,6 +168,7 @@ class Adopter < ApplicationRecord
   end
 
   def comments_and_audits_and_associated_audits
+    # (comments + audits + associated_audits).sort_by(&:created_at)
     comments + audits + associated_audits
   end
 

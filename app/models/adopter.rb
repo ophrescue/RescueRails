@@ -121,7 +121,7 @@ class Adopter < ApplicationRecord
   end
 
   def audits_and_associated_audits
-    (audits + associated_audits).sort_by(&:created_at)
+    (audits + associated_audits).sort_by(&:created_at).reverse!
   end
 
   def changes_to_sentence

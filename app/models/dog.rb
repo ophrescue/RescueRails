@@ -167,7 +167,7 @@ class Dog < ApplicationRecord
   end
 
   def audits_and_associated_audits
-    audits + associated_audits
+    (audits + associated_audits).sort_by(&:created_at).reverse!
   end
 
   def comments_and_audits_and_associated_audits

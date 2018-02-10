@@ -40,9 +40,16 @@
             </div>
           </div>
 
-<% if Time.now.between?(("2018-01-01".to_date),("2018-02-17".to_date))%>
+<% if Time.now.between?(("2018-01-01".to_date),("2018-02-17".to_date)) %>
           <div class="item">
             <%= image_tag "alex-and-ani-event-2018-02.jpg", alt: "Charity Design Event" %>
+          </div>
+<% elsif Time.now.between?(("2018-02-17".to_date),("2018-02-28".to_date)) %>
+          <div class="item">
+            <%= image_tag "world-spay-day-2018.jpg", alt: "World Spay Day Feb 27, 2018" %>
+            <div class="carousel-caption">
+              <%= link_to "Donate", "https://join.ophrescue.org/campaign/Operation-Desi-Dogs/c161458", :class => "btn btn-primary btn-large" %>
+            </div>
           </div>
 <% end %>
 

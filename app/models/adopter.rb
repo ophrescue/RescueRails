@@ -168,7 +168,7 @@ class Adopter < ApplicationRecord
   end
 
   def comments_and_audits_and_associated_audits
-    clean_comments = comments.to_a.delete_if { |obj| obj.id == nil }
+    clean_comments = comments.to_a.delete_if { |obj| obj.id.nil? }
     (clean_comments + audits + associated_audits).sort_by(&:created_at).reverse!
   end
 

@@ -1,0 +1,32 @@
+require 'rails_helper'
+
+RSpec.describe AuditsHelper, type: :helper do
+  describe "#classify_foreign_key" do
+    let(:audit_type) { Dog }
+
+    it "returns class name" do
+      p = "breed_id"
+
+      expect(helper.classify_foreign_key(p, audit_type)).to eq Breed
+    end
+
+    it "returns original value if no class is found" do
+      p = "breeeeed"
+      p2 = "breededed_id"
+
+      expect(helper.classify_foreign_key(p, audit_type)).to eq p
+      expect(helper.classify_foreign_key(p2, audit_type)).to eq p2
+    end
+
+    it "returns original value of there is no _id at end of string" do
+      p = "patient"
+      expect(helper.classify_foreign_key(p, audit_type)).to eq p
+    end
+
+    it "works for special relationships" do
+      o = "primary_breed_id"
+
+      expect(helper.classify_foreign_key(o, audit_type)).to eq Breed
+    end
+  end
+end

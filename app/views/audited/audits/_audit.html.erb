@@ -23,7 +23,7 @@
           <tbody>
             <% audit.audited_changes.each do |key, value| %>
               <tr>
-                <td><%= key.titleize %></td><td><%= value[0] %></td><td><%= value[1] %></td>
+                <td>|| <%= key.titleize %></td><td><%= key %> <%= value_from_audit(key, value[0], audit.auditable_type.constantize) %></td><td><%= value_from_audit(key, value[1], audit.auditable_type.constantize) %></td>
               </tr>
             <% end%>
           </tbody>

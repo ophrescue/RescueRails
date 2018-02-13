@@ -29,4 +29,16 @@ RSpec.describe AuditsHelper, type: :helper do
       expect(helper.classify_foreign_key(o, audit_type)).to eq Breed
     end
   end
+
+  describe '#value_from_audit' do
+    let(:frenchie) { create(:breed, name: 'Frenchie') }
+
+    it 'returns Frenchie' do
+      expect(helper.value_from_audit('primary_breed_id', frenchie.id, Dog)).to eq 'Frenchie'
+    end
+
+    it 'returns Female' do
+      expect(helper.value_from_audit('gender', 'Female', Dog)).to eq 'Female'
+    end
+  end
 end

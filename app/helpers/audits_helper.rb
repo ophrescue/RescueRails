@@ -21,7 +21,7 @@ module AuditsHelper
     if foreign_key&.class == Class
       foreign_key.find(audit_value).display_name
     else
-      foreign_key
+      audit_value
     end
   end
 end

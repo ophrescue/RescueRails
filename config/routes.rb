@@ -3,13 +3,13 @@ RescueRails::Application.routes.draw do
   get "/dogs/switch_view", to: "dogs#switch_view"
 
   resources :adopters do
-    resources :comments, except: %i(destroy edit update)
+    resources :comments, except: %i[destroy edit update]
     resources :adoptions
   end
 
   resources :adoption_app
 
-  resources :comments, except: %i(new)
+  resources :comments, except: %i[new]
 
   resources :users
   resources :dogs do
@@ -20,7 +20,7 @@ RescueRails::Application.routes.draw do
     resources :adoptions
   end
 
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: %i[new create destroy]
   resources :password_resets
 
   get '/events/past', to: 'events#past'

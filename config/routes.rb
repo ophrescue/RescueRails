@@ -45,13 +45,14 @@ RescueRails::Application.routes.draw do
 
   get '/contact',              to: 'pages#contact'
 
+  get '/shelter-partners',     to: 'pages#shelters'
+
   get '/guide',                to: 'pages#guide'
   get '/aboutus',              to: 'pages#aboutus'
   get '/contributors',         to: 'pages#contributors'
   get '/partnerships',         to: 'pages#partnerships'
-  get '/partner-shelters',     to: 'pages#shelters'
 
-  get'/documentary',          to: 'pages#documentary'
+  get '/documentary',          to: 'pages#documentary'
   get '/insurance',           to: 'pages#insurance'
   get '/volunteer',           to: 'pages#volunteer'
 

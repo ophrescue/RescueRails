@@ -45,12 +45,13 @@ RescueRails::Application.routes.draw do
 
   get '/contact',              to: 'pages#contact'
 
-  get '/shelter-partners',     to: 'pages#shelters'
+  get '/funding-partners',                  to: 'pages#funding_partners'
+  get '/community-partners',                to: 'pages#community_partners'
+  get '/non-profit-and-corporate-partners', to: 'pages#np_corp_partners'
+  get '/shelter-partners',                  to: 'pages#shelters'
 
   get '/guide',                to: 'pages#guide'
   get '/aboutus',              to: 'pages#aboutus'
-  get '/contributors',         to: 'pages#contributors'
-  get '/partnerships',         to: 'pages#partnerships'
 
   get '/documentary',          to: 'pages#documentary'
   get '/insurance',           to: 'pages#insurance'
@@ -58,7 +59,6 @@ RescueRails::Application.routes.draw do
 
   get '/foster',               to: 'pages#foster'
   get '/fosterfaq',            to: 'pages#fosterfaq'
-  get '/contribute',           to: 'pages#donate'
   get '/donate',               to: 'pages#donate'
   get '/sponsor',              to: 'pages#sponsor'
   get '/special-funds',        to: 'pages#special_funds'

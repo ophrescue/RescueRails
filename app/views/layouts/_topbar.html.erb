@@ -14,15 +14,16 @@
             <ul class="nav">
               <li><%= link_to "Dogs", dogs_path %></li>
               <li><%= link_to "Events", events_path %></li>
-              <li><a href="http://eepurl.com/h9oyk">Newsletter</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Adopt<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="/guide">Adoption Guide</a></li>
                   <li><%= link_to "Adoption Application", new_adopter_path %></li>
+                  <li><a href="/resources">Adoption Resources</a></li>
+                  <li class="divider"></li>
+                  <li><a href="http://eepurl.com/h9oyk">Subscribe to our Newsletter</a></li>
                   <li class="divider"></li>
                   <li><a href="/documentary">Watch 600 Miles Home</a></li>
-                  <li><a href="/resources">Resources</a></li>
                   <li><a href="/tips-for-finding-lost-pets">Finding Lost Pets</a></li>
                   <li><a href="/insurance">Pet Insurance</a></li>
                 </ul>
@@ -46,6 +47,14 @@
                 </ul>
               </li>
               <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Partners<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/contributors">Contributors</a></li>
+                  <li><a href="/partnerships">Community Partnerships</a></li>
+                  <li><a href="/partner-shelters">Partnering Shelters</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="/aboutus">Our Story</a></li>
@@ -53,9 +62,6 @@
                   <li><a href="/contact">Contact Us</a></li>
                   <li class="divider"></li>
                   <li><a href="/education-and-outreach">Education &amp; Outreach</a></li>
-                  <li><a href="/contributors">Contributors</a></li>
-                  <li><a href="/partnerships">Community Partnerships</a></li>
-                  <li><a href="/partner-shelters">Partnering Shelters</a></li>
                   <li><a href="/terms">Terms and Conditions</a></li>
                 </ul>
               </li>

@@ -2,6 +2,7 @@ class AdopterWaitlistsController < ApplicationController
   before_action :edit_my_adopters_user, only: %i(create update destroy)
   before_action :edit_all_adopters_user, only: %i(create update destroy)
   before_action :load_waitlist, only: %i(create)
+  before_action :load_adopter_waitlist, only: %i(show update destroy)
   before_action :load_adopter, only: %i(create)
 
   respond_to :html, :json
@@ -13,7 +14,20 @@ class AdopterWaitlistsController < ApplicationController
   def create
     @adopter_waitlist = AdopterWaitlist.find_or_initialize_by(create_params)
 
-    flash[:success] = 'Adpter added to the waitlist' if @adopter_waitlist.save!
+    if AdopterWaitlist.count == 0
+      @adopter_waitlist.rank = 1
+    else
+      @adopter_waitlist.rank = AdopterWaitlist.maximum('Rank') + 1
+    end
+
+    flash[:success] = 'Adopter added to the waitlist' if @adopter_waitlist.save!
+
+    handle_redirect
+  end
+
+  def destroy
+    @adopter_waitlist.destroy
+    flash[:warning] = 'Adopter removed from the waitlist'
 
     handle_redirect
   end

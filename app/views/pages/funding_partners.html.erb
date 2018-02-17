@@ -2,42 +2,58 @@
   <div class="span12">
     <div class="article">
 
-    <h1>Sponsors and Contributors</h1>
+    <h2>Funding Partners</h2>
+
+    <h1>Thank You!</h1>
 
     <p>Operation Paws for Homes is a 501(c)(3) organization and is 100% donor funded.
-    OPH receives no funding from federal, state, or county governments.  As a result, OPH
-    Rescue relies on generous donations and the adoption fees of our dogs to help in our
-    mission of saving dogs from shelters and finding them forever homes!</p>
+    We do not receive funding from federal, state or county governments. As a result,
+    we rely on generous donations and the adoption fees to help in our mission of saving dogs
+    from shelters and finding them forever homes. Thank you for joining our mission to creating a
+    No Kill nation and helping to write the futures for thousands of dogs every year.</p>
 
-    <h2>Sponsors</h2>
+    <h3>$25,000+</h3>
+      <ul class="thumbnails">
+        <li>
+          <a href="https://www.petcofoundation.org/" class="thumbnail thumbnail-no-border">
+            <%= image_tag("sponsors/petco_foundation.png", alt: "Petco Foundation") %>
+          </a>
+        </li>
+      </ul>
 
-    <p>OPH Rescue would like to express our deep gratitude to the businesses and individuals
-    who support our mission by becoming OPH Sponsors!  These contributors help us to
-    save the amazing dogs we find huddled in a shelter, running out of time in a kennel run,
-    or overlooked because of their fear for being abandoned in an unknown place and give
-    them the opportunity to find caring, loving forever homes.  Saying thank you doesn’t
-    seem to be enough for the support, but we do know it is a great start!</p>
+    <h3>$10,000 - $24,999</h3>
 
-    <h3>Sporting Dog - $1,000 Sponsorship</h3>
+    <h3>$5,000 - $9,999</h3>
+      <ul class="thumbnails">
+        <li>
+          <a href="http://cordish.com" class="thumbnail thumbnail-no-border">
+            <%= image_tag("sponsors/cordish.jpg", alt: "The Cordish Companies") %>
+          </a>
+        </li>
+      </ul>
 
-    <% sponsors_1000 =
-      { url: "http://www.millertoyota.com/",
-        img: "millertoyota.png"
+    <h3>$2,500 - $4,999</h3>
+
+    <% sponsors_2500 =
+      { url: "http://www.arfrescueva.org/",
+        img: "arfrescueva.jpg",
+        alt: "Animal Rescue Fund"
       },
       {
-        url: "http://www.royalpethaven.com/",
-        img: "royalpethaven.jpg"
+        url: "http://www.petvalu.com/",
+        img: "petvalu.jpg",
+        alt: "PetValu"
       }
     %>
 
-    <% sponsors_1000.each_slice(3) do |slice| %>
+    <% sponsors_2500.each_slice(2) do |slice| %>
       <div class="row">
         <div class="span12">
           <ul class="thumbnails">
           <% slice.each do |spon| %>
             <li class="span4">
               <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag "sponsors/"+spon[:img] %>
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt]) %>
               </a>
             </li>
           <% end %>
@@ -46,14 +62,115 @@
       </div>
     <% end %>
 
-    <h3>Herding Dog - $500 Sponsorship</h3>
+
+    <h3>$1,000 - $2,499</h3>
+
+    <% sponsors_1000 =
+      {
+        url: "#",
+        img: "",
+        alt: "Daniel Brown"
+      },
+      {
+        url: "#",
+        img: "",
+        alt: "Jessica Brown and Andy Howlett"
+      },
+      {
+        url: "https://corporate.discovery.com",
+        img: "",
+        alt: "Discovery Communications"
+      },
+      {
+        url: "http://www.millertoyota.com/",
+        img: "millertoyota.png",
+        alt: "Miller Toyota"
+      },
+      {
+        url: "https://www.pedigreefoundation.org",
+        img: "",
+        alt: "Pedigree Foundation"
+      },
+      {
+        url: "#",
+        img: "",
+        alt: "Scott and Karen Roland"
+      },
+      {
+        url: "http://www.royalpethaven.com/",
+        img: "royalpethaven.jpg",
+        alt: "Royal Pet Haven"
+      },
+      {
+        url: "https://www.washluberepair.com/",
+        img: "",
+        alt: "WLR Automative Group"
+      },
+      {
+        url: "#",
+        img: "",
+        alt: "Christina Young"
+      },
+      {
+        url: "http://dzaruba.com/",
+        img: "",
+        alt: "Zaruba Gallery"
+      }
+    %>
+
+    <% sponsors_1000.each_slice(3) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span3">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt]) %>
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <h3>$500 - $999</h3>
 
     <% sponsors_500 =
-      { url: "http://www.fvcbank.com/",
-        img: "fvcbank.jpg"
+      {
+        url: "http://www.fvcbank.com/",
+        img: "fvcbank.jpg",
+        alt: "FVC Bank"
       },
-      { url: "https://vcahospitals.com/southpaws",
-        img: "vcahospitals.jpg"
+      {
+        url: "https://www.keywcorp.com",
+        img: "",
+        alt: "KeyW Corporation"
+      },
+      {
+        url: "#",
+        img: "",
+        alt: "Jason Kusar"
+      },
+      {
+        url: "#",
+        img: "",
+        alt: "The Libera Family"
+      },
+      {
+        url: "#",
+        img: "",
+        alt: "Lori Painter"
+      },
+      {
+        url: "https://vcahospitals.com/southpaws",
+        img: "vcahospitals.jpg",
+        alt: "VCA SouthPaws Veterinary"
+      },
+      {
+        url: "#",
+        img: "",
+        alt: "Vortex 13, LLC"
       }
     %>
 
@@ -64,7 +181,7 @@
           <% slice.each do |spon| %>
             <li class="span4">
               <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag "sponsors/"+spon[:img] %>
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt]) %>
               </a>
             </li>
           <% end %>
@@ -73,54 +190,149 @@
       </div>
     <% end %>
 
-    <h3>Working Dog - $250 Sponsorship</h3>
+    <h3>$250 - $499</h3>
 
     <% sponsors_250 =
       {
-        url: "https://www.novec.com/",
-        img: "novec.jpg"
+        url: "https://www.burkecentrepetsitting.com/",
+        img: "burkecentrepetsitting.jpg",
+        alt: "Burke Centre Pet Sitting"
       },
       {
-        url: "http://www.walkingdogsva.com/",
-        img: "walkingdogsva.jpg"
-      },
-      {
-        url: "http://huxleyandkent.com/",
-        img: "huxley_kent.png"
-      },
-      {
-        url: "https://www.homeagain.com/",
-        img: "homeagain.png"
+        url: "#",
+        img: "joan_bryant.jpg",
+        alt: "Joan Bryant"
       },
       {
         url: "http://www.dogtranquility.com/",
-        img: "dogtranquility.png"
+        img: "dogtranquility.png",
+        alt: "Dog Tranquility"
       },
       {
-        url: "http://monument-title.com/",
-        img: "monument-title.png"
+        url: "http://www.dn3design.com/",
+        img: "dn3design.jpg",
+        alt: "DN3 (Door #3)"
       },
       {
-        url: "https://www.burkecentrepetsitting.com/",
-        img: "burkecentrepetsitting.jpg"
+        url: "#",
+        img: "barbara_draughon.jpg",
+        alt: "Barbara Draughon"
       },
       {
-        url: "http://www.naturesnibbles.com/",
-        img: "naturesnibbles.jpg"
+        url: "#",
+        img: "margaret_fink.jpg",
+        alt: "Margaret Fink"
       },
       {
-        url: "http://www.poop911.com/",
-        img: "poop911.png"
+        urm: "http://www.mynewfeet.com/",
+        img: "mynewfeet.jpg",
+        alt: "Frederick Foot and Ankle"
       },
       {
         url: "http://www.freshwaveworks.com/",
-        img: "freshwaveworks.png"
+        img: "freshwaveworks.png",
+        alt: "Fresh Wave"
+      },
+      {
+        url: "#",
+        img: "stephanie_guindon.jpg",
+        alt: "Stephanie Guindon"
       },
       {
         url: "http://healthyhoundplayground.com/",
-        img: "healthyhoundplayground.png"
+        img: "healthyhoundplayground.png",
+        alt: "Healthy Hound Playground"
+      },
+      {
+        url: "https://www.homeagain.com/",
+        img: "homeagain.png",
+        alt: "HomeAgain"
+      },
+      {
+        url: "http://www.crgelato.com/",
+        img: "crgelato.jpg",
+        alt: "Hungry Henry's Gelato"
+      },
+      {
+        url: "http://huxleyandkent.com/",
+        img: "huxley_kent.png",
+        alt: "Huxley and Kent"
+      },
+      {
+        url: "http://monument-title.com/",
+        img: "monument-title.png",
+        alt: "Monument Title Company"
+      },
+      {
+        url: "#",
+        img: "steven_murphy.jpg",
+        alt: "Steven Murphy"
+      },
+      {
+        url: "http://www.naturesnibbles.com/",
+        img: "naturesnibbles.jpg",
+        alt: "Natures Nibbles"
+      },
+      {
+        url: "https://www.novec.com/",
+        img: "novec.jpg",
+        alt: "NOVEC"
+      },
+      {
+        url: "http://www.olk9md.com/",
+        img: "olk9md.jpg",
+        alt: "Off Leash K9 Training Maryland"
+      },
+      {
+        url: "#",
+        img: "patricia_parsons.jpg",
+        alt: "Patricia Parsons"
+      },
+      {
+        url: "http://www.poop911.com/",
+        img: "poop911.png",
+        alt: "Poop 911"
+      },
+      {
+        url: "http://prolist.com",
+        img: "prolist.jpg",
+        alt: "ProList"
+      },
+      {
+        url: "https://www.rbkpetresort.com/",
+        img: "rbkpetresort.jpg",
+        alt: "Reisterstown Pet Resort and Spa"
+      },
+      {
+        url: "http://www.scoop-squad.com/",
+        img: "scoop-squad.jpg",
+        alt: "Scoop Squad"
+      },
+      {
+        url: "https://www.facebook.com/snorklesway/",
+        img: "snorklesway.jpg",
+        alt: "Snorkle’s Way: Adaptive Dog Training, LLC"
+      },
+      {
+        url: "#",
+        img: "jeffrey_teixeira.jpg",
+        alt: "Jeffrey Teixeira"
+      },
+      {
+        url: "http://www.walkingdogsva.com/",
+        img: "walkingdogsva.jpg",
+        alt: "Walking The Dogs"
+      },
+      {
+        url: "#",
+        img: "wilkins.jpg",
+        alt: "Mike and Jennifer Wilkins"
+      },
+      {
+        url: "#",
+        img: "zuckerman.jpg",
+        alt: "Victoria and Harvey Zuckerman"
       }
-
     %>
 
     <% sponsors_250.each_slice(3) do |slice| %>
@@ -130,7 +342,7 @@
           <% slice.each do |spon| %>
             <li class="span4">
               <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag("sponsors/"+spon[:img], size: '250') %>
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '125') %>
               </a>
             </li>
           <% end %>
@@ -139,48 +351,7 @@
       </div>
     <% end %>
 
-    <h3>Hunting Dog - $100 Sponsorship</h3>
-
-    <% sponsors_100 =
-      {
-        url: "http://www.valleyenergy.org/",
-        img: "valley_energy.jpg"
-      },
-      {
-        url: "http://www.affectionatepetcare.com/",
-        img: "affectionate_pc.jpg"
-      },
-      {
-        url: "http://caringhandsvet.com/",
-        img: "caringhandsvet.png"
-      },
-      {
-        url: "http://www.awoiponline.com/",
-        img: "awoiponline.jpg"
-      },
-      {
-        url: "https://rudysfriendsdogtraining.com/",
-        img: "rudysfriendsdogtraining.jpg"
-      }
-    %>
-
-    <% sponsors_100.each_slice(3) do |slice| %>
-      <div class="row">
-        <div class="span12">
-          <ul class="thumbnails">
-          <% slice.each do |spon| %>
-            <li class="span4">
-              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag "sponsors/"+spon[:img] %>
-              </a>
-            </li>
-          <% end %>
-          </ul>
-        </div>
-      </div>
-    <% end %>
-
-    <h3>In-Kind Product Sponsorship</h3>
+    <h2>In-Kind Donors</h2>
 
     <% sponsors =
       { url: "http://www.1800petmeds.com/",
@@ -228,7 +399,7 @@
           <% slice.each do |spon| %>
             <li class="span4">
               <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag "sponsors/"+spon[:img] %>
+                <%= image_tag "sponsors/"+spon[:img], size: '125' %>
               </a>
             </li>
           <% end %>
@@ -237,87 +408,23 @@
       </div>
     <% end %>
 
-      <h2>Contributors</h2>
 
-      <p>Many businesses and professionals give their time, space, resources and discounted
-      fees to assist us in our mission of saving dogs.  They are partners with OPH and –
-      without their support – we could not continue to rescue dogs, help find forever homes
-      for the dogs, and work to end the influx of unwanted dogs into rural shelters in the
-      South.  It’s hard to imagine how many moving parts and pieces go into a “rescue” of
-      a dog.  You have shown our rescued dogs and our team of incredible volunteers
-      that creating a village of dog lovers who will work for a common goal is something
-      obtainable!</p>
+    <h2>In-Kind Services</h2>
 
-      <p><%= image_tag "sponsors/bissell.gif" %><%= image_tag "sponsors/lost-pets-usa.gif" %></p>
-
-      <p><strong>Thanks <a href="http://www.1800petmeds.com">1-800-PetMeds</a> for the donation of <a href="http://www.1800petmeds.com/Flea+++Tick-cat10.html">flea prevention</a> for our adoptable pets! </strong></p>
-
-      <a name="it-services"></a><h3>IT Services</h3>
-      <p>This website would not be possible without the services donated by these companies.</p>
-
-      <p><a href="https://browserstack.com"><%= image_tag "sponsors/browserstack.png" %></a></p>
-      <p>Thanks to <a href="https://browserstack.com">BrowserStack</a> we are able to test the functionaliy of our site across a wide variety of browsers and mobile devices quickly and easily.</p>
       <ul class="unstyled">
         <li><a href=https://github.com/>GitHub</a></li>
+        <li><a href="https://browserstack.com"><%= image_tag "sponsors/browserstack.png" %></a></li>
         <li><a href="https://google.com">Google</a></li>
         <li><a href="https://hakiri.io">Hakiri</a></li>
         <li><a href="https://moqups.com/">Moqups</a></li>
         <li><a href="https://newrelic.com/">NewRelic</a></li>
       </ul>
 
-      <h3>Photographers</h3>
-
-      <p>A special thank you to our wonderful photographers who donate their time and talent to
-      help showcase the adorableness of our pooches!  We appreciate their incredible photos
-      and know that several dogs have found forever homes thanks to their efforts! Be sure to visit Allen and Michael’s websites to see their beautiful photographs, learn
-      more about the amazing pet portraits they can create for you, and to follow their Doggie
-      Blogs.</p>
-
       <strong><a href="http://www.allenpearsonsphotos.com/-/allenpearsonsphotos/">Allen Pearson</a></strong> <br>
       <strong><a href="http://michaelgarth.com/">Michael Garth</a></strong> <br>
 
-      <a href="https://nancyslattery.smugmug.com/"><%= image_tag "sponsors/wags-pet-portaits.jpg" %></a>
+      <a href="https://www.facebook.com/wagspetportraitsphotography/"><%= image_tag "sponsors/wags-pet-portaits.jpg" %></a>
 
-
-      <h3>Local Businesses</h3>
-
-      <p><a href="http://www.gaithersburg.homewoodsuites.com"><img src="/assets/sponsors/homewood_suites.jpg"</a></p>
-
-      <p><strong><a href="http://pawsofhanover.com/">Paws Animal Hospital</a></strong> – Jessica and the wonderful staff at Paws in Hanover, PA have
-      been long time supporters of OPH!  We couldn’t be more grateful.  Paws provides high
-      quality veterinary medicine in a friendly, welcoming environment.</p>
-
-      <p><strong><a href="https://www.vetmtairy.com/">P.A.W. Veterinary Clinic</a></strong> - Mount Airy, MD - Dr. Crystal Brobst-Wormell </p>
-
-      <p><strong><a href="http://www.piedmontpetsvet.com/">Piedmont Pets Veterinary Care</a></strong> – A heartfelt thank you to Dr. Lutz and her wonderful
-      staff in Warrenton, VA who have been so kind and compassionate to many OPH dogs
-      over the years.  Dr. Lutz was our first partner in treating heartworm disease.  Thanks to
-      her excellent care, the dogs who came in suffering from heartworm are given a chance
-      at life that would not have been possible years ago!</p>
-
-      <p><strong><a href="http://pawsibilitiescollars.com/">Pawsibilities Collars for Dogs!</a></strong> – Looking for fashionable accessories for your dog?
-      Look no more!  This website has amazing products available for the hip dogster.  They
-      are also amazing supporters of OPH and help us in our mission to save dogs!</p>
-
-      <p><strong><a href="http://otsfd.com">Olde Towne School for Dogs</a></strong> – The wonderful staff at Olde Towne School for Dogs
-      has been longtime supporters of OPH and our Virginia based endeavors.  Stop in and
-      ask for help in finding a great food for your pup!</p>
-
-      <p><strong><a href="http://www.alwaystherehorsecare.com">Malena Brisbois, LVT - Always There Horse Care</a></strong></p>
-
-      <p><strong><a href="http://manassas.anicira.org/">Anicira</a></strong> - Manassas, VA </p>
-
-      <p><strong><a href="https://blueridgevets.com/">Blue Ridge Veterinary Associates </a></strong> - Purcellville, VA <p>
-
-      <p><strong><a href="http://www.valuevet.net/">Value Vet</a></strong> - McLean, VA </p>
-
-      <p><strong><a href="http://www.capehornvet.com/">Cape Horn Veterinary Associates</a></strong> - Red Lion, PA </p>
-
-      <p><strong><a href="http://www.clearviewah.com/">Clearview Animal Hospital</a></strong> - Hanover, PA </p>
-
-      <p><strong><a href="http://palmyraac.com/">Palmyra Animal Clinic</a></strong> - Palmyra, PA </p>
-
-      <p><strong><a href="http://spaynow.com/">Spay Now Animal Surgery Clinic</a></strong> - Laurel, MD &amp; Grasonville, MD</p>
 
   </div>
   </div>

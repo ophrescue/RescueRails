@@ -123,7 +123,7 @@
         <div class="span12">
           <ul class="thumbnails">
           <% slice.each do |spon| %>
-            <li class="span3">
+            <li class="span4">
               <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
                 <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '175') %>
               </a>
@@ -411,20 +411,69 @@
 
     <h2>In-Kind Services</h2>
 
-      <ul class="unstyled">
-        <li><a href=https://github.com/>GitHub</a></li>
-        <li><a href="https://browserstack.com"><%= image_tag "sponsors/browserstack.png" %></a></li>
-        <li><a href="https://google.com">Google</a></li>
-        <li><a href="https://hakiri.io">Hakiri</a></li>
-        <li><a href="https://moqups.com/">Moqups</a></li>
-        <li><a href="https://newrelic.com/">NewRelic</a></li>
-      </ul>
+    <% services =
+        {
+          url: "http://www.allenpearsonsphotos.com/-/allenpearsonsphotos/",
+          img: "allen_pearson.png",
+          alt: "Allen Pearson"
+        },
+        {
+          url: "https://browserstack.com",
+          img: "browserstack.png",
+          alt: "Browserstack"
+        },
+        {
+          url: "https://github.com",
+          img: "github.jpg",
+          alt: "GitHub"
+        },
+        {
+          url: "https://google.com",
+          img: "google.png",
+          alt: "Google"
+        },
+        {
+          url: "https://hakiri.io",
+          img: "hakiri.jpg",
+          alt: "Hakiri"
+        },
+        {
+          url: "https://moqups.com/",
+          img: "moqups.png",
+          alt: "Moqups"
+        },
+        {
+          url: "https://newrelic.com/",
+          img: "newrelic.png",
+          alt: "NewRelic"
+        },
+        {
+          url: "http://michaelgarth.com/",
+          img: "michaelgarth.jpg",
+          alt: "Michael Garth"
+        },
+        {
+          url: "https://www.facebook.com/wagspetportraitsphotography/",
+          img: "wags-pet-portaits.jpg",
+          alt: "Wags Pet Portraits"
+        }
+    %>
 
-      <strong><a href="http://www.allenpearsonsphotos.com/-/allenpearsonsphotos/">Allen Pearson</a></strong> <br>
-      <strong><a href="http://michaelgarth.com/">Michael Garth</a></strong> <br>
-
-      <a href="https://www.facebook.com/wagspetportraitsphotography/"><%= image_tag "sponsors/wags-pet-portaits.jpg" %></a>
-
+    <% services.each_slice(3) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span4">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '150') %>
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
 
   </div>
   </div>

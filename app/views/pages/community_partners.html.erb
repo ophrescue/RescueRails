@@ -2,16 +2,272 @@
   <div class="span12">
     <div class="article">
 
-    <h1>Community Partnerships</h1>
+    <h2>Community Partners</h2>
 
-    <p>To truly make strides towards ending the overpopulation of animals in the United States,
-    OPH understands that we need to do more than adopt – we need to partner with the
-    Rescue World to educate, stop the cycle, and help.  To reach these goals, OPH has
-    formed some incredible partnerships with organizations.  Please take a moment to
-    get to know some of the Movers and Shakers, and Programs that OPH participates
-    in.  We are always looking for volunteers to help us increase our efforts and to provide
-    additional support to these Partners and our goal to end the overpopulation of animals
-    in the U.S. </p>
+    <h1>Thank You!</h1>
+
+    <p>Operation Paws for Homes has formed some incredible partnerships and is grateful to partner with local businesses
+    and professionals who give their time, space and resources to assist us in our mission of saving dogs. Thank you for
+    being a part of the OPH village of animal lovers who believe that all animals deserve second chances.</p>
+
+    <h3>Boarding Facilities</h3>
+
+    <% boarding =
+      {
+        alt: "Bark and Boarding",
+        url: "https://barkandboarding.com/",
+        img: "barkandboarding.gif"
+      },
+      {
+        alt: "Country Club Kennels South",
+        url: "http://countryclubkennels-south.com/",
+        img: "countryclubkennels-south.png"
+      },
+      {
+        alt: "Dog Tales Daycare",
+        url: "http://www.dogtalesdaycare.com/",
+        img: "dogtales.png"
+      },
+      {
+        alt: "Dogwood Hill Kennels",
+        url: "http://dogwoodhillkennels.com/",
+        img: "dogwoodhill.png"
+      },
+      {
+        alt: "Drew Sandberg",
+        url: "#",
+        img: "drew_sandberg.png"
+      },
+      {
+        alt: "For Jake's Sake",
+        url: "http://www.fortheloveofjake.com/",
+        img: "for_jakes_sake.png"
+      },
+      {
+        alt: "Lakeside Pet Resort",
+        url: "http://www.lakesidepetresort.com/",
+        img: "lakeside.gif"
+      },
+        {
+        alt: "Olde Towne Pet Resort",
+        url: "http://www.oldetownepetresort.com/",
+        img: "oldetownepetresort.png"
+      },
+      {
+        alt: "Whole Dogz",
+        url: "http://www.wholedogz.com/",
+        img: "whole-dogz.png"
+      },
+      {
+        alt: "Willow Run Kennels",
+        url: "http://www.willowrunkennels.net/",
+        img: "willow_run.gif"
+      }
+
+    %>
+
+    <% boarding.each_slice(4) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span3">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '150') %>
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <h3>Local Businesses</h3>
+
+    <% local_biz =
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "Homewood Suites Gaithersburg",
+        url: "http://www.gaithersburg.homewoodsuites.com",
+        img: "homewood_suites.jpg"
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      }
+    %>
+
+
+    <% local_biz.each_slice(4) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span3">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '150') %>
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <h3>Training Partners</h3>
+
+    <% training =
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      },
+      {
+        alt: "",
+        url: "",
+        img: ""
+      }
+    %>
+
+
+    <% training.each_slice(4) do |slice| %>
+      <div class="row">
+        <div class="span12">
+          <ul class="thumbnails">
+          <% slice.each do |spon| %>
+            <li class="span3">
+              <a href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '150') %>
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <h3>Event Hosts</h3>
+
+
+      <p><strong><a href="http://barknatural.com/">Barks – Pikesville, MD</a></strong> - This Barks location has been a longtime
+      supporter of OPH and our Maryland based dogs!</p>
+
+      <p><strong><a href="http://thedogparkva.biz/">The Dog Park - Alexandria, VA</a></strong> – This Dog Boutique is the It Place for dogs
+      to be spotted in Old Town Alexandria!  Stop in and meet the entire staff at The Dog Park, located on King Street in
+      downtown Alexandria.  While you are there, don’t forget to let your Four Legged Friend
+      sample some of the yummy treats offered for sale!</p>
+
+      <p><strong><a href="http://www.petco.com/content/locator/Details.aspx?storeId=2724&Nav=2">Petco - Glen Burnie, MD</a></strong> - The Petco in Glen Burnie, MD
+      is a terrific site for community outreach and adoption events.  We will be participating in their Mega Adoption Event weekend on September 21st.
+      The Petco is very generous and supportive of adopters by providing discounts on necessary items and providing dog obedience classes.</p>
+
+      <p><strong><a href="http://stores.petsmart.com/1817">PetSmart - Abingdon, MD</a> - </strong>The PetSmart in Abingdon, MD has a very supportive staff that is
+      always excited to host an OPH event. They have been very generous with their monthly donation of supplies for the dogs in foster care. PetSmart also donates
+      funds to OPH for each dog that is adopted at an event they host.</p>
+
+      <p><strong><a href="http://us.petvalu.com/location/5213">PetValu - Clifton, VA</a></strong> – The wonderful staff at Clifton Pet Valu have been so great to OPH
+      dogs and volunteers!  Stop in to Pet Valu and they will be happy to assist in finding the
+      best food, discovering the next best thing to a tennis ball, or selecting an outfit for your
+      pet!</p>
+
+      <p><strong><a href="http://petvalu.com/location/5030">PetValu - Pasadena, MD</a></strong> - The PetValu in Pasadena, MD has been one of the most generous
+      and supportive event hosts that OPH could hope for in our mission to rescue dogs.  They have assisted us in fundraising by matching what we raise and
+      have been extremely generous in donating supplies for the dogs in foster care.</p>
+
+      <p><strong><a href="http://www.uptownpetboutique.com/">Uptown Pet Bistro and Boutique</a></strong> - Uptown Pet Bistro and Boutique is one of our most
+      popular event locations in Fairfax, VA. This unique boutique is a great place to find one of a kind items for your pampered pet. The Boutique owner
+      is extremely knowledgeable about organic dog food, treats and supplements. Be sure to stop by and take advantage of Uptown Pet Bistro and Boutique's
+      customer appreciation sales!</p>
+
+
+
+<h1>xxxxxxxxxxxxxxxxxxxxxxxxxxx</h1>
+
 
     <p><strong><a href="http://www.brvbb.com/index.pml">Blue Ridge Blood Bank</a></strong> - This Blood Bank fields calls from across the continent from
     Veterinarians needing blood to perform lifesaving blood transfusions on dogs.  OPH is
@@ -56,54 +312,9 @@
 
 
 
-      <h1>Event Hosts</h1>
-
-      <p><strong><a href="http://us.petvalu.com/location/5213">PetValu Clifton, VA</a></strong> – The wonderful staff at Clifton Pet Valu have been so great to OPH
-      dogs and volunteers!  Stop in to Pet Valu and they will be happy to assist in finding the
-      best food, discovering the next best thing to a tennis ball, or selecting an outfit for your
-      pet!</p>
-
-      <p><strong><a href="http://thedogparkva.biz/">The Dog Park</a></strong> – This Dog Boutique is the It Place for dogs to be spotted in Old Town
-      Alexandria!  Stop in and meet the entire staff at The Dog Park, located on King Street in
-      downtown Alexandria.  While you are there, don’t forget to let your Four Legged Friend
-      sample some of the yummy treats offered for sale!</p>
-
-      <p><strong><a href="http://barknatural.com/">Barks</a></strong> – Located in Pikesville, Maryland, this Barks location has been a longtime
-      supporter of OPH and our Maryland based dogs!</p>
-
-      <p><strong><a href="http://petvalu.com/location/5030">PetValu Pasadena, MD</a></strong> - The PetValu in Pasadena, MD has been one of the most generous
-      and supportive event hosts that OPH could hope for in our mission to rescue dogs.  They have assisted us in fundraising by matching what we raise and
-      have been extremely generous in donating supplies for the dogs in foster care.</p>
-
-      <p><strong><a href="http://www.petco.com/content/locator/Details.aspx?storeId=2724&Nav=2">Petco Glen Burnie, MD</a></strong> - The Petco in Glen Burnie, MD
-      is a terrific site for community outreach and adoption events.  We will be participating in their Mega Adoption Event weekend on September 21st.
-      The Petco is very generous and supportive of adopters by providing discounts on necessary items and providing dog obedience classes.</p>
-
-      <p><strong><a href="http://stores.petsmart.com/1817">PetSmart Abingdon, MD</a> - </strong>The PetSmart in Abingdon, MD has a very supportive staff that is always excited to host an OPH event. They have been very generous with their monthly donation of supplies for the dogs in foster care. PetSmart also donates funds to OPH for each dog that is adopted at an event they host.</p>
-
-      <p><strong><a href="http://www.uptownpetboutique.com/">Uptown Pet Bistro and Boutique</a></strong> - Uptown Pet Bistro and Boutique is one of our most popular event locations in Fairfax, VA. This unique boutique is a great place to find one of a kind items for your pampered pet. The Boutique owner is extremely knowledgeable about organic dog food, treats and supplements. Be sure to stop by and take advantage of Uptown Pet Bistro and Boutique's customer appreciation sales!</p>
-
-      <h1>Boarding Facilities</h1>
-
-      <p><strong><a href="http://www.dogtalesdaycare.com/">Dog Tales Daycare</a></strong> - Chantilly, VA</p>
-      <p><strong><a href="http://www.wholedogz.com/"><%= image_tag "sponsors/whole-dogz.png", size: "120x120" %></a>  <a href="http://www.wholedogz.com/">Whole Dogz</a></strong> - Alexandira, VA</p>
-      <p><strong><a href="http://www.royalpethaven.com/">Royal Pet Haven LLC</a></strong> - Alexandria, VA </p>
-      <p><strong><a href="http://dogwoodhillkennels.com/">Dogwood Hill Kennels</a></strong> -  Reva, VA</p>
-      <p><strong><a href="http://www.oldetownepetresort.com/">Olde Towne Pet Resort</a></strong> - Springfield, VA - Rockville, MD - Sterling, VA</p>
-      <p><strong><a href="http://www.countrycomfortkennels.com/"> Country Comfort Kennels</a></strong> - Delta, PA</p>
-      <p><strong><a href="https://www.cozycaninepa.com/">Cozy Canine LLC</a></strong> - Fairfield, PA</p>
-      <p><strong><a href="http://www.dpncc.com/">Dog Paws 'n Cat Claws Pet Care</a></strong> - Bailey's Crossroads, VA</p>
-      <p><strong><a href="http://www.lakesidepetresort.com/">Lakeside Pet Resort</a></strong> – Hanover, PA </p>
-      <p><strong><a href="https://www.bestfriendsfurever.com/">Best Friends Fur Ever</a></strong> - Joppa, MD</p>
-      <p><strong><a href="http://countryclubkennels-south.com/">Country Club Kennels South</a></strong> - Locust Grove, VA</p>
-      <p><strong><a href="http://www.willowrunkennels.net/">Willow Run Kennels</a></strong> - Linden, VA</p>
-
-
-
 
       <h3>Local Businesses</h3>
 
-      <p><a href="http://www.gaithersburg.homewoodsuites.com"><img src="/assets/sponsors/homewood_suites.jpg"</a></p>
 
       <p><strong><a href="http://pawsofhanover.com/">Paws Animal Hospital</a></strong> – Jessica and the wonderful staff at Paws in Hanover, PA have
       been long time supporters of OPH!  We couldn’t be more grateful.  Paws provides high
@@ -126,19 +337,12 @@
       ask for help in finding a great food for your pup!</p>
 
       <p><strong><a href="http://www.alwaystherehorsecare.com">Malena Brisbois, LVT - Always There Horse Care</a></strong></p>
-
       <p><strong><a href="http://manassas.anicira.org/">Anicira</a></strong> - Manassas, VA </p>
-
       <p><strong><a href="https://blueridgevets.com/">Blue Ridge Veterinary Associates </a></strong> - Purcellville, VA <p>
-
       <p><strong><a href="http://www.valuevet.net/">Value Vet</a></strong> - McLean, VA </p>
-
       <p><strong><a href="http://www.capehornvet.com/">Cape Horn Veterinary Associates</a></strong> - Red Lion, PA </p>
-
       <p><strong><a href="http://www.clearviewah.com/">Clearview Animal Hospital</a></strong> - Hanover, PA </p>
-
       <p><strong><a href="http://palmyraac.com/">Palmyra Animal Clinic</a></strong> - Palmyra, PA </p>
-
       <p><strong><a href="http://spaynow.com/">Spay Now Animal Surgery Clinic</a></strong> - Laurel, MD &amp; Grasonville, MD</p>
 
 

@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 ruby   '2.3.1'
 
-gem 'rails', '5.0.3'
+gem 'rails', '5.0.6'
 
 gem 'rack-cache'
 
 gem 'acts_as_list'
+gem 'audited', '~> 4.5'
 gem 'aws-sdk', '~> 2'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem "countries"
@@ -31,7 +32,7 @@ gem 'will_paginate'
 
 # datas
 gem 'dalli'
-gem 'pg'
+gem 'pg', '~> 0.21.0'
 
 group :production do
   gem 'unicorn'

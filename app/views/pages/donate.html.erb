@@ -1,41 +1,86 @@
 <div class="row-fluid">
   <div class="span8 offset4">
-    <h1>Help rescue a dog today</h1>
+    <h1>Make a gift. Save a life today.</h1>
   </div>
 </div>
 
 <div class="row-fluid">
   <div class="span4 eventphoto hidden-phone">
     <%= image_tag "donate_1.jpg"%>
+    <br>
+    <br>
+    <%= image_tag "donate_2.jpg"%>
   </div>
 
   <div class="span8">
     <div class="article">
-      <p>Your gift to Operation Paws for Homes is put to immediate use saving dogs from high-kill shelters.</p>
-
-      <p>OPH depends on donations from generous people like you to provide the medical, transportation, fostering, and adoption services needed to place 1,000 homeless dogs in forever homes each year.</p>
+      <p>Your gift to Operation Paws for Homes will immediately help us to save dogs in need!</p>
+      <p>OPH depends on donations from generous people like you to provide the medical, transportation, fostering, and adoption services needed to place 1,200 homeless dogs in forever homes each year.</p>
       <br>
 
-      <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donate%40ophrescue%2eorg&lc=US&item_name=Operation%20Paws%20for%20Homes&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest"><%= image_tag "paypal-donate-button.png" %></a></p>
+      <p><a class="btn btn-primary btn-large" href="https://join.ophrescue.org/ophdonate">Donate</a></p>
 
     <br>
 
-    <p>Our rescued dogs are cared for throughout their adoption journey, from before they leave the shelter in the transport van to the day they’re welcomed with open arms by their adopters.</p>
+    <p>Our rescued dogs are cared for throughout their adoption journey, from before they leave the shelter in the transport van to the day they’re welcomed with open arms by their adopters. Adoption fees help offset our expenses, but do not cover all of the services that are needed and provided by OPH. </p>
 
-    <p>Adoption fees help offset our expenses, but do not cover all of the services that are needed and provided by OPH. Here are ways our dogs will benefit from your generosity:</p>
+    <h3>How Can I Help?</h3>
+      <div class= "row-fluid">
+        <ul class="thumbnails donate">
+          <li class="span4">
+            <div class="thumbnail">
+              <%= image_tag "dog-vaccine.png" %>
+              <p>$25 provides vaccines for a  small puppy</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <%= image_tag "dog-transport.png" %>
+              <p>$75 transports one dog up to 600 miles to safety</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <%= image_tag "vet-with-dog.png" %>
+              <p>$100 spays or neuters a dog and prevents an unwanted litter</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class= "row-fluid">
+        <ul class="thumbnails donate">
+            <li class="span4">
+              <div class="thumbnail">
+                <%= image_tag "sick-dog.png" %>
+                <p>$200 covers respiratory treatment for one dog</p>
+              </div>
+            </li>
+            <li class="span4">
+              <div class="thumbnail">
+                <%= image_tag "dog-meds.png" %>
+                <p>$500 funds lifesaving heartworm treatment for a dog</p>
+              </div>
+            </li>
+            <li class="span4">
+              <div class="thumbnail">
+                <%= image_tag "veternarian.png" %>
+                <p>$1,000 funds lifesaving tumor removal for one dog</p>
+              </div>
+            </li>
+        </ul>
+      </div>
 
-    <ul class="unstyled">
-      <li>$25 - food for one month during foster care</li>
-      <li>$75 - shelter release fee  with initial vaccinations</li>
-      <li>$100 - transportation from the shelter to the foster pickup location</li>
-      <li>$125 - spay or neuter</li>
-      <li>$250 - needed medical procedures, like tooth extractions</li>
-      <li>$500 - heartworm treatment</li>
-    </ul>
+    <h3>Double Your Impact</h3>
 
-    <h3>To Donate by Check</h3>
+    <p>Your gift may be matched dollar-for-dollar by your employer! Click <a href="https://doublethedonation.com/matching-gift-search">here</a> to find out if your company has a matching gift program. When you give through the workplace and encourage your company to join in charitable efforts, you are doubling your impact!</p>
 
-    <p>Please mail your check payable to <strong>Operation Paws for Homes</strong> to:</p>
+    <h3>Donate Online</h3>
+
+    <p>Donations can be made <a href="https://join.ophrescue.org/ophdonate">online</a> through our secure website or via <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donate%40ophrescue%2eorg&lc=US&item_name=Operation%20Paws%20for%20Homes&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest">PayPal</a>.</p>
+
+    <h3>Donate by Check</h3>
+
+    <p>To make a gift by check, please make your check payable to <strong>Operation Paws for Homes</strong> and mail to</p>
 
     <address>
       <strong>Operation Paws for Homes</strong><br>
@@ -43,21 +88,21 @@
       Alexandria, VA 22309<br>
     </address>
 
-    <h3>Questions about Donating?</h3>
+    <h3>Donate Your Vehicle</h3>
 
-    <p>Contact us at <a href="mailto:donate@ophrescue.org">donate@ophrescue.org</a>.</p>
+    <p>Operation Paws for Homes has partnered with the Melwood Foundation to accept vehicle donations.  For information on how to donate your vehicle to us call <strong>1-877-MEL-WOOD</strong></p>
 
-    <p>OPH is a 501(c)3 tax-exempt organization. All donations are tax-deductible.</p>
+    <h3>Combined Federal Campaign <%= Time.now.year %></h3>
 
-    <p>EIN: 45-2785962</p>
+    <p>Operation Paws for Homes is proud to be part of the <%= Time.now.year %> <a href="http://cfcnca.org/">Combined Federal Campaign of the National Capital Area (CFCNCA)</a>. Federal Employees within the National Capital Area can use code <strong>44590</strong> to donate to OPH.</p>
 
-    <h3>Donate your Car</h3>
+    <h3>Donate While Online Shopping</h3>
 
-    <p>Operation Paws for Homes has partnered with the Melwood Foundation to accept car donations.  For information on how to donate your car to us call <strong>1-877-MEL-WOOD</strong></p>
+    <p>Did you know you can shop and support OPH at the same time?  Learn more <%= link_to "here", other_ways_to_give_path %> about additional ways to give.
 
-    <h3>Combined Federal Campaign 2016</h3>
+    <p>Your donation that is made in support of a campaign will be used to fund that campaign or assist that specific animal.  Don’t worry - if the funds raised exceed the goal set for a campaign, the extra funds are used to support our mission. We appreciate your support!</p>
 
-    <p>Operation Paws for Homes is proud to be part of the 2016 <a href="http://cfcnca.org/">Combined Federal Campaign of the National Capital Area (CFCNCA)</a>. Federal Employees within the National Capital Area can use code <strong>44590</strong> to donate to OPH.</p>
+    <p>Operation Paws for Home is a registered as a 501(c)3 nonprofit in the US. All donations are tax-deductible. Tax ID: <strong>45-2785962</strong>. Thank you for your support of our mission!</p>
     </div>
   </div>
 </div>

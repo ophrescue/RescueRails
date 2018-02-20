@@ -31,6 +31,25 @@
 
       <h3>Add Adopter</h3>
       <%= render 'waitlisted_adopter_form' %>
+    <% else %>
+      <div>
+        <table class="table table-striped table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th>Place</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody id="adopters_sort">
+            <% @waitlist.adopter_waitlists.find_each do |wa| %>
+              <tr>
+                <td><%= wa.rank %></td>
+                <td><%= wa.adopter.name %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     <% end %>
   </div>
 </div>
@@ -59,12 +78,7 @@
         </table>
         <h3>Add Dog</h3>
           <div class="control-group">
-            <%= form_for @waitlist, html: { :class => "form-horizontal" } do |f| %>
-              <%= f.fields_for :dogs do |d| %>
-                <%= d.collection_select(:waitlist_id, @dogs, :id, :name, include_blank: '-select-') %><br /><br />
-                <%= d.submit "Add Dog", :id => "add_dog_submit", :class => "btn btn-small btn-primary" %>
-              <% end %>
-            <% end %>
+            <%= render 'waitlisted_dog_form' %>
           </div>
       <% else %>
         <table class="table table-striped table-bordered table-condensed">

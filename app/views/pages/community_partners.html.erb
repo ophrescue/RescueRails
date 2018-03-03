@@ -46,7 +46,8 @@
       {
         alt: "Lakeside Pet Resort",
         url: "http://www.lakesidepetresort.com/",
-        img: "lakeside.gif"
+        img: "lakeside.gif",
+        show_text: true
       },
       {
         alt: "Olde Towne Pet Resort",
@@ -72,8 +73,11 @@
           <ul class="thumbnails">
           <% slice.each do |spon| %>
             <li class="span3">
-              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border thumbnail-center-text">
                 <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '150') %>
+                <% if spon[:show_text] %>
+                  <%= spon[:alt] %>
+                <% end %>
               </a>
             </li>
           <% end %>
@@ -103,7 +107,8 @@
       {
         alt: "Clearview Animal Hospital",
         url: "http://www.clearviewah.com/",
-        img: "clearviewanimalhospital.png"
+        img: "clearviewanimalhospital.png",
+        show_text: true
       },
       {
         alt: "Homewood Suites Gaithersburg",
@@ -139,8 +144,11 @@
           <ul class="thumbnails">
           <% slice.each do |spon| %>
             <li class="span3">
-              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border thumbnail-center-text">
                 <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '150') %>
+                <% if spon[:show_text] %>
+                  <%= spon[:alt] %>
+                <% end %>
               </a>
             </li>
           <% end %>
@@ -160,7 +168,8 @@
       {
         alt: "Training by Dogwood Studio",
         url: "http://www.trainingbydogwoodstudio.com/",
-        img: "dogwood.png"
+        img: "dogwood.png",
+        show_text: true
       },
       {
         alt: "Einsteink9 Dog Training",
@@ -195,7 +204,8 @@
       {
         alt: "Patrick's Pet Care",
         url: "https://patrickspetcare.com/",
-        img: "patrickspetcare.png"
+        img: "patrickspetcare.png",
+        show_text: true
       },
       {
         alt: "Paw by Paw",
@@ -231,8 +241,11 @@
           <ul class="thumbnails">
           <% slice.each do |spon| %>
             <li class="span3">
-              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border thumbnail-center-text">
                 <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '150') %>
+                <% if spon[:show_text] %>
+                  <%= spon[:alt] %>
+                <% end %>
               </a>
             </li>
           <% end %>

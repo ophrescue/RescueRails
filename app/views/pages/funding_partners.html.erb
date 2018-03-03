@@ -181,7 +181,7 @@
           <% slice.each do |spon| %>
             <li class="span2">
               <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '150') %>
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '125') %>
               </a>
             </li>
           <% end %>
@@ -341,9 +341,9 @@
           <ul class="thumbnails">
           <% slice.each do |spon| %>
             <li class="span2">
-              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '125') %>
-              </a>
+                <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
+                  <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '100') %>
+                </a>
             </li>
           <% end %>
           </ul>

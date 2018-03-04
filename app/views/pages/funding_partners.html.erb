@@ -103,8 +103,8 @@
       },
       {
         url: "https://www.washluberepair.com/",
-        img: "wlrautomotive.png",
-        alt: "WLR Automotive Group"
+        img: "washluberepair.png",
+        alt: "The Auto Spa, The Lube Center, The Auto Repair"
       },
       {
         url: "#",
@@ -148,6 +148,12 @@
         alt: "KeyW Corporation"
       },
       {
+        url: "http://www.plamondonhospitalitypartners.com/",
+        img: "plamondon.jpg",
+        alt: "Plamondon Hospitality Partners",
+        show_text: true
+      },
+      {
         url: "#",
         img: "jason_kusar.png",
         alt: "Jason Kusar"
@@ -180,8 +186,11 @@
           <ul class="thumbnails">
           <% slice.each do |spon| %>
             <li class="span2">
-              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '125') %>
+              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-center-text thumbnail-no-border">
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '150') %>
+                <% if spon[:show_text] %>
+                  <%= spon[:alt] %>
+                <% end %>
               </a>
             </li>
           <% end %>
@@ -194,14 +203,24 @@
 
     <% sponsors_250 =
       {
-        url: "https://www.burkecentrepetsitting.com/",
-        img: "burkecentrepetsitting.jpg",
-        alt: "Burke Centre Pet Sitting"
+        url: "http://www.alittleunique.com",
+        img: "alittleunique.gif",
+        alt: "A Little Unique"
       },
       {
         url: "#",
         img: "bryant.png",
         alt: "Joan Bryant"
+      },
+      {
+        url: "https://www.buffalowildwings.com",
+        img: "buffalo-wild-wings.png",
+        alt: "Buffalo Wild Wings"
+      },
+      {
+        url: "https://www.burkecentrepetsitting.com/",
+        img: "burkecentrepetsitting.jpg",
+        alt: "Burke Centre Pet Sitting"
       },
       {
         url: "http://www.dogtranquility.com/",
@@ -284,6 +303,11 @@
         alt: "Off Leash K9 Training Maryland"
       },
       {
+        url: "https://www.parkwayvetclinic.com/",
+        img: "parkway.jpg",
+        alt: "Parkway Vet"
+      },
+      {
         url: "#",
         img: "parsons.png",
         alt: "Patricia Parsons"
@@ -342,7 +366,7 @@
           <% slice.each do |spon| %>
             <li class="span2">
                 <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                  <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '100') %>
+                  <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '125') %>
                 </a>
             </li>
           <% end %>
@@ -357,39 +381,36 @@
       { url: "http://www.1800petmeds.com/",
         img: "1800petmeds.jpg"
       },
-      { url: "https://www.vippetcare.com/",
-        img: "vippetcare.png"
-      },
-      { url: "https://naturvet.com/",
-        img: "naturvet.png"
-      },
+      { url: "http://www.abuelita.com/",
+        img: "abuelita.jpg"
+      }
       { url: "http://www.chocolatebar.com/",
         img: "chocolatebar.png"
-      },
-      { url: "https://www.fizzionclean.com/",
-        img: "fizzionclean.png"
       },
       { url: "https://enjoylifefoods.com/",
         img: "enjoylifefoods.png"
       },
-      { url: "https://www.kindsnacks.com/",
-        img: "kind_snacks.jpg"
-      },
-      { url: "http://browniebrittle.com/",
-        img: "browniebrittle.jpg"
-      },
-      { url: "http://www.invisibleglass.com/",
-        img: "invisibleglass.jpg"
+      { url: "https://www.fizzionclean.com/",
+        img: "fizzionclean.png"
       },
       { url: "http://www.formostgc.com/",
         img: "formostgc.png"
       },
+      { url: "http://www.invisibleglass.com/",
+        img: "invisibleglass.jpg"
+      },
+      { url: "https://www.kindsnacks.com/",
+        img: "kind_snacks.jpg"
+      },
+      { url: "https://naturvet.com/",
+        img: "naturvet.png"
+      },
       { url: "https://www.stellaandchewys.com/",
         img: "stellaandchewys.jpg"
       },
-      { url: "http://www.abuelita.com/",
-        img: "abuelita.jpg"
-      }
+      { url: "https://www.vippetcare.com/",
+        img: "vippetcare.png"
+      },
     %>
 
     <% sponsors.each_slice(3) do |slice| %>

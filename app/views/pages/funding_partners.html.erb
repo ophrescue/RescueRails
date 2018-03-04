@@ -520,6 +520,11 @@
           alt: "Hakiri"
         },
         {
+          url: "https://www.lustreart.com/",
+          img: "lustreart.gif",
+          alt: "LustreArt"
+        },
+        {
           url: "https://moqups.com/",
           img: "moqups.png",
           alt: "Moqups"
@@ -541,12 +546,12 @@
         }
     %>
 
-    <% services.each_slice(3) do |slice| %>
+    <% services.each_slice(6) do |slice| %>
       <div class="row">
         <div class="span12">
           <ul class="thumbnails">
           <% slice.each do |spon| %>
-            <li class="span4">
+            <li class="span2">
               <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
                 <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '150') %>
               </a>

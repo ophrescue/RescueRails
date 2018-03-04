@@ -378,47 +378,108 @@
     <h2>In-Kind Donors</h2>
 
     <% sponsors =
-      { url: "http://www.1800petmeds.com/",
+      {
+        url: "http://www.1800petmeds.com/",
         img: "1800petmeds.jpg"
       },
-      { url: "http://www.abuelita.com/",
+      {
+        url: "http://www.abuelita.com/",
         img: "abuelita.jpg"
       },
-      { url: "http://www.chocolatebar.com/",
+      {
+        url: "https://www.bissell.com/pets/partners-for-pets",
+        img: "bissell.gif",
+        alt: "Bissell"
+      },
+      {
+        url: "http://www.bluedogbakery.com",
+        img: "bluedogbakery.gif",
+        alt: "Blue Dog Bakery"
+      },
+      {
+        url: "https://chewy.com",
+        img: "chewy.png",
+        alt: "Chewy"
+      },
+      {
+        url: "https://www.commonmarket.coop/",
+        img: "commonmarket.png",
+        alt: "Common Market"
+      },
+      {
+        url: "http://www.chocolatebar.com/",
         img: "chocolatebar.png"
       },
-      { url: "https://enjoylifefoods.com/",
+      {
+        url: "https://enjoylifefoods.com/",
         img: "enjoylifefoods.png"
       },
-      { url: "https://www.fizzionclean.com/",
+      {
+        url: "https://www.fizzionclean.com/",
         img: "fizzionclean.png"
       },
-      { url: "http://www.formostgc.com/",
+      {
+        url: "http://www.formostgc.com/",
         img: "formostgc.png"
       },
-      { url: "http://www.invisibleglass.com/",
+      {
+        url: "http://www.invisibleglass.com/",
         img: "invisibleglass.jpg"
       },
-      { url: "https://www.kindsnacks.com/",
+      {
+        url: "http://www.justforpetsyorkpa.com/",
+        img: "justforpets.png",
+        alt: "Just for Pets"
+      },
+      {
+        url: "https://www.kindsnacks.com/",
         img: "kind_snacks.jpg"
       },
-      { url: "https://naturvet.com/",
+      {
+        url: "http://www.naturesnibbles.com",
+        img: "naturesnibbles.jpg",
+        alt: "Natures Nibbles"
+      },
+      {
+        url: "https://naturvet.com/",
         img: "naturvet.png"
       },
-      { url: "https://www.stellaandchewys.com/",
+      {
+        url: "https://www.petsafe.net",
+        img: "petsafe.jpg",
+        alt: "PetSafe"
+      },
+      {
+        url: "http://petvalu.com/",
+        img: "petvalu.jpg",
+        alt: "PetValu"
+      },
+      {
+        url: "https://rawrev.com/",
+        img: "rawrev.png",
+        alt: "Raw Revolution"
+      },
+      {
+        url: "https://www.stellaandchewys.com/",
         img: "stellaandchewys.jpg"
       },
-      { url: "https://www.vippetcare.com/",
+      {
+        url: "https://www.vippetcare.com/",
         img: "vippetcare.png"
+      },
+      {
+        url: "https://www.wegmans.com/",
+        img: "wegmans.png",
+        alt: "Wegmans"
       }
     %>
 
-    <% sponsors.each_slice(3) do |slice| %>
+    <% sponsors.each_slice(6) do |slice| %>
       <div class="row">
         <div class="span12">
           <ul class="thumbnails">
           <% slice.each do |spon| %>
-            <li class="span4">
+            <li class="span2">
               <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
                 <%= image_tag "sponsors/"+spon[:img], size: '125' %>
               </a>

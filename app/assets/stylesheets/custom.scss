@@ -264,7 +264,12 @@ div .fb-like {
 .thumbnail-no-border {
   border: 0 none;
   box-shadow: none;
-  }
+  background-image: none !important;
+}
+
+.thumbnail-center-text{
+  text-align: center;
+}
 
 .label-filter{
   padding-right:5px;

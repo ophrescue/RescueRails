@@ -39,7 +39,7 @@ RescueRails::Application.routes.draw do
 
   root                         to: 'pages#home'
 
-  get '/5k',                   to: redirect('https://www.active.com/frederick-md/running/distance-running-races/4th-annual-fast-and-furriest-5k-1m-fun-walk-event-2018')
+  get '5k',                    to: 'pages#5k'
 
   get '/signin',               to: 'sessions#new'
   get '/signout',              to: 'sessions#destroy'

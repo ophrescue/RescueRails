@@ -291,3 +291,32 @@ div .fb-like {
 .donate.thumbnails {
   text-align: center;
 }
+
+.thumbnail-blue {
+  background: #3176b1;
+  padding: 0px;
+  border-radius: 10px;
+  border: 0 none;
+}
+
+.thumbnail-blue .caption {
+  padding: 0px;
+  padding-bottom: 3px;
+}
+
+.thumbnail-blue a {
+  text-decoration: none;
+  padding-right: 0px;
+  background: transparent;
+}
+
+.thumbnail-blue img {
+  border: 0px;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.thumbnail-blue h3 {
+  color: #FFFFFF;
+}

@@ -56,9 +56,10 @@ RescueRails::Application.routes.draw do
   get '/aboutus',              to: 'pages#aboutus'
 
   get '/documentary',          to: 'pages#documentary'
-  get '/insurance',           to: 'pages#insurance'
-  get '/volunteer',           to: 'pages#volunteer'
+  get '/insurance',            to: 'pages#insurance'
 
+  get '/get-involved',         to: 'pages#get_involved'
+  get '/volunteer',            to: 'pages#volunteer'
   get '/foster',               to: 'pages#foster'
   get '/fosterfaq',            to: 'pages#fosterfaq'
   get '/donate',               to: 'pages#donate'

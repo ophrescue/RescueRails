@@ -196,4 +196,8 @@ class Dog < ApplicationRecord
   def self.next_tracking_id
     connection.select_value("SELECT nextval('tracking_id_seq')")
   end
+
+  def valid_comments
+    comments.to_a.delete_if { |obj| obj.id.nil? }
+  end
 end

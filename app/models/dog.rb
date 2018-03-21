@@ -67,7 +67,6 @@
 
 class Dog < ApplicationRecord
   audited
-  include Auditable
   include Filterable
 
   attr_accessor :primary_breed_name, :secondary_breed_name

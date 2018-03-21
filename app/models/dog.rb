@@ -170,7 +170,7 @@ class Dog < ApplicationRecord
   end
 
   def comments_and_audits_and_associated_audits
-    comments + audits + associated_audits
+    (valid_comments + audits + associated_audits).sort_by(&:created_at).reverse!
   end
 
   def to_petfinder_status

@@ -1,0 +1,37 @@
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li>
+          <a href="#all_table" data-toggle="tab">All</a>
+        </li>
+        <li class="active">
+          <a href="#comment_table" data-toggle="tab">Comments</a>
+        </li>
+        <li>
+          <a href="#history_table" data-toggle="tab">History</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane" id="all_table">
+          <% parent.comments_and_audits_and_associated_audits.each do |thing| %>
+            <% if thing.id.present? %>
+              <%= render thing %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="tab-pane active" id="comment_table">
+          <% parent.comments.each do |comment| %>
+            <% if comment.id.present? %>
+              <%= render comment %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="tab-pane" id="history_table">
+          <% parent.audits_and_associated_audits.each do |audit| %>
+            <% if audit.id.present? %>
+              <%= render audit %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>

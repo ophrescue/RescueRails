@@ -56,6 +56,7 @@
 
 class AdoptionApp < ApplicationRecord
   belongs_to :adopter, class_name: 'Adopter'
+  audited associated_with: :adopter
 
   has_many :attachments, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :attachments, allow_destroy: true

@@ -102,7 +102,7 @@ class Adopter < ApplicationRecord
   validates_inclusion_of :status, in: STATUSES
 
   before_create :chimp_subscribe
-  before_update :chimp_check
+  before_update :chimp_check, :training_email
   before_save :populate_county
 
   def populate_county
@@ -183,6 +183,15 @@ class Adopter < ApplicationRecord
   def chimp_unsubscribe
     AdopterUnsubscribeJob.perform_later(email)
     self.is_subscribed = 0
+  end
+
+  def training_email
+    return unless  status_changed?
+
+    if ((status == 'adopted') || (status == 'adptd sn pend')) && !training_email_sent?
+      TrainingMailer.free_training_notice(self.id).deliver_later
+      self.training_email_sent = true
+    end
   end
 
   def valid_comments

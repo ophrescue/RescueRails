@@ -177,8 +177,6 @@ GEM
     kgio (2.11.2)
     launchy (2.4.3)
       addressable (~> 2.3)
-    letter_opener (1.6.0)
-      launchy (~> 2.2)
     libv8 (3.16.14.19)
     loofah (2.2.2)
       crass (~> 1.0.2)
@@ -427,7 +425,6 @@ DEPENDENCIES
   gibbon
   gravatar_image_tag
   has_scope
-  letter_opener
   mailhopper
   newrelic_rpm
   paperclip (~> 5)

@@ -58,6 +58,8 @@ Rails.application.configure do
 
   # Action Mailer Configuration
   config.action_mailer.default_url_options = { host: "rescuerails.dev", protocol: "http://" }
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 
   # Paperclip Configuration
   Paperclip.options[:command_path] = "/usr/local/bin/"

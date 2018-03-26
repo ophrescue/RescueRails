@@ -24,4 +24,8 @@
 
 class Shelter < ApplicationRecord
   has_many :dogs
+
+  def display_name
+    name
+  end
 end

@@ -1,0 +1,176 @@
+$primary-color-light: #97dce1;
+$primary-color-dark: #071755;
+$secondary-color-light: #d4d2ca;
+
+.front-page-header {
+  text-align: right;
+}
+
+.front-page-header-title {
+  color: $primary-color-light;
+}
+
+.front-page-header-link {
+  color: $primary-color-light;
+  font-weight: normal;
+  
+  &:hover {
+    color: $primary-color-dark;
+    text-decoration: none;
+  }
+}
+
+.front-page-header-button {
+  background-color: $primary-color-dark;
+  color: white;
+  font-weight: normal;
+  padding: 7px 20px;
+  border-radius: 5px;
+
+  &:hover {
+    color: $secondary-color-light;
+    text-decoration: none;
+  }
+}
+
+.learn-more {
+  color: black;
+  background-color: white;
+  padding: 5px;
+}
+
+.our-mission,
+.our-impact {
+  text-align: center;
+  color: white;
+  background-color: $primary-color-light;
+  padding: 3%;
+}
+
+.container.main-container {
+  margin: 0;
+  width: 100%;
+}
+
+.container.front-page {
+  margin: 0;
+  width: 100%;
+}
+
+.front-page-logo {
+  position: absolute;
+  left: 1%;
+}
+
+.carousel-text-wrapper {
+  height: inherit;
+  display: flex;
+  align-items: center;
+}
+
+#ophCarousel {
+  margin-bottom: 0;
+}
+
+.take-action {
+  text-align: center;
+}
+
+.front-page-action-thumbnail {
+  background-color: $primary-color-dark;
+  border: 0;
+  box-shadow: none;
+  height: 100%;
+
+  h5 {
+    color: white;
+    text-decoration: none;
+  }
+
+  &:hover {
+    h5 {
+      color: $secondary-color-light;
+      text-decoration: none;
+    }
+  }
+}
+
+.front-page-action-thumbnails {
+  padding: 0 5%;
+}
+
+.take-action-image {
+  margin: none;
+  width: 100%;
+  padding-top: 10%;
+}
+
+.our-impact-thumbnail {
+  border: 0;
+  box-shadow: none;
+  color: white;  
+
+  h3 {
+    font-weight: bolder;
+  }
+
+  h5 {
+    font-weight: bold;
+  }
+}
+
+.carousel .item img {
+  width: 100%;
+}
+
+.social-media {
+  text-align: right;
+  position: absolute;
+  right: 2%;
+}
+
+.stay-in-touch {
+  background-color: $primary-color-light;
+  padding: 5% 3%;
+  display: flex;
+  align-items: center;
+
+  a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+.footer {
+  background-color: $primary-color-dark;
+  text-align: center;
+
+  a, .footer-links {
+    color: white;
+  }
+}
+
+.carousel-overlay {
+  background-repeat: no-repeat;
+  background: transparent;
+  text-align: left;
+  color: white;
+  top: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.carousel-overlay-text {
+  vertical-align: middle;
+  max-width: 25%;
+
+  h1 {
+    margin-top: 0;
+    font-weight: bolder;
+  }
+}

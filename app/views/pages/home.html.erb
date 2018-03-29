@@ -1,74 +1,43 @@
-<div class="container">
-  <div class="row">
-    <div class="span1 hidden-phone hidden-tablet">
-      <%= image_tag "logo.png" %>
+<div class="container front-page">
+  <div class="row-fluid">
+    <div class="span2 front-page-logo">
+      <%= image_tag "logo.png", :size => "75x75" %>
     </div>
 
-    <div class="span6 hidden-phone hidden-tablet">
-      <h2>Operation Paws for Homes</h2>
-      <h5>Virginia, Maryland, Washington DC and South Central PA</h5>
-    </div>
-
-    <div class="span7 hidden-desktop">
-      <h2>Operation Paws for Homes</h2>
-      <h5>Virginia, Maryland, Washington DC and South Central PA</h5>
-    </div>
-
-
-    <div class="span5 hidden-phone">
-      <span class="pull-right">
-        <a href="https://www.facebook.com/Operationpawsforhomes"><i class="fa fa-facebook-square fa-3x"></i></a>
-        <a href="https://twitter.com/RescueOPH"><i class="fa fa-twitter-square fa-3x"></i></a>
-        <a href="http://instagram.com/operationpawsforhomes"><i class="fa fa-instagram fa-3x"></i></a>
-        <a href="https://www.youtube.com/user/RescueOPH"><i class="fa fa-youtube fa-3x"></i></a>
-        &nbsp; &nbsp;
-          <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/">
-            <%= image_tag "gnp-2017-award.png", alt: "2017 Top-rated nonprofits and charities" %>
-          </a>
-        </span>
+    <div class="front-page-header">
+      <h2 class="front-page-header-title">Operation Paws for Homes</h2>
+      <h5>
+        <a class="front-page-header-link" href='/aboutus'>About Us</a>
+        <%= link_to "Adopt", new_adopter_path, :class => "front-page-header-link"%>
+        <a class="front-page-header-link" href="/partnerships">Partners</a>
+        <%= link_to "Take Action", '/volunteer', :class => "front-page-header-link" %>
+        <%= link_to "Events & Media", events_path, :class => "front-page-header-link"%>
+        <a class="front-page-header-link" href="/contact">Contact Us</a>
+        <%= link_to "Donate", '/donate', :class => "front-page-header-button" %>
+      </h5>
     </div>
   </div>
+
   <div class="row">
-    <div class="span12">
+    <div>
       <div id="ophCarousel" class="carousel slide">
         <div class="carousel-inner">
           <div class="item active">
             <%= image_tag "hero_bg4.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
-            <div class="carousel-caption">
-              <%= link_to "Our Dogs", dogs_path, :class => "btn btn-primary btn-large", :id => "hero-dog" %>
-              <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
-            </div>
           </div>
 
-<% if Time.now.between?(("2018-01-01".to_date),("2018-02-17".to_date)) %>
           <div class="item">
-            <%= image_tag "alex-and-ani-event-2018-02.jpg", alt: "Charity Design Event" %>
+            <%= image_tag "front-page/rescue.jpg", alt: 'Rescue' %>
           </div>
-<% elsif Time.now.between?(("2018-02-17".to_date),("2018-02-28".to_date)) %>
-          <div class="item">
-            <%= image_tag "world-spay-day-2018.jpg", alt: "World Spay Day Feb 27, 2018" %>
-            <div class="carousel-caption">
-              <%= link_to "Donate", "https://join.ophrescue.org/campaign/Operation-Desi-Dogs/c161458", :class => "btn btn-primary btn-large" %>
+        </div>
+        <div class="carousel-overlay">
+          <div class="carousel-text-wrapper">
+            <div class="carousel-overlay-text">
+              <h1>RESCUE</h1>
+              <h4>We believe they all deserve a second chance.</h4>
+              <a href="/resources" class="learn-more">Learn More</a>
             </div>
           </div>
-<% end %>
-
-<% if Time.now.between?(("2017-11-17".to_date),("2018-04-09".to_date))%>
-          <div class="item">
-            <%= image_tag "fastfurriestwebbanner-2018.jpg", alt: "Fast and Furriest 5k is April 8th, 2018" %>
-            <div class="carousel-caption">
-              <%= link_to "Register", "https://www.active.com/frederick-md/running/distance-running-races/4th-annual-fast-and-furriest-5k-1m-fun-walk-event-2018", :class => "btn btn-primary btn-large" %>
-              <%= link_to "Sponsorship Info", "https://oph5k.weebly.com/sponsorship-info.html", :class => "btn btn-primary btn-large" %>
-            </div>
-          </div>
-<% else %>
-          <div class="item">
-            <%= image_tag "lustreart.jpg", alt: "Lustre Art" %>
-            <div class="carousel-caption">
-              <%= link_to "Contact", "https://www.facebook.com/LustreArt", :class => "btn btn-primary btn-large" %>
-            </div>
-          </div>
-<% end %>
         </div>
         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
         <a class="right carousel-control" href="#ophCarousel" data-slide="next">&rsaquo;</a>
@@ -76,53 +45,96 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="span4 eventphoto">
-      <a href="/donate"><%= image_tag "home-donate.jpg" %></a>
-      <br />
-      <br />
+  <div class="our-mission">
+    <h3>OUR MISSION</h3>
+    <h4>Annually, 50% of our dogs and 70% of cats in shelters are euthanized simply because there is no one to adopt them.</h4>
+    <p>__________________________</p>
+    <h4>OPH is committed to a No Kill nation and believes every animal deserves a loving home.</h4>
+  </div>
+
+  <div class="take-action">
+    <h3>TAKE ACTION</h3>
+    <div class="row-fluid">
+      <ul class="thumbnails front-page-action-thumbnails">
+        <li class="thumbnail col-xs-4 front-page-action-thumbnail span4">
+            <a href="/dogs">
+              <%= image_tag "front-page/Adopt.jpg", :size => "200x200", :class=> "take-action-image"%>
+              <h5>ADOPT</h5>
+            </a>
+        </li>
+        <li class="thumbnail col-xs-4 front-page-action-thumbnail span4">
+            <a href="/foster">
+              <%= image_tag "front-page/Foster.jpg", :size => "200x200", :class=> "take-action-image"%>
+              <h5>FOSTER</h5>
+            </a>
+        </li>
+        <li class="thumbnail col-xs-4 front-page-action-thumbnail span4">
+            <a href="/volunteer">
+              <%= image_tag "front-page/Volunteer.jpg", :size => "200x200", :class=> "take-action-image"%>
+              <h5>VOLUNTEER</h5>
+            </a>
+          </li>
+      </ul>
     </div>
-    <div class="span4 eventphoto">
-      <a href="/volunteer"><%= image_tag "home-get-involved.jpg" %></a>
-      <br />
-      <br />
-    </div>
-    <div class="span4 eventphoto">
-      <a href="/events"><%= image_tag "home-events.jpg" %></a>
-      <br />
-      <br />
+    <div class="row-fluid">
+      <ul class="thumbnails front-page-action-thumbnails">
+        <li class="thumbnail col-xs-4 front-page-action-thumbnail span4">
+            <a href="/donate">
+              <%= image_tag "front-page/Donate.jpg", :size => "200x200", :class=> "take-action-image"%>
+              <h5>DONATE</h5>
+            </a>
+        </li>
+        <li class="thumbnail col-xs-4 front-page-action-thumbnail span4">
+            <a href="/events">
+              <%= image_tag "front-page/Events.jpg", :size => "200x200", :class=> "take-action-image"%>
+              <h5>EVENTS</h5>
+            </a>
+        </li>
+        <li class="thumbnail col-xs-4 front-page-action-thumbnail span4">
+            <a href="/fundraise">
+              <%= image_tag "front-page/Fundraise.JPG", :size => "200x200", :class=> "take-action-image"%>
+              <h5>FUNDRAISE</h5>
+            </a>
+        </li>
+      </ul>
     </div>
   </div>
-<br />
-  <div class="row">
-    <div class="span12 hidden-tablet hidden-desktop">
-      <span class="pull-right">
-        <a href="https://www.facebook.com/Operationpawsforhomes"><i class="fa fa-facebook-square fa-3x"></i></a>
-        <a href="https://twitter.com/RescueOPH"><i class="fa fa-twitter-square fa-3x"></i></a>
-        <a href="http://instagram.com/operationpawsforhomes"><i class="fa fa-instagram fa-3x"></i></a>
-        <a href="https://www.youtube.com/user/RescueOPH"><i class="fa fa-youtube fa-3x"></i></a>
-        &nbsp; &nbsp;
-          <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/">
-            <%= image_tag "gnp-2016-award.png", alt: "2016 Top-rated nonprofits and charities" %>
-          </a>
-        </span>
-    </div>
-    <div class="row">
-      <div class="span12">
-        <a href="http://adoptapet.com"><%= image_tag "approved-rescue-badge.png" %></a>
-        <%= image_tag "best-of-fairfax-2016.png" %>
-        &nbsp; &nbsp;
-        <%= image_tag "best-of-fairfax-2017.jpg"%>
-         &nbsp; &nbsp;
-        <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/">
-            <%= image_tag "gnp-2015-award.png", alt: "2015 Top-rated nonprofits and charities" %>
-            <%= image_tag "gnp-2016-award.png", alt: "2016 Top-rated nonprofits and charities" %>
-        </a>
-        &nbsp; &nbsp;
-        <a href="http://vfhs.org/"><%= image_tag "vfhs.png" %></a>
-      </div>
+  <div class="our-impact">
+    <h3>OUR IMPACT</h3>
+    <div class="row-fluid">
+      <ul class="thumbnails our-impact-thumbnails">
+        <li class="thumbnail our-impact-thumbnail span3">
+          <%= image_tag "front-page/dogs-rescued.png", :size => "150x150"%>
+          <h3>7,300</h3>
+          <h5>Dogs Rescued</h5>
+          <p>Since our founding in 2010, OPH has rescued over 7,300 dogs in need.</p>
+        </li>
+        <li class="thumbnail our-impact-thumbnail span3">
+          <%= image_tag "front-page/dogs-placed-annually.png", :size => "150x150"%>
+          <h3>1,300</h3>
+          <h5>Dogs Placed Annually</h5>
+          <p>Each year, OPH finds loving, permanent homes for 1,30 0deserving dogs.</p>
+        </li>
+        <li class="thumbnail our-impact-thumbnail span3">
+          <%= image_tag "front-page/educated.png", :size => "150x150"%>
+          <h3>240</h3>
+          <h5>People Educated</h5>
+          <p>Over 240 children and adults have participated in the Mult-i-gress program since 2017.</p>
+        </li>
+        <li class="thumbnail our-impact-thumbnail span3">
+          <%= image_tag "front-page/food-delivered.png", :size => "150x150"%>
+          <h3>25,000</h3>
+          <h5>Lbs. of Supplies Delivered</h5>
+          <p>Each year, OPH donates 25,000 lbs. of food to our shelter partners to support their life-saving efforts.</p>
+        </li>
+      </ul>
     </div>
   </div>
+  <div class="connect">
+  </div>
+  <div class="footer">
+  </div>
+  
 
 <script type="text/javascript">
 $('#ophCarousel').carousel({

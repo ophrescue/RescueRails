@@ -8,6 +8,7 @@
           <% else %>
             <strong><%= link_to comment.user.name, user_path(comment.user) %></strong>
           <% end %>
+          added a comment
           <em><%= comment.created_at.strftime('%m/%d/%Y %l:%M%P') %></em>
 
           <% if current_user == comment.user %>

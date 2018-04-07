@@ -146,7 +146,7 @@ class User < ApplicationRecord
   before_create :chimp_subscribe
   before_update :chimp_check
 
-  scope :unlocked,                  -> { where(locked: false) }
+  scope :unlocked,                -> { where(locked: false) }
   scope :admin,                   -> (status = true) { where(admin: status) }
   scope :adoption_coordinator,    -> (status = true) { where(edit_my_adopters: status) }
   scope :event_planner,           -> (status = true) { where(edit_events: status) }
@@ -174,6 +174,10 @@ class User < ApplicationRecord
   scope :has_children_under_five, -> (status = true) { where(children_under_five: status) }
   scope :puppies_ok,              -> (status = true) { where(can_foster_puppies: status) }
   scope :has_parvo_house,         -> (status = true) { where(parvo_house: status) }
+
+  def display_name
+    name
+  end
 
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

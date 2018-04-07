@@ -41,7 +41,8 @@
 #
 
 class Adopter < ApplicationRecord
-  include Auditable
+  audited on: :update
+  has_associated_audits
 
   attr_accessor :pre_q_costs,
                 :pre_q_surrender,
@@ -118,6 +119,10 @@ class Adopter < ApplicationRecord
     %w[status assigned_to_user_id email phone address1 address2 city state zip]
   end
 
+  def audits_and_associated_audits
+    (audits + associated_audits).sort_by(&:created_at).reverse!
+  end
+
   def changes_to_sentence
     result = []
     changed_audit_attributes.each do |attr|
@@ -161,6 +166,10 @@ class Adopter < ApplicationRecord
     self.is_subscribed = true
   end
 
+  def comments_and_audits_and_associated_audits
+    (valid_comments + audits + associated_audits).sort_by(&:created_at).reverse!
+  end
+
   def chimp_check
     return unless status_changed?
 
@@ -174,5 +183,9 @@ class Adopter < ApplicationRecord
   def chimp_unsubscribe
     AdopterUnsubscribeJob.perform_later(email)
     self.is_subscribed = 0
+  end
+
+  def valid_comments
+    comments.to_a.delete_if { |obj| obj.id.nil? }
   end
 end

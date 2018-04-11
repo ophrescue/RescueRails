@@ -63,35 +63,4 @@ RSpec.describe Adopter do
       end
     end
   end
-
-  describe '.audit_changes' do
-    context 'an attribute changes on an adopter' do
-      it 'creates a comment' do
-        expect { adopter.save }.to change { Comment.count }.by(1)
-      end
-    end
-
-    context 'no admin assigned to adopter' do
-      it 'does not make a comment' do
-        adopter.updated_by_admin_user = nil
-        expect { adopter.save }.to_not change { Comment.count }
-      end
-    end
-  end
-
-  describe '.changes_to_sentence' do
-    context 'an attribute changes' do
-      it 'creates a human readable version' do
-        expect(adopter.changes_to_sentence).to eq('changed status from new to completed')
-      end
-    end
-
-    context 'many attributes have changed' do
-      it 'cretes a human readable version' do
-        old_zip = adopter.zip
-        adopter.zip = old_zip + '-1'
-        expect(adopter.changes_to_sentence).to eq("changed status from new to completed * changed zip from #{old_zip} to #{old_zip}-1")
-      end
-    end
-  end
 end

@@ -28,8 +28,7 @@
 #
 
 class Reference < ApplicationRecord
-  audited on: :update
-  has_associated_audits
+  audited on: :update, associated_with: :adopter
 
   belongs_to :adopter, class_name: 'Adopter'
 end

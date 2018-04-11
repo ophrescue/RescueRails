@@ -28,40 +28,8 @@
 #
 
 class Reference < ApplicationRecord
-  include Auditable
+  audited on: :update
+  has_associated_audits
 
   belongs_to :adopter, class_name: 'Adopter'
-
-  after_update :audit_changes
-
-  def attributes_to_audit
-    %w[name email phone relationship whentocall]
-  end
-
-  def audit_content
-    content = "#{CurrentHelper.current_scope_user.name} has "
-    content + changes_to_sentence
-  end
-
-  def changes_to_sentence
-    result = []
-    changed_audit_attributes.each do |attr|
-        old_value = send("#{attr}_was")
-        new_value = send(attr)
-        result << "changed #{attr} from #{old_value} to #{new_value}"
-    end
-    result.sort.join(' * ')
-  end
-
-  def audit_changes
-    return unless audit_attributes_changed?
-    updated_by_admin_user = CurrentHelper.current_scope_user
-
-    return if updated_by_admin_user.nil?
-
-    Comment.create(content: audit_content,
-                    user: updated_by_admin_user,
-                    commentable_id: adopter_id,
-                    commentable_type: 'Adopter')
-  end
 end

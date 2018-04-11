@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 class PasswordResetsController < ApplicationController
-  skip_around_action :set_current_user
-
   def create
     user = User.find_by(email: params[:email].downcase)
 

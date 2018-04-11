@@ -18,10 +18,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include SessionsHelper
-  include CurrentHelper
 
   helper_method :handle_redirect
-  around_action :set_current_user
 
   def handle_redirect
     if request.xhr?
@@ -29,12 +27,5 @@ class ApplicationController < ActionController::Base
     else
       redirect_to request.referer
     end
-  end
-
-  def set_current_user
-    CurrentHelper.current_scope_user = current_user
-    yield
-  ensure
-    CurrentHelper.current_scope_user = nil
   end
 end

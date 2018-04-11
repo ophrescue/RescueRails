@@ -48,7 +48,5 @@ feature 'Edit Reference Form', js: true do
 
     click_link('References')
     expect(page).to have_content('First Reference')
-
-    expect(page).to have_content("#{admin.name} has changed name from #{reference.name} to First Reference")
   end
 end

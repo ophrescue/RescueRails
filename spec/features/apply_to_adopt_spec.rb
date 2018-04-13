@@ -150,20 +150,20 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('Rent Goes Up $50 a month')
 
     click_link('References')
-    expect(page).to have_content('First Reference')
-    expect(page).to have_content('first@reference.org')
-    expect(page).to have_content('(111) 111-1111')
-    expect(page).to have_content('After 1pm')
+    expect(page).to have_content("First Reference")
+    expect(page).to have_content("first@reference.org")
+    expect(page).to have_content("(111) 111-1111")
+    expect(page).to have_content("After 1pm")
 
-    expect(page).to have_content('Second Reference')
-    expect(page).to have_content('second@reference.org')
-    expect(page).to have_content('(222) 222-2222')
-    expect(page).to have_content('After 2pm')
+    expect(page).to have_content("Second Reference")
+    expect(page).to have_content("second@reference.org")
+    expect(page).to have_content("(222) 222-2222")
+    expect(page).to have_content("After 2pm")
 
-    expect(page).to have_content('Third Reference')
-    expect(page).to have_content('third@reference.org')
-    expect(page).to have_content('(333) 333-3333')
-    expect(page).to have_content('After 3pm')
+    expect(page).to have_content("Third Reference")
+    expect(page).to have_content("third@reference.org")
+    expect(page).to have_content("(333) 333-3333")
+    expect(page).to have_content("After 3pm")
   end
 
   scenario "Home Owner fills out adoption application", js: true do
@@ -300,19 +300,19 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('They do not like shots')
 
     click_link('References')
-    expect(page).to have_content('First Reference')
-    expect(page).to have_content('first@reference.org')
-    expect(page).to have_content('(111) 111-1111')
-    expect(page).to have_content('After 1pm')
+    expect(page).to have_content("First Reference")
+    expect(page).to have_content("first@reference.org")
+    expect(page).to have_content("(111) 111-1111")
+    expect(page).to have_content("After 1pm")
 
-    expect(page).to have_content('Second Reference')
-    expect(page).to have_content('second@reference.org')
-    expect(page).to have_content('(222) 222-2222')
-    expect(page).to have_content('After 2pm')
+    expect(page).to have_content("Second Reference")
+    expect(page).to have_content("second@reference.org")
+    expect(page).to have_content("(222) 222-2222")
+    expect(page).to have_content("After 2pm")
 
-    expect(page).to have_content('Third Reference')
-    expect(page).to have_content('third@reference.org')
-    expect(page).to have_content('(333) 333-3333')
-    expect(page).to have_content('After 3pm')
+    expect(page).to have_content("Third Reference")
+    expect(page).to have_content("third@reference.org")
+    expect(page).to have_content("(333) 333-3333")
+    expect(page).to have_content("After 3pm")
   end
 end

@@ -66,5 +66,30 @@ $( function() {
         select: itemSelected,
         source: remoteSource
       });
+
+    var isRefEditing = false;
+
+    $('#references').on('click', 'a#toggle-edit-ref', function() {
+      if (isRefEditing) {
+        // find all enabled fields in .edit-reference and disable them
+        $('form.edit-reference .to-disable').prop("disabled", true);
+        $('.ref-editable').hide();
+        $('.ref-read-only').show();
+        $('a#toggle-edit-ref').addClass('btn-primary').text("Edit References");
+        $('input.reference-save').removeClass('btn-primary');
+      }
+      else {
+        $('form.edit-reference :disabled')
+          .removeAttr('disabled')
+          .addClass('to-disable');
+
+        $('.ref-editable').show();
+        $('.ref-read-only').hide();
+        $('a#toggle-edit-ref').removeClass('btn-primary').text("Cancel");
+        $('input.reference-save').addClass('btn-primary');
+      }
+
+      isRefEditing = !isRefEditing;
+    });
   }
 });

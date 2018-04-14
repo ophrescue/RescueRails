@@ -99,6 +99,7 @@ feature 'Apply for Adoption' do
     fill_in('adopter_references_attributes_2_whentocall', with: 'After 3pm')
 
     expect { click_button('Submit') }.to change { Adopter.count }.by(1)
+      .and change { ActionMailer::Base.deliveries.size }.by(2)
 
     expect(page).to have_content 'Success! Your adoption application has been submitted'
 
@@ -255,6 +256,7 @@ feature 'Apply for Adoption' do
     fill_in('adopter_references_attributes_2_whentocall', with: 'After 3pm')
 
     expect { click_button('Submit') }.to change { Adopter.count }.by(1)
+      .and change { ActionMailer::Base.deliveries.size }.by(2)
 
     expect(page).to have_content 'Success! Your adoption application has been submitted'
 

@@ -11,7 +11,7 @@
 //= require bbq
 //= require jquery.form.wizard
 //= require jquery.validate
-//= require twitter/bootstrap
+//= require bootstrap
 //= require jquery.tablesorter.min
 //= require jquery.tablesorter.cfg
 //= require jquery.inputmask

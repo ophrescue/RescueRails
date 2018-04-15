@@ -320,3 +320,8 @@ div .fb-like {
 .thumbnail-blue h3 {
   color: #FFFFFF;
 }
+
+// Mobile Dropdown Menu fix https://github.com/twbs/bootstrap/issues/7968
+.dropdown-backdrop {
+  position: static;
+}

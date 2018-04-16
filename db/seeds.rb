@@ -85,6 +85,11 @@ params = { adopter: 						{
 
 Adopter.create!(params[:adopter])
 
+Breed.destroy_all
+15.times do
+  FactoryBot.create(:breed)
+end
+
 Dog.destroy_all
 30.times do
   FactoryBot.create(:dog)

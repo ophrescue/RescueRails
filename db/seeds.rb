@@ -7,6 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Create default admin user.
+require 'factory_bot'
+FactoryBot.find_definitions
 
 User.destroy_all
 
@@ -82,3 +84,8 @@ params = { adopter: 						{
 }
 
 Adopter.create!(params[:adopter])
+
+Dog.destroy_all
+30.times do
+  FactoryBot.create(:dog)
+end

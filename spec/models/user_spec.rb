@@ -295,4 +295,19 @@ describe User do
       expect(User.authenticate_with_salt(user.id, 'not-salt')).to be nil
     end
   end
+
+  # verifies before_save callback changed for Rails 5.1
+  describe 'encrypt password' do
+    it 'encrypts the password when it is present' do
+      user = create(:user, :password => 'topsekret')
+      expect(user.salt).not_to be_blank
+      expect(user.encrypted_password).to eq Digest::SHA2.hexdigest("#{user.salt}--topsekret")
+    end
+
+    it 'saves without error when password is not present' do
+      user = create(:user, :password => nil)
+      expect(user.encrypted_password).to be_blank
+      expect(user.salt).to be_blank
+    end
+  end
 end

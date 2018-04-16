@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby   '2.3.1'
 
-gem 'rails', '5.0.6'
+gem 'rails', '~> 5.1.0'
 
 gem 'rack-cache'
 
@@ -42,8 +42,6 @@ end
 gem 'daemons'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
-gem 'delayed_mailhopper'
-gem 'mailhopper'
 
 # Gems used only for assets and not required
 # in production environments by default.

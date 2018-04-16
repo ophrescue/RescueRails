@@ -115,7 +115,7 @@ class User < ApplicationRecord
   geocoded_by :full_street_address
   after_validation :geocode
 
-  before_save :encrypt_password, unless: "password.blank?"
+  before_save :encrypt_password, unless: Proc.new { |u| u.password_blank? }
 
   has_many :foster_dogs, class_name: 'Dog', foreign_key: 'foster_id'
   has_many :current_foster_dogs, -> { where(status: ['adoptable', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'foster_id'
@@ -181,6 +181,10 @@ class User < ApplicationRecord
 
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
+  end
+
+  def password_blank?
+    password.blank?
   end
 
   def self.authenticate(email, submitted_password)

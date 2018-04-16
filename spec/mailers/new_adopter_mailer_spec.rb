@@ -7,7 +7,6 @@ describe NewAdopterMailer, type: :mailer do
     let(:adopter) { create(:adopter_with_app) }
 
     it 'job is created' do
-      ActiveJob::Base.queue_adapter = :test
       expect do
         NewAdopterMailer.adopter_created(adopter.id).deliver_later
       end.to have_enqueued_job.on_queue('mailers')

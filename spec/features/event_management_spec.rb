@@ -10,7 +10,8 @@ feature 'Manage Events', js: true do
     click_link 'Events'
     expect(page).to have_content('Add an Event')
     click_link 'Add an Event'
-    expect(page).to have_content('Title Date')
+    expect(page).to have_content('Title')
+    expect(page).to have_content('Date')
 
     test_event = build(:event)
     fill_in('event_title', with: test_event.title)

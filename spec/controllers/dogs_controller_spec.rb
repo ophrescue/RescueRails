@@ -112,7 +112,7 @@ describe DogsController, type: :controller do
 
     it 'is successful' do
       get :show, params: { id: dog.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -123,7 +123,7 @@ describe DogsController, type: :controller do
 
     it 'is successful' do
       get :edit, params: { id: dog.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

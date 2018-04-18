@@ -27,7 +27,7 @@ describe CommentsController, type: :controller do
 
     it 'is successful' do
       get :index, params: { dog_id: dog.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -38,7 +38,7 @@ describe CommentsController, type: :controller do
 
     it 'is successful' do
       get :show, params: { id: comment.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

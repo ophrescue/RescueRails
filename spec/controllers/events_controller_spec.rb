@@ -4,7 +4,7 @@ describe EventsController, type: :controller do
   describe 'GET #index' do
     it 'is successful' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -13,7 +13,7 @@ describe EventsController, type: :controller do
 
     it 'is successful' do
       get :past
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -22,7 +22,7 @@ describe EventsController, type: :controller do
 
     it 'is successful' do
       get :show, params: { id: event.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -31,7 +31,7 @@ describe EventsController, type: :controller do
 
     it 'is successful' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -42,7 +42,7 @@ describe EventsController, type: :controller do
 
     it 'is successful' do
       get :edit, params: { id: event.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

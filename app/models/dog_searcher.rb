@@ -13,6 +13,8 @@
 #    limitations under the License.
 
 class DogSearcher
+  attr_accessor :params, :manager
+
   PER_PAGE = 30
 
   ACTIVE_STATUSES = [
@@ -31,25 +33,24 @@ class DogSearcher
   end
 
   def search
-    @dogs = Dog.includes(:photos, :foster)
-    if @manager
-      @dogs = @dogs.includes(:adopters, :comments)
+    if @manager # manager view
+      @dogs = Dog.includes(:adoptions, :adopters, :comments)
       @dogs = if text_search? && tracking_id_search?
-        @dogs.where('tracking_id = :search OR microchip = :search', search: search_term)
-      elsif text_search? && !tracking_id_search?
-        @dogs.where('microchip ILIKE :search OR name ILIKE :search', search: "%#{search_term.strip}%")
-      else
-        @dogs.filter(filtering_params)
-      end
-    else
-      @dogs = @dogs.includes(:primary_breed, :secondary_breed).where('status IN (?)', PUBLIC_STATUSES)
+                @dogs.identity_match_tracking_id_or_microchip(search_term) # sort by search term
+              elsif text_search? && !tracking_id_search?
+                @dogs.pattern_match_microchip_or_name(search_term) # sort by search term
+              else
+                @dogs.filter(filtering_params)# sort by sort params
+                     .order( sort = "#{sort_column} #{sort_direction}" )
+              end
+    else # gallery view
+      @dogs = Dog.includes(:primary_breed, :secondary_breed, :photos)
+                 .where(status: PUBLIC_STATUSES)
     end
 
-    with_includes
     with_sorting
-    for_page(@params[:page])
+    for_page(params[:page])
 
-    @dogs
   end
 
   def self.search(params: {}, manager: false)
@@ -59,44 +60,37 @@ class DogSearcher
   private
 
   def tracking_id_search?
-    @params[:search].scan(/\D/).empty? &&
-      @params[:search].to_i > 0 &&
-      @params[:search].to_i < 2_147_483_647
+    params[:search].scan(/\D/).empty? &&
+      params[:search].to_i > 0 &&
+      params[:search].to_i < 2_147_483_647
   end
 
   def text_search?
-    @params[:search].present?
+    params[:search].present?
   end
 
   def search_term
-    @params[:search]
-  end
-
-  def with_includes
-    @dogs = @dogs.includes(:photos, :primary_breed)
+    params[:search].strip
   end
 
   def with_sorting
-    sort = "#{sort_column} #{sort_direction}"
-
     if text_search? && unspecified_sort?
-      sort_string = "case when name ilike ? then 1 else 2 end #{sort_direction}, #{sort}"
-      sort = [sort_string, search_term + '%']
+      @dogs = @dogs.sort_with_search_term_matches_first(search_term)
+    else
+      @dogs = @dogs.order( sort = "#{sort_column} #{sort_direction}" )
     end
-
-    @dogs = @dogs.order(sort)
   end
 
   def unspecified_sort?
-    @params[:sort].blank?
+    params[:sort].blank?
   end
 
   def sort_column
-    Dog.column_names.include?(@params[:sort]) ? @params[:sort] : 'tracking_id'
+    Dog.column_names.include?(params[:sort]) ? params[:sort] : 'tracking_id'
   end
 
   def sort_direction
-    %w[asc desc].include?(@params[:direction]) ? @params[:direction] : 'asc'
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
   def for_page(page = nil)
@@ -104,7 +98,7 @@ class DogSearcher
   end
 
   def filtering_params
-    @params.slice(:is_age,
+    params.slice(:is_age,
                   :is_size,
                   :is_status,
                   :cb_high_priority,

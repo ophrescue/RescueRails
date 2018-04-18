@@ -5,7 +5,7 @@ feature 'View Dogs', js: true do
   let!(:active_user) { create(:user) }
   let!(:inactive_user) { create(:user, :inactive_user) }
   let!(:test_foster) { create(:user) }
-  let!(:test_dog) { create(:dog_with_photo_and_attachment, foster_id: test_foster.id) }
+  let!(:test_dog) { create(:dog_with_photo_and_attachment, foster_id: test_foster.id, status: 'adoptable') }
 
   context 'Logged in as Admin' do
     before(:each) do

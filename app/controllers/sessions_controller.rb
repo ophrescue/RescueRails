@@ -32,7 +32,6 @@ class SessionsController < ApplicationController
       sign_in user
       user.update_attribute(:lastlogin, Time.now)
       redirect_back_or(root_path)
-      #redirect_to root_path
     end
   end
 

@@ -6,14 +6,14 @@ describe PasswordResetsController, type: :controller do
 
     it 'should be successful' do
       get :edit, params: { id: 'aaa' }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET #new' do
     it 'should be successful' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

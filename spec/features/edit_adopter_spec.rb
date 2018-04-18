@@ -11,17 +11,17 @@ feature 'Edit Adopter Form', js: true do
     expect(page).to have_content(adopter.name)
     expect(page).to have_content(adopter.email)
 
-    expect(first('.read-only').visible?).to be true
-    expect(first('.editable')).to be_nil
+    expect(first('.read-only', :visible => false)).to be_visible
+    expect(first('.editable', :visible => false)).not_to be_visible
 
     find('#toggle-edit').click
 
-    expect(first('.read-only')).to be_nil
-    expect(first('.editable').visible?).to be true
+    expect(first('.read-only', :visible => false)).not_to be_visible
+    expect(first('.editable', :visible => false)).to be_visible
 
     find('#toggle-edit').click
 
-    expect(first('.read-only').visible?).to be true
-    expect(first('.editable')).to be_nil
+    expect(first('.read-only', :visible => false)).to be_visible
+    expect(first('.editable', :visible => false)).not_to be_visible
   end
 end

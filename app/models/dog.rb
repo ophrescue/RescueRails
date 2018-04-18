@@ -158,6 +158,18 @@ class Dog < ApplicationRecord
   scope :cb_no_dogs,                  ->(_) { where no_dogs: true }
   scope :cb_no_kids,                  ->(_) { where no_kids: true }
 
+  scope :matching_tracking_id,        ->(search_term) { where tracking_id: search_term }
+  scope :identity_matching_microchip, ->(search_term) { where microchip: search_term }
+  scope :identity_match_tracking_id_or_microchip, ->(search_term){ matching_tracking_id(search_term).or( identity_matching_microchip(search_term)) }
+
+  scope :pattern_matching_microchip,  ->(search_term) { where("microchip ilike ?", search_term) }
+  scope :pattern_matching_name,       ->(search_term) { where("name ilike ?", search_term) }
+  scope :pattern_match_microchip_or_name, ->(search_term){ pattern_matching_microchip("%"+search_term+"%").or( pattern_matching_name("%"+search_term+"%")) }
+
+  # Rails 5.2 issues deprecation errors for any order that is not column names
+  # so arel is the workaround
+  scope :sort_with_search_term_matches_first, ->(search_term) { order(Dog.arel_table[:name].does_not_match("#{search_term}%"), "tracking_id asc") }
+
   def adopted?
     status == 'adopted'
   end

@@ -1,0 +1,414 @@
+<%
+  dc_trainer =
+  {
+    name: 'Patrick\'s Pet Care',
+    logo: 'sponsors/patrickspetcare.png',
+    contact: 'Christopher Howard, Assistant General Manager of Boarding and Lead Trainer',
+    company_address: '3509 12th St NE/ 3303 11th Street NW, Washington, DC 20017',
+    website: 'https://patrickspetcare.com',
+    phone: '202-630-7387',
+    email: 'ch@patrickspetcare.com',
+    membership: 'N/A',
+    experience: '1 Year',
+    session_type: '1-hour group or 1-hour private lesson Saturday AM ',
+    quote: 'We use what\'s called the balanced training philosophy. We incorporate the use of the 4 quadrants of operant conditioning which are positive and negative reinforcement as well as punishment. This allows us to adapt to dogs with a wide range of attitudes and personalities. It\'s the science of using just enough to get the job done and finding what really motivates the dog so we can use that to teach them to be well behaved as well as a few cool tricks all while having as much fun as possible.'
+  }
+
+
+  md_trainers =
+  {
+    name: 'Creekside Canine Training',
+    logo: 'sponsors/creekside.png',
+    contact: 'Sarah Shulman, Owner/Head Trainer',
+    company_address: '311 West 7th Street, Frederick, MD 21701 ',
+    training_address: '423 East Patrick Street, Frederick, MD 21701',
+    website: 'http://www.creeksidecanine.com',
+    phone: '301-606-8099',
+    email: 'creeksidecanineinfo@gmail.com',
+    membership: 'Sarah Shulman is a certified Canine Trainer and Behavior Specialist. She attended the internationally acclaimed Starmark Academy for Professional Dog Trainers (formerly Triple Crown Academy) in Central Texas.',
+    experience: '8 Years',
+    session_type: '45 minutes to an hour private, times will vary based on schedule.',
+    quote: 'Creekside will work with you to design a custom-made training program that will give you the skills needed to have a positive relationship with your dog.'
+  },
+  {
+    name: 'Dogwood Elementary',
+    logo: 'sponsors/dogwood.png',
+    contact: 'Kathryn Boris ',
+    company_address: '54 Bell Lane, Avondale, MD 20781',
+    training_address: 'Your Home',
+    website: 'http://www.dogwoodelementary.com/',
+    phone: '484-356-4429',
+    email: 'kwboris@gmail.com',
+    membership: 'Animal Behavior College',
+    experience: '2 years',
+    session_type: 'Private, 1-Hour session on Saturday or Sunday morning or evenings. Please schedule with Kathryn two weeks in advance. ',
+    quote: 'Your dog truly wants to understand your family. They want to be part of it. Their antics and mischievous behavior maybe a cue to you they are really looking for some direction. Together we will create a positive, enriching, interactive environment; Happy at home.'
+  },
+  {
+    name: 'K9 Koncepts World LLC',
+    logo: 'sponsors/k9koncepts.png',
+    contact: 'Bill Campbell, Partner/Training Director',
+    company_address: '520 North Point Blvd., Sparrows Point, MD 21219',
+    website: 'http://K9koncepts.com ',
+    phone: '410-477-2000',
+    email: 'bill@k9koncepts.com',
+    membership: 'International Association of Canine Professionals, USCA',
+    experience: '19 years',
+    session_type: 'Three-hour group session on Monday evenings',
+    quote: 'We teach dog owners how to train their dogs and be responsible for them. Our experienced training staff will work with you and solve all the problems you’re having with your dog. These may include leash pulling, not coming when called, aggressive behavior towards people or other animals, and many more. No matter what your issue, we have seen it before and can help you to find a successful solution. '
+  },
+  {
+    name: 'Paw by Paw Dog Training',
+    logo: 'sponsors/pawbypaw.png',
+    contact: 'Carmen Nixon or David Berlak, Master Dog Trainers',
+    company_address: '5405 Tuckerman Ln., North Bethesda, MD 20852',
+    training_address: '7723-7725 Tuckerman Ln., Potomac, MD 20854',
+    website: 'https://www.facebook.com/pawbypawtraining/',
+    phone: '240-630-2089',
+    email: 'pawbypawdogtraining@gmail.com',
+    membership: 'N/A',
+    experience: '8 Years',
+    session_type: '45 minutes to 1 hour private lesson at a mutually agreed upon time/day',
+    quote: 'We believe in a balanced method of training. We don’t focus on a specific method of training; every dog is different and has their own personality. We try our best to help them and understand what is best for the dog. We want our dogs to be trained no matter what the distractions or environment they are exposed. We hold training sessions at Petvalu Cabin John, houses of the client, trails, etc. '
+  },
+  {
+    name: 'Olde Towne Pet Resort (Sterling, Operating in MD)',
+    logo: 'sponsors/oldetownepetresort.png',
+    contact: 'Kate Campbell, Canine Training Specialist',
+    company_address: ' 21460 Squire Ct., Sterling, VA 20166',
+    website: 'https://www.oldetownepetresort.com/',
+    phone: '703-593-7532 ',
+    email: 'espence@oldetownepetresort.com',
+    membership: 'N/A',
+    experience: '1.5 Year',
+    session_type: '1-Hour private session Monday-Friday AM or PM, by appointment ',
+    quote: 'I believe each dog is an individual. They are the ones that will tell us what motivates them to do or not to do a behavior. While their breed does play a role in their temperament, we all know that not all dogs are motivated by food/treats. Philosophy 1: I am not willing to do something to my dog that I\'m not willing to try to do first myself. Philosophy 2: A behavior is not good or bad unless you think it is. '
+  },
+  {
+    name: 'Show Me Your Dog Training ',
+    logo: 'sponsors/showmeyourdog.jpg',
+    contact: 'Nikki Sheckells, Trainer',
+    company_address: '4707 Benson Avenue, Halethorpe, MD 21227',
+    website: 'http://www.showmeyourdogtraining.com/',
+    phone: '443-632-4480',
+    email: 'nikki@showmeyourdog.com',
+    membership: 'Professional Member of International Association of Canine Professionals, graduate of Tony Ancheta\'s Koehler Method of Dog Training course',
+    experience: '5 years professional, 10 years hobbyist/volunteer',
+    session_type: 'First free session will be a 1-hour private lesson.',
+    quote: 'Successful training comes down to the relationship with your dog. We recognize that every dog is an individual with needs that differ from others. A "one size fits all" training approach isn\'t going to work for everyone. We train the dog in front of us, regardless of generalized characteristics that may lean towards one training method over another. Our ultimate goal in teaching obedience is to build in your dog better decision making; if we can help a dog learn to make good choices on his own, obedience becomes an easy, fun part of everyday life, not a grueling drill we are forced to practice.'
+  }
+
+
+  pa_trainers =
+  {
+    name: 'Faithful Paws Dog Training',
+    logo: 'sponsors/faithfulpaws.png',
+    contact: 'Deb Landers, Trainer/Owner',
+    company_address: '1540 Lilac Road, York PA 17408',
+    website: 'https://faithfulpawsdogtraining.wordpress.com/ ',
+    phone: ' 717-424-412',
+    email: 'FaithfulPawsDogTraining@aol.com',
+    membership: 'International Association of Canine Professionals, USCA',
+    experience: '19 Years',
+    session_type: '45-Minute private session on Monday/Tuesday/Sunday evening or Saturday morning',
+    quote: 'I have a passion for helping dogs and people which led me to complete my Diploma of Canine Behavior Science and Technology from Companion Animal Sciences Institute and am member of the Association of Animal Behavior Professionals to help my volunteer foster work with rescue dogs. I was involved with raising a 4-H Seeing Eye pup who after extensive training was released for a medical reason that is now our pet along with a KPets therapy dog. I believe in positive reinforcement training based on the behavioral problem. '
+  },
+    {
+    name: 'MCS Dog Training',
+    logo: 'sponsors/mcsdogtraining.png',
+    contact: 'George Matheis Jr.',
+    company_address: '3629 E Market, York, PA 17402',
+    website: 'http://mcsdogtraining.net/ ',
+    phone: '717-693-2085',
+    email: 'mercop27@gmail.com',
+    membership: 'N/A',
+    experience: '18 months',
+    session_type: 'Group classes, based on my availability',
+    quote: 'MCS uses a different approach to dog training, we don’t train them, we train you to understand them, so you can learn to modify their behavior. Some trainers try to get you to buy multiple sessions before they even know what\'s going on with your dog. Instead during the first session we show you how to hit the Ctrl/Alt/Delete button and start over again with an understanding of where you want to go and how to get there. Most of our calls are for getting a dog to stop doing something, not getting them to do something. Most bad behaviors stem from anxiety and once you understand that most problem behaviors are easy to modify.'
+  },
+  {
+    name: 'Perfect Paws U',
+    logo: 'sponsors/perfectpawsu.gif',
+    contact: 'Roseann LaVia, Owner',
+    company_address: '1040 Valley View Road, York, PA 17406',
+    website: 'http://perfectpawsu.com/',
+    phone: '717-840-0020',
+    email: 'roseannlavia@comcast.net',
+    membership: 'APDT/AKC, Treasurer of the Metro Baltimore Doberman Pinscher Club',
+    experience: '15 Years',
+    session_type: '1-Hour private or group training on week day evenings or weekend mornings',
+    quote: 'I use positive re-enforcement training as my foundation. We start out praising the behavior we want and ignoring the behavior we do not want. I use a variety of tools including clickers, treats, touch stick, voice and hand commands. There is no \'one way\' to train a dog. Like humans, dogs have different personalities and you must discover your dog’s personality to be able to choose the training discipline that will compliment your dog'
+  },
+    {
+    name: 'Ray\'s Canine Services',
+    logo: 'sponsors/rayscanineservices.png',
+    contact: 'Raymond Weatherell',
+    company_address: 'York, PA 17406',
+    training_address: 'Your home in York County and surrounding areas in PA',
+    website: 'http://www.rayscanineservices.com/',
+    phone: '717-818-5765',
+    email: 'rayscanineservices@yahoo.com',
+    membership: 'Animal Behavior College',
+    experience: '6.5 Years',
+    session_type: 'Private; Please schedule a training session with Raymond directly.',
+    quote: 'We provide in-home training, which means the trainer comes to you, on your schedule! An Animal Behavioral College certified trainer will guide you during the training process using scientifically proven training techniques. Training sessions curtail problem behaviors such as excessive barking, house breaking, aggression, digging, separation anxiety, and fear.'
+  }
+
+  va_trainers =
+  {
+    name: 'Einstein K9',
+    logo: 'sponsors/einsteink9.png',
+    contact: 'Chelsea Comstock, Trainer',
+    company_address: '500 13th St., Virginia Beach, VA 23451  ',
+    website: 'http://www.einsteink9training.com/',
+    phone: '757-773-9283',
+    email: 'Chelsea.einsteink9@yahoo.com',
+    membership: 'AKC CGC (pending)',
+    experience: ' 4.5 Years',
+    session_type: '1-Hour private or group session Monday- Friday 9:30 am to 6:30 pm by appointment only. ',
+    quote: 'At Einsteink9 dog training we use a variety of training methods to accommodate each and every dog. We use positive reinforcement, creating a happy and fun obedience training experience bringing only the best out in your dog. '
+  },
+  {
+    name: 'K9 Harmony',
+    logo: 'sponsors/k9harmony.png',
+    contact: 'Leila Shiekhy, Owner and Head Trainer',
+    company_address: '3405 N. 15th Street, Arlington, VA 22201',
+    website: 'http://www.k9harmony.us',
+    phone: '571-317-1036',
+    email: 'leila@k9harmony.us',
+    membership: 'International Association of Canine Professionals',
+    experience: '6 Years',
+    session_type: '1-Hour group session on Saturday mornings',
+    quote: 'Our business utilizes the most important tool out there - your relationship with your dog! We help our clients achieve balance and increase the amount of trust their dog has in them. We use a variety of methods depending on the dog and behavior.'
+  },
+  {
+    name: 'Olde Towne Pet Resort (Springfield)',
+    logo: 'sponsors/oldetownepetresort.png',
+    contact: 'Erin Spence',
+    company_address: '8101 Alban Rd., Springfield, VA 22150',
+    website: 'https://www.oldetownepetresort.com/',
+    phone: '703-455-9000',
+    email: 'espence@oldetownepetresort.com',
+    membership: 'APDT, IACP',
+    experience: '1+ Years',
+    session_type: '1-Hour private session Monday-Sunday AM or PM, by appointment',
+    quote: 'I practice a balanced method of training that begins with positive reinforcement and guidance. As dogs become proficient in their training and develop a better understanding of new behaviors and commands, discipline is instilled to maintain reliability and consistency in their performance. '
+  },
+  {
+    name: 'Olde Towne Pet Resort (Sterling)',
+    logo: 'sponsors/oldetownepetresort.png',
+    contact: 'Kate Campbell, Canine Training Specialis',
+    company_address: '21460 Squire Ct., Sterling, VA 20166',
+    website: 'https://www.oldetownepetresort.com/',
+    phone: '703-593-7532',
+    email: 'espence@oldetownepetresort.com',
+    membership: 'N/A',
+    experience: '1.5 Years',
+    session_type: '1-Hour private session Monday-Friday AM or PM, by appointment ',
+    quote: 'I believe each dog is an individual. They are the ones that will tell us what motivates them to do or not to do a behavior. While their breed does play a role in their temperament, we all know that not all dogs are motivated by food/treats. Philosophy 1: I am not willing to do something to my dog that I\'m not willing to try to do first myself. Philosophy 2: A behavior is not good or bad unless you think it is. '
+  },
+  {
+    name: 'Wholistic Hound Academy',
+    logo: 'sponsors/wholistichound.jpg',
+    contact: 'Sandy Modell, Founder and Head Trainer',
+    company_address: '18 Roth St., Alexandria, VA 22314',
+    website: 'http://www.wholistichound.com',
+    phone: '571-238-9145',
+    email: 'Info@wholistichound.com',
+    membership: 'Certified Professional Dog Trainer (CPDT-KA), Association of Professional Dog Trainers (APDT), Family Paws Parent Educator (FPPE), Pet Professional Guild (PPG), and Truly Dog-Friendly Trainers. ',
+    experience: '20 Years',
+    session_type: 'Please schedule a training session with Sandy within 30 days of adoption.',
+    quote: 'Our mission is simple: to help people enjoy an easier, fun, and positive relationship with their dogs, while experiencing the results and rewards of positive training. Positive training builds trusting partnerships between dogs and people. Our humane methods include clicker training, an approach that not only gets results, but is motivating, fast, and fun. Positive reinforcement techniques can help you to teach new behaviors quickly, effectively communicate with your dog, and increase your dog’s problem-solving skills.'
+  }
+%>
+
+<div class="row-fluid">
+  <div class="span12">
+    <div class="article">
+
+    <h1>Training Partners</h1>
+
+    <div class="well">
+      <ul>
+        <li><a href="#dc">District of Columbia</a></li>
+        <li><a href="#md">Maryland</a></li>
+        <li><a href="#pa">Pennsylvania</a></li>
+        <li><a href="#va">Virginia</a></li>
+      </ul>
+    </div>
+
+    <h2><a name="dc"></a>District of Columbia</h2>
+
+      <div class="media">
+        <h3><%= dc_trainer[:name] %></h3>
+        <a class="pull-left" target="_blank" href="">
+          <%= image_tag(dc_trainer[:logo], alt: dc_trainer[:name], size: "150") %>
+        </a>
+        <div class="media-body">
+          <ul class="unstyled">
+            <li>
+              <strong>Contact:</strong> <%= dc_trainer[:name] %>
+            </li>
+            <li>
+              <strong>Company Address:</strong> <%= dc_trainer[:company_address] %>
+            </li>
+            <li>
+              <strong>Website:</strong> <a href="<%= dc_trainer[:website] %>"><%=dc_trainer[:website] %></a>
+            </li>
+            <li>
+              <strong>Phone:</strong> <%= dc_trainer[:phone] %>
+            </li>
+            <li>
+              <strong>Email:</strong> <a href="mailto:<%= dc_trainer[:email] %>"><%=dc_trainer[:email] %></a>
+            </li>
+            <li>
+              <strong>Membership:</strong> <%= dc_trainer[:membership] %>
+            </li>
+            <li>
+              <strong>Experience:</strong> <%= dc_trainer[:experience] %>
+            </li>
+            <li>
+              <strong>Session Type:</strong> <%= dc_trainer[:session_type] %>
+            </li>
+          </ul>
+          <p><em>"<%= dc_trainer[:quote] %></em>"</p>
+        </div>
+      </div>
+
+    <h2><a name="md"></a>Maryland</h2>
+
+    <% md_trainers.each do |trainer| %>
+
+      <div class="media">
+        <h3><%= trainer[:name] %></h3>
+        <a class="pull-left" target="_blank" href="">
+          <%= image_tag(trainer[:logo], alt: trainer[:name], size: "150") %>
+        </a>
+        <div class="media-body">
+          <ul class="unstyled">
+            <li>
+              <strong>Contact:</strong> <%= trainer[:name] %>
+            </li>
+            <li>
+              <strong>Company Address:</strong> <%= trainer[:company_address] %>
+            </li>
+            <% if trainer[:training_address] %>
+              <strong>Training Address:</strong> <%= trainer[:training_address] %>
+            <% end %>
+            <li>
+              <strong>Website:</strong> <a href="<%= trainer[:website] %>"><%=trainer[:website] %></a>
+            </li>
+            <li>
+              <strong>Phone:</strong> <%= trainer[:phone] %>
+            </li>
+            <li>
+              <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
+            </li>
+            <li>
+              <strong>Membership:</strong> <%= trainer[:membership] %>
+            </li>
+            <li>
+              <strong>Experience:</strong> <%= trainer[:experience] %>
+            </li>
+            <li>
+              <strong>Session Type:</strong> <%= trainer[:session_type] %>
+            </li>
+          </ul>
+          <p><em>"<%= trainer[:quote] %></em>"</p>
+        </div>
+      </div>
+
+    <% end %>
+
+    <h2><a name="pa"></a>Pennsylvania</h2>
+
+    <% pa_trainers.each do |trainer| %>
+
+      <div class="media">
+        <h3><%= trainer[:name] %></h3>
+        <a class="pull-left" target="_blank" href="">
+          <%= image_tag(trainer[:logo], alt: trainer[:name], size: "150") %>
+        </a>
+        <div class="media-body">
+          <ul class="unstyled">
+            <li>
+              <strong>Contact:</strong> <%= trainer[:name] %>
+            </li>
+            <li>
+              <strong>Company Address:</strong> <%= trainer[:company_address] %>
+            </li>
+            <% if trainer[:training_address] %>
+              <strong>Training Address:</strong> <%= trainer[:training_address] %>
+            <% end %>
+            <li>
+              <strong>Website:</strong> <a href="<%= trainer[:website] %>"><%=trainer[:website] %></a>
+            </li>
+            <li>
+              <strong>Phone:</strong> <%= trainer[:phone] %>
+            </li>
+            <li>
+              <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
+            </li>
+            <li>
+              <strong>Membership:</strong> <%= trainer[:membership] %>
+            </li>
+            <li>
+              <strong>Experience:</strong> <%= trainer[:experience] %>
+            </li>
+            <li>
+              <strong>Session Type:</strong> <%= trainer[:session_type] %>
+            </li>
+          </ul>
+          <p><em>"<%= trainer[:quote] %></em>"</p>
+        </div>
+      </div>
+    <% end %>
+
+    <h2><a name="va"></a>Virginia</h2>
+
+    <% va_trainers.each do |trainer| %>
+
+      <div class="media">
+        <h3><%= trainer[:name] %></h3>
+        <a class="pull-left" target="_blank" href="">
+          <%= image_tag(trainer[:logo], alt: trainer[:name], size: "150") %>
+        </a>
+        <div class="media-body">
+          <ul class="unstyled">
+            <li>
+              <strong>Contact:</strong> <%= trainer[:name] %>
+            </li>
+            <li>
+              <strong>Company Address:</strong> <%= trainer[:company_address] %>
+            </li>
+            <% if trainer[:training_address] %>
+              <strong>Training Address:</strong> <%= trainer[:training_address] %>
+            <% end %>
+            <li>
+              <strong>Website:</strong> <a href="<%= trainer[:website] %>"><%=trainer[:website] %></a>
+            </li>
+            <li>
+              <strong>Phone:</strong> <%= trainer[:phone] %>
+            </li>
+            <li>
+              <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
+            </li>
+            <li>
+              <strong>Membership:</strong> <%= trainer[:membership] %>
+            </li>
+            <li>
+              <strong>Experience:</strong> <%= trainer[:experience] %>
+            </li>
+            <li>
+              <strong>Session Type:</strong> <%= trainer[:session_type] %>
+            </li>
+          </ul>
+          <p><em>"<%= trainer[:quote] %></em>"</p>
+        </div>
+      </div>
+
+    <% end %>
+
+    </div>
+  </div>
+</div>

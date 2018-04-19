@@ -56,6 +56,7 @@ RescueRails::Application.routes.draw do
   get '/community-partners',                to: 'pages#community_partners'
   get '/non-profit-and-corporate-partners', to: 'pages#np_corp_partners'
   get '/shelter-partners',                  to: 'pages#shelters'
+  get '/training-partners',                 to: 'pages#training_partners'
 
   get '/guide',                to: 'pages#guide'
   get '/aboutus',              to: 'pages#aboutus'

@@ -47,9 +47,9 @@ namespace :adoptapet_sync do
                   d.to_petfinder_size,
                   desc_prefix + d.id.to_s + "<br>" + d.description.gsub(/\r\n?/, "<br>"),
                   "Available",                      # status
-                  d.no_kids ? "N" : "Y",            # GoodWKids
-                  d.no_cats ? "N" : "Y",            # GoodWCats
-                  d.no_dogs ? "N" : "Y",            # GoodWDogs
+                  d.no_kids ? "N" : "",            # GoodWKids
+                  d.no_cats ? "N" : "",            # GoodWCats
+                  d.no_dogs ? "N" : "",            # GoodWDogs
                   d.is_altered ? "Y" : "N",         # SpayedNeutered
                   d.is_special_needs ? "Y" : "N",    # SpecialNeeds
                   photo_urls[0],

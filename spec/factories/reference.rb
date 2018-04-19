@@ -5,5 +5,7 @@ FactoryBot.define do
     phone { Faker::PhoneNumber.phone_number }
     relationship 'Your Mom'
     whentocall 'midnight'
+
+    adopter
   end
 end

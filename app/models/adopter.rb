@@ -135,6 +135,7 @@ class Adopter < ApplicationRecord
         result << "changed #{attr} from #{old_value} to #{new_value}"
       end
     end
+
     result.sort.join(' * ')
   end
 

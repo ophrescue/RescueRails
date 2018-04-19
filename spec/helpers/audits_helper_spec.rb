@@ -6,14 +6,17 @@ RSpec.describe AuditsHelper, type: :helper do
 
     it "returns Breed class name" do
       p = "breed_id"
-
       expect(helper.classify_foreign_key(p, audit_type)).to eq Breed
     end
 
     it "returns User class name" do
       p = "user_id"
-
       expect(helper.classify_foreign_key(p, audit_type)).to eq User
+    end
+
+    it "returns Shelter class name" do
+      p = "shelter_id"
+      expect(helper.classify_foreign_key(p, audit_type)).to eq Shelter
     end
 
     it "returns original value if no class is found" do
@@ -39,6 +42,7 @@ RSpec.describe AuditsHelper, type: :helper do
   describe '#value_from_audit' do
     let(:user) { create(:user) }
     let(:frenchie) { create(:breed, name: 'Frenchie') }
+    let(:shelter) { create(:shelter) }
 
     it 'returns Frenchie' do
       expect(helper.value_from_audit('primary_breed_id', frenchie.id, Dog)).to eq 'Frenchie'
@@ -50,6 +54,10 @@ RSpec.describe AuditsHelper, type: :helper do
 
     it 'returns name of user' do
       expect(helper.value_from_audit('user_id', user.id, User)).to eq user.name
+    end
+
+    it 'returns name of shelter' do
+      expect(helper.value_from_audit('shelter_id', shelter.id, Shelter)).to eq shelter.name
     end
   end
 end

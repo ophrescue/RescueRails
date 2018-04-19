@@ -68,14 +68,7 @@
             <%= f.submit "Post", :id => "comment_submit", :class => "btn btn-primary" %>
           <% end %>
 
-          <h4>Past Comments</h4>
-          <div id="comment_table">
-              <% @dog.comments.each do |comment| %>
-                <% if comment.id != nil %>
-                  <%= render 'comments/comment', :comment => comment %>
-                <% end %>
-              <% end %>
-          </div>
+          <%= render 'changes/changes', :parent => @dog %>
         </div>
       </div>
     <% end %>

@@ -32,7 +32,6 @@ feature 'View Dogs', js: true do
       click_link(test_dog.name.titleize)
       expect(page).to have_content(test_dog.name.titleize)
     end
-
   end
 
   context 'Logged in as Active User' do
@@ -69,6 +68,7 @@ feature 'View Dogs', js: true do
 
     scenario 'cannot view the Manager View' do
       visit '/dogs'
+      expect(page).to have_content('Our Dogs')
       expect(page).to have_no_content('Manager View')
     end
 
@@ -91,6 +91,7 @@ feature 'View Dogs', js: true do
   context 'Not Logged In' do
     scenario 'can not use the Manager View' do
       visit '/dogs'
+      expect(page).to have_content('Our Dogs')
       expect(page).to have_no_content('Manager View')
     end
 

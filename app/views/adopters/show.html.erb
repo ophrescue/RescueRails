@@ -65,7 +65,11 @@
         </div>
 
         <div id="references" class="tab-pane">
-          <%= render 'adopter_references' %>
+          <div class="row">
+            <div class="span4">
+              <%= render 'adopter_references' %>
+            </div>
+          </div>
         </div>
 
         <div id="rental" class="tab-pane">
@@ -126,10 +130,7 @@
     <h4>Add Comment</h4>
     <%= render 'adopter_comment_form' %>
 
-    <h4>Past Comments</h4>
-    <div id="comment_table">
-      <%= render 'adopter_comments' %>
-    </div>
+    <%= render 'changes/changes', :parent => @adopter %>
 
   </div>
 </div>

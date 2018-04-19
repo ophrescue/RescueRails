@@ -104,7 +104,7 @@ describe DogsController, type: :controller do
       end
     end
   end
-  
+
   describe 'GET #show' do
     include_context 'signed in admin'
 

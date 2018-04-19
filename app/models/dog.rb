@@ -66,10 +66,12 @@
 #  waitlist_id             :integer
 
 class Dog < ApplicationRecord
-  include Auditable
+  audited
   include Filterable
 
   attr_accessor :primary_breed_name, :secondary_breed_name
+
+  has_associated_audits
 
   belongs_to :primary_breed, class_name: 'Breed'
   belongs_to :secondary_breed, class_name: 'Breed'
@@ -156,8 +158,20 @@ class Dog < ApplicationRecord
   scope :cb_no_dogs,                  ->(_) { where no_dogs: true }
   scope :cb_no_kids,                  ->(_) { where no_kids: true }
 
+  def adopted?
+    status == 'adopted'
+  end
+
   def attributes_to_audit
     %w[status]
+  end
+
+  def audits_and_associated_audits
+    (audits + associated_audits).sort_by(&:created_at).reverse!
+  end
+
+  def comments_and_audits_and_associated_audits
+    (valid_comments + audits + associated_audits).sort_by(&:created_at).reverse!
   end
 
   def to_petfinder_status
@@ -180,11 +194,11 @@ class Dog < ApplicationRecord
     self.adoption_date = Date.today() if adopted?
   end
 
-  def adopted?
-    status == 'adopted'
-  end
-
   def self.next_tracking_id
     connection.select_value("SELECT nextval('tracking_id_seq')")
+  end
+
+  def valid_comments
+    comments.to_a.delete_if { |obj| obj.id.nil? }
   end
 end

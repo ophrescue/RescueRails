@@ -187,10 +187,9 @@ class Adopter < ApplicationRecord
   end
 
   def training_email
-    return unless  status_changed?
-
+    return unless status_changed?
     if ((status == 'adopted') || (status == 'adptd sn pend')) && !training_email_sent?
-      TrainingMailer.free_training_notice(self.id).deliver_later
+      TrainingMailer.free_training_notice(id).deliver_later
       self.training_email_sent = true
     end
   end

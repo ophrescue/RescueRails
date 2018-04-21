@@ -8,6 +8,7 @@ FactoryBot.define do
     state { Faker::Address.state_abbr }
     zip { Faker::Address.zip_code }
     status 'new'
+    training_email_sent false
 
     factory :adopter_with_app do
       after(:create) do |adopter|

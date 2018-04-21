@@ -181,6 +181,18 @@
         <% end %>
         </ul>
 
+        <h4>Waitlist</h4>
+        <ul class="unstyled">
+        <% if @dog.waitlist_id %>
+          <li>
+            <%= link_to @dog.waitlist.name, waitlist_path(@dog.waitlist) %>
+            <%= render 'waitlist_info' %> 
+          </li>
+        <% else %>
+          <li>No Waitlist Assigned</li>
+        <% end %>
+        </ul>
+
         <h4>Adoption Coordinator</h4>
         <ul class="unstyled">
         <% if @dog.coordinator_id %>

@@ -5,6 +5,7 @@ RescueRails::Application.routes.draw do
   resources :adopters do
     resources :comments, except: %i[destroy edit update]
     resources :adoptions
+    resources :adopter_waitlists
   end
 
   resources :adoption_app
@@ -27,6 +28,7 @@ RescueRails::Application.routes.draw do
   resources :events
 
   resources :adoptions
+  resources :adopter_waitlists
 
   resources :folders
   resources :attachments
@@ -36,6 +38,9 @@ RescueRails::Application.routes.draw do
   end
 
   resources :shelters
+  resources :waitlists do
+    resources :adopter_waitlists
+  end
 
   root                         to: 'pages#home'
 

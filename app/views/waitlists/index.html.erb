@@ -1,0 +1,19 @@
+<h1><%= @title %></h1>
+<br />
+
+<div class="row">
+	<div class="span12">
+		<% if is_admin? %>
+			<p><%= link_to "New Waitlist", new_waitlist_path, :class => "btn btn-primary" %></p>
+		<% end %>
+
+		<% if @waitlists.count > 0 %>
+			<ul class="unstyled">
+				<%= render @waitlists %>
+			</ul>
+		<% else %>
+			<h5>No Waitlists</h5>
+		<% end %>
+
+	</div>
+</div>

@@ -125,6 +125,11 @@ describe AdoptersController, type: :controller do
         mail = ActionMailer::Base.deliveries.last
         expect(mail.to[0]).to eq adopter.email
       end
+
+      it 'training_email_sent is set to true' do
+        put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
+        expect(adopter.reload.training_email_sent).to eq true
+      end
     end
 
     context 'adopter has already been sent training email' do

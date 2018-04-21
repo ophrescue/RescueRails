@@ -99,11 +99,10 @@ describe AdoptersController, type: :controller do
 
   describe 'Adopter recept of Training Coupon' do
     include ActiveJob::TestHelper
-    let(:adopter) { create(:adopter_with_app) }
-
     include_context 'signed in admin'
 
     context 'adopter set to adopted status for the first time' do
+      let(:adopter) { create(:adopter_with_app) }
       it 'free training coupon email created' do
         ActiveJob::Base.queue_adapter = :test
         expect do
@@ -125,6 +124,18 @@ describe AdoptersController, type: :controller do
         end
         mail = ActionMailer::Base.deliveries.last
         expect(mail.to[0]).to eq adopter.email
+      end
+    end
+
+    context 'adopter has already been sent training email' do
+      let(:adopter) { create(:adopter_with_app, training_email_sent: true) }
+
+      it 'free training coupon is not sent' do
+        expect do
+          perform_enqueued_jobs do
+            put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
+          end
+        end.to change { ActionMailer::Base.deliveries.size }.by(0)
       end
     end
   end

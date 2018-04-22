@@ -73,18 +73,26 @@ class DogsController < ApplicationController
   before_action :load_dog, only: %i(show edit update destroy)
   before_action :edit_dog_check, only: %i(edit update)
 
+  # find a better home for this
+  PER_PAGE = 30
+
   def index
     @title = session[:mgr_view] ? 'Dog Manager' : 'Our Dogs'
 
-    if signed_in? && session[:mgr_view]
-      do_manager_view = true
-    elsif signed_in? && params[:all_dogs] == "true"
-      do_manager_view = true
-    else
-      do_manager_view = false
-    end
+    do_manager_view =  signed_in? && (session[:mgr_view] || params[:all_dogs])
 
-    @dogs = DogSearcher.search(params: params, manager: do_manager_view)
+    @dogs = case
+            when params[:commit] == 'Search'
+              DogSearch.search(params: params, manager: do_manager_view)
+            when params[:commit] == 'Filter'
+              DogFilter.filter(params: params, manager: do_manager_view)
+            when do_manager_view # initial view, before search or filter initiated
+              Dog.includes(:adoptions, :adopters, :comments)
+            else # gallery view
+              Dog.gallery_view
+            end
+
+    for_page(params[:page])
 
     respond_to do |format|
       format.html { render :index }
@@ -248,5 +256,9 @@ class DogsController < ApplicationController
 
   def edit_dog_check
     redirect_to(root_path) unless fostering_dog? || current_user.edit_dogs?
+  end
+
+  def for_page(page = nil)
+    @dogs = @dogs.paginate(per_page: PER_PAGE, page: page || 1)
   end
 end

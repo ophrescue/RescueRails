@@ -83,7 +83,7 @@ describe DogsController, type: :controller do
       end
 
       it 'can filter by age, size and flags' do
-        get :index, params: {is_age: 'baby', is_size: 'small', cb_special_needs: true}, session: {mgr_view: true }
+        get :index, params: {is_age: 'baby', is_size: 'small', cb_special_needs: true, commit: 'Filter'}, session: {mgr_view: true }
         expect(assigns(:dogs)).to match_array([baby_small_special_needs_dog])
       end
     end

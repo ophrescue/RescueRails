@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :dog do
-    sequence(:tracking_id) { |n| n }
+    sequence(:tracking_id, ((Dog.pluck(:tracking_id) << 0).max.succ )) { |n| n }
     name { 
       until(nn = Faker::Dog.name; !Dog.pluck(:name).include?(nn))
       end
@@ -33,12 +33,51 @@ FactoryBot.define do
       end
     end
 
-    trait :adoptable do
-      status 'adoptable'
+    trait :primary_lab do
+      primary_breed_id { create(:breed, name: 'Labrador Retriever').id }
+      secondary_breed_id nil
     end
 
-    trait :completed do
-      status 'completed'
+    trait :secondary_westie do
+      primary_breed_id nil
+      secondary_breed_id { create(:breed, name: 'West Highland Terrier').id }
     end
+
+    Dog::STATUSES.each do |status|
+      trait status.parameterize(separator: "_").to_sym do
+        status status
+      end
+    end
+
+    Dog::AGES.each do |age|
+      trait age.to_sym do
+        age age
+      end
+    end
+
+    [ 'High Priority', 'Spay Neuter Needed' ].each do |flag|
+      trait flag.downcase.parameterize(separator: "_").to_sym do
+        add_attribute "is_#{flag.downcase.parameterize(separator: '_')}", true
+      end
+    end
+
+    trait :medical_review_needed do
+      needs_medical_review :false
+    end
+
+    trait :needs_foster do
+      needs_foster true
+    end
+
+    trait :spay_neuter_needed do
+       is_altered false
+    end
+
+    [ 'No Cats', 'No Dogs', 'No Kids' ].each do |flag|
+      trait flag.downcase.parameterize(separator: "_").to_sym do
+        add_attribute "#{flag.downcase.parameterize(separator: '_')}", true
+      end
+    end
+
   end
 end

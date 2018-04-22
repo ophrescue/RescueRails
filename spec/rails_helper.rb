@@ -9,8 +9,6 @@ require 'capybara/rails'
 
 require 'capybara-screenshot/rspec'
 
-Capybara.server = :webrick
-
 # Headless Chrome
 require 'selenium/webdriver'
 

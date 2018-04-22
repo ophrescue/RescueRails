@@ -62,6 +62,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'rspec-collection_matchers'
   gem 'rspec-rails'
+  gem 'puma'
 end
 
 group :test do

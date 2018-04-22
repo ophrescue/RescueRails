@@ -46,7 +46,7 @@ GEM
       activerecord (>= 3.0)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    annotate (2.7.2)
+    annotate (2.7.3)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
     archive-zip (0.11.0)
@@ -124,7 +124,11 @@ GEM
     crass (1.0.4)
     daemons (1.2.6)
     dalli (2.7.8)
+<<<<<<< 90aa2d92c19ab5c36128d000c971d3a39dfaa3ff
     database_cleaner (1.6.2)
+=======
+    database_cleaner (1.7.0)
+>>>>>>> bundle update
     debug_inspector (0.0.3)
     delayed_job (4.1.5)
       activesupport (>= 3.0, < 5.3)
@@ -133,9 +137,15 @@ GEM
       delayed_job (>= 3.0, < 5)
     diff-lcs (1.3)
     docile (1.1.5)
+<<<<<<< 90aa2d92c19ab5c36128d000c971d3a39dfaa3ff
     dotenv (2.2.2)
     dotenv-rails (2.2.2)
       dotenv (= 2.2.2)
+=======
+    dotenv (2.3.0)
+    dotenv-rails (2.3.0)
+      dotenv (= 2.3.0)
+>>>>>>> bundle update
       railties (>= 3.2, < 6.0)
     erubi (1.7.1)
     exception_notification (4.2.2)
@@ -152,7 +162,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.8.7)
       i18n (>= 0.7)
-    faraday (0.14.0)
+    faraday (0.15.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.23)
     font-awesome-rails (4.7.0.4)
@@ -168,7 +178,11 @@ GEM
       actionpack (>= 4.1)
       activesupport (>= 4.1)
     hitimes (1.2.6)
+<<<<<<< 90aa2d92c19ab5c36128d000c971d3a39dfaa3ff
     i18n (1.0.0)
+=======
+    i18n (1.0.1)
+>>>>>>> bundle update
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
     io-like (0.3.0)
@@ -284,7 +298,7 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
-    rollbar (2.15.5)
+    rollbar (2.15.6)
       multi_json
     roo (1.13.2)
       nokogiri
@@ -309,7 +323,7 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    rubocop (0.54.0)
+    rubocop (0.55.0)
       parallel (~> 1.10)
       parser (>= 2.5)
       powerpack (~> 0.1)
@@ -372,9 +386,13 @@ GEM
       spreadsheet
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+<<<<<<< 90aa2d92c19ab5c36128d000c971d3a39dfaa3ff
     uglifier (4.1.9)
+=======
+    uglifier (4.1.10)
+>>>>>>> bundle update
       execjs (>= 0.3.0, < 3)
-    unicode-display_width (1.3.0)
+    unicode-display_width (1.3.2)
     unicode_utils (1.4.0)
     unicorn (5.4.0)
       kgio (~> 2.6)

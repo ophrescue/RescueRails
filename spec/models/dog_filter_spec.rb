@@ -183,8 +183,18 @@ describe DogFilter do
           expect(results).to include(secondary_breed_dog)
           expect(results).not_to include(primary_breed_dog)
         end
+
       end
 
+      context 'primary and secondary breeds both match search term' do
+        let!(:primary_and_secondary_terrier) { create(:dog, :primary_and_secondary_terrier) }
+        let(:params) { { is_breed: 'terr' } }
+        let(:results) { DogFilter.filter(params: params, manager: true) }
+
+        it 'returns distinct results' do
+          expect(results.length).to eq 1
+        end
+      end
     end
   end
 end

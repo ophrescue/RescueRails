@@ -70,6 +70,8 @@
             </li>
           </ul>
         </div>
+        <%= label_tag :is_breed, 'Breed' %>
+        <%= text_field_tag :is_breed, params[:is_breed], placeholder: 'Breed (all/part)' %>
 
         <%= button_tag(type: "submit", class: "btn btn-primary", name: "commit", value: "Filter") do %>
           <i class="fa fa-filter" aria-hidden="true"></i> Filter
@@ -110,7 +112,7 @@
         <tr>
           <th><%= sortable "tracking_id" %></th>
           <th><%= sortable "name" %></th>
-          <th><%= sortable "intake_dt" %></th>
+          <th><%= sortable "intake_dt", "Intake<br/>Date".html_safe %></th>
           <th>Age</th>
           <th>Size</th>
           <th>Flag</th>

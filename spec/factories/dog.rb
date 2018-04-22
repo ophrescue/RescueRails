@@ -38,6 +38,16 @@ FactoryBot.define do
       secondary_breed_id nil
     end
 
+    trait :primary_and_secondary_terrier do
+      primary_breed_id { create(:breed, name: 'Cairn Terrier').id }
+      secondary_breed_id { create(:breed, name: 'Yorkshire Terrier').id }
+    end
+
+    trait :secondary_golden do
+      primary_breed_id { create(:breed, name: 'Golden Retriever').id }
+      secondary_breed_id nil
+    end
+
     trait :secondary_westie do
       primary_breed_id nil
       secondary_breed_id { create(:breed, name: 'West Highland Terrier').id }

@@ -64,4 +64,19 @@ module ApplicationHelper
     commit = params[:commit]
     link_to title, { commit: commit, sort: column, direction: direction, status: status, search: search_term, is_size: is_size, is_age: is_age, is_status: is_status }, { class: css_class }
   end
+
+  def size_abbrev(size)
+    case size
+    when 'small'
+      'SM'
+    when 'medium'
+      'M'
+    when 'large'
+      'L'
+    when 'extra large'
+      'XL'
+    else
+      ''
+    end
+  end
 end

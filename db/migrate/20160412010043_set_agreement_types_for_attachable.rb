@@ -1,4 +1,4 @@
-class SetAgreementTypesForAttachable < ActiveRecord::Migration
+class SetAgreementTypesForAttachable < ActiveRecord::Migration[4.2]
   def up
     Attachment.where(attachable_type: 'User').update_all(agreement_type: 'foster')
   end

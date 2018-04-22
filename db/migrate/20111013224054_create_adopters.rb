@@ -1,4 +1,4 @@
-class CreateAdopters < ActiveRecord::Migration
+class CreateAdopters < ActiveRecord::Migration[4.2]
   def change
     create_table :adopters do |t|
       t.string :name

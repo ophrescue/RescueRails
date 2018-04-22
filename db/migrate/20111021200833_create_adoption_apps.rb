@@ -1,4 +1,4 @@
-class CreateAdoptionApps < ActiveRecord::Migration
+class CreateAdoptionApps < ActiveRecord::Migration[4.2]
   def change
     create_table :adoption_apps do |t|
       t.integer :adopter_id

@@ -1,4 +1,4 @@
-class AddMedicalToDogs < ActiveRecord::Migration
+class AddMedicalToDogs < ActiveRecord::Migration[4.2]
   def change
     add_column :dogs, :first_shots, :string
     add_column :dogs, :second_shots, :string

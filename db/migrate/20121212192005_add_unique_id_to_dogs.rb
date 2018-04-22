@@ -1,4 +1,4 @@
-class AddUniqueIdToDogs < ActiveRecord::Migration
+class AddUniqueIdToDogs < ActiveRecord::Migration[4.2]
   def up
     add_index :dogs, :tracking_id, unique: true
 

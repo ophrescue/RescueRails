@@ -1,4 +1,4 @@
-class AddStartDatetoDogs < ActiveRecord::Migration
+class AddStartDatetoDogs < ActiveRecord::Migration[4.2]
   def change
     add_column :dogs, :foster_start_date, :date
     add_column :dogs, :adoption_date, :date

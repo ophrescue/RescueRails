@@ -1,4 +1,4 @@
-class CreateFosters < ActiveRecord::Migration
+class CreateFosters < ActiveRecord::Migration[4.2]
   def change
     create_table :fosters do |t|
       t.integer :user_id, null: false

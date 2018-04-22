@@ -1,4 +1,4 @@
-class RmMorefromAdoptionApp < ActiveRecord::Migration
+class RmMorefromAdoptionApp < ActiveRecord::Migration[4.2]
   def change
     remove_column :adoption_apps, :has_yard
     remove_column :adoption_apps, :has_fence

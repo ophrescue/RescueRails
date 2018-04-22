@@ -1,4 +1,4 @@
-class AddPasswordToUsers < ActiveRecord::Migration
+class AddPasswordToUsers < ActiveRecord::Migration[4.2]
   def self.up
     add_column :users, :encrypted_password, :string
   end

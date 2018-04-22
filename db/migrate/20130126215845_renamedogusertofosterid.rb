@@ -1,4 +1,4 @@
-class Renamedogusertofosterid < ActiveRecord::Migration
+class Renamedogusertofosterid < ActiveRecord::Migration[4.2]
   def up
     rename_column :dogs, :user_id, :foster_id
   end

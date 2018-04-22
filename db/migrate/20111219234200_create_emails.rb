@@ -1,6 +1,6 @@
 # Everything listed in this migration will be added to a migration file
 # inside of your main app.
-class CreateEmails < ActiveRecord::Migration
+class CreateEmails < ActiveRecord::Migration[4.2]
   def self.up
     create_table :emails do |t|
       t.string :from_address, null: false

@@ -97,6 +97,54 @@ describe AdoptersController, type: :controller do
     end
   end
 
+  describe 'Adopter recept of Training Coupon' do
+    include ActiveJob::TestHelper
+    include_context 'signed in admin'
+
+    context 'adopter set to adopted status for the first time' do
+      let(:adopter) { create(:adopter_with_app) }
+      it 'free training coupon email created' do
+        ActiveJob::Base.queue_adapter = :test
+        expect do
+          put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
+        end.to have_enqueued_job.on_queue('mailers')
+      end
+
+      it 'free training coupon is sent' do
+        expect do
+          perform_enqueued_jobs do
+            put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
+          end
+        end.to change { ActionMailer::Base.deliveries.size }.by(1)
+      end
+
+      it 'free training coupon is set to the right user' do
+        perform_enqueued_jobs do
+          put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
+        end
+        mail = ActionMailer::Base.deliveries.last
+        expect(mail.to[0]).to eq adopter.email
+      end
+
+      it 'training_email_sent is set to true' do
+        put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
+        expect(adopter.reload.training_email_sent).to eq true
+      end
+    end
+
+    context 'adopter has already been sent training email' do
+      let(:adopter) { create(:adopter_with_app, training_email_sent: true) }
+
+      it 'free training coupon is not sent' do
+        expect do
+          perform_enqueued_jobs do
+            put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
+          end
+        end.to change { ActionMailer::Base.deliveries.size }.by(0)
+      end
+    end
+  end
+
   describe 'GET check_email' do
     subject(:check_email) { get :check_email, xhr: true, params: { adopter: { email: adopter.email } } }
 

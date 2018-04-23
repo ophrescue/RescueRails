@@ -59,6 +59,16 @@ Rails.application.configure do
   # Action Mailer Configuration
   config.action_mailer.default_url_options = { host: "rescuerails.dev", protocol: "http://" }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => ENV['MAILTRAP_USER'],
+    :password => ENV['MAILTRAP_PASS'],
+    :address => 'smtp.mailtrap.io',
+    :domain => 'smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
+  }
+
   # Paperclip Configuration
   Paperclip.options[:command_path] = "/usr/local/bin/"
 

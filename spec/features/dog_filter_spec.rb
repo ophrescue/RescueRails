@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 feature 'View Dogs', js: true do
-  before { sign_in(active_user) }
+  before do
+    sign_in(active_user)
+  end
+
   let!(:active_user) { create(:user) }
-  let!(:primary_lab) { create(:dog, :primary_lab).name }
-  let!(:secondary_golden) { create(:dog, :secondary_golden).name }
-  let!(:secondary_westie) { create(:dog, :secondary_westie).name }
+  let!(:primary_lab) { create(:dog, :primary_lab, name: "Zeke").name.titleize }
+  let!(:secondary_golden) { create(:dog, :secondary_golden, name: "Abby").name.titleize }
+  let!(:secondary_westie) { create(:dog, :secondary_westie, name: "Nairobi").name.titleize }
 
 
   scenario 'can filter results with breed partial match' do
@@ -27,5 +30,15 @@ feature 'View Dogs', js: true do
     expect(page).not_to have_selector('tbody#dogs a', text: secondary_westie)
     expect(page).not_to have_selector('tbody#dogs', text: 'West Highland Terrier')
     expect(page).to have_field('is_breed', with: 'retriev')
+  end
+
+  scenario 'can sort filter results by dog name' do
+    fill_in('is_breed', with: "retriev")
+    find_button(value: 'Filter').click
+    expect(page.all("#dogs .name").map(&:text)).to match_array ["Abby", "Zeke"]
+    click_link('sort_by_name')
+    expect(page.all("#dogs .name").map(&:text)).to eq ["Abby", "Zeke"]
+    click_link('sort_by_name')
+    expect(page.all("#dogs .name").map(&:text)).to eq ["Zeke", "Abby"]
   end
 end

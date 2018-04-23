@@ -1,6 +1,7 @@
 <tr>
   <td><%= dog.tracking_id %></td>
-  <td><%= link_to dog.name.titleize, dog %></td>
+  <td class='name'><%= link_to dog.name.titleize, dog %></td>
+  <td class='breed'><%= dog.breeds.join("</br>").html_safe %></t>
   <td><%= dog.intake_dt.strftime("%m/%d/%y") unless dog.intake_dt.blank? %></td>
   <td><%= dog.age ? dog.age.titleize : " " %></td>
   <td><%= size_abbrev(dog.size) %></td>

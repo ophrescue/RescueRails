@@ -54,6 +54,7 @@ module ApplicationHelper
 
   def sortable(column, title = nil)
     title ||= column.titleize
+    css_id = "sort_by_#{column}"
     css_class = column == params[:sort] ? "current #{params[:direction]}" : nil
     direction = column == params[:sort] && params[:direction] == 'asc' ? 'desc' : 'asc'
     status = params[:status]
@@ -62,7 +63,7 @@ module ApplicationHelper
     is_age = params[:is_age]
     is_size = params[:is_size]
     commit = params[:commit]
-    link_to title, { commit: commit, sort: column, direction: direction, status: status, search: search_term, is_size: is_size, is_age: is_age, is_status: is_status }, { class: css_class }
+    link_to title, { commit: commit, sort: column, direction: direction, status: status, search: search_term, is_size: is_size, is_age: is_age, is_status: is_status }, { class: css_class, id: css_id }
   end
 
   def size_abbrev(size)

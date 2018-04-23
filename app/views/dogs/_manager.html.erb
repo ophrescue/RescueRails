@@ -110,8 +110,9 @@
     <table class="table-striped table-bordered table-condensed">
       <thead>
         <tr>
-          <th><%= sortable "tracking_id" %></th>
+          <th><%= sortable "tracking_id", "ID" %><%= hidden_field(:commit, value: params[:commit]) %></th>
           <th><%= sortable "name" %></th>
+          <th>Breed</th>
           <th><%= sortable "intake_dt", "Intake<br/>Date".html_safe %></th>
           <th>Age</th>
           <th>Size</th>
@@ -121,8 +122,8 @@
           <% end %>
           <th>Foster Name</th>
           <th>Location</th>
-          <th>Adopter Interest</th>
-          <th>Last Comment</th>
+          <th>Adopter<br/>Interest</th>
+          <th width='14em'>Last Comment</th>
         </tr>
       </thead>
       <tbody id="dogs">

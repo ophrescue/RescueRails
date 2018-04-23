@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20180324221858) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< 9520d30e0944fa60822b690c5097eed6b6243b21
   create_table "adopter_waitlists", force: :cascade do |t|
     t.integer  "rank"
     t.datetime "created_at",  null: false
@@ -47,6 +48,32 @@ ActiveRecord::Schema.define(version: 20180324221858) do
     t.string   "county"
     t.boolean  "training_email_sent",                           default: false, null: false
     t.index ["assigned_to_user_id"], name: "index_adopters_on_assigned_to_user_id", using: :btree
+=======
+  create_table "adopters", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
+    t.string "email", limit: 255
+    t.string "phone", limit: 255
+    t.string "address1", limit: 255
+    t.string "address2", limit: 255
+    t.string "city", limit: 255
+    t.string "state", limit: 255
+    t.string "zip", limit: 255
+    t.string "status", limit: 255
+    t.string "when_to_call", limit: 255
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+    t.text "dog_reqs"
+    t.text "why_adopt"
+    t.string "dog_name", limit: 255
+    t.string "other_phone", limit: 255
+    t.integer "assigned_to_user_id"
+    t.string "flag", limit: 255
+    t.boolean "is_subscribed", default: false
+    t.date "completed_date"
+    t.string "county"
+    t.boolean "training_email_sent", default: false, null: false
+    t.index ["assigned_to_user_id"], name: "index_adopters_on_assigned_to_user_id"
+>>>>>>> merge repo version of schema.rb
   end
 
   create_table "adoption_apps", id: :serial, force: :cascade do |t|
@@ -181,6 +208,7 @@ ActiveRecord::Schema.define(version: 20180324221858) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+<<<<<<< 9520d30e0944fa60822b690c5097eed6b6243b21
   create_table "dogs", force: :cascade do |t|
     t.string   "name",                    limit: 255
     t.datetime "created_at",                          precision: 6
@@ -242,6 +270,66 @@ ActiveRecord::Schema.define(version: 20180324221858) do
     t.index ["size"], name: "index_dogs_on_size", using: :btree
     t.index ["tracking_id"], name: "index_dogs_on_tracking_id", unique: true, using: :btree
     t.index ["waitlist_id"], name: "index_dogs_on_waitlist_id", using: :btree
+=======
+  create_table "dogs", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+    t.integer "tracking_id"
+    t.integer "primary_breed_id"
+    t.integer "secondary_breed_id"
+    t.string "status", limit: 255
+    t.string "age", limit: 75
+    t.string "size", limit: 75
+    t.boolean "is_altered"
+    t.string "gender", limit: 6
+    t.boolean "is_special_needs"
+    t.boolean "no_dogs"
+    t.boolean "no_cats"
+    t.boolean "no_kids"
+    t.text "description"
+    t.integer "foster_id"
+    t.date "adoption_date"
+    t.boolean "is_uptodateonshots", default: true
+    t.date "intake_dt"
+    t.date "available_on_dt"
+    t.boolean "has_medical_need", default: false
+    t.boolean "is_high_priority", default: false
+    t.boolean "needs_photos", default: false
+    t.boolean "has_behavior_problem", default: false
+    t.boolean "needs_foster", default: false
+    t.string "petfinder_ad_url", limit: 255
+    t.string "adoptapet_ad_url", limit: 255
+    t.string "craigslist_ad_url", limit: 255
+    t.string "youtube_video_url", limit: 255
+    t.string "first_shots", limit: 255
+    t.string "second_shots", limit: 255
+    t.string "third_shots", limit: 255
+    t.string "rabies", limit: 255
+    t.string "vac_4dx", limit: 255
+    t.string "bordetella", limit: 255
+    t.string "microchip", limit: 255
+    t.string "original_name", limit: 255
+    t.integer "fee"
+    t.integer "coordinator_id"
+    t.string "sponsored_by", limit: 255
+    t.integer "shelter_id"
+    t.text "medical_summary"
+    t.string "heartworm_preventative"
+    t.string "flea_tick_preventative"
+    t.boolean "medical_review_complete", default: false
+    t.text "behavior_summary"
+    t.index ["age"], name: "index_dogs_on_age"
+    t.index ["coordinator_id"], name: "index_dogs_on_coordinator_id"
+    t.index ["foster_id"], name: "index_dogs_on_user_id"
+    t.index ["gender"], name: "index_dogs_on_gender"
+    t.index ["name"], name: "index_dogs_on_name"
+    t.index ["primary_breed_id"], name: "index_dogs_on_primary_breed_id"
+    t.index ["secondary_breed_id"], name: "index_dogs_on_secondary_breed_id"
+    t.index ["shelter_id"], name: "index_dogs_on_shelter_id"
+    t.index ["size"], name: "index_dogs_on_size"
+    t.index ["tracking_id"], name: "index_dogs_on_tracking_id", unique: true
+>>>>>>> merge repo version of schema.rb
   end
 
   create_table "emails", id: :serial, force: :cascade do |t|

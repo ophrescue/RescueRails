@@ -436,7 +436,7 @@ DEPENDENCIES
   record_tag_helper (~> 1.0)
   redcarpet
   responders
-  rollbar
+  rollbar (~> 2.15, >= 2.15.5)
   roo (~> 1.13.2)
   rspec-collection_matchers
   rspec-rails

@@ -1,7 +1,8 @@
-<tr class="<%= dog.coordinator_id.present? ? 'success' : '' %>">
+<tr>
   <td><%= dog.tracking_id %></td>
   <td><%= link_to dog.name.titleize, dog %></td>
   <td><%= dog.intake_dt.strftime("%m/%d/%Y") unless dog.intake_dt.blank? %></td>
+  <td><span class="<%= dog.coordinator_id.present? ? 'icon-ok' : '' %>"></span</td>
   <td><%= dog.age ? dog.age.titleize : " " %></td>
   <td><%= dog.size ? dog.size.titleize : " " %></td>
   <td>

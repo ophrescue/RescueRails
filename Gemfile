@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby   '2.3.1'
 
-gem 'rails', '5.0.6'
+gem 'rails', '~> 5.1.0'
 
 gem 'rack-cache'
 
@@ -42,8 +42,6 @@ end
 gem 'daemons'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
-gem 'delayed_mailhopper'
-gem 'mailhopper'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -53,7 +51,9 @@ gem 'therubyracer', platforms: :ruby
 gem 'uglifier'
 
 gem 'newrelic_rpm'
-gem 'rollbar'
+# Rollbar can pick up new versions after this issue is fixed
+# https://github.com/rollbar/rollbar-gem/issues/713
+gem 'rollbar', '2.15.5'
 gem 'sucker_punch', '~> 1.5.1'
 
 group :development, :test do
@@ -64,6 +64,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'rspec-collection_matchers'
   gem 'rspec-rails'
+  gem 'puma'
 end
 
 group :test do

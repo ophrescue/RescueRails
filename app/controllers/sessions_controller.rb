@@ -13,6 +13,11 @@
 #    limitations under the License.
 
 class SessionsController < ApplicationController
+  def new
+    # it wasn't an access-denied redirect, so there will not be a redirect after login
+    clear_return_to if flash.empty?
+  end
+
   def create
     user = User.authenticate(params[:session][:email],
                  params[:session][:password])
@@ -26,7 +31,7 @@ class SessionsController < ApplicationController
     else
       sign_in user
       user.update_attribute(:lastlogin, Time.now)
-      redirect_to root_path
+      redirect_back_or(root_path)
     end
   end
 

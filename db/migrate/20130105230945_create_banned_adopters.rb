@@ -1,4 +1,4 @@
-class CreateBannedAdopters < ActiveRecord::Migration
+class CreateBannedAdopters < ActiveRecord::Migration[4.2]
   def change
     create_table :banned_adopters do |t|
       t.string :name,  limit: 100

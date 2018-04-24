@@ -1,4 +1,4 @@
-class AddBannAdoptersToUsers < ActiveRecord::Migration
+class AddBannAdoptersToUsers < ActiveRecord::Migration[4.2]
   def change
     add_column :users, :ban_adopters, :boolean, default: false
   end

@@ -1,4 +1,4 @@
-class CreateReferences < ActiveRecord::Migration
+class CreateReferences < ActiveRecord::Migration[4.2]
   def change
     create_table :references do |t|
       t.integer :adopter_id

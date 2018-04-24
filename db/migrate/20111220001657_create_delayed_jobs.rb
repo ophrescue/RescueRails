@@ -1,4 +1,4 @@
-class CreateDelayedJobs < ActiveRecord::Migration
+class CreateDelayedJobs < ActiveRecord::Migration[4.2]
   def self.up
     create_table :delayed_jobs, force: true do |table|
       table.integer  :priority, default: 0      # Allows some jobs to jump to the front of the queue
@@ -11,11 +11,11 @@ class CreateDelayedJobs < ActiveRecord::Migration
       table.string   :locked_by                    # Who is working on this object (if locked)
       table.timestamps
     end
-  
+
     add_index :delayed_jobs, [:priority, :run_at], name: 'delayed_jobs_priority'
   end
-  
+
   def self.down
-    drop_table :delayed_jobs  
+    drop_table :delayed_jobs
   end
 end

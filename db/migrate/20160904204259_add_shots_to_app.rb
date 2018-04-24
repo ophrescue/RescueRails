@@ -1,4 +1,4 @@
-class AddShotsToApp < ActiveRecord::Migration
+class AddShotsToApp < ActiveRecord::Migration[4.2]
   def change
     change_column :adoption_apps, :current_pets_uptodate, :boolean, default: nil
 

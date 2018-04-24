@@ -46,7 +46,7 @@ GEM
       activerecord (>= 3.0)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    annotate (2.7.2)
+    annotate (2.7.3)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
     archive-zip (0.11.0)
@@ -152,7 +152,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.8.7)
       i18n (>= 0.7)
-    faraday (0.14.0)
+    faraday (0.15.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.23)
     font-awesome-rails (4.7.0.4)
@@ -309,7 +309,7 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    rubocop (0.54.0)
+    rubocop (0.55.0)
       parallel (~> 1.10)
       parser (>= 2.5)
       powerpack (~> 0.1)
@@ -374,7 +374,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.9)
       execjs (>= 0.3.0, < 3)
-    unicode-display_width (1.3.0)
+    unicode-display_width (1.3.2)
     unicode_utils (1.4.0)
     unicorn (5.4.0)
       kgio (~> 2.6)
@@ -443,7 +443,7 @@ DEPENDENCIES
   record_tag_helper (~> 1.0)
   redcarpet
   responders
-  rollbar
+  rollbar (= 2.15.5)
   roo (~> 1.13.2)
   rspec-collection_matchers
   rspec-rails

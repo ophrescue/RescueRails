@@ -1,4 +1,4 @@
-class ChangeColumnNameonDogs < ActiveRecord::Migration
+class ChangeColumnNameonDogs < ActiveRecord::Migration[4.2]
   def up
     remove_column :dogs, :is_mix
     add_column    :dogs, :is_purebred, :boolean

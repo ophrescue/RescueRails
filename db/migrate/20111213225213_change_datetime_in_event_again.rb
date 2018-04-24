@@ -1,4 +1,4 @@
-class ChangeDatetimeInEventAgain < ActiveRecord::Migration
+class ChangeDatetimeInEventAgain < ActiveRecord::Migration[4.2]
   def change
     remove_column :events, :start_datetime
     remove_column :events, :end_datetime

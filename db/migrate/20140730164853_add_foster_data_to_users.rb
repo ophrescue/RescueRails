@@ -1,4 +1,4 @@
-class AddFosterDataToUsers < ActiveRecord::Migration
+class AddFosterDataToUsers < ActiveRecord::Migration[4.2]
   def change
     add_column :users, :house_type, :string, limit: '40'
     add_column :users, :breed_restriction, :boolean

@@ -284,7 +284,7 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
-    rollbar (2.15.6)
+    rollbar (2.15.5)
       multi_json
     roo (1.13.2)
       nokogiri
@@ -443,7 +443,7 @@ DEPENDENCIES
   record_tag_helper (~> 1.0)
   redcarpet
   responders
-  rollbar (~> 2.15, >= 2.15.5)
+  rollbar (= 2.15.5)
   roo (~> 1.13.2)
   rspec-collection_matchers
   rspec-rails

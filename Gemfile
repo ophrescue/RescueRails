@@ -51,7 +51,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'uglifier'
 
 gem 'newrelic_rpm'
-gem 'rollbar'
+gem 'rollbar', '~> 2.15', '>= 2.15.5'
 gem 'sucker_punch', '~> 1.5.1'
 
 group :development, :test do

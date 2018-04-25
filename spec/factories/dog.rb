@@ -89,5 +89,8 @@ FactoryBot.define do
       end
     end
 
+    factory :terrier do
+      primary_breed_id { Breed.find_or_create_by(name: 'terrier').id }
+    end
   end
 end

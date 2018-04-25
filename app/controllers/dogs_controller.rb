@@ -77,17 +77,16 @@ class DogsController < ApplicationController
   PER_PAGE = 30
 
   def index
-    @title = session[:mgr_view] ? 'Dog Manager' : 'Our Dogs'
-
-    do_manager_view =  signed_in? && (session[:mgr_view] || params[:all_dogs])
-
     @dogs = case
-            when params[:commit] == 'Search'
+            when params[:commit] == 'Search' # search button was clicked
               DogSearch.search(params: params, manager: do_manager_view)
-            when params[:commit] == 'Filter'
+            when params[:commit] == 'Filter' # filter button was clicked
               DogFilter.filter(params: params, manager: do_manager_view)
             when do_manager_view # initial view, before search or filter initiated
-              Dog.includes(:adoptions, :adopters, :comments)
+              params[:commit] = 'Filter'
+              params[:sort] = 'tracking_id'
+              params[:direction] = 'asc'
+              Dog.default_manager_view
             else # gallery view
               Dog.gallery_view
             end
@@ -260,5 +259,9 @@ class DogsController < ApplicationController
 
   def for_page(page = nil)
     @dogs = @dogs.paginate(per_page: PER_PAGE, page: page || 1)
+  end
+
+  def do_manager_view
+    signed_in? && (session[:mgr_view] || params[:all_dogs])
   end
 end

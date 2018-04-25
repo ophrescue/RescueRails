@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'View Dogs', js: true do
+feature 'Filter Dogs List', js: true do
   before do
     sign_in(active_user)
   end
@@ -33,6 +33,8 @@ feature 'View Dogs', js: true do
   end
 
   scenario 'can sort filter results by dog name' do
+    visit '/dogs'
+    click_link("Manager View")
     fill_in('is_breed', with: "retriev")
     find_button(value: 'Filter').click
     expect(page.all("#dogs .name").map(&:text)).to match_array ["Abby", "Zeke"]

@@ -1,9 +1,9 @@
-<tr>
-  <td><%= dog.tracking_id %></td>
+<tr class='dog'>
+  <td class='tracking_id'><%= dog.tracking_id %></td>
   <td class='name'><%= link_to dog.name.titleize, dog %></td>
   <td class='breed'><%= dog.breeds.join("</br>").html_safe %></t>
-  <td><%= dog.intake_dt.strftime("%m/%d/%y") unless dog.intake_dt.blank? %></td>
-  <td><%= dog.age ? dog.age.titleize : " " %></td>
+  <td class='intake_date'><%= dog.intake_dt.strftime("%m/%d/%y") unless dog.intake_dt.blank? %></td>
+  <td class='age'><%= dog.age ? dog.age.titleize : " " %></td>
   <td><%= size_abbrev(dog.size) %></td>
   <td>
     <% if !dog.medical_review_complete %>
@@ -29,13 +29,14 @@
     <% end %>
   </td>
   <% if (params[:status] == nil) || (params[:status] == "active")  %>
-    <td><%= dog.status.titleize %></td>
+    <td class='status'><%= dog.status.titleize %></td>
   <% end %>
   <td><%= dog.foster ? link_to(dog.foster.name, dog.foster) : "Unassigned" %></td>
   <td><%= dog.foster ? "#{dog.foster.city}, #{dog.foster.region}" : "Unassigned" %></td>
   <td>
     <% dog.adopters.each do |d| %>
       <%= link_to d.name, d %>
+      <br/>
       (<%= d.status %>)
       <br />
     <% end %>

@@ -25,7 +25,7 @@ class DogFilter
   def filter
     @dogs = Dog.filter(filtering_params)
                .order( "#{sort_column} #{sort_direction}" )
-               .includes(:adoptions, :adopters, :comments)
+               .includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster)
 
   end
 

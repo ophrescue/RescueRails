@@ -6,138 +6,58 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# Create default admin user.
 require 'factory_bot'
 FactoryBot.find_definitions
 
 User.destroy_all
-
-@attr = { name: "Admin User",
-          email: "test3@test.com",
-          password: "foobar99",
-          password_confirmation: "foobar99",
-          region: 'NY',
-          country: 'USA'
-}
-
- user = User.create!(@attr)
- user.toggle!(:admin)
-
-
- # Load list of breeds to breed table
-
- Breed.destroy_all
- open("db/dog_breeds.txt") do |breeds|
-   breeds.read.each_line do |breed|
-     breed = breed.chomp
-     Breed.create!(name: breed)
-   end
- end
-
+Breed.destroy_all
 Adopter.destroy_all
+Dog.destroy_all
 
-#params = { adopter: 						{
-              #name: "John Smith", 
-              #email: "jsmith@temp.blg", 
-              #phone: "(555) 555-5555", 
-              #address1: "5555 Eastern Ave", 
-              #address2: "", 
-              #city: "Baltimore", 
-              #state: "MD", 
-              #zip: "21224", 
-              #status: "new", 
-              #when_to_call: "any", 
-              #dog_reqs: "Low shedding, medium sized", 
-              #why_adopt: "I am resubmitting my application, I believe I've be...", 
-              #dog_name: "Sir Robyn Hood", 
-              #other_phone: "", 
-              #assigned_to_user_id: nil, 
-              #flag: "", 
-              #is_subscribed: true,
-              #adoption_app_attributes: {
-                #spouse_name: "Jill Smith", 
-                #other_household_names: "", 
-                #ready_to_adopt_dt: "2012-01-28", 
-                #house_type: "own", 
-                #dog_exercise: "We are moving into our new house on 1/21/12, and it...", 
-                #dog_stay_when_away: "In a limited area of home", 
-                #dog_vacation: "We will have friends stay at the house while we are...", 
-                #current_pets: nil, 
-                #why_not_fixed: nil, 
-                #current_pets_uptodate: nil, 
-                #current_pets_uptodate_why: nil, 
-                #landlord_name: nil, 
-                #landlord_phone: nil, 
-                #rent_dog_restrictions: nil, 
-                #surrender_pet_causes: "If the dog became overly aggressive and professiona...", 
-                #training_explain: "If we feel that we and the dog will benefit from tr...", 
-                #surrendered_pets: "no",  
-                #how_did_you_hear: "my mother went to an event at Bark!", 
-                #pets_branch: "no_pets", 
-                #current_pets_fixed: nil, 
-                #rent_costs: nil, 
-                #vet_info: nil, 
-                #max_hrs_alone: 9, 
-                #is_ofage: true
-              #}
-            #}
+#@attr = { name: "Admin User",
+          #email: "test3@test.com",
+          #password: "foobar99",
+          #password_confirmation: "foobar99",
+          #region: 'NY',
+          #country: 'USA'
 #}
 
-params = { adopter: 						{
-              name: Faker::Name.name, 
-              email: Faker::Internet.email, 
-              phone: Faker::PhoneNumber.phone_number, 
-              address1: Faker::Address.street_address, 
-              address2: "", 
-              city: Faker::Address.city, 
-              state: Faker::Address.state_abbr, 
-              zip: Faker::Address.zip_code, 
-              status: Adopter::STATUSES.sample, 
-              when_to_call: "any", 
-              dog_reqs: "Low shedding, medium sized", 
-              why_adopt: "I am resubmitting my application, I believe I've be...", 
-              dog_name: "Sir Robyn Hood", 
-              other_phone: "", 
-              assigned_to_user_id: nil, 
-              flag: "", 
-              is_subscribed: true,
-              adoption_app_attributes: {
-                spouse_name: "Jill Smith", 
-                other_household_names: "", 
-                ready_to_adopt_dt: "2012-01-28", 
-                house_type: "own", 
-                dog_exercise: "We are moving into our new house on 1/21/12, and it...", 
-                dog_stay_when_away: "In a limited area of home", 
-                dog_vacation: "We will have friends stay at the house while we are...", 
-                current_pets: nil, 
-                why_not_fixed: nil, 
-                current_pets_uptodate: nil, 
-                current_pets_uptodate_why: nil, 
-                landlord_name: nil, 
-                landlord_phone: nil, 
-                rent_dog_restrictions: nil, 
-                surrender_pet_causes: "If the dog became overly aggressive and professiona...", 
-                training_explain: "If we feel that we and the dog will benefit from tr...", 
-                surrendered_pets: "no",  
-                how_did_you_hear: "my mother went to an event at Bark!", 
-                pets_branch: "no_pets", 
-                current_pets_fixed: nil, 
-                rent_costs: nil, 
-                vet_info: nil, 
-                max_hrs_alone: 9, 
-                is_ofage: true
-              }
-            }
-}
+ #user = User.create!(@attr)
+ #user.toggle!(:admin)
 
-Adopter.create!(params[:adopter])
+FactoryBot.create(:user, :admin, :with_known_authentication_parameters)
 
-Breed.destroy_all
-15.times do
+100.times do
   FactoryBot.create(:breed)
 end
 
-Dog.destroy_all
-30.times do
+60.times do
   FactoryBot.create(:dog)
+end
+
+20.times do
+  FactoryBot.create(:adopter_with_app)
+end
+
+20.times do
+  # creates adoption relationships between existing adopters and dogs
+  # instead of creating new adopters and dogs
+  FactoryBot.create(:adoption_from_existing)
+end
+
+25.times do
+  FactoryBot.create(:user)
+end
+
+foster_user_ids = User.pluck(:id).sample(15).shuffle
+foster_dog_ids = Dog.pluck(:id).shuffle
+puts "fosterable dog count #{foster_dog_ids.length}"
+foster_user_ids.each do |id|
+  (1..4).to_a.sample.times do
+    dog_id = foster_dog_ids.sample
+    puts "dog tracking_id #{Dog.find(dog_id).tracking_id}"
+    foster_dog_ids.delete(dog_id)
+    puts "fosterable dog count #{foster_dog_ids.length}"
+    Dog.find(dog_id).update_attribute(:foster_id, id)
+  end
 end

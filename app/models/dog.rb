@@ -180,7 +180,8 @@ class Dog < ApplicationRecord
   # so arel is the workaround
   scope :sort_with_search_term_matches_first,     ->(search_term) { order(Dog.arel_table[:name].does_not_match("#{search_term}%"), "tracking_id asc") }
 
-  scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :photos).where(status: Dog::PUBLIC_STATUSES) }
+  scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :photos, :foster).where(status: Dog::PUBLIC_STATUSES) }
+  scope :default_manager_view,                    -> { includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster).order(:tracking_id) }
 
   def breeds
     [ (primary_breed && primary_breed.name),

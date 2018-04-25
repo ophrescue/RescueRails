@@ -28,7 +28,7 @@ class DogSearch
               else
                 Dog.pattern_match_microchip_or_name(search_term)
               end
-      @dogs = @dogs.includes(:adoptions, :adopters, :comments)
+      @dogs = @dogs.includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster)
 
       with_sorting
     end

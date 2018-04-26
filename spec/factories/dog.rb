@@ -1,7 +1,9 @@
 FactoryBot.define do
   factory :dog do
-    sequence(:tracking_id, ((Dog.pluck(:tracking_id) << 0).max.succ )) { |n| n }
-    name { 
+    # note, this works the same as 'sequence' but sequence based on
+    # the current max value of tracking_id fails the travis-ci build
+    tracking_id { (Dog.max(:tracking_id) || 0).succ }
+    name {
       until(nn = Faker::Dog.name; !Dog.pluck(:name).include?(nn))
       end
       nn

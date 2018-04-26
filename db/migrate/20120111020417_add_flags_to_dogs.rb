@@ -1,4 +1,4 @@
-class AddFlagsToDogs < ActiveRecord::Migration
+class AddFlagsToDogs < ActiveRecord::Migration[4.2]
   def change
     add_column :dogs, :has_medical_need, :boolean, default: false
     add_column :dogs, :is_high_priority, :boolean, default: false

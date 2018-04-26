@@ -46,7 +46,7 @@ GEM
       activerecord (>= 3.0)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    annotate (2.7.2)
+    annotate (2.7.3)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
     archive-zip (0.11.0)
@@ -55,6 +55,7 @@ GEM
     ast (2.4.0)
     audited (4.7.1)
       activerecord (>= 4.0, < 5.3)
+<<<<<<< HEAD
     aws-sdk (2.11.33)
       aws-sdk-resources (= 2.11.33)
     aws-sdk-core (2.11.33)
@@ -62,6 +63,15 @@ GEM
       jmespath (~> 1.0)
     aws-sdk-resources (2.11.33)
       aws-sdk-core (= 2.11.33)
+=======
+    aws-sdk (2.11.35)
+      aws-sdk-resources (= 2.11.35)
+    aws-sdk-core (2.11.35)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.11.35)
+      aws-sdk-core (= 2.11.35)
+>>>>>>> afeda02ae299514551e9a834a8f45e6d016be6c6
     aws-sigv4 (1.0.2)
     better_errors (2.4.0)
       coderay (>= 1.0.0)
@@ -124,7 +134,7 @@ GEM
     crass (1.0.4)
     daemons (1.2.6)
     dalli (2.7.8)
-    database_cleaner (1.6.2)
+    database_cleaner (1.7.0)
     debug_inspector (0.0.3)
     delayed_job (4.1.5)
       activesupport (>= 3.0, < 5.3)
@@ -133,9 +143,9 @@ GEM
       delayed_job (>= 3.0, < 5)
     diff-lcs (1.3)
     docile (1.1.5)
-    dotenv (2.2.2)
-    dotenv-rails (2.2.2)
-      dotenv (= 2.2.2)
+    dotenv (2.3.0)
+    dotenv-rails (2.3.0)
+      dotenv (= 2.3.0)
       railties (>= 3.2, < 6.0)
     erubi (1.7.1)
     exception_notification (4.2.2)
@@ -152,7 +162,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.8.7)
       i18n (>= 0.7)
-    faraday (0.14.0)
+    faraday (0.15.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.23)
     font-awesome-rails (4.7.0.4)
@@ -168,7 +178,7 @@ GEM
       actionpack (>= 4.1)
       activesupport (>= 4.1)
     hitimes (1.2.6)
-    i18n (1.0.0)
+    i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
     io-like (0.3.0)
@@ -232,7 +242,7 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     public_suffix (3.0.2)
-    puma (3.10.0)
+    puma (3.11.4)
     rack (2.0.4)
     rack-cache (1.7.1)
       rack (>= 0.4)
@@ -309,7 +319,7 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    rubocop (0.54.0)
+    rubocop (0.55.0)
       parallel (~> 1.10)
       parser (>= 2.5)
       powerpack (~> 0.1)
@@ -372,9 +382,9 @@ GEM
       spreadsheet
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.9)
+    uglifier (4.1.10)
       execjs (>= 0.3.0, < 3)
-    unicode-display_width (1.3.0)
+    unicode-display_width (1.3.2)
     unicode_utils (1.4.0)
     unicorn (5.4.0)
       kgio (~> 2.6)
@@ -443,7 +453,7 @@ DEPENDENCIES
   record_tag_helper (~> 1.0)
   redcarpet
   responders
-  rollbar
+  rollbar (= 2.15.5)
   roo (~> 1.13.2)
   rspec-collection_matchers
   rspec-rails
@@ -462,4 +472,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.15.3
+   1.16.1

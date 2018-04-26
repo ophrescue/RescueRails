@@ -97,10 +97,6 @@ feature 'Apply for Adoption' do
     fill_in('adopter_references_attributes_2_email', with: 'third@reference.org')
     fill_in('adopter_references_attributes_2_relationship', with: 'Friend')
     fill_in('adopter_references_attributes_2_whentocall', with: 'After 3pm')
-    
-    email = double("adopter mailer", deliver_later: true)
-    expect(NewAdopterMailer).to receive(:adopter_created).once.and_return(email)
-    expect(AdoptAppMailer).to receive(:adopt_app).once.and_return(email)
 
     email = double("adopter mailer", deliver_later: true)
     expect(NewAdopterMailer).to receive(:adopter_created).once.and_return(email)

@@ -1,4 +1,4 @@
-class RmOldPetsfromAdoptionApp < ActiveRecord::Migration
+class RmOldPetsfromAdoptionApp < ActiveRecord::Migration[4.2]
   def change
     remove_column :adoption_apps, :prior_pets
     remove_column :adoption_apps, :vet_name

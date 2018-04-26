@@ -1,4 +1,4 @@
-class AddDetialsToDogs < ActiveRecord::Migration
+class AddDetialsToDogs < ActiveRecord::Migration[4.2]
   def change
     add_column :dogs, :tracking_id, :integer
     add_column :dogs, :primary_breed_id, :integer
@@ -13,7 +13,7 @@ class AddDetialsToDogs < ActiveRecord::Migration
     add_column :dogs, :no_cats, :boolean
     add_column :dogs, :no_kids, :boolean
     add_column :dogs, :description, :text
-    
+
     add_index  :dogs, :primary_breed_id
     add_index  :dogs, :secondary_breed_id
     add_index  :dogs, :age

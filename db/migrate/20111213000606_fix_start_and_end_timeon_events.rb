@@ -1,4 +1,4 @@
-class FixStartAndEndTimeonEvents < ActiveRecord::Migration
+class FixStartAndEndTimeonEvents < ActiveRecord::Migration[4.2]
   def change
     remove_column :events, :start_ts
     remove_column :events, :end_ts

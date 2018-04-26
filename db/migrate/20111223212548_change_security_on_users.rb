@@ -1,4 +1,4 @@
-class ChangeSecurityOnUsers < ActiveRecord::Migration
+class ChangeSecurityOnUsers < ActiveRecord::Migration[4.2]
   def change
   remove_column :users, :edit_adopters
   remove_column :users, :view_adopters

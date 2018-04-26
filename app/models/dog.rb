@@ -156,7 +156,7 @@ class Dog < ApplicationRecord
   scope :is_age,                                  ->(age) { where age: age }
   scope :is_size,                                 ->(size) { where size: size }
   scope :is_status,                               ->(status) { where status: status }
-  scope :is_breed,                                ->(breed_partial) { joins("join breeds on (breeds.id = dogs.primary_breed_id) or (breeds.id = dogs.secondary_breed_id)").where("breeds.name ilike '%#{breed_partial}%'").distinct }
+  scope :is_breed,                                ->(breed_partial) { joins("join breeds on (breeds.id = dogs.primary_breed_id) or (breeds.id = dogs.secondary_breed_id)").where("breeds.name ilike '%#{sanitize_sql_like(breed_partial)}%'").distinct }
   scope :cb_high_priority,                        ->(_) { where is_high_priority: true }
   scope :cb_medical_need,                         ->(_) { where has_medical_need: true }
   scope :cb_medical_review_needed,                ->(_) { where medical_review_complete: false }

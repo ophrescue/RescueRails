@@ -55,15 +55,6 @@ GEM
     ast (2.4.0)
     audited (4.7.1)
       activerecord (>= 4.0, < 5.3)
-<<<<<<< HEAD
-    aws-sdk (2.11.33)
-      aws-sdk-resources (= 2.11.33)
-    aws-sdk-core (2.11.33)
-      aws-sigv4 (~> 1.0)
-      jmespath (~> 1.0)
-    aws-sdk-resources (2.11.33)
-      aws-sdk-core (= 2.11.33)
-=======
     aws-sdk (2.11.35)
       aws-sdk-resources (= 2.11.35)
     aws-sdk-core (2.11.35)
@@ -71,7 +62,6 @@ GEM
       jmespath (~> 1.0)
     aws-sdk-resources (2.11.35)
       aws-sdk-core (= 2.11.35)
->>>>>>> afeda02ae299514551e9a834a8f45e6d016be6c6
     aws-sigv4 (1.0.2)
     better_errors (2.4.0)
       coderay (>= 1.0.0)

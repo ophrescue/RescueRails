@@ -9,7 +9,7 @@ gem 'acts_as_list'
 gem 'audited', '~> 4.5'
 gem 'aws-sdk', '~> 2'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
-gem 'countries'
+gem "countries"
 gem 'dotenv'
 gem 'dotenv-rails'
 gem 'exception_notification'
@@ -20,7 +20,6 @@ gem 'gibbon'
 gem 'gravatar_image_tag'
 gem 'has_scope'
 gem 'paperclip', '~> 5'
-gem 'puma'
 gem 'rails4-autocomplete'
 gem 'record_tag_helper', '~> 1.0'
 gem 'redcarpet'
@@ -35,6 +34,10 @@ gem 'puma'
 # datas
 gem 'dalli'
 gem 'pg', '~> 0.21.0'
+
+group :production do
+  gem 'unicorn'
+end
 
 # Cool mail async stuff
 gem 'daemons'

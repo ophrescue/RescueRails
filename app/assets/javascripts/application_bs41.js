@@ -5,4 +5,6 @@
 // the compiled file.
 //
 //= require application_common
-//= require bootstrap
+
+// bootstrap bundle includes the required popper library
+//= require "bootstrap.bundle"

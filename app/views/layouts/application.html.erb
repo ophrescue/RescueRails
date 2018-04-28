@@ -49,7 +49,11 @@
 
     <!--[if lte IE 6]><script src="js/ie6/warning.js"></script><script>window.onload=function(){e("/assets/ie6warn/")}</script><![endif]-->
   <% if @hide_topbar.nil? %>
-    <%= render 'layouts/topbar' %>
+    <% if @bootstrap41 %>
+      <%= render 'layouts/topbar_bs41' %>
+    <% else %>
+      <%= render 'layouts/topbar' %>
+    <% end %>
   <% end %>
   <div class="container main-container">
     <% flash.each do |key, value| %>
@@ -81,9 +85,13 @@
         <p><%= link_to("Profile", current_user, :class => "btn btn-warning") %></p>
       </div>
     <% end %>
-    <%= yield %>
+    <div class='row'>
+      <%= yield %>
+    </div>
 
+    <div class='row'>
       <%= render 'layouts/footer' %>
+    </div>
       <%= debug(params) if Rails.env.development? %>
   </div>
   </body>

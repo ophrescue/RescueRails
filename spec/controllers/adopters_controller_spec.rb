@@ -35,7 +35,7 @@ describe AdoptersController, type: :controller do
 
     it 'should be successful' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -46,14 +46,14 @@ describe AdoptersController, type: :controller do
 
     it 'should be successful' do
       get :show, params: { id: adopter.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET new' do
     it 'should be successful' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

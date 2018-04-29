@@ -14,18 +14,18 @@ feature 'Edit Reference Form', js: true do
     expect(page).to have_content(reference.name)
     expect(page).to have_content(reference.email)
 
-    expect(first('.ref-read-only', visible: false)).to be_visible
-    expect(first('.ref-editable', visible: false)).not_to be_visible
+    expect(first('.ref-read-only').visible?).to be true
+    expect(first('.ref-editable', :visible => false)).not_to be_visible
 
     find('#toggle-edit-ref').click
 
-    expect(first('.ref-read-only', visible: false)).not_to be_visible
-    expect(first('.ref-editable', visible: false)).to be_visible
+    expect(first('.ref-read-only', :visible => false)).not_to be_visible
+    expect(first('.ref-editable')).to be_visible
 
     find('#toggle-edit-ref').click
 
-    expect(first('.ref-read-only', visible: false)).to be_visible
-    expect(first('.ref-editable', visible: false)).not_to be_visible
+    expect(first('.ref-read-only')).to be_visible
+    expect(first('.ref-editable', :visible => false)).not_to be_visible
   end
 
   scenario 'Admin edits reference' do

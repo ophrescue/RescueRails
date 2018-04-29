@@ -157,7 +157,7 @@ describe UsersController, type: :controller do
 
       it 'can view their own profile' do
         get :show, params: { id: inactive_user.id }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end

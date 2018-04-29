@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'manage medical and behavior summaries', js: true do
   let!(:admin) { create(:user, :admin) }
-  let!(:test_dog) { create(:dog) }
+  let!(:test_dog) { create(:dog, :status => 'adoptable') }
 
   context 'Logged in as Admin' do
     before(:each) do

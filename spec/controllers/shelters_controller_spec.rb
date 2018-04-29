@@ -18,7 +18,7 @@ describe SheltersController, type: :controller do
 
     it 'is successful' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -29,7 +29,7 @@ describe SheltersController, type: :controller do
 
     it 'is successful' do
       get :show, params: { id: shelter.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -38,7 +38,7 @@ describe SheltersController, type: :controller do
 
     it 'is successful' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -49,7 +49,7 @@ describe SheltersController, type: :controller do
 
     it 'is successful' do
       get :edit, params: { id: shelter.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

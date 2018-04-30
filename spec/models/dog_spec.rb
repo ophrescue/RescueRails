@@ -84,11 +84,105 @@ describe Dog do
     context 'status changed to value that is not complete or adopted' do
       it 'updates the date to nil' do
         dog.update_attribute(:status, 'adopted')
-        expect(dog.adoption_date).to be
+        expect(dog.adoption_date).to eq(Date.today)
 
         dog.update_attribute(:status, 'adoptable')
         expect(dog.adoption_date).to be_nil
       end
+    end
+  end
+
+  describe 'matching_tracking_id scope' do
+    let!(:good_dog){ create(:dog, tracking_id: 55) }
+    let!(:bad_dog){ create(:dog, tracking_id: 77) }
+
+    it 'result includes only matching tracking_id' do
+      dogs = Dog.matching_tracking_id(55)
+      expect(dogs.length).to eq 1
+      expect(dogs).to include(good_dog)
+      expect(dogs).not_to include(bad_dog)
+    end
+  end
+
+  describe 'matches_microchip scope' do
+    let!(:good_dog){ create(:dog, microchip: 55) }
+    let!(:bad_dog){ create(:dog, microchip: 77) }
+
+    it 'result includes only matching tracking_id' do
+      dogs = Dog.identity_matching_microchip(55)
+      expect(dogs.length).to eq 1
+      expect(dogs).to include(good_dog)
+      expect(dogs).not_to include(bad_dog)
+    end
+  end
+
+  describe 'combined scopes with identity matches' do
+    let!(:good_dog){ create(:dog, tracking_id: 55) }
+    let!(:better_dog){ create(:dog, microchip: 66) }
+    let!(:bad_dog){ create(:dog, tracking_id: 77) }
+    let!(:badder_dog){ create(:dog, microchip: 88) }
+
+    it 'result includes matches for either parameter' do
+      dogs = Dog.matching_tracking_id(55).or(Dog.identity_matching_microchip(66))
+      expect(dogs.length).to eq 2
+      expect(dogs).to include(good_dog)
+      expect(dogs).to include(better_dog)
+    end
+
+    it 'result includes matches for tracking_id when microchip field is nil' do
+      dogs = Dog.matching_tracking_id(55).or(Dog.identity_matching_microchip(nil))
+      expect(dogs.length).to eq 1
+      expect(dogs).to include(good_dog)
+    end
+
+    it 'result includes matches for microchip when tracking_id field is nil' do
+      dogs = Dog.matching_tracking_id(nil).or(Dog.identity_matching_microchip(66))
+      expect(dogs.length).to eq 1
+      expect(dogs).to include(better_dog)
+    end
+
+    it 'result of combined scope matches either parameter' do
+      dogs = Dog.identity_match_tracking_id_or_microchip(55)
+      expect(dogs.length).to eq 1
+      expect(dogs).to include(good_dog)
+      dogs = Dog.identity_match_tracking_id_or_microchip(66)
+      expect(dogs.length).to eq 1
+      expect(dogs).to include(better_dog)
+    end
+  end
+
+  describe 'combined scopes with pattern matches' do
+    let!(:good_dog){ create(:dog, name: 'Barney') }
+    let!(:better_dog){ create(:dog, microchip: 66) }
+    let!(:bad_dog){ create(:dog, name: 'Bert') }
+    let!(:badder_dog){ create(:dog, microchip: 88) }
+
+    it 'result includes matches for either parameter' do
+      dogs = Dog.pattern_matching_microchip('66').or(Dog.pattern_matching_name('bar%'))
+      expect(dogs.length).to eq 2
+      expect(dogs).to include(good_dog)
+      expect(dogs).to include(better_dog)
+    end
+
+    it 'result includes matches for name when microchip field is nil' do
+      dogs = Dog.pattern_matching_microchip(nil).or(Dog.pattern_matching_name('bar%'))
+      expect(dogs.length).to eq 1
+      expect(dogs).to include(good_dog)
+    end
+
+    it 'result includes matches for microchip when name field is nil' do
+      dogs = Dog.pattern_matching_microchip('66').or(Dog.pattern_matching_name(nil))
+      expect(dogs.length).to eq 1
+      expect(dogs).to include(better_dog)
+    end
+
+    it 'result of combined scope pattern matches either parameter' do
+      dogs = Dog.pattern_match_microchip_or_name('66')
+      expect(dogs.length).to eq 1
+      expect(dogs).to include(better_dog)
+      dogs = Dog.pattern_match_microchip_or_name('bar%')
+      expect(dogs.length).to eq 1
+      expect(dogs).to include(good_dog)
     end
   end
 end

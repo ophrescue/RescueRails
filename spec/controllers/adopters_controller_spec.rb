@@ -35,25 +35,25 @@ describe AdoptersController, type: :controller do
 
     it 'should be successful' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET show' do
-    let(:adopter) { create(:adopter_with_app) }
+    let(:adopter) { create(:adopter_with_app, status: 'approved') }
 
     include_context 'signed in admin'
 
     it 'should be successful' do
       get :show, params: { id: adopter.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET new' do
     it 'should be successful' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -69,7 +69,7 @@ describe AdoptersController, type: :controller do
   end
 
   describe 'PUT update' do
-    let(:adopter) { create(:adopter_with_app) }
+    let(:adopter) { create(:adopter_with_app, status: 'approved') }
 
     include_context 'signed in admin'
 
@@ -102,7 +102,7 @@ describe AdoptersController, type: :controller do
     include_context 'signed in admin'
 
     context 'adopter set to adopted status for the first time' do
-      let(:adopter) { create(:adopter_with_app) }
+      let(:adopter) { create(:adopter_with_app, status: 'approved') }
       it 'free training coupon email created' do
         ActiveJob::Base.queue_adapter = :test
         expect do
@@ -133,7 +133,7 @@ describe AdoptersController, type: :controller do
     end
 
     context 'adopter has already been sent training email' do
-      let(:adopter) { create(:adopter_with_app, training_email_sent: true) }
+      let(:adopter) { create(:adopter_with_app, status: 'approved', training_email_sent: true) }
 
       it 'free training coupon is not sent' do
         expect do

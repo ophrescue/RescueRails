@@ -1,5 +1,9 @@
 FactoryBot.define do
   factory :breed do
-    name { Faker::Name.name }
+    name { 
+      until(bb = Faker::Dog.breed; !Breed.pluck(:name).include?(bb))
+      end
+      bb
+    }
   end
 end

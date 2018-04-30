@@ -1,8 +1,8 @@
 <div class="row">
   <div class="span12">
-    <%= form_tag dogs_path, :method => 'get', :class => 'form-inline' do %>
+    <%= form_tag dogs_path, :method => 'get', class: 'form-inline' do %>
       <%= text_field_tag :search, params[:search], placeholder: 'ID, Name or Microchip' %>
-      <%= submit_tag "Search", class: "btn btn-primary" %>
+      <%= submit_tag "Search", class: "btn btn-primary", id: "search_button"%>
       <%= link_to ' Clear Search', :controller => "dogs", :status => "active" %>
     <% end %>
   </div>
@@ -70,12 +70,14 @@
             </li>
           </ul>
         </div>
+        <%= label_tag :is_breed, 'Breed' %>
+        <%= text_field_tag :is_breed, params[:is_breed], placeholder: 'Breed (all/part)' %>
 
-        <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+        <%= button_tag(type: "submit", class: "btn btn-primary", name: "commit", value: "Filter", id: "filter_button") do %>
           <i class="fa fa-filter" aria-hidden="true"></i> Filter
         <% end %>
 
-        <%= link_to '<i class="fa fa-times-circle-o" aria-hidden="true"></i> Reset '.html_safe, :controller => "dogs", :is_status => DogSearcher::ACTIVE_STATUSES %>
+        <%= link_to '<i class="fa fa-times-circle-o" aria-hidden="true"></i> Reset '.html_safe, :controller => "dogs", :is_status => Dog::ACTIVE_STATUSES %>
 
       <% end %>
     </div>
@@ -84,6 +86,8 @@
 
 
 <script id="example">
+    // init and config for bootstrap multiselect dropdowns
+    // see http://davidstutz.de/bootstrap-multiselect/
     $('#ageSelect').multiselect({
       nonSelectedText: 'Any'
     });
@@ -108,9 +112,10 @@
     <table class="table-striped table-bordered table-condensed">
       <thead>
         <tr>
-          <th><%= sortable "tracking_id" %></th>
+          <th><%= sortable "tracking_id", "ID" %><%= hidden_field(:commit, value: params[:commit]) %></th>
           <th><%= sortable "name" %></th>
-          <th><%= sortable "intake_dt" %></th>
+          <th>Breed</th>
+          <th><%= sortable "intake_dt", "Intake<br/>Date".html_safe %></th>
           <th>Age</th>
           <th>Size</th>
           <th>Flag</th>
@@ -119,8 +124,8 @@
           <% end %>
           <th>Foster Name</th>
           <th>Location</th>
-          <th>Adopter Interest</th>
-          <th>Last Comment</th>
+          <th>Adopter<br/>Interest</th>
+          <th width='14em'>Last Comment</th>
         </tr>
       </thead>
       <tbody id="dogs">

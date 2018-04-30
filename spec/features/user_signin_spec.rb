@@ -5,6 +5,7 @@ feature 'Sign in as Admin', js: true do
 
   scenario 'Valid User' do
     visit '/signin'
+    expect(page.evaluate_script("document.activeElement.id")).to eq 'session_email'
     fill_and_submit(admin)
     expect(page).to have_no_content('Invalid')
   end

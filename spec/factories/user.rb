@@ -1,6 +1,9 @@
 FactoryBot.define do
   factory :user do
-    sequence(:email) { |n| "test#{n}@test.com" }
+    # because the default admin user has sequence#3
+    # There's nothing sacred about that value, except everyone probably
+    # remembers that it's the default login, and you can't teach an old dog new tricks haha
+    sequence(:email, 4) { |n| "test#{n}@test.com" }
 
     name { Faker::Name.name }
     password { Faker::Internet.password(10) }
@@ -29,6 +32,12 @@ FactoryBot.define do
       dl_locked_resources true
       medical_behavior_permission true
       active true
+    end
+
+    trait :with_known_authentication_parameters do
+      email "test3@test.com"
+      password "foobar99"
+      password_confirmation "foobar99"
     end
   end
 end

@@ -83,7 +83,7 @@ describe DogsController, type: :controller do
       end
 
       it 'can filter by age, size and flags' do
-        get :index, params: {is_age: 'baby', is_size: 'small', cb_special_needs: true}, session: {mgr_view: true }
+        get :index, params: {is_age: 'baby', is_size: 'small', cb_special_needs: true, commit: 'Filter'}, session: {mgr_view: true }
         expect(assigns(:dogs)).to match_array([baby_small_special_needs_dog])
       end
     end
@@ -112,7 +112,7 @@ describe DogsController, type: :controller do
 
     it 'is successful' do
       get :show, params: { id: dog.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -123,7 +123,7 @@ describe DogsController, type: :controller do
 
     it 'is successful' do
       get :edit, params: { id: dog.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

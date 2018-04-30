@@ -17,9 +17,11 @@ module RescueRails
 
     config.time_zone = 'Eastern Time (US & Canada)'
 
-     # Resolves InvalidAuthenticityToken errors in Mobile Safari and Mobile Chrome
-     # https://github.com/rails/rails/issues/21948#issuecomment-163995796
-     config.action_dispatch.default_headers.merge!('Cache-Control' => 'no-store, no-cache')
+    # Resolves InvalidAuthenticityToken errors in Mobile Safari and Mobile Chrome
+    # https://github.com/rails/rails/issues/21948#issuecomment-163995796
+    config.action_dispatch.default_headers.merge!('Cache-Control' => 'no-store, no-cache')
 
+    # we have a custom file in support of the faker gem
+    I18n.load_path += Dir[ Rails.root.join("lib","locales","**/*.yml").to_s ]
   end
 end

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby   '2.3.1'
 
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.2.0'
 
 gem 'rack-cache'
 
@@ -29,6 +29,7 @@ gem 'strip_attributes'
 gem 'to_xls'
 gem 'whenever', '~> 0.9.4', require: false
 gem 'will_paginate'
+gem 'puma'
 
 # datas
 gem 'dalli'

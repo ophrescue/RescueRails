@@ -49,4 +49,8 @@ class Photo < ApplicationRecord
 
   scope :visible, -> { where(is_private: false) }
   scope :hidden, -> { where(is_private: true) }
+
+  def self.no_photo_url
+    "no_photo-320x320.png"
+  end
 end

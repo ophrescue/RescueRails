@@ -184,8 +184,22 @@ class Dog < ApplicationRecord
   scope :default_manager_view,                    -> { includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster).order(:tracking_id) }
 
   def breeds
-    [ (primary_breed && primary_breed.name),
-      (secondary_breed && secondary_breed.name) ].compact
+    [ (primary_breed && primary_breed.name.titleize ),
+      (secondary_breed && secondary_breed.name.titleize ) ].compact
+  end
+
+  def primary_photo_url
+    photos.empty? ?
+      Photo.no_photo_url :
+      photos.visible.first.photo.url(:medium)
+  end
+
+  def photo_alt_text
+    primary_breed ?  primary_breed.name : name
+  end
+
+  def foster_location
+    foster && foster.location
   end
 
   def adopted?

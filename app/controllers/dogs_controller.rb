@@ -72,6 +72,7 @@ class DogsController < ApplicationController
   before_action :add_dogs_user, only: %i(new create)
   before_action :load_dog, only: %i(show edit update destroy)
   before_action :edit_dog_check, only: %i(edit update)
+  before_action :select_bootstrap41, only: :index
 
   # find a better home for this
   PER_PAGE = 30

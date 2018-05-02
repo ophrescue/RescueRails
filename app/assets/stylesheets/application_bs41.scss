@@ -13,14 +13,18 @@
 //    limitations under the License.
 
 
-/*
- *= require jquery-ui
- */
 
-@import "bootstrap";
-@import "bootstrap-responsive";
+@import "bootstrap41";
+// I don't believe this is necessary any longer with bootstrap 4.1
+// @import "bootstrap-responsive";
+@import 'bootstrap-multiselect';
 @import "jquery-token/token-input";
 @import "chosen";
 @import "font-awesome";
 @import "custom";
 @import "front-page";
+@import 'galleria.classic';
+@import 'jquery-ui';
+@import 'link_icons';
+@import 'topbar_bs41';
+@import 'footer_bs41';

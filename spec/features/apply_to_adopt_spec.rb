@@ -5,7 +5,8 @@ feature 'Apply for Adoption' do
 
   scenario "Renter fills out adoption application", js: true do
     visit root_path
-    click_link 'Apply for Adoption'
+    click_link 'Adopt'
+    click_link 'Adoption Application'
     check('adopter_pre_q_costs')
     check('adopter_pre_q_surrender')
     check('adopter_pre_q_abuse')
@@ -172,7 +173,8 @@ feature 'Apply for Adoption' do
 
   scenario "Home Owner fills out adoption application", js: true do
     visit root_path
-    click_link 'Apply for Adoption'
+    click_link 'Adopt'
+    click_link 'Adoption Application'
     check('adopter_pre_q_costs')
     check('adopter_pre_q_surrender')
     check('adopter_pre_q_abuse')

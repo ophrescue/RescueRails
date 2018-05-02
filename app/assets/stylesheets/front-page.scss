@@ -174,3 +174,43 @@ $secondary-color-light: #d4d2ca;
     font-weight: bolder;
   }
 }
+
+@media(min-width: 1200px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media(max-width: 576.98px) {
+  .carousel-overlay-text h1, .carousel-overlay-text h4, .carousel-overlay-text a {
+    font-size: 0.7rem;
+  }
+}
+
+.carousel-control-prev {
+  top: 360px;
+}
+
+.carousel-control-next {
+  top: 360px;
+}
+
+.row.take-action {
+  margin-bottom: 20px;
+}
+
+.row.take-action .col-sm {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.row.take-action .col-sm img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+
+.carousel-col {
+  padding-left: 0;
+  padding-right: 0;
+}

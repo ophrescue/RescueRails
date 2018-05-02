@@ -189,9 +189,14 @@ class Dog < ApplicationRecord
   end
 
   def primary_photo_url
-    photos.empty? ?
-      Photo.no_photo_url :
-      photos.visible.first.photo.url(:medium)
+    if Rails.env.development?
+      # helps with formulating the css on the DogsController#index page
+      AWS_PHOTO_URLS.sample()
+    else
+      photos.empty? ?
+        Photo.no_photo_url :
+        photos.visible.first.photo.url(:medium)
+    end
   end
 
   def photo_alt_text

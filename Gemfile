@@ -8,7 +8,7 @@ gem 'rack-cache'
 gem 'acts_as_list'
 gem 'audited', '~> 4.5'
 gem 'aws-sdk', '~> 2'
-gem 'bootstrap-will_paginate', '~> 0.0.10'
+gem 'bootstrap-will_paginate', '~> 1.0.0'
 gem "countries"
 gem 'dotenv'
 gem 'dotenv-rails'
@@ -28,7 +28,6 @@ gem 'roo', '~>1.13.2'
 gem 'strip_attributes'
 gem 'to_xls'
 gem 'whenever', '~> 0.9.4', require: false
-gem 'will_paginate'
 gem 'puma'
 
 # datas

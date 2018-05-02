@@ -69,7 +69,7 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bootstrap-will_paginate (0.0.11)
+    bootstrap-will_paginate (1.0.0)
       will_paginate
     builder (3.2.3)
     byebug (10.0.2)
@@ -399,7 +399,7 @@ DEPENDENCIES
   aws-sdk (~> 2)
   better_errors
   binding_of_caller
-  bootstrap-will_paginate (~> 0.0.10)
+  bootstrap-will_paginate (~> 1.0.0)
   capistrano (~> 3.4.0)
   capistrano-bundler (~> 1.1.4)
   capistrano-rails (~> 1.1.5)
@@ -456,7 +456,6 @@ DEPENDENCIES
   uglifier
   unicorn
   whenever (~> 0.9.4)
-  will_paginate
 
 RUBY VERSION
    ruby 2.3.1p112

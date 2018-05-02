@@ -28,7 +28,7 @@ namespace :rescue_rails do
   desc "populate dogs"
   task populate_dogs: :environment do
     Dog.destroy_all
-    60.times do
+    120.times do
       FactoryBot.create(:dog)
     end
   end

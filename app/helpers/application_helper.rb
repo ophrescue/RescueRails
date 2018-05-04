@@ -74,11 +74,11 @@ module ApplicationHelper
   def size_abbrev(size)
     case size
     when 'small'
-      'SM'
+      'Sm'
     when 'medium'
-      'M'
+      'Med'
     when 'large'
-      'L'
+      'Lg'
     when 'extra large'
       'XL'
     else

@@ -55,3 +55,78 @@
   font-size: 1.5rem;
   line-height: 1.2;
 }
+
+// FLAGS
+.flags {
+  display: flex;
+}
+
+.has_medical_need, .is_high_priority, .has_behavior_problem, .needs_foster {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 18px;
+  height: 18px;
+  margin-left:2px;
+  margin-right:2px;
+}
+
+.has_medical_need {
+  background-image: image-url("has_medical_need.gif");
+}
+
+.is_high_priority {
+  background-image: image-url("is_high_priority.gif");
+}
+
+.has_behavior_problem {
+  background-image: image-url("has_behavior_problem.gif");
+}
+
+.needs_foster {
+  background-image: image-url("needs_foster.gif");
+}
+
+#manager-view {
+  width: 75%;
+}
+
+#manager-view .dog span {
+  margin-right: 6px;
+}
+
+#manager-view .dog.line-1 {
+  border-top: 1px solid #d4d4d4;
+  border-left: 1px solid #d4e4e4;
+  border-right: 1px solid #d4d4d4;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+#manager-view .dog.line-1 .name {
+  font-weight: 700px;
+}
+
+#manager-view .dog.line-2 {
+  border-left: 1px solid #d4d4d4;
+  border-right: 1px solid #d4d4d4;
+  border-bottom: 1px solid #d4d4d4;
+  margin-bottom: 12px;
+  color: #777777;
+  font-size: smaller;
+  padding-bottom: 6px;
+}
+
+#manager-view .dog.line-2 .foster_txt {
+  text-align: right;
+}
+
+.flags .fa {
+  position: relative;
+  top: 4px;
+  margin-left:2px;
+  margin-right:2px;
+}
+
+.fa-comment-o {
+  cursor: pointer;
+}

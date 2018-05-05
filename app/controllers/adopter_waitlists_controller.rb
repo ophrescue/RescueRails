@@ -13,12 +13,7 @@ class AdopterWaitlistsController < ApplicationController
 
   def create
     @adopter_waitlist = AdopterWaitlist.find_or_initialize_by(create_params)
-
-    if AdopterWaitlist.count == 0
-      @adopter_waitlist.rank = 1
-    else
-      @adopter_waitlist.rank = AdopterWaitlist.maximum('Rank') + 1
-    end
+    @adopter_waitlist.rank = AdopterWaitlist.where(waitlist: @waitlist).count + 1;
 
     flash[:success] = 'Adopter added to the waitlist' if @adopter_waitlist.save!
 

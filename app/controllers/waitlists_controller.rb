@@ -26,13 +26,18 @@ class WaitlistsController < ApplicationController
   before_action :edit_my_adopters_user, only: %i(create update destroy)
   before_action :edit_all_adopters_user, only: %i(create update destroy)
   before_action :admin_user, only: [:new, :create, :destroy]
+  before_action :load_waitlist, only: [:show, :edit, :update]
 
   def index
-    @waitlists = Waitlist.order(:id)
+    @waitlists = WaitlistSearcher.search(params: params)
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @waitlists }
+    end
   end
 
   def show
-    @waitlist = Waitlist.find(params[:id])
     @title = @waitlist.name
     @adopter_waitlists = @waitlist.adopter_waitlists
 
@@ -54,19 +59,18 @@ class WaitlistsController < ApplicationController
       flash[:success] = "Waitlist Added"
       redirect_to waitlists_path
     else
+      flash[:error] = "Waitlist creating error "
       render 'new'
     end
   end
 
   def edit
-    @waitlist = Waitlist.find(params[:id])
+
   end
 
   def update
-    @waitlist = Waitlist.find(params[:id])
-
     if @waitlist.update_attributes(waitlist_params)
-      flash[:success] = "Record updated."
+      flash[:success] = "Record updated"
       redirect_to waitlists_path
     else
       render 'edit'
@@ -103,5 +107,9 @@ class WaitlistsController < ApplicationController
   def edit_all_adopters_user
     # TODO Figure out how to differentiate these
     redirect_to(root_path) unless current_user.edit_all_adopters?
+  end
+
+  def load_waitlist
+    @waitlist = Waitlist.find(params[:id])
   end
 end

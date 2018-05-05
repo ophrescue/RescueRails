@@ -23,4 +23,5 @@
 class AdopterWaitlist < ApplicationRecord
   belongs_to :waitlist
   belongs_to :adopter
+
 end

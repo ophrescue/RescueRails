@@ -15,42 +15,6 @@ ActiveRecord::Schema.define(version: 2018_03_24_221858) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-<<<<<<< 7a566a9e060f5d9c571da85922c3cc4305dd05b4
-<<<<<<< 9520d30e0944fa60822b690c5097eed6b6243b21
-  create_table "adopter_waitlists", force: :cascade do |t|
-    t.integer  "rank"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "adopter_id"
-    t.integer  "waitlist_id"
-  end
-
-  create_table "adopters", force: :cascade do |t|
-    t.string   "name",                limit: 255
-    t.string   "email",               limit: 255
-    t.string   "phone",               limit: 255
-    t.string   "address1",            limit: 255
-    t.string   "address2",            limit: 255
-    t.string   "city",                limit: 255
-    t.string   "state",               limit: 255
-    t.string   "zip",                 limit: 255
-    t.string   "status",              limit: 255
-    t.string   "when_to_call",        limit: 255
-    t.datetime "created_at",                      precision: 6
-    t.datetime "updated_at",                      precision: 6
-    t.text     "dog_reqs"
-    t.text     "why_adopt"
-    t.string   "dog_name",            limit: 255
-    t.string   "other_phone",         limit: 255
-    t.integer  "assigned_to_user_id"
-    t.string   "flag",                limit: 255
-    t.boolean  "is_subscribed",                                 default: false
-    t.date     "completed_date"
-    t.string   "county"
-    t.boolean  "training_email_sent",                           default: false, null: false
-    t.index ["assigned_to_user_id"], name: "index_adopters_on_assigned_to_user_id", using: :btree
-=======
-=======
   create_table "adopter_waitlists", id: :serial, force: :cascade do |t|
     t.integer "rank"
     t.datetime "created_at", null: false
@@ -59,7 +23,6 @@ ActiveRecord::Schema.define(version: 2018_03_24_221858) do
     t.integer "waitlist_id"
   end
 
->>>>>>> updated waitlist based on feedback
   create_table "adopters", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
     t.string "email", limit: 255
@@ -84,7 +47,6 @@ ActiveRecord::Schema.define(version: 2018_03_24_221858) do
     t.string "county"
     t.boolean "training_email_sent", default: false, null: false
     t.index ["assigned_to_user_id"], name: "index_adopters_on_assigned_to_user_id"
->>>>>>> merge repo version of schema.rb
   end
 
   create_table "adoption_apps", id: :serial, force: :cascade do |t|
@@ -280,9 +242,6 @@ ActiveRecord::Schema.define(version: 2018_03_24_221858) do
     t.index ["size"], name: "index_dogs_on_size", using: :btree
     t.index ["tracking_id"], name: "index_dogs_on_tracking_id", unique: true, using: :btree
     t.index ["waitlist_id"], name: "index_dogs_on_waitlist_id", using: :btree
-=======
-    t.index ["waitlist_id"], name: "index_dogs_on_waitlist_id"
->>>>>>> updated waitlist based on feedback
   end
 
   create_table "emails", id: :serial, force: :cascade do |t|

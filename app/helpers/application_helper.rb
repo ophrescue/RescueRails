@@ -52,10 +52,6 @@ module ApplicationHelper
     'Operation Paws for Homes'
   end
 
-  def index_page_title
-    session[:mgr_view] ? 'Dog Manager' : 'Our Dogs'
-  end
-
   def sortable(column, title = nil)
     title ||= column.titleize
     css_id = "sort_by_#{column}"

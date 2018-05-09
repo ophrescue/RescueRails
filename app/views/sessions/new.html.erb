@@ -1,40 +1,33 @@
-<div class="row">
-	<div class="span6 offset1">
-		<h1>Staff Sign in</h1>
-		<br />
-		<%= form_for(:session, :html=> { :class => "form-horizontal" }, :url => sessions_path) do |f| %>
-			<fieldset>
-				<div class="well">
-					<div class="control-group">
-						<%= f.label :email, :class => "control-label" %>
-						<div class="controls">
-							<%= f.text_field :email %>
-						</div>
-					</div>
-					<div class="control-group">
-						<%= f.label :password, :class => "control-label" %>
-						<div class="controls">
-							<%= f.password_field :password %>
-							<span class="help-inline"><%= link_to "forgotten password?", new_password_reset_path %></span>
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<label class="checkbox">
-								<%= check_box_tag :remember_me, 1, params[:remember_me] %>
-								<span><%= label_tag :remember_me, "Keep Me Signed In" %></span>
-							</label>
-						</div>
-
-					</div>
-					<div class="form-actions">
-						<%= f.submit "Sign in", :class => "btn btn-primary btn-large" %>
-					</div>
-				</div>
-			</fieldset>
-		<% end %>
-	</div>
+<div class="row mb-20">
+  <div class="span6 offset1">
+    <h1>Staff Sign in</h1>
+  </div>
 </div>
+
+<div class="row">
+  <div class="span6 offset1">
+    <%= form_for :session, url: sessions_path do |form| %>
+      <div class="text-field">
+        <%= form.label :email %>
+        <%= form.text_field :email, type: 'email' %>
+      </div>
+
+      <div class="password-field">
+        <%= form.label :password %>
+        <%= form.password_field :password %>
+      </div>
+
+      <div class="submit-field">
+        <%= form.submit %>
+      </div>
+
+      <div class="other-links">
+        <%= link_to t('sessions.form.forgot_password'), new_password_path %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <script type="text/javascript">
   $(function(){
     $("#session_email")[0].focus();

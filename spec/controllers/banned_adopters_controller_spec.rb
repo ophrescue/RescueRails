@@ -18,11 +18,9 @@ require 'rails_helper'
 describe BannedAdoptersController, type: :controller do
   let!(:admin) { create(:user, :admin) }
   let!(:hacker) { create(:user) }
-  let!(:inactive_user) { create(:user, :inactive_user)}
+  let!(:inactive_user) { create(:user, :inactive_user) }
 
-  before :each do
-    allow(controller).to receive(:current_user) { admin }
-  end
+  include_context 'signed in admin'
 
   describe 'GET index' do
     context 'logged in as admin' do

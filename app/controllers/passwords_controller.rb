@@ -11,12 +11,5 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-
-class PagesController < ApplicationController
-  before_action :require_login, only: [:status_definitions]
-
-  def status_definitions
-    @hide_topbar = true
-  end
-
+class PasswordsController < Clearance::PasswordsController
 end

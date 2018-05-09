@@ -81,7 +81,7 @@
                       <li><%= link_to "Shelters", shelters_path %></li>
                     <% end %>
                     <li><%= link_to "My Profile", current_user %></li>
-                    <li><%= link_to "Sign out", signout_path %></li>
+                    <li><%= link_to t('layouts.application.sign_out'), signout_path %></li>
                   </ul>
                 </li>
               <% else %>

@@ -4,11 +4,10 @@ feature 'Link Dogs to Adoption Applications via Adoption model', js: true do
   let!(:test_applicant) { create(:adopter_with_app) }
 
   scenario 'Happy Path' do
-    admin = create(:user, :admin)
     create(:dog, name: 'Bark')
     create(:dog, name: 'Bart')
 
-    sign_in(admin)
+    sign_in_as_admin
 
     visit '/adopters'
     expect(page).to have_content('Adoption Applications')

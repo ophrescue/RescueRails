@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 feature 'Edit Reference Form', js: true do
-  let!(:admin) { create(:user, :admin) }
   let!(:adopter) { create(:adopter_with_app) }
 
   scenario 'Admin is able to edit reference' do
     reference = FactoryBot.create(:reference, adopter: adopter)
 
-    sign_in(admin)
+    sign_in_as_admin
     visit adopter_path(adopter)
 
     click_link('References')
@@ -31,7 +30,7 @@ feature 'Edit Reference Form', js: true do
   scenario 'Admin edits reference' do
     reference = FactoryBot.create(:reference, adopter: adopter)
 
-    sign_in(admin)
+    sign_in_as_admin
     visit adopter_path(adopter)
 
     click_link('References')

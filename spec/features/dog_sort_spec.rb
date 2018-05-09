@@ -9,12 +9,10 @@ feature 'Dog sort in manager view', js: true do
 
   before do
     create_many_dogs
-    sign_in(active_user)
+    sign_in_as_admin
     visit '/dogs_manager'
     expect(page_heading).to eq "Dog Manager"
   end
-
-  let!(:active_user) { create(:user, :admin) }
 
   context 'no filter active' do
     scenario 'default sort' do
@@ -99,7 +97,7 @@ feature 'Dog sort in manager view', js: true do
       breeds.each do |breed|
         # breed is primary breed name and secondary breed name
         # separated by \n, regex match doesn't like newlines
-        expect(breed.gsub(/\n/," ")).to match /terrier/i
+        expect(breed.tr("\n", " ")).to match(/terrier/i)
       end
     end
 
@@ -139,7 +137,7 @@ feature 'Dog sort in manager view', js: true do
     before do
       search_by("Name", "trou")
       dog_names.each do |name|
-        expect(name).to match /trou/i
+        expect(name).to match(/trou/i)
       end
     end
 

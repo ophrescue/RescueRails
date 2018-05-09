@@ -63,6 +63,7 @@ GEM
     aws-sdk-resources (2.11.35)
       aws-sdk-core (= 2.11.35)
     aws-sigv4 (1.0.2)
+    bcrypt (3.1.11)
     better_errors (2.4.0)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
@@ -109,6 +110,10 @@ GEM
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     chronic (0.10.2)
+    clearance (1.16.1)
+      bcrypt
+      email_validator (~> 1.4)
+      rails (>= 3.1)
     climate_control (0.2.0)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
@@ -139,6 +144,8 @@ GEM
     dotenv-rails (2.3.0)
       dotenv (= 2.3.0)
       railties (>= 3.2, < 6.0)
+    email_validator (1.6.0)
+      activemodel
     erubi (1.7.1)
     exception_notification (4.2.2)
       actionmailer (>= 4.0, < 6)
@@ -411,6 +418,7 @@ DEPENDENCIES
   capybara-screenshot
   capybara-selenium
   chromedriver-helper
+  clearance
   countries
   coveralls
   daemons

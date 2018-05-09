@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2018_06_06_150422) do
+=======
+ActiveRecord::Schema.define(version: 2018_05_08_000741) do
+>>>>>>> --wip-- [skip ci]
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adopter_waitlists", id: :serial, force: :cascade do |t|
+    t.integer "rank"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "adopter_id"
+    t.integer "waitlist_id"
+  end
 
   create_table "adopters", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
@@ -177,7 +189,7 @@ ActiveRecord::Schema.define(version: 2018_06_06_150422) do
     t.string "name", limit: 255
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
-    t.integer "tracking_id"
+    t.serial "tracking_id"
     t.integer "primary_breed_id"
     t.integer "secondary_breed_id"
     t.string "status", limit: 255
@@ -220,6 +232,8 @@ ActiveRecord::Schema.define(version: 2018_06_06_150422) do
     t.string "flea_tick_preventative"
     t.boolean "medical_review_complete", default: false
     t.text "behavior_summary"
+    t.integer "waitlist_id"
+    t.integer "rank"
     t.index ["age"], name: "index_dogs_on_age"
     t.index ["coordinator_id"], name: "index_dogs_on_coordinator_id"
     t.index ["foster_id"], name: "index_dogs_on_user_id"
@@ -230,6 +244,7 @@ ActiveRecord::Schema.define(version: 2018_06_06_150422) do
     t.index ["shelter_id"], name: "index_dogs_on_shelter_id"
     t.index ["size"], name: "index_dogs_on_size"
     t.index ["tracking_id"], name: "index_dogs_on_tracking_id", unique: true
+    t.index ["waitlist_id"], name: "index_dogs_on_waitlist_id"
   end
 
   create_table "emails", id: :serial, force: :cascade do |t|
@@ -374,23 +389,33 @@ ActiveRecord::Schema.define(version: 2018_06_06_150422) do
     t.boolean "translator", default: false, null: false
     t.string "known_languages", limit: 255
     t.integer "code_of_conduct_agreement_id"
-    t.boolean "boarding_buddies", default: false, null: false
     t.boolean "medical_behavior_permission", default: false
+    t.boolean "boarding_buddies", default: false, null: false
     t.boolean "social_media_manager", default: false, null: false
     t.boolean "graphic_design", default: false, null: false
     t.string "country", limit: 3, null: false, comment: "Country as a ISO 3166-1 alpha-3 code"
     t.boolean "active", default: false, null: false, comment: "if false user is a candiate volunteer and should only be able to see and edit their profile"
+    t.string "confirmation_token", limit: 128
+    t.string "remember_token", limit: 128
     t.index ["agreement_id"], name: "index_users_on_agreement_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
     t.index ["mentor_id"], name: "index_users_on_mentor_id"
     t.index ["name"], name: "index_users_on_name"
+    t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
   create_table "users_teams", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "team_id"
     t.index ["user_id", "team_id"], name: "index_users_teams_on_user_id_and_team_id", unique: true
+  end
+
+  create_table "waitlists", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

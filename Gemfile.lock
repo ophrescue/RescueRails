@@ -456,6 +456,7 @@ DEPENDENCIES
   uglifier
   unicorn
   whenever (~> 0.9.4)
+  will_paginate
 
 RUBY VERSION
    ruby 2.3.1p112

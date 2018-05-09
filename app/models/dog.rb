@@ -182,10 +182,10 @@ class Dog < ApplicationRecord
 
   scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :photos, :foster).where(status: Dog::PUBLIC_STATUSES) }
   scope :default_manager_view,                    -> { includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster).order(:tracking_id) }
+  scope :autocomplete_name,                       ->(search_term){ if search_term.present? then select(:name, :id).pattern_matching_name("%"+search_term+"%").sort_with_search_term_matches_first(search_term) else select(:name, :id) end }
 
   def breeds
-    [ (primary_breed && primary_breed.name.titleize ),
-      (secondary_breed && secondary_breed.name.titleize ) ].compact
+    [ (primary_breed&.name), (secondary_breed&.name) ].compact
   end
 
   def primary_photo_url

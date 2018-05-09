@@ -28,7 +28,7 @@ gem 'roo', '~>1.13.2'
 gem 'strip_attributes'
 gem 'to_xls'
 gem 'whenever', '~> 0.9.4', require: false
-gem 'puma'
+gem 'will_paginate'
 
 # datas
 gem 'dalli'

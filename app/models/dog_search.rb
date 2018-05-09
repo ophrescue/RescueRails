@@ -42,8 +42,7 @@ class DogSearch
   private
 
   def tracking_id_search?
-    !params[:search].nil? &&
-      params[:search].scan(/\D/).empty? &&
+    params[:search]&.scan(/\A\d+\z/).present? &&
       params[:search].to_i > 0 &&
       params[:search].to_i < 2_147_483_647
   end

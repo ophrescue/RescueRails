@@ -52,10 +52,6 @@ module ApplicationHelper
     'Operation Paws for Homes'
   end
 
-  def index_page_title
-    session[:mgr_view] ? 'Dog Manager' : 'Our Dogs'
-  end
-
   def sortable(column, title = nil)
     title ||= column.titleize
     css_id = "sort_by_#{column}"
@@ -71,18 +67,4 @@ module ApplicationHelper
     link_to title, { commit: commit, sort: column, direction: direction, status: status, search: search_term, is_size: is_size, is_age: is_age, is_status: is_status, is_breed: is_breed }, { class: css_class, id: css_id }
   end
 
-  def size_abbrev(size)
-    case size
-    when 'small'
-      'Sm'
-    when 'medium'
-      'Med'
-    when 'large'
-      'Lg'
-    when 'extra large'
-      'XL'
-    else
-      ''
-    end
-  end
 end

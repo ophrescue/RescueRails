@@ -78,6 +78,8 @@ class DogsController < ApplicationController
 
   def index
     @dogs = case
+            when params[:autocomplete] # it's autocomplete of dog names on the adopters/:id page
+              Dog.autocomplete_name(params[:search])
             when params[:commit] == 'Search' # search button was clicked
               DogSearch.search(params: params, manager: do_manager_view)
             when params[:commit] == 'Filter' # filter button was clicked
@@ -203,7 +205,7 @@ class DogsController < ApplicationController
               :medical_summary,
               :behavior_summary,
               :medical_review_complete,
-              :all_dogs,
+              :autocomplete,
               attachments_attributes:
               [
                 :attachment,
@@ -262,6 +264,6 @@ class DogsController < ApplicationController
   end
 
   def do_manager_view
-    signed_in? && (session[:mgr_view] || params[:all_dogs])
+    signed_in? && (session[:mgr_view])
   end
 end

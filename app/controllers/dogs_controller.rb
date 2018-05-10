@@ -78,6 +78,7 @@ class DogsController < ApplicationController
   PER_PAGE = 30
 
   def index
+    puts "xhr? #{request.xhr?}"
     @dogs = case
             when params[:autocomplete] # it's autocomplete of dog names on the adopters/:id page
               Dog.autocomplete_name(params[:search])

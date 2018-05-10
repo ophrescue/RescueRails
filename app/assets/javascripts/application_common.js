@@ -30,6 +30,4 @@
 //= require photos.js
 //= require adoption_form
 //= require jquery_ujs
-//= require bootstrap-multiselect
-//= require dog-filter
 //= require jquery.ui.touch-punch.min

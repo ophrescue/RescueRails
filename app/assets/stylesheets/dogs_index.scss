@@ -130,3 +130,48 @@
 .fa-comment-o {
   cursor: pointer;
 }
+
+// globalMultiSelect, the filter fields:
+#all_filter_params span.filter_param::after {
+  content: ', ';
+}
+
+#filter_controls {
+  display: flex;
+  margin-left: -23px;
+}
+
+.message_group {
+  font-size: smaller;
+}
+
+.message_group .group_label {
+  font-weight: 700;
+  margin-left: 1px;
+}
+
+.dropdown-menu li {
+  margin-left: 8px;
+}
+
+.dropdown-menu li.selected span.check {
+  visibility: visible;
+  width:12px;
+  margin-right:12px;
+  color: #38ad38;
+}
+
+.dropdown-menu li:not(.selected) span.check {
+  visibility: hidden;
+  width:12px;
+  margin-right:12px;
+}
+
+.dropdown-menu li span {
+  cursor: pointer;
+}
+
+#reset_message {
+  font-size:smaller;
+  display:none;
+}

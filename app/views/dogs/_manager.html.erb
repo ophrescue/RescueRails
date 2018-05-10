@@ -5,109 +5,200 @@
     <div class="row">
       <%= form_tag dogs_path, :method => 'get', class: 'form-inline' do %>
         <%= text_field_tag :search, params[:search], placeholder: 'ID, Name or Microchip' %>
-        <%= submit_tag "Search", class: "btn btn-primary", id: "search_button"%>
+        <%= submit_tag "Search", class: "btn btn-sm btn-primary", id: "search_button"%>
         <%= link_to ' Clear Search', :controller => "dogs", :status => "active" %>
       <% end %>
     </div>
 
     <div class="row">
-      <div class="well well-small">
-        <%= form_tag dogs_path, :method => 'get', :class => 'form-inline' do %>
-          <%= label_tag :is_age, 'Age:' %>
-          <%= select_tag :is_age, options_for_select(Dog::AGES, selected: params[:is_age]), {id: 'ageSelect', multiple: true} %>
-
-          <%= label_tag :is_size, 'Size:' %>
-          <%= select_tag :is_size, options_for_select(Dog::SIZES, selected: params[:is_size]), {id: 'sizeSelect', multiple: true} %>
-
-          <%= label_tag :is_status, 'Status:' %>
-          <%= select_tag :is_status, options_for_select(Dog::STATUSES, selected: params[:is_status]), {id: 'statusSelect', multiple: true} %>
-
-          <%= label_tag :flag_dropdown, 'Flags' %>
-          <div class="btn-group" id=flagDropdown>
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <span id=flagCount>0 selected</span>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu flag-dropdown-menu">
-              <li>
-                <%= check_box_tag :cb_high_priority, '1' , params[:cb_high_priority], class: "dog_filter_cb" %>
-                <%= label_tag :cb_high_priority, 'High Priority'%>
-              </li>
-              <li>
-                <%= check_box_tag :cb_medical_review_needed, '1', params[:cb_medical_review_needed], class: "dog_filter_cb" %>
-                <%= label_tag :cb_medical_review_needed, 'Medical Review Needed'%>
-              </li>
-              <li>
-                <%= check_box_tag :cb_medical_need, '1', params[:cb_medical_need], class: "dog_filter_cb" %>
-                <%= label_tag :cb_medical_need, 'Medical Need'%>
-              </li>
-              <li>
-                <%= check_box_tag :cb_special_needs, '1', params[:cb_special_needs], class: "dog_filter_cb" %>
-                <%= label_tag :cb_special_needs, 'Special Needs'%>
-              </li>
-              <li>
-                <%= check_box_tag :cb_behavior_problems, '1', params[:cb_behavior_problems], class: "dog_filter_cb" %>
-                <%= label_tag :cb_behavior_problems, 'Behavior Problems'%>
-              </li>
-              <li>
-                <%= check_box_tag :cb_foster_needed, '1', params[:cb_foster_needed], class: "dog_filter_cb" %>
-                <%= label_tag :cb_foster_needed, 'Foster Needed'%>
-              </li>
-              <li>
-                <%= check_box_tag :cb_spay_neuter_needed, '1', params[:cb_spay_neuter_needed], class: "dog_filter_cb" %>
-                <%= label_tag :cb_spay_neuter_needed, 'Spay/Neuter Needed'%>
-              </li>
-              <li>
-                <%= check_box_tag :cb_no_cats, '1', params[:cb_no_cats], class: "dog_filter_cb" %>
-                <%= label_tag :cb_no_cats, 'No Cats'%>
-              </li>
-              <li>
-                <%= check_box_tag :cb_no_dogs, '1', params[:cb_no_dogs], class: "dog_filter_cb" %>
-                <%= label_tag :cb_no_dogs, 'No Dogs'%>
-              </li>
-              <li>
-                <%= check_box_tag :cb_no_kids, '1', params[:cb_no_kids], class: "dog_filter_cb" %>
-                <%= label_tag :cb_no_kids, 'No Kids'%>
-              </li>
-            </ul>
-          </div>
-          <%= label_tag :is_breed, 'Breed' %>
-          <%= text_field_tag :is_breed, params[:is_breed], placeholder: 'Breed (all/part)' %>
-
-          <%= button_tag(type: "submit", class: "btn btn-primary", name: "commit", value: "Filter", id: "filter_button") do %>
-            <i class="fa fa-filter" aria-hidden="true"></i> Filter
-          <% end %>
-
-          <%= link_to '<i class="fa fa-times-circle-o" aria-hidden="true"></i> Reset '.html_safe, :controller => "dogs", :is_status => Dog::ACTIVE_STATUSES %>
-
-        <% end %>
-      </div>
+      <div class='col' id='all_filter_params' style="height:24px"></div>
     </div>
-    <% if @dogs.any? %>
+
+    <div class="row" id="filter_controls">
+    </div>
+
+    <%- if @dogs.any? %>
+      <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
       <%= render :partial => "manager_dog", :collection => @dogs, :as => :dog %>
+      <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
     <% else %>
       <h3>No Records Found</h3>
     <% end %>
   </div>
 </div>
 
-<script id="example">
-  // init and config for bootstrap multiselect dropdowns
-  // see http://davidstutz.de/bootstrap-multiselect/
-  $('#ageSelect').multiselect({
-      nonSelectedText: 'Any'
-    });
-    $('#sizeSelect').multiselect({
-      nonSelectedText: 'Any',
-    });
-    $('#statusSelect').multiselect({
-      nonSelectedText: 'Any'
-    });
-    $('#flagDropdown .dropdown-menu').on({
-      "click":function(e){
-          e.stopPropagation();
+<script type='text/javascript'>
+  function SortFilterMessageBar(options) {
+    this.$globalMessageField = $('#'+options.globalMessageField);
+    this.filter_params = window.filter_params
+
+    this.make_message_group_label = function(group_id, group_text){
+      span_id = `${group_id}_group`
+      this.$globalMessageField.prepend($(`<span class='message_group ${span_id}'></span>`));
+      this.$globalMessageField.find(`.message_group.${span_id}`).append($(`<span class='group_label ${span_id}'>${group_text}: </span>`).hide());
+    };
+
+    this.make_message = function(group_id, group_text, id, text){
+      span_id = `${group_id}_group`
+      this.$globalMessageField.find(`.message_group.${span_id}`).append($(`<span class='filter_param' id=${id}>${text}</span>`).hide());
+    };
+
+    this.make_message_group = function(id, buttonText,selectOptions){
+      this.make_message_group_label(id, buttonText)
+      for(var key in selectOptions){
+          this.make_message(id, buttonText, key, selectOptions[key])
         }
-    });
+    };
+
+    this.messages = function(selectedValue, selected, multiple){
+      var $selectedMessage = this.$globalMessageField.find(`#${selectedValue}`);
+      var $messageGroup = $selectedMessage.closest('.message_group');
+      if(!multiple){$messageGroup.find('.filter_param').hide()};
+      if(selected){
+        $messageGroup.find('.group_label').show();
+        $selectedMessage.show();
+      }else{
+        $selectedMessage.hide();
+        if($messageGroup.find('.filter_param:visible').length == 0) {
+           $messageGroup.find('.group_label').hide();
+        }
+      }
+      this.show_reset_link()
+    };
+
+    this.search_sort_filter_active = function(){
+      for(var filter_group in this.filter_params){
+        if ( (this.filter_params[filter_group].length > 0) || (this.filter_params[filter_group] != ["tracking_id"]) ){
+          return true
+        }
+      }
+      return false
+    };
+
+    this.show_reset_link = function(){
+      if(this.search_sort_filter_active()){
+        $('#reset_message').show()
+      }else{
+        $('#reset_message').hide()
+      }
+    };
+
+    this.initialize = function(){
+      this.$globalMessageField.append( '<span id="reset_message"><i class="fa fa-times" aria-hidden="true"></i> Reset filter, search and sort</span>');
+    }
+    this.initialize();
+  };
+
+  function GlobalMultiSelect(options) {
+
+    this.filter_params = window.filter_params = {}
+    this.message_bar = new SortFilterMessageBar(options)
+    this.$container = $('#'+options.container);
+    this.sort_param = ""
+    this.templates = function(){
+    return {wrapper: `<div class="col-sm globalselect-container"></div>`,
+            button:  `<button type="button" class="globalselect dropdown-toggle btn btn-sm btn-default" data-toggle="dropdown" aria-expanded="true">Age</button>`,
+            ul: `<ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform; min-width: max-content; padding-right: 8px"></ul>`,
+            li: `<li><span class='check fa fa-check'></span><span></span></li>`,
+            breed_field: `<div class='col-sm'><%= text_field_tag :is_breed, params[:is_breed], placeholder: 'Breed (all/part)' %></div>`,
+      }
+    }
+
+    this.addDropdown = function (options){
+      var $id = '#'+options.id
+      var templates = this.templates()
+      var $wrapper = $(templates.wrapper).attr('id',options.id)
+      this.$container.prepend($wrapper)
+      $wrapper.append(templates.button);
+      $('.globalselect',$id).text(options.buttonText);
+      $('.globalselect',$id).after(templates.ul);
+      this.message_bar.make_message_group(options.id, options.buttonText,options.selectOptions)
+      this.filter_params[options.id] = []
+      for(var key in options.selectOptions){
+          this.addDropdownItem($id, key, options.selectOptions[key])
+        }
+      this.activate($wrapper,options.multiple);
+    };
+
+    this.addDropdownItem = function($id, value, text){
+      var templates = this.templates()
+      var list_item = $(templates.li)
+      list_item.attr('id',value).find('span:last-child').text(text)
+      $('ul',$id).append(list_item)
+    };
+
+    this.activate = function(dropdown, multiple){
+      var context = this
+      dropdown.find('span').on('click', {context:context, multiple:multiple}, this.select);
+      $('.dropdown-menu li').on('click',function(event){event.stopPropagation()})
+    };
+
+
+    this.select = function(event){
+        var $target = $(event.target);
+        var $li = $target.parent();
+        var selected = $li.toggleClass('selected').hasClass('selected');
+        var multiple = event.data.multiple;
+        var context = event.data.context;
+        var group = $li.closest('.globalselect-container').attr('id')
+        var selectedValue = $li.attr('id');
+        var filter_params_group = context.filter_params[group]
+        if(selected && !multiple){
+          // remove the selected class from all the other list items
+          $li.parent().find('li').each(function(i,el){if(el!=$li[0]){$(el).removeClass('selected')}})
+          filter_params_group = [selectedValue]
+        };
+        if(multiple){
+          if(selected){
+            filter_params_group[filter_params_group.length] = selectedValue
+          }else{
+            filter_params_group.splice(filter_params_group.indexOf(selectedValue),1)
+          }
+        }
+        context.message_bar.messages(selectedValue, selected, multiple);
+        context.fetch(); // trigger ajax request on any change
+    };
+
+    this.filter_query = function(){
+      var base = "utf8=✓";
+      var groups = [];
+      $('.globalselect-container').each(
+        function(i,j){
+          l = groups.length
+          groups[l] = $(j).attr('id')
+        }
+      )
+      for(var group of groups){
+        $(`.globalselect-container#${group} .selected`).
+          each(function(i, list_item){
+                 base=base+`&${group}[]=${$(list_item).attr('id')}`
+                }
+              )
+      }
+      return base
+    };
+
+    this.fetch = function(){
+      $('#manager-view').load("/dogs #manager-view", this.filter_query(), this.handle_ajax_response )
+    };
+
+    this.handle_ajax_response = function(){console.log("we did it")};
+
+    this.initialize = function(){
+      var templates = this.templates()
+      this.addDropdown({id:"sort", buttonText:"Sort", selectOptions:<%= Sortable::SORT_FIELDS.to_json.html_safe %>, multiple:false})
+      this.$container.prepend(templates.breed_field);
+    }
+    this.initialize()
+  };
+
+  $( function(){
+    globalMultiSelect = new GlobalMultiSelect({container: 'filter_controls', globalMessageField: 'all_filter_params'})
+    globalMultiSelect.addDropdown({id:"has_flags", buttonText:"Flags", selectOptions:<%= Dog::FILTER_FLAGS.to_id_and_value_hash %>,multiple:true})
+    globalMultiSelect.addDropdown({id:"is_size", buttonText:"Size", selectOptions:<%= Dog::SIZES.to_id_and_value_hash %>, multiple:true})
+    globalMultiSelect.addDropdown({id:"is_status", buttonText:"Status", selectOptions:<%= Dog::STATUSES.to_id_and_value_hash %>, multiple:true})
+    globalMultiSelect.addDropdown({id:"is_age", buttonText:"Age", selectOptions:<%= Dog::AGES.to_id_and_value_hash %>, multiple:true})
+  });
 </script>
 <script>
   $('#comments_modal').on('show.bs.modal', function (e) {

@@ -8,33 +8,33 @@
       <% if can_add_dogs? %>
         <%# large-format (>=md) 2/12 width, small format (<md) half-width %>
         <div class="col-6 col-md-2">
-          <%= link_to "Add a Dog", new_dog_path, class: "btn btn-primary" %>
+          <%= link_to "Add a Dog", new_dog_path, class: "btn btn-sm btn-primary" %>
         </div>
       <% end %>
 
       <% if session[:mgr_view] %>
         <%# large-format (>=md) 2/12 width, small format (<md) half-width %>
         <div class="col-6 col-md-2">
-          <%= link_to("Gallery View", dogs_switch_view_path, class: "btn ") %>
+          <%= link_to("Gallery View", dogs_switch_view_path, class: "btn btn-sm") %>
         </div>
       <% elsif current_user.active %>
         <%# large-format (>=md) 2/12 width, small format (<md) half-width %>
         <div class="col-6 col-md-2">
-          <%= link_to("Manager View", dogs_switch_view_path, class: "btn ") %>
+          <%= link_to("Manager View", dogs_switch_view_path, class: "btn btn-sm") %>
         </div>
       <% end %>
     <% end %>
   </div>
 
-  <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 
     <% if signed_in? && session[:mgr_view] == true %>
       <%= render 'manager' %>
     <% else %>
+      <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
       <div class="row gallery" id="dogs">
         <%= render @dogs %>
       </div>
+      <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
     <% end %>
 
-  <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 </div>

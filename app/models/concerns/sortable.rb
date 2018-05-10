@@ -1,4 +1,5 @@
 module Sortable
+  SORT_FIELDS = {tracking_id:'Tracking ID',name:'Name',intake_dt: 'Intake date',status: 'Status'}
 
   def text_search?
     params[:search].present?

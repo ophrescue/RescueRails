@@ -44,12 +44,13 @@ $( function() {
       return false;
     };
 
-    var focusEvent = function(event, ui) {
+    var focusEvent = function(e, ui) {
       $('#autocomplete_label').val(ui.item.label);
+      $('#adoption_dog_id').val(ui.item.value);
       return false;
     };
 
-    var responseHandler = function(event, ui) {
+    var responseHandler = function(e, ui) {
       if (ui.content.length == 1) {
         $('#autocomplete_label').blur();
         ui.item = ui.content[0];

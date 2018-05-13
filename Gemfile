@@ -55,6 +55,7 @@ gem 'newrelic_rpm'
 # https://github.com/rollbar/rollbar-gem/issues/713
 gem 'rollbar', '2.15.5'
 gem 'sucker_punch', '~> 1.5.1'
+gem 'factory_bot_rails'
 
 group :development, :test do
   gem 'faker'
@@ -74,7 +75,6 @@ group :test do
   gem 'chromedriver-helper'
   gem 'coveralls', require: false
   gem 'database_cleaner'
-  gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   gem 'rack_session_access'
 end

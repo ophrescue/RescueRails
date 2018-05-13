@@ -29,7 +29,7 @@ $( function() {
     $('textarea#adopter_dog_name').on('blur', RescueRails.saveParentForm);
 
     var remoteSource = function(request, response) {
-      $.getJSON('/dogs?all_dogs=true&search=' + request.term, function(data) {
+      $.getJSON('/dogs?autocomplete=true&search=' + request.term, function(data) {
         var results = [];
         data.forEach( function(item) {
           results.push({label: item.name, value: item.id});

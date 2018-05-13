@@ -99,6 +99,16 @@ class Dog < ApplicationRecord
   validates_inclusion_of :status, in: STATUSES
   validates_presence_of :status
 
+  PUBLIC_STATUSES = ['adoptable', 'adoption pending', 'coming soon'].freeze
+
+  ACTIVE_STATUSES = [
+    'adoptable',
+    'adoption pending',
+    'on hold',
+    'return pending',
+    'coming soon'
+  ]
+
   PETFINDER_STATUS = {
     'adoptable' => 'A',
     'adoption pending' => 'P',
@@ -143,31 +153,40 @@ class Dog < ApplicationRecord
 
   before_save :update_adoption_date
 
-  scope :is_age,                      ->(age) { where age: age }
-  scope :is_size,                     ->(size) { where size: size }
-  scope :is_status,                   ->(status) { where status: status }
-  scope :cb_high_priority,            ->(_) { where is_high_priority: true }
-  scope :cb_medical_need,             ->(_) { where has_medical_need: true }
-  scope :cb_medical_review_needed,    ->(_) { where medical_review_complete: false }
-  scope :cb_special_needs,            ->(_) { where is_special_needs: true }
-  scope :cb_behavior_problems,        ->(_) { where has_behavior_problem: true }
-  scope :cb_foster_needed,            ->(_) { where needs_foster: true }
-  scope :cb_spay_neuter_needed,       ->(_) { where is_altered: false }
-  scope :cb_no_cats,                  ->(_) { where no_cats: true }
-  scope :cb_no_dogs,                  ->(_) { where no_dogs: true }
-  scope :cb_no_kids,                  ->(_) { where no_kids: true }
+  scope :is_age,                                  ->(age) { where age: age }
+  scope :is_size,                                 ->(size) { where size: size }
+  scope :is_status,                               ->(status) { where status: status }
+  scope :is_breed,                                ->(breed_partial) { joins("join breeds on (breeds.id = dogs.primary_breed_id) or (breeds.id = dogs.secondary_breed_id)").where("breeds.name ilike '%#{sanitize_sql_like(breed_partial)}%'").distinct }
+  scope :cb_high_priority,                        ->(_) { where is_high_priority: true }
+  scope :cb_medical_need,                         ->(_) { where has_medical_need: true }
+  scope :cb_medical_review_needed,                ->(_) { where medical_review_complete: false }
+  scope :cb_special_needs,                        ->(_) { where is_special_needs: true }
+  scope :cb_behavior_problems,                    ->(_) { where has_behavior_problem: true }
+  scope :cb_foster_needed,                        ->(_) { where needs_foster: true }
+  scope :cb_spay_neuter_needed,                   ->(_) { where is_altered: false }
+  scope :cb_no_cats,                              ->(_) { where no_cats: true }
+  scope :cb_no_dogs,                              ->(_) { where no_dogs: true }
+  scope :cb_no_kids,                              ->(_) { where no_kids: true }
 
-  scope :matching_tracking_id,        ->(search_term) { where tracking_id: search_term }
-  scope :identity_matching_microchip, ->(search_term) { where microchip: search_term }
+  scope :matching_tracking_id,                    ->(search_term) { where tracking_id: search_term }
+  scope :identity_matching_microchip,             ->(search_term) { where microchip: search_term }
   scope :identity_match_tracking_id_or_microchip, ->(search_term){ matching_tracking_id(search_term).or( identity_matching_microchip(search_term)) }
 
-  scope :pattern_matching_microchip,  ->(search_term) { where("microchip ilike ?", search_term) }
-  scope :pattern_matching_name,       ->(search_term) { where("name ilike ?", search_term) }
-  scope :pattern_match_microchip_or_name, ->(search_term){ pattern_matching_microchip("%"+search_term+"%").or( pattern_matching_name("%"+search_term+"%")) }
+  scope :pattern_matching_microchip,              ->(search_term) { where("microchip ilike ?", search_term) }
+  scope :pattern_matching_name,                   ->(search_term) { where("name ilike ?", search_term) }
+  scope :pattern_match_microchip_or_name,         ->(search_term){ pattern_matching_microchip("%"+search_term+"%").or( pattern_matching_name("%"+search_term+"%")) }
 
   # Rails 5.2 issues deprecation errors for any order that is not column names
   # so arel is the workaround
-  scope :sort_with_search_term_matches_first, ->(search_term) { order(Dog.arel_table[:name].does_not_match("#{search_term}%"), "tracking_id asc") }
+  scope :sort_with_search_term_matches_first,     ->(search_term) { order(Dog.arel_table[:name].does_not_match("#{search_term}%"), "tracking_id asc") }
+
+  scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :photos, :foster).where(status: Dog::PUBLIC_STATUSES) }
+  scope :default_manager_view,                    -> { includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster).order(:tracking_id) }
+  scope :autocomplete_name,                       ->(search_term){ if search_term.present? then select(:name, :id).pattern_matching_name("%"+search_term+"%").sort_with_search_term_matches_first(search_term) else select(:name, :id) end }
+
+  def breeds
+    [ (primary_breed&.name), (secondary_breed&.name) ].compact
+  end
 
   def adopted?
     status == 'adopted'

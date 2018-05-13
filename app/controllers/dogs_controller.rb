@@ -73,18 +73,27 @@ class DogsController < ApplicationController
   before_action :load_dog, only: %i(show edit update destroy)
   before_action :edit_dog_check, only: %i(edit update)
 
+  # find a better home for this
+  PER_PAGE = 30
+
   def index
-    @title = session[:mgr_view] ? 'Dog Manager' : 'Our Dogs'
+    @dogs = case
+            when params[:autocomplete] # it's autocomplete of dog names on the adopters/:id page
+              Dog.autocomplete_name(params[:search])
+            when params[:commit] == 'Search' # search button was clicked
+              DogSearch.search(params: params, manager: do_manager_view)
+            when params[:commit] == 'Filter' # filter button was clicked
+              DogFilter.filter(params: params, manager: do_manager_view)
+            when do_manager_view # initial view, before search or filter initiated
+              params[:commit] = 'Filter'
+              params[:sort] = 'tracking_id'
+              params[:direction] = 'asc'
+              Dog.default_manager_view
+            else # gallery view
+              Dog.gallery_view
+            end
 
-    if signed_in? && session[:mgr_view]
-      do_manager_view = true
-    elsif signed_in? && params[:all_dogs] == "true"
-      do_manager_view = true
-    else
-      do_manager_view = false
-    end
-
-    @dogs = DogSearcher.search(params: params, manager: do_manager_view)
+    for_page(params[:page])
 
     respond_to do |format|
       format.html { render :index }
@@ -196,7 +205,7 @@ class DogsController < ApplicationController
               :medical_summary,
               :behavior_summary,
               :medical_review_complete,
-              :all_dogs,
+              :autocomplete,
               attachments_attributes:
               [
                 :attachment,
@@ -248,5 +257,13 @@ class DogsController < ApplicationController
 
   def edit_dog_check
     redirect_to(root_path) unless fostering_dog? || current_user.edit_dogs?
+  end
+
+  def for_page(page = nil)
+    @dogs = @dogs.paginate(per_page: PER_PAGE, page: page || 1)
+  end
+
+  def do_manager_view
+    signed_in? && (session[:mgr_view])
   end
 end

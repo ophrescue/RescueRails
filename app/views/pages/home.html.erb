@@ -40,35 +40,20 @@
             </div>
           </div>
 
-<% if Time.now.between?(("2018-01-01".to_date),("2018-02-17".to_date)) %>
+<% if Time.now.between?(("2018-05-13".to_date),("2018-05-21".to_date)) %>
           <div class="item">
-            <%= image_tag "alex-and-ani-event-2018-02.jpg", alt: "Charity Design Event" %>
-          </div>
-<% elsif Time.now.between?(("2018-02-17".to_date),("2018-02-28".to_date)) %>
-          <div class="item">
-            <%= image_tag "world-spay-day-2018.jpg", alt: "World Spay Day Feb 27, 2018" %>
+            <%= image_tag "banner-do-more24-2018.jpg", alt: "Do More 24" %>
             <div class="carousel-caption">
-              <%= link_to "Donate", "https://join.ophrescue.org/campaign/Operation-Desi-Dogs/c161458", :class => "btn btn-primary btn-large" %>
+              <%= link_to "Donate Now", "https://www.domore24.org/ophrescue", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
 <% end %>
-
-<% if Time.now.between?(("2017-11-17".to_date),("2018-04-09".to_date))%>
-          <div class="item">
-            <%= image_tag "fastfurriestwebbanner-2018.jpg", alt: "Fast and Furriest 5k is April 8th, 2018" %>
-            <div class="carousel-caption">
-              <%= link_to "Register", "https://www.active.com/frederick-md/running/distance-running-races/4th-annual-fast-and-furriest-5k-1m-fun-walk-event-2018", :class => "btn btn-primary btn-large" %>
-              <%= link_to "Sponsorship Info", "https://oph5k.weebly.com/sponsorship-info.html", :class => "btn btn-primary btn-large" %>
-            </div>
-          </div>
-<% else %>
           <div class="item">
             <%= image_tag "lustreart.jpg", alt: "Lustre Art" %>
             <div class="carousel-caption">
               <%= link_to "Contact", "https://www.facebook.com/LustreArt", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
-<% end %>
         </div>
         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
         <a class="right carousel-control" href="#ophCarousel" data-slide="next">&rsaquo;</a>

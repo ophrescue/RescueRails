@@ -1,9 +1,9 @@
 <div class="row">
   <div class="span12">
-    <%= form_tag dogs_path, :method => 'get', class: 'form-inline' do %>
+    <%= form_tag dogs_manager_path, :method => 'get', class: 'form-inline' do %>
       <%= text_field_tag :search, params[:search], placeholder: 'ID, Name or Microchip' %>
       <%= submit_tag "Search", class: "btn btn-primary", id: "search_button"%>
-      <%= link_to ' Clear Search', :controller => "dogs", :status => "active" %>
+      <%= link_to ' Clear Search', dogs_manager_path %>
     <% end %>
   </div>
 </div>
@@ -11,7 +11,7 @@
 <div class="row">
   <div class="span12">
     <div class="well well-small">
-      <%= form_tag dogs_path, :method => 'get', :class => 'form-inline' do %>
+      <%= form_tag dogs_manager_path, :method => 'get', :class => 'form-inline' do %>
         <%= label_tag :is_age, 'Age:' %>
         <%= select_tag :is_age, options_for_select(Dog::AGES, selected: params[:is_age]), {id: 'ageSelect', multiple: true} %>
 
@@ -77,7 +77,7 @@
           <i class="fa fa-filter" aria-hidden="true"></i> Filter
         <% end %>
 
-        <%= link_to '<i class="fa fa-times-circle-o" aria-hidden="true"></i> Reset '.html_safe, :controller => "dogs", :is_status => Dog::ACTIVE_STATUSES %>
+        <%= link_to '<i class="fa fa-times-circle-o" aria-hidden="true"></i> Reset '.html_safe, :controller => "dogs", :action => "manager_index", :is_status => Dog::ACTIVE_STATUSES %>
 
       <% end %>
     </div>

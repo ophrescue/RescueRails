@@ -13,13 +13,12 @@
 #    limitations under the License.
 
 class DogFilter
-  attr_accessor :params, :manager
+  attr_accessor :params
 
   include Sortable
 
-  def initialize(params: {}, manager: false)
+  def initialize(params: {})
     @params = params
-    @manager = manager
   end
 
   def filter
@@ -29,8 +28,8 @@ class DogFilter
 
   end
 
-  def self.filter(params: {}, manager: false)
-    new(params: params, manager: manager).filter
+  def self.filter(params: {})
+    new(params: params).filter
   end
 
   private

@@ -1,30 +1,18 @@
 <div class="row">
   <div class="span4">
-    <h1><%= dog_index_page_title %></h1>
+    <h1>Our Dogs</h1>
   </div>
   <div class="span4 offset4">
-    <% if signed_in? %>
-      <% if can_add_dogs? %>
-        <%= link_to "Add a Dog", new_dog_path, :class => "btn btn-primary" %>
-      <% end %>
-
-      <% if session[:mgr_view] == true %>
-        <%= link_to("Gallery View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
-      <% elsif current_user.active %>
-        <%= link_to("Manager View", {:controller => 'dogs', :action => 'switch_view'},:class => "btn ") %>
-      <% end %>
+    <% if current_user&.active %>
+      <%= link_to("Manager View", {:controller => 'dogs', :action => 'manager_index'},:class => "btn ") %>
     <% end %>
   </div>
 </div>
 
 <%= will_paginate @dogs %>
 
-  <% if signed_in? && session[:mgr_view] == true %>
-    <%= render 'manager' %>
-  <% else %>
-    <div id="dogs">
-      <%= render 'dog_rows' %>
-    </div>
-  <% end %>
+<div id="dogs">
+  <%= render 'dog_rows' %>
+</div>
 
 <%= will_paginate @dogs %>

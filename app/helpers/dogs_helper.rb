@@ -1,7 +1,4 @@
 module DogsHelper
-  def dog_index_page_title
-    session[:mgr_view] ? 'Dog Manager' : 'Our Dogs'
-  end
 
   def size_abbrev(size)
     case size

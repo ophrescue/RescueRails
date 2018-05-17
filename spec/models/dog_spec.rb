@@ -152,9 +152,9 @@ describe Dog do
   end
 
   describe 'combined scopes with pattern matches' do
-    let!(:good_dog){ create(:dog, name: 'Barney') }
+    let!(:good_dog){ create(:dog, name: 'Barney', microchip: 55) }
     let!(:better_dog){ create(:dog, microchip: 66) }
-    let!(:bad_dog){ create(:dog, name: 'Bert') }
+    let!(:bad_dog){ create(:dog, name: 'Bert', microchip: 77) }
     let!(:badder_dog){ create(:dog, microchip: 88) }
 
     it 'result includes matches for either parameter' do

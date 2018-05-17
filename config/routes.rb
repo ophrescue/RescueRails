@@ -19,6 +19,7 @@ RescueRails::Application.routes.draw do
     end
     resources :adoptions
   end
+  get '/dogs_manager', to: 'dogs#manager_index', as: 'dogs_manager'
 
   resources :sessions, only: %i[new create destroy]
   resources :password_resets

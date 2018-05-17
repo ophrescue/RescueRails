@@ -80,15 +80,6 @@ class DogsController < ApplicationController
     @dogs = case
             when params[:autocomplete] # it's autocomplete of dog names on the adopters/:id page
               Dog.autocomplete_name(params[:search])
-            when params[:commit] == 'Search' # search button was clicked
-              DogSearch.search(params: params, manager: do_manager_view)
-            when params[:commit] == 'Filter' # filter button was clicked
-              DogFilter.filter(params: params, manager: do_manager_view)
-            when do_manager_view # initial view, before search or filter initiated
-              params[:commit] = 'Filter'
-              params[:sort] = 'tracking_id'
-              params[:direction] = 'asc'
-              Dog.default_manager_view
             else # gallery view
               Dog.gallery_view
             end
@@ -100,6 +91,24 @@ class DogsController < ApplicationController
       format.json { render json: @dogs }
     end
   end
+
+  def manager_index
+    @dogs = case
+            when params[:commit] == 'Search' # search button was clicked
+              DogSearch.search(params: params)
+            when params[:commit] == 'Filter' # filter button was clicked
+              DogFilter.filter(params: params)
+            else # initial view, before search or filter initiated
+              params[:commit] = 'Filter'
+              params[:sort] = 'tracking_id'
+              params[:direction] = 'asc'
+              Dog.default_manager_view
+            end
+
+    for_page(params[:page])
+
+  end
+
 
   def show
     @title = @dog.name
@@ -142,12 +151,6 @@ class DogsController < ApplicationController
   def destroy
     @dog.destroy
     flash[:success] = "Dog deleted."
-    redirect_to dogs_path
-  end
-
-  def switch_view
-    session[:mgr_view] = !session[:mgr_view]
-
     redirect_to dogs_path
   end
 
@@ -263,7 +266,4 @@ class DogsController < ApplicationController
     @dogs = @dogs.paginate(per_page: PER_PAGE, page: page || 1)
   end
 
-  def do_manager_view
-    signed_in? && (session[:mgr_view])
-  end
 end

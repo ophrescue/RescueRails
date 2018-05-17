@@ -3,8 +3,7 @@ require 'rails_helper'
 describe DogSearch do
   describe '.search' do
     context 'is a manager' do
-      let(:manager) { true }
-      let(:results) { DogSearch.search(params: params, manager: manager) }
+      let(:results) { DogSearch.search(params: params) }
 
       context 'by tracking id' do
         context 'search by tracking_id int' do
@@ -116,19 +115,5 @@ describe DogSearch do
       end
     end
 
-    # included here for historical reasons... the 'not manager' case is now
-    # handled in DogController#index
-    context 'is not a manager' do
-      let(:manager) { false }
-
-      let!(:found_dog) { create(:dog, :adoptable) }
-      let!(:other_dog) { create(:dog, :completed) }
-      let(:results) { Dog.gallery_view }
-
-      it 'finds dog with status in PUBLIC_STATUSES' do
-        expect(results).to include(found_dog)
-        expect(results).to_not include(other_dog)
-      end
-    end
   end
 end

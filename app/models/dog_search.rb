@@ -14,29 +14,25 @@
 
 class DogSearch
   include Sortable
-  attr_accessor :params, :manager
+  attr_accessor :params
 
-  def initialize(params: {}, manager: false)
+  def initialize(params: {})
     @params = params
-    @manager = manager
   end
 
   def search
-    if @manager # manager view
-      @dogs = if tracking_id_search?
-                Dog.identity_match_tracking_id_or_microchip(search_term)
-              else
-                Dog.pattern_match_microchip_or_name(search_term)
-              end
-      @dogs = @dogs.includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster)
+    @dogs = if tracking_id_search?
+              Dog.identity_match_tracking_id_or_microchip(search_term)
+            else
+              Dog.pattern_match_microchip_or_name(search_term)
+            end
+    @dogs = @dogs.includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster)
 
-      with_sorting
-    end
-
+    with_sorting
   end
 
-  def self.search(params: {}, manager: false)
-    new(params: params, manager: manager).search
+  def self.search(params: {})
+    new(params: params).search
   end
 
   private

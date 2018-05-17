@@ -35,6 +35,10 @@ FactoryBot.define do
       end
     end
 
+    trait :active_dog do
+      status { Dog::ACTIVE_STATUSES.sample }
+    end
+
     trait :primary_lab do
       primary_breed_id { create(:breed, name: 'Labrador Retriever').id }
       secondary_breed_id nil

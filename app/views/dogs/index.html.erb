@@ -4,7 +4,7 @@
   </div>
   <div class="span4 offset4">
     <% if current_user&.active %>
-      <%= link_to("Manager View", {:controller => 'dogs', :action => 'manager_index'},:class => "btn ") %>
+      <%= link_to("Manager View", {:controller => 'dogs', :action => 'manager_index', :is_status => Dog::ACTIVE_STATUSES},:class => "btn ") %>
     <% end %>
   </div>
 </div>

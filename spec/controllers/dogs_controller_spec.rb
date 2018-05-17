@@ -68,22 +68,22 @@ describe DogsController, type: :controller do
       end
 
       it 'in manager mode all dogs are returned' do
-        get :index, params: {}, session: { mgr_view: true }
+        get :manager_index, params: {}
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
       end
 
       it 'in gallery mode only publicly viewable dogs are returned' do
-        get :index, params: {}, session: { mgr_view: false }
+        get :index, params: {}
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, baby_small_special_needs_dog])
       end
 
-      it 'with all dogs paramater set all dogs are returned' do
-        get :index, params: {autocomplete: true}, session: { mgr_view: true }
+      it 'with autocomplete parameter set all dogs are returned' do
+        get :index, params: {autocomplete: true}
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
       end
 
       it 'can filter by age, size and flags' do
-        get :index, params: {is_age: 'baby', is_size: 'small', cb_special_needs: true, commit: 'Filter'}, session: {mgr_view: true }
+        get :manager_index, params: {is_age: 'baby', is_size: 'small', cb_special_needs: true, commit: 'Filter'}
         expect(assigns(:dogs)).to match_array([baby_small_special_needs_dog])
       end
     end
@@ -176,36 +176,6 @@ describe DogsController, type: :controller do
           end
         end
       end
-    end
-  end
-
-  describe 'GET switch_view' do
-    let(:request) { get :switch_view, params: {}, session: { mgr_view: mgr_view } }
-    let(:mgr_view) { true }
-
-    before do
-      allow(controller).to receive(:current_user) { admin }
-      request
-    end
-
-    context 'mgr_view is true' do
-      let(:mgr_view) { true }
-
-      it 'sets mgr_view to false' do
-        expect(session[:mgr_view]).to eq(false)
-      end
-    end
-
-    context 'mgr_view is false' do
-      let(:mgr_view) { false }
-
-      it 'sets mgr_view to true' do
-        expect(session[:mgr_view]).to eq(true)
-      end
-    end
-
-    it 'redirects to /dogs' do
-      expect(response).to redirect_to dogs_path
     end
   end
 

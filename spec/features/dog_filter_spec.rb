@@ -1,6 +1,9 @@
 require 'rails_helper'
+require_relative '../helpers/dogs_list_helper'
 
 feature 'Filter Dogs List', js: true do
+  include DogsListHelper
+
   before do
     sign_in(active_user)
   end
@@ -32,15 +35,22 @@ feature 'Filter Dogs List', js: true do
     expect(page).to have_field('is_breed', with: 'retriev')
   end
 
-  scenario 'can sort filter results by dog name' do
+  scenario 'can sort filter results by dog breed' do
     visit '/dogs'
     click_link("Manager View")
     fill_in('is_breed', with: "retriev")
     find_button(value: 'Filter').click
-    expect(page.all("#dogs .name").map(&:text)).to match_array ["Abby", "Zeke"]
+    expect(dog_names).to match_array ["Abby", "Zeke"]
     click_link('sort_by_name')
-    expect(page.all("#dogs .name").map(&:text)).to eq ["Abby", "Zeke"]
+    expect(dog_names).to eq ["Abby", "Zeke"]
     click_link('sort_by_name')
-    expect(page.all("#dogs .name").map(&:text)).to eq ["Zeke", "Abby"]
+    expect(dog_names).to eq ["Zeke", "Abby"]
+  end
+
+  scenario 'reset filter results displays all dogs' do
+    visit "/dogs_manager?commit=Filter&direction=desc&is_breed=retriev&sort=name"
+    expect(dog_names).to match_array ["Abby", "Zeke"]
+    click_link("Reset")
+    expect(dog_names).to match_array ["Abby", "Zeke", "Nairobi"]
   end
 end

@@ -6,7 +6,6 @@ STATIC_PAGES = [ '5k', 'contact', 'funding-partners', 'community-partners', 'non
 
 RescueRails::Application.routes.draw do
   get "/adopters/check_email", to: "adopters#check_email"
-  get "/dogs/switch_view", to: "dogs#switch_view"
 
   resources :adopters do
     resources :comments, except: %i[destroy edit update]
@@ -22,6 +21,7 @@ RescueRails::Application.routes.draw do
     end
     resources :adoptions
   end
+  get '/dogs_manager', to: 'dogs#manager_index', as: 'dogs_manager'
 
   resources :sessions, only: %i[new create destroy]
 

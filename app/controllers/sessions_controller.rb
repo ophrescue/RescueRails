@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #    Copyright 2017 Operation Paws for Homes
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,23 +19,6 @@ class SessionsController < Clearance::SessionsController
     # it wasn't an access-denied redirect, so there will not be a redirect after login
     clear_return_to if flash.empty?
   end
-
-  # def create
-  #   user = User.authenticate(params[:session][:email],
-  #                params[:session][:password])
-
-  #   if user.nil?
-  #     flash.now[:error] = "Invalid email/password combination."
-  #     render 'new'
-  #   elsif user.locked?
-  #     flash.now[:error] = "Your account is disabled."
-  #     render 'new'
-  #   else
-  #     sign_in user
-  #     user.update_attribute(:lastlogin, Time.now)
-  #     redirect_back_or(root_path)
-  #   end
-  # end
 
   def create
     set_remember_me

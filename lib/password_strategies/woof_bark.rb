@@ -13,8 +13,8 @@ module PasswordStrategies
     end
 
     def password=(new_password)
-      self.salt = make_salt unless has_password?(password)
-      self.encrypted_password = encrypt(password)
+      self.salt = make_salt unless has_password?(new_password)
+      self.encrypted_password = encrypt(new_password)
     end
 
     def has_password?(submitted_password)

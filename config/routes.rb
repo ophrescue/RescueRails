@@ -11,7 +11,10 @@ RescueRails::Application.routes.draw do
 
   resources :comments, except: %i[new]
 
-  resources :users
+  resources :users do
+    resource :password, controller: :passwords, only: %i[create edit update]
+  end
+
   resources :dogs do
     resources :comments
     resources :photos do
@@ -23,6 +26,7 @@ RescueRails::Application.routes.draw do
 
   resources :sessions, only: %i[new create destroy]
   resources :password_resets
+  resources :passwords
 
   get '/events/past', to: 'events#past'
   resources :events

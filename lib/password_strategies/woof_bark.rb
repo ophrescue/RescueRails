@@ -12,9 +12,9 @@ module PasswordStrategies
       secure_hash("#{Time.now.utc}--#{password}")
     end
 
-    def password=(new_password)
-      self.salt = make_salt unless has_password?(new_password)
-      self.encrypted_password = encrypt(new_password)
+    def encrypt_password
+      self.salt = make_salt unless has_password?(password)
+      self.encrypted_password = encrypt(password)
     end
 
     def has_password?(submitted_password)

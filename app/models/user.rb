@@ -114,6 +114,8 @@ class User < ApplicationRecord
   validates_with RegionValidator
   validates_with PostalCodeValidator
 
+  before_save :encrypt_password, unless: Proc.new { |u| u.password.blank? }
+
   geocoded_by :full_street_address
   after_validation :geocode
 

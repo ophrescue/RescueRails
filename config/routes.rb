@@ -47,8 +47,11 @@ RescueRails::Application.routes.draw do
   get '5k',                    to: 'pages#5k'
 
   get '/signin',               to: 'sessions#new'
-  get '/sign_in',              to: 'sessions#new', as: 'sign_in'
   get '/signout',              to: 'sessions#destroy'
+
+  get '/sign_in',              to: 'sessions#new', as: 'sign_in'
+  delete '/sign_out' => 'clearance/sessions#destroy', as: 'sign_out'
+
   get '/adopt',                to: 'adopters#new'
 
   get '/contact',              to: 'pages#contact'

@@ -5,7 +5,7 @@ module LoginMacros
     click_button I18n.t("helpers.submit.session.submit")
   end
 
-  def sign_in(user)
+  def sign_in_as(user)
     visit '/sign_in'
     fill_and_submit(user)
     expect(page).to have_content('Staff')

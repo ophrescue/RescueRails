@@ -28,7 +28,7 @@
 class CommentsController < ApplicationController
   include SessionsHelper
 
-  before_action :authenticate
+  before_action :require_login
   before_action :load_comment, only: %i(edit show update)
 
   respond_to :html, :json

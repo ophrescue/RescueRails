@@ -132,9 +132,7 @@ describe DogsController, type: :controller do
     let(:request) { -> { put :update, params: { id: test_dog.id, dog: attributes_for(:dog, name: 'New Dog Name', behavior_summary: 'This is a good doggy') } } }
 
     context 'logged in as admin' do
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
-      end
+      include_context 'signed in admin'
 
       it 'updates the dog name' do
         expect { request.call }.to change { test_dog.reload.name }.from('Old Dog Name').to('New Dog Name')

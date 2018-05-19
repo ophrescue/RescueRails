@@ -40,7 +40,7 @@
 #
 
 class AdoptersController < ApplicationController
-  before_action :authenticate, except: %i(new create check_email)
+  before_action :require_login, except: %i(new create check_email)
   before_action :edit_my_adopters_user, only: %i(index show edit update)
   before_action :edit_all_adopters_user, only: %i(index show edit update)
   before_action :admin_user, only: %i(destroy)

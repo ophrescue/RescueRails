@@ -66,7 +66,7 @@ class DogsController < ApplicationController
 
   autocomplete :breed, :name, full: true
 
-  before_action :authenticate, except: %i(index show)
+  before_action :require_login, except: %i(index show)
   before_action :admin_user, only: %i(destroy)
   before_action :add_dogs_user, only: %i(new create)
   before_action :load_dog, only: %i(show edit update destroy)
@@ -109,9 +109,7 @@ class DogsController < ApplicationController
             end
 
     for_page(params[:page])
-
   end
-
 
   def show
     @title = @dog.name
@@ -131,7 +129,7 @@ class DogsController < ApplicationController
   end
 
   def update
-    if @dog.update_attributes(dog_params)
+    if @dog.update(dog_params)
       flash[:success] = 'Dog updated.'
       redirect_to @dog
     else
@@ -269,5 +267,4 @@ class DogsController < ApplicationController
   def for_page(page = nil)
     @dogs = @dogs.paginate(per_page: PER_PAGE, page: page || 1)
   end
-
 end

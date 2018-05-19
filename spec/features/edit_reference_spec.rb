@@ -7,7 +7,7 @@ feature 'Edit Reference Form', js: true do
   scenario 'Admin is able to edit reference' do
     reference = FactoryBot.create(:reference, adopter: adopter)
 
-    sign_in(admin)
+    sign_in_as(admin)
     visit adopter_path(adopter)
 
     click_link('References')

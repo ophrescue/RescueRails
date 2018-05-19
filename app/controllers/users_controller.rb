@@ -73,8 +73,7 @@
 #  boarding_buddies             :boolean          default(FALSE)
 #  social_media_manager         :boolean          default(FALSE)
 #  graphic_design               :boolean          default(FALSE)
-class UsersController < ApplicationController
-  before_action :authenticate
+class UsersController < Clearance::UsersController
   before_action :correct_user, only: [:edit, :update]
   before_action :active_user, only: [:index]
   before_action :allowed_to_see_user, only: [:show]

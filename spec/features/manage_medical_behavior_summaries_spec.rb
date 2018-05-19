@@ -6,7 +6,7 @@ feature 'manage medical and behavior summaries', js: true do
 
   context 'Logged in as Admin' do
     before(:each) do
-      sign_in(admin)
+      sign_in_as(admin)
     end
 
     scenario 'Edit Medical Summary' do

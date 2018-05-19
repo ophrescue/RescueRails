@@ -9,7 +9,7 @@ feature 'View Dogs', js: true do
 
   context 'Logged in as Admin' do
     before(:each) do
-      sign_in(admin)
+      sign_in_as(admin)
     end
 
     scenario 'can view the Manager View' do
@@ -36,7 +36,7 @@ feature 'View Dogs', js: true do
 
   context 'Logged in as Active User' do
     before(:each) do
-      sign_in(active_user)
+      sign_in_as(active_user)
     end
 
     scenario 'can view the Manager View' do
@@ -63,7 +63,7 @@ feature 'View Dogs', js: true do
 
   context 'Logged in as Inactive User' do
     before(:each) do
-      sign_in(inactive_user)
+      sign_in_as(inactive_user)
     end
 
     scenario 'cannot view the Manager View' do

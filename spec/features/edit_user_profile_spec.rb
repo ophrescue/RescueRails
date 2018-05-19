@@ -3,7 +3,7 @@ feature 'Edit User Profile', js: true do
   let!(:user) { create(:user, active: true) }
 
   scenario 'Admin is presented with non-disabled name field' do
-    sign_in(admin)
+    sign_in_as(admin)
     visit '/users'
     click_link(user.name)
     click_link('Update/Verify Profile')
@@ -11,7 +11,7 @@ feature 'Edit User Profile', js: true do
   end
 
   scenario 'Admin is presented with non-disabled email field ' do
-    sign_in(admin)
+    sign_in_as(admin)
     visit '/users'
     click_link(user.name)
     click_link('Update/Verify Profile')
@@ -21,7 +21,7 @@ feature 'Edit User Profile', js: true do
   # field still appears visually on the screen but is not detectable because it
   # is disabled
   scenario 'User is presented with disabled name field' do
-    sign_in(user)
+    sign_in_as(user)
     visit '/users'
     click_link(user.name)
     click_link('Update/Verify Profile')
@@ -31,7 +31,7 @@ feature 'Edit User Profile', js: true do
   # field still appears visually on the screen but is not detectable because it
   # is disabled
   scenario 'User is presented with disabled email field' do
-    sign_in(user)
+    sign_in_as(user)
     visit '/users'
     click_link(user.name)
     click_link('Update/Verify Profile')

@@ -4,7 +4,7 @@ feature 'Manage Events', js: true do
   let!(:admin) { create(:user, :admin) }
 
   scenario 'Post and View an Event' do
-    sign_in(admin)
+    sign_in_as(admin)
     visit root_path
     expect(page).to have_content('Events')
     click_link 'Events'

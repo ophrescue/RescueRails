@@ -8,7 +8,7 @@ feature 'Link Dogs to Adoption Applications via Adoption model', js: true do
     create(:dog, name: 'Bark')
     create(:dog, name: 'Bart')
 
-    sign_in(admin)
+    sign_in_as(admin)
 
     visit '/adopters'
     expect(page).to have_content('Adoption Applications')

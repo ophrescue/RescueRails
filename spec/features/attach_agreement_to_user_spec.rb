@@ -9,7 +9,7 @@ feature 'Attach an agreement to a user', js: true do
   end
 
   scenario 'Admin attaches a foster agreement to a user' do
-    sign_in(admin)
+    sign_in_as(admin)
 
     visit '/users'
     expect(page).to have_content('Staff Directory')
@@ -29,7 +29,7 @@ feature 'Attach an agreement to a user', js: true do
   end
 
   scenario 'Admin attaches a confidentiality agreement to a user' do
-    sign_in(admin)
+    sign_in_as(admin)
 
     visit '/users'
     expect(page).to have_content('Staff Directory')
@@ -49,7 +49,7 @@ feature 'Attach an agreement to a user', js: true do
   end
 
   scenario 'Admin attaches a code of conduct agreement to a user' do
-    sign_in(admin)
+    sign_in_as(admin)
 
     visit '/users'
     expect(page).to have_content('Staff Directory')

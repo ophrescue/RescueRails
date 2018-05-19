@@ -5,7 +5,7 @@ feature 'Filter Dogs List', js: true do
   include DogsListHelper
 
   before do
-    sign_in(active_user)
+    sign_in_as(active_user)
   end
 
   let!(:active_user) { create(:user) }

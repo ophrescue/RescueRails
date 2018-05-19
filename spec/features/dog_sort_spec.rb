@@ -7,7 +7,7 @@ feature 'Dog sort in manager view', js: true do
 
   before do
     create_many_dogs
-    sign_in(active_user)
+    sign_in_as(active_user)
     visit '/dogs'
     click_link("Manager View")
     expect(page).to have_selector('h1', text: "Dog Manager")

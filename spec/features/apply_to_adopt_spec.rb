@@ -109,7 +109,7 @@ feature 'Apply for Adoption' do
 
     ## Now Login and Verify Contents display correctly
 
-    sign_in(admin)
+    sign_in_as(admin)
 
     visit '/adopters'
     expect(page).to have_content('Adoption Applications')
@@ -270,7 +270,7 @@ feature 'Apply for Adoption' do
 
     ## Now Login and Verify Contents display correctly
 
-    sign_in(admin)
+    sign_in_as(admin)
 
     visit '/adopters'
     expect(page).to have_content('Adoption Applications')

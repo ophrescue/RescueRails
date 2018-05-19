@@ -52,6 +52,8 @@ describe DogsController, type: :controller do
 
   describe 'GET #index' do
     context 'user is logged in' do
+      include_context 'signed in user'
+
       let!(:adoptable_dog) { create(:dog, name: 'adoptable', status: 'adoptable') }
       let!(:adoption_pending_dog) { create(:dog, name: 'adoption pending', status: 'adoption pending', is_special_needs: false) }
       let!(:coming_soon_dog) { create(:dog, name: 'coming soon', status: 'coming soon', is_special_needs: false) }
@@ -61,10 +63,6 @@ describe DogsController, type: :controller do
       let!(:baby_small_special_needs_dog) { create(:dog, name: 'filter pup' , status: 'adoptable', age: 'baby', size: 'small', is_special_needs: true) }
 
       let(:params) { {} }
-
-      before do
-        allow(controller).to receive(:signed_in?).and_return(true)
-      end
 
       it 'in manager mode all dogs are returned' do
         get :manager_index, params: {}
@@ -146,12 +144,10 @@ describe DogsController, type: :controller do
 
   describe 'POST create' do
     context 'logged in as dog adder admin' do
+      include_context 'signed in admin'
+
       subject(:post_create) do
         post :create, params: { dog: attributes_for(:dog_with_photo_and_attachment) }
-      end
-
-      before do
-        allow(controller).to receive(:current_user) { admin }
       end
 
       context 'params are valid' do
@@ -181,10 +177,6 @@ describe DogsController, type: :controller do
     subject { controller.send(:fostering_dog?) }
 
     context 'not signed in' do
-      before do
-        allow(controller).to receive(:signed_in?) { false }
-      end
-
       it 'returns false' do
         expect(subject).to eq(false)
       end

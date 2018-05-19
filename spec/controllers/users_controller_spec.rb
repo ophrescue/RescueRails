@@ -60,7 +60,6 @@
 require 'rails_helper'
 
 describe UsersController, type: :controller do
-  let!(:admin) { create(:user, :admin, name: 'Admin') }
   let!(:active_user) { create(:user, city: 'Old York') }
   let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
 
@@ -68,9 +67,7 @@ describe UsersController, type: :controller do
     let(:jones) { create(:user, name: 'Frank Jones') }
 
     context 'Logged in as an Admin User' do
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
-      end
+      include_context 'signed in admin'
 
       it 'returns all users' do
         smith = create(:user, name: 'Jane Smith')
@@ -134,7 +131,7 @@ describe UsersController, type: :controller do
 
     context 'logged in as an inactive user' do
       before :each do
-        allow(controller).to receive(:current_user) { inactive_user }
+        sign_in_as(inactive_user)
       end
 
       it 'cannot view users index' do
@@ -147,10 +144,12 @@ describe UsersController, type: :controller do
   describe 'GET show' do
     context 'logged in as an inactive user' do
       before :each do
-        allow(controller).to receive(:current_user) { inactive_user }
+        sign_in_as(inactive_user)
       end
 
       it 'cannot view another users profile' do
+        admin = create(:user, :admin)
+
         get :show, params: { id: admin.id }
         expect(inactive_user).to redirect_to('/')
       end
@@ -164,9 +163,7 @@ describe UsersController, type: :controller do
 
   describe 'POST create' do
     context 'logged in as an admin' do
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
-      end
+      include_context 'signed in admin'
 
       it 'is able to create a user' do
         expect{
@@ -176,9 +173,7 @@ describe UsersController, type: :controller do
     end
 
     context 'logged in as active user' do
-      before :each do
-        allow(controller).to receive(:current_user) { active_user }
-      end
+      include_context 'signed in user'
 
       it 'is not able to create a user' do
         expect{
@@ -206,9 +201,7 @@ describe UsersController, type: :controller do
     let(:change_name_request) { -> { patch :update, params: { id: test_user.id, user: attributes_for(:user, name: 'New Name') } } }
 
     context 'logged in as admin' do
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
-      end
+      include_context 'signed in admin'
 
       it 'updates the users permissions' do
         expect { change_permissions_request.call }.to change { test_user.reload.admin }.from(false).to(true)
@@ -216,8 +209,8 @@ describe UsersController, type: :controller do
     end
 
     context 'logged in as active user' do
-      before :each do
-        allow(controller).to receive(:current_user) { active_user }
+      before do
+        sign_in_as(active_user)
       end
 
       it 'is not able to modify user permissions' do
@@ -236,7 +229,7 @@ describe UsersController, type: :controller do
 
     context 'logged in as inactive user' do
       before :each do
-        allow(controller).to receive(:current_user) { inactive_user }
+        sign_in_as(inactive_user)
       end
 
       it 'is not able to modify user permissions' do

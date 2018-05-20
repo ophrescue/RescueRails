@@ -88,8 +88,7 @@ class User < ApplicationRecord
 
   include Filterable
 
-  attr_accessor :password,
-                :accessible
+  attr_accessor :accessible
 
   strip_attributes only: :email
 
@@ -106,7 +105,7 @@ class User < ApplicationRecord
   validates :password, presence: true,
                        confirmation: true,
                        length: { within: 8..40 },
-                       unless: Proc.new { |a| a.password.blank? }
+                       if: Proc.new { |a| a.password.present? }
 
   validates :country, length: { is: 3 }
   validate :country_is_supported
@@ -114,12 +113,10 @@ class User < ApplicationRecord
   validates_with RegionValidator
   validates_with PostalCodeValidator
 
-  before_save :encrypt_password, unless: Proc.new { |u| u.password.blank? }
-
   geocoded_by :full_street_address
   after_validation :geocode
 
-  has_many :foster_dogs, class_name: 'Dog', foreign_key: 'foster_id'
+  has_many :foster_dogs, class_name: 'Dog', foreign_key: 'foster_id', inverse_of: :foster
   has_many :current_foster_dogs, -> { where(status: ['adoptable', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'foster_id'
   has_many :coordinated_dogs, -> { where(status: ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'coordinator_id'
   has_many :comments

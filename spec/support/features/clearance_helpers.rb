@@ -21,7 +21,7 @@ module Features
     end
 
     def sign_out
-      click_button I18n.t("layouts.application.sign_out")
+      click_link I18n.t('layouts.application.sign_out')
     end
 
     def sign_up_with(email, password)

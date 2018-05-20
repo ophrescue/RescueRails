@@ -5,7 +5,7 @@ feature 'Edit Adopter Form', js: true do
   let!(:adopter) { create(:adopter_with_app) }
 
   scenario 'Admin edits adopter' do
-    sign_in(admin)
+    sign_in_as(admin)
     visit adopter_path(adopter)
 
     expect(page).to have_content(adopter.name)

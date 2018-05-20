@@ -105,7 +105,8 @@ class User < ApplicationRecord
   validates :password, presence: true,
                        confirmation: true,
                        length: { within: 8..40 },
-                       if: Proc.new { |a| a.password.present? }
+                       unless: :skip_password_validation?
+
 
   validates :country, length: { is: 3 }
   validate :country_is_supported
@@ -185,6 +186,13 @@ class User < ApplicationRecord
 
   def out_of_date?
     lastverified.blank? || (lastverified.to_date < 30.days.ago.to_date)
+  end
+
+  def password=(value)
+    return if value.blank?
+
+    encrypted_password_will_change!
+    super
   end
 
   def send_password_reset

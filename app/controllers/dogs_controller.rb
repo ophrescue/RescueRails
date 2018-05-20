@@ -94,17 +94,26 @@ class DogsController < ApplicationController
   end
 
   def manager_index
+    puts "incoming params #{params}"
+    full_params = ["is_age", "is_status", "is_size", "has_flags"].inject({}){|hash,attr| hash[attr] = (params && params[attr]) || []; hash}
+    full_params["sort"] = params["sort"] || "tracking_id"
+    full_params["commit"] = params["commit"]
+    puts "merged params #{full_params}"
+    params = full_params
     @dogs = case
-            when params[:commit] == 'Search' # search button was clicked
+            when params["commit"] == 'Search' # search button was clicked
               DogSearch.search(params: params)
-            when params[:commit] == 'Filter' # filter button was clicked
+            when params["commit"] == 'Filter' # filter button was clicked
               DogFilter.filter(params: params)
             else # initial view, before search or filter initiated
-              params[:commit] = 'Filter'
-              params[:sort] = 'tracking_id'
-              params[:direction] = 'asc'
+              params["commit"] = 'Filter'
+              params["sort"] = 'tracking_id'
+              params["direction"] = 'asc'
               Dog.default_manager_view
             end
+
+    @filter_params = params.slice("is_age", "is_status", "is_size", "has_flags", "sort")
+    puts "filter_params #{@filter_params}"
 
     for_page(params[:page])
 

@@ -157,16 +157,34 @@ class Dog < ApplicationRecord
   scope :is_size,                                 ->(size) { where size: size }
   scope :is_status,                               ->(status) { where status: status }
   scope :is_breed,                                ->(breed_partial) { joins("join breeds on (breeds.id = dogs.primary_breed_id) or (breeds.id = dogs.secondary_breed_id)").where("breeds.name ilike '%#{sanitize_sql_like(breed_partial)}%'").distinct }
-  scope :cb_high_priority,                        ->(_) { where is_high_priority: true }
-  scope :cb_medical_need,                         ->(_) { where has_medical_need: true }
-  scope :cb_medical_review_needed,                ->(_) { where medical_review_complete: false }
-  scope :cb_special_needs,                        ->(_) { where is_special_needs: true }
-  scope :cb_behavior_problems,                    ->(_) { where has_behavior_problem: true }
-  scope :cb_foster_needed,                        ->(_) { where needs_foster: true }
-  scope :cb_spay_neuter_needed,                   ->(_) { where is_altered: false }
-  scope :cb_no_cats,                              ->(_) { where no_cats: true }
-  scope :cb_no_dogs,                              ->(_) { where no_dogs: true }
-  scope :cb_no_kids,                              ->(_) { where no_kids: true }
+  scope :high_priority,                        -> { where is_high_priority: true }
+  scope :medical_need,                         -> { where has_medical_need: true }
+  scope :medical_review_needed,                -> { where medical_review_complete: false }
+  scope :special_needs,                        -> { where is_special_needs: true }
+  scope :behavior_problems,                    -> { where has_behavior_problem: true }
+  scope :foster_needed,                        -> { where needs_foster: true }
+  scope :spay_neuter_needed,                   -> { where is_altered: false }
+  scope :no_cats,                              -> { where no_cats: true }
+  scope :no_dogs,                              -> { where no_dogs: true }
+  scope :no_kids,                              -> { where no_kids: true }
+  def self.has_flags(flags) # flags is an array of active flag attributes
+    collection = [:high_priority,
+                  :medical_need,
+                  :medical_review_needed,
+                  :special_needs,
+                  :behavior_problems,
+                  :foster_needed,
+                  :spay_neuter_needed,
+                  :no_cats,
+                  :no_dogs,
+                  :no_kids].inject(Dog.where("1=1")) do |result, filter_flag|
+                    puts "flags received #{flags}"
+                    puts "test flag #{filter_flag}"
+                    puts "is it there? #{flags.include?(filter_flag.to_s)}"
+                    result = result.merge(Dog.send(filter_flag)) if flags.include?(filter_flag.to_s)
+                    result
+                  end
+  end
 
   scope :matching_tracking_id,                    ->(search_term) { where tracking_id: search_term }
   scope :identity_matching_microchip,             ->(search_term) { where microchip: search_term }
@@ -251,3 +269,5 @@ class Dog < ApplicationRecord
     comments.to_a.delete_if { |obj| obj.id.nil? }
   end
 end
+
+

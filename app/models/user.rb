@@ -184,13 +184,6 @@ class User < ApplicationRecord
     lastverified.blank? || (lastverified.to_date < 30.days.ago.to_date)
   end
 
-  def password=(value)
-    return if value.blank?
-
-    encrypted_password_will_change!
-    super
-  end
-
   def send_password_reset
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now

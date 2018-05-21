@@ -81,11 +81,8 @@
 #  country                      :string(3)        not null
 #  active                       :boolean          default(FALSE), not null
 
-require 'digest'
-
 class User < ApplicationRecord
   include Clearance::User
-
   include Filterable
 
   attr_accessor :accessible
@@ -106,7 +103,6 @@ class User < ApplicationRecord
                        confirmation: true,
                        length: { within: 8..40 },
                        unless: :skip_password_validation?
-
 
   validates :country, length: { is: 3 }
   validate :country_is_supported

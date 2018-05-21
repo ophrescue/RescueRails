@@ -5,14 +5,12 @@ feature 'Filter Dogs List', js: true do
   include DogsListHelper
 
   before do
-    sign_in_as(active_user)
+    sign_in_as_user
   end
 
-  let!(:active_user) { create(:user) }
   let!(:primary_lab) { create(:dog, :primary_lab, :active_dog, name: "Zeke").name.titleize }
   let!(:secondary_golden) { create(:dog, :secondary_golden, :active_dog, name: "Abby").name.titleize }
   let!(:secondary_westie) { create(:dog, :secondary_westie, :active_dog, name: "Nairobi").name.titleize }
-
 
   scenario 'can filter results with breed partial match' do
     visit '/dogs'

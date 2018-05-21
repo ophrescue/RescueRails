@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 feature 'manage medical and behavior summaries', js: true do
-  let!(:admin) { create(:user, :admin) }
-  let!(:test_dog) { create(:dog, :status => 'adoptable') }
+  let!(:test_dog) { create(:dog, status: 'adoptable') }
 
   context 'Logged in as Admin' do
     before(:each) do
-      sign_in_as(admin)
+      sign_in_as_admin
     end
 
     scenario 'Edit Medical Summary' do
@@ -31,5 +30,4 @@ feature 'manage medical and behavior summaries', js: true do
       expect(page).to have_content('The dog has ADHD.')
     end
   end
-
 end

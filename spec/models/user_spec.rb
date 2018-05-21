@@ -74,7 +74,7 @@ require 'rails_helper'
 describe User do
   describe 'valid?' do
     it 'requires country' do
-      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'CA')
+      user = build(:user, country: '')
       expect(user).to_not be_valid
 
       user.country = 'USA'
@@ -82,17 +82,17 @@ describe User do
     end
 
     it 'is invalid when country is not recognized' do
-      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'CA', country: 'ZZZ')
+      user = build(:user, country: 'ZZZ')
       expect(user).to_not be_valid
     end
 
     it 'is invalid when country is not supported' do
-      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'CA', country: 'ALB')
+      user = build(:user, country: 'ALB')
       expect(user).to_not be_valid
     end
 
     it 'removes whitespace from Canadian postal codes' do
-      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'ON', country: 'CAN')
+      user = build(:user, region: 'ON', country: 'CAN')
       user.postal_code = "   K 2 J 0 A     1   "
 
       expect(user).to be_valid
@@ -100,7 +100,7 @@ describe User do
     end
 
     it 'removes whitespace from American ZIP codes' do
-      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'CA', country: 'USA')
+      user = build(:user)
       user.postal_code = " 12    3 4 5   "
 
       expect(user).to be_valid
@@ -108,7 +108,7 @@ describe User do
     end
 
     it 'converts postal codes to uppercase' do
-      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'ON', country: 'CAN')
+      user = build(:user, region: 'ON', country: 'CAN')
       user.postal_code = "k2j0a1"
 
       expect(user).to be_valid
@@ -116,17 +116,17 @@ describe User do
     end
 
     it 'converts Canadian province to uppercase' do
-      user = User.new(name: Faker::Name.name, email: 'test@example.com', region: 'on', country: 'CAN')
+      user = build(:user, region: 'on', country: 'CAN', postal_code: 'K0M0B2')
 
       expect(user).to be_valid
       expect(user.region).to eq('ON')
     end
 
     it 'converts American state to uppercase' do
-      user = User.new(region: 'on', name: Faker::Name.name, email: 'test@example.com', country: 'USA')
+      user = build(:user, region: 'ny')
 
       expect(user).to be_valid
-      expect(user.region).to eq('ON')
+      expect(user.region).to eq('NY')
     end
   end
 
@@ -233,53 +233,6 @@ describe User do
     end
   end
 
-  describe '#has_password' do
-    let(:user) { create(:user) }
-
-    it 'is true when password matches' do
-      password = Faker::Internet.unique.password(10)
-      user.update_attributes(password: password)
-
-      expect(user.has_password?(password)).to be true
-    end
-
-    it 'is false when password does not match' do
-      user.update_attributes(password: Faker::Internet.unique.password(10))
-
-      expect(user.has_password?('not-password')).to be false
-    end
-
-    it 'is false when password is not persisted' do
-      user.update_attributes(password: Faker::Internet.unique.password(10))
-      new_password = 'new_password'
-      user.password = new_password
-
-      expect(user.has_password?(new_password)).to be false
-    end
-  end
-
-  describe '.authenticate' do
-    email = 'test@example.com'
-    password = Faker::Internet.unique.password(10)
-
-    let(:user) { create(:user) }
-
-    it 'returns user when email and password match' do
-      user.update_attributes(email: email, password: password)
-      expect(User.authenticate(email, password)).to eq(user)
-    end
-
-    it 'is nil when email matches no user' do
-      user.update_attributes(email: email, password: password)
-      expect(User.authenticate('not-email@example.com', password)).to be nil
-    end
-
-    it 'is nil when password does not match user with email' do
-      user.update_attributes(email: email, password: password)
-      expect(User.authenticate(email, 'not-password')).to be nil
-    end
-  end
-
   describe '.authenticate_with_salt' do
     let(:user) { create(:user) }
 
@@ -293,21 +246,6 @@ describe User do
 
     it 'is nil when salt does not match user with idt' do
       expect(User.authenticate_with_salt(user.id, 'not-salt')).to be nil
-    end
-  end
-
-  # verifies before_save callback changed for Rails 5.1
-  describe 'encrypt password' do
-    it 'encrypts the password when it is present' do
-      user = create(:user, :password => 'topsekret')
-      expect(user.salt).not_to be_blank
-      expect(user.encrypted_password).to eq Digest::SHA2.hexdigest("#{user.salt}--topsekret")
-    end
-
-    it 'saves without error when password is not present' do
-      user = create(:user, :password => nil)
-      expect(user.encrypted_password).to be_blank
-      expect(user.salt).to be_blank
     end
   end
 end

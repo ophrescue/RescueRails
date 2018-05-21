@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 feature 'Attach an agreement to a user', js: true do
-  let!(:admin) { create(:user, :admin) }
   let!(:user) { create(:user) }
 
   before :each do
@@ -9,7 +8,7 @@ feature 'Attach an agreement to a user', js: true do
   end
 
   scenario 'Admin attaches a foster agreement to a user' do
-    sign_in_as(admin)
+    sign_in_as_admin
 
     visit '/users'
     expect(page).to have_content('Staff Directory')
@@ -29,7 +28,7 @@ feature 'Attach an agreement to a user', js: true do
   end
 
   scenario 'Admin attaches a confidentiality agreement to a user' do
-    sign_in_as(admin)
+    sign_in_as_admin
 
     visit '/users'
     expect(page).to have_content('Staff Directory')
@@ -49,7 +48,7 @@ feature 'Attach an agreement to a user', js: true do
   end
 
   scenario 'Admin attaches a code of conduct agreement to a user' do
-    sign_in_as(admin)
+    sign_in_as_admin
 
     visit '/users'
     expect(page).to have_content('Staff Directory')

@@ -1,15 +1,12 @@
 require 'rails_helper'
 
 feature 'View Dogs', js: true do
-  let!(:admin) { create(:user, :admin) }
-  let!(:active_user) { create(:user) }
-  let!(:inactive_user) { create(:user, :inactive_user) }
   let!(:test_foster) { create(:user) }
   let!(:test_dog) { create(:dog_with_photo_and_attachment, foster_id: test_foster.id, status: 'adoptable') }
 
   context 'Logged in as Admin' do
     before(:each) do
-      sign_in_as(admin)
+      sign_in_as_admin
     end
 
     scenario 'can view the Manager View' do
@@ -36,7 +33,7 @@ feature 'View Dogs', js: true do
 
   context 'Logged in as Active User' do
     before(:each) do
-      sign_in_as(active_user)
+      sign_in_as_user
     end
 
     scenario 'can view the Manager View' do
@@ -63,7 +60,7 @@ feature 'View Dogs', js: true do
 
   context 'Logged in as Inactive User' do
     before(:each) do
-      sign_in_as(inactive_user)
+      sign_in_as_inactive_user
     end
 
     scenario 'cannot view the Manager View' do

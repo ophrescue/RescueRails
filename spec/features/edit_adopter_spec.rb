@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 feature 'Edit Adopter Form', js: true do
-  let!(:admin) { create(:user, :admin) }
   let!(:adopter) { create(:adopter_with_app) }
 
   scenario 'Admin edits adopter' do
-    sign_in_as(admin)
+    sign_in_as_admin
     visit adopter_path(adopter)
 
     expect(page).to have_content(adopter.name)

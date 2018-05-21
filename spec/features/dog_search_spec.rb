@@ -5,14 +5,20 @@ require_relative '../helpers/dogs_list_helper'
 feature 'visit manager view', js: true do
   include ApplicationHelpers
 
-  let!(:active_user) { create(:user, :admin) }
-
   context 'user is not signed in (issues #771)' do
+    let(:admin) { create(:user, :admin) }
+
     it 'should direct the user to sign in' do
-      expect { visit '/dogs_manager?search=xyz&commit=Search' }.not_to raise_exception
+      visit '/dogs_manager?search=xyz&commit=Search'
+
+      expect(current_path).to eq sign_in_path
+
       expect(page_heading).to eq 'Staff Sign in'
       expect(flash_notice_message).to eq 'Please sign in to access this page'
-      fill_and_submit(active_user)
+
+      # can't use sign_in_as_admin since it refreshes page losing the direct_to
+      fill_and_submit(admin)
+
       expect(page_heading).to eq "Dog Manager"
     end
   end
@@ -22,13 +28,12 @@ feature 'search and clear search when admin is logged-in' do
   include DogsListHelper
 
   before do
-    sign_in_with(active_user.email, active_user.password)
+    sign_in_as_admin
   end
 
   let!(:primary_lab) { create(:dog, name: "Abercrombie").name.titleize }
   let!(:secondary_golden) { create(:dog, name: "Abby").name.titleize }
   let!(:secondary_westie) { create(:dog, name: "Nairobi").name.titleize }
-  let!(:active_user) { create(:user, :admin) }
 
   it 'should find dogs matching text partial' do
     visit '/dogs_manager?search=ab&commit=Search'

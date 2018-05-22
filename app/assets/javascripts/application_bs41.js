@@ -8,5 +8,4 @@
 
 // bootstrap bundle includes the required popper library
 //= require "bootstrap.bundle"
-//= require 'turbolinks'
 //= require 'dogs_index'

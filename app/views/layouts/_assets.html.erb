@@ -2,10 +2,10 @@
     <!--[if lt IE 9]>
       <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-  <%- if @bootstrap41 %>
+  <% if @bootstrap41 %>
     <%= stylesheet_link_tag  "application_bs41", media: "all"%>
     <%= javascript_include_tag "application_bs41" %>
-  <%- else %>
+  <% else %>
     <%= stylesheet_link_tag  "application", media: "all"%>
     <%= javascript_include_tag "application" %>
-  <%- end %>
+  <% end %>

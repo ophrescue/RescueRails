@@ -370,9 +370,6 @@ GEM
     tins (1.16.3)
     to_xls (1.5.3)
       spreadsheet
-    turbolinks (5.1.1)
-      turbolinks-source (~> 5.1)
-    turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (4.1.10)
@@ -456,7 +453,6 @@ DEPENDENCIES
   sucker_punch (~> 1.5.1)
   therubyracer
   to_xls
-  turbolinks
   uglifier
   unicorn
   whenever (~> 0.9.4)

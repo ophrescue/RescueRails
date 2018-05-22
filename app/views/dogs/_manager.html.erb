@@ -7,22 +7,35 @@
 </div>
 
 <div class="row">
-  <div class='col' id='all_filter_params' style="height:24px"></div>
+  <div class='col' id='filter_info'>
+    <%= render partial: 'filter_info_group', locals: {group_id: 'is_age', group_text: "Age", values: Dog::AGES.to_id_and_value_hash} %>
+    <%= render partial: 'filter_info_group', locals: {group_id: 'is_status', group_text: "Status", values: Dog::STATUSES.to_id_and_value_hash} %>
+    <%= render partial: 'filter_info_group', locals: {group_id: 'is_size', group_text: "Size", values: Dog::SIZES.to_id_and_value_hash} %>
+    <%= render partial: 'filter_info_group', locals: {group_id: 'has_flags', group_text: "Flags", values: Dog::FILTER_FLAGS.to_id_and_value_hash} %>
+    <%= render partial: 'filter_info_group', locals: {group_id: 'sort', group_text: "Sort", values: Sortable::SORT_FIELDS} %>
+    <%= render partial: 'filter_text_info_group', locals: {group_id: 'is_breed', group_text: "Breed", value: params['is_breed'] } %>
+    <span id="reset_message"><i class="fa fa-times"></i> Reset filter, search and sort</span>
+  </div>
 </div>
 
-  <%= form_with url: dogs_manager_path, method: :get do |form| %>
-    <div class="row" id="filter_controls">
-      <%= hidden_field_tag :commit, 'Filter' %>
-      <%= render partial: 'global_multiselect_dropdown', locals: {form: form, id: 'is_age', button_text: 'Age', options: Dog::AGES.to_id_and_value_hash, multiple: true  } %>
-      <%= render partial: 'global_multiselect_dropdown', locals: {form: form, id: 'is_status', button_text: 'Status', options: Dog::STATUSES.to_id_and_value_hash, multiple: true  } %>
-      <%= render partial: 'global_multiselect_dropdown', locals: {form: form, id: 'is_size', button_text: 'Size', options: Dog::SIZES.to_id_and_value_hash, multiple: true  } %>
-      <%= render partial: 'global_multiselect_dropdown', locals: {form: form, id: 'has_flags', button_text: 'Flags', options: Dog::FILTER_FLAGS.to_id_and_value_hash, multiple: true  } %>
-      <div class="col-sm">
-        <%= form.text_field :is_breed, placeholder: "Breed (all/part)" %>
+<form class='row' id='filter_controls'>
+  <%= hidden_field_tag :commit, 'Filter' %>
+  <%= render partial: 'global_multiselect_dropdown', locals: {id: 'is_age', button_text: 'Age', options: Dog::AGES.to_id_and_value_hash, multiple: true  } %>
+  <%= render partial: 'global_multiselect_dropdown', locals: {id: 'is_status', button_text: 'Status', options: Dog::STATUSES.to_id_and_value_hash, multiple: true  } %>
+  <%= render partial: 'global_multiselect_dropdown', locals: {id: 'is_size', button_text: 'Size', options: Dog::SIZES.to_id_and_value_hash, multiple: true  } %>
+  <%= render partial: 'global_multiselect_dropdown', locals: {id: 'has_flags', button_text: 'Flags', options: Dog::FILTER_FLAGS.to_id_and_value_hash, multiple: true  } %>
+  <div class="col-sm">
+    <div class="input-group" id="breed">
+      <input type="text" class="form-control" placeholder="Breed (all/part)" id='is_breed' name='is_breed' value=<%=params[:is_breed]%> >
+      <div class="input-group-append">
+        <button class="btn btn-success" type="button">
+          <i class='fa fa-sm fa-search' id='search_breed_icon'></i>
+        </button>
       </div>
-      <%= render partial: 'global_multiselect_dropdown', locals: {form: form, id: 'sort', button_text: 'Sort', options: Sortable::SORT_FIELDS, multiple: false } %>
     </div>
-  <% end %>
+  </div>
+  <%= render partial: 'global_multiselect_dropdown', locals: {id: 'sort', button_text: 'Sort', options: Sortable::SORT_FIELDS, multiple: false } %>
+</form>
 
 <div id="manager_dogs">
   <%- if @dogs.any? %>
@@ -42,7 +55,16 @@
     $('#comments_modal #modal-title').text("Most recent comment for "+name)
   })
 </script>
-<script type='text/javascript' data-turbolinks-eval=false>
+<script type='text/javascript' >
   var filter_params = <%= @filter_params.to_json.html_safe %>
 </script>
 
+<script type='text/javascript'>
+  $(function(){ console.log("page load") })
+  $(document).on('turbolinks:load',function(){console.log("turbolinks load event")})
+</script>
+<script type='text/javascript' data-turbolinks-eval="false">
+  $(function(){
+    console.log("page load turbolinks doesn't")
+  })
+</script>

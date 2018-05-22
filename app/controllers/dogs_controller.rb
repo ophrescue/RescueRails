@@ -72,7 +72,7 @@ class DogsController < ApplicationController
   before_action :add_dogs_user, only: %i(new create)
   before_action :load_dog, only: %i(show edit update destroy)
   before_action :edit_dog_check, only: %i(edit update)
-  before_action :select_bootstrap41, only: %i{index, manager_index}
+  before_action :select_bootstrap41, only: %i(index manager_index)
 
   # find a better home for this
   PER_PAGE = 30
@@ -98,6 +98,7 @@ class DogsController < ApplicationController
     full_params = ["is_age", "is_status", "is_size", "has_flags"].inject({}){|hash,attr| hash[attr] = (params && params[attr]) || []; hash}
     full_params["sort"] = params["sort"] || "tracking_id"
     full_params["commit"] = params["commit"]
+    full_params["is_breed"] = params["is_breed"] || ""
     puts "merged params #{full_params}"
     params = full_params
     @dogs = case
@@ -112,7 +113,7 @@ class DogsController < ApplicationController
               Dog.default_manager_view
             end
 
-    @filter_params = params.slice("is_age", "is_status", "is_size", "has_flags", "sort")
+    @filter_params = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed")
     puts "filter_params #{@filter_params}"
 
     for_page(params[:page])

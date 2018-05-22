@@ -14,7 +14,6 @@
 
 class PagesController < ApplicationController
   before_action :authenticate, only: [:status_definitions]
-  before_action :select_bootstrap41, only: [:home]
 
   def status_definitions
     @hide_topbar = true

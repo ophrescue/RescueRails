@@ -1,0 +1,157 @@
+@mixin fontawesome-icon {
+  font-family: FontAwesome;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin icon-lg {
+  font-size: 1.333333333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+}
+
+$high-priority-icon: '\f062';
+$has-medical-need-icon: '\f0f9'; // fa-ambulance
+$spay-neuter-needed-icon: '\f0c4'; // fa-scissors
+$medical-review-needed-icon: '\f0f1'; // fa-stethoscope
+$foster-needed-icon: url('data:image/svg+xml;charset=utf-8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve"> <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata> <g><path d="M982.8,519.5L506.6,66c-9.1-8.7-23.5-8.5-32.4,0.3L134,403.7c0,0,0,0,0,0L16.9,519.8c-9.1,9.1-9.2,23.8-0.1,32.9c4.6,4.6,10.5,6.9,16.5,6.9c5.9,0,11.9-2.2,16.4-6.7l77.5-76.8v396.4c0,37.5,30.8,68,68.6,68h466.3h2h136.3c37.9,0,68.7-30.5,68.7-68V581.3c0-12.9-10.4-23.3-23.3-23.3c-12.9,0-23.3,10.4-23.3,23.3v291.2c0,11.8-9.9,21.4-22.1,21.4H664.2h-2H195.8c-12.2,0-22.1-9.6-22.1-21.4V429.9l317.2-314.6l459.8,437.9c9.3,8.9,24,8.5,32.9-0.8C992.4,543.1,992.1,528.4,982.8,519.5z"/><path d="M319.7,567.2c-0.6-2.5-1.3-5.1-2.1-7.4c-5.5-16.6-16.5-19.1-22.6-19.1c-17.3,0-22.9,18.1-24.8,24.1c-6.2,20.3,2.7,66,6.9,84.6c0.4,1.8,1,3.5,1.9,5c26.5,49.9,59.4,60.4,82.2,60.4c26.6,0,45.7-14,47.8-15.6c1-0.7,1.9-1.6,2.7-2.5c1.4-1.5,33.8-38.4,2.1-89.1c-16.9-27.1-44.2-40.9-80.9-40.9C328.1,566.8,323.6,567,319.7,567.2z M380,628.8c12.9,20.6,6.5,34.7,3.1,39.8c-3.5,2.1-11.9,6.4-21.9,6.4c-16.8,0-32.2-12.4-45.7-36.9c-2.2-10.3-4.1-20.9-5.4-30.4c2.7,0,5.6-0.2,9-0.4c4.2-0.3,8.9-0.6,13.8-0.6C355.9,606.7,370.4,613.5,380,628.8z"/><path d="M414,389.5c-4.1-5.2-10.3-8.2-17-8.2c-9.7,0-16.9,6-23.2,12.6c-14.8,15.4-26.9,60.1-31.4,78.6c-0.4,1.8-0.6,3.6-0.6,5.5c1.4,37.4,13,65.1,34.4,82.2c17.9,14.3,38,17.3,51.6,17.3c5.4,0,9.5-0.5,11.2-0.8c5-0.6,20.3-3.6,32.2-17.9c7.8-9.3,12.5-21.2,14.1-35.5c0,0,0.1,0.1,0.1,0.1c21.3,22.6,49.1,25.1,60.1,25.1c2.1,0,3.5-0.1,4-0.1c1.3-0.1,2.6-0.3,3.9-0.7c1.9-0.5,47.4-14.1,48.9-73.6c1.1-47.1-40.3-72.4-60.4-84.6c3.5-10.5,6-21.2-0.6-30.5c-4-5.7-10.6-9.1-17.7-9.1c-8.8,0-15.8,4.9-22.2,10.3c-16.2,13.9-32.6,57.2-38.9,75.2c-0.6,1.7-1,3.6-1.1,5.4c-0.2,2.8-0.3,5.5-0.3,8.3c-14.8-14.9-33.1-24-44.5-29.7C419.4,408.3,420.8,398.1,414,389.5z M501.3,445.8c3.5-9.7,7.4-19.4,11.1-27.9c2.8,1.9,5.7,3.7,8.6,5.5c21.2,12.9,41.9,27.4,41.4,49.7c-0.6,24.3-13.1,32.9-18.3,35.4c-5.8-0.2-19.6-1.9-29.6-12.5C504.8,485.6,500.3,468.7,501.3,445.8z M445.4,501.2c2.8,24.2-3.8,34.3-10.6,35.7c-1,0-0.7,0-1.9,0.3c-0.5,0.1-2.4,0.3-5.1,0.3c-19.6,0-43.4-10.2-46-58.3c2.5-9.9,5.4-19.9,8.4-28.8c2.8,1.6,5.8,3.1,8.8,4.6C421,465.9,442.8,478.5,445.4,501.2z"/><path d="M710.1,609.2c17.9-20.2,24.8-48.6,20.6-84.5c-0.2-1.9-0.7-3.7-1.4-5.4c-7.2-17.1-25.8-58.2-42.8-70.7c-5.8-4.2-12.8-8.5-20.8-8.5c-7.4,0-14.2,3.6-18.2,9.7c-6.5,9.8-3.5,20.2,0.7,30.4c-19,13.5-58.4,41.5-54.7,87.4c4.7,58.5,50.9,68.2,52.9,68.6c1.3,0.3,2.6,0.4,3.9,0.4c0,0,0,0,0.1,0C653.9,636.7,686.6,635.8,710.1,609.2z M680.5,582.5c-9.3,10.7-22.7,13.4-28.2,14.1c-5.4-2.1-17.3-9.3-19.1-32.1c-1.7-21.6,17.9-37.4,38.2-51.8c2.7-1.9,5.4-3.9,8-5.9c4,7.8,8.2,16.6,12,25.4C693.6,554.7,689.9,571.6,680.5,582.5z"/><path d="M521,834.2c77.1,0,165-30.4,176-97.3c5-30.2,0.4-53.8-13.6-70.3c-12.7-14.9-32.3-22.8-56.8-22.8c-4.1,0-8,0.2-11.5,0.6c-15.3-33.4-46-62.9-87.7-62.9c-6,0-12.1,0.6-18.1,1.9c-46.8,9.6-64.5,71.3-70.1,99.2c-22.1,8.7-38.1,24.9-44.7,45.6c-7.6,23.7-1.6,50.1,16.1,70.5C430.2,821.3,470.4,834.2,521,834.2z M432.5,740.3c3.6-11.2,13.9-19.3,29-23c8-1.9,14-8.6,15.1-16.7c3-22.4,17.4-73.2,40.7-78c3.4-0.7,6.8-1.1,10.1-1.1c27.9,0,48.1,25.6,55.7,51c3.1,10.4,13.8,16.4,24.2,13.6c0.1,0,8.8-2.2,19.2-2.2c8.6,0,20.2,1.5,26.3,8.7c7.5,8.9,6.7,25.5,4.6,38c-6.6,40-74.6,63.9-136.6,63.9c-37.3,0-68.7-8.5-80.2-21.8C432.3,762.8,429.2,750.7,432.5,740.3z"/></g> </svg>');
+$behaviour-problems-icon: url(<%= asset_path("law.svg") %>);
+$bootstrap-red-danger: #dc3545;
+
+//#manager-view {
+//  width: 75%;
+//}
+
+@import 'dogs_index/manager_dog';
+
+// globalMultiSelect, the filter fields:
+#filter_info {
+ min-height:24px;
+}
+
+#filter_info span.filter_param:not(:last-of-type)::after {
+  content: ', ';
+}
+
+#filter_info span.filter_param:last-of-type::after {
+  content: '. ';
+}
+
+.message_group {
+  font-size: smaller;
+
+  .group_label {
+    font-weight: 700;
+    margin-left: 1px;
+  }
+}
+
+#reset_message {
+  font-size:smaller;
+  display:none;
+  cursor: pointer;
+}
+
+#filter_controls {
+  display: flex;
+  margin-left: -23px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  min-width: max-content;
+  padding-right: 8px
+}
+
+.dropdown-menu li {
+  margin-left: 8px;
+}
+
+.dropdown-menu li.selected span.check {
+  visibility: visible;
+  width:12px;
+  margin-right:12px;
+  color: #38ad38;
+}
+
+.dropdown-menu li:not(.selected) span.check {
+  visibility: hidden;
+  width:12px;
+  margin-right:12px;
+}
+
+.dropdown-menu li span {
+  cursor: pointer;
+}
+
+// flags menu icons
+.dropdown-menu li#high_priority .filter_option:after {
+  @include icon-lg();
+  @include fontawesome-icon();
+  margin-left: 10px;
+  content: $high-priority-icon;
+  color: $bootstrap-red-danger;
+}
+
+.dropdown-menu li#medical_need .filter_option:after {
+  @include fontawesome-icon();
+  @include icon-lg();
+  margin-left: 10px;
+  content: $has-medical-need-icon;
+  color: $bootstrap-red-danger;
+}
+
+.dropdown-menu li#spay_neuter_needed .filter_option:after {
+  @include fontawesome-icon();
+  @include icon-lg();
+  margin-left: 10px;
+  content: $spay-neuter-needed-icon;
+}
+
+.dropdown-menu li#behavior_problems .filter_option:after {
+  content: $behaviour-problems-icon;
+  width: 18px;
+  display: inline-block;
+  margin-left:10px;
+}
+
+.dropdown-menu li#medical_review_needed .filter_option:after {
+  @include fontawesome-icon();
+  @include icon-lg();
+  margin-left: 10px;
+  content: $medical-review-needed-icon;
+}
+
+.dropdown-menu li#foster_needed {
+  margin-top: -4px; // it's a hack to restore uniform spacing that is disrupted by the :after content svg, below. A less hacky solution would be good!
+
+   .filter_option:after{
+    content: $foster-needed-icon;
+    display:inline-block;
+    width:22px;
+    height:10px;
+    margin-left: 10px;
+    position: relative;
+    top: 4px;
+  }
+}
+
+// filter-by-breed search input, bootstrap-styled input with button add-on
+#filter_controls .input-group#breed {
+  input {
+    height: 33px;
+  }
+
+  // we control the visibility with js. Show the button only when text is present
+  .input-group-append {
+    display: none;
+  }
+
+  button {
+    height: 33px;
+    padding-top: 4px;
+  }
+}

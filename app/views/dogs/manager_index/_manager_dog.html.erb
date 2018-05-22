@@ -50,14 +50,12 @@
     <%- end %>
   </div>
   <div class='col-1'>
-    <span class="<%= 'fa fa-lg fa-comment-o' unless dog.comments.empty? %>"
-          data-toggle='modal'
-          data-target='#comments_modal'
-          data-comment="<%= dog.comments.first.content %>"
-          data-dog_name="<%= dog.name %>" 
-          data-toggle='tooltip'
-          data-placement='bottom'
-          title='Click to view comments' ></span>
+    <a class="<%= 'fa fa-lg fa-comment-o' unless dog.comments.empty? %>"
+          tabindex='0'
+          data-toggle='popover'
+          data-placement='left'
+          data-trigger="focus"
+          title="Most recent comment for <%= dog.name %>" 
+          data-content="<%= dog.comments.first.content %>" ></a>
   </div>
 </div>
-

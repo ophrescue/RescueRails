@@ -8,11 +8,12 @@
   border-right: 1px solid #d4d4d4;
   font-weight: 500;
   margin-bottom: 6px;
+
+  .name {
+    font-weight: 700px;
+  }
 }
 
-#manager-view .dog.line-1 .name {
-  font-weight: 700px;
-}
 
 #manager-view .dog.line-2 {
   border-left: 1px solid #d4d4d4;
@@ -22,10 +23,24 @@
   color: #777777;
   font-size: smaller;
   padding-bottom: 6px;
+
+  .foster_txt {
+    text-align: right;
+  }
 }
 
-#manager-view .dog.line-2 .foster_txt {
-  text-align: right;
+
+.fa-comment-o {
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// FLAGS
+.flags {
+  display: flex;
 }
 
 .flags .fa {
@@ -33,15 +48,6 @@
   top: 4px;
   margin-left:2px;
   margin-right:2px;
-}
-
-.fa-comment-o {
-  cursor: pointer;
-}
-
-// FLAGS
-.flags {
-  display: flex;
 }
 
 .has_medical_need, .is_high_priority, .has_behavior_problem, .needs_foster {

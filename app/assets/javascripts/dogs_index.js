@@ -68,13 +68,12 @@ MessageBar.show_typed_text = function(group, text){
 }
 
 GlobalMultiSelect.fetch = function(){
-  console.log($('form').serialize());
   var query = $('form').serialize();
-  Turbolinks.visit(`/dogs_manager?${query}`)
+  window.location='/dogs_manager?'+query;
 };
 
 GlobalMultiSelect.fetch_all = function(){
-  Turbolinks.visit('/dogs_manager')
+  window.location='/dogs_manager';
 };
 
 GlobalMultiSelect.filter_select = function(event){

@@ -26,16 +26,19 @@ $bootstrap-red-danger: #dc3545;
 @import 'dogs_index/manager_dog';
 
 // globalMultiSelect, the filter fields:
-#filter_info {
- min-height:24px;
-}
-
-#filter_info span.filter_param:not(:last-of-type)::after {
-  content: ', ';
-}
-
-#filter_info span.filter_param:last-of-type::after {
-  content: '. ';
+#filter_info_row {
+  margin-top: 20px;
+  #filter_info {
+    min-height:24px;
+  }
+  #filter_info span.filter_param {
+    &:not(:last-of-type)::after {
+      content: ', ';
+    }
+    &:last-of-type::after {
+      content: '. ';
+    }
+  }
 }
 
 .message_group {
@@ -48,9 +51,20 @@ $bootstrap-red-danger: #dc3545;
 }
 
 #reset_message {
-  font-size:smaller;
-  display:none;
+  margin-left: 20px;
+  font-size: smaller;
+  display: none;
   cursor: pointer;
+
+  .fa-lg {
+    vertical-align: initial;
+    color: $bootstrap-red-danger;
+  }
+}
+
+#search-dropdown-heading {
+  font-size: small;
+  font-weight: 700;
 }
 
 #filter_controls {
@@ -139,8 +153,8 @@ $bootstrap-red-danger: #dc3545;
   }
 }
 
-// filter-by-breed search input, bootstrap-styled input with button add-on
-#filter_controls .input-group#breed {
+// search input, bootstrap-styled input with button add-on
+#filter_controls .input-group#search {
   input {
     height: 33px;
   }
@@ -154,4 +168,15 @@ $bootstrap-red-danger: #dc3545;
     height: 33px;
     padding-top: 4px;
   }
+
+  .text-input-error {
+    font-size: small;
+    color: $bootstrap-red-danger;
+  }
+}
+
+.globalselect-container>button {
+  width : 100%;
+  // margin-bottom: 8px;
+  // margin-bottom: 1rem;
 }

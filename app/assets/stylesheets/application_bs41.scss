@@ -17,7 +17,7 @@
 @import "bootstrap41";
 // I don't believe this is necessary any longer with bootstrap 4.1
 // @import "bootstrap-responsive";
-@import 'bootstrap-multiselect';
+//@import 'bootstrap-multiselect';
 @import "jquery-token/token-input";
 @import "chosen";
 @import "font-awesome";
@@ -27,3 +27,25 @@
 @import 'link_icons';
 @import 'topbar_bs41';
 @import 'dogs_index';
+
+html {
+  font-size: 1rem;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 1.4rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.6rem;
+  }
+}

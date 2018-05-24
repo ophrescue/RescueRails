@@ -95,25 +95,27 @@ class DogsController < ApplicationController
 
   def manager_index
     puts "incoming params #{params}"
+    default_manager_view = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field").empty?
+    # TODO THIS IS A HACK THAT NEEDS CLEANUP!!
     full_params = ["is_age", "is_status", "is_size", "has_flags"].inject({}){|hash,attr| hash[attr] = (params && params[attr]) || []; hash}
     full_params["sort"] = params["sort"] || "tracking_id"
-    full_params["commit"] = params["commit"]
     full_params["is_breed"] = params["is_breed"] || ""
+    full_params["search"] = params["search"] || ""
+    full_params["search_field"] = params["search_field"] || ""
     puts "merged params #{full_params}"
     params = full_params
     @dogs = case
-            when params["commit"] == 'Search' # search button was clicked
-              DogSearch.search(params: params)
-            when params["commit"] == 'Filter' # filter button was clicked
-              DogFilter.filter(params: params)
-            else # initial view, before search or filter initiated
-              params["commit"] = 'Filter'
+            when default_manager_view
               params["sort"] = 'tracking_id'
               params["direction"] = 'asc'
               Dog.default_manager_view
+            else
+              DogFilter.filter(params: params)
             end
+    @count = @dogs.count
 
-    @filter_params = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed")
+    @filter_params = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field")
+
     puts "filter_params #{@filter_params}"
 
     for_page(params[:page])

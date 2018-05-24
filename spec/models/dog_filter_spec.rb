@@ -3,7 +3,7 @@ require 'rails_helper'
 describe DogFilter do
   describe '.filter' do
     context 'when a manager is signed in, ' do
-      let(:results) { DogFilter.filter(params: params) }
+      let(:results) { DogFilter.filter(params: params.stringify_keys) }
 
       # %w[baby young adult senior]
       context 'filter by age' do
@@ -170,14 +170,14 @@ describe DogFilter do
         let!(:secondary_breed_dog) { create(:dog, :secondary_westie) }
 
         it 'finds by primary breed partial match' do
-          params = { is_breed: 'lab' }
+          params = { is_breed: 'lab' }.stringify_keys
           results = DogFilter.filter(params: params)
           expect(results).to include(primary_breed_dog)
           expect(results).not_to include(secondary_breed_dog)
         end
 
         it 'finds by secondary breed partial match' do
-          params = { is_breed: 'terr' }
+          params = { is_breed: 'terr' }.stringify_keys
           results = DogFilter.filter(params: params)
           expect(results).to include(secondary_breed_dog)
           expect(results).not_to include(primary_breed_dog)

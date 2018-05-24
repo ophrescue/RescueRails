@@ -17,7 +17,7 @@ module Filterable
 
   module ClassMethods
     def filter(filtering_params)
-      results = self
+      results = self.unscoped # to be sure an ActiveRecord::Relation is returned, even with no filtering_params
       filtering_params.each do |key, value|
         if value.present? && value != 'all'
           results = results.public_send(key, value)

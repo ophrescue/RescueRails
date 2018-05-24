@@ -68,6 +68,7 @@
 class Dog < ApplicationRecord
   audited
   include Filterable
+  include Flaggable
 
   attr_accessor :primary_breed_name, :secondary_breed_name
 
@@ -129,18 +130,16 @@ class Dog < ApplicationRecord
     'Female' => 'F'
   }.freeze
 
-  FILTER_FLAGS = [
-    'High Priority',
-    'Medical Need',
-    'Special Needs',
-    'Medical Review Needed',
-    'Behavior Problems',
-    'Foster Needed',
-    'Spay Neuter Needed',
-    'No Cats',
-    'No Dogs',
-    'No Kids'
-  ]
+  FILTER_FLAGS = {"high_priority"=>"High Priority",
+                  "medical_need"=>"Medical Need",
+                  "special_needs"=>"Special Needs",
+                  "medical_review_needed"=>"Medical Review Needed",
+                  "behavior_problems"=>"Behavior Problems",
+                  "foster_needed"=>"Foster Needed",
+                  "spay_neuter_needed"=>"Spay Neuter Needed",
+                  "no_cats"=>"No Cats",
+                  "no_dogs"=>"No Dogs",
+                  "no_kids"=>"No Kids"}
 
   AGES = %w[baby young adult senior]
   validates_inclusion_of :age, in: AGES, allow_blank: true
@@ -157,50 +156,37 @@ class Dog < ApplicationRecord
   scope :is_size,                                 ->(size) { where size: size }
   scope :is_status,                               ->(status) { where status: status }
   scope :is_breed,                                ->(breed_partial) { joins("join breeds on (breeds.id = dogs.primary_breed_id) or (breeds.id = dogs.secondary_breed_id)").where("breeds.name ilike '%#{sanitize_sql_like(breed_partial)}%'").distinct }
-  scope :high_priority,                        -> { where is_high_priority: true }
-  scope :medical_need,                         -> { where has_medical_need: true }
-  scope :medical_review_needed,                -> { where medical_review_complete: false }
-  scope :special_needs,                        -> { where is_special_needs: true }
-  scope :behavior_problems,                    -> { where has_behavior_problem: true }
-  scope :foster_needed,                        -> { where needs_foster: true }
-  scope :spay_neuter_needed,                   -> { where is_altered: false }
-  scope :no_cats,                              -> { where no_cats: true }
-  scope :no_dogs,                              -> { where no_dogs: true }
-  scope :no_kids,                              -> { where no_kids: true }
-  def self.has_flags(flags) # flags is an array of active flag attributes
-    collection = [:high_priority,
-                  :medical_need,
-                  :medical_review_needed,
-                  :special_needs,
-                  :behavior_problems,
-                  :foster_needed,
-                  :spay_neuter_needed,
-                  :no_cats,
-                  :no_dogs,
-                  :no_kids].inject(Dog.where("1=1")) do |result, filter_flag|
-                    puts "flags received #{flags}"
-                    puts "test flag #{filter_flag}"
-                    puts "is it there? #{flags.include?(filter_flag.to_s)}"
-                    result = result.merge(Dog.send(filter_flag)) if flags.include?(filter_flag.to_s)
-                    result
-                  end
-  end
 
-  scope :matching_tracking_id,                    ->(search_term) { where tracking_id: search_term }
-  scope :identity_matching_microchip,             ->(search_term) { where microchip: search_term }
-  scope :identity_match_tracking_id_or_microchip, ->(search_term){ matching_tracking_id(search_term).or( identity_matching_microchip(search_term)) }
+  #scope :matching_tracking_id,                    ->(search_term) { where tracking_id: search_term }
+  #scope :identity_matching_microchip,             ->(search_term) { where microchip: search_term }
+  #scope :identity_match_tracking_id_or_microchip, ->(search_term){ matching_tracking_id(search_term).or( identity_matching_microchip(search_term)) }
 
-  scope :pattern_matching_microchip,              ->(search_term) { where("microchip ilike ?", search_term) }
+  #scope :pattern_matching_microchip,              ->(search_term) { where("microchip ilike ?", search_term) }
   scope :pattern_matching_name,                   ->(search_term) { where("name ilike ?", search_term) }
-  scope :pattern_match_microchip_or_name,         ->(search_term){ pattern_matching_microchip("%"+search_term+"%").or( pattern_matching_name("%"+search_term+"%")) }
+  #scope :pattern_match_microchip_or_name,         ->(search_term){ pattern_matching_microchip("%"+search_term+"%").or( pattern_matching_name("%"+search_term+"%")) }
 
   # Rails 5.2 issues deprecation errors for any order that is not column names
   # so arel is the workaround
   scope :sort_with_search_term_matches_first,     ->(search_term) { order(Dog.arel_table[:name].does_not_match("#{search_term}%"), "tracking_id asc") }
-
   scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :photos, :foster).where(status: Dog::PUBLIC_STATUSES) }
   scope :default_manager_view,                    -> { includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster).order(:tracking_id) }
-  scope :autocomplete_name,                       ->(search_term){ if search_term.present? then select(:name, :id).pattern_matching_name("%"+search_term+"%").sort_with_search_term_matches_first(search_term) else select(:name, :id) end }
+
+  def self.autocomplete_name(search_term = nil)
+    if search_term.present?
+      select(:name, :id)
+        .pattern_matching_name("%"+search_term+"%")
+        .sort_with_search_term_matches_first(search_term)
+    else
+      select(:name, :id)
+    end
+  end
+
+  def self.search(search_params)
+    search_term, search_field = search_params
+    return unscoped if search_params.compact.length != 2 || search_params.any?(&:empty?) # abnormal
+    return is_breed(search_term) if search_field == "breed"
+    return where("? ilike ?", search_field, "%#{search_term.strip}%")
+  end
 
   def breeds
     [ (primary_breed&.name), (secondary_breed&.name) ].compact
@@ -208,7 +194,9 @@ class Dog < ApplicationRecord
 
   def primary_photo_url
     if Rails.env.development?
-      # helps with formulating the css on the DogsController#index page
+      # helps with formulating the css, and UI design, on the DogsController#index page
+      # probably shouldn't be used longterm,
+      # but it would be good to have a longterm solution that has actual photos
       AWS_PHOTO_URLS.sample()
     else
       photos.empty? ?

@@ -110,6 +110,8 @@ class Dog < ApplicationRecord
     'coming soon'
   ]
 
+  UNAVAILABLE_STATUSES = ['adopted', 'completed', 'not_available']
+
   PETFINDER_STATUS = {
     'adoptable' => 'A',
     'adoption pending' => 'P',
@@ -190,6 +192,10 @@ class Dog < ApplicationRecord
 
   def breeds
     [ (primary_breed&.name), (secondary_breed&.name) ].compact
+  end
+
+  def unavailable
+    UNAVAILABLE_STATUSES.include?(status)
   end
 
   def primary_photo_url

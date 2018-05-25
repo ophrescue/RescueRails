@@ -112,6 +112,7 @@ class DogsController < ApplicationController
 
   def show
     @title = @dog.name
+    flash[:error]= render_to_string partial: 'unavailable_flash_message' if @dog.unavailable?
   end
 
   def new

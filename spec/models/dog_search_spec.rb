@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative '../helpers/rspec_matchers'
 
 describe DogSearch do
   describe '.search' do
@@ -68,6 +69,16 @@ describe DogSearch do
 
         it 'shows dogs in order by name ascending (a-z)' do
           expect(results).to eq([butter, stutter, tt, zutter])
+        end
+      end
+
+      context 'sort by name, confirm that rspec matcher anomaly is fixed' do
+        let!(:davinci){ create(:dog, name: "Da Vinci") }
+        let!(:dallas){ create(:dog, name: "Dallas") }
+        let(:params){ {sort: 'name', direction: 'asc'} }
+
+        it 'should pass' do
+          expect(results.map(&:name)).to be_sorted(:ascending)
         end
       end
 

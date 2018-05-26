@@ -83,6 +83,10 @@ describe DogSearch do
       end
 
       context 'confirm postgres compares strings as expected' do
+        puts "Dallas #{ActiveRecord::Base.connection.execute("select array_agg(t) codes from (select ascii(regexp_split_to_table('Dallas', '')) as t) x").first["codes"]}"
+        puts "Da Vinci #{ActiveRecord::Base.connection.execute("select array_agg(t) codes from (select ascii(regexp_split_to_table('Da Vinci', '')) as t) x").first["codes"]}"
+        puts "Postgres says 'Da Vinci < Dallas' is #{ActiveRecord::Base.connection.execute("select 'Da Vinci' < 'Dallas' as bool").first["bool"]}"
+        puts "Postgres configuration #{              ActiveRecord::Base.connection.execute("select name,setting from pg_settings where name like '%encoding'").map(&:values)}"
         let(:bool){ ActiveRecord::Base.connection.execute("select 'Da Vinci' < 'Dallas' as bool").first["bool"]}
         it 'really should pass' do
           expect(bool).to be true

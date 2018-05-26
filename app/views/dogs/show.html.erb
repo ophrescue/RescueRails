@@ -1,6 +1,9 @@
   <div class="row">
     <div class="span12">
       <h5><%= link_to "Available Dogs", :controller => "dogs", :status => "active"  %></h5>
+      <% if current_user&.active %>
+        <h5><%= link_to "Dog Manager", :controller => "dogs", :action => "manager_index" %></h5>
+      <% end %>
       <h1><%= @dog.name %></h1>
       <h3><%= @dog.primary_breed.name if @dog.primary_breed.present? %></h3>
       <% if @dog.sponsored_by? %>

@@ -89,18 +89,19 @@ describe DogsController, type: :controller do
     end
 
     context 'public user' do
-      let!(:adoptable_dog) { create(:dog, status: 'adoptable') }
-      let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending') }
-      let!(:coming_soon_dog) { create(:dog, status: 'coming soon') }
-      let!(:adopted_dog) { create(:dog, status: 'adopted') }
-      let!(:on_hold_dog) { create(:dog, status: 'on hold') }
-      let!(:not_available_dog) { create(:dog, status: 'not available') }
+      let!(:adoptable_dog) { create(:dog, status: 'adoptable', tracking_id: 102) }
+      let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending', tracking_id: 105) }
+      let!(:coming_soon_dog) { create(:dog, status: 'coming soon', tracking_id: 100) }
+
+      let!(:adopted_dog) { create(:dog, status: 'adopted', tracking_id: 1) }
+      let!(:on_hold_dog) { create(:dog, status: 'on hold', tracking_id: 2) }
+      let!(:not_available_dog) { create(:dog, status: 'not available', tracking_id: 3) }
 
       subject(:get_index) { get :index, params: {} }
 
-      it 'Only adoptable, adoption pending or coming soon dogs should be displayed' do
+      it 'Only adoptable, adoption pending or coming soon dogs should be displayed in order by tracking id' do
         get_index
-        expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog])
+        expect(assigns(:dogs)).to eq([coming_soon_dog, adoptable_dog, adoption_pending_dog])
       end
     end
   end

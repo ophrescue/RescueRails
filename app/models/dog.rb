@@ -110,7 +110,7 @@ class Dog < ApplicationRecord
     'coming soon'
   ]
 
-  UNAVAILABLE_STATUSES = ['adopted', 'completed', 'not_available']
+  UNAVAILABLE_STATUSES = ['adopted', 'completed', 'not available']
 
   PETFINDER_STATUS = {
     'adoptable' => 'A',
@@ -170,7 +170,9 @@ class Dog < ApplicationRecord
   # Rails 5.2 issues deprecation errors for any order that is not column names
   # so arel is the workaround
   scope :sort_with_search_term_matches_first,     ->(search_term) { order(Dog.arel_table[:name].does_not_match("#{search_term}%"), "tracking_id asc") }
-  scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :photos, :foster).where(status: Dog::PUBLIC_STATUSES) }
+
+  scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :photos, :foster).where(status: Dog::PUBLIC_STATUSES).order(:tracking_id) }
+
   scope :default_manager_view,                    -> { includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster).order(:tracking_id) }
 
   def self.autocomplete_name(search_term = nil)
@@ -221,6 +223,10 @@ class Dog < ApplicationRecord
 
   def adopted?
     status == 'adopted'
+  end
+
+  def unavailable?
+    UNAVAILABLE_STATUSES.include?(status)
   end
 
   def attributes_to_audit

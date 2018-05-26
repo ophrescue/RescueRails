@@ -4,15 +4,7 @@
     <div class="col-12 col-md-8">
       <h1>Our Dogs</h1>
     </div>
-    <% if signed_in? %>
-      <% if can_add_dogs? %>
-        <%# large-format (>=md) 2/12 width, small format (<md) half-width %>
-        <div class="col-6 col-md-2">
-          <%= link_to "Add a Dog", new_dog_path, class: "btn btn-sm btn-primary" %>
-        </div>
-      <% end %>
-
-      <% if current_user.active %>
+      <% if current_user&.active %>
         <%# large-format (>=md) 2/12 width, small format (<md) half-width %>
         <div class="col-6 col-md-2">
           <%= link_to("Manager View", dogs_manager_path, class: "btn btn-sm") %>

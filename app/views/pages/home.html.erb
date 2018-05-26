@@ -26,6 +26,7 @@
             <%= image_tag "hero_bg4.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania", class:"d-block w-100" %>
           </div>
 
+<<<<<<< HEAD
           <div class="carousel-item">
             <%= image_tag "front-page/rescue.jpg", alt: 'Rescue', class:"d-block w-100" %>
           </div>
@@ -36,6 +37,20 @@
               <h1>RESCUE</h1>
               <h4>We believe they all deserve a second chance.</h4>
               <a href="/resources" class="learn-more">Learn More</a>
+=======
+<% if Time.now.between?(("2018-05-13".to_date),("2018-05-21".to_date)) %>
+          <div class="item">
+            <%= image_tag "banner-do-more24-2018.jpg", alt: "Do More 24" %>
+            <div class="carousel-caption">
+              <%= link_to "Donate Now", "https://www.domore24.org/ophrescue", :class => "btn btn-primary btn-large" %>
+            </div>
+          </div>
+<% end %>
+          <div class="item">
+            <%= image_tag "lustreart.jpg", alt: "Lustre Art" %>
+            <div class="carousel-caption">
+              <%= link_to "Contact", "https://www.facebook.com/LustreArt", :class => "btn btn-primary btn-large" %>
+>>>>>>> flash_refactor
             </div>
           </div>
         </div>

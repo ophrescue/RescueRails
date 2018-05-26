@@ -70,7 +70,7 @@
                     <% end %>
                     <% if current_user.active? || current_user.admin? %>
                       <li><%= link_to "DNA List", :controller => "banned_adopters" %></li>
-                      <li><%= link_to "Manage Dogs", :controller => "dogs", :status => "active" %></li>
+                      <li><%= link_to "Dog Manager", :controller => "dogs", :action => "manager_index" %></li>
                       <li><%= link_to "Users", users_path %></li>
                     <% end %>
                     <% if can_dl_resources? %>

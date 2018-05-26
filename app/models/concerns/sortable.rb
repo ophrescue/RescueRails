@@ -8,6 +8,7 @@ module Sortable
     if text_search? && unspecified_sort?
       @dogs = @dogs.sort_with_search_term_matches_first(search_term)
     else
+      puts "#{@dogs.order( sort = "#{sort_column} #{sort_direction}" ).to_sql}"
       @dogs = @dogs.order( sort = "#{sort_column} #{sort_direction}" )
     end
   end

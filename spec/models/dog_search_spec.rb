@@ -78,6 +78,7 @@ describe DogSearch do
         let(:params){ {sort: 'name', direction: 'asc'} }
 
         it 'should pass' do
+          puts "names: #{results.map(&:name)}"
           expect(results.map(&:name)).to be_sorted(:ascending)
         end
       end

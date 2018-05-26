@@ -72,32 +72,6 @@ describe DogSearch do
         end
       end
 
-      context 'sort by name, confirm that rspec matcher anomaly is fixed' do
-        # selection of names is to trigger TravisCI sorting difference from development and production
-        let!(:davinci){ create(:dog, name: "Da Vinci") }
-        let!(:dallas){ create(:dog, name: "Dallas") }
-        let(:params){ {sort: 'name', direction: 'asc'} }
-
-        it 'should pass' do
-          if ActiveRecord::Base.connection.current_database == "travis_ci_test"
-            expect(results.map(&:name)).to be_sorted(:descending)
-          else
-            expect(results.map(&:name)).to be_sorted(:ascending)
-          end
-        end
-      end
-
-      context 'confirm postgres compares strings as expected' do
-        let(:bool){ ActiveRecord::Base.connection.execute("select 'Da Vinci' < 'Dallas' as bool").first["bool"]}
-        it "really should return true. when this test fails on TravisCI, we'll know that the postgres sorting has changed" do
-          if ActiveRecord::Base.connection.current_database == "travis_ci_test"
-            expect(bool).to be false
-          else
-            expect(bool).to be true
-          end
-        end
-      end
-
       context 'searching for dogs by name with a desc sort' do
         let!(:tt) { create(:dog, name: 'tt') }
         let!(:butter) { create(:dog, name: 'butter') }

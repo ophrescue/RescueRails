@@ -88,7 +88,7 @@ class AdoptersController < ApplicationController
 
       NewAdopterMailer.adopter_created(@adopter.id).deliver_later
       AdoptAppMailer.adopt_app(@adopter.id).deliver_later
-      flash[:success] = "adoptsuccess"
+      flash[:success] = render_to_string partial: 'adopt_success_message'
       redirect_to root_path(adoptapp: "complete")
     else
       render 'new'

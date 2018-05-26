@@ -54,27 +54,7 @@
   <% end %>
   <div class="container">
     <% flash.each do |key, value| %>
-      <% if value == "adoptsuccess" %>
-        <div class="alert alert-block alert-success">
-          <a class="close" href="/">&times;</a>
-              <p><strong>Success!</strong> Your adoption application has been submitted successfully. We will review
-              your application and contact you in the next 2 business days.</p>
-              <p><strong>Next Steps:</strong></p>
-              <ul>
-                <li>Contact your references and let them know we will be calling.</li>
-                <li>Call your vet and verify that any current dogs or cats are spayed/neutered and up to date on shots.</li>
-                <li>Give your vet permission to release records to us.</li>
-                <li>Contact us at <strong>adopt@ophrescue.org</strong> if you want to make any changes to your application, or withdraw it.</li>
-              </ul>
-              <p>For more information please read our adoption guide and other resources.</p>
-              <div class="alert-actions">
-                  <a class="btn small primary" href="/guide">Adoption Guide</a>
-                  <a class="btn small primary" href="/resources">Resources for Adopters</a>
-                </div>
-        </div>
-      <% else %>
-        <%= content_tag(:div, value, :class => "alert alert-#{key}") %>
-      <% end %>
+      <%= content_tag(:div, value, :class => "alert alert-#{key}") %>
     <% end %> 
     <% if signed_in? && current_user.out_of_date? %>
       <div class="alert alert-block alert-warning">

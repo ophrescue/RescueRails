@@ -109,6 +109,8 @@ class Dog < ApplicationRecord
     'coming soon'
   ]
 
+  UNAVAILABLE_STATUSES = ['adopted', 'completed', 'not available']
+
   PETFINDER_STATUS = {
     'adoptable' => 'A',
     'adoption pending' => 'P',
@@ -190,6 +192,10 @@ class Dog < ApplicationRecord
 
   def adopted?
     status == 'adopted'
+  end
+
+  def unavailable?
+    UNAVAILABLE_STATUSES.include?(status)
   end
 
   def attributes_to_audit

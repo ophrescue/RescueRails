@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative '../helpers/rspec_matchers'
 
 describe DogSearch do
   describe '.search' do

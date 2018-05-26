@@ -73,24 +73,28 @@ describe DogSearch do
       end
 
       context 'sort by name, confirm that rspec matcher anomaly is fixed' do
+        # selection of names is to trigger TravisCI sorting difference from development and production
         let!(:davinci){ create(:dog, name: "Da Vinci") }
         let!(:dallas){ create(:dog, name: "Dallas") }
         let(:params){ {sort: 'name', direction: 'asc'} }
 
         it 'should pass' do
-          expect(results.map(&:name)).to be_sorted(:ascending)
+          if ActiveRecord::Base.connection.current_database == "travis_ci_test"
+            expect(results.map(&:name)).to be_sorted(:descending)
+          else
+            expect(results.map(&:name)).to be_sorted(:ascending)
+          end
         end
       end
 
       context 'confirm postgres compares strings as expected' do
-        puts "Dallas #{ActiveRecord::Base.connection.execute("select array_agg(t) codes from (select ascii(regexp_split_to_table('Dallas', '')) as t) x").first["codes"]}"
-        puts "Da Vinci #{ActiveRecord::Base.connection.execute("select array_agg(t) codes from (select ascii(regexp_split_to_table('Da Vinci', '')) as t) x").first["codes"]}"
-        puts "Postgres says 'Da Vinci < Dallas' is #{ActiveRecord::Base.connection.execute("select 'Da Vinci' < 'Dallas' as bool").first["bool"]}"
-        puts "Postgres configuration #{ActiveRecord::Base.connection.execute("select name,setting from pg_settings where name like '%encoding'").map(&:values)}"
-        puts "Postgres configuration #{ActiveRecord::Base.connection.execute("select name,setting from pg_settings where name like 'lc_collate'").map(&:values)}"
         let(:bool){ ActiveRecord::Base.connection.execute("select 'Da Vinci' < 'Dallas' as bool").first["bool"]}
-        it 'really should pass' do
-          expect(bool).to be true
+        it "really should return true. when this test fails on TravisCI, we'll know that the postgres sorting has changed" do
+          if ActiveRecord::Base.connection.current_database == "travis_ci_test"
+            expect(bool).to be false
+          else
+            expect(bool).to be true
+          end
         end
       end
 

@@ -78,8 +78,14 @@ describe DogSearch do
         let(:params){ {sort: 'name', direction: 'asc'} }
 
         it 'should pass' do
-          puts "names: #{results.map(&:name)}"
           expect(results.map(&:name)).to be_sorted(:ascending)
+        end
+      end
+
+      context 'confirm postgres compares strings as expected' do
+        let(:bool){ ActiveRecord::Base.connection.execute("select 'Da Vinci' < 'Dallas' as bool").first["bool"]}
+        it 'really should pass' do
+          expect(bool).to be true
         end
       end
 

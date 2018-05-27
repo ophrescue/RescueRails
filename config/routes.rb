@@ -50,7 +50,7 @@ RescueRails::Application.routes.draw do
   get '/signout',              to: 'sessions#destroy'
 
   get '/sign_in',              to: 'sessions#new', as: 'sign_in'
-  delete '/sign_out' => 'clearance/sessions#destroy', as: 'sign_out'
+  delete '/sign_out',          to: 'clearance/sessions#destroy', as: 'sign_out'
 
   get '/adopt',                to: 'adopters#new'
 

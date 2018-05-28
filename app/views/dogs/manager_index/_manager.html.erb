@@ -23,16 +23,19 @@
                 <div>
                   <input type="text" class="form-control" id='search' name='search' value=<%=params[:search]%> >
                 </div>
-                <div class="input-group-append">
-                  <button class="btn btn-success" type="button">
+                <div class="input-group-append" style="display:<%= search_string_present? ? 'inline' : 'none' %>">
+                  <button class="btn btn-light" type="button" id='search_reset'>
+                    <i class='fa fa-sm fa-times' id='reset_icon'></i>
+                  </button>
+                  <button class="btn btn-success" type="button" id='search_button'>
                     <i class='fa fa-sm fa-search' id='search_icon'></i>
                   </button>
                 </div>
               </div>
             </li>
-            <%- ["Breed", "Tracking ID", "Name", "Microchip"].to_id_and_value_hash.each do |value, text| %>
-              <li id=<%= value %> class=<%= is_selected?('search',value) %> >
-                <input type='hidden' name='search_field' value=<%= value %> <%= is_disabled?('search',value) %> />
+            <%- Dog::SEARCH_FIELDS.each do |value, text| %>
+              <li id=<%= value %> class=<%= is_selected_search?(value) %> >
+                <input type='hidden' name='search_field_index' value=<%= value %> <%= is_disabled_search?(value) %> />
                 <span class="check fa fa-check"></span>
                 <span class="filter_option"><%= text %></span>
               </li>
@@ -54,7 +57,7 @@
     <%= render partial: 'dogs/manager_index/filter_info_group', locals: {group_id: 'is_size', group_text: "Size", values: Dog::SIZES.to_id_and_value_hash} %>
     <%= render partial: 'dogs/manager_index/filter_info_group', locals: {group_id: 'has_flags', group_text: "Flags", values: Dog::FILTER_FLAGS} %>
     <%= render partial: 'dogs/manager_index/filter_info_group', locals: {group_id: 'sort', group_text: "Sort", values: Sortable::SORT_FIELDS} %>
-    <%= render partial: 'dogs/manager_index/filter_text_info_group', locals: {group_id: 'search', group_text: "Search by", value: "#{params['search_field']} matches #{params['search']}" } %>
+    <%= render partial: 'dogs/manager_index/filter_text_info_group', locals: {group_id: 'search', group_text: "Search by:", value: "#{@filter_params['search_field_text']} matches #{params['search']}" } %>
     <a href="#" id="reset_message" ><i class="fa fa-lg fa-times"></i> Reset filter, search and sort</a>
   </div>
 </div>
@@ -64,7 +67,7 @@
     <%= render :partial => "dogs/manager_index/manager_dog", :collection => @dogs, :as => :dog %>
     <div> <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %> </div>
   <% else %>
-    <div><h3>No dogs found, matching the specified criteria</h3></div>
+    <div id="none_found"><h4>No dogs were found that match the specified criteria</h3></div>
   <% end %>
 </div>
 

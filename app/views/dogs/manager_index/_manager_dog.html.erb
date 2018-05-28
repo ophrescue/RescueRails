@@ -1,11 +1,11 @@
 <div class='row dog line-1'>
   <div class='col-3'>
-    <span class='name'><%= link_to "##{dog.tracking_id} #{dog.name.titleize}", dog %>:</span>
+    <%= link_to "<span class='id'>##{dog.tracking_id}</span>&nbsp;<span class='name'>#{dog.name.titleize}</span>".html_safe, dog %>:
   </div>
   <div class='col'>
     <span><%= size_abbrev(dog.size) %>,</span>
-    <span class='age'><%= dog.age ? dog.age.titleize : " " %>,</span>
-    <span class='breed'><%= dog.breeds.join(" x ").html_safe %>,</span>
+    <span class='age'><%= dog.age ? dog.age.titleize : " " %></span>
+    <span class='breed'><%= dog.breeds.join(" x ").html_safe %></span>,
     <span class='status'>
       <% if (params[:status] == nil) || (params[:status] == "active")  %>
         <%= dog.status.titleize %>

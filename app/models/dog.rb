@@ -152,6 +152,8 @@ class Dog < ApplicationRecord
   GENDERS = %w[Male Female]
   validates_inclusion_of :gender, in: GENDERS, allow_blank: true
 
+  SEARCH_FIELDS = ["Breed", "Tracking ID", "Name", "Microchip"].to_id_and_value_hash
+
   before_save :update_adoption_date
 
   scope :is_age,                                  ->(age) { where age: age }

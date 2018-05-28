@@ -37,10 +37,10 @@ class DogFilter
 
 
   def filtering_params
-    params.slice( "is_age", "is_size", "is_status", "is_breed", "has_flags" )
+    params.slice( "is_age", "is_size", "is_status", "has_flags" )
   end
 
   def search_params
-    params.slice( "search", "search_field" ).values
+    params.slice( "search", "search_field_index" ).values
   end
 end

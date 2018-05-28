@@ -95,13 +95,15 @@ class DogsController < ApplicationController
 
   def manager_index
     puts "incoming params #{params}"
-    default_manager_view = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field").empty?
+    default_manager_view = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field_index").empty?
     # TODO THIS IS A HACK THAT NEEDS CLEANUP!!
     full_params = ["is_age", "is_status", "is_size", "has_flags"].inject({}){|hash,attr| hash[attr] = (params && params[attr]) || []; hash}
     full_params["sort"] = params["sort"] || "tracking_id"
     full_params["is_breed"] = params["is_breed"] || ""
     full_params["search"] = params["search"] || ""
-    full_params["search_field"] = params["search_field"] || ""
+    full_params["search_field_index"] = params["search_field_index"] || ""
+    #default_manager_view = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field_index").empty?
+    full_params["search_field_text"] = params["search_field_index"] && Dog::SEARCH_FIELDS[params["search_field_index"]]
     puts "merged params #{full_params}"
     params = full_params
     @dogs = case
@@ -114,7 +116,7 @@ class DogsController < ApplicationController
             end
     @count = @dogs.count
 
-    @filter_params = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field")
+    @filter_params = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field_index", "search_field_text")
 
     puts "filter_params #{@filter_params}"
 

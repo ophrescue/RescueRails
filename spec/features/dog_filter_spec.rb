@@ -9,48 +9,49 @@ feature 'Filter Dogs List', js: true do
   end
 
   let!(:active_user) { create(:user) }
-  let!(:primary_lab) { create(:dog, :primary_lab, :active_dog, name: "Zeke").name.titleize }
-  let!(:secondary_golden) { create(:dog, :secondary_golden, :active_dog, name: "Abby").name.titleize }
-  let!(:secondary_westie) { create(:dog, :secondary_westie, :active_dog, name: "Nairobi").name.titleize }
-
+  let!(:primary_lab){create(:dog, :primary_lab, :active_dog, name: "Zeke").name.titleize }
+  let!(:secondary_westie){create(:dog, :secondary_westie, :active_dog, name: "Nairobi").name.titleize }
+  let!(:secondary_golden){create(:dog, :secondary_golden, :active_dog, name: "Abby").name.titleize }
+  let(:all_dogs_sorted_by_id){ [["#1","Zeke", "Labrador Retriever"],
+                                ["#2", "Nairobi", "West Highland Terrier"],
+                                ["#3", "Abby", "Golden Retriever"] ] }
 
   scenario 'can filter results with breed partial match' do
     visit '/dogs'
     click_link("Manager View")
     expect(page).to have_selector('h1', text: 'Dog Manager')
-    expect(page).to have_selector('tbody#dogs a', text: primary_lab)
-    expect(page).to have_selector('tbody#dogs', text: 'Labrador Retriever')
-    expect(page).to have_selector('tbody#dogs a', text: secondary_westie)
-    expect(page).to have_selector('tbody#dogs', text: 'West Highland Terrier')
-    expect(page).to have_selector('tbody#dogs a', text: secondary_golden)
-    expect(page).to have_selector('tbody#dogs', text: 'Golden Retriever')
-    fill_in('is_breed', with: "retriev")
-    find_button(value: 'Filter').click
-    expect(page).to have_selector('tbody#dogs a', text: primary_lab)
-    expect(page).to have_selector('tbody#dogs', text: 'Labrador Retriever')
-    expect(page).to have_selector('tbody#dogs a', text: secondary_golden)
-    expect(page).to have_selector('tbody#dogs', text: 'Golden Retriever')
-    expect(page).not_to have_selector('tbody#dogs a', text: secondary_westie)
-    expect(page).not_to have_selector('tbody#dogs', text: 'West Highland Terrier')
-    expect(page).to have_field('is_breed', with: 'retriev')
+    expect(dogs_list).to eq all_dogs_sorted_by_id
+
+    search_by("Breed", "retriev")
+    expect(dogs_list).to eq [["#1","Zeke", "Labrador Retriever"],
+                             ["#3", "Abby", "Golden Retriever"] ]
+    click_button("Search")
+    expect(page.find('input#search').value).to eq 'retriev'
+    expect(page.find('#search ul>li#breed')['class']).to eq 'selected'
+    expect(page.find('#search_icon')).to be_visible
+    expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Search by:")
+    expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Breed matches retriev")
+    expect(page).to have_selector('#reset_message')
+    page.find('#reset_message').click
+    expect(dogs_list).to eq all_dogs_sorted_by_id
   end
 
-  scenario 'can sort filter results by dog breed' do
+  scenario 'can search by breed and sort results by dog name' do
     visit '/dogs'
     click_link("Manager View")
-    fill_in('is_breed', with: "retriev")
-    find_button(value: 'Filter').click
+    search_by("Breed", "retriev")
     expect(dog_names).to match_array ["Abby", "Zeke"]
-    click_link('sort_by_name')
+    sort_by("name")
     expect(dog_names).to eq ["Abby", "Zeke"]
-    click_link('sort_by_name')
-    expect(dog_names).to eq ["Zeke", "Abby"]
+    #sort_by("name") # later we'll reverse the direction on second click TODO
+    #expect(dog_names).to eq ["Zeke", "Abby"]
+    click_button("Search")
+    click_button('search_reset') # remove the search-by-breed, sort-by-name remains
+    expect(dog_names).to eq ["Abby", "Nairobi", "Zeke"]
+    click_button("Search")
+    # search field should be empty, name should be unselected, reset and search buttons not visible
+    page.find('#reset_message').click
+    expect(dogs_list).to eq all_dogs_sorted_by_id
   end
 
-  scenario 'reset filter results displays all dogs' do
-    visit "/dogs_manager?commit=Filter&direction=desc&is_breed=retriev&sort=name"
-    expect(dog_names).to match_array ["Abby", "Zeke"]
-    click_link("Reset")
-    expect(dog_names).to match_array ["Abby", "Zeke", "Nairobi"]
-  end
 end

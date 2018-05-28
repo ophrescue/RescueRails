@@ -9,7 +9,10 @@ MessageBar.init = function(){
     if(_.isArray(filter_params[group])){
       if(filter_params[group].indexOf(value) == -1) {$this.hide()}else{$this.show()}}
     else if(_.isString(filter_params[group])){
-      if((filter_params[group] == value) || ((filter_params[group] == $this.text()) && $this.text().length > 0)) {$this.show()}else{$this.hide()}};
+      if((filter_params[group] == value) ||
+        ((filter_params[group] == $this.text()) && $this.text().length > 0) ||
+        ((group == 'search') && (filter_params[group].length > 0))
+      ) {$this.show()}else{$this.hide()}};
   });
   $('#filter_info .message_group').each(function(){
     var $this = $(this);
@@ -161,7 +164,7 @@ $(function(){
 //  $(document).on('keyup', '#filter_controls #is_breed', GlobalMultiSelect.filter_by_text_search );
   $(document).on('keyup', '#filter_controls input#search', GlobalMultiSelect.filter_by_text_search );
   $(document).on('focus', '#filter_controls input#search', GlobalMultiSelect.ensure_attribute_selected );
-  $(document).on('click', '#filter_controls .dropdown-menu #search button', GlobalMultiSelect.fetch );
+  $(document).on('click', '#filter_controls .dropdown-menu .input-group#search button', GlobalMultiSelect.fetch );
   MessageBar.init();
 });
 

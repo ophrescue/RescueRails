@@ -25,7 +25,13 @@
   padding-bottom: 6px;
 
   .foster_txt {
-    text-align: right;
+    text-align: left;
+  }
+
+  @include media-breakpoint-up(md) {
+    .foster_txt {
+      text-align: right;
+    }
   }
 }
 

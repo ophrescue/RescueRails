@@ -51,6 +51,11 @@ class Photo < ApplicationRecord
   scope :hidden, -> { where(is_private: true) }
 
   def self.no_photo_url
-    "no_photo-320x320.png"
+    "/assets/no_photo-205x195.png"
+  end
+
+  # galleria dataSource format
+  def to_carousel
+    {image: photo.url(:original), thumb: photo.url(:medium)}
   end
 end

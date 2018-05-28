@@ -33,6 +33,9 @@ feature 'Filter Dogs List', js: true do
     expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Breed matches retriev")
     expect(page).to have_selector('#reset_message')
     page.find('#reset_message').click
+    click_button("Search")
+    expect(page.find('input#search').value).to be_blank
+    expect(page.find('#search ul>li#breed')['class']).to eq ''
     expect(dogs_list).to eq all_dogs_sorted_by_id
   end
 
@@ -45,11 +48,6 @@ feature 'Filter Dogs List', js: true do
     expect(dog_names).to eq ["Abby", "Zeke"]
     #sort_by("name") # later we'll reverse the direction on second click TODO
     #expect(dog_names).to eq ["Zeke", "Abby"]
-    click_button("Search")
-    click_button('search_reset') # remove the search-by-breed, sort-by-name remains
-    expect(dog_names).to eq ["Abby", "Nairobi", "Zeke"]
-    click_button("Search")
-    # search field should be empty, name should be unselected, reset and search buttons not visible
     page.find('#reset_message').click
     expect(dogs_list).to eq all_dogs_sorted_by_id
   end

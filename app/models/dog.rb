@@ -198,10 +198,6 @@ class Dog < ApplicationRecord
     [ (primary_breed&.name), (secondary_breed&.name) ].compact
   end
 
-  def unavailable
-    UNAVAILABLE_STATUSES.include?(status)
-  end
-
   def primary_photo_url
     if Rails.env.development?
       # helps with formulating the css, and UI design, on the DogsController#index page

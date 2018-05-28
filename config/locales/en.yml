@@ -2,6 +2,13 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  dogs:
+    show:
+      status_definitions:
+        coming_soon: 'This dog will be entering our foster care very soon. You may apply to adopt this dog, or check back soon as we add more photos and details.'
+        adoptable: 'This dog is currently available for adoption. There may be other applicants interested in this dog, so apply right away.'
+        adoption_pending: 'An approved adopter is seriously considering this dog. Apply to adopt, in case the dog becomes available.'
+
   title:
     pages:
       home: 'All breed dog rescue based in Virgina, Maryland, Washington DC and South Central PA'

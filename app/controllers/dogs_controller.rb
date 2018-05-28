@@ -72,7 +72,7 @@ class DogsController < ApplicationController
   before_action :add_dogs_user, only: %i(new create)
   before_action :load_dog, only: %i(show edit update destroy)
   before_action :edit_dog_check, only: %i(edit update)
-  before_action :select_bootstrap41, only: %i(index manager_index)
+  before_action :select_bootstrap41, only: %i(index manager_index show)
 
   # find a better home for this
   PER_PAGE = 30
@@ -88,7 +88,7 @@ class DogsController < ApplicationController
     for_page(params[:page])
 
     respond_to do |format|
-      format.html { render :index }
+      format.html { render 'dogs/gallery/index' }
       format.json { render json: @dogs }
     end
   end
@@ -122,12 +122,14 @@ class DogsController < ApplicationController
 
     for_page(params[:page])
 
+    render 'dogs/manager/index'
   end
 
 
   def show
     @title = @dog.name
-    flash[:error]= render_to_string partial: 'unavailable_flash_message' if @dog.unavailable?
+    @carousel = Carousel.new(@dog)
+    flash.now[:warning]= render_to_string partial: 'unavailable_flash_message' if @dog.unavailable?
   end
 
   def new

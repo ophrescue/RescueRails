@@ -1,0 +1,18 @@
+.title_row {
+  h1 {
+    margin-right: 18px;
+    display: inline-block;
+  }
+
+  span {
+    font-size: 1.2rem;
+  }
+
+  a.fa-info {
+    position: relative;
+    top: -6px;
+    margin-left: 2px;
+    cursor: pointer;
+  }
+
+}

@@ -1,10 +1,9 @@
 @import 'dogs_index/gallery_view';
 @import 'dogs_index/manager_view';
+@import 'dogs_index/show';
 
 .title_row {
   margin-top: 20px;
-}
 
-.title_row a {
-  margin-top: 8px;
+  a { margin-top: 8px; }
 }

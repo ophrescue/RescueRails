@@ -41,7 +41,8 @@ class Photo < ApplicationRecord
             s3_permissions: "public-read",
             path: ":rails_root/public/system/dog_photo/:hash.:extension",
             url: "/system/dog_photo/:hash.:extension",
-            hash_secret: "80fd0acd1674d7efdda5b913a7110d5c955e2d73"
+            hash_secret: "80fd0acd1674d7efdda5b913a7110d5c955e2d73",
+            preserve_files: !Rails.env.production? # in dev and test we only read AWS, never write/delete
 
   validates_attachment_presence :photo
   validates_attachment_size :photo, less_than: 10.megabytes

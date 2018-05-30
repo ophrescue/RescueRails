@@ -223,8 +223,16 @@ class Dog < ApplicationRecord
     status == 'adopted'
   end
 
+  def status_key
+    status.gsub(/\s/,"_")
+  end
+
   def unavailable?
     UNAVAILABLE_STATUSES.include?(status)
+  end
+
+  def is_accepting_applications?
+    PUBLIC_STATUSES.include?(status)
   end
 
   def attributes_to_audit

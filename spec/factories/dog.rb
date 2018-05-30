@@ -35,6 +35,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_photos do
+      after(:create) do |dog|
+        3.times { create(:photo, dog: dog, is_private: false) }
+      end
+    end
+
     trait :active_dog do
       status { Dog::ACTIVE_STATUSES.sample }
     end

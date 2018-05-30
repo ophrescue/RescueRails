@@ -93,6 +93,7 @@ class DogsController < ApplicationController
   end
 
   def manager_index
+    index unless current_user.active?
     @dogs = case
             when params[:commit] == 'Search' # search button was clicked
               DogSearch.search(params: params)

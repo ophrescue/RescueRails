@@ -92,8 +92,11 @@ class DogsController < ApplicationController
     end
   end
 
+  # access permitted if:
+  #       user is logged-in
+  #       and user is active
   def manager_index
-    index unless current_user.active?
+    index unless current_user&.active?
     @dogs = case
             when params[:commit] == 'Search' # search button was clicked
               DogSearch.search(params: params)

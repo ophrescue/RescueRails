@@ -35,7 +35,6 @@ namespace :rescue_rails do
 
   desc "populate users"
   task populate_users: :environment do
-    FactoryBot.find_definitions
     User.destroy_all
     FactoryBot.create(:user, :admin, :with_known_authentication_parameters)
     25.times do

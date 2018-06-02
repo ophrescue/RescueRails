@@ -54,6 +54,11 @@ RescueRails::Application.routes.draw do
   get '/shelter-partners',                  to: 'pages#shelters'
   get '/training-partners',                 to: 'pages#training_partners'
 
+  get '/international',                                 to: 'pages#international'
+  get '/international/kaw',                             to: 'pages#international-kaw'
+  get '/international/tcspca',                          to: 'pages#international-tcspca'
+  get '/international/volunteer-takes-oph-to-india',    to: 'pages#international-article'
+
   get '/guide',                to: 'pages#guide'
   get '/aboutus',              to: 'pages#aboutus'
 

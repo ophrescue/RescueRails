@@ -93,7 +93,11 @@ class DogsController < ApplicationController
     end
   end
 
+  # access permitted if:
+  #       user is logged-in
+  #       and user is active
   def manager_index
+    index unless current_user&.active?
     puts "incoming params #{params}"
     default_manager_view = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field_index").empty?
     # TODO THIS IS A HACK THAT NEEDS CLEANUP!!

@@ -29,6 +29,8 @@ FactoryBot.define do
     no_cats                 { [true, false].sample }
     no_kids                 { [true, false].sample }
     description { Faker::Lorem.paragraphs(3,true).join("\n\n") }
+    medical_summary { Faker::Lorem.paragraphs(1,true) }
+    behavior_summary { Faker::Lorem.paragraphs(1,true) }
 
     after(:create) do |dog|
       create(:comment, :commentable_type => 'Dog', :commentable_id => dog.id, :content => Faker::Lorem.sentence )

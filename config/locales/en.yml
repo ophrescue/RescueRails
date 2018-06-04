@@ -2,7 +2,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  dogs:
+  dogs_gallery:
     show:
       status_definitions:
         coming_soon: 'This dog will be entering our foster care very soon. You may apply to adopt this dog, or check back soon as we add more photos and details.'

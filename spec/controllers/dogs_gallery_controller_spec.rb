@@ -1,17 +1,3 @@
-#    Copyright 2017 Operation Paws for Homes
-#
-#    Licensed under the Apache License, Version 2.0 (the "License");
-#    you may not use this file except in compliance with the License.
-#    You may obtain a copy of the License at
-#
-#        http://www.apache.org/licenses/LICENSE-2.0
-#
-#    Unless required by applicable law or agreed to in writing, software
-#    distributed under the License is distributed on an "AS IS" BASIS,
-#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#    See the License for the specific language governing permissions and
-#    limitations under the License.
-
 # == Schema Information
 #
 # Table name: dogs
@@ -60,26 +46,39 @@
 #  sponsored_by         :string(255)
 #  shelter_id           :integer
 #  medical_summary      :text
-#
+require 'rails_helper'
 
-class DogsController < ApplicationController
+describe DogsGalleryController, type: :controller do
+  describe 'GET #index' do
+    let!(:adoptable_dog) { create(:dog, status: 'adoptable', tracking_id: 102) }
+    let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending', tracking_id: 105) }
+    let!(:coming_soon_dog) { create(:dog, status: 'coming soon', tracking_id: 100) }
 
-  PER_PAGE = 30
+    let!(:adopted_dog) { create(:dog, status: 'adopted', tracking_id: 1) }
+    let!(:on_hold_dog) { create(:dog, status: 'on hold', tracking_id: 2) }
+    let!(:not_available_dog) { create(:dog, status: 'not available', tracking_id: 3) }
 
-  def show
-    @title = @dog.name
-    @carousel = Carousel.new(@dog)
-    @adoptapet = Adoptapet.new(@dog.foster&.region)
-    flash.now[:warning]= render_to_string partial: 'unavailable_flash_message' if @dog.unavailable?
+    subject(:get_index) { get :index, params: {} }
+
+    it 'Only adoptable, adoption pending or coming soon dogs should be displayed in order by tracking id' do
+      get_index
+      expect(assigns(:dogs)).to eq([coming_soon_dog, adoptable_dog, adoption_pending_dog])
+    end
+
+    it 'with autocomplete parameter set all dogs are returned' do
+      get :index, params: {autocomplete: true}
+      expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog])
+    end
   end
 
-  private
-  def load_dog
-    @dog = Dog.find(params[:id])
+  describe 'GET #show' do
+    let(:dog) { create(:dog) }
+
+    it 'is successful' do
+      get :show, params: { id: dog.id }
+      expect(response).to be_successful
+    end
   end
 
-  def for_page(page = nil)
-    @dogs = @dogs.paginate(per_page: PER_PAGE, page: page || 1)
-  end
 
 end

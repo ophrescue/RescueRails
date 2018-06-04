@@ -12,8 +12,8 @@
     <% end %>
     <%# large-format (>=md) 2/12 width, small format (<md) half-width %>
     <div class="col-6 col-md-2 mb-2 mb-sm-0">
-      <%= link_to("Gallery View", dogs_path, class: "btn btn-sm") %>
+      <%= link_to("Gallery View", dogs_gallery_index_path, class: "btn btn-sm switch_view") %>
     </div>
   </div>
-  <%= render 'dogs/manager/manager' %>
+  <%= render partial: 'manager' %>
 </div>

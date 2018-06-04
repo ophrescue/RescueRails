@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row title_row">
-    <%# large-format (>=md) 8/12 width, small format (<md) full-width %>
-    <div class="col-12 col-md-8">
+    <%# large-format (>=md) 10/12 width, small format (<md) full-width %>
+    <div class="col-12 col-md-10">
       <h1>Our Dogs</h1>
     </div>
       <% if current_user&.active %>
         <%# large-format (>=md) 2/12 width, small format (<md) half-width %>
         <div class="col-6 col-md-2">
-          <%= link_to("Manager View", dogs_manager_path, class: "btn btn-sm") %>
+          <%= link_to("Manager View", dogs_path, class: "btn btn-sm switch_view") %>
         </div>
     <% end %>
   </div>
@@ -15,7 +15,7 @@
 
   <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
   <div class="row gallery" id="dogs">
-    <%= render partial: 'dogs/gallery/dog', collection: @dogs %>
+    <%= render partial: 'dogs_gallery/dog', collection: @dogs %>
   </div>
   <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 

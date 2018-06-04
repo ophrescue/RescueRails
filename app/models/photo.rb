@@ -29,6 +29,7 @@
 #
 
 class Photo < ApplicationRecord
+  extend ActionView::Helpers::AssetUrlHelper
   belongs_to :dog, touch: true
   acts_as_list scope: :dog
 

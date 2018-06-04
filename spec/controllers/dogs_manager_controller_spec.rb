@@ -48,12 +48,12 @@
 #  medical_summary      :text
 require 'rails_helper'
 
-describe DogsController, type: :controller do
+describe DogsManagerController, type: :controller do
   let!(:admin) { create(:user, :admin) }
 
   describe 'GET #index' do
     context 'user is logged in' do
-      let!(:adoptable_dog) { create(:dog, name: 'adoptable', status: 'adoptable') }
+      let!(:adoptable_dog) { create(:dog, name: 'adoptable', status: 'adoptable', is_special_needs: false) }
       let!(:adoption_pending_dog) { create(:dog, name: 'adoption pending', status: 'adoption pending', is_special_needs: false) }
       let!(:coming_soon_dog) { create(:dog, name: 'coming soon', status: 'coming soon', is_special_needs: false) }
       let!(:adopted_dog) { create(:dog, name: 'adopted', status: 'adopted', is_special_needs: false) }
@@ -65,43 +65,28 @@ describe DogsController, type: :controller do
 
       before do
         allow(controller).to receive(:signed_in?).and_return(true)
+        allow(controller).to receive(:active_user).and_return(true)
       end
 
-      it 'in manager mode all dogs are returned' do
-        get :manager_index, params: {}
-        expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
-      end
-
-      it 'in gallery mode only publicly viewable dogs are returned' do
+      it 'all dogs are returned in #index' do
         get :index, params: {}
-        expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, baby_small_special_needs_dog])
-      end
-
-      it 'with autocomplete parameter set all dogs are returned' do
-        get :index, params: {autocomplete: true}
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
       end
 
       it 'can filter by age, size and flags' do
-        get :manager_index, params: {is_age: 'baby', is_size: 'small', cb_special_needs: true, commit: 'Filter'}
+        get :index, params: {is_age: 'baby', is_size: 'small', has_flags: ['special_needs']}
         expect(assigns(:dogs)).to match_array([baby_small_special_needs_dog])
       end
     end
 
     context 'public user' do
-      let!(:adoptable_dog) { create(:dog, status: 'adoptable', tracking_id: 102) }
-      let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending', tracking_id: 105) }
-      let!(:coming_soon_dog) { create(:dog, status: 'coming soon', tracking_id: 100) }
-
-      let!(:adopted_dog) { create(:dog, status: 'adopted', tracking_id: 1) }
-      let!(:on_hold_dog) { create(:dog, status: 'on hold', tracking_id: 2) }
-      let!(:not_available_dog) { create(:dog, status: 'not available', tracking_id: 3) }
+      let!(:dog) { create(:dog) }
 
       subject(:get_index) { get :index, params: {} }
 
-      it 'Only adoptable, adoption pending or coming soon dogs should be displayed in order by tracking id' do
-        get_index
-        expect(assigns(:dogs)).to eq([coming_soon_dog, adoptable_dog, adoption_pending_dog])
+      it 'redirected to signin' do
+        expect(subject).to redirect_to(signin_path)
+        expect(assigns(:dogs)).to be_nil
       end
     end
   end

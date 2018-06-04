@@ -79,6 +79,7 @@ Rails.application.configure do
       bucket: 'ophrescue-production'
     },
     s3_protocol: 'https',
+    s3_region: 'ap-northeast-1',
     url: 's3.amazonaws.com'
   }
 

@@ -14,14 +14,15 @@ RescueRails::Application.routes.draw do
 
   resources :comments, except: %i[new]
 
-  resources :dogs do
+  resources :dogs_gallery, only: %i[index show]
+
+  resources :dogs, controller: 'dogs_manager' do
     resources :comments
     resources :photos do
       collection { post :sort }
     end
     resources :adoptions
   end
-  get '/dogs_manager', to: 'dogs#manager_index', as: 'dogs_manager'
 
   resources :sessions, only: %i[new create destroy]
 

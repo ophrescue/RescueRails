@@ -48,6 +48,6 @@ module AboutDogHelper
   end
 
   def male?
-    @dog.gender=="M"
+    @dog.gender=="Male"
   end
 end

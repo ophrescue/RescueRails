@@ -201,14 +201,22 @@ class Dog < ApplicationRecord
   def primary_photo_url
     if Rails.env.development?
       # helps with formulating the css, and UI design, on the DogsController#index page
-      # probably shouldn't be used longterm,
-      # but it would be good to have a longterm solution that has actual photos
+      # shouldn't be used longterm, as it uses actual urls, which will expire in time.
+      # it would be good to have a longterm solution that has actual photos
       AWS_PHOTO_URLS.sample()
     else
       photos.empty? ?
         Photo.no_photo_url :
         photos.visible.first.photo.url(:medium)
     end
+  end
+
+  def primary_breed_name
+    primary_breed&.name
+  end
+
+  def secondary_breed_name
+    secondary_breed&.name
   end
 
   def photo_alt_text

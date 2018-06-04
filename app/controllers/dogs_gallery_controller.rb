@@ -62,24 +62,26 @@
 #  medical_summary      :text
 #
 
-class DogsController < ApplicationController
+class DogsGalleryController < DogsController
+  autocomplete :breed, :name, full: true
 
-  PER_PAGE = 30
+  before_action :load_dog, only: %i(show)
+  before_action :select_bootstrap41, only: %i(index show)
 
-  def show
-    @title = @dog.name
-    @carousel = Carousel.new(@dog)
-    @adoptapet = Adoptapet.new(@dog.foster&.region)
-    flash.now[:warning]= render_to_string partial: 'unavailable_flash_message' if @dog.unavailable?
-  end
+  def index
+    @dogs = case
+            when params[:autocomplete] # it's autocomplete of dog names on the adopters/:id page
+              Dog.autocomplete_name(params[:search])
+            else # gallery view
+              Dog.gallery_view
+            end
 
-  private
-  def load_dog
-    @dog = Dog.find(params[:id])
-  end
+    for_page(params[:page])
 
-  def for_page(page = nil)
-    @dogs = @dogs.paginate(per_page: PER_PAGE, page: page || 1)
+    respond_to do |format|
+      format.html { render 'index' }
+      format.json { render json: @dogs }
+    end
   end
 
 end

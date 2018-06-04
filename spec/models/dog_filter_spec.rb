@@ -170,14 +170,14 @@ describe DogFilter do
         let!(:secondary_breed_dog) { create(:dog, :secondary_westie) }
 
         it 'finds by primary breed partial match' do
-          params = { is_breed: 'lab' }.stringify_keys
+          params = { search_field_index: 'breed', search: 'lab' }.stringify_keys
           results = DogFilter.filter(params: params)
           expect(results).to include(primary_breed_dog)
           expect(results).not_to include(secondary_breed_dog)
         end
 
         it 'finds by secondary breed partial match' do
-          params = { is_breed: 'terr' }.stringify_keys
+          params = { search_field_index: 'breed', search: 'terr' }.stringify_keys
           results = DogFilter.filter(params: params)
           expect(results).to include(secondary_breed_dog)
           expect(results).not_to include(primary_breed_dog)

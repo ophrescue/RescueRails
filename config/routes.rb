@@ -45,4 +45,8 @@ RescueRails::Application.routes.draw do
   get '/signout',              to: 'sessions#destroy'
   get '/adopt',                to: 'adopters#new'
 
+  get '/international',                                 to: 'pages#international'
+  get '/international/kaw',                             to: 'pages#international-kaw'
+  get '/international/tcspca',                          to: 'pages#international-tcspca'
+  get '/international/volunteer-takes-oph-to-india',    to: 'pages#international-article'
 end

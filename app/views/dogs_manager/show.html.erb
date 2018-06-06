@@ -74,10 +74,12 @@
         <dd><%= @dog.intake_dt || 'unknown' %></dd>
         <dt>Adopted on</dt>
         <dd><%= @dog.adoption_date || 'unknown' %></dd>
-        <dt>Adoptapet ad</dt>
-        <dd><%= @adoptapet %></dd>
-        <dt>Petfinder ad</dt>
-        <dd><a href="https://www.petfinder.com/pet-search?shelter_id=VA600">Petfinder</a></dd>
+        <dt>Ads</dt>
+        <dd>
+          <div><%= @adoptapet %></div>
+          <div><a href=<%= PETFINDER::OPH_PAGE %>>Petfinder</a></div>
+          <div><%= link_to_if @dog.craigslist_ad_url, "Craigslist", @dog.craigslist_ad_url do "Needs Craigslist ad" end %></div>
+        </dd>
       </dl>
       <div class='row'>
         </div>

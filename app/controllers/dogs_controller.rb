@@ -116,6 +116,7 @@ class DogsController < ApplicationController
 
   def show
     @title = @dog.name
+    @adoptapet = Adoptapet.new(@dog.foster&.region)
     flash.now[:error]= render_to_string partial: 'unavailable_flash_message' if @dog.unavailable?
   end
 

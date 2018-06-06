@@ -19,7 +19,7 @@ class Adoptapet
   def to_s
     return "Foster needed for Adoptapet" if no_foster_or_region?
     return "Adoptapet N/A for #{region}" if out_of_area?
-    "<a href=\"#{url}\">Adoptapet #{region}</a>"
+    "<a href=\"#{url}\">Adoptapet #{region}</a>".html_safe
   end
 
   private

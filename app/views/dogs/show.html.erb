@@ -216,7 +216,7 @@
         <h4>Ads</h4>
         <ul class="unstyled">
           <li><a href=<%= PETFINDER::OPH_PAGE %>>Petfinder</a></li>
-          <li><%= @adoptapet %></li>
+          <li id="adoptapet_ad"><%= @adoptapet %></li>
 
         <% if !@dog.craigslist_ad_url.blank? %>
           <li><%= link_to "Craigslist", @dog.craigslist_ad_url %></li>

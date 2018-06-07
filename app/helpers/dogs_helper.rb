@@ -1,4 +1,8 @@
 module DogsHelper
+  def x_icon
+    "<i class='fa fa-lg fa-times text-danger'></i>".html_safe
+  end
+
   def render_if(condition, options)
     if condition
       render options

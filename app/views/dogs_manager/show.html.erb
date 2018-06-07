@@ -80,6 +80,22 @@
           <div><a href=<%= PETFINDER::OPH_PAGE %>>Petfinder</a></div>
           <div><%= link_to_if @dog.craigslist_ad_url, "Craigslist", @dog.craigslist_ad_url do "Needs Craigslist ad" end %></div>
         </dd>
+        <dt>First shots</dt>
+        <dd><%= @dog.first_shots || x_icon %></dd>
+        <dt>Second shots</dt>
+        <dd><%= @dog.second_shots || x_icon %></dd>
+        <dt>Third shots</dt>
+        <dd><%= @dog.third_shots || x_icon %></dd>
+        <dt>Rabies</dt>
+        <dd><%= @dog.rabies || x_icon %></dd>
+        <dt>4DX</dt>
+        <dd><%= @dog.vac_4dx || x_icon %></dd>
+        <dt>Bordetella</dt>
+        <dd><%= @dog.bordetella || x_icon %></dd>
+        <dt>Heartworm Preventative</dt>
+        <dd><%= @dog.heartworm_preventative || x_icon %></dd>
+        <dt>Flea/Tick Preventative</dt>
+        <dd><%= @dog.flea_tick_preventative || x_icon %></dd>
       </dl>
       <div class='row'>
         </div>
@@ -97,12 +113,4 @@
     imageCrop: false,
     dataSource: <%= @carousel %>
   });
-
-  $(function () {
-    $('[data-toggle="popover"]').popover()
-  })
-
-  $('.popover-dismiss').popover({
-    trigger: 'focus'
-  })
 </script>

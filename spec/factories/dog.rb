@@ -32,6 +32,14 @@ FactoryBot.define do
     medical_summary { Faker::Lorem.paragraph }
     behavior_summary { Faker::Lorem.paragraph }
     craigslist_ad_url { [Faker::Internet.url, nil].sample }
+    first_shots { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    second_shots { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    third_shots { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    rabies { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    vac_4dx { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    bordetella { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    heartworm_preventative { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    flea_tick_preventative { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
 
     after(:create) do |dog|
       create(:comment, :commentable_type => 'Dog', :commentable_id => dog.id, :content => Faker::Lorem.sentence )

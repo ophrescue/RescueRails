@@ -252,7 +252,7 @@ class Dog < ApplicationRecord
   end
 
   def comments_and_audits_and_associated_audits
-    (valid_comments + audits + associated_audits).sort_by(&:created_at).reverse!
+    (persisted_comments + audits + associated_audits).sort_by(&:created_at).reverse!
   end
 
   def to_petfinder_status
@@ -279,8 +279,8 @@ class Dog < ApplicationRecord
     connection.select_value("SELECT nextval('tracking_id_seq')")
   end
 
-  def valid_comments
-    comments.to_a.delete_if { |obj| obj.id.nil? }
+  def persisted_comments
+    comments.select(&:persisted?)
   end
 end
 

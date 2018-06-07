@@ -39,5 +39,9 @@ FactoryBot.define do
       password "foobar99"
       password_confirmation "foobar99"
     end
+
+    factory :foster do
+      is_foster true
+    end
   end
 end

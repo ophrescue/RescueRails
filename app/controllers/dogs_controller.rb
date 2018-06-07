@@ -44,7 +44,6 @@
 #  has_behavior_problem :boolean          default(FALSE)
 #  needs_foster         :boolean          default(FALSE)
 #  petfinder_ad_url     :string(255)
-#  adoptapet_ad_url     :string(255)
 #  craigslist_ad_url    :string(255)
 #  youtube_video_url    :string(255)
 #  first_shots          :string(255)
@@ -116,6 +115,7 @@ class DogsController < ApplicationController
 
   def show
     @title = @dog.name
+    @adoptapet = Adoptapet.new(@dog.foster&.region)
     flash.now[:error]= render_to_string partial: 'unavailable_flash_message' if @dog.unavailable?
   end
 
@@ -193,7 +193,6 @@ class DogsController < ApplicationController
               :needs_foster,
               :attachments_attributes,
               :petfinder_ad_url,
-              :adoptapet_ad_url,
               :craigslist_ad_url,
               :youtube_video_url,
               :first_shots,

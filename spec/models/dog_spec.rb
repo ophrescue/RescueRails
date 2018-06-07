@@ -30,7 +30,6 @@
 #  has_behavior_problem    :boolean          default(FALSE)
 #  needs_foster            :boolean          default(FALSE)
 #  petfinder_ad_url        :string(255)
-#  adoptapet_ad_url        :string(255)
 #  craigslist_ad_url       :string(255)
 #  youtube_video_url       :string(255)
 #  first_shots             :string(255)

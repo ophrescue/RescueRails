@@ -93,6 +93,14 @@ form .control-group.error span.error {
   color: #404040;
 }
 
+.article img.right {
+  border-radius: 6px 6px 6px 6px;
+  // margin: 25px;
+  margin-left: 25px;
+  margin-bottom: 25px;
+  float: right;
+}
+
 .eventphoto img {
   border-radius: 6px 6px 6px 6px;
 }

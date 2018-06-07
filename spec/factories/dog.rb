@@ -23,6 +23,15 @@ FactoryBot.define do
     intake_dt { Date.today.advance(:days => -rand(365)) }
     primary_breed_id { Breed.pluck(:id).sample }
     secondary_breed_id { Breed.pluck(:id).sample }
+    is_uptodateonshots { [true, false].sample }
+    is_special_needs        { [true, false].sample }
+    no_dogs                 { [true, false].sample }
+    no_cats                 { [true, false].sample }
+    no_kids                 { [true, false].sample }
+    description { Faker::Lorem.paragraphs(3,true).join("\n\n") }
+    medical_summary { Faker::Lorem.paragraph }
+    behavior_summary { Faker::Lorem.paragraph }
+    craigslist_ad_url { [Faker::Internet.url, nil].sample }
 
     after(:create) do |dog|
       create(:comment, :commentable_type => 'Dog', :commentable_id => dog.id, :content => Faker::Lorem.sentence )

@@ -72,11 +72,11 @@ MessageBar.show_typed_text = function(group, text){
 
 GlobalMultiSelect.fetch = function(){
   var query = $('form').serialize();
-  window.location='/dogs_manager?'+query;
+  window.location='/dogs?'+query;
 };
 
 GlobalMultiSelect.fetch_all = function(){
-  window.location='/dogs_manager';
+  window.location='/dogs';
 };
 
 GlobalMultiSelect.filter_select = function(event){

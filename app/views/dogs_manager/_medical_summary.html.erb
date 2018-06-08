@@ -4,23 +4,3 @@
     <%= simple_format(@dog.medical_summary) %>
   </div>
 </div>
-
-<div class="row">
-  <div class="col">
-    <h4>Behavior Summary</h4>
-    <%= simple_format(@dog.behavior_summary) %>
-  </div>
-</div>
-
-<%= form_for [@dog, @dog.comments.build], :html => {:id => "new_comment"} do |f| %>
-  <div class='form-group'>
-    <label for='comment_content'>Add comment</label>
-    <%= f.text_area :content, :class => "form-control", :rows => "6" %>
-  </div>
-  <%= f.submit "Post", :id => "comment_submit", :class => "btn btn-primary" %>
-<% end %>
-<div class="row">
-  <div class="col">
-    <%= render 'changes' %>
-  </div>
-</div>

@@ -1,6 +1,11 @@
 <div class='container' id='manage_profile'>
-  <div class="row title_row">
-    <div class='col-10'>
+  <div class='row'>
+    <div class='col-2 offset-6 offset-sm-10'>
+      <%= link_to "Switch to public profile", dogs_gallery_path(@dog), class: 'switch_view btn btn-sm btn-outline-secondary' %>
+    </div>
+  </div>
+  <div class="row title_row justify-content-between">
+    <div class='col-12 col-sm-auto'>
       <h1>#<%=@dog.tracking_id%> <%= @dog.name %>:</h1>
       <span><%= @dog.size.titleize %>-size,</span>
       <span><%= @dog.gender %>,</span>
@@ -8,37 +13,29 @@
       <span class='breed'><%= @dog.breeds.join(" x ").html_safe %></span>,
       <span class='status'><%= @dog.status.titleize %></span >
     </div>
-    <div class='col-2'>
-      <%= link_to "Public profile", dogs_gallery_path(@dog), class: 'switch_view' %>
-    </div>
-  </div>
-  <div class="row profile line-1">
-    <div class="col-8">
-      <%= some_details %>
+    <div class='col-12 col-sm-1 manager_links'>
+      <% if can_edit_dogs? || fostering_dog? %>
+        <%= link_to "Edit", edit_dog_path(@dog), id: 'edit_dog'  %>
+      <% end %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-8">
+    <div class="col-12 col-sm-8">
       <div id="galleria"></div>
-      <div id="dogDescription" class="well">
-        <p> <%= simple_format(@dog.description) %></p>
+      <div id="dogDescription" >
+        <h4>Description</h4>
+        <%= simple_format(@dog.description) %>
       </div>
 
       <%= render partial: 'medical_summary' %>
+      <%= render partial: 'behaviour_summary' %>
+      <div class="d-none d-sm-block">
+        <%= render partial: 'comments_audits' %>
+      </div>
     </div>
 
-    <div class="col-4">
-      <div class='row'>
-        <div class='col-10'>
-          About <%= @dog.name.titleize %>
-        </div>
-        <div class='col-2'>
-          <% if can_edit_dogs? || fostering_dog? %>
-            <%= link_to "Edit", edit_dog_path(@dog), id: 'edit_dog'  %>
-          <% end %>
-        </div>
-      </div>
+    <div class="col-12 col-sm-4">
       <dl class='row' id='details'>
         <dt>Original Name</dt>
         <dd><%= @dog.original_name || 'unknown' %></dd>
@@ -46,6 +43,12 @@
         <dd><%= @dog.microchip || 'unknown' %></dd>
         <dt>Adoption Fee</dt>
         <dd><%= number_to_currency(@dog.fee, precision: 0) || 'unknown' %></dd>
+        <dt>OK with dogs?</dt>
+        <dd><%= (!@dog.no_dogs).as_icon  %></dd>
+        <dt>OK with cats?</dt>
+        <dd><%= (!@dog.no_cats).as_icon  %></dd>
+        <dt>OK with kids?</dt>
+        <dd><%= (!@dog.no_kids).as_icon  %></dd>
         <dt>Medical Review Complete</dt>
         <dd><%= @dog.medical_review_complete.as_icon %></dd>
         <dt>Has Medical Need</dt>
@@ -80,6 +83,8 @@
           <div><a href=<%= PETFINDER::OPH_PAGE %>>Petfinder</a></div>
           <div><%= link_to_if @dog.craigslist_ad_url, "Craigslist", @dog.craigslist_ad_url do "Needs Craigslist ad" end %></div>
         </dd>
+        <dt>Up-to-date on shots</dt>
+        <dd><%= @dog.is_uptodateonshots.as_icon %></dd>
         <dt>First shots</dt>
         <dd><%= @dog.first_shots || x_icon %></dd>
         <dt>Second shots</dt>
@@ -97,10 +102,8 @@
         <dt>Flea/Tick Preventative</dt>
         <dd><%= @dog.flea_tick_preventative || x_icon %></dd>
       </dl>
-      <div class='row'>
-        </div>
-          <!--<%= render partial: 'private_information' %> -->
-        </div>
+      <div class="d-block d-sm-none">
+        <%= render partial: 'comments_audits' %>
       </div>
     </div>
   </div>

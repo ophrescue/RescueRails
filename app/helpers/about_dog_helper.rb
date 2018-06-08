@@ -1,6 +1,6 @@
 module AboutDogHelper
   def some_details
-    "#{@dog.name} #{first_sentence} #{second_sentence}"
+    [@dog.name, first_sentence, second_sentence, third_sentence].join(' ')
   end
 
   private
@@ -10,6 +10,10 @@ module AboutDogHelper
 
   def second_sentence
     caveats.any? && "#{pronoun} #{caveats.to_sentence_period}"
+  end
+
+  def third_sentence
+    "#{@dog.name} is currently being fostered in #{@dog.foster_location}." if @dog.foster_location
   end
 
   def caveats

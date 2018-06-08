@@ -1,15 +1,16 @@
-<div class="container">
+<div class="container" id='public_list'>
+  <% if current_user&.active %>
+    <div class='row'>
+      <div class='col-2 offset-6 offset-sm-10'>
+          <%= link_to "Switch to manager list", dogs_path, class: 'switch_view btn btn-sm btn-outline-secondary' %>
+      </div>
+    </div>
+  <% end %>
   <div class="row title_row">
     <%# large-format (>=md) 10/12 width, small format (<md) full-width %>
     <div class="col-12 col-md-10">
       <h1>Our Dogs</h1>
     </div>
-      <% if current_user&.active %>
-        <%# large-format (>=md) 2/12 width, small format (<md) half-width %>
-        <div class="col-6 col-md-2">
-          <%= link_to("Manager View", dogs_path, class: "btn btn-sm switch_view") %>
-        </div>
-    <% end %>
   </div>
 
 

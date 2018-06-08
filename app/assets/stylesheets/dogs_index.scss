@@ -7,13 +7,13 @@
 
   a { margin-top: 8px; }
 
-  .switch_view {
+  .switch_view, #edit_dog {
     margin-top: 14px;
     position: relative;
     display: inline-block;
   }
 }
 
-.switch_view {
-  font-size: 1.2rem;
+#public_list, #manager_list {
+  margin-top: 20px;
 }

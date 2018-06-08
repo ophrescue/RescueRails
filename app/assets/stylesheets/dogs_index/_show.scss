@@ -1,5 +1,7 @@
 .title_row {
   color: #ad8b22;
+  margin-bottom: 28px;
+  align-items: baseline;
 
   h1 {
     margin-right: 18px;
@@ -98,6 +100,20 @@
 
 .galleria-thumbnails {
   margin: 0 auto;
+}
+
+#manage_profile, #public_profile {
+  margin-top: 20px;
+}
+
+.switch_view {
+  font-size: 0.9rem;
+}
+
+@include media-breakpoint-up(md) {
+  .switch_view {
+    font-size: 1.2rem;
+  }
 }
 
 #manage_profile #details dt, #manage_profile #details dd {

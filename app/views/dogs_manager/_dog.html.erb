@@ -26,13 +26,15 @@
     <div class="<%= 'spay_neuter_needed' unless dog.is_altered %>" 'data-toggle'='tooltip' 'data-placement'='bottom' title='Needs Spay/Neuter'></div>
   </div>
   <div class='col-4 d-md-none'>
-    <a class="<%= 'fa fa-lg fa-comment-o' unless dog.comments.empty? %>"
-          tabindex='0'
-          data-toggle='popover'
-          data-placement='left'
-          data-trigger="focus"
-          title="Most recent comment for <%= dog.name %>" 
-          data-content="<%= dog.comments.first.content %>" ></a>
+    <% unless dog.comments.empty? %>
+      <a class="fa fa-lg fa-comment-o"
+            tabindex='0'
+            data-toggle='popover'
+            data-placement='left'
+            data-trigger="focus"
+            title="Most recent comment for <%= dog.name %>" 
+            data-content="<%= dog.comments.first.content %>" ></a>
+    <% end %>
   </div>
   <div class='col-6 col-md-1'>
     Adoption Coordinator:
@@ -59,12 +61,14 @@
     <%- end %>
   </div>
   <div class='d-none d-md-block col-md-1'>
-    <a class="<%= 'fa fa-lg fa-comment-o' unless dog.comments.empty? %>"
-          tabindex='0'
-          data-toggle='popover'
-          data-placement='left'
-          data-trigger="focus"
-          title="Most recent comment for <%= dog.name %>" 
-          data-content="<%= dog.comments.first.content %>" ></a>
+    <% unless dog.comments.empty? %>
+      <a class="fa fa-lg fa-comment-o"
+            tabindex='0'
+            data-toggle='popover'
+            data-placement='left'
+            data-trigger="focus"
+            title="Most recent comment for <%= dog.name %>" 
+            data-content="<%= dog.comments.first.content %>" ></a>
+    <% end %>
   </div>
 </div>

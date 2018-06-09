@@ -63,7 +63,6 @@
 #
 
 class DogsGalleryController < DogsController
-  autocomplete :breed, :name, full: true
 
   before_action :load_dog, only: %i(show)
   before_action :select_bootstrap41

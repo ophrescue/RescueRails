@@ -65,7 +65,7 @@
 class DogsManagerController < DogsController
   helper_method :fostering_dog?
 
-  #autocomplete :breed, :name, full: true
+  autocomplete :breed, :name, full: true
 
   before_action :authenticate
   before_action :active_user

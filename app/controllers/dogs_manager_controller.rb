@@ -76,7 +76,7 @@ class DogsManagerController < DogsController
   before_action :select_bootstrap41
 
   def index
-    puts "incoming params #{params}"
+    #puts "incoming params #{params}"
     default_manager_view = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field_index").empty?
     # TODO THIS IS A HACK THAT NEEDS CLEANUP!!
     full_params = ["is_age", "is_status", "is_size", "has_flags"].inject({}){|hash,attr| hash[attr] = (params && params[attr]) || []; hash}
@@ -86,7 +86,7 @@ class DogsManagerController < DogsController
     full_params["search_field_index"] = params["search_field_index"] || ""
     #default_manager_view = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field_index").empty?
     full_params["search_field_text"] = params["search_field_index"] && Dog::SEARCH_FIELDS[params["search_field_index"]]
-    puts "merged params #{full_params}"
+    #puts "merged params #{full_params}"
     params = full_params
     @dogs = case
             when default_manager_view
@@ -100,7 +100,7 @@ class DogsManagerController < DogsController
 
     @filter_params = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field_index", "search_field_text")
 
-    puts "filter_params #{@filter_params}"
+    #puts "filter_params #{@filter_params}"
 
     for_page(params[:page])
   end

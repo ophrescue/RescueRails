@@ -2,6 +2,7 @@ require 'rspec/expectations'
 
 RSpec::Matchers.define :be_sorted do |expected|
   match do |actual|
+    return false if actual.length.zero?
     matches = []
     actual.each_index do |i|
       pair = [actual[i],actual[i.succ]]

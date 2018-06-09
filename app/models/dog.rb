@@ -190,8 +190,9 @@ class Dog < ApplicationRecord
     search_term, search_field = search_params
     # security check, since search field will be injected into SQL query
     return unscoped unless %w(name tracking_id microchip breed).include? search_field
-    return unscoped if search_params.compact.length != 2 || search_params.any?(&:empty?) # abnormal
+    return unscoped if search_params.compact.length != 2 # abnormal
     return is_breed(search_term) if search_field == "breed"
+    return where("#{search_field} = ?", "#{search_term.strip}") if search_field == "tracking_id"
     return where("#{search_field} ilike ?", "%#{search_term.strip}%")
   end
 

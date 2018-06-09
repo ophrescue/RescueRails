@@ -26,7 +26,6 @@ class DogFilter
     @dogs = Dog.search(search_params).merge(Dog.filter(filtering_params))
                .order( "#{sort_column} #{sort_direction}" )
                .includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster)
-
   end
 
   def self.filter(params: {})

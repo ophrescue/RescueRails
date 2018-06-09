@@ -66,7 +66,7 @@ class DogsGalleryController < DogsController
   autocomplete :breed, :name, full: true
 
   before_action :load_dog, only: %i(show)
-  before_action :select_bootstrap41, only: %i(index show)
+  before_action :select_bootstrap41
 
   def index
     @dogs = case

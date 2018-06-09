@@ -12,19 +12,18 @@ feature 'Filter Dogs List', js: true do
   let!(:primary_lab){create(:dog, :primary_lab, :active_dog, name: "Zeke").name.titleize }
   let!(:secondary_westie){create(:dog, :secondary_westie, :active_dog, name: "Nairobi").name.titleize }
   let!(:secondary_golden){create(:dog, :secondary_golden, :active_dog, name: "Abby").name.titleize }
-  let(:all_dogs_sorted_by_id){ [["#1","Zeke", "Labrador Retriever"],
-                                ["#2", "Nairobi", "West Highland Terrier"],
-                                ["#3", "Abby", "Golden Retriever"] ] }
+  let(:all_dogs_sorted_by_id){ [["#1","Zeke", "Labrador Retriever,"],
+                                ["#2", "Nairobi", "West Highland Terrier,"],
+                                ["#3", "Abby", "Golden Retriever,"] ] }
 
   scenario 'can filter results with breed partial match' do
-    visit '/dogs'
-    click_link("Manager View")
+    visit dogs_path
     expect(page).to have_selector('h1', text: 'Dog Manager')
     expect(dogs_list).to eq all_dogs_sorted_by_id
 
     search_by("Breed", "retriev")
-    expect(dogs_list).to eq [["#1","Zeke", "Labrador Retriever"],
-                             ["#3", "Abby", "Golden Retriever"] ]
+    expect(dogs_list).to eq [["#1","Zeke", "Labrador Retriever,"],
+                             ["#3", "Abby", "Golden Retriever,"] ]
     click_button("Search")
     expect(page.find('input#search').value).to eq 'retriev'
     expect(page.find('#search ul>li#breed')['class']).to eq 'selected'
@@ -40,8 +39,7 @@ feature 'Filter Dogs List', js: true do
   end
 
   scenario 'can search by breed and sort results by dog name' do
-    visit '/dogs'
-    click_link("Manager View")
+    visit dogs_path
     search_by("Breed", "retriev")
     expect(dog_names).to match_array ["Abby", "Zeke"]
     sort_by("name")

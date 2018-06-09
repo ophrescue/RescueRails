@@ -3,6 +3,12 @@ require_relative '../helpers/dog_show_helper'
 
 feature 'visit dog show page', js: true do
   include DogShowHelper
+  let!(:active_user) { create(:user) }
+
+  before do
+    sign_in(active_user)
+  end
+
   context "dog is unavailable" do
     before(:each) do
       visit dog_path(adoption_completed_dog)
@@ -21,10 +27,7 @@ feature 'visit dog show page', js: true do
   end
 
   context "adoptapet ad text" do
-    let!(:active_user) { create(:user) }
-
-    before do
-      sign_in(active_user)
+    before(:each) do
       visit dog_path(dog)
     end
 

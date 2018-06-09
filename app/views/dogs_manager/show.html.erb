@@ -79,7 +79,7 @@
         <dd><%= @dog.adoption_date || 'unknown' %></dd>
         <dt>Ads</dt>
         <dd>
-          <div><%= @adoptapet %></div>
+          <div id='adoptapet_ad'><%= @adoptapet %></div>
           <div><a href=<%= PETFINDER::OPH_PAGE %>>Petfinder</a></div>
           <div><%= link_to_if @dog.craigslist_ad_url, "Craigslist", @dog.craigslist_ad_url do "Needs Craigslist ad" end %></div>
         </dd>

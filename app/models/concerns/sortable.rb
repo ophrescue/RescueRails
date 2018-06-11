@@ -1,4 +1,5 @@
 module Sortable
+  SORT_FIELDS = {tracking_id:'Tracking ID',name:'Name',intake_dt: 'Intake date',status: 'Status'}
 
   def text_search?
     params[:search].present?
@@ -17,10 +18,10 @@ module Sortable
   end
 
   def sort_column
-    Dog.column_names.include?(params[:sort]) ? params[:sort] : params[:sort] = 'tracking_id'
+    Dog.column_names.include?(params["sort"]) ? params["sort"] : params["sort"] = 'tracking_id'
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : params[:direction] = 'asc'
+    %w[asc desc].include?(params["direction"]) ? params["direction"] : params["direction"] = 'asc'
   end
 end

@@ -28,4 +28,8 @@ class ApplicationController < ActionController::Base
       redirect_to request.referer
     end
   end
+
+  def select_bootstrap41
+    @bootstrap41 = true
+  end
 end

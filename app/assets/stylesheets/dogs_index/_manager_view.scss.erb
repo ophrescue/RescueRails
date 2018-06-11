@@ -1,0 +1,184 @@
+@mixin fontawesome-icon {
+  font-family: FontAwesome;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin icon-lg {
+  font-size: 1.333333333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+}
+
+$high-priority-icon: '\f062';
+$has-medical-need-icon: '\f0f9'; // fa-ambulance
+$spay-neuter-needed-icon: '\f0c4'; // fa-scissors
+$medical-review-needed-icon: '\f0f1'; // fa-stethoscope
+$foster-needed-icon: url(<%= asset_path("foster_icon.svg") %>);
+$behaviour-problems-icon: url(<%= asset_path("law.svg") %>);
+$bootstrap-red-danger: #dc3545;
+
+@import 'dogs_index/manager_dog';
+
+// globalMultiSelect, the filter fields:
+#filter_info_row {
+  margin-top: 20px;
+  #filter_info {
+    min-height:24px;
+  }
+  #filter_info span.filter_param {
+    &:not(:last-of-type)::after {
+      content: ', ';
+    }
+    &:last-of-type::after {
+      content: '. ';
+    }
+  }
+}
+
+.message_group {
+  font-size: smaller;
+
+  .group_label {
+    font-weight: 700;
+    margin-left: 1px;
+  }
+}
+
+#reset_message {
+  margin-left: 20px;
+  font-size: smaller;
+  display: none;
+  cursor: pointer;
+
+  .fa-lg {
+    vertical-align: initial;
+    color: $bootstrap-red-danger;
+  }
+}
+
+#search-dropdown-heading {
+  font-size: small;
+  font-weight: 700;
+}
+
+#filter_controls {
+  display: flex;
+  margin-left: -23px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  min-width: max-content;
+  padding-right: 8px
+}
+
+.dropdown-menu li {
+  margin-left: 8px;
+}
+
+.dropdown-menu li.selected span.check {
+  visibility: visible;
+  width:12px;
+  margin-right:12px;
+  color: #38ad38;
+}
+
+.dropdown-menu li:not(.selected) span.check {
+  visibility: hidden;
+  width:12px;
+  margin-right:12px;
+}
+
+.dropdown-menu li span {
+  cursor: pointer;
+}
+
+// flags menu icons
+.dropdown-menu li#high_priority .filter_option:after {
+  @include icon-lg();
+  @include fontawesome-icon();
+  margin-left: 10px;
+  content: $high-priority-icon;
+  color: $bootstrap-red-danger;
+}
+
+.dropdown-menu li#medical_need .filter_option:after {
+  @include fontawesome-icon();
+  @include icon-lg();
+  margin-left: 10px;
+  content: $has-medical-need-icon;
+  color: $bootstrap-red-danger;
+}
+
+.dropdown-menu li#spay_neuter_needed .filter_option:after {
+  @include fontawesome-icon();
+  @include icon-lg();
+  margin-left: 10px;
+  content: $spay-neuter-needed-icon;
+}
+
+.dropdown-menu li#behavior_problems .filter_option:after {
+  content: $behaviour-problems-icon;
+  width: 18px;
+  display: inline-block;
+  margin-left:10px;
+}
+
+.dropdown-menu li#medical_review_needed .filter_option:after {
+  @include fontawesome-icon();
+  @include icon-lg();
+  margin-left: 10px;
+  content: $medical-review-needed-icon;
+}
+
+.dropdown-menu li#foster_needed {
+  margin-top: -4px; // it's a hack to restore uniform spacing that is disrupted by the :after content svg, below. A less hacky solution would be good!
+
+   .filter_option:after{
+    content: $foster-needed-icon;
+    display:inline-block;
+    width:22px;
+    height:10px;
+    margin-left: 10px;
+    position: relative;
+    top: 4px;
+  }
+}
+
+// search input, bootstrap-styled input with button add-on
+#filter_controls .input-group#search {
+  input {
+    height: 33px;
+  }
+
+  // we control the visibility with js. Show the button only when text is present
+  .input-group-append {
+    display: none;
+  }
+
+  button {
+    height: 33px;
+    padding-top: 4px;
+
+    &#search_reset {
+      border-top: 1px solid #c3d4da;
+      border-bottom: 1px solid #c3d4da;
+      background-color: #0000;
+      color: #c3d4da;
+    }
+  }
+
+  .text-input-error {
+    font-size: small;
+    color: $bootstrap-red-danger;
+  }
+}
+
+// the 'no dogs matched' message
+#none_found {
+  text-align: center;
+}

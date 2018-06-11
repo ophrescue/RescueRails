@@ -22,10 +22,10 @@ class DogFilter
   end
 
   def filter
-    @dogs = Dog.filter(filtering_params)
+    #puts "filtering params #{filtering_params}"
+    @dogs = Dog.search(search_params).merge(Dog.filter(filtering_params))
                .order( "#{sort_column} #{sort_direction}" )
                .includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster)
-
   end
 
   def self.filter(params: {})
@@ -36,19 +36,10 @@ class DogFilter
 
 
   def filtering_params
-    params.slice( :is_age,
-                  :is_size,
-                  :is_status,
-                  :is_breed,
-                  :cb_high_priority,
-                  :cb_medical_need,
-                  :cb_medical_review_needed,
-                  :cb_special_needs,
-                  :cb_behavior_problems,
-                  :cb_foster_needed,
-                  :cb_spay_neuter_needed,
-                  :cb_no_cats,
-                  :cb_no_dogs,
-                  :cb_no_kids)
+    params.slice( "is_age", "is_size", "is_status", "has_flags" )
+  end
+
+  def search_params
+    params.slice( "search", "search_field_index" ).values
   end
 end

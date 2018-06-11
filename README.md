@@ -43,6 +43,10 @@ Tests are run via Headless Chrome, which will require Google Chrome and ChromeDr
 brew install chromedriver
 ```
 
+### Browser Support
+
+Supported browsers and platforms are those specified for the version of Boostrap incorporated. See the Bootstrap documentation: getting-started/browsers-devices for the appropriate version.
+
 ### Contributing
 
 Submit a volunteer application at https://ophrescue.org/volunteer if you'd like to be part of the team.  Pull Requests from non-team members will still be considered.  Work item priority is tracked on Waffle.io [![Stories in Ready](https://badge.waffle.io/ophrescue/rescuerails.png?label=ready&title=Ready)](https://waffle.io/ophrescue/rescuerails?utm_source=badge)

@@ -1,0 +1,6 @@
+<span class='message_group' id='<%= group_id %>'>
+  <span class='group_label' id='<%= group_id %>' ><%= group_text %></span>
+  <%- values.each do |id,value| %>
+    <span class='filter_param' id=<%= id %> ><%= value %></span>
+  <% end %>
+</span>

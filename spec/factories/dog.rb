@@ -23,6 +23,23 @@ FactoryBot.define do
     intake_dt { Date.today.advance(:days => -rand(365)) }
     primary_breed_id { Breed.pluck(:id).sample }
     secondary_breed_id { Breed.pluck(:id).sample }
+    is_uptodateonshots { [true, false].sample }
+    is_special_needs        { [true, false].sample }
+    no_dogs                 { [true, false].sample }
+    no_cats                 { [true, false].sample }
+    no_kids                 { [true, false].sample }
+    description { Faker::Lorem.paragraphs(3,true).join("\n\n") }
+    medical_summary { Faker::Lorem.paragraph }
+    behavior_summary { Faker::Lorem.paragraph }
+    craigslist_ad_url { [Faker::Internet.url, nil].sample }
+    first_shots { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    second_shots { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    third_shots { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    rabies { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    vac_4dx { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    bordetella { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    heartworm_preventative { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    flea_tick_preventative { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
 
     after(:create) do |dog|
       create(:comment, :commentable_type => 'Dog', :commentable_id => dog.id, :content => Faker::Lorem.sentence )

@@ -1,0 +1,145 @@
+<h4>Private Information</h4>
+<ul class="fa-ul">
+  <% if @dog.original_name.present? %>
+    <li><strong>Original Name:</strong> <%= @dog.original_name.titleize %></li>
+  <% end %>
+  <% if !@dog.microchip.blank? %>
+    <li><strong>Microchip:</strong> <%= @dog.microchip %></li>
+  <% end %>
+  <% if !@dog.fee.blank? %>
+    <li><strong>Adoption Fee:</strong> $<%= @dog.fee %></li>
+  <% end %>
+  <% if @dog.medical_review_complete %>
+    <li><i class="fa-li fa fa-lg fa-check-circle text-success" aria-hidden="true"></i>Medical Review Complete</li>
+  <% else %>
+    <li class="text-error"><i class="fa-li fa fa-lg fa-exclamation-circle" aria-hidden="true"></i>Medical Review Required</li>
+  <% end %>
+  <% if @dog.has_medical_need %>
+    <li><%= image_tag "has_medical_need.gif" %>Has Medical Need</li>
+  <% end %>
+  <% if !@dog.is_altered %>
+    <li><%= image_tag "needs_alter.gif" %>Needs Spay or Neuter</li>
+  <% end %>
+  <% if @dog.is_high_priority %>
+    <li><%= image_tag "is_high_priority.gif" %>High Priority</li>
+  <% end %>
+  <% if @dog.needs_photos %>
+    <li><%= image_tag "needs_photos.gif" %>Needs Photos</li>
+  <% end %>
+  <% if @dog.has_behavior_problem %>
+    <li><%= image_tag "has_behavior_problem.gif" %>Has Behavior Problem</li>
+  <% end %>
+  <% if @dog.needs_foster %>
+    <li><%= image_tag "needs_foster.gif" %>Needs Foster</li>
+  <% end %>
+</ul>
+
+<h4>Foster</h4>
+<ul class="unstyled">
+  <% if @dog.foster_id %>
+    <li><%= link_to @dog.foster.name, user_path(@dog.foster) %></li>
+    <li><%= @dog.foster.address1 %></li>
+    <li><%= @dog.foster.city %>, <%= @dog.foster.region %></li>
+    <li><%= @dog.foster.phone %></li>
+  <% else %>
+    <li>No Foster Assigned</li>
+  <% end %>
+</ul>
+
+<h4>Adoption Coordinator</h4>
+<ul class="unstyled">
+  <% if @dog.coordinator_id %>
+    <li><%= link_to @dog.coordinator.name, user_path(@dog.coordinator) %></li>
+  <% else %>
+    <li>No Adoption Coordinator Assigned</li>
+  <% end %>
+</ul>
+
+<h4>Source Shelter</h4>
+<ul class="unstyled">
+  <% if @dog.shelter_id %>
+    <li><%= @dog.shelter.name %></li>
+  <% else %>
+    <li>No Source Shelter Assigned</li>
+  <% end %>
+</ul>
+
+<% if @dog.adopters.count > 0 %>
+  <h4>Adopter Info</h4>
+  <ul class="unstyled">
+    <% @dog.adopters.each do |a| %>
+      <li><%= link_to a.name, a %> - <%= a.status %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h4>Dates</h4>
+<ul class="unstyled">
+  <li><%= "Available: " + @dog.available_on_dt.strftime("%m/%d/%Y") unless @dog.available_on_dt.blank?  %></li>
+  <li><%= "Intake: " + @dog.intake_dt.strftime("%m/%d/%Y") unless @dog.intake_dt.blank?  %></li>
+  <li><%= "Adopted: " + @dog.adoption_date.strftime("%m/%d/%Y") unless @dog.adoption_date.blank?  %></li>
+</ul>
+
+<h4>Ads</h4>
+<ul class="unstyled">
+  <li><a href="https://www.petfinder.com/pet-search?shelter_id=VA600">Petfinder</a></li>
+  <% if @dog.foster_id %>
+    <% if @dog.foster.region == "MD" %>
+      <li><a href="http://www.adoptapet.com/shelter80736-dogs.html">Adoptapet MD</a></li>
+    <% elsif @dog.foster.region == "PA" %>
+      <li><a href="http://www.adoptapet.com/shelter84558-dogs.html">Adoptapet PA</a></li>
+    <% elsif @dog.foster.region == "VA" %>
+      <li><a href="http://www.adoptapet.com/shelter79954-dogs.html">Adoptapet VA</a></li>
+    <% else %>
+      <li><a href="">Adoptapet N/A for <%= @dog.foster.region %></a></li>
+    <% end %>
+  <% else %>
+    <li>Foster Needed for Adoptapet</li>
+  <% end %>
+
+  <% if !@dog.craigslist_ad_url.blank? %>
+    <li><%= link_to "Craigslist", @dog.craigslist_ad_url %></li>
+  <% else %>
+    <li>Needs Craigslist Ad</li>
+  <% end %>
+</ul>
+
+<% if @dog.attachments.any? %>
+  <h4>Attachments</h4>
+  <ul class="unstyled">
+    <% @dog.attachments.each do |a| %>
+      <li>
+        <%= link_to a.download_url do %>
+          <i class="fa fa-cloud-download"></i>
+        <% end %>
+        <%= link_to a.attachment_file_name, a %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+<br />
+<h4>Vaccine Records</h4>
+<h5>1st Shots</h5>
+<p><%= @dog.first_shots %></p>
+
+<h5>2nd Shots</h5>
+<p><%= @dog.second_shots %></p>
+
+<h5>3rd Shots</h5>
+<p><%= @dog.third_shots %></p>
+
+<h5>Rabies</h5>
+<p><%= @dog.rabies %></p>
+
+<h5>4DX</h5>
+<p><%= @dog.vac_4dx %></p>
+
+<h5>Bordetella</h5>
+<p><%= @dog.bordetella %></p>
+
+<h5>Heartworm Preventative</h5>
+<p><%= @dog.heartworm_preventative %></p>
+
+<h5>Flea Tick Preventative</h5>
+<p><%= @dog.flea_tick_preventative %></p>
+

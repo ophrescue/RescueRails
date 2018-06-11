@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="navbar-brand">
+    <%= link_to "Operation Paws for Homes", root_path, :class => "brand d-none d-sm-block" %>
+    <%= link_to "OPH" , root_path, :class => "brand d-sm-block d-md-none" %>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarToggler">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item"><%= link_to "Dogs", dogs_path, class: "nav-link" %></li>
+      <li class="nav-item"><%= link_to "Events", events_path, class: "nav-link"  %></li>
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Adopt</a>
+        <div class="dropdown-menu">
+          <a href="/guide" class="nav-link">Adoption Guide</a>
+          <a href=<%= new_adopter_path %> class="nav-link" >Adoption Application</a>
+          <a href="/resources" class="nav-link">Adoption Resources</a>
+          <div class="dropdown-divider"></div>
+          <a href="http://eepurl.com/h9oyk" class="nav-link">Subscribe to our Newsletter</a>
+          <div class="dropdown-divider"></div>
+          <a href="/documentary" class="nav-link">Watch 600 Miles Home</a>
+          <a href="/tips-for-finding-lost-pets" class="nav-link">Finding Lost Pets</a>
+          <a href="/insurance" class="nav-link">Pet Insurance</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Donate</a>
+        <div class="dropdown-menu">
+          <%= link_to "Donate", '/donate', class: "nav-link" %>
+          <%= link_to "Special Funds", '/special-funds', class: "nav-link"%>
+          <%= link_to "Sponsor", '/sponsor', class: "nav-link" %>
+          <%= link_to "Other Ways to Give", '/other-ways-to-give', class: "nav-link" %>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="/get-involved", class="nav-link">Get Involved</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Partners</a>
+        <div class="dropdown-menu">
+          <a href="/funding-partners" class="nav-link">Funding Partners</a>
+          <a href="/community-partners" class="nav-link">Community Partners</a>
+          <a href="/non-profit-and-corporate-partners" class="nav-link">Non-Profit and Corporate Partners</a>
+          <a href="/shelter-partners" class="nav-link">Shelter Partners</a>
+          <a href="/training-partners" class="nav-link">Training Partners</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">About</a>
+        <div class="dropdown-menu">
+          <a href="/aboutus" class="nav-link">Our Story</a>
+          <a href="/documentary" class="nav-link">Watch 600 Miles Home</a>
+          <a href="/contact" class="nav-link">Contact Us</a>
+          <div class="dropdown-divider"></div>
+          <a href="/education-and-outreach" class="nav-link">Education &amp; Outreach</a>
+          <a href="/terms" class="nav-link">Terms and Conditions</a>
+        </div>
+      </li>
+      <% if signed_in? %>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Staff</a>
+          <div class="dropdown-menu">
+            <% if can_edit_my_adopters? || can_edit_all_adopters? %>
+              <%= link_to "Applications",  adopters_path( status: "active"), class: "nav-link" %>
+            <% end %>
+            <% if current_user.active? || current_user.admin? %>
+              <%= link_to "DNA List", banned_adopters_path, class: "nav-link" %>
+              <%= link_to "Manage Dogs", dogs_path( status: "active"), class: "nav-link" %>
+              <%= link_to "Users", users_path, class: "nav-link" %>
+            <% end %>
+            <% if can_dl_resources? %>
+              <%= link_to "Staff Resources", folders_path, class: "nav-link" %>
+            <% end %>
+            <% if can_edit_dogs? %>
+              <%= link_to "Shelters", shelters_path, class: "nav-link" %>
+            <% end %>
+            <%= link_to "My Profile", current_user, class: "nav-link" %>
+            <%= link_to "Sign out", signout_path, class: "nav-link" %>
+          </div>
+        </li>
+      <% else %>
+        <li><%= link_to "Sign in", signin_path, class: "nav-link" %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav >

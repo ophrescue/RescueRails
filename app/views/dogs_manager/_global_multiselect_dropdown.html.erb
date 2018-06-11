@@ -1,0 +1,15 @@
+<div class="col-4 col-md-2 globalselect-container" id=<%= id %>>
+  <button type="button" class="globalselect dropdown-toggle btn btn-sm btn-default mb-2 mb-sm-0" data-toggle="dropdown" >
+    <%= button_text %>
+  </button>
+  <ul class="dropdown-menu" data-multiple=<%= multiple %> data-close-after-selection=true >
+    <%- options.each do |value, text| %>
+      <li id=<%= value %> class=<%= is_selected?(id,value) %> >
+        <%- name = multiple ? "#{id}[]" : id %>
+        <input type='hidden' name=<%= name %> value=<%= value %> <%= is_disabled?(id,value) %> />
+        <span class="check fa fa-check"></span>
+        <span class="filter_option"><%= text %></span>
+      </li>
+    <%- end %>
+  </ul>
+</div>

@@ -4,8 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <%= csrf_meta_tag %>
-  <%= render 'layouts/stylesheets' %>
-  <%= javascript_include_tag "application" %>
+    <%= render 'layouts/assets' %>
 
   <script type="text/javascript">
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -45,12 +44,16 @@
       js = d.createElement(s); js.id = id;
       js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
       fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-  </script>
+      }(document, 'script', 'facebook-jssdk'));</script>
+    </script>
 
     <!--[if lte IE 6]><script src="js/ie6/warning.js"></script><script>window.onload=function(){e("/assets/ie6warn/")}</script><![endif]-->
   <% if @hide_topbar.nil? %>
-    <%= render 'layouts/topbar' %>
+    <% if @bootstrap41 %>
+      <%= render 'layouts/topbar_bs41' %>
+    <% else %>
+      <%= render 'layouts/topbar' %>
+    <% end %>
   <% end %>
   <div class="container">
     <% flash.each do |key, value| %>
@@ -62,9 +65,13 @@
         <p><%= link_to("Profile", current_user, :class => "btn btn-warning") %></p>
       </div>
     <% end %>
-    <%= yield %>
+    <div class='row'>
+      <%= yield %>
+    </div>
 
+    <div class='row'>
       <%= render 'layouts/footer' %>
+    </div>
       <%= debug(params) if Rails.env.development? %>
   </div>
   </body>

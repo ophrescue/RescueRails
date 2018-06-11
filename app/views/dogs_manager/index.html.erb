@@ -1,0 +1,20 @@
+<div class='container' id='manager_list'>
+  <% if current_user&.active %>
+    <div class='row'>
+      <div class='col-2 offset-6 offset-sm-10'>
+          <%= link_to("Switch to public list", dogs_gallery_index_path, class: "btn btn-sm btn-outline-secondary switch_view") %>
+      </div>
+    </div>
+  <% end %>
+  <div class="row title_row">
+    <div class="col-12 col-md-8">
+      <h1>Dog Manager</h1>
+    </div>
+    <% if can_add_dogs? %>
+      <div class="col-6 col-md-2 mb-2 mb-sm-0">
+        <%= link_to "Add a Dog", new_dog_path, :class => "btn btn-sm btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+  <%= render partial: 'manager' %>
+</div>

@@ -17,3 +17,12 @@ coverage
 .vscode/
 .byebug_history
 site_notes.txt
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
+/public/packs
+/public/packs-test
+/node_modules
+yarn-debug.log*
+.yarn-integrity

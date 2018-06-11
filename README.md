@@ -6,10 +6,11 @@ Rails 5.2.x
 Ruby 2.3.1
 Postgresql 9.6.x
 
-### About
+## About
 RescueRails is the public facing website for Operation Paws for Homes, as well as the private system used by the rescue for managing dogs, adopters and staff.
 
 
+## Developer Notes
 ### Setup in dev
 
     git clone git@github.com:ophrescue/RescueRails.git
@@ -43,15 +44,21 @@ Tests are run via Headless Chrome, which will require Google Chrome and ChromeDr
 brew install chromedriver
 ```
 
-### Browser Support
+### Webpacker
+
+RescueRails uses the Rails webpacker gem to support VueJS and ES6 javascript, including a javascript test suite. If you are working on any of the webpack packs in app/javascript, you can start the webpack-dev-server in a second terminal window, to give you hot-reloading of the webpack javascript code.
+
+To support the development of webpack packs, you will need nodejs and yarn installed. Refer to the [https://github.com/rails/webpacker#prerequisites](Webpacker gem documentation). You will also need to build a development environment for the packs by installing all the nodejs dependencies with `yarn install`.
+
+## Browser Support
 
 Supported browsers and platforms are those specified for the version of Boostrap incorporated. See the Bootstrap documentation: getting-started/browsers-devices for the appropriate version.
 
-### Contributing
+## Contributing
 
 Submit a volunteer application at https://ophrescue.org/volunteer if you'd like to be part of the team.  Pull Requests from non-team members will still be considered.  Work item priority is tracked on Waffle.io [![Stories in Ready](https://badge.waffle.io/ophrescue/rescuerails.png?label=ready&title=Ready)](https://waffle.io/ophrescue/rescuerails?utm_source=badge)
 
-### Licensing
+## Licensing
 * Source code written for this project has been licensed under the Apache 2.0 license
 * 3rd party libraries that may appear are licensed as identified.
 * Logos and images remain copyright of their respective owners.

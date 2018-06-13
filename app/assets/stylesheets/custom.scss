@@ -12,6 +12,10 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+/*body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}*/
 
 label.valid {
   width: 24px;
@@ -68,6 +72,23 @@ form .control-group.error span.error {
   color: #333333;
 }
 
+// .hero-unit {
+//  background-image: url(hero_bg2.gif);
+//  background-repeat: no-repeat;
+//  background-position: center;
+//  background-color: #262425;
+//  padding: 160px;
+// /* -webkit-border-radius: 6px;
+//  -moz-border-radius: 6px;
+//  border-radius: 6px;*/
+// }
+
+.carousel-inner {
+  background-repeat: no-repeat;
+  background-color: #262425;
+  text-align: center;
+}
+
 .carousel .item > img { display: inline-block; }
 
 .centered {
@@ -77,6 +98,15 @@ form .control-group.error span.error {
 .low {
   background: transparent;
 }
+
+// .hero-unit h1 {
+//  color: #FFFFFF;
+//  font-size: 37px;
+// }
+
+// .hero-unit p {
+//  color: #FFFFFF;
+// }
 
 .sidekick h2 {
   border-bottom: 2px solid #000000;
@@ -110,6 +140,30 @@ form .control-group.error span.error {
   font-size: .7rem;
   line-height: 1.3em;
   color: #757575;
+}
+
+.gallery img{
+  display:block ;
+  margin: auto ;
+  border-radius: 6px 6px 6px 6px;
+}
+
+.gallery h4 {
+  text-align: center;
+  color: #333333;
+}
+
+.gallery p {
+  text-align: center;
+  color: #333333;
+}
+
+.gallery a.thumbnail {
+  padding-top: 22px;
+}
+
+.gallery li {
+  height: 478px;
 }
 
 img.floatLeft {

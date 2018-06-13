@@ -17,13 +17,13 @@
 <div class='row dog line-2 d-none d-md-flex'> <!-- for now it's disabled on mobile, but the layout below is mobile-ready if this info is needed in this list for mobile iso on the #show page -->
   <div class='col-4 col-md-1 intake_date'><%= dog.intake_dt.strftime("%m/%d/%y") unless dog.intake_dt.blank? %></div>
   <div class='col-4 col-md-2 flags'>
-    <div class="<%= 'medical_review_needed' unless dog.medical_review_complete %>" 'data-toggle'='tooltip' 'data-placement'='bottom' title='Medical Review Incomplete'></div>
-    <div class="<%= 'has_medical_need' if dog.has_medical_need %>" 'data-toggle'='tooltip' 'data-placement'='bottom' title='Medical Need'></div>
-    <div class="<%= 'is_high_priority' if dog.is_high_priority %>" 'data-toggle'='tooltip' 'data-placement'='bottom' title='High Priority'></div>
-    <div class="<%= 'fa fa-lg fa-camera' if dog.needs_photos %>" 'data-toggle'='tooltip' 'data-placement'='bottom' title='Need Photos'></div>
-    <div class="<%= 'has_behavior_problem' if dog.has_behavior_problem %>" 'data-toggle'='tooltip' 'data-placement'='bottom' title='Behavior Problem'></div>
-    <div class="<%= 'needs_foster' if dog.needs_foster %>" 'data-toggle'='tooltip' 'data-placement'='bottom' title='Needs Foster'></div>
-    <div class="<%= 'spay_neuter_needed' unless dog.is_altered %>" 'data-toggle'='tooltip' 'data-placement'='bottom' title='Needs Spay/Neuter'></div>
+    <div class="<%= 'medical_review_needed' unless dog.medical_review_complete %>" data-toggle='tooltip' data-placement='bottom' title='Medical Review Incomplete'></div>
+    <div class="<%= 'has_medical_need' if dog.has_medical_need %>" data-toggle='tooltip' data-placement='bottom' title='Medical Need'></div>
+    <div class="<%= 'is_high_priority' if dog.is_high_priority %>" data-toggle='tooltip' data-placement='bottom' title='High Priority'></div>
+    <div class="<%= 'fa fa-lg fa-camera' if dog.needs_photos %>" data-toggle='tooltip' data-placement='bottom' title='Need Photos'></div>
+    <div class="<%= 'has_behavior_problem' if dog.has_behavior_problem %>" data-toggle='tooltip' data-placement='bottom' title='Behavior Problem'></div>
+    <div class="<%= 'needs_foster' if dog.needs_foster %>" data-toggle='tooltip' data-placement='bottom' title='Needs Foster'></div>
+    <div class="<%= 'spay_neuter_needed' unless dog.is_altered %>" data-toggle='tooltip' data-placement='bottom' title='Needs Spay/Neuter'></div>
   </div>
   <div class='col-4 d-md-none'>
     <% unless dog.comments.empty? %>

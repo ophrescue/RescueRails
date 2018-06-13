@@ -67,9 +67,14 @@ describe DogsManagerController, type: :controller do
         allow(controller).to receive(:active_user).and_return(true)
       end
 
+      it 'should redirect if no params are supplied' do
+        expect(get :index, params: {}).to redirect_to dogs_path(sort: 'tracking_id', direction: 'asc')
+      end
+
       it 'all dogs are returned in #index' do
-        get :index, params: {}
+        get :index, params: {sort: 'tracking_id', direction: 'asc'}
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
+        expect(assigns(:filter_params)).to match_array([])
       end
 
       it 'can filter by age, size and flags' do

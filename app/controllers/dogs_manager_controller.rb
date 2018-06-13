@@ -79,8 +79,12 @@ class DogsManagerController < DogsController
     #puts "incoming params #{params}"
     default_manager_view = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field_index").empty?
     # TODO THIS IS A HACK THAT NEEDS CLEANUP!!
+    if default_manager_view
+      redirect_to dogs_path(sort: 'tracking_id', direction: 'asc') and return
+    end
     full_params = ["is_age", "is_status", "is_size", "has_flags"].inject({}){|hash,attr| hash[attr] = (params && params[attr]) || []; hash}
     full_params["sort"] = params["sort"] || "tracking_id"
+    full_params["direction"] = params["direction"] || "asc"
     full_params["is_breed"] = params["is_breed"] || ""
     full_params["search"] = params["search"] || ""
     full_params["search_field_index"] = params["search_field_index"] || ""
@@ -88,17 +92,18 @@ class DogsManagerController < DogsController
     full_params["search_field_text"] = params["search_field_index"] && Dog::SEARCH_FIELDS[params["search_field_index"]]
     #puts "merged params #{full_params}"
     params = full_params
-    @dogs = case
-            when default_manager_view
-              params["sort"] = 'tracking_id'
-              params["direction"] = 'asc'
-              Dog.default_manager_view
-            else
-              DogFilter.filter(params: params)
-            end
+    #@dogs = case
+            #when default_manager_view
+              #params["sort"] = 'tracking_id'
+              #params["direction"] = 'asc'
+              #Dog.default_manager_view
+            #else
+              #DogFilter.filter(params: params)
+            #end
+    @dogs = DogFilter.filter(params: params)
     @count = @dogs.count
 
-    @filter_params = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field_index", "search_field_text")
+    @filter_params = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "direction", "is_breed", "search", "search_field_index", "search_field_text")
 
     #puts "filter_params #{@filter_params}"
 

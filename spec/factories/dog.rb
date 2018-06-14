@@ -52,6 +52,13 @@ FactoryBot.define do
       end
     end
 
+    trait :no_flags do
+      [ :medical_review_complete, :has_medical_need, :is_special_needs, :is_altered, :is_high_priority, :needs_photos,
+        :has_behavior_problem, :needs_foster, :no_dogs, :no_cats, :no_kids ].each do |flag|
+        send(flag, nil)
+      end
+    end
+
     trait :active_dog do
       status { Dog::ACTIVE_STATUSES.sample }
     end

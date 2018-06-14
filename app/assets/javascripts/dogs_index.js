@@ -1,32 +1,32 @@
-MessageBar = {};
+//MessageBar = {};
 GlobalMultiSelect = {};
 
-MessageBar.init = function(){
-  $('#filter_info .filter_param').each(function(){
-    var $this = $(this);
-    group = $this.closest('.message_group').attr('id');
-    value = $this.attr('id');
-    if(_.isArray(filter_params[group])){
-      if(filter_params[group].indexOf(value) == -1) {$this.hide()}else{$this.show()}}
-    else if(_.isString(filter_params[group])){
-      if((filter_params[group] == value) ||
-        ((filter_params[group] == $this.text()) && $this.text().length > 0) ||
-        ((group == 'search') && (filter_params[group].length > 0))
-      ) {$this.show()}else{$this.hide()}};
-  });
-  $('#filter_info .message_group').each(function(){
-    var $this = $(this);
-    if($this.find('.filter_param:visible').length == 0)
-      {$this.find('.group_label').hide()}else{$this.find('group_label').show()};
-  });
-  MessageBar.manage_reset_message()
-};
+//MessageBar.init = function(){
+  //$('#filter_info .filter_param').each(function(){
+    //var $this = $(this);
+    //group = $this.closest('.message_group').attr('id');
+    //value = $this.attr('id');
+    //if(_.isArray(filter_params[group])){
+      //if(filter_params[group].indexOf(value) == -1) {$this.hide()}else{$this.show()}}
+    //else if(_.isString(filter_params[group])){
+      //if((filter_params[group] == value) ||
+        //((filter_params[group] == $this.text()) && $this.text().length > 0) ||
+        //((group == 'search') && (filter_params[group].length > 0))
+      //) {$this.show()}else{$this.hide()}};
+  //});
+  //$('#filter_info .message_group').each(function(){
+    //var $this = $(this);
+    //if($this.find('.filter_param:visible').length == 0)
+      //{$this.find('.group_label').hide()}else{$this.find('group_label').show()};
+  //});
+  //MessageBar.manage_reset_message()
+//};
 
-MessageBar.manage_reset_message = function(){
-  if(!MessageBar.default())
-    { $('#reset_message').show() }else
-    { $('#reset_message').hide() };
-};
+//MessageBar.manage_reset_message = function(){
+  //if(!MessageBar.default())
+    //{ $('#reset_message').show() }else
+    //{ $('#reset_message').hide() };
+//};
 
 //MessageBar.show_message = function(group,value,multiple){
   //if(!multiple){$('#filter_info .message_group#'+group+' .filter_param').hide()}
@@ -44,31 +44,31 @@ MessageBar.manage_reset_message = function(){
   //MessageBar.manage_reset_message();
 //};
 
-MessageBar.default = function(){
-  return !(MessageBar.filter_active() || MessageBar.sort_active());
-};
+//MessageBar.default = function(){
+  //return !(MessageBar.filter_active() || MessageBar.sort_active());
+//};
 
-MessageBar.filter_active = function(){
-  return ($('#filter_info .message_group:not(#sort) .filter_param:visible').length != 0)
-};
+//MessageBar.filter_active = function(){
+  //return ($('#filter_info .message_group:not(#sort) .filter_param:visible').length != 0)
+//};
 
-MessageBar.sort_active = function(){
-  var default_sort = 'tracking_id';
-  var selected_sort = $('#filter_info .message_group#sort .filter_param:visible').first().attr('id')
-  return (selected_sort != default_sort)
-};
+//MessageBar.sort_active = function(){
+  //var default_sort = 'tracking_id';
+  //var selected_sort = $('#filter_info .message_group#sort .filter_param:visible').first().attr('id')
+  //return (selected_sort != default_sort)
+//};
 
-MessageBar.show_typed_text = function(group, text){
-  var $message = $('#filter_info .message_group#'+group+' .filter_param');
-  var $group_label = $message.prev()
-  if(text.length == 0){
-    $message.hide();
-    $group_label.hide();
-  }else{
-    $message.show().text(text);
-    $group_label.show();
-  };
-}
+//MessageBar.show_typed_text = function(group, text){
+  //var $message = $('#filter_info .message_group#'+group+' .filter_param');
+  //var $group_label = $message.prev()
+  //if(text.length == 0){
+    //$message.hide();
+    //$group_label.hide();
+  //}else{
+    //$message.show().text(text);
+    //$group_label.show();
+  //};
+//}
 
 GlobalMultiSelect.fetch = function(){
   var query = $('form').serialize();
@@ -142,7 +142,7 @@ GlobalMultiSelect.filter_by_text_search = function(){
     { $search_button.hide()}else{ $search_button.show()};
   var group = $input.attr('id')
   filter_params[group] = $input.val()
-  MessageBar.show_typed_text(group, $input.val())
+  //MessageBar.show_typed_text(group, $input.val())
 };
 
 GlobalMultiSelect.ensure_attribute_selected = function(){
@@ -165,7 +165,7 @@ $(function(){
   $(document).on('keyup', '#filter_controls input#search', GlobalMultiSelect.filter_by_text_search );
   $(document).on('focus', '#filter_controls input#search', GlobalMultiSelect.ensure_attribute_selected );
   $(document).on('click', '#filter_controls .dropdown-menu .input-group#search button', GlobalMultiSelect.fetch );
-  MessageBar.init();
+  //MessageBar.init();
 });
 
-$(function(){MessageBar.init})
+//$(function(){MessageBar.init})

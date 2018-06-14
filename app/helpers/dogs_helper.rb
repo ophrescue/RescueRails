@@ -1,4 +1,46 @@
 module DogsHelper
+  def age_filter_active?
+    !@filter_params['is_age'].empty?
+  end
+
+  def status_filter_active?
+    !@filter_params['is_status'].empty?
+  end
+
+  def size_filter_active?
+    !@filter_params['is_size'].empty?
+  end
+
+  def flag_filter_active?
+    !@filter_params['has_flags'].empty?
+  end
+
+  def selected_flags
+    Dog::FILTER_FLAGS.slice(*@filter_params["has_flags"])
+  end
+
+  def selected_sizes
+    #["small", "medium", "large", "extra large"]
+    (Dog::SIZES & @filter_params['is_size']).to_id_and_value_hash
+  end
+
+  def sort_field
+    Sortable::SORT_FIELDS.slice(@filter_params['sort'].to_sym)
+  end
+
+  def search_active?
+    search_string.present? && search_field_index.present?
+  end
+
+  def search_field_index
+    @filter_params['search_field_index']
+  end
+
+  def search_string
+    @filter_params['search']
+  end
+
+
   def x_icon
     "<i class='fa fa-lg fa-times text-danger'></i>".html_safe
   end
@@ -7,6 +49,18 @@ module DogsHelper
     if condition
       render options
     end
+  end
+
+  def render_unless(condition, options)
+    render_if(!condition, options)
+  end
+
+  def default_search_sort?
+    !search_active? && !sort_active?
+  end
+
+  def sort_active?
+    @filter_params['sort'] != 'tracking_id'
   end
 
   def search_string_present?

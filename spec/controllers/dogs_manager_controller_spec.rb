@@ -74,7 +74,16 @@ describe DogsManagerController, type: :controller do
       it 'all dogs are returned in #index' do
         get :index, params: {sort: 'tracking_id', direction: 'asc'}
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
-        expect(assigns(:filter_params)).to match_array([])
+        expect(assigns(:filter_params)).to match_array({"is_age"=>[],
+                                                        "is_status"=>[],
+                                                        "is_size"=>[],
+                                                        "has_flags"=>[],
+                                                        "sort"=>"tracking_id",
+                                                        "direction"=>"asc",
+                                                        "is_breed"=>"",
+                                                        "search"=>"",
+                                                        "search_field_index"=>"",
+                                                        "search_field_text"=>nil})
       end
 
       it 'can filter by age, size and flags' do

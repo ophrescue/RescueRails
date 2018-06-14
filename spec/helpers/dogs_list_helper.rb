@@ -6,6 +6,10 @@ module DogsListHelper
     page.find('#search_icon').click
   end
 
+  def filter_info
+    page.find('#filter_info').text
+  end
+
   def sort_by(field)
     click_button("Sort")
     page.find("#filter_controls #sort .dropdown-menu li##{field} span.filter_option").click
@@ -62,9 +66,10 @@ module DogsListHelper
     page.all('#manager_dogs .dog .breed').map(&:text)
   end
 
-  def filter_by_age(age)
-    page.find('#is_age button').click
-    page.find("#is_age .dropdown-menu li##{age} .filter_option").click
+  def filter_by(attribute, value)
+    id = attribute=='flags' ? "has_flags" : "is_#{attribute}"
+    page.find("##{id} button").click
+    page.find("##{id} .dropdown-menu li##{value} .filter_option").click
   end
 
 end

@@ -49,7 +49,7 @@ feature 'Dog sort in manager view', js: true do
 
   context 'with age filter active' do
     before do
-      filter_by_age("adult")
+      filter_by("age","adult")
       ages.each do |age|
         expect(age).to eq 'Adult,'
       end

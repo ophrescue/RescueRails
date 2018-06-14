@@ -17,3 +17,5 @@ coverage
 .vscode/
 .byebug_history
 site_notes.txt
+node_modules/
+public/packs/

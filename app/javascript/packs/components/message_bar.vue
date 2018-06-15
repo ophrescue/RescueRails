@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import queryString from 'query-string'
+// import queryString from 'query-string'
 // const queryString = require('query-string');
 // 
 // console.log(location.search);
 // //=> '?foo=bar'
 // 
-const parsed = queryString.parse(location.search);
-console.log(parsed);
+// const parsed = queryString.parse(location.search);
+// console.log(parsed);
 // //=> {foo: 'bar'}
 // 
 // console.log(location.hash);
@@ -38,7 +38,7 @@ var message = "who let the canary out"
 export default {
   data: function () {
     return {
-      message: parsed
+      message: message
     }
   }
 }

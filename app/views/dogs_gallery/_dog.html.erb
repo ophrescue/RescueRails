@@ -1,7 +1,7 @@
 <div class="col-sm-4 dog">
   <%= link_to dogs_gallery_path(dog), class: "img-thumbnail" do %>
     <%= image_tag(dog.primary_photo_url, :alt => dog.photo_alt_text) %>
-    <h4><%= dog.name.titleize %></h4>
+    <h4><%= dog.name %></h4>
     <strong><%= dog.status.titleize %></strong><br />
     <%= dog.foster_location %><br />
     <%= dog.gender %> - <%= dog.age.try(:titleize) %><br />

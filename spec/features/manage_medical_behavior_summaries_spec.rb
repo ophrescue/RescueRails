@@ -11,7 +11,7 @@ feature 'manage medical and behavior summaries', js: true do
 
     scenario 'Edit Medical Summary' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name.titleize)
+      expect(page).to have_content(test_dog.name)
 
       click_link(test_dog.name)
       click_link('Edit')
@@ -22,7 +22,7 @@ feature 'manage medical and behavior summaries', js: true do
 
     scenario 'Edit Behavior Summary' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name.titleize)
+      expect(page).to have_content(test_dog.name)
 
       click_link(test_dog.name)
       click_link('Edit')

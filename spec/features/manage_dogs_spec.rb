@@ -7,7 +7,7 @@ feature 'View Dogs', js: true do
   let!(:active_user) { create(:user) }
   let!(:inactive_user) { create(:user, :inactive_user) }
   let!(:test_foster) { create(:user) }
-  let!(:test_dog) { create(:dog_with_photo_and_attachment, foster_id: test_foster.id, status: 'adoptable') }
+  let!(:test_dog) { create(:dog_with_photo_and_attachment, name: "Couch potato", foster_id: test_foster.id, status: 'adoptable') }
 
   context 'Logged in as Admin' do
     before(:each) do
@@ -16,12 +16,12 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the Manager View' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name.titleize)
+      expect(page).to have_content(test_dog.name)
     end
 
     scenario 'can view private information about a dog' do
       visit dog_path(test_dog)
-      expect(page).to have_content(test_dog.name.titleize)
+      expect(page).to have_content(test_dog.name)
       ["Medical Summary",
        "Behavior Summary",
        "Original Name",
@@ -60,9 +60,9 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the public dog gallery' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name.titleize)
-      click_link(test_dog.name.titleize)
-      expect(page).to have_content(test_dog.name.titleize)
+      expect(page).to have_content(test_dog.name)
+      click_link(test_dog.name)
+      expect(page).to have_content(test_dog.name)
     end
   end
 
@@ -73,12 +73,12 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the Manager View' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name.titleize)
+      expect(page).to have_content(test_dog.name)
     end
 
     scenario 'can view private information about a dog' do
       visit dog_path(test_dog)
-      expect(page).to have_content(test_dog.name.titleize)
+      expect(page).to have_content(test_dog.name)
       ["Medical Summary",
        "Behavior Summary",
        "Original Name",
@@ -117,9 +117,9 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the public dog gallery' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name.titleize)
-      click_link(test_dog.name.titleize)
-      expect(page).to have_content(test_dog.name.titleize)
+      expect(page).to have_content(test_dog.name)
+      click_link(test_dog.name)
+      expect(page).to have_content(test_dog.name)
     end
   end
 
@@ -135,7 +135,7 @@ feature 'View Dogs', js: true do
 
     scenario 'can not view private information about a dog' do
       visit dog_path(test_dog)
-      expect(page).to have_content(test_dog.name.titleize)
+      expect(page).to have_content(test_dog.name)
       ["Medical Summary",
        "Behavior Summary",
        "Original Name",
@@ -174,9 +174,9 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the public dog gallery' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name.titleize)
-      click_link(test_dog.name.titleize)
-      expect(page).to have_content(test_dog.name.titleize)
+      expect(page).to have_content(test_dog.name)
+      click_link(test_dog.name)
+      expect(page).to have_content(test_dog.name)
     end
   end
 
@@ -188,9 +188,9 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the public dog gallery' do
       visit dogs_gallery_index_path
-      expect(page).to have_content(test_dog.name.titleize)
-      click_link(test_dog.name.titleize)
-      expect(page).to have_content(test_dog.name.titleize)
+      expect(page).to have_content(test_dog.name)
+      click_link(test_dog.name)
+      expect(page).to have_content(test_dog.name)
     end
   end
 

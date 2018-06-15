@@ -125,7 +125,6 @@ feature 'Filter Dogs List', js: true do
     Dog::SIZES.to_id_and_value_hash.each do |key,text|
       scenario "can filter by '#{text}' size attribute" do
         visit dogs_path
-        puts "key: #{key} text: #{text}"
 
         filter_by("size", key)
         expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sort:")
@@ -159,7 +158,6 @@ feature 'Filter Dogs List', js: true do
     Dog::STATUSES.to_id_and_value_hash.each do |key,text|
       scenario "can filter by '#{text}' status attribute" do
         visit dogs_path
-        puts "key: #{key} text: #{text}"
 
         filter_by("status", key)
         expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sort:")

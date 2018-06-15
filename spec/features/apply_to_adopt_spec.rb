@@ -132,7 +132,7 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('Google and Craigslist')
 
     click_link('Dog Info')
-    expect(page).to have_field("adoption_app_ready_to_adopt_dt", with: "12/13/2012")
+    expect(page).to have_field("adoption_app_ready_to_adopt_dt", with: "2012-12-13")
     expect(page).to have_content('Dog will go to the gym with me')
     expect(page).to have_content('In a crate')
     expect(page).to have_content('Dog will come with us on vacation')
@@ -294,7 +294,7 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('Authorized to verify home ownership')
 
     click_link('Dog Info')
-    expect(page).to have_field("adoption_app_ready_to_adopt_dt", with: "12/13/2012")
+    expect(page).to have_field("adoption_app_ready_to_adopt_dt", with: "2012-12-13")
     expect(page).to have_content('Dog will go to the gym with me')
     expect(page).to have_content('In a crate')
     expect(page).to have_content('Dog will come with us on vacation')

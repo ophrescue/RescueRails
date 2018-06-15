@@ -9,11 +9,11 @@ import Vue from 'vue'
 import messageBar from './components/message_bar.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const el = document.body.appendChild(document.createElement('hello'))
-  const app = new Vue({
-    el,
-    render: h => h(messageBar)
-  })
+  //const el = document.body.appendChild(document.createElement('hello'))
+  //const app = new Vue({
+    //el,
+    //render: h => h(messageBar)
+  //})
 
   console.log(app)
 })

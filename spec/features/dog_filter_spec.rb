@@ -28,14 +28,25 @@ feature 'Filter Dogs List', js: true do
       expect(dogs_list).to eq [["#1","Zeke", "Labrador Retriever,"],
                                ["#3", "Abby", "Golden Retriever,"] ]
       click_button("Search")
+      # search parameters for the search currently active are shown in the search dropdown
       expect(page.find('input#search').value).to eq 'retriev'
       expect(page.find('#search_field_index ul>li._breed input', visible: false)).to be_checked # it's not visible b/c we hide it in order to make custom radio button
       expect(page.find('#search_icon')).to be_visible
+
+      # all current filter params are shown
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Tracking ID")
       expect(page).to have_selector(group_label, text: "Search by:")
       expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
       expect(page).to have_selector('#reset_message')
+
+      # close and open the search dropdown... search params are still shown
+      click_button("Search") # close
+      click_button("Search") # open
+      expect(page.find('input#search').value).to eq 'retriev'
+      expect(page.find('#search_field_index ul>li._breed input', visible: false)).to be_checked # it's not visible b/c we hide it in order to make custom radio button
+      expect(page.find('#search_icon')).to be_visible
+
       page.find('#reset_message').click
       click_button("Search")
       expect(page.find('input#search').value).to be_blank
@@ -78,6 +89,52 @@ feature 'Filter Dogs List', js: true do
       expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
       page.find('#reset_message').click
       expect(dogs_list).to eq all_dogs_sorted_by_id
+    end
+
+    scenario 'shows error message if user forgets to select search attribute' do
+      visit dogs_path
+      click_button("Search")
+      expect(page).to have_selector('#search-dropdown-heading')
+      page.find('input#search').set("retr")
+      page.find('#search_icon').click
+      expect(page).not_to have_selector('#search-dropdown-heading')
+      expect(page).to have_selector('#search-error-message', text: 'Please select a field to search in')
+      select_search_by('Breed')
+      expect(page).not_to have_selector('#search-error-message')
+      expect(page).not_to have_selector('#search-dropdown-heading')
+    end
+
+    scenario 'search after being reminded to select search attribute' do
+      visit dogs_path
+      click_button("Search")
+      page.find('input#search').set("retr")
+      page.find('#search_icon').click
+      select_search_by('Breed')
+      page.find('#search_icon').click
+      expect(dog_names).to match_array ["Zeke", "Abby"]
+    end
+
+    scenario 'reset search field' do
+      visit dogs_path
+      click_button("Search")
+      page.find('input#search').set("retr")
+      select_search_by('Breed')
+      page.find('#search_reset_button').click
+      expect(page.find('input#search').value).to be_blank
+      expect(page.find('#search_reset_button', visible: false)).not_to be_visible
+      expect(page.find('#search_button', visible: false)).not_to be_visible
+      expect(page.all('#search_field_index input[type="radio"]', visible: false).map(&:checked?).any?).to eq false
+    end
+
+    scenario 'reset search params on dropdown close without search' do
+      visit dogs_path
+      click_button("Search")
+      select_search_by('Breed')
+      page.find('input#search').set("retr")
+      click_button("Search") # close
+      click_button("Search") # open again
+      expect(page.find('input#search').value).to be_blank
+      expect(page.all('#search_field_index input[type="radio"]', visible: false).map(&:checked?).any?).to eq false
     end
   end
 

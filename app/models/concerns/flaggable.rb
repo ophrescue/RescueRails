@@ -16,7 +16,7 @@ module Flaggable
 
   class_methods do
     def has_flags(flags) # flags is an array of active (i.e submitted by user for filter) flag attributes
-      filter_flags = Dog::FILTER_FLAGS.keys
+      filter_flags = Dog::FILTER_FLAGS.as_options.keys
       # security measure, ensure received flags are in the list of FILTER_FLAGS
       (filter_flags & flags).inject(Dog.unscoped) do |result, filter_flag|
         result.send(filter_flag)

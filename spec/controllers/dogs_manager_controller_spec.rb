@@ -67,27 +67,22 @@ describe DogsManagerController, type: :controller do
         allow(controller).to receive(:active_user).and_return(true)
       end
 
-      it 'should redirect if no params are supplied' do
-        expect(get :index, params: {}).to redirect_to dogs_path(sort: 'tracking_id', direction: 'asc')
+      it 'should set default sort and direction if no params are supplied' do
+        get :index, params {}
+        expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
+        expect(assigns(:filter_params)[:sort]).to eq "tracking_id"
+        expect(assigns(:filter_params)[:direction]).to eq "asc"
       end
 
       it 'all dogs are returned in #index' do
-        get :index, params: {sort: 'tracking_id', direction: 'asc'}
+        get :index, params: {filter_params: { sort: 'tracking_id', direction: 'asc'}}
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
-        expect(assigns(:filter_params)).to match_array({"is_age"=>[],
-                                                        "is_status"=>[],
-                                                        "is_size"=>[],
-                                                        "has_flags"=>[],
-                                                        "sort"=>"tracking_id",
-                                                        "direction"=>"asc",
-                                                        "is_breed"=>"",
-                                                        "search"=>"",
-                                                        "search_field_index"=>"",
-                                                        "search_field_text"=>nil})
+        expect(assigns(:filter_params)[:sort]).to eq "tracking_id"
+        expect(assigns(:filter_params)[:direction]).to eq "asc"
       end
 
       it 'can filter by age, size and flags' do
-        get :index, params: {is_age: 'baby', is_size: 'small', has_flags: ['special_needs']}
+        get :index, params: {filter_params: {is_age: 'baby', is_size: 'small', has_flags: ['special_needs']}}
         expect(assigns(:dogs)).to match_array([baby_small_special_needs_dog])
       end
     end

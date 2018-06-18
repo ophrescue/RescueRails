@@ -76,36 +76,9 @@ class DogsManagerController < DogsController
   before_action :select_bootstrap41
 
   def index
-    #puts "incoming params #{params}"
-    default_manager_view = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field_index").empty?
-    # TODO THIS IS A HACK THAT NEEDS CLEANUP!!
-    if default_manager_view
-      redirect_to dogs_path(sort: 'tracking_id', direction: 'asc') and return
-    end
-    full_params = ["is_age", "is_status", "is_size", "has_flags"].inject({}){|hash,attr| hash[attr] = (params && params[attr]) || []; hash}
-    full_params["sort"] = params["sort"] || "tracking_id"
-    full_params["direction"] = params["direction"] || "asc"
-    full_params["is_breed"] = params["is_breed"] || ""
-    full_params["search"] = params["search"] || ""
-    full_params["search_field_index"] = params["search_field_index"] || ""
-    #default_manager_view = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "is_breed", "search", "search_field_index").empty?
-    full_params["search_field_text"] = params["search_field_index"] && Dog::SEARCH_FIELDS[params["search_field_index"]]
-    #puts "merged params #{full_params}"
-    params = full_params
-    #@dogs = case
-            #when default_manager_view
-              #params["sort"] = 'tracking_id'
-              #params["direction"] = 'asc'
-              #Dog.default_manager_view
-            #else
-              #DogFilter.filter(params: params)
-            #end
-    @dogs = DogFilter.filter(params: params)
-    @count = @dogs.count
-
-    @filter_params = params.slice("is_age", "is_status", "is_size", "has_flags", "sort", "direction", "is_breed", "search", "search_field_index", "search_field_text")
-
-    #puts "filter_params #{@filter_params}"
+    params[:filter_params] ||= {}
+    @dog_filter = DogFilter.new search_params
+    @dogs, @count, @filter_params = @dog_filter.filter
 
     for_page(params[:page])
   end
@@ -149,75 +122,31 @@ class DogsManagerController < DogsController
   end
 
   private
+  def search_params
+    # filter_params is not required as it is not supplied for the default manager view
+    params.permit(filter_params: [:sort,
+                                  :direction,
+                                  :search,
+                                  :search_field_index,
+                                  is_age: [],
+                                  is_status:[],
+                                  is_size:[],
+                                  has_flags:[]])
+  end
 
   def dog_params
     params.require(:dog)
-      .permit(:name,
-              :tracking_id,
-              :primary_breed_id,
-              :primary_breed_name,
-              :secondary_breed_id,
-              :secondary_breed_name,
-              :status,
-              :age,
-              :size,
-              :is_altered,
-              :gender,
-              :is_special_needs,
-              :no_dogs,
-              :no_cats,
-              :no_kids,
-              :description,
-              :photos_attributes,
-              :foster_id,
-              :foster_start_date,
-              :adoption_date,
-              :is_uptodateonshots,
-              :intake_dt,
-              :available_on_dt,
-              :has_medical_need,
-              :is_high_priority,
-              :needs_photos,
-              :has_behavior_problem,
-              :needs_foster,
-              :attachments_attributes,
-              :petfinder_ad_url,
-              :adoptapet_ad_url,
-              :craigslist_ad_url,
-              :youtube_video_url,
-              :first_shots,
-              :second_shots,
-              :third_shots,
-              :rabies,
-              :vac_4dx,
-              :heartworm_preventative,
-              :flea_tick_preventative,
-              :bordetella,
-              :microchip,
-              :original_name,
-              :fee,
-              :coordinator_id,
-              :sponsored_by,
-              :shelter_id,
-              :medical_summary,
-              :behavior_summary,
-              :medical_review_complete,
-              attachments_attributes:
-              [
-                :attachment,
-                :description,
-                :updated_by_user_id,
-                :_destroy,
-                :id
-              ],
-              photos_attributes:
-              [
-                :photo,
-                :position,
-                :is_private,
-                :_destroy,
-                :id
-              ])
+      .permit(:name, :tracking_id, :primary_breed_id, :primary_breed_name, :secondary_breed_id,
+              :secondary_breed_name, :status, :age, :size, :is_altered, :gender, :is_special_needs,
+              :no_dogs, :no_cats, :no_kids, :description, :photos_attributes, :foster_id, :foster_start_date,
+              :adoption_date, :is_uptodateonshots, :intake_dt, :available_on_dt, :has_medical_need,
+              :is_high_priority, :needs_photos, :has_behavior_problem, :needs_foster, :attachments_attributes,
+              :petfinder_ad_url, :adoptapet_ad_url, :craigslist_ad_url, :youtube_video_url, :first_shots,
+              :second_shots, :third_shots, :rabies, :vac_4dx, :heartworm_preventative, :flea_tick_preventative,
+              :bordetella, :microchip, :original_name, :fee, :coordinator_id, :sponsored_by, :shelter_id,
+              :medical_summary, :behavior_summary, :medical_review_complete,
+              attachments_attributes: [ :attachment, :description, :updated_by_user_id, :_destroy, :id ],
+              photos_attributes: [ :photo, :position, :is_private, :_destroy, :id ])
   end
 
   def load_instance_variables

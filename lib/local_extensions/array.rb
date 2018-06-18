@@ -1,7 +1,7 @@
 class Array
   # for example ["Tracking ID", "Foster Location"] becomes:
   # {tracking_id: "Tracking ID", foster_location: "Foster Location"}
-  def to_id_and_value_hash
+  def as_options
     self.inject({}){|hash, string| hash[string.downcase.gsub(/\s/,"_")]=string; hash}
   end
 

@@ -131,16 +131,8 @@ class Dog < ApplicationRecord
     'Female' => 'F'
   }.freeze
 
-  FILTER_FLAGS = {"high_priority"=>"High Priority",
-                  "medical_need"=>"Medical Need",
-                  "special_needs"=>"Special Needs",
-                  "medical_review_needed"=>"Medical Review Needed",
-                  "behavior_problems"=>"Behavior Problems",
-                  "foster_needed"=>"Foster Needed",
-                  "spay_neuter_needed"=>"Spay Neuter Needed",
-                  "no_cats"=>"No Cats",
-                  "no_dogs"=>"No Dogs",
-                  "no_kids"=>"No Kids"}
+  FILTER_FLAGS = ["High Priority", "Medical Need", "Special Needs", "Medical Review Needed", "Behavior Problems",
+                  "Foster Needed", "Spay Neuter Needed", "No Cats", "No Dogs", "No Kids"]
 
   AGES = %w[baby young adult senior]
   validates_inclusion_of :age, in: AGES, allow_blank: true
@@ -151,29 +143,17 @@ class Dog < ApplicationRecord
   GENDERS = %w[Male Female]
   validates_inclusion_of :gender, in: GENDERS, allow_blank: true
 
-  SEARCH_FIELDS = ["Breed", "Tracking ID", "Name", "Microchip"].to_id_and_value_hash
+  SEARCH_FIELDS = ["Breed", "Tracking ID", "Name", "Microchip"]
 
   before_save :update_adoption_date
 
-  scope :is_age,                                  ->(age) { where age: age }
-  scope :is_size,                                 ->(size) { where size: size }
-  scope :is_status,                               ->(status) { where status: status }
   scope :is_breed,                                ->(breed_partial) { joins("join breeds on (breeds.id = dogs.primary_breed_id) or (breeds.id = dogs.secondary_breed_id)").where("breeds.name ilike '%#{sanitize_sql_like(breed_partial)}%'").distinct }
-
-  #scope :matching_tracking_id,                    ->(search_term) { where tracking_id: search_term }
-  #scope :identity_matching_microchip,             ->(search_term) { where microchip: search_term }
-  #scope :identity_match_tracking_id_or_microchip, ->(search_term){ matching_tracking_id(search_term).or( identity_matching_microchip(search_term)) }
-
-  #scope :pattern_matching_microchip,              ->(search_term) { where("microchip ilike ?", search_term) }
   scope :pattern_matching_name,                   ->(search_term) { where("name ilike ?", search_term) }
-  #scope :pattern_match_microchip_or_name,         ->(search_term){ pattern_matching_microchip("%"+search_term+"%").or( pattern_matching_name("%"+search_term+"%")) }
 
   # Rails 5.2 issues deprecation errors for any order that is not column names
   # so arel is the workaround
   scope :sort_with_search_term_matches_first,     ->(search_term) { order(Dog.arel_table[:name].does_not_match("#{search_term}%"), "tracking_id asc") }
-
   scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :photos, :foster).where(status: Dog::PUBLIC_STATUSES).order(:tracking_id) }
-
   scope :default_manager_view,                    -> { includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster).order(:tracking_id) }
 
   def self.autocomplete_name(search_term = nil)

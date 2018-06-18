@@ -2,14 +2,18 @@
   <button type="button" class="globalselect dropdown-toggle btn btn-sm btn-default mb-2 mb-sm-0" data-toggle="dropdown" >
     <%= button_text %>
   </button>
-  <ul class="dropdown-menu" data-multiple=<%= multiple %> data-close-after-selection=true >
-    <%- options.each do |value, text| %>
-      <li id=<%= value.to_s.gsub(/\s/,"_") %> class=<%= is_selected?(id,value) %> >
-        <%- name = multiple ? "#{id}[]" : id %>
-        <%- attr = (id=="is_status" || id=="is_size") ? text : value %>
-        <input type='hidden' name=<%= name %> value="<%= attr %>" <%= is_disabled?(id,value) %> />
-        <span class="check fa fa-check"></span>
-        <span class="filter_option"><%= text %></span>
+  <ul class="dropdown-menu" data-close-on-select=<%= close_on_select %> >
+    <%- options.each do |key, text| %>
+      <li class="_<%= key %>" >
+        <label for=<%=id%>_<%= key %>>
+          <% if multiple %>
+            <%= check_box_tag "filter_params[#{id}][]", key, is_selected?(id,key), id: "#{id}_#{key}" %>
+          <% else %>
+            <%= radio_button_tag "filter_params[#{id}]", key, @filter_params[id]==key.to_s, id: "#{id}_#{key}" %>
+          <% end %>
+          <div class='control_indicator'></div>
+          <span class="filter_option"><%= text %></span>
+        </label>
       </li>
     <%- end %>
   </ul>

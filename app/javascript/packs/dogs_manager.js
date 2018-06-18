@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //render: h => h(messageBar)
   //})
 
-  console.log(app)
+  //console.log(app)
 })
 
 

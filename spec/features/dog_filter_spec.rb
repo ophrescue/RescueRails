@@ -16,6 +16,8 @@ feature 'Filter Dogs List', js: true do
     let(:all_dogs_sorted_by_id){ [["#1","Zeke", "Labrador Retriever,"],
                                   ["#2", "Nairobi", "West Highland Terrier,"],
                                   ["#3", "Abby", "Golden Retriever,"] ] }
+    let(:group_label) { '#filter_info_row #filter_info .message_group .group_label' }
+    let(:filter_params) { '#filter_info_row #filter_info .message_group .filter_params' }
 
     scenario 'can filter results with breed partial match' do
       visit dogs_path
@@ -27,53 +29,53 @@ feature 'Filter Dogs List', js: true do
                                ["#3", "Abby", "Golden Retriever,"] ]
       click_button("Search")
       expect(page.find('input#search').value).to eq 'retriev'
-      expect(page.find('#search ul>li#breed')['class']).to eq 'selected'
+      expect(page.find('#search_field_index ul>li._breed input', visible: false)).to be_checked # it's not visible b/c we hide it in order to make custom radio button
       expect(page.find('#search_icon')).to be_visible
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sort:")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Tracking ID")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Search by:")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Breed matches retriev")
+      expect(page).to have_selector(group_label, text: "Sort:")
+      expect(page).to have_selector(filter_params, text: "Tracking ID")
+      expect(page).to have_selector(group_label, text: "Search by:")
+      expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
       expect(page).to have_selector('#reset_message')
       page.find('#reset_message').click
       click_button("Search")
       expect(page.find('input#search').value).to be_blank
-      expect(page.find('#search ul>li#breed')['class']).to eq ''
+      expect(page.find('#search_field_index ul>li._breed input', visible: false)).not_to be_checked
       expect(dogs_list).to eq all_dogs_sorted_by_id
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sort:")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Tracking ID")
-      expect(page).to have_no_selector('#filter_info_row #filter_info .message_group .group_label', text: "Search by:")
-      expect(page).to have_no_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Breed matches retriev")
+      expect(page).to have_selector(group_label, text: "Sort:")
+      expect(page).to have_selector(filter_params, text: "Tracking ID")
+      expect(page).to have_no_selector(group_label, text: "Search by:")
+      expect(page).to have_no_selector(filter_params, text: "Breed matches 'retriev'")
       expect(page).to have_no_selector('#reset_message')
     end
 
     scenario 'can search by breed and sort results by dog name' do
       visit dogs_path
       search_by("Breed", "retriev")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sort:")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Tracking ID")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Search by:")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Breed matches retriev")
+      expect(page).to have_selector(group_label, text: "Sort:")
+      expect(page).to have_selector(filter_params, text: "Tracking ID")
+      expect(page).to have_selector(group_label, text: "Search by:")
+      expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
       expect(dog_names).to match_array ["Abby", "Zeke"]
       sort_by("name")
       expect(dog_names).to eq ["Abby", "Zeke"]
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sort:")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Name")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Search by:")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Breed matches retriev")
+      expect(page).to have_selector(group_label, text: "Sort:")
+      expect(page).to have_selector(filter_params, text: "Name")
+      expect(page).to have_selector(group_label, text: "Search by:")
+      expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
       #sort_by("name") # later we'll reverse the direction on second click TODO
       #expect(dog_names).to eq ["Zeke", "Abby"]
       sort_by("status")
       expect(dog_names).to match_array ["Abby", "Zeke"]
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sort:")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Status")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Search by:")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Breed matches retriev")
+      expect(page).to have_selector(group_label, text: "Sort:")
+      expect(page).to have_selector(filter_params, text: "Status")
+      expect(page).to have_selector(group_label, text: "Search by:")
+      expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
       sort_by("intake_dt")
       expect(dog_names).to match_array ["Abby", "Zeke"]
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sort:")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Intake date")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Search by:")
-      expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Breed matches retriev")
+      expect(page).to have_selector(group_label, text: "Sort:")
+      expect(page).to have_selector(filter_params, text: "Intake date")
+      expect(page).to have_selector(group_label, text: "Search by:")
+      expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
       page.find('#reset_message').click
       expect(dogs_list).to eq all_dogs_sorted_by_id
     end
@@ -95,15 +97,17 @@ feature 'Filter Dogs List', js: true do
     let!(:no_cats){ create(:dog, :no_flags, no_cats: true, name: 'No Cats') }
     let!(:no_dogs){ create(:dog, :no_flags, no_dogs: true, name: 'No Dogs') }
     let!(:no_kids){ create(:dog, :no_flags, no_kids: true, name: 'No Kids') }
+    let(:group_label) { '#filter_info_row #filter_info .message_group .group_label' }
+    let(:filter_params) { '#filter_info_row #filter_info .message_group .filter_params' }
 
-    Dog::FILTER_FLAGS.each do |key,text|
+    Dog::FILTER_FLAGS.as_options.each do |key,text|
         scenario "can filter by '#{key}' flag attribute" do
           visit dogs_path
           filter_by("flags", key)
-          expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sort:")
-          expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Tracking ID")
-          expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Flags:")
-          expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: text)
+          expect(page).to have_selector(group_label, text: "Sort:")
+          expect(page).to have_selector(filter_params, text: "Tracking ID")
+          expect(page).to have_selector(group_label, text: "Flags:")
+          expect(page).to have_selector(filter_params, text: text)
           expect(dog_names).to eq [text]
           expect(dog_names.count).to eq 1
         end
@@ -121,16 +125,18 @@ feature 'Filter Dogs List', js: true do
     let!(:medium) { create(:dog, size: 'medium', name: 'Medium Dog') }
     let!(:large) { create(:dog, size: 'large', name: 'Large Dog') }
     let!(:extra_large) { create(:dog, size: 'extra large', name: 'Extra Large Dog') }
+    let(:group_label) { '#filter_info_row #filter_info .message_group .group_label' }
+    let(:filter_params) { '#filter_info_row #filter_info .message_group .filter_params' }
 
-    Dog::SIZES.to_id_and_value_hash.each do |key,text|
+    Dog::SIZES.as_options.each do |key,text|
       scenario "can filter by '#{text}' size attribute" do
         visit dogs_path
 
         filter_by("size", key)
-        expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sort:")
-        expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Tracking ID")
-        expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sizes:")
-        expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: text )
+        expect(page).to have_selector(group_label, text: "Sort:")
+        expect(page).to have_selector(filter_params, text: "Tracking ID")
+        expect(page).to have_selector(group_label, text: "Size:")
+        expect(page).to have_selector(filter_params, text: text )
         expect(dog_names).to eq ["#{text.titleize} Dog"]
         expect(dog_names.count).to eq 1
       end
@@ -154,16 +160,18 @@ feature 'Filter Dogs List', js: true do
     let!(:return_pending) { create(:dog, status: 'return pending', name: 'Return Pending Dog') }
     let!(:coming_soon) { create(:dog, status: 'coming soon', name: 'Coming Soon Dog') }
     let!(:completed) { create(:dog, status: 'completed', name: 'Completed Dog') }
+    let(:group_label) { '#filter_info_row #filter_info .message_group .group_label' }
+    let(:filter_params) { '#filter_info_row #filter_info .message_group .filter_params' }
 
-    Dog::STATUSES.to_id_and_value_hash.each do |key,text|
+    Dog::STATUSES.as_options.each do |key,text|
       scenario "can filter by '#{text}' status attribute" do
         visit dogs_path
 
         filter_by("status", key)
-        expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sort:")
-        expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Tracking ID")
-        expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Status:")
-        expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: text )
+        expect(page).to have_selector(group_label, text: "Sort:")
+        expect(page).to have_selector(filter_params, text: "Tracking ID")
+        expect(page).to have_selector(group_label, text: "Status:")
+        expect(page).to have_selector(filter_params, text: text )
         expect(dog_names).to eq ["#{text.titleize} Dog"]
         expect(dog_names.count).to eq 1
       end
@@ -181,16 +189,18 @@ feature 'Filter Dogs List', js: true do
     let!(:young) { create(:dog, age: 'young', name: 'Young Dog') }
     let!(:adult) { create(:dog, age: 'adult', name: 'Adult Dog') }
     let!(:senior) { create(:dog, age: 'senior', name: 'Senior Dog') }
+    let(:group_label) { '#filter_info_row #filter_info .message_group .group_label' }
+    let(:filter_params) { '#filter_info_row #filter_info .message_group .filter_params' }
 
-    Dog::AGES.to_id_and_value_hash.each do |key,text|
+    Dog::AGES.as_options.each do |key,text|
       scenario "can filter by '#{text}' age attribute" do
         visit dogs_path
 
         filter_by("age", key)
-        expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Sort:")
-        expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: "Tracking ID")
-        expect(page).to have_selector('#filter_info_row #filter_info .message_group .group_label', text: "Age:")
-        expect(page).to have_selector('#filter_info_row #filter_info .message_group .filter_param', text: text )
+        expect(page).to have_selector(group_label, text: "Sort:")
+        expect(page).to have_selector(filter_params, text: "Tracking ID")
+        expect(page).to have_selector(group_label, text: "Age:")
+        expect(page).to have_selector(filter_params, text: text )
         expect(dog_names).to eq ["#{text.titleize} Dog"]
         expect(dog_names.count).to eq 1
       end

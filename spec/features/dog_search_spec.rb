@@ -32,12 +32,12 @@ feature 'search and clear search when admin is logged-in', :js => true do
   let!(:active_user) { create(:user, :admin) }
 
   it 'should find dogs matching text partial' do
-    visit '/dogs?search=ab&search_field_index=name'
+    visit dogs_path(filter_params: {search: 'ab', search_field_index: 'name'})
     expect(dog_names).to match_array ["Abercrombie", "Abby"]
   end
 
   it 'should show all dogs when search is cleared' do
-    visit '/dogs?search=ab&search_field_index=name'
+    visit dogs_path(filter_params: {search: 'ab', search_field_index: 'name'})
     click_link 'reset_message'
     expect(dog_names).to match_array ["Abercrombie", "Abby", "Nairobi"]
   end

@@ -12,7 +12,7 @@ module DogsListHelper
 
   def sort_by(field)
     click_button("Sort")
-    page.find("#filter_controls #sort .dropdown-menu li##{field} span.filter_option").click
+    page.find("#filter_controls #sort .dropdown-menu li._#{field} span.filter_option").click
   end
 
   def dogs_list
@@ -23,7 +23,7 @@ module DogsListHelper
   end
 
   def select_search_by(attribute)
-    page.find('#search ul>li>span', text: attribute).click
+    page.find('#search_field_index ul>li>label>span.filter_option', text: attribute).click
   end
 
   def create_many_dogs
@@ -69,7 +69,7 @@ module DogsListHelper
   def filter_by(attribute, value)
     id = attribute=='flags' ? "has_flags" : "is_#{attribute}"
     page.find("##{id} button").click
-    page.find("##{id} .dropdown-menu li##{value} .filter_option").click
+    page.find("##{id} .dropdown-menu li._#{value} .filter_option").click
   end
 
 end

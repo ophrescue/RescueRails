@@ -7,7 +7,7 @@
   border-left: 1px solid #d4e4e4;
   border-right: 1px solid #d4d4d4;
   font-weight: 500;
-  margin-bottom: 6px;
+  padding-bottom: 6px;
 
   .name {
     font-weight: 700px;
@@ -45,60 +45,67 @@
 }
 
 // FLAGS
-.flags {
+.line-2 .flags {
   display: flex;
-}
 
-.flags .fa {
-  position: relative;
-  top: 4px;
-  margin-left:2px;
-  margin-right:2px;
-}
+  .fa {
+    position: relative;
+    top: 4px;
+    margin-left:2px;
+    margin-right:2px;
+  }
 
-.has_medical_need, .is_high_priority, .has_behavior_problem, .needs_foster {
-  background-repeat: no-repeat;
-  background-size: 100%;
-  width: 18px;
-  height: 18px;
-  margin-left:2px;
-  margin-right:2px;
-}
+  .has_medical_need, .is_high_priority, .has_behavior_problem, .needs_foster, .needs_photos {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 18px;
+    height: 18px;
+    margin-left:2px;
+    margin-right:2px;
+  }
 
-// icons in dog line 2
-.is_high_priority:before {
-  @include fontawesome-icon();
-  @include icon-lg();
-  content: $high-priority-icon;
-  color: $bootstrap-red-danger;
-}
+  // icons in dog line 2
+  .needs_photos:before {
+    @include fontawesome-icon();
+    @include icon-lg();
+    content: $camera;
+  }
 
-.has_medical_need:before {
-  @include fontawesome-icon();
-  @include icon-lg();
-  content: $has-medical-need-icon;
-  color: $bootstrap-red-danger;
-}
+  .is_high_priority:before {
+    @include fontawesome-icon();
+    @include icon-lg();
+    content: $high-priority-icon;
+    color: $bootstrap-red-danger;
+  }
 
-.spay_neuter_needed:before {
-  @include fontawesome-icon();
-  @include icon-lg();
-  content: $spay-neuter-needed-icon;
-}
+  .has_medical_need:before {
+    @include fontawesome-icon();
+    @include icon-lg();
+    content: $has-medical-need-icon;
+    color: $bootstrap-red-danger;
+  }
 
-.medical_review_needed:before {
-  @include fontawesome-icon();
-  @include icon-lg();
-  content: $medical_review_needed_icon;
-}
+  .spay_neuter_needed:before {
+    @include fontawesome-icon();
+    @include icon-lg();
+    content: $spay-neuter-needed-icon;
+  }
 
-.needs_foster {
-  margin-top: 1px;
-  content: $foster-needed-icon;
-  display:inline-block;
-}
+  .medical_review_needed:before {
+    @include fontawesome-icon();
+    @include icon-lg();
+    content: $medical_review_needed_icon;
+  }
 
-.has_behavior_problem {
-  content: '';
-  background: $behaviour-problems-icon;
+  .needs_foster {
+    margin-top: 1px;
+    content: $foster-needed-icon;
+    display:inline-block;
+  }
+
+  .has_behavior_problem {
+    content: '';
+    background: $behaviour-problems-icon;
+  }
+
 }

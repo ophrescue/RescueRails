@@ -1,31 +1,42 @@
 module DogsHelper
   def age_filter_active?
-    !@filter_params['is_age'].empty?
+    @filter_params && @filter_params["is_age"] && !@filter_params["is_age"].empty?
   end
 
   def status_filter_active?
-    !@filter_params['is_status'].empty?
+    @filter_params && @filter_params["is_status"] && !@filter_params["is_status"].empty?
   end
 
   def size_filter_active?
-    !@filter_params['is_size'].empty?
+    @filter_params && @filter_params["is_size"] && !@filter_params["is_size"].empty?
   end
 
   def flag_filter_active?
-    !@filter_params['has_flags'].empty?
+    @filter_params && @filter_params["has_flags"] && !@filter_params["has_flags"].empty?
   end
 
   def selected_flags
-    Dog::FILTER_FLAGS.slice(*@filter_params["has_flags"])
+    @filter_params && @filter_params["has_flags"] && (Dog::FILTER_FLAGS.as_options.slice(*@filter_params["has_flags"])).values
   end
 
   def selected_sizes
-    #["small", "medium", "large", "extra large"]
-    (Dog::SIZES & @filter_params['is_size']).to_id_and_value_hash
+    @filter_params && @filter_params["is_size"] && (Dog::SIZES.as_options.slice(*@filter_params["is_size"])).values
   end
 
-  def sort_field
-    Sortable::SORT_FIELDS.slice(@filter_params['sort'].to_sym)
+  def selected_ages
+    @filter_params && @filter_params["is_age"] && (Dog::AGES.as_options.slice(*@filter_params["is_age"])).values
+  end
+
+  def selected_statuses
+    @filter_params && @filter_params["is_status"] && (Dog::STATUSES.as_options.slice(*@filter_params["is_status"])).values
+  end
+
+  def selected_sort
+    if @filter_params && @filter_params[:sort]
+      [Sortable::SORT_FIELDS[@filter_params[:sort].to_sym]]
+    else
+      []
+    end
   end
 
   def search_active?
@@ -67,8 +78,9 @@ module DogsHelper
     !(params[:search].nil? || params[:search]&.length&.zero?)
   end
 
-  def is_selected?(id,value)
-    selected?(id,value) ? 'selected' : ''
+  def is_selected?(id, text)
+    # e.g. id= 'has_flags' text='No Dogs'
+    @filter_params && @filter_params[id.to_sym] && @filter_params[id.to_sym].include?(text.to_s)
   end
 
   def is_disabled?(id,value)

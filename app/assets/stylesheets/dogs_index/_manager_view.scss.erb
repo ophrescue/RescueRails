@@ -11,13 +11,16 @@
   vertical-align: -15%;
 }
 
-$high-priority-icon: '\f062';
+$high-priority-icon: '\f062'; // up-arrow
 $has-medical-need-icon: '\f0f9'; // fa-ambulance
 $spay-neuter-needed-icon: '\f0c4'; // fa-scissors
 $medical-review-needed-icon: '\f0f1'; // fa-stethoscope
+$camera: '\f030'; // camera
+$check: '\f00c'; // check
 $foster-needed-icon: url(<%= asset_path("foster_icon.svg") %>);
 $behaviour-problems-icon: url(<%= asset_path("law.svg") %>);
 $bootstrap-red-danger: #dc3545;
+$bootstrap-green-success: #28a745;
 
 @import 'dogs_index/manager_dog';
 
@@ -27,13 +30,8 @@ $bootstrap-red-danger: #dc3545;
   #filter_info {
     min-height:24px;
   }
-  #filter_info span.filter_param {
-    &:not(:last-of-type)::after {
-      content: ', ';
-    }
-    &:last-of-type::after {
-      content: '. ';
-    }
+  #filter_info span.filter_params::after {
+    content: '. ';
   }
 }
 
@@ -69,35 +67,54 @@ $bootstrap-red-danger: #dc3545;
 
 .dropdown-menu {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 26px;
+  left: 21px;
   min-width: max-content;
-  padding-right: 8px
+  padding-right: 8px;
 }
 
 .dropdown-menu li {
   margin-left: 8px;
-}
 
-.dropdown-menu li.selected span.check {
-  visibility: visible;
-  width:12px;
-  margin-right:12px;
-  color: #38ad38;
-}
+  // render the browser-styled checkbox invisible
+  & input[type='checkbox'], input[type='radio'] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
 
-.dropdown-menu li:not(.selected) span.check {
-  visibility: hidden;
-  width:12px;
-  margin-right:12px;
-}
+  .control_indicator {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: #e6e6e6;
+  }
 
-.dropdown-menu li span {
-  cursor: pointer;
+  & .control_indicator:before {
+    @include fontawesome-icon();
+    margin-left: 3px;
+    content: $check;
+    color: $bootstrap-green-success;
+    display: none;
+  }
+
+  & input[type='checkbox']:checked ~.control_indicator:before,
+    input[type='radio']:checked    ~.control_indicator:before {
+    display: inline-block;
+  }
+
+  & label {
+    display: flex;
+    cursor: pointer;
+
+    & span {
+      margin-left: 20px;
+    }
+  }
 }
 
 // flags menu icons
-.dropdown-menu li#high_priority .filter_option:after {
+.dropdown-menu li.high_priority .filter_option:after {
   @include icon-lg();
   @include fontawesome-icon();
   margin-left: 10px;
@@ -105,7 +122,7 @@ $bootstrap-red-danger: #dc3545;
   color: $bootstrap-red-danger;
 }
 
-.dropdown-menu li#medical_need .filter_option:after {
+.dropdown-menu li.medical_need .filter_option:after {
   @include fontawesome-icon();
   @include icon-lg();
   margin-left: 10px;
@@ -113,28 +130,28 @@ $bootstrap-red-danger: #dc3545;
   color: $bootstrap-red-danger;
 }
 
-.dropdown-menu li#spay_neuter_needed .filter_option:after {
+.dropdown-menu li.spay_neuter_needed .filter_option:after {
   @include fontawesome-icon();
   @include icon-lg();
   margin-left: 10px;
   content: $spay-neuter-needed-icon;
 }
 
-.dropdown-menu li#behavior_problems .filter_option:after {
+.dropdown-menu li.behavior_problems .filter_option:after {
   content: $behaviour-problems-icon;
   width: 18px;
   display: inline-block;
   margin-left:10px;
 }
 
-.dropdown-menu li#medical_review_needed .filter_option:after {
+.dropdown-menu li.medical_review_needed .filter_option:after {
   @include fontawesome-icon();
   @include icon-lg();
   margin-left: 10px;
   content: $medical-review-needed-icon;
 }
 
-.dropdown-menu li#foster_needed {
+.dropdown-menu li.foster_needed {
   margin-top: -4px; // it's a hack to restore uniform spacing that is disrupted by the :after content svg, below. A less hacky solution would be good!
 
    .filter_option:after{

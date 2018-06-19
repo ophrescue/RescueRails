@@ -44,12 +44,6 @@ Tests are run via Headless Chrome, which will require Google Chrome and ChromeDr
 brew install chromedriver
 ```
 
-### Webpacker
-
-RescueRails uses the Rails webpacker gem to support VueJS and ES6 javascript, including a javascript test suite. If you are working on any of the webpack packs in app/javascript, you can start the webpack-dev-server in a second terminal window, to give you hot-reloading of the webpack javascript code.
-
-To support the development of webpack packs, you will need nodejs and yarn installed. Refer to the [https://github.com/rails/webpacker#prerequisites](Webpacker gem documentation). You will also need to build a development environment for the packs by installing all the nodejs dependencies with `yarn install`.
-
 ## Browser Support
 
 Supported browsers and platforms are those specified for the version of Boostrap incorporated. See the Bootstrap documentation: getting-started/browsers-devices for the appropriate version.

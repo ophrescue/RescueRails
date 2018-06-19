@@ -14,15 +14,7 @@
 
 <div class="row">
   <div class="span8">
-    <div id="galleria">
-      <% if @dog.photos.visible.empty?  %>
-        <%= image_tag("no_photo-205x195.png", :alt => @dog.name) %>
-      <% else %>
-        <% for photo in @dog.photos.visible %>
-          <%= link_to image_tag(photo.photo.url(:medium)), photo.photo.url(:original) %>
-        <% end %>
-      <% end %>
-    </div>
+    <div id="galleria"></div>
 
     <div class="fb-like" data-href="<%= request.url %>" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
 
@@ -279,10 +271,10 @@
   </div>
 </div>
 
-
 <script>
-$('#galleria').galleria({
-responsive: true,
-imageCrop: false
-});
+  $('#galleria').galleria({
+    responsive: true,
+    imageCrop: false,
+    dataSource: <%= @carousel %>
+  });
 </script>

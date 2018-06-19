@@ -51,4 +51,13 @@ class Photo < ApplicationRecord
 
   scope :visible, -> { where(is_private: false) }
   scope :hidden, -> { where(is_private: true) }
+
+  def self.no_photo_url
+    "/assets/no_photo.svg"
+  end
+
+  # galleria dataSource format
+  def to_carousel
+    {image: photo.url(:original), thumb: photo.url(:medium)}
+  end
 end

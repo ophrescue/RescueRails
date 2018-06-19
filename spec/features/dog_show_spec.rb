@@ -31,21 +31,10 @@ feature 'visit dog show page', js: true do
 
   context 'dog has photos' do
     before(:each) do
-      `mkdir -p #{Rails.root.join("public","system","dog_photo")}`
-      3.times do |i|
-        photo = FactoryBot.create(:photo, dog: adoptable_dog, is_private: false, position: i+1 )
-        ["medium", "original"].each do |style|
-          data = "photos/photos/#{photo.id}/#{style}/"
-          hash = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, Photo::HASH_SECRET, data)
-          filepath = "public/system/dog_photo/#{hash}.jpg"
-          image_source = Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s
-          `cp #{image_source} #{Rails.root.join(filepath)}`
-        end
-      end
       visit dog_path(adoptable_dog)
     end
 
-    let(:adoptable_dog){ FactoryBot.create(:dog, status: 'adoptable') }
+    let(:adoptable_dog){ FactoryBot.create(:dog, :with_photos, status: 'adoptable') }
     let(:thumbnails){ adoptable_dog.photos.collect { |photo| photo.photo.url(:medium) } }
     let(:first_position_photo_url){ adoptable_dog.photos.find{|p| p.position == 1}.photo.url(:original) }
     let(:main_image_source){ page.find("#galleria .galleria-images .galleria-image img")["src"] }

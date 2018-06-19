@@ -59,6 +59,22 @@ FactoryBot.define do
       end
     end
 
+    trait :with_photos do
+      after(:create) do |dog|
+        `mkdir -p #{Rails.root.join("public","system","dog_photo")}`
+        3.times do |i|
+          photo = FactoryBot.create(:photo, dog: dog, is_private: false, position: i+1 )
+          ["medium", "original"].each do |style|
+            data = "photos/photos/#{photo.id}/#{style}/"
+            hash = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, Photo::HASH_SECRET, data)
+            filepath = "public/system/dog_photo/#{hash}.jpeg"
+            image_source = Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s
+            `cp #{image_source} #{Rails.root.join(filepath)}`
+          end
+        end
+      end
+    end
+
     trait :active_dog do
       status { Dog::ACTIVE_STATUSES.sample }
     end

@@ -17,3 +17,4 @@ coverage
 .vscode/
 .byebug_history
 site_notes.txt
+.ackrc

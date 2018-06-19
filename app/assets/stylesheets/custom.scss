@@ -123,6 +123,14 @@ form .control-group.error span.error {
   color: #404040;
 }
 
+.article img.right {
+  border-radius: 6px 6px 6px 6px;
+  // margin: 25px;
+  margin-left: 25px;
+  margin-bottom: 25px;
+  float: right;
+}
+
 .eventphoto img {
   border-radius: 6px 6px 6px 6px;
 }
@@ -319,6 +327,18 @@ div .fb-like {
 
 .thumbnail-blue h3 {
   color: #FFFFFF;
+}
+
+.thumbnail-blue h4 {
+  color: #FFFFFF;
+}
+
+.thumbnail-blue h5 {
+  color: #FFFFFF;
+}
+
+.well-feature {
+  background-color: #f5f39fe1;
 }
 
 // Mobile Dropdown Menu fix https://github.com/twbs/bootstrap/issues/7968

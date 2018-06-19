@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_24_221858) do
+ActiveRecord::Schema.define(version: 2018_06_06_150422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -201,7 +201,6 @@ ActiveRecord::Schema.define(version: 2018_03_24_221858) do
     t.boolean "has_behavior_problem", default: false
     t.boolean "needs_foster", default: false
     t.string "petfinder_ad_url", limit: 255
-    t.string "adoptapet_ad_url", limit: 255
     t.string "craigslist_ad_url", limit: 255
     t.string "youtube_video_url", limit: 255
     t.string "first_shots", limit: 255

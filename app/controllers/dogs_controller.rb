@@ -44,7 +44,6 @@
 #  has_behavior_problem :boolean          default(FALSE)
 #  needs_foster         :boolean          default(FALSE)
 #  petfinder_ad_url     :string(255)
-#  adoptapet_ad_url     :string(255)
 #  craigslist_ad_url    :string(255)
 #  youtube_video_url    :string(255)
 #  first_shots          :string(255)
@@ -92,7 +91,11 @@ class DogsController < ApplicationController
     end
   end
 
+  # access permitted if:
+  #       user is logged-in
+  #       and user is active
   def manager_index
+    index unless current_user&.active?
     @dogs = case
             when params[:commit] == 'Search' # search button was clicked
               DogSearch.search(params: params)
@@ -113,7 +116,8 @@ class DogsController < ApplicationController
   def show
     @title = @dog.name
     @carousel = Carousel.new(@dog)
-    flash[:error]= render_to_string partial: 'unavailable_flash_message' if @dog.unavailable?
+    @adoptapet = Adoptapet.new(@dog.foster&.region)
+    flash.now[:error]= render_to_string partial: 'unavailable_flash_message' if @dog.unavailable?
   end
 
   def new
@@ -190,7 +194,6 @@ class DogsController < ApplicationController
               :needs_foster,
               :attachments_attributes,
               :petfinder_ad_url,
-              :adoptapet_ad_url,
               :craigslist_ad_url,
               :youtube_video_url,
               :first_shots,

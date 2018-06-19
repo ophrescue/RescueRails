@@ -206,20 +206,8 @@
 
         <h4>Ads</h4>
         <ul class="unstyled">
-          <li><a href="https://www.petfinder.com/pet-search?shelter_id=VA600">Petfinder</a></li>
-        <% if @dog.foster_id %>
-          <% if @dog.foster.region == "MD" %>
-            <li><a href="http://www.adoptapet.com/shelter80736-dogs.html">Adoptapet MD</a></li>
-          <% elsif @dog.foster.region == "PA" %>
-            <li><a href="http://www.adoptapet.com/shelter84558-dogs.html">Adoptapet PA</a></li>
-          <% elsif @dog.foster.region == "VA" %>
-            <li><a href="http://www.adoptapet.com/shelter79954-dogs.html">Adoptapet VA</a></li>
-          <% else %>
-            <li><a href="">Adoptapet N/A for <%= @dog.foster.region %></a></li>
-          <% end %>
-          <% else %>
-            <li>Foster Needed for Adoptapet</li>
-        <% end %>
+          <li><a href=<%= PETFINDER::OPH_PAGE %>>Petfinder</a></li>
+          <li id="adoptapet_ad"><%= @adoptapet %></li>
 
         <% if !@dog.craigslist_ad_url.blank? %>
           <li><%= link_to "Craigslist", @dog.craigslist_ad_url %></li>

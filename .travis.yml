@@ -23,11 +23,6 @@ env:
 script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
-  - nvm install node
-  - node -v
-  - npm i -g yarn
-  - yarn
-  - yarn test
   - bundle exec rspec spec/
 
 before_script:

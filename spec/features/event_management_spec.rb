@@ -26,5 +26,6 @@ feature 'Manage Events', js: true do
     click_button('Submit')
 
     expect(page).to have_content(test_event.title)
+    expect(page.find('.google_map_link')['href']).to eq 'whaaaat'
   end
 end

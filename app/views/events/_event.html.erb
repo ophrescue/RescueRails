@@ -11,7 +11,7 @@
         <% if event.photo? %>
           <%= link_to image_tag(event.photo.url(:medium)),event.photo.url %>
         <% else %>
-        &nbsp;
+          &nbsp;
         <% end %>
 
       </div>
@@ -38,13 +38,13 @@
           <p><i class="icon-camera"></i> <strong>Event Photographer:</strong> <%= event.photographer_name %></p>
         <% end %>
       </div>
-      <a href="<%="https://maps.google.com/?q=#{event.latitude}%2C#{event.longitude}"%>">
-      <%= image_tag "https://maps.google.com/maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers=#{event.latitude}%2C#{event.longitude}"
-         %></a>
+      <a href="<%="https://maps.google.com/?q=#{event.latitude}%2C#{event.longitude}"%>" class='google_map_link'>
+        <%= image_tag "https://maps.google.com/maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers=#{event.latitude}%2C#{event.longitude}"
+        %></a>
       <div class="row">
         <div class="span8">
           <br />
-            <p><%= markdown(event.description) %></p>
+          <p><%= markdown(event.description) %></p>
           <br />
         </div>
       </div>
@@ -62,12 +62,12 @@
       <% end %>
 
       <% if can_edit_events? %>
-            <%= link_to  "delete",
-                  event,
-                  :method => :delete,
-                  :class => "btn btn-small",
-                  :confirm => "You sure?",
-                  :title => "Delete #{event.title}" %>
+        <%= link_to  "delete",
+          event,
+          :method => :delete,
+          :class => "btn btn-small",
+          :confirm => "You sure?",
+          :title => "Delete #{event.title}" %>
 
       <% end %>
 

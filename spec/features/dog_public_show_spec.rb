@@ -5,7 +5,7 @@ feature 'visit dog show page', js: true do
   include DogShowHelper
   context "dog is unavailable" do
     before(:each) do
-      visit dogs_gallery_path(adoption_completed_dog)
+      visit dog_path(adoption_completed_dog)
     end
 
     ["adopted", "completed", "not available"].each do |status|
@@ -22,7 +22,7 @@ feature 'visit dog show page', js: true do
 
   context 'dog does not have any photos' do
     before(:each) do
-      visit dogs_gallery_path(adoptable_dog)
+      visit dog_path(adoptable_dog)
     end
 
     let(:adoptable_dog){ FactoryBot.create(:dog, status: 'adoptable') }
@@ -33,7 +33,7 @@ feature 'visit dog show page', js: true do
 
   context 'dog has photos' do
     before(:each) do
-      visit dogs_gallery_path(adoptable_dog)
+      visit dog_path(adoptable_dog)
     end
 
     let(:adoptable_dog){ FactoryBot.create(:dog, :with_photos, status: 'adoptable') }

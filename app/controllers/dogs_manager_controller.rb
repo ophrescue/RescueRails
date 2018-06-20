@@ -95,7 +95,7 @@ class DogsManagerController < DogsController
   def update
     if @dog.update_attributes(dog_params)
       flash[:success] = 'Dog updated.'
-      redirect_to @dog
+      redirect_to dogs_manager_path(@dog)
     else
       load_instance_variables
       render 'edit'
@@ -181,7 +181,7 @@ class DogsManagerController < DogsController
   end
 
   def active_user
-    redirect_to dogs_gallery_index_path unless current_user&.active?
+    redirect_to dogs_path unless current_user&.active?
   end
 
 end

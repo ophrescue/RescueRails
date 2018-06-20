@@ -1,6 +1,6 @@
 <div class='row dog line-1'>
   <div class='col-3'>
-    <%= link_to "<span class='id'>##{dog.tracking_id}</span>&nbsp;<span class='name'>#{dog.name}</span>".html_safe, dog %>:
+    <%= link_to "<span class='id'>##{dog.tracking_id}</span>&nbsp;<span class='name'>#{dog.name}</span>".html_safe, dogs_manager_path(dog) %>:
   </div>
   <div class='col'>
     <span><%= size_abbrev(dog.size) %>,</span>

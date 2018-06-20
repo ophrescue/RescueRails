@@ -1,5 +1,5 @@
 <div class="col-sm-4 dog">
-  <%= link_to dogs_gallery_path(dog), class: "img-thumbnail" do %>
+  <%= link_to dog_path(dog), class: "img-thumbnail" do %>
     <%= image_tag(dog.primary_photo_url, :alt => dog.photo_alt_text) %>
     <h4><%= dog.name %></h4>
     <strong><%= dog.status.titleize %></strong><br />

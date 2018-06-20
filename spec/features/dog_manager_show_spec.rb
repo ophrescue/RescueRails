@@ -11,7 +11,7 @@ feature 'visit dog show page', js: true do
 
   context "dog is unavailable" do
     before(:each) do
-      visit dog_path(adoption_completed_dog)
+      visit dogs_manager_path(adoption_completed_dog)
     end
 
     ["adopted", "completed", "not available"].each do |status|
@@ -28,7 +28,7 @@ feature 'visit dog show page', js: true do
 
   context "adoptapet ad text" do
     before(:each) do
-      visit dog_path(dog)
+      visit dogs_manager_path(dog)
     end
 
     context "dog does not have a foster" do

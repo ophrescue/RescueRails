@@ -2,7 +2,7 @@
   <% if current_user&.active %>
     <div class='row'>
       <div class='col-2 offset-6 offset-sm-10'>
-          <%= link_to "Switch to manager list", dogs_path, class: 'switch_view btn btn-sm btn-outline-secondary' %>
+          <%= link_to "Switch to manager list", dogs_manager_index_path, class: 'switch_view btn btn-sm btn-outline-secondary' %>
       </div>
     </div>
   <% end %>

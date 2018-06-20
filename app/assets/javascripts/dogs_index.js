@@ -2,7 +2,7 @@ GlobalMultiSelect = {};
 
 GlobalMultiSelect.fetch = function(){
   var query = $('form').serialize();
-  window.location='/dogs?'+query;
+  window.location='/dogs_manager?'+query;
 };
 
 GlobalMultiSelect.search = function(){
@@ -44,7 +44,7 @@ GlobalMultiSelect.remove_error = function(){
 };
 
 GlobalMultiSelect.fetch_all = function(){
-  window.location='/dogs';
+  window.location='/dogs_manager';
 };
 
 GlobalMultiSelect.filter_select = function(event){

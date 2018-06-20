@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'webmock/rspec'
 
 feature 'Manage Events', js: true do
   let!(:admin) { create(:user, :admin) }
@@ -13,7 +14,7 @@ feature 'Manage Events', js: true do
     expect(page).to have_selector('label', text: 'Title')
     expect(page).to have_selector('label', text: 'Date')
 
-    test_event = build(:event)
+    test_event = build(:event, :in_the_future)
     fill_in('event_title', with: test_event.title)
     fill_in('event_event_date', with: test_event.event_date)
     fill_in('event_start_time', with: test_event.start_time)
@@ -26,6 +27,8 @@ feature 'Manage Events', js: true do
     click_button('Submit')
 
     expect(page).to have_content(test_event.title)
-    expect(page.find('.google_map_link')['href']).to eq 'whaaaat'
+    expect(page.find('.google_map_link')['href']).to eq "https://maps.google.com/?q=40.7143528%2C-74.0059731"
+    expect(page.find('.google_map_link>img')['src']).to eq "https://maps.google.com/maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers=40.7143528%2C-74.0059731"
   end
+
 end

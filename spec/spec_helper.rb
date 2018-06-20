@@ -28,7 +28,13 @@ RSpec.configure do |config|
     expectations.syntax = :expect
   end
 
+  config.before(:suite) do
+    Capybara::Webmock.start
+  end
+
   config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
+    Capybara::Webmock.stop
   end
+
 end

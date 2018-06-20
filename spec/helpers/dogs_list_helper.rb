@@ -27,23 +27,24 @@ module DogsListHelper
   end
 
   def create_many_dogs
-    FactoryBot.create_list(:breed, 30)
-    # it's a workaround for TravisCI sorting weirdness.
-    # It doesn't handle spaces inside names as expected
-    # (expected means ' '< 'x')
-    Dog.all.each do |dog|
-      dog.update_attribute(:name, dog.name.gsub(/(\W|\s)/,'').titlecase )
+    30.times do
+      # create_list can produce duplicates
+      FactoryBot.create(:breed)
     end
     # make sure there are some terriers for the filter-by-breed spec
     FactoryBot.create(:dog, name: "Trouble")
     FactoryBot.create(:dog, name: "Troubador")
     FactoryBot.create(:dog, name: "Trouper")
-    FactoryBot.create_list(:terrier, 5)
-    FactoryBot.create_list(:dog, 25)
+    5.times do
+      FactoryBot.create(:terrier)
+    end
+    25.times do |i|
+      FactoryBot.create(:dog, name: "Fido_#{i}")
+    end
   end
 
   def tracking_ids
-    page.all('#manager_dogs .dog .id').map(&:text).map(&:to_i)
+    page.all('#manager_dogs .dog .id').map(&:text).map{|id| id.match(/\d*$/)[0] }.map(&:to_i)
   end
 
   def dog_names

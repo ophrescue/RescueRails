@@ -22,7 +22,8 @@ class DogFilter
     # e.g. @params["search_field_text"] = "Tracking ID"
     @params["search_field_text"] = @params["search_field_index"] && Dog::SEARCH_FIELDS.as_options[@params["search_field_index"]]
     # @params["search_field_text"] == @params[:search_field_text]
-    @params.reverse_merge!({sort: "tracking_id", direction: "asc"}) # maintains indifferent access
+    @params.reverse_merge!({sort: "tracking_id"}) # maintains indifferent access
+    @params[:direction] = (@params[:sort] == "tracking_id") ? "desc" : "asc"
   end
 
   def filter

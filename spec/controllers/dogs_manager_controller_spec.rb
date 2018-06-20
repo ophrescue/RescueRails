@@ -71,14 +71,14 @@ describe DogsManagerController, type: :controller do
         get :index, params {}
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
         expect(assigns(:filter_params)[:sort]).to eq "tracking_id"
-        expect(assigns(:filter_params)[:direction]).to eq "asc"
+        expect(assigns(:filter_params)[:direction]).to eq "desc"
       end
 
       it 'all dogs are returned in #index' do
         get :index, params: {filter_params: { sort: 'tracking_id', direction: 'asc'}}
         expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
         expect(assigns(:filter_params)[:sort]).to eq "tracking_id"
-        expect(assigns(:filter_params)[:direction]).to eq "asc"
+        expect(assigns(:filter_params)[:direction]).to eq "desc"
       end
 
       it 'can filter by age, size and flags' do

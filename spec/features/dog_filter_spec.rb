@@ -22,11 +22,11 @@ feature 'Filter Dogs List', js: true do
     scenario 'with breed partial match' do
       visit dogs_manager_index_path
       expect(page).to have_selector('h1', text: 'Dog Manager')
-      expect(dogs_list).to eq all_dogs_sorted_by_id
+      expect(dogs_list).to eq all_dogs_sorted_by_id.reverse
 
       search_by("Breed", "retriev")
-      expect(dogs_list).to eq [["#1","Zeke", "Labrador Retriever,"],
-                               ["#3", "Abby", "Golden Retriever,"] ]
+      expect(dogs_list).to eq [ ["#3", "Abby", "Golden Retriever,"],
+                                ["#1","Zeke", "Labrador Retriever,"] ]
       click_button("Search")
       # search parameters for the search currently active are shown in the search dropdown
       expect(page.find('input#search').value).to eq 'retriev'
@@ -51,7 +51,7 @@ feature 'Filter Dogs List', js: true do
       click_button("Search")
       expect(page.find('input#search').value).to be_blank
       expect(page.find('#search_field_index ul>li._breed input', visible: false)).not_to be_checked
-      expect(dogs_list).to eq all_dogs_sorted_by_id
+      expect(dogs_list).to eq all_dogs_sorted_by_id.reverse
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Tracking ID")
       expect(page).to have_no_selector(group_label, text: "Search by:")
@@ -88,7 +88,7 @@ feature 'Filter Dogs List', js: true do
       expect(page).to have_selector(group_label, text: "Search by:")
       expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
       page.find('#reset_message').click
-      expect(dogs_list).to eq all_dogs_sorted_by_id
+      expect(dogs_list).to eq all_dogs_sorted_by_id.reverse
     end
 
     scenario 'shows error message if user forgets to select search attribute' do

@@ -9,7 +9,6 @@ feature 'Dog sort in manager view', js: true do
     create_many_dogs
     sign_in(active_user)
     visit '/dogs'
-    click_link("Manager View")
     expect(page).to have_selector('h1', text: "Dog Manager")
   end
 
@@ -22,38 +21,37 @@ feature 'Dog sort in manager view', js: true do
 
     scenario 'sort by tracking_id' do
       expect(tracking_ids).to be_sorted(:ascending)
-      click_link("sort_by_tracking_id")
-      expect(tracking_ids).to be_sorted(:descending)
+      #sort_by('tracking_id')
+      #expect(tracking_ids).to be_sorted(:descending)
     end
 
     scenario 'sort by name' do
-      click_link("sort_by_name")
+      sort_by('name')
       expect(dog_names).to be_sorted(:ascending)
-      click_link("sort_by_name")
-      expect(dog_names).to be_sorted(:descending)
+      #sort_by('name')
+      #expect(dog_names).to be_sorted(:descending)
     end
 
     scenario 'sort by intake date' do
-      click_link("sort_by_intake_dt")
+      sort_by('intake_dt')
       expect(intake_dates).to be_sorted(:ascending)
-      click_link("sort_by_intake_dt")
-      expect(intake_dates).to be_sorted(:descending)
+      #sort_by('intake_dt')
+      #expect(intake_dates).to be_sorted(:descending)
     end
 
     scenario 'sort by status' do
-      click_link("sort_by_status")
+      sort_by('status')
       expect(statuses).to be_sorted(:ascending)
-      click_link("sort_by_status")
-      expect(statuses).to be_sorted(:descending)
+      #sort_by('status')
+      #expect(statuses).to be_sorted(:descending)
     end
   end
 
   context 'with age filter active' do
     before do
-      filter_by_age("adult")
-      page.find('#filter_button').click
+      filter_by("age","adult")
       ages.each do |age|
-        expect(age).to eq 'Adult'
+        expect(age).to eq 'Adult,'
       end
     end
 
@@ -63,36 +61,39 @@ feature 'Dog sort in manager view', js: true do
 
     scenario 'sort by tracking_id' do
       expect(tracking_ids).to be_sorted(:ascending)
-      click_link("sort_by_tracking_id")
-      expect(tracking_ids).to be_sorted(:descending)
+      # currently we don't flip the search order on second click
+      #sort_by('tracking_id')
+      #expect(tracking_ids).to be_sorted(:descending)
     end
 
     scenario 'sort by name' do
-      click_link("sort_by_name")
+      sort_by('name')
       expect(dog_names).to be_sorted(:ascending)
-      click_link("sort_by_name")
-      expect(dog_names).to be_sorted(:descending)
+      # currently we don't flip the search order on second click
+      #sort_by('name')
+      #expect(dog_names).to be_sorted(:descending)
     end
 
     scenario 'sort by intake date' do
-      click_link("sort_by_intake_dt")
+      sort_by('intake_dt')
       expect(intake_dates).to be_sorted(:ascending)
-      click_link("sort_by_intake_dt")
-      expect(intake_dates).to be_sorted(:descending)
+      # currently we don't flip the search order on second click
+      #sort_by('intake_dt')
+      #expect(intake_dates).to be_sorted(:descending)
     end
 
     scenario 'sort by status' do
-      click_link("sort_by_status")
+      sort_by('status')
       expect(statuses).to be_sorted(:ascending)
-      click_link("sort_by_status")
-      expect(statuses).to be_sorted(:descending)
+      # currently we don't flip the search order on second click
+      #sort_by('status')
+      #expect(statuses).to be_sorted(:descending)
     end
   end
 
   context 'with breed filter active' do
     before do
-      filter_by_breed("terr")
-      page.find('#filter_button').click
+      search_by('Breed',"terr")
       breeds.each do |breed|
         # breed is primary breed name and secondary breed name
         # separated by \n, regex match doesn't like newlines
@@ -106,36 +107,35 @@ feature 'Dog sort in manager view', js: true do
 
     scenario 'sort by tracking_id' do
       expect(tracking_ids).to be_sorted(:ascending)
-      click_link("sort_by_tracking_id")
-      expect(tracking_ids).to be_sorted(:descending)
+      #sort_by('tracking_id')
+      #expect(tracking_ids).to be_sorted(:descending)
     end
 
     scenario 'sort by name' do
-      click_link("sort_by_name")
+      sort_by('name')
       expect(dog_names).to be_sorted(:ascending)
-      click_link("sort_by_name")
-      expect(dog_names).to be_sorted(:descending)
+      #click_link("sort_by_name")
+      #expect(dog_names).to be_sorted(:descending)
     end
 
     scenario 'sort by intake date' do
-      click_link("sort_by_intake_dt")
+      sort_by('intake_dt')
       expect(intake_dates).to be_sorted(:ascending)
-      click_link("sort_by_intake_dt")
-      expect(intake_dates).to be_sorted(:descending)
+      #sort_by('intake_dt')
+      #expect(intake_dates).to be_sorted(:descending)
     end
 
     scenario 'sort by status' do
-      click_link("sort_by_status")
+      sort_by('status')
       expect(statuses).to be_sorted(:ascending)
-      click_link("sort_by_status")
-      expect(statuses).to be_sorted(:descending)
+      #sort_by('status')
+      #expect(statuses).to be_sorted(:descending)
     end
   end
 
   context 'with name matching active' do
     before do
-      fill_in('search', with: "trou")
-      page.find('#search_button').click
+      search_by("Name", "trou")
       dog_names.each do |name|
         expect(name).to match /trou/i
       end
@@ -143,31 +143,31 @@ feature 'Dog sort in manager view', js: true do
 
     scenario 'sort by tracking_id' do
       # initial sort is by search-string match
-      click_link("sort_by_tracking_id")
+      sort_by('tracking_id')
       expect(tracking_ids).to be_sorted(:ascending)
-      click_link("sort_by_tracking_id")
-      expect(tracking_ids).to be_sorted(:descending)
+      #sort_by('tracking_id')
+      #expect(tracking_ids).to be_sorted(:descending)
     end
 
     scenario 'sort by name' do
-      click_link("sort_by_name")
+      sort_by('name')
       expect(dog_names).to be_sorted(:ascending)
-      click_link("sort_by_name")
-      expect(dog_names).to be_sorted(:descending)
+      #sort_by('name')
+      #expect(dog_names).to be_sorted(:descending)
     end
 
     scenario 'sort by intake date' do
-      click_link("sort_by_intake_dt")
+      sort_by('intake_dt')
       expect(intake_dates).to be_sorted(:ascending)
-      click_link("sort_by_intake_dt")
-      expect(intake_dates).to be_sorted(:descending)
+      #sort_by('intake_dt')
+      #expect(intake_dates).to be_sorted(:descending)
     end
 
     scenario 'sort by status' do
-      click_link("sort_by_status")
+      sort_by('status')
       expect(statuses).to be_sorted(:ascending)
-      click_link("sort_by_status")
-      expect(statuses).to be_sorted(:descending)
+      #sort_by('status')
+      #expect(statuses).to be_sorted(:descending)
     end
   end
 end

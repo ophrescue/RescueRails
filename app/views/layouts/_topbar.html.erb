@@ -12,7 +12,7 @@
           </a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><%= link_to "Dogs", dogs_path %></li>
+              <li><%= link_to "Dogs", dogs_gallery_index_path %></li>
               <li><%= link_to "Events", events_path %></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Adopt<b class="caret"></b></a>
@@ -71,7 +71,7 @@
                     <% end %>
                     <% if current_user.active? || current_user.admin? %>
                       <li><%= link_to "DNA List", :controller => "banned_adopters" %></li>
-                      <li><%= link_to "Dog Manager", :controller => "dogs", :action => "manager_index" %></li>
+                      <li><%= link_to "Dog Manager", dogs_gallery_index_path %></li>
                       <li><%= link_to "Users", users_path %></li>
                     <% end %>
                     <% if can_dl_resources? %>

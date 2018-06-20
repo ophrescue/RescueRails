@@ -67,6 +67,7 @@
 class Dog < ApplicationRecord
   audited
   include Filterable
+  include Flaggable
 
   attr_accessor :primary_breed_name, :secondary_breed_name
 
@@ -130,18 +131,8 @@ class Dog < ApplicationRecord
     'Female' => 'F'
   }.freeze
 
-  FILTER_FLAGS = [
-    'High Priority',
-    'Medical Need',
-    'Special Needs',
-    'Medical Review Needed',
-    'Behavior Problems',
-    'Foster Needed',
-    'Spay Neuter Needed',
-    'No Cats',
-    'No Dogs',
-    'No Kids'
-  ]
+  FILTER_FLAGS = ["High Priority", "Medical Need", "Special Needs", "Medical Review Needed", "Behavior Problems",
+                  "Foster Needed", "Spay Neuter Needed", "No Cats", "No Dogs", "No Kids"]
 
   AGES = %w[baby young adult senior]
   validates_inclusion_of :age, in: AGES, allow_blank: true
@@ -152,49 +143,89 @@ class Dog < ApplicationRecord
   GENDERS = %w[Male Female]
   validates_inclusion_of :gender, in: GENDERS, allow_blank: true
 
+  SEARCH_FIELDS = ["Breed", "Tracking ID", "Name", "Microchip"]
+
   before_save :update_adoption_date
 
-  scope :is_age,                                  ->(age) { where age: age }
-  scope :is_size,                                 ->(size) { where size: size }
-  scope :is_status,                               ->(status) { where status: status }
   scope :is_breed,                                ->(breed_partial) { joins("join breeds on (breeds.id = dogs.primary_breed_id) or (breeds.id = dogs.secondary_breed_id)").where("breeds.name ilike '%#{sanitize_sql_like(breed_partial)}%'").distinct }
-  scope :cb_high_priority,                        ->(_) { where is_high_priority: true }
-  scope :cb_medical_need,                         ->(_) { where has_medical_need: true }
-  scope :cb_medical_review_needed,                ->(_) { where medical_review_complete: false }
-  scope :cb_special_needs,                        ->(_) { where is_special_needs: true }
-  scope :cb_behavior_problems,                    ->(_) { where has_behavior_problem: true }
-  scope :cb_foster_needed,                        ->(_) { where needs_foster: true }
-  scope :cb_spay_neuter_needed,                   ->(_) { where is_altered: false }
-  scope :cb_no_cats,                              ->(_) { where no_cats: true }
-  scope :cb_no_dogs,                              ->(_) { where no_dogs: true }
-  scope :cb_no_kids,                              ->(_) { where no_kids: true }
-
-  scope :matching_tracking_id,                    ->(search_term) { where tracking_id: search_term }
-  scope :identity_matching_microchip,             ->(search_term) { where microchip: search_term }
-  scope :identity_match_tracking_id_or_microchip, ->(search_term){ matching_tracking_id(search_term).or( identity_matching_microchip(search_term)) }
-
-  scope :pattern_matching_microchip,              ->(search_term) { where("microchip ilike ?", search_term) }
   scope :pattern_matching_name,                   ->(search_term) { where("name ilike ?", search_term) }
-  scope :pattern_match_microchip_or_name,         ->(search_term){ pattern_matching_microchip("%"+search_term+"%").or( pattern_matching_name("%"+search_term+"%")) }
 
   # Rails 5.2 issues deprecation errors for any order that is not column names
   # so arel is the workaround
   scope :sort_with_search_term_matches_first,     ->(search_term) { order(Dog.arel_table[:name].does_not_match("#{search_term}%"), "tracking_id asc") }
-
   scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :photos, :foster).where(status: Dog::PUBLIC_STATUSES).order(:tracking_id) }
-  scope :default_manager_view,                    -> { includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster).order(:tracking_id) }
-  scope :autocomplete_name,                       ->(search_term){ if search_term.present? then select(:name, :id).pattern_matching_name("%"+search_term+"%").sort_with_search_term_matches_first(search_term) else select(:name, :id) end }
+
+  def self.autocomplete_name(search_term = nil)
+    if search_term.present?
+      select(:name, :id)
+        .pattern_matching_name("%"+search_term+"%")
+        .sort_with_search_term_matches_first(search_term)
+    else
+      select(:name, :id)
+    end
+  end
+
+  def self.search(search_params)
+    search_term, search_field = search_params
+    return unscoped if invalid_search_params(search_params)
+    return is_breed(search_term) if search_field == "breed"
+    return where("#{search_field} = ?", "#{search_term.strip}") if search_field == "tracking_id"
+    return where("#{search_field} ilike ?", "%#{search_term.strip}%")
+  end
+
+  def self.invalid_search_params(search_params)
+    search_term, search_field = search_params
+    # security check, since search field will be injected into SQL query
+    (search_params.compact.length != 2) || ( !%w(name tracking_id microchip breed).include? search_field )
+  end
 
   def breeds
     [ (primary_breed&.name), (secondary_breed&.name) ].compact
+  end
+
+  def primary_photo_url
+    if Rails.env.development?
+      # helps with formulating the css, and UI design, on the DogsController#index page
+      # shouldn't be used longterm, as it uses actual urls, which will expire in time.
+      # it would be good to have a longterm solution that has actual photos
+      AWS_PHOTO_URLS.sample()
+    else
+      photos.empty? ?
+        Photo.no_photo_url :
+        photos.visible.first.photo.url(:medium)
+    end
+  end
+
+  def primary_breed_name
+    primary_breed&.name
+  end
+
+  def secondary_breed_name
+    secondary_breed&.name
+  end
+
+  def photo_alt_text
+    primary_breed ?  primary_breed.name : name
+  end
+
+  def foster_location
+    foster && foster.location
   end
 
   def adopted?
     status == 'adopted'
   end
 
+  def status_key
+    status.gsub(/\s/,"_")
+  end
+
   def unavailable?
     UNAVAILABLE_STATUSES.include?(status)
+  end
+
+  def is_accepting_applications?
+    PUBLIC_STATUSES.include?(status)
   end
 
   def attributes_to_audit
@@ -206,7 +237,7 @@ class Dog < ApplicationRecord
   end
 
   def comments_and_audits_and_associated_audits
-    (valid_comments + audits + associated_audits).sort_by(&:created_at).reverse!
+    (persisted_comments + audits + associated_audits).sort_by(&:created_at).reverse!
   end
 
   def to_petfinder_status
@@ -233,7 +264,9 @@ class Dog < ApplicationRecord
     connection.select_value("SELECT nextval('tracking_id_seq')")
   end
 
-  def valid_comments
-    comments.to_a.delete_if { |obj| obj.id.nil? }
+  def persisted_comments
+    comments.select(&:persisted?)
   end
 end
+
+

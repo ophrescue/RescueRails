@@ -29,8 +29,11 @@
 #
 
 class Photo < ApplicationRecord
+  extend ActionView::Helpers::AssetUrlHelper
   belongs_to :dog, touch: true
   acts_as_list scope: :dog
+
+  HASH_SECRET = "80fd0acd1674d7efdda5b913a7110d5c955e2d73"
 
   has_attached_file :photo,
             styles: { original: '1280x1024>',
@@ -41,7 +44,8 @@ class Photo < ApplicationRecord
             s3_permissions: "public-read",
             path: ":rails_root/public/system/dog_photo/:hash.:extension",
             url: "/system/dog_photo/:hash.:extension",
-            hash_secret: "80fd0acd1674d7efdda5b913a7110d5c955e2d73"
+            hash_secret: HASH_SECRET,
+            preserve_files: !Rails.env.production? # in dev and test we only read AWS, never write/delete
 
   validates_attachment_presence :photo
   validates_attachment_size :photo, less_than: 10.megabytes
@@ -49,4 +53,13 @@ class Photo < ApplicationRecord
 
   scope :visible, -> { where(is_private: false) }
   scope :hidden, -> { where(is_private: true) }
+
+  def self.no_photo_url
+    "/assets/no_photo.svg"
+  end
+
+  # galleria dataSource format
+  def to_carousel
+    {image: photo.url(:original), thumb: photo.url(:medium)}
+  end
 end

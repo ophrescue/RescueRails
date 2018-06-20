@@ -1,0 +1,51 @@
+<div class="card bg-light mb-3">
+  <div class="card-header"> Filter, Search and Sort the database...  </div>
+  <div class="card-body">
+    <form class='row' id='filter_controls'>
+      <%= render partial: 'dogs_manager/global_multiselect_dropdown', locals: {id: 'is_age', button_text: 'Age', options: Dog::AGES.as_options, multiple: true , close_on_select: "true" } %>
+      <%= render partial: 'dogs_manager/global_multiselect_dropdown', locals: {id: 'is_status', button_text: 'Status', options: Dog::STATUSES.as_options, multiple: true , close_on_select: "true" } %>
+      <%= render partial: 'dogs_manager/global_multiselect_dropdown', locals: {id: 'is_size', button_text: 'Size', options: Dog::SIZES.as_options, multiple: true , close_on_select: "true" } %>
+      <%= render partial: 'dogs_manager/global_multiselect_dropdown', locals: {id: 'has_flags', button_text: 'Flags', options: Dog::FILTER_FLAGS.as_options, multiple:true, close_on_select: "true" } %>
+      <%= render partial: 'dogs_manager/global_multiselect_dropdown', locals: {id: 'search_field_index', button_text: 'Search', options: Dog::SEARCH_FIELDS.as_options, multiple:false, close_on_select: "false" } %>
+      <%= render partial: 'dogs_manager/global_multiselect_dropdown', locals: {id: 'sort', button_text: 'Sort', options: Sortable::SORT_FIELDS, multiple: false, close_on_select: "true" } %>
+    </form>
+  </div>
+</div>
+
+<div class="row" id='filter_info_row'>
+  <div class='col-12 col-md-2'>
+    <%= @count %> records returned
+  </div>
+  <div class='col-12 col-md-10' id='filter_info'>
+    <%= render_if age_filter_active?,    partial: 'dogs_manager/filter_info_group',      locals: {group_text: "Age:",       values: selected_ages } %>
+    <%= render_if status_filter_active?, partial: 'dogs_manager/filter_info_group',      locals: {group_text: "Status:",    values: selected_statuses } %>
+    <%= render_if size_filter_active?,   partial: 'dogs_manager/filter_info_group',      locals: {group_text: "Size:",      values: selected_sizes } %>
+    <%= render_if flag_filter_active?,   partial: 'dogs_manager/filter_info_group',      locals: {group_text: "Flags:",     values: selected_flags } %>
+    <%= render_if search_active?,        partial: 'dogs_manager/filter_info_group',      locals: {group_text: "Search by:", values: ["#{@filter_params['search_field_text']} matches '#{@filter_params['search']}'"] } %>
+    <%= render                           partial: 'dogs_manager/filter_info_group',      locals: {group_text: "Sort:",      values: selected_sort} %>
+    <%= render_unless default_search_sort?, 'dogs_manager/reset_message' %>
+  </div>
+</div>
+
+<div id="manager_dogs">
+  <%- if @dogs.any? %>
+    <%= render :partial => "dogs_manager/dog", :collection => @dogs, :as => :dog %>
+    <div> <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %> </div>
+  <% else %>
+    <div id="none_found"><h4>No dogs were found that match the specified criteria</h3></div>
+  <% end %>
+</div>
+
+<script type='text/javascript'>
+  var template = "<%=j render partial: 'dogs_manager/search_field' %>"
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+    $('[data-toggle="tooltip"]').tooltip()
+    $('#search_field_index .dropdown-menu').prepend(template) // add the search field to the search dropdown
+    // $('.globalselect-container#search_field_index button.dropdown-toggle'). // the search dropdown
+    //   removeAttr('data-toggle'). // we want to leave the dropdown open when an option is clicked
+    //   on('click', function(){$(this).parent().find('.dropdown-menu').toggleClass('show')}) // control dropdown with javascript instead
+  })
+
+  var filter_params = <%= @filter_params.to_json.html_safe %>
+</script>

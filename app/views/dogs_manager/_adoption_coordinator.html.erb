@@ -1,0 +1,6 @@
+<% if @dog.coordinator_id %>
+  <%= link_to @dog.coordinator.name, user_path(@dog.coordinator) %>
+<% else %>
+  not assigned
+<% end %>
+

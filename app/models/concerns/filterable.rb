@@ -15,15 +15,48 @@
 module Filterable
   extend ActiveSupport::Concern
 
+  included do
+    scope :is_age,    ->(age) { where age: age }
+    scope :is_size,   ->(size) { where size: size }
+    scope :is_status, ->(status) { where status: status }
+  end
+
   module ClassMethods
     def filter(filtering_params)
-      results = self
-      filtering_params.each do |key, value|
-        if value.present? && value != 'all'
-          results = results.public_send(key, value)
+      results = self.unscoped # to be sure an ActiveRecord::Relation is returned, even with no filtering_params
+      # [ "is_age", "is_size", "is_status", "has_flags"]
+      filtering_params.each do |key, values|
+        if values.present?
+          results = results.public_send(key, lookup(key,values))
         end
       end
       results
+    end
+
+    private
+    def lookup(key,values)
+      return values if ["training_team",
+                        "newsletter",
+                        "public_relations",
+                        "fundraising",
+                        "translator",
+                        "active_volunteer"].include? key
+
+      lookup_table = case key.to_sym
+                     when :is_age
+                       Dog::AGES
+                     when :is_size
+                       Dog::SIZES
+                     when :is_status
+                       Dog::STATUSES
+                     when :has_flags
+                       Dog::FILTER_FLAGS
+                     end
+      map_keys(lookup_table,values)
+    end
+
+    def map_keys(lookup_table,values)
+      lookup_table.as_options.slice(*values).values
     end
   end
 end

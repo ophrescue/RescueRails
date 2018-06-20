@@ -231,6 +231,14 @@ class User < ApplicationRecord
     end
   end
 
+  def location
+    has_location? && "#{city.titleize}, #{region.upcase}".html_safe
+  end
+
+  def has_location?
+    [city, region].all?
+  end
+
   private
 
     def generate_token(column)

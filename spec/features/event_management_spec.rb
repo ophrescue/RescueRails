@@ -15,7 +15,7 @@ feature 'Manage Events', js: true do
 
     test_event = build(:event)
     fill_in('event_title', with: test_event.title)
-    fill_in('event_event_date', with: test_event.event_date)
+    fill_in('event_event_date', with: test_event.event_date.strftime("%Y-%m-%d"))
     fill_in('event_start_time', with: test_event.start_time)
     fill_in('event_end_time', with: test_event.end_time)
     fill_in('event_location_name', with: test_event.location_name)

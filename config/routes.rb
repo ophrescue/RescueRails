@@ -14,9 +14,9 @@ RescueRails::Application.routes.draw do
 
   resources :comments, except: %i[new]
 
-  resources :dogs_gallery, only: %i[index show]
+  resources :dogs, controller: 'dogs_gallery', only: %i[index show]
 
-  resources :dogs, controller: 'dogs_manager' do
+  resources :dogs_manager do
     resources :comments
     resources :photos do
       collection { post :sort }

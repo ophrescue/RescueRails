@@ -2,7 +2,7 @@
   <%- if active_user? %>
     <div class='row'>
       <div class='col-2 offset-6 offset-sm-10'>
-          <%= link_to "Switch to manager profile", dog_path(@dog), class: 'switch_view btn btn-outline-secondary' %>
+          <%= link_to "Switch to manager profile", dogs_manager_path(@dog), class: 'switch_view btn btn-outline-secondary' %>
       </div>
     </div>
   <% end %>

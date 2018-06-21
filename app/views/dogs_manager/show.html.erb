@@ -1,7 +1,7 @@
 <div class='container' id='manage_profile'>
   <div class='row'>
     <div class='col-2 offset-6 offset-sm-10'>
-      <%= link_to "Switch to public profile", dogs_gallery_path(@dog), class: 'switch_view btn btn-sm btn-outline-secondary' %>
+      <%= link_to "Switch to public profile", dog_path(@dog), class: 'switch_view btn btn-sm btn-outline-secondary' %>
     </div>
   </div>
   <div class="row title_row justify-content-between">
@@ -15,7 +15,7 @@
     </div>
     <div class='col-12 col-sm-1 manager_links'>
       <% if can_edit_dogs? || fostering_dog? %>
-        <%= link_to "Edit", edit_dog_path(@dog), id: 'edit_dog'  %>
+        <%= link_to "Edit", edit_dogs_manager_path(@dog), id: 'edit_dog'  %>
       <% end %>
     </div>
   </div>

@@ -15,12 +15,12 @@ feature 'View Dogs', js: true do
     end
 
     scenario 'can view the Manager View' do
-      visit dogs_path
+      visit dogs_manager_index_path
       expect(page).to have_content(test_dog.name)
     end
 
     scenario 'can view private information about a dog' do
-      visit dog_path(test_dog)
+      visit dogs_manager_path(test_dog)
       expect(page).to have_content(test_dog.name)
       ["Medical Summary",
        "Behavior Summary",
@@ -72,12 +72,12 @@ feature 'View Dogs', js: true do
     end
 
     scenario 'can view the Manager View' do
-      visit dogs_path
+      visit dogs_manager_index_path
       expect(page).to have_content(test_dog.name)
     end
 
     scenario 'can view private information about a dog' do
-      visit dog_path(test_dog)
+      visit dogs_manager_path(test_dog)
       expect(page).to have_content(test_dog.name)
       ["Medical Summary",
        "Behavior Summary",
@@ -129,12 +129,12 @@ feature 'View Dogs', js: true do
     end
 
     scenario 'cannot view the Manager View' do
-      visit dogs_path
+      visit dogs_manager_index_path
       expect(page_heading).to eq 'Our Dogs'
     end
 
     scenario 'can not view private information about a dog' do
-      visit dog_path(test_dog)
+      visit dogs_manager_index_path(test_dog)
       expect(page).to have_content(test_dog.name)
       ["Medical Summary",
        "Behavior Summary",
@@ -182,12 +182,12 @@ feature 'View Dogs', js: true do
 
   context 'Not Logged In' do
     scenario 'can not use the Manager View' do
-      visit dogs_path
+      visit dogs_manager_index_path
       expect(page_heading).to eq "Staff Sign in"
     end
 
     scenario 'can view the public dog gallery' do
-      visit dogs_gallery_index_path
+      visit dogs_path
       expect(page).to have_content(test_dog.name)
       click_link(test_dog.name)
       expect(page).to have_content(test_dog.name)

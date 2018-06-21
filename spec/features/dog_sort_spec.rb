@@ -8,7 +8,7 @@ feature 'Dog sort in manager view', js: true do
   before do
     create_many_dogs
     sign_in(active_user)
-    visit '/dogs'
+    visit '/dogs_manager'
     expect(page).to have_selector('h1', text: "Dog Manager")
   end
 
@@ -16,11 +16,11 @@ feature 'Dog sort in manager view', js: true do
 
   context 'no filter active' do
     scenario 'default sort' do
-      expect(tracking_ids).to be_sorted(:ascending)
+      expect(tracking_ids).to be_sorted(:descending)
     end
 
     scenario 'sort by tracking_id' do
-      expect(tracking_ids).to be_sorted(:ascending)
+      expect(tracking_ids).to be_sorted(:descending)
       #sort_by('tracking_id')
       #expect(tracking_ids).to be_sorted(:descending)
     end
@@ -56,11 +56,11 @@ feature 'Dog sort in manager view', js: true do
     end
 
     scenario 'default sort' do
-      expect(tracking_ids).to be_sorted(:ascending)
+      expect(tracking_ids).to be_sorted(:descending)
     end
 
     scenario 'sort by tracking_id' do
-      expect(tracking_ids).to be_sorted(:ascending)
+      expect(tracking_ids).to be_sorted(:descending)
       # currently we don't flip the search order on second click
       #sort_by('tracking_id')
       #expect(tracking_ids).to be_sorted(:descending)
@@ -102,11 +102,11 @@ feature 'Dog sort in manager view', js: true do
     end
 
     scenario 'default sort' do
-      expect(tracking_ids).to be_sorted(:ascending)
+      expect(tracking_ids).to be_sorted(:descending)
     end
 
     scenario 'sort by tracking_id' do
-      expect(tracking_ids).to be_sorted(:ascending)
+      expect(tracking_ids).to be_sorted(:descending)
       #sort_by('tracking_id')
       #expect(tracking_ids).to be_sorted(:descending)
     end
@@ -144,7 +144,7 @@ feature 'Dog sort in manager view', js: true do
     scenario 'sort by tracking_id' do
       # initial sort is by search-string match
       sort_by('tracking_id')
-      expect(tracking_ids).to be_sorted(:ascending)
+      expect(tracking_ids).to be_sorted(:descending)
       #sort_by('tracking_id')
       #expect(tracking_ids).to be_sorted(:descending)
     end

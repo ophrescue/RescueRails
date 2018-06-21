@@ -19,14 +19,14 @@ feature 'Filter Dogs List', js: true do
     let(:group_label) { '#filter_info_row #filter_info .message_group .group_label' }
     let(:filter_params) { '#filter_info_row #filter_info .message_group .filter_params' }
 
-    scenario 'can filter results with breed partial match' do
-      visit dogs_path
+    scenario 'with breed partial match' do
+      visit dogs_manager_index_path
       expect(page).to have_selector('h1', text: 'Dog Manager')
-      expect(dogs_list).to eq all_dogs_sorted_by_id
+      expect(dogs_list).to eq all_dogs_sorted_by_id.reverse
 
       search_by("Breed", "retriev")
-      expect(dogs_list).to eq [["#1","Zeke", "Labrador Retriever,"],
-                               ["#3", "Abby", "Golden Retriever,"] ]
+      expect(dogs_list).to eq [ ["#3", "Abby", "Golden Retriever,"],
+                                ["#1","Zeke", "Labrador Retriever,"] ]
       click_button("Search")
       # search parameters for the search currently active are shown in the search dropdown
       expect(page.find('input#search').value).to eq 'retriev'
@@ -51,7 +51,7 @@ feature 'Filter Dogs List', js: true do
       click_button("Search")
       expect(page.find('input#search').value).to be_blank
       expect(page.find('#search_field_index ul>li._breed input', visible: false)).not_to be_checked
-      expect(dogs_list).to eq all_dogs_sorted_by_id
+      expect(dogs_list).to eq all_dogs_sorted_by_id.reverse
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Tracking ID")
       expect(page).to have_no_selector(group_label, text: "Search by:")
@@ -59,8 +59,8 @@ feature 'Filter Dogs List', js: true do
       expect(page).to have_no_selector('#reset_message')
     end
 
-    scenario 'can search by breed and sort results by dog name' do
-      visit dogs_path
+    scenario 'and sort results by dog name' do
+      visit dogs_manager_index_path
       search_by("Breed", "retriev")
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Tracking ID")
@@ -88,11 +88,11 @@ feature 'Filter Dogs List', js: true do
       expect(page).to have_selector(group_label, text: "Search by:")
       expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
       page.find('#reset_message').click
-      expect(dogs_list).to eq all_dogs_sorted_by_id
+      expect(dogs_list).to eq all_dogs_sorted_by_id.reverse
     end
 
     scenario 'shows error message if user forgets to select search attribute' do
-      visit dogs_path
+      visit dogs_manager_index_path
       click_button("Search")
       expect(page).to have_selector('#search-dropdown-heading')
       page.find('input#search').set("retr")
@@ -105,7 +105,7 @@ feature 'Filter Dogs List', js: true do
     end
 
     scenario 'search after being reminded to select search attribute' do
-      visit dogs_path
+      visit dogs_manager_index_path
       click_button("Search")
       page.find('input#search').set("retr")
       page.find('#search_icon').click
@@ -115,7 +115,7 @@ feature 'Filter Dogs List', js: true do
     end
 
     scenario 'reset search field' do
-      visit dogs_path
+      visit dogs_manager_index_path
       click_button("Search")
       page.find('input#search').set("retr")
       select_search_by('Breed')
@@ -127,7 +127,7 @@ feature 'Filter Dogs List', js: true do
     end
 
     scenario 'reset search params on dropdown close without search' do
-      visit dogs_path
+      visit dogs_manager_index_path
       click_button("Search")
       select_search_by('Breed')
       page.find('input#search').set("retr")
@@ -159,7 +159,7 @@ feature 'Filter Dogs List', js: true do
 
     Dog::FILTER_FLAGS.as_options.each do |key,text|
         scenario "can filter by '#{key}' flag attribute" do
-          visit dogs_path
+          visit dogs_manager_index_path
           filter_by("flags", key)
           expect(page).to have_selector(group_label, text: "Sort:")
           expect(page).to have_selector(filter_params, text: "Tracking ID")
@@ -187,7 +187,7 @@ feature 'Filter Dogs List', js: true do
 
     Dog::SIZES.as_options.each do |key,text|
       scenario "can filter by '#{text}' size attribute" do
-        visit dogs_path
+        visit dogs_manager_index_path
 
         filter_by("size", key)
         expect(page).to have_selector(group_label, text: "Sort:")
@@ -222,7 +222,7 @@ feature 'Filter Dogs List', js: true do
 
     Dog::STATUSES.as_options.each do |key,text|
       scenario "can filter by '#{text}' status attribute" do
-        visit dogs_path
+        visit dogs_manager_index_path
 
         filter_by("status", key)
         expect(page).to have_selector(group_label, text: "Sort:")
@@ -251,7 +251,7 @@ feature 'Filter Dogs List', js: true do
 
     Dog::AGES.as_options.each do |key,text|
       scenario "can filter by '#{text}' age attribute" do
-        visit dogs_path
+        visit dogs_manager_index_path
 
         filter_by("age", key)
         expect(page).to have_selector(group_label, text: "Sort:")

@@ -8,19 +8,19 @@ feature 'control access to dogs_manager pages by user privileges' do
   let(:active_user){ FactoryBot.create(:user, active: true) }
 
   scenario 'user is not logged-in' do
-    visit dogs_path
+    visit dogs_manager_index_path
     expect(page_heading).to eq "Staff Sign in"
   end
 
   scenario 'user is logged-in but not active' do
     sign_in(inactive_user)
-    visit dogs_path
+    visit dogs_manager_index_path
     expect(page_heading).to eq "Our Dogs"
   end
 
   scenario 'user is logged-in and active' do
     sign_in(active_user)
-    visit dogs_path
+    visit dogs_manager_index_path
     expect(page_heading).to eq "Dog Manager"
   end
 end

@@ -5,8 +5,12 @@ FactoryBot.define do
     tracking_id { (Dog.maximum(:tracking_id) || 0).succ }
     name {
       until(nn = Faker::Dog.name; !Dog.pluck(:name).include?(nn))
+        puts nn
       end
-      nn
+      # it's a workaround for TravisCI sorting weirdness.
+      # It doesn't handle spaces inside names as expected
+      # (expected means ' '< 'x')
+      nn.gsub(/(\W|\s)/,'').titlecase
     }
     status {  Dog::STATUSES.sample }
     sequence(:microchip) { |n| "MC-#{n}" }

@@ -27,6 +27,7 @@ feature 'Manage Events', js: true do
     click_button('Submit')
 
     expect(page).to have_content(test_event.title)
+    # lat/long are default values specified in spec/support/geocoder_stubs
     expect(page.find('.google_map_link')['href']).to eq "https://maps.google.com/?q=40.7143528%2C-74.0059731"
     expect(page.find('.google_map_link>img')['src']).to eq "https://maps.google.com/maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers=40.7143528%2C-74.0059731"
   end

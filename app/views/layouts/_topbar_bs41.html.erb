@@ -66,7 +66,7 @@
             <% end %>
             <% if current_user.active? || current_user.admin? %>
               <%= link_to "DNA List", banned_adopters_path, class: "nav-link" %>
-              <%= link_to "Dog Manager", dogs_path( status: "active"), class: "nav-link" %>
+              <%= link_to "Dog Manager", dogs_manager_index_path, class: "nav-link" %>
               <%= link_to "Users", users_path, class: "nav-link" %>
             <% end %>
             <% if can_dl_resources? %>

@@ -40,6 +40,8 @@ RescueRails::Application.routes.draw do
 
   root                         to: 'pages#home'
 
+  get 'sample_image/:type',    to: 'sample_images#show', constraints: {type: /map/}, as: 'sample_image'
+
   get '5k',                    to: 'pages#5k'
 
   get '/signin',               to: 'sessions#new'

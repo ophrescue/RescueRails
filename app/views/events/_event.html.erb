@@ -38,9 +38,7 @@
           <p><i class="icon-camera"></i> <strong>Event Photographer:</strong> <%= event.photographer_name %></p>
         <% end %>
       </div>
-      <a href="<%="https://maps.google.com/?q=#{event.latitude}%2C#{event.longitude}"%>" class='google_map_link'>
-        <%= image_tag "https://maps.google.com/maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers=#{event.latitude}%2C#{event.longitude}"
-        %></a>
+      <%= event.google_map %>
       <div class="row">
         <div class="span8">
           <br />

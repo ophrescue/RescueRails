@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'webmock/rspec'
 
 feature 'Manage Events', js: true do
   let!(:admin) { create(:user, :admin) }
@@ -24,12 +23,17 @@ feature 'Manage Events', js: true do
     fill_in('event_facebook_url', with: test_event.facebook_url)
     fill_in('event_address', with: test_event.address)
     fill_in('event_description', with: test_event.description)
+    attach_file('event[photo]', Rails.root.join('lib','sample_images','event_images',"pic_#{rand(15)}.jpg") )
     click_button('Submit')
 
     expect(page).to have_content(test_event.title)
     # lat/long are default values specified in spec/support/geocoder_stubs
     expect(page.find('.google_map_link')['href']).to eq "https://maps.google.com/?q=40.7143528%2C-74.0059731"
     expect(page.find('.google_map_link>img')['src']).to eq "https://maps.google.com/maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers=40.7143528%2C-74.0059731"
+    # <a href="/system/event_photo/31/original/20180327_210243.jpg?1529672940">
+    #   <img src="/system/event_photo/31/medium/20180327_210243.jpg?1529672940">
+    # </a>
+    expect(page.find('.eventphoto a')['href']).to match "\/system\/event_photo"
+    expect(page.find('.eventphoto a img')['src']).to match "\/system\/event_photo"
   end
-
 end

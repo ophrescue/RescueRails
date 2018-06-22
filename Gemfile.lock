@@ -101,7 +101,6 @@ GEM
     capybara-selenium (0.0.6)
       capybara
       selenium-webdriver
-    capybara-webmock (0.1.0)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     childprocess (0.9.0)
@@ -411,7 +410,6 @@ DEPENDENCIES
   capybara
   capybara-screenshot
   capybara-selenium
-  capybara-webmock
   chromedriver-helper
   countries
   coveralls

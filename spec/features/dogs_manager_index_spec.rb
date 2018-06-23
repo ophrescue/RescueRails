@@ -53,6 +53,6 @@ feature 'edit a dog', js: true do
   it "update dog attributes" do
     fill_in('Name', with: 'Rover')
     click_button "Submit"
-    expect(page_heading).to eq  "#1 Rover:"
+    expect(page_heading).to match  /Rover/
   end
 end

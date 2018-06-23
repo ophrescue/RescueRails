@@ -29,8 +29,8 @@ RSpec.configure do |config|
   end
 
   config.before(:suite) do
-    table_exists = ActiveRecord::Base.connection.execute("select exists(select * from information_schema.sequences);")
-    ActiveRecord::Base.connection.execute("CREATE SEQUENCE tracking_id_seq START 1;") unless table_exists.first["exists"]
+    ActiveRecord::Base.connection.execute("DROP SEQUENCE IF EXISTS tracking_id_seq;")
+    ActiveRecord::Base.connection.execute("CREATE SEQUENCE tracking_id_seq START 1;")
   end
 
   config.after(:suite) do

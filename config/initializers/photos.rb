@@ -58,6 +58,6 @@ urls =  ["c26d00f6b3620c8738a514b562ff9f764302fa6c.jpg?1520716341",
          "79280ced826398c65350ab57a4530209e33fdc8e.JPG?1512571324",
          "37acbc92eb69f0a1d5595d79a287dd3b99b8fe94.jpeg?1521241125"].map{|file| "https://s3.amazonaws.com/ophrescue-production/dog_photo/#{file}"}
 
-no_photo_urls = Array.new(5, "no_photo-205x195.png")
+no_photo_urls = Array.new(5, "no_photo.svg")
 
 AWS_PHOTO_URLS = urls + no_photo_urls

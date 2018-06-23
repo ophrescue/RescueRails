@@ -80,6 +80,12 @@
   </li>
 </ul>
 
+<% if is_admin? %>
+  <p>
+  <%= link_to "Download to Excel", users_path(format: :xls, params: request.query_parameters) , :class => "btn btn-success" %>
+  </p>
+<% end %>
+
 <% if params[:foster] == 'true' %>
   <div class="container-fluid">
     <div class="row-fluid">

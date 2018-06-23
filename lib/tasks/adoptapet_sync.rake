@@ -20,9 +20,7 @@ namespace :adoptapet_sync do
       puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Adoptapet #{state} Export Start"
 
       dogs = Dog.joins(:foster).where(
-        { status: ["adoptable",
-          "adoption pending",
-          "coming soon"],
+        { status: Dog::PUBLIC_STATUSES,
           users: {region: state}
          })
 
@@ -31,8 +29,8 @@ namespace :adoptapet_sync do
       CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
         dogs.each do |d|
           photo_urls = Array.new
-          d.photos.visible.order('updated_at desc')
-          d.photos.visible[0..3].each do |p|
+          pics = d.photos.visible.reorder('updated_at desc')
+          pics[0..3].each do |p|
             photo_urls << p.photo.url(:large)
           end
 

@@ -134,6 +134,11 @@ describe DogsManagerController, type: :controller do
         expect { request.call }.to change { test_dog.reload.name }.from('Old Dog Name').to('New Dog Name')
       end
 
+      it 'redirects to dog#show' do
+        request.call
+        expect(response).to redirect_to(dogs_manager_path(test_dog))
+      end
+
       it 'updates the behavior summary' do
         expect { request.call }.to change { test_dog.reload.behavior_summary }.from('Mean Doggy').to('This is a good doggy')
       end
@@ -155,9 +160,9 @@ describe DogsManagerController, type: :controller do
           expect { post_create }.to change(Dog, :count).by(1)
         end
 
-        it 'redirects to dogs#index' do
+        it 'redirects to dogs_manager#index' do
           post_create
-          expect(response).to redirect_to(dogs_path)
+          expect(response).to redirect_to(dogs_manager_index_path)
         end
 
         context 'dog tracking id is blank' do

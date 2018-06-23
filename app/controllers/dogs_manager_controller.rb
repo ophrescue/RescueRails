@@ -108,7 +108,7 @@ class DogsManagerController < DogsController
 
     if @dog.save
       flash[:success] = "New Dog Added"
-      redirect_to dogs_path
+      redirect_to dogs_manager_index_path
     else
       load_instance_variables
       render 'new'

@@ -10,12 +10,12 @@ feature 'Filter Dogs List', js: true do
     end
 
     let!(:active_user) { create(:user) }
-    let!(:primary_lab){create(:dog, :no_flags, :primary_lab, :active_dog, name: "Zeke").name.titleize }
-    let!(:secondary_westie){create(:dog, :no_flags, :secondary_westie, :active_dog, name: "Nairobi").name.titleize }
-    let!(:secondary_golden){create(:dog, :no_flags, :secondary_golden, :active_dog, name: "Abby").name.titleize }
-    let(:all_dogs_sorted_by_id){ [["#1","Zeke", "Labrador Retriever,"],
-                                  ["#2", "Nairobi", "West Highland Terrier,"],
-                                  ["#3", "Abby", "Golden Retriever,"] ] }
+    let!(:zeke){create(:dog, :no_flags, :primary_lab, :active_dog, name: "Zeke") }
+    let!(:nairobi){create(:dog, :no_flags, :secondary_westie, :active_dog, name: "Nairobi") }
+    let!(:abby){create(:dog, :no_flags, :secondary_golden, :active_dog, name: "Abby") }
+    let(:all_dogs_sorted_by_id){ [["##{zeke.tracking_id}","Zeke", "Labrador Retriever,"],
+                                  ["##{nairobi.tracking_id}", "Nairobi", "West Highland Terrier,"],
+                                  ["##{abby.tracking_id}", "Abby", "Golden Retriever,"] ] }
     let(:group_label) { '#filter_info_row #filter_info .message_group .group_label' }
     let(:filter_params) { '#filter_info_row #filter_info .message_group .filter_params' }
 
@@ -25,8 +25,8 @@ feature 'Filter Dogs List', js: true do
       expect(dogs_list).to eq all_dogs_sorted_by_id.reverse
 
       search_by("Breed", "retriev")
-      expect(dogs_list).to eq [ ["#3", "Abby", "Golden Retriever,"],
-                                ["#1","Zeke", "Labrador Retriever,"] ]
+      expect(dogs_list).to eq [ ["##{abby.tracking_id}", "Abby", "Golden Retriever,"],
+                                ["##{zeke.tracking_id}","Zeke", "Labrador Retriever,"] ]
       click_button("Search")
       # search parameters for the search currently active are shown in the search dropdown
       expect(page.find('input#search').value).to eq 'retriev'

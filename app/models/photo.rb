@@ -53,7 +53,7 @@ class Photo < ApplicationRecord
   scope :hidden, -> { where(is_private: true) }
 
   def self.no_photo_url
-    "/assets/no_photo.svg"
+    ActionController::Base.helpers.asset_path("no_photo.svg")
   end
 
   # galleria dataSource format

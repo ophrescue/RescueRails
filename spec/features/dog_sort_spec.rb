@@ -1,15 +1,17 @@
 require 'rails_helper'
 require_relative '../helpers/dogs_list_helper'
 require_relative '../helpers/rspec_matchers'
+require_relative '../helpers/application_helpers'
 
 feature 'Dog sort in manager view', js: true do
   include DogsListHelper
+  include ApplicationHelpers
 
   before do
     create_many_dogs
     sign_in(active_user)
     visit '/dogs_manager'
-    expect(page).to have_selector('h1', text: "Dog Manager")
+    expect(page_heading).to eq "Dog Manager"
   end
 
   let!(:active_user) { create(:user, :admin) }

@@ -1,11 +1,10 @@
-<h1><%= @title %></h1>
 
 <br />
 <br />
 
 <div class="row">
   <div class="span6">
-    <%= form_for @dog, url: dogs_manager_path(@dog), html: { multipart: true, class: "form-horizontal"  } do |f| %>
+    <%= form_for @dog, url: @dog.new_record? ? dogs_manager_index_path : dogs_manager_path(@dog), html: { multipart: true, class: "form-horizontal"  } do |f| %>
     <%= render 'shared/error_messages', :object => f.object %>
 
     <% if !@dog.new_record? %>
@@ -398,6 +397,6 @@
 
 <div class="actions well">
   <%= f.submit "Submit", class: 'btn btn-primary mr-20' %>
-  <%= link_to 'Cancel', dogs_path, class: 'btn btn-danger' %>
+  <%= link_to 'Cancel', dogs_manager_index_path, class: 'btn btn-danger' %>
 </div>
 <% end %>

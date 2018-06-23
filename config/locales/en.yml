@@ -52,7 +52,7 @@ en:
       index: 'Do Not Adopt List'
       new: 'Add a Banned Adopter'
       edit: 'Edit'
-    dogs:
+    dogs_manager:
       new: 'Add a New Dog'
       edit: 'Edit Dog'
     events:
@@ -76,3 +76,11 @@ en:
       edit: 'Edit Profile'
       index: 'Staff Directory'
       new: 'Add a Staff Account'
+
+  # we have some duplication here, we need to migrate to the format below
+  # and eliminate the unconventional format above
+  dogs_manager:
+    new:
+      title: "Add a New Dog"
+    edit:
+      title: "Edit Dog"

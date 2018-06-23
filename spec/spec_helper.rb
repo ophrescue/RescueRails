@@ -28,6 +28,11 @@ RSpec.configure do |config|
     expectations.syntax = :expect
   end
 
+  config.before(:suite) do
+    table_exists = ActiveRecord::Base.connection.execute("select exists(select * from information_schema.sequences);")
+    ActiveRecord::Base.connection.execute("CREATE SEQUENCE tracking_id_seq START 1;") unless table_exists.first["exists"]
+  end
+
   config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
   end

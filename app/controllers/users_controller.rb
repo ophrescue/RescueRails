@@ -89,7 +89,11 @@ class UsersController < ApplicationController
     @users = UserSearcher.search(params: params)
     respond_to do |format|
       format.html
-      format.xls { render_users_xls }
+      if current_user.admin?
+        format.xls { render_users_xls }
+      else
+        format.xls { head :forbidden }
+      end
     end
   end
 

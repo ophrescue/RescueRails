@@ -1,55 +1,43 @@
-<%= form_for @dog, url: @dog.new_record? ? dogs_manager_index_path : dogs_manager_path(@dog), html: { multipart: true, class:'container' } do |f| %>
+<%= form_for @dog, url: @dog.new_record? ? dogs_manager_index_path : dogs_manager_path(@dog), html: { multipart: true, class:'container', id:'dog_form' } do |f| %>
   <div class="row">
-    <div class="col-6">
+    <div class="col-6" id='left-column'>
       <%= render 'shared/error_messages', :object => f.object %>
 
       <% if !@dog.new_record? %>
-        <div class="form-group row row">
-          <%= f.label :tracking_id, "OPH Tracking ID", class: 'control-label col-6' %>
+        <div class="form-group row">
+          <%= f.label :tracking_id, "OPH Tracking ID", class: 'col-form-label col-4' %>
           <%= f.text_field :tracking_id, disabled: !can_edit_dogs?, class: 'form-control col-6' %>
         </div>
       <% end %>
 
       <div class="form-group row">
-        <%= f.label :name, class: 'control-label col-6'  %>
+        <%= f.label :name, class: 'col-form-label col-4'  %>
         <%= f.text_field :name, class: 'form-control col-6' %>
       </div>
       <div class="form-group row">
-        <%= f.label :original_name, class: 'control-label col-6'  %>
-        <% if can_add_dogs? %>
-          <%= f.text_field :original_name, class: 'form-control col-6' %>
-        <% else %>
-          <%= f.text_field :original_name, disabled: !can_edit_dogs?, class: 'form-control col-6' %>
-        <% end %>
+        <%= f.label :original_name, class: 'col-form-label col-4'  %>
+        <%= f.text_field :original_name, disabled: !can_edit_dogs?, class: 'form-control col-6' %>
       </div>
       <div class="form-group row">
-        <%= f.label :status, class: 'control-label col-6'  %>
-        <% if can_edit_dogs? || can_add_dogs? %>
-          <%= f.select :status, Dog::STATUSES, prompt: '-select-', class: 'form-control col-6' %>
-        <% else %>
-          <%= f.text_field :status, disabled: true, class: 'form-control col-6' %>
-        <% end %>
+        <%= f.label :status, class: 'col-form-label col-4'  %>
+        <%= f.select :status, Dog::STATUSES, prompt: '-select-', class: 'form-control col-6' %>
       </div>
       <div class="form-group row">
-        <%= f.label :microchip, class: 'control-label col-6'  %>
+        <%= f.label :microchip, class: 'col-form-label col-4'  %>
         <%= f.text_field :microchip, class: 'form-control col-6' %>
       </div>
       <div class="form-group row input-prepend input-append">
-        <%= f.label :fee, 'Adoption Fee',class: 'control-label col-6'%>
+        <%= f.label :fee, 'Adoption Fee',class: 'col-form-label col-4'%>
         <div class="input-group-prepend">
           <span class="input-group-text" >$</span>
         </div>
-        <% if can_add_dogs? %>
-          <%= f.text_field :fee, class: 'input-small form-control col-4' %>
-        <% else %>
-          <%= f.text_field :fee, class: 'input-small form-control col-4', disabled: !can_edit_dogs? %>
-        <% end %>
+        <%= f.text_field :fee, class: 'input-small form-control col-4', disabled: !can_edit_dogs? %>
         <div class="input-group-append">
           <span class="input-group-text" >.00</span>
         </div>
       </div>
       <div class="form-group row">
-        <%= f.label :primary_breed_name, class: 'control-label col-6'  %>
+        <%= f.label :primary_breed_name, class: 'col-form-label col-4'  %>
         <% if can_add_dogs? %>
           <%= f.collection_select(:primary_breed_id, @breeds, :id, :name, prompt:  '-select-', class: 'form-control col-6') %>
         <% else %>
@@ -57,7 +45,7 @@
         <% end %>
       </div>
       <div class="form-group row">
-        <%= f.label :secondary_breed_name, class: 'control-label col-6'  %>
+        <%= f.label :secondary_breed_name, class: 'col-form-label col-4'  %>
         <% if can_add_dogs? %>
           <%= f.collection_select(:secondary_breed_id, @breeds, :id, :name, prompt: '-select-', class: 'form-control col-6') %>
         <% else %>
@@ -65,57 +53,49 @@
         <% end %>
       </div>
       <div class="form-group row">
-        <%= f.label :gender, class: 'control-label col-6'  %>
+        <%= f.label :gender, class: 'col-form-label col-4'  %>
         <%= f.select(:gender, Dog::GENDERS, prompt: '-select-', class: "col-2 form-control col-6") %>
       </div>
       <div class="form-group row">
-        <%= f.label :age, class: 'control-label col-6'  %>
+        <%= f.label :age, class: 'col-form-label col-4'  %>
         <%= f.select(:age, Dog::AGES, prompt: '-select-', class: "col-2 form-control col-6") %>
       </div>
       <div class="form-group row">
-        <%= f.label :size, "Size when grown", class: 'control-label col-6'  %>
+        <%= f.label :size, "Size when grown", class: 'col-form-label col-4'  %>
         <%= f.select(:size, Dog::SIZES, prompt: '-select-', class: "col-2 form-control col-6") %>
       </div>
       <div class="form-group row">
-        <%= f.label :intake_dt, "Intake Date", class: 'control-label col-6'  %>
+        <%= f.label :intake_dt, "Intake Date", class: 'col-form-label col-4'  %>
         <%= f.text_field :intake_dt, class: 'col-6' %>
       </div>
       <div class="form-group row">
-        <%= f.label :available_on_dt, "Available On Date", class: 'control-label col-6'  %>
+        <%= f.label :available_on_dt, "Available On Date", class: 'col-form-label col-4'  %>
         <%= f.text_field :available_on_dt, class: 'form-control col-6' %>
       </div>
       <div class="form-group row">
-        <%= f.label :adoption_date, "Adoption Date", class: 'control-label col-6'  %>
+        <%= f.label :adoption_date, "Adoption Date", class: 'col-form-label col-4'  %>
         <%= f.text_field :adoption_date, class: 'form-control col-6' %>
       </div>
       <div class="form-group row">
-        <%= f.label :sponsored_by, "Sponsored by", class: 'control-label col-6' %>
-        <% if can_edit_dogs? || can_add_dogs? %>
-          <%= f.text_field :sponsored_by, class: 'form-control col-6' %>
-        <% else %>
-          <%= @dog.sponsored_by ? @dog.sponsored_by : "No Sponsor" %>
-        <% end %>
+        <%= f.label :sponsored_by, "Sponsored by", class: 'col-form-label col-4' %>
+        <%= f.text_field :sponsored_by, class: 'form-control col-6' %>
       </div>
 
       <h3>Ads</h3>
       <div class="form-group row">
-        <%= f.label :craigslist_ad_url, "Craigslist Ad Link", class: 'control-label col-6'  %>
+        <%= f.label :craigslist_ad_url, "Craigslist Ad Link", class: 'col-form-label col-4'  %>
         <%= f.text_field :craigslist_ad_url, class: 'form-control col-6' %>
       </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-6" id='right-column'>
       <div class="form-group row">
-        <%= f.label :foster_id, "Foster assignment", class: 'control-label col-6' %>
-        <% if can_edit_dogs? || can_add_dogs? %>
-          <%= f.collection_select(:foster_id, @foster_users, :id, :name, include_blank: '-select-', class: 'form-control col-6') %>
-        <% else %>
-          <%= @dog.foster ? @dog.foster.name : "No Foster Assigned" %>
-        <% end %>
+        <%= f.label :foster_id, "Foster assignment", class: 'col-form-label col-4' %>
+        <%= f.collection_select(:foster_id, @foster_users, :id, :name, include_blank: '-select-', class: 'form-control col-6') %>
       </div>
 
       <div class="form-group row">
-        <%= f.label :coordinator_id, "Adoption coordinator", class: 'control-label col-6' %>
+        <%= f.label :coordinator_id, "Adoption coordinator", class: 'col-form-label col-4' %>
         <% if can_edit_all_adopters? || can_add_dogs? %>
           <%= f.collection_select(:coordinator_id, @coordinator_users, :id, :name, include_blank: '-select-', class: 'form-control col-6' ) %>
         <% else %>
@@ -124,105 +104,101 @@
       </div>
 
       <div class="form-group row">
-        <%= f.label :shelter_id, "Source shelter", class: 'control-label col-6' %>
-        <% if can_edit_dogs? || can_add_dogs? %>
-          <%= f.collection_select(:shelter_id, @shelters, :id, :name, include_blank: '-select-', class: 'form-control col-6' ) %>
-        <% else %>
-          <%= @dog.shelter ? @dog.shelter.name : "No Source Shelter Assigned" %>
-        <% end %>
+        <%= f.label :shelter_id, "Source shelter", class: 'col-form-label col-4' %>
+        <%= f.collection_select(:shelter_id, @shelters, :id, :name, include_blank: '-select-', class: 'form-control col-6' ) %>
       </div>
 
       <h3>Public Attributes</h3>
       <div class="form-group row">
-          <%= f.label :is_uptodateonshots, "Up-to-date on shots", class: 'control-label col-9'  %>
+          <%= f.label :is_uptodateonshots, "Up-to-date on shots", class: 'col-form-label col-9'  %>
           <%= f.check_box :is_uptodateonshots %>
       </div>
       <div class="form-group row">
-          <%= f.label :is_altered, class: 'control-label col-9' %>
+          <%= f.label :is_altered, class: 'col-form-label col-9' %>
           <%= f.check_box :is_altered %>
       </div>
       <div class="form-group row">
-          <%= f.label :is_special_needs, class: 'control-label col-9' %>
+          <%= f.label :is_special_needs, class: 'col-form-label col-9' %>
           <%= f.check_box :is_special_needs %>
       </div>
       <div class="form-group row">
-          <%= f.label :no_dogs, class: 'control-label col-9' %>
+          <%= f.label :no_dogs, class: 'col-form-label col-9' %>
           <%= f.check_box :no_dogs %>
       </div>
       <div class="form-group row">
-          <%= f.label :no_cats, class: 'control-label col-9' %>
+          <%= f.label :no_cats, class: 'col-form-label col-9' %>
           <%= f.check_box :no_cats %>
       </div>
       <div class="form-group row">
-          <%= f.label :no_kids, class: 'control-label col-9' %>
+          <%= f.label :no_kids, class: 'col-form-label col-9' %>
           <%= f.check_box :no_kids %>
       </div>
 
       <h3>Private Attributes</h3>
       <div class="form-group row">
-        <%= f.label :medical_review_complete , class: 'control-label col-9' %>
+        <%= f.label :medical_review_complete , class: 'col-form-label col-9' %>
         <%= f.check_box :medical_review_complete %>
       </div>
       <div class="form-group row">
-        <%= f.label :has_medical_need , class: 'control-label col-9' %>
+        <%= f.label :has_medical_need , class: 'col-form-label col-9' %>
         <%= f.check_box :has_medical_need %>
       </div>
       <div class="form-group row">
-        <%= f.label "High Priority Dog" , class: 'control-label col-9' %>
+        <%= f.label "High Priority Dog" , class: 'col-form-label col-9' %>
         <%= f.check_box :is_high_priority %>
       </div>
       <div class="form-group row">
-        <%= f.label :needs_photos , class: 'control-label col-9' %>
+        <%= f.label :needs_photos , class: 'col-form-label col-9' %>
         <%= f.check_box :needs_photos %>
       </div>
       <div class="form-group row">
-        <%= f.label :has_behavior_problem , class: 'control-label col-9' %>
+        <%= f.label :has_behavior_problem , class: 'col-form-label col-9' %>
         <%= f.check_box :has_behavior_problem %>
       </div>
       <div class="form-group row">
-        <%= f.label :needs_foster , class: 'control-label col-9' %>
+        <%= f.label :needs_foster , class: 'col-form-label col-9' %>
         <%= f.check_box :needs_foster %>
       </div>
 
       <h3>Vaccine Records</h3>
 
       <div class="form-group row">
-        <%= f.label :first_shots, "First Shots", class: 'control-label col-6' %>
+        <%= f.label :first_shots, "First Shots", class: 'col-form-label col-4' %>
         <%= f.text_field :first_shots, class: 'col-6' %>
       </div>
 
       <div class="form-group row">
-        <%= f.label :second_shots, "Second Shots", class: 'control-label col-6' %>
+        <%= f.label :second_shots, "Second Shots", class: 'col-form-label col-4' %>
         <%= f.text_field :second_shots, class: 'col-6' %>
       </div>
 
       <div class="form-group row">
-        <%= f.label :third_shots, "Third Shots", class: 'control-label col-6' %>
+        <%= f.label :third_shots, "Third Shots", class: 'col-form-label col-4' %>
         <%= f.text_field :third_shots, class: 'col-6' %>
       </div>
 
       <div class="form-group row">
-        <%= f.label :rabies, "Rabies", class: 'control-label col-6' %>
+        <%= f.label :rabies, "Rabies", class: 'col-form-label col-4' %>
         <%= f.text_field :rabies, class: 'col-6' %>
       </div>
 
       <div class="form-group row">
-        <%= f.label :vac_4dx, "4DX", class: 'control-label col-6' %>
+        <%= f.label :vac_4dx, "4DX", class: 'col-form-label col-4' %>
         <%= f.text_field :vac_4dx, class: 'col-6' %>
       </div>
 
       <div class="form-group row">
-        <%= f.label :bordetella, "Bordetella", class: 'control-label col-6' %>
+        <%= f.label :bordetella, "Bordetella", class: 'col-form-label col-4' %>
         <%= f.text_field :bordetella, class: 'col-6' %>
       </div>
 
       <div class="form-group row">
-        <%= f.label :heartworm_preventative, "Heartworm Preventative", class: 'control-label col-6' %>
+        <%= f.label :heartworm_preventative, "Heartworm Preventative", class: 'col-form-label col-4' %>
         <%= f.text_field :heartworm_preventative, class: 'col-6' %>
       </div>
 
       <div class="form-group row">
-        <%= f.label :flea_tick_preventative, "Flea/Tick Preventative", class: 'control-label col-6' %>
+        <%= f.label :flea_tick_preventative, "Flea/Tick Preventative", class: 'col-form-label col-4' %>
         <%= f.text_field :flea_tick_preventative, class: 'col-6' %>
       </div>
     </div>
@@ -289,7 +265,7 @@
         <%= f.fields_for :attachments do |af| %>
           <% unless af.object.new_record? %>
             <div class="form-group">
-              <label class="control-label" for="delAttachment">
+              <label class="col-form-label" for="delAttachment">
                 <i class="icon-file"></i><%= link_to af.object.attachment_file_name, af.object.download_url %>
             </label>
             <% if can_edit_dogs? %>

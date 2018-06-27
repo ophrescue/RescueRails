@@ -152,12 +152,12 @@ feature 'edit a dog', js: true do
         fill_in(:dog_flea_tick_preventative, with: 'born in a barn')
         check(:dog_medical_review_complete)
         fill_in(:dog_behavior_summary, with: 'words describing behaviour')
-        all(:xpath, './/input[contains(@id,"dog_photos")]').first.set('')
-        expect(1).to eq 0 # to flag the tests to be written for:
-                          # photos
-                          # documents
+        all(:xpath, './/input[contains(@id,"dog_photos")]').first.set(Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s)
+        all(:xpath, './/input[contains(@id,"dog_attachments")]').first.set(Rails.root.join('spec','fixtures', 'doc', 'sample.docx').to_s)
 
-        click_button('Submit')
+        # 5 size variants created from 1 image upload, see app/models/photo.rb
+        expect{ click_button('Submit') }.to change{Dir.glob(Rails.root.join('public','system','test','dog_photo','*')).length}.by(5).
+                                        and change{Dir.glob(Rails.root.join('public','system','test','attachment','*')).length}.by(1)
 
         saved_attributes = Dog.first
         expect(saved_attributes.name).to eq 'newname'
@@ -202,6 +202,7 @@ feature 'edit a dog', js: true do
         expect(saved_attributes.flea_tick_preventative).to eq 'born in a barn'
         expect(saved_attributes.medical_review_complete).to eq true
         expect(saved_attributes.behavior_summary).to eq 'words describing behaviour'
+        expect(saved_attributes.photos.length).to eq 1
 
         expect(page_heading).to match 'newname'
         expect(page_heading).to match '555'
@@ -246,6 +247,8 @@ feature 'edit a dog', js: true do
         expect(page.find('#flea_tick_preventative').text).to eq 'born in a barn'
         expect(page.find('#medical_review_complete')).to have_check_icon
         expect(page.find('#behavior_summary').text).to eq 'words describing behaviour'
+        expect(page.all('#galleria .galleria-stage .galleria-image img').length).to eq 1
+        expect(page.all('#galleria .galleria-thumbnails-container .galleria-image img').length).to eq 1
       end
     end
 

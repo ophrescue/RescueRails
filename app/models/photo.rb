@@ -42,8 +42,8 @@ class Photo < ApplicationRecord
                    thumb: 'x195',
                    minithumb: 'x64#' },
             s3_permissions: "public-read",
-            path: ":rails_root/public/system/dog_photo/:hash.:extension",
-            url: "/system/dog_photo/:hash.:extension",
+            path: ":rails_root/public/system/#{Rails.env}/dog_photo/:hash.:extension",
+            url: "/system/#{Rails.env}/dog_photo/:hash.:extension",
             hash_secret: HASH_SECRET,
             preserve_files: !Rails.env.production? # in dev and test we only read AWS, never write/delete
 

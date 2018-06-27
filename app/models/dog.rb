@@ -254,7 +254,7 @@ class Dog < ApplicationRecord
 
   def update_adoption_date
     return unless status_changed?
-    return unless status != 'completed'
+    return if status == 'completed'
 
     self.adoption_date = nil
     self.adoption_date = Date.today() if adopted?

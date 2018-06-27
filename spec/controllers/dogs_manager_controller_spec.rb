@@ -182,12 +182,13 @@ describe DogsManagerController, type: :controller do
 
   describe 'PUT update' do
     let(:test_dog) { create(:dog, name: 'Old Dog Name', behavior_summary: 'Mean Doggy') }
-    let(:request) { -> { put :update, params: { id: test_dog.id, dog: attributes_for(:dog, name: 'New Dog Name', behavior_summary: 'This is a good doggy') } } }
+    let(:request) { -> { put :update, params: { id: test_dog.id, dog: { adoption_date: "2018-8-28", name: 'New Dog Name', behavior_summary: 'This is a good doggy'} } } }
     include_context 'signed in admin'
 
     context 'logged in as admin' do
       it 'updates the dog name' do
         expect { request.call }.to change { test_dog.reload.name }.from('Old Dog Name').to('New Dog Name')
+                               .and change { test_dog.adoption_date }.from(nil).to(Date.new(2018,8,28))
       end
 
       it 'redirects to dog#show' do

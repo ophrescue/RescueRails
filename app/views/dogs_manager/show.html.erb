@@ -7,11 +7,11 @@
   <div class="row title_row justify-content-between">
     <div class='col-12 col-sm-auto'>
       <h1>#<%=@dog.tracking_id%> <%= @dog.name %>:</h1>
-      <span><%= @dog.size.titleize %>-size,</span>
-      <span><%= @dog.gender %>,</span>
-      <span class='age'><%= @dog.age ? @dog.age.titleize : " " %></span>
-      <span class='breed'><%= @dog.breeds.join(" x ").html_safe %></span>,
-      <span class='status'><%= @dog.status.titleize %></span >
+      <span id='size'><%= @dog.size.titleize %>-size,</span>
+      <span id='gender'><%= @dog.gender %>,</span>
+      <span id='age'><%= @dog.age ? @dog.age.titleize : " " %></span>
+      <span id='breed'><%= @dog.breeds.join(" x ").html_safe %></span>,
+      <span id='status'><%= @dog.status.titleize %></span >
     </div>
     <div class='col-12 col-sm-1 manager_links'>
       <% if can_edit_dogs? || fostering_dog? %>
@@ -38,69 +38,75 @@
     <div class="col-12 col-sm-4">
       <dl class='row' id='details'>
         <dt>Original Name</dt>
-        <dd><%= @dog.original_name || 'unknown' %></dd>
+        <dd id='original_name'><%= @dog.original_name || 'unknown' %></dd>
         <dt>Microchip</dt>
-        <dd><%= @dog.microchip || 'unknown' %></dd>
+        <dd id='microchip'><%= @dog.microchip || 'unknown' %></dd>
         <dt>Adoption Fee</dt>
-        <dd><%= number_to_currency(@dog.fee, precision: 0) || 'unknown' %></dd>
+        <dd id='fee'><%= number_to_currency(@dog.fee, precision: 0) || 'unknown' %></dd>
         <dt>OK with dogs?</dt>
-        <dd><%= (!@dog.no_dogs).as_icon  %></dd>
+        <dd id='dogs_ok'><%= (!@dog.no_dogs).as_icon  %></dd>
         <dt>OK with cats?</dt>
-        <dd><%= (!@dog.no_cats).as_icon  %></dd>
+        <dd id='cats_ok'><%= (!@dog.no_cats).as_icon  %></dd>
         <dt>OK with kids?</dt>
-        <dd><%= (!@dog.no_kids).as_icon  %></dd>
+        <dd id='kids_ok'><%= (!@dog.no_kids).as_icon  %></dd>
         <dt>Medical Review Complete</dt>
-        <dd><%= @dog.medical_review_complete.as_icon %></dd>
+        <dd id='medical_review_complete'><%= @dog.medical_review_complete.as_icon %></dd>
         <dt>Has Medical Need</dt>
-        <dd><%= @dog.has_medical_need.as_icon %></dd>
+        <dd id='has_medical_need'><%= @dog.has_medical_need.as_icon %></dd>
+        <dt>Is Special Needs</dt>
+        <dd id='special_needs'><%= @dog.is_special_needs.as_icon %></dd>
         <dt>Needs Spay or Neuter</dt>
-        <dd><%= (!@dog.is_altered).as_icon %></dd>
+        <dd id='not_altered'><%= (!@dog.is_altered).as_icon %></dd>
         <dt>High Priority</dt>
-        <dd><%= @dog.is_high_priority.as_icon %></dd>
+        <dd id='is_high_priority'><%= @dog.is_high_priority.as_icon %></dd>
         <dt>Needs Photos</dt>
-        <dd><%= @dog.needs_photos.as_icon %></dd>
+        <dd id='needs_photos'><%= @dog.needs_photos.as_icon %></dd>
         <dt>Has Behavior Problem</dt>
-        <dd><%= @dog.has_behavior_problem.as_icon %></dd>
+        <dd id='has_behaviour_problem'><%= @dog.has_behavior_problem.as_icon %></dd>
         <dt>Needs Foster</dt>
-        <dd><%= @dog.is_high_priority.as_icon %></dd>
+        <dd id='needs_foster'><%= @dog.needs_foster.as_icon %></dd>
         <dt>Foster</dt>
-        <dd><%= render partial: 'foster_details' %></dd>
+        <dd id='foster'><%= render partial: 'foster_details' %></dd>
         <dt>Adoption Coordinator</dt>
-        <dd><%= render partial: 'adoption_coordinator' %></dd>
+        <dd id='adoption_coordinator'><%= render partial: 'adoption_coordinator' %></dd>
+        <dt>Sponsor</dt>
+        <dd id='sponsored_by'><%= @dog.sponsored_by %></dd>
         <dt>Source Shelter</dt>
-        <dd><%= @dog.shelter&.name || 'unknown' %></dd>
+        <dd id='shelter'><%= @dog.shelter&.name || 'unknown' %></dd>
         <dt>Adopters</dt>
-        <dd><%= render(partial: 'adopter', collection: @dog.adopters) || "no adopters" %></dd>
+        <dd id='adopters'><%= render(partial: 'adopter', collection: @dog.adopters) || "no adopters" %></dd>
         <dt>Available on</dt>
-        <dd><%= @dog.available_on_dt || 'unknown' %></dd>
+        <dd id='available_on_dt'><%= @dog.available_on_dt || 'unknown' %></dd>
         <dt>Intake date</dt>
-        <dd><%= @dog.intake_dt || 'unknown' %></dd>
+        <dd id='intake_dt'><%= @dog.intake_dt || 'unknown' %></dd>
         <dt>Adopted on</dt>
-        <dd><%= @dog.adoption_date || 'unknown' %></dd>
+        <dd id='adoption_date'><%= @dog.adoption_date || 'unknown' %></dd>
         <dt>Ads</dt>
         <dd>
           <div id='adoptapet_ad'><%= @adoptapet %></div>
           <div><a href=<%= PETFINDER::OPH_PAGE %>>Petfinder</a></div>
-          <div><%= link_to_if @dog.craigslist_ad_url, "Craigslist", @dog.craigslist_ad_url do "Needs Craigslist ad" end %></div>
+          <div id='craigslist_ad_url'>
+            <%= link_to_if @dog.craigslist_ad_url, "Craigslist", @dog.craigslist_ad_url do "Needs Craigslist ad" end %>
+          </div>
         </dd>
         <dt>Up-to-date on shots</dt>
-        <dd><%= @dog.is_uptodateonshots.as_icon %></dd>
+        <dd id='is_uptodateonshots'><%= @dog.is_uptodateonshots.as_icon %></dd>
         <dt>First shots</dt>
-        <dd><%= @dog.first_shots || x_icon %></dd>
+        <dd id='first_shots'><%= @dog.first_shots || x_icon %></dd>
         <dt>Second shots</dt>
-        <dd><%= @dog.second_shots || x_icon %></dd>
+        <dd id='second_shots'><%= @dog.second_shots || x_icon %></dd>
         <dt>Third shots</dt>
-        <dd><%= @dog.third_shots || x_icon %></dd>
+        <dd id='third_shots'><%= @dog.third_shots || x_icon %></dd>
         <dt>Rabies</dt>
-        <dd><%= @dog.rabies || x_icon %></dd>
+        <dd id='rabies'><%= @dog.rabies || x_icon %></dd>
         <dt>4DX</dt>
-        <dd><%= @dog.vac_4dx || x_icon %></dd>
+        <dd id='vac_4dx'><%= @dog.vac_4dx || x_icon %></dd>
         <dt>Bordetella</dt>
-        <dd><%= @dog.bordetella || x_icon %></dd>
+        <dd id='bordetella'><%= @dog.bordetella || x_icon %></dd>
         <dt>Heartworm Preventative</dt>
-        <dd><%= @dog.heartworm_preventative || x_icon %></dd>
+        <dd id='heartworm_preventative'><%= @dog.heartworm_preventative || x_icon %></dd>
         <dt>Flea/Tick Preventative</dt>
-        <dd><%= @dog.flea_tick_preventative || x_icon %></dd>
+        <dd id='flea_tick_preventative'><%= @dog.flea_tick_preventative || x_icon %></dd>
       </dl>
       <div class="d-block d-sm-none">
         <%= render partial: 'comments_audits' %>

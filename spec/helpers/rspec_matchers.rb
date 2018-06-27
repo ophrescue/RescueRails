@@ -18,3 +18,15 @@ RSpec::Matchers.define :be_sorted do |expected|
     matches.all?
   end
 end
+
+RSpec::Matchers.define :have_check_icon do
+  match do |actual|
+    actual.has_css? '.fa-check'
+  end
+end
+
+RSpec::Matchers.define :have_x_icon do
+  match do |actual|
+    actual.has_css? '.fa-times'
+  end
+end

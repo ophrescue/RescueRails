@@ -58,10 +58,15 @@ describe Dog do
     let(:dog) { create(:dog, :adoptable) }
 
     context 'status did not change' do
-      it 'does not update the date' do
+      it 'does not update the date if none is provided' do
         old_date = dog.adoption_date
         dog.update_attribute(:name, "new_#{dog.name}")
         expect(dog.adoption_date).to eq(old_date)
+      end
+
+      it 'updates the date to the value provided ' do
+        dog.update_attribute(:adoption_date, '2024-8-19')
+        expect(dog.adoption_date).to eq(Date.new(2024,8,19))
       end
     end
 

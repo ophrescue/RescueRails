@@ -376,6 +376,8 @@ GEM
     stackprof (0.2.12)
     strip_attributes (1.8.0)
       activemodel (>= 3.0, < 6.0)
+    stripe (3.17.0)
+      faraday (~> 0.10)
     sucker_punch (1.5.1)
       celluloid (= 0.16.0)
     term-ansicolor (1.6.0)
@@ -477,6 +479,7 @@ DEPENDENCIES
   sass-rails
   stackprof
   strip_attributes
+  stripe
   sucker_punch (~> 1.5.1)
   to_xls
   uglifier

@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_06_150422) do
+ActiveRecord::Schema.define(version: 2018_06_30_162040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adopter_waitlists", id: :serial, force: :cascade do |t|
+    t.integer "rank"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "adopter_id"
+    t.integer "waitlist_id"
+  end
 
   create_table "adopters", id: :serial, force: :cascade do |t|
     t.string "name"
@@ -220,6 +228,8 @@ ActiveRecord::Schema.define(version: 2018_06_06_150422) do
     t.string "flea_tick_preventative"
     t.boolean "medical_review_complete", default: false
     t.text "behavior_summary"
+    t.integer "waitlist_id"
+    t.integer "rank"
     t.index ["age"], name: "index_dogs_on_age"
     t.index ["coordinator_id"], name: "index_dogs_on_coordinator_id"
     t.index ["foster_id"], name: "index_dogs_on_foster_id"
@@ -230,6 +240,18 @@ ActiveRecord::Schema.define(version: 2018_06_06_150422) do
     t.index ["shelter_id"], name: "index_dogs_on_shelter_id"
     t.index ["size"], name: "index_dogs_on_size"
     t.index ["tracking_id"], name: "index_dogs_on_tracking_id", unique: true
+    t.index ["waitlist_id"], name: "index_dogs_on_waitlist_id"
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.integer "amount"
+    t.string "zip"
+    t.string "card_token"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "emails", id: :serial, force: :cascade do |t|
@@ -395,6 +417,13 @@ ActiveRecord::Schema.define(version: 2018_06_06_150422) do
     t.index ["mentor_id"], name: "index_users_on_mentor_id"
     t.index ["name"], name: "index_users_on_name"
     t.index ["remember_token"], name: "index_users_on_remember_token"
+  end
+
+  create_table "waitlists", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

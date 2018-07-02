@@ -30,3 +30,9 @@ RSpec::Matchers.define :have_x_icon do
     actual.has_css? '.fa-times'
   end
 end
+
+RSpec::Matchers.define :have_class do |expected|
+  match do |actual|
+    actual[:class].include? expected
+  end
+end

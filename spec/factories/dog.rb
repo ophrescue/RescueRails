@@ -3,7 +3,6 @@ FactoryBot.define do
     tracking_id { Dog.next_tracking_id }
     name {
       until(nn = Faker::Dog.name; !Dog.pluck(:name).include?(nn))
-        puts nn
       end
       # it's a workaround for TravisCI sorting weirdness.
       # It doesn't handle spaces inside names as expected
@@ -63,13 +62,13 @@ FactoryBot.define do
 
     trait :with_photos do
       after(:create) do |dog|
-        `mkdir -p #{Rails.root.join("public","system","dog_photo")}`
+        `mkdir -p #{Rails.root.join("public","system","test","dog_photo")}`
         3.times do |i|
           photo = FactoryBot.create(:photo, dog: dog, is_private: false, position: i+1 )
           ["medium", "original"].each do |style|
             data = "photos/photos/#{photo.id}/#{style}/"
             hash = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, Photo::HASH_SECRET, data)
-            filepath = "public/system/dog_photo/#{hash}.jpeg"
+            filepath = "public/system/test/dog_photo/#{hash}.jpeg"
             image_source = Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s
             `cp #{image_source} #{Rails.root.join(filepath)}`
           end

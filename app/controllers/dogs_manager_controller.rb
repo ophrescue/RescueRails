@@ -98,6 +98,7 @@ class DogsManagerController < DogsController
       redirect_to dogs_manager_path(@dog)
     else
       load_instance_variables
+      flash.now[:error] = 'form could not be saved, see errors below'
       render 'edit'
     end
   end
@@ -150,8 +151,6 @@ class DogsManagerController < DogsController
   end
 
   def load_instance_variables
-    5.times { @dog.photos.build }
-    5.times { @dog.attachments.build }
     @foster_users = User.where(is_foster: true).order("name")
     @coordinator_users = User.where(edit_all_adopters: true).order("name")
     @shelters = Shelter.order("name")

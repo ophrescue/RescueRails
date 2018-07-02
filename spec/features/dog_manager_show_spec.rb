@@ -63,6 +63,7 @@ feature 'visit dog show page', js: true do
 
   context 'dog attributes unpopulated' do
     let(:dog){ create(:dog,
+                      status: 'adoption pending',
                       original_name: nil,
                       microchip: nil,
                       fee: nil,

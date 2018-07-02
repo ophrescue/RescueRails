@@ -16,11 +16,12 @@ RescueRails::Application.routes.draw do
 
   resources :dogs, controller: 'dogs_gallery', only: %i[index show]
 
+  resources :photos do
+    collection { post :sort }
+  end
+
   resources :dogs_manager do
     resources :comments
-    resources :photos do
-      collection { post :sort }
-    end
     resources :adoptions
   end
 

@@ -1,18 +1,19 @@
-<%= form_for @dog, url: @dog.new_record? ? dogs_manager_index_path : dogs_manager_path(@dog), html: { multipart: true, class:'container', id:'dog_form' } do |f| %>
+<%= form_for @dog, url: @dog.new_record? ? dogs_manager_index_path : dogs_manager_path(@dog), html: { multipart: true, class:'container needs-validation', id:'dog_form', novalidate: true } do |f| %>
   <div class="row">
     <div class="col-6" id='left-column'>
-      <%= render 'shared/error_messages', :object => f.object %>
 
       <% if !@dog.new_record? %>
         <div class="form-group row">
-          <%= f.label :tracking_id, "OPH Tracking ID", class: 'col-form-label col-form-label-sm col-4' %>
-          <%= f.text_field :tracking_id, disabled: !can_edit_dogs?, class: 'form-control form-control-sm col-6' %>
+          <%= f.label :tracking_id, "OPH Tracking ID", class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true %>
+          <%= f.text_field :tracking_id, disabled: !can_edit_dogs?, class: "form-control form-control-sm col-6 #{validation_class_for(:tracking_id)}", pattern:'\s{0,}\d{1,20}\s{0,}', 'data-bootstrap41': true %>
+          <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(:tracking_id) %></div>
         </div>
       <% end %>
 
       <div class="form-group row">
-        <%= f.label :name, class: 'col-form-label col-form-label-sm col-4'  %>
-        <%= f.text_field :name, class: 'form-control form-control-sm col-6' %>
+        <%= f.label :name, class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true %>
+        <%= f.text_field :name, class: "form-control form-control-sm col-6 #{validation_class_for(:name) }", required: true, pattern:'\w{1,}', 'data-bootstrap41': true %>
+        <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(:name) %></div>
       </div>
 
       <div class="form-group row">
@@ -36,10 +37,11 @@
           <div class="input-group-prepend">
             <span class="input-group-text" >$</span>
           </div>
-          <%= f.text_field :fee, class: 'form-control form-control-sm', disabled: !can_edit_dogs? %>
+          <%= f.text_field :fee, class: 'form-control form-control-sm', disabled: !can_edit_dogs?, pattern:'^\s{0,}\w{1,10}\s{0,}$' %>
           <div class="input-group-append">
             <span class="input-group-text" >.00</span>
           </div>
+          <div class='invalid-feedback'>must be a whole number, with no letters</div>
         </div>
       </div>
 
@@ -78,17 +80,20 @@
 
       <div class="form-group row">
         <%= f.label :intake_dt, "Intake Date", class: 'col-form-label col-form-label-sm col-4'  %>
-        <%= f.text_field :intake_dt, class: 'col-6' %>
+        <%= f.text_field :intake_dt, class: 'form-control form-control-sm col-6' %>
+        <div class="form-text text-muted col-6 offset-4 small">yyyy-mm-dd</div>
       </div>
 
       <div class="form-group row">
         <%= f.label :available_on_dt, "Available On Date", class: 'col-form-label col-form-label-sm col-4'  %>
         <%= f.text_field :available_on_dt, class: 'form-control form-control-sm col-6' %>
+        <div class="form-text text-muted col-6 offset-4 small">yyyy-mm-dd</div>
       </div>
 
       <div class="form-group row">
         <%= f.label :adoption_date, "Adoption Date", class: 'col-form-label col-form-label-sm col-4'  %>
         <%= f.text_field :adoption_date, class: 'form-control form-control-sm col-6' %>
+        <div class="form-text text-muted col-6 offset-4 small">yyyy-mm-dd</div>
       </div>
 
       <div class="form-group row">
@@ -98,7 +103,8 @@
 
       <div class="form-group row">
         <%= f.label :craigslist_ad_url, "Craigslist Ad Link", class: 'col-form-label col-form-label-sm col-4'  %>
-        <%= f.text_field :craigslist_ad_url, class: 'form-control form-control-sm col-6' %>
+        <%= f.text_field :craigslist_ad_url, class: 'form-control form-control-sm col-6', pattern:'^http://.*$' %>
+        <div class='invalid-feedback col-sm-6 offset-4'>please include 'http://'</div>
       </div>
     </div>
 
@@ -218,81 +224,31 @@
     </div>
   </div>
 
-  <div class="row ">
-    <div class="col-12">
-      <h2>Photos</h2>
-      <% if !@dog.new_record? %>
-        <table class="table table-striped">
-          <tbody id="photos_sort" data-update-url="<%= sort_dogs_manager_photos_url(@dog) %>">
-            <%= f.fields_for :photos do |photo| %>
-              <% unless photo.object.new_record? %>
-                <%= content_tag_for(:tr, photo.object) do %>
-                  <td class="sort-handle"><i class="fa fa-sort fa-5x"></i></td>
-                  <td>
-                    <div class="thumb">
-                      <%= link_to image_tag(photo.object.photo.url(:thumb)), photo.object.photo.url(:original) %>
-                    </div>
-                  </td>
-                  <td>
-                    <label class="checkbox ">
-                      <%= photo.check_box :is_private %>
-                      <span>Private Photo</span>
-                    </label>
-                    <label class="checkbox ">
-                      <%= photo.check_box :_destroy %>
-                      <span>Delete Photo</span>
-                    </label>
-                  </td>
-                <% end %>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
-      <% end %>
-      <h3>New Photos</h3>
-      <div class="form-group">
-        <%= f.fields_for :photos do |photo| %>
-          <% if photo.object.new_record? %>
-            <%= photo.file_field :photo %><br />
-          <% end %>
-        <% end %>
-      </div>
+  <div class='row'>
+    <h2 class='col-12'>Photos</h2>
+  </div>
+  <div class="row" id='manage_photos'>
+    <%= render_unless @dog.new_record?, partial: 'dog_photos', locals: {f:f} %>
+  </div>
+  <div class='row'>
+    <div class='col-2'>
+      <a href='#' id='add_photo' class='btn btn-sm btn-success'>Add a Photo</a>
     </div>
+    <div class="form-group new_photos col-8"></div>
   </div>
 
-  <div class="row ">
-    <div class="col-12">
-      <h2>Documents</h2>
-      <div class="span5">
-        <h3>New Documents</h3>
-        <div class="form-group">
-          <%= f.fields_for :attachments do |af| %>
-            <% if af.object.new_record? %>
-              <%= af.file_field :attachment %><br />
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-      <div class="span5">
-        <h3>Existing Documents</h3>
 
-        <%= f.fields_for :attachments do |af| %>
-          <% unless af.object.new_record? %>
-            <div class="form-group">
-              <label class="col-form-label col-form-label-sm" for="delAttachment">
-                <i class="icon-file"></i><%= link_to af.object.attachment_file_name, af.object.download_url %>
-            </label>
-            <% if can_edit_dogs? %>
-              <label class="checkbox">
-                <%= af.check_box :_destroy, :id => "delAttachment" %>
-                <span>Delete <%= af.object.attachment_file_name %></span>
-              </label>
-            <% end %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
+  <div class='row'>
+    <h2 class='col-12'>Documents</h2>
+  </div>
+  <div class="row" id='manage_attachments'>
+    <%= render_unless @dog.new_record?, partial: 'dog_attachments', locals: {f:f} %>
+  </div>
+  <div class='row'>
+    <div class='col-2'>
+    <a href='#' id='add_attachment' class='btn btn-sm btn-success'>Add a Document</a>
     </div>
+    <div class='form-group new_attachments col-8'></div>
   </div>
 
   <div class="form-group ">
@@ -321,5 +277,114 @@
   <div class="actions well">
     <%= f.submit "Submit", class: 'btn btn-primary mr-20' %>
     <%= link_to 'Cancel', dogs_manager_index_path, class: 'btn btn-danger' %>
+    <div class='invalid-feedback'>form cannot be saved due to errors</div>
   </div>
 <% end %>
+
+<script type='text/javascript'>
+// form validation
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+          check_inputs_validity();
+        }, false);
+      });
+    }, false);
+  })();
+  $(function(){
+    check_inputs_validity = function(){
+      if ($('form.was-validated input:invalid').length > 0) {
+        $('.actions').addClass('form-errors')
+      }else{
+        $('.actions').removeClass('form-errors')
+      }
+    }
+    $('form input').on({change: check_inputs_validity, keyup: check_inputs_validity })
+  })
+</script>
+
+<script type='html/template' id='new_attachment_input'>
+  <div style='height:0px;' class='new_file'>
+    <input type='file' name='dog[${type}_attributes][${index}][${singular_type}]' id='new_dog_${singular_type}'/>
+    <a href='#' id='remove_${singular_type}'>remove</a>
+  </div>
+</script>
+
+<script type='text/javascript'>
+// add/remove new photo or document inputs
+  var new_attachment_input = _.template($('#new_attachment_input').html())
+  var last_photos_index, last_attachments_index
+  ["photos", "attachments"].forEach(function(type){
+    var singular_type = type.replace(/s$/,'');
+    var indexes = $.map($(`#manage_${type} .${singular_type}`), function(el){ return $(el).data('index')}) 
+    if(_.isEmpty(indexes)){
+      this[`last_${type}_index`] = -1
+    }else{
+      this[`last_${type}_index`] = _.max(indexes)
+    }
+  })
+  var add_file_field_for = function(type){
+    var unconfigured_inputs_count = _.filter($(`.new_${type} input`),function(input){return _.isEmpty(input.value)}).length;
+    var all_inputs_configured = unconfigured_inputs_count == 0;
+    var file_inputs_count = $(`.new_${type} input`).length;
+    var no_inputs_displayed = file_inputs_count == 0;
+    var inputs_displayed = !no_inputs_displayed;
+    var singular_type = type.replace(/s$/,'');
+    if(no_inputs_displayed || (inputs_displayed && all_inputs_configured)){
+      var new_input = new_attachment_input({type: type, singular_type: singular_type, index: ++this[`last_${type}_index`]})
+      $(new_input).appendTo($(`.new_${type}`)).animate({height: '20px'}, 100);
+    }
+  }
+
+  $(function(){
+    $('#add_photo').on('click', function(){
+      event.preventDefault();
+      event.stopPropagation();
+      add_file_field_for('photos');
+    });
+
+    $('#add_attachment').on('click', function(){
+      event.preventDefault();
+      event.stopPropagation();
+      add_file_field_for('attachments');
+    });
+
+    $('.new_photos').on('click','#remove_photo', function(){
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).parent().animate({height: '0px'},100,function(){
+        this.remove()
+        if($('.new_photos .new_file').length==0){ $('#add_photo').html("Add a Photo") }
+      });
+    })
+
+    $('.new_attachments').on('click','#remove_attachment', function(){
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).parent().animate({height: '0px'},100,function(){
+        this.remove()
+        if($('.new_attachments .new_file').length==0){ $('#add_attachment').html("Add a Document") }
+      });
+    })
+
+    $('.new_photos').on('change','input', function(){
+      $('#add_photo').html("Add another Photo")
+    })
+
+    $('.new_attachments').on('change','input',function(){
+      $('#add_attachment').html("Add another Document")
+    })
+
+  })
+</script>
+

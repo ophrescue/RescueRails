@@ -38,6 +38,11 @@ html {
   }
 }
 
+// in bs41, the red color is assigned to alert-danger
+.alert-error {
+  @extend .alert-danger;
+}
+
 //@include media-breakpoint-up(md) {
   //html {
     //font-size: 1.4rem;

@@ -55,6 +55,8 @@ require 'rails_helper'
 
 describe Dog do
   describe '.update_adoption_date' do
+    # tests for the update_adoption_date callback simply document the behaviour found in the code
+    # without understanding the intent or validating correctness
     let(:dog) { create(:dog, :adoptable) }
 
     context 'status did not change' do
@@ -75,6 +77,11 @@ describe Dog do
         old_date = dog.adoption_date
         dog.update_attribute(:status, 'completed')
         expect(dog.adoption_date).to eq(old_date)
+      end
+
+      it 'updates the adoption date if one is provided by the user' do
+        dog.update_attributes(status: 'completed', adoption_date: Date.new(2000,1,1))
+        expect(dog.adoption_date).to eq(Date.new(2000,1,1))
       end
     end
 

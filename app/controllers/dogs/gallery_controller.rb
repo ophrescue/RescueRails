@@ -62,7 +62,7 @@
 #  medical_summary      :text
 #
 
-class DogsGalleryController < DogsController
+class Dogs::GalleryController < Dogs::DogsBaseController
 
   before_action :load_dog, only: %i(show)
   before_action :select_bootstrap41

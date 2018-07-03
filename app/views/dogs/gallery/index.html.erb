@@ -16,7 +16,7 @@
 
   <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
   <div class="row gallery" id="dogs">
-    <%= render partial: 'dogs_gallery/dog', collection: @dogs %>
+    <%= render partial: 'dogs/gallery/dog', collection: @dogs %>
   </div>
   <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 

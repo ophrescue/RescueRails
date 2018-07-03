@@ -47,7 +47,7 @@
 #  medical_summary      :text
 require 'rails_helper'
 
-describe DogsManagerController, type: :controller do
+describe Dogs::ManagerController, type: :controller do
 
   describe 'GET #index' do
     context 'user is logged in' do

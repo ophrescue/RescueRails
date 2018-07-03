@@ -48,7 +48,7 @@
 #  medical_summary      :text
 require 'rails_helper'
 
-describe DogsGalleryController, type: :controller do
+describe Dogs::GalleryController, type: :controller do
   describe 'GET #index' do
     let!(:adoptable_dog) { create(:dog, status: 'adoptable', tracking_id: 102) }
     let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending', tracking_id: 105) }

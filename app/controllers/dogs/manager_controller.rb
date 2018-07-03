@@ -62,7 +62,7 @@
 #  medical_summary      :text
 #
 
-class DogsManagerController < DogsController
+class Dogs::ManagerController < Dogs::DogsBaseController
   helper_method :fostering_dog?
 
   autocomplete :breed, :name, full: true

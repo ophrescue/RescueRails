@@ -1,6 +1,6 @@
 <%= form_for @dog, url: @dog.new_record? ? dogs_manager_index_path : dogs_manager_path(@dog), html: { multipart: true, class:'container needs-validation', id:'dog_form', novalidate: true } do |f| %>
   <div class="row">
-    <div class="col-6" id='left-column'>
+    <div class="col-12 col-md-6" id='left-column'>
 
       <% if !@dog.new_record? %>
         <div class="form-group row">
@@ -110,7 +110,7 @@
       </div>
     </div>
 
-    <div class="col-6" id='right-column'>
+    <div class="col-12 col-md-6" id='right-column'>
       <div class="form-group row">
         <%= f.label :foster_id, "Foster assignment", class: 'col-form-label col-form-label-sm col-4' %>
         <%= f.collection_select(:foster_id, @foster_users, :id, :name, {include_blank: '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
@@ -233,10 +233,10 @@
     <%= render_unless @dog.new_record?, partial: 'dog_photos', locals: {f:f} %>
   </div>
   <div class='row'>
-    <div class='col-2'>
+    <div class='col-12 col-md-2'>
       <a href='#' id='add_photo' class='btn btn-sm btn-success'>Add a Photo</a>
     </div>
-    <div class="form-group new_photos col-8"></div>
+    <div class="form-group new_photos col-12 col-md-8"></div>
   </div>
 
 
@@ -247,24 +247,30 @@
     <%= render_unless @dog.new_record?, partial: 'dog_attachments', locals: {f:f} %>
   </div>
   <div class='row'>
-    <div class='col-2'>
+    <div class='col-12 col-md-2'>
     <a href='#' id='add_attachment' class='btn btn-sm btn-success'>Add a Document</a>
     </div>
-    <div class='form-group new_attachments col-8'></div>
+    <div class='form-group new_attachments col-12 col-md-8'></div>
   </div>
 
-  <div class="form-group ">
-    <h2>Public Description</h2>
+  <div class='row'>
+    <h2 class='col-12'>Public Description</h2>
+  </div>
+  <div class="row form-group ">
     <%= f.text_area :description, class: "required input-xxlarge form-control form-control-sm", rows: "8" %>
   </div>
 
-  <div class="form-group ">
-    <h2>Medical Summary</h2>
+  <div class='row'>
+    <h2 class='col-12'>Medical Summary</h2>
+  </div>
+  <div class="row form-group ">
     <%= f.text_area :medical_summary, class: "input-xxlarge form-control form-control-sm", rows: "8", disabled: !can_manage_medical_behavior_summaries? %>
   </div>
 
-  <div class="form-group ">
-    <h2>Behavior Summary</h2>
+  <div class='row'>
+    <h2 class='col-12'>Behavior Summary</h2>
+  </div>
+  <div class="row form-group ">
     <%= f.text_area :behavior_summary, class: "input-xxlarge form-control form-control-sm", rows: "8", disabled: !can_manage_medical_behavior_summaries? %>
   </div>
 
@@ -306,9 +312,10 @@
 </script>
 
 <script type='html/template' id='new_attachment_input'>
-  <div style='height:0px;' class='new_file'>
-    <input type='file' name='dog[${type}_attributes][${index}][${singular_type}]' id='new_dog_${singular_type}'/>
-    <a href='#' id='remove_${singular_type}'>remove</a>
+  <div style='height:0px;' class='new_file row mb-0 mb-sm-3 mt-3 mt-sm-0'>
+    <input type='file' name='dog[${type}_attributes][${index}][${singular_type}]' class='col-10 col-md-6' id='new_dog_${singular_type}'/>
+    <a href='#' id='remove_${singular_type}' class='col-md-6 d-none d-md-inline'>remove</a>
+    <a href='#' id='remove_${singular_type}' class='col-2 d-inline d-md-none'><i class='fa fa-lg fa-times text-danger'></i></a>
   </div>
 </script>
 
@@ -334,7 +341,7 @@
     var singular_type = type.replace(/s$/,'');
     if(no_inputs_displayed || (inputs_displayed && all_inputs_configured)){
       var new_input = new_attachment_input({type: type, singular_type: singular_type, index: ++this[`last_${type}_index`]})
-      $(new_input).appendTo($(`.new_${type}`)).animate({height: '20px'}, 100);
+      $(new_input).appendTo($(`.new_${type}`)).animate({height: '28px'}, 100);
     }
   }
 

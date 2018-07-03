@@ -6,13 +6,13 @@
       </div>
     </div>
   <% end %>
-  <div class="row title_row">
-    <div class="col-12 col-md-8">
+  <div class="row title_row align-items-center">
+    <div class="col-8 col-md-8">
       <h1>Dog Manager</h1>
     </div>
     <% if can_add_dogs? %>
-      <div class="col-6 col-md-2 mb-2 mb-sm-0">
-        <%= link_to "Add a Dog", new_dogs_manager_path, :class => "btn btn-sm btn-primary" %>
+      <div class="col-2 col-md-2 mb-2 mb-sm-0">
+        <%= link_to "Add a Dog", new_dogs_manager_path, :class => "btn btn-sm btn-success" %>
       </div>
     <% end %>
   </div>

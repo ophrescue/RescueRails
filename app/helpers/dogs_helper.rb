@@ -14,6 +14,8 @@ module DogsHelper
       "cannot be blank"
     when :tracking_id
       "must be numeric"
+    when :status
+      "must be selected"
     end
   end
 

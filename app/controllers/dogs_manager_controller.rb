@@ -112,6 +112,7 @@ class DogsManagerController < DogsController
       redirect_to dogs_manager_index_path
     else
       load_instance_variables
+      flash.now[:error] = 'form could not be saved, see errors below'
       render 'new'
     end
   end

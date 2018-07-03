@@ -63,7 +63,7 @@ feature 'edit a dog', js: true do
 
       it 'should show values instead of inputs for medical summary and behavior summary' do
         disallowed_fields.each do |field|
-          expect(page).not_to have_field("dog_#{field}")
+          expect(page).to have_field("dog_#{field}", disabled: true)
         end
       end
     end

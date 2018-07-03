@@ -36,9 +36,13 @@
     }
   }
 
+  textarea:disabled {
+    cursor: not-allowed;
+  }
 
-// mimic the styling of the form-group feedback block in
-// a block attached to the submit button
+
+  // mimic the styling of the form-group feedback block in
+  // a block attached to the submit button
   .actions .invalid-feedback {
     display: none;
   }

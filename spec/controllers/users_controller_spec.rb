@@ -130,6 +130,27 @@ describe UsersController, type: :controller do
         get :index, params: { active_volunteer: true }
         expect(assigns(:users)).to match_array([smith, admin, active_user])
       end
+
+      it 'returns excel list of users' do
+        get :index, format: :xls
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'logged in as an active user' do
+      before :each do
+        allow(controller).to receive(:current_user) { active_user }
+      end
+
+      it 'can view users index' do
+        get :index
+        expect(assigns(:users)).to match_array([jones, admin, active_user, inactive_user])
+      end
+
+      it 'cannot view excel xls export' do
+        get :index, format: :xls
+        expect(response).to have_http_status(403)
+      end
     end
 
     context 'logged in as an inactive user' do
@@ -138,7 +159,7 @@ describe UsersController, type: :controller do
       end
 
       it 'cannot view users index' do
-        get(:index)
+        get :index
         expect(inactive_user).to redirect_to('/')
       end
     end

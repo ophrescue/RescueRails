@@ -12,17 +12,14 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-
 class Donation < ApplicationRecord
-
   def process_payment
     customer = Stripe::Customer.create email: email,
-                                        card: card_token
+                                       card: card_token
 
     Stripe::Charge.create customer: customer.id,
-                          amount: amount*100,
+                          amount: amount * 100,
                           description: 'Donation',
                           currency: 'usd'
-
-    end
+  end
 end

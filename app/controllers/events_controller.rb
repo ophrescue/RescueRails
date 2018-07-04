@@ -43,6 +43,7 @@
 class EventsController < ApplicationController
   before_action :authenticate, except: [:index, :show, :past]
   before_action :edit_events_user, except: [:index, :show, :past]
+  before_action :select_bootstrap41
 
   def index
     @events =

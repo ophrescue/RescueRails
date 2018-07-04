@@ -1,24 +1,22 @@
-<div class="row">
-  <div class="row event-title">
-    <div class="span8 offset4">
-      <h3><%= event.title %></h3>
-      <p><strong><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %l:%M %P") %> to <%= event.end_time.strftime(" %l:%M %P") %></strong></p>
-    </div>
+<div class="row event-title">
+  <div class="col-md-8 offset-md-4">
+    <h3><%= event.title %></h3>
+    <p><strong><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %l:%M %P") %> to <%= event.end_time.strftime(" %l:%M %P") %></strong></p>
   </div>
   <div class="row">
-    <div class="span4">
-      <div class="eventphoto">
+    <div class="col-4">
+      <div>
         <% if event.photo? %>
-          <%= link_to image_tag(event.photo.url(:medium)),event.photo.url %>
+          <%= link_to image_tag(event.photo.url(:medium), class:"rounded"),event.photo.url %>
         <% else %>
           &nbsp;
         <% end %>
 
       </div>
     </div>
-    <div class="span8">
+    <div class="col-8">
       <div class="">
-        <div class="span10">
+        <div class="col-10">
           <address>
             <% if event.location_url? %>
               <strong><%= link_to event.location_name, event.location_url %></strong><br />
@@ -31,16 +29,13 @@
             <% end %>
           </address>
         </div>
-        <% if event.photographer_name? && event.photographer_url? %>
-          <p><i class="icon-camera"></i> <strong>Event Photographer:</strong> <%= link_to event.photographer_name, event.photographer_url %></p>
-        <% end %>
-        <% if event.photographer_name? && !event.photographer_url? %>
-          <p><i class="icon-camera"></i> <strong>Event Photographer:</strong> <%= event.photographer_name %></p>
+        <% if event.photographer_name? %>
+          <p><strong>Event Photographer:</strong> <%= link_to_if event.photographer_url?, event.photographer_name, event.photographer_url %></p>
         <% end %>
       </div>
       <%= event.google_map %>
       <div class="row">
-        <div class="span8">
+        <div class="col-8">
           <br />
           <p><%= markdown(event.description) %></p>
           <br />

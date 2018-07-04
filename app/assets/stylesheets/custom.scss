@@ -72,17 +72,6 @@ form .control-group.error span.error {
   color: #333333;
 }
 
-// .hero-unit {
-//  background-image: url(hero_bg2.gif);
-//  background-repeat: no-repeat;
-//  background-position: center;
-//  background-color: #262425;
-//  padding: 160px;
-// /* -webkit-border-radius: 6px;
-//  -moz-border-radius: 6px;
-//  border-radius: 6px;*/
-// }
-
 .carousel-inner {
   background-repeat: no-repeat;
   background-color: #262425;
@@ -98,15 +87,6 @@ form .control-group.error span.error {
 .low {
   background: transparent;
 }
-
-// .hero-unit h1 {
-//  color: #FFFFFF;
-//  font-size: 37px;
-// }
-
-// .hero-unit p {
-//  color: #FFFFFF;
-// }
 
 .sidekick h2 {
   border-bottom: 2px solid #000000;
@@ -133,6 +113,13 @@ form .control-group.error span.error {
 
 .eventphoto img {
   border-radius: 6px 6px 6px 6px;
+}
+
+// this duplicates the eventphoto class border, but doesn't have the
+// confusing association with events!
+// it overrides Bootstrap 4.1 .rounded class with a larger radius
+.rounded {
+  border-radius: 0.5rem !important;
 }
 
 .caption {
@@ -176,16 +163,6 @@ img.floatRight {
     margin: 4px;
     border-radius: 6px 6px 6px 6px;
     margin-left: 20px;
-}
-
-.event-title {
-  padding: 5px;
-  margin-bottom: 10px;
-}
-
-.event-title h3 {
-  border-bottom: 2px solid #000000;
-  margin-bottom: 10px;
 }
 
 td.icons {

@@ -23,6 +23,15 @@ FactoryBot.define do
     intake_dt { Date.today.advance(:days => -rand(365)) }
     primary_breed_id { Breed.pluck(:id).sample }
     secondary_breed_id { Breed.pluck(:id).sample }
+    is_uptodateonshots { [true, false].sample }
+    is_special_needs        { [true, false].sample }
+    no_dogs                 { [true, false].sample }
+    no_cats                 { [true, false].sample }
+    no_kids                 { [true, false].sample }
+    description { Faker::Lorem.paragraphs(3,true).join("\n\n") }
+    medical_summary { Faker::Lorem.paragraph }
+    behavior_summary { Faker::Lorem.paragraph }
+    craigslist_ad_url { [Faker::Internet.url, nil].sample }
 
     after(:create) do |dog|
       create(:comment, :commentable_type => 'Dog', :commentable_id => dog.id, :content => Faker::Lorem.sentence )
@@ -32,6 +41,22 @@ FactoryBot.define do
       after(:build) do |dog|
         build(:attachment, attachable: dog)
         build(:photo, dog: dog)
+      end
+    end
+
+    trait :with_photos do
+      after(:create) do |dog|
+        `mkdir -p #{Rails.root.join("public","system","dog_photo")}`
+        3.times do |i|
+          photo = FactoryBot.create(:photo, dog: dog, is_private: false, position: i+1 )
+          ["medium", "original"].each do |style|
+            data = "photos/photos/#{photo.id}/#{style}/"
+            hash = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, Photo::HASH_SECRET, data)
+            filepath = "public/system/dog_photo/#{hash}.jpg"
+            image_source = Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s
+            `cp #{image_source} #{Rails.root.join(filepath)}`
+          end
+        end
       end
     end
 

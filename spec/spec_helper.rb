@@ -32,4 +32,7 @@ RSpec.configure do |config|
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
   end
 
+  config.define_derived_metadata(:file_path => Regexp.new('/spec/rake/')) do |metadata|
+    metadata[:type] = :model
+  end
 end

@@ -87,6 +87,14 @@ class UsersController < ApplicationController
     @options = YES_NO_OPTIONS
     @rent_options = OWN_RENT_OPTIONS
     @users = UserSearcher.search(params: params)
+    respond_to do |format|
+      format.html
+      if current_user.admin?
+        format.xls { render_users_xls }
+      else
+        format.xls { head :forbidden }
+      end
+    end
   end
 
   def show
@@ -271,5 +279,31 @@ class UsersController < ApplicationController
 
   def admin_user
     redirect_to(root_path) unless current_user.admin?
+  end
+
+  def render_users_xls
+    send_data @users.to_xls(
+      filename: 'users.xls',
+      columns: [
+        :id,
+        :name,
+        :email,
+        :phone,
+        :address1,
+        :address2,
+        :city,
+        :region
+      ],
+      headers: [
+        'id',
+        'Name',
+        'Email',
+        'Phone',
+        'Address 1',
+        'Address 2',
+        'City',
+        'State'
+      ]
+    )
   end
 end

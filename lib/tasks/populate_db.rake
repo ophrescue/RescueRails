@@ -3,7 +3,7 @@ require 'factory_bot'
 namespace :rescue_rails do
   desc "populate database tables"
   task populate_all: [:populate_users, :populate_breeds, :populate_adopters, :populate_dogs, :populate_events] do
-    tables = ["users", "breeds", "adopters", "dogs", "fosters", "adoptions"]
+    tables = ["users", "breeds", "adopters", "dogs", "fosters", "adoptions", "events"]
     tables.each do |table|
       Rake::Task["rescue_rails:populate_#{table}"].invoke
     end

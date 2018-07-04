@@ -4,9 +4,9 @@ class GoogleMap
   BASE_URL = "https://maps.google.com/"
   IMG_PATH = "maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers="
 
-  def initialize(dog)
-    @latitude = dog.latitude
-    @longitude = dog.longitude
+  def initialize(event)
+    @latitude = event.latitude
+    @longitude = event.longitude
   end
 
   def to_s

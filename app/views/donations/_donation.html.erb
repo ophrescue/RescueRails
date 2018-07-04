@@ -1,0 +1,9 @@
+<tr>
+    <td><%= donation.id %></td>
+    <td><%= donation.created_at.strftime('%m/%d/%Y') %></td>
+    <td><%= donation.name %></td>
+    <td><%= donation.email %></td>
+    <td><%= number_to_currency(donation.amount) %></td>
+    <td><%= donation.zip %></td>
+    <td><%= simple_format(donation.comment) unless !donation.comment %></td>
+</tr>

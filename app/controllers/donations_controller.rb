@@ -12,8 +12,23 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 class DonationsController < ApplicationController
+
+  before_action :admin_user, only: [:index, :show, :destroy]
+
   def new
     @donation = Donation.new
+  end
+
+  def index
+    @donations = Donation.order(:id)
+    respond_to do |format|
+      format.html
+      format.xls { render_donations_xls }
+    end
+  end
+
+  def show
+    redirect_to(root_path)
   end
 
   def create
@@ -29,6 +44,10 @@ class DonationsController < ApplicationController
 
   private
 
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
+  end
+
   def stripe_params
     params.permit :stripeEmail, :stripeToken
   end
@@ -40,5 +59,29 @@ class DonationsController < ApplicationController
                                      :zip,
                                      :comment,
                                      :card_token)
+  end
+
+  def render_donations_xls
+    send_data @donations.to_xls(
+      filename: 'donations.xls',
+      columns: [
+        :id,
+        :created_at,
+        :name,
+        :email,
+        :amount,
+        :zip,
+        :comment
+      ],
+      headers: [
+        'ID',
+        'Timestamp',
+        'Name',
+        'Email',
+        'Amount',
+        'Zip Code',
+        'Comment'
+      ]
+    )
   end
 end

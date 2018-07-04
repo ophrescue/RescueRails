@@ -11,7 +11,12 @@
         <%= f.text_field :name, class: 'input-large' %>
       </div>
     </div>
-
+    <div class="control-group">
+      <%= f.label :email, class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :email, class: 'input-large' %>
+      </div>
+    </div>
     <div class="control-group">
       <%= f.label :amount, class: 'control-label' %>
       <div class="controls">
@@ -25,22 +30,26 @@
         <%= f.text_area :comment, class: 'input-xlarge', rows: '5' %>
       </div>
     </div>
-  </fieldset>
-
     <%= hidden_field_tag(:stripeToken) %>
 
     <button id='donateButton'>Donate</button>
+  </fieldset>
+
+
 <% end %>
 
 
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
 <script>
+
+
   var handler = StripeCheckout.configure({
     key: '<%= Rails.configuration.stripe[:publishable_key] %>',
     locale: 'auto',
     name: 'Operation Paws for Homes',
     description: 'One-time donation',
+    panelLabel: 'Donate {{amount}}',
     zipCode: true,
     image: '/apple-touch-icon.png',
 
@@ -54,6 +63,8 @@
     e.preventDefault();
 
     $('#error_explanation').html('');
+
+    var email = $('input#donation_email').val();
 
     var amount = $('input#donation_amount').val();
     amount = amount.replace(/\$/g, '').replace(/\,/g, '')
@@ -69,7 +80,8 @@
     else {
       amount = amount * 100; // Needs to be an integer!
       handler.open({
-        amount: Math.round(amount)
+        amount: Math.round(amount),
+        email: email
       })
     }
   });

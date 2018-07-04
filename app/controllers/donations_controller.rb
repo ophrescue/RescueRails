@@ -32,8 +32,8 @@ class DonationsController < ApplicationController
   end
 
   def create
-    @donation = Donation.new donation_params.merge(email: stripe_params["stripeEmail"],
-                                                   card_token: stripe_params["stripeToken"])
+    @donation = Donation.new donation_params.merge(card_token: stripe_params["stripeToken"])
+
     raise "Check for errors" unless @donation.valid?
     @donation.process_payment
     @donation.save
@@ -49,16 +49,16 @@ class DonationsController < ApplicationController
   end
 
   def stripe_params
-    params.permit :stripeEmail, :stripeToken
+    params.permit :stripeToken, :utf8, :authenticity_token
   end
 
   def donation_params
     params.require(:donation).permit(:name,
                                      :email,
                                      :amount,
-                                     :zip,
                                      :comment,
                                      :card_token)
+
   end
 
   def render_donations_xls
@@ -70,7 +70,6 @@ class DonationsController < ApplicationController
         :name,
         :email,
         :amount,
-        :zip,
         :comment
       ],
       headers: [
@@ -79,7 +78,6 @@ class DonationsController < ApplicationController
         'Name',
         'Email',
         'Amount',
-        'Zip Code',
         'Comment'
       ]
     )

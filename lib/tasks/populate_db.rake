@@ -36,7 +36,7 @@ namespace :rescue_rails do
   desc "populate dogs"
   task populate_dogs: :environment do
     Dog.destroy_all
-    60.times do
+    120.times do
       FactoryBot.create(:dog)
     end
   end
@@ -69,6 +69,25 @@ namespace :rescue_rails do
         foster_dog_ids.delete(dog_id)
         Dog.find(dog_id).update_attribute(:foster_id, id)
       end
+    end
+  end
+
+  desc "create photos, with links to actual pics on AWS, taken from production data"
+  task populate_photos: :environment do
+    Photo.destroy_all
+    json = JSON.load(File.read(Rails.root.join('lib','data','dog_photos.json')))
+    all_dog_ids = Dog.pluck(:id)
+    map = {} # {photo.dog_id => dog.id, ...}
+    json.each_with_index do |json_attrs,i|
+      photo = Photo.new.from_json(json_attrs)
+      if map[photo.dog_id]
+        photo.dog_id = map[photo.dog_id]
+      else
+        new_map_val = map.values.last&.succ || all_dog_ids[0]
+        map.merge!({photo.dog_id => new_map_val })
+        photo.dog_id = new_map_val
+      end
+      photo.save
     end
   end
 

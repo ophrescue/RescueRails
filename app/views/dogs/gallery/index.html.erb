@@ -1,0 +1,23 @@
+<div class="container" id='public_list'>
+  <% if current_user&.active %>
+    <div class='row'>
+      <div class='col-2 offset-6 offset-sm-10'>
+          <%= link_to "Switch to manager list", dogs_manager_index_path, class: 'switch_view btn btn-sm btn-outline-secondary' %>
+      </div>
+    </div>
+  <% end %>
+  <div class="row title_row">
+    <%# large-format (>=md) 10/12 width, small format (<md) full-width %>
+    <div class="col-12 col-md-10">
+      <h1>Our Dogs</h1>
+    </div>
+  </div>
+
+
+  <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+  <div class="row gallery" id="dogs">
+    <%= render partial: 'dogs/gallery/dog', collection: @dogs %>
+  </div>
+  <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+
+</div>

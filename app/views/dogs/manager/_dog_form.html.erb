@@ -1,0 +1,389 @@
+<%= form_for @dog, url: @dog.new_record? ? dogs_manager_index_path : dogs_manager_path(@dog), html: { multipart: true, class:'container needs-validation', id:'dog_form', novalidate: true } do |f| %>
+  <div class="row">
+    <div class="col-12 col-md-6" id='left-column'>
+
+      <% if !@dog.new_record? %>
+        <div class="form-group row">
+          <!-- see config/initializers/rails_bootstrap_errors.rb for usage of the data-bootstrap41 attribute -->
+          <%= f.label :tracking_id, "OPH Tracking ID", class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true %>
+          <%= f.text_field :tracking_id, disabled: !can_edit_dogs?, class: "form-control form-control-sm col-6 #{validation_class_for(:tracking_id)}", pattern:'\s{0,}\d{1,20}\s{0,}', 'data-bootstrap41': true, autocomplete: 'off' %>
+          <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(:tracking_id) %></div>
+        </div>
+      <% end %>
+
+      <div class="form-group row">
+        <%= f.label :name, class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true %>
+        <%= f.text_field :name, class: "form-control form-control-sm col-6 #{validation_class_for(:name) }", required: true, pattern:'\w{1,}', 'data-bootstrap41': true, autocomplete: 'off' %>
+        <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(:name) %></div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :original_name, class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.text_field :original_name, disabled: !can_edit_dogs?, class: 'form-control form-control-sm col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :status, class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.select :status, Dog::STATUSES, {prompt: '-select-'}, {class: 'form-control form-control-sm col-6', required: true} %>
+        <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(:status) %></div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :microchip, class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.text_field :microchip, class: 'form-control form-control-sm col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :fee, 'Adoption Fee',class: 'col-form-label col-form-label-sm col-4'%>
+        <div class='input-group input-group-sm col-6' style='padding:0px;'>
+          <div class="input-group-prepend">
+            <span class="input-group-text" >$</span>
+          </div>
+          <%= f.text_field :fee, class: 'form-control form-control-sm', disabled: !can_edit_dogs?, pattern:'^\s{0,}\w{1,10}\s{0,}$' %>
+          <div class="input-group-append">
+            <span class="input-group-text" >.00</span>
+          </div>
+          <div class='invalid-feedback'>must be a whole number, with no letters</div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :primary_breed_name, class: 'col-form-label col-form-label-sm col-4'  %>
+        <% if can_add_dogs? %>
+          <%= f.collection_select(:primary_breed_id, @breeds, :id, :name, {prompt:  '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
+        <% else %>
+          <%= @dog.primary_breed_id ? @dog.primary_breed.name : "None Assigned" %>
+        <% end %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :secondary_breed_name, class: 'col-form-label col-form-label-sm col-4'  %>
+        <% if can_add_dogs? %>
+          <%= f.collection_select(:secondary_breed_id, @breeds, :id, :name, {prompt: '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
+        <% else %>
+          <%= @dog.secondary_breed_id ? @dog.secondary_breed.name : "None Assigned" %>
+        <% end %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :gender, class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.select(:gender, Dog::GENDERS, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :age, class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.select(:age, Dog::AGES, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :size, "Size when grown", class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.select(:size, Dog::SIZES, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :intake_dt, "Intake Date", class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.text_field :intake_dt, class: 'form-control form-control-sm col-6' %>
+        <div class="form-text text-muted col-6 offset-4 small">yyyy-mm-dd</div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :available_on_dt, "Available On Date", class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.text_field :available_on_dt, class: 'form-control form-control-sm col-6' %>
+        <div class="form-text text-muted col-6 offset-4 small">yyyy-mm-dd</div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :adoption_date, "Adoption Date", class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.text_field :adoption_date, class: 'form-control form-control-sm col-6' %>
+        <div class="form-text text-muted col-6 offset-4 small">yyyy-mm-dd</div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :sponsored_by, "Sponsored by", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :sponsored_by, class: 'form-control form-control-sm col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :craigslist_ad_url, "Craigslist Ad Link", class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.text_field :craigslist_ad_url, class: 'form-control form-control-sm col-6', pattern:'^http://.*$' %>
+        <div class='invalid-feedback col-sm-6 offset-4'>please include 'http://'</div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6" id='right-column'>
+      <div class="form-group row">
+        <%= f.label :foster_id, "Foster assignment", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.collection_select(:foster_id, @foster_users, :id, :name, {include_blank: '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :coordinator_id, "Adoption coordinator", class: 'col-form-label col-form-label-sm col-4' %>
+        <% if can_edit_all_adopters? || can_add_dogs? %>
+          <%= f.collection_select(:coordinator_id, @coordinator_users, :id, :name, {include_blank: '-select-'}, {class: 'form-control form-control-sm col-6'} ) %>
+        <% else %>
+          <%= @dog.coordinator ? @dog.coordinator.name : "No Coordinator Assigned" %>
+        <% end %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :shelter_id, "Source shelter", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.collection_select(:shelter_id, @shelters, :id, :name, {include_blank: '-select-'}, {class: 'form-control form-control-sm col-6'} ) %>
+      </div>
+
+      <h3>Public Attributes</h3>
+      <div class="form-check">
+        <%= f.check_box :is_uptodateonshots, class: 'form-check-input' %>
+        <%= f.label :is_uptodateonshots, "Up-to-date on shots", class: 'form-check-label col-5'  %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :is_altered, class: 'form-check-input' %>
+        <%= f.label :is_altered, class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :is_special_needs, class: 'form-check-input' %>
+        <%= f.label :is_special_needs, class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :no_dogs, class: 'form-check-input' %>
+        <%= f.label :no_dogs, class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :no_cats, class: 'form-check-input' %>
+        <%= f.label :no_cats, class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :no_kids, class: 'form-check-input' %>
+        <%= f.label :no_kids, class: 'form-check-label col-5' %>
+      </div>
+
+      <h3>Private Attributes</h3>
+      <div class="form-check">
+        <%= f.check_box :medical_review_complete, class: 'form-check-input' %>
+        <%= f.label :medical_review_complete , class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :has_medical_need, class: 'form-check-input' %>
+        <%= f.label :has_medical_need , class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :is_high_priority, class: 'form-check-input' %>
+        <%= f.label "High Priority Dog" , class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :needs_photos, class: 'form-check-input' %>
+        <%= f.label :needs_photos , class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :has_behavior_problem, class: 'form-check-input' %>
+        <%= f.label :has_behavior_problem , class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :needs_foster, class: 'form-check-input' %>
+        <%= f.label :needs_foster , class: 'form-check-label col-5' %>
+      </div>
+
+      <h3>Vaccine Records</h3>
+
+      <div class="form-group row">
+        <%= f.label :first_shots, "First Shots", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :first_shots, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :second_shots, "Second Shots", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :second_shots, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :third_shots, "Third Shots", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :third_shots, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :rabies, "Rabies", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :rabies, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :vac_4dx, "4DX", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :vac_4dx, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :bordetella, "Bordetella", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :bordetella, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :heartworm_preventative, "Heartworm Preventative", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :heartworm_preventative, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :flea_tick_preventative, "Flea/Tick Preventative", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :flea_tick_preventative, class: 'col-6' %>
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <h2 class='col-12'>Photos</h2>
+  </div>
+  <div class="row" id='manage_photos'>
+    <%= render_unless @dog.new_record?, partial: 'dog_photos', locals: {f:f} %>
+  </div>
+  <div class='row'>
+    <div class='col-12 col-md-2'>
+      <a href='#' id='add_photo' class='btn btn-sm btn-success'>Add a Photo</a>
+    </div>
+    <div class="form-group new_photos col-12 col-md-8"></div>
+  </div>
+
+
+  <div class='row'>
+    <h2 class='col-12'>Documents</h2>
+  </div>
+  <div class="row" id='manage_attachments'>
+    <%= render_unless @dog.new_record?, partial: 'dog_attachments', locals: {f:f} %>
+  </div>
+  <div class='row'>
+    <div class='col-12 col-md-2'>
+    <a href='#' id='add_attachment' class='btn btn-sm btn-success'>Add a Document</a>
+    </div>
+    <div class='form-group new_attachments col-12 col-md-8'></div>
+  </div>
+
+  <div class='row'>
+    <h2 class='col-12'>Public Description</h2>
+  </div>
+  <div class="row form-group ">
+    <%= f.text_area :description, class: "required input-xxlarge form-control form-control-sm", rows: "8" %>
+  </div>
+
+  <div class='row'>
+    <h2 class='col-12'>Medical Summary</h2>
+  </div>
+  <div class="row form-group ">
+    <%= f.text_area :medical_summary, class: "input-xxlarge form-control form-control-sm", rows: "8", disabled: !can_manage_medical_behavior_summaries? %>
+  </div>
+
+  <div class='row'>
+    <h2 class='col-12'>Behavior Summary</h2>
+  </div>
+  <div class="row form-group ">
+    <%= f.text_area :behavior_summary, class: "input-xxlarge form-control form-control-sm", rows: "8", disabled: !can_manage_medical_behavior_summaries? %>
+  </div>
+
+  <div class="actions well">
+    <%= f.submit "Submit", class: 'btn btn-primary mr-20' %>
+    <%= link_to 'Cancel', dogs_manager_index_path, class: 'btn btn-danger' %>
+    <div class='invalid-feedback'>form cannot be saved due to errors</div>
+  </div>
+<% end %>
+
+<script type='text/javascript'>
+// form validation
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      var forms = document.getElementsByClassName('needs-validation');
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+          check_inputs_validity();
+        }, false);
+      });
+    }, false);
+  })();
+  $(function(){
+    check_inputs_validity = function(){
+      if ($('form.was-validated input:invalid').length > 0) {
+        $('.actions').addClass('form-errors')
+      }else{
+        $('.actions').removeClass('form-errors')
+      }
+    }
+    $('form input').on({change: check_inputs_validity, keyup: check_inputs_validity })
+  })
+</script>
+
+<script type='html/template' id='new_attachment_input'>
+  <div style='height:0px;' class='new_file row mb-0 mb-sm-3 mt-3 mt-sm-0'>
+    <input type='file' name='dog[${type}_attributes][${index}][${singular_type}]' class='col-10 col-md-6' id='new_dog_${singular_type}'/>
+    <a href='#' id='remove_${singular_type}' class='col-md-6 d-none d-md-inline'>remove</a>
+    <a href='#' id='remove_${singular_type}' class='col-2 d-inline d-md-none'><i class='fa fa-lg fa-times text-danger'></i></a>
+  </div>
+</script>
+
+<script type='text/javascript'>
+// add/remove new photo or document inputs
+  var new_attachment_input = _.template($('#new_attachment_input').html())
+  var last_photos_index, last_attachments_index
+  ["photos", "attachments"].forEach(function(type){
+    var singular_type = type.replace(/s$/,'');
+    var indexes = $.map($(`#manage_${type} .${singular_type}`), function(el){ return $(el).data('index')}) 
+    if(_.isEmpty(indexes)){
+      this[`last_${type}_index`] = -1
+    }else{
+      this[`last_${type}_index`] = _.max(indexes)
+    }
+  })
+  var add_file_field_for = function(type){
+    var unconfigured_inputs_count = _.filter($(`.new_${type} input`),function(input){return _.isEmpty(input.value)}).length;
+    var all_inputs_configured = unconfigured_inputs_count == 0;
+    var file_inputs_count = $(`.new_${type} input`).length;
+    var no_inputs_displayed = file_inputs_count == 0;
+    var inputs_displayed = !no_inputs_displayed;
+    var singular_type = type.replace(/s$/,'');
+    if(no_inputs_displayed || (inputs_displayed && all_inputs_configured)){
+      var new_input = new_attachment_input({type: type, singular_type: singular_type, index: ++this[`last_${type}_index`]})
+      $(new_input).appendTo($(`.new_${type}`)).animate({height: '28px'}, 100);
+    }
+  }
+
+  $(function(){
+    $('#add_photo').on('click', function(){
+      event.preventDefault();
+      event.stopPropagation();
+      add_file_field_for('photos');
+    });
+
+    $('#add_attachment').on('click', function(){
+      event.preventDefault();
+      event.stopPropagation();
+      add_file_field_for('attachments');
+    });
+
+    $('.new_photos').on('click','#remove_photo', function(){
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).parent().animate({height: '0px'},100,function(){
+        this.remove()
+        if($('.new_photos .new_file').length==0){ $('#add_photo').html("Add a Photo") }
+      });
+    })
+
+    $('.new_attachments').on('click','#remove_attachment', function(){
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).parent().animate({height: '0px'},100,function(){
+        this.remove()
+        if($('.new_attachments .new_file').length==0){ $('#add_attachment').html("Add a Document") }
+      });
+    })
+
+    $('.new_photos').on('change','input', function(){
+      $('#add_photo').html("Add another Photo")
+    })
+
+    $('.new_attachments').on('change','input',function(){
+      $('#add_attachment').html("Add another Document")
+    })
+
+  })
+</script>
+

@@ -2,6 +2,7 @@ require 'rspec/expectations'
 
 RSpec::Matchers.define :be_sorted do |expected|
   match do |actual|
+    return false if actual.length.zero?
     matches = []
     actual.each_index do |i|
       pair = [actual[i],actual[i.succ]]
@@ -15,5 +16,23 @@ RSpec::Matchers.define :be_sorted do |expected|
       matches << (pair[1] >= pair[0])
     end
     matches.all?
+  end
+end
+
+RSpec::Matchers.define :have_check_icon do
+  match do |actual|
+    actual.has_css? '.fa-check'
+  end
+end
+
+RSpec::Matchers.define :have_x_icon do
+  match do |actual|
+    actual.has_css? '.fa-times'
+  end
+end
+
+RSpec::Matchers.define :have_class do |expected|
+  match do |actual|
+    actual[:class].include? expected
   end
 end

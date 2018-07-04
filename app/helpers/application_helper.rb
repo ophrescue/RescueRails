@@ -67,5 +67,4 @@ module ApplicationHelper
     link_to title, { commit: commit, sort: column, direction: direction, status: status, search: search_term, is_size: is_size, is_age: is_age, is_status: is_status, is_breed: is_breed }, { class: css_class, id: css_id }
   end
 
-
 end

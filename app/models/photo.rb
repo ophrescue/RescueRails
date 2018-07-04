@@ -29,6 +29,7 @@
 #
 
 class Photo < ApplicationRecord
+  extend ActionView::Helpers::AssetUrlHelper
   belongs_to :dog, touch: true
   acts_as_list scope: :dog
 
@@ -41,9 +42,10 @@ class Photo < ApplicationRecord
                    thumb: 'x195',
                    minithumb: 'x64#' },
             s3_permissions: "public-read",
-            path: ":rails_root/public/system/dog_photo/:hash.:extension",
-            url: "/system/dog_photo/:hash.:extension",
-            hash_secret: HASH_SECRET
+            path: ":rails_root/public/system/#{Rails.env}/dog_photo/:hash.:extension",
+            url: "/system/#{Rails.env}/dog_photo/:hash.:extension",
+            hash_secret: HASH_SECRET,
+            preserve_files: !Rails.env.production? # in dev and test we only read AWS, never write/delete
 
   validates_attachment_presence :photo
   validates_attachment_size :photo, less_than: 10.megabytes

@@ -43,5 +43,13 @@ FactoryBot.define do
     factory :foster do
       is_foster true
     end
+
+    factory :adoption_coordinator do
+      # NOTE: this is not consistent with the definition of adoption_coordinator in the user model
+      # it is consistent with the definition of adoption_coordinator in the context of selecting an adoption_coordinator for a dog in dog_form
+      # defined here for writing spec around the dog_form,
+      # without understanding the inconsistent usage!
+      edit_all_adopters true
+    end
   end
 end

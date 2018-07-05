@@ -37,19 +37,25 @@ class Attachment < ApplicationRecord
                              production: "/attachments/:hash.:extension",
                              staging:    "/attachments/:hash.:extension" }
 
+  CONTENT_TYPES = ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif',
+                   'application/msword', 'application/vnd.ms-word',
+                   'application/msexcel', 'application/vnd.ms-excel',
+                   'application/mspowerpoint', 'application/vnd.ms-powerpoint',
+                   'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                   'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                   'application/pdf', 'text/plain']
+
+  HASH_SECRET = 'e17ac013aa7f8f2fd095edfa012edb8c'
+
   has_attached_file :attachment,
-            dir: 'attachments',
-            hash_secret: 'e17ac013aa7f8f2fd095edfa012edb8c',
+            hash_secret: HASH_SECRET,
             s3_permissions: :private
 
   validates_attachment_presence :attachment
   validates_attachment_size :attachment, less_than: 100.megabytes
   validates_attachment_content_type :attachment,
-   content_type: ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif', 'application/pdf',
-            'application/msword', 'application/vnd.ms-word', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'application/msexcel', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'application/mspowerpoint', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-            'text/plain'],
+   content_type: CONTENT_TYPES,
    message: 'Images, Docs, PDF, Excel and Plain Text Only.'
 
   AGREEMENT_TYPE_FOSTER = 'foster'

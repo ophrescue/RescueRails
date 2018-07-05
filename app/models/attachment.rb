@@ -33,9 +33,12 @@ class Attachment < ApplicationRecord
   belongs_to :attachable, polymorphic: true
   belongs_to :updated_by_user, class_name: 'User'
 
+  PAPERCLIP_STORAGE_PATH = { test:       "/system/test/attachments/:hash.:extension",
+                             production: "/attachments/:hash.:extension",
+                             staging:    "/attachments/:hash.:extension" }
+
   has_attached_file :attachment,
-            path: ":rails_root/public/system/#{Rails.env}/attachment/:hash.:extension",
-            url: '/system/attachments/:hash.:extension',
+            dir: 'attachments',
             hash_secret: 'e17ac013aa7f8f2fd095edfa012edb8c',
             s3_permissions: :private
 

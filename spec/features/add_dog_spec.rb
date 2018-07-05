@@ -130,8 +130,8 @@ feature 'add a dog', js: true do
         expect(page.all('#new_dog_attachment').length).to eq 2
 
         # 5 size variants created from each image upload, see app/models/photo.rb
-        expect{ click_button('Submit') }.to change{Dir.glob(Rails.root.join('public','system','test','dog_photo','*')).length}.by(10).
-                                        and change{Dir.glob(Rails.root.join('public','system','test','attachment','*')).length}.by(2)
+        expect{ click_button('Submit') }.to change{Dir.glob(Rails.root.join('public','system','test','photos','*')).length}.by(10).
+                                        and change{Dir.glob(Rails.root.join('public','system','test','attachments','*')).length}.by(2)
 
         dog = Dog.first
         expect(dog.name).to eq 'newname'

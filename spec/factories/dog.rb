@@ -60,15 +60,17 @@ FactoryBot.define do
       end
     end
 
+    # file paths here are for test environment, they are not appropriate
+    # for development environment
     trait :with_photos do
       after(:create) do |dog|
-        `mkdir -p #{Rails.root.join("public","system","test","dog_photo")}`
+        `mkdir -p #{Rails.root.join("public","system","test","photos")}`
         3.times do |i|
           photo = FactoryBot.create(:photo, dog: dog, is_private: false, position: i+1 )
           ["medium", "original"].each do |style|
             data = "photos/photos/#{photo.id}/#{style}/"
             hash = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, Photo::HASH_SECRET, data)
-            filepath = "public/system/test/dog_photo/#{hash}.jpeg"
+            filepath = "public/system/test/photos/#{hash}.jpeg"
             image_source = Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s
             `cp #{image_source} #{Rails.root.join(filepath)}`
           end

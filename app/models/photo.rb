@@ -34,6 +34,9 @@ class Photo < ApplicationRecord
   acts_as_list scope: :dog
 
   HASH_SECRET = "80fd0acd1674d7efdda5b913a7110d5c955e2d73"
+  PAPERCLIP_STORAGE_PATH = { test:       "/system/test/photos/:hash.:extension",
+                             production: "/dog_photo/:hash.:extension",
+                             staging:    "/dog_photo/:hash.:extension" }
 
   has_attached_file :photo,
             styles: { original: '1280x1024>',
@@ -42,10 +45,7 @@ class Photo < ApplicationRecord
                    thumb: 'x195',
                    minithumb: 'x64#' },
             s3_permissions: "public-read",
-            path: ":rails_root/public/system/#{Rails.env}/dog_photo/:hash.:extension",
-            url: "/system/dog_photo/:hash.:extension",
-            hash_secret: HASH_SECRET,
-            preserve_files: !Rails.env.production? # in dev and test we only read AWS, never write/delete
+            hash_secret: HASH_SECRET
 
   validates_attachment_presence :photo
   validates_attachment_size :photo, less_than: 10.megabytes

@@ -56,7 +56,7 @@ Rails.application.configure do
   # paperclip derives the :path config from the :url
   # :class is interpolated by paperclip as class.name.downcase.pluralize
   # Paperclip::Attachment.default_options[:url] = "/system/test/:class/:hash.:extension"
-  Paperclip::Attachment.default_options[:url] = ":paperclip_test_path"
+  Paperclip::Attachment.default_options[:url] = "/system/test/:class/:hash.:extension"
 
   # Access to rack session
   config.middleware.use RackSessionAccess::Middleware

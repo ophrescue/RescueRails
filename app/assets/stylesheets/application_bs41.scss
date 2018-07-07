@@ -13,7 +13,6 @@
 //    limitations under the License.
 
 
-
 @import "bootstrap";
 // I don't believe this is necessary any longer with bootstrap 4.1
 // @import "bootstrap-responsive";
@@ -28,6 +27,21 @@
 @import 'topbar_bs41';
 @import 'dogs_index';
 @import 'events';
+
+.title_row {
+  margin-top: 20px;
+  color: #ad8b22;
+  margin-bottom: 28px;
+  align-items: baseline;
+
+  h1 {
+    display: inline-block;
+    color: #10acd8;
+    letter-spacing: -1.5px;
+    font-style: italic;
+  }
+
+}
 
 html {
   font-size: .8rem;

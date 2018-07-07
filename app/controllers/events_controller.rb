@@ -41,24 +41,14 @@
 #
 
 class EventsController < ApplicationController
-  before_action :authenticate, except: [:index, :show, :past]
-  before_action :edit_events_user, except: [:index, :show, :past]
+  before_action :authenticate, except: [:index, :show]
+  before_action :edit_events_user, except: [:index, :show]
   before_action :select_bootstrap41
 
   def index
-    @events =
-      Event
-        .where("event_date >= ?", Date.today)
-        .limit(30)
-        .order('event_date ASC')
-  end
-
-  def past
-    @events =
-      Event
-        .where("event_date < ?", Date.today)
-        .limit(30)
-        .order('event_date DESC')
+    @scope = params[:scope]
+    @events = Event.send(@scope)
+    @title = t(".title.#{@scope}")
   end
 
   def show

@@ -92,9 +92,9 @@ en:
     edit:
       title: 'Edit Event'
     index:
-      title: 'Upcoming Events'
-    past:
-      title: 'Past Events'
+      title:
+        upcoming: 'Upcoming Events'
+        past: 'Past Events'
     show:
       title: 'Events'
     new:

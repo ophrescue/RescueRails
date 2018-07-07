@@ -1,17 +1,20 @@
-<h1><%= t('.title') %></h1>
 <% if can_edit_events? %>
-<p>
-( <%= link_to "Add an Event", new_event_path %> / 
-<%= link_to "Past Events", "/events/past" %> )
-</p>
+  <div class='col-2 offset-6 offset-sm-10'>
+    <%= link_to(alternate_scope_string, events_path(alternate_scope), class: "btn btn-sm btn-outline-secondary") %>
+  </div>
 <% end %>
-
-	<% if @events.count > 0 %>
-		<%= render @events %>	
-	<% else %>
-		<div class="row">
-			<div class="col-12">
-				<h3>No Events Scheduled</h3>
-			</div>
-		</div>
-	<% end %>
+<div class='col-12' id='events_list'>
+  <div class="row title_row align-items-center">
+    <div class="col-8 col-md-8">
+      <h1><%= "#{t(".title.#{@scope}")}" %></h1>
+    </div>
+    <% if can_edit_events? %>
+      <div class="col-2 col-md-2 mb-2 mb-sm-0">
+        <%= link_to "Add an Event", new_event_path, class: "btn btn-sm btn-success" %>
+      </div>
+    <% end %>
+  </div>
+  <div class='col-12'>
+    <%= render(@events) || render(partial: 'no_events', locals: {current_scope: current_scope}) %>	
+  </div>
+</div>

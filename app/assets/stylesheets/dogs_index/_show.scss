@@ -1,18 +1,11 @@
 .title_row {
-  color: #ad8b22;
-  margin-bottom: 28px;
-  align-items: baseline;
-
-  h1 {
-    margin-right: 18px;
-    display: inline-block;
-    color: #10acd8;
-    letter-spacing: -1.5px;
-    font-style: italic;
-  }
 
   span {
     font-size: 1.2rem;
+  }
+
+  span:first-of-type {
+    margin-left: 18px;
   }
 
   a.fa-info {

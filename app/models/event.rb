@@ -80,6 +80,9 @@ class Event < ApplicationRecord
   validates_attachment_size :photo, less_than: 5.megabytes
   validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
 
+  scope :upcoming, ->{ where("event_date >= ?", Date.today).limit(30).order('event_date ASC')  }
+  scope :past,     ->{ where("event_date < ?",  Date.today).limit(30).order('event_date DESC') }
+
   def set_user
     self.created_by_user = @current_user
   end

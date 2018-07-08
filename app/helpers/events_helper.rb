@@ -11,6 +11,10 @@ module EventsHelper
     @scope=="past" ? "upcoming" : "past"
   end
 
+  def photographer?(event)
+    event.photographer_name? ? "d-block;" : "d-none"
+  end
+
   private
   def scopes
     {"upcoming" => t(".title.upcoming"), "past" => t(".title.past")}

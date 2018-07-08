@@ -2,13 +2,13 @@
   <% if current_user&.active %>
     <div class='row'>
       <div class='col-2 offset-6 offset-sm-10'>
-          <%= link_to("Switch to public list", dogs_path, class: "btn btn-sm btn-outline-secondary switch_view") %>
+          <%= link_to("Switch to public list", dogs_path, class: "switch_view") %>
       </div>
     </div>
   <% end %>
   <div class="row title_row align-items-center">
     <div class="col-8 col-md-8">
-      <h1>Dog Manager</h1>
+      <h1><%= t('.title') %></h1>
     </div>
     <% if can_add_dogs? %>
       <div class="col-2 col-md-2 mb-2 mb-sm-0">

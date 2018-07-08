@@ -1,71 +1,42 @@
 <div class="row event-title">
   <div class="col-md-8 offset-md-4">
     <h3><%= event.title %></h3>
-    <p><strong><%= event.event_date.strftime("%A, %B %e, %Y") %> from <%= event.start_time.strftime(" %l:%M %P") %> to <%= event.end_time.strftime(" %l:%M %P") %></strong></p>
+    <div class='date_time'><%= event.event_date.strftime("%A, %B %-e, %Y") %> from <%= event.start_time.strftime("%-l:%M %P") %> to <%= event.end_time.strftime("%-l:%M %P") %></div>
   </div>
 </div>
 
-  <div class="row">
-    <div class="col-4">
-      <div>
-        <% if event.photo? %>
-          <%= link_to image_tag(event.photo.url(:medium), class:"rounded"),event.photo.url %>
-        <% else %>
-          &nbsp;
-        <% end %>
-
-      </div>
-    </div>
-    <div class="col-8">
-      <div class="">
-        <div class="col-10">
-          <address>
-            <% if event.location_url? %>
-              <strong><%= link_to event.location_name, event.location_url %></strong><br />
-            <% else %>
-              <strong><%= event.location_name %></strong><br />
-            <% end %>
-            <%= event.address %><br />
-            <% if event.location_phone? %>
-              <abbr title="Phone">P: </abbr><%= event.location_phone %><br />
-            <% end %>
-          </address>
-        </div>
-        <% if event.photographer_name? %>
-          <p><strong>Event Photographer:</strong> <%= link_to_if event.photographer_url?, event.photographer_name, event.photographer_url %></p>
-        <% end %>
-      </div>
-      <%= event.google_map %>
-      <div class="row">
-        <div class="col-8">
-          <br />
-          <p><%= markdown(event.description) %></p>
-          <br />
-        </div>
-      </div>
-
-      <p>
-
-      <% if event.facebook_url? %>
-        <%= link_to "Facebook Event", event.facebook_url, :class => "btn btn-primary" %>
-      <% end %>
-
-      <a href="/adopt" class="btn btn-primary">Apply to Adopt</a>
-
-      <% if can_edit_events? %>
-        <%= link_to  "edit", edit_event_path(event), :class => "btn btn-small" %>
-      <% end %>
-
-      <% if can_edit_events? %>
-        <%= link_to  "delete",
-          event,
-          :method => :delete,
-          :class => "btn btn-small",
-          :confirm => "You sure?",
-          :title => "Delete #{event.title}" %>
-
-      <% end %>
-
-      </p>
+<div class="row">
+  <div class="col-4">
+    <div class='event_photo'>
+      <%= link_to_if( event.photo?, image_tag(event.photo.url(:medium), class:"rounded"),event.photo.url){ } %>
     </div>
   </div>
+  <div class="col-8">
+    <div class='row'>
+      <address class='col-12'>
+        <div class='location'> <%= link_to_if event.location_url?, event.location_name, event.location_url %> </div>
+        <div class='address'> <%= event.address %> </div>
+        <div class='phone'> <%= event.location_phone %> </div>
+      </address>
+    </div>
+    <div class='row <%= photographer?(event) %>'>
+      <div class='photographer col-12'><span>Event Photographer:</span> <%= link_to_if event.photographer_url?, event.photographer_name, event.photographer_url %></div>
+    </div>
+    <%= event.google_map %>
+    <div class="row">
+      <div class="col-12 description">
+        <%= markdown(event.description) %>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col'>
+        <%= link_to_if(event.facebook_url?, "Facebook Event", event.facebook_url, :class => "btn btn-sm btn-primary"){} %>
+        <%= link_to "Apply to Adopt", adopt_path, :class => "btn btn-sm btn-primary" %>
+        <%= link_to_if(can_edit_events?, "edit", edit_event_path(event), :class => "btn btn-sm btn-outline-secondary"){} %>
+        <%= link_to_if(can_edit_events?, "delete", event, method: :delete, class: "btn btn-sm btn-outline-secondary",
+                       data: { confirm: "Are you sure?"}, title: "Delete #{event.title}", id: 'delete_event'){} %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -99,16 +99,6 @@
   margin-top: 20px;
 }
 
-.switch_view {
-  font-size: 0.9rem;
-}
-
-@include media-breakpoint-up(md) {
-  .switch_view {
-    font-size: 1.2rem;
-  }
-}
-
 #manage_profile #details dt, #manage_profile #details dd {
   @extend .col-6;
 }

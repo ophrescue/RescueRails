@@ -1,9 +1,17 @@
 .event-title {
   padding: 5px;
   margin-bottom: 10px;
+
+  h3 {
+    border-bottom: 2px solid #000000;
+    margin-bottom: 10px;
+  }
+
+  .date_time {
+    font-weight: 700;
+  }
 }
 
-.event-title h3 {
-  border-bottom: 2px solid #000000;
-  margin-bottom: 10px;
+.photographer span {
+  font-weight: 600;
 }

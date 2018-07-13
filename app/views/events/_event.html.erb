@@ -5,7 +5,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row event-body">
   <div class="col-4">
     <div class='event_photo'>
       <%= link_to_if( event.photo?, image_tag(event.photo.url(:medium), class:"rounded"),event.photo.url){ } %>

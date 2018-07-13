@@ -1,3 +1,13 @@
+#required_fields_message {
+  font-size: .9rem;
+  padding-left: 0px;
+  margin-bottom: 12px;
+
+  #asterix {
+    @extend .text-danger;
+  }
+}
+
 .event-title {
   padding: 5px;
   margin-bottom: 10px;
@@ -12,6 +22,62 @@
   }
 }
 
+.event-body {
+  margin-bottom: 36px;
+}
+
 .photographer span {
   font-weight: 600;
+}
+
+address {
+  top: -6px; // for pixel-perfect alignment with the image
+  margin-bottom: .5rem;
+}
+
+.google_map_link {
+  display: block;
+  margin: 18px 0px;
+}
+
+.description {
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  h1 {
+    font-size: 1.75rem; // same as the event title
+  }
+
+  h2 {
+    font-size: 1.55rem;
+  }
+
+  h3 {
+    font-size: 1.35rem;
+  }
+
+  h4 {
+    font-size: 1.15rem;
+  }
+}
+
+#event_form {
+  label {
+    text-align: right;
+  }
+
+  .form-text {
+    font-size: .85rem;
+    padding-left: 0px;
+  }
+
+  .invalid-feedback {
+    padding-left: 0px;
+  }
+}
+
+.actions .col {
+  @extend .col-4;
+  @extend .offset-2;
+  padding-left: 0;
 }

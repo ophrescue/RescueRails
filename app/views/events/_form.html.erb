@@ -1,62 +1,75 @@
-<%= form_for @event, url: @event.new_record? ? events_path : event_path(@event), :html=> { :multipart => true, :class => "container form-horizontal" } do |f| %>
+<%= form_for @event, url: @event.new_record? ? events_path : event_path(@event), :html=> { multipart: true, id: "event_form", class: "container form-horizontal needs-validation", autocomplete: 'off', novalidate: true } do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
-  <div class="form-group row">
-    <%= f.label :title, nil, :class => 'col-form-label col-form-label-sm col-4' %>
-    <%= f.text_field :title, :class => "form-control form-control-sm col-6" %>
+
+  <div class='row'>
+    <div class='col-3 offset-2' id='required_fields_message'>
+      <span id='asterix'>*</span> indicates required fields
+    </div>
   </div>
 
   <div class="form-group row">
-    <%= f.label :event_date, "Date" , :class => 'col-form-label col-form-label-sm col-4'%>
-    <%= f.text_field :event_date, :class => "form-control form-control-sm col-6" %>
+    <%= f.label :title, nil, class: 'col-form-label col-form-label-sm col-2 required' %>
+    <%= f.text_field :title, class: "form-control form-control-sm col-4", required: true, 'data-bootstrap41': true %>
+    <%= f.bootstrap_errors :title, class: 'col-sm-12 offset-2'  %>
   </div>
 
   <div class="form-group row">
-    <%= f.label :start_time, "Start Time", :class => 'col-form-label col-form-label-sm col-4' %>
-    <%= f.text_field :start_time, :class => "form-control form-control-sm col-6" %>
-    <span class="help-inline">(1 PM, 3:45pm, etc.)</span>
+    <%= f.label :event_date, "Date" , class: 'col-form-label col-form-label-sm col-2 required'%>
+    <%= f.text_field :event_date, class: "form-control form-control-sm col-1", required:true %>
+    <%= f.bootstrap_errors :event_date, class: 'col-sm-12 offset-2'  %>
   </div>
 
   <div class="form-group row">
-    <%= f.label :end_time, "End Time", :class => 'col-form-label col-form-label-sm col-4' %>
-    <%= f.text_field :end_time, :class => "form-control form-control-sm col-6" %>
+    <%= f.label :start_time, "Start Time", class: 'col-form-label col-form-label-sm col-2 required' %>
+    <%= f.text_field :start_time, class: "form-control form-control-sm col-1", required:true %>
+    <span class="form-text text-muted col-10 offset-2">1 PM, 3:45pm, etc.</span>
+    <%= f.bootstrap_errors :start_time, class: 'col-sm-12 offset-2'  %>
   </div>
 
   <div class="form-group row">
-    <%= f.label :location_name, "Location Name", :class => 'col-form-label col-form-label-sm col-4' %>
-    <%= f.text_field :location_name %>
+    <%= f.label :end_time, "End Time", class: 'col-form-label col-form-label-sm col-2 required' %>
+    <%= f.text_field :end_time, class: "form-control form-control-sm col-1", required:true %>
+    <%= f.bootstrap_errors :end_time, class: 'col-sm-12 offset-2'  %>
   </div>
 
   <div class="form-group row">
-    <%= f.label :location_url, "Location Website", :class => 'col-form-label col-form-label-sm col-4' %>
-    <%= f.text_field :location_url, :class => "form-control form-control-sm col-6" %>
-    <span class="help-inline">Include http://</span>
+    <%= f.label :location_name, "Location Name", class: 'col-form-label col-form-label-sm col-2 required' %>
+    <%= f.text_field :location_name, class: "form-control form-control-sm col-4", required: true %>
+    <%= f.bootstrap_errors :location_name, class: 'col-sm-12 offset-2'  %>
   </div>
 
   <div class="form-group row">
-    <%= f.label :facebook_url, "Facebook Event URL", :class => 'col-form-label col-form-label-sm col-4' %>
-    <%= f.text_field :facebook_url, :class => "form-control form-control-sm col-6" %>
-    <span class="help-inline">Include http://</span>
+    <%= f.label :location_url, "Location Website", class: 'col-form-label col-form-label-sm col-2' %>
+    <%= f.text_field :location_url, class: "form-control form-control-sm col-4" %>
+    <span class="form-text text-muted col-10 offset-2">Include http://</span>
   </div>
 
   <div class="form-group row">
-    <%= f.label :photographer_name, "Photographer Name", :class => 'col-form-label col-form-label-sm col-4' %>
-    <%= f.text_field :photographer_name %>
+    <%= f.label :facebook_url, "Facebook Event URL", class: 'col-form-label col-form-label-sm col-2' %>
+    <%= f.text_field :facebook_url, class: "form-control form-control-sm col-4" %>
+    <span class="form-text text-muted col-10 offset-2">Include http://</span>
   </div>
 
   <div class="form-group row">
-    <%= f.label :photographer_url, "Photographer Website", :class => 'col-form-label col-form-label-sm col-4' %>
-    <%= f.text_field :photographer_url, :class => "form-control form-control-sm col-6" %>
-    <span class="help-inline">Include http://</span>
+    <%= f.label :photographer_name, "Photographer Name", class: 'col-form-label col-form-label-sm col-2' %>
+    <%= f.text_field :photographer_name, class: "form-control form-control-sm col-4" %>
   </div>
 
   <div class="form-group row">
-    <%= f.label :location_phone, "Location Phone", :class => 'col-form-label col-form-label-sm col-4' %>
-    <%= f.text_field :location_phone, :class => "form-control form-control-sm col-6" %>
+    <%= f.label :photographer_url, "Photographer Website", class: 'col-form-label col-form-label-sm col-2' %>
+    <%= f.text_field :photographer_url, class: "form-control form-control-sm col-4" %>
+    <span class="form-text text-muted col-10 offset-2">Include http://</span>
   </div>
 
   <div class="form-group row">
-    <%= f.label :address, nil , :class => 'col-form-label col-form-label-sm col-4'%>
-    <%= f.text_field :address, :class => "form-control form-control-sm col-6" %>
+    <%= f.label :location_phone, "Location Phone", class: 'col-form-label col-form-label-sm col-2' %>
+    <%= f.text_field :location_phone, class: "form-control form-control-sm col-2" %>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :address, nil , class: 'col-form-label col-form-label-sm col-2 required'%>
+    <%= f.text_field :address, class: "form-control form-control-sm col-4", required:true %>
+    <%= f.bootstrap_errors :address, class: 'col-sm-12 offset-2'  %>
   </div>
 
   <div class="form-group row">
@@ -68,18 +81,17 @@
         <%= f.label "delete", for: 'event_photo_delete' %>
       </div>
     <% else %>
-      <%= f.label "Image", for: 'event_photo', :class => 'col-form-label col-form-label-sm col-4'%>
+      <%= f.label "Image", for: 'event_photo', class: 'col-form-label col-form-label-sm col-2'%>
       <%= f.file_field :photo %>
     <% end %>
   </div>
   <div class="form-group row">
-    <%= f.label :description, nil, :class => 'col-form-label col-form-label-sm col-4' %>
-    <%= f.text_area :description, :class => "form-control form-control-sm col-6", :rows => "20" %>
-    <span class="help-inline">Description now supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>!</span>
+    <%= f.label :description, nil, class: 'col-form-label col-form-label-sm col-2 required' %>
+    <%= f.text_area :description, class: "form-control form-control-sm col-6", :rows => "20", required:true %>
+    <span class="form-text text-muted col-10 offset-2">Description now supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>!</span>
+    <%= f.bootstrap_errors :description, class: 'col-sm-12 offset-2'  %>
   </div>
 
-  <div class="actions well">
-    <%= f.submit "Submit", :class => "btn btn-primary" %>
-  </div>
+  <%= submit_or_return_to(f, events_path('upcoming')) %>
 
 <% end %>

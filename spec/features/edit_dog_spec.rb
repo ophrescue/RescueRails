@@ -1,10 +1,10 @@
 require 'rails_helper'
 require_relative '../helpers/application_helpers'
 require_relative '../helpers/rspec_matchers'
-require_relative '../helpers/dog_form_helpers'
+require_relative '../helpers/client_validation_form_helpers'
 
 feature 'edit a dog', js: true do
-  include DogFormHelpers
+  include ClientValidationFormHelpers
 
   feature 'permitted access to fields' do
     let(:active_record_attributes){ [:created_at, :updated_at, :id].map(&:to_s) }
@@ -283,10 +283,10 @@ feature 'edit a dog', js: true do
         it "should not save, and should notify user" do
           fill_in(:dog_tracking_id, with: 'new_tracking_id') # tracking id must be integer
           expect{ click_button('Submit') }.not_to change{Dog.first.tracking_id}
-          expect(validation_error_message_for(:tracking_id).text).to eq "Tracking id must be numeric"
+          expect(validation_error_message_for(:dog_tracking_id).text).to eq "Tracking id must be numeric"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           fill_in(:dog_tracking_id, with: '22')
-          expect(validation_error_message_for(:tracking_id)).not_to be_visible
+          expect(validation_error_message_for(:dog_tracking_id)).not_to be_visible
           expect(submit_button_form_error_message).not_to be_visible
         end
       end
@@ -302,10 +302,10 @@ feature 'edit a dog', js: true do
         it "should not save and should notify user" do
           fill_in(:dog_name, with: '')
           expect{ click_button('Submit') }.not_to change{Dog.first.name}
-          expect(validation_error_message_for(:name).text).to eq "Name cannot be blank"
+          expect(validation_error_message_for(:dog_name).text).to eq "Name cannot be blank"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           fill_in(:dog_name, with: 'Fido')
-          expect(validation_error_message_for(:name)).not_to be_visible
+          expect(validation_error_message_for(:dog_name)).not_to be_visible
           expect(submit_button_form_error_message).not_to be_visible
         end
       end
@@ -314,10 +314,10 @@ feature 'edit a dog', js: true do
         it "should not save and should notify user" do
           fill_in(:dog_name, with: '  ')
           expect{ click_button('Submit') }.not_to change{Dog.first.name}
-          expect(validation_error_message_for(:name).text).to eq "Name cannot be blank"
+          expect(validation_error_message_for(:dog_name).text).to eq "Name cannot be blank"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           fill_in(:dog_name, with: 'Fido')
-          expect(validation_error_message_for(:name)).not_to be_visible
+          expect(validation_error_message_for(:dog_name)).not_to be_visible
           expect(submit_button_form_error_message).not_to be_visible
         end
       end
@@ -326,10 +326,10 @@ feature 'edit a dog', js: true do
         it "should not save and should notify user" do
           fill_in(:dog_craigslist_ad_url, with: 'www.craigslist.com/foo/bar/baz')
           expect{ click_button('Submit') }.not_to change{Dog.first.craigslist_ad_url}
-          expect(validation_error_message_for(:craigslist_ad_url).text).to eq "please include 'http://'"
+          expect(validation_error_message_for(:dog_craigslist_ad_url).text).to eq "please include 'http://'"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           fill_in(:dog_craigslist_ad_url, with: 'http://www.craigslist.com/foo/bar/baz')
-          expect(validation_error_message_for(:craigslist_ad_url)).not_to be_visible
+          expect(validation_error_message_for(:dog_craigslist_ad_url)).not_to be_visible
           expect(submit_button_form_error_message).not_to be_visible
         end
       end
@@ -338,10 +338,10 @@ feature 'edit a dog', js: true do
         it 'should not save and should notify user' do
           fill_in(:dog_fee, with: '$88')
           expect{ click_button('Submit') }.not_to change{Dog.first.fee}
-          expect(validation_error_message_for(:fee).text).to eq "must be a whole number, with no letters"
+          expect(validation_error_message_for(:dog_fee).text).to eq "must be a whole number, with no letters"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           fill_in(:dog_fee, with: '88')
-          expect(validation_error_message_for(:fee)).not_to be_visible
+          expect(validation_error_message_for(:dog_fee)).not_to be_visible
           expect(submit_button_form_error_message).not_to be_visible
         end
       end
@@ -352,7 +352,6 @@ feature 'edit a dog', js: true do
           expect{ click_button('Submit') }.to change{Dog.first.fee}.to(88)
         end
       end
-
     end
 
     #uniqueness of name and tracking id
@@ -367,8 +366,8 @@ feature 'edit a dog', js: true do
           expect{ click_button('Submit') }.not_to change{ bruno.name }
           expect(page_heading).to eq 'Edit Dog'
           expect(page.find('#dog_name')).to have_class 'is-invalid'
-          expect(validation_error_message_for(:name)).to be_visible
-          expect(validation_error_message_for(:name).text).to eq 'Name has already been taken'
+          expect(validation_error_message_for(:dog_name)).to be_visible
+          expect(validation_error_message_for(:dog_name).text).to eq 'Name has already been taken'
           expect(flash_error_message).to eq "form could not be saved, see errors below"
         end
       end
@@ -380,12 +379,11 @@ feature 'edit a dog', js: true do
           expect{ click_button('Submit') }.not_to change{ bruno.tracking_id }
           expect(page_heading).to eq 'Edit Dog'
           expect(page.find('#dog_tracking_id')).to have_class 'is-invalid'
-          expect(validation_error_message_for(:tracking_id)).to be_visible
-          expect(validation_error_message_for(:tracking_id).text).to eq 'Tracking id has already been taken'
+          expect(validation_error_message_for(:dog_tracking_id)).to be_visible
+          expect(validation_error_message_for(:dog_tracking_id).text).to eq 'Tracking id has already been taken'
           expect(flash_error_message).to eq "form could not be saved, see errors below"
         end
       end
-
     end
   end
 end

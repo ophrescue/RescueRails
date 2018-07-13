@@ -1,0 +1,40 @@
+// mimic the styling of the form-group feedback block in
+// a block attached to the submit button
+.actions .invalid-feedback {
+  display: none;
+}
+
+.actions.form-errors .invalid-feedback {
+  display: block;
+}
+
+label.required:after {
+  @extend .text-danger;
+  content: '*';
+}
+
+.switch_view {
+  @extend .btn;
+  @extend .btn-sm;
+  @extend .btn-outline-secondary;
+  font-size: 0.9rem;
+}
+
+@include media-breakpoint-up(md) {
+  .switch_view {
+    font-size: 1.2rem;
+  }
+}
+
+.title_row {
+  margin-top: 20px;
+  color: #ad8b22;
+  margin-bottom: 28px;
+
+  h1 {
+    display: inline-block;
+    color: #10acd8;
+    letter-spacing: -1.5px;
+    font-style: italic;
+  }
+}

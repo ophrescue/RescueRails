@@ -77,7 +77,8 @@ en:
       index:
         title: "Dog Manager"
     gallery:
-      index: "Our Dogs"
+      index:
+        title: "Our Dogs"
       show:
         status_definitions:
           coming_soon: 'This dog will be entering our foster care very soon. You may apply to adopt this dog, or check back soon as we add more photos and details.'

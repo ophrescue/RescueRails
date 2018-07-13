@@ -1,8 +1,11 @@
 require 'rails_helper'
 require_relative '../helpers/application_helpers'
+require_relative '../helpers/client_validation_form_helpers'
 
 feature 'Manage Events', js: true do
   include ApplicationHelpers
+  include ClientValidationFormHelpers
+
   let!(:admin) { create(:user, :admin) }
 
   describe "add an event" do
@@ -112,6 +115,45 @@ feature 'Manage Events', js: true do
       visit scoped_events_path("upcoming")
       click_link("Apply to Adopt")
       expect(page.current_path).to eq adopt_path
+    end
+  end
+
+  describe "event validation" do
+  # validates_presence_of :title, :event_date, :start_time, :end_time, :location_name, :address, :description
+  # validates_format_of :location_url, with: URI::regexp(%w[http https])
+  # validates :title, length: { maximum: 255 }
+  # validates :location_name, length: { maximum: 255 }
+  # validates :address, length: { maximum: 255 }
+  # validates :location_url, length: { maximum: 255 }
+  # validates :facebook_url,
+  #           length: { maximum: 255 },
+  #           allow_blank: true,
+  #           presence: { message: 'Remove everything after the ? (You just need https://facebook.com/events/12345.../)' }
+  # validates_attachment_size :photo, less_than: 5.megabytes
+  # validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
+  #  see:   https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation
+    let!(:event){ create(:event, :in_the_future) }
+
+    before do
+      sign_in(admin)
+      visit new_event_path
+    end
+
+    it "should show client validation error messages" do
+      click_button('Submit')
+      expect( validation_error_message_for(:event_title).text ).to eq "Title cannot be blank"
+      expect( validation_error_message_for(:event_event_date).text ).to eq "Event date cannot be blank"
+      expect( validation_error_message_for(:event_start_time).text ).to eq "Start time cannot be blank"
+      expect( validation_error_message_for(:event_end_time).text ).to eq "End time cannot be blank"
+      expect( validation_error_message_for(:event_location_name).text ).to eq "Location name cannot be blank"
+      expect( validation_error_message_for(:event_address).text ).to eq "Address cannot be blank"
+      expect( validation_error_message_for(:event_description).text ).to eq "Description cannot be blank"
+    end
+  end
+
+  describe "facebook url sanitization" do
+    it "foo" do
+      expect(1).to eq 0
     end
   end
 end

@@ -80,6 +80,12 @@ class Event < ApplicationRecord
   validates_attachment_size :photo, less_than: 5.megabytes
   validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
 
+  VALIDATION_ERROR_MESSAGES = {}
+  def self.client_validation_error_messages_for(field)
+    key = VALIDATION_ERROR_MESSAGES[field] || :blank
+    I18n.t("errors.messages.#{key}")
+  end
+
   scope :upcoming, ->{ where("event_date >= ?", Date.today).limit(30).order('event_date ASC')  }
   scope :past,     ->{ where("event_date < ?",  Date.today).limit(30).order('event_date DESC') }
 

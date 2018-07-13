@@ -14,9 +14,6 @@
 
 
 @import "bootstrap";
-// I don't believe this is necessary any longer with bootstrap 4.1
-// @import "bootstrap-responsive";
-//@import 'bootstrap-multiselect';
 @import "jquery-token/token-input";
 @import "chosen";
 @import "font-awesome";
@@ -27,33 +24,7 @@
 @import 'topbar_bs41';
 @import 'dogs_index';
 @import 'events';
-
-.switch_view {
-  @extend .btn;
-  @extend .btn-sm;
-  @extend .btn-outline-secondary;
-  font-size: 0.9rem;
-}
-
-@include media-breakpoint-up(md) {
-  .switch_view {
-    font-size: 1.2rem;
-  }
-}
-
-.title_row {
-  margin-top: 20px;
-  color: #ad8b22;
-  margin-bottom: 28px;
-  align-items: baseline;
-
-  h1 {
-    display: inline-block;
-    color: #10acd8;
-    letter-spacing: -1.5px;
-    font-style: italic;
-  }
-}
+@import 'shared_styles';
 
 html {
   font-size: .8rem;

@@ -12,6 +12,12 @@ RescueRails::Application.routes.draw do
     resources :adoptions
   end
 
+  resources :donations do
+    collection do
+      get 'history'
+    end
+  end
+
   resources :comments, except: %i[new]
 
   resources :dogs, controller: 'dogs/gallery', only: %i[index show]

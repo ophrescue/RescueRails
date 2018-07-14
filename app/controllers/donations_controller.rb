@@ -12,14 +12,18 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 class DonationsController < ApplicationController
-
-  before_action :admin_user, only: [:index, :show, :destroy]
+  before_action :authenticate, except: %i[new create]
+  before_action :admin_user, only: %i[history show]
 
   def new
     @donation = Donation.new
   end
 
   def index
+    redirect_to(new_donation_path)
+  end
+
+  def history
     @donations = Donation.order(:id)
     respond_to do |format|
       format.html
@@ -45,7 +49,7 @@ class DonationsController < ApplicationController
   private
 
   def admin_user
-    redirect_to(root_path) unless current_user.admin?
+    redirect_to(new_donation_path) unless current_user.admin?
   end
 
   def stripe_params
@@ -56,9 +60,7 @@ class DonationsController < ApplicationController
     params.require(:donation).permit(:name,
                                      :email,
                                      :amount,
-                                     :comment,
-                                     :card_token)
-
+                                     :comment)
   end
 
   def render_donations_xls

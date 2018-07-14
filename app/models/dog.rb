@@ -179,6 +179,10 @@ class Dog < ApplicationRecord
     (search_params.compact.length != 2) || ( !%w(name tracking_id microchip breed).include? search_field )
   end
 
+  def name=(name)
+    write_attribute(:name, name.strip)
+  end
+
   def breeds
     [ (primary_breed&.name), (secondary_breed&.name) ].compact
   end

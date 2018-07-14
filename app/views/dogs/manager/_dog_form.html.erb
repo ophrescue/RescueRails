@@ -6,15 +6,18 @@
         <div class="form-group row">
           <!-- see config/initializers/rails_bootstrap_errors.rb for usage of the data-bootstrap41 attribute -->
           <%= f.label :tracking_id, "OPH Tracking ID", class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true %>
-          <%= f.text_field :tracking_id, disabled: !can_edit_dogs?, class: "form-control form-control-sm col-6 #{validation_class_for(:tracking_id)}", pattern:'\s{0,}\d{1,20}\s{0,}', 'data-bootstrap41': true, autocomplete: 'off' %>
-          <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(:tracking_id) %></div>
+          <%= f.text_field :tracking_id, disabled: !can_edit_dogs?,
+            class: "form-control form-control-sm col-6 #{validation_class_for(f,:tracking_id)}",
+            pattern:'\s{0,}\d{1,20}\s{0,}', 'data-bootstrap41': true, autocomplete: 'off' %>
+          <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(f,:tracking_id) %></div>
         </div>
       <% end %>
 
       <div class="form-group row">
         <%= f.label :name, class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true %>
-        <%= f.text_field :name, class: "form-control form-control-sm col-6 #{validation_class_for(:name) }", required: true, pattern:'\w{1,}', 'data-bootstrap41': true, autocomplete: 'off' %>
-        <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(:name) %></div>
+        <%= f.text_field :name, class: "form-control form-control-sm col-6 #{validation_class_for(f,:name) }",
+          required: true, pattern: '\s{0,}\w.{1,75}\s{0,}', maxlength:75, 'data-bootstrap41': true, autocomplete: 'off' %>
+        <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(f,:name) %></div>
       </div>
 
       <div class="form-group row">
@@ -23,9 +26,9 @@
       </div>
 
       <div class="form-group row">
-        <%= f.label :status, class: 'col-form-label col-form-label-sm col-4'  %>
-        <%= f.select :status, Dog::STATUSES, {prompt: '-select-'}, {class: 'form-control form-control-sm col-6', required: true} %>
-        <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(:status) %></div>
+        <%= f.label :status, class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true  %>
+        <%= f.select :status, Dog::STATUSES, {prompt: '-select-'}, {class: "form-control form-control-sm col-6 #{validation_class_for(f,:status)}", 'data-bootstrap41': true, required: true} %>
+        <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(f,:status) %></div>
       </div>
 
       <div class="form-group row">
@@ -274,42 +277,9 @@
     <%= f.text_area :behavior_summary, class: "input-xxlarge form-control form-control-sm", rows: "8", disabled: !can_manage_medical_behavior_summaries? %>
   </div>
 
-  <div class="actions well">
-    <%= f.submit "Submit", class: 'btn btn-primary mr-20' %>
-    <%= link_to 'Cancel', dogs_manager_index_path, class: 'btn btn-danger' %>
-    <div class='invalid-feedback'>form cannot be saved due to errors</div>
-  </div>
-<% end %>
+  <%= submit_or_return_to(f, dogs_manager_index_path) %>
 
-<script type='text/javascript'>
-// form validation
-  (function() {
-    'use strict';
-    window.addEventListener('load', function() {
-      var forms = document.getElementsByClassName('needs-validation');
-      var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-          check_inputs_validity();
-        }, false);
-      });
-    }, false);
-  })();
-  $(function(){
-    check_inputs_validity = function(){
-      if ($('form.was-validated input:invalid').length > 0) {
-        $('.actions').addClass('form-errors')
-      }else{
-        $('.actions').removeClass('form-errors')
-      }
-    }
-    $('form input').on({change: check_inputs_validity, keyup: check_inputs_validity })
-  })
-</script>
+<% end %>
 
 <script type='html/template' id='new_attachment_input'>
   <div style='height:0px;' class='new_file row mb-0 mb-sm-3 mt-3 mt-sm-0'>
@@ -383,7 +353,6 @@
     $('.new_attachments').on('change','input',function(){
       $('#add_attachment').html("Add another Document")
     })
-
   })
 </script>
 

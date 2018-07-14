@@ -185,11 +185,11 @@ feature 'add a dog', js: true do
     context 'user enters invalid attributes --client-side validation' do
       context 'no status selected' do
         it "should not save and should notify user" do
+          fill_in(:dog_name, with: 'Fido')
           expect{ click_button('Submit') }.not_to change{Dog.count}
           expect(validation_error_message_for(:status).text).to eq "Status must be selected"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           select('adoption pending', from: 'dog_status')
-          fill_in(:dog_name, with: 'Fido')
           expect(validation_error_message_for(:status)).not_to be_visible
           expect(submit_button_form_error_message).not_to be_visible
         end
@@ -197,6 +197,7 @@ feature 'add a dog', js: true do
 
       context 'blank name' do
         it "should not save and should notify user" do
+          select('adoption pending', from: 'dog_status')
           expect{ click_button('Submit') }.not_to change{Dog.count}
           expect(validation_error_message_for(:name).text).to eq "Name cannot be blank"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
@@ -206,8 +207,24 @@ feature 'add a dog', js: true do
         end
       end
 
+      context 'with any of the Faker names' do
+        it "should validate the name on the browser" do
+          click_button('Submit')
+          expect(validation_error_message_for(:name).text).to eq "Name cannot be blank"
+          # here we test against just 30 names, for performance reasons
+          # if any changes are made to this code it would be wise to
+          # remove the .sample(30) and verify code against all thenames
+          names = I18n.t('faker.dog.name').sample(30)
+          names.each do |name|
+            fill_in(:dog_name, with: name)
+            expect(validation_error_message_for(:name)).not_to be_visible
+          end
+        end
+      end
+
       context 'whitespace name' do
         it "should not save and should notify user" do
+          select('adoption pending', from: 'dog_status')
           fill_in(:dog_name, with: '  ')
           expect{ click_button('Submit') }.not_to change{Dog.count}
           expect(validation_error_message_for(:name).text).to eq "Name cannot be blank"
@@ -218,9 +235,28 @@ feature 'add a dog', js: true do
         end
       end
 
+      context 'name with legitimate whitespace' do
+        it "should save" do
+          fill_in(:dog_name, with: ' Fido Smith ')
+          select('adoption pending', from: 'dog_status')
+          expect{ click_button('Submit') }.to change{Dog.count}.by(1)
+          expect(Dog.first.name).to eq "Fido Smith"
+        end
+      end
+
+      context 'name with acceptable punctuation' do
+        it "should save" do
+          fill_in(:dog_name, with: ' B.B. Mc-Fido ')
+          select('adoption pending', from: 'dog_status')
+          expect{ click_button('Submit') }.to change{Dog.count}.by(1)
+          expect(Dog.first.name).to eq "B.B. Mc-Fido"
+        end
+      end
+
       context 'improperly formatted craigslist ad url' do
         it "should not save and should notify user" do
           fill_in(:dog_name, with: 'Fido')
+          select('adoption pending', from: 'dog_status')
           fill_in(:dog_craigslist_ad_url, with: 'www.craigslist.com/foo/bar/baz')
           expect{ click_button('Submit') }.not_to change{Dog.count}
           expect(validation_error_message_for(:craigslist_ad_url).text).to eq "please include 'http://'"
@@ -234,6 +270,7 @@ feature 'add a dog', js: true do
       context 'adoption fee includes letters' do
         it 'should not save and should notify user' do
           fill_in(:dog_name, with: 'Fido')
+          select('adoption pending', from: 'dog_status')
           fill_in(:dog_fee, with: '$88')
           expect{ click_button('Submit') }.not_to change{Dog.count}
           expect(validation_error_message_for(:fee).text).to eq "must be a whole number, with no letters"

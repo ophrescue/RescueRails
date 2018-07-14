@@ -1,9 +1,9 @@
 module DogsHelper
-  def validation_class_for(field)
+  def validation_class_for(f,field)
     'is-invalid' if @dog.errors.messages[field].any?
   end
 
-  def validation_error_message_for(field)
+  def validation_error_message_for(f,field)
     message = @dog.errors.messages[field].first || client_validation_message_for(field)
     "#{field.to_s.humanize(keep_id_suffix: true)} #{message}"
   end

@@ -216,17 +216,6 @@ th .desc {
   min-width:300px
 }
 
-#photos_sort {
-  font-size: 12px;
-  color: #777;
-}
-
-td.sort-handle {
-  vertical-align: middle;
-  text-align: right;
-  cursor: move;
-}
-
 #edit_flag select,
 #edit_assigned select,
 #edit_status select {
@@ -265,9 +254,7 @@ div .fb-like {
   padding: 5px;
 }
 
-.mb-5 { margin-bottom: 5px; }
-
-.mr-20 { margin-right: 20px; }
+.editable.mb-5, .read-only.mb-5 { margin-bottom: 5px; }
 
 .thumbnail-no-border {
   border: 0 none;

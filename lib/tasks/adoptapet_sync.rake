@@ -9,22 +9,29 @@ namespace :adoptapet_sync do
 
   desc "Export Records to CSV for adoptapet"
   task export_upload: :environment do
-    FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
-    FileUtils::Verbose.mkdir(path)
-
-    FileUtils::Verbose.cp "#{Rails.root.to_s}/lib/tasks/import.cfg", path
+    if Rails.env.production?
+      FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
+      FileUtils::Verbose.mkdir(path)
+      FileUtils::Verbose.cp "#{Rails.root.to_s}/lib/tasks/import.cfg", path
+    else
+      FileUtils.rm_r(path) if Dir.exists?(path)
+      FileUtils.mkdir(path)
+      FileUtils.cp "#{Rails.root.to_s}/lib/tasks/import.cfg", path
+    end
 
     STATES.each do |state|
       filename = "pets_#{state}.csv"
 
-      puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Adoptapet #{state} Export Start"
+      if Rails.env.production?
+        puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Adoptapet #{state} Export Start"
+      end
 
       dogs = Dog.joins(:foster).where(
         { status: Dog::PUBLIC_STATUSES,
           users: {region: state}
          })
 
-      desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs/"
+      desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs"
 
       CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
         dogs.each do |d|
@@ -58,9 +65,9 @@ namespace :adoptapet_sync do
           ]
         end
       end
-      puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Adoptapet #{state} Export Complete"
 
       if Rails.env.production?
+        puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Adoptapet #{state} Export Complete"
         puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Begin Upload for #{state}"
         ## Being Upload
         ftp = Net::FTP.new
@@ -71,8 +78,6 @@ namespace :adoptapet_sync do
 
         ftp.close
         puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Upload Completed for #{state}"
-      else
-        puts "Not production, skipping upload"
       end
     end
   end

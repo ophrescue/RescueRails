@@ -7,7 +7,9 @@
   <div class="row title_row justify-content-between">
     <div class='col-12 col-sm-auto'>
       <h1>#<%=@dog.tracking_id%> <%= @dog.name %>:</h1>
-      <span id='size'><%= @dog.size.titleize %>-size,</span>
+      <% if @dog.size? %>
+        <span id='size'><%= @dog.size.titleize %>-size,</span>
+      <% end %>
       <span id='gender'><%= @dog.gender %>,</span>
       <span id='age'><%= @dog.age ? @dog.age.titleize : " " %></span>
       <span id='breed'><%= @dog.breeds.join(" x ").html_safe %></span>,

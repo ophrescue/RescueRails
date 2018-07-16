@@ -56,7 +56,7 @@
         <dt>Has Medical Need</dt>
         <dd id='has_medical_need'><%= @dog.has_medical_need.as_icon %></dd>
         <dt>Is Special Needs</dt>
-        <dd id='special_needs'><%= @dog.is_special_needs.as_icon || ' ' %></dd>
+        <dd id='special_needs'><%= @dog.is_special_needs.as_icon %></dd>
         <dt>Needs Spay or Neuter</dt>
         <dd id='not_altered'><%= (!@dog.is_altered).as_icon %></dd>
         <dt>High Priority</dt>

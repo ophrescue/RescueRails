@@ -4,8 +4,9 @@ module AboutDogHelper
   end
 
   private
+
   def first_sentence
-    [up_to_date_on_shots,  spay_or_neuter_status].to_sentence_period
+    [up_to_date_on_shots, spay_or_neuter_status].to_sentence_period
   end
 
   def second_sentence
@@ -40,7 +41,7 @@ module AboutDogHelper
   end
 
   def spayed_or_neutered
-    @dog.gender=="M" ? "neutered" : "spayed"
+    @dog.gender == "Male" ? "neutered" : "spayed"
   end
 
   def posessive_pronoun
@@ -52,6 +53,6 @@ module AboutDogHelper
   end
 
   def male?
-    @dog.gender=="Male"
+    @dog.gender == "Male"
   end
 end

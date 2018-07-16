@@ -76,6 +76,9 @@ class CommentsController < ApplicationController
 
   def find_commentable
     params.each do |name, value|
+      if name == 'dogs_manager_id'  #duct tape to fix #834
+        name = 'dogs_id'
+      end                           #end duct tape
       matches = /(.+)_id$/.match(name)
 
       if matches.present?

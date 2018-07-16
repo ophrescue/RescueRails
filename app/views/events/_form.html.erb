@@ -9,7 +9,7 @@
 
   <div class="form-group row">
     <%= f.label :title, nil, class: 'col-form-label col-form-label-sm col-2 required' %>
-    <%= f.text_field :title, class: "form-control form-control-sm col-4", required: true, 'data-bootstrap41': true %>
+    <%= f.text_field :title, class: "form-control form-control-sm col-4", required: true, 'data-bootstrap41': true, maxlength: 255 %>
     <%= f.bootstrap_errors :title, class: 'col-sm-12 offset-2'  %>
   </div>
 
@@ -34,20 +34,22 @@
 
   <div class="form-group row">
     <%= f.label :location_name, "Location Name", class: 'col-form-label col-form-label-sm col-2 required' %>
-    <%= f.text_field :location_name, class: "form-control form-control-sm col-4", required: true %>
+    <%= f.text_field :location_name, class: "form-control form-control-sm col-4", required: true, maxlength: 255 %>
     <%= f.bootstrap_errors :location_name, class: 'col-sm-12 offset-2'  %>
   </div>
 
   <div class="form-group row">
     <%= f.label :location_url, "Location Website", class: 'col-form-label col-form-label-sm col-2' %>
-    <%= f.text_field :location_url, class: "form-control form-control-sm col-4" %>
+    <%= f.text_field :location_url, class: "form-control form-control-sm col-4", type: :url, maxlength: 255 %>
     <span class="form-text text-muted col-10 offset-2">Include http://</span>
+    <%= f.bootstrap_errors :location_url, class: 'col-sm-12 offset-2'  %>
   </div>
 
   <div class="form-group row">
     <%= f.label :facebook_url, "Facebook Event URL", class: 'col-form-label col-form-label-sm col-2' %>
-    <%= f.text_field :facebook_url, class: "form-control form-control-sm col-4" %>
+    <%= f.text_field :facebook_url, class: "form-control form-control-sm col-4", type: :url, maxlength: 255 %>
     <span class="form-text text-muted col-10 offset-2">Include http://</span>
+    <%= f.bootstrap_errors :facebook_url, class: 'col-sm-12 offset-2'  %>
   </div>
 
   <div class="form-group row">
@@ -68,7 +70,7 @@
 
   <div class="form-group row">
     <%= f.label :address, nil , class: 'col-form-label col-form-label-sm col-2 required'%>
-    <%= f.text_field :address, class: "form-control form-control-sm col-4", required:true %>
+    <%= f.text_field :address, class: "form-control form-control-sm col-4", required:true, maxlength: 255 %>
     <%= f.bootstrap_errors :address, class: 'col-sm-12 offset-2'  %>
   </div>
 
@@ -83,6 +85,7 @@
     <% else %>
       <%= f.label "Image", for: 'event_photo', class: 'col-form-label col-form-label-sm col-2'%>
       <%= f.file_field :photo %>
+      <%= f.bootstrap_errors :photo, class: 'col-sm-12 offset-2'  %>
     <% end %>
   </div>
   <div class="form-group row">

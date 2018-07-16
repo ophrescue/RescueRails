@@ -119,16 +119,6 @@ feature 'Manage Events', js: true do
   end
 
   describe "event validation" do
-  # validates_presence_of :title, :event_date, :start_time, :end_time, :location_name, :address, :description
-  # validates_format_of :location_url, with: URI::regexp(%w[http https])
-  # validates :title, length: { maximum: 255 }
-  # validates :location_name, length: { maximum: 255 }
-  # validates :address, length: { maximum: 255 }
-  # validates :location_url, length: { maximum: 255 }
-  # validates :facebook_url,
-  #           length: { maximum: 255 },
-  #           allow_blank: true,
-  #           presence: { message: 'Remove everything after the ? (You just need https://facebook.com/events/12345.../)' }
   # validates_attachment_size :photo, less_than: 5.megabytes
   # validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
   #  see:   https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation
@@ -139,7 +129,7 @@ feature 'Manage Events', js: true do
       visit new_event_path
     end
 
-    it "should show client validation error messages" do
+    it "should show client validation error messages for required fields" do
       click_button('Submit')
       expect( validation_error_message_for(:event_title).text ).to eq "Title cannot be blank"
       expect( validation_error_message_for(:event_event_date).text ).to eq "Event date cannot be blank"
@@ -148,6 +138,33 @@ feature 'Manage Events', js: true do
       expect( validation_error_message_for(:event_location_name).text ).to eq "Location name cannot be blank"
       expect( validation_error_message_for(:event_address).text ).to eq "Address cannot be blank"
       expect( validation_error_message_for(:event_description).text ).to eq "Description cannot be blank"
+    end
+
+    it "should not show client validation error messages for blank url fields" do
+      click_button('Submit')
+      expect( validation_error_message_for(:event_location_url) ).not_to be_visible
+      expect( validation_error_message_for(:event_facebook_url) ).not_to be_visible
+    end
+
+    it "should show client validation error messages for improperly formatted url fields" do
+      fill_in('event_location_url', with: 'www.example.com')
+      fill_in('event_facebook_url', with: 'www.example.com')
+      click_button('Submit')
+      expect( validation_error_message_for(:event_location_url).text ).to eq "Location url is improperly formatted"
+      expect( validation_error_message_for(:event_facebook_url).text ).to eq "Facebook url is improperly formatted"
+    end
+
+    it "should not show client validation error messages for properly formatted url fields" do
+      fill_in('event_location_url', with: 'http:www.example.com')
+      fill_in('event_facebook_url', with: 'http:www.example.com')
+      click_button('Submit')
+      expect( validation_error_message_for(:event_location_url) ).not_to be_visible
+      expect( validation_error_message_for(:event_facebook_url) ).not_to be_visible
+    end
+
+    it "should show error message when image > 5Mb is chosen" do
+      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"dog_large_pic.jpg") )
+      expect( validation_error_message_for(:event_photo).text ).to eq "Photo must be smaller than 5Mb"
     end
   end
 

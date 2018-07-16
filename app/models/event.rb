@@ -80,7 +80,7 @@ class Event < ApplicationRecord
   validates_attachment_size :photo, less_than: 5.megabytes
   validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
 
-  VALIDATION_ERROR_MESSAGES = {}
+  VALIDATION_ERROR_MESSAGES = {location_url: :url_format, facebook_url: :url_format, photo: :attachment_size}
   def self.client_validation_error_messages_for(field)
     key = VALIDATION_ERROR_MESSAGES[field] || :blank
     I18n.t("errors.messages.#{key}")

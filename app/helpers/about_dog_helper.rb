@@ -10,7 +10,7 @@ module AboutDogHelper
   end
 
   def second_sentence
-    caveats.any? && "#{pronoun} #{caveats.to_sentence_period}"
+    "#{pronoun} #{caveats.to_sentence_period}" if caveats.any?
   end
 
   def third_sentence

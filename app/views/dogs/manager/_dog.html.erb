@@ -1,8 +1,10 @@
 <div class='row dog line-1'>
-  <div class='col-3'>
-    <%= link_to "<span class='id'>##{dog.tracking_id}</span>&nbsp;<span class='name'>#{dog.name}</span>".html_safe, dogs_manager_path(dog) %>:
-  </div>
   <div class='col'>
+    <%= link_to "<span class='id'>##{dog.tracking_id}</span>&nbsp;<span class='name'>#{dog.name}</span>".html_safe, dogs_manager_path(dog) %>
+  </div>
+</div>
+<div class='row dog line-2'>
+  <div class='col offset-md-3'>
     <span><%= size_abbrev(dog.size) %>,</span>
     <span class='age'><%= dog.age ? dog.age.titleize : " " %>,</span>
     <span class='gender'><%= dog.gender %>,</span>
@@ -14,7 +16,7 @@
     </span >
   </div>
 </div>
-<div class='row dog line-2 d-none d-md-flex'> <!-- for now it's disabled on mobile, but the layout below is mobile-ready if this info is needed in this list for mobile iso on the #show page -->
+<div class='row dog line-3 d-none d-md-flex'> <!-- for now it's disabled on mobile, but the layout below is mobile-ready if this info is needed in this list for mobile iso on the #show page -->
   <div class='col-4 col-md-1 intake_date'><%= dog.intake_dt.strftime("%m/%d/%y") unless dog.intake_dt.blank? %></div>
   <div class='col-4 col-md-2 flags'>
     <div class="<%= 'medical_review_needed' unless dog.medical_review_complete %>" data-toggle='tooltip' data-placement='bottom' title='Medical Review Incomplete'></div>
@@ -32,7 +34,7 @@
             data-toggle='popover'
             data-placement='left'
             data-trigger="focus"
-            title="Most recent comment for <%= dog.name %>" 
+            title="Most recent comment for <%= dog.name %>"
             data-content="<%= dog.comments.first.content %>" ></a>
     <% end %>
   </div>
@@ -67,7 +69,7 @@
             data-toggle='popover'
             data-placement='left'
             data-trigger="focus"
-            title="Most recent comment for <%= dog.name %>" 
+            title="Most recent comment for <%= dog.name %>"
             data-content="<%= dog.comments.first.content %>" ></a>
     <% end %>
   </div>

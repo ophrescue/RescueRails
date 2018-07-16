@@ -109,6 +109,7 @@ Rails.application.configure do
     },
     s3_protocol: 'https',
     s3_region: ENV['AWS_REGION'],
+    path: ":paperclip_production_path",
     url: ':s3_domain_url'
   }
 

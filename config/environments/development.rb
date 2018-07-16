@@ -72,17 +72,6 @@ Rails.application.configure do
   # Paperclip Configuration
   Paperclip.options[:command_path] = "/usr/local/bin/"
 
-  # Paperclip & Amazon S3 Configuration
-  #config.paperclip_defaults = {
-    #storage: :s3,
-    #s3_credentials: {
-      #bucket: 'ophrescue-production'
-    #},
-    #s3_protocol: 'https',
-    #s3_region: 'ap-northeast-1',
-    #url: 's3.amazonaws.com'
-  #}
-
   # Exception Notification
   ExceptionNotifier::Rake.configure
 

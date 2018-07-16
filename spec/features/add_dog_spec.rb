@@ -130,8 +130,8 @@ feature 'add a dog', js: true do
         expect(page.all('#new_dog_attachment').length).to eq 2
 
         # 5 size variants created from each image upload, see app/models/photo.rb
-        expect{ click_button('Submit') }.to change{Dir.glob(Rails.root.join('public','system','test','dog_photo','*')).length}.by(10).
-                                        and change{Dir.glob(Rails.root.join('public','system','test','attachment','*')).length}.by(2)
+        expect{ click_button('Submit') }.to change{Dir.glob(Rails.root.join('public','system','test','photos','*')).length}.by(10).
+                                        and change{Dir.glob(Rails.root.join('public','system','test','attachments','*')).length}.by(2)
 
         dog = Dog.first
         expect(dog.name).to eq 'newname'
@@ -185,6 +185,7 @@ feature 'add a dog', js: true do
     context 'user enters invalid attributes --client-side validation' do
       context 'no status selected' do
         it "should not save and should notify user" do
+          fill_in(:dog_name, with: 'Fido')
           expect{ click_button('Submit') }.not_to change{Dog.count}
           expect(validation_error_message_for(:dog_status).text).to eq "Status must be selected"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
@@ -197,6 +198,7 @@ feature 'add a dog', js: true do
 
       context 'blank name' do
         it "should not save and should notify user" do
+          select('adoption pending', from: 'dog_status')
           expect{ click_button('Submit') }.not_to change{Dog.count}
           expect(validation_error_message_for(:dog_name).text).to eq "Name cannot be blank"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
@@ -207,8 +209,24 @@ feature 'add a dog', js: true do
         end
       end
 
+      context 'with any of the Faker names' do
+        it "should validate the name on the browser" do
+          click_button('Submit')
+          expect(validation_error_message_for(:dog_name).text).to eq "Name cannot be blank"
+          # here we test against just 30 names, for performance reasons
+          # if any changes are made to this code it would be wise to
+          # remove the .sample(30) and verify code against all thenames
+          names = I18n.t('faker.dog.name').sample(30)
+          names.each do |name|
+            fill_in(:dog_name, with: name)
+            expect(validation_error_message_for(:dog_name)).not_to be_visible
+          end
+        end
+      end
+
       context 'whitespace name' do
         it "should not save and should notify user" do
+          select('adoption pending', from: 'dog_status')
           fill_in(:dog_name, with: '  ')
           expect{ click_button('Submit') }.not_to change{Dog.count}
           expect(validation_error_message_for(:dog_name).text).to eq "Name cannot be blank"
@@ -217,6 +235,24 @@ feature 'add a dog', js: true do
           expect(validation_error_message_for(:dog_name)).not_to be_visible
           select('adoption pending', from: 'dog_status')
           expect(submit_button_form_error_message).not_to be_visible
+        end
+      end
+
+      context 'name with legitimate whitespace' do
+        it "should save" do
+          fill_in(:dog_name, with: ' Fido Smith ')
+          select('adoption pending', from: 'dog_status')
+          expect{ click_button('Submit') }.to change{Dog.count}.by(1)
+          expect(Dog.first.name).to eq "Fido Smith"
+        end
+      end
+
+      context 'name with acceptable punctuation' do
+        it "should save" do
+          fill_in(:dog_name, with: ' B.B. Mc-Fido ')
+          select('adoption pending', from: 'dog_status')
+          expect{ click_button('Submit') }.to change{Dog.count}.by(1)
+          expect(Dog.first.name).to eq "B.B. Mc-Fido"
         end
       end
 
@@ -238,6 +274,7 @@ feature 'add a dog', js: true do
         it 'should not save and should notify user' do
           select('adoption pending', from: 'dog_status')
           fill_in(:dog_name, with: 'Fido')
+          select('adoption pending', from: 'dog_status')
           fill_in(:dog_fee, with: '$88')
           expect{ click_button('Submit') }.not_to change{Dog.count}
           expect(validation_error_message_for(:dog_fee).text).to eq "must be a whole number, with no letters"

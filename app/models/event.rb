@@ -73,9 +73,7 @@ class Event < ApplicationRecord
   has_attached_file :photo,
                     styles: { original: '1024x1024>',
                                medium: '205x300>',
-                               thumb: '64x64>' },
-                    path: ':rails_root/public/system/event_photo/:id/:style/:filename',
-                    url: '/system/event_photo/:id/:style/:filename'
+                               thumb: '64x64>' }
 
   validates_attachment_size :photo, less_than: 5.megabytes
   validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']

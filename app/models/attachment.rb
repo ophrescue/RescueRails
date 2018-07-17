@@ -33,10 +33,6 @@ class Attachment < ApplicationRecord
   belongs_to :attachable, polymorphic: true
   belongs_to :updated_by_user, class_name: 'User'
 
-  PAPERCLIP_STORAGE_PATH = { test:       "/system/test/attachments/:hash.:extension",
-                             production: "/attachments/:hash.:extension",
-                             staging:    "/attachments/:hash.:extension" }
-
   CONTENT_TYPES = ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif',
                    'application/msword', 'application/vnd.ms-word',
                    'application/msexcel', 'application/vnd.ms-excel',

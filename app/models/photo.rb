@@ -34,9 +34,6 @@ class Photo < ApplicationRecord
   acts_as_list scope: :dog
 
   HASH_SECRET = "80fd0acd1674d7efdda5b913a7110d5c955e2d73"
-  PAPERCLIP_STORAGE_PATH = { test:       "/system/test/photos/:hash.:extension",
-                             production: "/dog_photo/:hash.:extension",
-                             staging:    "/dog_photo/:hash.:extension" }
 
   has_attached_file :photo,
             styles: { original: '1280x1024>',

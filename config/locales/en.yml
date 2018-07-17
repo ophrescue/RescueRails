@@ -39,6 +39,9 @@ en:
     manager:
       new: 'Add a New Dog'
       edit: 'Edit Dog'
+      index: 'Dog Manager'
+    gallery:
+      index: 'Our Dogs'
     events:
       destroy: 'Events'
       edit: 'Edit Event'
@@ -83,4 +86,3 @@ en:
           not_available: 'not available'
           return_pending: 'return pending'
           completed: 'completed'
-

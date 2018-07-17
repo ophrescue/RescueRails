@@ -19,7 +19,13 @@ Capybara.register_driver :selenium_chrome_headless do |app|
   Capybara::Selenium::Driver.new app, browser: :chrome, desired_capabilities: capabilities
 end
 
+Capybara.register_driver :firefox do |app|
+  options = Selenium::WebDriver::Firefox::Options.new
+  Capybara::Selenium::Driver.new(app, :browser => :firefox, :options => options)
+end
+
 Capybara.javascript_driver = :selenium_chrome_headless
+#Capybara.javascript_driver = :firefox
 
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |file| require file }
 

@@ -91,6 +91,21 @@
             <%= link_to_if @dog.craigslist_ad_url, "Craigslist", @dog.craigslist_ad_url do "Needs Craigslist ad" end %>
           </div>
         </dd>
+        <% if @dog.attachments.any? %>
+          <dt>Attachments</dt>
+          <dd>
+            <ul class="unstyled">
+            <% @dog.attachments.each do |a| %>
+              <li>
+              <%= link_to a.download_url do %>
+                <i class="fa fa-cloud-download"></i>
+              <% end %>
+              <%= link_to a.attachment_file_name, a %>
+              </li>
+            <% end %>
+            </ul>
+          </dd>
+        <% end %>
         <dt>Up-to-date on shots</dt>
         <dd id='is_uptodateonshots'><%= @dog.is_uptodateonshots.as_icon %></dd>
         <dt>First shots</dt>

@@ -1,4 +1,4 @@
-<%= form_for @dog.comments.build, url: new_dogs_manager_comment_path(@dog), html: {id: "new_comment"} do |f| %>
+<%= form_for @dog.comments.build, url: dogs_manager_comments_path(@dog), html: {id: "new_comment"} do |f| %>
   <div class='form-group'>
     <label for='comment_content' class='h4'>Add comment</label>
     <%= f.text_area :content, :class => "form-control", :rows => "6" %>

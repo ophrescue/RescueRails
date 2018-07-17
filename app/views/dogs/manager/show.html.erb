@@ -32,6 +32,21 @@
 
       <%= render partial: 'medical_summary' %>
       <%= render partial: 'behaviour_summary' %>
+
+      <% if @dog.attachments.any? %>
+        <h4>Attachments</h4>
+          <ul class="list-unstyled">
+          <% @dog.attachments.each do |a| %>
+            <li>
+            <%= link_to a.download_url do %>
+              <i class="fa fa-cloud-download"></i>
+            <% end %>
+            <%= link_to a.attachment_file_name, a %>
+            </li>
+          <% end %>
+          </ul>
+      <% end %>
+
       <div class="d-none d-sm-block">
         <%= render partial: 'comments_audits' %>
       </div>
@@ -91,6 +106,7 @@
             <%= link_to_if @dog.craigslist_ad_url, "Craigslist", @dog.craigslist_ad_url do "Needs Craigslist ad" end %>
           </div>
         </dd>
+
         <dt>Up-to-date on shots</dt>
         <dd id='is_uptodateonshots'><%= @dog.is_uptodateonshots.as_icon %></dd>
         <dt>First shots</dt>

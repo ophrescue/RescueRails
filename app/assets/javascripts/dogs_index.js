@@ -5,7 +5,7 @@ GlobalMultiSelect.fetch = function(){
   window.location='/dogs_manager?'+query;
 };
 
-GlobalMultiSelect.search = function(){
+GlobalMultiSelect.search = function(event){
   event.stopPropagation()
   if(GlobalMultiSelect.validate_search()){
     GlobalMultiSelect.fetch()
@@ -15,7 +15,7 @@ GlobalMultiSelect.search = function(){
   }
 };
 
-GlobalMultiSelect.search_reset = function(){
+GlobalMultiSelect.search_reset = function(event){
   event.stopPropagation();
   $('#search_field_index input#search').val('')
   $('#search_field_index input:radio').prop('checked',false)
@@ -84,9 +84,9 @@ $(function(){
   $(document).on('click', '#reset_message', GlobalMultiSelect.fetch_all );
   $(document).on('click', '.globalselect-container>ul>li>label', GlobalMultiSelect.filter_select );
   $(document).on('keyup', '#filter_controls input#search', GlobalMultiSelect.manage_search_button_visibility );
-  $(document).on('click', '#filter_controls .dropdown-menu .input-group#search #search_icon', GlobalMultiSelect.search );
-  $(document).on('click', '#filter_controls .dropdown-menu .input-group#search #search_reset_icon', GlobalMultiSelect.search_reset );
+  $(document).on('click', '#filter_controls .dropdown-menu .input-group#search #search_button', GlobalMultiSelect.search );
+  $(document).on('click', '#filter_controls .dropdown-menu .input-group#search #search_reset_button', GlobalMultiSelect.search_reset );
   $(document).on('change', '#filter_controls .dropdown-menu input:radio', GlobalMultiSelect.remove_error );
-  $('#search_field_index').on('show.bs.dropdown',GlobalMultiSelect.manage_search_button_visibility)
-  $('#search_field_index').on('hide.bs.dropdown',GlobalMultiSelect.search_revert_to_current)
+  $('#search_field_index').on('show.bs.dropdown',GlobalMultiSelect.manage_search_button_visibility);
+  $('#search_field_index').on('hide.bs.dropdown',GlobalMultiSelect.search_revert_to_current);
 });

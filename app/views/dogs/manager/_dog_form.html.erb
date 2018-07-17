@@ -316,28 +316,28 @@
   }
 
   $(function(){
-    $('#add_photo').on('click', function(){
+    $('#add_photo').on('click', function(event){
       event.preventDefault();
       event.stopPropagation();
       add_file_field_for('photos');
     });
 
-    $('#add_attachment').on('click', function(){
+    $('#add_attachment').on('click', function(event){
       event.preventDefault();
       event.stopPropagation();
       add_file_field_for('attachments');
     });
 
-    $('.new_photos').on('click','#remove_photo', function(){
+    $('.new_photos').on('click','#remove_photo', function(event){
       event.preventDefault();
       event.stopPropagation();
-      $(this).parent().animate({height: '0px'},100,function(){
+      $(this).parent().animate({height: '0px'},100,function(event){
         this.remove()
         if($('.new_photos .new_file').length==0){ $('#add_photo').html("Add a Photo") }
       });
     })
 
-    $('.new_attachments').on('click','#remove_attachment', function(){
+    $('.new_attachments').on('click','#remove_attachment', function(event){
       event.preventDefault();
       event.stopPropagation();
       $(this).parent().animate({height: '0px'},100,function(){

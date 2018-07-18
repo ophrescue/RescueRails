@@ -60,13 +60,16 @@ gem 'factory_bot_rails'
 
 group :development, :test do
   gem 'faker'
+  gem 'flamegraph'
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'pry-stack_explorer'
+  gem 'rack-mini-profiler', require: false
   gem 'rspec-collection_matchers'
   gem 'rspec-rails'
   gem 'puma'
+  gem 'stackprof'
 end
 
 group :test do

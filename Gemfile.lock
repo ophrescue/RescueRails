@@ -163,6 +163,7 @@ GEM
     faraday (0.15.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
+    flamegraph (0.9.5)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
     geocoder (1.4.9)
@@ -246,6 +247,8 @@ GEM
     rack (2.0.5)
     rack-cache (1.8.0)
       rack (>= 0.4)
+    rack-mini-profiler (1.0.0)
+      rack (>= 1.2.0)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rack_session_access (0.2.0)
@@ -362,6 +365,7 @@ GEM
     sshkit (1.16.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    stackprof (0.2.12)
     strip_attributes (1.8.0)
       activemodel (>= 3.0, < 6.0)
     sucker_punch (1.5.1)
@@ -434,6 +438,7 @@ DEPENDENCIES
   exception_notification-rake (~> 0.3.0)
   factory_bot_rails
   faker
+  flamegraph
   font-awesome-rails
   geocoder
   gibbon
@@ -449,6 +454,7 @@ DEPENDENCIES
   pry-stack_explorer
   puma
   rack-cache
+  rack-mini-profiler
   rack_session_access
   rails (~> 5.2.0)
   rails-controller-testing
@@ -462,6 +468,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   sass-rails
+  stackprof
   strip_attributes
   sucker_punch (~> 1.5.1)
   therubyracer

@@ -175,6 +175,35 @@ class User < ApplicationRecord
   scope :puppies_ok,              -> (status = true) { where(can_foster_puppies: status) }
   scope :has_parvo_house,         -> (status = true) { where(parvo_house: status) }
 
+  HOUSE_TYPES = %w[ rent own ]
+
+  # mapping of query string parameter to model attributes
+  FILTER_FLAGS = { admin: :admin,
+                   adoption_coordinator: :edit_my_adopters,
+                   event_planner: :edit_events,
+                   dog_adder: :add_dogs,
+                   dog_editor: :edit_dogs,
+                   foster: :is_foster,
+                   photographer: :is_photographer,
+                   newsletter: :writes_newsletter,
+                   transporter: :is_transporter,
+                   training_team: :training_team,
+                   foster_mentor: :foster_mentor,
+                   translator: :translator,
+                   public_relations: :public_relations,
+                   fundraising: :fundraising,
+                   medical_behavior: :medical_behavior_permission,
+                   boarding_buddy: :boarding_buddies,
+                   social_media: :social_media_manager,
+                   graphic_designer: :graphic_design,
+                   active_volunteer: :active,
+                   has_dogs: :has_own_dogs,
+                   has_cats: :has_own_cats,
+                   has_fence: :has_fenced_yard,
+                   has_children_under_five: :children_under_five,
+                   puppies_ok: :can_foster_puppies,
+                   has_parvo_house: :parvo_house }
+
   def display_name
     name
   end

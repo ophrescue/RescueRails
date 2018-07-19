@@ -60,14 +60,14 @@
 require 'rails_helper'
 
 describe UsersController, type: :controller do
-  let!(:admin) { create(:user, :admin, name: 'Admin') }
-  let!(:active_user) { create(:user, city: 'Old York') }
-  let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
 
   describe 'GET index' do
-    let(:jones) { create(:user, name: 'Frank Jones') }
 
     context 'Logged in as an Admin User' do
+      let!(:admin) { create(:user, :admin, name: 'Admin') }
+      let!(:active_user) { create(:user, city: 'Old York') }
+      let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
+      let(:jones) { create(:user, name: 'Frank Jones') }
       before :each do
         allow(controller).to receive(:current_user) { admin }
       end
@@ -131,13 +131,52 @@ describe UsersController, type: :controller do
         expect(assigns(:users)).to match_array([smith, admin, active_user])
       end
 
+      it 'returns the inactive team members' do
+        get :index, params: { inactive_volunteer: true }
+        expect(assigns(:users)).to match_array([inactive_user])
+      end
+
+      it 'returns users with specified house type' do
+        smith = create(:user, name: 'Jane Smithbot', house_type: "rent")
+        get :index, params: { house_type: "rent"}
+        expect(assigns(:users)).to match_array([smith])
+      end
+
       it 'returns excel list of users' do
         get :index, format: :xls
         expect(response).to have_http_status(200)
       end
     end
 
+    context 'Logged in as an unprivileged Admin User' do
+      let!(:admin_without_extra_privileges) { create(:user, :admin_without_extra_privileges, name: 'Unprivileged Admin') }
+      before :each do
+        allow(controller).to receive(:current_user) { admin_without_extra_privileges }
+      end
+
+      User::FILTER_FLAGS.reject{|k,v| [:admin, :active_volunteer].include?(k)}.each do |k, attr|
+        it "returns the #{k} team members" do
+          expected = create(:user, "#{attr}": true)
+          get :index, params: { "#{k}": true }
+          expect(assigns(:users)).to match_array([expected])
+        end
+      end
+
+      User::FILTER_FLAGS.select{|k,v| [:admin, :active_volunteer].include?(k)}.each do |k, attr|
+        it "returns the #{k} team members" do
+          expected = create(:user, "#{attr}": true)
+          get :index, params: { "#{k}": true }
+          expect(assigns(:users)).to match_array([expected, admin_without_extra_privileges])
+        end
+      end
+    end
+
     context 'logged in as an active user' do
+      let(:active_user) { create(:user, city: 'Old York') }
+      let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
+      let!(:jones) { create(:user, name: 'Frank Jones') }
+      let!(:admin) { create(:user, :admin, name: 'Admin') }
+
       before :each do
         allow(controller).to receive(:current_user) { active_user }
       end
@@ -154,6 +193,8 @@ describe UsersController, type: :controller do
     end
 
     context 'logged in as an inactive user' do
+      let(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
+
       before :each do
         allow(controller).to receive(:current_user) { inactive_user }
       end
@@ -166,6 +207,9 @@ describe UsersController, type: :controller do
   end
 
   describe 'GET show' do
+    let!(:admin) { create(:user, :admin, name: 'Admin') }
+    let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
+
     context 'logged in as an inactive user' do
       before :each do
         allow(controller).to receive(:current_user) { inactive_user }
@@ -184,6 +228,10 @@ describe UsersController, type: :controller do
   end
 
   describe 'POST create' do
+    let!(:admin) { create(:user, :admin, name: 'Admin') }
+    let!(:active_user) { create(:user, city: 'Old York') }
+    let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
+
     context 'logged in as an admin' do
       before :each do
         allow(controller).to receive(:current_user) { admin }
@@ -225,6 +273,9 @@ describe UsersController, type: :controller do
     let!(:test_user) { create(:user, name: 'Original Name', admin: false) }
     let(:change_permissions_request) { -> { patch :update, params: { id: test_user.id, user: attributes_for(:user, admin: true) } } }
     let(:change_name_request) { -> { patch :update, params: { id: test_user.id, user: attributes_for(:user, name: 'New Name') } } }
+    let!(:admin) { create(:user, :admin, name: 'Admin') }
+    let!(:active_user) { create(:user, city: 'Old York') }
+    let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
 
     context 'logged in as admin' do
       before :each do

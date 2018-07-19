@@ -24,11 +24,12 @@ class DogFilter
     # @params["search_field_text"] == @params[:search_field_text]
     @params.reverse_merge!({sort: "tracking_id"}) # maintains indifferent access
     @params[:direction] = (@params[:sort] == "tracking_id") ? "desc" : "asc"
+    @params[:page] = params[:page]
   end
 
   def filter
-    #puts "filtering params #{filtering_params}"
     @dogs = Dog.search(search_params).merge(Dog.filter(filtering_params)).merge(Dog.has_flags(flag_params))
+               .paginate(page: page_params)
                .order( "#{sort_column} #{sort_direction}" )
                .includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster)
     [@dogs, @dogs.length, params]
@@ -42,6 +43,10 @@ class DogFilter
 
   def filtering_params
     params.slice( :is_age, :is_size, :is_status)
+  end
+
+  def page_params
+    params[:page] || 1
   end
 
   def search_params

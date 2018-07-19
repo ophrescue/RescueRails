@@ -79,8 +79,6 @@ class Dogs::ManagerController < Dogs::DogsBaseController
     params[:filter_params] ||= {}
     @dog_filter = DogFilter.new search_params
     @dogs, @count, @filter_params = @dog_filter.filter
-
-    for_page(params[:page])
   end
 
   def new
@@ -124,9 +122,11 @@ class Dogs::ManagerController < Dogs::DogsBaseController
   end
 
   private
+
   def search_params
     # filter_params is not required as it is not supplied for the default manager view
-    params.permit(filter_params: [:sort,
+    params.permit(:page,
+                  filter_params: [:sort,
                                   :direction,
                                   :search,
                                   :search_field_index,

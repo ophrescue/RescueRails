@@ -42,9 +42,9 @@ set :rollbar_role, Proc.new { :app }
 set :tests, []
 
 # files we want symlinking to specific entries in shared.
-set :linked_files, %W{config/database.yml 
-                      config/newrelic.yml 
-                      config/initializers/setup_mail.rb 
+set :linked_files, %W{config/database.yml
+                      config/newrelic.yml
+                      config/initializers/setup_mail.rb
                       .env.#{fetch(:stage)} }
 
 # dirs we want symlinking to shared
@@ -62,7 +62,7 @@ set(:config_files, %w(
   unicorn_init.sh
   delayed_job.sh
 ))
- 
+
 # which config files should be made executable after copying
 # by deploy:setup_config
 set(:executable_config_files, %w(
@@ -121,9 +121,11 @@ namespace :deploy do
   # automatically.
   after 'deploy:publishing', 'deploy:restart'
 
+  # Notify NewRelic about our deployment
+  after "deploy:updated", "newrelic:notice_deployment"
+
   task :restart do
     invoke 'unicorn:upgrade'
     invoke 'delayed_job:restart'
   end
 end
-

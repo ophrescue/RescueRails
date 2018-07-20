@@ -223,7 +223,7 @@
               <td>Current Dogs</td>
               <td>
                 <% @user.current_foster_dogs.each do |d| %>
-                  <%= link_to d.name, d %>
+                  <%= link_to d.name, dogs_manager_path(d) %>
                     (<%= d.status %>)
                   <br />
                 <% end %>

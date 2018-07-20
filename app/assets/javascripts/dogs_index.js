@@ -62,11 +62,11 @@ GlobalMultiSelect.filter_select = function(event){
   }
 };
 
-GlobalMultiSelect.selection_callback = function($li){
+GlobalMultiSelect.selection_callback = function ($li) {
   var $text_input = $li.closest('ul.dropdown-menu').find('.input-group input.form-control');
-  var text = $li.text().trim()
-  $text_input.attr('placeholder',`${text} (all/part)`);
-  $text_input.focus()
+  var text = $li.text().trim();
+  $text_input.attr('placeholder', text + ' (all/part)');
+  $text_input.focus();
 };
 
 GlobalMultiSelect.manage_search_button_visibility = function(){
@@ -76,8 +76,8 @@ GlobalMultiSelect.manage_search_button_visibility = function(){
     { $search_button.hide()}else{ $search_button.show()};
 };
 
-GlobalMultiSelect.add_error=function($field,text){
-  $field.after(`<div class='text-input-error'>${text}</div>`)
+GlobalMultiSelect.add_error = function ($field, text) {
+  $field.after("<div class='text-input-error'>" + text + "</div>");
 };
 
 $(function(){

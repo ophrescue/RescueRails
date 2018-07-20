@@ -205,6 +205,7 @@ describe UsersController, type: :controller do
         expect(inactive_user).to redirect_to('/')
       end
     end
+
   end
 
   describe 'GET show' do

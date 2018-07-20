@@ -157,6 +157,7 @@ class User < ApplicationRecord
   FILTER_FLAGS = { active_volunteer: :active,
                    admin: :admin,
                    adoption_coordinator: :edit_my_adopters,
+                   available_to_foster: :available_to_foster,
                    boarding_buddy: :boarding_buddies,
                    dog_adder: :add_dogs,
                    dog_editor: :edit_dogs,

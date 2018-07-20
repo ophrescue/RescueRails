@@ -43,7 +43,7 @@
               <% @adopter.adoptions.find_each do |adp| %>
                 <div class="span6">
                   <%= form_for adp, html: {method: :put}, format: :json do |f| %>
-                    <%=  link_to adp.dog.name, adp.dog %>
+                    <%=  link_to adp.dog.name, dogs_manager_path(adp.dog) %>
                     (<%= adp.dog.status %>),
                     <%= @adopter.name %> status with this dog is
                     <%= f.select :relation_type, options_for_select(Adoption::RELATION_TYPE.collect{|s| [s, s]}, adp.relation_type), {}, class: 'input-medium' %>

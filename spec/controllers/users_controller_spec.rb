@@ -145,6 +145,7 @@ describe UsersController, type: :controller do
       it 'returns excel list of users' do
         get :index, format: :xls
         expect(response).to have_http_status(200)
+        expect(response.headers["Content-Type"]).to eq "application/xls"
       end
     end
 

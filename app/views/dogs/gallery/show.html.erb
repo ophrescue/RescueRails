@@ -2,9 +2,6 @@
   <%- if active_user? %>
     <div class='row'>
       <div class='col-12'>
-        <% if can_edit_dogs? || fostering_dog? %>
-          <%= link_to "Edit", edit_dogs_manager_path(@dog), id: 'edit_dog', class: 'switch_view btn btn-sm btn-primary mr-4' %>
-        <% end %>
         <%= link_to "Manager Profile", dogs_manager_path(@dog), class: 'switch_view btn btn-secondary' %>
       </div>
     </div>

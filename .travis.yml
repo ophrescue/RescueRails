@@ -12,6 +12,7 @@ bundler_args: --without production
 addons:
   postgresql: "9.6"
   chrome: stable
+  firefox: latest
 
 env:
   global:
@@ -24,6 +25,7 @@ script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
   - bundle exec rspec spec/
+  - BROWSER=firefox bundle exec rspec spec/
 
 before_script:
  - psql -c 'create database travis_ci_test;' -U postgres

@@ -88,6 +88,7 @@ feature 'Filter Dogs List', js: true do
       expect(page).to have_selector(group_label, text: "Search by:")
       expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
       page.find('#reset_message').click
+      expect(page).to have_selector(filter_params, text: "Tracking ID")
       expect(dogs_list).to eq all_dogs_sorted_by_id.reverse
     end
 

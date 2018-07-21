@@ -30,6 +30,7 @@ feature 'search and clear search when admin is logged-in', :js => true do
   let!(:secondary_golden) { create(:dog, name: "Abby").name.titleize }
   let!(:secondary_westie) { create(:dog, name: "Nairobi").name.titleize }
   let!(:active_user) { create(:user, :admin) }
+  let(:filter_params) { '#filter_info_row #filter_info .message_group .filter_params' }
 
   it 'should find dogs matching text partial' do
     visit dogs_manager_index_path(filter_params: {search: 'ab', search_field_index: 'name'})
@@ -39,6 +40,7 @@ feature 'search and clear search when admin is logged-in', :js => true do
   it 'should show all dogs when search is cleared' do
     visit dogs_manager_index_path(filter_params: {search: 'ab', search_field_index: 'name'})
     click_link 'reset_message'
+    expect(page).to have_selector(filter_params, text: "Tracking ID")
     expect(dog_names).to match_array ["Abercrombie", "Abby", "Nairobi"]
   end
 end

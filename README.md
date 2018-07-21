@@ -38,10 +38,39 @@ See `db/seeds.rb` for default admin login info
 
 ### Running Tests
 
-Tests are run via Headless Chrome, which will require Google Chrome and ChromeDriver.
+Tests are run by default via Headless Chrome, which will require Google Chrome and ChromeDriver.
 
 ```
 brew install chromedriver
+```
+
+then run tests with:
+
+```
+rspec spec
+```
+or
+
+```
+rake spec
+```
+
+or even just
+
+```
+rake
+```
+
+To run tests with headless Firefox, you will need geckodriver
+
+```
+brew install geckodriver
+```
+
+and then run tests with:
+
+```
+BROWSER=firefox rspec spec # environment variable switch in rails_helper.rb
 ```
 
 ### File Attachment Storage

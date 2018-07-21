@@ -1,15 +1,28 @@
 <div class='container' id='public_profile'>
   <%- if active_user? %>
     <div class='row'>
-      <div class='col-2 offset-6 offset-sm-10'>
-          <%= link_to "Switch to manager profile", dogs_manager_path(@dog), class: 'switch_view btn btn-outline-secondary' %>
+      <div class='col-12'>
+        <% if can_edit_dogs? || fostering_dog? %>
+          <%= link_to "Edit", edit_dogs_manager_path(@dog), id: 'edit_dog', class: 'switch_view btn btn-sm btn-primary mr-4' %>
+        <% end %>
+        <%= link_to "Manager Profile", dogs_manager_path(@dog), class: 'switch_view btn btn-secondary' %>
       </div>
     </div>
   <% end %>
   <div class="row title_row">
     <div class='col-12 col-sm-auto'>
-      <h1>#<%=@dog.tracking_id%> <%= @dog.name %>:</h1>
+      <h1>#<%=@dog.tracking_id%> <%= @dog.name %></h1>
     </div>
+  </div>
+  <div class="row title_row">
+    <div class='col-12 col-sm-auto'>
+      <span class='status'><%= @dog.status.titleize %></span >
+      <a tabindex="0" class='fa fa-sm fa-info text-primary'
+         data-trigger='focus' data-toggle='popover' data-placement='left'
+         data-content='<%=t ".status_definitions.#{@dog.status_key}" %>'></a>
+    </div>
+  </div>
+  <div class="row title_row">
     <div class='col-12 col-sm-auto'>
       <% if @dog.size? %>
         <span><%= @dog.size.titleize %>-size,</span>
@@ -17,12 +30,9 @@
       <span><%= @dog.gender %>,</span>
       <span class='age'><%= @dog.age ? @dog.age.titleize : " " %></span>
       <span class='breed'><%= @dog.breeds.join(" x ").html_safe %></span>,
-      <span class='status'><%= @dog.status.titleize %></span >
-      <a tabindex="0" class='fa fa-sm fa-info text-primary'
-         data-trigger='focus' data-toggle='popover' data-placement='left'
-         data-content='<%=t ".status_definitions.#{@dog.status_key}" %>'></a>
     </div>
   </div>
+
   <div class="row profile">
     <div class="col">
       <%= some_details %>

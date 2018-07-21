@@ -69,10 +69,10 @@ class Dogs::ManagerController < Dogs::DogsBaseController
 
   before_action :authenticate
   before_action :active_user
-  before_action :admin_user, only: %i(destroy)
-  before_action :add_dogs_user, only: %i(new create)
-  before_action :load_dog, only: %i(show edit update destroy)
-  before_action :edit_dog_check, only: %i(edit update)
+  before_action :admin_user, only: %i[destroy]
+  before_action :add_dogs_user, only: %i[new create]
+  before_action :load_dog, only: %i[show edit update destroy]
+  before_action :edit_dog_check, only: %i[edit update]
   before_action :select_bootstrap41
 
   def index

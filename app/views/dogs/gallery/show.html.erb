@@ -22,7 +22,7 @@
   <div class="row title_row">
     <div class='col-12 col-sm-auto'>
       <% if @dog.size? %>
-        <span><%= @dog.size.titleize %>-size,</span>
+        <span><%= @dog.size.titleize %>-size</span>,
       <% end %>
       <span><%= @dog.gender %>,</span>
       <span class='age'><%= @dog.age ? @dog.age.titleize : " " %></span>

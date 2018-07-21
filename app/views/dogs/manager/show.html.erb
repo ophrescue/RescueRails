@@ -24,10 +24,10 @@
   <div class="row title_row">
     <div class='col-12 col-sm-auto'>
 
-      <span id='gender'><%= @dog.gender %>,</span>
-      <span id='age'><%= @dog.age ? @dog.age.titleize : " " %>,</span>
+      <span id='gender'><%= @dog.gender %></span>,
+      <span id='age'><%= @dog.age ? @dog.age.titleize : " " %></span>,
       <% if @dog.size? %>
-        <span id='size'><%= @dog.size.titleize %>-size,</span>
+        <span id='size'><%= @dog.size.titleize %>-size</span>,
       <% end %>
       <span id='breed'><%= @dog.breeds.join(" x ").html_safe %></span>
     </div>

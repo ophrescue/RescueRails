@@ -79,6 +79,12 @@ describe Dogs::ManagerController, type: :controller do
           expect(assigns(:filter_params)[:direction]).to eq "desc"
         end
 
+        it 'returns excel list of dogs' do
+          get :index, format: :xls
+          expect(response).to have_http_status(200)
+          expect(response.headers["Content-Type"]).to eq "application/xls"
+        end
+
         it 'can filter by age, size and flags' do
           get :index, params: {filter_params: {is_age: 'baby', is_size: 'small', has_flags: ['special_needs']}}
           expect(assigns(:dogs)).to match_array([baby_small_special_needs_dog])

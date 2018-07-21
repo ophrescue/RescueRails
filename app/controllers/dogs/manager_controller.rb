@@ -79,6 +79,10 @@ class Dogs::ManagerController < Dogs::DogsBaseController
     params[:filter_params] ||= {}
     @dog_filter = DogFilter.new search_params
     @dogs, @count, @filter_params = @dog_filter.filter
+    respond_to do |format|
+      format.html
+      format.xls { render_dogs_xls }
+    end
   end
 
   def new
@@ -184,4 +188,25 @@ class Dogs::ManagerController < Dogs::DogsBaseController
     redirect_to dogs_path unless current_user&.active?
   end
 
+  def render_dogs_xls
+    send_data @dogs.to_xls(columns: [:id,
+                                     :tracking_id,
+                                     :name,
+                                     { primary_breed: [:name] },
+                                     { secondary_breed: [:name] },
+                                     :age,
+                                     :size,
+                                     { foster: %i[name city region] }],
+                           headers: ['DMS ID',
+                                     'Tracking ID',
+                                     'Name',
+                                     'Primary Breed',
+                                     'Secondary Breed',
+                                     'Age',
+                                     'Size',
+                                     'Foster Name',
+                                     'Foster City',
+                                     'Foster State']),
+              filename: 'dog_export.xls'
+  end
 end

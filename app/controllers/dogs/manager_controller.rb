@@ -76,6 +76,7 @@ class Dogs::ManagerController < Dogs::DogsBaseController
   before_action :select_bootstrap41
 
   def index
+    session[:last_dog_search] = request.url
     params[:filter_params] ||= {}
     @dog_filter = DogFilter.new search_params
     @dogs, @count, @filter_params = @dog_filter.filter
@@ -83,6 +84,10 @@ class Dogs::ManagerController < Dogs::DogsBaseController
       format.html
       format.xls { render_dogs_xls }
     end
+  end
+
+  def show
+    session[:last_dog_search] ||= dogs_manager_index_url
   end
 
   def new

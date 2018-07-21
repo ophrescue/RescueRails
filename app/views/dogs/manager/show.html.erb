@@ -2,10 +2,11 @@
   <div class='row'>
 
     <div class='col-6'>
+      <%= link_to "Dog Manager", session[:last_dog_search], class: 'switch_view btn btn-sm btn-primary mr-4' %>
       <% if can_edit_dogs? || fostering_dog? %>
-        <%= link_to "Edit", edit_dogs_manager_path(@dog), id: 'edit_dog', class: 'switch_view btn btn-sm btn-primary'  %>
+        <%= link_to "Edit", edit_dogs_manager_path(@dog), id: 'edit_dog', class: 'switch_view btn btn-sm btn-primary mr-4' %>
       <% end %>
-      <%= link_to "Public Profile", dog_path(@dog), class: 'switch_view btn btn-sm btn-outline-secondary' %>
+      <%= link_to "Public Profile", dog_path(@dog), class: 'switch_view btn btn-sm btn-secondary' %>
     </div>
   </div>
   <div class="row title_row justify-content-between">

@@ -66,6 +66,7 @@ class Dogs::DogsBaseController < ApplicationController
   PER_PAGE = 30
 
   def show
+    session[:last_dog_manager_search] ||= dogs_manager_index_url
     @title = @dog.name
     @carousel = Carousel.new(@dog)
     @adoptapet = Adoptapet.new(@dog.foster&.region)
@@ -73,6 +74,7 @@ class Dogs::DogsBaseController < ApplicationController
   end
 
   private
+
   def load_dog
     @dog = Dog.find(params[:id])
   end

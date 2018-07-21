@@ -82,5 +82,4 @@ class Dogs::GalleryController < Dogs::DogsBaseController
       format.json { render json: @dogs }
     end
   end
-
 end

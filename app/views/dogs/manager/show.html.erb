@@ -1,24 +1,34 @@
 <div class='container' id='manage_profile'>
   <div class='row'>
-    <div class='col-2 offset-6 offset-sm-10'>
-      <%= link_to "Switch to public profile", dog_path(@dog), class: 'switch_view btn btn-sm btn-outline-secondary' %>
+
+    <div class='col-6'>
+      <% if can_edit_dogs? || fostering_dog? %>
+        <%= link_to "Edit", edit_dogs_manager_path(@dog), id: 'edit_dog', class: 'switch_view btn btn-sm btn-primary'  %>
+      <% end %>
+      <%= link_to "Public Profile", dog_path(@dog), class: 'switch_view btn btn-sm btn-outline-secondary' %>
     </div>
   </div>
   <div class="row title_row justify-content-between">
     <div class='col-12 col-sm-auto'>
-      <h1>#<%=@dog.tracking_id%> <%= @dog.name %>:</h1>
+      <h1>#<%=@dog.tracking_id%> <%= @dog.name %></h1>
+    </div>
+  </div>
+
+<div class="row title_row">
+    <div class='col-12 col-sm-auto'>
+      <span id='status'><%= @dog.status.titleize %></span>
+    </div>
+</div>
+
+  <div class="row title_row">
+    <div class='col-12 col-sm-auto'>
+
+      <span id='gender'><%= @dog.gender %>,</span>
+      <span id='age'><%= @dog.age ? @dog.age.titleize : " " %>,</span>
       <% if @dog.size? %>
         <span id='size'><%= @dog.size.titleize %>-size,</span>
       <% end %>
-      <span id='gender'><%= @dog.gender %>,</span>
-      <span id='age'><%= @dog.age ? @dog.age.titleize : " " %></span>
-      <span id='breed'><%= @dog.breeds.join(" x ").html_safe %></span>,
-      <span id='status'><%= @dog.status.titleize %></span >
-    </div>
-    <div class='col-12 col-sm-1 manager_links'>
-      <% if can_edit_dogs? || fostering_dog? %>
-        <%= link_to "Edit", edit_dogs_manager_path(@dog), id: 'edit_dog'  %>
-      <% end %>
+      <span id='breed'><%= @dog.breeds.join(" x ").html_safe %></span>
     </div>
   </div>
 

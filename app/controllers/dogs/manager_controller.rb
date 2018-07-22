@@ -67,6 +67,7 @@ class Dogs::ManagerController < Dogs::DogsBaseController
 
   autocomplete :breed, :name, full: true
 
+  before_action :send_unauthenticated_to_public_profile, only: %i[show]
   before_action :authenticate
   before_action :active_user
   before_action :admin_user, only: %i[destroy]
@@ -187,6 +188,10 @@ class Dogs::ManagerController < Dogs::DogsBaseController
 
   def active_user
     redirect_to dogs_path unless current_user&.active?
+  end
+
+  def send_unauthenticated_to_public_profile
+    redirect_to(dog_path(params[:id])) unless signed_in?
   end
 
   def render_dogs_xls

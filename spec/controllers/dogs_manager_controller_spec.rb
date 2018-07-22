@@ -114,13 +114,23 @@ describe Dogs::ManagerController, type: :controller do
   end
 
   describe 'GET #show' do
-    include_context 'signed in admin'
+    context 'public user' do
+      let(:dog) { create(:dog) }
 
-    let(:dog) { create(:dog) }
+      it 'is redirected to the dog public profile' do
+        get :show, params: { id: dog.id }
+        expect(subject).to redirect_to(dog_path(dog.id))
+      end
+    end
+    context 'signed in as admin' do
+      include_context 'signed in admin'
 
-    it 'is successful' do
-      get :show, params: { id: dog.id }
-      expect(response).to be_successful
+      let(:dog) { create(:dog) }
+
+      it 'is successful' do
+        get :show, params: { id: dog.id }
+        expect(response).to be_successful
+      end
     end
   end
 

@@ -34,6 +34,10 @@ FactoryBot.define do
       active true
     end
 
+    trait :admin_without_extra_privileges do
+      admin true
+    end
+
     trait :with_known_authentication_parameters do
       email "test3@test.com"
       password "foobar99"

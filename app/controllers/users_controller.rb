@@ -283,7 +283,6 @@ class UsersController < ApplicationController
 
   def render_users_xls
     send_data @users.to_xls(
-      filename: 'users.xls',
       columns: [
         :id,
         :name,
@@ -304,6 +303,7 @@ class UsersController < ApplicationController
         'City',
         'State'
       ]
-    )
+    ),
+    filename: 'users.xls'
   end
 end

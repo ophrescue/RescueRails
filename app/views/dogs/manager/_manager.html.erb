@@ -12,9 +12,9 @@
   </div>
 </div>
 
-<div class="row" id='filter_info_row'>
+<div class="row mb-3" id='filter_info_row'>
   <div class='col-12 col-md-2'>
-    <%= @count %> records returned
+    <%= link_to "Download to Excel", dogs_manager_index_path(format: :xls, params: request.query_parameters) , :class => "btn btn-sm btn-success" %>
   </div>
   <div class='col-12 col-md-10' id='filter_info'>
     <%= render_if age_filter_active?,    partial: 'dogs/manager/filter_info_group',      locals: {group_text: "Age:",       values: selected_ages } %>

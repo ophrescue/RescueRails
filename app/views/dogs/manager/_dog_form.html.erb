@@ -291,53 +291,57 @@
 
 <script type='text/javascript'>
 // add/remove new photo or document inputs
-  var new_attachment_input = _.template($('#new_attachment_input').html())
-  var last_photos_index, last_attachments_index
-  ["photos", "attachments"].forEach(function(type){
-    var singular_type = type.replace(/s$/,'');
-    var indexes = $.map($(`#manage_${type} .${singular_type}`), function(el){ return $(el).data('index')}) 
-    if(_.isEmpty(indexes)){
-      this[`last_${type}_index`] = -1
-    }else{
-      this[`last_${type}_index`] = _.max(indexes)
+  var new_attachment_input = _.template($('#new_attachment_input').html());
+  var last_photos_index, last_attachments_index;
+  ["photos", "attachments"].forEach(function (type) {
+    var singular_type = type.replace(/s$/, '');
+    var indexes = $.map($("#manage_" + type + " ." + singular_type), function (el) {
+      return $(el).data('index');
+    });
+    if (_.isEmpty(indexes)) {
+      this["last_" + type + "_index"] = -1;
+    } else {
+      this["last_" + type + "_index"] = _.max(indexes);
     }
-  })
-  var add_file_field_for = function(type){
-    var unconfigured_inputs_count = _.filter($(`.new_${type} input`),function(input){return _.isEmpty(input.value)}).length;
+  });
+  var add_file_field_for = function add_file_field_for(type) {
+    var unconfigured_inputs_count = _.filter($(".new_" + type + " input"), function (input) {
+      return _.isEmpty(input.value);
+    }).length;
     var all_inputs_configured = unconfigured_inputs_count == 0;
-    var file_inputs_count = $(`.new_${type} input`).length;
+    var file_inputs_count = $(".new_" + type + " input").length;
     var no_inputs_displayed = file_inputs_count == 0;
     var inputs_displayed = !no_inputs_displayed;
-    var singular_type = type.replace(/s$/,'');
-    if(no_inputs_displayed || (inputs_displayed && all_inputs_configured)){
-      var new_input = new_attachment_input({type: type, singular_type: singular_type, index: ++this[`last_${type}_index`]})
-      $(new_input).appendTo($(`.new_${type}`)).animate({height: '28px'}, 100);
+    var singular_type = type.replace(/s$/, '');
+    if (no_inputs_displayed || inputs_displayed && all_inputs_configured) {
+      var new_input = new_attachment_input({ type: type, singular_type: singular_type, index: ++this["last_" + type + "_index"] });
+      $(new_input).appendTo($(".new_" + type)).animate({ height: '28px' }, 100);
     }
-  }
+  };
 
   $(function(){
-    $('#add_photo').on('click', function(){
+    $('#add_photo').on('click', function(event){
       event.preventDefault();
       event.stopPropagation();
       add_file_field_for('photos');
     });
 
-    $('#add_attachment').on('click', function(){
+    $('#add_attachment').on('click', function(event){
       event.preventDefault();
       event.stopPropagation();
       add_file_field_for('attachments');
     });
 
-    $('.new_photos').on('click','#remove_photo', function(){
+    $('.new_photos').on('click','#remove_photo', function(event){
       event.preventDefault();
       event.stopPropagation();
-      $(this).parent().animate({height: '0px'},100,function(){
+      $(this).parent().animate({height: '0px'},100,function(event){
         this.remove()
         if($('.new_photos .new_file').length==0){ $('#add_photo').html("Add a Photo") }
       });
     })
 
-    $('.new_attachments').on('click','#remove_attachment', function(){
+    $('.new_attachments').on('click','#remove_attachment', function(event){
       event.preventDefault();
       event.stopPropagation();
       $(this).parent().animate({height: '0px'},100,function(){
@@ -355,4 +359,3 @@
     })
   })
 </script>
-

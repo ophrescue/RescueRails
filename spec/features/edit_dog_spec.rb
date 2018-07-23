@@ -236,9 +236,9 @@ feature 'edit a dog', js: true do
         expect(page.find('#breed').text).to match 'new secondary breed'
         expect(page.find('#status').text).to eq 'Adoption Pending'
         expect(page.find('#age').text).to eq 'Senior'
-        expect(page.find('#size').text).to eq 'Large-size,'
+        expect(page.find('#size').text).to eq 'Large-size'
         expect(page.find('#not_altered')).to have_x_icon
-        expect(page.find('#gender').text).to eq 'Female,'
+        expect(page.find('#gender').text).to eq 'Female'
         expect(page.find('#special_needs')).to have_check_icon
         expect(page.find('#dogs_ok')).to have_x_icon
         expect(page.find('#cats_ok')).to have_x_icon

@@ -9,9 +9,9 @@ require 'capybara/rails'
 
 require 'capybara-screenshot/rspec'
 
-# Headless Chrome
 require 'selenium/webdriver'
 
+# Headless Chrome
 Capybara.register_driver :selenium_chrome_headless do |app|
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
     chromeOptions: { args: %w[headless disable-gpu window-size=1366,2000] }
@@ -19,7 +19,23 @@ Capybara.register_driver :selenium_chrome_headless do |app|
   Capybara::Selenium::Driver.new app, browser: :chrome, desired_capabilities: capabilities
 end
 
-Capybara.javascript_driver = :selenium_chrome_headless
+Capybara.register_driver :selenium_firefox_headless do |app|
+  options = Selenium::WebDriver::Firefox::Options.new
+  options.add_argument('-headless')
+  Capybara::Selenium::Driver.new(app, :browser => :firefox, :options => options)
+end
+
+Capybara::Screenshot.register_driver(:selenium_firefox_headless) do |driver, path|
+  driver.browser.save_screenshot(path)
+end
+
+if ENV['BROWSER'] == 'firefox'
+  puts 'testing with firefox headless'
+  Capybara.javascript_driver = :selenium_firefox_headless
+else
+  puts 'testing with chrome headless'
+  Capybara.javascript_driver = :selenium_chrome_headless
+end
 
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |file| require file }
 

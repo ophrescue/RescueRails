@@ -67,20 +67,24 @@ class Dogs::ManagerController < Dogs::DogsBaseController
 
   autocomplete :breed, :name, full: true
 
+  before_action :send_unauthenticated_to_public_profile, only: %i[show]
   before_action :authenticate
   before_action :active_user
-  before_action :admin_user, only: %i(destroy)
-  before_action :add_dogs_user, only: %i(new create)
-  before_action :load_dog, only: %i(show edit update destroy)
-  before_action :edit_dog_check, only: %i(edit update)
+  before_action :admin_user, only: %i[destroy]
+  before_action :add_dogs_user, only: %i[new create]
+  before_action :load_dog, only: %i[show edit update destroy]
+  before_action :edit_dog_check, only: %i[edit update]
   before_action :select_bootstrap41
 
   def index
+    session[:last_dog_manager_search] = request.url
     params[:filter_params] ||= {}
     @dog_filter = DogFilter.new search_params
     @dogs, @count, @filter_params = @dog_filter.filter
-
-    for_page(params[:page])
+    respond_to do |format|
+      format.html
+      format.xls { render_dogs_xls }
+    end
   end
 
   def new
@@ -124,9 +128,11 @@ class Dogs::ManagerController < Dogs::DogsBaseController
   end
 
   private
+
   def search_params
     # filter_params is not required as it is not supplied for the default manager view
-    params.permit(filter_params: [:sort,
+    params.permit(:page,
+                  filter_params: [:sort,
                                   :direction,
                                   :search,
                                   :search_field_index,
@@ -184,4 +190,29 @@ class Dogs::ManagerController < Dogs::DogsBaseController
     redirect_to dogs_path unless current_user&.active?
   end
 
+  def send_unauthenticated_to_public_profile
+    redirect_to(dog_path(params[:id])) unless signed_in?
+  end
+
+  def render_dogs_xls
+    send_data @dogs.to_xls(columns: [:id,
+                                     :tracking_id,
+                                     :name,
+                                     { primary_breed: [:name] },
+                                     { secondary_breed: [:name] },
+                                     :age,
+                                     :size,
+                                     { foster: %i[name city region] }],
+                           headers: ['DMS ID',
+                                     'Tracking ID',
+                                     'Name',
+                                     'Primary Breed',
+                                     'Secondary Breed',
+                                     'Age',
+                                     'Size',
+                                     'Foster Name',
+                                     'Foster City',
+                                     'Foster State']),
+              filename: 'dog_export.xls'
+  end
 end

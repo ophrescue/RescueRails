@@ -79,6 +79,12 @@ describe Dogs::ManagerController, type: :controller do
           expect(assigns(:filter_params)[:direction]).to eq "desc"
         end
 
+        it 'returns excel list of dogs' do
+          get :index, format: :xls
+          expect(response).to have_http_status(200)
+          expect(response.headers["Content-Type"]).to eq "application/xls"
+        end
+
         it 'can filter by age, size and flags' do
           get :index, params: {filter_params: {is_age: 'baby', is_size: 'small', has_flags: ['special_needs']}}
           expect(assigns(:dogs)).to match_array([baby_small_special_needs_dog])
@@ -108,13 +114,23 @@ describe Dogs::ManagerController, type: :controller do
   end
 
   describe 'GET #show' do
-    include_context 'signed in admin'
+    context 'public user' do
+      let(:dog) { create(:dog) }
 
-    let(:dog) { create(:dog) }
+      it 'is redirected to the dog public profile' do
+        get :show, params: { id: dog.id }
+        expect(subject).to redirect_to(dog_path(dog.id))
+      end
+    end
+    context 'signed in as admin' do
+      include_context 'signed in admin'
 
-    it 'is successful' do
-      get :show, params: { id: dog.id }
-      expect(response).to be_successful
+      let(:dog) { create(:dog) }
+
+      it 'is successful' do
+        get :show, params: { id: dog.id }
+        expect(response).to be_successful
+      end
     end
   end
 

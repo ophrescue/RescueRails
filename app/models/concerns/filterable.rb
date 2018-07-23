@@ -35,12 +35,8 @@ module Filterable
 
     private
     def lookup(key,values)
-      return values if ["training_team",
-                        "newsletter",
-                        "public_relations",
-                        "fundraising",
-                        "translator",
-                        "active_volunteer"].include? key
+      return values if User::FILTER_FLAGS.keys.include? key.to_sym
+      return false if key == 'inactive_volunteer'
 
       lookup_table = case key.to_sym
                      when :is_age
@@ -51,6 +47,8 @@ module Filterable
                        Dog::STATUSES
                      when :has_flags
                        Dog::FILTER_FLAGS
+                     when :house_type
+                       User::HOUSE_TYPES
                      end
       map_keys(lookup_table,values)
     end

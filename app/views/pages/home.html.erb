@@ -47,6 +47,13 @@
               <%= link_to "Enter or Vote", "https://www.gogophotocontest.com/operationpawsforhomes", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
+<% elsif Time.now.between?(("2018-08-01".to_date),("2018-09-14".to_date)) %>
+          <div class="item">
+            <%= image_tag "banner-2018-book-release.jpg", alt: "Another Good Dog Book Coming Soon" %>
+            <div class="carousel-caption">
+              <%= link_to "Order Now", "http://www.anothergooddog.org/book.html", :class => "btn btn-primary btn-large" %>
+            </div>
+          </div>
 <% end %>
           <div class="item">
             <%= image_tag "lustreart.jpg", alt: "Lustre Art" %>

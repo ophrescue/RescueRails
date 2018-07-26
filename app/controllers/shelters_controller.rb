@@ -23,7 +23,7 @@
 #
 
 class SheltersController < ApplicationController
-  before_action :authenticate
+  before_action :require_login
   before_action :edit_dogs_user
 
   def index
@@ -58,7 +58,7 @@ class SheltersController < ApplicationController
 
   def update
     @shelter = Shelter.find(params[:id])
-    if @shelter.update_attributes(shelter_params)
+    if @shelter.update(shelter_params)
       flash[:success] = "Record updated."
       redirect_to shelters_path
     else

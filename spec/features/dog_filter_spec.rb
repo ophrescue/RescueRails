@@ -6,10 +6,9 @@ feature 'Filter Dogs List', js: true do
 
   describe "filter by breed" do
     before do
-      sign_in(active_user)
+      sign_in_as_user
     end
 
-    let!(:active_user) { create(:user) }
     let!(:zeke){create(:dog, :no_flags, :primary_lab, :active_dog, name: "Zeke") }
     let!(:nairobi){create(:dog, :no_flags, :secondary_westie, :active_dog, name: "Nairobi") }
     let!(:abby){create(:dog, :no_flags, :secondary_golden, :active_dog, name: "Abby") }
@@ -141,10 +140,9 @@ feature 'Filter Dogs List', js: true do
 
   describe "filter by flags" do
     before do
-      sign_in(active_user)
+      sign_in_as_user
     end
 
-    let!(:active_user) { create(:user) }
     let!(:high_priority){ create(:dog, :no_flags, is_high_priority: true, name: 'High Priority') }
     let!(:medical_need){ create(:dog, :no_flags, has_medical_need: true, name: "Medical Need") }
     let!(:special_needs){ create(:dog, :no_flags, is_special_needs: true, name: "Special Needs") }
@@ -174,11 +172,9 @@ feature 'Filter Dogs List', js: true do
 
   describe "filter by size" do
     before do
-      sign_in(active_user)
+      sign_in_as_user
     end
 
-    #SIZES = ['small', 'medium', 'large', 'extra large']
-    let!(:active_user) { create(:user) }
     let!(:small) { create(:dog, size: 'small', name: 'Small Dog') }
     let!(:medium) { create(:dog, size: 'medium', name: 'Medium Dog') }
     let!(:large) { create(:dog, size: 'large', name: 'Large Dog') }
@@ -203,12 +199,9 @@ feature 'Filter Dogs List', js: true do
 
   describe "filter by status" do
     before do
-      sign_in(active_user)
+      sign_in_as_user
     end
 
-    #STATUSES = ['adoptable', 'adopted', 'adoption pending', 'trial adoption',
-    #            'on hold', 'not available', 'return pending', 'coming soon', 'completed']
-    let!(:active_user) { create(:user) }
     let!(:adoptable) { create(:dog, status: 'adoptable', name: 'Adoptable Dog') }
     let!(:adopted) { create(:dog, status: 'adopted', name: 'Adopted Dog') }
     let!(:adoption_pending) { create(:dog, status: 'adoption pending', name: 'Adoption Pending Dog') }
@@ -238,11 +231,10 @@ feature 'Filter Dogs List', js: true do
 
   describe "filter by age" do
     before do
-      sign_in(active_user)
+      sign_in_as_user
     end
 
     #  AGES = %w[baby young adult senior]
-    let!(:active_user) { create(:user) }
     let!(:baby) { create(:dog, age: 'baby', name: 'Baby Dog') }
     let!(:young) { create(:dog, age: 'young', name: 'Young Dog') }
     let!(:adult) { create(:dog, age: 'adult', name: 'Adult Dog') }

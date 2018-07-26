@@ -40,9 +40,9 @@ describe AdoptersController, type: :controller do
   end
 
   describe 'GET show' do
-    let(:adopter) { create(:adopter_with_app, status: 'approved') }
-
     include_context 'signed in admin'
+
+    let(:adopter) { create(:adopter_with_app, status: 'approved') }
 
     it 'should be successful' do
       get :show, params: { id: adopter.id }
@@ -69,9 +69,9 @@ describe AdoptersController, type: :controller do
   end
 
   describe 'PUT update' do
-    let(:adopter) { create(:adopter_with_app, status: 'approved') }
-
     include_context 'signed in admin'
+
+    let(:adopter) { create(:adopter_with_app, status: 'approved') }
 
     context 'can complete adopters' do
       before do
@@ -86,6 +86,8 @@ describe AdoptersController, type: :controller do
     end
 
     context 'cannot complete adopters' do
+      include_context 'signed in admin'
+
       before do
         allow(controller).to receive(:can_complete_adopters?) { false }
       end
@@ -103,6 +105,7 @@ describe AdoptersController, type: :controller do
 
     context 'adopter set to adopted status for the first time' do
       let(:adopter) { create(:adopter_with_app, status: 'approved') }
+
       it 'free training coupon email created' do
         ActiveJob::Base.queue_adapter = :test
         expect do
@@ -122,6 +125,7 @@ describe AdoptersController, type: :controller do
         perform_enqueued_jobs do
           put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
         end
+
         mail = ActionMailer::Base.deliveries.last
         expect(mail.to[0]).to eq adopter.email
       end
@@ -153,6 +157,7 @@ describe AdoptersController, type: :controller do
 
       it 'returns false' do
         check_email
+
         expect(response.body).to eq('false')
       end
     end
@@ -162,6 +167,7 @@ describe AdoptersController, type: :controller do
 
       it 'returns true' do
         check_email
+
         expect(response.body).to eq('true')
       end
     end

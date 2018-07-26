@@ -10,6 +10,7 @@ gem 'audited', '~> 4.5'
 gem 'aws-sdk', '~> 2'
 gem 'bootstrap', '~> 4.1.0'
 gem 'bootstrap-will_paginate', '~> 1.0.0'
+gem 'clearance'
 gem "countries"
 gem 'dotenv'
 gem 'dotenv-rails'

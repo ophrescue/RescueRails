@@ -31,8 +31,8 @@
 #
 
 class AttachmentsController < ApplicationController
+  before_action :require_login
   respond_to :html, :json
-  before_action :authenticate
 
   def index
     redirect_to :root

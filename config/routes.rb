@@ -25,7 +25,13 @@ RescueRails::Application.routes.draw do
     resources :adoptions
   end
 
+  resources :users do
+    resource :password, controller: :passwords, only: %i[create edit update]
+  end
+
   resources :sessions, only: %i[new create destroy]
+  resources :password_resets
+  resources :passwords
 
   get '/events/past', to: 'events#past'
 
@@ -43,6 +49,10 @@ RescueRails::Application.routes.draw do
 
   get '/signin',               to: 'sessions#new'
   get '/signout',              to: 'sessions#destroy'
+
+  get '/sign_in',              to: 'sessions#new', as: 'sign_in'
+  delete '/sign_out',          to: 'clearance/sessions#destroy', as: 'sign_out'
+
   get '/adopt',                to: 'adopters#new'
 
   get '/international',                                 to: 'pages#international'

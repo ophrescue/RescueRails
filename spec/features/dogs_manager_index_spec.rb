@@ -6,11 +6,9 @@ feature 'add a new dog', js: true do
   include ApplicationHelpers
   include DogsListHelper
 
-  let!(:active_user) { create(:user, :admin) }
-
   before do
     create(:dog)
-    sign_in(active_user)
+    sign_in_as_admin
     visit dogs_manager_index_path
     expect(page_heading).to eq "Dog Manager"
   end
@@ -30,5 +28,28 @@ feature 'add a new dog', js: true do
     click_button "Submit"
     expect(page_heading).to eq "Dog Manager"
     expect(dog_names).to include "Fido"
+  end
+end
+
+feature 'edit a dog', js: true do
+  include ApplicationHelpers
+
+  let!(:dog) { create(:dog) }
+
+  before do
+    sign_in_as_admin
+    visit edit_dogs_manager_path(dog)
+    expect(page_heading).to eq "Edit Dog"
+  end
+
+  it 'should cancel back to the manager list' do
+    click_link "Cancel"
+    expect(page_heading).to eq "Dog Manager"
+  end
+
+  it "update dog attributes" do
+    fill_in('Name', with: 'Rover')
+    click_button "Submit"
+    expect(page_heading).to match  /Rover/
   end
 end

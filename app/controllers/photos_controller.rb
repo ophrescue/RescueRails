@@ -29,6 +29,8 @@
 #
 
 class PhotosController < ApplicationController
+  before_action :require_login
+
   def sort
     params[:photo].each_with_index do |id, index|
       photo = Photo.find(id)

@@ -8,7 +8,7 @@ feature 'Edit Adopter Form', js: true do
   let!(:comment_id){ adopter.comments.first.id }
 
   scenario 'Admin edits adopter' do
-    sign_in(admin)
+    sign_in_as_admin
     visit adopter_path(adopter)
 
     expect(page).to have_content(adopter.name)

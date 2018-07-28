@@ -2,6 +2,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
+require 'clearance/rspec'
 
 # Capybara integration
 require 'capybara/rspec'

@@ -14,12 +14,6 @@
 require 'rails_helper'
 
 describe CommentsController, type: :controller do
-  let!(:user) { create(:user) }
-
-  before(:each) do
-    allow(controller).to receive(:current_user).and_return(user)
-  end
-
   describe 'GET #index' do
     include_context 'signed in user'
 
@@ -43,11 +37,15 @@ describe CommentsController, type: :controller do
   end
 
   describe 'POST #create' do
+    include_context 'signed in user'
+
     context 'a form post is made' do
       it 'should succeed' do
         request.env['HTTP_REFERER'] = '/'
         dog = create(:dog)
-        post :create, xhr:true, params: { dog_id: dog.id, comment: FactoryBot.attributes_for(:comment) }
+        comment_params = attributes_for(:comment)
+
+        post :create, xhr: true, params: { dog_id: dog.id, comment: comment_params }
         expect(response.status).to eq(200)
         expect(response).not_to be_redirect
       end
@@ -56,7 +54,8 @@ describe CommentsController, type: :controller do
     context 'an ajax call is made' do
       it 'should succeed' do
         dog = create(:dog)
-        post :create, xhr: true, params: { dog_id: dog.id, comment: FactoryBot.attributes_for(:comment) }
+        post :create, xhr: true, params: { dog_id: dog.id, comment: attributes_for(:comment) }
+
         expect(response.status).to eq(200)
         expect(response).not_to be_redirect
       end
@@ -66,15 +65,10 @@ describe CommentsController, type: :controller do
   describe 'PUT #update' do
     subject { put :update, params: { id: comment.id, comment: { content: 'Hi' } } }
 
-    let(:user) { create(:user) }
     let(:comment) { create(:comment, user_id: user.id) }
 
-    before do
-      allow(controller).to receive(:current_user) { current_user }
-    end
-
     context 'user created comment being updated' do
-      let(:current_user) { user }
+      include_context 'signed in user'
 
       it 'updates the comment' do
         expect_any_instance_of(Comment).to receive(:update_attributes)
@@ -84,7 +78,12 @@ describe CommentsController, type: :controller do
     end
 
     context 'user did not create comment being updated' do
+      let(:user) { create(:user) }
       let(:current_user) { create(:user) }
+
+      before do
+        sign_in_as(current_user)
+      end
 
       it 'returns unauthorized' do
         subject

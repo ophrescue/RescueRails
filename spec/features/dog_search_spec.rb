@@ -8,12 +8,10 @@ feature 'visit manager view', js: true do
   let!(:active_user) { create(:user, :admin) }
 
   context 'user is not signed in (issues #771)' do
-    it 'should direct the user to sign in' do
-      expect{ visit '/dogs_manager?search=xyz' }.not_to raise_exception
-      expect(page_heading).to eq 'Staff Sign in'
-      expect(flash_notice_message).to eq 'Please sign in to access this page'
-      fill_and_submit(active_user)
-      expect(page_heading).to eq "Dog Manager"
+    it 'should direct the user to /dogs' do
+      visit '/dogs_manager?search=xyz'
+
+      expect(current_path).to eq(dogs_path)
     end
   end
 
@@ -23,13 +21,12 @@ feature 'search and clear search when admin is logged-in', :js => true do
   include DogsListHelper
 
   before do
-    sign_in(active_user)
+    sign_in_as_admin
   end
 
   let!(:primary_lab) { create(:dog, name: "Abercrombie").name.titleize }
   let!(:secondary_golden) { create(:dog, name: "Abby").name.titleize }
   let!(:secondary_westie) { create(:dog, name: "Nairobi").name.titleize }
-  let!(:active_user) { create(:user, :admin) }
   let(:filter_params) { '#filter_info_row #filter_info .message_group .filter_params' }
 
   it 'should find dogs matching text partial' do

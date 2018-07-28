@@ -11,13 +11,12 @@
 require 'rails_helper'
 
 describe SheltersController, type: :controller do
-  let!(:hacker) { create(:user) }
-
   describe 'GET #index' do
     include_context 'signed in admin'
 
     it 'is successful' do
       get :index
+
       expect(response).to be_successful
     end
   end
@@ -29,6 +28,7 @@ describe SheltersController, type: :controller do
 
     it 'is successful' do
       get :show, params: { id: shelter.id }
+
       expect(response).to be_successful
     end
   end
@@ -38,6 +38,7 @@ describe SheltersController, type: :controller do
 
     it 'is successful' do
       get :new
+
       expect(response).to be_successful
     end
   end
@@ -49,6 +50,7 @@ describe SheltersController, type: :controller do
 
     it 'is successful' do
       get :edit, params: { id: shelter.id }
+
       expect(response).to be_successful
     end
   end
@@ -64,10 +66,8 @@ describe SheltersController, type: :controller do
       end
     end
 
-    context 'logged in as normal shelter' do
-      before :each do
-        allow(controller).to receive(:current_user) { hacker }
-      end
+    context 'logged in as normal user' do
+      include_context 'signed in user'
 
       it 'is unable to create a shelter' do
         expect{
@@ -90,9 +90,7 @@ describe SheltersController, type: :controller do
     end
 
     context 'logged in as normal user' do
-      before :each do
-        allow(controller).to receive(:current_user) { hacker }
-      end
+      include_context 'signed in user'
 
       it 'is unable to modify shelter' do
         expect { request.call }.to_not change { test_shelter.reload.name }

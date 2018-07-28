@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #    Copyright 2017 Operation Paws for Homes
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +14,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-class SessionsController < ApplicationController
+class SessionsController < Clearance::SessionsController
   before_action :prevent_caching
 
   def new
@@ -21,29 +23,25 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.authenticate(params[:session][:email],
-                 params[:session][:password])
-
-    if user.nil?
-      flash.now[:error] = "Invalid email/password combination."
-      render 'new'
-    elsif user.locked?
-      flash.now[:error] = "Your account is disabled."
-      render 'new'
-    else
-      sign_in user
-      user.update_attribute(:lastlogin, Time.now)
-      redirect_back_or(root_path)
-    end
+    set_remember_me
+    super
   end
 
   def destroy
     session[:mgr_view] = false
-    sign_out
-    redirect_to root_path
+
+    super
   end
 
   private
+
+  def set_remember_me
+    if params[:remember_me]
+      cookies.permanent[:remember_me] = true
+    else
+      cookies.delete(:remember_me)
+    end
+  end
 
   def prevent_caching
     # Fix for Mobile Safari https://blog.alex-miller.co/rails/2017/01/07/rails-authenticity-token-and-mobile-safari.html

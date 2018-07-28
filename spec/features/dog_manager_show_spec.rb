@@ -9,10 +9,8 @@ feature 'visit dog show page', js: true do
   include ClientValidationFormHelpers
   include ApplicationHelpers
 
-  let!(:active_user) { create(:user) }
-
   before do
-    sign_in(active_user)
+    sign_in_as_user
   end
 
   context "dog is unavailable" do

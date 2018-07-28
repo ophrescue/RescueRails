@@ -28,7 +28,7 @@
 #
 
 class BannedAdoptersController < ApplicationController
-  before_action :authenticate
+  before_action :require_login
   before_action :active_user
   before_action :ban_adopters_user, only: [:new, :create, :destroy, :edit, :update, :import]
 

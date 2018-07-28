@@ -73,8 +73,8 @@
 #  boarding_buddies             :boolean          default(FALSE)
 #  social_media_manager         :boolean          default(FALSE)
 #  graphic_design               :boolean          default(FALSE)
-class UsersController < ApplicationController
-  before_action :authenticate
+class UsersController < Clearance::UsersController
+  before_action :require_login
   before_action :correct_user, only: [:edit, :update]
   before_action :active_user, only: [:index]
   before_action :allowed_to_see_user, only: [:show]
@@ -109,8 +109,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+
     if @user.save
-      flash[:success] = "Account created for " + @user.name
+      flash[:success] = 'Account created for ' + @user.name
       redirect_to users_path
     else
       @user.password = ""
@@ -126,9 +127,10 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(user_params)
-      @user.update_attribute(:lastverified, Time.now)
-      flash[:success] = "Profile updated."
+    if @user.update(user_params)
+      @user.update(lastverified: Time.now)
+
+      flash[:success] = 'Profile updated.'
       redirect_to @user
     else
       init_fields
@@ -306,4 +308,6 @@ class UsersController < ApplicationController
     ),
     filename: 'users.xls'
   end
+
+  def redirect_signed_in_users; end
 end

@@ -31,8 +31,9 @@
 #
 
 class AttachmentsController < ApplicationController
+  before_action :require_login
+
   respond_to :html, :json
-  before_action :authenticate
 
   def destroy
     Attachment.find(params[:id]).destroy

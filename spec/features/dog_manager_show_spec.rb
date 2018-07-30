@@ -101,4 +101,88 @@ feature 'visit dog show page', js: true do
     end
   end
 
+  context 'comments tabs, small screen' do
+    let!(:dog){ create(:dog, :adoptable) }
+    before(:each) do
+      set_screen_size(:small_screen)
+      dog.update_attribute(:status, 'adopted') # create an audited update item
+      visit dogs_manager_path(dog)
+    end
+
+    after(:each) do
+      set_screen_size(:large_screen)
+    end
+    # audit has comment-header
+    # audit which is update has change-audit-item
+    # comment has comment-header and read-only-comment
+    # comment has editable-comment while editing
+
+    it "should add comment on small screen" do
+      expect(page).to have_selector('#comment_table_small', visible: true)
+      expect(page).to have_selector('.read-only-comment', count: 1)
+      expect(page).to have_selector('.comment-header', count: 1)
+      fill_in('comment_content', with: "bish bash bosh")
+      page.find('#comment_submit').click
+      expect(page).to have_selector('.read-only-comment', count: 2)
+      expect(page).to have_selector('.comment-header', count: 2)
+      expect(dog.comments.count).to eq 2
+      click_link('All')
+      expect(page).to have_selector('.read-only-comment', count: 2)
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+      expect(page).to have_selector('.comment-header', count: 4) # create, update, 2 comments
+    end
+
+    it "should show audit history on small screen" do
+      click_link('History')
+      expect(page).not_to have_selector('.read-only-comment')
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+      expect(page).to have_selector('.comment-header', count: 2) # create and update
+    end
+
+    it "should show comments and audit history on small screen" do
+      click_link('All')
+      expect(page).to have_selector('.read-only-comment', count: 1) # the comment
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+      expect(page).to have_selector('.comment-header', count: 3) # create, add comment, update
+    end
+  end
+
+  context 'comments tabs, large screen' do
+    let!(:dog){ create(:dog, :adoptable) }
+    before(:each) do
+      set_screen_size(:large_screen)
+      dog.update_attribute(:status, 'adopted') # create an audited change item
+      visit dogs_manager_path(dog)
+    end
+
+    it "should add comment on large screen" do
+      expect(page).to have_selector('.read-only-comment', count: 1)
+      expect(page).to have_selector('.comment-header', count: 1)
+      fill_in('comment_content', with: "bish bash bosh")
+      page.find('#comment_submit').click
+      expect(page).to have_selector('.read-only-comment', count: 2)
+      expect(page).to have_selector('.comment-header', count: 2)
+      expect(dog.comments.count).to eq 2
+      click_link('All')
+      expect(page).to have_selector('foo')
+      expect(page).to have_selector('.read-only-comment', count: 2)
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+      expect(page).to have_selector('.comment-header', count: 4) # create, update, 2 comments
+    end
+
+    it "should show audit history on large screen" do
+      click_link('History')
+      expect(page).not_to have_selector('.read-only-comment')
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+      expect(page).to have_selector('.comment-header', count: 2) # create and update
+    end
+
+    it "should show comments and audit history on large screen" do
+      click_link('All')
+      expect(page).to have_selector('.read-only-comment', count: 1) # the comment
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+      expect(page).to have_selector('.comment-header', count: 3) # create, add comment, update
+    end
+  end
+
 end # /feature

@@ -96,6 +96,6 @@ function saveComment($form) {
 function refresh_comments() {
   var url = window.location + '/comments';
   $.get(url, function(data) {
-    $('#comment_table').html(data);
+    $('.comment_table').html(data);
   });
 }

@@ -58,3 +58,5 @@ end
 
 # Keep only the screenshots generated from the last failing test suite
 Capybara::Screenshot.prune_strategy = :keep_last_run
+
+Capybara.asset_host="http://localhost:3000/assets"

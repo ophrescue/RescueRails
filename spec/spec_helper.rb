@@ -15,6 +15,7 @@ RSpec.configure do |config|
   # Use documentation formatter when running a single file.
   config.default_formatter = 'doc' if config.files_to_run.one?
 
+
   # Print the 5 slowest examples and example groups at the end of the run
   config.profile_examples = 5
 
@@ -32,6 +33,7 @@ RSpec.configure do |config|
     # required for TravisCI, otherwise this required sequence is not present in the db
     ActiveRecord::Base.connection.execute("DROP SEQUENCE IF EXISTS tracking_id_seq;")
     ActiveRecord::Base.connection.execute("CREATE SEQUENCE tracking_id_seq START 1;")
+    `RAILS_ENV=test rake assets:precompile`
   end
 
   config.after(:suite) do

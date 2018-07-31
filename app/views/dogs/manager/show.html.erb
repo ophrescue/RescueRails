@@ -59,7 +59,7 @@
       <% end %>
 
       <div class="d-none d-sm-block">
-        <%= render partial: 'comments_audits', locals: {device:'large'} %>
+        <%= render partial: 'comments_audits', locals: {device:'_large'} %>
       </div>
     </div>
 
@@ -138,7 +138,7 @@
         <dd id='flea_tick_preventative'><%= @dog.flea_tick_preventative || x_icon %></dd>
       </dl>
       <div class="d-block d-sm-none">
-        <%= render partial: 'comments_audits' , locals: {device:'small'}%>
+        <%= render partial: 'comments_audits' , locals: {device:'_small'}%>
       </div>
     </div>
   </div>

@@ -37,28 +37,43 @@ $( function () {
     });
   }
 
+  $('body').on('ajax:success', 'form#new_comment', function(event,result,status) {
+    var $form = $(event.target);
+    // so it worked, add to the comment list
+    refresh_comments(result);
 
-  $('#new_comment').submit( function(e) {
-    e.preventDefault();
-    $.ajax({
-      type: 'POST',
-      url: this.action,
-      data: $('#new_comment').serialize(),
-      success: function (data) {
-        // so it worked, add to the comment list
-        refresh_comments();
+    // reset the form validation class
+    $form.removeClass('was-validated')
 
-        // clear comment field for next comment
-        $('#comment_content').val('');
+    // clear comment field for next comment
+    $('.comment_content').val('');
 
-        // Turn the POST button back on
-        $('#comment_submit').prop('disabled', false);
-      },
-      error: function() {
-        alert('error saving comment');
-      }
-    });
+    // Turn the POST button back on
+    $('.comment_submit').prop('disabled', false);
   });
+//
+//  $('.comment_submit').on('click', function(e) {
+//    e.preventDefault();
+//    $form = $(e.target).closest('form')
+//    $.ajax({
+//      type: 'POST',
+//      url: $form.attr('action'),
+//      data: $form.serialize(),
+//      success: function (data) {
+//        // so it worked, add to the comment list
+//         refresh_comments(data);
+//
+//        // clear comment field for next comment
+//          $('.comment_content').val('');
+//
+//        // Turn the POST button back on
+//        $('.comment_submit').prop('disabled', false);
+//      },
+//      error: function() {
+//        alert('error saving comment');
+//      }
+//    });
+//  });
 });
 
 function editComment($parent) {
@@ -93,9 +108,7 @@ function saveComment($form) {
           })
 }
 
-function refresh_comments() {
-  var url = window.location + '/comments';
-  $.get(url, function(data) {
-    $('.comment_table').html(data);
-  });
+function refresh_comments(data) {
+  $("[id^='comment_table']").prepend(data);
+  $("[id^='all_table']").prepend(data);
 }

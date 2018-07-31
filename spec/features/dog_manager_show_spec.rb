@@ -1,9 +1,12 @@
 require 'rails_helper'
 require_relative '../helpers/dog_show_helper'
 require_relative '../helpers/rspec_matchers'
+require_relative '../helpers/form_validation_helpers'
 
 feature 'visit dog show page', js: true do
   include DogShowHelper
+  include FormValidationHelpers
+
   let!(:active_user) { create(:user) }
 
   before do
@@ -112,43 +115,56 @@ feature 'visit dog show page', js: true do
     after(:each) do
       set_screen_size(:large_screen)
     end
-    # audit has comment-header
-    # audit which is update has change-audit-item
-    # comment has comment-header and read-only-comment
-    # comment has editable-comment while editing
 
     it "should add comment on small screen" do
-      expect(page).to have_selector('#comment_table_small', visible: true)
+      expect(page).to have_selector('#comment_table_small')
       expect(page).to have_selector('.read-only-comment', count: 1)
       expect(page).to have_selector('.comment-header', count: 1)
       fill_in('comment_content', with: "bish bash bosh")
-      page.find('#comment_submit').click
+      page.find('#comment_submit_small').click
       expect(page).to have_selector('.read-only-comment', count: 2)
       expect(page).to have_selector('.comment-header', count: 2)
       expect(dog.comments.count).to eq 2
       click_link('All')
+      expect(page).to have_selector('.comment-header', count: 2) # 2 comments
       expect(page).to have_selector('.read-only-comment', count: 2)
+      expect(page).to have_selector('.audit-header', count: 2) # create, update
       expect(page).to have_selector('.change-audit-item', count: 1) # update
-      expect(page).to have_selector('.comment-header', count: 4) # create, update, 2 comments
+    end
+
+    it "should warn user if comment field is blank" do
+      page.find('#comment_submit_small').click
+      expect(validation_error_message_for('comment_content').text).to eq "Content cannot be blank"
+      fill_in('comment_content', with: "x")
+      expect(validation_error_message_for('comment_content')).not_to be_visible
+    end
+
+    xit 'should be editable' do
+      expect(2).to eq 1
+    end
+
+    xit 'edit comment to blank' do
+      expect(2).to eq 1
     end
 
     it "should show audit history on small screen" do
       click_link('History')
       expect(page).not_to have_selector('.read-only-comment')
       expect(page).to have_selector('.change-audit-item', count: 1) # update
-      expect(page).to have_selector('.comment-header', count: 2) # create and update
+      expect(page).to have_selector('.audit-header', count: 2) # create and update
     end
 
     it "should show comments and audit history on small screen" do
       click_link('All')
+      expect(page).to have_selector('.comment-header', count: 1)
       expect(page).to have_selector('.read-only-comment', count: 1) # the comment
       expect(page).to have_selector('.change-audit-item', count: 1) # update
-      expect(page).to have_selector('.comment-header', count: 3) # create, add comment, update
+      expect(page).to have_selector('.audit-header', count: 2) # create, update
     end
   end
 
   context 'comments tabs, large screen' do
-    let!(:dog){ create(:dog, :adoptable) }
+    let!(:dog){ create(:dog, :adoptable, comments: [create(:comment, user: active_user)]) }
     before(:each) do
       set_screen_size(:large_screen)
       dog.update_attribute(:status, 'adopted') # create an audited change item
@@ -156,32 +172,96 @@ feature 'visit dog show page', js: true do
     end
 
     it "should add comment on large screen" do
+      expect(page).to have_selector('#comment_table_large')
       expect(page).to have_selector('.read-only-comment', count: 1)
       expect(page).to have_selector('.comment-header', count: 1)
       fill_in('comment_content', with: "bish bash bosh")
-      page.find('#comment_submit').click
+      page.find('#comment_submit_large').click
       expect(page).to have_selector('.read-only-comment', count: 2)
       expect(page).to have_selector('.comment-header', count: 2)
       expect(dog.comments.count).to eq 2
       click_link('All')
-      expect(page).to have_selector('foo')
+      expect(page).to have_selector('.comment-header', count: 2) # 2 comments
       expect(page).to have_selector('.read-only-comment', count: 2)
+      expect(page).to have_selector('.audit-header', count: 2) # create, update
       expect(page).to have_selector('.change-audit-item', count: 1) # update
-      expect(page).to have_selector('.comment-header', count: 4) # create, update, 2 comments
+    end
+
+    it "should warn user if comment field is blank" do
+      page.find('#comment_submit_large').click
+      expect(validation_error_message_for('comment_content').text).to eq "Content cannot be blank"
+      fill_in('comment_content', with: "x")
+      expect(validation_error_message_for('comment_content')).not_to be_visible
+    end
+
+    it 'should be editable' do
+      click_button('Edit')
+      page.find('.editable-comment>textarea').set("new comment text")
+      click_button('Save')
+      expect(page).to have_selector('.read-only-comment', text: "new comment_text")
+    end
+
+    xit 'edit comment to blank' do
+      expect(2).to eq 1
+    end
+
+    it "should show audit history on small screen" do
+      click_link('History')
+      expect(page).not_to have_selector('.read-only-comment')
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+      expect(page).to have_selector('.audit-header', count: 2) # create and update
+    end
+
+    it "should show comments and audit history on small screen" do
+      click_link('All')
+      expect(page).to have_selector('.comment-header', count: 1)
+      expect(page).to have_selector('.read-only-comment', count: 1) # the comment
+      expect(page).to have_selector('.audit-header', count: 2) # create, update
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+    end
+  end
+
+  context 'comments tabs, large screen' do
+    let!(:dog){ create(:dog, :adoptable, comments: [create(:comment, user: active_user)]) }
+    before(:each) do
+      set_screen_size(:large_screen)
+      dog.update_attribute(:status, 'adopted') # create an audited change item
+      visit dogs_manager_path(dog)
+    end
+
+    it "should add comment on large screen" do
+      expect(page).to have_selector('#comment_table_large')
+      expect(page).to have_selector('.read-only-comment', count: 1)
+      expect(page).to have_selector('.comment-header', count: 1)
+      fill_in('comment_content', with: "bish bash bosh")
+      page.find('#comment_submit_large').click
+      expect(page).to have_selector('.read-only-comment', count: 2)
+      expect(page).to have_selector('.comment-header', count: 2)
+      expect(dog.comments.count).to eq 2
+      click_link('All')
+      expect(page).to have_selector('.comment-header', count: 2) # 2 comments
+      expect(page).to have_selector('.read-only-comment', count: 2)
+      expect(page).to have_selector('.audit-header', count: 2) # create, update
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+    end
+
+    xit "should warn user if comment field is blank" do
+      expect(1).to eq 0
     end
 
     it "should show audit history on large screen" do
       click_link('History')
       expect(page).not_to have_selector('.read-only-comment')
       expect(page).to have_selector('.change-audit-item', count: 1) # update
-      expect(page).to have_selector('.comment-header', count: 2) # create and update
+      expect(page).to have_selector('.audit-header', count: 2) # create and update
     end
 
     it "should show comments and audit history on large screen" do
       click_link('All')
+      expect(page).to have_selector('.comment-header', count: 1)
       expect(page).to have_selector('.read-only-comment', count: 1) # the comment
+      expect(page).to have_selector('.audit-header', count: 2) # create, update
       expect(page).to have_selector('.change-audit-item', count: 1) # update
-      expect(page).to have_selector('.comment-header', count: 3) # create, add comment, update
     end
   end
 

@@ -26,7 +26,6 @@
 #
 
 class CommentsController < ApplicationController
-  include SessionsHelper
 
   before_action :authenticate
   before_action :load_comment, only: %i(edit show update)
@@ -48,8 +47,7 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.build(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      flash[:success] = 'Comment Saved'
-      return handle_redirect
+      render @comment
     else
       render action: 'new'
     end

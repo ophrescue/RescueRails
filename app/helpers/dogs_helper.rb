@@ -1,10 +1,10 @@
 module DogsHelper
   def validation_class_for(f,field)
-    'is-invalid' if @dog.errors.messages[field].any?
+    'is-invalid' if f.object.errors.messages[field].any?
   end
 
   def validation_error_message_for(f,field)
-    message = @dog.errors.messages[field].first || client_validation_message_for(field)
+    message = f.object.errors.messages[field].first || client_validation_message_for(field)
     "#{field.to_s.humanize(keep_id_suffix: true)} #{message}"
   end
 
@@ -16,6 +16,8 @@ module DogsHelper
       "must be numeric"
     when :status
       "must be selected"
+    when :content
+      "cannot be blank"
     end
   end
 

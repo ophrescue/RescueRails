@@ -30,6 +30,10 @@ FactoryBot.define do
     completed_date { Date.today.advance(days: rand(500)) }
     county { Faker::Address.county }
 
+    after(:create) do |adopter|
+      create(:comment, :commentable_type => 'Adopter', :commentable_id => adopter.id, :content => Faker::Lorem.sentence )
+    end
+
     factory :adopter_with_app do
       after(:create) do |adopter|
         create(:adoption_app, adopter: adopter)

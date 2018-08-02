@@ -10,4 +10,16 @@ module ApplicationHelpers
   def page_heading
     page.find('h1').text
   end
+
+  def find_link_and_click(locator)
+    script = <<-JS
+      arguments[0].scrollIntoView(true)
+    JS
+
+    element = page.find(:link, locator)
+
+    Capybara.current_session.driver.browser.execute_script(script,element.native)
+
+    element.click
+  end
 end

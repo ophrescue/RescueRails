@@ -2,10 +2,12 @@ require 'rails_helper'
 require_relative '../helpers/dog_show_helper'
 require_relative '../helpers/rspec_matchers'
 require_relative '../helpers/form_validation_helpers'
+require_relative '../helpers/application_helpers'
 
 feature 'visit dog show page', js: true do
   include DogShowHelper
   include FormValidationHelpers
+  include ApplicationHelpers
 
   let!(:active_user) { create(:user) }
 
@@ -126,7 +128,7 @@ feature 'visit dog show page', js: true do
       expect(page).to have_selector('.read-only-comment', count: 2)
       expect(page).to have_selector('.comment-header', count: 2)
       expect(dog.comments.count).to eq 2
-      click_link('All')
+      find_link_and_click('All')
       expect(page).to have_selector('.comment-header', count: 2) # 2 comments
       expect(page).to have_selector('.read-only-comment', count: 2)
       expect(page).to have_selector('.audit-header', count: 2) # create, update
@@ -145,7 +147,7 @@ feature 'visit dog show page', js: true do
       page.find('.editable-comment>textarea').set("new comment text")
       click_button('Save')
       expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
-      click_link('All')
+      find_link_and_click('All')
       expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
     end
 
@@ -161,14 +163,14 @@ feature 'visit dog show page', js: true do
     end
 
     it "should show audit history on small screen" do
-      click_link('History')
+      find_link_and_click('History')
       expect(page).not_to have_selector('.read-only-comment')
       expect(page).to have_selector('.change-audit-item', count: 1) # update
       expect(page).to have_selector('.audit-header', count: 2) # create and update
     end
 
     it "should show comments and audit history on small screen" do
-      click_link('All')
+      find_link_and_click('All')
       expect(page).to have_selector('.comment-header', count: 1)
       expect(page).to have_selector('.read-only-comment', count: 1) # the comment
       expect(page).to have_selector('.change-audit-item', count: 1) # update
@@ -194,7 +196,7 @@ feature 'visit dog show page', js: true do
       expect(page).to have_selector('.read-only-comment', count: 2)
       expect(page).to have_selector('.comment-header', count: 2)
       expect(dog.comments.count).to eq 2
-      click_link('All')
+      find_link_and_click('All')
       expect(page).to have_selector('.comment-header', count: 2) # 2 comments
       expect(page).to have_selector('.read-only-comment', count: 2)
       expect(page).to have_selector('.audit-header', count: 2) # create, update
@@ -213,7 +215,7 @@ feature 'visit dog show page', js: true do
       page.find('.editable-comment>textarea').set("new comment text")
       click_button('Save')
       expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
-      click_link('All')
+      find_link_and_click('All')
       expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
     end
 
@@ -229,14 +231,14 @@ feature 'visit dog show page', js: true do
     end
 
     it "should show audit history on large screen" do
-      click_link('History')
+      find_link_and_click('History')
       expect(page).not_to have_selector('.read-only-comment')
       expect(page).to have_selector('.change-audit-item', count: 1) # update
       expect(page).to have_selector('.audit-header', count: 2) # create and update
     end
 
     it "should show comments and audit history on large screen" do
-      click_link('All')
+      find_link_and_click('All')
       expect(page).to have_selector('.comment-header', count: 1)
       expect(page).to have_selector('.read-only-comment', count: 1) # the comment
       expect(page).to have_selector('.audit-header', count: 2) # create, update

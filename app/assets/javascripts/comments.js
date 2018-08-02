@@ -25,7 +25,6 @@ $( function () {
         editComment($parent);
       }
       $($parent).data("editing", !isEditing);
-
     });
 
 
@@ -49,6 +48,8 @@ $( function () {
     var comment_id = $form.find("div[id^=comment_content]").attr('id').match(/\d+/)[0]
     $('.read-only-comment#comment_content_'+comment_id).closest('form').closest('.row').replaceWith(result);
   });
+
+});
 
 function editComment($parent) {
   $parent.find('.read-only-comment').hide();

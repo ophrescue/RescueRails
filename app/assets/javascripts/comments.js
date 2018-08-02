@@ -14,7 +14,6 @@
 
 $( function () {
 
-  //if ( $('.edit_comment').length > 0) {
     $(document).on('click', '.toggle-edit-comment', function(e){
       var $parent = $(e.target).parents('form.edit_comment');
       isEditing = $($parent).data("editing");
@@ -29,13 +28,6 @@ $( function () {
 
     });
 
-//     $(document).on('click', 'button.save-edit-comment', function(e){
-//       var $parent = $(e.target).parents('form.edit_comment');
-// 
-//       saveComment($parent);
-//       $parent.find('.toggle-edit-comment').click();
-//     });
-  //}
 
   $('body').on('ajax:success', 'form#new_comment', function(event,result,status) {
     var $form = $(event.target);
@@ -57,30 +49,6 @@ $( function () {
     var comment_id = $form.find("div[id^=comment_content]").attr('id').match(/\d+/)[0]
     $('.read-only-comment#comment_content_'+comment_id).closest('form').closest('.row').replaceWith(result);
   });
-//
-//  $('.comment_submit').on('click', function(e) {
-//    e.preventDefault();
-//    $form = $(e.target).closest('form')
-//    $.ajax({
-//      type: 'POST',
-//      url: $form.attr('action'),
-//      data: $form.serialize(),
-//      success: function (data) {
-//        // so it worked, add to the comment list
-//         refresh_comments(data);
-//
-//        // clear comment field for next comment
-//          $('.comment_content').val('');
-//
-//        // Turn the POST button back on
-//        $('.comment_submit').prop('disabled', false);
-//      },
-//      error: function() {
-//        alert('error saving comment');
-//      }
-//    });
-//  });
-});
 
 function editComment($parent) {
   $parent.find('.read-only-comment').hide();
@@ -95,24 +63,6 @@ function showComment($parent) {
   $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
   $parent.find('.save-edit-comment').hide();
 }
-
-// function saveComment($form) {
-//   var url = $form.attr('action');
-//   var serialized_form = $form.serialize();
-// 
-//   $.ajax({
-//         url: url,
-//         type: 'POST',
-//         data: serialized_form
-//       }).success(function() {
-//           $.get(url, function(data) {
-//             $form.find('.read-only-comment').html(data);
-//           })
-// 
-//         }).error( function() {
-//           $form.find('.read-only-comment').html("Comment update error.");
-//           })
-// }
 
 function refresh_comments(data) {
   $("[id^='comment_table']").prepend(data);

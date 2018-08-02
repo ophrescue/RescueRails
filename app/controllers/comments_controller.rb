@@ -56,7 +56,7 @@ class CommentsController < ApplicationController
   def update
     if @comment.user_id == current_user.id
       @comment.update_attributes(comment_params)
-      head :ok
+      render @comment
     else
       head :unauthorized
     end

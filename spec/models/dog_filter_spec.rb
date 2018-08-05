@@ -111,7 +111,7 @@ describe DogFilter do
       end
 
       context 'by flags_array with foster_needed flag' do
-        let!(:found_dog) { create(:dog, needs_foster: true) }
+        let!(:found_dog) { create(:dog, status: 'adoptable', needs_foster: true) }
         let!(:other_dog) { create(:dog, needs_foster: false) }
         let(:params) { { filter_params:  { has_flags:[ "foster_needed"] } } }
 

@@ -51,7 +51,7 @@ class Event < ApplicationRecord
                         :address,
                         :description
 
-  validates_format_of :location_url, with: URI::regexp(%w[http https])
+  validates_format_of :location_url, with: URI::regexp(%w[http https]), allow_blank: true
 
   validates :title, length: { maximum: 255 }
   validates :location_name, length: { maximum: 255 }

@@ -70,7 +70,19 @@ brew install geckodriver
 and then run tests with:
 
 ```
-BROWSER=firefox rspec spec # environment variable switch in rails_helper.rb
+BROWSER=firefox_headless rspec spec # environment variable switch in rails_helper.rb
+```
+
+To facilitate debugging, you can run Firefox in the non-headless mode with:
+
+```
+BROWSER=firefox rspec spec
+```
+
+A rake task is included to test agains multiple browsers:
+
+```
+rake rescue_rails:test_suite
 ```
 
 ### File Attachment Storage

@@ -26,7 +26,6 @@
 #
 
 class CommentsController < ApplicationController
-  include SessionsHelper
 
   before_action :authenticate
   before_action :load_comment, only: %i(edit show update)
@@ -48,8 +47,7 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.build(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      flash[:success] = 'Comment Saved'
-      return handle_redirect
+      render @comment
     else
       render action: 'new'
     end
@@ -58,7 +56,7 @@ class CommentsController < ApplicationController
   def update
     if @comment.user_id == current_user.id
       @comment.update_attributes(comment_params)
-      head :ok
+      render @comment
     else
       head :unauthorized
     end
@@ -76,9 +74,6 @@ class CommentsController < ApplicationController
 
   def find_commentable
     params.each do |name, value|
-      if name == 'dogs_manager_id'  #duct tape to fix #834
-        name = 'dogs_id'
-      end                           #end duct tape
       matches = /(.+)_id$/.match(name)
 
       if matches.present?

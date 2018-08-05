@@ -1,12 +1,13 @@
-<%= form_for @dog.comments.build, url: dogs_manager_comments_path(@dog), html: {id: "new_comment"} do |f| %>
+<%= form_for @dog.comments.build, url: dogs_manager_comments_path(@dog), data: {remote: true},  html: {novalidate: true, class: 'needs-validation', id: "new_comment"} do |f| %>
   <div class='form-group'>
     <label for='comment_content' class='h4'>Add comment</label>
-    <%= f.text_area :content, :class => "form-control", :rows => "6" %>
+    <%= f.text_area :content, :class => "form-control comment_content", :rows => "6", :required => true %>
+    <div class='invalid-feedback'><%= validation_error_message_for(f,:content) %></div>
   </div>
-  <%= f.submit "Post", :id => "comment_submit", :class => "btn btn-primary" %>
+  <button id="comment_submit<%= device %>" class="btn btn-primary comment_submit">Post</button>
 <% end %>
 <div class="row" >
   <div class="col">
-    <%= render 'changes' %>
+    <%= render partial: 'changes/changes', locals: {parent: @dog, device: device} %>
   </div>
 </div>

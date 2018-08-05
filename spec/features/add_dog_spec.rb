@@ -1,11 +1,11 @@
 require 'rails_helper'
 require_relative '../helpers/application_helpers'
 require_relative '../helpers/rspec_matchers'
-require_relative '../helpers/dog_form_helpers'
+require_relative '../helpers/form_validation_helpers'
 require_relative '../helpers/dogs_list_helper'
 
 feature 'add a dog', js: true do
-  include DogFormHelpers
+  include FormValidationHelpers
   include ApplicationHelpers
 
   feature 'permitted access to fields' do
@@ -187,10 +187,10 @@ feature 'add a dog', js: true do
         it "should not save and should notify user" do
           fill_in(:dog_name, with: 'Fido')
           expect{ click_button('Submit') }.not_to change{Dog.count}
-          expect(validation_error_message_for(:status).text).to eq "Status must be selected"
+          expect(validation_error_message_for(:dog_status).text).to eq "Status must be selected"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           select('adoption pending', from: 'dog_status')
-          expect(validation_error_message_for(:status)).not_to be_visible
+          expect(validation_error_message_for(:dog_status)).not_to be_visible
           expect(submit_button_form_error_message).not_to be_visible
         end
       end
@@ -199,10 +199,10 @@ feature 'add a dog', js: true do
         it "should not save and should notify user" do
           select('adoption pending', from: 'dog_status')
           expect{ click_button('Submit') }.not_to change{Dog.count}
-          expect(validation_error_message_for(:name).text).to eq "Name cannot be blank"
+          expect(validation_error_message_for(:dog_name).text).to eq "Name cannot be blank"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           fill_in(:dog_name, with: 'Fido')
-          expect(validation_error_message_for(:name)).not_to be_visible
+          expect(validation_error_message_for(:dog_name)).not_to be_visible
           expect(submit_button_form_error_message).not_to be_visible
         end
       end
@@ -210,14 +210,14 @@ feature 'add a dog', js: true do
       context 'with any of the Faker names' do
         it "should validate the name on the browser" do
           click_button('Submit')
-          expect(validation_error_message_for(:name).text).to eq "Name cannot be blank"
+          expect(validation_error_message_for(:dog_name).text).to eq "Name cannot be blank"
           # here we test against just 30 names, for performance reasons
           # if any changes are made to this code it would be wise to
           # remove the .sample(30) and verify code against all thenames
           names = I18n.t('faker.dog.name').sample(30)
           names.each do |name|
             fill_in(:dog_name, with: name)
-            expect(validation_error_message_for(:name)).not_to be_visible
+            expect(validation_error_message_for(:dog_name)).not_to be_visible
           end
         end
       end
@@ -227,10 +227,10 @@ feature 'add a dog', js: true do
           select('adoption pending', from: 'dog_status')
           fill_in(:dog_name, with: '  ')
           expect{ click_button('Submit') }.not_to change{Dog.count}
-          expect(validation_error_message_for(:name).text).to eq "Name cannot be blank"
+          expect(validation_error_message_for(:dog_name).text).to eq "Name cannot be blank"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           fill_in(:dog_name, with: 'Fido')
-          expect(validation_error_message_for(:name)).not_to be_visible
+          expect(validation_error_message_for(:dog_name)).not_to be_visible
           expect(submit_button_form_error_message).not_to be_visible
         end
       end
@@ -259,10 +259,10 @@ feature 'add a dog', js: true do
           select('adoption pending', from: 'dog_status')
           fill_in(:dog_craigslist_ad_url, with: 'www.craigslist.com/foo/bar/baz')
           expect{ click_button('Submit') }.not_to change{Dog.count}
-          expect(validation_error_message_for(:craigslist_ad_url).text).to eq "please include 'http://'"
+          expect(validation_error_message_for(:dog_craigslist_ad_url).text).to eq "please include 'http://'"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           fill_in(:dog_craigslist_ad_url, with: 'http://www.craigslist.com/foo/bar/baz')
-          expect(validation_error_message_for(:craigslist_ad_url)).not_to be_visible
+          expect(validation_error_message_for(:dog_craigslist_ad_url)).not_to be_visible
           expect(submit_button_form_error_message).not_to be_visible
         end
       end
@@ -273,10 +273,10 @@ feature 'add a dog', js: true do
           select('adoption pending', from: 'dog_status')
           fill_in(:dog_fee, with: '$88')
           expect{ click_button('Submit') }.not_to change{Dog.count}
-          expect(validation_error_message_for(:fee).text).to eq "must be a whole number, with no letters"
+          expect(validation_error_message_for(:dog_fee).text).to eq "must be a whole number, with no letters"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           fill_in(:dog_fee, with: '88')
-          expect(validation_error_message_for(:fee)).not_to be_visible
+          expect(validation_error_message_for(:dog_fee)).not_to be_visible
           expect(submit_button_form_error_message).not_to be_visible
         end
       end
@@ -305,8 +305,8 @@ feature 'add a dog', js: true do
           expect{ click_button('Submit') }.not_to change{ Dog.count }
           expect(page_heading).to eq 'Add a New Dog'
           expect(page.find('#dog_name')).to have_class 'is-invalid'
-          expect(validation_error_message_for(:name)).to be_visible
-          expect(validation_error_message_for(:name).text).to eq 'Name has already been taken'
+          expect(validation_error_message_for(:dog_name)).to be_visible
+          expect(validation_error_message_for(:dog_name).text).to eq 'Name has already been taken'
           expect(flash_error_message).to eq "form could not be saved, see errors below"
         end
       end

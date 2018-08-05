@@ -8,9 +8,8 @@ $(function(){
   }
 
 
-  var $form = $('form.needs-validation');
-
   var validate_form_fields = function(event){
+    var $form = $(event.target)
     if ($form[0].checkValidity() === false) {
       event.preventDefault(); // prevents form submission
       event.stopPropagation();
@@ -20,6 +19,6 @@ $(function(){
   }
 
   $('form :input').on({change: validate_form_fields, keyup: validate_form_fields })
-  $form.on('submit', validate_form_fields);
+  $('form.needs-validation').on('submit', validate_form_fields);
 });
 

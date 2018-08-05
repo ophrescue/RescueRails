@@ -273,4 +273,4 @@ class Dog < ApplicationRecord
   end
 end
 
-
+DogsManager = Dog

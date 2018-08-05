@@ -4,7 +4,7 @@ describe TrainingMailer, type: :mailer do
   include ActiveJob::TestHelper
 
   describe "Training Coupon Email" do
-    let(:adopter) { create(:adopter_with_app) }
+    let(:adopter) { create(:adopter, :with_app) }
 
     it 'job is created' do
       expect do

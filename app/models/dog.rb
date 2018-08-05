@@ -145,7 +145,7 @@ class Dog < ApplicationRecord
 
   SEARCH_FIELDS = ["Breed", "Tracking ID", "Name", "Microchip"]
 
-  before_save :update_adoption_date
+  before_save :update_adoption_date, :update_needs_foster
 
   scope :is_breed,                                ->(breed_partial) { joins("join breeds on (breeds.id = dogs.primary_breed_id) or (breeds.id = dogs.secondary_breed_id)").where("breeds.name ilike '%#{sanitize_sql_like(breed_partial)}%'").distinct }
   scope :pattern_matching_name,                   ->(search_term) { where("name ilike ?", search_term) }
@@ -262,6 +262,13 @@ class Dog < ApplicationRecord
 
     self.adoption_date = nil
     self.adoption_date = Date.today() if adopted?
+  end
+
+  def update_needs_foster
+    return unless status_changed?
+    return unless ['completed', 'adopted', 'trial adoption'].include?(status)
+
+    self.needs_foster = false
   end
 
   def self.next_tracking_id

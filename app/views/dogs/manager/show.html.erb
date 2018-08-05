@@ -1,0 +1,154 @@
+<div class='container' id='manage_profile'>
+  <div class='row'>
+    <div class='col-12'>
+      <%= link_to "Dog Manager", session[:last_dog_manager_search], class: 'switch_view btn btn-sm btn-primary mr-4' %>
+      <% if can_edit_dogs? || fostering_dog? %>
+        <%= link_to "Edit", edit_dogs_manager_path(@dog), id: 'edit_dog', class: 'switch_view btn btn-sm btn-primary mr-4' %>
+      <% end %>
+      <%= link_to "Public Profile", dog_path(@dog), class: 'switch_view btn btn-sm btn-secondary' %>
+    </div>
+  </div>
+
+  <div class="row title_row justify-content-between">
+    <div class='col-12 col-sm-auto'>
+      <h1>#<%= @dog.tracking_id%> <%= @dog.name %></h1>
+    </div>
+  </div>
+
+  <div class="row title_row">
+      <div class='col-12 col-sm-auto'>
+        <span id='status'><%= @dog.status.titleize %></span>
+      </div>
+  </div>
+
+  <div class="row title_row">
+    <div class='col-12 col-sm-auto'>
+
+      <span id='gender'><%= @dog.gender %></span>,
+      <span id='age'><%= @dog.age ? @dog.age.titleize : " " %></span>,
+      <% if @dog.size? %>
+        <span id='size'><%= @dog.size.titleize %>-size</span>,
+      <% end %>
+      <span id='breed'><%= @dog.breeds.join(" x ").html_safe %></span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-8">
+      <div id="galleria"></div>
+      <div id="dogDescription" >
+        <h4>Description</h4>
+        <%= simple_format(@dog.description) %>
+      </div>
+
+      <%= render partial: 'medical_summary' %>
+      <%= render partial: 'behaviour_summary' %>
+
+      <% if @dog.attachments.any? %>
+        <h4>Attachments</h4>
+          <ul class="list-unstyled">
+          <% @dog.attachments.each do |a| %>
+            <li>
+            <%= link_to a.download_url do %>
+              <i class="fa fa-cloud-download"></i>
+            <% end %>
+            <%= link_to a.attachment_file_name, a %>
+            </li>
+          <% end %>
+          </ul>
+      <% end %>
+
+      <div class="d-none d-sm-block">
+        <%= render partial: 'comments_audits' %>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-4">
+      <dl class='row' id='details'>
+        <dt>Original Name</dt>
+        <dd id='original_name'><%= @dog.original_name || 'unknown' %></dd>
+        <dt>Microchip</dt>
+        <dd id='microchip'><%= @dog.microchip || 'unknown' %></dd>
+        <dt>Adoption Fee</dt>
+        <dd id='fee'><%= number_to_currency(@dog.fee, precision: 0) || 'unknown' %></dd>
+        <dt>OK with dogs?</dt>
+        <dd id='dogs_ok'><%= (!@dog.no_dogs).as_icon  %></dd>
+        <dt>OK with cats?</dt>
+        <dd id='cats_ok'><%= (!@dog.no_cats).as_icon  %></dd>
+        <dt>OK with kids?</dt>
+        <dd id='kids_ok'><%= (!@dog.no_kids).as_icon  %></dd>
+        <dt>Medical Review Complete</dt>
+        <dd id='medical_review_complete'><%= @dog.medical_review_complete.as_icon %></dd>
+        <dt>Has Medical Need</dt>
+        <dd id='has_medical_need'><%= @dog.has_medical_need.as_icon %></dd>
+        <dt>Is Special Needs</dt>
+        <dd id='special_needs'><%= @dog.is_special_needs.as_icon %></dd>
+        <dt>Needs Spay or Neuter</dt>
+        <dd id='not_altered'><%= (!@dog.is_altered).as_icon %></dd>
+        <dt>High Priority</dt>
+        <dd id='is_high_priority'><%= @dog.is_high_priority.as_icon %></dd>
+        <dt>Needs Photos</dt>
+        <dd id='needs_photos'><%= @dog.needs_photos.as_icon %></dd>
+        <dt>Has Behavior Problem</dt>
+        <dd id='has_behaviour_problem'><%= @dog.has_behavior_problem.as_icon %></dd>
+        <dt>Needs Foster</dt>
+        <dd id='needs_foster'><%= @dog.needs_foster.as_icon %></dd>
+        <dt>Foster</dt>
+        <dd id='foster'><%= render partial: 'foster_details' %></dd>
+        <dt>Adoption Coordinator</dt>
+        <dd id='adoption_coordinator'><%= render partial: 'adoption_coordinator' %></dd>
+        <dt>Sponsor</dt>
+        <dd id='sponsored_by'><%= @dog.sponsored_by %></dd>
+        <dt>Source Shelter</dt>
+        <dd id='shelter'><%= @dog.shelter&.name || 'unknown' %></dd>
+        <dt>Adopters</dt>
+        <dd id='adopters'><%= render(partial: 'adopter', collection: @dog.adopters) || "no adopters" %></dd>
+        <dt>Available on</dt>
+        <dd id='available_on_dt'><%= @dog.available_on_dt || 'unknown' %></dd>
+        <dt>Intake date</dt>
+        <dd id='intake_dt'><%= @dog.intake_dt || 'unknown' %></dd>
+        <dt>Adopted on</dt>
+        <dd id='adoption_date'><%= @dog.adoption_date || 'unknown' %></dd>
+        <dt>Ads</dt>
+        <dd>
+          <div id='adoptapet_ad'><%= @adoptapet %></div>
+          <div><a href=<%= PETFINDER::OPH_PAGE %>>Petfinder</a></div>
+          <div id='craigslist_ad_url'>
+            <%= link_to_if @dog.craigslist_ad_url, "Craigslist", @dog.craigslist_ad_url do "Needs Craigslist ad" end %>
+          </div>
+        </dd>
+
+        <dt>Up-to-date on shots</dt>
+        <dd id='is_uptodateonshots'><%= @dog.is_uptodateonshots.as_icon %></dd>
+        <dt>First shots</dt>
+        <dd id='first_shots'><%= @dog.first_shots || x_icon %></dd>
+        <dt>Second shots</dt>
+        <dd id='second_shots'><%= @dog.second_shots || x_icon %></dd>
+        <dt>Third shots</dt>
+        <dd id='third_shots'><%= @dog.third_shots || x_icon %></dd>
+        <dt>Rabies</dt>
+        <dd id='rabies'><%= @dog.rabies || x_icon %></dd>
+        <dt>4DX</dt>
+        <dd id='vac_4dx'><%= @dog.vac_4dx || x_icon %></dd>
+        <dt>Bordetella</dt>
+        <dd id='bordetella'><%= @dog.bordetella || x_icon %></dd>
+        <dt>Heartworm Preventative</dt>
+        <dd id='heartworm_preventative'><%= @dog.heartworm_preventative || x_icon %></dd>
+        <dt>Flea/Tick Preventative</dt>
+        <dd id='flea_tick_preventative'><%= @dog.flea_tick_preventative || x_icon %></dd>
+      </dl>
+      <div class="d-block d-sm-none">
+        <%= render partial: 'comments_audits' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $('#galleria').galleria({
+    responsive: true,
+    imageCrop: false,
+    dataSource: <%= @carousel %>
+  });
+</script>

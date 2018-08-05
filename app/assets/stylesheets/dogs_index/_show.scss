@@ -1,0 +1,121 @@
+.title_row {
+  color: #ad8b22;
+  margin-bottom: 5px;
+  align-items: baseline;
+
+  h1 {
+    margin-right: 18px;
+    display: inline-block;
+    color: #10acd8;
+    letter-spacing: -1.5px;
+    font-style: italic;
+  }
+
+  span {
+    font-size: 1.2rem;
+  }
+
+  a.fa-info {
+    position: relative;
+    top: -6px;
+    margin-left: 2px;
+    cursor: pointer;
+  }
+
+}
+
+.show_page_links {
+  background-color: #10acd8;
+  color: #fff;
+  display: block;
+//  padding: 10px 10px 10px 15px;
+  height: 45px;
+  line-height: 45px;
+  text-decoration: none;
+  margin-bottom: 1px;
+
+  &:hover {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .fa-compass {
+    margin-left: 14px;
+    font-size: 28px;
+  }
+
+  .fa-stack {
+    margin-left: 4px;
+  }
+
+  .link {
+    position: absolute;
+    left: 74px;
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+}
+
+#adopt_me svg {
+  height: 28px;
+  margin-left: 10px;
+  position: relative;
+  top: 10px;
+
+  path {
+    fill: #fff;
+  }
+}
+
+#adoption_guide {
+  margin-bottom: 12px;
+
+  .fa-compass {
+    color: #fff;
+  }
+}
+
+#sponsor_me .fa-dollar {
+  color: #10acd8;
+}
+
+.share_the_love {
+  border: 1px solid #d4d4d4;
+
+  .share_the_love_header {
+    background-color: #10acd8;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    padding-left: 58px;
+    height: 45px;
+    line-height: 45px;
+  }
+
+  .fb-like {
+    margin: 12px;
+  }
+}
+
+.galleria-thumbnails {
+  margin: 0 auto;
+}
+
+#manage_profile, #public_profile {
+  margin-top: 20px;
+}
+
+.switch_view {
+  font-size: 0.9rem;
+}
+
+@include media-breakpoint-up(md) {
+  .switch_view {
+    font-size: 1.2rem;
+  }
+}
+
+#manage_profile #details dt, #manage_profile #details dd {
+  @extend .col-6;
+}

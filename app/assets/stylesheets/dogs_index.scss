@@ -1,0 +1,20 @@
+@import 'dogs_index/gallery_view';
+@import 'dogs_index/manager_view';
+@import 'dogs_index/show';
+@import 'dogs_index/dog_form';
+
+.title_row {
+  margin-top: 5px;
+
+  a { margin-top: 8px; }
+
+  .switch_view, #edit_dog {
+    margin-top: 14px;
+    position: relative;
+    display: inline-block;
+  }
+}
+
+#public_list, #manager_list {
+  margin-top: 20px;
+}

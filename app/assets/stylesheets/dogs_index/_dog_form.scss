@@ -1,0 +1,49 @@
+#dog_form {
+  #left-column {
+    label {
+      text-align: right
+    }
+  }
+
+  h2 {
+    border-bottom: 2px solid #000;
+    margin-bottom: 10px;
+    margin-top: 24px;
+  }
+
+  h3 {
+    margin: 12px 0px;
+  }
+
+  .new_photos input {
+    display: inline-block;
+  }
+
+  .photo {
+    margin: 12px;
+
+    .sort-handle, img {
+      cursor: move;
+    }
+
+    img {
+      margin-left: 12px;
+      margin-right: 12px;
+    }
+  }
+
+  textarea:disabled {
+    cursor: not-allowed;
+  }
+
+
+  // mimic the styling of the form-group feedback block in
+  // a block attached to the submit button
+  .actions .invalid-feedback {
+    display: none;
+  }
+
+  .actions.form-errors .invalid-feedback {
+    display: block;
+  }
+}

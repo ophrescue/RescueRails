@@ -1,12 +1,13 @@
 FactoryBot.define do
   factory :dog do
-    # note, this works the same as 'sequence' but sequence based on
-    # the current max value of tracking_id fails the travis-ci build
-    tracking_id { (Dog.maximum(:tracking_id) || 0).succ }
+    tracking_id { Dog.next_tracking_id }
     name {
       until(nn = Faker::Dog.name; !Dog.pluck(:name).include?(nn))
       end
-      nn
+      # it's a workaround for TravisCI sorting weirdness.
+      # It doesn't handle spaces inside names as expected
+      # (expected means ' '< 'x')
+      nn.gsub(/(\W|\s)/,'').titlecase
     }
     status {  Dog::STATUSES.sample }
     sequence(:microchip) { |n| "MC-#{n}" }
@@ -32,6 +33,14 @@ FactoryBot.define do
     medical_summary { Faker::Lorem.paragraph }
     behavior_summary { Faker::Lorem.paragraph }
     craigslist_ad_url { [Faker::Internet.url, nil].sample }
+    first_shots { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    second_shots { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    third_shots { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    rabies { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    vac_4dx { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    bordetella { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    heartworm_preventative { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    flea_tick_preventative { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
 
     after(:create) do |dog|
       create(:comment, :commentable_type => 'Dog', :commentable_id => dog.id, :content => Faker::Lorem.sentence )
@@ -44,15 +53,24 @@ FactoryBot.define do
       end
     end
 
+    trait :no_flags do
+      [ :medical_review_complete, :has_medical_need, :is_special_needs, :is_altered, :is_high_priority, :needs_photos,
+        :has_behavior_problem, :needs_foster, :no_dogs, :no_cats, :no_kids ].each do |flag|
+        send(flag, nil)
+      end
+    end
+
+    # file paths here are for test environment, they are not appropriate
+    # for development environment
     trait :with_photos do
       after(:create) do |dog|
-        `mkdir -p #{Rails.root.join("public","system","dog_photo")}`
+        `mkdir -p #{Rails.root.join("public","system","test","photos")}`
         3.times do |i|
           photo = FactoryBot.create(:photo, dog: dog, is_private: false, position: i+1 )
           ["medium", "original"].each do |style|
             data = "photos/photos/#{photo.id}/#{style}/"
             hash = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, Photo::HASH_SECRET, data)
-            filepath = "public/system/dog_photo/#{hash}.jpg"
+            filepath = "public/system/test/photos/#{hash}.jpeg"
             image_source = Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s
             `cp #{image_source} #{Rails.root.join(filepath)}`
           end

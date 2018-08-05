@@ -8,7 +8,8 @@ gem 'rack-cache'
 gem 'acts_as_list'
 gem 'audited', '~> 4.5'
 gem 'aws-sdk', '~> 2'
-gem 'bootstrap-will_paginate', '~> 0.0.10'
+gem 'bootstrap', '~> 4.1.0'
+gem 'bootstrap-will_paginate', '~> 1.0.0'
 gem "countries"
 gem 'dotenv'
 gem 'dotenv-rails'
@@ -59,13 +60,16 @@ gem 'factory_bot_rails'
 
 group :development, :test do
   gem 'faker'
+  gem 'flamegraph'
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'pry-stack_explorer'
+  gem 'rack-mini-profiler', require: false
   gem 'rspec-collection_matchers'
   gem 'rspec-rails'
   gem 'puma'
+  gem 'stackprof'
 end
 
 group :test do

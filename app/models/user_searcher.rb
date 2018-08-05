@@ -56,7 +56,10 @@ class UserSearcher
     @params.slice(:admin, :adoption_coordinator, :event_planner,
                  :dog_adder, :dog_editor, :photographer, :foster,
                  :newsletter, :has_dogs, :has_cats, :house_type, :has_children_under_five,
-                 :has_fence, :puppies_ok, :has_parvo_house, :transporter, :training_team, :foster_mentor, :translator, :public_relations, :fundraising, :medical_behavior, :boarding_buddy, :social_media, :graphic_designer, :active_volunteer, :inactive_volunteer
+                 :has_fence, :puppies_ok, :has_parvo_house, :transporter, :training_team,
+                 :foster_mentor, :translator, :public_relations, :fundraising, :medical_behavior,
+                 :boarding_buddy, :social_media, :graphic_designer, :active_volunteer, :inactive_volunteer,
+                 :available_to_foster
                 )
   end
 end

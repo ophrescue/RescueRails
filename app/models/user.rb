@@ -147,33 +147,43 @@ class User < ApplicationRecord
   before_update :chimp_check
 
   scope :unlocked,                -> { where(locked: false) }
-  scope :admin,                   -> (status = true) { where(admin: status) }
-  scope :adoption_coordinator,    -> (status = true) { where(edit_my_adopters: status) }
-  scope :event_planner,           -> (status = true) { where(edit_events: status) }
-  scope :dog_adder,               -> (status = true) { where(add_dogs: status) }
-  scope :dog_editor,              -> (status = true) { where(edit_dogs: status) }
-  scope :foster,                  -> (status = true) { where(is_foster: status) }
-  scope :photographer,            -> (status = true) { where(is_photographer: status) }
-  scope :newsletter,              -> (status = true) { where(writes_newsletter: status) }
-  scope :transporter,             -> (status = true) { where(is_transporter: status) }
-  scope :training_team,           -> (status = true) { where(training_team: status) }
-  scope :foster_mentor,           -> (status = true) { where(foster_mentor: status) }
-  scope :translator,              -> (status = true) { where(translator: status) }
-  scope :public_relations,        -> (status = true) { where(public_relations: status)}
-  scope :fundraising,             -> (status = true) { where(fundraising: status)}
-  scope :medical_behavior,        -> (status = true) { where(medical_behavior_permission: status)}
-  scope :boarding_buddy,          -> (status = true) { where(boarding_buddies: status)}
-  scope :social_media,            -> (status = true) { where(social_media_manager: status)}
-  scope :graphic_designer,        -> (status = true) { where(graphic_design: status)}
-  scope :active_volunteer,        -> (status = true) { where(active: status)}
+
   scope :inactive_volunteer,      -> (status = false) { where(active: status)}
   scope :house_type,              -> (type) { where(house_type: type) }
-  scope :has_dogs,                -> (status = true) { where(has_own_dogs: status) }
-  scope :has_cats,                -> (status = true) { where(has_own_cats: status) }
-  scope :has_fence,               -> (status = true) { where(has_fenced_yard: status) }
-  scope :has_children_under_five, -> (status = true) { where(children_under_five: status) }
-  scope :puppies_ok,              -> (status = true) { where(can_foster_puppies: status) }
-  scope :has_parvo_house,         -> (status = true) { where(parvo_house: status) }
+
+  HOUSE_TYPES = %w[ rent own ]
+
+  # mapping of scope name (= query string parameter) to model attributes
+  FILTER_FLAGS = { active_volunteer: :active,
+                   admin: :admin,
+                   adoption_coordinator: :edit_my_adopters,
+                   available_to_foster: :available_to_foster,
+                   boarding_buddy: :boarding_buddies,
+                   dog_adder: :add_dogs,
+                   dog_editor: :edit_dogs,
+                   event_planner: :edit_events,
+                   foster: :is_foster,
+                   foster_mentor: :foster_mentor,
+                   fundraising: :fundraising,
+                   graphic_designer: :graphic_design,
+                   has_cats: :has_own_cats,
+                   has_children_under_five: :children_under_five,
+                   has_dogs: :has_own_dogs,
+                   has_fence: :has_fenced_yard,
+                   has_parvo_house: :parvo_house,
+                   medical_behavior: :medical_behavior_permission,
+                   newsletter: :writes_newsletter,
+                   photographer: :is_photographer,
+                   public_relations: :public_relations,
+                   puppies_ok: :can_foster_puppies,
+                   social_media: :social_media_manager,
+                   training_team: :training_team,
+                   translator: :translator,
+                   transporter: :is_transporter }
+
+  FILTER_FLAGS.each do |param,attr|
+    scope :"#{param}", -> (status = true) { where "#{attr}": status}
+  end
 
   def display_name
     name
@@ -229,6 +239,14 @@ class User < ApplicationRecord
         chimp_subscribe
       end
     end
+  end
+
+  def location
+    has_location? && "#{city.titleize}, #{region.upcase}".html_safe
+  end
+
+  def has_location?
+    [city, region].all?
   end
 
   private

@@ -19,7 +19,4 @@ class PagesController < ApplicationController
     @hide_topbar = true
   end
 
-  def dog_status_definitions
-    @hide_topbar = true
-  end
 end

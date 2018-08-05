@@ -1,0 +1,20 @@
+<div class="col-4 col-md-2 globalselect-container" id=<%= id %>>
+  <button type="button" class="globalselect dropdown-toggle btn btn-sm btn-default mb-2 mb-sm-0" data-toggle="dropdown" >
+    <%= button_text %>
+  </button>
+  <ul class="dropdown-menu" data-close-on-select=<%= close_on_select %> >
+    <%- options.each do |key, text| %>
+      <li class="_<%= key %>" >
+        <label for=<%=id%>_<%= key %>>
+          <% if multiple %>
+            <%= check_box_tag "filter_params[#{id}][]", key, is_selected?(id,key), id: "#{id}_#{key}" %>
+          <% else %>
+            <%= radio_button_tag "filter_params[#{id}]", key, @filter_params[id]==key.to_s, id: "#{id}_#{key}" %>
+          <% end %>
+          <div class='control_indicator'></div>
+          <span class="filter_option"><%= text %></span>
+        </label>
+      </li>
+    <%- end %>
+  </ul>
+</div>

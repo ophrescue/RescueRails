@@ -1,0 +1,76 @@
+<div class='row dog line-1'>
+  <div class='col'>
+    <%= link_to "<span class='id'>##{dog.tracking_id}</span>&nbsp;<span class='name'>#{dog.name}</span>".html_safe, dogs_manager_path(dog) %>
+  </div>
+</div>
+<div class='row dog line-2'>
+  <div class='col offset-md-3'>
+    <span><%= size_abbrev(dog.size) %>,</span>
+    <span class='age'><%= dog.age ? dog.age.titleize : " " %>,</span>
+    <span class='gender'><%= dog.gender %>,</span>
+    <span class='breed'><%= dog.breeds.join(" x ").html_safe %>,</span>
+    <span class='status'>
+      <% if (params[:status] == nil) || (params[:status] == "active")  %>
+        <%= dog.status.titleize %>
+      <% end %>
+    </span >
+  </div>
+</div>
+<div class='row dog line-3 d-none d-md-flex'> <!-- for now it's disabled on mobile, but the layout below is mobile-ready if this info is needed in this list for mobile iso on the #show page -->
+  <div class='col-4 col-md-1 intake_date'><%= dog.intake_dt.strftime("%m/%d/%y") unless dog.intake_dt.blank? %></div>
+  <div class='col-4 col-md-2 flags'>
+    <div class="<%= 'medical_review_needed' unless dog.medical_review_complete %>" data-toggle='tooltip' data-placement='bottom' title='Medical Review Incomplete'></div>
+    <div class="<%= 'has_medical_need'      if     dog.has_medical_need %>"        data-toggle='tooltip' data-placement='bottom' title='Medical Need'></div>
+    <div class="<%= 'is_high_priority'      if     dog.is_high_priority %>"        data-toggle='tooltip' data-placement='bottom' title='High Priority'></div>
+    <div class="<%= 'needs_photos'          if     dog.needs_photos %>"            data-toggle='tooltip' data-placement='bottom' title='Need Photos'></div>
+    <div class="<%= 'has_behavior_problem'  if     dog.has_behavior_problem %>"    data-toggle='tooltip' data-placement='bottom' title='Behavior Problem'></div>
+    <div class="<%= 'needs_foster'          if     dog.needs_foster %>"            data-toggle='tooltip' data-placement='bottom' title='Needs Foster'></div>
+    <div class="<%= 'spay_neuter_needed'    unless dog.is_altered %>"              data-toggle='tooltip' data-placement='bottom' title='Needs Spay/Neuter'></div>
+  </div>
+  <div class='col-4 d-md-none'>
+    <% unless dog.comments.empty? %>
+      <a class="fa fa-lg fa-comment-o"
+            tabindex='0'
+            data-toggle='popover'
+            data-placement='left'
+            data-trigger="focus"
+            title="Most recent comment for <%= dog.name %>"
+            data-content="<%= dog.comments.first.content %>" ></a>
+    <% end %>
+  </div>
+  <div class='col-6 col-md-1'>
+    Adoption Coordinator:
+  </div>
+  <div class='col-6 col-md-1'>
+    <%= dog.coordinator ? link_to(dog.coordinator.name, dog.coordinator) : "Unassigned" %>
+  </div>
+  <div class='col-6 col-md-1 foster_txt'>Foster:</div>
+  <div class='col-6 col-md-2'><%= dog.foster ? link_to(dog.foster.name, dog.foster) : "Unassigned" %><br />
+    <%= dog.foster_location %></div>
+  <div class='col-6 col-md-1'>
+    Adopter interest:
+  </div>
+  <div class='col-6 col-md-2'>
+    <%- if dog.adopters.empty? %>
+      None
+    <%- else %>
+      <% dog.adopters.each do |d| %>
+        <%= link_to d.name, d %>
+        <br/>
+        (<%= d.status %>)
+        <br/>
+      <% end %>
+    <%- end %>
+  </div>
+  <div class='d-none d-md-block col-md-1'>
+    <% unless dog.comments.empty? %>
+      <a class="fa fa-lg fa-comment-o"
+            tabindex='0'
+            data-toggle='popover'
+            data-placement='left'
+            data-trigger="focus"
+            title="Most recent comment for <%= dog.name %>"
+            data-content="<%= dog.comments.first.content %>" ></a>
+    <% end %>
+  </div>
+</div>

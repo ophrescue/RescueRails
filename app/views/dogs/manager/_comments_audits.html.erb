@@ -1,0 +1,12 @@
+<%= form_for @dog.comments.build, url: dogs_manager_comments_path(@dog), html: {id: "new_comment"} do |f| %>
+  <div class='form-group'>
+    <label for='comment_content' class='h4'>Add comment</label>
+    <%= f.text_area :content, :class => "form-control", :rows => "6" %>
+  </div>
+  <%= f.submit "Post", :id => "comment_submit", :class => "btn btn-primary" %>
+<% end %>
+<div class="row" >
+  <div class="col">
+    <%= render 'changes' %>
+  </div>
+</div>

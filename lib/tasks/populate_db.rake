@@ -2,10 +2,18 @@ require 'factory_bot'
 
 namespace :rescue_rails do
   desc "populate database tables"
-  task populate_all: [:populate_users, :populate_breeds, :populate_adopters, :populate_dogs] do
-    tables = ["users", "breeds", "adopters", "dogs", "fosters", "adoptions"]
+  task populate_all: [:populate_users, :populate_breeds, :populate_adopters, :populate_dogs, :populate_events] do
+    tables = ["users", "breeds", "adopters", "dogs", "fosters", "adoptions", "events"]
     tables.each do |table|
       Rake::Task["rescue_rails:populate_#{table}"].invoke
+    end
+  end
+
+  desc "populate events"
+  task populate_events: :environment do
+    Event.destroy_all
+    10.times do
+      FactoryBot.create(:event)
     end
   end
 

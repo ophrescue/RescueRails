@@ -84,6 +84,10 @@ class Event < ApplicationRecord
     self.created_by_user = @current_user
   end
 
+  def google_map
+    GoogleMap.new(self)
+  end
+
   private
 
   def delete_photo!

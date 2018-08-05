@@ -37,6 +37,8 @@ RescueRails::Application.routes.draw do
 
   root to: 'pages#home'
 
+  get 'sample_image/:type',    to: 'sample_images#show', constraints: {type: /map/}, as: 'sample_image'
+
   STATIC_PAGES.each do |page|
     get("/#{page}", to: "pages##{page.underscore}")
   end

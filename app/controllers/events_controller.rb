@@ -44,6 +44,7 @@ class EventsController < ApplicationController
   before_action :authenticate, except: [:index, :show]
   before_action :edit_events_user, except: [:index, :show]
   before_action :select_bootstrap41
+  before_action :find_event, only: [:show, :edit, :update, :destroy]
 
   def index
     @scope = params[:scope] || "upcoming"
@@ -51,20 +52,11 @@ class EventsController < ApplicationController
     @title = t(".title.#{@scope}")
   end
 
-  def show
-    @event = Event.find(params[:id])
-  end
-
   def new
     @event = Event.new
   end
 
-  def edit
-    @event = Event.find(params[:id])
-  end
-
   def update
-    @event = Event.find(params[:id])
     @event.photo_delete = params[:event][:photo_delete]
 
     if @event.update_attributes(event_params)
@@ -86,13 +78,17 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    (event=Event.find(params[:id])).destroy
-    redirect_scope = event.upcoming? ? "upcoming" : "past"
+    @event.destroy
+    redirect_scope = @event.upcoming? ? "upcoming" : "past"
     flash[:notice] = "Event deleted"
     redirect_to scoped_events_path(redirect_scope)
   end
 
   private
+
+  def find_event
+    @event = Event.find(params[:id])
+  end
 
   def edit_events_user
     redirect_to(root_path) unless current_user.edit_events?

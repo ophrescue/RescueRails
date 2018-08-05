@@ -74,6 +74,17 @@ address {
   .invalid-feedback {
     padding-left: 0px;
   }
+
+  #event_photo {
+    display: inline-block;
+    width: auto;
+  }
+
+  // display error message when file is added,
+  // vs. bootstrap displays error message on submit
+  #event_photo:invalid~.invalid-feedback {
+    display: block;
+  }
 }
 
 .actions .col {

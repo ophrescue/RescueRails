@@ -38,4 +38,4 @@ en:
       numeric: "must be numeric"
       selected: "must be selected"
       url_format: "is improperly formatted"
-      attachment_size: "too big"
+      attachment_size: "must be smaller than %{max_size}Mb"

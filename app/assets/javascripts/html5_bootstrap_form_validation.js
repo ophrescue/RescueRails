@@ -7,6 +7,20 @@ $(function(){
     }
   }
 
+  var ie11_workaround = function(){
+    $form.find(':input:visible').each(function(){
+      var $input = $(this)
+      var $parent = $input.closest('.form-group')
+      var $message = $parent.find('.invalid-feedback')
+      if($input.is(':valid')){
+        console.log('hide')
+        $message.hide()
+      }else{
+        console.log('show')
+        $message.show()
+      }
+    });
+  };
 
   var $form = $('form.needs-validation');
 
@@ -16,10 +30,12 @@ $(function(){
       event.stopPropagation();
     }
     $form.addClass('was-validated');
+    ie11_workaround()
     check_form_validity();
   }
 
-  $('form :input').on({change: validate_form_fields, keyup: validate_form_fields })
+  // the 'input' event is part of the IE11 workaround, it triggers when the 'x' input for clearing a field is clicked
+  $('body').on('change keyup input', 'form.was-validated :input', validate_form_fields )
   $form.on('submit', validate_form_fields);
 });
 

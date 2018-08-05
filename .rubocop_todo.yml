@@ -186,7 +186,7 @@ Lint/AssignmentInCondition:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleAlignWith, SupportedStylesAlignWith.
 # SupportedStylesAlignWith: either, start_of_block, start_of_line
-Lint/BlockAlignment:
+Layout/BlockAlignment:
   Exclude:
     - 'lib/tasks/petfinder_sync.rake'
 
@@ -201,7 +201,7 @@ Lint/DeprecatedClassMethods:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleAlignWith, SupportedStylesAlignWith, AutoCorrect.
 # SupportedStylesAlignWith: keyword, variable, start_of_line
-Lint/EndAlignment:
+Layout/EndAlignment:
   Exclude:
     - 'app/helpers/adopters_helper.rb'
 

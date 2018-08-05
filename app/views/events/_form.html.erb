@@ -84,7 +84,7 @@
       </div>
     <% else %>
       <%= f.label "Image", for: 'event_photo', class: 'col-form-label col-form-label-sm col-2'%>
-      <%= f.file_field :photo %>
+      <%= f.file_field :photo, data: {max_size: Event::ATTACHMENT_MAX_SIZE}, class: 'form-control' %>
       <%= f.bootstrap_errors :photo, class: 'col-sm-12 offset-2'  %>
     <% end %>
   </div>
@@ -98,3 +98,20 @@
   <%= submit_or_return_to(f, events_path('upcoming')) %>
 
 <% end %>
+
+<script type='text/javascript'>
+  $(function(){
+    $('#event_photo').on('change', function(){
+      var $file_field = $(event.target);
+      var max_size = parseInt($file_field.data('maxSize'))*1024*1024;
+      if(typeof this.files[0] != 'undefined'){
+        file_size = this.files[0].size
+        if(file_size > max_size){
+          this.setCustomValidity("some text any text it doesn't matter, the message is specified in the html")
+        }else{
+          this.setCustomValidity('')
+        }
+      }
+    });
+  });
+</script>

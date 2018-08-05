@@ -123,6 +123,7 @@ feature 'Manage Events', js: true do
   # validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
   #  see:   https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation
     let!(:event){ create(:event, :in_the_future) }
+    let(:test_event){ build(:event, :in_the_future) }
 
     before do
       sign_in(admin)
@@ -165,12 +166,10 @@ feature 'Manage Events', js: true do
     it "should show error message when image > 5Mb is chosen" do
       attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"dog_large_pic.jpg") )
       expect( validation_error_message_for(:event_photo).text ).to eq "Photo must be smaller than 5Mb"
+      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"dog_pic.jpg") )
+      expect( validation_error_message_for(:event_photo)).not_to be_visible
     end
+
   end
 
-  describe "facebook url sanitization" do
-    it "foo" do
-      expect(1).to eq 0
-    end
-  end
 end

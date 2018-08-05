@@ -27,7 +27,7 @@ env:
 script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
-  - $BROWSER bundle exec rspec spec/
+  - BROWSER=$BROWSER bundle exec rspec spec/
 
 before_install:
   - wget https://github.com/mozilla/geckodriver/releases/download/v0.21.0/geckodriver-v0.21.0-linux64.tar.gz

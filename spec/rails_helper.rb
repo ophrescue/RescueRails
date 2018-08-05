@@ -14,13 +14,15 @@ require 'drivers/selenium_chrome_headless'
 require 'drivers/selenium_firefox_headless'
 require 'drivers/selenium_firefox'
 
-
 if ENV['BROWSER'] == 'firefox_headless'
   puts 'testing with firefox headless'
   Capybara.javascript_driver = :selenium_firefox_headless
 elsif ENV['BROWSER'] == 'firefox'
   puts 'testing with firefox'
   Capybara.javascript_driver = :selenium_firefox
+elsif ENV['BROWSER'] == 'chrome_headless'
+  puts 'testing with chrome headless'
+  Capybara.javascript_driver = :selenium_chrome_headless
 else
   puts 'testing with chrome headless'
   Capybara.javascript_driver = :selenium_chrome_headless

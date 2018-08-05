@@ -13,6 +13,8 @@
 #    limitations under the License.
 
 class SessionsController < ApplicationController
+  before_action :prevent_caching
+
   def new
     # it wasn't an access-denied redirect, so there will not be a redirect after login
     clear_return_to if flash.empty?
@@ -39,5 +41,12 @@ class SessionsController < ApplicationController
     session[:mgr_view] = false
     sign_out
     redirect_to root_path
+  end
+
+  private
+
+  def prevent_caching
+    # Fix for Mobile Safari https://blog.alex-miller.co/rails/2017/01/07/rails-authenticity-token-and-mobile-safari.html
+    response.headers['Cache-Control'] = 'no-store, no-cache'
   end
 end

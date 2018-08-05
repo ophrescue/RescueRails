@@ -29,11 +29,11 @@
 require 'rails_helper'
 
 describe Event do
-  let(:event) { build(:event) }
+  it 'has a valid factory' do
+    expect(build(:event)).to be_valid
+  end
 
-  context 'has a valid factory' do
-    it 'is valid' do
-      expect(build(:event)).to be_valid
-    end
+  it 'is valid when location_url is blank' do
+    expect(build(:event, location_url: nil)).to be_valid
   end
 end

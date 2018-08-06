@@ -105,8 +105,12 @@
       var $file_field = $(event.target);
       var max_size = parseInt($file_field.data('maxSize'))*1024*1024;
       if(typeof this.files[0] != 'undefined'){
-        file_size = this.files[0].size
-        if(file_size > max_size){
+        var file = this.files[0];
+        var file_size = file.size;
+        var file_type = file.type;
+        var too_big = file_size > max_size;
+        var wrong_type = !file_type.match(/(jpe?g|png)/)
+        if(too_big || wrong_type){
           this.setCustomValidity("some text any text it doesn't matter, the message is specified in the html")
         }else{
           this.setCustomValidity('')

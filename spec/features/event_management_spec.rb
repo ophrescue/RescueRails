@@ -59,9 +59,9 @@ feature 'Manage Events', js: true do
   end
 
   describe "edit an upcoming event" do
-    let!(:event){ create(:event, :in_the_future) }
+    let!(:event){ create(:event, :in_the_future, title: 'future event') }
     let(:new_upcoming_event){ build(:event, :in_the_future) }
-    let!(:past_event){ create(:event, :in_the_past) }
+    let!(:past_event){ create(:event, :in_the_past, title: 'past event') }
 
     before do
       sign_in(admin)
@@ -97,7 +97,23 @@ feature 'Manage Events', js: true do
 
     scenario 'View past events' do
       visit scoped_events_path("past")
-      expect(page.find('.event-title h3').text).to eq past_event.title
+      expect(page_heading).to eq 'Past Events'
+      expect(page).to have_selector('.event-title h3', text: past_event.title)
+      expect(page).not_to have_selector('.event-title h3', text: event.title)
+    end
+
+    scenario 'View upcoming events' do
+      visit scoped_events_path("upcoming")
+      expect(page_heading).to eq 'Upcoming Events'
+      expect(page).not_to have_selector('.event-title h3', text: past_event.title)
+      expect(page).to have_selector('.event-title h3', text: event.title)
+    end
+
+    scenario 'default events view' do
+      visit events_path
+      expect(page_heading).to eq 'Upcoming Events'
+      expect(page).not_to have_selector('.event-title h3', text: past_event.title)
+      expect(page).to have_selector('.event-title h3', text: event.title)
     end
 
     it 'should delete a past event and redirect to past events' do
@@ -119,9 +135,6 @@ feature 'Manage Events', js: true do
   end
 
   describe "event validation" do
-  # validates_attachment_size :photo, less_than: 5.megabytes
-  # validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
-  #  see:   https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation
     let!(:event){ create(:event, :in_the_future) }
     let(:test_event){ build(:event, :in_the_future) }
 
@@ -165,7 +178,14 @@ feature 'Manage Events', js: true do
 
     it "should show error message when image > 5Mb is chosen" do
       attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"dog_large_pic.jpg") )
-      expect( validation_error_message_for(:event_photo).text ).to eq "Photo must be smaller than 5Mb"
+      expect( validation_error_message_for(:event_photo).text ).to eq "Photo must be a jpg or png file smaller than 5Mb"
+      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"dog_pic.jpg") )
+      expect( validation_error_message_for(:event_photo)).not_to be_visible
+    end
+
+    it "should show error message when non-image attachment file is chosen" do
+      attach_file('event[photo]', Rails.root.join('spec','fixtures','doc',"sample.docx") )
+      expect( validation_error_message_for(:event_photo).text ).to eq "Photo must be a jpg or png file smaller than 5Mb"
       attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"dog_pic.jpg") )
       expect( validation_error_message_for(:event_photo)).not_to be_visible
     end

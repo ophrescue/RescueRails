@@ -44,7 +44,7 @@ class Event < ApplicationRecord
   attr_accessor :photo_delete
 
   ATTACHMENT_MAX_SIZE = 5
-  VALIDATION_ERROR_MESSAGES = {location_url: :url_format, facebook_url: :url_format, photo: ["attachment_size", {max_size: ATTACHMENT_MAX_SIZE}]}
+  VALIDATION_ERROR_MESSAGES = {location_url: :url_format, facebook_url: :url_format, photo: ["attachment_constraints", {max_size: ATTACHMENT_MAX_SIZE}]}
 
   validates_presence_of :title,
                         :event_date,

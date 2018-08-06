@@ -39,6 +39,7 @@ feature 'Edit Adopter Form', js: true do
     expect(page).to have_selector('.read-only-comment', count: 2)
     expect(page).to have_selector('.comment-header', count: 2)
     expect(adopter.comments.count).to eq 2
+    expect(page.find('#new_comment').find('textarea').value).to be_blank
 
     click_link('All')
     # 2 comments

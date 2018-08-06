@@ -28,4 +28,9 @@
 class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
   belongs_to :user
+
+  VALIDATION_ERROR_MESSAGES = {content: :blank}
+  def self.client_validation_error_messages_for(field)
+    I18n.t("errors.messages.#{VALIDATION_ERROR_MESSAGES[field]}")
+  end
 end

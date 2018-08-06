@@ -168,7 +168,7 @@ class Adopter < ApplicationRecord
   end
 
   def comments_and_audits_and_associated_audits
-    (valid_comments + audits + associated_audits).sort_by(&:created_at).reverse!
+    (persisted_comments + audits + associated_audits).sort_by(&:created_at).reverse!
   end
 
   def chimp_check
@@ -194,7 +194,7 @@ class Adopter < ApplicationRecord
     end
   end
 
-  def valid_comments
-    comments.to_a.delete_if { |obj| obj.id.nil? }
+  def persisted_comments
+    comments.select(&:persisted?)
   end
 end

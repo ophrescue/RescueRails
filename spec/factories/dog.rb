@@ -42,8 +42,10 @@ FactoryBot.define do
     heartworm_preventative { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
     flea_tick_preventative { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
 
-    after(:create) do |dog|
-      create(:comment, :commentable_type => 'Dog', :commentable_id => dog.id, :content => Faker::Lorem.sentence )
+    trait :with_comment do
+      after(:create) do |dog|
+        create(:comment, :commentable_type => 'Dog', :commentable_id => dog.id, :content => Faker::Lorem.sentence )
+      end
     end
 
     factory :dog_with_photo_and_attachment do

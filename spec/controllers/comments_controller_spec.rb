@@ -47,8 +47,9 @@ describe CommentsController, type: :controller do
       it 'should succeed' do
         request.env['HTTP_REFERER'] = '/'
         dog = create(:dog)
-        post :create, params: { dog_id: dog.id, comment: FactoryBot.attributes_for(:comment) }
-        expect(response).to redirect_to(root_path)
+        post :create, xhr:true, params: { dog_id: dog.id, comment: FactoryBot.attributes_for(:comment) }
+        expect(response.status).to eq(200)
+        expect(response).not_to be_redirect
       end
     end
 

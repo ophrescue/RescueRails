@@ -29,7 +29,7 @@ namespace :rescue_rails do
   task populate_adopters: :environment do
     Adopter.destroy_all
     20.times do
-      FactoryBot.create(:adopter_with_app)
+      FactoryBot.create(:adopter, :with_app)
     end
   end
 

@@ -14,7 +14,6 @@
 
 $( function () {
 
-  if ( $('.edit_comment').length > 0) {
     $(document).on('click', '.toggle-edit-comment', function(e){
       var $parent = $(e.target).parents('form.edit_comment');
       isEditing = $($parent).data("editing");
@@ -26,39 +25,30 @@ $( function () {
         editComment($parent);
       }
       $($parent).data("editing", !isEditing);
-
     });
 
-    $(document).on('click', 'button.save-edit-comment', function(e){
-      var $parent = $(e.target).parents('form.edit_comment');
 
-      saveComment($parent);
-      $parent.find('.toggle-edit-comment').click();
-    });
-  }
+  $('body').on('ajax:success', 'form#new_comment', function(event,result,status) {
+    var $form = $(event.target);
+    // so it worked, add to the comment list
+    refresh_comments(result);
 
+    // reset the form validation class
+    $form.removeClass('was-validated')
 
-  $('#new_comment').submit( function(e) {
-    e.preventDefault();
-    $.ajax({
-      type: 'POST',
-      url: this.action,
-      data: $('#new_comment').serialize(),
-      success: function (data) {
-        // so it worked, add to the comment list
-        refresh_comments();
+    // clear comment field for next comment
+    $('.comment_content').val('');
 
-        // clear comment field for next comment
-        $('#comment_content').val('');
-
-        // Turn the POST button back on
-        $('#comment_submit').prop('disabled', false);
-      },
-      error: function() {
-        alert('error saving comment');
-      }
-    });
+    // Turn the POST button back on
+    $('.comment_submit').prop('disabled', false);
   });
+
+  $('body').on('ajax:success', 'form.edit_comment', function(event,result,status) {
+    var $form = $(event.target);
+    var comment_id = $form.find("div[id^=comment_content]").attr('id').match(/\d+/)[0]
+    $('.read-only-comment#comment_content_'+comment_id).closest('form').closest('.row').replaceWith(result);
+  });
+
 });
 
 function editComment($parent) {
@@ -75,27 +65,7 @@ function showComment($parent) {
   $parent.find('.save-edit-comment').hide();
 }
 
-function saveComment($form) {
-  var url = $form.attr('action');
-  var serialized_form = $form.serialize();
-
-  $.ajax({
-        url: url,
-        type: 'POST',
-        data: serialized_form
-      }).success(function() {
-          $.get(url, function(data) {
-            $form.find('.read-only-comment').html(data);
-          })
-
-        }).error( function() {
-          $form.find('.read-only-comment').html("Comment update error.");
-          })
-}
-
-function refresh_comments() {
-  var url = window.location + '/comments';
-  $.get(url, function(data) {
-    $('#comment_table').html(data);
-  });
+function refresh_comments(data) {
+  $("[id^='comment_table']").prepend(data);
+  $("[id^='all_table']").prepend(data);
 }

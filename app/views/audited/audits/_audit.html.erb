@@ -1,6 +1,6 @@
 <div class="row">
   <div class="span8">
-      <div class="comment-header">
+      <div class="audit-header">
         <small>
           <% if !audit.user %>
             <strong>Deleted User</strong>
@@ -16,7 +16,7 @@
         </small>
       </div>
       <% if audit.action == 'update' %>
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped change-audit-item">
           <thead>
             <th>Field</th><th>Old Value</th><th>New Value</th>
           </thead>

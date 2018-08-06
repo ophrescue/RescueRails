@@ -103,6 +103,39 @@ describe Dog do
     end
   end
 
+  describe '.needs_foster' do
+    let(:dog) { create(:dog, :adoptable, needs_foster: true) }
+
+    context 'status changed to adopted' do
+      it 'sets needs_foster to FALSE' do
+        dog.update_attribute(:status, 'adopted')
+        expect(dog.needs_foster).to eq(false)
+      end
+    end
+
+    context 'status changed to completed' do
+      it 'sets needs_foster to FALSE' do
+        dog.update_attribute(:status, 'completed')
+        expect(dog.needs_foster).to eq(false)
+      end
+    end
+
+    context 'status changed to trial adoption' do
+      it 'sets needs_foster to FALSE' do
+        dog.update_attribute(:status, 'trial adoption')
+        expect(dog.needs_foster).to eq(false)
+      end
+    end
+
+    context 'status changed to on hold' do
+      it 'needs_foster is not changed' do
+        dog.update_attribute(:status, 'on hold')
+        expect(dog.needs_foster).to eq(true)
+      end
+    end
+
+  end
+
   describe 'matching_tracking_id scope' do
     let!(:good_dog){ create(:dog, tracking_id: 55) }
     let!(:bad_dog){ create(:dog, tracking_id: 77) }

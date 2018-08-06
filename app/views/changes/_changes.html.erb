@@ -1,37 +1,25 @@
-    <div class="tabbable">
-      <ul class="nav nav-tabs">
-        <li>
-          <a href="#all_table" data-toggle="tab">All</a>
-        </li>
-        <li class="active">
-          <a href="#comment_table" data-toggle="tab">Comments</a>
-        </li>
-        <li>
-          <a href="#history_table" data-toggle="tab">History</a>
-        </li>
-      </ul>
+<div class='tabbable'>
+  <ul class="nav nav-tabs" role='tablist'>
+    <li class='nav-item'>
+      <a href="#all_table<%= device %>" data-toggle="tab" class='nav-link' role='tab'>All</a>
+    </li>
+    <li class='nav-item' role='tab'>
+      <a href="#comment_table<%= device %>" data-toggle="tab" class='nav-link active' role='tab'>Comments</a>
+    </li>
+    <li class='nav-item' role='tab'>
+      <a href="#history_table<%= device %>" data-toggle="tab" class='nav-link' role='tab'>History</a>
+    </li>
+  </ul>
 
-      <div class="tab-content">
-        <div class="tab-pane" id="all_table">
-          <% parent.comments_and_audits_and_associated_audits.each do |thing| %>
-            <% if thing.id.present? %>
-              <%= render thing %>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="tab-pane active" id="comment_table">
-          <% parent.comments.each do |comment| %>
-            <% if comment.id.present? %>
-              <%= render comment %>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="tab-pane" id="history_table">
-          <% parent.audits_and_associated_audits.each do |audit| %>
-            <% if audit.id.present? %>
-              <%= render audit %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
+  <div class="tab-content">
+    <div class="tab-pane" id="all_table<%= device %>" role='tabpanel'>
+      <%= render parent.comments_and_audits_and_associated_audits %>
     </div>
+    <div class="tab-pane active" id="comment_table<%= device %>" role='tabpanel'>
+      <%= render parent.persisted_comments %>
+    </div>
+    <div class="tab-pane" id="history_table<%= device %>" role='tabpanel'>
+      <%= render parent.audits_and_associated_audits %>
+    </div>
+  </div>
+</div>

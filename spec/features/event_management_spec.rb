@@ -54,7 +54,7 @@ feature 'Manage Events', js: true do
       expect(page.find('address .phone').text).to eq test_event.location_phone
       expect(page.find('.photographer a').text).to eq test_event.photographer_name
       expect(page.find('.photographer a')['href']).to eq test_event.photographer_url
-      expect(page.find('.description').text).to eq test_event.description.gsub(/\r/,'')
+      expect(page.find('.description').text.gsub(/\n/,'')).to eq test_event.description.gsub(/\r/,'')
     end
   end
 

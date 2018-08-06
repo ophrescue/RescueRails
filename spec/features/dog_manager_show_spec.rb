@@ -1,9 +1,14 @@
 require 'rails_helper'
 require_relative '../helpers/dog_show_helper'
 require_relative '../helpers/rspec_matchers'
+require_relative '../helpers/client_validation_form_helpers'
+require_relative '../helpers/application_helpers'
 
 feature 'visit dog show page', js: true do
   include DogShowHelper
+  include ClientValidationFormHelpers
+  include ApplicationHelpers
+
   let!(:active_user) { create(:user) }
 
   before do
@@ -98,6 +103,146 @@ feature 'visit dog show page', js: true do
       expect(page.find('#bordetella')).to have_x_icon
       expect(page.find('#heartworm_preventative')).to have_x_icon
       expect(page.find('#flea_tick_preventative')).to have_x_icon
+    end
+  end
+
+  context 'comments tabs, small screen' do
+    let!(:dog){ create(:dog, :adoptable, comments: [create(:comment, user: active_user)]) }
+    let!(:comment_id){ dog.comments.first.id }
+    before(:each) do
+      set_screen_size(:small_screen)
+      dog.update_attribute(:status, 'adopted') # create an audited update item
+      visit dogs_manager_path(dog)
+    end
+
+    after(:each) do
+      set_screen_size(:large_screen)
+    end
+
+    it "should add comment on small screen" do
+      expect(page).to have_selector('#comment_table_small')
+      expect(page).to have_selector('.read-only-comment', count: 1)
+      expect(page).to have_selector('.comment-header', count: 1)
+      fill_in('comment_content', with: "bish bash bosh")
+      page.find('#comment_submit_small').click
+      expect(page).to have_selector('.read-only-comment', count: 2)
+      expect(page).to have_selector('.comment-header', count: 2)
+      expect(dog.comments.count).to eq 2
+      find_link_and_click('All')
+      expect(page).to have_selector('.comment-header', count: 2) # 2 comments
+      expect(page).to have_selector('.read-only-comment', count: 2)
+      expect(page).to have_selector('.audit-header', count: 2) # create, update
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+    end
+
+    it "should warn user if comment field is blank" do
+      page.find('#comment_submit_small').click
+      expect(validation_error_message_for('comment_content').text).to eq "Content cannot be blank"
+      fill_in('comment_content', with: "x")
+      expect(validation_error_message_for('comment_content')).not_to be_visible
+    end
+
+    it 'should be editable' do
+      page.find('a', text:'Edit').click
+      page.find('.editable-comment>textarea').set("new comment text")
+      click_button('Save')
+      expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
+      find_link_and_click('All')
+      expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
+    end
+
+    it 'edit comment to blank' do
+      page.find('a', text:'Edit').click
+      page.find('.editable-comment>textarea').set("")
+      click_button('Save')
+      within('#comment_table_small .editable-comment') do
+        expect(validation_error_message_for('comment_content').text).to eq "Content cannot be blank"
+        fill_in('comment_content', with: 'x')
+        expect(validation_error_message_for('comment_content')).not_to be_visible
+      end
+    end
+
+    it "should show audit history on small screen" do
+      find_link_and_click('History')
+      expect(page).not_to have_selector('.read-only-comment')
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+      expect(page).to have_selector('.audit-header', count: 2) # create and update
+    end
+
+    it "should show comments and audit history on small screen" do
+      find_link_and_click('All')
+      expect(page).to have_selector('.comment-header', count: 1)
+      expect(page).to have_selector('.read-only-comment', count: 1) # the comment
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+      expect(page).to have_selector('.audit-header', count: 2) # create, update
+    end
+  end
+
+  context 'comments tabs, large screen' do
+    let!(:dog){ create(:dog, :adoptable, comments: [create(:comment, user: active_user)]) }
+    let!(:comment_id){ dog.comments.first.id }
+    before(:each) do
+      set_screen_size(:large_screen)
+      dog.update_attribute(:status, 'adopted') # create an audited change item
+      visit dogs_manager_path(dog)
+    end
+
+    it "should add comment on large screen" do
+      expect(page).to have_selector('#comment_table_large')
+      expect(page).to have_selector('.read-only-comment', count: 1)
+      expect(page).to have_selector('.comment-header', count: 1)
+      fill_in('comment_content', with: "bish bash bosh")
+      page.find('#comment_submit_large').click
+      expect(page).to have_selector('.read-only-comment', count: 2)
+      expect(page).to have_selector('.comment-header', count: 2)
+      expect(dog.comments.count).to eq 2
+      find_link_and_click('All')
+      expect(page).to have_selector('.comment-header', count: 2) # 2 comments
+      expect(page).to have_selector('.read-only-comment', count: 2)
+      expect(page).to have_selector('.audit-header', count: 2) # create, update
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+    end
+
+    it "should warn user if comment field is blank" do
+      page.find('#comment_submit_large').click
+      expect(validation_error_message_for('comment_content').text).to eq "Content cannot be blank"
+      fill_in('comment_content', with: "x")
+      expect(validation_error_message_for('comment_content')).not_to be_visible
+    end
+
+    it 'should be editable' do
+      page.find('a', text:'Edit').click
+      page.find('.editable-comment>textarea').set("new comment text")
+      click_button('Save')
+      expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
+      find_link_and_click('All')
+      expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
+    end
+
+    it 'edit comment to blank' do
+      page.find('a', text:'Edit').click
+      page.find('.editable-comment>textarea').set("")
+      click_button('Save')
+      within('#comment_table_large .editable-comment') do
+        expect(validation_error_message_for('comment_content').text).to eq "Content cannot be blank"
+        fill_in('comment_content', with: 'x')
+        expect(validation_error_message_for('comment_content')).not_to be_visible
+      end
+    end
+
+    it "should show audit history on large screen" do
+      find_link_and_click('History')
+      expect(page).not_to have_selector('.read-only-comment')
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
+      expect(page).to have_selector('.audit-header', count: 2) # create and update
+    end
+
+    it "should show comments and audit history on large screen" do
+      find_link_and_click('All')
+      expect(page).to have_selector('.comment-header', count: 1)
+      expect(page).to have_selector('.read-only-comment', count: 1) # the comment
+      expect(page).to have_selector('.audit-header', count: 2) # create, update
+      expect(page).to have_selector('.change-audit-item', count: 1) # update
     end
   end
 

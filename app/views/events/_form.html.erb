@@ -101,7 +101,7 @@
 
 <script type='text/javascript'>
   $(function(){
-    $('#event_photo').on('change', function(){
+    $('#event_photo').on('change', function(event){
       var $file_field = $(event.target);
       var max_size = parseInt($file_field.data('maxSize'))*1024*1024;
       if(typeof this.files[0] != 'undefined'){

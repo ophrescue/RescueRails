@@ -150,7 +150,7 @@ feature 'Filter Dogs List', js: true do
     let!(:special_needs){ create(:dog, :no_flags, is_special_needs: true, name: "Special Needs") }
     let!(:medical_review_needed){ create(:dog, :no_flags, medical_review_complete: false, name: "Medical Review Needed") }
     let!(:behavior_problems){ create(:dog, :no_flags, has_behavior_problem: true, name: "Behavior Problems") }
-    let!(:foster_needed){ create(:dog, :no_flags, needs_foster: true, name: 'Foster Needed') }
+    let!(:foster_needed){ create(:dog, :no_flags, status: 'adoptable', needs_foster: true, name: 'Foster Needed') }
     let!(:spay_neuter_needed){ create(:dog, :no_flags, is_altered: false, name: 'Spay Neuter Needed') }
     let!(:no_cats){ create(:dog, :no_flags, no_cats: true, name: 'No Cats') }
     let!(:no_dogs){ create(:dog, :no_flags, no_dogs: true, name: 'No Dogs') }

@@ -9,7 +9,7 @@ describe DogFilter do
       context 'filter by age' do
         let!(:baby_dog) { create(:dog, :baby) }
         let!(:senior_dog) { create(:dog, :senior) }
-        let(:params) { { filter_params:  { is_age: ['baby'] } } }
+        let(:params) { { filter_params: { is_age: ['baby'] } } }
 
         it 'finds the correct dog' do
           expect(results[0]).to include(baby_dog)
@@ -20,7 +20,7 @@ describe DogFilter do
       context 'filter by multiple ages' do
         let!(:baby_dog) { create(:dog, :baby) }
         let!(:senior_dog) { create(:dog, :senior) }
-        let(:params) { { filter_params:  { is_age: ['baby', 'senior'] } } }
+        let(:params) { { filter_params: { is_age: ['baby', 'senior'] } } }
 
         it 'finds all matching dogs' do
           expect(results[0]).to include(baby_dog)
@@ -33,7 +33,7 @@ describe DogFilter do
       context 'filter by any status' do
         let!(:found_dog) { create(:dog, :completed) }
         let!(:other_dog) { create(:dog, :adoptable) }
-        let(:params) { { filter_params:  { is_status: 'completed' } } }
+        let(:params) { { filter_params: { is_status: 'completed' } } }
 
         it 'finds the correct dog' do
           expect(results[0]).to include(found_dog)
@@ -45,7 +45,7 @@ describe DogFilter do
         let!(:found_dog) { create(:dog, :completed) }
         let!(:another_found_dog) { create(:dog, :on_hold) }
         let!(:other_dog) { create(:dog, :adoptable) }
-        let(:params) { { filter_params:  { is_status: ['completed', 'on_hold'] } } }
+        let(:params) { { filter_params: { is_status: ['completed', 'on_hold'] } } }
 
         it 'finds multiple correct dogs' do
           expect(results[0]).to include(found_dog)
@@ -58,7 +58,7 @@ describe DogFilter do
       context 'by flags array with high_priority flag' do
         let!(:found_dog) { create(:dog, :high_priority) }
         let!(:other_dog) { create(:dog, is_high_priority: false) }
-        let(:params) { { filter_params:  { has_flags: [ "high_priority"] } } }
+        let(:params) { { filter_params:  { has_flags: ["high_priority"] } } }
 
         it 'finds the high priority dog' do
           expect(results[0]).to include(found_dog)
@@ -69,7 +69,7 @@ describe DogFilter do
       context 'by flags array with medical_need flag' do
         let!(:found_dog) { create(:dog, has_medical_need: true) }
         let!(:other_dog) { create(:dog, has_medical_need: false) }
-        let(:params) { { filter_params:  { has_flags: [ "medical_need"] } } }
+        let(:params) { { filter_params: { has_flags: ["medical_need"] } } }
 
         it 'finds the medical_need dog' do
           expect(results[0]).to include(found_dog)
@@ -80,7 +80,7 @@ describe DogFilter do
       context 'by flags array with medical_review_needed flag' do
         let!(:found_dog) { create(:dog, medical_review_complete: false) }
         let!(:other_dog) { create(:dog, medical_review_complete: true) }
-        let(:params) { { filter_params:  { has_flags: [ "medical_review_needed"] } } }
+        let(:params) { { filter_params: { has_flags: ["medical_review_needed"] } } }
 
         it 'finds the medical_review_needed (== !medical_review_complete) dog' do
           expect(results[0]).to include(found_dog)
@@ -91,7 +91,7 @@ describe DogFilter do
       context 'by flags array with special_needs flag' do
         let!(:found_dog) { create(:dog, is_special_needs: true) }
         let!(:other_dog) { create(:dog, is_special_needs: false) }
-        let(:params) { { filter_params:  { has_flags: [ "special_needs"] } } }
+        let(:params) { { filter_params:  { has_flags: ["special_needs"] } } }
 
         it 'finds the special_needs dog' do
           expect(results[0]).to include(found_dog)
@@ -102,7 +102,7 @@ describe DogFilter do
       context 'by flags array with behavior_problems flag' do
         let!(:found_dog) { create(:dog, has_behavior_problem: true) }
         let!(:other_dog) { create(:dog, has_behavior_problem: false) }
-        let(:params) { { filter_params:  { has_flags: [ "behavior_problems"] } } }
+        let(:params) { { filter_params: { has_flags: ["behavior_problems"] } } }
 
         it 'finds the behaviour_problem dog' do
           expect(results[0]).to include(found_dog)
@@ -111,9 +111,9 @@ describe DogFilter do
       end
 
       context 'by flags_array with foster_needed flag' do
-        let!(:found_dog) { create(:dog, needs_foster: true) }
+        let!(:found_dog) { create(:dog, status: 'adoptable', needs_foster: true) }
         let!(:other_dog) { create(:dog, needs_foster: false) }
-        let(:params) { { filter_params:  { has_flags:[ "foster_needed"] } } }
+        let(:params) { { filter_params:  { has_flags: ["foster_needed"] } } }
 
         it 'finds the foster_needed dog' do
           expect(results[0]).to include(found_dog)
@@ -135,7 +135,7 @@ describe DogFilter do
       context 'by flags array with no_cats flag set' do
         let!(:found_dog) { create(:dog, no_cats: true) }
         let!(:other_dog) { create(:dog, no_cats: false) }
-        let(:params) { { filter_params:  { has_flags: ["no_cats"] } } }
+        let(:params) { { filter_params: { has_flags: ["no_cats"] } } }
 
         it 'finds the no_cats dog' do
           expect(results[0]).to include(found_dog)
@@ -157,7 +157,7 @@ describe DogFilter do
       context 'by flags array with no_kids flag set' do
         let!(:found_dog) { create(:dog, no_kids: true) }
         let!(:other_dog) { create(:dog, no_kids: false) }
-        let(:params) { { filter_params: {has_flags: ["no_kids"] } } }
+        let(:params) { { filter_params: { has_flags: ["no_kids"] } } }
 
         it 'finds the no_kids dog' do
           expect(results[0]).to include(found_dog)
@@ -186,7 +186,7 @@ describe DogFilter do
 
       context 'primary and secondary breeds both match search term' do
         let!(:primary_and_secondary_terrier) { create(:dog, :primary_and_secondary_terrier) }
-        let(:params) { { filter_params:  { is_breed: 'terr' } } }
+        let(:params) { { filter_params: { is_breed: 'terr' } } }
         let(:results) { DogFilter.new(params).filter }
 
         it 'returns distinct results' do

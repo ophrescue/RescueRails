@@ -37,6 +37,10 @@ module DogsHelper
     @filter_params && @filter_params["has_flags"] && !@filter_params["has_flags"].empty?
   end
 
+  def filter_active?
+    [age_filter_active?, status_filter_active?, size_filter_active?, flag_filter_active?].any?
+  end
+
   def selected_flags
     @filter_params && @filter_params["has_flags"] && (Dog::FILTER_FLAGS.as_options.slice(*@filter_params["has_flags"])).values
   end
@@ -89,7 +93,7 @@ module DogsHelper
   end
 
   def default_search_sort?
-    !search_active? && !sort_active?
+    !search_active? && !sort_active? && !filter_active?
   end
 
   def sort_active?

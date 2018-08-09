@@ -36,7 +36,7 @@ describe EventsController, type: :controller do
     it 'is successful with valid id param' do
       get :show, params: { id: event.id }
       expect(response).to be_successful
-      expect(assigns[:event]).to eq :event
+      expect(assigns[:event]).to eq event
     end
 
     it 'is unsuccessful with invalid id param' do

@@ -8,12 +8,40 @@ describe EventsController, type: :controller do
     end
   end
 
+  describe 'GET #index, with upcoming scope' do
+    let(:future_event){ create(:event, :in_the_future) }
+    let(:past_event){ create(:event, :in_the_past) }
+
+    it "shows future events" do
+      get :index, params: { scope: "upcoming" }
+      expect(response).to be_successful
+      expect(assigns[:events]).to eq [ future_event ]
+    end
+  end
+
+  describe 'GET #index, with past scope' do
+    let(:future_event){ create(:event, :in_the_future) }
+    let(:past_event){ create(:event, :in_the_past) }
+
+    it "shows future events" do
+      get :index, params: { scope: "past" }
+      expect(response).to be_successful
+      expect(assigns[:events]).to eq [ past_event ]
+    end
+  end
+
   describe 'GET #show' do
     let(:event) { create(:event) }
 
-    it 'is successful' do
+    it 'is successful with valid id param' do
       get :show, params: { id: event.id }
       expect(response).to be_successful
+      expect(assigns[:event]).to eq :event
+    end
+
+    it 'is unsuccessful with invalid id param' do
+      expect{ get :show, params: { id: 'hack_me_if_you_can' } }.to raise_exception ActiveRecord::RecordNotFound
+      expect(assigns[:event]).to be_nil
     end
   end
 

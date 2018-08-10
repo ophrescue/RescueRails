@@ -6,8 +6,8 @@
 //
 //= require application_common
 
-// bootstrap bundle includes the required popper library
-//= require "bootstrap.bundle"
+//= require "popper"
+//= require "bootstrap-sprockets"
 //= require 'dogs_index'
 //= require 'jquery_local_extensions'
 //= require 'html5_bootstrap_form_validation'

@@ -14,10 +14,7 @@
 
 
 
-@import "bootstrap";
-// I don't believe this is necessary any longer with bootstrap 4.1
-// @import "bootstrap-responsive";
-//@import 'bootstrap-multiselect';
+@import "bootstrap"; // from the bootstrap gem
 @import "jquery-token/token-input";
 @import "chosen";
 @import "font-awesome";

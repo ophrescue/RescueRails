@@ -48,7 +48,7 @@ gem 'delayed_job_active_record'
 # in production environments by default.
 
 gem 'sass-rails'
-gem 'therubyracer', platforms: :ruby
+gem 'mini_racer', platforms: :ruby
 gem 'uglifier'
 
 gem 'newrelic_rpm'

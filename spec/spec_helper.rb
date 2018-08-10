@@ -39,6 +39,7 @@ RSpec.configure do |config|
   config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
     FileUtils.rm_rf(Dir[Rails.root.join('public', 'system', 'test')])
+    FileUtils.rm_rf(Dir[Rails.root.join('public', 'assets', '*')])
   end
 
   config.define_derived_metadata(:file_path => Regexp.new('/spec/rake/')) do |metadata|

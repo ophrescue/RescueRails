@@ -26,7 +26,6 @@
 //= require galleria.classic
 //= require comments.js
 //= require dog_link.js
-//= require chosen.jquery
 //= require photos.js
 //= require adoption_form
 //= require jquery_ujs

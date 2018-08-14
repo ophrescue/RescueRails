@@ -14,6 +14,7 @@
 class DonationsController < ApplicationController
   before_action :authenticate, except: %i[new create]
   before_action :admin_user, only: %i[history show]
+  before_action :select_bootstrap41
 
   def new
     @donation = Donation.new

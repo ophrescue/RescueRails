@@ -1,42 +1,50 @@
-<div class="row">
-  <div class="span8">
+<div class="container">
+  <div class="row myBackground">
+    <div class="col-md-6 offset-md-2">
 
-<%= form_for @donation, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+    <h1>Make a gift. Save a life today.</h1>
 
-  <fieldset>
-    <div class="control-group">
-      <%= f.label :name, class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :name, class: 'input-large' %>
-      </div>
+    <p>Operation Paws for Homes depends on your generous donations to provide the medical, transportation, fostering, and adoption services needed to place 1,200 homeless dogs in forever homes each year.</p>
+
+    <%= form_for @donation, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+        <div class="form-group">
+          <%= f.label :amount %>
+          <%= f.text_field :amount, class: 'input-large form-control' %>
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="button">$25</button>
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="button">$75</button>
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="button">$100</button>
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="button">$200</button>
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="button">$500</button>
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="button">$1,000</button>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Donate in Memory or Honor of Someone</label>
+        </div>
+        <h5>Contact Information</h5>
+        <div class="form-group">
+          <%= f.label :name, 'Name' %>
+          <%= f.text_field :name, class: 'input-large form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'input-large form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :comment %>
+          <%= f.text_area :comment, class: 'input-xlarge form-control', rows: '5' %>
+        </div>
+        <%= hidden_field_tag(:stripeToken) %>
+        <button id="donateButton" class="btn btn-primary btn-lg">Donate</button>
+    <% end %>
     </div>
-    <div class="control-group">
-      <%= f.label :email, class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :email, class: 'input-large' %>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :amount, class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :amount, class: 'input-large' %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :comment, class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_area :comment, class: 'input-xlarge', rows: '5' %>
-      </div>
-    </div>
-    <%= hidden_field_tag(:stripeToken) %>
-
-    <button id='donateButton'>Donate</button>
-  </fieldset>
+  </div>
+</div>
 
 
-<% end %>
 
 
 <script src="https://checkout.stripe.com/checkout.js"></script>

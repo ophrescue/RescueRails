@@ -166,6 +166,7 @@ feature 'Filter Dogs List', js: true do
           expect(page).to have_selector(filter_params, text: "Tracking ID")
           expect(page).to have_selector(group_label, text: "Flags:")
           expect(page).to have_selector(filter_params, text: text)
+          expect(page).to have_selector('#reset_message')
           expect(dog_names).to eq [text]
           expect(dog_names.count).to eq 1
         end
@@ -195,6 +196,7 @@ feature 'Filter Dogs List', js: true do
         expect(page).to have_selector(filter_params, text: "Tracking ID")
         expect(page).to have_selector(group_label, text: "Size:")
         expect(page).to have_selector(filter_params, text: text )
+        expect(page).to have_selector('#reset_message')
         expect(dog_names).to eq ["#{text.titleize} Dog"]
         expect(dog_names.count).to eq 1
       end
@@ -230,6 +232,7 @@ feature 'Filter Dogs List', js: true do
         expect(page).to have_selector(filter_params, text: "Tracking ID")
         expect(page).to have_selector(group_label, text: "Status:")
         expect(page).to have_selector(filter_params, text: text )
+        expect(page).to have_selector('#reset_message')
         expect(dog_names).to eq ["#{text.titleize} Dog"]
         expect(dog_names.count).to eq 1
       end
@@ -259,6 +262,7 @@ feature 'Filter Dogs List', js: true do
         expect(page).to have_selector(filter_params, text: "Tracking ID")
         expect(page).to have_selector(group_label, text: "Age:")
         expect(page).to have_selector(filter_params, text: text )
+        expect(page).to have_selector('#reset_message')
         expect(dog_names).to eq ["#{text.titleize} Dog"]
         expect(dog_names.count).to eq 1
       end

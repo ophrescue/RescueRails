@@ -237,6 +237,7 @@ feature 'add a dog', js: true do
 
       context 'name with legitimate whitespace' do
         it "should save" do
+          expect(1).to eq 1
           fill_in(:dog_name, with: ' Fido Smith ')
           select('adoption pending', from: 'dog_status')
           expect{ click_button('Submit') }.to change{Dog.count}.by(1)

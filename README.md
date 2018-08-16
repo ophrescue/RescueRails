@@ -37,54 +37,78 @@ Fire up the app and see what happens.  App is setup to run SSL always, might wan
 See `db/seeds.rb` for default admin login info
 
 ### Running Tests
-
+#### Default test configuration
 Tests are run by default via Headless Chrome, which will require Google Chrome and ChromeDriver.
-
 ```
 brew install chromedriver
 ```
-
 then run tests with:
-
 ```
 rspec spec
 ```
 or
-
 ```
 rake spec
 ```
-
 or even just
-
 ```
 rake
 ```
-
+#### Firefox testing
 To run tests with headless Firefox, you will need geckodriver
-
 ```
 brew install geckodriver
 ```
-
 and then run tests with:
-
 ```
 BROWSER=firefox_headless rspec spec # environment variable switch in rails_helper.rb
 ```
-
 To facilitate debugging, you can run Firefox in the non-headless mode with:
-
 ```
-BROWSER=firefox rspec spec
+BROWSER=firefox_local rspec spec
 ```
-
-A rake task is included to test agains multiple browsers:
-
+#### Testing on BrowserStack
+To test on BrowserStack's Automate service, the account credentials must be set as environment variables:
+```
+export BROWSERSTACK_USER=<your browserstack username>
+export BROWSERSTACK_KEY=<your browserstack key>
+```
+Then the BrowserStack OS and browser configuration is established for a test suite with environment variables according to this pattern:
+```
+BROWSER="browser name/browser version" OS="os name/os version" rspec spec/features
+```
+for example:
+```
+BROWSER="Edge/17.0" OS="Windows/10" rspec spec/features
+```
+Since Internet Explorer and Edge are normally associated with Windows, and Safari is normally associated with OS X, these browsers are inferred if missing and the following invocations may be used:
+```
+BROWSER="Edge/17.0" rspec spec/features
+BROWSER="Internet Explorer/11.0" rspec spec/features
+BROWSER="Safari/11.1" rspec spec/features
+```
+The progress of the test can be monitored on the [Automate dashboard](https://automate.browserstack.com).
+The full set of browser and OS configuration options are found [here](https://www.browserstack.com/automate/capabilities).
+#### BrowserStack Troubleshooting
+During development this error may be encountered:
+```
+Either another browserstack local client is running on your machine or some server is listening on port 45691
+```
+This is typically due to premature termination of a test run, so that the browserstack_local utility was not properly terminated.
+The recovery is to find the process that is bound to port 45691:
+```
+> netstat -vanp tcp | grep 45691
+> tcp4       0      0  *.45691                *.*                    LISTEN      131072 131072  54981      0
+```
+Then killing the process indicated (in this case it's 54981):
+```
+kill -9 54981
+```
+#### Running against multiple browsers
+A rake task is included to test against multiple browsers:
 ```
 rake rescue_rails:test_suite
 ```
-
 ### File Attachment Storage
 
 Storage for photos (photo.rb) and attachments (attachment.rb) is managed by the Paperclip gem and is on AWS S3 in production and staging environments, and under Rails root for development and testing environments.

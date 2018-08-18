@@ -14,7 +14,7 @@ RescueRails::Application.routes.draw do
 
   resources :donations do
     collection do
-      get 'history'
+      get 'history', to: 'donations#history'
     end
   end
 

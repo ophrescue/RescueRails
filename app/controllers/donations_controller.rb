@@ -25,7 +25,7 @@ class DonationsController < ApplicationController
   end
 
   def history
-    @donations = Donation.order(:id)
+    @donations = Donation.order(created_at: :desc)
     respond_to do |format|
       format.html
       format.xls { render_donations_xls }
@@ -42,6 +42,7 @@ class DonationsController < ApplicationController
     raise "Check for errors" unless @donation.valid?
     @donation.process_payment
     @donation.save
+    DonationMailer.donation_receipt(@donation.id).deliver_later
   rescue Stripe::CardError
     flash[:error] = e.message
     render :new

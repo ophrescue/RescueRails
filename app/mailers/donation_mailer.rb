@@ -17,7 +17,7 @@ class DonationMailer < ActionMailer::Base
           return_path: 'donate@ophrescue.org',
           reply_to: 'donate@ophrescue.org'
 
-  def donation_mailer(donation_id)
+  def donation_receipt(donation_id)
     @donation = Donation.find(donation_id)
     mail(to: @donation.email,
          subject: 'OPH Donation Receipt',

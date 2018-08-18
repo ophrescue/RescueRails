@@ -78,14 +78,52 @@
   </div>
 </div>
 
+<script>
 
+    let honorToggle = document.getElementById('honorToggle');
+    honorToggle.addEventListener('click', function (event) {
+        document.getElementById('honorFields').classList.toggle('collapse')
+    });
 
+    let notifyToggle = document.getElementById('notifyToggle');
+    notifyToggle.addEventListener('click', function (event) {
+        document.getElementById('notifyFields').classList.toggle('collapse')
+    });
+
+    let donationAmount = document.getElementById('donation_amount');
+    let otherAmount = document.getElementById('otherAmount');
+
+    let otherAmountFunction = function () {
+        donationAmount.value = this.value
+        console.log('Donation value set to :' + donationAmount.value);
+    }
+
+    otherAmount.addEventListener('change', otherAmountFunction);
+
+    let donationButtons = document.getElementsByClassName('donationButton');
+
+    let donationButtonFunction = function() {
+        for (let i = 0; i < donationButtons.length; i++ ){
+            donationButtons[i].classList.remove('btn-success');
+            donationButtons[i].removeAttribute('aria-pressed');
+            donationButtons[i].classList.remove('active');
+            donationButtons[i].classList.add('btn-primary');
+        }
+        otherAmount.value = "$0.00";
+        this.classList.remove('btn-primary');
+        this.classList.add('btn-success');
+        donationAmount.value = this.value;
+        console.log('Donation value set to :' + donationAmount.value);
+    }
+
+    for (let i = 0; i < donationButtons.length; i++ ) {
+        donationButtons[i].addEventListener('click', donationButtonFunction);
+    }
+</script>
 
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
 <script>
-
-
   var handler = StripeCheckout.configure({
     key: '<%= Rails.configuration.stripe[:publishable_key] %>',
     locale: 'auto',

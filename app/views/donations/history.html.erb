@@ -1,8 +1,8 @@
-<h1>Donations</h1>
-<br />
 
 <div class="row">
-    <div class="span12">
+    <div class="col-md-12">
+    <h1>Donations</h1>
+
     <% if @donations.count > 0 %>
         <p>
             Download:
@@ -11,12 +11,11 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Donation ID</th>
-                    <th>Date</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Amount</th>
-                    <th>Comment</th>
+                    <th scope="col">Donation ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Amount</th>
                 </tr>
             </thead>
             <tbody>

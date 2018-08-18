@@ -12,7 +12,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
     let honorToggle = document.getElementById('honorToggle');
     honorToggle.addEventListener('click', function (event) {
         document.getElementById('honorFields').classList.toggle('collapse')
@@ -22,4 +22,4 @@ document.addEventListener("DOMContentLoaded", function(){
     notifyToggle.addEventListener('click', function (event) {
         document.getElementById('notifyFields').classList.toggle('collapse')
     })
-  });
+});

@@ -16,10 +16,17 @@ document.addEventListener("DOMContentLoaded", function () {
     let honorToggle = document.getElementById('honorToggle');
     honorToggle.addEventListener('click', function (event) {
         document.getElementById('honorFields').classList.toggle('collapse')
-    })
+    });
 
     let notifyToggle = document.getElementById('notifyToggle');
     notifyToggle.addEventListener('click', function (event) {
         document.getElementById('notifyFields').classList.toggle('collapse')
-    })
+    });
+
+    let donation25Button = document.getElementById('donate25');
+    donation25Button.addEventListener('click', function(event) {
+        donation25Button.classList.toggle('btn-primary');
+        donation25Button.classList.toggle('btn-success');
+        document.getElementById('donation_amount').value = "25";
+    });
 });

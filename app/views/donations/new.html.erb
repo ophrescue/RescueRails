@@ -13,12 +13,12 @@
     <%= form_for @donation, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
         <div class="form-inline">
-          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" data-toggle="button">$25</button>
-          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" data-toggle="button">$75</button>
-          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" data-toggle="button">$100</button>
-          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" data-toggle="button">$200</button>
-          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" data-toggle="button">$500</button>
-          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" data-toggle="button">$1,000</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" id="donate25" data-toggle="button">$25</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" id="donate75" data-toggle="button">$75</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" id="donate100" data-toggle="button">$100</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" id="donate200" data-toggle="button">$200</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" id="donate500" data-toggle="button">$500</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" id="donate1000" data-toggle="button">$1,000</button>
           <div class="form-group">
             <label for="otherAmount" class="mr-2">Other</label>
             <input type="text" id="otherAmount" class="form-control" placeholder="$0.00">
@@ -69,7 +69,7 @@
           <%= f.label :email %>
           <%= f.email_field :email, class: 'form-control' %>
         </div>
-        <%= hidden_field_tag(:amount) %>
+        <%= f.hidden_field(:amount) %>
         <%= hidden_field_tag(:stripeToken) %>
         <button id="donateButton" class="btn btn-primary btn-lg">Donate</button>
     <% end %>
@@ -107,7 +107,7 @@
 
     var email = $('input#donation_email').val();
 
-    var amount = $('input#donation_amount').val();
+    var amount = $('#donation_amount').val();
     amount = amount.replace(/\$/g, '').replace(/\,/g, '')
 
     amount = parseFloat(amount);

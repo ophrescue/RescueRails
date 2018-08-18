@@ -48,7 +48,7 @@ gem 'delayed_job_active_record'
 # in production environments by default.
 
 gem 'sass-rails'
-gem 'therubyracer', platforms: :ruby
+gem 'mini_racer', platforms: :ruby
 gem 'uglifier'
 
 gem 'newrelic_rpm'
@@ -81,6 +81,7 @@ group :test do
   gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'rack_session_access'
+  gem 'browserstack-local'
 end
 
 group :development do

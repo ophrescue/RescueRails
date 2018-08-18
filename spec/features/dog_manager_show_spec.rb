@@ -127,6 +127,7 @@ feature 'visit dog show page', js: true do
       page.find('#comment_submit_small').click
       expect(page).to have_selector('.read-only-comment', count: 2)
       expect(page).to have_selector('.comment-header', count: 2)
+      expect(page.find('#new_comment').find('textarea').value).to be_blank
       expect(dog.comments.count).to eq 2
       find_link_and_click('All')
       expect(page).to have_selector('.comment-header', count: 2) # 2 comments
@@ -195,6 +196,7 @@ feature 'visit dog show page', js: true do
       page.find('#comment_submit_large').click
       expect(page).to have_selector('.read-only-comment', count: 2)
       expect(page).to have_selector('.comment-header', count: 2)
+      expect(page.find('#new_comment').find('textarea').value).to be_blank
       expect(dog.comments.count).to eq 2
       find_link_and_click('All')
       expect(page).to have_selector('.comment-header', count: 2) # 2 comments

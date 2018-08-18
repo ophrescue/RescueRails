@@ -22,11 +22,10 @@
 //= require adoption_app_home_auth
 //= require datepicker
 //= require jquery.scroll
-//= require galleria
-//= require galleria.classic
+//= require galleria-1.5.7
+//= require galleria-1.5.7.classic
 //= require comments.js
 //= require dog_link.js
-//= require chosen.jquery
 //= require photos.js
 //= require adoption_form
 //= require jquery_ujs

@@ -9,19 +9,11 @@ $(function(){
   }
 
   var ie11_workaround = function(){
-    $form.find(':input:visible').each(function(){
-      var $input = $(this)
-      var $parent = $input.closest('.form-group')
-      var $message = $parent.find('.invalid-feedback')
-      if($input.is(':valid')){
-        console.log('hide')
-        $message.hide()
-      }else{
-        console.log('show')
-        $message.show()
-      }
-    });
-  };
+    $('form.needs-validation.was-validated :input').each(function(i,input){
+      var invalid_feedback_message = $(input).closest('.form-group').find('.invalid-feedback')
+      if(input.checkValidity()){ invalid_feedback_message.hide(); }
+      else{ invalid_feedback_message.show(); } })
+  }
 
   var validate_form_fields = function(event){
     var $form = $(event.target)
@@ -38,4 +30,5 @@ $(function(){
   $('body').on('change keyup input', 'form.was-validated :input', validate_form_fields )
   $('form.needs-validation').on('submit', validate_form_fields);
 });
+
 

@@ -33,12 +33,23 @@ RSpec.configure do |config|
     # required for TravisCI, otherwise this required sequence is not present in the db
     ActiveRecord::Base.connection.execute("DROP SEQUENCE IF EXISTS tracking_id_seq;")
     ActiveRecord::Base.connection.execute("CREATE SEQUENCE tracking_id_seq START 1;")
-    `RAILS_ENV=test rake assets:precompile`
+    `RAILS_ENV=test rake assets:precompile 2>/dev/null` # inhibit STD_OUT b/c it overruns the terminal page
+  end
+
+  config.before :each, type: :feature do
+    begin
+      handle = page.driver.current_window_handle
+      # added for Browserstack IE, which opens windows with unpredictable size
+      page.driver.maximize_window(handle)
+    rescue Capybara::NotSupportedByDriverError
+    end
   end
 
   config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
     FileUtils.rm_rf(Dir[Rails.root.join('public', 'system', 'test')])
+    FileUtils.rm_rf(Dir[Rails.root.join('public', 'assets', '*')])
+    FileUtils.rm(Dir[Rails.root.join('public', 'assets', '.sprockets*')])
   end
 
   config.define_derived_metadata(:file_path => Regexp.new('/spec/rake/')) do |metadata|

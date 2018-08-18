@@ -8,7 +8,7 @@ feature 'Attach an agreement to a user', js: true do
     allow_any_instance_of(Attachment).to receive(:download_url).and_return('http://')
   end
 
-  scenario 'Admin attaches a foster agreement to a user' do
+  scenario 'Admin attaches a foster agreement to a user', exclude_ie: true do
     sign_in(admin)
 
     visit '/users'
@@ -28,7 +28,7 @@ feature 'Attach an agreement to a user', js: true do
     end
   end
 
-  scenario 'Admin attaches a confidentiality agreement to a user' do
+  scenario 'Admin attaches a confidentiality agreement to a user', exclude_ie: true do
     sign_in(admin)
 
     visit '/users'
@@ -48,7 +48,7 @@ feature 'Attach an agreement to a user', js: true do
     end
   end
 
-  scenario 'Admin attaches a code of conduct agreement to a user' do
+  scenario 'Admin attaches a code of conduct agreement to a user', exclude_ie: true do
     sign_in(admin)
 
     visit '/users'

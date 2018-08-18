@@ -61,8 +61,7 @@ class DonationsController < ApplicationController
   def donation_params
     params.require(:donation).permit(:name,
                                      :email,
-                                     :amount,
-                                     :comment)
+                                     :amount)
   end
 
   def render_donations_xls
@@ -73,16 +72,14 @@ class DonationsController < ApplicationController
         :created_at,
         :name,
         :email,
-        :amount,
-        :comment
+        :amount
       ],
       headers: [
         'ID',
         'Timestamp',
         'Name',
         'Email',
-        'Amount',
-        'Comment'
+        'Amount'
       ]
     )
   end

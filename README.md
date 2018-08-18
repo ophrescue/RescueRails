@@ -98,6 +98,7 @@ And the test invocation for testing with IE on BrowserStack should be:
 ```
 BROWSER="Internet Explorer/11.0" rspec spec/features --tag ~exclude_ie:true
 ```
+The ~ here indicates negation, meaning run all tests in spec/features _except_ those tagged with `exclude_ie=true`.
 #### BrowserStack Troubleshooting
 During development this error may be encountered:
 ```
@@ -119,7 +120,6 @@ A rake task is included to test against multiple browsers:
 rake rescue_rails:test_suite
 ```
 ### File Attachment Storage
-
 Storage for photos (photo.rb) and attachments (attachment.rb) is managed by the Paperclip gem and is on AWS S3 in production and staging environments, and under Rails root for development and testing environments.
 
 The storage paths are configured for production, staging, and test environments in the environments/*.rb files.
@@ -131,11 +131,9 @@ For the test environment, the storage is ephemeral and files are destroyed at th
 For the production and staging environments, the path is formed by the concatenation of AWS ENV variables, and the path strings stored in PAPERCLIP_STORAGE_PATH constant.
 
 ## Browser Support
-
 Supported browsers and platforms are those specified for the version of Boostrap incorporated. See the Bootstrap documentation: getting-started/browsers-devices for the appropriate version.
 
 ## Contributing
-
 Submit a volunteer application at https://ophrescue.org/volunteer if you'd like to be part of the team.  Pull Requests from non-team members will still be considered.  Work item priority is tracked on Waffle.io [![Stories in Ready](https://badge.waffle.io/ophrescue/rescuerails.png?label=ready&title=Ready)](https://waffle.io/ophrescue/rescuerails?utm_source=badge)
 
 ## Licensing

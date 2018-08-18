@@ -23,11 +23,17 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('notifyFields').classList.toggle('collapse')
     });
 
-    let otherAmount = document.getElementById('otherAmount');
-    //otherAmount.addEventListener(change)
-
 
     let donationAmount = document.getElementById('donation_amount');
+    let otherAmount = document.getElementById('otherAmount');
+
+    let otherAmountFunction = function () {
+        donationAmount.value = this.value
+        console.log('Donation value set to :' + donationAmount.value);
+    }
+
+    otherAmount.addEventListener('change', otherAmountFunction);
+
     let donationButtons = document.getElementsByClassName('donationButton');
 
     let donationButtonFunction = function() {
@@ -41,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         this.classList.remove('btn-primary');
         this.classList.add('btn-success');
         donationAmount.value = this.value;
+        console.log('Donation value set to :' + donationAmount.value);
     }
 
     for (let i = 0; i < donationButtons.length; i++ ) {

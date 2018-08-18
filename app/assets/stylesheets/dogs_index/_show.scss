@@ -98,9 +98,22 @@
   }
 }
 
-.galleria-thumbnails {
-  margin: 0 auto;
+.galleria-theme-classic {
+  &.galleria-container {
+    background-color: #fff;
+  }
+
+  .galleria-thumbnails {
+    margin: 0 auto;
+
+    .galleria-image {
+      background-color: #fff;
+      border: none;
+    }
+  }
 }
+
+
 
 #manage_profile, #public_profile {
   margin-top: 20px;

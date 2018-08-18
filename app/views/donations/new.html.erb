@@ -1,26 +1,32 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8 offset-md-1 py-3 myBackground">
+    <div class="col-md-7 offset-md-1 pt-3 myBackground">
 
     <h1>Make a gift. Save a life today.</h1>
 
     <p>Operation Paws for Homes depends on your generous donations to provide the medical, transportation, fostering, and adoption services needed to place 1,200 homeless dogs in forever homes each year.</p>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-7 offset-md-1 pb-3 myBackground">
     <%= form_for @donation, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-
-        <div class="form-group">
-          <button type="button" class="btn btn-primary btn-lg" data-toggle="button">$25</button>
-          <button type="button" class="btn btn-primary btn-lg" data-toggle="button">$75</button>
-          <button type="button" class="btn btn-primary btn-lg" data-toggle="button">$100</button>
-          <button type="button" class="btn btn-primary btn-lg" data-toggle="button">$200</button>
-          <button type="button" class="btn btn-primary btn-lg" data-toggle="button">$500</button>
-          <button type="button" class="btn btn-primary btn-lg" data-toggle="button">$1,000</button>
-          <%= f.text_field :amount, class: 'form-control col-md-3', placeholder: '$0.00' %>
+        <div class="form-inline">
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" data-toggle="button">$25</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" data-toggle="button">$75</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" data-toggle="button">$100</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" data-toggle="button">$200</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" data-toggle="button">$500</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2" data-toggle="button">$1,000</button>
+          <div class="form-group">
+            <label for="otherAmount" class="mr-2">Other</label>
+            <input type="text" id="otherAmount" class="form-control" placeholder="$0.00">
+          </div>
         </div>
         <div class="form-group form-check">
           <input type="checkbox" class="form-check-input" id="honorToggle">
-          <label class="form-check-label" for="honorToggle">Donate in Memory or Honor of Someone</label>
+          <label class="form-check-label" for="honorToggle">Donate in memory or honor of someone</label>
         </div>
         <div id="honorFields" class="collapse">
           <div class="form-group form-check form-check-inline">
@@ -63,10 +69,7 @@
           <%= f.label :email %>
           <%= f.email_field :email, class: 'form-control' %>
         </div>
-        <div class="form-group">
-          <%= f.label :comment %>
-          <%= f.text_area :comment, class: 'form-control', rows: '5' %>
-        </div>
+        <%= hidden_field_tag(:amount) %>
         <%= hidden_field_tag(:stripeToken) %>
         <button id="donateButton" class="btn btn-primary btn-lg">Donate</button>
     <% end %>

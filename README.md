@@ -89,6 +89,15 @@ BROWSER="Safari/11.1" rspec spec/features
 ```
 The progress of the test can be monitored on the [Automate dashboard](https://automate.browserstack.com).
 The full set of browser and OS configuration options are found [here](https://www.browserstack.com/automate/capabilities).
+#### Testing with Internet Explorer
+Internet explorer is not able to be controlled through its api to upload files. Therefore all tests that involve uploading files in spec/features are tagged with:
+```
+exclude_ie: true
+```
+And the test invocation for testing with IE on BrowserStack should be:
+```
+BROWSER="Internet Explorer/11.0" rspec spec/features --tag ~exclude_ie:true
+```
 #### BrowserStack Troubleshooting
 During development this error may be encountered:
 ```

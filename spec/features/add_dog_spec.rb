@@ -63,7 +63,7 @@ feature 'add a dog', js: true do
       visit new_dogs_manager_path
     end
 
-    context 'user enters valid attributes' do
+    context 'user enters valid attributes', exclude_ie: true do
       it "should save the user-entered values" do
         fill_in(:dog_name, with: 'newname')
         select('new primary breed', from: 'dog_primary_breed_id')

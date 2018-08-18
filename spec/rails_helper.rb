@@ -11,22 +11,9 @@ require 'selenium/webdriver'
 require 'drivers/selenium_chrome_headless'
 require 'drivers/selenium_firefox_headless'
 require 'drivers/selenium_firefox'
-require 'drivers/local_ie'
 require 'drivers/browserstack'
 
-if ENV["BROWSER"] == "ie_local"
-  puts "testing with internet explorer on local network"
-
-  Capybara.server_port = 3010
-  ip = `ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d ' ' -f2`.strip
-  puts "this machine ip is #{ip}"
-
-  Capybara.app_host = "http://#{ip}:#{Capybara.server_port}"
-  Capybara.current_driver = :local_ie
-  Capybara.javascript_driver = :local_ie
-  Capybara.run_server = false
-  Capybara.remote = true
-elsif ENV['BROWSER'] == 'firefox_headless'
+if ENV["BROWSER"] == 'firefox_headless'
   puts 'testing with firefox headless'
   Capybara.javascript_driver = :selenium_firefox_headless
 elsif ENV['BROWSER'] == 'firefox_local'

@@ -23,10 +23,20 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('notifyFields').classList.toggle('collapse')
     });
 
-    let donation25Button = document.getElementById('donate25');
-    donation25Button.addEventListener('click', function(event) {
-        donation25Button.classList.toggle('btn-primary');
-        donation25Button.classList.toggle('btn-success');
-        document.getElementById('donation_amount').value = "25";
-    });
+    let donationAmount = document.getElementById('donation_amount');
+    let donationButtons = document.getElementsByClassName('donationButton');
+
+    let donationButtonFunction = function() {
+        for (let i = 0; i < donationButtons.length; i++ ){
+            donationButtons[i].classList.remove('btn-success');
+            donationButtons[i].classList.add('btn-primary')
+        }
+        this.classList.remove('btn-primary');
+        this.classList.add('btn-success');
+        donationAmount.value = this.value;
+    }
+
+    for (let i = 0; i < donationButtons.length; i++ ) {
+        donationButtons[i].addEventListener('click', donationButtonFunction);
+    }
 });

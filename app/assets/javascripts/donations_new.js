@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('notifyFields').classList.toggle('collapse')
     });
 
-
     let donationAmount = document.getElementById('donation_amount');
     let otherAmount = document.getElementById('otherAmount');
 

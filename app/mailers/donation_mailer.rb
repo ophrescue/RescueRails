@@ -13,14 +13,14 @@
 #    limitations under the License.
 
 class DonationMailer < ActionMailer::Base
-    default from: "Operation Paws for Homes <donate@ophrescue.org>",
-            return_path: 'donate@ophrescue.org',
-            reply_to: 'donate@ophrescue.org'
+  default from: "Operation Paws for Homes <donate@ophrescue.org>",
+          return_path: 'donate@ophrescue.org',
+          reply_to: 'donate@ophrescue.org'
 
-    def donation_mailer(donation_id)
-        @donation = Donation.find(donation_id)
-        mail(to: @donation.email,
-        subject: 'OPH Donation Receipt',
-        content_type: 'text/html')
-    end
+  def donation_mailer(donation_id)
+    @donation = Donation.find(donation_id)
+    mail(to: @donation.email,
+         subject: 'OPH Donation Receipt',
+         content_type: 'text/html')
+  end
 end

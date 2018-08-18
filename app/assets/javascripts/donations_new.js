@@ -23,14 +23,21 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('notifyFields').classList.toggle('collapse')
     });
 
+    let otherAmount = document.getElementById('otherAmount');
+    //otherAmount.addEventListener(change)
+
+
     let donationAmount = document.getElementById('donation_amount');
     let donationButtons = document.getElementsByClassName('donationButton');
 
     let donationButtonFunction = function() {
         for (let i = 0; i < donationButtons.length; i++ ){
             donationButtons[i].classList.remove('btn-success');
-            donationButtons[i].classList.add('btn-primary')
+            donationButtons[i].removeAttribute('aria-pressed');
+            donationButtons[i].classList.remove('active');
+            donationButtons[i].classList.add('btn-primary');
         }
+        otherAmount.value = "$0.00";
         this.classList.remove('btn-primary');
         this.classList.add('btn-success');
         donationAmount.value = this.value;

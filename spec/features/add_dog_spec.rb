@@ -63,7 +63,7 @@ feature 'add a dog', js: true do
       visit new_dogs_manager_path
     end
 
-    context 'user enters valid attributes' do
+    context 'user enters valid attributes', exclude_ie: true do
       it "should save the user-entered values" do
         fill_in(:dog_name, with: 'newname')
         select('new primary breed', from: 'dog_primary_breed_id')
@@ -237,6 +237,7 @@ feature 'add a dog', js: true do
 
       context 'name with legitimate whitespace' do
         it "should save" do
+          expect(1).to eq 1
           fill_in(:dog_name, with: ' Fido Smith ')
           select('adoption pending', from: 'dog_status')
           expect{ click_button('Submit') }.to change{Dog.count}.by(1)

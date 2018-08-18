@@ -38,6 +38,8 @@ module RescueRails::BrowserStack
     case browser
     when /ie/i
       ["Windows","10"]
+    when /explorer/i
+      ["Windows","10"]
     when /edge/i
       ["Windows","10"]
     when /safari/i

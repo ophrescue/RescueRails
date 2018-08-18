@@ -36,7 +36,7 @@ RSpec.configure do |config|
     `RAILS_ENV=test rake assets:precompile 2>/dev/null` # inhibit STD_OUT b/c it overruns the terminal page
   end
 
-  config.before(:each) do
+  config.before :each, type: :feature do
     begin
       handle = page.driver.current_window_handle
       # added for Browserstack IE, which opens windows with unpredictable size

@@ -13,7 +13,6 @@
 //    limitations under the License.
 
 
-
 @import "bootstrap"; // from the bootstrap gem
 @import "jquery-token/token-input";
 @import "font-awesome";
@@ -22,6 +21,8 @@
 @import 'link_icons';
 @import 'topbar_bs41';
 @import 'dogs_index';
+@import 'events';
+@import 'shared_styles';
 
 html {
   font-size: .8rem;

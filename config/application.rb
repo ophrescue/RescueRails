@@ -26,5 +26,7 @@ module RescueRails
 
     # we have a custom file in support of the faker gem
     I18n.load_path += Dir[ Rails.root.join("lib","locales","**/*.yml").to_s ]
+
+    I18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
   end
 end

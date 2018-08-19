@@ -1,4 +1,5 @@
 $(function(){
+  var $form = $('form.needs-validation');
   var check_form_validity = function(){
     if ($('form.was-validated :input:invalid').length > 0) {
       $('.actions').addClass('form-errors')
@@ -21,12 +22,13 @@ $(function(){
       event.stopPropagation();
     }
     $form.addClass('was-validated');
-    ie11_workaround();
+    ie11_workaround()
     check_form_validity();
   }
 
-  $('form :input').on({change: validate_form_fields, keyup: validate_form_fields })
-  $('body').on('submit', 'form.needs-validation', validate_form_fields);
+  // the 'input' event is part of the IE11 workaround, it triggers when the 'x' input for clearing a field is clicked
+  $('body').on('change keyup input', 'form.was-validated :input', validate_form_fields )
+  $('form.needs-validation').on('submit', validate_form_fields);
 });
 
 

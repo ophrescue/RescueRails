@@ -1,12 +1,12 @@
 require 'rails_helper'
 require_relative '../helpers/dog_show_helper'
 require_relative '../helpers/rspec_matchers'
-require_relative '../helpers/form_validation_helpers'
+require_relative '../helpers/client_validation_form_helpers'
 require_relative '../helpers/application_helpers'
 
 feature 'visit dog show page', js: true do
   include DogShowHelper
-  include FormValidationHelpers
+  include ClientValidationFormHelpers
   include ApplicationHelpers
 
   let!(:active_user) { create(:user) }

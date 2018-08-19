@@ -1,94 +1,94 @@
-    <div class="navbar hidden-print">
-      <div class="navbar-inner">
-        <div class="container">
-          <div class="brand-pad">
-            <%= link_to "Operation Paws for Homes", root_path, :class => "brand hidden-phone" %>
-            <%= link_to "OPH" , root_path, :class => "brand visible-phone" %>
-          </div>
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li><%= link_to "Dogs", dogs_path %></li>
-              <li><%= link_to "Events", events_path %></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Adopt<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/guide">Adoption Guide</a></li>
-                  <li><%= link_to "Adoption Application", new_adopter_path %></li>
-                  <li><a href="/resources">Adoption Resources</a></li>
-                  <li class="divider"></li>
-                  <li><a href="http://eepurl.com/h9oyk">Subscribe to our Newsletter</a></li>
-                  <li class="divider"></li>
-                  <li><a href="/documentary">Watch 600 Miles Home</a></li>
-                  <li><a href="/tips-for-finding-lost-pets">Finding Lost Pets</a></li>
-                  <li><a href="/insurance">Pet Insurance</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Donate<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "Donate", '/donate' %></li>
-                  <li><%= link_to "Special Funds", '/special-funds'%></li>
-                  <li><%= link_to "Sponsor", '/sponsor' %></li>
-                  <li><%= link_to "Other Ways to Give", '/other-ways-to-give' %></li>
-                </ul>
-              </li>
-              <li>
-                <a href="/get-involved">Get Involved</a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Partners<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/funding-partners">Funding Partners</a></li>
-                  <li><a href="/community-partners">Community Partners</a></li>
-                  <li><a href="/non-profit-and-corporate-partners">Non-Profit and Corporate Partners</a></li>
-                  <li><a href="/shelter-partners">Shelter Partners</a></li>
-                  <li><a href="/training-partners">Training Partners</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/aboutus">Our Story</a></li>
-                  <li><a href="/international">International Programs</a></li>
-                  <li><a href="/documentary">Watch 600 Miles Home</a></li>
-                  <li><a href="/contact">Contact Us</a></li>
-                  <li class="divider"></li>
-                  <li><a href="/education-and-outreach">Education &amp; Outreach</a></li>
-                  <li><a href="/terms">Terms and Conditions</a></li>
-                </ul>
-              </li>
-              <% if signed_in? %>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Staff<b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <% if can_edit_my_adopters? || can_edit_all_adopters? %>
-                      <li><%= link_to "Applications",  :controller => "adopters", :status => "active" %></li>
-                    <% end %>
-                    <% if current_user.active? || current_user.admin? %>
-                      <li><%= link_to "DNA List", :controller => "banned_adopters" %></li>
-                      <li><%= link_to "Dog Manager", dogs_manager_index_path %></li>
-                      <li><%= link_to "Users", users_path %></li>
-                    <% end %>
-                    <% if can_dl_resources? %>
-                      <li><%= link_to "Staff Resources", folders_path %></li>
-                    <% end %>
-                    <% if can_edit_dogs? %>
-                      <li><%= link_to "Shelters", shelters_path %></li>
-                    <% end %>
-                    <li><%= link_to "My Profile", current_user %></li>
-                    <li><%= link_to "Sign out", signout_path %></li>
-                  </ul>
-                </li>
-              <% else %>
-                <li><%= link_to "Sign in", signin_path %></li>
-              <% end %>
+<div class="navbar hidden-print">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="brand-pad">
+        <%= link_to "Operation Paws for Homes", root_path, :class => "brand hidden-phone" %>
+        <%= link_to "OPH" , root_path, :class => "brand visible-phone" %>
+      </div>
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li><%= link_to "Dogs", dogs_path %></li>
+          <li><%= link_to "Events", scoped_events_path("upcoming") %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Adopt<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="/guide">Adoption Guide</a></li>
+              <li><%= link_to "Adoption Application", new_adopter_path %></li>
+              <li><a href="/resources">Adoption Resources</a></li>
+              <li class="divider"></li>
+              <li><a href="http://eepurl.com/h9oyk">Subscribe to our Newsletter</a></li>
+              <li class="divider"></li>
+              <li><a href="/documentary">Watch 600 Miles Home</a></li>
+              <li><a href="/tips-for-finding-lost-pets">Finding Lost Pets</a></li>
+              <li><a href="/insurance">Pet Insurance</a></li>
             </ul>
-          </div>
-        </div>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Donate<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Donate", '/donate' %></li>
+              <li><%= link_to "Special Funds", '/special-funds'%></li>
+              <li><%= link_to "Sponsor", '/sponsor' %></li>
+              <li><%= link_to "Other Ways to Give", '/other-ways-to-give' %></li>
+            </ul>
+          </li>
+          <li>
+            <a href="/get-involved">Get Involved</a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Partners<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="/funding-partners">Funding Partners</a></li>
+              <li><a href="/community-partners">Community Partners</a></li>
+              <li><a href="/non-profit-and-corporate-partners">Non-Profit and Corporate Partners</a></li>
+              <li><a href="/shelter-partners">Shelter Partners</a></li>
+              <li><a href="/training-partners">Training Partners</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="/aboutus">Our Story</a></li>
+              <li><a href="/international">International Programs</a></li>
+              <li><a href="/documentary">Watch 600 Miles Home</a></li>
+              <li><a href="/contact">Contact Us</a></li>
+              <li class="divider"></li>
+              <li><a href="/education-and-outreach">Education &amp; Outreach</a></li>
+              <li><a href="/terms">Terms and Conditions</a></li>
+            </ul>
+          </li>
+          <% if signed_in? %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Staff<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <% if can_edit_my_adopters? || can_edit_all_adopters? %>
+                  <li><%= link_to "Applications",  :controller => "adopters", :status => "active" %></li>
+                <% end %>
+                <% if current_user.active? || current_user.admin? %>
+                  <li><%= link_to "DNA List", :controller => "banned_adopters" %></li>
+                  <li><%= link_to "Dog Manager", dogs_manager_index_path %></li>
+                  <li><%= link_to "Users", users_path %></li>
+                <% end %>
+                <% if can_dl_resources? %>
+                  <li><%= link_to "Staff Resources", folders_path %></li>
+                <% end %>
+                <% if can_edit_dogs? %>
+                  <li><%= link_to "Shelters", shelters_path %></li>
+                <% end %>
+                <li><%= link_to "My Profile", current_user %></li>
+                <li><%= link_to "Sign out", signout_path %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to "Sign in", signin_path %></li>
+          <% end %>
+        </ul>
       </div>
     </div>
+  </div>
+</div>

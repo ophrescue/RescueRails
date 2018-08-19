@@ -1,10 +1,10 @@
 require 'rails_helper'
 require_relative '../helpers/application_helpers'
 require_relative '../helpers/rspec_matchers'
-require_relative '../helpers/form_validation_helpers'
+require_relative '../helpers/client_validation_form_helpers'
 
 feature 'edit a dog', js: true do
-  include FormValidationHelpers
+  include ClientValidationFormHelpers
 
   feature 'permitted access to fields' do
     let(:active_record_attributes){ [:created_at, :updated_at, :id].map(&:to_s) }
@@ -352,7 +352,6 @@ feature 'edit a dog', js: true do
           expect{ click_button('Submit') }.to change{Dog.first.fee}.to(88)
         end
       end
-
     end
 
     #uniqueness of name and tracking id
@@ -385,7 +384,6 @@ feature 'edit a dog', js: true do
           expect(flash_error_message).to eq "form could not be saved, see errors below"
         end
       end
-
     end
   end
 end

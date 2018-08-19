@@ -27,9 +27,8 @@ RescueRails::Application.routes.draw do
 
   resources :sessions, only: %i[new create destroy]
 
-  get '/events/past', to: 'events#past'
-
-  resources :adoption_app, :users, :password_resets, :events, :adoptions, :folders, :attachments, :shelters
+  get '/events/:scope', to: 'events#index', scope: /(past|upcoming)/, as: "scoped_events"
+  resources :events, :adoption_app, :users, :password_resets, :adoptions, :folders, :attachments, :shelters
 
   resources :banned_adopters do
     collection { post :import }
@@ -37,11 +36,11 @@ RescueRails::Application.routes.draw do
 
   root to: 'pages#home'
 
-  get 'sample_image/:type',    to: 'sample_images#show', constraints: {type: /map/}, as: 'sample_image'
-
   STATIC_PAGES.each do |page|
     get("/#{page}", to: "pages##{page.underscore}")
   end
+
+  get 'sample_image/:type',    to: 'sample_images#show', constraints: {type: /map/}, as: 'sample_image'
 
   get '/signin',               to: 'sessions#new'
   get '/signout',              to: 'sessions#destroy'

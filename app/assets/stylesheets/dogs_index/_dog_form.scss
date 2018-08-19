@@ -36,14 +36,4 @@
     cursor: not-allowed;
   }
 
-
-  // mimic the styling of the form-group feedback block in
-  // a block attached to the submit button
-  .actions .invalid-feedback {
-    display: none;
-  }
-
-  .actions.form-errors .invalid-feedback {
-    display: block;
-  }
 }

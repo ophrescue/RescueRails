@@ -42,7 +42,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" >$</span>
           </div>
-          <%= f.text_field :fee, class: 'form-control form-control-sm', disabled: !can_edit_dogs?, pattern:'^\s{0,}\w{1,10}\s{0,}$' %>
+          <%= f.text_field :fee, class: 'form-control form-control-sm', disabled: !can_edit_dogs?, pattern:'^\s{0,}\d{1,10}\s{0,}$' %>
           <div class="input-group-append">
             <span class="input-group-text" >.00</span>
           </div>

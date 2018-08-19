@@ -41,44 +41,27 @@
 #
 
 class EventsController < ApplicationController
-  before_action :authenticate, except: [:index, :show, :past]
-  before_action :edit_events_user, except: [:index, :show, :past]
+  before_action :authenticate, except: [:index, :show]
+  before_action :edit_events_user, except: [:index, :show]
+  before_action :select_bootstrap41
+  before_action :find_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events =
-      Event
-        .where("event_date >= ?", Date.today)
-        .limit(30)
-        .order('event_date ASC')
-  end
-
-  def past
-    @events =
-      Event
-        .where("event_date < ?", Date.today)
-        .limit(30)
-        .order('event_date DESC')
-  end
-
-  def show
-    @event = Event.find(params[:id])
+    @scope = params[:scope] || "upcoming"
+    @events = Event.send(@scope)
+    @title = t(".title.#{@scope}")
   end
 
   def new
     @event = Event.new
   end
 
-  def edit
-    @event = Event.find(params[:id])
-  end
-
   def update
-    @event = Event.find(params[:id])
     @event.photo_delete = params[:event][:photo_delete]
 
     if @event.update_attributes(event_params)
       flash[:success] = "Event updated."
-      redirect_to events_path
+      redirect_to scoped_events_path('upcoming')
     else
       render 'edit'
     end
@@ -87,20 +70,25 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      flash[:success] = "New Event Added"
-      redirect_to events_path
+      flash[:success] = "New event added"
+      redirect_to scoped_events_path("upcoming")
     else
       render 'new'
     end
   end
 
   def destroy
-    Event.find(params[:id]).destroy
-    flash[:danger] = "Event Deleted"
-    redirect_to events_path
+    @event.destroy
+    redirect_scope = @event.upcoming? ? "upcoming" : "past"
+    flash[:notice] = "Event deleted"
+    redirect_to scoped_events_path(redirect_scope)
   end
 
   private
+
+  def find_event
+    @event = Event.find(params[:id])
+  end
 
   def edit_events_user
     redirect_to(root_path) unless current_user.edit_events?

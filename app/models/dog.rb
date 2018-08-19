@@ -99,6 +99,11 @@ class Dog < ApplicationRecord
   validates_inclusion_of :status, in: STATUSES
   validates_presence_of :status
 
+  VALIDATION_ERROR_MESSAGES = {tracking_id: :numeric, name: :blank, status: :selected }
+  def self.client_validation_error_messages_for(field)
+    I18n.t("errors.messages.#{VALIDATION_ERROR_MESSAGES[field]}")
+  end
+
   PUBLIC_STATUSES = ['adoptable', 'adoption pending', 'coming soon'].freeze
 
   ACTIVE_STATUSES = [

@@ -1,8 +1,8 @@
 require 'rails_helper'
-require_relative '../helpers/form_validation_helpers'
+require_relative '../helpers/client_validation_form_helpers'
 
 feature 'Edit Adopter Form', js: true do
-  include FormValidationHelpers
+  include ClientValidationFormHelpers
   let!(:admin) { create(:user, :admin) }
   let!(:adopter) { create(:adopter, :with_app, comments: [create(:comment, user: admin)]) }
   let!(:comment_id){ adopter.comments.first.id }

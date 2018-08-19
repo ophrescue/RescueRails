@@ -43,6 +43,9 @@
 class Event < ApplicationRecord
   attr_accessor :photo_delete
 
+  ATTACHMENT_MAX_SIZE = 5
+  VALIDATION_ERROR_MESSAGES = {location_url: :url_format, facebook_url: :url_format, photo: ["attachment_constraints", {max_size: ATTACHMENT_MAX_SIZE}]}
+
   validates_presence_of :title,
                         :event_date,
                         :start_time,
@@ -51,7 +54,7 @@ class Event < ApplicationRecord
                         :address,
                         :description
 
-  validates_format_of :location_url, with: URI::regexp(%w[http https]), allow_blank: true
+  validates_format_of :location_url, with: URI::regexp(%w[http https]), message: VALIDATION_ERROR_MESSAGES[:location_url], allow_blank: true
 
   validates :title, length: { maximum: 255 }
   validates :location_name, length: { maximum: 255 }
@@ -59,11 +62,11 @@ class Event < ApplicationRecord
   validates :location_url, length: { maximum: 255 }
   validates :facebook_url,
             length: { maximum: 255 },
-            allow_blank: true,
-            presence: { message: 'Remove everything after the ? (You just need https://facebook.com/events/12345.../)' }
+            allow_blank: true
 
   before_save :set_user
   before_save :delete_photo!
+  before_save :remove_facebook_url_query_string
 
   geocoded_by :address
 
@@ -72,13 +75,31 @@ class Event < ApplicationRecord
 
   has_attached_file :photo,
                     styles: { original: '1024x1024>',
-                               medium: '205x300>',
-                               thumb: '64x64>' },
+                              medium: '205x300>',
+                              thumb: '64x64>' },
                     path: ':rails_root/public/system/event_photo/:id/:style/:filename',
                     url: '/system/event_photo/:id/:style/:filename'
 
-  validates_attachment_size :photo, less_than: 5.megabytes
+  validates_attachment_size :photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
   validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
+
+
+  def self.client_validation_error_messages_for(field, params)
+    key = VALIDATION_ERROR_MESSAGES[field] || :blank
+    if key.is_a?(Array)
+      key, params = key
+      I18n.t("errors.messages.#{key}", params)
+    else
+      I18n.t("errors.messages.#{key}")
+    end
+  end
+
+  scope :upcoming, ->{ where("event_date >= ?", Date.today).limit(30).order('event_date ASC')  }
+  scope :past,     ->{ where("event_date < ?",  Date.today).limit(30).order('event_date DESC') }
+
+  def upcoming?
+    event_date >= Date.today
+  end
 
   def set_user
     self.created_by_user = @current_user
@@ -89,6 +110,9 @@ class Event < ApplicationRecord
   end
 
   private
+  def remove_facebook_url_query_string
+    self.facebook_url = self.facebook_url&.split('?')[0]
+  end
 
   def delete_photo!
     photo.clear if photo_delete == '1'

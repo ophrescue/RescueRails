@@ -66,13 +66,19 @@ en:
 
   # we have some duplication here, we need to migrate to the format below
   # and eliminate the unconventional format above
+  # when all title fields (above) are fully duplicated below, change the translation format in application_helper.rb
+  # from '.title.controller_name.action_name' to 'controller_name.action_name.title'
   dogs:
     manager:
       new:
         title: "Add a New Dog"
       edit:
         title: "Edit Dog"
+      index:
+        title: "Dog Manager"
     gallery:
+      index:
+        title: "Our Dogs"
       show:
         status_definitions:
           coming_soon: 'This dog will be entering our foster care very soon. You may apply to adopt this dog, or check back soon as we add more photos and details.'
@@ -86,3 +92,15 @@ en:
           not_available: 'not available'
           return_pending: 'return pending'
           completed: 'completed'
+
+  events:
+    edit:
+      title: 'Edit Event'
+    index:
+      title:
+        upcoming: 'Upcoming Events'
+        past: 'Past Events'
+    show:
+      title: 'Events'
+    new:
+      title: 'Add an Event'

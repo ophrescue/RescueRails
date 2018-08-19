@@ -15,6 +15,10 @@
     font-size: 1.2rem;
   }
 
+  span:first-of-type {
+    margin-left: 18px;
+  }
+
   a.fa-info {
     position: relative;
     top: -6px;
@@ -117,16 +121,6 @@
 
 #manage_profile, #public_profile {
   margin-top: 20px;
-}
-
-.switch_view {
-  font-size: 0.9rem;
-}
-
-@include media-breakpoint-up(md) {
-  .switch_view {
-    font-size: 1.2rem;
-  }
 }
 
 #manage_profile #details dt, #manage_profile #details dd {

@@ -1,11 +1,11 @@
 require 'rails_helper'
 require_relative '../helpers/application_helpers'
 require_relative '../helpers/rspec_matchers'
-require_relative '../helpers/form_validation_helpers'
+require_relative '../helpers/client_validation_form_helpers'
 require_relative '../helpers/dogs_list_helper'
 
 feature 'add a dog', js: true do
-  include FormValidationHelpers
+  include ClientValidationFormHelpers
   include ApplicationHelpers
 
   feature 'permitted access to fields' do
@@ -190,6 +190,7 @@ feature 'add a dog', js: true do
           expect(validation_error_message_for(:dog_status).text).to eq "Status must be selected"
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           select('adoption pending', from: 'dog_status')
+          fill_in(:dog_name, with: 'Fido')
           expect(validation_error_message_for(:dog_status)).not_to be_visible
           expect(submit_button_form_error_message).not_to be_visible
         end
@@ -203,6 +204,7 @@ feature 'add a dog', js: true do
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           fill_in(:dog_name, with: 'Fido')
           expect(validation_error_message_for(:dog_name)).not_to be_visible
+          select('adoption pending', from: 'dog_status')
           expect(submit_button_form_error_message).not_to be_visible
         end
       end
@@ -231,6 +233,7 @@ feature 'add a dog', js: true do
           expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
           fill_in(:dog_name, with: 'Fido')
           expect(validation_error_message_for(:dog_name)).not_to be_visible
+          select('adoption pending', from: 'dog_status')
           expect(submit_button_form_error_message).not_to be_visible
         end
       end
@@ -270,6 +273,7 @@ feature 'add a dog', js: true do
 
       context 'adoption fee includes letters' do
         it 'should not save and should notify user' do
+          select('adoption pending', from: 'dog_status')
           fill_in(:dog_name, with: 'Fido')
           select('adoption pending', from: 'dog_status')
           fill_in(:dog_fee, with: '$88')

@@ -1,26 +1,4 @@
 module DogsHelper
-  def validation_class_for(f,field)
-    'is-invalid' if f.object.errors.messages[field].any?
-  end
-
-  def validation_error_message_for(f,field)
-    message = f.object.errors.messages[field].first || client_validation_message_for(field)
-    "#{field.to_s.humanize(keep_id_suffix: true)} #{message}"
-  end
-
-  def client_validation_message_for(field)
-    case field
-    when :name
-      "cannot be blank"
-    when :tracking_id
-      "must be numeric"
-    when :status
-      "must be selected"
-    when :content
-      "cannot be blank"
-    end
-  end
-
   def age_filter_active?
     @filter_params && @filter_params["is_age"] && !@filter_params["is_age"].empty?
   end

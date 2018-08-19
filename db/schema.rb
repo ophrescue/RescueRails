@@ -244,12 +244,19 @@ ActiveRecord::Schema.define(version: 2018_06_30_162040) do
   end
 
   create_table "donations", force: :cascade do |t|
+    t.string "stripe_customer_id"
     t.string "name"
     t.string "email"
     t.integer "amount"
-    t.string "zip"
+    t.string "frequency"
     t.string "card_token"
-    t.text "comment"
+    t.boolean "notify_someone"
+    t.string "notify_name"
+    t.string "notify_email"
+    t.string "notify_message"
+    t.boolean "is_memory_honor"
+    t.string "memory_honor_type"
+    t.string "memory_honor_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

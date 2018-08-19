@@ -11,6 +11,19 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
+# == Schema Information
+#
+# Table name: donations
+#
+#  id         :bigint(8)        not null, primary key
+#  name       :string
+#  email      :string
+#  amount     :integer
+#  zip        :string
+#  card_token :string
+#  comment    :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 
 class Donation < ApplicationRecord
   def process_payment

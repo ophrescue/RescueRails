@@ -33,39 +33,39 @@
           </select>
         </div>
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="honorToggle">
-          <label class="form-check-label" for="honorToggle">Donate in memory or honor of someone</label>
+          <%= f.check_box :is_memory_honor, class: 'form-check-input', id: 'honorToggle' %>
+          <%= f.label :is_memory_honor, 'Donate in memory or honor of someone', class: 'form-check-label', for: 'honorToggle' %>
         </div>
         <div id="honorFields" class="collapse">
           <div class="form-group form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-            <label class="form-check-label" for="inlineRadio1">In Memory of...</label>
+            <%= f.radio_button :memory_honor_type, 'In memory of', class: 'form-check-input' %>
+            <%= f.label :memory_honor_type_in_memory_of, 'In Memory of...', class: 'form-check-label'%>
           </div>
           <div class="form-group form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-            <label class="form-check-label" for="inlineRadio2">In Honor of...</label>
+            <%= f.radio_button :memory_honor_type, 'In honor of', class: 'form-check-input' %>
+            <%= f.label :memory_honor_type_in_honor_of, 'In Honor of...', class: 'form-check-label'%>
           </div>
           <div class="form-group">
-            <label for="honoreeName">Honoree's Name</label>
-            <input type="text" id="honoreeName" class="form-control">
+            <%= f.label :memory_honor_name, 'Honoree\'s Name' %>
+            <%= f.text_field :memory_honor_name , class: 'form-control' %>
           </div>
         </div>
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="notifyToggle">
-          <label class="form-check-label" for="notifyToggle">Notify someone about your donation</label>
+          <%= f.check_box :notify_someone, class: 'form-check-input', id: 'notifyToggle' %>
+          <%= f.label :notify_someone, 'Notify someone about your donation', class: 'form-check-label', for: 'notifyToggle' %>
         </div>
         <div id="notifyFields" class="collapse">
           <div class="form-group">
-            <label for="recepientName">Recepient's Name</label>
-            <input type="text" id="recepientName" class="form-control">
+            <%= f.label :notify_name, 'Recepien\'s Name' %>
+            <%= f.text_field :notify_name, class: 'form-control' %>
           </div>
           <div class="form-group">
-            <label for="honoreeName">Recepient's Email </label>
-            <input type="email" id="honoreeName" class="form-control">
+            <%= f.label :notify_email, 'Recepient\'s Email' %>
+            <%= f.email_field :notify_email, class: 'form-control' %>
           </div>
           <div class="form-group">
-            <label for="recepientMessage">Your message to recepient</label>
-            <textarea id="recepientMessage" class="form-control" rows="5"></textarea>
+            <%= f.label :notify_message, 'Your message to recepient' %>
+            <%= f.text_area :notify_message, class: 'form-control', rows: '5' %>
           </div>
         </div>
         <h5>Your Contact Information</h5>

@@ -61,7 +61,15 @@ class DonationsController < ApplicationController
   def donation_params
     params.require(:donation).permit(:name,
                                      :email,
-                                     :amount)
+                                     :amount,
+                                     :frequency,
+                                     :notify_someone,
+                                     :notify_name,
+                                     :notify_email,
+                                     :notify_message,
+                                     :is_memory_honor,
+                                     :memory_honor_type,
+                                     :memory_honor_name)
   end
 
   def render_donations_xls

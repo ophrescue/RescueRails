@@ -50,8 +50,8 @@ feature 'Edit Adopter Form', js: true do
     expect(page).to have_selector('.change-audit-item', count: 1) # update
 
     click_link('History')
-    expect(page).not_to have_selector('.read-only-comment')
-    expect(page).not_to have_selector('.comment-header')
+    expect(page).to have_no_selector('.read-only-comment')
+    expect(page).to have_no_selector('.comment-header')
     expect(page).to have_selector('.change-audit-item', count: 1) # update
     expect(page).to have_selector('.audit-header', count: 2) # create and update
   end

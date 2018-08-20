@@ -165,7 +165,7 @@ feature 'visit dog show page', js: true do
 
     it "should show audit history on small screen" do
       find_link_and_click('History')
-      expect(page).not_to have_selector('.read-only-comment')
+      expect(page).to have_no_selector('.read-only-comment')
       expect(page).to have_selector('.change-audit-item', count: 1) # update
       expect(page).to have_selector('.audit-header', count: 2) # create and update
     end
@@ -234,7 +234,7 @@ feature 'visit dog show page', js: true do
 
     it "should show audit history on large screen" do
       find_link_and_click('History')
-      expect(page).not_to have_selector('.read-only-comment')
+      expect(page).to have_no_selector('.read-only-comment')
       expect(page).to have_selector('.change-audit-item', count: 1) # update
       expect(page).to have_selector('.audit-header', count: 2) # create and update
     end

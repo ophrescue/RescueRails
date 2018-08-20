@@ -98,11 +98,11 @@ feature 'Filter Dogs List', js: true do
       expect(page).to have_selector('#search-dropdown-heading')
       page.find('input#search').set("retr")
       page.find('#search_icon').click
-      expect(page).not_to have_selector('#search-dropdown-heading')
+      expect(page).to have_no_selector('#search-dropdown-heading')
       expect(page).to have_selector('#search-error-message', text: 'Please select a field to search in')
       select_search_by('Breed')
-      expect(page).not_to have_selector('#search-error-message')
-      expect(page).not_to have_selector('#search-dropdown-heading')
+      expect(page).to have_no_selector('#search-error-message')
+      expect(page).to have_no_selector('#search-dropdown-heading')
     end
 
     scenario 'search after being reminded to select search attribute' do

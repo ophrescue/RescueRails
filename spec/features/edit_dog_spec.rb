@@ -29,7 +29,7 @@ feature 'edit a dog', js: true do
 
       it 'should show values instead of inputs for breed attributes' do
         disallowed_fields.each do |field|
-          expect(page).not_to have_field("dog_#{field}")
+          expect(page).to have_no_field("dog_#{field}")
         end
       end
     end
@@ -46,7 +46,7 @@ feature 'edit a dog', js: true do
 
       it 'should show values instead of inputs for breed attributes and coordinator field' do
         disallowed_fields.each do |field|
-          expect(page).not_to have_field("dog_#{field}")
+          expect(page).to have_no_field("dog_#{field}")
         end
       end
     end

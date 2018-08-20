@@ -47,8 +47,12 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @scope = params[:scope] || "upcoming"
-    @events = Event.send(@scope)
+    @scope =
+      case params[:scope]
+      when "upcoming", "past" then params[:scope]
+      else "upcoming"
+      end
+    @events = Event.public_send(@scope)
     @title = t(".title.#{@scope}")
   end
 

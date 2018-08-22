@@ -15,15 +15,23 @@
 #
 # Table name: donations
 #
-#  id         :bigint(8)        not null, primary key
-#  name       :string
-#  email      :string
-#  amount     :integer
-#  zip        :string
-#  card_token :string
-#  comment    :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                 :bigint(8)        not null, primary key
+#  stripe_customer_id :string
+#  name               :string
+#  email              :string
+#  amount             :integer
+#  frequency          :string
+#  card_token         :string
+#  notify_someone     :boolean
+#  notify_name        :string
+#  notify_email       :string
+#  notify_message     :string
+#  is_memory_honor    :boolean
+#  memory_honor_type  :string
+#  memory_honor_name  :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
 
 class Donation < ApplicationRecord
   def process_payment

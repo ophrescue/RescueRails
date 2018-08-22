@@ -82,7 +82,7 @@ feature 'Manage Events', js: true do
       check('Delete')
       click_button('Submit')
       expect(page.find('.event-title h3').text).to eq new_upcoming_event.title
-      expect(page).not_to have_selector('.event_photo a')
+      expect(page).to have_no_selector('.event_photo a')
     end
 
     it 'should delete an upcoming event and redirect to upcoming events' do
@@ -99,20 +99,20 @@ feature 'Manage Events', js: true do
       visit scoped_events_path("past")
       expect(page_heading).to eq 'Past Events'
       expect(page).to have_selector('.event-title h3', text: past_event.title)
-      expect(page).not_to have_selector('.event-title h3', text: event.title)
+      expect(page).to have_no_selector('.event-title h3', text: event.title)
     end
 
     scenario 'View upcoming events' do
       visit scoped_events_path("upcoming")
       expect(page_heading).to eq 'Upcoming Events'
-      expect(page).not_to have_selector('.event-title h3', text: past_event.title)
+      expect(page).to have_no_selector('.event-title h3', text: past_event.title)
       expect(page).to have_selector('.event-title h3', text: event.title)
     end
 
     scenario 'default events view' do
       visit events_path
       expect(page_heading).to eq 'Upcoming Events'
-      expect(page).not_to have_selector('.event-title h3', text: past_event.title)
+      expect(page).to have_no_selector('.event-title h3', text: past_event.title)
       expect(page).to have_selector('.event-title h3', text: event.title)
     end
 

@@ -40,27 +40,30 @@
             </div>
           </div>
 
-<% if Time.now.between?(("2018-06-11".to_date),("2018-07-31".to_date)) %>
+<% if Time.now.between?(("2018-08-24".to_date),("2018-09-23".to_date)) %>
           <div class="item">
-            <%= image_tag "banner-summer-photo-contest-2018.jpg", alt: "Dog Day of Summer Photo Contest" %>
+            <%= image_tag "banner-bww-2018.jpg", alt: "Buy your tickets for Bark Wag Wine 2018" %>
             <div class="carousel-caption">
-              <%= link_to "Enter or Vote", "https://www.gogophotocontest.com/operationpawsforhomes", :class => "btn btn-primary btn-large" %>
+              <%= link_to "Buy Tickets", "http://www.barkwagwine.com/", :class => "btn btn-primary btn-large" %>
+              <%= link_to "FB Event", "https://www.facebook.com/events/225479564935225/", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
-<% elsif Time.now.between?(("2018-08-01".to_date),("2018-09-14".to_date)) %>
+<% end %>
+<% if Time.now.between?(("2018-08-01".to_date),("2018-09-14".to_date)) %>
           <div class="item">
             <%= image_tag "banner-2018-book-release.jpg", alt: "Another Good Dog Book Coming Soon" %>
             <div class="carousel-caption">
               <%= link_to "Order Now", "http://www.anothergooddog.org/book.html", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
-<% end %>
+<% else %>
           <div class="item">
             <%= image_tag "lustreart.jpg", alt: "Lustre Art" %>
             <div class="carousel-caption">
               <%= link_to "Contact", "https://www.facebook.com/LustreArt", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
+<% end %>
         </div>
         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
         <a class="right carousel-control" href="#ophCarousel" data-slide="next">&rsaquo;</a>

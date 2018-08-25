@@ -149,6 +149,8 @@
   $('#galleria').galleria({
     responsive: true,
     imageCrop: false,
-    dataSource: <%= @carousel %>
+    dataSource: <%= @carousel %>,
+    theme: 'classic',
+    swipe: false
   });
 </script>

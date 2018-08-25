@@ -13,8 +13,7 @@ feature 'Manage Events', js: true do
     let(:date_time) { "#{test_event.event_date.strftime("%A, %B %-e, %Y") } from #{test_event.start_time.strftime("%-l:%M %P") } to #{ test_event.end_time.strftime("%-l:%M %P") }" }
     before do
       sign_in(admin)
-      visit root_path
-      click_link 'Events'
+      visit '/events'
     end
 
     it 'should save and render attributes' do

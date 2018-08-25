@@ -40,27 +40,30 @@
             </div>
           </div>
 
-<% if Time.now.between?(("2018-06-11".to_date),("2018-07-31".to_date)) %>
+<% if Time.now.between?(("2018-08-24".to_date),("2018-09-23".to_date)) %>
           <div class="item">
-            <%= image_tag "banner-summer-photo-contest-2018.jpg", alt: "Dog Day of Summer Photo Contest" %>
+            <%= image_tag "banner-bww-2018.jpg", alt: "Buy your tickets for Bark Wag Wine 2018" %>
             <div class="carousel-caption">
-              <%= link_to "Enter or Vote", "https://www.gogophotocontest.com/operationpawsforhomes", :class => "btn btn-primary btn-large" %>
+              <%= link_to "Buy Tickets", "http://www.barkwagwine.com/", :class => "btn btn-primary btn-large" %>
+              <%= link_to "FB Event", "https://www.facebook.com/events/225479564935225/", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
-<% elsif Time.now.between?(("2018-08-01".to_date),("2018-09-14".to_date)) %>
+<% end %>
+<% if Time.now.between?(("2018-08-01".to_date),("2018-09-14".to_date)) %>
           <div class="item">
             <%= image_tag "banner-2018-book-release.jpg", alt: "Another Good Dog Book Coming Soon" %>
             <div class="carousel-caption">
               <%= link_to "Order Now", "http://www.anothergooddog.org/book.html", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
-<% end %>
+<% else %>
           <div class="item">
             <%= image_tag "lustreart.jpg", alt: "Lustre Art" %>
             <div class="carousel-caption">
               <%= link_to "Contact", "https://www.facebook.com/LustreArt", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
+<% end %>
         </div>
         <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
         <a class="right carousel-control" href="#ophCarousel" data-slide="next">&rsaquo;</a>
@@ -70,17 +73,17 @@
 
   <div class="row">
     <div class="span4 eventphoto">
-      <a href="/donate"><%= image_tag "home-donate.jpg" %></a>
+      <a href="/donate"><%= image_tag "home-donate.jpg", alt: "Donate" %></a>
       <br />
       <br />
     </div>
     <div class="span4 eventphoto">
-      <a href="/get-involved"><%= image_tag "home-get-involved.jpg" %></a>
+      <a href="/get-involved"><%= image_tag "home-get-involved.jpg", alt: "Get Involved" %></a>
       <br />
       <br />
     </div>
     <div class="span4 eventphoto">
-      <a href="/events"><%= image_tag "home-events.jpg" %></a>
+      <a href="/events"><%= image_tag "home-events.jpg", alt: "Events" %></a>
       <br />
       <br />
     </div>
@@ -101,10 +104,10 @@
     </div>
     <div class="row">
       <div class="span12">
-        <a href="http://adoptapet.com"><%= image_tag "approved-rescue-badge.png" %></a>
-        <%= image_tag "best-of-fairfax-2016.png" %>
+        <a href="http://adoptapet.com"><%= image_tag "approved-rescue-badge.png", alt: "Adoptapet Approved Rescue" %></a>
+        <%= image_tag "best-of-fairfax-2016.png", alt: "Best of Fairfax 2016" %>
         &nbsp; &nbsp;
-        <%= image_tag "best-of-fairfax-2017.jpg"%>
+        <%= image_tag "best-of-fairfax-2017.jpg", alt: "Best of Fairfax 2017"%>
          &nbsp; &nbsp;
         <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/">
             <%= image_tag "gnp-2015-award.png", alt: "2015 Top-rated nonprofits and charities" %>

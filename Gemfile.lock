@@ -53,7 +53,7 @@ GEM
       io-like (~> 0.3.0)
     arel (9.0.0)
     ast (2.4.0)
-    audited (4.7.1)
+    audited (4.8.0)
       activerecord (>= 4.0, < 5.3)
     autoprefixer-rails (9.1.0)
       execjs

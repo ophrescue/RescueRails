@@ -390,7 +390,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.0)
     unicode_utils (1.4.0)
-    unicorn (5.4.0)
+    unicorn (5.4.1)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     websocket-driver (0.7.0)

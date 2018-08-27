@@ -111,7 +111,7 @@ describe FoldersController, type: :controller do
       request.env['HTTP_REFERER'] = '/'
       post :create, params: { folder: attributes_for(:folder) }
       expect(flash[:success]).to be_present
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to folders_path
     end
   end
 

@@ -14,8 +14,8 @@
 <% end %>
 
 
-<% unless @folders.empty? %>
-  <%= render 'folder_table' %>
+<% unless @attachments.empty? %>
+  <%= render 'attachment_table' %>
 <% else %>
-  <h3>No folders found</h3>
+  <h3>No matching files found</h3>
 <% end %>

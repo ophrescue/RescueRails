@@ -68,6 +68,16 @@ en:
   # and eliminate the unconventional format above
   # when all title fields (above) are fully duplicated below, change the translation format in application_helper.rb
   # from '.title.controller_name.action_name' to 'controller_name.action_name.title'
+  folder_attachments:
+    index:
+      title: "Staff Resources"
+  folders:
+    index:
+      title: "Staff Resources"
+    new:
+      title: 'Create a New Folder'
+    edit:
+      title: 'Edit Folder'
   dogs:
     manager:
       new:

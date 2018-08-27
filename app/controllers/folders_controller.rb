@@ -30,14 +30,7 @@ class FoldersController < ApplicationController
   before_action :admin_user, only: %i[new create edit update destroy]
 
   def index
-    if params[:search].present?
-      @folder = FolderSearcher.search(current_user, params: params)
-    else
-      @folder = Folder.order(:name)
-      @folder.each do |a|
-        a.attachments.build
-      end
-    end
+    @folders = Folder.order(:name)
   end
 
   def show
@@ -60,8 +53,11 @@ class FoldersController < ApplicationController
     @folder = Folder.new(folder_params)
 
     if @folder.save
+      @folders = Folder.all
       flash[:success] = 'New Folder Added'
-      handle_redirect
+      redirect_to folders_path
+    else
+      render :new
     end
   end
 
@@ -71,14 +67,12 @@ class FoldersController < ApplicationController
       flash[:success] = 'Folder Updated'
       redirect_to @folder
     else
-      flash[:error] = 'Upload Error'
-      handle_redirect
+      render :edit
     end
   end
 
   def edit
     @folder = Folder.find(params[:id])
-    @folder.attachments.build
   end
 
   def destroy

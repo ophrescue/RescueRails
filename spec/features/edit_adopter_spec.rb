@@ -30,7 +30,8 @@ feature 'Edit Adopter Form', js: true do
 
   scenario 'Add comment' do
     adopter.update_attribute(:email, 'norm@acme.co.uk') # create an update audit item
-    sign_in(admin)
+    sign_in_as_admin
+
     visit adopter_path(adopter)
     expect(page).to have_selector('.read-only-comment', count: 1)
     expect(page).to have_selector('.comment-header', count: 1)
@@ -57,7 +58,8 @@ feature 'Edit Adopter Form', js: true do
   end
 
   scenario 'Edit comment' do
-    sign_in(admin)
+    sign_in_as_admin
+
     visit adopter_path(adopter)
     page.find('a.toggle-edit-comment', text:'Edit').click
     page.find('.editable-comment>textarea').set("new comment text")

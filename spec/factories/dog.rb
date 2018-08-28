@@ -58,7 +58,7 @@ FactoryBot.define do
     trait :no_flags do
       [ :medical_review_complete, :has_medical_need, :is_special_needs, :is_altered, :is_high_priority, :needs_photos,
         :has_behavior_problem, :needs_foster, :no_dogs, :no_cats, :no_kids ].each do |flag|
-        send(flag, nil)
+        add_attribute(flag) { nil }
       end
     end
 
@@ -118,7 +118,7 @@ FactoryBot.define do
 
     [ 'High Priority', 'Spay Neuter Needed' ].each do |flag|
       trait flag.downcase.parameterize(separator: "_").to_sym do
-        add_attribute "is_#{flag.downcase.parameterize(separator: '_')}", true
+        add_attribute("is_#{flag.downcase.parameterize(separator: '_')}") { true }
       end
     end
 
@@ -136,7 +136,7 @@ FactoryBot.define do
 
     [ 'No Cats', 'No Dogs', 'No Kids' ].each do |flag|
       trait flag.downcase.parameterize(separator: "_").to_sym do
-        add_attribute "#{flag.downcase.parameterize(separator: '_')}", true
+        add_attribute("#{flag.downcase.parameterize(separator: '_')}") { true }
       end
     end
 

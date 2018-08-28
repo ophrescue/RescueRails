@@ -332,6 +332,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
+    rubocop-rspec (1.29.0)
+      rubocop (>= 0.58.0)
     ruby-ole (1.2.12.1)
     ruby-progressbar (1.10.0)
     rubyzip (1.2.1)
@@ -468,6 +470,7 @@ DEPENDENCIES
   rspec-collection_matchers
   rspec-rails
   rubocop
+  rubocop-rspec
   sass-rails
   stackprof
   strip_attributes
@@ -482,4 +485,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.16.3
+   1.16.4

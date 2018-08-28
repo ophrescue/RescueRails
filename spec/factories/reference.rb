@@ -3,8 +3,8 @@ FactoryBot.define do
     name { Faker::Name.name }
     email { Faker::Internet.email }
     phone { Faker::PhoneNumber.phone_number }
-    relationship 'Your Mom'
-    whentocall 'midnight'
+    relationship { 'Your Mom' }
+    whentocall { 'midnight' }
 
     adopter
   end

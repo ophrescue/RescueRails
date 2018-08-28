@@ -2,8 +2,8 @@ include ActionDispatch::TestProcess
 
 FactoryBot.define do
   factory :event do
-    title 'A Dog Event'
-    location_name 'Westminster'
+    title { 'A Dog Event' }
+    location_name { 'Westminster' }
     address { Faker::Address::street_address }
     event_date { Date.today.advance(days: rand(365)-175) }
     start_time { Faker::Time.between(2.days.ago, Time.zone.now, :afternoon) }

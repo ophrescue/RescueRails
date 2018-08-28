@@ -5,6 +5,6 @@ FactoryBot.define do
     phone { Faker::PhoneNumber.cell_phone }
     city { Faker::Address.city }
     state { Faker::Address.state_abbr }
-    comment 'BANNED!'
+    comment { 'BANNED!' }
   end
 end

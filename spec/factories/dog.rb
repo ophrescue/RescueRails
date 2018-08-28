@@ -86,7 +86,7 @@ FactoryBot.define do
 
     trait :primary_lab do
       primary_breed_id { create(:breed, name: 'Labrador Retriever').id }
-      secondary_breed_id nil
+      secondary_breed_id { nil }
     end
 
     trait :primary_and_secondary_terrier do
@@ -96,23 +96,23 @@ FactoryBot.define do
 
     trait :secondary_golden do
       primary_breed_id { create(:breed, name: 'Golden Retriever').id }
-      secondary_breed_id nil
+      secondary_breed_id { nil }
     end
 
     trait :secondary_westie do
-      primary_breed_id nil
+      primary_breed_id { nil }
       secondary_breed_id { create(:breed, name: 'West Highland Terrier').id }
     end
 
     Dog::STATUSES.each do |status|
       trait status.parameterize(separator: "_").to_sym do
-        status status
+        status { status }
       end
     end
 
     Dog::AGES.each do |age|
       trait age.to_sym do
-        age age
+        age { age }
       end
     end
 
@@ -123,15 +123,15 @@ FactoryBot.define do
     end
 
     trait :medical_review_needed do
-      needs_medical_review :false
+      needs_medical_review { :false }
     end
 
     trait :needs_foster do
-      needs_foster true
+      needs_foster { true }
     end
 
     trait :spay_neuter_needed do
-       is_altered false
+       is_altered { false }
     end
 
     [ 'No Cats', 'No Dogs', 'No Kids' ].each do |flag|

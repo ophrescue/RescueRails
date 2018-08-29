@@ -28,8 +28,9 @@ RescueRails::Application.routes.draw do
   resources :sessions, only: %i[new create destroy]
 
   get '/events/:scope', to: 'events#index', scope: /(past|upcoming)/, as: "scoped_events"
-  resources :events, :adoption_app, :users, :password_resets, :adoptions, :folders, :attachments, :shelters
+  resources :events, :adoption_app, :users, :password_resets, :adoptions, :folders, :shelters
   resources :folder_attachments, only: :index
+  resources :attachment, only: [:show, :destroy]
 
   resources :banned_adopters do
     collection { post :import }

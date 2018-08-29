@@ -2,14 +2,12 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   TargetRubyVersion: 2.3
-  Include:
-    - ./config.ru
-    - ./Rakefile
   Exclude:
     - bin/**/*
     - config/**/*
     - db/**/*
     - script/rails
+    - tmp/**/*
 
 Rails:
   Enabled: true

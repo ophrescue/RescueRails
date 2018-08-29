@@ -301,10 +301,6 @@ GEM
       railties (>= 4.2.0, < 5.3)
     rollbar (2.15.5)
       multi_json
-    roo (1.13.2)
-      nokogiri
-      rubyzip
-      spreadsheet (> 0.6.4)
     rspec-collection_matchers (1.1.3)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.8.0)
@@ -466,7 +462,6 @@ DEPENDENCIES
   redcarpet
   responders
   rollbar (= 2.15.5)
-  roo (~> 1.13.2)
   rspec-collection_matchers
   rspec-rails
   rubocop

@@ -9,13 +9,13 @@
   <% end %>
 
 <% if is_admin? %>
-  <p><%= link_to "Edit Folder", edit_folder_path(@folder), :class => "btn btn-primary btn-small" %></p>
+  <p><%= link_to "Edit Folder", edit_folder_path(@folder), :id => 'edit_folder', :class => "btn btn-primary btn-small" %></p>
 <% end %>
     <table class="table-striped table-bordered table-condensed">
       <thead>
         <tr>
           <th>File Name</th>
-          <th>Description</th>
+          <th colspan='2'>Description</th>
           <th>Uploaded By</th>
           <th>Date</th>
           <th>Actions</th>
@@ -23,9 +23,7 @@
       </thead>
       <tbody>
       <% @folder.attachments.each do |attachment| %>
-        <% if attachment.id != nil %>
-          <%= render 'attachments/attachment', :attachment => attachment %>
-        <% end %>
+        <%= render_if attachment.persisted?, attachment %>
       <% end %>
       </tbody>
     </table>
@@ -47,3 +45,48 @@
   </div>
   <% end %>
 <% end %>
+
+<script type='text/javascript'>
+  var current_value;
+  var edit_description = function(event){
+    var $target = $(event.target);
+    var $edit_container = $target.closest('tr').find('.description');
+    current_value = $edit_container.text().trim();
+    var $description_input = $("<input class='attachment_description' type='text'></input>");
+    $description_input.val(current_value);
+    $edit_container.text("").append($description_input);
+    var $cancel = $("<span class='cancel_edit'>Cancel</span>");
+    var $save = $("<span class='save_edit'>Save</span>");
+    $target.closest('td').html($cancel).append($save);
+    $target.closest('td').html($cancel).append($save);
+  }
+
+  var edit_save = function(event){
+    var $target = $(event.target);
+    var description = $target.closest('tr').find('.attachment_description').val()
+    var id = $target.closest('tr').data('id')
+    var data = {attachment: { description: description }}
+    var url = "<%= folder_attachment_path('id') %>"
+    url = url.replace(/id/, id)
+    $.ajax({
+      type: 'patch',
+      url: url,
+      data: data
+    });
+  }
+
+  var edit_cancel = function(event){
+    var $target = $(event.target);
+    var $description_field_container = $target.closest('tr').find('.description');
+    $description_field_container.html(current_value);
+    var $edit_description_container = $target.closest('tr').find('.edit_description_container')
+    var $edit = $("<span class='edit_description'>Edit</span>")
+    $edit_description_container.html($edit)
+  }
+
+  $(function(){
+    $('.attachment').on('click', '.edit_description', edit_description)
+    $('.attachment').on('click', '.save_edit', edit_save)
+    $('.attachment').on('click', '.cancel_edit', edit_cancel)
+  })
+</script>

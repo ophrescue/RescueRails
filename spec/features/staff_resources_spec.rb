@@ -144,8 +144,8 @@ feature "folder management", js: true do
           fill_in(:folder_description, with: "new folder description")
           choose("Unrestricted Folder")
           expect{ click_button('Submit'); page.find('h1',text: 'new folder name') }.to change{Folder.first.name}.to("new folder name").
-                                                                                    and change{Folder.first.description}.to("new folder description").
-                                                                                    and change{Folder.first.locked}.to false
+            and change{Folder.first.description}.to("new folder description").
+            and change{Folder.first.locked}.to false
           expect(flash_success_message).to eq "Folder Updated"
         end
       end
@@ -171,18 +171,32 @@ feature "folder management", js: true do
   end
 
   describe "show a folder" do
-    let(:admin){ create(:user, :admin) }
-    let(:folder){ create(:folder, :locked) }
-    let!(:resource){ create(:attachment, updated_by_user_id: admin.id, attachable_id: folder.id, attachable_type: 'Folder') }
+    context 'when the folder is empty' do
+      let(:admin){ create(:user, :admin) }
+      let(:folder){ create(:folder, :locked) }
+      before do
+        sign_in(admin)
+      end
 
-    before do
-      sign_in(admin)
+      it "should show 'no files' message" do
+        visit folder_path(folder)
+        expect(1).to eq 0
+      end
     end
+    context 'when the folder contains files' do
+      let(:admin){ create(:user, :admin) }
+      let(:folder){ create(:folder, :locked) }
+      let!(:resource){ create(:attachment, updated_by_user_id: admin.id, attachable_id: folder.id, attachable_type: 'Folder') }
 
-    it "should show list of attachments" do
-      visit folder_path(folder)
-      expect(page).to have_selector('.file_name', text: resource.attachment_file_name)
-      expect(page).to have_selector('.attachment input', text: 'Delete')
+      before do
+        sign_in(admin)
+      end
+
+      it "should show list of attachments" do
+        visit folder_path(folder)
+        expect(page).to have_selector('.file_name', text: resource.attachment_file_name)
+        expect(page).to have_selector('.attachment input.delete_attachment')
+      end
     end
   end
 
@@ -197,33 +211,53 @@ feature "folder management", js: true do
     end
 
     it "should show matching search results" do
-      # attachments should not have delete button here
       visit folders_path
       expect(page).to have_selector('#folders .folder', count: 1)
       fill_in('search', with: 'bar')
       page.find('#fetch_files').click
       expect(page).to have_selector('.attachment', count: 1)
       expect(page).to have_selector('.attachment .file_name', text: 'bar_file.pdf')
-      expect(page).not_to have_selector('.attachment input', text: 'Delete')
-      expect(1).to eq 0
+      expect(page).not_to have_selector('.attachment input.delete_attachment')
     end
   end
 
   describe "edit a resource" do
     let(:folder){ create(:folder, :locked) }
-    let!(:resource){ create(:attachment, attachable_id: folder.id) }
+    let!(:resource){ create(:attachment, attachable_type: 'Folder', attachable_id: folder.id) }
 
-    describe "when user is admin" do
+    context "when user is admin" do
+      let(:admin){ create(:user, :admin) }
+
       before do
-        visit folders_path(folder)
+        sign_in(admin)
+        visit folder_path(folder)
       end
 
       it "should save edited description" do
-        click_link('Edit')
+        click_link('edit_description')
+        fill_in('file_description', with: "new file description")
+        expect{ click('Save') }.to change{ Attachment.first.description }.to "new file description"
+      end
+    end
+
+    context "when user is not admin" do
+      it "should not work" do
+        expect(1).to eq 0
+      end
+    end
+  end
+
+  describe "delete a resource" do
+    describe "when user is admin" do
+      it "should not work" do
+        expect(1).to eq 0
       end
     end
 
     describe "when user is not admin" do
+      it "should not work" do
+        expect(1).to eq 0
+      end
     end
   end
 end

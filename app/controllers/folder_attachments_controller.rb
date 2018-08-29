@@ -34,6 +34,12 @@ class FolderAttachmentsController < ApplicationController
                                    .map{|a| a.becomes(Attachment) }
   end
 
+  def update
+    respond_to do |request|
+      request.json { head 200 }
+    end
+  end
+
   private
 
   def dl_resource_user

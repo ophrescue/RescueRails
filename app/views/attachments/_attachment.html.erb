@@ -1,7 +1,6 @@
 <% if params[:search].present? %>
-  <tr>
-    <% if attachment.attachment_file_name %>
-      <td>
+  <tr class='attachment'>
+      <td class='file_name'>
         <%= link_to(attachment.attachment_file_name, attachment.download_url) %>
       </td>
       <td>
@@ -10,15 +9,19 @@
       <td>
         <%= attachment.updated_at.strftime("%B %d, %Y") %>
       </td>
-    <% end %>
   </tr>
 <% else %>
-  <tr class='attachment'>
+  <tr class='attachment' data-id=<%= attachment.id %>>
     <td class="file_name">
       <%= link_to attachment.attachment_file_name, attachment.download_url %>
     </td>
-    <td>
+    <td class='description'>
       <%= attachment.description %>
+    </td>
+    <td class='edit_description_container'>
+      <% if is_admin? %>
+        <span class='edit_description'>Edit</span>
+      <% end %>
     </td>
     <td>
       <%= link_to attachment.updated_by_user.name, attachment.updated_by_user %>
@@ -29,7 +32,7 @@
     <td>
       <% if is_admin? %>
         <%= form_for attachment, html: {id: "delete_attachment", class: "delete_attachment"}, method: :delete do |f| %>
-          <%= f.submit "Delete", class: "btn btn-danger btn-small" %>
+          <%= f.submit "Delete", class: "btn btn-danger btn-small delete_attachment" %>
         <% end %>
       <% end %>
     </td>

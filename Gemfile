@@ -82,6 +82,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'rack_session_access'
   gem 'browserstack-local'
+  gem 'stripe-ruby-mock', '~> 2.5.4', :require => 'stripe_mock'
 end
 
 group :development do

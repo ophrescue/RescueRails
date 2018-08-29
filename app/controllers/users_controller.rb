@@ -109,13 +109,13 @@ class UsersController < Clearance::UsersController
 
   def create
     @user = User.new(user_params)
+    @user.password = SecureRandom.hex[0..15]
 
     if @user.save
       flash[:success] = 'Account created for ' + @user.name
       redirect_to users_path
     else
       @user.password = ""
-      @user.password_confirmation = ""
       init_fields
       render 'new'
     end
@@ -152,7 +152,6 @@ class UsersController < Clearance::UsersController
         .permit(:name,
                 :email,
                 :password,
-                :password_confirmation,
                 :admin,
                 :is_foster,
                 :phone,
@@ -229,7 +228,6 @@ class UsersController < Clearance::UsersController
     else
       params.require(:user)
         .permit(:password,
-                :password_confirmation,
                 :phone,
                 :other_phone,
                 :address1,

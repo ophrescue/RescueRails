@@ -165,9 +165,9 @@ describe UsersController, type: :controller do
     context 'logged in as an admin' do
       include_context 'signed in admin'
 
-      it 'is able to create a user' do
+      it 'is able to create a user without password param' do
         expect{
-          post :create, params: { user: attributes_for(:user) }
+          post :create, params: { user: attributes_for(:user, password: nil) }
         }.to change(User, :count).by(1)
       end
     end

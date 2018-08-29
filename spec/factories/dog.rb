@@ -58,7 +58,7 @@ FactoryBot.define do
     trait :no_flags do
       [ :medical_review_complete, :has_medical_need, :is_special_needs, :is_altered, :is_high_priority, :needs_photos,
         :has_behavior_problem, :needs_foster, :no_dogs, :no_cats, :no_kids ].each do |flag|
-        send(flag, nil)
+        add_attribute(flag) { nil }
       end
     end
 
@@ -86,7 +86,7 @@ FactoryBot.define do
 
     trait :primary_lab do
       primary_breed_id { create(:breed, name: 'Labrador Retriever').id }
-      secondary_breed_id nil
+      secondary_breed_id { nil }
     end
 
     trait :primary_and_secondary_terrier do
@@ -96,47 +96,47 @@ FactoryBot.define do
 
     trait :secondary_golden do
       primary_breed_id { create(:breed, name: 'Golden Retriever').id }
-      secondary_breed_id nil
+      secondary_breed_id { nil }
     end
 
     trait :secondary_westie do
-      primary_breed_id nil
+      primary_breed_id { nil }
       secondary_breed_id { create(:breed, name: 'West Highland Terrier').id }
     end
 
     Dog::STATUSES.each do |status|
       trait status.parameterize(separator: "_").to_sym do
-        status status
+        status { status }
       end
     end
 
     Dog::AGES.each do |age|
       trait age.to_sym do
-        age age
+        age { age }
       end
     end
 
     [ 'High Priority', 'Spay Neuter Needed' ].each do |flag|
       trait flag.downcase.parameterize(separator: "_").to_sym do
-        add_attribute "is_#{flag.downcase.parameterize(separator: '_')}", true
+        add_attribute("is_#{flag.downcase.parameterize(separator: '_')}") { true }
       end
     end
 
     trait :medical_review_needed do
-      needs_medical_review :false
+      needs_medical_review { :false }
     end
 
     trait :needs_foster do
-      needs_foster true
+      needs_foster { true }
     end
 
     trait :spay_neuter_needed do
-       is_altered false
+       is_altered { false }
     end
 
     [ 'No Cats', 'No Dogs', 'No Kids' ].each do |flag|
       trait flag.downcase.parameterize(separator: "_").to_sym do
-        add_attribute "#{flag.downcase.parameterize(separator: '_')}", true
+        add_attribute("#{flag.downcase.parameterize(separator: '_')}") { true }
       end
     end
 

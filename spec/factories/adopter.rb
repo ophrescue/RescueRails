@@ -20,7 +20,7 @@ FactoryBot.define do
     zip { Faker::Address.zip_code }
     status { Adopter::STATUSES.sample }
     when_to_call { call_times.sample }
-    training_email_sent false
+    training_email_sent { false }
     dog_reqs { Faker::Lorem.sentence }
     why_adopt { Faker::Lorem.sentence }
     dog_name { Faker::Dog.name }

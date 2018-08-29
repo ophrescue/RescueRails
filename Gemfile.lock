@@ -57,15 +57,15 @@ GEM
       activerecord (>= 4.0, < 5.3)
     autoprefixer-rails (9.1.0)
       execjs
-    aws-sdk (2.11.71)
-      aws-sdk-resources (= 2.11.71)
-    aws-sdk-core (2.11.71)
+    aws-sdk (2.11.118)
+      aws-sdk-resources (= 2.11.118)
+    aws-sdk-core (2.11.118)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.11.71)
-      aws-sdk-core (= 2.11.71)
-    aws-sigv4 (1.0.2)
-    better_errors (2.4.0)
+    aws-sdk-resources (2.11.118)
+      aws-sdk-core (= 2.11.118)
+    aws-sigv4 (1.0.3)
+    better_errors (2.5.0)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
@@ -95,7 +95,7 @@ GEM
     capistrano-rbenv (2.0.4)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
-    capybara (3.2.1)
+    capybara (3.6.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -245,7 +245,7 @@ GEM
     pry-stack_explorer (0.4.9.2)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
-    public_suffix (3.0.2)
+    public_suffix (3.0.3)
     puma (3.12.0)
     rack (2.0.5)
     rack-cache (1.8.0)
@@ -332,6 +332,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
+    rubocop-rspec (1.29.0)
+      rubocop (>= 0.58.0)
     ruby-ole (1.2.12.1)
     ruby-progressbar (1.10.0)
     rubyzip (1.2.1)
@@ -468,6 +470,7 @@ DEPENDENCIES
   rspec-collection_matchers
   rspec-rails
   rubocop
+  rubocop-rspec
   sass-rails
   stackprof
   strip_attributes
@@ -482,4 +485,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.16.3
+   1.16.4

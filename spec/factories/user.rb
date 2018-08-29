@@ -13,39 +13,39 @@ FactoryBot.define do
     postal_code { Faker::Address.zip }
     lastverified { Time.now }
     country { 'USA' }
-    active true
-    admin false
+    active { true }
+    admin { false }
 
     trait :inactive_user do
-      active false
+      active { false }
     end
 
     trait :admin do
-      admin true
-      edit_dogs true
-      edit_my_adopters true
-      edit_all_adopters true
-      edit_events true
-      complete_adopters true
-      add_dogs true
-      ban_adopters true
-      dl_locked_resources true
-      medical_behavior_permission true
-      active true
+      admin { true }
+      edit_dogs { true }
+      edit_my_adopters { true }
+      edit_all_adopters { true }
+      edit_events { true }
+      complete_adopters { true }
+      add_dogs { true }
+      ban_adopters { true }
+      dl_locked_resources { true }
+      medical_behavior_permission { true }
+      active { true }
     end
 
     trait :admin_without_extra_privileges do
-      admin true
+      admin { true }
     end
 
     trait :with_known_authentication_parameters do
-      email "test3@test.com"
-      password "foobar99"
-      password_confirmation "foobar99"
+      email { "test3@test.com" }
+      password { "foobar99" }
+      password_confirmation { "foobar99" }
     end
 
     factory :foster do
-      is_foster true
+      is_foster { true }
     end
 
     factory :adoption_coordinator do
@@ -53,7 +53,7 @@ FactoryBot.define do
       # it is consistent with the definition of adoption_coordinator in the context of selecting an adoption_coordinator for a dog in dog_form
       # defined here for writing spec around the dog_form,
       # without understanding the inconsistent usage!
-      edit_all_adopters true
+      edit_all_adopters { true }
     end
   end
 end

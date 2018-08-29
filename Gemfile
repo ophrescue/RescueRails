@@ -95,4 +95,5 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.0.3'
   gem 'powder'
   gem 'rubocop'
+  gem 'rubocop-rspec'
 end

@@ -28,7 +28,8 @@ RescueRails::Application.routes.draw do
   resources :sessions, only: %i[new create destroy]
 
   get '/events/:scope', to: 'events#index', scope: /(past|upcoming)/, as: "scoped_events"
-  resources :events, :adoption_app, :users, :password_resets, :adoptions, :folders, :attachments, :shelters
+  resources :events, :adoption_app, :users, :password_resets, :adoptions, :folders, :shelters
+  resources :attachment, only: [:show, :destroy]
   resources :folder_attachments, only: :index
 
   resources :banned_adopters do

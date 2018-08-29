@@ -9,8 +9,10 @@ feature 'visit dog show page', js: true do
   include ClientValidationFormHelpers
   include ApplicationHelpers
 
+  let!(:active_user) { create(:user) }
+
   before do
-    sign_in_as_user
+    sign_in_with(active_user.email, active_user.password)
   end
 
   context "dog is unavailable" do
@@ -20,7 +22,7 @@ feature 'visit dog show page', js: true do
 
     ["adopted", "completed", "not available"].each do |status|
       context "when the dog adoption is #{status}" do
-        let(:adoption_completed_dog){FactoryBot.create(:dog, status: status)}
+        let(:adoption_completed_dog){ FactoryBot.create(:dog, status: status) }
         it 'should show alert to inform user' do
           expect(page).to have_selector('.alert.alert-danger h4', text: "Sorry, this dog is no longer available for adoption!")
           expect(page).to have_selector('.alert.alert-danger', text: "Please see our gallery of")

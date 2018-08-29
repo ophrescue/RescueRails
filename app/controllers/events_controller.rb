@@ -41,10 +41,10 @@
 #
 
 class EventsController < ApplicationController
-  before_action :require_login, except: [:index]
-  before_action :edit_events_user, except: [:index]
+  before_action :require_login, except: [:index, :show]
+  before_action :edit_events_user, except: [:index, :show]
   before_action :select_bootstrap41
-  before_action :find_event, only: [:update, :destroy]
+  before_action :find_event, only: [:destroy, :edit, :show, :update]
 
   def index
     @scope =

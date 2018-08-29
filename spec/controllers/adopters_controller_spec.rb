@@ -42,7 +42,7 @@ describe AdoptersController, type: :controller do
   describe 'GET show' do
     include_context 'signed in admin'
 
-    let(:adopter) { create(:adopter_with_app, status: 'approved') }
+    let(:adopter) { create(:adopter, :with_app, status: 'approved') }
 
     it 'should be successful' do
       get :show, params: { id: adopter.id }

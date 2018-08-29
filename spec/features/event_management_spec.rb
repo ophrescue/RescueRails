@@ -9,7 +9,9 @@ feature 'Manage Events', js: true do
   describe "add an event" do
     let(:test_event){ build(:event, :in_the_future) }
     let(:date_time) { "#{test_event.event_date.strftime("%A, %B %-e, %Y") } from #{test_event.start_time.strftime("%-l:%M %P") } to #{ test_event.end_time.strftime("%-l:%M %P") }" }
+
     before do
+      sign_in_as_admin
       visit '/events'
     end
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'View a mostly nil Adoption App without crashing', js: true do
-  let!(:adopter_with_null_app) { create(:adopter_with_null_app) }
+  let!(:adopter_with_null_app) { create(:adopter, :with_null_app) }
 
   scenario "Adoptor barely fills out adoption application" do
     sign_in_as_admin

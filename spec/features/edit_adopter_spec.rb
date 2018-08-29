@@ -5,10 +5,13 @@ feature 'Edit Adopter Form', js: true do
   include ClientValidationFormHelpers
   let!(:admin) { create(:user, :admin) }
   let!(:adopter) { create(:adopter, :with_app, comments: [create(:comment, user: admin)]) }
-  let!(:comment_id){ adopter.comments.first.id }
+  let!(:comment_id) { adopter.comments.first.id }
+
+  before do
+    sign_in_with(admin.email, admin.password)
+  end
 
   scenario 'Admin edits adopter' do
-    sign_in_as_admin
     visit adopter_path(adopter)
 
     expect(page).to have_content(adopter.name)
@@ -30,7 +33,6 @@ feature 'Edit Adopter Form', js: true do
 
   scenario 'Add comment' do
     adopter.update_attribute(:email, 'norm@acme.co.uk') # create an update audit item
-    sign_in_as_admin
 
     visit adopter_path(adopter)
     expect(page).to have_selector('.read-only-comment', count: 1)
@@ -58,8 +60,6 @@ feature 'Edit Adopter Form', js: true do
   end
 
   scenario 'Edit comment' do
-    sign_in_as_admin
-
     visit adopter_path(adopter)
     page.find('a.toggle-edit-comment', text:'Edit').click
     page.find('.editable-comment>textarea').set("new comment text")
@@ -68,5 +68,4 @@ feature 'Edit Adopter Form', js: true do
     click_link('All')
     expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
   end
-
 end

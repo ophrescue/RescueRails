@@ -41,7 +41,6 @@ FactoryBot.define do
     trait :with_known_authentication_parameters do
       email { "test3@test.com" }
       password { "foobar99" }
-      password_confirmation { "foobar99" }
     end
 
     factory :foster do

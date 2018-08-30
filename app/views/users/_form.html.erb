@@ -111,12 +111,6 @@
       </div>
     </div>
 
-    <h3>Password</h3>
-
-    <div class="control-group">
-      <%= link_to 'Change Password', new_password_path %>
-    </div>
-
     <h3>Fostering</h3>
 
     <% if is_admin? %>
@@ -327,6 +321,15 @@
       <div class="controls">
         <%= f.text_area :foster_dog_types, :class => "xxlarge", :rows => "6" %>
         <span class="help-inline">Weight, breed, medical, etc<span>
+      </div>
+    </div>
+
+    <h3>Password Change</h3>
+
+    <div class="control-group">
+      <%= f.label :password, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password, autocomplete: 'new-password' %>
       </div>
     </div>
 

@@ -127,9 +127,7 @@ class UsersController < Clearance::UsersController
   end
 
   def update
-    if @user.update(user_params)
-      @user.update(lastverified: Time.now)
-
+    if @user.update(update_user_params)
       flash[:success] = 'Profile updated.'
       redirect_to @user
     else
@@ -145,6 +143,14 @@ class UsersController < Clearance::UsersController
   end
 
   private
+
+  def update_user_params
+    p = user_params
+    p.delete(:password) if p[:password].blank?
+    p[:lastverified] = Time.now
+
+    p
+  end
 
   def user_params
     if current_user && current_user.admin?

@@ -24,14 +24,19 @@
 #  locked      :boolean          default(FALSE)
 #
 
-class Folder < ApplicationRecord
-  has_many :attachments, -> { order('updated_at DESC') }, as: :attachable
+class FolderAttachmentsController < ApplicationController
+  before_action :authenticate
+  before_action :dl_resource_user
 
-  scope :locked, -> { where(locked: true) }
-  scope :unlocked, -> { where(locked: false) }
-  scope :accessible_by, ->(user){ user.dl_locked_resources ? all : unlocked }
+  def index
+    @attachments = FolderAttachment.accessible_by(current_user)
+                                   .matching(params[:search])
+                                   .map{|a| a.becomes(Attachment) }
+  end
 
-  accepts_nested_attributes_for :attachments, allow_destroy: true
+  private
 
-  validates :name, presence: true
+  def dl_resource_user
+    redirect_to(root_path) unless current_user.dl_resources?
+  end
 end

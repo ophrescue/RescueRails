@@ -57,13 +57,13 @@ GEM
       activerecord (>= 4.0, < 5.3)
     autoprefixer-rails (9.1.0)
       execjs
-    aws-sdk (2.11.118)
-      aws-sdk-resources (= 2.11.118)
-    aws-sdk-core (2.11.118)
+    aws-sdk (2.11.119)
+      aws-sdk-resources (= 2.11.119)
+    aws-sdk-core (2.11.119)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.11.118)
-      aws-sdk-core (= 2.11.118)
+    aws-sdk-resources (2.11.119)
+      aws-sdk-core (= 2.11.119)
     aws-sigv4 (1.0.3)
     better_errors (2.5.0)
       coderay (>= 1.0.0)
@@ -301,10 +301,6 @@ GEM
       railties (>= 4.2.0, < 5.3)
     rollbar (2.15.5)
       multi_json
-    roo (1.13.2)
-      nokogiri
-      rubyzip
-      spreadsheet (> 0.6.4)
     rspec-collection_matchers (1.1.3)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.8.0)
@@ -466,7 +462,6 @@ DEPENDENCIES
   redcarpet
   responders
   rollbar (= 2.15.5)
-  roo (~> 1.13.2)
   rspec-collection_matchers
   rspec-rails
   rubocop

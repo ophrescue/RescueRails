@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 describe FolderAttachmentsController do
+  before :each do
+    sign_in_as(user)
+  end
+
   describe 'GET #index' do
-    let!(:no_access_user) { create(:user, dl_resources: false) }
+    let!(:user) { create(:user, dl_resources: true, dl_locked_resources: false) }
 
     context 'logged in with standard folder access' do
-      before :each do
-        sign_in_with(dl_resources_user.email, dl_resources_user.password)
-      end
-
       context 'when no search params are submitted' do
         it 'is successful' do
           get :index
@@ -27,11 +27,7 @@ describe FolderAttachmentsController do
     end
 
     context 'logged in as no access user' do
-      let!(:dl_resources_user) { create(:user, dl_resources: true, dl_locked_resources: false) }
-
-      before :each do
-        sign_in_with(no_access_user.email, no_access_user.password)
-      end
+      let!(:user) { create(:user, dl_resources: false) }
 
       it 'redirects to sign in page' do
         get :index

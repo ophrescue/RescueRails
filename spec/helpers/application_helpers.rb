@@ -7,6 +7,10 @@ module ApplicationHelpers
     page.find('.alert.alert-notice').text
   end
 
+  def flash_success_message
+    page.find('.alert.alert-success').text
+  end
+
   def page_heading
     page.find('h1').text
   end

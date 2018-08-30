@@ -29,6 +29,7 @@ RescueRails::Application.routes.draw do
 
   get '/events/:scope', to: 'events#index', scope: /(past|upcoming)/, as: "scoped_events"
   resources :events, :adoption_app, :users, :password_resets, :adoptions, :folders, :shelters
+  resources :folder_attachments, only: :index
   resources :attachment, only: [:show, :destroy]
 
   resources :banned_adopters do

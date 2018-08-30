@@ -5,7 +5,6 @@ feature "folder management", js: true do
   include ApplicationHelpers
 
   describe "folder index" do
-    let(:admin){ create(:user, :admin) }
     describe "when user is not admin" do
       it "should redirect to signin page" do
         visit folders_path
@@ -15,7 +14,7 @@ feature "folder management", js: true do
 
     describe "when user is admin" do
       before do
-        sign_in(admin)
+        sign_in_as_admin
       end
 
       describe "when there are no folders" do
@@ -133,7 +132,7 @@ feature "folder management", js: true do
     describe "user is admin" do
       let(:admin){ create(:user, :admin) }
       before do
-        sign_in(admin)
+        sign_in_as_admin
         visit edit_folder_path(folder)
       end
 

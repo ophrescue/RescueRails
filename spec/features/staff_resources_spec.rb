@@ -164,7 +164,7 @@ feature "folder management", js: true do
       it "should notify user that they are not permitted and redirect to sign in page" do
         visit edit_folder_path(folder)
         expect(page_heading).to eq "Staff Sign in"
-        expect(flash_notice_message).to eq "Please sign in to access this page"
+        expect(flash_notice_message).to eq "Please sign in to continue."
       end
     end
   end

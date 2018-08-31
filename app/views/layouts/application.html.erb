@@ -6,40 +6,44 @@
     <%= csrf_meta_tag %>
     <%= render 'layouts/assets' %>
 
-  <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  <% if Rails.env.production? || Rails.env.staging? %>
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-12286524-2', 'auto');
-    ga('send', 'pageview');
+      ga('create', 'UA-12286524-2', 'auto');
+      ga('send', 'pageview');
 
-    <% if signed_in? %>
-       ga('set', 'dimension1', 'is_staff');
-    <% end %>
-  </script>
+      <% if signed_in? %>
+        ga('set', 'dimension1', 'is_staff');
+      <% end %>
+    </script>
 
-  <script>
-    /**
-    * Function that tracks a click on an outbound link in Analytics.
-    * This function takes a valid URL string as an argument, and uses that URL string
-    * as the event label. Setting the transport method to 'beacon' lets the hit be sent
-    * using 'navigator.sendBeacon' in browser that support it.
-    */
-    var trackOutboundLink = function(url) {
-      ga('send', 'event', 'outbound', 'click', url, {
-        'transport': 'beacon',
-        'hitCallback': function(){document.location = url;}
-      });
-    }
-  </script>
+    <script>
+      /**
+      * Function that tracks a click on an outbound link in Analytics.
+      * This function takes a valid URL string as an argument, and uses that URL string
+      * as the event label. Setting the transport method to 'beacon' lets the hit be sent
+      * using 'navigator.sendBeacon' in browser that support it.
+      */
+      var trackOutboundLink = function(url) {
+        ga('send', 'event', 'outbound', 'click', url, {
+          'transport': 'beacon',
+          'hitCallback': function(){document.location = url;}
+        });
+      }
+    </script>
+  <% end %>
+
   <% if Rails.env.test? %>
     <%= javascript_tag "$.fx.off = true;" %>
   <% end %>
 
   </head>
   <body>
+    <% if Rails.env.production? || Rails.env.staging? %>
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -49,6 +53,7 @@
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
+    <% end %>
 
     <!--[if lte IE 6]><script src="js/ie6/warning.js"></script><script>window.onload=function(){e("/assets/ie6warn/")}</script><![endif]-->
   <% if @hide_topbar.nil? %>
@@ -61,7 +66,7 @@
   <div class="container">
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, :class => "alert alert-#{key}") %>
-    <% end %> 
+    <% end %>
     <% if signed_in? && current_user.out_of_date? %>
       <div class="alert alert-block alert-warning">
         <p>Please verify your profile information!</p>

@@ -182,6 +182,13 @@ feature 'add a dog', js: true do
       end
     end
 
+    describe 'cancel while adding' do
+      it "should return to the dog manager page" do
+        click_link('Cancel')
+        expect(page_heading).to eq 'Dog Manager'
+      end
+    end
+
     context 'user enters invalid attributes --client-side validation' do
       context 'no status selected' do
         it "should not save and should notify user" do
@@ -295,7 +302,6 @@ feature 'add a dog', js: true do
           expect( Dog.first.fee ).to eq 88
         end
       end
-
     end
 
     #uniqueness of name validated on server
@@ -315,7 +321,6 @@ feature 'add a dog', js: true do
           expect(flash_error_message).to eq "form could not be saved, see errors below"
         end
       end
-
     end
   end
 end

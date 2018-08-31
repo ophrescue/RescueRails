@@ -89,11 +89,13 @@ class Dogs::ManagerController < Dogs::DogsBaseController
 
   def new
     @dog = Dog.new
+    @on_cancel_path = dogs_manager_index_path
     load_instance_variables
   end
 
   def edit
     load_instance_variables
+    @on_cancel_path = dogs_manager_path(@dog)
   end
 
   def update

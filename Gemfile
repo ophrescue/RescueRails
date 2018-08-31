@@ -5,7 +5,6 @@ gem 'rails', '~> 5.2.1'
 
 gem 'rack-cache'
 
-gem 'acts_as_list'
 gem 'audited', '~> 4.5'
 gem 'aws-sdk', '~> 2'
 gem 'bootstrap', '~> 4.1.0'

@@ -87,43 +87,6 @@ feature "folder management", js: true do
           expect(flash_error_message).to include "1 error"
         end
       end
-
-      xdescribe "delete a folder" do
-        describe "when user does not have restricted folder access" do
-          describe "and the folder is restricted" do
-            it "should disable the delete icon" do
-              expect(1).to eq 0
-            end
-          end
-          describe "and the folder is not restricted" do
-            describe "when the folder is empty" do
-              it "should delete the folder" do
-                expect(1).to eq 0
-              end
-            end
-
-            describe "when the folder is not empty" do
-              it "should not delete the folder, and should warn the user" do
-                expect(1).to eq 0
-              end
-            end
-          end
-        end
-
-        describe "when user has restricted folder access" do
-          describe "when the folder is empty" do
-            it "should delete the folder" do
-              expect(1).to eq 0
-            end
-          end
-
-          describe "when the folder is not empty" do
-            it "should not delete the folder, and should warn the user" do
-              expect(1).to eq 0
-            end
-          end
-        end
-      end
     end
   end
 
@@ -171,31 +134,45 @@ feature "folder management", js: true do
   end
 
   describe "show a folder" do
+    let(:admin){ create(:user, :admin) }
+    let(:folder){ create(:folder, :locked) }
+
     context 'when the folder is empty' do
-      let(:admin){ create(:user, :admin) }
-      let(:folder){ create(:folder, :locked) }
       before do
         sign_in(admin)
       end
 
       it "should show 'no files' message" do
         visit folder_path(folder)
-        expect(1).to eq 0
+        expect(page).to have_selector('h3', text: "Folder is empty")
       end
     end
+
     context 'when the folder contains files' do
-      let(:admin){ create(:user, :admin) }
-      let(:folder){ create(:folder, :locked) }
-      let!(:resource){ create(:attachment, updated_by_user_id: admin.id, attachable_id: folder.id, attachable_type: 'Folder') }
+      let!(:resource){ create(:attachment, :downloadable, updated_by_user_id: admin.id, attachable_id: folder.id, attachable_type: 'Folder') }
 
       before do
         sign_in(admin)
+        visit folder_path(folder)
       end
 
       it "should show list of attachments" do
-        visit folder_path(folder)
         expect(page).to have_selector('.file_name', text: resource.attachment_file_name)
         expect(page).to have_selector('.attachment input.delete_attachment')
+      end
+    end
+
+    describe 'upload a file' do
+      before do
+        sign_in(admin)
+        visit folder_path(folder)
+      end
+
+      it "should save the file in the folder", exclude_ie: true do
+        expect(page_heading).to eq folder.name
+        attach_file('folder_attachment_attachment', Rails.root.join("spec", "fixtures", "doc", "sample.pdf"))
+        fill_in('folder_attachment_description', with: 'dock docker dockest')
+        expect{ page.find('#save_file_button').click }.to change{ FolderAttachment.count }.by(1)
       end
     end
   end
@@ -234,30 +211,46 @@ feature "folder management", js: true do
       end
 
       it "should save edited description" do
-        click_link('edit_description')
+        page.find('.edit_description').click
         fill_in('file_description', with: "new file description")
-        expect{ click('Save') }.to change{ Attachment.first.description }.to "new file description"
+        expect{ page.find('.save_edit').click; wait_for_ajax }.to change{ Attachment.first.description }.to "new file description"
+        expect(page.find('.attachment .description').text).to eq "new file description"
+        expect(page).to have_selector('.attachment .edit_description_container .edit_description')
+        expect(page).not_to have_selector('.attachment .edit_description_container .cancel_edit')
+        expect(page).not_to have_selector('.attachment .edit_description_container .save_edit')
       end
     end
 
     context "when user is not admin" do
+      let(:folder){ create(:folder, :locked) }
+      let!(:resource){ create(:attachment, attachable_type: 'Folder', attachable_id: folder.id) }
+
+      before do
+        visit folder_path(folder)
+      end
+
       it "should not work" do
-        expect(1).to eq 0
+        expect(page).not_to have_selector('.edit_description')
       end
     end
   end
 
   describe "delete a resource" do
     describe "when user is admin" do
-      it "should not work" do
-        expect(1).to eq 0
+      let(:folder){ create(:folder, :locked) }
+      let!(:resource){ create(:attachment, attachable_type: 'Folder', attachable_id: folder.id) }
+      let(:admin){ create(:user, :admin) }
+
+      before do
+        sign_in(admin)
+        visit folder_path(folder)
+      end
+
+      it "should delete the file" do
+        expect{ page.find('input.delete_attachment').click }.to change{ Attachment.count }.by(-1)
+        expect(page).not_to have_selector('.attachment')
       end
     end
 
-    describe "when user is not admin" do
-      it "should not work" do
-        expect(1).to eq 0
-      end
-    end
   end
 end

@@ -1,16 +1,22 @@
-.attachment {
-  .edit_description_container {
-    border-left: none;
-    text-align: center;
-    width: 1em;
+#attachments {
+  th {
+    width: 22.5%;
+    &.actions { width: 10% }
+  }
+  .attachment {
+    .edit_description_container {
+      border-left: none;
+      text-align: center;
+      width: 1em;
 
-    .edit_description, .cancel_edit, .save_edit {
-      color: #08c;
-      cursor: pointer;
-    }
+      .edit_description, .cancel_edit, .save_edit {
+        color: #08c;
+        cursor: pointer;
+      }
 
-    .save_edit {
-      margin-left: 12px;
+      .save_edit {
+        margin-left: 12px;
+      }
     }
   }
 }

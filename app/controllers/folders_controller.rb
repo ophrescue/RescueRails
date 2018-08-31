@@ -35,13 +35,14 @@ class FoldersController < ApplicationController
 
   def show
     @folder = Folder.find(params[:id])
+    #@attachments = @folder.persisted_attachments
+    @folder.attachments.build
 
     if @folder.locked && !current_user.dl_locked_resources?
       flash[:error] = 'You do not have permission to view this folder'
       return redirect_to action: :index
     end
 
-    @folder.attachments.build
     @title = @folder.name
   end
 

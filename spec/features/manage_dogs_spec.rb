@@ -22,35 +22,35 @@ feature 'View Dogs', js: true do
       ["Medical Summary",
        "Behavior Summary",
        "Original Name",
-      "Microchip",
-      "Adoption Fee",
-      "OK with dogs?",
-      "OK with cats?",
-      "OK with kids?",
-      "Medical Review Complete",
-      "Has Medical Need",
-      "Needs Spay or Neuter",
-      "High Priority",
-      "Needs Photos",
-      "Has Behavior Problem",
-      "Needs Foster",
-      "Foster",
-      "Adoption Coordinator",
-      "Source Shelter",
-      "Adopters",
-      "Available on",
-      "Intake date",
-      "Adopted on",
-      "Ads",
-      "Up-to-date on shots",
-      "First shots",
-      "Second shots",
-      "Third shots",
-      "Rabies",
-      "4DX",
-      "Bordetella",
-      "Heartworm Preventative",
-      "Flea/Tick Preventative"].each do |private_info|
+       "Microchip",
+       "Adoption Fee",
+       "OK with dogs?",
+       "OK with cats?",
+       "OK with kids?",
+       "Medical Review Complete",
+       "Has Medical Need",
+       "Needs Spay or Neuter",
+       "High Priority",
+       "Needs Photos",
+       "Has Behavior Problem",
+       "Needs Foster",
+       "Foster",
+       "Adoption Coordinator",
+       "Source Shelter",
+       "Adopters",
+       "Available on",
+       "Intake date",
+       "Adopted on",
+       "Ads",
+       "Up-to-date on shots",
+       "First shots",
+       "Second shots",
+       "Third shots",
+       "Rabies",
+       "4DX",
+       "Bordetella",
+       "Heartworm Preventative",
+       "Flea/Tick Preventative"].each do |private_info|
         expect(page).to have_content private_info
       end
     end
@@ -79,35 +79,35 @@ feature 'View Dogs', js: true do
       ["Medical Summary",
        "Behavior Summary",
        "Original Name",
-      "Microchip",
-      "Adoption Fee",
-      "OK with dogs?",
-      "OK with cats?",
-      "OK with kids?",
-      "Medical Review Complete",
-      "Has Medical Need",
-      "Needs Spay or Neuter",
-      "High Priority",
-      "Needs Photos",
-      "Has Behavior Problem",
-      "Needs Foster",
-      "Foster",
-      "Adoption Coordinator",
-      "Source Shelter",
-      "Adopters",
-      "Available on",
-      "Intake date",
-      "Adopted on",
-      "Ads",
-      "Up-to-date on shots",
-      "First shots",
-      "Second shots",
-      "Third shots",
-      "Rabies",
-      "4DX",
-      "Bordetella",
-      "Heartworm Preventative",
-      "Flea/Tick Preventative"].each do |private_info|
+       "Microchip",
+       "Adoption Fee",
+       "OK with dogs?",
+       "OK with cats?",
+       "OK with kids?",
+       "Medical Review Complete",
+       "Has Medical Need",
+       "Needs Spay or Neuter",
+       "High Priority",
+       "Needs Photos",
+       "Has Behavior Problem",
+       "Needs Foster",
+       "Foster",
+       "Adoption Coordinator",
+       "Source Shelter",
+       "Adopters",
+       "Available on",
+       "Intake date",
+       "Adopted on",
+       "Ads",
+       "Up-to-date on shots",
+       "First shots",
+       "Second shots",
+       "Third shots",
+       "Rabies",
+       "4DX",
+       "Bordetella",
+       "Heartworm Preventative",
+       "Flea/Tick Preventative"].each do |private_info|
         expect(page).to have_content private_info
       end
     end
@@ -121,10 +121,8 @@ feature 'View Dogs', js: true do
   end
 
   context 'Logged in as Inactive User' do
-    let!(:inactive_user) { create(:user, :inactive_user) }
-
-    before(:each) do
-      sign_in_with(inactive_user.email, inactive_user.password)
+    before do
+      sign_in_as_inactive_user
     end
 
     scenario 'cannot view the Manager View' do
@@ -138,35 +136,35 @@ feature 'View Dogs', js: true do
       ["Medical Summary",
        "Behavior Summary",
        "Original Name",
-      "Microchip",
-      "Adoption Fee",
-      "OK with dogs?",
-      "OK with cats?",
-      "OK with kids?",
-      "Medical Review Complete",
-      "Has Medical Need",
-      "Needs Spay or Neuter",
-      "High Priority",
-      "Needs Photos",
-      "Has Behavior Problem",
-      "Needs Foster",
-      "Foster",
-      "Adoption Coordinator",
-      "Source Shelter",
-      "Adopters",
-      "Available on",
-      "Intake date",
-      "Adopted on",
-      "Ads",
-      "Up-to-date on shots",
-      "First shots",
-      "Second shots",
-      "Third shots",
-      "Rabies",
-      "4DX",
-      "Bordetella",
-      "Heartworm Preventative",
-      "Flea/Tick Preventative"].each do |private_info|
+       "Microchip",
+       "Adoption Fee",
+       "OK with dogs?",
+       "OK with cats?",
+       "OK with kids?",
+       "Medical Review Complete",
+       "Has Medical Need",
+       "Needs Spay or Neuter",
+       "High Priority",
+       "Needs Photos",
+       "Has Behavior Problem",
+       "Needs Foster",
+       "Foster",
+       "Adoption Coordinator",
+       "Source Shelter",
+       "Adopters",
+       "Available on",
+       "Intake date",
+       "Adopted on",
+       "Ads",
+       "Up-to-date on shots",
+       "First shots",
+       "Second shots",
+       "Third shots",
+       "Rabies",
+       "4DX",
+       "Bordetella",
+       "Heartworm Preventative",
+       "Flea/Tick Preventative"].each do |private_info|
         expect(page).to have_no_content private_info
       end
     end
@@ -182,7 +180,7 @@ feature 'View Dogs', js: true do
   context 'Not Logged In' do
     scenario 'can not use the Manager View' do
       visit dogs_manager_index_path
-      expect(page_heading).to eq "Our Dogs"
+      expect(page_heading).to eq "Staff Sign In"
     end
 
     scenario 'can view the public dog gallery' do
@@ -192,5 +190,4 @@ feature 'View Dogs', js: true do
       expect(page).to have_content(test_dog.name)
     end
   end
-
 end

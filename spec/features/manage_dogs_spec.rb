@@ -180,7 +180,7 @@ feature 'View Dogs', js: true do
   context 'Not Logged In' do
     scenario 'can not use the Manager View' do
       visit dogs_manager_index_path
-      expect(page_heading).to eq "Staff Sign In"
+      expect(page_heading).to eq "Staff Sign in"
     end
 
     scenario 'can view the public dog gallery' do

@@ -277,7 +277,7 @@
     <%= f.text_area :behavior_summary, class: "input-xxlarge form-control form-control-sm", rows: "8", disabled: !can_manage_medical_behavior_summaries? %>
   </div>
 
-  <%= submit_or_return_to(f, dogs_manager_index_path) %>
+  <%= submit_or_return_to(f, @on_cancel_path) %>
 
 <% end %>
 

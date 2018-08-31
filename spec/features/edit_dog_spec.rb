@@ -278,6 +278,14 @@ feature 'edit a dog', js: true do
       end
     end
 
+    describe 'cancel while editing' do
+      it "should return to the dog profile" do
+        click_link('Cancel')
+        dog = Dog.first
+        expect(page_heading).to eq "##{dog.tracking_id} #{dog.name}"
+      end
+    end
+
     context 'user enters invalid attributes --client-side validation' do
       context 'non-integer tracking id' do
         it "should not save, and should notify user" do

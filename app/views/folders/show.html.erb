@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <% unless @folder.attachments.empty? %>
+        <% unless @folder.attachments.select(&:persisted?).empty? %>
           <%= render @folder.attachments.select(&:persisted?) %>
         <% else %>
           <h3>Folder is empty</h3>
@@ -34,11 +34,13 @@
   <div class="actions">
     <h4>Upload a new file</h4>
   <%= form_for @folder, :html=> { :multipart => true, :class => 'form-inline' } do |f| %>
-    <%= f.fields_for :attachment do |at| %>
-      <%= at.file_field :attachment %>
-      <%= at.hidden_field :updated_by_user_id, :value => current_user.id %>
-      <%= at.label :description %>
-      <%= at.text_field :description %>
+    <%= f.fields_for :attachments do |at| %>
+      <% if at.object.new_record? %>
+        <%= at.file_field :attachment, id: 'folder_new_attachment_file' %>
+        <%= at.hidden_field :updated_by_user_id, :value => current_user.id %>
+        <%= at.label :description %>
+        <%= at.text_field :description, id: 'folder_new_attachment_description' %>
+      <% end %>
     <% end %>
     <%= f.submit "Upload", :id => "save_file_button", :class => "btn btn-primary" %>
   </div>

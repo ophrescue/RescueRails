@@ -109,7 +109,7 @@ feature "folder management", js: true do
           expect{ click_button('Submit'); page.find('h1',text: 'new folder name') }.to change{Folder.first.name}.to("new folder name").
             and change{Folder.first.description}.to("new folder description").
             and change{Folder.first.locked}.to false
-          expect(flash_success_message).to eq "Folder Updated"
+          expect(flash_success_message).to eq "Folder updated"
         end
       end
 
@@ -170,9 +170,11 @@ feature "folder management", js: true do
 
       it "should save the file in the folder", exclude_ie: true do
         expect(page_heading).to eq folder.name
-        attach_file('folder_attachment_attachment', Rails.root.join("spec", "fixtures", "doc", "sample.pdf"))
-        fill_in('folder_attachment_description', with: 'dock docker dockest')
+        attach_file('folder_new_attachment_file', Rails.root.join("spec", "fixtures", "doc", "sample.pdf"))
+        fill_in('folder_new_attachment_description', with: 'dock docker dockest')
         expect{ page.find('#save_file_button').click }.to change{ FolderAttachment.count }.by(1)
+        expect(flash_success_message).to eq "Folder updated"
+        expect(page).to have_selector('.attachment', count: 1)
       end
     end
   end

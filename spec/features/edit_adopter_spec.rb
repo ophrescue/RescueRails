@@ -8,7 +8,7 @@ feature 'Edit Adopter Form', js: true do
   let!(:comment_id) { adopter.comments.first.id }
 
   before do
-    sign_in_with(admin.email, admin.password)
+    sign_in_as(admin)
   end
 
   scenario 'Admin edits adopter' do

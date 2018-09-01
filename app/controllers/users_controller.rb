@@ -109,7 +109,6 @@ class UsersController < Clearance::UsersController
 
   def create
     @user = User.new(user_params)
-    @user.password = SecureRandom.hex[0..15]
 
     if @user.save
       flash[:success] = 'Account created for ' + @user.name

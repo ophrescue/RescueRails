@@ -81,8 +81,6 @@
 #  country                      :string(3)        not null
 #  active                       :boolean          default(FALSE), not null
 
-require 'digest'
-
 class User < ApplicationRecord
   include Clearance::User
   include Filterable

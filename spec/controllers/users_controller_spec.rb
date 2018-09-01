@@ -168,7 +168,7 @@ describe UsersController, type: :controller do
       it 'is able to create a user without password param' do
         expect{
           post :create, params: { user: attributes_for(:user, password: nil) }
-        }.to change(User, :count).by(1)
+        }.to_not change(User, :count)
       end
     end
 

@@ -79,7 +79,7 @@ class Dogs::ManagerController < Dogs::DogsBaseController
   def index
     session[:last_dog_manager_search] = request.url
     params[:filter_params] ||= {}
-    @dog_filter = DogFilter.new search_params
+    @dog_filter = DogFilter.new search_params.merge({inhibit_pagination: request.format.xls?})
     @dogs, @count, @filter_params = @dog_filter.filter
     respond_to do |format|
       format.html

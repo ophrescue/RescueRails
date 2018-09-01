@@ -54,13 +54,13 @@ RescueRails::Application.routes.draw do
     get("/#{page}", to: "pages##{page.underscore}")
   end
 
-  get 'sample_image/:type',    to: 'sample_images#show', constraints: {type: /map/}, as: 'sample_image'
+  get 'sample_image/:type',    to: 'sample_images#show', constraints: { type: /map/ }, as: 'sample_image'
 
   get '/signin',               to: 'sessions#new'
   get '/signout',              to: 'sessions#destroy'
 
   get '/sign_in',              to: 'sessions#new', as: 'sign_in'
-  delete '/sign_out',          to: 'clearance/sessions#destroy', as: 'sign_out'
+  get '/sign_out',             to: 'clearance/sessions#destroy', as: 'sign_out'
 
   get '/adopt',                to: 'adopters#new'
 

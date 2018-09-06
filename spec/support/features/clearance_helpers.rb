@@ -8,7 +8,7 @@ module Features
 
     def sign_in
       password = "password"
-      user = FactoryBot.create(:user, password: password)
+      user = FactoryBot.create(:user, password: password, password_confirmation: password)
       sign_in_with user.email, password
     end
 
@@ -32,6 +32,7 @@ module Features
       visit sign_up_path
       fill_in "user_email", with: email
       fill_in "user_password", with: password
+      fill_in "user_password_confirmation", with: password
       click_button I18n.t("helpers.submit.user.create")
     end
 

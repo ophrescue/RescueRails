@@ -95,6 +95,12 @@ class User < ApplicationRecord
   validates :country, length: { is: 3 }
   validate :country_is_supported
 
+  validates :password,
+            presence: true,
+            confirmation: true,
+            length: { within: 8..40 },
+            unless: :skip_password_validation?
+
   validates_with RegionValidator
   validates_with PostalCodeValidator
 

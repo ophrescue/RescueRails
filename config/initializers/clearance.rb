@@ -8,5 +8,5 @@ Clearance.configure do |config|
   config.routes = false
   config.sign_in_guards = []
 
-  config.cookie_expiration = ->(cookies) { 1.year.from_now if cookies['remember_me'] }
+  config.cookie_expiration = ->(cookies) { 1.week.from_now if cookies['remember_me'] }
 end

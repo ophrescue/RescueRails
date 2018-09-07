@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 class DogFilter
-  attr_accessor :params
+  attr_accessor :params, :per_page
   include Sortable
 
   def initialize(params) # params is string with indifferent access
@@ -25,11 +25,12 @@ class DogFilter
     @params.reverse_merge!({sort: "tracking_id"}) # maintains indifferent access
     @params[:direction] = (@params[:sort] == "tracking_id") ? "desc" : "asc"
     @params[:page] = params[:page]
+    @per_page = params[:inhibit_pagination] ? Dog.count : Dogs::DogsBaseController::PER_PAGE
   end
 
   def filter
     @dogs = Dog.search(search_params).merge(Dog.filter(filtering_params)).merge(Dog.has_flags(flag_params))
-               .paginate(page: page_params)
+               .paginate(per_page: per_page, page: page_params)
                .order( "#{sort_column} #{sort_direction}" )
                .includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster)
     [@dogs, @dogs.length, params]

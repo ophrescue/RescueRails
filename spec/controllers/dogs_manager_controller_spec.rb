@@ -55,12 +55,12 @@ describe Dogs::ManagerController, type: :controller do
 
       context 'and user is active' do
         let!(:admin) { create(:user, :admin) }
-        let!(:adoptable_dog) { create(:dog, name: 'adoptable', status: 'adoptable', is_special_needs: false) }
-        let!(:adoption_pending_dog) { create(:dog, name: 'adoption pending', status: 'adoption pending', is_special_needs: false) }
-        let!(:coming_soon_dog) { create(:dog, name: 'coming soon', status: 'coming soon', is_special_needs: false) }
-        let!(:adopted_dog) { create(:dog, name: 'adopted', status: 'adopted', is_special_needs: false) }
-        let!(:on_hold_dog) { create(:dog, name: 'on hold', status: 'on hold', is_special_needs: false) }
-        let!(:not_available_dog) { create(:dog, name: 'not available', status: 'not available', is_special_needs: false) }
+        let!(:adoptable_dog) { create(:dog, name: 'adoptable', status: 'adoptable', is_special_needs: false, age: 'senior') }
+        let!(:adoption_pending_dog) { create(:dog, name: 'adoption pending', status: 'adoption pending', is_special_needs: false, age: 'senior') }
+        let!(:coming_soon_dog) { create(:dog, name: 'coming soon', status: 'coming soon', is_special_needs: false, age: 'senior') }
+        let!(:adopted_dog) { create(:dog, name: 'adopted', status: 'adopted', is_special_needs: false, age: 'senior') }
+        let!(:on_hold_dog) { create(:dog, name: 'on hold', status: 'on hold', is_special_needs: false, age: 'baby') }
+        let!(:not_available_dog) { create(:dog, name: 'not available', status: 'not available', is_special_needs: false, age: 'baby') }
         let!(:baby_small_special_needs_dog) { create(:dog, name: 'filter pup' , status: 'adoptable', age: 'baby', size: 'small', is_special_needs: true) }
 
         let(:params) { {} }
@@ -85,8 +85,16 @@ describe Dogs::ManagerController, type: :controller do
           expect(response.headers["Content-Type"]).to eq "application/xls"
         end
 
+        it 'returns excel list of all dogs matching filter and sort, not limited by paging' do
+          stub_const('Dogs::DogsBaseController::PER_PAGE',2)
+          get :index, format: :xls, params: {filter_params: {is_age: ['baby']}}
+          expect(response).to have_http_status(200)
+          expect(response.headers["Content-Type"]).to eq "application/xls"
+          expect(assigns(:dogs)).to match_array([on_hold_dog, not_available_dog, baby_small_special_needs_dog])
+        end
+
         it 'can filter by age, size and flags' do
-          get :index, params: {filter_params: {is_age: 'baby', is_size: 'small', has_flags: ['special_needs']}}
+          get :index, params: {filter_params: {is_age: ['baby'], is_size: ['small'], has_flags: ['special_needs']}}
           expect(assigns(:dogs)).to match_array([baby_small_special_needs_dog])
         end
       end

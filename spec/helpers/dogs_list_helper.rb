@@ -35,8 +35,8 @@ module DogsListHelper
     FactoryBot.create(:dog, name: "Trouble")
     FactoryBot.create(:dog, name: "Troubador")
     FactoryBot.create(:dog, name: "Trouper")
-    5.times do
-      FactoryBot.create(:terrier)
+    5.times do |i|
+      FactoryBot.create(:terrier, name: "Notfido_#{i}")
     end
     25.times do |i|
       FactoryBot.create(:dog, name: "Fido_#{i}")

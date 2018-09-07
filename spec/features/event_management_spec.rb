@@ -6,13 +6,12 @@ feature 'Manage Events', js: true do
   include ApplicationHelpers
   include ClientValidationFormHelpers
 
-  let!(:admin) { create(:user, :admin) }
-
   describe "add an event" do
     let(:test_event){ build(:event, :in_the_future) }
     let(:date_time) { "#{test_event.event_date.strftime("%A, %B %-e, %Y") } from #{test_event.start_time.strftime("%-l:%M %P") } to #{ test_event.end_time.strftime("%-l:%M %P") }" }
+
     before do
-      sign_in(admin)
+      sign_in_as_admin
       visit '/events'
     end
 
@@ -63,7 +62,7 @@ feature 'Manage Events', js: true do
     let!(:past_event){ create(:event, :in_the_past, title: 'past event') }
 
     before do
-      sign_in(admin)
+      sign_in_as_admin
       visit events_path('upcoming')
     end
 
@@ -138,7 +137,7 @@ feature 'Manage Events', js: true do
     let(:test_event){ build(:event, :in_the_future) }
 
     before do
-      sign_in(admin)
+      sign_in_as_admin
       visit new_event_path
     end
 

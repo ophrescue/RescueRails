@@ -19,8 +19,8 @@ describe FoldersController, type: :controller do
 
   describe 'GET #index' do
     context 'logged in with standard folder access' do
-      before :each do
-        allow(controller).to receive(:current_user) { dl_resources_user }
+      before do
+        sign_in_as(dl_resources_user)
       end
 
       it 'is successful' do
@@ -32,8 +32,8 @@ describe FoldersController, type: :controller do
 
   describe 'GET #show' do
     context 'logged in with standard folder access' do
-      before :each do
-        allow(controller).to receive(:current_user) { dl_resources_user }
+      before do
+        sign_in_as(dl_resources_user)
       end
 
       it 'is able to view files in standard folders' do
@@ -50,9 +50,10 @@ describe FoldersController, type: :controller do
     end
 
     context 'logged in without any folder access' do
-      before :each do
-        allow(controller).to receive(:current_user) { no_access_user }
+      before do
+        sign_in_as(no_access_user)
       end
+
       it 'is NOT able to view files in standard folders' do
         unlocked_folder = create(:folder, :unlocked)
         get :show, params: { id: unlocked_folder }
@@ -67,14 +68,14 @@ describe FoldersController, type: :controller do
     end
 
     context 'logged in with restricted folder access' do
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
-      end
+      include_context 'signed in admin'
+
       it 'is able to view files in standard folders' do
         unlocked_folder = create :folder
         get :show, params: { id: unlocked_folder }
         expect(assigns(:folder)).to eq unlocked_folder
       end
+
       it 'is able to view files in restricted folders' do
         locked_folder = create(:folder, :locked)
         get :show, params: { id: locked_folder }

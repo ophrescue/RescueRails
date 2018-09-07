@@ -6,11 +6,9 @@ feature 'add a new dog', js: true do
   include ApplicationHelpers
   include DogsListHelper
 
-  let!(:active_user) { create(:user, :admin) }
-
   before do
     create(:dog)
-    sign_in(active_user)
+    sign_in_as_admin
     visit dogs_manager_index_path
     expect(page_heading).to eq "Dog Manager"
   end

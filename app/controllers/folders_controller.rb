@@ -25,7 +25,7 @@
 #
 
 class FoldersController < ApplicationController
-  before_action :authenticate
+  before_action :require_login
   before_action :dl_resource_user
   before_action :admin_user, only: %i[new create edit update destroy]
 

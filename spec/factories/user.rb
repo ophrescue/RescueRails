@@ -6,7 +6,8 @@ FactoryBot.define do
     sequence(:email, 4) { |n| "test#{n}@test.com" }
 
     name { Faker::Name.name }
-    password { Faker::Internet.password(10) }
+    password { 'foobar99' }
+    password_confirmation { 'foobar99' }
     address1 { Faker::Address.street_address }
     city { Faker::Address.city }
     region { Faker::Address.state_abbr }
@@ -41,7 +42,6 @@ FactoryBot.define do
     trait :with_known_authentication_parameters do
       email { "test3@test.com" }
       password { "foobar99" }
-      password_confirmation { "foobar99" }
     end
 
     factory :foster do

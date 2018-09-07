@@ -6,6 +6,10 @@ require_relative '../helpers/client_validation_form_helpers'
 feature 'edit a dog', js: true do
   include ClientValidationFormHelpers
 
+  before do
+    sign_in_as(active_user)
+  end
+
   feature 'permitted access to fields' do
     let(:active_record_attributes){ [:created_at, :updated_at, :id].map(&:to_s) }
     let(:not_editable_attributes){ [:youtube_video_url, :petfinder_ad_url].map(&:to_s) }
@@ -13,7 +17,6 @@ feature 'edit a dog', js: true do
     let(:all_form_fields) { all_database_attributes - active_record_attributes - not_editable_attributes }
 
     before do
-      sign_in(active_user)
       visit edit_dogs_manager_path(create(:dog))
     end
 
@@ -90,7 +93,6 @@ feature 'edit a dog', js: true do
     let!(:shelter){ create(:shelter) }
 
     before do
-      sign_in(active_user)
       visit edit_dogs_manager_path(create(:dog,
                                           name: 'Scout',
                                           status: 'adoptable',

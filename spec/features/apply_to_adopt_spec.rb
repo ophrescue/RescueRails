@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 feature 'Apply for Adoption' do
-  let!(:admin) { create(:user, :admin) }
-
   scenario "Renter fills out adoption application", js: true do
     visit root_path
     click_link 'Adopt'
@@ -109,7 +107,7 @@ feature 'Apply for Adoption' do
 
     ## Now Login and Verify Contents display correctly
 
-    sign_in(admin)
+    sign_in_as_admin
 
     visit '/adopters'
     expect(page).to have_content('Adoption Applications')
@@ -270,7 +268,7 @@ feature 'Apply for Adoption' do
 
     ## Now Login and Verify Contents display correctly
 
-    sign_in(admin)
+    sign_in_as_admin
 
     visit '/adopters'
     expect(page).to have_content('Adoption Applications')

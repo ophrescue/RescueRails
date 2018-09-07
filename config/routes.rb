@@ -2,7 +2,7 @@ STATIC_PAGES = ['5k', 'contact', 'funding-partners', 'community-partners', 'non-
                 'shelter-partners', 'training-partners', 'guide', 'aboutus', 'documentary', 'insurance',
                 'get-involved', 'volunteer', 'foster', 'fosterfaq', 'donate', 'sponsor',
                 'special-funds', 'other-ways-to-give', 'terms', 'resources', 'tips-for-finding-lost-pets', 'status_definitions',
-                'education-and-outreach']
+                'education-and-outreach'].freeze
 
 RescueRails::Application.routes.draw do
   get "/adopters/check_email", to: "adopters#check_email"
@@ -28,9 +28,21 @@ RescueRails::Application.routes.draw do
   resources :sessions, only: %i[new create destroy]
 
   get '/events/:scope', to: 'events#index', scope: /(past|upcoming)/, as: "scoped_events"
-  resources :events, :adoption_app, :users, :password_resets, :adoptions, :folders, :shelters
+
+  resources :adoptions,
+            :adoption_app,
+            :events,
+            :folders,
+            :passwords,
+            :password_resets,
+            :shelters
+
   resources :attachments, only: %i[show destroy]
   resources :folder_attachments, only: :index
+
+  resources :users do
+    resource :password, controller: :passwords, only: %i[create edit update]
+  end
 
   resources :banned_adopters do
     collection { post :import }
@@ -42,10 +54,14 @@ RescueRails::Application.routes.draw do
     get("/#{page}", to: "pages##{page.underscore}")
   end
 
-  get 'sample_image/:type',    to: 'sample_images#show', constraints: {type: /map/}, as: 'sample_image'
+  get 'sample_image/:type',    to: 'sample_images#show', constraints: { type: /map/ }, as: 'sample_image'
 
   get '/signin',               to: 'sessions#new'
   get '/signout',              to: 'sessions#destroy'
+
+  get '/sign_in',              to: 'sessions#new', as: 'sign_in'
+  get '/sign_out',             to: 'clearance/sessions#destroy', as: 'sign_out'
+
   get '/adopt',                to: 'adopters#new'
 
   get '/international',                                 to: 'pages#international'

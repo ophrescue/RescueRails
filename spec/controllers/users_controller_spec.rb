@@ -60,17 +60,14 @@
 require 'rails_helper'
 
 describe UsersController, type: :controller do
+  let!(:active_user) { create(:user, city: 'Old York') }
+  let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
 
   describe 'GET index' do
+    let(:jones) { create(:user, name: 'Frank Jones') }
 
     context 'Logged in as an Admin User' do
-      let!(:admin) { create(:user, :admin, name: 'Admin') }
-      let!(:active_user) { create(:user, city: 'Old York') }
-      let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
-      let(:jones) { create(:user, name: 'Frank Jones') }
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
-      end
+      include_context 'signed in admin'
 
       it 'returns all users' do
         smith = create(:user, name: 'Jane Smith')
@@ -130,94 +127,29 @@ describe UsersController, type: :controller do
         get :index, params: { active_volunteer: true }
         expect(assigns(:users)).to match_array([smith, admin, active_user])
       end
-
-      it 'returns the inactive team members' do
-        get :index, params: { inactive_volunteer: true }
-        expect(assigns(:users)).to match_array([inactive_user])
-      end
-
-      it 'returns users with specified house type' do
-        smith = create(:user, name: 'Jane Smithbot', house_type: "rent")
-        get :index, params: { house_type: "rent"}
-        expect(assigns(:users)).to match_array([smith])
-      end
-
-      it 'returns excel list of users' do
-        get :index, format: :xls
-        expect(response).to have_http_status(200)
-        expect(response.headers["Content-Type"]).to eq "application/xls"
-      end
-    end
-
-    context 'Logged in as an unprivileged Admin User' do
-      let!(:admin_without_extra_privileges) { create(:user, :admin_without_extra_privileges, name: 'Unprivileged Admin') }
-      before :each do
-        allow(controller).to receive(:current_user) { admin_without_extra_privileges }
-      end
-
-      User::FILTER_FLAGS.reject{|k,v| [:admin, :active_volunteer].include?(k)}.each do |k, attr|
-        it "returns the #{k} team members" do
-          expected = create(:user, "#{attr}": true)
-          get :index, params: { "#{k}": true }
-          expect(assigns(:users)).to match_array([expected])
-        end
-      end
-
-      User::FILTER_FLAGS.select{|k,v| [:admin, :active_volunteer].include?(k)}.each do |k, attr|
-        it "returns the #{k} team members" do
-          expected = create(:user, "#{attr}": true)
-          get :index, params: { "#{k}": true }
-          expect(assigns(:users)).to match_array([expected, admin_without_extra_privileges])
-        end
-      end
-    end
-
-    context 'logged in as an active user' do
-      let(:active_user) { create(:user, city: 'Old York') }
-      let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
-      let!(:jones) { create(:user, name: 'Frank Jones') }
-      let!(:admin) { create(:user, :admin, name: 'Admin') }
-
-      before :each do
-        allow(controller).to receive(:current_user) { active_user }
-      end
-
-      it 'can view users index' do
-        get :index
-        expect(assigns(:users)).to match_array([jones, admin, active_user, inactive_user])
-      end
-
-      it 'cannot view excel xls export' do
-        get :index, format: :xls
-        expect(response).to have_http_status(403)
-      end
     end
 
     context 'logged in as an inactive user' do
-      let(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
-
       before :each do
-        allow(controller).to receive(:current_user) { inactive_user }
+        sign_in_as(inactive_user)
       end
 
       it 'cannot view users index' do
-        get :index
+        get(:index)
         expect(inactive_user).to redirect_to('/')
       end
     end
-
   end
 
   describe 'GET show' do
-    let!(:admin) { create(:user, :admin, name: 'Admin') }
-    let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
-
     context 'logged in as an inactive user' do
       before :each do
-        allow(controller).to receive(:current_user) { inactive_user }
+        sign_in_as(inactive_user)
       end
 
       it 'cannot view another users profile' do
+        admin = create(:user, :admin)
+
         get :show, params: { id: admin.id }
         expect(inactive_user).to redirect_to('/')
       end
@@ -230,26 +162,18 @@ describe UsersController, type: :controller do
   end
 
   describe 'POST create' do
-    let!(:admin) { create(:user, :admin, name: 'Admin') }
-    let!(:active_user) { create(:user, city: 'Old York') }
-    let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
-
     context 'logged in as an admin' do
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
-      end
+      include_context 'signed in admin'
 
-      it 'is able to create a user' do
+      it 'is able to create a user without password param' do
         expect{
-          post :create, params: { user: attributes_for(:user) }
-        }.to change(User, :count).by(1)
+          post :create, params: { user: attributes_for(:user, password: nil) }
+        }.to_not change(User, :count)
       end
     end
 
     context 'logged in as active user' do
-      before :each do
-        allow(controller).to receive(:current_user) { active_user }
-      end
+      include_context 'signed in user'
 
       it 'is not able to create a user' do
         expect{
@@ -275,14 +199,9 @@ describe UsersController, type: :controller do
     let!(:test_user) { create(:user, name: 'Original Name', admin: false) }
     let(:change_permissions_request) { -> { patch :update, params: { id: test_user.id, user: attributes_for(:user, admin: true) } } }
     let(:change_name_request) { -> { patch :update, params: { id: test_user.id, user: attributes_for(:user, name: 'New Name') } } }
-    let!(:admin) { create(:user, :admin, name: 'Admin') }
-    let!(:active_user) { create(:user, city: 'Old York') }
-    let!(:inactive_user) { create(:user, :inactive_user, city: 'Some Old City') }
 
     context 'logged in as admin' do
-      before :each do
-        allow(controller).to receive(:current_user) { admin }
-      end
+      include_context 'signed in admin'
 
       it 'updates the users permissions' do
         expect { change_permissions_request.call }.to change { test_user.reload.admin }.from(false).to(true)
@@ -290,8 +209,8 @@ describe UsersController, type: :controller do
     end
 
     context 'logged in as active user' do
-      before :each do
-        allow(controller).to receive(:current_user) { active_user }
+      before do
+        sign_in_as(active_user)
       end
 
       it 'is not able to modify user permissions' do
@@ -310,7 +229,7 @@ describe UsersController, type: :controller do
 
     context 'logged in as inactive user' do
       before :each do
-        allow(controller).to receive(:current_user) { inactive_user }
+        sign_in_as(inactive_user)
       end
 
       it 'is not able to modify user permissions' do
@@ -328,4 +247,3 @@ describe UsersController, type: :controller do
     end
   end
 end
-

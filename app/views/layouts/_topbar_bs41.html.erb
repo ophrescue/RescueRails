@@ -76,11 +76,11 @@
               <%= link_to "Shelters", shelters_path, class: "nav-link" %>
             <% end %>
             <%= link_to "My Profile", current_user, class: "nav-link" %>
-            <%= link_to "Sign out", signout_path, class: "nav-link" %>
+            <%= link_to t('layouts.application.sign_out'), sign_out_path, class: "nav-link" %>
           </div>
         </li>
       <% else %>
-        <li><%= link_to "Sign in", signin_path, class: "nav-link" %></li>
+        <li><%= link_to "Sign in", sign_in_path, class: "nav-link" %></li>
       <% end %>
     </ul>
   </div>

@@ -9,7 +9,8 @@ feature 'Dog sort in manager view', js: true do
 
   before do
     create_many_dogs
-    sign_in(active_user)
+    sign_in_as(active_user)
+
     visit '/dogs_manager'
     expect(page_heading).to eq "Dog Manager"
   end

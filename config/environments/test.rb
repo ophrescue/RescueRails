@@ -58,7 +58,8 @@ Rails.application.configure do
   # Paperclip::Attachment.default_options[:url] = "/system/test/:class/:hash.:extension"
   Paperclip::Attachment.default_options[:url] = ":paperclip_test_path"
 
+  config.middleware.use Clearance::BackDoor
+
   # Access to rack session
   config.middleware.use RackSessionAccess::Middleware
-
 end

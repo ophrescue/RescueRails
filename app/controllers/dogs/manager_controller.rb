@@ -68,7 +68,7 @@ class Dogs::ManagerController < Dogs::DogsBaseController
   autocomplete :breed, :name, full: true
 
   before_action :send_unauthenticated_to_public_profile, only: %i[show]
-  before_action :authenticate
+  before_action :require_login
   before_action :active_user
   before_action :admin_user, only: %i[destroy]
   before_action :add_dogs_user, only: %i[new create]
@@ -99,7 +99,7 @@ class Dogs::ManagerController < Dogs::DogsBaseController
   end
 
   def update
-    if @dog.update_attributes(dog_params)
+    if @dog.update(dog_params)
       flash[:success] = 'Dog updated.'
       redirect_to dogs_manager_path(@dog)
     else

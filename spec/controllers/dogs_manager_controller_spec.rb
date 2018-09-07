@@ -107,8 +107,7 @@ describe Dogs::ManagerController, type: :controller do
       subject(:get_index) { get :index, params: {} }
 
       it 'redirected to signin' do
-        expect(subject).to redirect_to(signin_path)
-        expect(assigns(:dogs)).to be_nil
+        expect(subject).to redirect_to(sign_in_path)
       end
     end
   end

@@ -9,13 +9,15 @@ feature 'Attach an agreement to a user', js: true do
   end
 
   scenario 'Admin attaches a foster agreement to a user', exclude_ie: true do
-    sign_in(admin)
+    sign_in_as_admin
 
     visit '/users'
     expect(page).to have_content('Staff Directory')
+
     click_link(user.name)
     expect(page).to have_content(user.name)
     expect(page).to have_content('No Foster Agreement on File')
+
     click_link('Update/Verify Profile')
     expect(page).to have_content('Edit Staff Account')
 
@@ -29,13 +31,15 @@ feature 'Attach an agreement to a user', js: true do
   end
 
   scenario 'Admin attaches a confidentiality agreement to a user', exclude_ie: true do
-    sign_in(admin)
+    sign_in_as_admin
 
     visit '/users'
     expect(page).to have_content('Staff Directory')
+
     click_link(user.name)
     expect(page).to have_content(user.name)
     expect(page).to have_content('No Confidentiality Agreement on File')
+
     click_link('Update/Verify Profile')
     expect(page).to have_content('Edit Staff Account')
 
@@ -49,13 +53,15 @@ feature 'Attach an agreement to a user', js: true do
   end
 
   scenario 'Admin attaches a code of conduct agreement to a user', exclude_ie: true do
-    sign_in(admin)
+    sign_in_as_admin
 
     visit '/users'
     expect(page).to have_content('Staff Directory')
+
     click_link(user.name)
     expect(page).to have_content(user.name)
     expect(page).to have_content('No Code of Conduct Agreement on File')
+
     click_link('Update/Verify Profile')
     expect(page).to have_content('Edit Staff Account')
 

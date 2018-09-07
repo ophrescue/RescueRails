@@ -15,7 +15,7 @@ feature 'add a dog', js: true do
     let(:all_form_fields) { all_database_attributes - active_record_attributes - not_editable_attributes }
 
     before do
-      sign_in(active_user)
+      sign_in_as(active_user)
       visit new_dogs_manager_path
     end
 
@@ -59,7 +59,7 @@ feature 'add a dog', js: true do
     let!(:shelter){ create(:shelter) }
 
     before do
-      sign_in(active_user)
+      sign_in_as(active_user)
       visit new_dogs_manager_path
     end
 

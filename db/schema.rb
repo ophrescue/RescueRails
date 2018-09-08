@@ -389,7 +389,6 @@ ActiveRecord::Schema.define(version: 2018_09_08_004040) do
     t.boolean "active", default: false, null: false, comment: "if false user is a candiate volunteer and should only be able to see and edit their profile"
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128
-    t.datetime "last_login_at"
     t.index ["agreement_id"], name: "index_users_on_agreement_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"

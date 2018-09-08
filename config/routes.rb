@@ -38,7 +38,7 @@ RescueRails::Application.routes.draw do
             :shelters
 
   resources :attachments, only: %i[show destroy]
-  resources :folder_attachments, only: :index
+  resources :folder_attachments, only: %i[index update]
 
   resources :users do
     resource :password, controller: :passwords, only: %i[create edit update]

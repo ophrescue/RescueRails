@@ -34,9 +34,22 @@ class FolderAttachmentsController < ApplicationController
                                    .map{|a| a.becomes(Attachment) }
   end
 
+  def update
+    @attachment = FolderAttachment.find(params[:id])
+    if @attachment.update_attributes(folder_attachment_params)
+      render json: @attachment, status: 200
+    else
+      head 422
+    end
+  end
+
   private
 
   def dl_resource_user
     redirect_to(root_path) unless current_user.dl_resources?
+  end
+
+  def folder_attachment_params
+    params.require(:attachment).permit(:description)
   end
 end

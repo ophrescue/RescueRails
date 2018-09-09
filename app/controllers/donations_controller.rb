@@ -25,7 +25,7 @@ class DonationsController < ApplicationController
   end
 
   def history
-    @donations = Donation.order(created_at: :desc)
+    @donations = Donation.order(created_at: :desc).paginate(page: params[:page], per_page: 30)
     respond_to do |format|
       format.html
       format.xls { render_donations_xls }

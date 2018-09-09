@@ -23,4 +23,11 @@ class DonationMailer < ActionMailer::Base
          subject: 'OPH Donation Receipt',
          content_type: 'text/html')
   end
+
+  def donation_notification(donation_id)
+    @donation = Donation.find(donation_id)
+    mail(to: @donation.notify_email,
+         subject: "#{@donation.name} just donated to Operation Paws for Homes",
+         content_type: 'text/html')
+  end
 end

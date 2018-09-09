@@ -43,6 +43,9 @@ class DonationsController < ApplicationController
     @donation.process_payment
     @donation.save
     DonationMailer.donation_receipt(@donation.id).deliver_later
+    if @donation.notify_someone
+      DonationMailer.donation_notification(@donation.id).deliver_later
+    end
   rescue Stripe::CardError => e
     flash[:error] = e.message
     render :new

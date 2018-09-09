@@ -34,6 +34,10 @@
 #
 
 class Donation < ApplicationRecord
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :amount, presence: true
+
   def process_payment
     customer = Stripe::Customer.create email: email,
                                        card: card_token

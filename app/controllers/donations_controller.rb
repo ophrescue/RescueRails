@@ -43,7 +43,7 @@ class DonationsController < ApplicationController
     @donation.process_payment
     @donation.save
     DonationMailer.donation_receipt(@donation.id).deliver_later
-  rescue Stripe::CardError
+  rescue Stripe::CardError => e
     flash[:error] = e.message
     render :new
   end

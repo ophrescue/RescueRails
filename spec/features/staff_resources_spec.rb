@@ -138,7 +138,7 @@ feature "folder management", js: true do
 
     context 'when the folder is empty' do
       before do
-        sign_in(admin)
+        sign_in_as_admin
       end
 
       it "should show 'no files' message" do
@@ -151,7 +151,7 @@ feature "folder management", js: true do
       let!(:resource){ create(:attachment, :downloadable, updated_by_user_id: admin.id, attachable_id: folder.id, attachable_type: 'Folder') }
 
       before do
-        sign_in(admin)
+        sign_in_as_admin
         visit folder_path(folder)
       end
 
@@ -163,7 +163,7 @@ feature "folder management", js: true do
 
     describe 'upload a file' do
       before do
-        sign_in(admin)
+        sign_in_as_admin
         visit folder_path(folder)
       end
 
@@ -185,7 +185,7 @@ feature "folder management", js: true do
     let!(:resource2){ create(:attachment, attachment_file_name: 'bar_file.pdf', updated_by_user_id: admin.id, attachable_id: folder.id, attachable_type: 'Folder') }
 
     before do
-      sign_in(admin)
+      sign_in_as_admin
     end
 
     it "should show matching search results" do
@@ -207,7 +207,7 @@ feature "folder management", js: true do
       let(:admin){ create(:user, :admin) }
 
       before do
-        sign_in(admin)
+        sign_in_as_admin
         visit folder_path(folder)
       end
 
@@ -243,7 +243,7 @@ feature "folder management", js: true do
       let(:admin){ create(:user, :admin) }
 
       before do
-        sign_in(admin)
+        sign_in_as_admin
         visit folder_path(folder)
       end
 

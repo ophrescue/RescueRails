@@ -3,10 +3,13 @@ require "support/features/clearance_helpers"
 
 RSpec.feature "Visitor signs in" do
   scenario "with valid email and password" do
-    create_user "user@example.com", "password"
+    user = create_user "user@example.com", "password"
+    expect(user.lastlogin).to be_blank
+
     sign_in_with "user@example.com", "password"
 
     expect_user_to_be_signed_in
+    expect(user.reload.lastlogin).to be_present
   end
 
   scenario "with valid mixed-case email and password " do

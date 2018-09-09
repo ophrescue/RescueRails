@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 class DonationsController < ApplicationController
-  before_action :require_login, except: %i[new create]
+  before_action :require_login, except: %i[new create index]
   before_action :admin_user, only: %i[history show]
   before_action :select_bootstrap41
 

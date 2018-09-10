@@ -6,7 +6,7 @@
     <% if @donations.count > 0 %>
         <p>
             Download:
-            <%= link_to "Excel", donations_path(format: "xls") %>
+            <%= link_to "Excel", history_donations_path(format: "xls") %>
         </p>
         <table class="table table-striped table-bordered">
             <thead>

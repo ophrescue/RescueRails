@@ -35,5 +35,9 @@ feature 'Donations' do
     end
     sleep(5)
     expect(page).to have_content('Thank You')
+
+    sign_in_as_admin
+    visit '/donations/history'
+    expect(page).to have_content('Test Donor')
   end
 end

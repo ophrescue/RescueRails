@@ -17,19 +17,23 @@ describe DonationsController, type: :controller do
 
   describe 'GET #history as admin' do
     include_context 'signed in admin'
+    let!(:donation) { create(:donation)}
 
     it 'is successful' do
       get :history
       expect(response).to be_successful
     end
+
+    it 'returns excel list of donations' do
+      get :history, format: :xls
+      expect(response).to have_http_status(200)
+    end
   end
 
   describe 'GET #new' do
-
     it 'is successful' do
       get :new
       expect(response).to be_successful
     end
   end
-
 end

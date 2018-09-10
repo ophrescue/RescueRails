@@ -10,7 +10,7 @@ feature 'Donations' do
     visit '/donations/new'
     expect(page).to have_content('Save a life')
     click_button('donate25')
-    select('One Time', from: 'donationFrequency')
+    # select('One Time', from: 'donationFrequency')
     fill_in('donation_name', with: 'Test Donor')
     fill_in('donation_email', with: 'fake@ophrescue.org')
     click_button('donateButton')

@@ -15,7 +15,6 @@ RSpec.configure do |config|
   # Use documentation formatter when running a single file.
   config.default_formatter = 'doc' if config.files_to_run.one?
 
-
   # Print the 5 slowest examples and example groups at the end of the run
   config.profile_examples = 5
 
@@ -55,4 +54,5 @@ RSpec.configure do |config|
   config.define_derived_metadata(:file_path => Regexp.new('/spec/rake/')) do |metadata|
     metadata[:type] = :model
   end
+
 end

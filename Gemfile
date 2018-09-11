@@ -26,6 +26,7 @@ gem 'record_tag_helper', '~> 1.0'
 gem 'redcarpet'
 gem 'responders'
 gem 'strip_attributes'
+gem 'stripe'
 gem 'to_xls'
 gem 'whenever', '~> 0.9.4', require: false
 gem 'will_paginate'
@@ -81,6 +82,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'rack_session_access'
   gem 'browserstack-local'
+  gem 'stripe-ruby-mock', '~> 2.5.4', :require => 'stripe_mock'
 end
 
 group :development do

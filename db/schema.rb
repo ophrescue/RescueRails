@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_06_150422) do
+ActiveRecord::Schema.define(version: 2018_06_30_162040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -230,6 +230,24 @@ ActiveRecord::Schema.define(version: 2018_06_06_150422) do
     t.index ["shelter_id"], name: "index_dogs_on_shelter_id"
     t.index ["size"], name: "index_dogs_on_size"
     t.index ["tracking_id"], name: "index_dogs_on_tracking_id", unique: true
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.string "stripe_customer_id"
+    t.string "name"
+    t.string "email"
+    t.integer "amount"
+    t.string "frequency"
+    t.string "card_token"
+    t.boolean "notify_someone"
+    t.string "notify_name"
+    t.string "notify_email"
+    t.string "notify_message"
+    t.boolean "is_memory_honor"
+    t.string "memory_honor_type"
+    t.string "memory_honor_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "emails", id: :serial, force: :cascade do |t|

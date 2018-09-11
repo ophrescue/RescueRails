@@ -4,11 +4,11 @@ FactoryBot.define do
     description { Faker::Lorem.sentence }
 
     trait :unlocked do
-      locked { FALSE }
+      locked { false }
     end
 
     trait :locked do
-      locked { TRUE }
+      locked { true }
     end
   end
 end

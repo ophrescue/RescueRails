@@ -12,6 +12,12 @@ RescueRails::Application.routes.draw do
     resources :adoptions
   end
 
+  resources :donations do
+    collection do
+      get 'history', to: 'donations#history'
+    end
+  end
+
   resources :comments, except: %i[new]
 
   resources :dogs, controller: 'dogs/gallery', only: %i[index show]
@@ -38,7 +44,7 @@ RescueRails::Application.routes.draw do
             :shelters
 
   resources :attachments, only: %i[show destroy]
-  resources :folder_attachments, only: :index
+  resources :folder_attachments, only: %i[index update]
 
   resources :users do
     resource :password, controller: :passwords, only: %i[create edit update]

@@ -55,13 +55,13 @@ GEM
       activerecord (>= 4.0, < 5.3)
     autoprefixer-rails (9.1.0)
       execjs
-    aws-sdk (2.11.125)
-      aws-sdk-resources (= 2.11.125)
-    aws-sdk-core (2.11.125)
+    aws-sdk (2.11.126)
+      aws-sdk-resources (= 2.11.126)
+    aws-sdk-core (2.11.126)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.11.125)
-      aws-sdk-core (= 2.11.125)
+    aws-sdk-resources (2.11.126)
+      aws-sdk-core (= 2.11.126)
     aws-sigv4 (1.0.3)
     bcrypt (3.1.12)
       coderay (>= 1.0.0)
@@ -97,7 +97,7 @@ GEM
     capistrano-rbenv (2.0.4)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
-    capybara (3.6.0)
+    capybara (3.7.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -139,6 +139,7 @@ GEM
     crass (1.0.4)
     daemons (1.2.6)
     dalli (2.7.8)
+    dante (0.2.0)
     database_cleaner (1.7.0)
     debug_inspector (0.0.3)
     delayed_job (4.1.5)
@@ -328,7 +329,7 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    rubocop (0.58.2)
+    rubocop (0.59.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
@@ -376,6 +377,12 @@ GEM
     stackprof (0.2.12)
     strip_attributes (1.8.0)
       activemodel (>= 3.0, < 6.0)
+    stripe (3.17.0)
+      faraday (~> 0.10)
+    stripe-ruby-mock (2.5.4)
+      dante (>= 0.2.0)
+      multi_json (~> 1.0)
+      stripe (>= 2.0.3)
     sucker_punch (1.5.1)
       celluloid (= 0.16.0)
     term-ansicolor (1.6.0)
@@ -477,6 +484,8 @@ DEPENDENCIES
   sass-rails
   stackprof
   strip_attributes
+  stripe
+  stripe-ruby-mock (~> 2.5.4)
   sucker_punch (~> 1.5.1)
   to_xls
   uglifier
@@ -485,7 +494,7 @@ DEPENDENCIES
   will_paginate
 
 RUBY VERSION
-   ruby 2.3.1p112
+   ruby 2.5.1p57
 
 BUNDLED WITH
    1.16.4

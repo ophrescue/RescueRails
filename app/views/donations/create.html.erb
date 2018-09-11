@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 offset-md-1 mt-3 pt-3 myBackground">
+
+    <h1>Thank You!</h1>
+
+    <h4>Your donation of <strong><%= number_to_currency(@donation.amount) %></strong> has been received.</h4>
+
+    <p>Thank you for your thoughtful donation to Operation Paws for Homes! You make it possible for us to save dogs every single day. Your donations help us provide vaccinations, food, transportation, heartworm medicines, spaying and neutering, and so much more. We also depend on donations like yours for dogs suffering from severe neglect that require extra attention.</p>
+
+    <h4>Looking for other ways you can help? It takes a village!</h4>
+
+    <p><strong>Your time</strong> - Regardless of where you live or how much free time you have, there are ways you can volunteer. Visit our <a href="/get-involved">Get Involved</a> page to learn more.</p>
+    <p><strong>Your Vehicle</strong> - Operation Paws for Homes has partnered with the Melwood Foundation to accept vehicle donations. For information on how to donate your vehicle to us call 1-877-MEL-WOOD</p>
+    <p><strong>Shopping</strong> - Did you know you can shop online and support OPH at the same time? Learn more at <a href="/other-ways-to-give">Other Ways to Give</a></p>
+    <p>Above all, thank you for choosing to donate to the OPH Rescue!</p>
+
+      <ul class="list-unstyled">
+        <li>Donor Name: <%= @donation.name %></li>
+        <li>Donation Date: <%= @donation.created_at.strftime('%m/%d/%y') %> </li>
+        <li>Donation Amount: <%= number_to_currency(@donation.amount) %></li>
+      </ul>
+
+      <ul class="list-unstyled">
+        <li>Operation Paws for Homes</li>
+        <li>EIN 45-2785962</li>
+        <li>P.O. Box 90813</li>
+        <li>Alexandria, VA 22309</li>
+        <li>Phone: 703-344-7320</li>
+        <li>Fax: 804-302-7975</li>
+      </ul>
+
+    </div>
+  </div>
+</div>

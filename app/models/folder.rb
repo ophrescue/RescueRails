@@ -34,4 +34,8 @@ class Folder < ApplicationRecord
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
   validates :name, presence: true
+
+  def persisted_attachments
+    attachments.select(&:persisted?)
+  end
 end

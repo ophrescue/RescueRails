@@ -1,0 +1,188 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 offset-md-1 mt-5 pt-3 myBackground">
+
+    <h1>Make a gift. Save a life today.</h1>
+
+    <p>Operation Paws for Homes depends on your generous donations to provide the medical, transportation, fostering, and adoption services needed to place 1,200 homeless dogs in forever homes each year.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-7 offset-md-1 pb-3 myBackground">
+    <%= form_for @donation, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+        <div class="form-inline">
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2 donationButton" id="donate25" data-toggle="button" value="25">$25</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2 donationButton" id="donate50" data-toggle="button" value="50">$50</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2 donationButton" id="donate75" data-toggle="button" value="75">$75</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2 donationButton" id="donate100" data-toggle="button" value="100">$100</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2 donationButton" id="donate200" data-toggle="button" value="200">$200</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2 donationButton" id="donate500" data-toggle="button" value="500">$500</button>
+          <button type="button" class="btn btn-primary btn-lg mx-2 my-2 donationButton" id="donate1000" data-toggle="button" value="1000">$1,000</button>
+          <div class="form-group">
+            <label for="otherAmount" class="mr-2">Other</label>
+            <input type="text" id="otherAmount" class="form-control" placeholder="$0.00">
+          </div>
+        </div>
+        <%= f.hidden_field(:frequency, value: 'One Time') %>
+        <!--
+        <div class="form-group form-inline">
+          <label for="donationFrequency">Make my donation:</label>
+          <select id="donationFrequency" class="form-control ml-2">
+            <option select>Monthy</option>
+            <option>One Time</option>
+          </select>
+        </div>
+        !-->
+        <div class="form-group form-check">
+          <%= f.check_box :is_memory_honor, class: 'form-check-input', id: 'honorToggle' %>
+          <%= f.label :is_memory_honor, 'Donate in memory or honor of someone', class: 'form-check-label', for: 'honorToggle' %>
+        </div>
+        <div id="honorFields" class="collapse">
+          <div class="form-group form-check form-check-inline">
+            <%= f.radio_button :memory_honor_type, 'In memory of', class: 'form-check-input' %>
+            <%= f.label :memory_honor_type_in_memory_of, 'In Memory of...', class: 'form-check-label'%>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <%= f.radio_button :memory_honor_type, 'In honor of', class: 'form-check-input' %>
+            <%= f.label :memory_honor_type_in_honor_of, 'In Honor of...', class: 'form-check-label'%>
+          </div>
+          <div class="form-group">
+            <%= f.label :memory_honor_name, 'Honoree\'s Name' %>
+            <%= f.text_field :memory_honor_name , class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group form-check">
+          <%= f.check_box :notify_someone, class: 'form-check-input', id: 'notifyToggle' %>
+          <%= f.label :notify_someone, 'Notify someone about your donation', class: 'form-check-label', for: 'notifyToggle' %>
+        </div>
+        <div id="notifyFields" class="collapse">
+          <div class="form-group">
+            <%= f.label :notify_name, 'Recepien\'s Name' %>
+            <%= f.text_field :notify_name, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :notify_email, 'Recepient\'s Email' %>
+            <%= f.email_field :notify_email, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :notify_message, 'Your message to recepient' %>
+            <%= f.text_area :notify_message, class: 'form-control', rows: '5' %>
+          </div>
+        </div>
+        <h5>Your Contact Information</h5>
+        <div class="form-group">
+          <%= f.label :name, 'Name' %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+        <%= f.hidden_field(:amount) %>
+        <%= hidden_field_tag(:stripeToken) %>
+        <button id="donateButton" class="btn btn-primary btn-lg">Donate</button>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+
+    let honorToggle = document.getElementById('honorToggle');
+    honorToggle.addEventListener('click', function (event) {
+      document.getElementById('honorFields').classList.toggle('collapse')
+    });
+
+    let notifyToggle = document.getElementById('notifyToggle');
+    notifyToggle.addEventListener('click', function (event) {
+      document.getElementById('notifyFields').classList.toggle('collapse')
+    });
+
+    let donationAmount = document.getElementById('donation_amount');
+    let otherAmount = document.getElementById('otherAmount');
+
+    let otherAmountFunction = function () {
+      donationAmount.value = this.value
+      resetDonationButtons();
+      console.log('Donation value set to :' + donationAmount.value);
+    }
+
+    otherAmount.addEventListener('change', otherAmountFunction);
+
+    let donationButtons = document.getElementsByClassName('donationButton');
+
+    let resetDonationButtons = function() {
+      for (let i = 0; i < donationButtons.length; i++ ){
+        donationButtons[i].classList.remove('btn-success');
+        donationButtons[i].removeAttribute('aria-pressed');
+        donationButtons[i].classList.remove('active');
+        donationButtons[i].classList.add('btn-primary');
+      }
+    }
+
+    let donationButtonFunction = function() {
+      resetDonationButtons();
+      otherAmount.value = "$0.00";
+      this.classList.remove('btn-primary');
+      this.classList.add('btn-success');
+      donationAmount.value = this.value;
+      console.log('Donation value set to :' + donationAmount.value);
+    }
+
+    for (let i = 0; i < donationButtons.length; i++ ) {
+      donationButtons[i].addEventListener('click', donationButtonFunction);
+    }
+</script>
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<script>
+  var handler = StripeCheckout.configure({
+    key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+    locale: 'auto',
+    name: 'Operation Paws for Homes',
+    description: 'One-time donation',
+    panelLabel: 'Donate {{amount}}',
+    zipCode: true,
+    image: '/apple-touch-icon.png',
+
+    token: function(token) {
+      $('input#stripeToken').val(token.id);
+      $('form').submit();
+    }
+  });
+
+  $('#donateButton').on('click', function(e) {
+    e.preventDefault();
+
+    $('#error_explanation').html('');
+
+    var email = $('input#donation_email').val();
+
+    var amount = $('#donation_amount').val();
+    amount = amount.replace(/\$/g, '').replace(/\,/g, '')
+
+    amount = parseFloat(amount);
+
+    if (isNaN(amount)) {
+      $('#error_explanation').html('<p>Please enter a valid amount in USD ($).</p>');
+    }
+    else if (amount < 5.00) {
+      $('#error_explanation').html('<p>Donation amount must be at least $5.</p>');
+    }
+    else {
+      amount = amount * 100; // Needs to be an integer!
+      handler.open({
+        amount: Math.round(amount),
+        email: email
+      })
+    }
+  });
+
+  // Close Checkout on page navigation
+  $(window).on('popstate', function() {
+    handler.close();
+  });
+</script>

@@ -11,15 +11,3 @@
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
-
-
-/*
- *= require jquery-ui
- */
-
-@import "bootstrap_2.3.2";
-@import "bootstrap-responsive";
-@import "jquery-token/token-input";
-@import "font-awesome";
-@import "custom";
-@import "staff_resources";

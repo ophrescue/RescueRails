@@ -45,12 +45,12 @@ class DropFoldersDescriptionField < ActiveRecord::Migration[5.2]
     add_column :folders, :description, :text
 
     NAMES_TO_CHANGE.each do |n|
-      folder = Folder.find_by(:name, n["new_name"])
+      folder = Folder.find_by(:name => n["new_name"])
       folder&.update_attribute(:name, n["current_name"])
     end
 
     NAMES_AND_DESCRIPTIONS.each do |n|
-      folder = Folder.find_by(:name, n["name"])
+      folder = Folder.find_by(:name => n["name"])
       folder&.update_attribute(:description, n["description"])
     end
   end

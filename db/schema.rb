@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_03_125048) do
+ActiveRecord::Schema.define(version: 2018_09_12_034937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -289,8 +289,7 @@ ActiveRecord::Schema.define(version: 2018_09_03_125048) do
   end
 
   create_table "folders", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.text "description"
+    t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "locked", default: false

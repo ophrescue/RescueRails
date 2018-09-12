@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :folder do
-    name { Faker::Lorem.word }
-    description { Faker::Lorem.sentence }
+    name { Faker::Lorem.sentence }
 
     trait :unlocked do
       locked { false }

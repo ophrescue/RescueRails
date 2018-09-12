@@ -377,7 +377,7 @@ GEM
     stackprof (0.2.12)
     strip_attributes (1.8.0)
       activemodel (>= 3.0, < 6.0)
-    stripe (3.17.0)
+    stripe (3.26.0)
       faraday (~> 0.10)
     stripe-ruby-mock (2.5.4)
       dante (>= 0.2.0)

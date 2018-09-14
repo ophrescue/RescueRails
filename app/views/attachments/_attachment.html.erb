@@ -24,7 +24,9 @@
       <% end %>
     </td>
     <td>
-      <%= link_to attachment.updated_by_user.name, attachment.updated_by_user %>
+      <% if attachment.updated_by_user %>
+        <%= link_to attachment.updated_by_user.name, attachment.updated_by_user %>
+      <% end %>
     </td>
     <td>
       <%= time_ago_in_words(attachment.created_at) %> ago

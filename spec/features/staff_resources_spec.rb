@@ -53,7 +53,6 @@ feature "folder management", js: true do
         it "should save a locked-access folder" do
           expect(page_heading).to eq "Create a New Folder"
           fill_in("folder_name", with: "Medical Resources")
-          fill_in("folder_description", with: "put medical stuff here")
           choose("Restricted Folder")
           expect{ click_button("Submit") }.to change{ Folder.count }.by 1
           expect(page_heading).to eq "Staff Resources"
@@ -64,7 +63,6 @@ feature "folder management", js: true do
         it "should save an unlocked-access folder" do
           expect(page_heading).to eq "Create a New Folder"
           fill_in("folder_name", with: "Medical Resources")
-          fill_in("folder_description", with: "put medical stuff here")
           choose("Unrestricted Folder")
           expect{ click_button("Submit") }.to change{ Folder.count }.by 1
           expect(page_heading).to eq "Staff Resources"
@@ -103,10 +101,9 @@ feature "folder management", js: true do
         it "should save the new attributes" do
           expect(page_heading).to eq "Edit Folder"
           fill_in(:folder_name, with: "new folder name")
-          fill_in(:folder_description, with: "new folder description")
           choose("Unrestricted Folder")
-          expect{ click_button('Submit'); page.find('h1',text: 'new folder name') }.to change{Folder.first.name}.to("new folder name").
-            and change{Folder.first.description}.to("new folder description").
+          expect{ click_button('Submit'); page.find('h1',text: 'new folder name') }.
+            to change{Folder.first.name}.to("new folder name").
             and change{Folder.first.locked}.to false
           expect(flash_success_message).to eq "Folder updated"
         end

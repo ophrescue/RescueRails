@@ -3,7 +3,11 @@ require 'stripe_mock'
 
 feature 'Donations' do
   let(:stripe_helper) { StripeMock.create_test_helper }
-  before { StripeMock.start }
+  before do
+    raise "Stripe test requires environment variables STRIPE_PUBLISHABLE_KEY and STRIPE_SECRET_KEY to be configured" if ENV['STRIPE_PUBLISHABLE_KEY'].nil? or ENV['STRIPE_SECRET_KEY'].nil?
+    StripeMock.start
+  end
+
   after { StripeMock.stop }
 
   scenario "One time Donation", js: true do

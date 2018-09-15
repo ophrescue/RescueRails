@@ -18,7 +18,7 @@ module PasswordStrategies
       @password = new_password
 
       self.salt = make_salt unless has_password?(new_password)
-      self.encrypted_password = encrypt(new_password)
+      self.woof_bark_password = self.encrypted_password = encrypt(new_password)
     end
 
     def has_password?(submitted_password)

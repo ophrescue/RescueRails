@@ -7,6 +7,7 @@ RSpec.feature "Visitor updates password" do
     update_password user, "newpassword"
 
     expect_user_to_be_signed_in
+    expect(user.reload.encrypted_password).to eq(user.woof_bark_password)
   end
 
   scenario "signs in with new password" do

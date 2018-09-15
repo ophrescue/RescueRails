@@ -248,4 +248,12 @@ describe User do
       expect(User.authenticate_with_salt(user.id, 'not-salt')).to be nil
     end
   end
+
+  describe 'password=' do
+    let(:user) { build(:user, password: 'password') }
+
+    it 'populates both woof_bark_password and encrypted_password with same value' do
+      expect(user.encrypted_password).to eq user.woof_bark_password
+    end
+  end
 end

@@ -16,6 +16,5 @@ User.destroy_all
           country: 'USA'
 }
 
- user = User.create!(@attr)
- user.toggle!(:admin)
-
+user = User.create!(@attr)
+user.toggle!(:admin)

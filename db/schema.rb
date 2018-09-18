@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_30_162040) do
+ActiveRecord::Schema.define(version: 2018_09_12_034937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -289,10 +289,16 @@ ActiveRecord::Schema.define(version: 2018_06_30_162040) do
   end
 
   create_table "folders", id: :serial, force: :cascade do |t|
+<<<<<<< HEAD
     t.string "name"
     t.text "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+=======
+    t.text "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+>>>>>>> 29691d676f01622e1f565ac4a7c7f08bdcb64c80
     t.boolean "locked", default: false
   end
 

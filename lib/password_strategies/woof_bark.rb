@@ -47,7 +47,7 @@ module PasswordStrategies
 
     def bcrypt_authenticated?(password)
       return if encrypted_password.blank?
-      return unless encrypted_password.starts_with?('$2$')
+      return unless encrypted_password.starts_with?('$2')
 
       ::BCrypt::Password.new(encrypted_password) == password
     end

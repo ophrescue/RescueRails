@@ -80,6 +80,11 @@
           <%= f.label :email %>
           <%= f.email_field :email, class: 'form-control' %>
         </div>
+        <div class="form-group">
+          <%= f.label :comment, 'Comment' %>
+          <%= f.text_area :comment, class: 'form-control', rows: '5' %>
+          <small id="commentHelp" class="form-text text-muted">(Optional) Include a short message to OPH about your donation.</small>
+        </div>
         <%= f.hidden_field(:amount) %>
         <%= hidden_field_tag(:stripeToken) %>
         <button id="donateButton" class="btn btn-primary btn-lg">Donate</button>

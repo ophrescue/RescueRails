@@ -64,6 +64,7 @@ class DonationsController < ApplicationController
   def donation_params
     params.require(:donation).permit(:name,
                                      :email,
+                                     :comment,
                                      :amount,
                                      :frequency,
                                      :notify_someone,
@@ -83,14 +84,16 @@ class DonationsController < ApplicationController
         :created_at,
         :name,
         :email,
-        :amount
+        :amount,
+        :comment
       ],
       headers: [
         'ID',
         'Timestamp',
         'Name',
         'Email',
-        'Amount'
+        'Amount',
+        'Comment'
       ]
     )
   end

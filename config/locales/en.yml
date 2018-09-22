@@ -42,6 +42,9 @@ en:
       index: 'Dog Manager'
     gallery:
       index: 'Our Dogs'
+    donations:
+      new: 'Donate'
+      history: 'Donation History'
     events:
       destroy: 'Events'
       edit: 'Edit Event'
@@ -102,7 +105,11 @@ en:
           not_available: 'not available'
           return_pending: 'return pending'
           completed: 'completed'
-
+  donations:
+    new:
+      title: "Donate"
+    history:
+      title: "Donation History"
   events:
     edit:
       title: 'Edit Event'

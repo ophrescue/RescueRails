@@ -9,4 +9,9 @@ class DonationMailerPreview < ActionMailer::Preview
     @donation = Donation.where(notify_someone: true).last
     DonationMailer.donation_notification(@donation.id)
   end
+
+  def donation_accounting_notification
+    @donation = Donation.first
+    DonationMailer.donation_accounting_notification(@donation.id)
+  end
 end

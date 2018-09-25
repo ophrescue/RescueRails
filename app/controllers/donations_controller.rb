@@ -43,6 +43,7 @@ class DonationsController < ApplicationController
     @donation.process_payment
     @donation.save
     DonationMailer.donation_receipt(@donation.id).deliver_later
+    DonationMailer.donation_accounting_notification(@donation.id).deliver_later
     if @donation.notify_someone
       DonationMailer.donation_notification(@donation.id).deliver_later
     end

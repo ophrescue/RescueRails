@@ -43,6 +43,7 @@ class DonationsController < ApplicationController
     @donation.process_payment
     @donation.save
     DonationMailer.donation_receipt(@donation.id).deliver_later
+    DonationMailer.donation_accounting_notification(@donation.id).deliver_later
     if @donation.notify_someone
       DonationMailer.donation_notification(@donation.id).deliver_later
     end
@@ -64,6 +65,7 @@ class DonationsController < ApplicationController
   def donation_params
     params.require(:donation).permit(:name,
                                      :email,
+                                     :comment,
                                      :amount,
                                      :frequency,
                                      :notify_someone,
@@ -83,14 +85,16 @@ class DonationsController < ApplicationController
         :created_at,
         :name,
         :email,
-        :amount
+        :amount,
+        :comment
       ],
       headers: [
         'ID',
         'Timestamp',
         'Name',
         'Email',
-        'Amount'
+        'Amount',
+        'Comment'
       ]
     )
   end

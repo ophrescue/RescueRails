@@ -4,9 +4,10 @@
     <td><%= donation.name %></td>
     <td><%= donation.email %></td>
     <td><%= number_to_currency(donation.amount) %></td>
+    <td><%= simple_format(donation.comment) %>
     <td><%= donation.notify_name %></td>
     <td><%= donation.notify_email %></td>
-    <td><%= donation.notify_message %></td>
+    <td><%= simple_format(donation.notify_message) %></td>
     <td><%= donation.memory_honor_type %></td>
     <td><%= donation.memory_honor_name %></td>
 </tr>

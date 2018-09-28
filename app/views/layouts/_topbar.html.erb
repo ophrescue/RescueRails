@@ -74,6 +74,9 @@
                   <li><%= link_to "Dog Manager", dogs_manager_index_path %></li>
                   <li><%= link_to "Users", users_path %></li>
                 <% end %>
+                <% if current_user.admin? %>
+                  <li><%= link_to "Donations", history_donations_path %></li>
+                <% end %>
                 <% if can_dl_resources? %>
                   <li><%= link_to "Staff Resources", folders_path %></li>
                 <% end %>

@@ -69,6 +69,9 @@
               <%= link_to "Dog Manager", dogs_manager_index_path, class: "nav-link" %>
               <%= link_to "Users", users_path, class: "nav-link" %>
             <% end %>
+            <% if current_user.admin? %>
+              <%= link_to "Donations", history_donations_path, class: "nav-link" %>
+            <% end %>
             <% if can_dl_resources? %>
               <%= link_to "Staff Resources", folders_path, class: "nav-link" %>
             <% end %>

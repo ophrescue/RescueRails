@@ -55,13 +55,13 @@ GEM
       activerecord (>= 4.0, < 5.3)
     autoprefixer-rails (9.1.0)
       execjs
-    aws-sdk (2.11.130)
-      aws-sdk-resources (= 2.11.130)
-    aws-sdk-core (2.11.130)
+    aws-sdk (2.11.137)
+      aws-sdk-resources (= 2.11.137)
+    aws-sdk-core (2.11.137)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.11.130)
-      aws-sdk-core (= 2.11.130)
+    aws-sdk-resources (2.11.137)
+      aws-sdk-core (= 2.11.137)
     aws-sigv4 (1.0.3)
     bcrypt (3.1.12)
       coderay (>= 1.0.0)
@@ -97,7 +97,7 @@ GEM
     capistrano-rbenv (2.0.4)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
-    capybara (3.7.2)
+    capybara (3.8.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -114,7 +114,7 @@ GEM
       timers (~> 4.0.0)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
-    chromedriver-helper (1.2.0)
+    chromedriver-helper (2.1.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     chronic (0.10.2)
@@ -170,7 +170,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.9.1)
       i18n (>= 0.7)
-    faraday (0.15.2)
+    faraday (0.15.3)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
     flamegraph (0.9.5)
@@ -212,7 +212,7 @@ GEM
     mimemagic (0.3.2)
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
-    mini_racer (0.2.0)
+    mini_racer (0.2.3)
       libv8 (>= 6.3)
     minitest (5.11.3)
     money (6.11.3)
@@ -377,7 +377,7 @@ GEM
     stackprof (0.2.12)
     strip_attributes (1.8.0)
       activemodel (>= 3.0, < 6.0)
-    stripe (3.26.0)
+    stripe (3.28.0)
       faraday (~> 0.10)
     stripe-ruby-mock (2.5.4)
       dante (>= 0.2.0)
@@ -457,7 +457,7 @@ DEPENDENCIES
   gibbon
   gravatar_image_tag
   has_scope
-  mini_racer
+  mini_racer (~> 0.2.3)
   newrelic_rpm
   paperclip (~> 5)
   pg (~> 0.21.0)

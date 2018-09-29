@@ -25,16 +25,14 @@
             <input type="text" id="otherAmount" class="form-control" placeholder="$0.00">
           </div>
         </div>
-        <%= f.hidden_field(:frequency, value: 'One Time') %>
-        <!--
-        <div class="form-group form-inline">
-          <label for="donationFrequency">Make my donation:</label>
-          <select id="donationFrequency" class="form-control ml-2">
-            <option select>Monthy</option>
-            <option>One Time</option>
-          </select>
+        <div class="form-group form-check form-check-inline">
+          <%= f.radio_button :frequency, 'Monthly', class: 'form-check-input' %>
+          <%= f.label :frequency_monthly, 'Donate Monthly', class: 'form-check-label'%>
         </div>
-        !-->
+        <div class="form-group form-check form-check-inline">
+          <%= f.radio_button :frequency, 'Once', class: 'form-check-input' %>
+          <%= f.label :frequency_once, 'Donate Once', class: 'form-check-label'%>
+        </div>
         <div class="form-group form-check">
           <%= f.check_box :is_memory_honor, class: 'form-check-input', id: 'honorToggle' %>
           <%= f.label :is_memory_honor, 'Donate in memory or honor of someone', class: 'form-check-label', for: 'honorToggle' %>
@@ -148,8 +146,8 @@
     key: '<%= Rails.configuration.stripe[:publishable_key] %>',
     locale: 'auto',
     name: 'Operation Paws for Homes',
-    description: 'One-time donation',
-    panelLabel: 'Donate {{amount}}',
+    //description: 'One-time donation',
+    //panelLabel: 'Donate {{amount}}',
     zipCode: true,
     image: '/apple-touch-icon.png',
 
@@ -171,6 +169,19 @@
 
     amount = parseFloat(amount);
 
+    var frequency = $("[name='donation[frequency]']").val();
+
+    if (frequency == 'Monthly') {
+      var description = 'Monthly Donation'
+      var panelLabel = 'Donate {{amount}} Monthly'
+    }
+    else if (frequency == 'Once') {
+      var description = 'One Time Donation'
+      var panelLabel = 'Donate {{amount}}'
+    } else {
+      $('#error_explanation').html('<p>Please choose Donate Monthly or Donate Once.</p>')
+    }
+
     if (isNaN(amount)) {
       $('#error_explanation').html('<p>Please enter a valid amount in USD ($).</p>');
     }
@@ -181,7 +192,9 @@
       amount = amount * 100; // Needs to be an integer!
       handler.open({
         amount: Math.round(amount),
-        email: email
+        email: email,
+        description: description,
+        panelLabel: panelLabel
       })
     }
   });

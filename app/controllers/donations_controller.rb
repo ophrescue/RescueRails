@@ -40,7 +40,12 @@ class DonationsController < ApplicationController
     @donation = Donation.new donation_params.merge(card_token: stripe_params["stripeToken"])
 
     raise "Check for errors" unless @donation.valid?
-    @donation.process_payment
+    if @donation.subscription?
+      @donation.create_subscription
+    else
+      @donation.process_payment
+    end
+
     @donation.save
     DonationMailer.donation_receipt(@donation.id).deliver_later
     DonationMailer.donation_accounting_notification(@donation.id).deliver_later

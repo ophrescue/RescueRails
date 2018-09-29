@@ -38,6 +38,15 @@ class Donation < ApplicationRecord
   validates :email, presence: true
   validates :amount, presence: true
 
+  def create_subscription
+    customer = Stripe::Customer.create email: email,
+                                       card: card_token
+
+    Stripe::Subscription.create customer: customer,
+                                items: [{ plan: ENV['STRIPE_MONTHLY_DONATION_PLAN'],
+                                          quantity: amount * 100 }]
+  end
+
   def process_payment
     customer = Stripe::Customer.create email: email,
                                        card: card_token
@@ -46,5 +55,9 @@ class Donation < ApplicationRecord
                           amount: amount * 100,
                           description: 'Donation',
                           currency: 'usd'
+  end
+
+  def subscription?
+    frequency == 'Monthly'
   end
 end

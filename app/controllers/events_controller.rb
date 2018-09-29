@@ -57,7 +57,10 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    source_id = params[:source]
+    clone = source_id && Event.pluck(:id).include?(source_id.to_i)
+    @event = clone ? Event.from_template(source_id.to_i) : Event.new
+    @title = clone ? t(".title.clone") : t(".title.new")
   end
 
   def update
@@ -72,7 +75,11 @@ class EventsController < ApplicationController
   end
 
   def create
+    clone_source_id = params["event"].delete("source")&.to_i
     @event = Event.new(event_params)
+    if valid_id?(clone_source_id) && params["event"]["photo_delete"] == "0"
+      @event.attach_photo_from(clone_source_id, request)
+    end
     if @event.save
       flash[:success] = "New event added"
       redirect_to scoped_events_path("upcoming")
@@ -89,6 +96,9 @@ class EventsController < ApplicationController
   end
 
   private
+  def valid_id?(id)
+    Event.pluck(:id).include?(id)
+  end
 
   def find_event
     @event = Event.find(params[:id])

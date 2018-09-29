@@ -41,7 +41,7 @@
 #
 
 class Event < ApplicationRecord
-  attr_accessor :photo_delete
+  attr_accessor :photo_delete, :source
 
   ATTACHMENT_MAX_SIZE = 5
   VALIDATION_ERROR_MESSAGES = {location_url: :url_format, facebook_url: :url_format, photo: ["attachment_constraints", {max_size: ATTACHMENT_MAX_SIZE}]}
@@ -107,6 +107,28 @@ class Event < ApplicationRecord
 
   def google_map
     GoogleMap.new(self)
+  end
+
+  # pre-populate the new Event with another event's attributes
+  def self.from_template(id)
+    attrs_to_omit = ["id", "event_date", "created_at", "updated_at", "start_time", "end_time"]
+    attrs = find(id).attributes.except(*attrs_to_omit)
+    attrs.merge!({source: id})
+    clone = new(attrs)
+    photo_url = clone.photo.options[:url]
+    # link to the original event's photo image for now, attach it properly when we save
+    clone.photo.options[:url] = photo_url.gsub(/:id/,id.to_s )
+    clone
+  end
+
+  def attach_photo_from(id, request)
+    source_event = Event.find(id)
+    return unless source_event.photo
+    source_photo_url = source_event.photo.url
+    source_photo_url.prepend(request.base_url) if source_photo_url =~ /^\// # make the url absolute, there should be a better way!
+    self.photo = URI.open(source_photo_url)
+    self.photo_file_name, self.photo_content_type, self.photo_file_size, self.photo_updated_at =
+      source_event.attributes.values_at "photo_file_name", "photo_content_type", "photo_file_size", "photo_updated_at"
   end
 
   private

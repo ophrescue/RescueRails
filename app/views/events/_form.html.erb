@@ -94,7 +94,7 @@
     <span class="form-text text-muted col-10 offset-2">Description now supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>!</span>
     <%= f.bootstrap_errors :description, class: 'col-sm-12 offset-2'  %>
   </div>
-
+  <%= f.hidden_field :source %>
   <%= submit_or_return_to(f, events_path('upcoming')) %>
 
 <% end %>

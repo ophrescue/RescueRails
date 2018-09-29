@@ -145,8 +145,8 @@ feature 'Manage Events', js: true do
       expect(cloned_event.photo.exists?).to eq true
       expect(cloned_event.attributes.values_at( "photo_file_name", "photo_content_type", "photo_file_size", "photo_updated_at")).
         not_to eq [nil, nil, nil, nil]
-      expect(cloned_event.attributes.values_at( "photo_file_name", "photo_content_type", "photo_file_size", "photo_updated_at")).
-        to eq past_event.attributes.values_at( "photo_file_name", "photo_content_type", "photo_file_size", "photo_updated_at")
+      expect(cloned_event.attributes.values_at( "photo_file_name", "photo_content_type", "photo_file_size")).
+        to eq past_event.attributes.values_at( "photo_file_name", "photo_content_type", "photo_file_size")
     end
 
     scenario 'clone a past event without copying the photo' do

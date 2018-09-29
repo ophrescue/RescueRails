@@ -130,6 +130,37 @@ feature 'Manage Events', js: true do
       click_link("Apply to Adopt")
       expect(page.current_path).to eq adopt_path
     end
+
+    scenario 'clone a past event' do
+      visit scoped_events_path("past")
+      click_link("create copy")
+      expect(page_heading).to eq 'Create Event by Copy'
+
+      fill_in('event_event_date', with: new_upcoming_event.event_date.strftime("%Y-%m-%d"))
+      fill_in('event_start_time', with: new_upcoming_event.start_time)
+      fill_in('event_end_time', with: new_upcoming_event.end_time)
+      expect{ click_button('Submit') }.to change{ Event.count }.by(1)
+      expect( page.all('.event-title').count).to eq 2
+      cloned_event = Event.last
+      expect(cloned_event.attributes.values_at( :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at)).
+        to eq event.attributes.values_at( :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at)
+    end
+
+    scenario 'clone a past event without copying the photo' do
+      visit scoped_events_path("past")
+      click_link("create copy")
+      expect(page_heading).to eq 'Create Event by Copy'
+
+      fill_in('event_event_date', with: new_upcoming_event.event_date.strftime("%Y-%m-%d"))
+      fill_in('event_start_time', with: new_upcoming_event.start_time)
+      fill_in('event_end_time', with: new_upcoming_event.end_time)
+      check('Delete')
+      expect{ click_button('Submit') }.to change{ Event.count }.by(1)
+      expect( page.all('.event-title').count).to eq 2
+      cloned_event = Event.last
+      expect(cloned_event.attributes.values_at( :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at)).
+        to eq [nil, nil, nil, nil]
+    end
   end
 
   describe "event validation" do

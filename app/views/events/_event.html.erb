@@ -36,6 +36,7 @@
         <%= link_to_if(can_edit_events?, "edit", edit_event_path(event), :class => "btn btn-sm btn-outline-secondary"){} %>
         <%= link_to_if(can_edit_events?, "delete", event, method: :delete, class: "btn btn-sm btn-outline-secondary",
                        data: { confirm: "Are you sure?"}, title: "Delete #{event.title}", id: 'delete_event'){} %>
+        <%= link_to_if(can_edit_events?, "create copy", new_event_path(source: event.id), id: 'clone_event', class: "btn btn-sm btn-outline-secondary"){} %>
       </div>
     </div>
   </div>

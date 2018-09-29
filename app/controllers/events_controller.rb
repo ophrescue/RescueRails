@@ -77,7 +77,7 @@ class EventsController < ApplicationController
   def create
     clone_source_id = params["event"].delete("source")&.to_i
     @event = Event.new(event_params)
-    if valid_id?(clone_source_id) && params["event"]["delete"] == 0
+    if valid_id?(clone_source_id) && params["event"]["photo_delete"] == "0"
       @event.attach_photo_from(clone_source_id, request)
     end
     if @event.save

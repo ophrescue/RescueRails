@@ -142,8 +142,11 @@ feature 'Manage Events', js: true do
       expect{ click_button('Submit') }.to change{ Event.count }.by(1)
       expect( page.all('.event-title').count).to eq 2
       cloned_event = Event.last
-      expect(cloned_event.attributes.values_at( :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at)).
-        to eq event.attributes.values_at( :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at)
+      expect(cloned_event.photo.exists?).to eq true
+      expect(cloned_event.attributes.values_at( "photo_file_name", "photo_content_type", "photo_file_size", "photo_updated_at")).
+        not_to eq [nil, nil, nil, nil]
+      expect(cloned_event.attributes.values_at( "photo_file_name", "photo_content_type", "photo_file_size", "photo_updated_at")).
+        to eq past_event.attributes.values_at( "photo_file_name", "photo_content_type", "photo_file_size", "photo_updated_at")
     end
 
     scenario 'clone a past event without copying the photo' do

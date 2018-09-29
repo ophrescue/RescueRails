@@ -4,9 +4,19 @@
 
     <h1>Thank You!</h1>
 
-    <h4>Your donation of <strong><%= number_to_currency(@donation.amount) %></strong> has been received.</h4>
+    <% if @donation.frequency == 'Monthly' %>
+      <h4>Thank you for your monthy donation of <strong><%= number_to_currency(@donation.amount) %></strong></h4>
 
-    <p>Thank you for your thoughtful donation to Operation Paws for Homes! You make it possible for us to save dogs every single day. Your donations help us provide vaccinations, food, transportation, heartworm medicines, spaying and neutering, and so much more. We also depend on donations like yours for dogs suffering from severe neglect that require extra attention.</p>
+      <p>Thank you for choosing to support Operation Paws for Homes each month.
+      Monthly donations like yours provide a stable source of funding for medical care, food, transport and so much more.
+      To make changes to your monthly donation in the future, please contact us at <a href='mailto:donate@ophrescue.org'>donate@ophrescue.org</a></p>
+    <% else %>
+      <h4>Your donation of <strong><%= number_to_currency(@donation.amount) %></strong> has been received.</h4>
+
+      <p>Thank you for your thoughtful donation to Operation Paws for Homes! You make it possible for us to save dogs every single day.
+      Your donations help us provide vaccinations, food, transportation, heartworm medicines, spaying and neutering, and so much more.
+      We also depend on donations like yours for dogs suffering from severe neglect that require extra attention.</p>
+    <% end %>
 
     <h4>Looking for other ways you can help? It takes a village!</h4>
 

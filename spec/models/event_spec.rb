@@ -83,6 +83,7 @@ describe Event do
     excluded_attributes.each do |attr|
       expect(clone.send(attr)).to be_nil
     end
+    excluded_attributes.push[:photo_updated_at]
     expect(clone.attributes.slice!(*excluded_attributes.map(&:to_s))).to eq event.attributes.slice!(*excluded_attributes.map(&:to_s))
   end
 end

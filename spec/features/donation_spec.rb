@@ -14,8 +14,8 @@ feature 'Donations' do
     visit '/donations/new'
     expect(page).to have_content('Save a life')
     click_button('donate25')
-    # select('One Time', from: 'donationFrequency')
 
+    choose('donation_frequency_once')
     check 'honorToggle'
     choose 'donation_memory_honor_type_in_honor_of'
     fill_in('donation_memory_honor_name', with: 'Miss Honoree')

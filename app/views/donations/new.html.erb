@@ -26,11 +26,11 @@
           </div>
         </div>
         <div class="form-group form-check form-check-inline">
-          <%= f.radio_button :frequency, 'Monthly', class: 'form-check-input' %>
+          <%= f.radio_button :frequency, 'Monthly', class: 'form-check-input', id: 'donation_frequency_monthly' %>
           <%= f.label :frequency_monthly, 'Donate Monthly', class: 'form-check-label'%>
         </div>
         <div class="form-group form-check form-check-inline">
-          <%= f.radio_button :frequency, 'Once', class: 'form-check-input' %>
+          <%= f.radio_button :frequency, 'Once', class: 'form-check-input', id: 'donation_frequency_once' %>
           <%= f.label :frequency_once, 'Donate Once', class: 'form-check-label'%>
         </div>
         <div class="form-group form-check">
@@ -85,6 +85,11 @@
         </div>
         <%= f.hidden_field(:amount) %>
         <%= hidden_field_tag(:stripeToken) %>
+        <div id="error_explanation">
+          <% if flash[:error].present? %>
+              <p><%= flash[:error] %></p>
+          <% end %>
+        </div>
         <button id="donateButton" class="btn btn-primary btn-lg">Donate</button>
     <% end %>
     </div>
@@ -165,21 +170,41 @@
     var email = $('input#donation_email').val();
 
     var amount = $('#donation_amount').val();
-    amount = amount.replace(/\$/g, '').replace(/\,/g, '')
+    amount = amount.replace(/\$/g, '').replace(/\,/g, '');
 
     amount = parseFloat(amount);
 
-    var frequency = $("[name='donation[frequency]']").val();
-
-    if (frequency == 'Monthly') {
-      var description = 'Monthly Donation'
-      var panelLabel = 'Donate {{amount}} Monthly'
+    if ($('input#donation_name').val().length == 0) {
+      $('#error_explanation').html('<p>Please enter your name.</p>')
+      throw "invalid donor name";
     }
-    else if (frequency == 'Once') {
-      var description = 'One Time Donation'
-      var panelLabel = 'Donate {{amount}}'
+
+    if ($('input#donation_email').val().length == 0) {
+      $('#error_explanation').html('<p>Please enter your email address.</p>')
+      throw "invalid donor email";
+    }
+
+    var frequency = '';
+
+    if ($('#donation_frequency_monthly').prop('checked')) {
+      frequency = $('#donation_frequency_monthly').val();
+    } else if ($('#donation_frequency_once').prop("checked")) {
+      frequency = $('#donation_frequency_once').val();
     } else {
       $('#error_explanation').html('<p>Please choose Donate Monthly or Donate Once.</p>')
+      throw "invalid donation type";
+    }
+
+    if (frequency == 'Monthly') {
+      var description = 'Monthly Donation';
+      var panelLabel = 'Donate {{amount}} Monthly';
+    }
+    else if (frequency == 'Once') {
+      var description = 'One Time Donation';
+      var panelLabel = 'Donate {{amount}}';
+    } else {
+      $('#error_explanation').html('<p>Please choose Donate Monthly or Donate Once.</p>');
+      throw "invalid donation type";
     }
 
     if (isNaN(amount)) {

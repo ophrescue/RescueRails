@@ -74,4 +74,16 @@ describe Event do
   it 'is valid when facebook url is blank' do
     expect(build(:event, facebook_url: nil)).to be_valid
   end
+
+  it 'creates event clones' do
+    event = create(:event)
+    clone = Event.from_template(event.id)
+    expect(clone).not_to be_persisted
+    excluded_attributes = [:id, :created_at, :updated_at, :event_date, :start_time, :end_time]
+    excluded_attributes.each do |attr|
+      expect(clone.send(attr)).to be_nil
+    end
+    excluded_attributes.push(:photo_updated_at)
+    expect(clone.attributes.slice!(*excluded_attributes.map(&:to_s))).to eq event.attributes.slice!(*excluded_attributes.map(&:to_s))
+  end
 end

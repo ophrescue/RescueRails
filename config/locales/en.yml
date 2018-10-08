@@ -120,4 +120,6 @@ en:
     show:
       title: 'Events'
     new:
-      title: 'Add an Event'
+      title:
+        new: 'Add an Event'
+        clone: 'Create Event by Copy'

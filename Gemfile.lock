@@ -457,7 +457,7 @@ DEPENDENCIES
   gibbon
   gravatar_image_tag
   has_scope
-  mini_racer
+  mini_racer (>= 0.2.3)
   newrelic_rpm
   paperclip (~> 5)
   pg (~> 0.21.0)

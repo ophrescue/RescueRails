@@ -1,0 +1,30 @@
+<div class="row campaign-title">
+  <div class="col-md-8 offset-md-4">
+    <h3><%= campaign.title %></h3>
+    <h5><%= campaign.goal %></h5>
+  </div>
+</div>
+
+<div class="row event-body">
+  <div class="col-4">
+    <div class='campaign_photo'>
+      <%= link_to_if( campaign.photo?, image_tag(campaign.photo.url(:medium), class:"rounded"),campaign.photo.url){ } %>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class='row'>
+    </div>
+
+    <div class="row">
+      <div class="col-12 description">
+        <%= markdown(campaign.description) %>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col'>
+        <%= link_to_if(can_edit_events?, "edit", edit_campaign_path(campaign), :class => "btn btn-sm btn-outline-secondary"){} %>
+      </div>
+    </div>
+  </div>
+</div>

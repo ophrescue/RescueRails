@@ -42,6 +42,10 @@ en:
       index: 'Dog Manager'
     gallery:
       index: 'Our Dogs'
+    campaigns:
+      index: 'Campaigns'
+      new: 'Create a Campaign'
+      edit: 'Edit Campaign'
     donations:
       new: 'Donate'
       history: 'Donation History'
@@ -81,6 +85,13 @@ en:
       title: 'Create a New Folder'
     edit:
       title: 'Edit Folder'
+  campaigns:
+    new:
+      title: 'Create a Campaign'
+    index:
+      title: 'Campaigns'
+    edit:
+      title: 'Edit Campaigns'
   dogs:
     manager:
       new:

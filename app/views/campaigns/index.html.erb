@@ -1,0 +1,17 @@
+<div class='container' id='campaigns_list'>
+  <div class='col-12' id='events_list'>
+    <div class="row title_row">
+      <div class="col-8 col-md-8">
+        <h1><%= "#{t(".title")}" %></h1>
+      </div>
+      <% if can_edit_events? %>
+        <div class="col-2 col-md-2 mb-2 mb-sm-0">
+          <%= link_to "Create a Campaign", new_campaign_path, class: "btn btn-sm btn-success" %>
+        </div>
+      <% end %>
+    </div>
+    <div class='col-12'>
+      <%= render(@campaigns) || render(partial: 'no_campaigns') %>
+    </div>
+  </div>
+</div>

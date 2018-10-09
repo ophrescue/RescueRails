@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_22_123913) do
+ActiveRecord::Schema.define(version: 2018_10_09_000340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,19 @@ ActiveRecord::Schema.define(version: 2018_09_22_123913) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name"], name: "index_breeds_on_name"
+  end
+
+  create_table "campaigns", force: :cascade do |t|
+    t.string "title"
+    t.integer "goal"
+    t.string "photo_file_name"
+    t.string "photo_content_type"
+    t.integer "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer "created_by_user_id"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|

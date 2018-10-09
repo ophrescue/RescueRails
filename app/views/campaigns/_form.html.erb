@@ -1,0 +1,66 @@
+<%= form_for @campaign, url: @campaign.new_record? ? campaigns_path : campaign_path(@campaign), :html=> { multipart: true, id: "campaign_form", class: "container form-horizontal needs-validation", autocomplete: 'off', novalidate: true } do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+
+  <div class='row'>
+    <div class='col-3 offset-2' id='required_fields_message'>
+      <span id='asterix'>*</span> indicates required fields
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :title, nil, class: 'col-form-label col-form-label-sm col-2 required' %>
+    <%= f.text_field :title, class: "form-control form-control-sm col-4", required: true, 'data-bootstrap41': true, maxlength: 255 %>
+    <%= f.bootstrap_errors :title, class: 'col-sm-12 offset-2'  %>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :goal, "Fundraising Goal", class: 'col-form-label col-form-label-sm col-2 required' %>
+    <%= f.text_field :goal, class: "form-control form-control-sm col-4", required: true, maxlength: 10 %>
+    <%= f.bootstrap_errors :goal, class: 'col-sm-12 offset-2'  %>
+  </div>
+
+  <div class="form-group row">
+    <% if f.object.photo? %>
+      <%= f.label "Image", class: 'col-form-label col-form-label-sm col-2' %>
+      <%= link_to image_tag(f.object.photo.url(:thumb)), f.object.photo.url(:original), class: 'col-2' %>
+      <div class='col-2'>
+        <%= f.check_box :photo_delete, {}, "1", "0" %>
+        <%= f.label "delete", for: 'campaign_photo_delete' %>
+      </div>
+    <% else %>
+      <%= f.label "Image", for: 'campaign_photo', class: 'col-form-label col-form-label-sm col-2'%>
+      <%= f.file_field :photo, data: {max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control' %>
+      <%= f.bootstrap_errors :photo, class: 'col-sm-12 offset-2'  %>
+    <% end %>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :description, nil, class: 'col-form-label col-form-label-sm col-2 required' %>
+    <%= f.text_area :description, class: "form-control form-control-sm col-6", :rows => "20", required:true %>
+    <span class="form-text text-muted col-10 offset-2">Description now supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>!</span>
+    <%= f.bootstrap_errors :description, class: 'col-sm-12 offset-2'  %>
+  </div>
+  <%= submit_or_return_to(f, campaigns_path) %>
+
+<% end %>
+
+<script type='text/javascript'>
+  $(function(){
+    $('#campaign_photo').on('change', function(campaign){
+      var $file_field = $(campaign.target);
+      var max_size = parseInt($file_field.data('maxSize'))*1024*1024;
+      if(typeof this.files[0] != 'undefined'){
+        var file = this.files[0];
+        var file_size = file.size;
+        var file_type = file.type;
+        var too_big = file_size > max_size;
+        var wrong_type = !file_type.match(/(jpe?g|png)/)
+        if(too_big || wrong_type){
+          this.setCustomValidity("some text any text it doesn't matter, the message is specified in the html")
+        }else{
+          this.setCustomValidity('')
+        }
+      }
+    });
+  });
+</script>

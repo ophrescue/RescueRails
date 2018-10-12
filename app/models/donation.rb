@@ -38,6 +38,8 @@ class Donation < ApplicationRecord
   validates :email, presence: true
   validates :amount, presence: true
 
+  belongs_to :campaign, optional: true
+
   def create_subscription
     customer = Stripe::Customer.create email: email,
                                        card: card_token

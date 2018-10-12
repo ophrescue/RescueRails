@@ -22,6 +22,8 @@ class Campaign < ApplicationRecord
                         :goal,
                         :description
 
+  has_many :donations, dependent: :restrict_with_error
+
   has_attached_file :photo,
                     styles: { medium: '800x800>',
                               thumb: '128x128>' },
@@ -41,4 +43,7 @@ class Campaign < ApplicationRecord
     end
   end
 
+  def progress
+    return 50
+  end
 end

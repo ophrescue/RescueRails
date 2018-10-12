@@ -1,0 +1,17 @@
+<div class='container'>
+  <div class='col-12'>
+    <div class="row title_row">
+      <div class="col-md-8">
+        <h1><%= @campaign.title %></h1>
+      </div>
+      <div class="col-md-4">
+        <h5>Goal <%= number_to_currency(@campaign.goal, precision: 0) %></h5>
+        <h5>Raised <%= number_to_currency(@campaign.progress, precision: 0) %></h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+        <p><%= simple_format(@campaign.description) %>
+    </div>
+  </div>
+</div>

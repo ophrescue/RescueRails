@@ -1,6 +1,6 @@
 <div class="row campaign-title">
   <div class="col-md-8 offset-md-4">
-    <h3><%= campaign.title %></h3>
+    <h3><%= link_to campaign.title, campaign %></h3>
     <h5><%= campaign.goal %></h5>
   </div>
 </div>
@@ -23,7 +23,7 @@
 
     <div class='row'>
       <div class='col'>
-        <%= link_to_if(can_edit_events?, "edit", edit_campaign_path(campaign), :class => "btn btn-sm btn-outline-secondary"){} %>
+        <%= link_to_if(is_admin?, "edit", edit_campaign_path(campaign), :class => "btn btn-sm btn-outline-secondary"){} %>
       </div>
     </div>
   </div>

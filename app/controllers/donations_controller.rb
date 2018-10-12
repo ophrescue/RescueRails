@@ -17,7 +17,7 @@ class DonationsController < ApplicationController
   before_action :select_bootstrap41
 
   def new
-    @donation = Donation.new
+    @donation = Donation.new campaign_params
   end
 
   def index
@@ -67,6 +67,10 @@ class DonationsController < ApplicationController
     params.permit :stripeToken, :utf8, :authenticity_token
   end
 
+  def campaign_params
+    params.permit :campaign_id
+  end
+
   def donation_params
     params.require(:donation).permit(:name,
                                      :email,
@@ -78,6 +82,7 @@ class DonationsController < ApplicationController
                                      :notify_email,
                                      :notify_message,
                                      :is_memory_honor,
+                                     :campaign_id,
                                      :memory_honor_type,
                                      :memory_honor_name)
   end

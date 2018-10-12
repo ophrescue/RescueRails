@@ -44,6 +44,6 @@ class Campaign < ApplicationRecord
   end
 
   def progress
-    return 50
+    self.donations.sum(:amount)
   end
 end

@@ -4,6 +4,10 @@
 
     <h1>Make a gift. Save a life today.</h1>
 
+    <% if @donation.campaign.present? %>
+      <h3>You will be donating to <%= @donation.campaign.title %> </h3>
+    <% end %>
+
     <p>Operation Paws for Homes depends on your generous donations to provide the medical, transportation, fostering, and adoption services needed to place 1,200 homeless dogs in forever homes each year.</p>
     </div>
   </div>
@@ -83,6 +87,9 @@
           <%= f.text_area :comment, class: 'form-control', rows: '5' %>
           <small id="commentHelp" class="form-text text-muted">(Optional) Include a short message to OPH about your donation.</small>
         </div>
+        <% if @donation.campaign.present? %>
+          <%= f.hidden_field(:campaign_id) %>
+        <% end %>
         <%= f.hidden_field(:amount) %>
         <%= hidden_field_tag(:stripeToken) %>
         <div id="error_explanation">

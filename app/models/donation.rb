@@ -34,6 +34,7 @@
 #
 
 class Donation < ApplicationRecord
+
   validates :name, presence: true
   validates :email, presence: true
   validates :amount, presence: true

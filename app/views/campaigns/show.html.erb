@@ -7,6 +7,7 @@
       <div class="col-md-4">
         <h5>Goal <%= number_to_currency(@campaign.goal, precision: 0) %></h5>
         <h5>Raised <%= number_to_currency(@campaign.progress, precision: 0) %></h5>
+        <%= link_to "Donate", new_donation_path({campaign_id: @campaign.id}), class: 'btn btn-primary' %>
     </div>
   </div>
   <div class="row">

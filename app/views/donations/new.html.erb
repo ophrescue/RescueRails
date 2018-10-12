@@ -22,7 +22,10 @@
           <button type="button" class="btn btn-primary btn-lg mx-2 my-2 donationButton" id="donate1000" data-toggle="button" value="1000">$1,000</button>
           <div class="form-group">
             <label for="otherAmount" class="mr-2">Other</label>
-            <input type="text" id="otherAmount" class="form-control" placeholder="$0.00">
+            <div class="input-group-prepend">
+              <div class="input-group-text">$</div>
+            </div>
+            <input type="number" id="otherAmount" class="form-control" placeholder="0.00">
           </div>
         </div>
         <div class="form-group form-check form-check-inline">

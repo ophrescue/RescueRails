@@ -6,7 +6,7 @@
   </div>
   <div class="col-md-8">
     <h3><%= link_to campaign.title, campaign %></h3>
-    <h5><%= campaign.goal %></h5>
+    <h5><%= number_to_currency(campaign.progress, precision: 0) %> raised of <%= number_to_currency(campaign.goal, precision: 0) %> goal</h5>
     <%= link_to_if(is_admin?, "edit", edit_campaign_path(campaign), :class => "btn btn-sm btn-outline-secondary"){} %>
   </div>
 </div>

@@ -15,6 +15,8 @@
 class Campaign < ApplicationRecord
   attr_accessor :photo_delete, :source
 
+  before_save :delete_photo!
+
   ATTACHMENT_MAX_SIZE = 5
   VALIDATION_ERROR_MESSAGES = {photo: ["attachment_constraints", {max_size: ATTACHMENT_MAX_SIZE}]}
 
@@ -26,7 +28,8 @@ class Campaign < ApplicationRecord
 
   has_attached_file :photo,
                     styles: { medium: '800x800>',
-                              thumb: '128x128>' },
+                              small: '400x400',
+                              thumb: '200x200>' },
                     path: ':rails_root/public/system/campaign_photo/:id/:style/:filename',
                     url: '/system/campaign_photo/:id/:style/:filename'
 
@@ -44,6 +47,12 @@ class Campaign < ApplicationRecord
   end
 
   def progress
-    self.donations.sum(:amount)
+    donations.sum(:amount)
+  end
+
+  private
+
+  def delete_photo!
+    photo.clear if photo_delete == '1'
   end
 end

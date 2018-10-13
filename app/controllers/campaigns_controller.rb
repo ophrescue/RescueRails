@@ -13,8 +13,10 @@
 #    limitations under the License.
 
 class CampaignsController < ApplicationController
+  before_action :require_login, except: %i[index show]
+  before_action :admin_user, except: %i[index show]
   before_action :select_bootstrap41
-  before_action :find_campaign, only: [:edit, :show, :update]
+  before_action :find_campaign, only: %i[edit show update]
 
   def index
     @campaigns = Campaign.order(created_at: :desc).paginate(page: params[:page], per_page: 30)
@@ -35,7 +37,9 @@ class CampaignsController < ApplicationController
   end
 
   def update
-    if @campaign.update_attributes(campaign_params)
+    @campaign.photo_delete = params[:campaign][:photo_delete]
+
+    if @campaign.update(campaign_params)
       flash[:success] = "Campaign Updated"
       redirect_to campaigns_path
     else
@@ -43,21 +47,30 @@ class CampaignsController < ApplicationController
     end
   end
 
-  private
-    def find_campaign
-      @campaign = Campaign.find_by_id(params[:id])
-    end
+  def edit; end
 
-    def campaign_params
-      params.require(:campaign)
-        .permit(:title,
-                :description,
-                :goal,
-                :photo,
-                :photo_file_name,
-                :photo_content_type,
-                :photo_file_size,
-                :photo_updated_at,
-                :photo_delete)
-      end
+  def show; end
+
+  private
+
+  def find_campaign
+    @campaign = Campaign.find_by(id: params[:id])
+  end
+
+  def campaign_params
+    params.require(:campaign)
+      .permit(:title,
+              :description,
+              :goal,
+              :photo,
+              :photo_file_name,
+              :photo_content_type,
+              :photo_file_size,
+              :photo_updated_at,
+              :photo_delete)
+  end
+
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
+  end
 end

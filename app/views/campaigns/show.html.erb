@@ -1,11 +1,11 @@
 <div class='container'>
-  <div class='col-12'>
     <div class="row title_row">
-      <div class="col-md-8">
+      <div class="col-md-10">
+        <%= image_tag(@campaign.photo.url(:medium), class:"img-fluid") %>
         <h1><%= @campaign.title %></h1>
       </div>
-      <div class="col-md-4">
-        <h5>Goal <%= number_to_currency(@campaign.goal, precision: 0) %></h5>
+      <div class="col-md-2">
+        <h5>Our Goal <%= number_to_currency(@campaign.goal, precision: 0) %></h5>
         <h5>Raised <%= number_to_currency(@campaign.progress, precision: 0) %></h5>
         <%= link_to "Donate", new_donation_path({campaign_id: @campaign.id}), class: 'btn btn-primary' %>
     </div>

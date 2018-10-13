@@ -4,16 +4,17 @@
 
     <h1>Make a gift. Save a life today.</h1>
 
-    <% if @donation.campaign.present? %>
-      <h3>You will be donating to <%= @donation.campaign.title %> </h3>
-    <% end %>
-
     <p>Operation Paws for Homes depends on your generous donations to provide the medical, transportation, fostering, and adoption services needed to place 1,200 homeless dogs in forever homes each year.</p>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-7 offset-md-1 pb-3 myBackground">
+    <% if @donation.campaign.present? %>
+      <div class="alert alert-warning" role="alert">
+        You will be donating to <%= @donation.campaign.title %>
+      </div>
+    <% end %>
     <%= form_for @donation, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
         <div class="form-inline">

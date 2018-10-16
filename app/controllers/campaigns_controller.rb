@@ -60,14 +60,33 @@ class CampaignsController < ApplicationController
   def campaign_params
     params.require(:campaign)
       .permit(:title,
+              :summary,
               :description,
               :goal,
-              :photo,
-              :photo_file_name,
-              :photo_content_type,
-              :photo_file_size,
-              :photo_updated_at,
-              :photo_delete)
+              :primary_photo,
+              :primary_photo_file_name,
+              :primary_photo_content_type,
+              :primary_photo_file_size,
+              :primary_photo_updated_at,
+              :primary_photo_delete,
+              :left_photo,
+              :left_photo_file_name,
+              :left_photo_content_type,
+              :left_photo_file_size,
+              :left_photo_updated_at,
+              :left_photo_delete,
+              :middle_photo,
+              :middle_photo_file_name,
+              :middle_photo_content_type,
+              :middle_photo_file_size,
+              :middle_photo_updated_at,
+              :middle_photo_delete,
+              :right_photo,
+              :right_photo_file_name,
+              :right_photo_content_type,
+              :right_photo_file_size,
+              :right_photo_updated_at,
+              :right_photo_delete)
   end
 
   def admin_user

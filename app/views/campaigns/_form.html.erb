@@ -8,35 +8,87 @@
   </div>
 
   <div class="form-group row">
-    <%= f.label :title, nil, class: 'col-form-label col-form-label-sm col-2 required' %>
-    <%= f.text_field :title, class: "form-control form-control-sm col-4", required: true, 'data-bootstrap41': true, maxlength: 255 %>
-    <%= f.bootstrap_errors :title, class: 'col-sm-12 offset-2'  %>
+    <%= f.label :title, nil, class: 'col-form-label col-form-label col-2 required' %>
+    <%= f.text_field :title, class: "form-control form-control col-4", required: true, 'data-bootstrap41': true, maxlength: 255 %>
+    <%= f.bootstrap_errors :title, class: 'col-12 offset-2'  %>
   </div>
 
   <div class="form-group row">
-    <%= f.label :goal, "Fundraising Goal", class: 'col-form-label col-form-label-sm col-2 required' %>
-    <%= f.text_field :goal, class: "form-control form-control-sm col-4", required: true, maxlength: 10 %>
+    <%= f.label :goal, "Fundraising Goal", class: 'col-form-label col-form-label col-2 required' %>
+    <%= f.number_field :goal, class: "form-control col-4", required: true, maxlength: 10 %>
     <%= f.bootstrap_errors :goal, class: 'col-sm-12 offset-2'  %>
   </div>
 
   <div class="form-group row">
-    <% if f.object.photo? %>
-      <%= f.label "Image", class: 'col-form-label col-form-label-sm col-2' %>
-      <%= link_to image_tag(f.object.photo.url(:thumb)), f.object.photo.url(:original), class: 'col-2' %>
+    <% if f.object.primary_photo? %>
+      <%= f.label "Image", class: 'col-form-label col-2' %>
+      <%= link_to image_tag(f.object.primary_photo.url(:thumb)), f.object.primary_photo.url(:original), class: 'col-2' %>
       <div class='col-2'>
-        <%= f.check_box :photo_delete, {}, "1", "0" %>
-        <%= f.label "delete", for: 'campaign_photo_delete' %>
+        <%= f.check_box :primary_photo_delete, {}, "1", "0" %>
+        <%= f.label "delete", for: 'campaign_primary_photo_delete' %>
       </div>
     <% else %>
-      <%= f.label "Image", for: 'campaign_photo', class: 'col-form-label col-form-label-sm col-2'%>
-      <%= f.file_field :photo, data: {max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control' %>
-      <%= f.bootstrap_errors :photo, class: 'col-sm-12 offset-2'  %>
+      <%= f.label "Primary Photo", for: 'campaign_primary_photo', class: 'col-form-label col-2'%>
+      <%= f.file_field :primary_photo, data: {max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control col-6' %>
+      <%= f.bootstrap_errors :primary_photo, class: 'col-sm-8 offset-2'  %>
     <% end %>
   </div>
 
   <div class="form-group row">
-    <%= f.label :description, nil, class: 'col-form-label col-form-label-sm col-2 required' %>
-    <%= f.text_area :description, class: "form-control form-control-sm col-6", :rows => "20", required:true %>
+    <% if f.object.left_photo? %>
+      <%= f.label "Left Photo", class: 'col-form-label col-2' %>
+      <%= link_to image_tag(f.object.left_photo.url(:thumb)), f.object.left_photo.url(:original), class: 'col-2' %>
+      <div class='col-2'>
+        <%= f.check_box :left_photo_delete, {}, "1", "0" %>
+        <%= f.label "delete", for: 'campaign_left_photo_delete' %>
+      </div>
+    <% else %>
+      <%= f.label "Left Photo", for: 'campaign_left_photo', class: 'col-form-label col-2'%>
+      <%= f.file_field :left_photo, data: {max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control col-6' %>
+      <%= f.bootstrap_errors :left_photo, class: 'col-sm-8 offset-2'  %>
+    <% end %>
+  </div>
+
+  <div class="form-group row">
+    <% if f.object.middle_photo? %>
+      <%= f.label "Middle Photo", class: 'col-form-label col-2' %>
+      <%= link_to image_tag(f.object.middle_photo.url(:thumb)), f.object.middle_photo.url(:original), class: 'col-2' %>
+      <div class='col-2'>
+        <%= f.check_box :middle_photo_delete, {}, "1", "0" %>
+        <%= f.label "delete", for: 'campaign_middle_photo_delete' %>
+      </div>
+    <% else %>
+      <%= f.label "Middle Photo", for: 'campaign_middle_photo', class: 'col-form-label col-2'%>
+      <%= f.file_field :middle_photo, data: {max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control col-6' %>
+      <%= f.bootstrap_errors :middle_photo, class: 'col-sm-10 offset-2'  %>
+    <% end %>
+  </div>
+
+  <div class="form-group row">
+    <% if f.object.right_photo? %>
+      <%= f.label "Right Photo", class: 'col-form-label col-2' %>
+      <%= link_to image_tag(f.object.right_photo.url(:thumb)), f.object.right_photo.url(:original), class: 'col-2' %>
+      <div class='col-2'>
+        <%= f.check_box :right_photo_delete, {}, "1", "0" %>
+        <%= f.label "delete", for: 'campaign_right_photo_delete' %>
+      </div>
+    <% else %>
+      <%= f.label "Right Photo", for: 'campaign_right_photo', class: 'col-form-label col-2'%>
+      <%= f.file_field :right_photo, data: {max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control col-6' %>
+      <%= f.bootstrap_errors :right_photo, class: 'col-sm-10 offset-2'  %>
+    <% end %>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :summary, nil, class: 'col-form-label col-2 required' %>
+    <%= f.text_area :summary, class: "form-control col-6", :rows => "5", required:true %>
+    <span class="form-text text-muted col-10 offset-2">Supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>!</span>
+    <%= f.bootstrap_errors :description, class: 'col-sm-12 offset-2'  %>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :description, nil, class: 'col-form-label col-2 required' %>
+    <%= f.text_area :description, class: "form-control col-6", :rows => "20", required:true %>
     <span class="form-text text-muted col-10 offset-2">Description now supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>!</span>
     <%= f.bootstrap_errors :description, class: 'col-sm-12 offset-2'  %>
   </div>

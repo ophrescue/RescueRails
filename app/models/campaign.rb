@@ -13,11 +13,15 @@
 #    limitations under the License.
 
 class Campaign < ApplicationRecord
-  attr_accessor :photo_delete, :source
+  attr_accessor :primary_photo_delete,
+                :left_photo_delete,
+                :middle_photo_delete,
+                :right_photo_delete
 
   before_save :delete_photo!
 
   ATTACHMENT_MAX_SIZE = 5
+  ATTACHMENT_CONTENT_TYPE = ['image/jpeg', 'image/png', 'image/pjpeg'].freeze
   VALIDATION_ERROR_MESSAGES = {photo: ["attachment_constraints", {max_size: ATTACHMENT_MAX_SIZE}]}
 
   validates_presence_of :title,
@@ -26,15 +30,47 @@ class Campaign < ApplicationRecord
 
   has_many :donations, dependent: :restrict_with_error
 
-  has_attached_file :photo,
+  has_attached_file :primary_photo,
                     styles: { medium: '800x800>',
                               small: '400x400',
                               thumb: '200x200>' },
-                    path: ':rails_root/public/system/campaign_photo/:id/:style/:filename',
-                    url: '/system/campaign_photo/:id/:style/:filename'
+                    path: ':rails_root/public/system/campaign_photos/:id/primary/:style/:filename',
+                    url: '/system/campaign_photos/:id/primary/:style/:filename'
 
-  validates_attachment_size :photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
-  validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
+  validates_attachment_size :primary_photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
+  validates_attachment_content_type :primary_photo, content_type: ATTACHMENT_CONTENT_TYPE
+
+
+  has_attached_file :left_photo,
+                    styles: { medium: '800x800>',
+                              small: '400x400',
+                              thumb: '200x200>' },
+                    path: ':rails_root/public/system/campaign_photos/:id/left/:style/:filename',
+                    url: '/system/campaign_photos/:id/left/:style/:filename'
+
+  validates_attachment_size :left_photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
+  validates_attachment_content_type :left_photo, content_type: ATTACHMENT_CONTENT_TYPE
+
+
+  has_attached_file :middle_photo,
+                    styles: { medium: '800x800>',
+                              small: '400x400',
+                              thumb: '200x200>' },
+                    path: ':rails_root/public/system/campaign_photos/:id/middle/:style/:filename',
+                    url: '/system/campaign_photos/:id/middle/:style/:filename'
+
+  validates_attachment_size :middle_photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
+  validates_attachment_content_type :middle_photo, content_type: ATTACHMENT_CONTENT_TYPE
+
+  has_attached_file :right_photo,
+                    styles: { medium: '800x800>',
+                              small: '400x400',
+                              thumb: '200x200>' },
+                    path: ':rails_root/public/system/campaign_photos/:id/right/:style/:filename',
+                    url: '/system/campaign_photos/:id/right/:style/:filename'
+
+  validates_attachment_size :right_photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
+  validates_attachment_content_type :right_photo, content_type: ATTACHMENT_CONTENT_TYPE
 
   def self.client_validation_error_messages_for(field, params)
     key = VALIDATION_ERROR_MESSAGES[field] || :blank
@@ -53,6 +89,9 @@ class Campaign < ApplicationRecord
   private
 
   def delete_photo!
-    photo.clear if photo_delete == '1'
+    primary_photo.clear if primary_photo_delete == '1'
+    left_photo.clear if left_photo_delete == '1'
+    middle_photo.clear if middle_photo_delete == '1'
+    right_photo.clear if right_photo_delete == '1'
   end
 end

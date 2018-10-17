@@ -50,9 +50,13 @@ class CampaignsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @campaign = Campaign.find(params[:id])
+  end
 
-  def show; end
+  def show
+    @campaign = Campaign.find(params[:id])
+  end
 
   private
 

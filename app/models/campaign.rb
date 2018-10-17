@@ -51,7 +51,6 @@ class Campaign < ApplicationRecord
   validates_attachment_size :left_photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
   validates_attachment_content_type :left_photo, content_type: ATTACHMENT_CONTENT_TYPE
 
-
   has_attached_file :middle_photo,
                     styles: { medium: '800x800>',
                               small: '400x400',

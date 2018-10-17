@@ -33,7 +33,7 @@ class Campaign < ApplicationRecord
   has_attached_file :primary_photo,
                     styles: { medium: '800x800>',
                               small: '400x400',
-                              thumb: '200x200>' },
+                              thumb: '200x200' },
                     path: ':rails_root/public/system/campaign_photos/:id/primary/:style/:filename',
                     url: '/system/campaign_photos/:id/primary/:style/:filename'
 
@@ -44,7 +44,7 @@ class Campaign < ApplicationRecord
   has_attached_file :left_photo,
                     styles: { medium: '800x800>',
                               small: '400x400',
-                              thumb: '200x200>' },
+                              thumb: 'x200' },
                     path: ':rails_root/public/system/campaign_photos/:id/left/:style/:filename',
                     url: '/system/campaign_photos/:id/left/:style/:filename'
 
@@ -55,7 +55,7 @@ class Campaign < ApplicationRecord
   has_attached_file :middle_photo,
                     styles: { medium: '800x800>',
                               small: '400x400',
-                              thumb: '200x200>' },
+                              thumb: 'x200' },
                     path: ':rails_root/public/system/campaign_photos/:id/middle/:style/:filename',
                     url: '/system/campaign_photos/:id/middle/:style/:filename'
 
@@ -65,7 +65,7 @@ class Campaign < ApplicationRecord
   has_attached_file :right_photo,
                     styles: { medium: '800x800>',
                               small: '400x400',
-                              thumb: '200x200>' },
+                              thumb: 'x200' },
                     path: ':rails_root/public/system/campaign_photos/:id/right/:style/:filename',
                     url: '/system/campaign_photos/:id/right/:style/:filename'
 

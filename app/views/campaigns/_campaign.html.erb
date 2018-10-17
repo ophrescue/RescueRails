@@ -1,12 +1,13 @@
 <div class="row">
   <div class="col-md-4">
     <div class='campaign_photo'>
-      <%= link_to_if( campaign.photo?, image_tag(campaign.photo.url(:thumb), class:"rounded"),campaign.photo.url){ } %>
+      <%=  image_tag(campaign.primary_photo.url(:thumb), class:"rounded") %>
     </div>
   </div>
   <div class="col-md-8">
     <h3><%= link_to campaign.title, campaign %></h3>
     <h5><%= number_to_currency(campaign.progress, precision: 0) %> raised of <%= number_to_currency(campaign.goal, precision: 0) %> goal</h5>
+    <p><%= campaign.summary %></p>
     <%= link_to_if(is_admin?, "edit", edit_campaign_path(campaign), :class => "btn btn-sm btn-outline-secondary"){} %>
   </div>
 </div>

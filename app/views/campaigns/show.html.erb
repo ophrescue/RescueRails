@@ -1,17 +1,42 @@
 <div class='container'>
-    <div class="row title_row">
-      <div class="col-md-10">
-        <%= image_tag(@campaign.photo.url(:medium), class:"img-fluid") %>
-        <h1><%= @campaign.title %></h1>
+    <div class="row">
+      <div class="col-12">
+        <%= image_tag(@campaign.primary_photo.url(:medium), class:"img-fluid rounded") %>
       </div>
-      <div class="col-md-2">
+    </div>
+    <div class="row title_row">
+      <div class="col-md-12">
+
+        <h1><%= @campaign.title %></h1>
         <h5>Our Goal <%= number_to_currency(@campaign.goal, precision: 0) %></h5>
         <h5>Raised <%= number_to_currency(@campaign.progress, precision: 0) %></h5>
-        <%= link_to "Donate", new_donation_path({campaign_id: @campaign.id}), class: 'btn btn-primary' %>
+        <%= link_to "Donate", new_donation_path({campaign_id: @campaign.id}), class: 'btn btn-primary btn-lg' %>
+      </div>
     </div>
   </div>
+
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-10">
+        <h5><%= simple_format(@campaign.summary) %></h5>
+
+      <div class="row">
+        <div class="col-sm-4 py-4">
+          <%= image_tag(@campaign.left_photo.url(:thumb), class: "img-fluid rounded" ) %>
+        </div>
+        <div class="col-sm-4 py-4">
+          <%= image_tag(@campaign.middle_photo.url(:thumb), class: "img-fluid rounded" ) %>
+        </div>
+        <div class="col-sm-4 py-4">
+          <%= image_tag(@campaign.right_photo.url(:thumb), class: "img-fluid rounded" ) %>
+        </div>
+      <div>
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-md-10">
         <p><%= simple_format(@campaign.description) %>
     </div>
   </div>

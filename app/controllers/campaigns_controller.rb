@@ -37,7 +37,10 @@ class CampaignsController < ApplicationController
   end
 
   def update
-    @campaign.photo_delete = params[:campaign][:photo_delete]
+    @campaign.primary_photo_delete = params[:campaign][:primary_photo_delete]
+    @campaign.left_photo_delete = params[:campaign][:left_photo_delete]
+    @campaign.middle_photo_delete = params[:campaign][:middle_photo_delete]
+    @campaign.right_photo_delete = params[:campaign][:right_photo_delete]
 
     if @campaign.update(campaign_params)
       flash[:success] = "Campaign Updated"

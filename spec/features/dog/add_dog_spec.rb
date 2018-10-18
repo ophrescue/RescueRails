@@ -1,8 +1,8 @@
 require 'rails_helper'
-require_relative '../helpers/application_helpers'
-require_relative '../helpers/rspec_matchers'
-require_relative '../helpers/client_validation_form_helpers'
-require_relative '../helpers/dogs_list_helper'
+require_relative '../../helpers/application_helpers'
+require_relative '../../helpers/rspec_matchers'
+require_relative '../../helpers/client_validation_form_helpers'
+require_relative '../../helpers/dogs_list_helper'
 
 feature 'add a dog', js: true do
   include ClientValidationFormHelpers
@@ -300,6 +300,52 @@ feature 'add a dog', js: true do
           select('adoption pending', from: 'dog_status')
           click_button('Submit')
           expect( Dog.first.fee ).to eq 88
+        end
+      end
+
+      context 'photo exceeds limit' do
+        before do
+          Photo::PHOTO_MAX_SIZE = 1
+          visit new_dogs_manager_path
+        end
+
+        it 'should not save and should warn user' do
+          click_link('Add a Photo')
+          find("#new_dog_photo").set(Rails.root.join('spec','fixtures','photo','dog_large_pic.jpg').to_s)
+          expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system','test','photos','*')).length}
+          expect(page).to have_selector('.new_photos .invalid-feedback', text: 'must be a jpg or png file smaller than 10Mb')
+        end
+      end
+
+      context 'photo is wrong type' do
+        it 'should not save and should warn user' do
+          click_link('Add a Photo')
+          find("#new_dog_photo").set(Rails.root.join('spec','fixtures','doc','sample.pdf').to_s)
+          expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system','test','photos','*')).length}
+          expect(page).to have_selector('.new_photos .invalid-feedback', text: 'must be a jpg or png file smaller than 10Mb')
+        end
+      end
+
+      context 'attachment exceeds limit' do
+        before do
+          Attachment::ATTACHMENT_MAX_SIZE = 1
+          visit new_dogs_manager_path
+        end
+
+        it 'should not save and should warn user' do
+          click_link('Add a Document')
+          find("#new_dog_attachment").set(Rails.root.join('spec','fixtures','doc','sample_large.pdf').to_s)
+          expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system','test','attachments','*')).length}
+          expect(page).to have_selector('.new_attachments .invalid-feedback', text: 'Images, MS Docs, PDF or Plain Text smaller than 100Mb')
+        end
+      end
+
+      context 'attachment is wrong type' do
+        it 'should not save and should warn user' do
+          click_link('Add a Document')
+          find("#new_dog_attachment").set(Rails.root.join('spec','fixtures','doc','sample.rb').to_s)
+          expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system','test','attachments','*')).length}
+          expect(page).to have_selector('.new_attachments .invalid-feedback', text: 'Images, MS Docs, PDF or Plain Text smaller than 100Mb')
         end
       end
     end

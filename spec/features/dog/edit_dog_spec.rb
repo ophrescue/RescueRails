@@ -1,7 +1,7 @@
 require 'rails_helper'
-require_relative '../helpers/application_helpers'
-require_relative '../helpers/rspec_matchers'
-require_relative '../helpers/client_validation_form_helpers'
+require_relative '../../helpers/application_helpers'
+require_relative '../../helpers/rspec_matchers'
+require_relative '../../helpers/client_validation_form_helpers'
 
 feature 'edit a dog', js: true do
   include ClientValidationFormHelpers

@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative '../helpers/application_helpers'
+require_relative '../../helpers/application_helpers'
 
 feature 'when user is not signed in', js: true do
   include ApplicationHelpers

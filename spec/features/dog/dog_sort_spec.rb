@@ -1,7 +1,7 @@
 require 'rails_helper'
-require_relative '../helpers/dogs_list_helper'
-require_relative '../helpers/rspec_matchers'
-require_relative '../helpers/application_helpers'
+require_relative '../../helpers/dogs_list_helper'
+require_relative '../../helpers/rspec_matchers'
+require_relative '../../helpers/application_helpers'
 
 feature 'Dog sort in manager view', js: true do
   include DogsListHelper

@@ -305,7 +305,7 @@ feature 'add a dog', js: true do
 
       context 'photo exceeds limit' do
         before do
-          Photo::PHOTO_MAX_SIZE = 1
+          stub_const("Photo::PHOTO_MAX_SIZE", 1)
           visit new_dogs_manager_path
         end
 
@@ -328,7 +328,7 @@ feature 'add a dog', js: true do
 
       context 'attachment exceeds limit' do
         before do
-          Attachment::ATTACHMENT_MAX_SIZE = 1
+          stub_const("Attachment::ATTACHMENT_MAX_SIZE", 1)
           visit new_dogs_manager_path
         end
 

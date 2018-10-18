@@ -11,6 +11,7 @@
         <h5>Our Goal <%= number_to_currency(@campaign.goal, precision: 0) %></h5>
         <h5>Raised <%= number_to_currency(@campaign.progress, precision: 0) %></h5>
         <%= link_to "Donate", new_donation_path({campaign_id: @campaign.id}), class: 'btn btn-primary btn-lg', id: 'donate-now' %>
+        <%= link_to_if(is_admin?, "Edit", edit_campaign_path(@campaign), :class => "btn btn-lg btn-outline-secondary"){} %>
       </div>
     </div>
   </div>

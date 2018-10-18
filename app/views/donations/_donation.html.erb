@@ -1,6 +1,7 @@
 <tr>
     <td><%= donation.id %></td>
     <td><%= donation.created_at.strftime('%m/%d/%Y') %></td>
+    <td><%= donation.campaign.try(:title) %>
     <td><%= donation.name %></td>
     <td><%= donation.email %></td>
     <td><%= donation.frequency %></td>

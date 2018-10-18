@@ -37,6 +37,7 @@ RescueRails::Application.routes.draw do
 
   resources :adoptions,
             :adoption_app,
+            :campaigns,
             :events,
             :folders,
             :passwords,

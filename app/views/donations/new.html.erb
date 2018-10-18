@@ -10,6 +10,11 @@
 
   <div class="row">
     <div class="col-md-7 offset-md-1 pb-3 myBackground">
+    <% if @donation.campaign.present? %>
+      <div class="alert alert-warning" role="alert">
+        You will be donating to <%= @donation.campaign.title %>
+      </div>
+    <% end %>
     <%= form_for @donation, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
         <div class="form-inline">
@@ -86,6 +91,9 @@
           <%= f.text_area :comment, class: 'form-control', rows: '5' %>
           <small id="commentHelp" class="form-text text-muted">(Optional) Include a short message to OPH about your donation.</small>
         </div>
+        <% if @donation.campaign.present? %>
+          <%= f.hidden_field(:campaign_id) %>
+        <% end %>
         <%= f.hidden_field(:amount) %>
         <%= hidden_field_tag(:stripeToken) %>
         <div id="error_explanation">

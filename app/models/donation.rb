@@ -34,9 +34,12 @@
 #
 
 class Donation < ApplicationRecord
+
   validates :name, presence: true
   validates :email, presence: true
   validates :amount, presence: true
+
+  belongs_to :campaign, optional: true
 
   def create_subscription
     customer = Stripe::Customer.create email: email,

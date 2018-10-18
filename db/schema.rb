@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_22_123913) do
+ActiveRecord::Schema.define(version: 2018_10_12_000752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,32 @@ ActiveRecord::Schema.define(version: 2018_09_22_123913) do
     t.index ["name"], name: "index_breeds_on_name"
   end
 
+  create_table "campaigns", force: :cascade do |t|
+    t.string "title"
+    t.integer "goal"
+    t.text "summary"
+    t.integer "created_by_user_id"
+    t.text "description"
+    t.string "primary_photo_file_name"
+    t.string "primary_photo_content_type"
+    t.integer "primary_photo_file_size"
+    t.datetime "primary_photo_updated_at"
+    t.string "left_photo_file_name"
+    t.string "left_photo_content_type"
+    t.integer "left_photo_file_size"
+    t.datetime "left_photo_updated_at"
+    t.string "middle_photo_file_name"
+    t.string "middle_photo_content_type"
+    t.integer "middle_photo_file_size"
+    t.datetime "middle_photo_updated_at"
+    t.string "right_photo_file_name"
+    t.string "right_photo_content_type"
+    t.integer "right_photo_file_size"
+    t.datetime "right_photo_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", id: :serial, force: :cascade do |t|
     t.text "content"
     t.integer "commentable_id"
@@ -249,6 +275,7 @@ ActiveRecord::Schema.define(version: 2018_09_22_123913) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "comment"
+    t.integer "campaign_id"
   end
 
   create_table "emails", id: :serial, force: :cascade do |t|

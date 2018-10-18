@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative '../helpers/application_helpers'
+require_relative '../../helpers/application_helpers'
 
 feature 'View Dogs', js: true do
   include ApplicationHelpers

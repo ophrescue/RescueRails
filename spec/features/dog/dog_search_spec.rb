@@ -1,6 +1,6 @@
 require 'rails_helper'
-require_relative '../helpers/application_helpers'
-require_relative '../helpers/dogs_list_helper'
+require_relative '../../helpers/application_helpers'
+require_relative '../../helpers/dogs_list_helper'
 
 feature 'visit manager view', js: true do
   include ApplicationHelpers

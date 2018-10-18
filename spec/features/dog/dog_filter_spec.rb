@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative '../helpers/dogs_list_helper'
+require_relative '../../helpers/dogs_list_helper'
 
 feature 'Filter Dogs List', js: true do
   include DogsListHelper

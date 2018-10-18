@@ -84,10 +84,11 @@
       </div>
     <% else %>
       <%= f.label "Image", for: 'event_photo', class: 'col-form-label col-form-label-sm col-2'%>
-      <%= f.file_field :photo, data: {max_size: Event::ATTACHMENT_MAX_SIZE}, class: 'form-control' %>
+      <%= f.file_field :photo, data: {mime_types: Event::MIME_TYPES, max_size: Event::ATTACHMENT_MAX_SIZE}, class: 'form-control' %>
       <%= f.bootstrap_errors :photo, class: 'col-sm-12 offset-2'  %>
     <% end %>
   </div>
+
   <div class="form-group row">
     <%= f.label :description, nil, class: 'col-form-label col-form-label-sm col-2 required' %>
     <%= f.text_area :description, class: "form-control form-control-sm col-6", :rows => "20", required:true %>
@@ -100,22 +101,5 @@
 <% end %>
 
 <script type='text/javascript'>
-  $(function(){
-    $('#event_photo').on('change', function(event){
-      var $file_field = $(event.target);
-      var max_size = parseInt($file_field.data('maxSize'))*1024*1024;
-      if(typeof this.files[0] != 'undefined'){
-        var file = this.files[0];
-        var file_size = file.size;
-        var file_type = file.type;
-        var too_big = file_size > max_size;
-        var wrong_type = !file_type.match(/(jpe?g|png)/)
-        if(too_big || wrong_type){
-          this.setCustomValidity("some text any text it doesn't matter, the message is specified in the html")
-        }else{
-          this.setCustomValidity('')
-        }
-      }
-    });
-  });
+  $(function(){ $('#event_photo').on('change', upload_file_validator); });
 </script>

@@ -30,6 +30,8 @@
 #  agreement_type          :string
 #
 class Attachment < ApplicationRecord
+  include ClientValidated
+
   belongs_to :attachable, polymorphic: true
 
   belongs_to :updated_by_user, class_name: 'User'
@@ -40,14 +42,16 @@ class Attachment < ApplicationRecord
                              production: "/attachments/:hash.:extension",
                              staging:    "/attachments/:hash.:extension" }
 
-  CONTENT_TYPES = ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif',
-                   'application/msword', 'application/vnd.ms-word',
+  CONTENT_TYPES = {"Images"=>['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif'],
+                   "Docs"=>['application/msword', 'application/vnd.ms-word',
                    'application/msexcel', 'application/vnd.ms-excel',
                    'application/mspowerpoint', 'application/vnd.ms-powerpoint',
                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                   'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-                   'application/pdf', 'text/plain']
+                   'application/vnd.openxmlformats-officedocument.presentationml.presentation'],
+                   "PDF"=>'application/pdf', "Plain Text"=>'text/plain'}
+
+  MIME_TYPES = CONTENT_TYPES.values.flatten
 
   HASH_SECRET = 'e17ac013aa7f8f2fd095edfa012edb8c'
 
@@ -55,11 +59,15 @@ class Attachment < ApplicationRecord
             hash_secret: HASH_SECRET,
             s3_permissions: :private
 
+  ATTACHMENT_MAX_SIZE = 100
+
   validates_attachment_presence :attachment
-  validates_attachment_size :attachment, less_than: 100.megabytes
+  validates_attachment_size :attachment, less_than: ATTACHMENT_MAX_SIZE.megabytes
   validates_attachment_content_type :attachment,
-   content_type: CONTENT_TYPES,
+   content_type: MIME_TYPES,
    message: 'Images, Docs, PDF, Excel and Plain Text Only.'
+
+  VALIDATION_ERROR_MESSAGES = {attachment: ["attachment_constraints", {max_size: ATTACHMENT_MAX_SIZE}] }
 
   AGREEMENT_TYPE_FOSTER = 'foster'
   AGREEMENT_TYPE_CONFIDENTIALITY = 'confidentiality'

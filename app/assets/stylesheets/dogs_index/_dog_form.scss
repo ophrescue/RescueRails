@@ -36,4 +36,11 @@
     cursor: not-allowed;
   }
 
+
+  // display error message when file is added,
+  // vs. bootstrap displays error message on submit
+  #new_dog_photo:invalid~.invalid-feedback, #new_dog_attachment:invalid~.invalid-feedback {
+    display: block;
+  }
+
 }

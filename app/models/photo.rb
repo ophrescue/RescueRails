@@ -30,6 +30,7 @@
 
 class Photo < ApplicationRecord
   extend ActionView::Helpers::AssetUrlHelper
+  include ClientValidated
   belongs_to :dog, touch: true
 
   HASH_SECRET = "80fd0acd1674d7efdda5b913a7110d5c955e2d73"
@@ -46,12 +47,17 @@ class Photo < ApplicationRecord
             s3_permissions: "public-read",
             hash_secret: HASH_SECRET
 
+  MIME_TYPES = ['image/jpeg', 'image/png', 'image/pjpeg']
+
+  PHOTO_MAX_SIZE = 10
   validates_attachment_presence :photo
-  validates_attachment_size :photo, less_than: 10.megabytes
-  validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/png', 'image/pjpeg']
+  validates_attachment_size :photo, less_than: PHOTO_MAX_SIZE.megabytes
+  validates_attachment_content_type :photo, content_type: MIME_TYPES
+  VALIDATION_ERROR_MESSAGES = {photo: ["image_constraints", {max_size: PHOTO_MAX_SIZE}] }
 
   scope :visible, -> { where(is_private: false) }
   scope :hidden, -> { where(is_private: true) }
+
 
   def self.no_photo_url
     ActionController::Base.helpers.asset_path("no_photo.png")

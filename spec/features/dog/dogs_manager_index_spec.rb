@@ -1,6 +1,6 @@
 require 'rails_helper'
-require_relative '../helpers/application_helpers'
-require_relative '../helpers/dogs_list_helper'
+require_relative '../../helpers/application_helpers'
+require_relative '../../helpers/dogs_list_helper'
 
 feature 'add a new dog', js: true do
   include ApplicationHelpers

@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative '../helpers/dog_show_helper'
+require_relative '../../helpers/dog_show_helper'
 
 feature 'visit dog show page', js: true do
   include DogShowHelper

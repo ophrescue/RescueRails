@@ -39,4 +39,5 @@ en:
       selected: "must be selected"
       url_format: "is improperly formatted"
       attachment_size: "must be smaller than %{max_size}Mb"
-      attachment_constraints: "must be a jpg or png file smaller than %{max_size}Mb"
+      image_constraints: "must be a jpg or png file smaller than %{max_size}Mb"
+      attachment_constraints: 'Images, MS Docs, PDF or Plain Text smaller than %{max_size}Mb'

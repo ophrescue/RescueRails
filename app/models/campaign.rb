@@ -13,6 +13,8 @@
 #    limitations under the License.
 
 class Campaign < ApplicationRecord
+  include ClientValidated
+
   attr_accessor :primary_photo_delete,
                 :left_photo_delete,
                 :middle_photo_delete,
@@ -21,8 +23,12 @@ class Campaign < ApplicationRecord
   before_save :delete_photo!
 
   ATTACHMENT_MAX_SIZE = 5
-  ATTACHMENT_CONTENT_TYPE = ['image/jpeg', 'image/png', 'image/pjpeg'].freeze
-  VALIDATION_ERROR_MESSAGES = {photo: ["attachment_constraints", {max_size: ATTACHMENT_MAX_SIZE}]}
+  CONTENT_TYPES = {"Images" => ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif']}.freeze
+  MIME_TYPES = CONTENT_TYPES.values.flatten
+  VALIDATION_ERROR_MESSAGES = { primary_photo: ["image_constraints", { max_size: ATTACHMENT_MAX_SIZE }],
+                                left_photo: ["image_constraints", { max_size: ATTACHMENT_MAX_SIZE }],
+                                middle_photo: ["image_constraints", { max_size: ATTACHMENT_MAX_SIZE }],
+                                right_photo: ["image_constraints", { max_size: ATTACHMENT_MAX_SIZE }] }.freeze
 
   validates_presence_of :title,
                         :goal,
@@ -38,8 +44,7 @@ class Campaign < ApplicationRecord
                     url: '/system/campaign_photos/:id/primary/:style/:filename'
 
   validates_attachment_size :primary_photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
-  validates_attachment_content_type :primary_photo, content_type: ATTACHMENT_CONTENT_TYPE
-
+  validates_attachment_content_type :primary_photo, content_type: MIME_TYPES
 
   has_attached_file :left_photo,
                     styles: { medium: '800x800>',
@@ -49,7 +54,7 @@ class Campaign < ApplicationRecord
                     url: '/system/campaign_photos/:id/left/:style/:filename'
 
   validates_attachment_size :left_photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
-  validates_attachment_content_type :left_photo, content_type: ATTACHMENT_CONTENT_TYPE
+  validates_attachment_content_type :left_photo, content_type: MIME_TYPES
 
   has_attached_file :middle_photo,
                     styles: { medium: '800x800>',
@@ -59,7 +64,7 @@ class Campaign < ApplicationRecord
                     url: '/system/campaign_photos/:id/middle/:style/:filename'
 
   validates_attachment_size :middle_photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
-  validates_attachment_content_type :middle_photo, content_type: ATTACHMENT_CONTENT_TYPE
+  validates_attachment_content_type :middle_photo, content_type: MIME_TYPES
 
   has_attached_file :right_photo,
                     styles: { medium: '800x800>',
@@ -69,17 +74,7 @@ class Campaign < ApplicationRecord
                     url: '/system/campaign_photos/:id/right/:style/:filename'
 
   validates_attachment_size :right_photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
-  validates_attachment_content_type :right_photo, content_type: ATTACHMENT_CONTENT_TYPE
-
-  def self.client_validation_error_messages_for(field, params)
-    key = VALIDATION_ERROR_MESSAGES[field] || :blank
-    if key.is_a?(Array)
-      key, params = key
-      I18n.t("errors.messages.#{key}", params)
-    else
-      I18n.t("errors.messages.#{key}")
-    end
-  end
+  validates_attachment_content_type :right_photo, content_type: MIME_TYPES
 
   def progress
     donations.sum(:amount)

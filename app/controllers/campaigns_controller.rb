@@ -14,7 +14,7 @@
 
 class CampaignsController < ApplicationController
   before_action :require_login, except: %i[index show]
-  before_action :admin_user, except: %i[index show]
+  before_action :edit_events_user, except: %i[index show]
   before_action :select_bootstrap41
   before_action :find_campaign, only: %i[edit show update]
 
@@ -96,7 +96,7 @@ class CampaignsController < ApplicationController
               :right_photo_delete)
   end
 
-  def admin_user
-    redirect_to(root_path) unless current_user.admin?
+  def edit_events_user
+    redirect_to(root_path) unless current_user.edit_events?
   end
 end

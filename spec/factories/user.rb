@@ -35,6 +35,11 @@ FactoryBot.define do
       active { true }
     end
 
+    trait :event_manager do
+      edit_events { true }
+      active { true }
+    end
+
     trait :admin_without_extra_privileges do
       admin { true }
     end

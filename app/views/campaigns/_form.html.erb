@@ -31,7 +31,7 @@
       </div>
     <% else %>
       <%= f.label "Primary Photo", for: 'campaign_primary_photo', class: 'col-form-label col-sm-2'%>
-      <%= f.file_field :primary_photo, data: {max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control col-sm-6' %>
+      <%= f.file_field :primary_photo, data: {mime_types: Campaign::MIME_TYPES, max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control col-sm-6' %>
       <%= f.bootstrap_errors :primary_photo, class: 'col-sm-8 offset-2'  %>
     <% end %>
   </div>
@@ -46,7 +46,7 @@
       </div>
     <% else %>
       <%= f.label "Left Photo", for: 'campaign_left_photo', class: 'col-form-label col-sm-2'%>
-      <%= f.file_field :left_photo, data: {max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control col-sm-6' %>
+      <%= f.file_field :left_photo, data: {mime_types: Campaign::MIME_TYPES, max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control col-sm-6' %>
       <%= f.bootstrap_errors :left_photo, class: 'col-sm-8 offset-2'  %>
     <% end %>
   </div>
@@ -61,7 +61,7 @@
       </div>
     <% else %>
       <%= f.label "Middle Photo", for: 'campaign_middle_photo', class: 'col-form-label col-sm-2'%>
-      <%= f.file_field :middle_photo, data: {max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control col-sm-6' %>
+      <%= f.file_field :middle_photo, data: {mime_types: Campaign::MIME_TYPES, max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control col-sm-6' %>
       <%= f.bootstrap_errors :middle_photo, class: 'col-sm-10 offset-2'  %>
     <% end %>
   </div>
@@ -76,7 +76,7 @@
       </div>
     <% else %>
       <%= f.label "Right Photo", for: 'campaign_right_photo', class: 'col-form-label col-sm-2'%>
-      <%= f.file_field :right_photo, data: {max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control col-sm-6' %>
+      <%= f.file_field :right_photo, data: {mime_types: Campaign::MIME_TYPES, max_size: Campaign::ATTACHMENT_MAX_SIZE}, class: 'form-control col-sm-6' %>
       <%= f.bootstrap_errors :right_photo, class: 'col-sm-10 offset-2'  %>
     <% end %>
   </div>
@@ -102,22 +102,8 @@
 </div>
 
 <script type='text/javascript'>
-  $(function(){
-    $('#campaign_photo').on('change', function(campaign){
-      var $file_field = $(campaign.target);
-      var max_size = parseInt($file_field.data('maxSize'))*1024*1024;
-      if(typeof this.files[0] != 'undefined'){
-        var file = this.files[0];
-        var file_size = file.size;
-        var file_type = file.type;
-        var too_big = file_size > max_size;
-        var wrong_type = !file_type.match(/(jpe?g|png)/)
-        if(too_big || wrong_type){
-          this.setCustomValidity("some text any text it doesn't matter, the message is specified in the html")
-        }else{
-          this.setCustomValidity('')
-        }
-      }
-    });
-  });
+  $(function(){ $('#campaign_primary_photo').on('change', upload_file_validator); });
+  $(function(){ $('#campaign_left_photo').on('change', upload_file_validator); });
+  $(function(){ $('#campaign_middle_photo').on('change', upload_file_validator); });
+  $(function(){ $('#campaign_right_photo').on('change', upload_file_validator); });
 </script>

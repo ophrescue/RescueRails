@@ -6,6 +6,14 @@ RSpec.shared_context 'signed in admin' do
   end
 end
 
+RSpec.shared_context 'signed in event manager' do
+  let(:event_manager) { create(:user, :event_manager) }
+
+  before do
+    sign_in_as(event_manager)
+  end
+end
+
 RSpec.shared_context 'signed in user' do
   let(:user) { create(:user) }
 

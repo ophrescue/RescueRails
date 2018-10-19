@@ -45,7 +45,7 @@ class Event < ApplicationRecord
   attr_accessor :photo_delete, :source
 
   ATTACHMENT_MAX_SIZE = 5
-  CONTENT_TYPES = {"Images"=>['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif']}
+  CONTENT_TYPES = {"Images" => ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif']}
   MIME_TYPES = CONTENT_TYPES.values.flatten
   VALIDATION_ERROR_MESSAGES = {location_url: :url_format, facebook_url: :url_format, photo: ["image_constraints", {max_size: ATTACHMENT_MAX_SIZE}]}
 

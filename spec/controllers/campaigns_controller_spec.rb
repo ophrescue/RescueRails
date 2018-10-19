@@ -24,7 +24,7 @@ describe CampaignsController, type: :controller do
   end
 
   describe 'GET #new' do
-    include_context 'signed in admin'
+    include_context 'signed in event manager'
 
     it 'is successful' do
       get :new
@@ -33,7 +33,7 @@ describe CampaignsController, type: :controller do
   end
 
   describe 'GET #edit' do
-    include_context 'signed in admin'
+    include_context 'signed in event manager'
 
     let(:campaign) { create(:campaign) }
 
@@ -44,7 +44,7 @@ describe CampaignsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    include_context 'signed in admin'
+    include_context 'signed in event manager'
 
     let(:campaign) { create(:campaign) }
 
@@ -56,7 +56,7 @@ describe CampaignsController, type: :controller do
   end
 
   describe 'POST #create' do
-    include_context 'signed in admin'
+    include_context 'signed in event manager'
 
     it 'is successful' do
       post :create, params: { campaign: attributes_for(:campaign) }

@@ -136,29 +136,59 @@ $(function(){
                               required: true,
                               maxlength: 1000
                         },
+                        "adopter[references_attributes][0][name]" : {
+                              required: true,
+                              maxlength: 250
+                        },
                         "adopter[references_attributes][0][email]" : {
                               required: false,
-                              email: true
+                              email: true,
+                              maxlength: 250
                         },
                         "adopter[references_attributes][0][relationship]" : {
                               required: true,
-                              referenceRelationship: true
+                              referenceRelationship: true,
+                              maxlength: 250
+                        },
+                        "adopter[references_attributes][0][whentocall]" : {
+                              required: true,
+                              maxlength: 250
+                        },
+                        "adopter[references_attributes][1][name]" : {
+                              required: true,
+                              maxlength: 250
                         },
                         "adopter[references_attributes][1][email]" : {
                               required: false,
-                              email: true
+                              email: true,
+                              maxlength: 250
                         },
                         "adopter[references_attributes][1][relationship]" : {
                               required: true,
-                              referenceRelationship: true
+                              referenceRelationship: true,
+                              maxlength: 250
+                        },
+                        "adopter[references_attributes][1][whentocall]" : {
+                              required: true,
+                              maxlength: 250
+                        },
+                        "adopter[references_attributes][2][name]" : {
+                              required: true,
+                              maxlength: 250
                         },
                         "adopter[references_attributes][2][email]" : {
                               required: false,
-                              email: true
+                              email: true,
+                              maxlength: 250
                         },
                         "adopter[references_attributes][2][relationship]" : {
                               required: true,
-                              referenceRelationship: true
+                              referenceRelationship: true,
+                              maxlength: 250
+                        },
+                        "adopter[references_attributes][2][whentocall]" : {
+                              required: true,
+                              maxlength: 250
                         }
           },
           messages : {

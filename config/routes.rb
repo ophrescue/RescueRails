@@ -75,4 +75,5 @@ RescueRails::Application.routes.draw do
   get '/international/kaw',                             to: 'pages#international-kaw'
   get '/international/tcspca',                          to: 'pages#international-tcspca'
   get '/international/volunteer-takes-oph-to-india',    to: 'pages#international-article'
+  get '/international/7000-miles-home',                 to: 'pages#7000-miles-home'
 end

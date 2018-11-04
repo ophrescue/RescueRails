@@ -29,6 +29,11 @@ en:
       status_definitions: 'Adoption Application Status Definitions'
       dog_status_definitions: 'Dog Status Definitions'
       terms: 'Terms and Conditions'
+      international: 'International Programs'
+      7000-miles-home: '7000 Miles Home'
+      international-kaw: 'Kannan Animal Welfare, India'
+      international-tcspca: 'Turks & Caicos SPCA'
+      international-article: 'Adopter & Volunteer Takes OPH to India'
     adopters:
       index: 'Adoption Applications'
       new: 'Adoption Application'
@@ -46,6 +51,7 @@ en:
       index: 'Campaigns'
       new: 'Create a Campaign'
       edit: 'Edit Campaign'
+      show: 'Campaign'
     donations:
       new: 'Donate'
       history: 'Donation History'

@@ -157,7 +157,7 @@ class Dog < ApplicationRecord
   # Rails 5.2 issues deprecation errors for any order that is not column names
   # so arel is the workaround
   scope :sort_with_search_term_matches_first,     ->(search_term) { order(Dog.arel_table[:name].does_not_match("#{search_term}%"), "tracking_id asc") }
-  scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :photos, :foster).where(status: Dog::PUBLIC_STATUSES).order(:tracking_id) }
+  scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :photos, :foster).where(status: Dog::PUBLIC_STATUSES).status_order.order(:tracking_id) }
 
   def self.autocomplete_name(search_term = nil)
     if search_term.present?
@@ -246,6 +246,16 @@ class Dog < ApplicationRecord
 
   def comments_and_audits_and_associated_audits
     (persisted_comments + audits + associated_audits).sort_by(&:created_at).reverse!
+  end
+
+  def self.status_order
+    order("
+      CASE
+        WHEN status = 'adoptable' THEN '1'
+        WHEN status = 'coming soon' THEN '2'
+        WHEN status = 'adoption pending' THEN '3'
+      END
+      ")
   end
 
   def to_petfinder_status

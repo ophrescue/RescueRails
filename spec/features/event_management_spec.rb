@@ -41,7 +41,6 @@ feature 'Manage Events', js: true do
       expect(page.find('.event-title .date_time').text).to eq date_time
       # lat/long are default values specified in spec/support/geocoder_stubs
       expect(page.find('.google_map_link')['href']).to eq "https://maps.google.com/?q=40.7143528%2C-74.0059731"
-      expect(page.find('.google_map_link>img')['src']).to eq "https://maps.google.com/maps/api/staticmap?size=250x100&zoom=12&sensor=false&zoom=16&markers=40.7143528%2C-74.0059731"
       # <a href="/system/event_photo/31/original/20180327_210243.jpg?1529672940">
       #   <img src="/system/event_photo/31/medium/20180327_210243.jpg?1529672940">
       # </a>

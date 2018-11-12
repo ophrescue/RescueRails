@@ -51,8 +51,11 @@ require 'rails_helper'
 describe Dogs::GalleryController, type: :controller do
   describe 'GET #index' do
     let!(:adoptable_dog) { create(:dog, status: 'adoptable', tracking_id: 102) }
-    let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending', tracking_id: 105) }
+    let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending', tracking_id: 99) }
+    let!(:adoption_pending_dog2) { create(:dog, status: 'adoption pending', tracking_id: 105) }
     let!(:coming_soon_dog) { create(:dog, status: 'coming soon', tracking_id: 100) }
+    let!(:coming_soon_dog2) { create(:dog, status: 'coming soon', tracking_id: 109) }
+    let!(:adoptable_dog2) { create(:dog, status: 'adoptable', tracking_id: 110) }
 
     let!(:adopted_dog) { create(:dog, status: 'adopted', tracking_id: 1) }
     let!(:on_hold_dog) { create(:dog, status: 'on hold', tracking_id: 2) }
@@ -60,14 +63,14 @@ describe Dogs::GalleryController, type: :controller do
 
     subject(:get_index) { get :index, params: {} }
 
-    it 'Only adoptable, adoption pending or coming soon dogs should be displayed in order by tracking id' do
+    it 'Only adoptable, coming soon and adoption pending dogs should be displayed respectively in order by status then tracking id' do
       get_index
-      expect(assigns(:dogs)).to eq([coming_soon_dog, adoptable_dog, adoption_pending_dog])
+      expect(assigns(:dogs)).to eq([adoptable_dog, adoptable_dog2, coming_soon_dog, coming_soon_dog2, adoption_pending_dog, adoption_pending_dog2])
     end
 
     it 'with autocomplete parameter set all dogs are returned' do
       get :index, params: {autocomplete: true}
-      expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog])
+      expect(assigns(:dogs)).to match_array([adoptable_dog, adoptable_dog2, adoption_pending_dog, adoption_pending_dog2, coming_soon_dog, coming_soon_dog2, adopted_dog, on_hold_dog, not_available_dog])
     end
   end
 

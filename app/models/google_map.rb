@@ -11,7 +11,7 @@ class GoogleMap
   def to_s
     template = <<-TMPL.html_safe
       <a href=#{link_url} target="_blank">
-        View on Google Maps
+        View Location on Google Maps
       </a>
     TMPL
   end

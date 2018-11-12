@@ -249,13 +249,13 @@ class Dog < ApplicationRecord
   end
 
   def self.status_order
-    order("
+    order(Arel.sql("
       CASE
         WHEN status = 'adoptable' THEN '1'
         WHEN status = 'coming soon' THEN '2'
         WHEN status = 'adoption pending' THEN '3'
       END
-      ")
+      "))
   end
 
   def to_petfinder_status

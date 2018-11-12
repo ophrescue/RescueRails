@@ -18,11 +18,12 @@
         <div class='phone'> <%= event.location_phone %> </div>
       </address>
     <%= event.google_map %>
-    <div class='row <%= photographer?(event) %>'>
-      <div class='photographer col-12'><span>Event Photographer:</span> <%= link_to_if event.photographer_url?, event.photographer_name, event.photographer_url %></div>
+    <div class='<%= photographer?(event) %>'>
+      <div class='photographer'><span>Event Photographer:</span> <%= link_to_if event.photographer_url?, event.photographer_name, event.photographer_url %></div>
     </div>
-
-    <%= markdown(event.description) %>
+    <div class='description'>
+      <%= markdown(event.description) %>
+    </div>
 
     <div class='row'>
       <div class='col'>

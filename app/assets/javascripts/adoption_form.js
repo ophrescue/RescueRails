@@ -92,5 +92,30 @@ $( function() {
 
       isRefEditing = !isRefEditing;
     });
+
+    var isVetEditing = false;
+
+    $('#otherpets').on('click', 'a#toggle-edit-vet', function() {
+      if (isVetEditing) {
+        // find all enabled fields in .edit-vet and disable them
+        $('form.edit-vet .to-disable').prop("disabled", true);
+        $('.vet-editable').hide();
+        $('.vet-read-only').show();
+        $('a#toggle-edit-vet').addClass('btn-primary').text("Edit Vet Info");
+        $('input.vet-save').removeClass('btn-primary');
+      }
+      else {
+        $('form.edit-vet :disabled')
+          .removeAttr('disabled')
+          .addClass('to-disable');
+
+        $('.vet-editable').show();
+        $('.vet-read-only').hide();
+        $('a#toggle-edit-vet').removeClass('btn-primary').text("Cancel");
+        $('input.vet-save').addClass('btn-primary');
+      }
+
+      isVetEditing = !isVetEditing;
+    });
   }
 });

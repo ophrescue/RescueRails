@@ -1,0 +1,190 @@
+<%= form_for @adoption_app, html: { class: 'form-horizontal edit-vet' } do |f| %>
+    <table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th class="span2">Current Pets</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.current_pets %></div>
+          <div class='vet-editable'><%= f.text_area :current_pets %></div>
+        </td>
+    </tr>
+    <tr>
+        <th class="span2">Vet Info</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.vet_info %></div>
+          <div class='vet-editable'><%= f.text_area :vet_info %></div>
+        </td>
+    </tr>
+    <tr>
+        <th class="span2">Are current pets fixed?</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.current_pets_fixed %></div>
+          <div class='vet-editable'>
+            <label>
+              <%= f.radio_button :current_pets_fixed, true %>
+              <span>Yes</span>
+            <label>
+            <label>
+              <%= f.radio_button :current_pets_fixed, false %>
+              <span>No</span>
+            </label>
+            <label>
+              <%= f.radio_button :current_pets_fixed, '' %>
+              <span>N/A</span>
+            </label>
+          </div>
+        </td>
+    </tr>
+    <tr>
+        <th class="span2">Why not fixed?</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.why_not_fixed %></div>
+          <div class='vet-editable'><%= f.text_area :why_not_fixed %></div>
+        </td>
+    </tr>
+    <tr>
+        <th class="span2">Are current pets up to date on shots?</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.current_pets_uptodate %></div>
+          <div class='vet-editable'>
+            <label>
+              <%= f.radio_button :current_pets_uptodate, true %>
+              <span>Yes</span>
+            <label>
+            <label>
+              <%= f.radio_button :current_pets_uptodate, false %>
+              <span>No</span>
+            </label>
+            <label>
+              <%= f.radio_button :current_pets_uptodate, '' %>
+              <span>N/A</span>
+            </label>
+          </div>
+        </td>
+    </tr>
+        <th class="span2">DHPP/DHLPP (dogs only)</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.shot_dhpp_dhlpp %></div>
+          <div class='vet-editable'>
+            <label>
+              <%= f.radio_button :shot_dhpp_dhlpp, true %>
+              <span>Yes</span>
+            <label>
+            <label>
+              <%= f.radio_button :shot_dhpp_dhlpp, false %>
+              <span>No</span>
+            </label>
+            <label>
+              <%= f.radio_button :shot_dhpp_dhlpp, '' %>
+              <span>N/A</span>
+            </label>
+          </div>
+        </td>
+    </tr>
+        <th class="span2">FPV/FHV/FCV (cats only)</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.shot_fpv_fhv_fcv %></div>
+          <div class='vet-editable'>
+            <label>
+              <%= f.radio_button :shot_fpv_fhv_fcv, true %>
+              <span>Yes</span>
+            <label>
+            <label>
+              <%= f.radio_button :shot_fpv_fhv_fcv, false %>
+              <span>No</span>
+            </label>
+            <label>
+              <%= f.radio_button :shot_fpv_fhv_fcv, '' %>
+              <span>N/A</span>
+            </label>
+          </div>
+        </td>
+    </tr>
+        <th class="span2">Rabies</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.shot_rabies %></div>
+          <div class='vet-editable'>
+            <label>
+              <%= f.radio_button :shot_rabies, true %>
+              <span>Yes</span>
+            <label>
+            <label>
+              <%= f.radio_button :shot_rabies, false %>
+              <span>No</span>
+            </label>
+            <label>
+              <%= f.radio_button :shot_rabies, '' %>
+              <span>N/A</span>
+            </label>
+          </div>
+        </td>
+    </tr>
+        <th class=span2>Bordetella (dogs only)</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.shot_bordetella %></div>
+          <div class='vet-editable'>
+            <label>
+              <%= f.radio_button :shot_bordetella, true %>
+              <span>Yes</span>
+            <label>
+            <label>
+              <%= f.radio_button :shot_bordetella, false %>
+              <span>No</span>
+            </label>
+            <label>
+              <%= f.radio_button :shot_bordetella, '' %>
+              <span>N/A</span>
+            </label>
+          </div>
+        </td>
+    </tr>
+        <th class="span2">Heartworm preventative (dogs only)</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.shot_heartworm %></div>
+          <div class='vet-editable'>
+            <label>
+              <%= f.radio_button :shot_heartworm, true %>
+              <span>Yes</span>
+            <label>
+            <label>
+              <%= f.radio_button :shot_heartworm, false %>
+              <span>No</span>
+            </label>
+            <label>
+              <%= f.radio_button :shot_heartworm, '' %>
+              <span>N/A</span>
+            </label>
+          </div>
+        </td>
+    </tr>
+        <th class="span2">Flea/Tick preventative</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.shot_flea_tick %></div>
+          <div class='vet-editable'>
+            <label>
+              <%= f.radio_button :shot_flea_tick, true %>
+              <span>Yes</span>
+            <label>
+            <label>
+              <%= f.radio_button :shot_flea_tick, false %>
+              <span>No</span>
+            </label>
+            <label>
+              <%= f.radio_button :shot_flea_tick, '' %>
+              <span>N/A</span>
+            </label>
+          </div>
+        </td>
+    </tr>
+    <tr>
+        <th class="span2">Why not up to date</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.current_pets_uptodate_why %></div>
+          <div class='vet-editable'><%= f.text_field :current_pets_uptodate_why %></div>
+        </td>
+    </tr>
+    </table>
+    <p>
+      <a id="toggle-edit-vet" class="btn btn-primary">Edit Vet Info</a>
+      <%= f.submit "Save Vet Info", class: "btn vet-save", disabled: "disabled" %>
+    </p>
+<% end %>

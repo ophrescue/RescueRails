@@ -17,9 +17,7 @@
     <ul class="nav nav-tabs">
       <li class="active"><a href="#dog" data-toggle="tab">Dog Choices</a></li>
       <li><a href="#doginfo" data-toggle="tab">Dog Info</a></li>
-      <% if @adopter.adoption_app.pets_branch == 'other_pets' %>
-        <li><a href="#otherpets" data-toggle="tab">Pet Vet</a></li>
-      <% end %>
+      <li><a href="#otherpets" data-toggle="tab">Pet Vet</a></li>
       <% if @adopter.adoption_app.house_type == 'rent' %>
         <li><a href="#rental" data-toggle="tab">Rental</a></li>
       <% end %>
@@ -77,7 +75,7 @@
         </div>
 
         <div id='otherpets' class="tab-pane">
-          <%= render 'adopter_other_pets' %>
+          <%= render 'adopter_other_pets_form' %>
         </div>
       </div>
     </div>

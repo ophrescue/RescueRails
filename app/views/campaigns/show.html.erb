@@ -1,24 +1,23 @@
 <div class='container'>
-    <div class="row">
-      <div class="col-12">
-        <%= image_tag(@campaign.primary_photo.url(:medium), class:"img-fluid rounded") %>
-      </div>
+  <div class="row">
+    <div class="col-12">
+      <%= image_tag(@campaign.primary_photo.url(:medium), class:"img-fluid rounded") %>
     </div>
-    <div class="row title_row">
-      <div class="col-md-12">
+  </div>
+  <div class="row title_row">
+    <div class="col-md-12">
 
-        <h1><%= @campaign.title %></h1>
-        <h5>Our Goal <%= number_to_currency(@campaign.goal, precision: 0) %></h5>
-        <h5>Raised <%= number_to_currency(@campaign.progress, precision: 0) %></h5>
-        <%= link_to "Donate", new_donation_path({campaign_id: @campaign.id}), class: 'btn btn-primary btn-lg', id: 'donate-now' %>
-        <%= link_to_if(can_edit_events?, "Edit", edit_campaign_path(@campaign), :class => "btn btn-lg btn-outline-secondary"){} %>
-      </div>
+      <h1><%= @campaign.title %></h1>
+      <h5>Our Goal <%= number_to_currency(@campaign.goal, precision: 0) %></h5>
+      <h5>Raised <%= number_to_currency(@campaign.progress, precision: 0) %></h5>
+      <%= link_to "Donate", new_donation_path({campaign_id: @campaign.id}), class: 'btn btn-primary btn-lg', id: 'donate-now' %>
+      <%= link_to_if(can_edit_events?, "Edit", edit_campaign_path(@campaign), :class => "btn btn-lg btn-outline-secondary"){} %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-10">
-        <h5><%= simple_format(@campaign.summary) %></h5>
+        <h5><%= markdown(@campaign.summary) %></h5>
 
       <div class="row">
         <div class="col-sm-4 py-4">
@@ -30,7 +29,7 @@
         <div class="col-sm-4 py-4">
           <%= image_tag(@campaign.right_photo.url(:thumb), class: "img-fluid rounded" ) %>
         </div>
-      <div>
+      </div>
     </div>
   </div>
 
@@ -38,7 +37,8 @@
 
   <div class="row">
     <div class="col-md-10">
-        <p><%= simple_format(@campaign.description) %>
+        <p><%= markdown(@campaign.description) %>
+        <%= link_to "Donate", new_donation_path({campaign_id: @campaign.id}), class: 'btn btn-primary btn-lg', id: 'donate-now' %>
     </div>
   </div>
 </div>

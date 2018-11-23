@@ -17,7 +17,7 @@
 
   <div class="row">
     <div class="col-md-10">
-        <h5><%= simple_format(@campaign.summary) %></h5>
+        <h5><%= markdown(@campaign.summary) %></h5>
 
       <div class="row">
         <div class="col-sm-4 py-4">
@@ -37,7 +37,7 @@
 
   <div class="row">
     <div class="col-md-10">
-        <p><%= simple_format(@campaign.description) %>
+        <p><%= markdown(@campaign.description) %>
     </div>
   </div>
 </div>

@@ -28,7 +28,6 @@
         </span>
     </div>
   </div>
-   <h1><%= Time.zone.now %></h1>
   <div class="row">
     <div class="span12">
       <div id="ophCarousel" class="carousel slide">
@@ -40,9 +39,6 @@
               <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
             </div>
           </div>
-
-
-
 <% if Time.zone.now.between?((Time.zone.parse("2018-11-23 23:46").to_datetime), (Time.zone.parse("2018-11-26 17:59").to_datetime)) %>
           <div class="item">
             <%= image_tag "banner-pre-gt-2018.jpg", alt: "Donate to Giving Tuesday" %>

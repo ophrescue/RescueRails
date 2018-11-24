@@ -39,21 +39,27 @@
               <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
             </div>
           </div>
-
-<% if Time.now.between?(("2018-08-24".to_date),("2018-09-23".to_date)) %>
+<% if Time.zone.now.between?((Time.zone.parse("2018-11-23 23:46").to_datetime), (Time.zone.parse("2018-11-26 17:59").to_datetime)) %>
           <div class="item">
-            <%= image_tag "banner-bww-2018.jpg", alt: "Buy your tickets for Bark Wag Wine 2018" %>
+            <%= image_tag "banner-pre-gt-2018.jpg", alt: "Donate to Giving Tuesday" %>
             <div class="carousel-caption">
-              <%= link_to "Buy Tickets", "http://www.barkwagwine.com/", :class => "btn btn-primary btn-large" %>
-              <%= link_to "FB Event", "https://www.facebook.com/events/225479564935225/", :class => "btn btn-primary btn-large" %>
+              <%= link_to "Donate", "/campaigns/2", :class => "btn btn-primary btn-large" %>
+            </div>
+          </div>
+<% elsif Time.zone.now.between?((Time.zone.parse("2018-11-26 18:00").to_datetime), (Time.zone.parse("2018-11-28 12:00").to_datetime)) %>
+          <div class="item">
+            <%= image_tag "banner-main-gt-2018.jpg", alt: "Donate to Giving Tuesday" %>
+            <div class="carousel-caption">
+              <%= link_to "Donate", "/campaigns/2", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
 <% end %>
-<% if Time.now.between?(("2018-08-01".to_date),("2018-09-14".to_date)) %>
+
+<% if Time.zone.now.between?((Time.zone.parse("2018-11-23").to_datetime), (Time.zone.parse("2018-11-28 12:00").to_datetime)) %>
           <div class="item">
-            <%= image_tag "banner-2018-book-release.jpg", alt: "Another Good Dog Book Coming Soon" %>
+            <%= image_tag "banner-cats-gt-2018.jpg", alt: "Donate to OPH Cats and Kittens" %>
             <div class="carousel-caption">
-              <%= link_to "Order Now", "http://www.anothergooddog.org/book.html", :class => "btn btn-primary btn-large" %>
+              <%= link_to "Donate", "https://www.facebook.com/donate/271635420362516/", :class => "btn btn-primary btn-large" %>
             </div>
           </div>
 <% else %>

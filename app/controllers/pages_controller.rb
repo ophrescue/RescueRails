@@ -14,8 +14,13 @@
 
 class PagesController < ApplicationController
   before_action :require_login, only: [:status_definitions]
+  before_action :select_bootstrap41, only: [:home_new]
 
   def status_definitions
+    @hide_topbar = true
+  end
+
+  def home_new
     @hide_topbar = true
   end
 end

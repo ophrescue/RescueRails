@@ -44,4 +44,15 @@ feature 'Donations' do
     visit '/donations/history'
     expect(page).to have_content('Test Donor')
   end
+
+  scenario "Verify Pagination" do
+    stub_const('DonationsController::PER_PAGE',2)
+    3.times do
+      FactoryBot.create(:donation)
+    end
+    sign_in_as_admin
+    visit '/donations/history'
+    expect(page).to have_selector :css, 'nav.pagination '
+    expect(page.all('table tbody tr').size).to eq 2
+  end
 end

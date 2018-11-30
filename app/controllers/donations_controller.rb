@@ -12,6 +12,8 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 class DonationsController < ApplicationController
+  PER_PAGE = 30
+
   before_action :require_login, except: %i[new create index]
   before_action :admin_user, only: %i[history show]
   before_action :select_bootstrap41
@@ -25,7 +27,7 @@ class DonationsController < ApplicationController
   end
 
   def history
-    @donations = Donation.order(created_at: :desc).paginate(page: params[:page], per_page: 30)
+    @donations = Donation.order(created_at: :desc).paginate(page: params[:page], per_page: format_for_page)
     respond_to do |format|
       format.html
       format.xls { render_donations_xls }
@@ -58,6 +60,11 @@ class DonationsController < ApplicationController
   end
 
   private
+
+  def format_for_page
+    return PER_PAGE unless request.format.xls?
+    Donation.count
+  end
 
   def admin_user
     redirect_to(new_donation_path) unless current_user.admin?

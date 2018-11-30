@@ -8,6 +8,8 @@
             Download:
             <%= link_to "Excel", history_donations_path(format: "xls") %>
         </p>
+
+        <%= will_paginate(@donations, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -30,6 +32,7 @@
                 <%= render @donations %>
             </tbody>
         </table>
+        <%= will_paginate(@donations, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
     <% else %>
 
         <h5>No Donations!</h5>

@@ -250,7 +250,7 @@ GEM
     pry-doc (0.13.5)
       pry (~> 0.11)
       yard (~> 0.9.11)
-    pry-rails (0.3.7)
+    pry-rails (0.3.8)
       pry (>= 0.10.4)
     pry-stack_explorer (0.4.9.3)
       binding_of_caller (>= 0.7)

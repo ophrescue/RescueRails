@@ -311,3 +311,15 @@ div .fb-like {
 .dropdown-backdrop {
   position: static;
 }
+
+// Bootstrap 4 Home Page
+
+.jumbotron {
+  background-image: image-url('home/rescue-jumbo.jpg');
+  background-size: cover;
+  min-height: 500px;
+}
+
+.bg-lightblue {
+  background: #baebee;
+}

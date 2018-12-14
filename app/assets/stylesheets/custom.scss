@@ -321,7 +321,11 @@ p.lead {
   color: #FFFFFF;
 }
 
-@media only screen and (min-width: 1025px) {
+@media only screen and (min-width: 992px) {
+  .dog-hero-content {
+    padding-top: 300px;
+    padding-left: 50px;
+  }
   .dog-hero {
     background-image: image-url('home/rescue-jumbo.jpg');
     align-items: left;
@@ -337,7 +341,7 @@ p.lead {
   box-sizing: inherit;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 991px) {
   .dog-hero {
     background: #333333;
   }

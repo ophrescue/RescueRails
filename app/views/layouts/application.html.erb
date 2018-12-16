@@ -63,7 +63,7 @@
       <%= render 'layouts/topbar' %>
     <% end %>
   <% end %>
-  <div class="container">
+  <div class="container-fluid">
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, :class => "alert alert-#{key}") %>
     <% end %>
@@ -73,10 +73,11 @@
         <p><%= link_to("Profile", current_user, :class => "btn btn-warning") %></p>
       </div>
     <% end %>
-    <div class='row'>
-      <%= yield %>
-    </div>
+  </div>
 
+    <%= yield %>
+
+  <div class="container-fluid">
     <div class='row'>
       <%= render 'layouts/footer' %>
     </div>

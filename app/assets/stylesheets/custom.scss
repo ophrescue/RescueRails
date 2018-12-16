@@ -314,48 +314,27 @@ div .fb-like {
 
 // Bootstrap 4 Home Page - Start
 
-h1 {
+.dog-hero h1 {
   color: #FFFFFF;
 }
-p.lead {
+.dog-hero p.lead {
   color: #FFFFFF;
 }
 
-@media only screen and (min-width: 992px) {
-  .dog-hero-content {
-    padding-top: 300px;
-    padding-left: 50px;
-  }
-  .dog-hero {
-    background-image: image-url('home/rescue-jumbo.jpg');
-    align-items: left;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    height: 500px;
-  }
+.dog-hero-content {
+  padding-top: 300px;
+  padding-left: 20px;
+}
+.dog-hero {
+  background-image: image-url('home/rescue-jumbo.jpg');
+  align-items: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  height: 500px;
 }
 
 
-:before, :after {
-  box-sizing: inherit;
-}
-
-@media only screen and (max-width: 991px) {
-  .dog-hero {
-    background: #333333;
-  }
-  .dog-hero:before {
-    background-image: image-url('home/rescue-jumbo.jpg');
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    content: "";
-    height: 300px;
-    width: 100%;
-    display: block;
-  }
-}
 .bg-lightblue {
-  background: #baebee;
+  background: #a5c2e4;
 }

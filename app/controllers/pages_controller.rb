@@ -19,8 +19,4 @@ class PagesController < ApplicationController
   def status_definitions
     @hide_topbar = true
   end
-
-  def home_new
-    @hide_topbar = true
-  end
 end

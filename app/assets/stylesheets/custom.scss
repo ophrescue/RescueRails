@@ -312,14 +312,29 @@ div .fb-like {
   position: static;
 }
 
-// Bootstrap 4 Home Page
+// Bootstrap 4 Home Page - Start
 
-.jumbotron {
-  background-image: image-url('home/rescue-jumbo.jpg');
-  background-size: cover;
-  min-height: 500px;
+.dog-hero h1 {
+  color: #FFFFFF;
+}
+.dog-hero p.lead {
+  color: #FFFFFF;
 }
 
+.dog-hero-content {
+  padding-top: 300px;
+  padding-left: 20px;
+}
+.dog-hero {
+  background-image: image-url('home/rescue-jumbo.jpg');
+  align-items: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  height: 500px;
+}
+
+
 .bg-lightblue {
-  background: #baebee;
+  background: #a5c2e4;
 }

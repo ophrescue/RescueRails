@@ -75,7 +75,13 @@
     <% end %>
   </div>
 
+  <% if @bootstrap41 %>
     <%= yield %>
+  <% else %>
+    <div class="container">
+      <%= yield %>
+    </div>
+  <% end %>
 
   <div class="container-fluid">
     <div class='row'>

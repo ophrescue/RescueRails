@@ -2,10 +2,9 @@
     <div class="row-fluid">
         <div class="col-10">
             <div class="container dog-hero-content pb-5">
-                <h1 class="display-5">Rescue</h1>
+                <h1 class="display-5">Operation Paws for Homes</h1>
                 <p class="lead">We believe they all deserve a second chance.</p>
                     <a class="btn btn-primary btn-lg" href="#" role="button">Adoptable Dogs</a>
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Apply to Adopt</a>
             </div>
         </div>
     </div>
@@ -14,11 +13,14 @@
 <br />
 
 <div class="row pt-3 bg-lightblue px-5">
-    <div class="col-12 pb-5">
+    <div class="col-12 pb-5 text-center">
         <h2 class="text-center">Our Mission</h2>
         <h5 class="text-center">50% of dogs and 70% of cats in shelters are euthanized simply because there is no one to adopt them.</h5>
         <hr class="my-4">
         <h5 class="text-center">We are committed to a No Kill Nation and believes every animal deserves a loving home.</h5>
+        <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/" target="_blank" rel="noopener">
+            <%= image_tag "gnp-2018-award.png", alt: "2018 Top-rated nonprofits and charities" %>
+        </a>
     </div>
 </div>
 
@@ -32,49 +34,49 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                    <%= image_tag "get-involved-adopt.jpg", alt: "Adopt", class: "card-img-top" %>
-                    <div class="card-body">
-                        <h4 class="card-text text-center">Adopt</h4>
-                    </div>
+                        <%= image_tag "get-involved-adopt.jpg", alt: "Adopt", class: "card-img-top" %>
+                        <div class="card-body text-center">
+                            <a class="btn btn-primary btn-lg" role="button" href="/guide">Adopt</a>
+                        </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
                     <%= image_tag "get-involved-foster.jpg", alt: "Foster", class: "card-img-top" %>
-                    <div class="card-body">
-                        <h4 class="card-text text-center">Foster</h4>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary btn-lg" role="button" href="/foster">Foster</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
                     <%= image_tag "get-involved-volunteer.jpg", alt: "Volunteer", class: "card-img-top" %>
-                    <div class="card-body">
-                        <h4 class="card-text text-center">Volunteer</h4>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary btn-lg" role="button" href="/volunteer">Volunteer</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
                     <%= image_tag "get-involved-other.jpg", alt: "Donate", class: "card-img-top" %>
-                    <div class="card-body">
-                        <h4 class="card-text text-center">Donate</h4>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary btn-lg" role="button" href="/donate">Donate</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
                     <%= image_tag "get-involved-events.jpg", alt: "Events", class: "card-img-top" %>
-                    <div class="card-body">
-                        <h4 class="card-text text-center">Events</h4>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary btn-lg" role="button" href="/events">Events</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                    <%= image_tag "get-involved-fundraise.jpg", alt: "Fundraise", class: "card-img-top" %>
-                    <div class="card-body">
-                        <h4 class="card-text text-center">Fundraise</h4>
+                    <%= image_tag "get-involved-trainers.jpg", alt: "Trainers and Vets", class: "card-img-top" %>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary btn-lg" role="button" href="/get-involved">Trainers and Vets</a>
                     </div>
                 </div>
             </div>
@@ -90,25 +92,25 @@
 </div>
 <div class="row bg-lightblue text-center px-3">
     <div class="col-md-3">
-        <%= image_tag("home/dogs-rescued.png", size: "200") %>
+        <%= image_tag("home/dogs-rescued.png", alt: "", size: "200") %>
         <h2>7,300</h2>
         <h5>Dogs Rescued</h5>
         <p>Since our founding in 2010, OPH has rescued over 7,300 dogs in need.</p>
     </div>
     <div class="col-md-3">
-        <%= image_tag("home/dogs-placed-annually.png", size: "200") %>
+        <%= image_tag("home/dogs-placed-annually.png", alt: "", size: "200") %>
         <h2>1,300</h2>
         <h5>Dogs Placed Annually</h5>
         <p>Each year, OPH finds loving, permanaent homes for 1,300 deserving dogs.</p>
     </div>
     <div class="col-md-3">
-        <%= image_tag("home/people-educated.png", size: "200") %>
+        <%= image_tag("home/people-educated.png", alt: "", size: "200") %>
         <h2>240</h2>
         <h5>People Educated</h5>
         <p>Over 240 children and adults have participated in the Mutt­i­grees® program since 2017.</p>
     </div>
     <div class="col-md-3">
-        <%= image_tag("home/supplies-delivered.png", size: "200") %>
+        <%= image_tag("home/supplies-delivered.png", alt: "", size: "200") %>
         <h2>25,000</h2>
         <h5>Lbs. of Supplies Delivered</h5>
         <p>Each year, OPH donates 25,000 lbs. of food and supplies to our shelter partners to support their life­saving efforts.</p>
@@ -118,18 +120,31 @@
 
 <div class="row justify-content-between pt-5">
     <div class="col-sm-4 offset-1">
-        <form>
+        <!-- <form>
             <div class="form-group">
                 <label for="exampleInputEmail1">Stay in Touch</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
             </div>
             <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-        </form>
+        </form> !-->
     </div>
     <div class="col-sm-4 offset-1 pt-5">
-        <a href="https://www.facebook.com/Operationpawsforhomes" target="_blank"><i class="fa fa-facebook-square fa-3x"></i></a>
-        <a href="https://twitter.com/RescueOPH" target="_blank"><i class="fa fa-twitter-square fa-3x"></i></a>
-        <a href="http://instagram.com/operationpawsforhomes" target="_blank"><i class="fa fa-instagram fa-3x"></i></a>
-        <a href="https://www.youtube.com/user/RescueOPH" target="_blank"><i class="fa fa-youtube fa-3x"></i></a>
+        <a href="https://www.facebook.com/Operationpawsforhomes" target="_blank" rel="noopener"><i class="fa fa-facebook-square fa-3x"></i></a>
+        <a href="https://twitter.com/RescueOPH" target="_blank" rel="noopener"><i class="fa fa-twitter-square fa-3x"></i></a>
+        <a href="http://instagram.com/operationpawsforhomes" target="_blank" rel="noopener"><i class="fa fa-instagram fa-3x"></i></a>
+        <a href="https://www.youtube.com/user/RescueOPH" target="_blank" rel="noopener"><i class="fa fa-youtube fa-3x"></i></a>
     </div>
 </div>
+
+
+
+<div class="row pt-5">
+    <div class="col-md-12">
+        <a href="http://adoptapet.com" target="_blank" rel="noopener"><%= image_tag "approved-rescue-badge.png", alt: "Adoptapet Approved Rescue" %></a>
+        <%= image_tag "best-of-fairfax-2016.png", alt: "Best of Fairfax 2016" %>
+        &nbsp; &nbsp;
+        <%= image_tag "best-of-fairfax-2017.jpg", alt: "Best of Fairfax 2017"%>
+         &nbsp; &nbsp;
+        <a href="http://vfhs.org/" target="_blank" rel="noopener"><%= image_tag "vfhs.png" %></a>
+    </div>
+<div>

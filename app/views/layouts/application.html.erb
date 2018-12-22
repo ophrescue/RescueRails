@@ -69,7 +69,7 @@
       <%= render 'layouts/topbar' %>
     <% end %>
   <% end %>
-  <div class="container-fluid">
+  <div class="container">
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, :class => "alert alert-#{key}") %>
     <% end %>
@@ -89,7 +89,7 @@
     </div>
   <% end %>
 
-  <div class="container-fluid">
+  <div class="container">
     <div class='row'>
       <%= render 'layouts/footer' %>
     </div>

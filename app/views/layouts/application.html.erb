@@ -2,12 +2,14 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:site_name" content="Operation Paws for Homes">
-    <meta property="og:description" content="All breed dog rescue based in Virgina, Maryland, Washington DC and South Central PA">
-    <meta property="og:image" content="https://ophrescue.org/og_image.jpg">
-    <meta property="og:image:type" content="image/jpg">
-    <meta property="og:image:width" content="3059">
-    <meta property="og:image:height" content="2447">
+    <% if current_page?(root_path) || current_page?(home_new_path) %>
+      <meta property="og:site_name" content="Operation Paws for Homes">
+      <meta property="og:description" content="All breed dog rescue based in Virgina, Maryland, Washington DC and South Central PA">
+      <meta property="og:image" content="https://ophrescue.org/og_image.jpg">
+      <meta property="og:image:type" content="image/jpg">
+      <meta property="og:image:width" content="3059">
+      <meta property="og:image:height" content="2447">
+    <% end %>
     <title><%= title %></title>
     <%= csrf_meta_tag %>
     <%= render 'layouts/assets' %>

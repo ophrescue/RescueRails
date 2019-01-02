@@ -140,7 +140,7 @@ class Adopter < ApplicationRecord
   end
 
   def chimp_subscribe
-    if (status == 'adopted') || (status == 'completed')
+    if (status == 'adopted') || (status == 'completed') || (status == 'adptd sn pend')
       interests = {
         adopted_from_oph: true,
         active_application: false
@@ -152,10 +152,8 @@ class Adopter < ApplicationRecord
       }
     end
 
-    if (status == 'completed')
+    if ((status == 'adopted') || (status == 'completed') || (status == 'adptd sn pend')) && (completed_date == '')
       completed_date = Time.now.strftime('%m/%d/%Y')
-    else
-      completed_date = ''
     end
 
     merge_vars = {

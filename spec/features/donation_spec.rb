@@ -46,10 +46,10 @@ feature 'Donations' do
   end
 
   scenario "Verify Pagination" do
-    stub_const('DonationsController::PER_PAGE',2)
     3.times do
       FactoryBot.create(:donation)
     end
+    stub_const('DonationsController::PER_PAGE',2)
     sign_in_as_admin
     visit '/donations/history'
     expect(page).to have_selector :css, 'nav.pagination '

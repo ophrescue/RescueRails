@@ -20,9 +20,9 @@ module AboutDogHelper
   def caveats
     caveats = []
     caveats << "is a special needs dog" if @dog.is_special_needs
-    caveats << "is not good with other dogs" if @dog.no_dogs
-    caveats << "is not good with cats" if @dog.no_cats
-    caveats << "is not good for homes with small children" if @dog.no_kids
+    caveats << "is best in a home without dogs" if @dog.no_dogs
+    caveats << "is best in a home without cats" if @dog.no_cats
+    caveats << "is best in a home without small children" if @dog.no_kids
     caveats
   end
 

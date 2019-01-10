@@ -32,22 +32,16 @@
     <div class="span12">
       <div id="ophCarousel" class="carousel slide">
         <div class="carousel-inner">
-<% if Time.zone.now.between?((Time.zone.parse("2018-12-08 23:46").to_datetime), (Time.zone.parse("2018-12-27 12:00").to_datetime)) %>
-          <div class="item active">
-            <%= image_tag "banner-holiday-2018.jpg", alt: "Happy Holidays from OPH" %>
-          </div>
-<% else %>
           <div class="item active">
             <%= image_tag "hero_bg4.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
           </div>
-<% end %>
 
-<% if Time.zone.now.between?((Time.zone.parse("2018-12-08 12:00").to_datetime), (Time.zone.parse("2019-01-02 12:00").to_datetime)) %>
+<% if Time.zone.now.between?((Time.zone.parse("2019-01-09 12:00").to_datetime), (Time.zone.parse("2019-04-14 12:00").to_datetime)) %>
           <div class="item">
-            <%= image_tag "banner-7000-miles.jpg", alt: "7000 Miles Home" %>
+            <%= image_tag "banner-5k-2019.jpg", alt: "Fast and Furriest 5k 2019" %>
             <div class="carousel-caption">
-              <%= link_to "Watch 7000 Miles Home", "/international/7000-miles-home", :class => "btn btn-primary" %>
-              <%= link_to "Donate", "/campaigns/1", :class => "btn btn-primary" %>
+              <%= link_to "Register", "https://endurancecui.active.com/event-reg/select-race?e=54554854", :class => "btn btn-primary" %>
+              <%= link_to "Event Info", "https://www.facebook.com/events/528102047710638/", :class => "btn btn-primary" %>
             </div>
           </div>
 <% else %>

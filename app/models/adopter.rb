@@ -152,8 +152,10 @@ class Adopter < ApplicationRecord
       }
     end
 
-    if ((status == 'adopted') || (status == 'completed') || (status == 'adptd sn pend')) && (completed_date == '')
+    if ((status == 'adopted') || (status == 'adptd sn pend'))
       completed_date = Time.now.strftime('%m/%d/%Y')
+    else
+      completed_date = ''
     end
 
     merge_vars = {

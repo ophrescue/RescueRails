@@ -3,8 +3,11 @@ require 'rails_helper'
 feature 'Apply for Adoption' do
   scenario "Renter fills out adoption application", js: true do
     visit root_path
-    click_link 'Adopt'
-    click_link 'Adoption Application'
+    within(:css, "div.actions") do
+      click_link 'Adopt'
+    end
+
+    click_link('Adoption Application', match: :first)
     check('adopter_pre_q_costs')
     check('adopter_pre_q_surrender')
     check('adopter_pre_q_abuse')
@@ -171,8 +174,11 @@ feature 'Apply for Adoption' do
 
   scenario "Home Owner fills out adoption application", js: true do
     visit root_path
-    click_link 'Adopt'
-    click_link 'Adoption Application'
+    within(:css, "div.actions") do
+      click_link 'Adopt'
+    end
+
+    click_link('Adoption Application', match: :first)
     check('adopter_pre_q_costs')
     check('adopter_pre_q_surrender')
     check('adopter_pre_q_abuse')

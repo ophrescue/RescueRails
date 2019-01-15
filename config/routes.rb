@@ -55,7 +55,7 @@ RescueRails::Application.routes.draw do
     collection { post :import }
   end
 
-  root to: 'pages#home_new'
+  root to: 'pages#home'
 
   STATIC_PAGES.each do |page|
     get("/#{page}", to: "pages##{page.underscore}")

@@ -2,7 +2,7 @@ STATIC_PAGES = ['5k', 'contact', 'funding-partners', 'community-partners', 'non-
                 'shelter-partners', 'training-partners', 'guide', 'aboutus', 'documentary', 'insurance',
                 'get-involved', 'volunteer', 'foster', 'fosterfaq', 'donate', 'sponsor',
                 'special-funds', 'other-ways-to-give', 'terms', 'resources', 'tips-for-finding-lost-pets', 'status_definitions',
-                'education-and-outreach', 'home-new'].freeze
+                'education-and-outreach'].freeze
 
 RescueRails::Application.routes.draw do
   get "/adopters/check_email", to: "adopters#check_email"
@@ -55,7 +55,7 @@ RescueRails::Application.routes.draw do
     collection { post :import }
   end
 
-  root to: 'pages#home'
+  root to: 'pages#home_new'
 
   STATIC_PAGES.each do |page|
     get("/#{page}", to: "pages##{page.underscore}")

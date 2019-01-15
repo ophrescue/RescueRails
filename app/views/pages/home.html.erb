@@ -1,117 +1,180 @@
-<div class="container">
-  <div class="row">
-    <div class="span1 hidden-phone hidden-tablet">
-      <%= image_tag "logo.png" %>
-    </div>
+<div class="container-fluid">
 
-    <div class="span6 hidden-phone hidden-tablet">
-      <h2>Operation Paws for Homes</h2>
-      <h5>Virginia, Maryland, Washington DC and South Central PA</h5>
-    </div>
-
-    <div class="span7 hidden-desktop">
-      <h2>Operation Paws for Homes</h2>
-      <h5>Virginia, Maryland, Washington DC and South Central PA</h5>
-    </div>
-
-
-    <div class="span5 hidden-phone">
-      <span class="pull-right">
-        <a href="https://www.facebook.com/Operationpawsforhomes"><i class="fa fa-facebook-square fa-3x"></i></a>
-        <a href="https://twitter.com/RescueOPH"><i class="fa fa-twitter-square fa-3x"></i></a>
-        <a href="http://instagram.com/operationpawsforhomes"><i class="fa fa-instagram fa-3x"></i></a>
-        <a href="https://www.youtube.com/user/RescueOPH"><i class="fa fa-youtube fa-3x"></i></a>
-        &nbsp; &nbsp;
-          <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/">
-            <%= image_tag "gnp-2018-award.png", alt: "2018 Top-rated nonprofits and charities" %>
-          </a>
-        </span>
-    </div>
-  </div>
-  <div class="row">
-    <div class="span12">
-      <div id="ophCarousel" class="carousel slide">
-        <div class="carousel-inner">
-          <div class="item active">
-            <%= image_tag "hero_bg4.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
-          </div>
-
-<% if Time.zone.now.between?((Time.zone.parse("2019-01-09 12:00").to_datetime), (Time.zone.parse("2019-04-14 12:00").to_datetime)) %>
-          <div class="item">
-            <%= image_tag "banner-5k-2019.jpg", alt: "Fast and Furriest 5k 2019" %>
-            <div class="carousel-caption">
-              <%= link_to "Register", "https://endurancecui.active.com/event-reg/select-race?e=54554854", :class => "btn btn-primary" %>
-              <%= link_to "Event Info", "https://www.facebook.com/events/528102047710638/", :class => "btn btn-primary" %>
+    <div class="row dog-hero">
+        <div class="col-10">
+            <div class="dog-hero-content pb-5">
+                <h1 class="display-5">Operation Paws for Homes</h1>
+                <p class="lead">We believe they all deserve a second chance.</p>
+                    <a class="btn btn-primary btn-lg" href="/dogs" role="button">Adoptable Dogs</a>
             </div>
-          </div>
-<% else %>
-          <div class="item">
-            <%= image_tag "lustreart.jpg", alt: "Lustre Art" %>
-            <div class="carousel-caption">
-              <%= link_to "Contact", "https://www.facebook.com/LustreArt", :class => "btn btn-primary btn-large" %>
-            </div>
-          </div>
-<% end %>
         </div>
-        <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
-        <a class="right carousel-control" href="#ophCarousel" data-slide="next">&rsaquo;</a>
-      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="span12 text-center well">
-        <%= link_to "Our Dogs", dogs_path, :class => "btn btn-primary btn-large", :id => "hero-dog" %>
-        <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="span4 eventphoto">
-      <a href="/donate"><%= image_tag "home-donate.jpg", alt: "Donate" %></a>
-      <br />
-      <br />
-    </div>
-    <div class="span4 eventphoto">
-      <a href="/get-involved"><%= image_tag "home-get-involved.jpg", alt: "Get Involved" %></a>
-      <br />
-      <br />
-    </div>
-    <div class="span4 eventphoto">
-      <a href="/events"><%= image_tag "home-events.jpg", alt: "Events" %></a>
-      <br />
-      <br />
-    </div>
-  </div>
 <br />
-  <div class="row">
-    <div class="span12 hidden-tablet hidden-desktop">
-      <span class="pull-right">
-        <a href="https://www.facebook.com/Operationpawsforhomes"><i class="fa fa-facebook-square fa-3x"></i></a>
-        <a href="https://twitter.com/RescueOPH"><i class="fa fa-twitter-square fa-3x"></i></a>
-        <a href="http://instagram.com/operationpawsforhomes"><i class="fa fa-instagram fa-3x"></i></a>
-        <a href="https://www.youtube.com/user/RescueOPH"><i class="fa fa-youtube fa-3x"></i></a>
-        &nbsp; &nbsp;
-          <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/">
+
+<div class="row pt-3 bg-lightblue px-5">
+    <div class="col-12 pb-5 text-center">
+        <h2 class="text-center">Our Mission</h2>
+        <h5 class="text-center">50% of dogs and 70% of cats in shelters are euthanized simply because there is no one to adopt them.</h5>
+        <hr class="my-4">
+        <h5 class="text-center">We are committed to a No Kill Nation and believe every animal deserves a loving home.</h5>
+        <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/" target="_blank" rel="noopener">
             <%= image_tag "gnp-2018-award.png", alt: "2018 Top-rated nonprofits and charities" %>
-          </a>
-        </span>
+        </a>
     </div>
-    <div class="row">
-      <div class="span12">
-        <a href="http://adoptapet.com"><%= image_tag "approved-rescue-badge.png", alt: "Adoptapet Approved Rescue" %></a>
-        <%= image_tag "best-of-fairfax-2016.png", alt: "Best of Fairfax 2016" %>
+</div>
+
+<div class="row pt-5">
+    <div class="col-12">
+        <h2 class="text-center">Take Action</h2>
+    </div>
+</div>
+<div class="album">
+    <div class="container">
+        <div class="row actions">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                        <%= image_tag "get-involved-adopt.jpg", alt: "Adopt", class: "card-img-top" %>
+                        <div class="card-body text-center">
+                            <a class="btn btn-primary btn-lg" role="button" href="/guide">Adopt</a>
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <%= image_tag "get-involved-foster.jpg", alt: "Foster", class: "card-img-top" %>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary btn-lg" role="button" href="/foster">Foster</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <%= image_tag "get-involved-volunteer.jpg", alt: "Volunteer", class: "card-img-top" %>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary btn-lg" role="button" href="/volunteer">Volunteer</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <%= image_tag "get-involved-other.jpg", alt: "Donate", class: "card-img-top" %>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary btn-lg" role="button" href="/donate">Donate</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <%= image_tag "get-involved-events.jpg", alt: "Events", class: "card-img-top" %>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary btn-lg" role="button" href="/events">Events</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <%= image_tag "get-involved-international.jpg", alt: "International Programs", class: "card-img-top" %>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary btn-lg" role="button" href="/international">International Programs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row pt-5 bg-lightblue">
+    <div class="col-12">
+        <h2 class="text-center">Our Impact</h2>
+    </div>
+</div>
+<div class="row bg-lightblue text-center px-3">
+    <div class="col-md-3">
+        <%= image_tag("home/dogs-rescued.png", alt: "", size: "200") %>
+        <h2>7,300</h2>
+        <h5>Dogs Rescued</h5>
+        <p>Since our founding in 2010, OPH has rescued over 7,300 dogs in need.</p>
+    </div>
+    <div class="col-md-3">
+        <%= image_tag("home/dogs-placed-annually.png", alt: "", size: "200") %>
+        <h2>1,300</h2>
+        <h5>Dogs and Cats Rescued Annually</h5>
+        <p>Each year, OPH finds loving homes for 1,300 deserving dogs and cats.</p>
+    </div>
+    <div class="col-md-3">
+        <%= image_tag("home/people-educated.png", alt: "", size: "200") %>
+        <h2>240</h2>
+        <h5>People Educated</h5>
+        <p>Over 240 children and adults have participated in the Mutt­i­grees® program since 2017.</p>
+    </div>
+    <div class="col-md-3">
+        <%= image_tag("home/supplies-delivered.png", alt: "", size: "200") %>
+        <h2>47,000</h2>
+        <h5>Lbs. of Supplies Delivered Annually</h5>
+        <p>Each year, OPH donates 47,000 lbs. of food and supplies to our shelter partners to support their life­saving efforts.</p>
+    </div>
+</div>
+
+<div class="row pt-5 text-center">
+    <div class="col-12">
+        <h2>News &amp; Updates</h2>
+    </div>
+</div>
+
+<div class="row pt-3 text-center">
+    <div class="col-12">
+        <%= image_tag "banner-7000-miles.jpg", class: "img-fluid", alt: "7000 Miles Home" %>
+    </div>
+</div>
+<div class="row pt-2 text-center">
+    <div class="col-12">
+        <%= link_to "Watch 7000 Miles Home", "/international/7000-miles-home", :class => "btn btn-primary" %>
+        <%= link_to "Donate", "/campaigns/1", :class => "btn btn-primary" %>
+    </div>
+</div>
+
+<div class="row pt-3 text-center">
+    <div class="col-12">
+        <%= image_tag "banner-5k-2019.jpg", class: "img-fluid", alt: "Fast and Furriest 5k 2019" %>
+    </div>
+</div>
+<div class="row pt-2 text-center">
+    <div class="col-12">
+        <%= link_to "Register", "https://endurancecui.active.com/event-reg/select-race?e=54554854", :class => "btn btn-primary" %>
+        <%= link_to "Event Info", "https://www.facebook.com/events/528102047710638/", :class => "btn btn-primary" %>
+    </div>
+</div>
+
+<div class="row justify-content-between pt-5">
+    <div class="col-sm-4 offset-1">
+        <!-- <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Stay in Touch</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+        </form> !-->
+    </div>
+    <div class="col-sm-4 offset-1 pt-5">
+        <a href="https://www.facebook.com/Operationpawsforhomes" target="_blank" rel="noopener"><i class="fa fa-facebook-square fa-3x"></i></a>
+        <a href="https://twitter.com/RescueOPH" target="_blank" rel="noopener"><i class="fa fa-twitter-square fa-3x"></i></a>
+        <a href="http://instagram.com/operationpawsforhomes" target="_blank" rel="noopener"><i class="fa fa-instagram fa-3x"></i></a>
+        <a href="https://www.youtube.com/user/RescueOPH" target="_blank" rel="noopener"><i class="fa fa-youtube fa-3x"></i></a>
+    </div>
+</div>
+
+
+
+<div class="row pt-5 text-center">
+    <div class="col-12">
+        <a href="http://adoptapet.com" target="_blank" rel="noopener"><%= image_tag "approved-rescue-badge.png", class: "img-fluid", alt: "Adoptapet Approved Rescue", size: "125" %></a>
+        <%= image_tag "best-of-fairfax-2016.png", class: "img-fluid", alt: "Best of Fairfax 2016", size: "125" %>
         &nbsp; &nbsp;
-        <%= image_tag "best-of-fairfax-2017.jpg", alt: "Best of Fairfax 2017"%>
+        <%= image_tag "best-of-fairfax-2017.jpg", class: "img-fluid", alt: "Best of Fairfax 2017", size: "125" %>
          &nbsp; &nbsp;
-        <a href="http://vfhs.org/"><%= image_tag "vfhs.png" %></a>
-      </div>
+        <a href="http://vfhs.org" target="_blank" rel="noopener"><%= image_tag "vfhs.png", class: "img-fluid", alt: "VFHS", size: "175"  %></a>
     </div>
-  </div>
-
-<script type="text/javascript">
-$('#ophCarousel').carousel({
-   interval: 6000
-});
-</script>
-
+<div>
 </div>

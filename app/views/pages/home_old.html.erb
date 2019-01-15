@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="row">
+    <div class="span1 hidden-phone hidden-tablet">
+      <%= image_tag "logo.png" %>
+    </div>
+
+    <div class="span6 hidden-phone hidden-tablet">
+      <h2>Operation Paws for Homes</h2>
+      <h5>Virginia, Maryland, Washington DC and South Central PA</h5>
+    </div>
+
+    <div class="span7 hidden-desktop">
+      <h2>Operation Paws for Homes</h2>
+      <h5>Virginia, Maryland, Washington DC and South Central PA</h5>
+    </div>
+
+
+    <div class="span5 hidden-phone">
+      <span class="pull-right">
+        <a href="https://www.facebook.com/Operationpawsforhomes"><i class="fa fa-facebook-square fa-3x"></i></a>
+        <a href="https://twitter.com/RescueOPH"><i class="fa fa-twitter-square fa-3x"></i></a>
+        <a href="http://instagram.com/operationpawsforhomes"><i class="fa fa-instagram fa-3x"></i></a>
+        <a href="https://www.youtube.com/user/RescueOPH"><i class="fa fa-youtube fa-3x"></i></a>
+        &nbsp; &nbsp;
+          <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/">
+            <%= image_tag "gnp-2018-award.png", alt: "2018 Top-rated nonprofits and charities" %>
+          </a>
+        </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12">
+      <div id="ophCarousel" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="item active">
+            <%= image_tag "hero_bg4.jpg", alt: "Operation Paws for Homes Dog Rescue Virginia, Maryland, Washington DC, York Pennsylvania" %>
+          </div>
+
+<% if Time.zone.now.between?((Time.zone.parse("2019-01-09 12:00").to_datetime), (Time.zone.parse("2019-04-14 12:00").to_datetime)) %>
+          <div class="item">
+            <%= image_tag "banner-5k-2019.jpg", alt: "Fast and Furriest 5k 2019" %>
+            <div class="carousel-caption">
+              <%= link_to "Register", "https://endurancecui.active.com/event-reg/select-race?e=54554854", :class => "btn btn-primary" %>
+              <%= link_to "Event Info", "https://www.facebook.com/events/528102047710638/", :class => "btn btn-primary" %>
+            </div>
+          </div>
+<% else %>
+          <div class="item">
+            <%= image_tag "lustreart.jpg", alt: "Lustre Art" %>
+            <div class="carousel-caption">
+              <%= link_to "Contact", "https://www.facebook.com/LustreArt", :class => "btn btn-primary btn-large" %>
+            </div>
+          </div>
+<% end %>
+        </div>
+        <a class="left carousel-control" href="#ophCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="right carousel-control" href="#ophCarousel" data-slide="next">&rsaquo;</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12 text-center well">
+        <%= link_to "Our Dogs", dogs_path, :class => "btn btn-primary btn-large", :id => "hero-dog" %>
+        <%= link_to "Apply for Adoption", new_adopter_path, :class => "btn btn-primary btn-large", :id => "hero-adopt" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span4 eventphoto">
+      <a href="/donate"><%= image_tag "home-donate.jpg", alt: "Donate" %></a>
+      <br />
+      <br />
+    </div>
+    <div class="span4 eventphoto">
+      <a href="/get-involved"><%= image_tag "home-get-involved.jpg", alt: "Get Involved" %></a>
+      <br />
+      <br />
+    </div>
+    <div class="span4 eventphoto">
+      <a href="/events"><%= image_tag "home-events.jpg", alt: "Events" %></a>
+      <br />
+      <br />
+    </div>
+  </div>
+<br />
+  <div class="row">
+    <div class="span12 hidden-tablet hidden-desktop">
+      <span class="pull-right">
+        <a href="https://www.facebook.com/Operationpawsforhomes"><i class="fa fa-facebook-square fa-3x"></i></a>
+        <a href="https://twitter.com/RescueOPH"><i class="fa fa-twitter-square fa-3x"></i></a>
+        <a href="http://instagram.com/operationpawsforhomes"><i class="fa fa-instagram fa-3x"></i></a>
+        <a href="https://www.youtube.com/user/RescueOPH"><i class="fa fa-youtube fa-3x"></i></a>
+        &nbsp; &nbsp;
+          <a href="http://greatnonprofits.org/reviews/operation-paws-for-homes/role:2/">
+            <%= image_tag "gnp-2018-award.png", alt: "2018 Top-rated nonprofits and charities" %>
+          </a>
+        </span>
+    </div>
+    <div class="row">
+      <div class="span12">
+        <a href="http://adoptapet.com"><%= image_tag "approved-rescue-badge.png", alt: "Adoptapet Approved Rescue" %></a>
+        <%= image_tag "best-of-fairfax-2016.png", alt: "Best of Fairfax 2016" %>
+        &nbsp; &nbsp;
+        <%= image_tag "best-of-fairfax-2017.jpg", alt: "Best of Fairfax 2017"%>
+         &nbsp; &nbsp;
+        <a href="http://vfhs.org/"><%= image_tag "vfhs.png" %></a>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+$('#ophCarousel').carousel({
+   interval: 6000
+});
+</script>
+
+</div>

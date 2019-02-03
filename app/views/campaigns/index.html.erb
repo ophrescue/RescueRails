@@ -2,11 +2,14 @@
   <div class='col-12' id='events_list'>
     <div class="row title_row">
       <div class="col-8 col-md-8">
-        <h1><%= "#{t(".title")}" %></h1>
+        <h1><%= "#{t(".title.#{@scope}")}" %></h1>
       </div>
       <% if can_edit_events? %>
         <div class="col-2 col-md-2 mb-2 mb-sm-0">
           <%= link_to "Create a Campaign", new_campaign_path, class: "btn btn-sm btn-success" %>
+        </div>
+        <div class="col-2 col-md-2 mb-2 mb-sm-0">
+          <%= link_to(alternate_campaign_scope_string, scoped_campaigns_path(alternate_campaign_scope), class: "btn btn-sm btn-secondary") %>
         </div>
       <% end %>
     </div>

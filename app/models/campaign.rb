@@ -36,6 +36,9 @@ class Campaign < ApplicationRecord
 
   has_many :donations, dependent: :restrict_with_error
 
+  scope :active, -> { where(active: true) }
+  scope :inactive, -> { where(active: false) }
+
   has_attached_file :primary_photo,
                     styles: { medium: '800x800>',
                               small: '400x400',

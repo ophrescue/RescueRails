@@ -84,15 +84,20 @@
   <div class="form-group row">
     <%= f.label :summary, nil, class: 'col-form-label col-sm-2 required' %>
     <%= f.text_area :summary, class: "form-control col-sm-6", :rows => "5", required: true, maxlength: 600 %>
-    <span class="form-text text-muted col-sm-10">Max 600 characters.  Supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>!</span>
+    <span class="form-text text-muted col-sm-10 offset-2">Max 600 characters.  Supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>!</span>
     <%= f.bootstrap_errors :summary, class: 'col-sm-12 offset-2'  %>
   </div>
 
   <div class="form-group row">
     <%= f.label :description, nil, class: 'col-form-label col-sm-2 required' %>
     <%= f.text_area :description, class: "form-control col-sm-6", :rows => "20", required: true %>
-    <span class="form-text text-muted col-sm-10">Supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>!</span>
+    <span class="form-text text-muted col-sm-10 offset-2">Supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>!</span>
     <%= f.bootstrap_errors :description, class: 'col-sm-12 offset-2'  %>
+  </div>
+
+  <div class="form-group form-check row">
+    <%= f.check_box :active %>
+    <%= f.label "Active Campaign", for: "campaign_active" %>
   </div>
 
   <%= submit_or_return_to(f, campaigns_path) %>

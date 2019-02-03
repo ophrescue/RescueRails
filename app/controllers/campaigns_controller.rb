@@ -19,7 +19,12 @@ class CampaignsController < ApplicationController
   before_action :find_campaign, only: %i[edit show update]
 
   def index
-    @campaigns = Campaign.order(created_at: :desc).paginate(page: params[:page], per_page: 30)
+    @scope =
+      case params[:scope]
+      when "active", "inactive" then params[:scope]
+      else "active"
+      end
+    @campaigns = Campaign.public_send(@scope).order(created_at: :desc).paginate(page: params[:page], per_page: 30)
   end
 
   def new
@@ -70,6 +75,7 @@ class CampaignsController < ApplicationController
               :summary,
               :description,
               :goal,
+              :active,
               :primary_photo,
               :primary_photo_file_name,
               :primary_photo_content_type,

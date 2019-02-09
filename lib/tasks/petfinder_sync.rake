@@ -8,6 +8,8 @@ namespace :petfinder_sync do
   photo_path = path + "photos/"
   filename = 'VA600.csv'
 
+  max_attempts = 5
+
   desc "Export Records to CSV with Top 3 Photos, upload to Petfinder"
   task export_upload: :environment do
     puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Petfinder Export Start"
@@ -57,10 +59,16 @@ namespace :petfinder_sync do
           d.photos.visible.order('updated_at desc')
           d.photos.visible[0..2].each do |p|
             counter += 1
+            attempt_count = 0
             begin
+              attempt_count += 1
               open(p.photo.url(:large)).read
             rescue OpenURI::HTTPError => error
                 puts "Photo not found for dog " + d.id.to_s
+            rescue SocketError, Net::ReadTimeout => e
+                puts "error: #{e}"
+                sleep 3
+                retry if attempt_count < max_attempts
             else
                 open(photo_path + d.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
                    file << open(p.photo.url(:large)).read

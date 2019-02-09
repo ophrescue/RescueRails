@@ -35,6 +35,8 @@ RescueRails::Application.routes.draw do
 
   get '/events/:scope', to: 'events#index', scope: /(past|upcoming)/, as: "scoped_events"
 
+  get '/campaigns/:scope', to: 'campaigns#index', scope: /(inactive|active)/, as: "scoped_campaigns"
+
   resources :adoptions,
             :adoption_app,
             :campaigns,

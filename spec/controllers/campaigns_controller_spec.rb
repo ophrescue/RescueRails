@@ -8,6 +8,26 @@ describe CampaignsController, type: :controller do
     end
   end
 
+  describe 'GET #index with active scope' do
+    let(:active_campaign) { create(:campaign, active: true) }
+    let(:inactive_campaign) { create(:campaign, active: false) }
+    it 'shows active campaigns' do
+      get :index, params: { scope: "active" }
+      expect(response).to be_successful
+      expect(assigns[:campaigns]).to eq [active_campaign]
+    end
+  end
+
+  describe 'GET #index with inactive scope' do
+    let(:active_campaign) { create(:campaign, active: true) }
+    let(:inactive_campaign) { create(:campaign, active: false) }
+    it 'shows active campaigns' do
+      get :index, params: { scope: "inactive" }
+      expect(response).to be_successful
+      expect(assigns[:campaigns]).to eq [inactive_campaign]
+    end
+  end
+
   describe 'GET #show' do
     let(:campaign) { create(:campaign) }
 

@@ -50,6 +50,9 @@ en:
       index: 'Our Dogs'
     campaigns:
       index: 'Campaigns'
+      title:
+      active: 'Active'
+      inactive: 'Inactive'
       new: 'Create a Campaign'
       edit: 'Edit Campaign'
       show: 'Campaign'
@@ -96,7 +99,9 @@ en:
     new:
       title: 'Create a Campaign'
     index:
-      title: 'Campaigns'
+      title:
+        active: "Active Campaigns"
+        inactive: "Inactive Campaigns"
     edit:
       title: 'Edit Campaigns'
   dogs:

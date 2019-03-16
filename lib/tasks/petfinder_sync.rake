@@ -56,7 +56,7 @@ namespace :petfinder_sync do
           next if d.photos.visible.empty?
 
           counter = 0
-          d.photos.visible.order('updated_at desc')
+          d.photos.visible.order('position asc')
           d.photos.visible[0..2].each do |p|
             counter += 1
             attempt_count = 0

@@ -36,7 +36,7 @@ namespace :adoptapet_sync do
       CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
         dogs.each do |d|
           photo_urls = Array.new
-          pics = d.photos.visible.reorder('updated_at desc')
+          pics = d.photos.visible.reorder('position asc')
           pics[0..3].each do |p|
             photo_urls << p.photo.url(:large)
           end

@@ -92,6 +92,11 @@
         alt: "Miller Toyota"
       },
       {
+        url:"https://www.oldetownepetresort.com/" ,
+        img: "oldetownepetresort.png",
+        alt: "Olde Towne Pet Resort"
+      },
+      {
         url: "https://www.pedigreefoundation.org",
         img: "pedigreefoundation.png",
         alt: "Pedigree Foundation"
@@ -147,6 +152,11 @@
     <h3>$500 - $999</h3>
 
     <% sponsors_500 =
+      {
+      url: "http://www.companionanimalclinicvirginia.com/" ,
+      img: "companionanimalclinicvirginia.jpg" ,
+      alt: "Companion Animal Clinic"
+      },
       {
         url: "https://www.keywcorp.com",
         img: "keywcorp.jpg",
@@ -218,6 +228,16 @@
         alt: "A Little Unique"
       },
       {
+        url: "http://www.awoiponline.com/" ,
+        img: "awoip.png" ,
+        alt: "AWOIP"
+      },
+      {
+        url: "https://baydog.com/",
+        img: "baydog.png",
+        alt: "baydog"
+      },
+      {
         url: "#",
         img: "bryant.png",
         alt: "Joan Bryant"
@@ -226,6 +246,11 @@
         url: "https://www.burkecentrepetsitting.com/",
         img: "burkecentrepetsitting.jpg",
         alt: "Burke Centre Pet Sitting"
+      },
+      {
+        url:"https://www.caninecancer.com/" ,
+        img: "caninecancer.jpg" ,
+        alt: "Canine Cancer"
       },
       {
         url: "http://www.dn3design.com/",
@@ -238,12 +263,22 @@
         alt: "Barbara Draughon"
       },
       {
+        url: "https://www.embracepetinsurance.com/",
+        img: "embracepetinsurance.png",
+        alt: "Embrace Pet Insurance"
+      },
+      {
         url: "#",
         img: "fink.png",
         alt: "Margaret Fink"
       },
       {
-        urm: "http://www.mynewfeet.com/",
+        url: "https://www.fccatering.com/" ,
+        img: "fccatering.jpg",
+        alt: "Fresh Connections Catering"
+      },
+      {
+        url: "http://www.mynewfeet.com/",
         img: "frederickfootankle.png",
         alt: "Frederick Foot and Ankle"
       },
@@ -251,6 +286,16 @@
         url: "#",
         img: "guindon.png",
         alt: "Stephanie Guindon"
+      },
+      {
+        url: "http://www.hhpaving.com/" ,
+        img: "hhpaving.jpg",
+        alt: "H and H Paving"
+      },
+      {
+        url: "https://www.hanoverautoteam.com/" ,
+        img: "hanoverautoteam.jpg" ,
+        alt: "Hanover Auto Team"
       },
       {
         url: "https://www.hemaxlandscaping.com/",
@@ -268,6 +313,11 @@
         alt: "Hungry Henry's Gelato"
       },
       {
+        url: "https://www.kcautoburke.com/" ,
+        img: "kcautoburke.jpg" ,
+        alt: "KC Automotive"
+      },
+      {
         url: "http://monument-title.com/",
         img: "monument-title.png",
         alt: "Monument Title Company"
@@ -276,11 +326,6 @@
         url: "#",
         img: "murphy.png",
         alt: "Steven Murphy"
-      },
-      {
-        url: "http://www.naturesnibbles.com/",
-        img: "naturesnibbles.jpg",
-        alt: "Natures Nibbles"
       },
       {
         url: "https://www.novec.com/",
@@ -293,6 +338,11 @@
         alt: "Off Leash K9 Training Maryland"
       },
       {
+        alt: "Patrick's Pet Care",
+        url: "https://patrickspetcare.com/",
+        img: "patrickspetcare.png",
+      },
+      {
         url: "https://www.parkwayvetclinic.com/",
         img: "parkway.jpg",
         alt: "Parkway Vet"
@@ -301,6 +351,11 @@
         url: "#",
         img: "parsons.png",
         alt: "Patricia Parsons"
+      },
+      {
+        url: "http://www.pimlicokey.com/" ,
+        img: "pimlicokey.png" ,
+        alt: "Pimlico Key"
       },
       {
         url: "http://www.poop911.com/",
@@ -313,9 +368,19 @@
         alt: "ProList"
       },
       {
+        url: "https://www.pureinsurance.com/" ,
+        img: "pureinsurance.jpg",
+        alt: "Pure Insurance"
+      },
+      {
         url: "https://www.rbkpetresort.com/",
         img: "rbkpetresort.png",
         alt: "Reisterstown Pet Resort and Spa"
+      },
+      {
+        url: "http://sahomeimprovement.us/" ,
+        img: "sahomeimprovement.jpg",
+        alt: "SA Home Improvement"
       },
       {
         url: "http://www.scoop-squad.com/",
@@ -326,6 +391,11 @@
         url: "https://www.facebook.com/snorklesway/",
         img: "snorklesway.jpg",
         alt: "Snorkle’s Way: Adaptive Dog Training, LLC"
+      },
+      {
+        url: "https://www.sunsetpetservices.com/" ,
+        img: "sunsetpetservices.jpg" ,
+        alt: "Sunset Pet Services"
       },
       {
         url: "#",
@@ -343,6 +413,11 @@
         alt: "Mike and Jennifer Wilkins"
       },
       {
+        url: "http://www.via-pet.com/" ,
+        img: "viaguard.jpg",
+        alt: "viaguard"
+      },
+      {
         url: "#",
         img: "zuckerman.png",
         alt: "Victoria and Harvey Zuckerman"
@@ -356,7 +431,7 @@
           <% slice.each do |spon| %>
             <li class="span2">
                 <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                  <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '125') %>
+                  <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '200') %>
                 </a>
             </li>
           <% end %>
@@ -376,6 +451,10 @@
         img: "1800petmeds.jpg"
       },
       {
+        url: "http://affectionatepetcare.com/" ,
+        img: "affectionatepetcare.jpg" ,
+      },
+      {
         url: "https://www.bissell.com/pets/partners-for-pets",
         img: "bissell.gif",
         alt: "Bissell"
@@ -384,6 +463,15 @@
         url: "http://www.bluedogbakery.com",
         img: "bluedogbakery.gif",
         alt: "Blue Dog Bakery"
+      },
+      {
+        url: "https://www.bunnyslippers.com/" ,
+        img: "bunnyslippers.jpg" ,
+      },
+      {
+        alt: "Caring Hands",
+        url: "http://caringhandsvet.com/",
+        img: "caringhandsvet.png"
       },
       {
         url: "https://chewy.com",
@@ -400,6 +488,10 @@
         img: "fizzionclean.png"
       },
       {
+        url: "https://hopecentervet.com/" ,
+        img: "hopecentervet.jpg" ,
+      },
+      {
         url: "http://www.justforpetsyorkpa.com/",
         img: "justforpets.png",
         alt: "Just for Pets"
@@ -407,6 +499,10 @@
       {
         url: "https://www.kindsnacks.com/",
         img: "kind_snacks.jpg"
+      },
+      {
+        url: "https://www.petconnectapp.com/" ,
+        img: "petconnectapp.gif" ,
       },
       {
         url: "https://www.petsafe.net",

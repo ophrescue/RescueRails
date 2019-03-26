@@ -23,7 +23,7 @@ FactoryBot.define do
     training_email_sent { false }
     dog_reqs { Faker::Lorem.sentence }
     why_adopt { Faker::Lorem.sentence }
-    dog_name { Faker::Dog.name }
+    dog_name { Faker::Creature::Dog.name }
     other_phone { Faker::PhoneNumber.phone_number }
     flag { Adopter::FLAGS.sample }
     is_subscribed { [true, false].sample }

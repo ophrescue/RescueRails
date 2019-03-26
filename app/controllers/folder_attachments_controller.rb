@@ -26,6 +26,7 @@
 
 class FolderAttachmentsController < ApplicationController
   before_action :require_login
+  before_action :unlocked_user
   before_action :dl_resource_user
 
   def index

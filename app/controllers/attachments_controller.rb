@@ -32,6 +32,7 @@
 
 class AttachmentsController < ApplicationController
   before_action :require_login
+  before_action :unlocked_user
 
   respond_to :html, :json
 

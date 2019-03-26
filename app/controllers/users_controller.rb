@@ -74,7 +74,10 @@
 #  social_media_manager         :boolean          default(FALSE)
 #  graphic_design               :boolean          default(FALSE)
 class UsersController < Clearance::UsersController
+  include ApplicationHelper
+
   before_action :require_login
+  before_action :unlocked_user
   before_action :correct_user, only: [:edit, :update]
   before_action :active_user, only: [:index]
   before_action :allowed_to_see_user, only: [:show]

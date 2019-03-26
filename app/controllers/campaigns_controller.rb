@@ -14,6 +14,7 @@
 
 class CampaignsController < ApplicationController
   before_action :require_login, except: %i[index show]
+  before_action :unlocked_user, except: %i[index show]
   before_action :edit_events_user, except: %i[index show]
   before_action :select_bootstrap41
   before_action :find_campaign, only: %i[edit show update]

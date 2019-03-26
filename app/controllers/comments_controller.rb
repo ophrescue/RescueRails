@@ -28,6 +28,7 @@
 class CommentsController < ApplicationController
 
   before_action :require_login
+  before_action :unlocked_user
   before_action :load_comment, only: %i(edit show update)
 
   respond_to :html, :json

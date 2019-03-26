@@ -17,14 +17,6 @@ module SessionsHelper
     current_user&.active?
   end
 
-  def is_locked?
-    if current_user.locked?
-      cookies.delete(:remember_token)
-      self.current_user = nil
-      redirect_to root, error: "Your Account is Locked"
-    end
-  end
-
   def is_admin?
     current_user.admin? unless current_user.nil?
   end

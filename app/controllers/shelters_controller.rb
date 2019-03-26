@@ -24,6 +24,7 @@
 
 class SheltersController < ApplicationController
   before_action :require_login
+  before_action :unlocked_user
   before_action :edit_dogs_user
 
   def index

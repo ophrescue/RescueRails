@@ -15,6 +15,7 @@ class DonationsController < ApplicationController
   PER_PAGE = 30
 
   before_action :require_login, except: %i[new create index]
+  before_action :unlocked_user, except: %i[new create index]
   before_action :admin_user, only: %i[history show]
   before_action :select_bootstrap41
 

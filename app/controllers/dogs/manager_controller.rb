@@ -69,6 +69,7 @@ class Dogs::ManagerController < Dogs::DogsBaseController
 
   before_action :send_unauthenticated_to_public_profile, only: %i[show]
   before_action :require_login
+  before_action :unlocked_user
   before_action :active_user
   before_action :admin_user, only: %i[destroy]
   before_action :add_dogs_user, only: %i[new create]

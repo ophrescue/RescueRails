@@ -71,4 +71,14 @@ module ApplicationHelper
     render partial: 'shared/submit_or_cancel', locals: {f:f, return_path:return_path}
   end
 
+  def unlocked_user
+    if current_user.locked?
+      cookies.delete(:remember_token)
+      flash[:error] = 'Your account is locked.  You must contact Joanne@ophrescue.org to reactivate your account'
+      redirect_to(root_path)
+    else
+      return true
+    end
+  end
+
 end

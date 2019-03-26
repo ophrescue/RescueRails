@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :dog do
     tracking_id { Dog.next_tracking_id }
     name {
-      until(nn = Faker::Dog.name; !Dog.pluck(:name).include?(nn))
+      until(nn = Faker::Creature::Dog.name; !Dog.pluck(:name).include?(nn))
       end
       # it's a workaround for TravisCI sorting weirdness.
       # It doesn't handle spaces inside names as expected

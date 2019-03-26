@@ -30,6 +30,7 @@
 
 class PhotosController < ApplicationController
   before_action :require_login
+  before_action :unlocked_user
 
   def sort
     params[:photo].each_with_index do |id, index|

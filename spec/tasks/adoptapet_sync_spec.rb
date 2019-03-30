@@ -10,14 +10,14 @@ describe 'adoptapet_sync:export_upload', type: :task do
     let!(:dog) { FactoryBot.create(:dog, status: 'adoptable', foster_id: foster.id, photos_attributes: [photo0,photo1,photo2,photo3,photo4].map(&:attributes)) }
     let!(:rake){ task.execute }
     let(:recent_photos){ Dog.first.photos.visible.sort_by{|photo| photo.position}}
-    let(:photo_urls){ recent_photos.map{|photo| photo.photo.url(:large)} }
+    let(:photo_urls){ recent_photos[0..3].map{|photo| photo.photo.url(:large)} }
     let(:csv) { CSV.read( '/tmp/adoptapet/pets_VA.csv' ) }
 
     it "should include most recent four photos for a dog" do
       csv_photos = csv.first[16..19]
       # just confirming recent_photos are the ones we want to upload
       # expect most recent first
-      expect(recent_photos.map(&:updated_at)).to be_sorted(:ascending)
+      expect(recent_photos.map(&:position)).to be_sorted(:ascending)
       expect(csv_photos).to eq photo_urls
     end
   end

@@ -494,7 +494,7 @@ DEPENDENCIES
   sucker_punch (~> 1.5.1)
   to_xls
   uglifier
-  unicorn (~> 5.4, >= 5.4.1)
+  unicorn
   whenever (~> 0.9.4)
   will_paginate
 

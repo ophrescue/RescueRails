@@ -36,7 +36,7 @@ gem 'dalli'
 gem 'pg', '~> 0.21.0'
 
 group :production do
-  gem 'unicorn'
+  gem "unicorn", "~> 5.5.0.1.g6836"
 end
 
 # Cool mail async stuff

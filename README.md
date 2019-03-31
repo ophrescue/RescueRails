@@ -134,7 +134,7 @@ For the production and staging environments, the path is formed by the concatena
 Supported browsers and platforms are those specified for the version of Boostrap incorporated. See the Bootstrap documentation: getting-started/browsers-devices for the appropriate version.
 
 ## Contributing
-Submit a volunteer application at https://ophrescue.org/volunteer if you'd like to be part of the team.  Pull Requests from non-team members will still be considered.  Work item priority is tracked on our GitHub Project.
+If you'd like to be part of the team, submit a volunteer application at https://ophrescue.org/volunteer.  Pull Requests from non-team members will still be considered.  Work item priority is tracked on our [GitHub Project](https://github.com/orgs/ophrescue/projects/1).
 
 ## Licensing
 * Source code written for this project has been licensed under the Apache 2.0 license

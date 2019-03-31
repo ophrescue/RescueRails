@@ -1,0 +1,16 @@
+<main role="main" class="container">
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <h5 class="border-bottom border-gray pb-2 mb-0">Nearby Events</h5>
+        <%= render partial: "event", collection: @upcoming_nearby_events %>
+    </div>
+
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <h5 class="border-bottom border-gray pb-2 mb-0">My Dogs</h5>
+        <%= render partial: "dog", collection: @my_dogs %>
+    </div>
+
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <h5 class="border-bottom border-gray pb-2 mb-0">My Adopters</h5>
+        <%= render partial: "adopter", collection: @my_adopters %>
+    </div>
+</main>

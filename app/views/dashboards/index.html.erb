@@ -1,5 +1,5 @@
 <main role="main" class="container-fluid">
-    <div class="row">
+    <div class="row bg-dark">
         <div class="col-md">
             <div class="my-3 p-3 bg-white rounded box-shadow">
                 <h5 class="border-bottom border-gray pb-2 mb-0">Bulletins</h5>
@@ -17,6 +17,21 @@
     <div class="row bg-lightblue">
         <div class="col-md">
             <div class="my-3 p-3 bg-white rounded box-shadow">
+                <h5 class="border-bottom border-gray pb-2 mb-0">My Dogs</h5>
+                <%= render partial: "dog", collection: @my_dogs %>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="my-3 p-3 bg-white rounded box-shadow">
+                <h5 class="border-bottom border-gray pb-2 mb-0">My Adopters</h5>
+                <%= render partial: "adopter", collection: @my_adopters %>
+            </div>
+        </div>
+    </div>
+
+    <div class="row bg-dark">
+        <div class="col-md">
+            <div class="my-3 p-3 bg-white rounded box-shadow">
                 <h5 class="border-bottom border-gray pb-2 mb-0">Upcoming Events</h5>
                 <%= render partial: "event", collection: @upcoming_nearby_events %>
             </div>
@@ -31,18 +46,5 @@
     </div>
 
 
-    <div class="row">
-        <div class="col-md">
-            <div class="my-3 p-3">
-                <h5 class="border-bottom border-gray pb-2 mb-0">My Dogs</h5>
-                <%= render partial: "dog", collection: @my_dogs %>
-            </div>
-        </div>
-        <div class="col-md">
-            <div class="my-3 p-3">
-                <h5 class="border-bottom border-gray pb-2 mb-0">My Adopters</h5>
-                <%= render partial: "adopter", collection: @my_adopters %>
-            </div>
-        </div>
-    </div>
+
 </main>

@@ -6,6 +6,6 @@
     <%= event.address %> <br />
 
     <%= event.start_time.strftime("%-l:%M %P") %> to <%= event.end_time.strftime("%-l:%M %P") %> <br />
-    <%= link_to("Event Details", event_path(event)) %>
+    <%= link_to("View", event_path(event)) %>
     </p>
 </div>

@@ -1,9 +1,11 @@
 <div class="media pt-3">
     <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+    <%= event.event_date.strftime("%A, %B %-e") %> <br />
     <strong class="d-block"><%= event.title %></strong>
     <%= event.location_name %> <br />
     <%= event.address %> <br />
-    <%= event.event_date.strftime("%A, %B %-e, %Y") %> from <%= event.start_time.strftime("%-l:%M %P") %> to <%= event.end_time.strftime("%-l:%M %P") %> <br />
+
+    <%= event.start_time.strftime("%-l:%M %P") %> to <%= event.end_time.strftime("%-l:%M %P") %> <br />
     <%= link_to("Event Details", event_path(event)) %>
     </p>
 </div>

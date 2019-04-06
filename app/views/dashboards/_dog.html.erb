@@ -1,6 +1,6 @@
 <div class="media pt-3">
     <%= image_tag(dog.primary_photo_url, size: "75x75", class: "rounded", alt: dog.photo_alt_text) %>
-    <p class="media-body pl-3 pb-3 mb-0 lh-125 border-bottom border-gray">
+    <p class="media-body pl-3 pb-3 mb-0 lh-125">
     <strong class="d-block"><%= dog.name %></strong>
     <span class="d-block"><%= dog.status %><span>
     <span class="d-block"><%= dog.primary_breed&.name %></span>

@@ -1,22 +1,20 @@
 <div class='container' id='events_list'>
+  <div class="row title_row">
+    <div class="col">
+      <h1><%= "#{t(".title.#{@scope}")}" %></h1>
+    </div>
+  </div>
   <% if can_edit_events? %>
-    <div class='col-2 offset-6 offset-sm-10'>
-      <%= link_to(alternate_scope_string, scoped_events_path(alternate_scope), class: "switch_view") %>
+  <div class="row">
+    <div class="col pb-5">
+      <%= link_to "Add an Event", new_event_path, class: "btn btn-primary" %>
+      <%= link_to(alternate_scope_string, scoped_events_path(alternate_scope), class: "btn btn-secondary") %>
     </div>
+  </div>
   <% end %>
-  <div class='col-12' id='events_list'>
-    <div class="row title_row">
-      <div class="col-8 col-md-8">
-        <h1><%= "#{t(".title.#{@scope}")}" %></h1>
-      </div>
-      <% if can_edit_events? %>
-        <div class="col-2 col-md-2 mb-2 mb-sm-0">
-          <%= link_to "Add an Event", new_event_path, class: "btn btn-sm btn-success" %>
-        </div>
-      <% end %>
-    </div>
-    <div class='col-12'>
-      <%= render(@events) || render(partial: 'no_events', locals: {current_scope: current_scope}) %>	
+  <div class="row">
+    <div class='col'>
+      <%= render(@events) || render(partial: 'no_events', locals: {current_scope: current_scope}) %>
     </div>
   </div>
 </div>

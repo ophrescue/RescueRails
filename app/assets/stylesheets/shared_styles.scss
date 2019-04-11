@@ -14,9 +14,6 @@ label.required:after {
 }
 
 .switch_view {
-  @extend .btn;
-  @extend .btn-sm;
-  @extend .btn-outline-secondary;
   font-size: 0.9rem;
 }
 

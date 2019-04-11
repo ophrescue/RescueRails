@@ -13,16 +13,6 @@ label.required:after {
   content: '*';
 }
 
-.switch_view {
-  font-size: 0.9rem;
-}
-
-@include media-breakpoint-up(md) {
-  .switch_view {
-    font-size: 1.2rem;
-  }
-}
-
 .title_row {
   margin-top: 20px;
   color: #ad8b22;

@@ -8,9 +8,9 @@
   </div>
   <div class="row pb-3">
     <div class="col">
-        <%= link_to("Public View", dogs_path, class: "switch_view btn btn-sm btn-secondary") %>
+        <%= link_to("Public View", dogs_path, class: "btn btn-secondary") %>
         <% if can_add_dogs? %>
-          <%= link_to "Add Dog", new_dogs_manager_path, :class => "btn btn-sm btn-success" %>
+          <%= link_to "Add Dog", new_dogs_manager_path, :class => "btn btn-primary" %>
         <% end %>
     </div>
   </div>

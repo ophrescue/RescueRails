@@ -76,7 +76,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'capybara-selenium'
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
   gem 'coveralls', require: false
   gem 'database_cleaner'
   gem 'rails-controller-testing'

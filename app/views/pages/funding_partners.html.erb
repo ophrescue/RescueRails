@@ -51,14 +51,14 @@
       }
     %>
 
-    <% sponsors_2500.each_slice(2) do |slice| %>
+    <% sponsors_2500.each_slice(3) do |slice| %>
       <div class="row">
         <div class="span12">
           <ul class="thumbnails">
           <% slice.each do |spon| %>
             <li class="span4">
               <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt]) %>
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '275') %>
               </a>
             </li>
           <% end %>
@@ -128,6 +128,11 @@
       },
       {
         url: "#",
+        img: "linda-wolf-homes.jpg",
+        alt: "Wolf Real Estate"
+      },
+      {
+        url: "#",
         img: "christina_young.png",
         alt: "Christina Young"
       },
@@ -145,7 +150,7 @@
           <% slice.each do |spon| %>
             <li class="span4">
               <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '175') %>
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '225') %>
               </a>
             </li>
           <% end %>
@@ -209,14 +214,14 @@
       }
     %>
 
-    <% sponsors_500.each_slice(6) do |slice| %>
+    <% sponsors_500.each_slice(4) do |slice| %>
       <div class="row">
         <div class="span12">
           <ul class="thumbnails">
           <% slice.each do |spon| %>
-            <li class="span2">
+            <li class="span3">
               <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-center-text thumbnail-no-border">
-                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '150') %>
+                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '200') %>
                 <% if spon[:show_text] %>
                   <%= spon[:alt] %>
                 <% end %>

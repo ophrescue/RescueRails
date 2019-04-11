@@ -14,14 +14,14 @@ feature 'add a new dog', js: true do
   end
 
   it "should cancel back to the manager list" do
-    click_link "Add a Dog"
+    click_link "Add Dog"
     expect(page_heading).to eq "Add a New Dog"
     click_link "Cancel"
     expect(page_heading).to eq "Dog Manager"
   end
 
   it "save the new dog" do
-    click_link "Add a Dog"
+    click_link "Add Dog"
     expect(page_heading).to eq "Add a New Dog"
     fill_in('Name', with: 'Fido')
     select('adoptable', from: 'Status')

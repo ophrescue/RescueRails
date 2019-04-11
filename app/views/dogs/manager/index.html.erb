@@ -1,20 +1,18 @@
-<div class='container' id='manager_list'>
-  <% if current_user&.active %>
-    <div class='row'>
-      <div class='col-2 offset-6 offset-sm-10'>
-          <%= link_to("Public View", dogs_path, class: "switch_view btn btn-sm btn-secondary") %>
-      </div>
-    </div>
-  <% end %>
+<div class="container" id="manager_list">
   <div class="row title_row">
-    <div class="col-8 col-md-8">
+    <div class="col">
       <h1><%= t('.title') %></h1>
     </div>
-    <% if can_add_dogs? %>
-      <div class="col-2 col-md-2 mb-2 mb-sm-0">
-        <%= link_to "Add a Dog", new_dogs_manager_path, :class => "btn btn-sm btn-success" %>
-      </div>
-    <% end %>
   </div>
-  <%= render partial: 'manager' %>
+  <div class="row">
+  </div>
+  <div class="row pb-3">
+    <div class="col">
+        <%= link_to("Public View", dogs_path, class: "switch_view btn btn-sm btn-secondary") %>
+        <% if can_add_dogs? %>
+          <%= link_to "Add Dog", new_dogs_manager_path, :class => "btn btn-sm btn-success" %>
+        <% end %>
+    </div>
+  </div>
+  <%= render partial: "manager" %>
 </div>

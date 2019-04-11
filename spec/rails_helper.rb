@@ -9,6 +9,7 @@ require 'capybara/rspec'
 require 'capybara/rails'
 require 'capybara-screenshot/rspec'
 require 'selenium/webdriver'
+require 'webdrivers'
 require 'drivers/selenium_chrome_headless'
 require 'drivers/selenium_firefox_headless'
 require 'drivers/selenium_firefox'
@@ -39,7 +40,7 @@ else # browserstack testing
 
   # Code to stop browserstack local after end of test
   at_exit do
-    @bs_local.stop unless @bs_local.nil? 
+    @bs_local.stop unless @bs_local.nil?
   end
 end
 

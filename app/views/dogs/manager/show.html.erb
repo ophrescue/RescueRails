@@ -136,6 +136,10 @@
         <dd id='heartworm_preventative'><%= @dog.heartworm_preventative || x_icon %></dd>
         <dt>Flea/Tick Preventative</dt>
         <dd id='flea_tick_preventative'><%= @dog.flea_tick_preventative || x_icon %></dd>
+        <dt>Dewormer</dt>
+        <dd id='dewormer'><%= @dog.dewormer || x_icon %></dd>
+        <dt>Toltrazuril</dt>
+        <dd id='toltrazuril'><%= @dog.toltrazuril || x_icon %></dd>
       </dl>
       <div class="d-block d-sm-none">
         <%= render partial: 'comments_audits' , locals: {device:'_small'}%>

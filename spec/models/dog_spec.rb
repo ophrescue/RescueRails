@@ -49,6 +49,8 @@
 #  flea_tick_preventative  :string
 #  medical_review_complete :boolean          default(FALSE)
 #  behavior_summary        :text
+#  dewormer                :string
+#  toltrazuril             :string
 #
 
 require 'rails_helper'

@@ -40,7 +40,7 @@
 </div>
 
 <%= form_tag adopters_path, :method => 'get', :class => 'form-inline'  do %>
-<%= text_field_tag :search, params[:search], placeholder: 'Search by Name or Email' %>
+<%= text_field_tag :search, params[:search], placeholder: 'Search by Name, Email or Phone' %>
 <%= submit_tag "Search", :name => nil %>
 <% end %>
 
@@ -71,5 +71,3 @@
 <% else %>
   <h3>No Records Found</h3>
 <% end %>
-
-

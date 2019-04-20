@@ -23,6 +23,38 @@ describe AdopterSearcher do
       end
     end
 
+    context 'by phone number - just numbers, main number' do
+      let!(:found_adopter) { create(:adopter, phone: '(213) 456-7890') }
+      let(:params) { { search: '2134567890' } }
+      it 'finds the correct adopter' do
+        expect(results).to match_array([found_adopter])
+      end
+    end
+
+    context 'by phone number - numbers and dashes, main number' do
+      let!(:found_adopter) { create(:adopter, phone: '(213) 456-7890') }
+      let(:params) { { search: '213-456-7890' } }
+      it 'finds the correct adopter' do
+        expect(results).to match_array([found_adopter])
+      end
+    end
+
+    context 'by phone number - parens and dash, main number' do
+      let!(:found_adopter) { create(:adopter, phone: '(213) 456-7890') }
+      let(:params) { { search: '(213) 456-7890' } }
+      it 'finds the correct adopter' do
+        expect(results).to match_array([found_adopter])
+      end
+    end
+
+    context 'by phone number - parens and dash, other number' do
+      let!(:found_adopter) { create(:adopter, other_phone: '(213) 456-7890') }
+      let(:params) { { search: '(213) 456-7890' } }
+      it 'finds the correct adopter' do
+        expect(results).to match_array([found_adopter])
+      end
+    end
+
     context 'by active status' do
       let!(:found_adopter) { create(:adopter, status: 'new') }
       let!(:other_adopter) { create(:adopter, status: 'denied') }

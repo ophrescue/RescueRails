@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 class AdopterSearcher
+  include ActionView::Helpers::NumberHelper
   PER_PAGE = 30
 
   STATUSES = [
@@ -23,7 +24,9 @@ class AdopterSearcher
     'approved'
   ].freeze
 
-  EMAIL_CHECK = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  EMAIL_CHECK = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
+
+  PHONE_CHECK = /\(?(?<areacode>[1]?[2-9]\d{2})\)?[\s-]?(?<prefix>[2-9]\d{2})[\s-]?(?<linenumber>[\d]{4})/i.freeze
 
   def initialize(params: {})
     @params = params
@@ -35,6 +38,9 @@ class AdopterSearcher
     if @params[:search]
       if email_search?
         @adopters = @adopters.where('adopters.email ILIKE ?', "%#{@params[:search].strip}%")
+      elsif phone_search?
+        formatted_phone = format_phone(@params[:search].strip)
+        @adopters = @adopters.where(phone: formatted_phone).or(@adopters.where(other_phone: formatted_phone))
       else
         @adopters = @adopters.where('adopters.name ILIKE ?', "%#{@params[:search].strip}%")
       end
@@ -105,6 +111,14 @@ class AdopterSearcher
 
   def email_search?
     @params[:search].match(EMAIL_CHECK)
+  end
+
+  def phone_search?
+    @params[:search].match(PHONE_CHECK)
+  end
+
+  def format_phone(phone)
+    number_to_phone(phone.tr('^0-9', ''), area_code: true)
   end
 
   def for_page(page = nil)

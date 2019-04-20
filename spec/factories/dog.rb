@@ -41,6 +41,8 @@ FactoryBot.define do
     bordetella { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
     heartworm_preventative { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
     flea_tick_preventative { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    dewormer { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
+    toltrazuril { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
 
     trait :with_comment do
       after(:create) do |dog|

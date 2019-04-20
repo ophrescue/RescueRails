@@ -160,6 +160,8 @@ feature 'edit a dog', js: true do
         fill_in(:dog_flea_tick_preventative, with: 'born in a barn')
         check(:dog_medical_review_complete)
         fill_in(:dog_behavior_summary, with: 'words describing behaviour')
+        fill_in(:dog_dewormer, with: 'duis aute')
+        fill_in(:dog_toltrazuril, with: 'excepteur sint')
 
         # add photos
         click_link('Add a Photo')
@@ -230,6 +232,8 @@ feature 'edit a dog', js: true do
         expect(dog.flea_tick_preventative).to eq 'born in a barn'
         expect(dog.medical_review_complete).to eq true
         expect(dog.behavior_summary).to eq 'words describing behaviour'
+        expect(dog.dewormer).to eq 'duis aute'
+        expect(dog.toltrazuril).to eq 'excepteur sint'
         expect(dog.photos.length).to eq 2
 
         expect(page_heading).to match 'newname'
@@ -275,6 +279,8 @@ feature 'edit a dog', js: true do
         expect(page.find('#flea_tick_preventative').text).to eq 'born in a barn'
         expect(page.find('#medical_review_complete')).to have_check_icon
         expect(page.find('#behavior_summary').text).to eq 'words describing behaviour'
+        expect(page.find('#dewormer').text).to eq 'duis aute'
+        expect(page.find('#toltrazuril').text).to eq 'excepteur sint'
         expect(page.all('#galleria .galleria-stage .galleria-image img').length).to eq 1
         expect(page.all('#galleria .galleria-thumbnails-container .galleria-image img').length).to eq 2
       end

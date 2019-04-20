@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_03_202130) do
+ActiveRecord::Schema.define(version: 2019_04_20_182534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,6 +247,8 @@ ActiveRecord::Schema.define(version: 2019_02_03_202130) do
     t.string "flea_tick_preventative"
     t.boolean "medical_review_complete", default: false
     t.text "behavior_summary"
+    t.string "dewormer"
+    t.string "toltrazuril"
     t.index ["age"], name: "index_dogs_on_age"
     t.index ["coordinator_id"], name: "index_dogs_on_coordinator_id"
     t.index ["foster_id"], name: "index_dogs_on_foster_id"

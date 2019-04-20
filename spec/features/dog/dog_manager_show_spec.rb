@@ -84,7 +84,9 @@ feature 'visit dog show page', js: true do
                       vac_4dx: nil,
                       bordetella: nil,
                       heartworm_preventative: nil,
-                      flea_tick_preventative: nil) }
+                      flea_tick_preventative: nil,
+                      dewormer: nil,
+                      toltrazuril: nil) }
 
     it "page shows default text for unknown attributes" do
       visit dogs_manager_path(dog)
@@ -104,6 +106,8 @@ feature 'visit dog show page', js: true do
       expect(page.find('#bordetella')).to have_x_icon
       expect(page.find('#heartworm_preventative')).to have_x_icon
       expect(page.find('#flea_tick_preventative')).to have_x_icon
+      expect(page.find('#dewormer')).to have_x_icon
+      expect(page.find('#toltrazuril')).to have_x_icon
     end
   end
 

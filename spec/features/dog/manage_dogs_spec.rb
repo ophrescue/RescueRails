@@ -50,7 +50,9 @@ feature 'View Dogs', js: true do
        "4DX",
        "Bordetella",
        "Heartworm Preventative",
-       "Flea/Tick Preventative"].each do |private_info|
+       "Flea/Tick Preventative",
+       "Dewormer",
+       "Toltrazuril"].each do |private_info|
         expect(page).to have_content private_info
       end
     end
@@ -107,7 +109,9 @@ feature 'View Dogs', js: true do
        "4DX",
        "Bordetella",
        "Heartworm Preventative",
-       "Flea/Tick Preventative"].each do |private_info|
+       "Flea/Tick Preventative",
+       "Dewormer",
+       "Toltrazuril"].each do |private_info|
         expect(page).to have_content private_info
       end
     end
@@ -164,7 +168,9 @@ feature 'View Dogs', js: true do
        "4DX",
        "Bordetella",
        "Heartworm Preventative",
-       "Flea/Tick Preventative"].each do |private_info|
+       "Flea/Tick Preventative",
+       "Dewormer",
+       "Toltrazuril"].each do |private_info|
         expect(page).to have_no_content private_info
       end
     end

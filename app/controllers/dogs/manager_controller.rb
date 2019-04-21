@@ -155,7 +155,7 @@ class Dogs::ManagerController < Dogs::DogsBaseController
               :petfinder_ad_url, :adoptapet_ad_url, :craigslist_ad_url, :youtube_video_url, :first_shots,
               :second_shots, :third_shots, :rabies, :vac_4dx, :heartworm_preventative, :flea_tick_preventative,
               :bordetella, :microchip, :original_name, :fee, :coordinator_id, :sponsored_by, :shelter_id,
-              :medical_summary, :behavior_summary, :medical_review_complete,
+              :medical_summary, :behavior_summary, :medical_review_complete, :dewormer, :toltrazuril,
               attachments_attributes: [ :attachment, :description, :updated_by_user_id, :_destroy, :id ],
               photos_attributes: [ :photo, :position, :is_private, :_destroy, :id ])
   end

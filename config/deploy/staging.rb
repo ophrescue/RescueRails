@@ -6,9 +6,9 @@ set :branch, "staging"
 # at filepaths
 set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
-set :server_name, "beagle.ophrescue.org"
+set :server_name, "69.164.216.112"
 
-server 'beagle.ophrescue.org', user: 'deploy', roles: %w{web app db}, primary: true
+server '69.164.216.112', user: 'deploy', roles: %w{web app db}, primary: true
 
 set :deploy_to, "/var/www/#{fetch(:full_app_name)}"
 

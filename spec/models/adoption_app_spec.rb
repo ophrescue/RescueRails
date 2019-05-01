@@ -39,6 +39,7 @@
 #  shot_flea_tick            :boolean
 #  verify_home_auth          :boolean          default(FALSE)
 #  has_family_under_18       :boolean
+#  birth_date                :date
 #
 
 require 'rails_helper'

@@ -71,14 +71,13 @@ class AdoptionApp < ApplicationRecord
   validates :birth_date, presence: true, unless: :is_ofage?
 
   def adopter_age
-    if birth_date.nil?
-      return
-    end
+    return unless birth_date
 
     today = Date.today
     age = today.year - birth_date.year
 
-    if birth_date.month < today.month || birth_date.day < today.day
+    if birth_date.month > today.month ||
+      (birth_date.month == today.month && birth_date.day > today.day)
       age -= 1
     end
 

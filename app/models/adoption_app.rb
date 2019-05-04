@@ -81,6 +81,6 @@ class AdoptionApp < ApplicationRecord
       age -= 1
     end
 
-    age <= 1 ? "#{age} year" : "#{age} years"
+    age == 1 ? "#{age} year" : "#{age} years"
   end
 end

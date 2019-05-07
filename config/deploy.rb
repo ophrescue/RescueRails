@@ -53,15 +53,12 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # which config files should be copied by deploy:setup_config
 # see documentation in lib/capistrano/tasks/setup_config.cap
 # for details of operations
-set(:config_files, %w(
-  nginx.conf
-  database.example.yml
-  log_rotation
-  monit
-  unicorn.rb
-  unicorn_init.sh
-  delayed_job.sh
-))
+set(:config_files, %w[nginx.conf
+                      log_rotation
+                      monit
+                      unicorn.rb
+                      unicorn_init.sh
+                      delayed_job.sh])
 
 # which config files should be made executable after copying
 # by deploy:setup_config
@@ -70,29 +67,23 @@ set(:executable_config_files, %w(
   delayed_job.sh
 ))
 
-# files which need to be symlinked to other parts of the
-# filesystem. For example nginx virtualhosts, log rotation
-# init scripts etc.
+# Reference config files kept in other places on our server
 set(:symlinks, [
   {
-    source: "nginx.conf",
-    link: "/etc/nginx/sites-enabled/{{full_app_name}}"
+    link: "config/database.yml",
+    source: "/var/www/config/database.yml"
   },
   {
-    source: "unicorn_init.sh",
-    link: "/etc/init.d/unicorn_{{full_app_name}}"
+    link: ".env.#{fetch(:stage)}",
+    source: "/var/www/config/.env.#{fetch(:stage)}"
   },
   {
-    source: "log_rotation",
-   link: "/etc/logrotate.d/{{full_app_name}}"
+    link: "config/initializers/setup_mail.rb",
+    source: "/var/www/config/setup_mail.rb"
   },
   {
-    source: "delayed_job.sh",
-   link: "/etc/init.d/delayed_job_{{full_app_name}}"
-  },
-  {
-    source: "monit",
-    link: "/etc/monit/conf.d/{{full_app_name}}.conf"
+    link: "config/newrelic.yml",
+    source: "/var/www/config/newrelic.yml"
   }
 ])
 

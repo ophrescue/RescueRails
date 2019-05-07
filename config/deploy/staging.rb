@@ -6,9 +6,9 @@ set :branch, "staging"
 # at filepaths
 set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
-set :server_name, "69.164.216.112"
+set :server_name, "staging.ophrescue.org"
 
-server '69.164.216.112', user: 'deploy', roles: %w{web app db}, primary: true
+server '96.126.107.86', user: 'deploy', roles: %w{web app db}, primary: true
 
 set :deploy_to, "/var/www/#{fetch(:full_app_name)}"
 
@@ -22,7 +22,7 @@ set :unicorn_worker_count, 3
 
 # whether we're using ssl or not, used for building nginx
 # config file
-set :enable_ssl, true
+set :enable_ssl, false
 
 
 # Custom SSH Options

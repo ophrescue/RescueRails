@@ -2,7 +2,7 @@ namespace :deploy do
   task :setup_config do
     on roles(:app) do
       # make the config dir
-      execute :mkdir, "-p #{shared_path}/config"
+      execute :mkdir, "-p #{shared_path}/config/initializers"
       full_app_name = fetch(:full_app_name)
 
       # config files to be uploaded to shared/config, see the

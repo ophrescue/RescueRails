@@ -71,19 +71,19 @@ set(:executable_config_files, %w(
 set(:symlinks, [
   {
     link: "config/database.yml",
-    source: "/var/www/config/database.yml"
+    source: "/var/www/rescuerails_ansible/config/database.yml"
   },
   {
     link: ".env.#{fetch(:stage)}",
-    source: "/var/www/config/.env.#{fetch(:stage)}"
+    source: "/var/www/rescuerails_ansible/config/.env.#{fetch(:stage)}"
   },
   {
     link: "config/initializers/setup_mail.rb",
-    source: "/var/www/config/setup_mail.rb"
+    source: "/var/www/rescuerails_ansible/config/setup_mail.rb"
   },
   {
     link: "config/newrelic.yml",
-    source: "/var/www/config/newrelic.yml"
+    source: "/var/www/rescuerails_ansible/config/newrelic.yml"
   }
 ])
 

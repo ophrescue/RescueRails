@@ -1,0 +1,12 @@
+[Unit]
+Description = <%= fetch(:application) %> delayed_job
+Requires = <%= fetch(:"#{prefix}_instance_services").join(" ") %>
+
+[Service]
+Type = oneshot
+RemainAfterExit = yes
+ExecStart  = /bin/true
+ExecReload = /bin/true
+
+[Install]
+WantedBy = default.target

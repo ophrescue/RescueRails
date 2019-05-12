@@ -1,0 +1,29 @@
+[Unit]
+Description = <%= fetch(:application) %> delayed_job (instance %i)
+PartOf = <%= fetch(:"#{prefix}_service") %>
+ReloadPropagatedFrom = <%= fetch(:"#{prefix}_service") %>
+
+[Service]
+Type = forking
+
+Environment = PATH=<%= fetch(:direct_rbenv_path) %>/shims:/usr/local/bin:/usr/bin:/bin
+Environment = RBENV_VERSION=<%= fetch(:rbenv_ruby) %>
+Environment = RBENV_ROOT=<%= fetch(:direct_rbenv_path) %>
+Environment = RAILS_ENV=<%= fetch(:rails_env) %>
+Environment = PWD=<%= current_path %>
+
+WorkingDirectory = <%= current_path %>
+
+ExecStart  = <%= fetch(:direct_rbenv_path) %>/bin/rbenv exec bundle exec bin/delayed_job -p <%= fetch(:application) %> -i %i start
+ExecStop   = <%= fetch(:direct_rbenv_path) %>/bin/rbenv exec bundle exec bin/delayed_job -p <%= fetch(:application) %> -i %i stop
+ExecReload = /bin/kill -HUP $MAINPID
+
+PIDFile = <%= shared_path %>/tmp/pids/delayed_job.%i.pid
+TimeoutStopSec = 22
+Restart = always
+
+User = deploy
+Group = deploy
+
+[Install]
+WantedBy = default.target

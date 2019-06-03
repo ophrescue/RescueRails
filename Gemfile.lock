@@ -220,7 +220,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (5.0.2)
     net_http_ssl_fix (0.0.10)
-    newrelic_rpm (6.2.0.354)
+    newrelic_rpm (6.4.0.356)
     nio4r (2.3.1)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)

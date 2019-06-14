@@ -345,17 +345,23 @@
             <li>
               <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
             </li>
+            <% if trainer[:membership] %>
             <li>
               <strong>Membership:</strong> <%= trainer[:membership] %>
             </li>
+            <% end %>
+            <% if trainer[:experience] %>
             <li>
               <strong>Experience:</strong> <%= trainer[:experience] %>
             </li>
+            <% end %>
             <li>
               <strong>Session Type:</strong> <%= trainer[:session_type] %>
             </li>
           </ul>
+          <% if trainer[:quote] %>
           <p><em>"<%= trainer[:quote] %></em>"</p>
+          <% end %>
         </div>
       </div>
 

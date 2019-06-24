@@ -32,6 +32,9 @@ namespace :deploy do
       symlinks.each do |symlink|
         sudo "ln -nfs #{sub_strings(symlink[:source])} #{shared_path}/#{symlink[:link]} "
       end
+
+      invoke 'systemd:unicorn:setup'
+      invoke 'systemd:delayed_job:setup'
     end
   end
 end

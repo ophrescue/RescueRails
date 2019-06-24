@@ -8,7 +8,7 @@ set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
 set :server_name, "staging.ophrescue.org"
 
-server '45.79.161.93', user: 'deploy', roles: %w{web app db}, primary: true
+server '50.116.48.118', user: 'deploy', roles: %w{web app db}, primary: true
 
 set :deploy_to, "/var/www/#{fetch(:full_app_name)}"
 

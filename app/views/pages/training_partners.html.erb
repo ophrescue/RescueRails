@@ -31,6 +31,17 @@
     quote: 'Creekside will work with you to design a custom-made training program that will give you the skills needed to have a positive relationship with your dog.'
   },
   {
+    name: 'Dog Training with Lisa',
+    logo: 'white-50x50.gif',
+    company_address: 'Gaithersburg, MD 20878',
+    phone: '240-454-4045',
+    email: 'doglover35@yahoo.com',
+    experience: 'I’m a veterinary technician and a dog show handler. I have over 35 years of experience working with dogs.',
+    session_type: '1-hour private lesson at client’s home within a reasonable distance from me.  Please schedule 1-2 weeks in advance.',
+    quote: 'I do Positive Reinforcement Training, with a Behavioral Approach, and a Holistic Approach. I believe each dog must be trained as an individual, because no two dogs are alike. I have over 35  years of experience training and showing dogs, having started as a Junior Handler in dog shows at the age of 15. I\'m also a Veterinary Technician with over 30 years of continuing education with Michigan State University, which enables me to spot behavioral problems that are caused by medical problem or genetics. I\'ve worked with rescues for many years, and one of my specialties is training rescues with severe fears and anxieties caused by abuse, abandonment, or neglect. I\'ve trained show dogs, therapy dogs, service dogs, blind dogs, rescue dogs, and dogs with severe emotional and behavioral problems. I do beginning and advanced obedience training for both puppies and adult dogs.
+I believe any dog can be trained, no matter what behavioral problems they\'re having, as long as you\'re willing to put the time and energy into it, and train with consistency and kindness.'
+  },
+  {
     name: 'Dogwood Elementary',
     logo: 'sponsors/dogwood.png',
     contact: 'Kathryn Boris ',
@@ -328,18 +339,22 @@
         </a>
         <div class="media-body">
           <ul class="unstyled">
+            <% if trainer[:contact] %>
             <li>
               <strong>Contact:</strong> <%= trainer[:contact] %>
             </li>
+            <% end %>
             <li>
               <strong>Company Address:</strong> <%= trainer[:company_address] %>
             </li>
             <% if trainer[:training_address] %>
               <strong>Training Address:</strong> <%= trainer[:training_address] %>
             <% end %>
+            <% if trainer[:website] %>
             <li>
               <strong>Website:</strong> <a href="<%= trainer[:website] %>"><%=trainer[:website] %></a>
             </li>
+            <% end %>
             <li>
               <strong>Phone:</strong> <%= trainer[:phone] %>
             </li>

@@ -2,7 +2,7 @@ namespace :deploy do
   task :setup_config do
     on roles(:app) do
       # make the config dir
-      execute :mkdir, "-p #{shared_path}/config"
+      execute :mkdir, "-p #{shared_path}/config/initializers"
       full_app_name = fetch(:full_app_name)
 
       # config files to be uploaded to shared/config, see the
@@ -16,18 +16,25 @@ namespace :deploy do
         smart_template file
       end
 
-      # which of the above files should be marked as executable
-      executable_files = fetch(:executable_config_files)
-      executable_files.each do |file|
-        execute :chmod, "+x #{shared_path}/config/#{file}"
+      # Make sure ~/.config/systemd/user exists https://awesomeprogrammer.com/blog/2018/11/18/user-systemd-and-capistrano/
+      execute :mkdir, "-p ~/.config/systemd/user"
+
+      # link stuff out to /etc
+      etclinks = fetch(:etclinks)
+
+      etclinks.each do |etclink|
+        sudo "ln -nfs #{shared_path}/#{etclink[:source]} #{sub_strings(etclink[:link])} "
       end
 
       # symlink stuff which should be... symlinked
       symlinks = fetch(:symlinks)
 
       symlinks.each do |symlink|
-        sudo "ln -nfs #{shared_path}/config/#{symlink[:source]} #{sub_strings(symlink[:link])}"
+        sudo "ln -nfs #{sub_strings(symlink[:source])} #{shared_path}/#{symlink[:link]} "
       end
+
+      invoke 'systemd:unicorn:setup'
+      invoke 'systemd:delayed_job:setup'
     end
   end
 end

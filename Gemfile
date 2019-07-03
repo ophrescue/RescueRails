@@ -89,11 +89,12 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano', '~> 3.11'
   gem 'capistrano-bundler', '~> 1.1.4'
   gem 'capistrano-rails', '~> 1.1.5'
   gem 'capistrano-rails-console', require: false
   gem 'capistrano-rbenv', '~> 2.0.3'
+  gem 'capistrano-systemd-multiservice', require: false
   gem 'powder'
   gem 'rubocop'
   gem 'rubocop-rspec'

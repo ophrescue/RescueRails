@@ -1,0 +1,26 @@
+[Unit]
+Description = <%= fetch(:application) %> unicorn rack server
+
+[Service]
+Environment = PATH=<%= fetch(:direct_rbenv_path) %>/shims:/usr/local/bin:/usr/bin:/bin
+Environment = RBENV_VERSION=<%= fetch(:rbenv_ruby) %>
+Environment = RBENV_ROOT=<%= fetch(:direct_rbenv_path) %>
+Environment = RAILS_ENV=<%= fetch(:rails_env) %>
+Environment = PWD=<%= current_path %>
+
+WorkingDirectory = <%= current_path %>
+
+ExecStart = <%= fetch(:direct_rbenv_path) %>/bin/rbenv exec bundle exec unicorn -c <%= current_path %>/config/unicorn.rb
+ExecReload = /bin/kill -USR2 $MAINPID
+
+PIDFile = <%= shared_path %>/tmp/pids/unicorn.pid
+KillSignal = SIGQUIT
+KillMode = process
+TimeoutStopSec = 62
+Restart = always
+
+User = deploy
+Group = deploy
+
+[Install]
+WantedBy = default.target

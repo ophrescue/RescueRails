@@ -31,6 +31,17 @@
     quote: 'Creekside will work with you to design a custom-made training program that will give you the skills needed to have a positive relationship with your dog.'
   },
   {
+    name: 'Dog Training with Lisa',
+    logo: 'white-50x50.gif',
+    company_address: 'Gaithersburg, MD 20878',
+    phone: '240-454-4045',
+    email: 'doglover35@yahoo.com',
+    experience: 'I’m a veterinary technician and a dog show handler. I have over 35 years of experience working with dogs.',
+    session_type: '1-hour private lesson at client’s home within a reasonable distance from me.  Please schedule 1-2 weeks in advance.',
+    quote: 'I do Positive Reinforcement Training, with a Behavioral Approach, and a Holistic Approach. I believe each dog must be trained as an individual, because no two dogs are alike. I have over 35  years of experience training and showing dogs, having started as a Junior Handler in dog shows at the age of 15. I\'m also a Veterinary Technician with over 30 years of continuing education with Michigan State University, which enables me to spot behavioral problems that are caused by medical problem or genetics. I\'ve worked with rescues for many years, and one of my specialties is training rescues with severe fears and anxieties caused by abuse, abandonment, or neglect. I\'ve trained show dogs, therapy dogs, service dogs, blind dogs, rescue dogs, and dogs with severe emotional and behavioral problems. I do beginning and advanced obedience training for both puppies and adult dogs.
+I believe any dog can be trained, no matter what behavioral problems they\'re having, as long as you\'re willing to put the time and energy into it, and train with consistency and kindness.'
+  },
+  {
     name: 'Dogwood Elementary',
     logo: 'sponsors/dogwood.png',
     contact: 'Kathryn Boris ',
@@ -84,17 +95,39 @@
     quote: 'I believe each dog is an individual. They are the ones that will tell us what motivates them to do or not to do a behavior. While their breed does play a role in their temperament, we all know that not all dogs are motivated by food/treats. Philosophy 1: I am not willing to do something to my dog that I\'m not willing to try to do first myself. Philosophy 2: A behavior is not good or bad unless you think it is. '
   },
   {
+    name: 'Boomerang K9',
+    logo: 'sponsors/boomerang-k9.jpg',
+    contact: 'Nikki Sheckells, Owner',
+    company_address: 'Mt. Airy, MD',
+    membership: 'AKC CGC and Trick Dog Evaluator, Professional Member of International Association of Canine Professionals, graduate of Tony Ancheta\'s Koehler Method of Dog Training course, Blue K9 Pedestal Training Certification, Canine Conditioning and Fitness Coach Certification through Do More With Your Dog',
+    phone: '443-632-4480',
+    email: 'nlm.dogtraining@gmail.com',
+    experience: '5 years professional, 10 years hobbyist/volunteer',
+    session_type: '1-hour private lesson in Mt Airy, MD; please contact to schedule',
+    quote: 'Successful training comes down to the relationship with your dog. By pursuing a relationship first, we will have an easier time establishing the obedience that follows. Every dog and handler are an individual team with needs that differ from others; a "one size fits all" training approach isn\'t going to work for everyone. We train the dog in front of us, not the dog who fits into a mold. Our ultimate goal in teaching obedience is to build better decision making; if we can help a dog learn to make good choices, obedience becomes an easy, fun part of everyday life, not a grueling drill we are forced to practice.'
+  },
+  {
     name: 'Show Me Your Dog Training ',
     logo: 'sponsors/showmeyourdog.jpg',
-    contact: 'Nikki Sheckells, Trainer',
+    contact: 'Dave Cochran, Owner/Head Trainer',
     company_address: '4707 Benson Avenue, Halethorpe, MD 21227',
     website: 'http://www.showmeyourdog.com/',
-    phone: '443-632-4480',
-    email: 'nikki@showmeyourdog.com',
-    membership: 'Professional Member of International Association of Canine Professionals, graduate of Tony Ancheta\'s Koehler Method of Dog Training course',
-    experience: '5 years professional, 10 years hobbyist/volunteer',
-    session_type: 'First free session will be a 1-hour private lesson.',
-    quote: 'Successful training comes down to the relationship with your dog. We recognize that every dog is an individual with needs that differ from others. A "one size fits all" training approach isn\'t going to work for everyone. We train the dog in front of us, regardless of generalized characteristics that may lean towards one training method over another. Our ultimate goal in teaching obedience is to build in your dog better decision making; if we can help a dog learn to make good choices on his own, obedience becomes an easy, fun part of everyday life, not a grueling drill we are forced to practice.'
+    phone: '240-997-5257',
+    email: 'Dave@showmeyourdog.com',
+    session_type: '45 minutes to an hour private lesson'
+  },
+  {
+    name: 'Snorkle\'s Way Adaptive Dog Training',
+    logo: 'sponsors/snorkles-way.png',
+    contact: 'Dianna Matteson, Owner',
+    company_address: '10317 Harp Rd., Walkersville, MD  21793 ',
+    website: 'https://www.snorkleswayadaptivedogtraining.com/',
+    phone: '410-736-3112',
+    email: 'dianna@snorkleswayadaptivedogtraining.com',
+    membership: 'IACP - International Association of Canine Professionals',
+    experience: '5 Years',
+    session_type: '45 minutes, one on one/private evaluation.  1-2 weeks notice is asked',
+    quote: 'Snorkle\'s Way offers both private and group sessions that incorporate basic obedience, trick training, canine fitness and leashed hikes into our programs.  I specialize in creating individualized programs for you and your dog, so that you get the most out of your training.  I believe that the right training tool is my humane tool that helps you and your dog build a positive relationship.'
   }
 
 
@@ -190,7 +223,7 @@
     email: 'espence@oldetownepetresort.com',
     membership: 'APDT, IACP',
     experience: '1+ Years',
-    session_type: '1-Hour private session Monday-Sunday AM or PM, by appointment',
+    session_type: 'One hour, in person initial training consultation, by appointment.',
     quote: 'I practice a balanced method of training that begins with positive reinforcement and guidance. As dogs become proficient in their training and develop a better understanding of new behaviors and commands, discipline is instilled to maintain reliability and consistency in their performance. '
   },
   {
@@ -306,35 +339,45 @@
         </a>
         <div class="media-body">
           <ul class="unstyled">
+            <% if trainer[:contact] %>
             <li>
-              <strong>Contact:</strong> <%= trainer[:name] %>
+              <strong>Contact:</strong> <%= trainer[:contact] %>
             </li>
+            <% end %>
             <li>
               <strong>Company Address:</strong> <%= trainer[:company_address] %>
             </li>
             <% if trainer[:training_address] %>
               <strong>Training Address:</strong> <%= trainer[:training_address] %>
             <% end %>
+            <% if trainer[:website] %>
             <li>
               <strong>Website:</strong> <a href="<%= trainer[:website] %>"><%=trainer[:website] %></a>
             </li>
+            <% end %>
             <li>
               <strong>Phone:</strong> <%= trainer[:phone] %>
             </li>
             <li>
               <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
             </li>
+            <% if trainer[:membership] %>
             <li>
               <strong>Membership:</strong> <%= trainer[:membership] %>
             </li>
+            <% end %>
+            <% if trainer[:experience] %>
             <li>
               <strong>Experience:</strong> <%= trainer[:experience] %>
             </li>
+            <% end %>
             <li>
               <strong>Session Type:</strong> <%= trainer[:session_type] %>
             </li>
           </ul>
+          <% if trainer[:quote] %>
           <p><em>"<%= trainer[:quote] %></em>"</p>
+          <% end %>
         </div>
       </div>
 

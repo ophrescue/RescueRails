@@ -9,7 +9,7 @@ set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 #set :server_name, "husky.ophrescue.org"
 set :server_name, "ophrescue.org"
 
-server 'prod-blue.ophrescue.org', user: 'deploy', roles: %w{web app db}, primary: true
+server '45.79.161.105', user: 'deploy', roles: %w{web app db}, primary: true
 
 set :deploy_to, "/var/www/#{fetch(:full_app_name)}"
 

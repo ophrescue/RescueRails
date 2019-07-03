@@ -23,7 +23,7 @@ set :unicorn_worker_count, 3
 
 # whether we're using ssl or not, used for building nginx
 # config file
-set :enable_ssl, true
+set :enable_ssl, false
 
 
 # Custom SSH Options

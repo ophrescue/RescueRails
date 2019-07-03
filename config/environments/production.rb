@@ -84,7 +84,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "ophrescue.org", protocol: "https://" }
 
   #Force SSL
-  config.force_ssl = true
+  config.force_ssl = false
 
   config.cache_store = :dalli_store
 

@@ -6,8 +6,7 @@ server {
   # These are calls from port 80 on the load balancer that should be redirected to https
   server_name <%= fetch(:server_name) %> www.<%= fetch(:server_name) %>;
   listen 8080;
-  return 200 "Hello port 8080";
-  # return 301 http://<%= fetch(:server_name) %>$request_uri;
+  return 301 https://<%= fetch(:server_name) %>$request_uri;
 }
 
 server {

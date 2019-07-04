@@ -10,6 +10,9 @@ addons:
   postgresql: '9.6'
   chrome: stable
   firefox: latest
+  apt:
+    packages:
+      - chromium-browser
 env:
   global:
   - ARTIFACTS_AWS_REGION=us-east-1

@@ -14,8 +14,8 @@ Environment = PWD=<%= current_path %>
 
 WorkingDirectory = <%= current_path %>
 
-ExecStart  = <%= fetch(:direct_rbenv_path) %>/bin/rbenv exec bundle exec bin/delayed_job -p <%= fetch(:application) %> -i %i start
-ExecStop   = <%= fetch(:direct_rbenv_path) %>/bin/rbenv exec bundle exec bin/delayed_job -p <%= fetch(:application) %> -i %i stop
+ExecStart  = <%= fetch(:direct_rbenv_path) %>/bin/rbenv exec bundle exec script/delayed_job -p <%= fetch(:application) %> -i %i start
+ExecStop   = <%= fetch(:direct_rbenv_path) %>/bin/rbenv exec bundle exec script/delayed_job -p <%= fetch(:application) %> -i %i stop
 ExecReload = /bin/kill -HUP $MAINPID
 
 PIDFile = <%= shared_path %>/tmp/pids/delayed_job.%i.pid

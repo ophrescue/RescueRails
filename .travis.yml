@@ -8,8 +8,10 @@ rvm:
 bundler_args: "--without production"
 addons:
   postgresql: '9.6'
-  chrome: stable
   firefox: latest
+  apt:
+    packages:
+      - google-chrome-stable
 env:
   global:
   - ARTIFACTS_AWS_REGION=us-east-1

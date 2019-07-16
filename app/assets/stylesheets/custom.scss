@@ -375,5 +375,33 @@ div .fb-like {
 
 // end BS4 Navbar colors
 
+// Bootstrap 4 User Navbar colors
+
+.navbar-user-custom {
+  background-color: #e7b93a;
+}
+
+/* change the color of active or hovered links */
+.navbar-user-custom  .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+  color: #333333;
+}
+
+/* for dropdown only - change the color of droodown */
+.navbar-user-custom  .dropdown-menu {
+  background-color: #aedfe3;
+}
+.navbar-user-custom  .dropdown-item {
+  color: #333333;
+}
+
+.navbar-user-custom  .dropdown-item:hover,
+.navbar-user-custom  .dropdown-item:focus {
+  color: #333333;
+  // background-color: rgba(255,255,255,.5);
+}
+
+// end BS4 User Navbar colors
+
 // BS4 Dashboard
 // end BS4 Dashboard

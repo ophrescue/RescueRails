@@ -1,19 +1,25 @@
-<main role="main" class="container-fluid">
-    <div class="row bg-dark">
+<main role="main" class="container">
+    <div class="row">
         <div class="col-md">
             <div class="my-3 p-3 bg-white rounded box-shadow">
-                <h5 class="border-bottom border-gray pb-2 mb-0">Bulletins</h5>
+                <h5 class="border-bottom border-gray pb-2 mb-0">Updates</h5>
                 <%= render partial: "bulletins" %>
             </div>
-        </div>
-        <div class="col-md">
+            <small class="d-block text-right mt-3">
+            <a href="#">All updates</a>
+            </small>
             <div class="my-3 p-3 bg-white rounded box-shadow">
                 <h5 class="border-bottom border-gray pb-2 mb-0">Opportunities</h5>
                 <%= render partial: "opportunities" %>
             </div>
+            <small class="d-block text-right mt-3">
+            <a href="#">All Opportunities</a>
+            </small>
         </div>
     </div>
 
+
+<!--
     <div class="row bg-lightblue">
         <div class="col-md">
             <div class="my-3 p-3 bg-white rounded box-shadow">
@@ -29,7 +35,8 @@
         </div>
     </div>
 
-    <div class="row bg-dark">
+
+    <div class="row">
         <div class="col-md">
             <div class="my-3 p-3 bg-white rounded box-shadow">
                 <h5 class="border-bottom border-gray pb-2 mb-0">Upcoming Events</h5>
@@ -44,7 +51,7 @@
             </div>
         </div>
     </div>
-
+!-->
 
 
 </main>

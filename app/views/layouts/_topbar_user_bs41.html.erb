@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light navbar-user-custom">
+  <div class="navbar-brand">
+    <%= link_to "OPH", root_path, :class => "brand" %>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon text-white"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarToggler">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item"><%= link_to "My Home", dashboards_path, class: "nav-link" %></li>
+      <% if can_edit_my_adopters? || can_edit_all_adopters? %>
+        <li class="nav-item"><%= link_to "Adopters", adopters_path( status: "active"), class: "nav-link "%>
+      <% end %>
+      <% if current_user.active? %>
+        <li class="nav-item"><%= link_to "Dog Mgr", dogs_manager_index_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Volunteers", users_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "DNA", banned_adopters_path, class: "nav-link" %></li>
+      <% else %>
+        <li class="nav-item"><%= link_to "Dogs", dogs_manager_index_path, class: "nav-link" %></li>
+      <% end %>
+      <li class="nav-item"><%= link_to "Events", scoped_events_path("upcoming"), class: "nav-link"  %></li>
+      <% if current_user.admin? %>
+          <li class="nav-item"><%= link_to "Donations", history_donations_path, class: "nav-link" %></li>
+      <% end %>
+      <% if can_dl_resources? %>
+        <li class="nav-item"><%= link_to "Files", folders_path, class: "nav-link" %></li>
+      <% end %>
+      <% if can_edit_dogs? %>
+        <li class="nav-item"><%= link_to "Shelters", shelters_path, class: "nav-link" %></li>
+      <% end %>
+      <li class="nav-item"><%= link_to "Profile", current_user, class: "nav-link" %></li>
+      <li class="nav-item"><%= link_to t('layouts.application.sign_out'), sign_out_path, class: "nav-link" %></li>
+    </ul>
+  </div>
+</nav >

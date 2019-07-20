@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Bulletins', js: true do
+feature 'Bulletin', js: true do
   scenario 'visit Bulletins as volunteer' do
     sign_in_as_admin
     visit bulletins_path
@@ -8,7 +8,7 @@ feature 'Bulletins', js: true do
   end
 
   scenario 'visit Bulletins as public user' do
-    visit bulletins
+    visit bulletins_path
     expect(current_path).to eq sign_in_path
   end
 end

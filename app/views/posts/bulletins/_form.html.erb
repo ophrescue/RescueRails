@@ -1,6 +1,5 @@
 <%= form_for @bulletin, url: @bulletin.new_record? ? bulletins_path : bulletin_path(@bulletin), :html=> { multipart: true, id: "post_form", class: "container form-horizontal needs-validation", autocomplete: 'off', novalidate: true } do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
-
   <div class="form-group">
     <%= f.label :title, nil, class: 'col-form-label col-form-label-sm col-2 required' %>
     <%= f.text_field :title, class: "form-control form-control-sm col-4", required: true, 'data-bootstrap41': true, maxlength: 255 %>

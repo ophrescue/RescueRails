@@ -67,10 +67,17 @@ en:
       past: 'Past Events'
       show: 'Events'
       new: 'Add an Event'
+    bulletins:
+      index: 'Bulletins'
+      show: 'Bulletins'
+      new: 'Add a Bulletin'
+      edit: 'Edit Bulletin'
     folders:
       edit: 'Edit Folder'
       index: 'Staff Resources'
       new: 'Create a New Folder'
+    dashboards:
+      index: 'Volunteer Dashboard'
     sessions:
       new: 'Sign In'
     shelters:
@@ -147,3 +154,11 @@ en:
       title:
         new: 'Add an Event'
         clone: 'Create Event by Copy'
+  posts:
+    bulletins:
+      index:
+        title: 'Bulletins'
+      edit:
+        title: 'Edit Bulletin'
+      new:
+        title: 'New Bulletin'

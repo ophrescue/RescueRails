@@ -1,0 +1,5 @@
+<h3><%= bulletin.title.titleize %></h3>
+
+<p class="small text-muted">Posted by <%= bulletin.user.name.titleize %> <%= time_ago_in_words(bulletin.created_at) %> ago.
+
+<p><%= markdown(bulletin.content) %></p>

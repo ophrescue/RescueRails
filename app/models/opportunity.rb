@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  id         :bigint           not null, primary key
+#  user_id    :bigint
+#  type       :string
+#  title      :string
+#  content    :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 
 #    Copyright 2019 Operation Paws for Homes
 #
@@ -13,19 +25,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-class DashboardsController < ApplicationController
-  include ApplicationHelper
+class Opportunity < Post
 
-  before_action :require_login
-  before_action :unlocked_user
-  before_action :select_bootstrap41
-
-  def index
-    @show_user_topbar = true
-    @current_user = current_user
-    @bulletins = Bulletin.order(:id)
-    # @upcoming_nearby_events = Event.where(event_date: Time.zone.today..3.weeks.from_now).near(current_user.location, 20).limit(10)
-    # @my_dogs = Dog.where(foster: current_user).where(status: Dog::ACTIVE_STATUSES).limit(10)
-    # @my_adopters = Adopter.where(user: current_user).limit(10)
-  end
 end

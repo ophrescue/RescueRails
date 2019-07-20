@@ -2,12 +2,16 @@
     <div class="row">
         <div class="col-md">
             <div class="my-3 p-3 bg-white rounded box-shadow">
-                <h5 class="border-bottom border-gray pb-2 mb-0">Updates</h5>
-                <%= render partial: "bulletins" %>
+                <h5 class="border-bottom border-gray pb-2 mb-0">Bulletins</h5>
+                <%= render partial: 'bulletin', collection: @bulletins %>
             </div>
             <small class="d-block text-right mt-3">
-            <a href="#">All updates</a>
+                <% if current_user.admin? %>
+                <%= link_to 'Create a Bulletin', new_bulletin_path %> <br />
+                <% end %>
+                <%= link_to 'All Bulletins', bulletins_path %>
             </small>
+<!--
             <div class="my-3 p-3 bg-white rounded box-shadow">
                 <h5 class="border-bottom border-gray pb-2 mb-0">Opportunities</h5>
                 <%= render partial: "opportunities" %>
@@ -15,6 +19,7 @@
             <small class="d-block text-right mt-3">
             <a href="#">All Opportunities</a>
             </small>
+!-->
         </div>
     </div>
 

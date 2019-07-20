@@ -31,6 +31,8 @@ RescueRails::Application.routes.draw do
     resources :adoptions
   end
 
+  resources :bulletins, controller: 'posts/bulletins'
+
   resources :sessions, only: %i[new create destroy]
 
   get '/events/:scope', to: 'events#index', scope: /(past|upcoming)/, as: "scoped_events"

@@ -70,8 +70,13 @@ en:
     bulletins:
       index: 'Bulletins'
       show: 'Bulletins'
-      new: 'Add a Bulletin'
+      new: 'Post a Bulletin'
       edit: 'Edit Bulletin'
+    opportunities:
+      index: 'Opportunities'
+      show: 'Opportunities'
+      new: 'Post an Opportunity'
+      edit: 'Edit Opportunity'
     folders:
       edit: 'Edit Folder'
       index: 'Staff Resources'
@@ -161,4 +166,11 @@ en:
       edit:
         title: 'Edit Bulletin'
       new:
-        title: 'New Bulletin'
+        title: 'Post Bulletin'
+    opportunities:
+      index:
+        title: 'Opportunities'
+      edit:
+        title: 'Edit Opportunity'
+      new:
+        title: 'Post Opportunity'

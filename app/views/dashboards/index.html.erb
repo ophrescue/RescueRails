@@ -3,23 +3,26 @@
         <div class="col-md">
             <div class="my-3 p-3 bg-white rounded box-shadow">
                 <h5 class="border-bottom border-gray pb-2 mb-0">Bulletins</h5>
-                <%= render partial: 'bulletin', collection: @bulletins %>
+                <%= render partial: 'bulletin', collection: @bulletins unless @bulletins.nil? %>
             </div>
             <small class="d-block text-right mt-3">
                 <% if current_user.admin? %>
-                <%= link_to 'Create a Bulletin', new_bulletin_path %> <br />
+                    <%= link_to 'Post a Bulletin', new_bulletin_path %> <br />
                 <% end %>
                 <%= link_to 'All Bulletins', bulletins_path %>
             </small>
-<!--
+
             <div class="my-3 p-3 bg-white rounded box-shadow">
                 <h5 class="border-bottom border-gray pb-2 mb-0">Opportunities</h5>
-                <%= render partial: "opportunities" %>
+                <%= render partial: "opportunity", collection: @opportunities unless @opportunities.nil? %>
             </div>
             <small class="d-block text-right mt-3">
-            <a href="#">All Opportunities</a>
+                <% if current_user.admin? %>
+                    <%= link_to 'Post an Opportunity', new_opportunity_path %> <br />
+                <% end %>
+                <%= link_to 'All Opportunities', opportunities_path %>
             </small>
-!-->
+
         </div>
     </div>
 

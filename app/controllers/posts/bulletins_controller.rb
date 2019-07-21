@@ -57,6 +57,7 @@ class Posts::BulletinsController < ApplicationController
   end
 
   def destroy
+    @bulletin = Bulletin.find_by(id: params[:id])
     @bulletin.destroy
     flash[:notice] = "Bulletin deleted"
     redirect_to bulletins_path

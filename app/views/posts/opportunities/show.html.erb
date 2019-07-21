@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3><%= @opportunity.title.titleize %></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="small text-muted">Posted by <%= @opportunity.user.name.titleize %> <%= time_ago_in_words(@opportunity.created_at) %> ago.
+      <p><%= markdown(@opportunity.content) %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <%= link_to_if(current_user.admin?, "Edit", edit_opportunity_path(@opportunity), class: "btn btn-sm btn-outline-secondary") %>
+        <%= link_to_if(current_user.admin?, "Delete", @opportunity, method: :delete, class: "btn btn-sm btn-outline-danger",
+                        data: { confirm: "Are you sure?"}, title: "Delete #{@opportunity.title}", id: 'delete_opportunity'){} %>
+    </div>
+  </div>
+</div>

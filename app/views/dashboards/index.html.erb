@@ -1,5 +1,10 @@
 <main role="main" class="container">
     <div class="row">
+        <div clas="col-md">
+            <div class="pl-3">
+                <p class="text-muted">Welcome back <%= @current_user.name.titleize%>, <%= link_to "profile", user_path(@current_user)%></p>
+            </div>
+        </div>
         <div class="col-md text-right">
             <a href="https://www.facebook.com/Operationpawsforhomes" target="_blank" rel="noopener"><i class="fa fa-facebook-square fa-2x"></i></a>
             <a href="https://twitter.com/RescueOPH" target="_blank" rel="noopener"><i class="fa fa-twitter-square fa-2x"></i></a>

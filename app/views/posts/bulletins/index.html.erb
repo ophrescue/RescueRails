@@ -4,6 +4,13 @@
       <h1><%= "#{t(".title")}" %></h1>
     </div>
   </div>
+  <% if current_user.admin? %>
+  <div class="row">
+    <div class="col pb-5">
+      <%= link_to "Add a Bulletin", new_bulletin_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+  <% end %>
   <div class="row">
     <div class="col">
       <%= render partial: 'posts/bulletins/bulletin', collection: @bulletins %>

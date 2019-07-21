@@ -20,7 +20,7 @@ class Posts::BulletinsController < ApplicationController
   before_action :admin_user, only: %i[new create edit update destroy]
 
   def index
-    @bulletins = Bulletin.order(:id)
+    @bulletins = Bulletin.order(created_at: :desc)
   end
 
   def new

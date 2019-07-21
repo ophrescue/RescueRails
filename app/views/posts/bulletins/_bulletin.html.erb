@@ -1,5 +1,15 @@
-<h3><%= bulletin.title.titleize %></h3>
 
-<p class="small text-muted">Posted by <%= bulletin.user.name.titleize %> <%= time_ago_in_words(bulletin.created_at) %> ago.
+<div class="row">
+    <div class="col pb-5">
+        <h3><%= bulletin.title.titleize %></h3>
 
-<p><%= markdown(bulletin.content) %></p>
+        <p class="small text-muted">Posted by <%= bulletin.user.name.titleize %> <%= time_ago_in_words(bulletin.created_at) %> ago.
+
+        <p><%= markdown(bulletin.content) %></p>
+
+        <%= link_to("View", bulletin, class: "btn btn-sm btn-primary") %>
+        <%= link_to_if(current_user.admin?, "Edit", edit_bulletin_path(bulletin), class: "btn btn-sm btn-outline-secondary") %>
+        <%= link_to_if(current_user.admin?, "Delete", bulletin, method: :delete, class: "btn btn-sm btn-outline-danger",
+                        data: { confirm: "Are you sure?"}, title: "Delete #{bulletin.title}", id: 'delete_bulletin'){} %>
+    </div>
+</div>

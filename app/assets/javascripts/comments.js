@@ -14,7 +14,7 @@
 
 $( function () {
 
-    $(document).on('click', '.toggle-edit-comment', function(e){
+    $(document).on('click touchstart', '.toggle-edit-comment', function(e){
       var $parent = $(e.target).parents('form.edit_comment');
       isEditing = $($parent).data("editing");
 

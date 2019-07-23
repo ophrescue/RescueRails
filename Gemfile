@@ -95,6 +95,8 @@ group :development do
   gem 'capistrano-rails-console', require: false
   gem 'capistrano-rbenv', '~> 2.0.3'
   gem 'capistrano-systemd-multiservice', require: false
+  gem 'ed25519', '>= 1.2', '< 2.0'
+  gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
   gem 'powder'
   gem 'rubocop'
   gem 'rubocop-rspec'

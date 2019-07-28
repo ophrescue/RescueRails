@@ -12,8 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-class Posts::BulletinsController < ApplicationController
-
+class BulletinsController < ApplicationController
   before_action :require_login
   before_action :unlocked_user
   before_action :select_bootstrap41
@@ -63,7 +62,6 @@ class Posts::BulletinsController < ApplicationController
     redirect_to bulletins_path
   end
 
-
   private
 
   def admin_user
@@ -75,8 +73,6 @@ class Posts::BulletinsController < ApplicationController
     params
       .require(:bulletin)
       .permit(:title,
-              :content
-             )
+              :content)
   end
-
 end

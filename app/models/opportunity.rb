@@ -26,5 +26,4 @@
 #    limitations under the License.
 
 class Opportunity < Post
-
 end

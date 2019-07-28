@@ -12,54 +12,52 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-class OpportunitiesController < ApplicationController
+class PostsController < ApplicationController
+  # before_action :set_type
   before_action :require_login
   before_action :unlocked_user
   before_action :select_bootstrap41
   before_action :admin_user, only: %i[new create edit update destroy]
 
   def index
-    @opportunities = Opportunity.order(created_at: :desc)
-  end
-
-  def new
-    @opportunity = Opportunity.new
-  end
-
-  def update
-    @opportunity = Opportunity.find_by(id: params[:id])
-    if @opportunity.update_attributes(opportunity_params)
-      flash[:success] = "Opportunity updated."
-      redirect_to opportunity_path
-    else
-      render 'edit'
-    end
-  end
-
-  def edit
-    @opportunity = Opportunity.find(params[:id])
+    @posts = type_class.order(created_at: :desc)
   end
 
   def show
-    @opportunity = Opportunity.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
+  def new
+    @post = type_class.new
+  end
+
+  def edit; end
+
   def create
-    @opportunity = Opportunity.new(opportunity_params)
-    @opportunity.user_id = current_user.id
-    if @opportunity.save
-      flash[:success] = "New Opportunity added"
-      redirect_to opportunities_path
+    @post = type_class.new(post_params)
+    @post.user_id = current_user.id
+    if @post.save
+      flash[:success] = "New #{params[:type]} added"
+      redirect_to @post
     else
       render 'new'
     end
   end
 
+  def update
+    if @post.update(post_params)
+      flash[:notice] = "#{params[:type]} updated"
+      redirect_to @post
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
-    @opportunity = Opportunity.find(params[:id])
-    @opportunity.destroy
-    flash[:notice] = "Opportunity deleted"
-    redirect_to opportunities_path
+    @post = Post.find_by(id: paras[:id])
+    @post.destroy
+    flash[:notice] = "#{params[:type]} deleted"
+    redirect_to dashboards_path
   end
 
   private
@@ -69,10 +67,15 @@ class OpportunitiesController < ApplicationController
     redirect_to(root_path) unless current_user.admin?
   end
 
-  def opportunity_params
-    params
-      .require(:opportunity)
-      .permit(:title,
-              :content)
+  def allowed_types
+    ['Bulletin', 'Opportunity']
+  end
+
+  def type_class
+    params[:type].constantize if params[:type].in? allowed_types
+  end
+
+  def post_params
+    params.require(type_class.name.underscore.to_sym).permit(:title, :content)
   end
 end

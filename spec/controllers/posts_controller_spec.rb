@@ -1,11 +1,6 @@
-# == Schema Information
-#
-# Table name: bulletins
-#
-
 require 'rails_helper'
 
-describe Posts::BulletinsController, type: :controller do
+describe PostsController, type: :controller do
   describe 'GET #index' do
     include_context 'signed in admin'
     it 'is successful' do
@@ -16,9 +11,9 @@ describe Posts::BulletinsController, type: :controller do
 
   describe 'GET #show' do
     include_context 'signed in admin'
-    let(:bulletin) { create(:bulletin) }
+    let(:opportunity) { create(:opportunity) }
     it 'is successful' do
-      get :show, params: { id: bulletin.id }
+      get :show, params: { id: opportunity.id }
 
       expect(response).to be_successful
     end
@@ -34,9 +29,9 @@ describe Posts::BulletinsController, type: :controller do
 
   describe 'GET #edit' do
     include_context 'signed in admin'
-    let(:bulletin) { create(:bulletin) }
+    let(:opportunity) { create(:opportunity) }
     it 'is successful' do
-      get :edit, params: { id: bulletin.id }
+      get :edit, params: { id: opportunity.id }
       expect(response).to be_successful
     end
   end
@@ -44,38 +39,38 @@ describe Posts::BulletinsController, type: :controller do
   describe 'POST #create' do
     context 'logged in as an admin' do
       include_context 'signed in admin'
-      it 'is able to create a bulletin' do
+      it 'is able to create a opportunity' do
         expect{
-          post :create, params: { bulletin: attributes_for(:bulletin) }
-        }.to change(Bulletin, :count).by(1)
+          post :create, params: { opportunity: attributes_for(:opportunity) }
+        }.to change(Opportunity, :count).by(1)
       end
     end
 
     context 'logged in as normal user' do
       include_context 'signed in user'
-      it 'is unable to create a bulletin' do
+      it 'is unable to create a opportunity' do
         expect{
-          post :create, params: { bulletin: attributes_for(:bulletin) }
-        }.to_not change(Bulletin, :count)
+          post :create, params: { opportunity: attributes_for(:opportunity) }
+        }.to_not change(Opportunity, :count)
       end
     end
   end
 
   describe 'PUT #update' do
-    let(:test_bulletin) { create(:bulletin, title: 'old title') }
-    let(:request) { -> { put :update, params: { id: test_bulletin.id, bulletin: attributes_for(:bulletin, title: 'new hotness') } } }
+    let(:test_opportunity) { create(:opportunity, title: 'old title') }
+    let(:request) { -> { put :update, params: { id: test_opportunity.id, opportunity: attributes_for(:opportunity, title: 'new hotness') } } }
 
     context 'logged in as admin' do
       include_context 'signed in admin'
-      it 'updates the bulletin name' do
-        expect { request.call }.to change { test_bulletin.reload.title }.from('old title').to('new hotness')
+      it 'updates the opportunity name' do
+        expect { request.call }.to change { test_opportunity.reload.title }.from('old title').to('new hotness')
       end
     end
 
     context 'logged in as normal user' do
       include_context 'signed in user'
-      it 'is unable to modify bulletin' do
-        expect { request.call }.to_not change { test_bulletin.reload.title }
+      it 'is unable to modify opportunity' do
+        expect { request.call }.to_not change { test_opportunity.reload.title }
       end
     end
   end

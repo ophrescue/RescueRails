@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-5">
-    <%= form_for @bulletin, url: @bulletin.new_record? ? bulletins_path : bulletin_path(@bulletin), :html=> { multipart: true, id: "post_form", class: "needs-validation", autocomplete: 'off', novalidate: true } do |f| %>
+    <%= form_with model: @post, multipart: true, id: "post_form", class: "needs-validation", autocomplete: 'off', novalidate: true do |f| %>
       <%= render 'shared/error_messages', :object => f.object %>
       <div class="form-group">
         <%= f.label :title, nil, class: 'col-form-label required' %>
@@ -14,7 +14,7 @@
         <%= f.bootstrap_errors :content %>
       </div>
 
-      <%= submit_or_return_to(f, bulletins_path) %>
+      <%= f.submit %>
 
     <% end %>
   </div>

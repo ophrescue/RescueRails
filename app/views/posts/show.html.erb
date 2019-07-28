@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3><%= @post.title.titleize %></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="small text-muted">Posted by <%= @post.user.name.titleize %> <%= time_ago_in_words(@post.created_at) %> ago.
+      <p><%= markdown(@post.content) %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <%= link_to_if(current_user.admin?, "Edit", edit_polymorphic_path(@post), class: "btn btn-sm btn-outline-secondary") %>
+        <%= link_to_if(current_user.admin?, "Delete", @post, method: :delete, class: "btn btn-sm btn-outline-danger",
+                        data: { confirm: "Are you sure?"}, title: "Delete #{@post.title}", id: 'delete_post'){} %>
+    </div>
+  </div>
+</div>

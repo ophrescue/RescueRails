@@ -31,8 +31,8 @@ RescueRails::Application.routes.draw do
     resources :adoptions
   end
 
-  resources :bulletins, controller: 'posts/bulletins'
-  resources :opportunities, controller: 'posts/opportunities'
+  resources :bulletins, controller: :posts, type: 'Bulletin'
+  resources :opportunities, controller: :posts, type: 'Opportunity'
 
   resources :sessions, only: %i[new create destroy]
 

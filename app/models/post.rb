@@ -27,8 +27,10 @@
 
 class Post < ActiveRecord::Base
   include ClientValidated
-
-  VALIDATION_ERROR_MESSAGES = {content: :blank}
+  VALIDATION_ERROR_MESSAGES = {content: :blank}.freeze
 
   belongs_to :user
+
+  scope :bulletins, -> { where(type: 'Bulletin') }
+  scope :opportunities, -> { where(type: 'Opportunity') }
 end

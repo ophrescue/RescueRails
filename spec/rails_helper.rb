@@ -52,7 +52,6 @@ RSpec.configure do |config|
   config.include LoginMacros
   config.include ActiveSupport::Testing::TimeHelpers
   config.include FactoryBot::Syntax::Methods
-  config.include Rack::Test::Methods, type: :request
 
   # Disable Rails transactional fixtures in favor of DatabaseCleaner
   config.use_transactional_fixtures = false

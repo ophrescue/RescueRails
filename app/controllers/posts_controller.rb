@@ -31,7 +31,9 @@ class PostsController < ApplicationController
     @post = type_class.new
   end
 
-  def edit; end
+  def edit
+    @post = Post.find(params[:id])
+  end
 
   def create
     @post = type_class.new(post_params)
@@ -45,6 +47,7 @@ class PostsController < ApplicationController
   end
 
   def update
+    @post = Post.find(params[:id])
     if @post.update(post_params)
       flash[:notice] = "#{params[:type]} updated"
       redirect_to @post
@@ -63,7 +66,7 @@ class PostsController < ApplicationController
   private
 
   def admin_user
-    flash[:error] = "You aren't allowed to do that." unless current_user.admin?
+    flash[:error] = "You are not allowed to do that." unless current_user.admin?
     redirect_to(root_path) unless current_user.admin?
   end
 

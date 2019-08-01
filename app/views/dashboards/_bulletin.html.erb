@@ -1,7 +1,6 @@
 <div class="media pt-3">
-    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-    <strong class="d-block"><%= bulletin.title.titleize %></strong>
-    <%= bulletin.content %> <br />
-    <%= link_to("View", bulletin) %>
-    </p>
+    <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+    <h6 class="d-block"><%= link_to(bulletin.title.titleize, bulletin) %></h6>
+    <%= markdown(bulletin.content) %> <br />
+    </div>
 </div>

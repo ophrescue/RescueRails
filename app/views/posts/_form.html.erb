@@ -12,6 +12,7 @@
         <%= f.label :content, nil, class: 'col-form-label required' %>
         <%= f.text_area :content, class: "form-control ", :rows => "5", required:true %>
         <%= f.bootstrap_errors :content %>
+        <span class="form-text text-muted">This field supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank" rel="noopener">Markdown</a>!</span>
       </div>
 
       <%= f.submit %>

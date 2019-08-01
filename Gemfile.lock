@@ -51,8 +51,8 @@ GEM
       rake (>= 10.4, < 13.0)
     arel (9.0.0)
     ast (2.4.0)
-    audited (4.8.0)
-      activerecord (>= 4.0, < 5.3)
+    audited (4.9.0)
+      activerecord (>= 4.2, < 6.1)
     autoprefixer-rails (9.5.1)
       execjs
     aws-eventstream (1.0.3)

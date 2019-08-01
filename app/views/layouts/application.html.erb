@@ -66,11 +66,7 @@
     <!--[if lte IE 6]><script src="js/ie6/warning.js"></script><script>window.onload=function(){e("/assets/ie6warn/")}</script><![endif]-->
   <% if @hide_topbar.nil? %>
     <% if @bootstrap41 %>
-      <% if @show_user_topbar.nil? %>
-        <%= render 'layouts/topbar_bs41' %>
-      <% else %>
-        <%= render 'layouts/topbar_user_bs41' %>
-      <% end %>
+      <%= render 'layouts/topbar_bs41' %>
     <% else %>
       <%= render 'layouts/topbar' %>
     <% end %>

@@ -67,10 +67,22 @@ en:
       past: 'Past Events'
       show: 'Events'
       new: 'Add an Event'
+    bulletins:
+      index: 'Bulletins'
+      show: 'Bulletins'
+      new: 'Post a Bulletin'
+      edit: 'Edit Bulletin'
+    opportunities:
+      index: 'Opportunities'
+      show: 'Opportunities'
+      new: 'Post an Opportunity'
+      edit: 'Edit Opportunity'
     folders:
       edit: 'Edit Folder'
       index: 'Staff Resources'
       new: 'Create a New Folder'
+    dashboards:
+      index: 'Volunteer Dashboard'
     sessions:
       new: 'Sign In'
     shelters:
@@ -147,3 +159,18 @@ en:
       title:
         new: 'Add an Event'
         clone: 'Create Event by Copy'
+  posts:
+    bulletins:
+      index:
+        title: 'Bulletins'
+      edit:
+        title: 'Edit Bulletin'
+      new:
+        title: 'Post Bulletin'
+    opportunities:
+      index:
+        title: 'Opportunities'
+      edit:
+        title: 'Edit Opportunity'
+      new:
+        title: 'Post Opportunity'

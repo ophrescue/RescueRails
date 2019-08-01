@@ -1,20 +1,41 @@
 <main role="main" class="container">
     <div class="row">
+        <div clas="col-md">
+            <div class="pl-3">
+                <p class="text-muted">Welcome back <%= link_to @current_user.name.titleize, user_path(@current_user) %> </p>
+            </div>
+        </div>
+        <div class="col-md text-right">
+            <a href="https://www.facebook.com/Operationpawsforhomes" target="_blank" rel="noopener"><i class="fa fa-facebook-square fa-2x"></i></a>
+            <a href="https://twitter.com/RescueOPH" target="_blank" rel="noopener"><i class="fa fa-twitter-square fa-2x"></i></a>
+            <a href="http://instagram.com/operationpawsforhomes" target="_blank" rel="noopener"><i class="fa fa-instagram fa-2x"></i></a>
+            <a href="https://www.youtube.com/user/RescueOPH" target="_blank" rel="noopener"><i class="fa fa-youtube fa-2x"></i></a>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md">
             <div class="my-3 p-3 bg-white rounded box-shadow">
-                <h5 class="border-bottom border-gray pb-2 mb-0">Updates</h5>
-                <%= render partial: "bulletins" %>
+                <h5 class="border-bottom border-gray pb-2 mb-0">Bulletins</h5>
+                <%= render partial: 'bulletin', collection: @bulletins unless @bulletins.nil? %>
             </div>
             <small class="d-block text-right mt-3">
-            <a href="#">All updates</a>
+                <% if current_user.admin? %>
+                    <%= link_to 'Post a Bulletin', new_bulletin_path %> <br />
+                <% end %>
+                <%= link_to 'All Bulletins', bulletins_path %>
             </small>
+
             <div class="my-3 p-3 bg-white rounded box-shadow">
                 <h5 class="border-bottom border-gray pb-2 mb-0">Opportunities</h5>
-                <%= render partial: "opportunities" %>
+                <%= render partial: "opportunity", collection: @opportunities unless @opportunities.nil? %>
             </div>
             <small class="d-block text-right mt-3">
-            <a href="#">All Opportunities</a>
+                <% if current_user.admin? %>
+                    <%= link_to 'Post an Opportunity', new_opportunity_path %> <br />
+                <% end %>
+                <%= link_to 'All Opportunities', opportunities_path %>
             </small>
+
         </div>
     </div>
 

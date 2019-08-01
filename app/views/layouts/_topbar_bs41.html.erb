@@ -62,6 +62,7 @@
         <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Staff</a>
           <div class="dropdown-menu">
+              <%= link_to "Dashboard", dashboards_path, class: "nav-link" %>
             <% if can_edit_my_adopters? || can_edit_all_adopters? %>
               <%= link_to "Applications",  adopters_path( status: "active"), class: "nav-link" %>
             <% end %>

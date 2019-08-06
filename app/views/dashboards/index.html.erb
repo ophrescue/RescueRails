@@ -14,32 +14,33 @@
     </div>
     <div class="row">
         <div class="col-md">
-            <div class="my-3 p-3 bg-white rounded box-shadow">
-                <h4 class="border-bottom border-gray pb-2 mb-0">Bulletins</h5>
+            <h4 class="border-bottom border-gray">Bulletins</h4>
+            <ul class="list-unstyled">
                 <%= render partial: 'bulletin', collection: @bulletins unless @bulletins.nil? %>
-            </div>
+            </ul>
             <small class="d-block text-right mt-3">
                 <% if current_user.admin? %>
                     <%= link_to 'Post a Bulletin', new_bulletin_path %> <br />
                 <% end %>
                 <%= link_to 'All Bulletins', bulletins_path %>
             </small>
+        </div>
+    </div>
 
-            <div class="my-3 p-3 bg-white rounded box-shadow">
-                <h4 class="border-bottom border-gray pb-2 mb-0">Opportunities</h5>
+    <div class="row">
+        <div class="col-md">
+            <h4 class="border-bottom border-gray">Opportunities</h4>
+            <ul class="list-unstyled">
                 <%= render partial: "opportunity", collection: @opportunities unless @opportunities.nil? %>
-            </div>
+            </ul>
             <small class="d-block text-right mt-3">
                 <% if current_user.admin? %>
                     <%= link_to 'Post an Opportunity', new_opportunity_path %> <br />
                 <% end %>
                 <%= link_to 'All Opportunities', opportunities_path %>
             </small>
-
         </div>
     </div>
-
-
 <!--
     <div class="row bg-lightblue">
         <div class="col-md">

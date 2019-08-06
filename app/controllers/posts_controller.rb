@@ -57,7 +57,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by(id: paras[:id])
+    @post = Post.find(params[:id])
     @post.destroy
     flash[:notice] = "#{params[:type]} deleted"
     redirect_to dashboards_path

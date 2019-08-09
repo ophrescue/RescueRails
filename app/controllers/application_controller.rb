@@ -35,4 +35,8 @@ class ApplicationController < ActionController::Base
   def select_bootstrap41
     @bootstrap41 = true
   end
+
+  def show_user_navbar
+    @show_user_topbar = true
+  end
 end

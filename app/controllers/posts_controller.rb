@@ -17,6 +17,7 @@ class PostsController < ApplicationController
   before_action :require_login
   before_action :unlocked_user
   before_action :select_bootstrap41
+  before_action :show_user_navbar
   before_action :admin_user, only: %i[new create edit update destroy]
 
   def index

@@ -19,9 +19,9 @@ class DashboardsController < ApplicationController
   before_action :require_login
   before_action :unlocked_user
   before_action :select_bootstrap41
+  before_action :show_user_navbar
 
   def index
-    @show_user_topbar = true
     @current_user = current_user
     @bulletins = Bulletin.order(created_at: :desc).limit(5)
     @opportunities = Opportunity.order(created_at: :desc).limit(5)

@@ -65,6 +65,8 @@ class Dogs::DogsBaseController < ApplicationController
 
   PER_PAGE = 30
 
+  before_action :show_user_navbar
+
   def show
     session[:last_dog_manager_search] ||= dogs_manager_index_url
     @title = @dog.name

@@ -4,11 +4,11 @@
     <% if can_edit_my_adopters? || can_edit_all_adopters? %>
       <%= link_to "Adopters", adopters_path( status: "active"), class: "nav-link "%>
     <% end %>
-    <% if current_user.active? %>
+    <% if current_user.active? || current_user.admin? %>
       <%= link_to "DNA", banned_adopters_path, class: "nav-link" %>
     <% end %>
-    <%= link_to "Dogs", dogs_manager_index_path, class: "nav-link" %>
-    <% if current_user.active? %>
+    <%= link_to "Dog Mgr", dogs_manager_index_path, class: "nav-link" %>
+    <% if current_user.active? || current_user.admin? %>
       <%= link_to "Volunteers", users_path, class: "nav-link" %>
     <% end %>
     <% if current_user.admin? %>

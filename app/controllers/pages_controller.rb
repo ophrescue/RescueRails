@@ -13,8 +13,9 @@
 #    limitations under the License.
 
 class PagesController < ApplicationController
-  before_action :require_login, only: [:status_definitions]
-  before_action :select_bootstrap41, only: [:home]
+  before_action :require_login, only: %i[status_definitions newsletter]
+  before_action :select_bootstrap41, only: %i[home newsletter]
+  before_action :show_user_navbar, only: %i[newsletter]
 
   def status_definitions
     @hide_topbar = true

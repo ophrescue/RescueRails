@@ -1,7 +1,6 @@
 <div class="nav-scroller shadow-sm">
   <nav class="nav nav-underline">
     <%= link_to "Dashboard", dashboards_path, class: "nav-link" %>
-    <a href="/newsletter" class="nav-link">Newsletters</a>
     <% if can_edit_my_adopters? || can_edit_all_adopters? %>
       <%= link_to "Adopters", adopters_path( status: "active"), class: "nav-link "%>
     <% end %>
@@ -12,6 +11,7 @@
     <% if current_user.active? || current_user.admin? %>
       <%= link_to "Volunteers", users_path, class: "nav-link" %>
     <% end %>
+    <a href="/newsletters" class="nav-link">Newsletters</a>
     <% if current_user.admin? %>
         <%= link_to "Donations", history_donations_path, class: "nav-link" %>
     <% end %>

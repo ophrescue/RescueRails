@@ -130,6 +130,12 @@ For the test environment, the storage is ephemeral and files are destroyed at th
 
 For the production and staging environments, the path is formed by the concatenation of AWS ENV variables, and the path strings stored in PAPERCLIP_STORAGE_PATH constant.
 
+## Contributing
+
+If you're very new to web development or to Ruby on Rails, you'll have a lot to learn before you get started.  I recommend [learnenough.com](https://www.learnenough.com/) and [railstutorial.org](https://www.railstutorial.org/) as imporant first steps to complete.
+
+Otherwise, Pull Requests are always welcome, see our [project](https://github.com/orgs/ophrescue/projects/1) for backlog items.  Please include some rspec tests to verify your work.  If you'd like to be a regular contributor and work on some of the more involved items in the backlog, please submit a volunteer application at https://ophrescue.org/volunteer.  Thanks!
+
 ## Browser Support
 Supported browsers and platforms are those specified for the version of Boostrap incorporated. See the Bootstrap documentation: getting-started/browsers-devices for the appropriate version.
 

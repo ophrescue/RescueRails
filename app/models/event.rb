@@ -86,8 +86,8 @@ class Event < ApplicationRecord
   validates_attachment_size :photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
   validates_attachment_content_type :photo, content_type: MIME_TYPES
 
-  scope :upcoming, ->{ where("event_date >= ?", Date.today).limit(30).order('event_date ASC')  }
-  scope :past,     ->{ where("event_date < ?",  Date.today).limit(30).order('event_date DESC') }
+  scope :upcoming, ->{ where("event_date >= ?", Date.today).order('event_date ASC') }
+  scope :past,     ->{ where("event_date < ?",  Date.today).order('event_date DESC') }
 
   def upcoming?
     event_date >= Date.today

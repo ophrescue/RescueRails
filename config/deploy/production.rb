@@ -10,6 +10,7 @@ set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 set :server_name, "ophrescue.org"
 
 server '45.79.161.105', user: 'deploy', roles: %w{web app db}, primary: true
+server '173.255.234.243 ', user: 'deploy', roles: %w{web app db}
 
 set :deploy_to, "/var/www/#{fetch(:full_app_name)}"
 
@@ -24,7 +25,6 @@ set :unicorn_worker_count, 3
 # whether we're using ssl or not, used for building nginx
 # config file
 set :enable_ssl, false
-
 
 # Custom SSH Options
 # ==================

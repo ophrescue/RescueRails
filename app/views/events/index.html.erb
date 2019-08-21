@@ -14,7 +14,9 @@
   <% end %>
   <div class="row">
     <div class='col'>
+      <%= will_paginate(@events, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
       <%= render(@events) || render(partial: 'no_events', locals: {current_scope: current_scope}) %>
+      <%= will_paginate(@events, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
     </div>
   </div>
 </div>

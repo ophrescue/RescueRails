@@ -47,13 +47,15 @@ class EventsController < ApplicationController
   before_action :select_bootstrap41
   before_action :find_event, only: [:destroy, :edit, :show, :update]
 
+  PER_PAGE = 15
+
   def index
     @scope =
       case params[:scope]
       when "upcoming", "past" then params[:scope]
       else "upcoming"
       end
-    @events = Event.public_send(@scope)
+    @events = Event.public_send(@scope).paginate(page: params[:page], per_page: PER_PAGE)
     @title = t(".title.#{@scope}")
   end
 

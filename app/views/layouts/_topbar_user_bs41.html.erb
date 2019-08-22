@@ -11,7 +11,6 @@
     <% if current_user.active? || current_user.admin? %>
       <%= link_to "Volunteers", users_path, class: "nav-link" %>
     <% end %>
-    <a href="/newsletters" class="nav-link">Newsletters</a>
     <% if current_user.admin? %>
         <%= link_to "Donations", history_donations_path, class: "nav-link" %>
     <% end %>

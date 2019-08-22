@@ -71,7 +71,7 @@ class EventsController < ApplicationController
 
     if @event.update_attributes(event_params)
       flash[:success] = "Event updated."
-      redirect_to scoped_events_path('upcoming')
+      redirect_to @event
     else
       render 'edit'
     end
@@ -85,7 +85,7 @@ class EventsController < ApplicationController
     end
     if @event.save
       flash[:success] = "New event added"
-      redirect_to scoped_events_path("upcoming")
+      redirect_to @event
     else
       render 'new'
     end

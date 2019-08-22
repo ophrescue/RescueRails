@@ -139,6 +139,7 @@ feature 'Manage Events', js: true do
       fill_in('event_start_time', with: new_upcoming_event.start_time)
       fill_in('event_end_time', with: new_upcoming_event.end_time)
       expect{ click_button('Submit') }.to change{ Event.count }.by(1)
+      visit scoped_events_path("upcoming")
       expect( page.all('.event-title').count).to eq 2
       cloned_event = Event.last
       expect(cloned_event.photo.exists?).to eq true
@@ -158,6 +159,7 @@ feature 'Manage Events', js: true do
       fill_in('event_end_time', with: new_upcoming_event.end_time)
       check('Delete')
       expect{ click_button('Submit') }.to change{ Event.count }.by(1)
+      visit scoped_events_path("upcoming")
       expect( page.all('.event-title').count).to eq 2
       cloned_event = Event.last
       expect(cloned_event.attributes.values_at( :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at)).

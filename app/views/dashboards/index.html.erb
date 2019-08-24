@@ -51,6 +51,34 @@
             </small>
         </div>
     </div>
+
+    <% if @featured_event.present? %>
+        <div class="row mt-3 py-2 highlight rounded">
+            <div class="col-md-4">
+                <div class='event_photo'>
+                    <%= link_to_if( @featured_event.photo?, image_tag(@featured_event.photo.url(:medium), class:"rounded"), @featured_event.photo.url){ } %>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h4><%= @featured_event.title %></h4>
+                <div class='date_time'><%= @featured_event.event_date.strftime("%A, %B %-e, %Y") %> from <%= @featured_event.start_time.strftime("%-l:%M %P") %> to <%= @featured_event.end_time.strftime("%-l:%M %P") %></div>
+                <address>
+                    <div class='location'> <%= link_to_if @featured_event.location_url?, @featured_event.location_name, @featured_event.location_url %> </div>
+                    <div class='address'> <%= @featured_event.address %> </div>
+                    <div class='phone'> <%= @featured_event.location_phone %> </div>
+                </address>
+            <div class='row'>
+                <div class='col'>
+                    <%= link_to "Details", @featured_event, class: "btn btn-sm btn-primary" %>
+                    <%= link_to_if(@featured_event.facebook_url?, "Facebook Event", @featured_event.facebook_url, :class => "btn btn-sm btn-outline-primary"){} %>
+                    <%= link_to_if(can_edit_events?, "edit", edit_event_path(@featured_event), :class => "btn btn-sm btn-outline-secondary"){} %>
+                </div>
+            </div>
+            </div>
+        </div>
+    <% end %>
+
+
 <!--
     <div class="row bg-lightblue">
         <div class="col-md">

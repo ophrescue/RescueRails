@@ -24,6 +24,8 @@ class DashboardsController < ApplicationController
     @current_user = current_user
     @bulletins = Bulletin.order(created_at: :desc).limit(5)
     @opportunities = Opportunity.order(created_at: :desc).limit(5)
+    @featured_event = Event.limit(1).first
+
     # @upcoming_nearby_events = Event.where(event_date: Time.zone.today..3.weeks.from_now).near(current_user.location, 20).limit(10)
     # @my_dogs = Dog.where(foster: current_user).where(status: Dog::ACTIVE_STATUSES).limit(10)
     # @my_adopters = Adopter.where(user: current_user).limit(10)

@@ -89,6 +89,7 @@ class Event < ApplicationRecord
 
   scope :upcoming, ->{ where("event_date >= ?", Date.today).order('event_date ASC') }
   scope :past,     ->{ where("event_date < ?",  Date.today).order('event_date DESC') }
+  scope :featured, ->{ where(featured: true) }
 
   def upcoming?
     event_date >= Date.today

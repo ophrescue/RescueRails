@@ -1,8 +1,8 @@
 
-<div class="row">
+<div class="row <%= 'highlight' if event.featured %>">
     <div class="col-md-4">
-        <div class='event_photo'>
-        <%= link_to_if( event.photo?, image_tag(event.photo.url(:medium), class:"rounded"), event.photo.url){ } %>
+        <div class='event_photo pt-3'>
+            <%= link_to_if( event.photo?, image_tag(event.photo.url(:medium), class:"rounded"), event.photo.url){ } %>
         </div>
     </div>
     <div class="col-md-8">
@@ -10,7 +10,6 @@
             <h3><%= event.title %></h3>
             <div class='date_time'><%= event.event_date.strftime("%A, %B %-e, %Y") %> from <%= event.start_time.strftime("%-l:%M %P") %> to <%= event.end_time.strftime("%-l:%M %P") %></div>
         </div>
-
         <div class="event-body">
             <address>
             <div class='location'> <%= link_to_if event.location_url?, event.location_name, event.location_url %> </div>

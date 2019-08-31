@@ -20,7 +20,7 @@ class DonationsController < ApplicationController
   before_action :select_bootstrap41
 
   def new
-    @donation = Donation.new campaign_params
+    @donation = Donation.new optional_params
   end
 
   def index
@@ -75,8 +75,11 @@ class DonationsController < ApplicationController
     params.permit :stripeToken, :utf8, :authenticity_token
   end
 
-  def campaign_params
-    params.permit :campaign_id
+  def optional_params
+    params.permit(:campaign_id,
+                  :comment,
+                  :frequency,
+                  :amount)
   end
 
   def donation_params

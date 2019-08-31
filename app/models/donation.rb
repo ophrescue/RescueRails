@@ -34,12 +34,18 @@
 #
 
 class Donation < ApplicationRecord
-
   validates :name, presence: true
   validates :email, presence: true
   validates :amount, presence: true
 
   belongs_to :campaign, optional: true
+
+  TSHIRT_SIZE = { "Small" => 'T-Shirt Size: Small',
+                  "Medium" => 'T-Shirt Size: Medium',
+                  "Large" => 'Tshirt Size: Large',
+                  "X-Large" => 'Tshirt Size: X-Large'}.freeze
+
+  MONTHLY_AMOUNTS = [25, 50, 75, 100].freeze
 
   def create_subscription
     customer = Stripe::Customer.create email: email,

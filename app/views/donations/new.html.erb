@@ -153,6 +153,18 @@
     for (let i = 0; i < donationButtons.length; i++ ) {
       donationButtons[i].addEventListener('click', donationButtonFunction);
     }
+
+    // Support for Montly Giving Club Form
+
+    let url = new URL(document.URL)
+    let search_params = new URLSearchParams(url.search);
+    let url_amount = search_params.get('amount');
+
+    if (url_amount) {
+      console.log('URL has preset donation of :' + url_amount)
+      var donate_button = document.getElementById('donate' + url_amount);
+      donate_button.click();
+    }
 </script>
 
 <script src="https://checkout.stripe.com/checkout.js"></script>

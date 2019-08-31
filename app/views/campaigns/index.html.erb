@@ -1,20 +1,20 @@
 <div class='container' id='campaigns_list'>
-  <div class='col-12' id='events_list'>
     <div class="row title_row">
-      <div class="col-8 col-md-8">
-        <h1><%= "#{t(".title.#{@scope}")}" %></h1>
-      </div>
-      <% if can_edit_events? %>
-        <div class="col-2 col-md-2 mb-2 mb-sm-0">
-          <%= link_to "Create a Campaign", new_campaign_path, class: "btn btn-sm btn-success" %>
+        <div class="col-12">
+            <h1><%= "#{t(".title.#{@scope}")}" %></h1>
         </div>
-        <div class="col-2 col-md-2 mb-2 mb-sm-0">
-          <%= link_to(alternate_campaign_scope_string, scoped_campaigns_path(alternate_campaign_scope), class: "btn btn-sm btn-secondary") %>
+    </div>
+    <% if can_edit_events? %>
+        <div class="row">
+            <div class="col-12 pb-5">
+                <%= link_to "Create a Campaign", new_campaign_path, class: "btn btn-primary" %>
+                <%= link_to(alternate_campaign_scope_string, scoped_campaigns_path(alternate_campaign_scope), class: "btn btn-secondary") %>
+            </div>
         </div>
-      <% end %>
+    <% end %>
+    <div class="row">
+        <div class='col-12'>
+            <%= render(@campaigns) || render(partial: 'no_campaigns') %>
+        </div>
     </div>
-    <div class='col-12'>
-      <%= render(@campaigns) || render(partial: 'no_campaigns') %>
-    </div>
-  </div>
 </div>

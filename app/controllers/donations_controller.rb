@@ -95,7 +95,14 @@ class DonationsController < ApplicationController
                                      :is_memory_honor,
                                      :campaign_id,
                                      :memory_honor_type,
-                                     :memory_honor_name)
+                                     :memory_honor_name,
+                                     :more_contact_info,
+                                     :phone,
+                                     :address1,
+                                     :address2,
+                                     :city,
+                                     :postal_code,
+                                     :region)
   end
 
   def render_donations_xls

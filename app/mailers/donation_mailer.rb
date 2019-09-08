@@ -33,8 +33,8 @@ class DonationMailer < ActionMailer::Base
 
   def donation_accounting_notification(donation_id)
     @donation = Donation.find(donation_id)
-    mail(to: 'accounting@ophrescue.org',
-         subject: "#{@donation.name} just donated $#{@donation.amount} to OPH",
+    mail(to: 'accounting@ophrescue.org, donate@ophrescue.org',
+         subject: "#{@donation.name} just donated $#{@donation.amount} #{@donation.frequency} to OPH",
          content_type: 'text/html')
   end
 end

@@ -1,10 +1,12 @@
 <div class="container">
-    <div class="row">
-        <%= area_chart @donation_chart_data, prefix: "$" %>
+    <div class="row pt-4">
+        <div class="col-md-12">
+        <h1>Donations</h1>
+            <%= area_chart @donation_chart_data, prefix: "$" %>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-        <h1>Donations</h1>
 
         <% if @donations.count > 0 %>
             <p>

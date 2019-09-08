@@ -15,7 +15,7 @@
 #
 # Table name: donations
 #
-#  id                 :bigint(8)        not null, primary key
+#  id                 :bigint           not null, primary key
 #  stripe_customer_id :string
 #  name               :string
 #  email              :string
@@ -31,6 +31,14 @@
 #  memory_honor_name  :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  comment            :text
+#  campaign_id        :integer
+#  phone              :string
+#  address1           :string
+#  address2           :string
+#  city               :string
+#  region             :string(2)
+#  postal_code        :string
 #
 
 class Donation < ApplicationRecord

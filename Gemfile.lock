@@ -117,6 +117,7 @@ GEM
       selenium-webdriver
     celluloid (0.16.0)
       timers (~> 4.0.0)
+    chartkick (3.2.1)
     childprocess (1.0.1)
       rake (< 13.0)
     chronic (0.10.2)
@@ -189,6 +190,8 @@ GEM
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     gravatar_image_tag (1.2.0)
+    groupdate (4.1.2)
+      activesupport (>= 4.2)
     has_scope (0.7.2)
       actionpack (>= 4.1)
       activesupport (>= 4.1)
@@ -460,6 +463,7 @@ DEPENDENCIES
   capybara
   capybara-screenshot
   capybara-selenium
+  chartkick
   clearance
   countries
   coveralls
@@ -480,6 +484,7 @@ DEPENDENCIES
   geocoder
   gibbon
   gravatar_image_tag
+  groupdate
   has_scope
   mini_racer (>= 0.2.3)
   newrelic_rpm

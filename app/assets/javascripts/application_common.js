@@ -32,3 +32,5 @@
 //= require jquery.ui.touch-punch.min
 //= require lodash
 //= require upload_file_validator
+//= require chartkick
+//= require Chart.bundle

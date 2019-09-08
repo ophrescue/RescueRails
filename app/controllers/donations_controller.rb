@@ -30,6 +30,7 @@ class DonationsController < ApplicationController
 
   def history
     @donations = Donation.order(created_at: :desc).paginate(page: params[:page], per_page: format_for_page)
+    @donation_chart_data = Donation.where(created_at: 12.months.ago..Time.now).group_by_month(:created_at).sum(:amount)
     respond_to do |format|
       format.html
       format.xls { render_donations_xls }

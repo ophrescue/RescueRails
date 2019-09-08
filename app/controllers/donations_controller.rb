@@ -18,6 +18,7 @@ class DonationsController < ApplicationController
   before_action :unlocked_user, except: %i[new create index]
   before_action :admin_user, only: %i[history show]
   before_action :select_bootstrap41
+  before_action :show_user_navbar, only: %i[history show]
 
   def new
     @donation = Donation.new optional_params
@@ -36,13 +37,14 @@ class DonationsController < ApplicationController
   end
 
   def show
-    redirect_to(root_path)
+    @donation = Donation.find(params[:id])
   end
 
   def create
     @donation = Donation.new donation_params.merge(card_token: stripe_params["stripeToken"])
 
     raise "Check for errors" unless @donation.valid?
+
     if @donation.subscription?
       @donation.create_subscription
     else
@@ -64,6 +66,7 @@ class DonationsController < ApplicationController
 
   def format_for_page
     return PER_PAGE unless request.format.xls?
+
     Donation.count
   end
 

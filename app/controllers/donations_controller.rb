@@ -38,6 +38,7 @@ class DonationsController < ApplicationController
 
   def show
     @donation = Donation.find(params[:id])
+    @related_donations = Donation.where(email: @donation.email)
   end
 
   def create

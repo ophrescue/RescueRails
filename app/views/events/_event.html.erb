@@ -25,7 +25,7 @@
             </div>
             <div class='row'>
                 <div class='col'>
-                    <%= link_to "Details", event, class: "btn btn-sm btn-primary" %>
+                    <%= link_to "Event Page", event, class: "btn btn-sm btn-primary" %>
                     <%= link_to_if(event.facebook_url?, "Facebook Event", event.facebook_url, :class => "btn btn-sm btn-outline-primary"){} %>
                     <%= link_to "Apply to Adopt", adopt_path, :class => "btn btn-sm btn-outline-primary" %>
                     <%= link_to_if(can_edit_events?, "edit", edit_event_path(event), :class => "btn btn-sm btn-outline-secondary"){} %>

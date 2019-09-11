@@ -15,6 +15,13 @@
     </div>
 
     <div class="control-group">
+      <%= f.label :avatar, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :avatar %>
+      </div>
+    </div>
+
+    <div class="control-group">
       <%= f.label :duties, :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :duties, :autocomplete => :off %>

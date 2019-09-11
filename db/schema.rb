@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_07_190712) do
+ActiveRecord::Schema.define(version: 2019_09_11_145438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -334,6 +334,19 @@ ActiveRecord::Schema.define(version: 2019_09_07_190712) do
     t.boolean "locked", default: false
   end
 
+  create_table "fosters", id: :serial, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "dog_id", null: false
+    t.date "start_date", null: false
+    t.date "end_date"
+    t.integer "updated_by", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["dog_id"], name: "index_fosters_on_dog_id"
+    t.index ["user_id", "dog_id"], name: "index_fosters_on_user_id_and_dog_id"
+    t.index ["user_id"], name: "index_fosters_on_user_id"
+  end
+
   create_table "photos", id: :serial, force: :cascade do |t|
     t.integer "dog_id"
     t.string "photo_file_name"
@@ -442,6 +455,10 @@ ActiveRecord::Schema.define(version: 2019_09_07_190712) do
     t.boolean "active", default: false, null: false, comment: "if false user is a candiate volunteer and should only be able to see and edit their profile"
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["agreement_id"], name: "index_users_on_agreement_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"

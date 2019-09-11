@@ -106,7 +106,6 @@ class User < ApplicationRecord
 
   geocoded_by :full_street_address
   after_validation :geocode
-
   has_many :foster_dogs, class_name: 'Dog', foreign_key: 'foster_id'
   has_many :current_foster_dogs, -> { where(status: ['adoptable', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'foster_id'
   has_many :coordinated_dogs, -> { where(status: ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'coordinator_id'
@@ -140,6 +139,20 @@ class User < ApplicationRecord
 
   scope :inactive_volunteer,      -> (status = false) { where(active: status)}
   scope :house_type,              -> (type) { where(house_type: type) }
+
+  has_attached_file :avatar, styles: { medium: "300x300>" }
+
+  PAPERCLIP_STORAGE_PATH = { test:       "/system/test/user_photo/:extension",
+                             production: "/user_photo/:extension",
+                             staging:    "/user_photo/:extension" }
+
+  CONTENT_TYPES = {"Images"=>['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif']}
+
+  MIME_TYPES = CONTENT_TYPES.values.flatten
+
+  validates_attachment_content_type :avatar,
+   content_type: MIME_TYPES,
+   message: 'Images Only.'
 
   HOUSE_TYPES = %w[ rent own ]
 

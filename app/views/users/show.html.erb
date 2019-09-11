@@ -9,6 +9,11 @@
           <strong><%= link_to( "Update/Verify Profile", edit_user_path(@user), :class => "btn btn-primary") %></strong>
         <% end %>
   </div>
+
+  <div class="span12">
+    <div><%= image_tag @user.avatar.url(:medium) %></div>
+  </div>
+
 </div>
 
 <div class="row">

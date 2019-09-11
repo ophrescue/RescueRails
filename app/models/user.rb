@@ -140,7 +140,7 @@ class User < ApplicationRecord
   scope :inactive_volunteer,      -> (status = false) { where(active: status)}
   scope :house_type,              -> (type) { where(house_type: type) }
 
-  has_attached_file :avatar, styles: { medium: "300x300>" }, default_url: "assets/images/no_photo.png"
+  has_attached_file :avatar, styles: { medium: "300x300>" }, default_url: "no_photo.png"
 
   PAPERCLIP_STORAGE_PATH = { test:       "/system/test/user_photo/:extension",
                              production: "/user_photo/:extension",

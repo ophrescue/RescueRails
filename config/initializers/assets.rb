@@ -11,4 +11,4 @@ Rails.application.config.assets.paths << Rails.root.join("app", "assets", "image
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w( application_bs41.css application_bs41.js galleria-1.5.7.classic.js galleria-1.5.7.classic.css)
+Rails.application.config.assets.precompile += %w( application_bs41.css application_bs41.js galleria-1.5.7.classic.js galleria-1.5.7.classic.css event_structured_data.js)

@@ -141,7 +141,7 @@ class User < ApplicationRecord
   scope :inactive_volunteer,      -> (status = false) { where(active: status)}
   scope :house_type,              -> (type) { where(house_type: type) }
 
-  has_attached_file :avatar, styles: { medium: "300x300>" }, default_url: "no_photo.png"
+  has_attached_file :avatar, styles: { thumb: "75x75>", medium: "300x300>" }, default_url: "no_profile_photo.png"
 
   PAPERCLIP_STORAGE_PATH = { test:       "/system/test/user_photo/:extension",
                              production: "/user_photo/:extension",
@@ -154,7 +154,7 @@ class User < ApplicationRecord
   validates_attachment_content_type :avatar,
    content_type: MIME_TYPES,
    message: 'Images Only.'
-   
+
   HOUSE_TYPES = %w[ rent own ]
 
   # mapping of scope name (= query string parameter) to model attributes

@@ -10,11 +10,6 @@
         <% end %>
   </div>
 </div>
-
-  <div class="span12">
-    <div><%= image_tag @user.avatar.url(:medium) %></div>
-  </div>
-
 <div class="row">
   <div class="span6">
       <h4>Profile</h4>
@@ -96,9 +91,14 @@
             </td>
           </tr>
         </table>
+        <h4>Permissions</h4>
+        <%= render 'permissions' %>
       </div>
 
       <div class="span6">
+
+        <div><%= image_tag @user.avatar.url(:medium), class: 'rounded' %></div>
+
         <h4>Fostering</h4>
           <% if @user.mentor_id %>
             <p>Mentor: <%= link_to @user.mentor.name, user_path(@user.mentor) %></p>
@@ -253,13 +253,11 @@
 
     <div class="row">
       <div class="span6">
-          <h4>Permissions</h4>
-            <%= render 'permissions' %>
-        </div>
+      </div>
         <% if is_admin? %>
             <div class="row6">
               <h4>Admin Notes</h4>
               <p><%= @user.admin_comment %></p>
             </div>
         <% end %>
-      </div>
+    </div>

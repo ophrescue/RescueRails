@@ -20,6 +20,25 @@ describe EventsController, type: :controller do
       end
     end
 
+    describe "GET #index, with upcoming scope and pagination" do
+      let(:event_one)   { create(:event, event_date: Date.today.advance(days: 5), start_time: '06:00:00') }
+      let(:event_two)   { create(:event, event_date: Date.today.advance(days: 5), start_time: '06:00:00') }
+      let(:event_three) { create(:event, event_date: Date.today.advance(days: 5), start_time: '06:00:00') }
+      let(:event_four)  { create(:event, event_date: Date.today.advance(days: 5), start_time: '06:00:00') }
+
+      it 'page 1 shows event one and two' do
+        stub_const('EventsController::PER_PAGE',2)
+        get :index, params: { scope: "upcoming" }
+        expect(assigns(:events)).to match_array([event_one, event_two])
+      end
+
+      it 'page 2 shows event three and four' do
+        stub_const('EventsController::PER_PAGE',2)
+        get :index, params: { scope: "upcoming" }
+        expect(assigns(:events)).to match_array([event_three, event_four])
+      end
+    end
+
     describe 'GET #index, with past scope' do
       let(:future_event){ create(:event, :in_the_future) }
       let(:past_event){ create(:event, :in_the_past) }
@@ -28,6 +47,25 @@ describe EventsController, type: :controller do
         get :index, params: { scope: "past" }
         expect(response).to be_successful
         expect(assigns[:events]).to eq [ past_event ]
+      end
+    end
+
+    describe "GET #index, with past scope and pagination" do
+      let(:event_one)   { create(:event, event_date: Date.today.advance(days: -5), start_time: '06:00:00') }
+      let(:event_two)   { create(:event, event_date: Date.today.advance(days: -5), start_time: '06:00:00') }
+      let(:event_three) { create(:event, event_date: Date.today.advance(days: -5), start_time: '06:00:00') }
+      let(:event_four)  { create(:event, event_date: Date.today.advance(days: -5), start_time: '06:00:00') }
+
+      it 'page 1 shows event one and two' do
+        stub_const('EventsController::PER_PAGE',2)
+        get :index, params: { scope: "past" }
+        expect(assigns(:events)).to match_array([event_one, event_two])
+      end
+
+      it 'page 2 shows event three and four' do
+        stub_const('EventsController::PER_PAGE',2)
+        get :index, params: { scope: "past" }
+        expect(assigns(:events)).to match_array([event_three, event_four])
       end
     end
 

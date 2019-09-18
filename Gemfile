@@ -54,9 +54,7 @@ gem 'mini_racer', '>= 0.2.3', platforms: :ruby
 gem 'uglifier'
 
 gem 'newrelic_rpm'
-# Rollbar can pick up new versions after this issue is fixed
-# https://github.com/rollbar/rollbar-gem/issues/713
-gem 'rollbar', '2.15.5'
+gem 'honeybadger', '~> 4.0'
 gem 'sucker_punch', '~> 1.5.1'
 gem 'factory_bot_rails'
 

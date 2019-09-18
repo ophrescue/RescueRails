@@ -32,10 +32,6 @@ set :pty, false
 
 set :newrelic_license_key, ENV['NEW_RELIC_LICENSE_KEY']
 
-set :rollbar_token, ENV['ROLLBAR_ACCESS_TOKEN']
-set :rollbar_env, Proc.new { fetch :stage }
-set :rollbar_role, Proc.new { :app }
-
 # what specs should be run before deployment is allowed to
 # continue, see lib/capistrano/tasks/run_tests.cap
 #If you were to have this as set :tests, []

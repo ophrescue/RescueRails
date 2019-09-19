@@ -264,7 +264,8 @@ class UsersController < Clearance::UsersController
                 :is_transporter,
                 :mentor_id,
                 :translator,
-                :known_languages)
+                :known_languages,
+                :avatar)
     end
   end
 

@@ -22,7 +22,6 @@ require 'capistrano/bundler'
 require 'capistrano/rails/assets'
 require 'capistrano/rails/console'
 require 'capistrano/rails/migrations'
-require 'rollbar/capistrano3'
 require 'whenever/capistrano'
 require "capistrano/systemd/multiservice"
 install_plugin Capistrano::Systemd::MultiService.new_service("unicorn")
@@ -31,3 +30,5 @@ install_plugin Capistrano::Systemd::MultiService.new_service("delayed_job")
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
 Dir.glob('lib/capistrano/**/*.rb').each { |r| import r }
+
+require 'capistrano/honeybadger'

@@ -3,7 +3,7 @@
         <div clas="col-md">
             <div class="pl-3">
                 <p class="text-muted">Welcome back <%= link_to @current_user.name.titleize, user_path(@current_user) %> </p>
-                <%= link_to image_tag(@current_user.avatar.url(:thumb)), @current_user %>
+                <%= link_to image_tag(@current_user.avatar.url(:thumb), size: "75x75"), @current_user %>
             </div>
         </div>
         <div class="col-md text-right">

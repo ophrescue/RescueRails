@@ -29,7 +29,7 @@ FactoryBot.define do
     no_dogs                 { [true, false].sample }
     no_cats                 { [true, false].sample }
     no_kids                 { [true, false].sample }
-    description { Faker::Lorem.paragraphs(3,true).join("\n\n") }
+    description { Faker::Lorem.paragraphs(number: 3, supplemental: true).join("\n\n") }
     medical_summary { Faker::Lorem.paragraph }
     behavior_summary { Faker::Lorem.paragraph }
     craigslist_ad_url { [Faker::Internet.url, nil].sample }

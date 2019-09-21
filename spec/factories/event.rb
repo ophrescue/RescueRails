@@ -6,9 +6,9 @@ FactoryBot.define do
     location_name { 'Westminster' }
     address { Faker::Address::street_address }
     event_date { Date.today.advance(days: rand(365)-175) }
-    start_time { Faker::Time.between(2.days.ago, Time.zone.now, :afternoon) }
-    end_time { Faker::Time.between(2.days.ago, Time.zone.now, :evening) }
-    description { Faker::Lorem.paragraphs(4).join("\r\r") }
+    start_time { Faker::Time.between_dates(from: 2.days.ago, to: Time.zone.now, period: :afternoon) }
+    end_time { Faker::Time.between_dates(from: 2.days.ago, to: Time.zone.now, period: :evening) }
+    description { Faker::Lorem.paragraphs(number: 4).join("\r\r") }
     location_url { Faker::Internet.url }
     location_phone { Faker::Base.with_locale "en-US" do; "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number}"; end }
     latitude {(350000000 + rand(150000000)).to_f/10000000} # 35 to 50 deg N

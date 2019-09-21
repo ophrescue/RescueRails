@@ -7,12 +7,12 @@ feature 'Manage Events', js: true do
   include ClientValidationFormHelpers
 
   describe "add an event" do
+    let(:admin){ create(:user, :admin) }
     let(:test_event){ build(:event, :in_the_future) }
     let(:date_time) { "#{test_event.event_date.strftime("%A, %B %-e, %Y") } from #{test_event.start_time.strftime("%-l:%M %P") } to #{ test_event.end_time.strftime("%-l:%M %P") }" }
 
     before do
-      sign_in_as_admin
-      visit '/events'
+      visit events_path(as: admin)
     end
 
     it 'should save and render attributes' do
@@ -56,13 +56,13 @@ feature 'Manage Events', js: true do
   end
 
   describe "edit an upcoming event" do
+    let(:admin){ create(:user, :admin) }
     let!(:event){ create(:event, :in_the_future, title: 'future event') }
     let(:new_upcoming_event){ build(:event, :in_the_future) }
     let!(:past_event){ create(:event, :in_the_past, title: 'past event') }
 
     before do
-      sign_in_as_admin
-      visit events_path('upcoming')
+      visit events_path('upcoming', as: admin)
     end
 
     it 'should save edited attributes' do

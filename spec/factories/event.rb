@@ -19,11 +19,11 @@ FactoryBot.define do
     facebook_url       { Faker::Internet.url }
 
     trait :in_the_future do
-      event_date { Date.today.advance(days: rand(365)) }
+      event_date { Faker::Time.forward(days: 120) }
     end
 
     trait :in_the_past do
-      event_date { Date.today.advance(days: -rand(365)) }
+      event_date { Faker::Time.backward(days: 120) }
     end
   end
 end

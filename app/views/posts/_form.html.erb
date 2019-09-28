@@ -2,7 +2,7 @@
 <!-- quill use adapted from https://harlemsquirrel.github.io/jekyll/update/2016/12/11/rails-and-quill.html> -->
 
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-12">
     <%= form_with model: @post, multipart: true, id: "post-form", class: "needs-validation", autocomplete: 'off', novalidate: true do |f| %>
       <%= render 'shared/error_messages', :object => f.object %>
       <div class="form-group">
@@ -17,7 +17,7 @@
         <div id="editor"></div>
       </div>
 
-      <%= f.submit %>
+      <%= f.submit "Submit", class: "btn btn-primary" %>
 
     <% end %>
   </div>
@@ -29,8 +29,12 @@
 <!-- Initialize Quill editor -->
 <script>
   var form = document.querySelector('#post-form');
+  var toolbarOptions = [['bold','italic', 'underline'],['link'],[{ 'list': 'ordered'}, { 'list': 'bullet' }]]
   var quill = new Quill('#editor', {
-    theme: 'snow'
+    theme: 'snow',
+    modules: {
+      toolbar: toolbarOptions
+    }
   });
 
   var existingPostContent = document.getElementById('post-content').value;

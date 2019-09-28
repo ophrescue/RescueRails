@@ -29,6 +29,9 @@ class Post < ActiveRecord::Base
   include ClientValidated
   VALIDATION_ERROR_MESSAGES = {content: :blank}.freeze
 
+  VALID_TAGS = %w[p strong em a ol ul li].freeze
+  VALID_ATTRIBUTES = %w[href].freeze
+
   belongs_to :user
 
   scope :bulletins, -> { where(type: 'Bulletin') }

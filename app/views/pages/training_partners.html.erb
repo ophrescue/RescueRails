@@ -188,6 +188,14 @@ I believe any dog can be trained, no matter what behavioral problems they\'re ha
 
   va_trainers =
   {
+    name: 'Apple Dog Daycare',
+    logo: 'sponsors/apple-dog-daycare.jpg',
+    company_address: '8818 Brook Rd, Glen Allen, VA 23060',
+    website: 'http://www.appledogdaycare.com/',
+    phone: '(804) 261-0234',
+    email: 'info@appledogdaycare.com'
+  },
+  {
     name: 'Einstein K9',
     logo: 'sponsors/einsteink9.png',
     contact: 'Chelsea Comstock, Trainer',
@@ -438,9 +446,11 @@ I believe any dog can be trained, no matter what behavioral problems they\'re ha
         </a>
         <div class="media-body">
           <ul class="unstyled">
-            <li>
-              <strong>Contact:</strong> <%= trainer[:contact] %>
-            </li>
+            <% if trainer[:contact] %>
+              <li>
+                <strong>Contact:</strong> <%= trainer[:contact] %>
+              </li>
+            <% end %>
             <li>
               <strong>Company Address:</strong> <%= trainer[:company_address] %>
             </li>
@@ -456,17 +466,25 @@ I believe any dog can be trained, no matter what behavioral problems they\'re ha
             <li>
               <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
             </li>
-            <li>
-              <strong>Membership:</strong> <%= trainer[:membership] %>
-            </li>
+            <% if trainer[:membership] %>
+              <li>
+                <strong>Membership:</strong> <%= trainer[:membership] %>
+              </li>
+            <% end %>
+            <% if trainer[:experience] %>
             <li>
               <strong>Experience:</strong> <%= trainer[:experience] %>
             </li>
-            <li>
-              <strong>Session Type:</strong> <%= trainer[:session_type] %>
-            </li>
+            <% end %>
+            <% if trainer[:session_type] %>
+              <li>
+                <strong>Session Type:</strong> <%= trainer[:session_type] %>
+              </li>
+            <% end %>
           </ul>
-          <p><em>"<%= trainer[:quote] %></em>"</p>
+          <% if trainer[:quote] %>
+            <p><em>"<%= trainer[:quote] %></em>"</p>
+          <% end %>
         </div>
       </div>
 

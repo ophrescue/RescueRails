@@ -33,6 +33,7 @@ RescueRails::Application.routes.draw do
 
   resources :bulletins, controller: :posts, type: 'Bulletin'
   resources :opportunities, controller: :posts, type: 'Opportunity'
+  resources :infos, controller: :posts, type: 'Info'
 
   resources :sessions, only: %i[new create destroy]
 

@@ -25,7 +25,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.friendly.find(params[:id])
   end
 
   def new
@@ -33,7 +33,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.friendly.find(params[:id])
   end
 
   def create
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = Post.friendly.find(params[:id])
     if @post.update(post_params)
       flash[:notice] = "#{params[:type]} updated"
       redirect_to @post
@@ -58,7 +58,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    @post = Post.friendly.find(params[:id])
     @post.destroy
     flash[:notice] = "#{params[:type]} deleted"
     redirect_to dashboards_path

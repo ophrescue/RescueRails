@@ -72,7 +72,7 @@ class PostsController < ApplicationController
   end
 
   def allowed_types
-    ['Bulletin', 'Opportunity']
+    ['Bulletin', 'Opportunity', 'Info']
   end
 
   def type_class

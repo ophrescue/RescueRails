@@ -11,7 +11,7 @@
 #  updated_at :datetime         not null
 #
 
-#    Copyright 2017 Operation Paws for Homes
+#    Copyright 2019 Operation Paws for Homes
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -25,16 +25,5 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-class Post < ActiveRecord::Base
-  include ClientValidated
-  VALIDATION_ERROR_MESSAGES = {content: :blank}.freeze
-
-  VALID_TAGS = %w[p strong em a ol ul li].freeze
-  VALID_ATTRIBUTES = %w[href].freeze
-
-  belongs_to :user
-
-  scope :bulletins, -> { where(type: 'Bulletin') }
-  scope :opportunities, -> { where(type: 'Opportunity') }
-  scope :infos, -> { where(type: 'Info') }
+class Info < Post
 end

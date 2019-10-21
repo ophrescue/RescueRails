@@ -183,6 +183,8 @@ GEM
     flamegraph (0.9.5)
     font-awesome-rails (4.7.0.5)
       railties (>= 3.2, < 6.1)
+    friendly_id (5.3.0)
+      activerecord (>= 4.0.0)
     geocoder (1.4.9)
     gibbon (3.2.0)
       faraday (>= 0.9.1)
@@ -481,6 +483,7 @@ DEPENDENCIES
   faker
   flamegraph
   font-awesome-rails
+  friendly_id (~> 5.3)
   geocoder
   gibbon
   gravatar_image_tag

@@ -1,0 +1,13 @@
+<%= form_for @cat.comments.build, url: cats_manager_comments_path(@cat), data: {remote: true},  html: {novalidate: true, class: 'needs-validation', id: "new_comment"} do |f| %>
+  <div class='form-group'>
+    <label for='comment_content' class='h4'>Add comment</label>
+    <%= f.text_area :content, :class => "form-control comment_content", :rows => "6", :required => true %>
+    <div class='invalid-feedback'><%= validation_error_message_for(f,:content) %></div>
+  </div>
+  <button id="comment_submit<%= device %>" class="btn btn-primary comment_submit">Post</button>
+<% end %>
+<div class="row" >
+  <div class="col">
+    <%= render partial: 'changes/changes', locals: {parent: @cat, device: device} %>
+  </div>
+</div>

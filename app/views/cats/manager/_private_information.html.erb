@@ -1,0 +1,144 @@
+<h4>Private Information</h4>
+<ul class="fa-ul">
+  <% if @cat.original_name.present? %>
+    <li><strong>Original Name:</strong> <%= @cat.original_name.titleize %></li>
+  <% end %>
+  <% if !@cat.microchip.blank? %>
+    <li><strong>Microchip:</strong> <%= @cat.microchip %></li>
+  <% end %>
+  <% if !@cat.fee.blank? %>
+    <li><strong>Adoption Fee:</strong> $<%= @cat.fee %></li>
+  <% end %>
+  <% if @cat.medical_review_complete %>
+    <li><i class="fa-li fa fa-lg fa-check-circle text-success" aria-hidden="true"></i>Medical Review Complete</li>
+  <% else %>
+    <li class="text-error"><i class="fa-li fa fa-lg fa-exclamation-circle" aria-hidden="true"></i>Medical Review Required</li>
+  <% end %>
+  <% if @cat.has_medical_need %>
+    <li><%= image_tag "has_medical_need.gif" %>Has Medical Need</li>
+  <% end %>
+  <% if !@cat.is_altered %>
+    <li><%= image_tag "needs_alter.gif" %>Needs Spay or Neuter</li>
+  <% end %>
+  <% if @cat.is_high_priority %>
+    <li><%= image_tag "is_high_priority.gif" %>High Priority</li>
+  <% end %>
+  <% if @cat.needs_photos %>
+    <li><%= image_tag "needs_photos.gif" %>Needs Photos</li>
+  <% end %>
+  <% if @cat.has_behavior_problem %>
+    <li><%= image_tag "has_behavior_problem.gif" %>Has Behavior Problem</li>
+  <% end %>
+  <% if @cat.needs_foster %>
+    <li><%= image_tag "needs_foster.gif" %>Needs Foster</li>
+  <% end %>
+</ul>
+
+<h4>Foster</h4>
+<ul class="unstyled">
+  <% if @cat.foster_id %>
+    <li><%= link_to @cat.foster.name, user_path(@cat.foster) %></li>
+    <li><%= @cat.foster.address1 %></li>
+    <li><%= @cat.foster.city %>, <%= @cat.foster.region %></li>
+    <li><%= @cat.foster.phone %></li>
+  <% else %>
+    <li>No Foster Assigned</li>
+  <% end %>
+</ul>
+
+<h4>Adoption Coordinator</h4>
+<ul class="unstyled">
+  <% if @cat.coordinator_id %>
+    <li><%= link_to @cat.coordinator.name, user_path(@cat.coordinator) %></li>
+  <% else %>
+    <li>No Adoption Coordinator Assigned</li>
+  <% end %>
+</ul>
+
+<h4>Source Shelter</h4>
+<ul class="unstyled">
+  <% if @cat.shelter_id %>
+    <li><%= @cat.shelter.name %></li>
+  <% else %>
+    <li>No Source Shelter Assigned</li>
+  <% end %>
+</ul>
+
+<% if @cat.adopters.count > 0 %>
+  <h4>Adopter Info</h4>
+  <ul class="unstyled">
+    <% @cat.adopters.each do |a| %>
+      <li><%= link_to a.name, a %> - <%= a.status %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h4>Dates</h4>
+<ul class="unstyled">
+  <li><%= "Available: " + @cat.available_on_dt.strftime("%m/%d/%Y") unless @cat.available_on_dt.blank?  %></li>
+  <li><%= "Intake: " + @cat.intake_dt.strftime("%m/%d/%Y") unless @cat.intake_dt.blank?  %></li>
+  <li><%= "Adopted: " + @cat.adoption_date.strftime("%m/%d/%Y") unless @cat.adoption_date.blank?  %></li>
+</ul>
+
+<h4>Ads</h4>
+<ul class="unstyled">
+  <li><a href="https://www.petfinder.com/pet-search?shelter_id=VA600">Petfinder</a></li>
+  <% if @cat.foster_id %>
+    <% if @cat.foster.region == "MD" %>
+      <li><a href="http://www.adoptapet.com/shelter80736-cats.html">Adoptapet MD</a></li>
+    <% elsif @cat.foster.region == "PA" %>
+      <li><a href="http://www.adoptapet.com/shelter84558-cats.html">Adoptapet PA</a></li>
+    <% elsif @cat.foster.region == "VA" %>
+      <li><a href="http://www.adoptapet.com/shelter79954-cats.html">Adoptapet VA</a></li>
+    <% else %>
+      <li><a href="">Adoptapet N/A for <%= @cat.foster.region %></a></li>
+    <% end %>
+  <% else %>
+    <li>Foster Needed for Adoptapet</li>
+  <% end %>
+
+  <% if !@cat.craigslist_ad_url.blank? %>
+    <li><%= link_to "Craigslist", @cat.craigslist_ad_url %></li>
+  <% else %>
+    <li>Needs Craigslist Ad</li>
+  <% end %>
+</ul>
+
+<% if @cat.attachments.any? %>
+  <h4>Attachments</h4>
+  <ul class="unstyled">
+    <% @cat.attachments.each do |a| %>
+      <li>
+        <%= link_to a.download_url do %>
+          <i class="fa fa-cloud-download"></i>
+        <% end %>
+        <%= link_to a.attachment_file_name, a %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+<br />
+<h4>Vaccine Records</h4>
+<h5>1st Shots</h5>
+<p><%= @cat.first_shots %></p>
+
+<h5>2nd Shots</h5>
+<p><%= @cat.second_shots %></p>
+
+<h5>3rd Shots</h5>
+<p><%= @cat.third_shots %></p>
+
+<h5>Rabies</h5>
+<p><%= @cat.rabies %></p>
+
+<h5>4DX</h5>
+<p><%= @cat.vac_4dx %></p>
+
+<h5>Bordetella</h5>
+<p><%= @cat.bordetella %></p>
+
+<h5>Heartworm Preventative</h5>
+<p><%= @cat.heartworm_preventative %></p>
+
+<h5>Flea Tick Preventative</h5>
+<p><%= @cat.flea_tick_preventative %></p>

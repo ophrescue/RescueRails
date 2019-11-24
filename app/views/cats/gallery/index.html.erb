@@ -1,0 +1,21 @@
+<div class="container" id='public_list'>
+  <div class="row title_row">
+    <div class="col">
+      <h1><%= t('.title') %></h1>
+    </div>
+  </div>
+  <% if current_user&.active %>
+  <div class='row'>
+    <div class='col'>
+        <%= link_to "Manager View", cats_manager_index_path, class: 'btn btn-secondary' %>
+    </div>
+  </div>
+  <% end %>
+
+  <%= will_paginate(@cats, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+  <div class="row gallery" id="cats">
+    <%= render partial: 'cats/gallery/cat', collection: @cats %>
+  </div>
+  <%= will_paginate(@cats, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+
+</div>

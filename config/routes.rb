@@ -20,6 +20,8 @@ RescueRails::Application.routes.draw do
 
   resources :comments, except: %i[new]
 
+  resources :cats, controller: 'cats/gallery', only: %i[index show]
+
   resources :dogs, controller: 'dogs/gallery', only: %i[index show]
 
   resources :photos do
@@ -27,6 +29,11 @@ RescueRails::Application.routes.draw do
   end
 
   resources :dogs_manager, controller: 'dogs/manager' do
+    resources :comments
+    resources :adoptions
+  end
+
+  resources :cats_manager, controller: 'cats/manager' do
     resources :comments
     resources :adoptions
   end

@@ -1,0 +1,5 @@
+<% if @cat.coordinator_id %>
+  <%= link_to @cat.coordinator.name, user_path(@cat.coordinator) %>
+<% else %>
+  not assigned
+<% end %>

@@ -1,0 +1,10 @@
+<div class="col-sm-4 cat">
+  <%= link_to cat_path(cat), class: "img-thumbnail" do %>
+    <%= image_tag(cat.primary_photo_url, alt: cat.photo_alt_text) %>
+    <h4><%= cat.name %></h4>
+    <strong><%= cat.status.titleize %></strong><br />
+    <%= cat.foster_location %><br />
+    <%= cat.gender %> - <%= cat.age.try(:titleize) %><br />
+    <%= cat.breeds.join(" x ").html_safe %>
+  <% end %>
+</div>

@@ -6,31 +6,32 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# User.destroy_all
+if User.first.nil?
+  @attr = { name: "Admin User",
+            email: "test3@test.com",
+            password: "foobar99",
+            password_confirmation: "foobar99",
+            region: 'NY',
+            country: 'USA'}
 
-# @attr = { name: "Admin User",
-#           email: "test3@test.com",
-#           password: "foobar99",
-#           password_confirmation: "foobar99",
-#           region: 'NY',
-#           country: 'USA'
-# }
+  user = User.create!(@attr)
+  user.toggle!(:admin)
+end
 
-# user = User.create!(@attr)
-# user.toggle!(:admin)
+if Breed.first.nil?
+  open("db/dog_breeds.txt") do |breeds|
+    breeds.read.each_line do |breed|
+      breed = breed.chomp
+      Breed.create!(name: breed)
+    end
+  end
+end
 
-# Breed.destroy_all
-# open("db/dog_breeds.txt") do |breeds|
-#   breeds.read.each_line do |breed|
-#     breed = breed.chomp
-#     Breed.create!(name: breed)
-#   end
-# end
-
-CatBreed.destroy_all
-open("db/cat_breeds.txt") do |breeds|
-  breeds.read.each_line do |breed|
-    breed = breed.chomp
-    CatBreed.create!(name: breed)
+if CatBreed.first.nil?
+  open("db/cat_breeds.txt") do |breeds|
+    breeds.read.each_line do |breed|
+      breed = breed.chomp
+      CatBreed.create!(name: breed)
+    end
   end
 end

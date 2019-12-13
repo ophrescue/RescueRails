@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-class Cats::ManagerController < Dogs::DogsBaseController
+class Cats::ManagerController < Cats::CatsBaseController
   helper_method :fostering_cat?
 
   autocomplete :breed, :name, full: true
@@ -35,7 +35,7 @@ class Cats::ManagerController < Dogs::DogsBaseController
     @cats, @count, @filter_params = @cat_filter.filter
     respond_to do |format|
       format.html
-      format.xls { render_dogs_xls }
+      format.xls { render_cats_xls }
     end
   end
 
@@ -47,7 +47,7 @@ class Cats::ManagerController < Dogs::DogsBaseController
 
   def edit
     load_instance_variables
-    @on_cancel_path = cats_manager_path(@dog)
+    @on_cancel_path = cats_manager_path(@cat)
   end
 
   def update
@@ -99,13 +99,14 @@ class Cats::ManagerController < Dogs::DogsBaseController
   def cat_params
     params.require(:cat)
       .permit(:name, :tracking_id, :primary_breed_id, :primary_breed_name, :secondary_breed_id,
-              :secondary_breed_name, :status, :age, :size, :is_altered, :gender, :is_special_needs,
+              :secondary_breed_name, :status, :age, :size, :is_altered, :gender, :declawed, :litter_box_trained,
+              :coat_length, :is_special_needs,
               :no_dogs, :no_cats, :no_kids, :description, :photos_attributes, :foster_id, :foster_start_date,
               :adoption_date, :is_uptodateonshots, :intake_dt, :available_on_dt, :has_medical_need,
               :is_high_priority, :needs_photos, :has_behavior_problem, :needs_foster, :attachments_attributes,
               :petfinder_ad_url, :adoptapet_ad_url, :craigslist_ad_url, :youtube_video_url, :first_shots,
-              :second_shots, :third_shots, :rabies, :vac_4dx, :heartworm_preventative, :flea_tick_preventative,
-              :bordetella, :microchip, :original_name, :fee, :coordinator_id, :sponsored_by, :shelter_id,
+              :second_shots, :third_shots, :rabies, :felv_fiv_test, :flea_tick_preventative, :dewormer,
+              :coccidia_treatment, :microchip, :original_name, :fee, :coordinator_id, :sponsored_by, :shelter_id,
               :medical_summary, :behavior_summary, :medical_review_complete, :dewormer, :toltrazuril,
               attachments_attributes: [ :attachment, :description, :updated_by_user_id, :_destroy, :id ],
               photos_attributes: [ :photo, :position, :is_private, :_destroy, :id ])
@@ -136,8 +137,8 @@ class Cats::ManagerController < Dogs::DogsBaseController
     @cat.foster_id == current_user.id
   end
 
-  def edit_dog_check
-    redirect_to(root_path) unless fostering_dog? || current_user.edit_dogs?
+  def edit_cat_check
+    redirect_to(root_path) unless fostering_cat? || current_user.edit_dogs?
   end
 
   def active_user
@@ -169,6 +170,6 @@ class Cats::ManagerController < Dogs::DogsBaseController
                                      'Foster Name',
                                      'Foster City',
                                      'Foster State']),
-              filename: 'dog_export.xls'
+              filename: 'cat_export.xls'
   end
 end

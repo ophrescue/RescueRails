@@ -12,24 +12,24 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-class Cats::CatsBaseController < ApplicationController
-  PER_PAGE = 30
+# == Schema Information
+#
+# Table name: cat_adoptions
+#
+#  id            :integer          not null, primary key
+#  adopter_id    :integer
+#  cat_id        :integer
+#  relation_type :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#
 
-  def show
-    session[:last_cat_manager_search] ||= cats_manager_index_url
-    @title = @cat.name
-    @carousel = Carousel.new(@cat)
-    @adoptapet = Adoptapet.new(@cat.foster&.region)
-    flash.now[:danger] = render_to_string partial: 'cats/unavailable_flash_message' if @cat.unavailable?
-  end
+class CatAdoption < ApplicationRecord
+  belongs_to :cat
+  belongs_to :adopter
 
-  private
+  RELATION_TYPE = ['interested', 'adopted', 'returned',
+        'pending adoption', 'pending return', 'trial adoption']
 
-  def load_cat
-    @cat = Cat.find(params[:id])
-  end
-
-  def for_page(page = nil)
-    @cats = @cats.paginate(per_page: PER_PAGE, page: page || 1)
-  end
+  validates_inclusion_of :relation_type, in: RELATION_TYPE
 end

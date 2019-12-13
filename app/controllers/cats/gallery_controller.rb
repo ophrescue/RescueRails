@@ -12,8 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-class Cats::GalleryController < Dogs::DogsBaseController
-
+class Cats::GalleryController < Cats::CatsBaseController
   before_action :load_cat, only: %i(show)
   before_action :select_bootstrap41
 

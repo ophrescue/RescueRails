@@ -86,12 +86,12 @@ class Cat < ApplicationRecord
 
   has_many :comments, -> { order 'created_at DESC' }, as: :commentable
   has_many :attachments, as: :attachable, dependent: :destroy
-  has_many :photos, -> { order 'position ASC' }, dependent: :destroy
-  has_many :adoptions, dependent: :destroy
-  has_many :adopters, through: :adoptions
+  has_many :cat_photos, -> { order 'position ASC' }, dependent: :destroy
+  has_many :cat_adoptions, dependent: :destroy
+  has_many :adopters, through: :cat_adoptions
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
-  accepts_nested_attributes_for :photos, allow_destroy: true
+  accepts_nested_attributes_for :cat_photos, allow_destroy: true
 
   validates :name,
             presence: true,
@@ -165,7 +165,7 @@ class Cat < ApplicationRecord
   # Rails 5.2 issues deprecation errors for any order that is not column names
   # so arel is the workaround
   scope :sort_with_search_term_matches_first,     ->(search_term) { order(Cat.arel_table[:name].does_not_match("#{search_term}%"), "tracking_id asc") }
-  scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :photos, :foster).where(status: Cat::PUBLIC_STATUSES).status_order.order(:tracking_id) }
+  scope :gallery_view,                            -> { includes(:primary_breed, :secondary_breed, :cat_photos, :foster).where(status: Cat::PUBLIC_STATUSES).status_order.order(:tracking_id) }
 
   def self.autocomplete_name(search_term = nil)
     if search_term.present?

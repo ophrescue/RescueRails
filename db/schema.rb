@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_131011) do
+ActiveRecord::Schema.define(version: 2019_12_12_221014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,10 +174,32 @@ ActiveRecord::Schema.define(version: 2019_11_14_131011) do
     t.boolean "active", default: true
   end
 
+  create_table "cat_adoptions", force: :cascade do |t|
+    t.integer "adopter_id"
+    t.integer "cat_id"
+    t.string "relation_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["adopter_id", "cat_id"], name: "index_cat_adoptions_on_adopter_id_and_cat_id", unique: true
+    t.index ["adopter_id"], name: "index_cat_adoptions_on_adopter_id"
+    t.index ["cat_id"], name: "index_cat_adoptions_on_cat_id"
+  end
+
   create_table "cat_breeds", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cat_photos", force: :cascade do |t|
+    t.integer "cat_id"
+    t.string "photo_file_name"
+    t.string "photo_content_type"
+    t.integer "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cat_id"], name: "index_cat_photos_on_cat_id"
   end
 
   create_table "cats", force: :cascade do |t|

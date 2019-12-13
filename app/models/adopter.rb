@@ -44,16 +44,12 @@ class Adopter < ApplicationRecord
   audited on: :update
   has_associated_audits
 
-  attr_accessor :pre_q_costs,
-                :pre_q_surrender,
-                :pre_q_abuse,
-                :pre_q_reimbursement,
+  attr_accessor :pre_q_abuse,
+                :pre_q_dog_adjust,
                 :pre_q_limited_info,
                 :pre_q_breed_info,
-                :pre_q_dog_adjust,
-                :pre_q_courtesy,
-                :pre_q_travel,
-                :pre_q_hold
+                :pre_q_hold,
+                :pre_q_costs
 
   attr_reader :dog_tokens
   attr_accessor :updated_by_admin_user

@@ -11,17 +11,17 @@ addons:
   firefox: latest
   apt:
     sources:
-      - google-chrome
+    - google-chrome
     packages:
-      - google-chrome-stable
+    - google-chrome-stable
 env:
   global:
   - ARTIFACTS_AWS_REGION=us-east-1
   - ARTIFACTS_S3_BUCKET=travis-ci-screenshots
-  - secure: CJKFy918mjHbn7oDpuhbhiVR1d2qT4ktu/mABcrLAdT31pcPO9RKExNw/fp3P3gkfcLB/kQhWQfdrknqlHWiQiJj2z2HlaJJLQDNelpKsKPOHRo0GAq0N/aBwEu6wDk+GQb2PjxeYHFaQ0uupzNiqAup6glWokCpPuUUV2eb6js=
-  - secure: AnnnXIFPy93JvGO+DuqSpYGPd9MZNSxwciYKTcCV6Yx5htJwZFU6adAak9UWvXr8vjtfwrHJD/VqViC6GII7toVCF9O9XEc6ooHVHsLGxfqvl0uOy+prgZS0F8bYW8n6EjFrWPfywdEoMn8PsZ/9iNxPFC2tH8vVKmJAq/FnxUo=
-  - secure: XPOKBecqK22Xz+hGvl/LVMs4POWweFMFzj0f2N3La8lJxmX5CJB3H9hC1RHjKFIdook4orxOe+6+Cvxeeez2goFXlaHIFsN0yMNbkg58owc4Lj7077IQi7lmVIioJ15olZS2tIitLKI7OhKXJSedj4Yt0AMDIBTiw5iG2v11BvQ=
-  - secure: xEuLhxIAOZANe5DNk8mRmxTm60/QAA6IG00rqdKKERChZ1L77ACD29viMw7pQ3wnDsU6bC+oCPdyNwFPbMA3wLqpKMuQBh5tKNJPs+wldgsX8AHMXRJXhQgsz0jzh/tvl26reK1nofRyPtVsq6Ev2ZBEglOHp4l+rk8MaGjQ17w=
+  - secure: asNrPcYQTTHEvkbk9jK29a45gyZRQBGL54alP3784EIhLanJ+JuzY5p8zGEAAchU164QPRSb9b59Elvig97zIMFCyVrrppXQDDqCQBnnqnacHRUN20pd1huNlasgrIDHQpy23m3U/ncEeIRHg8yCjdrVcGYA1XjNFRYxLnEsiyw=
+  - secure: LbLdKhEEj3VDtRYZspy1Uj6ZobCKDObGSe+1/GkrH2DqLvCBjwKe6W8lCQtWEr5yDTFMUcpekosEdvnBh1UTESyOMq1/aaWW+QknypxetOx9kk38ByrmKTcr3eNdbXZ9HutfHSkIDW7bXCtUX4yKdRPvnQa4QMxfjqG9h0TDCZ8=
+  - secure: rcR1gQNXATBnUMuE9bY3NgR0QvKinn8DB01CQ3eM4rKt4e4X4dxEcGkUP5R7v9OpinrIypZnuj6EaRaDECf8yQlHthhBxqajplgiNBNSD8sXBJxM0NSJRMixRgYa8ayXYU40mTSyRC7LM2jnjMSxEevbXwaDvtXk1tz2o7BS0UE=
+  - secure: 4gX6Y5WzqsMnpLFxiL2J1csH/EWx6VAfiKGwS/AGN/9MSJMS4UU2l6Cof6E5asiqFOX4Zi1Q5Phfsn42wI5Ywr95i6spLp6pZyN4mBOFZ21j5ZKTlcyOZLKw0vr1xeA3zOgHOWcOVEe/eFCB2opVWRP1Q7ocBuHouN6V03OZHIk=
   matrix:
   - BROWSER=chrome_headless SUITE=spec/
   - BROWSER=firefox_headless SUITE=spec/features

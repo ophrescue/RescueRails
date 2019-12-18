@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_12_221014) do
+ActiveRecord::Schema.define(version: 2019_12_18_185811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,17 +189,6 @@ ActiveRecord::Schema.define(version: 2019_12_12_221014) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "cat_photos", force: :cascade do |t|
-    t.integer "cat_id"
-    t.string "photo_file_name"
-    t.string "photo_content_type"
-    t.integer "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cat_id"], name: "index_cat_photos_on_cat_id"
   end
 
   create_table "cats", force: :cascade do |t|
@@ -435,6 +424,9 @@ ActiveRecord::Schema.define(version: 2019_12_12_221014) do
     t.datetime "updated_at"
     t.integer "position"
     t.boolean "is_private", default: false
+    t.string "animal_type"
+    t.bigint "animal_id"
+    t.index ["animal_type", "animal_id"], name: "index_photos_on_animal_type_and_animal_id"
     t.index ["dog_id"], name: "index_photos_on_dog_id"
   end
 

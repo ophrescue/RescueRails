@@ -4,7 +4,7 @@ describe PhotosController, type: :controller do
   include_context 'signed in admin'
 
   let(:dog) { create(:dog_with_photo_and_attachment) }
-  let(:photo) { create(:photo, dog: dog) }
+  let(:photo) { create(:photo, animal_type: 'Dog', animal_id: dog.id) }
 
   describe 'POST #sort' do
     it 'is successful' do

@@ -54,7 +54,7 @@ FactoryBot.define do
       factory :cat_with_photo_and_attachment do
         after(:build) do |cat|
           build(:attachment, attachable: cat)
-          build(:photo, cat: cat)
+          build(:photo, animal_type: 'Cat', animal_id: cat.id)
         end
       end
 

@@ -1,6 +1,9 @@
 module Flaggable
   extend ActiveSupport::Concern
 
+  FILTER_FLAGS = ["High Priority", "Medical Need", "Special Needs", "Medical Review Needed", "Behavior Problems",
+    "Foster Needed", "Spay Neuter Needed", "No Cats", "No Dogs", "No Kids"].freeze
+
   included do
     scope :high_priority,                        -> { where is_high_priority: true }
     scope :medical_need,                         -> { where has_medical_need: true }
@@ -16,9 +19,9 @@ module Flaggable
 
   class_methods do
     def has_flags(flags) # flags is an array of active (i.e submitted by user for filter) flag attributes
-      filter_flags = Dog::FILTER_FLAGS.as_options.keys
+      filter_flags = Flaggable::FILTER_FLAGS.as_options.keys
       # security measure, ensure received flags are in the list of FILTER_FLAGS
-      (filter_flags & flags).inject(Dog.unscoped) do |result, filter_flag|
+      (filter_flags & flags).inject(unscoped) do |result, filter_flag|
         result.send(filter_flag)
       end
     end

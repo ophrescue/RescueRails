@@ -22,7 +22,13 @@ env:
   - secure: 3Ko9ZhLHpZiharEefPMoJ6KSJUpI+h1pDRmzzQzt+4M4PIN4inhMb57qudoHtSYbgJRo45hZ8A3x+QI7fjAwHQyJNTDIHnXolMTwit2/wziSpeHuaqtKWAELrVUgPfP3avnl5GC3jvO2cHK1eWPwdx6Ks/iybXhyYeTf39ogxRs=
   - secure: fcTE2FdWMzHEv++avWgdICDN1d20c+iWfXmMEcEva04kikJfz9np++E2HHkd3OP8Y4puWJ2j4Q+QAscviP7ATmAWTjX4mscq1UY5/fNwd4qDFUkct/UG/8soS4XKzMkZy9KvoniEvSSDuJJeLmEd/0ImuS1F60Dr+jxUal0p9Fg=
   - secure: YmVza5uaDsncEQ+8kq0XOCcrBP6VFHfHTPp0W0VpU0iq1vtCeWQGIUYQtvvxPU7O1sDzb+U7cx+Sn8aFNzxsHHwP0zLcrtPcwT1mD18XANPTmcmrKSQHozeYzgdyi7c2c/zymLr/i3KmwUvAhQe89Qt2ZmgepuRyg3oRj3VLMNI=
-script: 
+  matrix:
+  - BROWSER=chrome_headless SUITE=spec/
+  - BROWSER=firefox_headless SUITE=spec/features
+script:
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- BROWSER=$BROWSER bundle exec rspec $SUITE
 before_install:
 - wget https://github.com/mozilla/geckodriver/releases/download/v0.21.0/geckodriver-v0.21.0-linux64.tar.gz
 - mkdir geckodriver

@@ -88,6 +88,7 @@ feature 'Manage Events', js: true do
         click_link('delete')
       end
       expect(flash_notice_message).to eq "Event deleted"
+      expect(page_heading).to eq 'This is an intentionally failed test'
       expect(page.current_path).to eq scoped_events_path("upcoming")
       expect(Event.count).to eq count-1
     end

@@ -11,8 +11,6 @@ addons:
   postgresql: '9.6'
   firefox: latest
   apt:
-    sources:
-    - google-chrome
     packages:
     - google-chrome-stable
 env:

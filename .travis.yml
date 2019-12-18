@@ -39,4 +39,4 @@ before_script:
 - cp config/database.yml.travis config/database.yml
 - gem install travis-artifacts
 after_failure:
-- travis-artifacts upload --path tmp/capybara/
+- artifacts upload --path tmp/capybara/

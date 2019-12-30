@@ -16,55 +16,80 @@ feature 'edit a dog', js: true do
     let(:all_database_attributes){ Dog.new.attributes.keys }
     let(:all_form_fields) { all_database_attributes - active_record_attributes - not_editable_attributes }
 
-    before do
-      visit edit_dogs_manager_path(create(:dog))
-    end
-
     context 'user not permitted to add dogs' do
+      let!(:dog) { create(:dog) }
       let!(:active_user) { create(:user, :admin, add_dogs: false) }
       let(:disallowed_fields) { ['primary_breed_id', 'secondary_breed_id'] }
 
-      it 'should allow access to all fields except breed fields' do
+      it 'should allow access to all fields except breed fields and status' do
+        visit edit_dogs_manager_path(dog)
         (all_form_fields - disallowed_fields).each do |field|
           expect(page.find("#dog_#{field}")).not_to be_disabled
         end
       end
 
-      it 'should show values instead of inputs for breed attributes' do
+      it 'should show disallowed fields as disabled' do
+        visit edit_dogs_manager_path(dog)
         disallowed_fields.each do |field|
-          expect(page).to have_no_field("dog_#{field}")
+          expect(page).to have_field("dog_#{field}", disabled: true)
         end
       end
     end
 
     context 'user not permitted to edit adopters and not permitted to add dogs' do
+      let!(:dog) { create(:dog) }
       let!(:active_user) { create(:user, :admin, add_dogs: false, edit_all_adopters: false) }
       let(:disallowed_fields) { ['primary_breed_id', 'secondary_breed_id', 'coordinator_id'] }
 
       it 'should allow access to all except breed fields and coordinators field' do
+        visit edit_dogs_manager_path(dog)
         (all_form_fields - disallowed_fields).each do |field|
           expect(page.find("#dog_#{field}")).not_to be_disabled
         end
       end
 
-      it 'should show values instead of inputs for breed attributes and coordinator field' do
+      it 'should show disabled inputs for breed attributes and coordinator field' do
+        visit edit_dogs_manager_path(dog)
         disallowed_fields.each do |field|
-          expect(page).to have_no_field("dog_#{field}")
+          expect(page).to have_field("dog_#{field}", disabled: true)
         end
       end
     end
 
     context 'user not permitted to manage_medical_behavior' do
+      let!(:dog) { create(:dog) }
       let!(:active_user) { create(:user, :admin, medical_behavior_permission: false ) }
       let(:disallowed_fields){ ['medical_summary', 'behavior_summary'] }
 
       it 'should allow access to all fields except medical summary' do
+        visit edit_dogs_manager_path(dog)
         (all_form_fields - disallowed_fields).each do |field|
           expect(page.find("#dog_#{field}")).not_to be_disabled
         end
       end
 
-      it 'should show values instead of inputs for medical summary and behavior summary' do
+      it 'should show disabled inputs for medical summary and behavior summary' do
+        visit edit_dogs_manager_path(dog)
+        disallowed_fields.each do |field|
+          expect(page).to have_field("dog_#{field}", disabled: true)
+        end
+      end
+    end
+
+    context 'user is fostering the dog' do
+      let!(:active_user) { create(:user, :foster) }
+      let!(:dog) { create(:dog, foster_id: active_user.id) }
+      let(:disallowed_fields){ %w[tracking_id original_name fee medical_summary behavior_summary status primary_breed_id secondary_breed_id coordinator_id] }
+
+      it 'should allow access to limited foster fields' do
+        visit edit_dogs_manager_path(dog)
+        (all_form_fields - disallowed_fields).each do |field|
+          expect(page.find("#dog_#{field}")).not_to be_disabled
+        end
+      end
+
+      it 'should show disabled inputs for foster disallowed fields' do
+        visit edit_dogs_manager_path(dog)
         disallowed_fields.each do |field|
           expect(page).to have_field("dog_#{field}", disabled: true)
         end
@@ -73,8 +98,10 @@ feature 'edit a dog', js: true do
 
     context 'user has all permissions' do
       let!(:active_user) { create(:user, :admin) }
+      let!(:dog) { create(:dog) }
 
       it 'should allow access to all fields' do
+        visit edit_dogs_manager_path(dog)
         all_form_fields.each do |field|
           expect(page.find("#dog_#{field}")).not_to be_disabled
         end

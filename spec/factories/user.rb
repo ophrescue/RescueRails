@@ -49,6 +49,10 @@ FactoryBot.define do
       password { "foobar99" }
     end
 
+    trait :foster do
+      is_foster { true }
+    end
+
     factory :foster do
       is_foster { true }
     end

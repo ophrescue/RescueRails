@@ -15,6 +15,9 @@ Rails:
 Style/Documentation:
   Enabled: false
 
+Metrics/BlockLength:
+  Enabled: false
+
 Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
 

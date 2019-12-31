@@ -39,6 +39,7 @@ module ApplicationHelper
   end
 
   def title
+    @controller_i18n = controller_i18n(controller_path)
     @title ||= I18n.t("#{controller_i18n(controller_path)}.#{action_name}.title")
     if @title.nil?
       base_title
@@ -51,9 +52,9 @@ module ApplicationHelper
     'Operation Paws for Homes'
   end
 
-  def controller_i18n(controller_path)
-    controller_path.gsub!('/','.') if controller_path.include?('/')
-    controller_path
+  def controller_i18n(name)
+    name = controller_path.gsub('/','.') if controller_path.include?('/')
+    name
   end
 
   def sortable(column, title = nil)

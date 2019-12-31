@@ -42,6 +42,7 @@ set :tests, []
 
 # files we want symlinking to specific entries in shared.
 set :linked_files, %W{config/database.yml
+                      config/rds.pem
                       config/newrelic.yml
                       config/initializers/setup_mail.rb
                       config/unicorn.rb
@@ -72,6 +73,10 @@ set(:symlinks, [
   {
     link: "config/database.yml",
     source: "/var/www/rescuerails_ansible/config/database.yml"
+  },
+  {
+    link: "config/rds.pem",
+    source: "/var/www/rescuerails_ansible/config/rds.pem"
   },
   {
     link: ".env.#{fetch(:stage)}",

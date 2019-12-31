@@ -2,7 +2,7 @@
   <div class='row'>
     <div class='col-12'>
       <%= link_to "Cat Manager", session[:last_cat_manager_search], class: 'btn btn-primary mr-4' %>
-      <% if can_edit_dogs? || fostering_dog? %>
+      <% if can_edit_cats? || fostering_cat? %>
         <%= link_to "Edit", edit_cats_manager_path(@cat), id: 'edit_cat', class: 'btn btn-primary mr-4' %>
       <% end %>
       <%= link_to "Public Profile", cat_path(@cat), class: 'btn btn-secondary' %>
@@ -28,6 +28,9 @@
       <span id='age'><%= @cat.age ? @cat.age.titleize : " " %></span>,
       <% if @cat.size? %>
         <span id='size'><%= @cat.size.titleize %>-size</span>,
+      <% end %>
+      <% if @cat.coat_length? %>
+        <span id='size'><%= @cat.coat_length.titleize %> coat</span>,
       <% end %>
       <span id='breed'><%= @cat.breeds.join(" x ").html_safe %></span>
     </div>
@@ -71,6 +74,10 @@
         <dd id='microchip'><%= @cat.microchip || 'unknown' %></dd>
         <dt>Adoption Fee</dt>
         <dd id='fee'><%= number_to_currency(@cat.fee, precision: 0) || 'unknown' %></dd>
+        <dt>Declawed?</dt>
+        <dd id='declawed'><%= (@cat.declawed).as_icon  %></dd>
+        <dt>Litter Box Trained?</dt>
+        <dd id='litter_box_trained'><%= (@cat.litter_box_trained).as_icon  %></dd>
         <dt>OK with cats?</dt>
         <dd id='cats_ok'><%= (!@cat.no_cats).as_icon  %></dd>
         <dt>OK with dogs?</dt>
@@ -128,18 +135,14 @@
         <dd id='third_shots'><%= @cat.third_shots || x_icon %></dd>
         <dt>Rabies</dt>
         <dd id='rabies'><%= @cat.rabies || x_icon %></dd>
-        <dt>4DX</dt>
-        <dd id='vac_4dx'><%= @cat.vac_4dx || x_icon %></dd>
-        <dt>Bordetella</dt>
-        <dd id='bordetella'><%= @cat.bordetella || x_icon %></dd>
-        <dt>Heartworm Preventative</dt>
-        <dd id='heartworm_preventative'><%= @cat.heartworm_preventative || x_icon %></dd>
+        <dt>Felv FIV Test</dt>
+        <dd id='felv_fiv_test'><%= @cat.felv_fiv_test || x_icon %></dd>
         <dt>Flea/Tick Preventative</dt>
         <dd id='flea_tick_preventative'><%= @cat.flea_tick_preventative || x_icon %></dd>
         <dt>Dewormer</dt>
         <dd id='dewormer'><%= @cat.dewormer || x_icon %></dd>
-        <dt>Toltrazuril</dt>
-        <dd id='toltrazuril'><%= @cat.toltrazuril || x_icon %></dd>
+        <dt>Coccidia Treatment</dt>
+        <dd id='coccidia_treatment'><%= @cat.coccidia_treatment || x_icon %></dd>
       </dl>
       <div class="d-block d-sm-none">
         <%= render partial: 'comments_audits' , locals: {device:'_small'}%>

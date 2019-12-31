@@ -6,7 +6,7 @@
         <div class="form-group row">
           <!-- see config/initializers/rails_bootstrap_errors.rb for usage of the data-bootstrap41 attribute -->
           <%= f.label :tracking_id, "OPH Tracking ID", class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true %>
-          <%= f.text_field :tracking_id, disabled: !can_edit_dogs?,
+          <%= f.text_field :tracking_id, disabled: !can_edit_cats?,
             class: "form-control form-control-sm col-6 #{validation_class_for(f,:tracking_id)}",
             pattern:'\s{0,}\d{1,20}\s{0,}', 'data-bootstrap41': true, autocomplete: 'off' %>
           <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(f,:tracking_id) %></div>
@@ -22,12 +22,12 @@
 
       <div class="form-group row">
         <%= f.label :original_name, class: 'col-form-label col-form-label-sm col-4'  %>
-        <%= f.text_field :original_name, disabled: !can_edit_dogs?, class: 'form-control form-control-sm col-6' %>
+        <%= f.text_field :original_name, disabled: !can_edit_cats?, class: 'form-control form-control-sm col-6' %>
       </div>
 
       <div class="form-group row">
         <%= f.label :status, class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true  %>
-        <%= f.select :status, Dog::STATUSES, {prompt: '-select-'}, {class: "form-control form-control-sm col-6 #{validation_class_for(f,:status)}", 'data-bootstrap41': true, required: true} %>
+        <%= f.select :status, Cat::STATUSES, {prompt: '-select-'}, {class: "form-control form-control-sm col-6 #{validation_class_for(f,:status)}", 'data-bootstrap41': true, required: true} %>
         <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(f,:status) %></div>
       </div>
 
@@ -42,7 +42,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" >$</span>
           </div>
-          <%= f.text_field :fee, class: 'form-control form-control-sm', disabled: !can_edit_dogs?, pattern:'^\s{0,}\d{1,10}\s{0,}$' %>
+          <%= f.text_field :fee, class: 'form-control form-control-sm', disabled: !can_edit_cats?, pattern:'^\s{0,}\d{1,10}\s{0,}$' %>
           <div class="input-group-append">
             <span class="input-group-text" >.00</span>
           </div>
@@ -52,7 +52,7 @@
 
       <div class="form-group row">
         <%= f.label :primary_breed_name, class: 'col-form-label col-form-label-sm col-4'  %>
-        <% if can_add_dogs? %>
+        <% if can_add_cats? %>
           <%= f.collection_select(:primary_breed_id, @breeds, :id, :name, {prompt:  '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
         <% else %>
           <%= @cat.primary_breed_id ? @cat.primary_breed.name : "None Assigned" %>
@@ -61,7 +61,7 @@
 
       <div class="form-group row">
         <%= f.label :secondary_breed_name, class: 'col-form-label col-form-label-sm col-4'  %>
-        <% if can_add_dogs? %>
+        <% if can_add_cats? %>
           <%= f.collection_select(:secondary_breed_id, @breeds, :id, :name, {prompt: '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
         <% else %>
           <%= @cat.secondary_breed_id ? @cat.secondary_breed.name : "None Assigned" %>
@@ -70,17 +70,22 @@
 
       <div class="form-group row">
         <%= f.label :gender, class: 'col-form-label col-form-label-sm col-4'  %>
-        <%= f.select(:gender, Dog::GENDERS, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
+        <%= f.select(:gender, Cat::GENDERS, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
       </div>
 
       <div class="form-group row">
         <%= f.label :age, class: 'col-form-label col-form-label-sm col-4'  %>
-        <%= f.select(:age, Dog::AGES, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
+        <%= f.select(:age, Cat::AGES, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
       </div>
 
       <div class="form-group row">
         <%= f.label :size, "Size when grown", class: 'col-form-label col-form-label-sm col-4'  %>
-        <%= f.select(:size, Dog::SIZES, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
+        <%= f.select(:size, Cat::SIZES, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :coat_length, "Coat Length", class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.select(:coat_length, Cat::COAT_LENGTH, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
       </div>
 
       <div class="form-group row">
@@ -121,7 +126,7 @@
 
       <div class="form-group row">
         <%= f.label :coordinator_id, "Adoption coordinator", class: 'col-form-label col-form-label-sm col-4' %>
-        <% if can_edit_all_adopters? || can_add_dogs? %>
+        <% if can_edit_all_adopters? || can_add_cats? %>
           <%= f.collection_select(:coordinator_id, @coordinator_users, :id, :name, {include_blank: '-select-'}, {class: 'form-control form-control-sm col-6'} ) %>
         <% else %>
           <%= @cat.coordinator ? @cat.coordinator.name : "No Coordinator Assigned" %>
@@ -134,6 +139,14 @@
       </div>
 
       <h3>Public Attributes</h3>
+      <div class="form-check">
+        <%= f.check_box :declawed, class: 'form-check-input' %>
+        <%= f.label :declawed, "Declawed", class: 'form-check-label col-5'  %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :litter_box_trained, class: 'form-check-input' %>
+        <%= f.label :litter_box_trained, "Litter box trained", class: 'form-check-label col-5'  %>
+      </div>
       <div class="form-check">
         <%= f.check_box :is_uptodateonshots, class: 'form-check-input' %>
         <%= f.label :is_uptodateonshots, "Up-to-date on shots", class: 'form-check-label col-5'  %>
@@ -170,7 +183,7 @@
       </div>
       <div class="form-check">
         <%= f.check_box :is_high_priority, class: 'form-check-input' %>
-        <%= f.label "High Priority Dog" , class: 'form-check-label col-5' %>
+        <%= f.label "High Priority Cat" , class: 'form-check-label col-5' %>
       </div>
       <div class="form-check">
         <%= f.check_box :needs_photos, class: 'form-check-input' %>
@@ -208,18 +221,8 @@
       </div>
 
       <div class="form-group row">
-        <%= f.label :vac_4dx, "4DX", class: 'col-form-label col-form-label-sm col-4' %>
-        <%= f.text_field :vac_4dx, class: 'col-6' %>
-      </div>
-
-      <div class="form-group row">
-        <%= f.label :bordetella, "Bordetella", class: 'col-form-label col-form-label-sm col-4' %>
-        <%= f.text_field :bordetella, class: 'col-6' %>
-      </div>
-
-      <div class="form-group row">
-        <%= f.label :heartworm_preventative, "Heartworm Preventative", class: 'col-form-label col-form-label-sm col-4' %>
-        <%= f.text_field :heartworm_preventative, class: 'col-6' %>
+        <%= f.label :felv_fiv_test, "Felv FIV Test", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :felv_fiv_test, class: 'col-6' %>
       </div>
 
       <div class="form-group row">
@@ -233,8 +236,8 @@
       </div>
 
       <div class="form-group row">
-        <%= f.label :toltrazuril, "Toltrazuril", class: 'col-form-label col-form-label-sm col-4' %>
-        <%= f.text_field :toltrazuril, class: 'col-6' %>
+        <%= f.label :coccidia_treatment, "Coccidia Treatment", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :coccidia_treatment, class: 'col-6' %>
       </div>
     </div>
   </div>
@@ -243,7 +246,7 @@
     <h2 class='col-12'>Photos</h2>
   </div>
   <div class="row" id='manage_photos'>
-    <%= render_unless @cat.new_record?, partial: 'dog_photos', locals: {f:f} %>
+    <%= render_unless @cat.new_record?, partial: 'cat_photos', locals: {f:f} %>
   </div>
   <div class='row'>
     <div class='col-12 col-md-2'>

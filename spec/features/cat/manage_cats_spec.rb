@@ -47,12 +47,10 @@ feature 'View Cats', js: true do
        "Second shots",
        "Third shots",
        "Rabies",
-       "4DX",
-       "Bordetella",
-       "Heartworm Preventative",
+       "FELV/FIV Test",
        "Flea/Tick Preventative",
        "Dewormer",
-       "Toltrazuril"].each do |private_info|
+       "Coccidia Treatment"].each do |private_info|
         expect(page).to have_content private_info
       end
     end
@@ -106,12 +104,10 @@ feature 'View Cats', js: true do
        "Second shots",
        "Third shots",
        "Rabies",
-       "4DX",
-       "Bordetella",
-       "Heartworm Preventative",
+       "FELV/FIV Test",
        "Flea/Tick Preventative",
        "Dewormer",
-       "Toltrazuril"].each do |private_info|
+       "Coccidia Treatment"].each do |private_info|
         expect(page).to have_content private_info
       end
     end
@@ -165,12 +161,10 @@ feature 'View Cats', js: true do
        "Second shots",
        "Third shots",
        "Rabies",
-       "4DX",
-       "Bordetella",
-       "Heartworm Preventative",
+       "FELV/FIV Test",
        "Flea/Tick Preventative",
        "Dewormer",
-       "Toltrazuril"].each do |private_info|
+       "Coccidia Treatment"].each do |private_info|
         expect(page).to have_no_content private_info
       end
     end

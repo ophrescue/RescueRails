@@ -75,7 +75,7 @@ FactoryBot.define do
             data = "photos/photos/#{photo.id}/#{style}/"
             hash = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, Photo::HASH_SECRET, data)
             filepath = "public/system/test/photos/#{hash}.jpeg"
-            image_source = Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s
+            image_source = Rails.root.join('spec','fixtures','photo','animal_pic.jpg').to_s
             `cp #{image_source} #{Rails.root.join(filepath)}`
           end
         end

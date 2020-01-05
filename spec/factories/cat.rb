@@ -76,7 +76,7 @@ FactoryBot.define do
               data = "photos/photos/#{photo.id}/#{style}/"
               hash = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, Photo::HASH_SECRET, data)
               filepath = "public/system/test/photos/#{hash}.jpeg"
-              image_source = Rails.root.join('spec','fixtures','photo','cat_pic.jpg').to_s
+              image_source = Rails.root.join('spec','fixtures','photo','animal_pic.jpg').to_s
               `cp #{image_source} #{Rails.root.join(filepath)}`
             end
           end
@@ -88,23 +88,33 @@ FactoryBot.define do
       end
 
       trait :primary_tabby do
-        primary_breed_id { create(:breed, name: 'Tabby').id }
+        primary_breed_id { create(:cat_breed, name: 'Tabby').id }
         secondary_breed_id { nil }
       end
 
       trait :primary_and_secondary_hair do
-        primary_breed_id { create(:breed, name: 'American Shorthair').id }
-        secondary_breed_id { create(:breed, name: 'American Wirehair').id }
+        primary_breed_id { create(:cat_breed, name: 'American Shorthair').id }
+        secondary_breed_id { create(:cat_breed, name: 'American Wirehair').id }
+      end
+
+      trait :primary_shorthair do
+        primary_breed_id { create(:cat_breed, name: 'American Shorthair').id }
+        secondary_breed_id { nil }
+      end
+
+      trait :secondary_shorthair do
+        primary_breed_id { nil }
+        secondary_breed_id { create(:cat_breed, name: 'American Shorthair').id }
       end
 
       trait :secondary_tabby do
         primary_breed_id { nil }
-        secondary_breed_id { create(:breed, name: 'Tabby').id  }
+        secondary_breed_id { create(:cat_breed, name: 'Tabby').id  }
       end
 
       trait :secondary_persian do
         primary_breed_id { nil }
-        secondary_breed_id { create(:breed, name: 'Persian').id }
+        secondary_breed_id { create(:cat_breed, name: 'Persian').id }
       end
 
       Cat::STATUSES.each do |status|

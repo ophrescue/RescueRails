@@ -9,12 +9,12 @@ feature 'Filter Cats List', js: true do
       sign_in_as_user
     end
 
-    let!(:zeke){ create(:cat, :no_flags, :primary_tabby, :active_cat, name: "Zeke") }
+    let!(:zeke){ create(:cat, :no_flags, :primary_shorthair, :active_cat, name: "Zeke") }
     let!(:nairobi){ create(:cat, :no_flags, :secondary_persian, :active_cat, name: "Nairobi") }
-    let!(:abby){ create(:cat, :no_flags, :secondary_tabby, :active_cat, name: "Abby") }
-    let(:all_cats_sorted_by_id){ [["##{zeke.tracking_id}","Zeke", "Tabby,"],
+    let!(:abby){ create(:cat, :no_flags, :secondary_shorthair, :active_cat, name: "Abby") }
+    let(:all_cats_sorted_by_id){ [["##{zeke.tracking_id}","Zeke", "American Shorthair,"],
                                   ["##{nairobi.tracking_id}", "Nairobi", "Persian,"],
-                                  ["##{abby.tracking_id}", "Abby", "Tabby,"] ] }
+                                  ["##{abby.tracking_id}", "Abby", "American Shorthair,"] ] }
     let(:group_label) { '#filter_info_row #filter_info .message_group .group_label' }
     let(:filter_params) { '#filter_info_row #filter_info .message_group .filter_params' }
 
@@ -23,56 +23,56 @@ feature 'Filter Cats List', js: true do
       expect(page).to have_selector('h1', text: 'Cat Manager')
       expect(cats_list).to eq all_cats_sorted_by_id.reverse
 
-      search_by("Breed", "retriev")
-      expect(cats_list).to eq [ ["##{abby.tracking_id}", "Abby", "Golden Retriever,"],
-                                ["##{zeke.tracking_id}","Zeke", "Labrador Retriever,"] ]
+      search_by("Cat Breed", "shorthai")
+      expect(cats_list).to eq [ ["##{abby.tracking_id}", "Abby", "American Shorthair,"],
+                                ["##{zeke.tracking_id}","Zeke", "American Shorthair,"] ]
       click_button("Search")
       # search parameters for the search currently active are shown in the search dropdown
-      expect(page.find('input#search').value).to eq 'retriev'
-      expect(page.find('#search_field_index ul>li._breed input', visible: false)).to be_checked # it's not visible b/c we hide it in order to make custom radio button
+      expect(page.find('input#search').value).to eq 'shorthai'
+      expect(page.find('#search_field_index ul>li._cat_breed input', visible: false)).to be_checked # it's not visible b/c we hide it in order to make custom radio button
       expect(page.find('#search_icon')).to be_visible
 
       # all current filter params are shown
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Tracking ID")
       expect(page).to have_selector(group_label, text: "Search by:")
-      expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
+      expect(page).to have_selector(filter_params, text: "Breed matches 'shorthai'")
       expect(page).to have_selector('#reset_message')
 
       # close and open the search dropdown... search params are still shown
       click_button("Search") # close
       click_button("Search") # open
-      expect(page.find('input#search').value).to eq 'retriev'
-      expect(page.find('#search_field_index ul>li._breed input', visible: false)).to be_checked # it's not visible b/c we hide it in order to make custom radio button
+      expect(page.find('input#search').value).to eq 'shorthai'
+      expect(page.find('#search_field_index ul>li._cat_breed input', visible: false)).to be_checked # it's not visible b/c we hide it in order to make custom radio button
       expect(page.find('#search_icon')).to be_visible
 
       page.find('#reset_message').click
       click_button("Search")
       expect(page.find('input#search').value).to be_blank
-      expect(page.find('#search_field_index ul>li._breed input', visible: false)).not_to be_checked
+      expect(page.find('#search_field_index ul>li._cat_breed input', visible: false)).not_to be_checked
       expect(cats_list).to eq all_cats_sorted_by_id.reverse
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Tracking ID")
       expect(page).to have_no_selector(group_label, text: "Search by:")
-      expect(page).to have_no_selector(filter_params, text: "Breed matches 'retriev'")
+      expect(page).to have_no_selector(filter_params, text: "Breed matches 'shorthai'")
       expect(page).to have_no_selector('#reset_message')
     end
 
     scenario 'and sort results by cat name' do
       visit cats_manager_index_path
       expect(page).to have_selector('h1', text: 'Cat Manager')
-      search_by("Breed", "retriev")
+      search_by("Cat Breed", "shorthai")
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Tracking ID")
       expect(page).to have_selector(group_label, text: "Search by:")
-      expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
+      expect(page).to have_selector(filter_params, text: "Breed matches 'shorthai'")
       expect(cat_names).to match_array ["Abby", "Zeke"]
       sort_by("name")
       expect(cat_names).to eq ["Abby", "Zeke"]
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Name")
       expect(page).to have_selector(group_label, text: "Search by:")
-      expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
+      expect(page).to have_selector(filter_params, text: "Breed matches 'shorthai'")
       #sort_by("name") # later we'll reverse the direction on second click TODO
       #expect(cat_names).to eq ["Zeke", "Abby"]
       sort_by("status")
@@ -80,13 +80,13 @@ feature 'Filter Cats List', js: true do
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Status")
       expect(page).to have_selector(group_label, text: "Search by:")
-      expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
+      expect(page).to have_selector(filter_params, text: "Breed matches 'shorthai'")
       sort_by("intake_dt")
       expect(cat_names).to match_array ["Abby", "Zeke"]
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Intake date")
       expect(page).to have_selector(group_label, text: "Search by:")
-      expect(page).to have_selector(filter_params, text: "Breed matches 'retriev'")
+      expect(page).to have_selector(filter_params, text: "Breed matches 'shorthai'")
       page.find('#reset_message').click
       expect(page).to have_selector(filter_params, text: "Tracking ID")
       expect(cats_list).to eq all_cats_sorted_by_id.reverse
@@ -97,11 +97,11 @@ feature 'Filter Cats List', js: true do
       expect(page).to have_selector('h1', text: 'Cat Manager')
       click_button("Search")
       expect(page).to have_selector('#search-dropdown-heading')
-      page.find('input#search').set("retr")
+      page.find('input#search').set("shorthai")
       page.find('#search_icon').click
       expect(page).to have_no_selector('#search-dropdown-heading')
       expect(page).to have_selector('#search-error-message', text: 'Please select a field to search in')
-      select_search_by('Breed')
+      select_search_by('Cat Breed')
       expect(page).to have_no_selector('#search-error-message')
       expect(page).to have_no_selector('#search-dropdown-heading')
     end
@@ -110,9 +110,9 @@ feature 'Filter Cats List', js: true do
       visit cats_manager_index_path
       expect(page).to have_selector('h1', text: 'Cat Manager')
       click_button("Search")
-      page.find('input#search').set("retr")
+      page.find('input#search').set("shorthai")
       page.find('#search_icon').click
-      select_search_by('Breed')
+      select_search_by('Cat Breed')
       page.find('#search_icon').click
       expect(cat_names).to match_array ["Zeke", "Abby"]
     end
@@ -121,8 +121,8 @@ feature 'Filter Cats List', js: true do
       visit cats_manager_index_path
       expect(page).to have_selector('h1', text: 'Cat Manager')
       click_button("Search")
-      page.find('input#search').set("retr")
-      select_search_by('Breed')
+      page.find('input#search').set("shortha")
+      select_search_by('Cat Breed')
       page.find('#search_reset_button').click
       expect(page.find('input#search').value).to be_blank
       expect(page.find('#search_reset_button', visible: false)).not_to be_visible
@@ -134,8 +134,8 @@ feature 'Filter Cats List', js: true do
       visit cats_manager_index_path
       expect(page).to have_selector('h1', text: 'Cat Manager')
       click_button("Search")
-      select_search_by('Breed')
-      page.find('input#search').set("retr")
+      select_search_by('Cat Breed')
+      page.find('input#search').set("shorthai")
       click_button("Search") # close
       click_button("Search") # open again
       expect(page.find('input#search').value).to be_blank

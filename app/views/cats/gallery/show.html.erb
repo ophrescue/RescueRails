@@ -24,6 +24,9 @@
       <% if @cat.size? %>
         <span><%= @cat.size.titleize %>-size</span>,
       <% end %>
+      <% if @cat.coat_length? %>
+        <span><%= @cat.coat_length.titleize %> coat length</span>,
+      <% end %>
       <span><%= @cat.gender %>,</span>
       <span class='age'><%= @cat.age ? @cat.age.titleize : " " %></span>
       <span class='breed'><%= @cat.breeds.join(" x ").html_safe %></span>,

@@ -152,6 +152,7 @@ feature 'edit a cat', js: true do
         select('adoption pending', from: 'cat_status')
         select('senior', from: 'cat_age')
         select('large', from: 'cat_size')
+        select('medium', from: 'cat_coat_length')
         check(:cat_is_altered)
         select('Female', from: 'cat_gender')
         check(:cat_is_special_needs)
@@ -192,9 +193,9 @@ feature 'edit a cat', js: true do
         click_link('Add a Photo')
         click_link('Add a Photo') # cannot add another input until the first one has been set
         expect(page.all('#new_cat_photo').length).to eq 1
-        find("#new_cat_photo").set(Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s)
+        find("#new_cat_photo").set(Rails.root.join('spec','fixtures','photo','animal_pic.jpg').to_s)
         click_link('Add another Photo')
-        all("#new_cat_photo")[1].set(Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s)
+        all("#new_cat_photo")[1].set(Rails.root.join('spec','fixtures','photo','animal_pic.jpg').to_s)
         click_link('Add another Photo')
         page.all('#remove_photo').last.click
         expect(page.all('#new_cat_photo').length).to eq 2
@@ -267,13 +268,14 @@ feature 'edit a cat', js: true do
         expect(page.find('#status').text).to eq 'Adoption Pending'
         expect(page.find('#age').text).to eq 'Senior'
         expect(page.find('#size').text).to eq 'Large-size'
+        expect(page.find('#coat_length').text).to eq 'Medium coat length'
         expect(page.find('#not_altered')).to have_x_icon
         expect(page.find('#gender').text).to eq 'Female'
         expect(page.find('#special_needs')).to have_check_icon
         expect(page.find('#dogs_ok')).to have_x_icon
         expect(page.find('#cats_ok')).to have_x_icon
         expect(page.find('#kids_ok')).to have_x_icon
-        expect(page.find('#dogDescription').text).to match 'have a nice day'
+        expect(page.find('#catDescription').text).to match 'have a nice day'
         expect(page.find('#foster').text).to match foster.name
         expect(page.find('#adoption_date').text).to eq 'unknown'
         expect(page.find('#is_uptodateonshots')).to have_check_icon
@@ -400,7 +402,7 @@ feature 'edit a cat', js: true do
 
         it 'should not save and should warn user' do
           click_link('Add a Photo')
-          find("#new_cat_photo").set(Rails.root.join('spec','fixtures','photo','dog_large_pic.jpg').to_s)
+          find("#new_cat_photo").set(Rails.root.join('spec','fixtures','photo','animal_large_pic.jpg').to_s)
           expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system','test','photos','*')).length}
           expect(page).to have_selector('.new_photos .invalid-feedback', text: 'must be a jpg or png file smaller than 10Mb')
         end

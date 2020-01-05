@@ -30,7 +30,7 @@
         <span id='size'><%= @cat.size.titleize %>-size</span>,
       <% end %>
       <% if @cat.coat_length? %>
-        <span id='size'><%= @cat.coat_length.titleize %> coat</span>,
+        <span id='coat_length'><%= @cat.coat_length.titleize %> coat length</span>,
       <% end %>
       <span id='breed'><%= @cat.breeds.join(" x ").html_safe %></span>
     </div>
@@ -135,7 +135,7 @@
         <dd id='third_shots'><%= @cat.third_shots || x_icon %></dd>
         <dt>Rabies</dt>
         <dd id='rabies'><%= @cat.rabies || x_icon %></dd>
-        <dt>Felv FIV Test</dt>
+        <dt>FELV/FIV Test</dt>
         <dd id='felv_fiv_test'><%= @cat.felv_fiv_test || x_icon %></dd>
         <dt>Flea/Tick Preventative</dt>
         <dd id='flea_tick_preventative'><%= @cat.flea_tick_preventative || x_icon %></dd>

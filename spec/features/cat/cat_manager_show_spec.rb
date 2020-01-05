@@ -81,12 +81,10 @@ feature 'visit cat show page', js: true do
                       second_shots: nil,
                       third_shots: nil,
                       rabies: nil,
-                      vac_4dx: nil,
-                      bordetella: nil,
-                      heartworm_preventative: nil,
+                      felv_fiv_test: nil,
                       flea_tick_preventative: nil,
                       dewormer: nil,
-                      toltrazuril: nil) }
+                      coccidia_treatment: nil)}
 
     it "page shows default text for unknown attributes" do
       visit cats_manager_path(cat)
@@ -102,12 +100,10 @@ feature 'visit cat show page', js: true do
       expect(page.find('#second_shots')).to have_x_icon
       expect(page.find('#third_shots')).to have_x_icon
       expect(page.find('#rabies')).to have_x_icon
-      expect(page.find('#vac_4dx')).to have_x_icon
-      expect(page.find('#bordetella')).to have_x_icon
-      expect(page.find('#heartworm_preventative')).to have_x_icon
+      expect(page.find('#felv_fiv_test')).to have_x_icon
       expect(page.find('#flea_tick_preventative')).to have_x_icon
       expect(page.find('#dewormer')).to have_x_icon
-      expect(page.find('#toltrazuril')).to have_x_icon
+      expect(page.find('#coccidia_treatment')).to have_x_icon
     end
   end
 

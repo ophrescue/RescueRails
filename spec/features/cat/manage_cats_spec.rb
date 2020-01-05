@@ -131,7 +131,7 @@ feature 'View Cats', js: true do
 
     scenario 'cannot view the Manager View' do
       visit cats_manager_index_path
-      expect(page_heading).to eq 'Our Dogs'
+      expect(page_heading).to eq 'Our Cats'
     end
 
     scenario 'can not view private information about a cat' do

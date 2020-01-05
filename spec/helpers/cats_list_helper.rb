@@ -29,9 +29,9 @@ module CatsListHelper
   def create_many_cats
     30.times do
       # create_list can produce duplicates
-      FactoryBot.create(:breed)
+      FactoryBot.create(:cat_breed)
     end
-    # make sure there are some terriers for the filter-by-breed spec
+    # make sure there are some tabby cats for the filter-by-breed spec
     FactoryBot.create(:cat, name: "Trouble")
     FactoryBot.create(:cat, name: "Troubador")
     FactoryBot.create(:cat, name: "Trouper")

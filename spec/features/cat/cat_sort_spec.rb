@@ -94,13 +94,13 @@ feature 'Cat sort in manager view', js: true do
     end
   end
 
-  context 'with breed filter active' do
+  context 'with cat breed filter active' do
     before do
-      search_by('Breed',"terr")
+      search_by('Cat Breed',"tabby")
       breeds.each do |breed|
         # breed is primary breed name and secondary breed name
         # separated by \n, regex match doesn't like newlines
-        expect(breed.gsub(/\n/," ")).to match /terrier/i
+        expect(breed.gsub(/\n/," ")).to match /tabby/i
       end
     end
 

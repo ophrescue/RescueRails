@@ -53,7 +53,7 @@
       <div class="form-group row">
         <%= f.label :primary_breed_name, class: 'col-form-label col-form-label-sm col-4'  %>
         <% if can_add_cats? %>
-          <%= f.collection_select(:primary_breed_id, @breeds, :id, :name, {prompt:  '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
+          <%= f.collection_select(:primary_breed_id, @cat_breeds, :id, :name, {prompt:  '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
         <% else %>
           <%= @cat.primary_breed_id ? @cat.primary_breed.name : "None Assigned" %>
         <% end %>
@@ -62,7 +62,7 @@
       <div class="form-group row">
         <%= f.label :secondary_breed_name, class: 'col-form-label col-form-label-sm col-4'  %>
         <% if can_add_cats? %>
-          <%= f.collection_select(:secondary_breed_id, @breeds, :id, :name, {prompt: '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
+          <%= f.collection_select(:secondary_breed_id, @cat_breeds, :id, :name, {prompt: '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
         <% else %>
           <%= @cat.secondary_breed_id ? @cat.secondary_breed.name : "None Assigned" %>
         <% end %>

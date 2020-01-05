@@ -78,8 +78,8 @@ class Cat < ApplicationRecord
 
   has_associated_audits
 
-  belongs_to :primary_breed, class_name: 'Breed'
-  belongs_to :secondary_breed, class_name: 'Breed'
+  belongs_to :primary_breed, class_name: 'CatBreed'
+  belongs_to :secondary_breed, class_name: 'CatBreed'
   belongs_to :foster, class_name: 'User'
   belongs_to :coordinator, class_name: 'User'
   belongs_to :shelter
@@ -152,7 +152,7 @@ class Cat < ApplicationRecord
   COAT_LENGTH = ['hairless','short','medium','long','wire','curly'].freeze
   validates_inclusion_of :coat_length, in: COAT_LENGTH, allow_blank: true
 
-  SEARCH_FIELDS = ["Breed", "Tracking ID", "Name", "Microchip"].freeze
+  SEARCH_FIELDS = ["Cat Breed", "Tracking ID", "Name", "Microchip"].freeze
 
   before_save :update_adoption_date, :update_needs_foster
 
@@ -177,7 +177,7 @@ class Cat < ApplicationRecord
   def self.search(search_params)
     search_term, search_field = search_params
     return unscoped if invalid_search_params(search_params)
-    return is_breed(search_term) if search_field == "breed"
+    return is_breed(search_term) if search_field == "cat_breed"
     return where("#{search_field} = ?", "#{search_term.strip}") if search_field == "tracking_id"
     return where("#{search_field} ilike ?", "%#{search_term.strip}%")
   end
@@ -185,7 +185,7 @@ class Cat < ApplicationRecord
   def self.invalid_search_params(search_params)
     search_term, search_field = search_params
     # security check, since search field will be injected into SQL query
-    (search_params.compact.length != 2) || ( !%w(name tracking_id microchip breed).include? search_field )
+    (search_params.compact.length != 2) || (!%w[name tracking_id microchip cat_breed].include? search_field)
   end
 
   def name=(name)

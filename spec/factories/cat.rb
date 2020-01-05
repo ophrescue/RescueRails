@@ -144,7 +144,7 @@ FactoryBot.define do
       end
 
       factory :tabby do
-        primary_breed_id { Breed.find_or_create_by(name: 'tabby').id }
+        primary_breed_id { CatBreed.find_or_create_by(name: 'tabby').id }
       end
     end
   end

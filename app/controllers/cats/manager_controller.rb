@@ -15,7 +15,7 @@
 class Cats::ManagerController < Cats::CatsBaseController
   helper_method :fostering_cat?
 
-  autocomplete :breed, :name, full: true
+  autocomplete :cat_breed, :name, full: true
 
   before_action :send_unauthenticated_to_public_profile, only: %i[show]
   before_action :require_login
@@ -116,7 +116,7 @@ class Cats::ManagerController < Cats::CatsBaseController
     @foster_users = User.where(is_foster: true).order("name")
     @coordinator_users = User.where(edit_all_adopters: true).order("name")
     @shelters = Shelter.order("name")
-    @breeds = Breed.all
+    @cat_breeds = CatBreed.all
   end
 
   def edit_cats_user

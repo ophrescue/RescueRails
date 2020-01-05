@@ -113,8 +113,8 @@ feature 'edit a cat', js: true do
     include ApplicationHelpers
 
     let!(:active_user) { create(:user, :admin) }
-    let!(:primary_breed){ create(:breed, name: 'new primary breed') }
-    let!(:secondary_breed){ create(:breed, name: 'new secondary breed') }
+    let!(:primary_breed){ create(:cat_breed, name: 'new primary breed') }
+    let!(:secondary_breed){ create(:cat_breed, name: 'new secondary breed') }
     let!(:foster){ create(:foster, name: 'Dede Doglady') }
     let!(:adoption_coordinator){ create(:adoption_coordinator) }
     let!(:shelter){ create(:shelter) }
@@ -174,8 +174,10 @@ feature 'edit a cat', js: true do
         fill_in(:cat_second_shots, with: 'lorem ipsum')
         fill_in(:cat_third_shots, with: 'blah blah')
         fill_in(:cat_rabies, with: 'kablooie')
-        fill_in(:cat_vac_4dx, with: 'schmutz')
-        fill_in(:cat_bordetella, with: 'words')
+        fill_in(:cat_felv_fiv_test, with: 'schmutz')
+        fill_in(:cat_flea_tick_preventative, with: 'words')
+        fill_in(:cat_dewormer, with: 'duis aute')
+        fill_in(:cat_coccidia_treatment, with: 'excepteur sint')
         fill_in(:cat_microchip, with: '1234abcd')
         fill_in(:cat_original_name, with: 'Snoop Dogg')
         fill_in(:cat_fee, with: '333')
@@ -183,12 +185,8 @@ feature 'edit a cat', js: true do
         fill_in(:cat_sponsored_by, with: 'Harry Harker')
         select(shelter.name, from: 'cat_shelter_id')
         fill_in(:cat_medical_summary, with: 'medical words')
-        fill_in(:cat_heartworm_preventative, with: 'have a nice day')
-        fill_in(:cat_flea_tick_preventative, with: 'born in a barn')
         check(:cat_medical_review_complete)
         fill_in(:cat_behavior_summary, with: 'words describing behaviour')
-        fill_in(:cat_dewormer, with: 'duis aute')
-        fill_in(:cat_toltrazuril, with: 'excepteur sint')
 
         # add photos
         click_link('Add a Photo')
@@ -246,8 +244,10 @@ feature 'edit a cat', js: true do
         expect(cat.second_shots).to eq 'lorem ipsum'
         expect(cat.third_shots).to eq 'blah blah'
         expect(cat.rabies).to eq 'kablooie'
-        expect(cat.vac_4dx).to eq 'schmutz'
-        expect(cat.bordetella).to eq 'words'
+        expect(cat.felv_fiv_test).to eq 'schmutz'
+        expect(cat.flea_tick_preventative).to eq 'words'
+        expect(cat.dewormer).to eq 'duis aute'
+        expect(cat.coccidia_treatment).to eq 'excepteur sint'
         expect(cat.microchip).to eq '1234abcd'
         expect(cat.original_name).to eq 'Snoop Dogg'
         expect(cat.fee).to eq 333
@@ -255,12 +255,9 @@ feature 'edit a cat', js: true do
         expect(cat.sponsored_by).to eq 'Harry Harker'
         expect(cat.shelter_id).to eq shelter.id
         expect(cat.medical_summary).to eq 'medical words'
-        expect(cat.heartworm_preventative).to eq 'have a nice day'
-        expect(cat.flea_tick_preventative).to eq 'born in a barn'
         expect(cat.medical_review_complete).to eq true
         expect(cat.behavior_summary).to eq 'words describing behaviour'
-        expect(cat.dewormer).to eq 'duis aute'
-        expect(cat.toltrazuril).to eq 'excepteur sint'
+
         expect(cat.photos.length).to eq 2
 
         expect(page_heading).to match 'newname'
@@ -293,8 +290,10 @@ feature 'edit a cat', js: true do
         expect(page.find('#second_shots').text).to eq 'lorem ipsum'
         expect(page.find('#third_shots').text).to eq 'blah blah'
         expect(page.find('#rabies').text).to eq 'kablooie'
-        expect(page.find('#vac_4dx').text).to eq 'schmutz'
-        expect(page.find('#bordetella').text).to eq 'words'
+        expect(page.find('#felv_fiv_test').text).to eq 'schmutz'
+        expect(page.find('#flea_tick_preventative').text).to eq 'words'
+        expect(page.find('#dewormer').text).to eq 'duis aute'
+        expect(page.find('#coccidia_treatment').text).to eq 'excepteur sint'
         expect(page.find('#microchip').text).to eq '1234abcd'
         expect(page.find('#original_name').text).to eq 'Snoop Dogg'
         expect(page.find('#fee').text).to eq '$333'
@@ -302,12 +301,9 @@ feature 'edit a cat', js: true do
         expect(page.find('#sponsored_by').text).to eq 'Harry Harker'
         expect(page.find('#shelter').text).to eq shelter.name
         expect(page.find('#medical_summary').text).to eq 'medical words'
-        expect(page.find('#heartworm_preventative').text).to eq 'have a nice day'
-        expect(page.find('#flea_tick_preventative').text).to eq 'born in a barn'
         expect(page.find('#medical_review_complete')).to have_check_icon
         expect(page.find('#behavior_summary').text).to eq 'words describing behaviour'
-        expect(page.find('#dewormer').text).to eq 'duis aute'
-        expect(page.find('#toltrazuril').text).to eq 'excepteur sint'
+
         expect(page.all('#galleria .galleria-stage .galleria-image img').length).to eq 1
         expect(page.all('#galleria .galleria-thumbnails-container .galleria-image img').length).to eq 2
       end
@@ -316,7 +312,7 @@ feature 'edit a cat', js: true do
     describe 'cancel while editing' do
       it "should return to the cat profile" do
         click_link('Cancel')
-        dog = Cat.first
+        cat = Cat.first
         expect(page_heading).to eq "##{cat.tracking_id} #{cat.name}"
       end
     end
@@ -422,7 +418,7 @@ feature 'edit a cat', js: true do
       context 'attachment exceeds limit' do
         before do
           stub_const("Attachment::ATTACHMENT_MAX_SIZE", 1)
-          visit edit_dogs_manager_path(create(:cat))
+          visit edit_cats_manager_path(create(:cat))
         end
 
         it 'should not save and should warn user' do

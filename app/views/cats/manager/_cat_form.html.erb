@@ -27,7 +27,7 @@
 
       <div class="form-group row">
         <%= f.label :status, class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true  %>
-        <%= f.select :status, Cat::STATUSES, {prompt: '-select-'}, {class: "form-control form-control-sm col-6 #{validation_class_for(f,:status)}", 'data-bootstrap41': true, required: true} %>
+        <%= f.select :status, Cat::STATUSES, {prompt: '-select-'}, {class: "form-control form-control-sm col-6 #{validation_class_for(f,:status)}", 'data-bootstrap41': true, required: true, disabled: !can_edit_cats? } %>
         <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(f,:status) %></div>
       </div>
 
@@ -52,20 +52,12 @@
 
       <div class="form-group row">
         <%= f.label :primary_breed_name, class: 'col-form-label col-form-label-sm col-4'  %>
-        <% if can_add_cats? %>
-          <%= f.collection_select(:primary_breed_id, @cat_breeds, :id, :name, {prompt:  '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
-        <% else %>
-          <%= @cat.primary_breed_id ? @cat.primary_breed.name : "None Assigned" %>
-        <% end %>
+        <%= f.collection_select(:primary_breed_id, @cat_breeds, :id, :name, {prompt:  '-select-'}, {class: 'form-control form-control-sm col-6', disabled: !can_add_cats?}) %>
       </div>
 
       <div class="form-group row">
         <%= f.label :secondary_breed_name, class: 'col-form-label col-form-label-sm col-4'  %>
-        <% if can_add_cats? %>
-          <%= f.collection_select(:secondary_breed_id, @cat_breeds, :id, :name, {prompt: '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
-        <% else %>
-          <%= @cat.secondary_breed_id ? @cat.secondary_breed.name : "None Assigned" %>
-        <% end %>
+        <%= f.collection_select(:secondary_breed_id, @cat_breeds, :id, :name, {prompt: '-select-'}, {class: 'form-control form-control-sm col-6', disabled: !can_add_cats?}) %>
       </div>
 
       <div class="form-group row">
@@ -129,7 +121,7 @@
         <% if can_edit_all_adopters? || can_add_cats? %>
           <%= f.collection_select(:coordinator_id, @coordinator_users, :id, :name, {include_blank: '-select-'}, {class: 'form-control form-control-sm col-6'} ) %>
         <% else %>
-          <%= @cat.coordinator ? @cat.coordinator.name : "No Coordinator Assigned" %>
+          <%= f.collection_select(:coordinator_id, @coordinator_users, :id, :name, {include_blank: '-select-'}, {class: 'form-control form-control-sm col-6', disabled: true} ) %>
         <% end %>
       </div>
 

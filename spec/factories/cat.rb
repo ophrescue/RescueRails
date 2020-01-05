@@ -71,7 +71,7 @@ FactoryBot.define do
         after(:create) do |cat|
           `mkdir -p #{Rails.root.join("public","system","test","photos")}`
           3.times do |i|
-            photo = FactoryBot.create(:photo, cat: cat, is_private: false, position: i+1 )
+            photo = FactoryBot.create(:photo, animal_type: 'Cat', animal_id: cat.id, is_private: false, position: i+1)
             ["medium", "original"].each do |style|
               data = "photos/photos/#{photo.id}/#{style}/"
               hash = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, Photo::HASH_SECRET, data)

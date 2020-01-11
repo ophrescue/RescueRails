@@ -20,10 +20,10 @@ feature 'Link Cats to Adoption Applications via Adoption model', js: true do
 
     click_button('Link Cat')
     expect(page).to have_content(test_applicant.name + ' status with this cat is', wait: 5)
-    expect(page).to have_select('adoption_relation_type', selected: 'interested')
+    expect(page).to have_select('cat_adoption_relation_type', selected: 'interested')
 
-    select 'returned', from: 'adoption_relation_type'
-    expect(page).to have_select('adoption_relation_type', selected: 'returned')
+    select 'returned', from: 'cat_adoption_relation_type'
+    expect(page).to have_select('cat_adoption_relation_type', selected: 'returned')
 
     accept_confirm do
       click_button('X')

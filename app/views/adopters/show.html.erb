@@ -163,4 +163,9 @@
       $('#linked_dogs_table')
         .on('change', 'select#adoption_relation_type', RescueRails.saveParentForm);
    });
+
+  $(function() {
+      $('#linked_cats_table')
+        .on('change', 'select#cat_adoption_relation_type', RescueRails.saveParentForm);
+   });
 </script>

@@ -53,7 +53,7 @@ FactoryBot.define do
     factory :dog_with_photo_and_attachment do
       after(:build) do |dog|
         build(:attachment, attachable: dog)
-        build(:photo, dog: dog)
+        build(:photo, animal_type: 'Dog', animal_id: dog.id)
       end
     end
 
@@ -70,12 +70,12 @@ FactoryBot.define do
       after(:create) do |dog|
         `mkdir -p #{Rails.root.join("public","system","test","photos")}`
         3.times do |i|
-          photo = FactoryBot.create(:photo, dog: dog, is_private: false, position: i+1 )
+          photo = FactoryBot.create(:photo, animal_type: 'Dog', animal_id: dog.id, is_private: false, position: i+1 )
           ["medium", "original"].each do |style|
             data = "photos/photos/#{photo.id}/#{style}/"
             hash = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, Photo::HASH_SECRET, data)
             filepath = "public/system/test/photos/#{hash}.jpeg"
-            image_source = Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s
+            image_source = Rails.root.join('spec','fixtures','photo','animal_pic.jpg').to_s
             `cp #{image_source} #{Rails.root.join(filepath)}`
           end
         end

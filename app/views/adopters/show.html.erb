@@ -56,6 +56,31 @@
               <% end %>
             </div>
           </div>
+
+          <h3>Cats</h3>
+          <%= render 'associated_cats_form' %>
+
+          <div id="parent_linked_cats_table">
+            <div id="linked_cats_table" class="row">
+              <% @adopter.cat_adoptions.find_each do |adp| %>
+                <div class="span6">
+                  <%= form_for adp, html: {method: :put}, format: :json do |f| %>
+                    <%=  link_to adp.cat.name, cats_manager_path(adp.cat) %>
+                    (<%= adp.cat.status %>),
+                    <%= @adopter.name %> status with this cat is
+                    <%= f.select :relation_type, options_for_select(CatAdoption::RELATION_TYPE.collect{|s| [s, s]}, adp.relation_type), {}, class: 'input-medium' %>
+                    <div id="status-icon"></div>
+                  <% end %>
+                </div>
+                <div class="span1">
+                  <%= form_for adp, html: {id: "delete_cat_link", class: "delete_cat_adoption"}, method: :delete do |f| %>
+                    <%= f.submit "X", class: "btn btn-danger btn-small" %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
         </div>
 
         <div id="doginfo" class="tab-pane">
@@ -137,5 +162,10 @@
   $(function() {
       $('#linked_dogs_table')
         .on('change', 'select#adoption_relation_type', RescueRails.saveParentForm);
+   });
+
+  $(function() {
+      $('#linked_cats_table')
+        .on('change', 'select#cat_adoption_relation_type', RescueRails.saveParentForm);
    });
 </script>

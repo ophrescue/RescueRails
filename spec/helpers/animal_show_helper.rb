@@ -1,4 +1,4 @@
-module DogShowHelper
+module AnimalShowHelper
   def adoptapet_ad
     page.find('#adoptapet_ad').text
   end

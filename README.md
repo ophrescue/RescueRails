@@ -29,6 +29,7 @@ psql                                            //launch Postgresql command line
 \list                                          //to get a list of your databases if you don't remember
 \connect TheNameOfYourDatabase
 CREATE SEQUENCE tracking_id_seq START 1;
+CREATE SEQUENCE cat_tracking_id_seq START 1;
 \q                                              //quit and return to command prompt.
 ```
 

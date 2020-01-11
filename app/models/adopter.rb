@@ -75,10 +75,14 @@ class Adopter < ApplicationRecord
   has_many :adoptions, dependent: :destroy
   accepts_nested_attributes_for :adoptions
 
+  has_many :cat_adoptions, dependent: :destroy
+  accepts_nested_attributes_for :cat_adoptions
+
   has_one :adoption_app, dependent: :destroy
   accepts_nested_attributes_for :adoption_app
 
   has_many :dogs, through: :adoptions
+  has_many :cats, through: :cat_adoptions
   has_many :comments, -> { order('created_at DESC') }, as: :commentable
 
   belongs_to :user, class_name: 'User', primary_key: 'id', foreign_key: 'assigned_to_user_id'

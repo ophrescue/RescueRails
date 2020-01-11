@@ -26,10 +26,10 @@ $( function() {
       isEditing = !isEditing;
     });
 
-    $('textarea#adopter_dog_name').on('blur', RescueRails.saveParentForm);
+    $('textarea#adopter_cat_name').on('blur', RescueRails.saveParentForm);
 
-    var remoteSource = function(request, response) {
-      $.getJSON('/dogs?autocomplete=true&search=' + request.term, function(data) {
+    var remoteCatSource = function(request, response) {
+      $.getJSON('/cats?autocomplete=true&search=' + request.term, function(data) {
         var results = [];
         data.forEach( function(item) {
           results.push({label: item.name, value: item.id});
@@ -38,35 +38,77 @@ $( function() {
       });
     };
 
-    var itemSelected = function(e, ui) {
-      $('#autocomplete_label').val(ui.item.label);
-      $('#adoption_dog_id').val(ui.item.value);
+    var catSelected = function(e, ui) {
+      $('#autocomplete_cat_label').val(ui.item.label);
+      $('#adoption_cat_id').val(ui.item.value);
       return false;
     };
 
-    var focusEvent = function(e, ui) {
-      $('#autocomplete_label').val(ui.item.label);
-      $('#adoption_dog_id').val(ui.item.value);
+    var focusCatEvent = function(e, ui) {
+      $('#autocomplete_cat_label').val(ui.item.label);
+      $('#adoption_cat_id').val(ui.item.value);
       return false;
     };
 
-    var responseHandler = function(e, ui) {
+    var responseCatHandler = function(e, ui) {
       if (ui.content.length == 1) {
-        $('#autocomplete_label').blur();
+        $('#autocomplete_cat_label').blur();
         ui.item = ui.content[0];
         $(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
         $(this).autocomplete('close');
       }
     };
 
-    $('.autocomplete')
+    $('#autocomplete_cat_label')
       .autocomplete({
-        focus: focusEvent,
+        focus: focusCatEvent,
         minLength: 2,
-        response: responseHandler,
-        select: itemSelected,
-        source: remoteSource
+        response: responseCatHandler,
+        select: catSelected,
+        source: remoteCatSource
       });
+
+      $('textarea#adopter_dog_name').on('blur', RescueRails.saveParentForm);
+
+      var remoteDogSource = function(request, response) {
+        $.getJSON('/dogs?autocomplete=true&search=' + request.term, function(data) {
+          var results = [];
+          data.forEach( function(item) {
+            results.push({label: item.name, value: item.id});
+          });
+          response(results);
+        });
+      };
+
+      var dogSelected = function(e, ui) {
+        $('#autocomplete_dog_label').val(ui.item.label);
+        $('#adoption_dog_id').val(ui.item.value);
+        return false;
+      };
+
+      var focusDogEvent = function(e, ui) {
+        $('#autocomplete_dog_label').val(ui.item.label);
+        $('#adoption_dog_id').val(ui.item.value);
+        return false;
+      };
+
+      var responseDogHandler = function(e, ui) {
+        if (ui.content.length == 1) {
+          $('#autocomplete_dog_label').blur();
+          ui.item = ui.content[0];
+          $(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
+          $(this).autocomplete('close');
+        }
+      };
+
+      $('#autocomplete_dog_label')
+        .autocomplete({
+          focus: focusDogEvent,
+          minLength: 2,
+          response: responseDogHandler,
+          select: dogSelected,
+          source: remoteDogSource
+        });
 
     var isRefEditing = false;
 

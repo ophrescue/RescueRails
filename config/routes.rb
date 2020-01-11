@@ -10,6 +10,7 @@ RescueRails::Application.routes.draw do
   resources :adopters do
     resources :comments, except: %i[destroy edit update]
     resources :adoptions
+    resources :cat_adoptions
   end
 
   resources :donations do
@@ -20,6 +21,8 @@ RescueRails::Application.routes.draw do
 
   resources :comments, except: %i[new]
 
+  resources :cats, controller: 'cats/gallery', only: %i[index show]
+
   resources :dogs, controller: 'dogs/gallery', only: %i[index show]
 
   resources :photos do
@@ -29,6 +32,11 @@ RescueRails::Application.routes.draw do
   resources :dogs_manager, controller: 'dogs/manager' do
     resources :comments
     resources :adoptions
+  end
+
+  resources :cats_manager, controller: 'cats/manager' do
+    resources :comments
+    resources :cat_adoptions
   end
 
   resources :bulletins, controller: :posts, type: 'Bulletin'
@@ -44,6 +52,7 @@ RescueRails::Application.routes.draw do
   resources :adoptions,
             :adoption_app,
             :campaigns,
+            :cat_adoptions,
             :dashboards,
             :events,
             :folders,

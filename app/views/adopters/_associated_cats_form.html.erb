@@ -1,0 +1,15 @@
+<%= form_for(@adopter.cat_adoptions.build(:adopter_id => @adopter.id),:html => {:id => "new_cat_link"}) do |ad| %>
+  <fieldset>
+    <div class="control-group">
+      <%= ad.label :cat_id, "Associate Cat with Application", :class => "control-label" %>
+      <div class="controls">
+        <input id="autocomplete_cat_label" name="adoption_cat_name" class='autocomplete'>
+        <input id="adoption_cat_id" type="hidden" name="cat_adoption[cat_id]">
+      </div>
+    </div>
+    <div><%= ad.hidden_field :adopter_id %></div>
+    <div id="Navigation">
+      <%= ad.submit "Link Cat", :id => "link_cat_submit",:class => "btn btn-small btn-primary" %>
+    </div>
+  </fieldset>
+<% end %>

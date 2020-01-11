@@ -194,9 +194,9 @@ feature 'edit a dog', js: true do
         click_link('Add a Photo')
         click_link('Add a Photo') # cannot add another input until the first one has been set
         expect(page.all('#new_dog_photo').length).to eq 1
-        find("#new_dog_photo").set(Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s)
+        find("#new_dog_photo").set(Rails.root.join('spec','fixtures','photo','animal_pic.jpg').to_s)
         click_link('Add another Photo')
-        all("#new_dog_photo")[1].set(Rails.root.join('spec','fixtures','photo','dog_pic.jpg').to_s)
+        all("#new_dog_photo")[1].set(Rails.root.join('spec','fixtures','photo','animal_pic.jpg').to_s)
         click_link('Add another Photo')
         page.all('#remove_photo').last.click
         expect(page.all('#new_dog_photo').length).to eq 2
@@ -404,7 +404,7 @@ feature 'edit a dog', js: true do
 
         it 'should not save and should warn user' do
           click_link('Add a Photo')
-          find("#new_dog_photo").set(Rails.root.join('spec','fixtures','photo','dog_large_pic.jpg').to_s)
+          find("#new_dog_photo").set(Rails.root.join('spec','fixtures','photo','animal_large_pic.jpg').to_s)
           expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system','test','photos','*')).length}
           expect(page).to have_selector('.new_photos .invalid-feedback', text: 'must be a jpg or png file smaller than 10Mb')
         end

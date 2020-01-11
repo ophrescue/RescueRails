@@ -32,6 +32,8 @@ RSpec.configure do |config|
     # required for TravisCI, otherwise this required sequence is not present in the db
     ActiveRecord::Base.connection.execute("DROP SEQUENCE IF EXISTS tracking_id_seq;")
     ActiveRecord::Base.connection.execute("CREATE SEQUENCE tracking_id_seq START 1;")
+    ActiveRecord::Base.connection.execute("DROP SEQUENCE IF EXISTS cat_tracking_id_seq;")
+    ActiveRecord::Base.connection.execute("CREATE SEQUENCE cat_tracking_id_seq START 1;")
     `RAILS_ENV=test rake assets:precompile 2>/dev/null` # inhibit STD_OUT b/c it overruns the terminal page
   end
 

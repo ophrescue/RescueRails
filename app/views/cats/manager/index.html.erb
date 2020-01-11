@@ -1,0 +1,18 @@
+<div class="container" id="manager_list">
+  <div class="row title_row">
+    <div class="col">
+      <h1><%= t('.title') %></h1>
+    </div>
+  </div>
+  <div class="row">
+  </div>
+  <div class="row pb-3">
+    <div class="col">
+        <%= link_to("Public View", cats_path, class: "btn btn-secondary") %>
+        <% if can_add_cats? %>
+          <%= link_to "Add Cat", new_cats_manager_path, :class => "btn btn-primary" %>
+        <% end %>
+    </div>
+  </div>
+  <%= render partial: "manager" %>
+</div>

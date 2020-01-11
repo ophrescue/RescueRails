@@ -1,8 +1,8 @@
 require 'rails_helper'
-require_relative '../../helpers/dog_show_helper'
+require_relative '../../helpers/animal_show_helper'
 
 feature 'visit dog show page', js: true do
-  include DogShowHelper
+  include AnimalShowHelper
   context "dog is unavailable" do
     before(:each) do
       visit dog_path(adoption_completed_dog)

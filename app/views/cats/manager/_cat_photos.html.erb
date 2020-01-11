@@ -1,0 +1,25 @@
+<% if @cat.photos.empty? %>
+  <span id='no_photos' class='col-12'><%= @cat.name %> has no photos</span>
+<% end %>
+<div class="col-12" id='photos_sort' data-update-url="<%= sort_photos_url %>">
+  <%= f.fields_for :photos do |photo| %>
+    <div class='photo row align-items-center' id="photo_<%= photo.object.id %>" data-index=<%= photo.index %>>
+      <div class='col-5'>
+        <i class="fa fa-sort fa-3x sort-handle"></i>
+        <%= image_tag(photo.object.photo.url(:thumb)) %>
+      </div>
+      <div class='col-2'>
+        <label>
+          <%= photo.check_box :is_private %>
+          <span>Private Photo</span>
+        </label>
+      </div>
+      <div class='col-2'>
+        <label>
+          <%= photo.check_box :_destroy %>
+          <span>Delete Photo</span>
+        </label>
+      </div>
+    </div>
+  <% end %>
+</div>

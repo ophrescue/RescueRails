@@ -210,16 +210,16 @@ feature 'Manage Events', js: true do
     end
 
     it "should show error message when image > 5Mb is chosen" do
-      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"dog_large_pic.jpg") )
+      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"animal_large_pic.jpg") )
       expect( validation_error_message_for(:event_photo).text ).to eq "Photo must be a jpg or png file smaller than 5Mb"
-      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"dog_pic.jpg") )
+      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"animal_pic.jpg") )
       expect( validation_error_message_for(:event_photo)).not_to be_visible
     end
 
     it "should show error message when non-image attachment file is chosen" do
       attach_file('event[photo]', Rails.root.join('spec','fixtures','doc',"sample.docx") )
       expect( validation_error_message_for(:event_photo).text ).to eq "Photo must be a jpg or png file smaller than 5Mb"
-      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"dog_pic.jpg") )
+      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"animal_pic.jpg") )
       expect( validation_error_message_for(:event_photo)).not_to be_visible
     end
 

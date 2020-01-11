@@ -16,7 +16,7 @@ feature 'Link Dogs to Adoption Applications via Adoption model', js: true do
     expect(page).to have_content(test_applicant.name)
     expect(page).to have_no_content('status with this dog is')
 
-    select_from_autocomplete('autocomplete_label', with: 'Bar', click: 'Bark')
+    select_from_autocomplete('autocomplete_dog_label', with: 'Bar', click: 'Bark')
 
     click_button('Link Dog')
     expect(page).to have_content(test_applicant.name + ' status with this dog is', wait: 5)

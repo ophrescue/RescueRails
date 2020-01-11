@@ -1,8 +1,8 @@
 class Carousel
   attr_accessor :photos
 
-  def initialize(dog)
-    @photos = dog.photos.visible
+  def initialize(animal)
+    @photos = animal.photos.visible
   end
 
   def to_s

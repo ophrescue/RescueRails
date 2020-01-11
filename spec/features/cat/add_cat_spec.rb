@@ -52,8 +52,8 @@ feature 'add a cat', js: true do
     include CatsListHelper
 
     let!(:active_user) { create(:user, :admin) }
-    let!(:primary_breed){ create(:breed, name: 'new primary breed') }
-    let!(:secondary_breed){ create(:breed, name: 'new secondary breed') }
+    let!(:primary_breed){ create(:cat_breed, name: 'new primary breed') }
+    let!(:secondary_breed){ create(:cat_breed, name: 'new secondary breed') }
     let!(:foster){ create(:foster, name: 'Dede Catlady') }
     let!(:adoption_coordinator){ create(:adoption_coordinator) }
     let!(:shelter){ create(:shelter) }

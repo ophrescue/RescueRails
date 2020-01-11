@@ -10,6 +10,7 @@ RescueRails::Application.routes.draw do
   resources :adopters do
     resources :comments, except: %i[destroy edit update]
     resources :adoptions
+    resources :cat_adoptions
   end
 
   resources :donations do
@@ -35,7 +36,7 @@ RescueRails::Application.routes.draw do
 
   resources :cats_manager, controller: 'cats/manager' do
     resources :comments
-    resources :adoptions
+    resources :cat_adoptions
   end
 
   resources :bulletins, controller: :posts, type: 'Bulletin'
@@ -51,6 +52,7 @@ RescueRails::Application.routes.draw do
   resources :adoptions,
             :adoption_app,
             :campaigns,
+            :cat_adoptions,
             :dashboards,
             :events,
             :folders,

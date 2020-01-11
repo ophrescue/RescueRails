@@ -14,25 +14,25 @@
 
 $( function () {
 
-  $('#new_dog_link').submit( function(e) {
+  $('#new_cat_link').submit( function(e) {
     e.preventDefault();
 
     $.ajax({
       type: 'POST',
       url: this.action,
-      data: $('#new_dog_link').serialize(),
+      data: $('#new_cat_link').serialize(),
       success: function (data) {
-        refresh_dogs();
-        clear_dog_autocomplete();
+        refresh_cats();
+        clear_cat_autocomplete();
       },
       error: function(a, b, c) {
-        $('#link_dog_submit').prop('disabled', false);
+        $('#link_cat_submit').prop('disabled', false);
         alert(b + ': ' + c);
       }
     });
   });
 
-  $('#parent_linked_dogs_table').on('submit', '#delete_dog_link', function(e) {
+  $('#parent_linked_cats_table').on('submit', '#delete_cat_link', function(e) {
     e.preventDefault();
     if(confirm('Are you sure you would like to delete this?')) {
       $.ajax({
@@ -40,7 +40,7 @@ $( function () {
         url: this.action,
         data: $(this).serialize(),
         success: function (data) {
-          refresh_dogs();
+          refresh_cats();
         },
         statusCode: {
           401: function() {
@@ -55,13 +55,13 @@ $( function () {
 
 });
 
-function refresh_dogs() {
+function refresh_cats() {
   var url = window.location;
-  $('#parent_linked_dogs_table').load(url+' #linked_dogs_table');
-  $('#link_dog_submit').prop('disabled', false);
+  $('#parent_linked_cats_table').load(url+' #linked_cats_table');
+  $('#link_cat_submit').prop('disabled', false);
 }
 
-function clear_dog_autocomplete() {
-  $('#autocomplete_dog_label').val('');
-  $('#adoption_dog_id').val('');
+function clear_cat_autocomplete() {
+  $('#autocomplete_cat_label').val('');
+  $('#adoption_cat_id').val('');
 }

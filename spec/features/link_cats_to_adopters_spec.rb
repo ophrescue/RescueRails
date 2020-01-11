@@ -16,7 +16,7 @@ feature 'Link Cats to Adoption Applications via Adoption model', js: true do
     expect(page).to have_content(test_applicant.name)
     expect(page).to have_no_content('status with this cat is')
 
-    select_from_autocomplete('autocomplete_label', with: 'Meo', click: 'Meow')
+    select_from_autocomplete('autocomplete_cat_label', with: 'Meo', click: 'Meow')
 
     click_button('Link Cat')
     expect(page).to have_content(test_applicant.name + ' status with this cat is', wait: 5)

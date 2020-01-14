@@ -73,6 +73,7 @@
                   <li><%= link_to "Applications",  :controller => "adopters", :status => "active" %></li>
                 <% end %>
                 <% if current_user.active? || current_user.admin? %>
+                  <li><%= link_to "Cat Manager", cats_manager_index_path %></li>
                   <li><%= link_to "DNA List", :controller => "banned_adopters" %></li>
                   <li><%= link_to "Dog Manager", dogs_manager_index_path %></li>
                   <li><%= link_to "Users", users_path %></li>

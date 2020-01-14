@@ -34,8 +34,8 @@
             <a href="/newsletters" class="btn btn-large btn-info">Volunteer Newsletters</a>
         </div>
         <div class="col-md-6 text-center py-2">
-            <% if @contacts_folder.present? %>
-                <%= link_to "OPH Contact List", folder_path(@contacts_folder), class: 'btn btn-large btn-info' %>
+            <% if @contacts_id.present? %>
+                <%= link_to "OPH Contact List", info_path(@contacts_id), class: 'btn btn-large btn-info' %>
             <% end %>
         </div>
     </div>

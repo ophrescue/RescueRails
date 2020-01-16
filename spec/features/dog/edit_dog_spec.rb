@@ -19,7 +19,7 @@ feature 'edit a dog', js: true do
     context 'user not permitted to add dogs' do
       let!(:dog) { create(:dog) }
       let!(:active_user) { create(:user, :admin, add_dogs: false) }
-      let(:disallowed_fields) { ['primary_breed_id', 'secondary_breed_id'] }
+      let(:disallowed_fields) { ['name','original_name','primary_breed_id', 'secondary_breed_id'] }
 
       it 'should allow access to all fields except breed fields and status' do
         visit edit_dogs_manager_path(dog)
@@ -39,7 +39,7 @@ feature 'edit a dog', js: true do
     context 'user not permitted to edit adopters and not permitted to add dogs' do
       let!(:dog) { create(:dog) }
       let!(:active_user) { create(:user, :admin, add_dogs: false, edit_all_adopters: false) }
-      let(:disallowed_fields) { ['primary_breed_id', 'secondary_breed_id', 'coordinator_id'] }
+      let(:disallowed_fields) { ['name','original_name','primary_breed_id', 'secondary_breed_id', 'coordinator_id'] }
 
       it 'should allow access to all except breed fields and coordinators field' do
         visit edit_dogs_manager_path(dog)
@@ -79,7 +79,7 @@ feature 'edit a dog', js: true do
     context 'user is fostering the dog' do
       let!(:active_user) { create(:user, :foster) }
       let!(:dog) { create(:dog, foster_id: active_user.id) }
-      let(:disallowed_fields){ %w[tracking_id original_name fee medical_summary behavior_summary status primary_breed_id secondary_breed_id coordinator_id] }
+      let(:disallowed_fields){ %w[tracking_id name original_name fee medical_summary behavior_summary status primary_breed_id secondary_breed_id coordinator_id] }
 
       it 'should allow access to limited foster fields' do
         visit edit_dogs_manager_path(dog)

@@ -1,19 +1,4 @@
 <%
-  dc_trainer =
-  {
-    name: 'Patrick\'s Pet Care',
-    logo: 'sponsors/patrickspetcare.png',
-    contact: 'Patrick Flynn Owner and General Manager',
-    company_address: '3509 12th Street NE Washington DC 20017',
-    website: 'https://patrickspetcare.com',
-    phone: '202-630-7387',
-    email: 'pf@patrickspetcare.com',
-    membership: 'N/A',
-    experience: '1 Year',
-    session_type: '1-hour group or 1-hour private lesson Saturday AM ',
-    quote: 'We use what\'s called the balanced training philosophy. We incorporate the use of the 4 quadrants of operant conditioning which are positive and negative reinforcement as well as punishment. This allows us to adapt to dogs with a wide range of attitudes and personalities. It\'s the science of using just enough to get the job done and finding what really motivates the dog so we can use that to teach them to be well behaved as well as a few cool tricks all while having as much fun as possible.'
-  }
-
 
   md_trainers =
   {
@@ -188,7 +173,7 @@ I believe any dog can be trained, no matter what behavioral problems they\'re ha
 
   va_trainers =
   {
-    name: 'Apple Dog Daycare',
+    name: 'Apple Dog Academy',
     logo: 'sponsors/apple-dog-daycare.jpg',
     company_address: '8818 Brook Rd, Glen Allen, VA 23060',
     website: 'http://www.appledogdaycare.com/',
@@ -286,7 +271,6 @@ I believe any dog can be trained, no matter what behavioral problems they\'re ha
   <div class="span4">
     <div class="well">
       <ul>
-        <li><a href="#dc">District of Columbia</a></li>
         <li><a href="#md">Maryland</a></li>
         <li><a href="#pa">Pennsylvania</a></li>
         <li><a href="#va">Virginia</a></li>
@@ -298,44 +282,6 @@ I believe any dog can be trained, no matter what behavioral problems they\'re ha
 <div class="row-fluid">
   <div class="span12">
     <div class="article">
-    <h2><a name="dc"></a>District of Columbia</h2>
-
-      <div class="media">
-        <h3><%= dc_trainer[:name] %></h3>
-        <a class="pull-left" target="_blank" href="">
-          <%= image_tag(dc_trainer[:logo], alt: dc_trainer[:name], size: "150") %>
-        </a>
-        <div class="media-body">
-          <ul class="unstyled">
-            <li>
-              <strong>Contact:</strong> <%= dc_trainer[:contact] %>
-            </li>
-            <li>
-              <strong>Company Address:</strong> <%= dc_trainer[:company_address] %>
-            </li>
-            <li>
-              <strong>Website:</strong> <a href="<%= dc_trainer[:website] %>"><%=dc_trainer[:website] %></a>
-            </li>
-            <li>
-              <strong>Phone:</strong> <%= dc_trainer[:phone] %>
-            </li>
-            <li>
-              <strong>Email:</strong> <a href="mailto:<%= dc_trainer[:email] %>"><%=dc_trainer[:email] %></a>
-            </li>
-            <li>
-              <strong>Membership:</strong> <%= dc_trainer[:membership] %>
-            </li>
-            <li>
-              <strong>Experience:</strong> <%= dc_trainer[:experience] %>
-            </li>
-            <li>
-              <strong>Session Type:</strong> <%= dc_trainer[:session_type] %>
-            </li>
-          </ul>
-          <p><em>"<%= dc_trainer[:quote] %></em>"</p>
-        </div>
-      </div>
-
     <h2><a name="md"></a>Maryland</h2>
 
     <% md_trainers.each do |trainer| %>

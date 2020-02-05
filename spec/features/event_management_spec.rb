@@ -7,12 +7,12 @@ feature 'Manage Events', js: true do
   include ClientValidationFormHelpers
 
   describe "add an event" do
+    let(:admin){ create(:user, :admin) }
     let(:test_event){ build(:event, :in_the_future) }
     let(:date_time) { "#{test_event.event_date.strftime("%A, %B %-e, %Y") } from #{test_event.start_time.strftime("%-l:%M %P") } to #{ test_event.end_time.strftime("%-l:%M %P") }" }
 
     before do
-      sign_in_as_admin
-      visit '/events'
+      visit events_path(as: admin)
     end
 
     it 'should save and render attributes' do
@@ -56,13 +56,13 @@ feature 'Manage Events', js: true do
   end
 
   describe "edit an upcoming event" do
+    let(:admin){ create(:user, :admin) }
     let!(:event){ create(:event, :in_the_future, title: 'future event') }
     let(:new_upcoming_event){ build(:event, :in_the_future) }
     let!(:past_event){ create(:event, :in_the_past, title: 'past event') }
 
     before do
-      sign_in_as_admin
-      visit events_path('upcoming')
+      visit events_path('upcoming', as: admin)
     end
 
     it 'should save edited attributes' do
@@ -139,6 +139,7 @@ feature 'Manage Events', js: true do
       fill_in('event_start_time', with: new_upcoming_event.start_time)
       fill_in('event_end_time', with: new_upcoming_event.end_time)
       expect{ click_button('Submit') }.to change{ Event.count }.by(1)
+      visit scoped_events_path("upcoming")
       expect( page.all('.event-title').count).to eq 2
       cloned_event = Event.last
       expect(cloned_event.photo.exists?).to eq true
@@ -158,6 +159,7 @@ feature 'Manage Events', js: true do
       fill_in('event_end_time', with: new_upcoming_event.end_time)
       check('Delete')
       expect{ click_button('Submit') }.to change{ Event.count }.by(1)
+      visit scoped_events_path("upcoming")
       expect( page.all('.event-title').count).to eq 2
       cloned_event = Event.last
       expect(cloned_event.attributes.values_at( :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at)).
@@ -208,16 +210,16 @@ feature 'Manage Events', js: true do
     end
 
     it "should show error message when image > 5Mb is chosen" do
-      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"dog_large_pic.jpg") )
+      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"animal_large_pic.jpg") )
       expect( validation_error_message_for(:event_photo).text ).to eq "Photo must be a jpg or png file smaller than 5Mb"
-      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"dog_pic.jpg") )
+      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"animal_pic.jpg") )
       expect( validation_error_message_for(:event_photo)).not_to be_visible
     end
 
     it "should show error message when non-image attachment file is chosen" do
       attach_file('event[photo]', Rails.root.join('spec','fixtures','doc',"sample.docx") )
       expect( validation_error_message_for(:event_photo).text ).to eq "Photo must be a jpg or png file smaller than 5Mb"
-      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"dog_pic.jpg") )
+      attach_file('event[photo]', Rails.root.join('spec','fixtures','photo',"animal_pic.jpg") )
       expect( validation_error_message_for(:event_photo)).not_to be_visible
     end
 

@@ -159,6 +159,7 @@ class UsersController < Clearance::UsersController
     if current_user && current_user.admin?
       params.require(:user)
         .permit(:name,
+                :avatar,
                 :email,
                 :password,
                 :password_confirmation,
@@ -263,7 +264,8 @@ class UsersController < Clearance::UsersController
                 :is_transporter,
                 :mentor_id,
                 :translator,
-                :known_languages)
+                :known_languages,
+                :avatar)
     end
   end
 

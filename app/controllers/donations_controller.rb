@@ -18,9 +18,10 @@ class DonationsController < ApplicationController
   before_action :unlocked_user, except: %i[new create index]
   before_action :admin_user, only: %i[history show]
   before_action :select_bootstrap41
+  before_action :show_user_navbar, only: %i[history show]
 
   def new
-    @donation = Donation.new campaign_params
+    @donation = Donation.new optional_params
   end
 
   def index
@@ -29,6 +30,7 @@ class DonationsController < ApplicationController
 
   def history
     @donations = Donation.order(created_at: :desc).paginate(page: params[:page], per_page: format_for_page)
+    @donation_chart_data = Donation.where(created_at: 12.months.ago..Time.now).group_by_month(:created_at).sum(:amount)
     respond_to do |format|
       format.html
       format.xls { render_donations_xls }
@@ -36,13 +38,15 @@ class DonationsController < ApplicationController
   end
 
   def show
-    redirect_to(root_path)
+    @donation = Donation.find(params[:id])
+    @related_donations = Donation.where(email: @donation.email)
   end
 
   def create
     @donation = Donation.new donation_params.merge(card_token: stripe_params["stripeToken"])
 
     raise "Check for errors" unless @donation.valid?
+
     if @donation.subscription?
       @donation.create_subscription
     else
@@ -64,6 +68,7 @@ class DonationsController < ApplicationController
 
   def format_for_page
     return PER_PAGE unless request.format.xls?
+
     Donation.count
   end
 
@@ -75,8 +80,11 @@ class DonationsController < ApplicationController
     params.permit :stripeToken, :utf8, :authenticity_token
   end
 
-  def campaign_params
-    params.permit :campaign_id
+  def optional_params
+    params.permit(:campaign_id,
+                  :comment,
+                  :frequency,
+                  :amount)
   end
 
   def donation_params
@@ -92,7 +100,14 @@ class DonationsController < ApplicationController
                                      :is_memory_honor,
                                      :campaign_id,
                                      :memory_honor_type,
-                                     :memory_honor_name)
+                                     :memory_honor_name,
+                                     :more_contact_info,
+                                     :phone,
+                                     :address1,
+                                     :address2,
+                                     :city,
+                                     :postal_code,
+                                     :region)
   end
 
   def render_donations_xls

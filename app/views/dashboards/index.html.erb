@@ -1,19 +1,88 @@
-<main role="main" class="container-fluid">
-    <div class="row bg-dark">
-        <div class="col-md">
-            <div class="my-3 p-3 bg-white rounded box-shadow">
-                <h5 class="border-bottom border-gray pb-2 mb-0">Bulletins</h5>
-                <%= render partial: "bulletins" %>
+<main role="main" class="container">
+    <div class="row">
+        <div clas="col-md">
+            <div class="pl-3">
+                <p class="text-muted">Welcome back <%= link_to @current_user.name.titleize, user_path(@current_user) %> </p>
+                <%= link_to image_tag(@current_user.avatar.url(:thumb), size: "75x75"), @current_user %>
             </div>
         </div>
-        <div class="col-md">
-            <div class="my-3 p-3 bg-white rounded box-shadow">
-                <h5 class="border-bottom border-gray pb-2 mb-0">Opportunities</h5>
-                <%= render partial: "opportunities" %>
-            </div>
+        <div class="col-md text-right">
+            <a href="https://www.facebook.com/Operationpawsforhomes" target="_blank" rel="noopener"><i class="fa fa-facebook-square fa-3x"></i></a>
+            <a href="https://twitter.com/RescueOPH" target="_blank" rel="noopener"><i class="fa fa-twitter-square fa-3x"></i></a>
+            <a href="http://instagram.com/operationpawsforhomes" target="_blank" rel="noopener"><i class="fa fa-instagram fa-3x"></i></a>
+            <a href="https://www.youtube.com/user/RescueOPH" target="_blank" rel="noopener"><i class="fa fa-youtube fa-3x"></i></a>
         </div>
     </div>
 
+    <div class="row my-2">
+        <div class="col-md dashboard-posts">
+            <h4 class="border-bottom border-gray">Bulletins</h4>
+            <ul class="list-unstyled">
+                <%= render partial: 'bulletin', collection: @bulletins unless @bulletins.nil? %>
+            </ul>
+            <small class="d-block text-right mt-3">
+                <% if current_user.admin? %>
+                    <%= link_to 'Post a Bulletin', new_bulletin_path %> <br />
+                <% end %>
+                <%= link_to 'All Bulletins', bulletins_path %>
+            </small>
+        </div>
+    </div>
+
+    <div class="row highlight rounded">
+        <div class="col-md-6 text-center py-2">
+            <a href="/newsletters" class="btn btn-large btn-info">Volunteer Newsletters</a>
+        </div>
+        <div class="col-md-6 text-center py-2">
+            <% if @contacts_id.present? %>
+                <%= link_to "OPH Contact List", info_path(@contacts_id), class: 'btn btn-large btn-info' %>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-md dashboard-posts">
+            <h4 class="border-bottom border-gray">Opportunities</h4>
+            <ul class="list-unstyled">
+                <%= render partial: "opportunity", collection: @opportunities unless @opportunities.nil? %>
+            </ul>
+            <small class="d-block text-right mt-3">
+                <% if current_user.admin? %>
+                    <%= link_to 'Post an Opportunity', new_opportunity_path %> <br />
+                <% end %>
+                <%= link_to 'All Opportunities', opportunities_path %>
+            </small>
+        </div>
+    </div>
+
+    <% if @featured_event.present? %>
+        <div class="row mt-3 py-2 highlight rounded">
+            <div class="col-md-4">
+                <div class='event_photo'>
+                    <%= link_to_if( @featured_event.photo?, image_tag(@featured_event.photo.url(:medium), class:"rounded"), @featured_event.photo.url){ } %>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h4><%= @featured_event.title %></h4>
+                <div class='date_time'><%= @featured_event.event_date.strftime("%A, %B %-e, %Y") %> from <%= @featured_event.start_time.strftime("%-l:%M %P") %> to <%= @featured_event.end_time.strftime("%-l:%M %P") %></div>
+                <address>
+                    <div class='location'> <%= link_to_if @featured_event.location_url?, @featured_event.location_name, @featured_event.location_url %> </div>
+                    <div class='address'> <%= @featured_event.address %> </div>
+                    <div class='phone'> <%= @featured_event.location_phone %> </div>
+                </address>
+            <div class='row'>
+                <div class='col'>
+                    <%= link_to "Details", @featured_event, class: "btn btn-sm btn-primary" %>
+                    <%= link_to_if(@featured_event.facebook_url?, "Facebook Event", @featured_event.facebook_url, :class => "btn btn-sm btn-outline-primary"){} %>
+                    <%= link_to_if(can_edit_events?, "edit", edit_event_path(@featured_event), :class => "btn btn-sm btn-outline-secondary"){} %>
+                </div>
+            </div>
+            </div>
+        </div>
+    <% end %>
+
+
+<!--
     <div class="row bg-lightblue">
         <div class="col-md">
             <div class="my-3 p-3 bg-white rounded box-shadow">
@@ -29,7 +98,8 @@
         </div>
     </div>
 
-    <div class="row bg-dark">
+
+    <div class="row">
         <div class="col-md">
             <div class="my-3 p-3 bg-white rounded box-shadow">
                 <h5 class="border-bottom border-gray pb-2 mb-0">Upcoming Events</h5>
@@ -44,7 +114,7 @@
             </div>
         </div>
     </div>
-
+!-->
 
 
 </main>

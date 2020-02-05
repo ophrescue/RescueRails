@@ -1,0 +1,10 @@
+<% if @cat.foster %>
+  <ul class='list-unstyled'>
+    <li><%= link_to @cat.foster.name, user_path(@cat.foster) %></li>
+    <li><%= @cat.foster.address1 %></li>
+    <li><%= @cat.foster.city %>, <%= @cat.foster.region %></li>
+    <li><%= @cat.foster.phone %></li>
+  </ul>
+<% else %>
+  not assigned
+<% end %>

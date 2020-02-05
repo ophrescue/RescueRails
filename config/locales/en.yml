@@ -2,99 +2,18 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  title:
-    pages:
-      home: 'All breed dog rescue based in Virgina, Maryland, Washington DC and South Central PA'
-      home_new: 'All breed dog rescue based in Virgina, Maryland, Washington DC and South Central PA'
-      guide: 'Adoption Guide'
-      aboutus: 'About Us'
-      contact: 'Contact Us'
-      contributers: 'Contributers'
-      partnerships: 'Partnerships'
-      shelters: 'Partering Shelters'
-      donate: 'Donate'
-      special_funds: 'Special Funds'
-      sponsor: 'Sponsor a Dog'
-      other_ways_to_give: 'Other Ways to Give'
-      foster: 'Fostering Opportunities'
-      fosterfaq: 'Foster Frequently Asked Questions'
-      newsletter: 'Newsletter'
-      adoptprocess: 'Adoption Process'
-      insurance: 'Pet Insurance'
-      resources: 'Resources for Adopters'
-      volunteer: 'Volunteer'
-      documentary: "'600 Miles Home' Dog Rescue Documentary"
-      puppyguide: 'Guide For Puppies'
-      tips_for_finding_lost_pets: 'Tips for Finding Lost Pets'
-      shopping: 'New Dog Shopping List'
-      status_definitions: 'Adoption Application Status Definitions'
-      dog_status_definitions: 'Dog Status Definitions'
-      terms: 'Terms and Conditions'
-      international: 'International Programs'
-      7000-miles-home: '7000 Miles Home'
-      international-kaw: 'Kannan Animal Welfare, India'
-      international-tcspca: 'Turks & Caicos SPCA'
-      international-article: 'Adopter & Volunteer Takes OPH to India'
-    adopters:
-      index: 'Adoption Applications'
-      new: 'Adoption Application'
-    banned_adopters:
-      index: 'Do Not Adopt List'
-      new: 'Add a Banned Adopter'
-      edit: 'Edit'
-    manager:
-      new: 'Add a New Dog'
-      edit: 'Edit Dog'
-      index: 'Dog Manager'
-    gallery:
-      index: 'Our Dogs'
-    campaigns:
-      index: 'Campaigns'
-      title:
-      active: 'Active'
-      inactive: 'Inactive'
-      new: 'Create a Campaign'
-      edit: 'Edit Campaign'
-      show: 'Campaign'
-    donations:
-      new: 'Donate'
-      history: 'Donation History'
-    events:
-      destroy: 'Events'
-      edit: 'Edit Event'
-      index: 'Upcoming Events'
-      past: 'Past Events'
-      show: 'Events'
-      new: 'Add an Event'
-    folders:
-      edit: 'Edit Folder'
-      index: 'Staff Resources'
-      new: 'Create a New Folder'
-    sessions:
-      new: 'Sign In'
-    shelters:
-      edit: 'Edit'
-      index: 'Source Shelters'
-      new: 'Add a Source Shelter'
-    users:
-      edit: 'Edit Profile'
-      index: 'Staff Directory'
-      new: 'Add a Staff Account'
-
-  # we have some duplication here, we need to migrate to the format below
-  # and eliminate the unconventional format above
-  # when all title fields (above) are fully duplicated below, change the translation format in application_helper.rb
-  # from '.title.controller_name.action_name' to 'controller_name.action_name.title'
-  folder_attachments:
+  adopters:
     index:
-      title: "Staff Resources"
-  folders:
-    index:
-      title: "Staff Resources"
+      title: 'Adoption Applications'
     new:
-      title: 'Create a New Folder'
+      title: 'Adoption Application'
+  banned_adopters:
+    index:
+      title: 'Do Not Adopt List'
+    new:
+      title: 'Add a Banned Adopter'
     edit:
-      title: 'Edit Folder'
+      title: 'Edit'
   campaigns:
     new:
       title: 'Create a Campaign'
@@ -104,6 +23,33 @@ en:
         inactive: "Inactive Campaigns"
     edit:
       title: 'Edit Campaigns'
+  cats:
+    manager:
+      new:
+        title: "Add a New Cat"
+      edit:
+        title: "Edit Cat"
+      index:
+        title: "Cat Manager"
+    gallery:
+      index:
+        title: "Our Cats"
+      show:
+        status_definitions:
+          coming_soon: 'This cat will be entering our foster care very soon. You may apply to adopt this cat, or check back soon as we add more photos and details.'
+          adoptable: 'This cat is currently available for adoption. There may be other applicants interested in this cat, so apply right away.'
+          adoption_pending: 'An approved adopter is seriously considering this cat. Apply to adopt, in case the cat becomes available.'
+          # the following statuses should not normally be needed,
+          # included to prevent view anomalies if a page is bookmarked and a cat becomes unadoptable
+          adopted: 'adopted'
+          trial_adoption: 'trial adoption'
+          on_hold: 'on hold'
+          not_available: 'not available'
+          return_pending: 'return pending'
+          completed: 'completed'
+  dashboards:
+    index:
+      title: 'Volunteer Dashboard'
   dogs:
     manager:
       new:
@@ -146,3 +92,123 @@ en:
       title:
         new: 'Add an Event'
         clone: 'Create Event by Copy'
+
+  folder_attachments:
+    index:
+      title: "Staff Resources"
+  folders:
+    index:
+      title: "Staff Resources"
+    new:
+      title: 'Create a New Folder'
+    edit:
+      title: 'Edit Folder'
+  pages:
+    home:
+      title: 'All breed dog rescue based in Virgina, Maryland, Washington DC and South Central PA'
+    home_new:
+      title: 'All breed dog rescue based in Virgina, Maryland, Washington DC and South Central PA'
+    guide:
+      title: 'Adoption Guide'
+    aboutus:
+      title: 'About Us'
+    contact:
+      title: 'Contact Us'
+    contributers:
+      title: 'Contributers'
+    community_partners:
+      title: 'Community Partners'
+    education_and_outreach:
+      title: 'Education and Outreach'
+    get_involved:
+      title: 'Get Involved'
+    partnerships:
+      title: 'Partnerships'
+    shelters:
+      title: 'Partering Shelters'
+    donate:
+      title: 'Donate'
+    special_funds:
+      title: 'Special Funds'
+    sponsor:
+      title: 'Sponsor a Dog'
+    other_ways_to_give:
+      title: 'Other Ways to Give'
+    foster:
+      title: 'Fostering Opportunities'
+    fosterfaq:
+      title: 'Foster Frequently Asked Questions'
+    funding_partners:
+      title: 'Funding Partners'
+    newsletter:
+      title: 'Volunteer Newsletters'
+    adoptprocess:
+      title: 'Adoption Process'
+    insurance:
+      title: 'Pet Insurance'
+    non_profit_and_corporate_partners:
+      title: 'Non-Profit and Corporate Partners'
+    shelter_partners:
+      title: 'Shelter Partners'
+    resources:
+      title: 'Resources for Adopters'
+    volunteer:
+      title: 'Volunteer'
+    documentary:
+      title: "'600 Miles Home' Dog Rescue Documentary"
+    puppyguide:
+      title: 'Guide For Puppies'
+    tips_for_finding_lost_pets:
+      title: 'Tips for Finding Lost Pets'
+    shopping:
+      title: 'New Dog Shopping List'
+    status_definitions:
+      title: 'Adoption Application Status Definitions'
+    dog_status_definitions:
+      title: 'Dog Status Definitions'
+    terms:
+      title: 'Terms and Conditions'
+    international:
+      title: 'International Programs'
+    7000-miles-home:
+      title: '7000 Miles Home'
+    international-kaw:
+      title: 'Kannan Animal Welfare, India'
+    international-tcspca:
+      title: 'Turks & Caicos SPCA'
+    international-article:
+      title: 'Adopter & Volunteer Takes OPH to India'
+    training_partners:
+      title: 'Training Partners'
+  posts:
+    bulletins:
+      index:
+        title: 'Bulletins'
+      edit:
+        title: 'Edit Bulletin'
+      new:
+        title: 'Post Bulletin'
+    opportunities:
+      index:
+        title: 'Opportunities'
+      edit:
+        title: 'Edit Opportunity'
+      new:
+        title: 'Post Opportunity'
+  sessions:
+    new:
+      title: 'Sign In'
+  shelters:
+    edit:
+      title: 'Edit'
+    index:
+      title: 'Source Shelters'
+    new:
+      title: 'Add a Source Shelter'
+  users:
+    edit:
+      title: 'Edit Profile'
+    index:
+      title: 'Staff Directory'
+    new:
+      title: 'Add a Staff Account'

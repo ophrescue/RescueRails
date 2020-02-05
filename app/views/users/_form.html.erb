@@ -15,6 +15,15 @@
     </div>
 
     <div class="control-group">
+      <%= f.label :avatar, 'Profile Photo',:class => 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :avatar %>
+        <span class="help-inline">Help fellow volunteers by using a real profile photo. </span>
+      </div>
+
+    </div>
+
+    <div class="control-group">
       <%= f.label :duties, :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :duties, :autocomplete => :off %>

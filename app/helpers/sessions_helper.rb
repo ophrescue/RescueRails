@@ -29,11 +29,21 @@ module SessionsHelper
     current_user.add_dogs? unless current_user.nil?
   end
 
+  def can_add_cats?
+    # For now, cats use the same permissions as dogs. If you're allowed to add a dog, you're allowed to add a cat.
+    current_user.add_dogs? unless current_user.nil?
+  end
+
   def can_manage_medical_behavior_summaries?
     current_user.medical_behavior_permission? unless current_user.nil?
   end
 
   def can_edit_dogs?
+    current_user.edit_dogs? unless current_user.nil?
+  end
+
+  def can_edit_cats?
+    # For now, cats use the same permissions as dogs. If you're allowed to edit a dog, you're allowed to edit a cat.
     current_user.edit_dogs? unless current_user.nil?
   end
 

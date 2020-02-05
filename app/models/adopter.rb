@@ -44,16 +44,12 @@ class Adopter < ApplicationRecord
   audited on: :update
   has_associated_audits
 
-  attr_accessor :pre_q_costs,
-                :pre_q_surrender,
-                :pre_q_abuse,
-                :pre_q_reimbursement,
+  attr_accessor :pre_q_abuse,
+                :pre_q_dog_adjust,
                 :pre_q_limited_info,
                 :pre_q_breed_info,
-                :pre_q_dog_adjust,
-                :pre_q_courtesy,
-                :pre_q_travel,
-                :pre_q_hold
+                :pre_q_hold,
+                :pre_q_costs
 
   attr_reader :dog_tokens
   attr_accessor :updated_by_admin_user
@@ -79,10 +75,14 @@ class Adopter < ApplicationRecord
   has_many :adoptions, dependent: :destroy
   accepts_nested_attributes_for :adoptions
 
+  has_many :cat_adoptions, dependent: :destroy
+  accepts_nested_attributes_for :cat_adoptions
+
   has_one :adoption_app, dependent: :destroy
   accepts_nested_attributes_for :adoption_app
 
   has_many :dogs, through: :adoptions
+  has_many :cats, through: :cat_adoptions
   has_many :comments, -> { order('created_at DESC') }, as: :commentable
 
   belongs_to :user, class_name: 'User', primary_key: 'id', foreign_key: 'assigned_to_user_id'

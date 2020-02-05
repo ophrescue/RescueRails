@@ -1,0 +1,385 @@
+<%= form_for @cat, url: @cat.new_record? ? cats_manager_index_path : cats_manager_path(@cat), html: { multipart: true, class:'container needs-validation', id:'cat_form', novalidate: true } do |f| %>
+  <div class="row">
+    <div class="col-12 col-md-6" id='left-column'>
+
+      <% if !@cat.new_record? %>
+        <div class="form-group row">
+          <!-- see config/initializers/rails_bootstrap_errors.rb for usage of the data-bootstrap41 attribute -->
+          <%= f.label :tracking_id, "OPH Tracking ID", class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true %>
+          <%= f.text_field :tracking_id, disabled: !can_edit_cats?,
+            class: "form-control form-control-sm col-6 #{validation_class_for(f,:tracking_id)}",
+            pattern:'\s{0,}\d{1,20}\s{0,}', 'data-bootstrap41': true, autocomplete: 'off' %>
+          <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(f,:tracking_id) %></div>
+        </div>
+      <% end %>
+
+      <div class="form-group row">
+        <%= f.label :name, class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true %>
+        <%= f.text_field :name, disabled: !can_add_cats?, class: "form-control form-control-sm col-6 #{validation_class_for(f,:name) }",
+          required: true, pattern: '\s{0,}\w.{1,75}\s{0,}', maxlength:75, 'data-bootstrap41': true, autocomplete: 'off' %>
+        <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(f,:name) %></div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :original_name, class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.text_field :original_name, disabled: !can_add_cats?, class: 'form-control form-control-sm col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :status, class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true  %>
+        <%= f.select :status, Cat::STATUSES, {prompt: '-select-'}, {class: "form-control form-control-sm col-6 #{validation_class_for(f,:status)}", 'data-bootstrap41': true, required: true, disabled: !can_edit_cats? } %>
+        <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(f,:status) %></div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :microchip, class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.text_field :microchip, class: 'form-control form-control-sm col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :fee, 'Adoption Fee',class: 'col-form-label col-form-label-sm col-4'%>
+        <div class='input-group input-group-sm col-6' style='padding:0px;'>
+          <div class="input-group-prepend">
+            <span class="input-group-text" >$</span>
+          </div>
+          <%= f.text_field :fee, class: 'form-control form-control-sm', disabled: !can_edit_cats?, pattern:'^\s{0,}\d{1,10}\s{0,}$' %>
+          <div class="input-group-append">
+            <span class="input-group-text" >.00</span>
+          </div>
+          <div class='invalid-feedback'>must be a whole number, with no letters</div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :primary_breed_name, class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.collection_select(:primary_breed_id, @cat_breeds, :id, :name, {prompt:  '-select-'}, {class: 'form-control form-control-sm col-6', disabled: !can_add_cats?}) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :secondary_breed_name, class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.collection_select(:secondary_breed_id, @cat_breeds, :id, :name, {prompt: '-select-'}, {class: 'form-control form-control-sm col-6', disabled: !can_add_cats?}) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :gender, class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.select(:gender, Cat::GENDERS, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :age, class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.select(:age, Cat::AGES, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :size, "Size when grown", class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.select(:size, Cat::SIZES, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :coat_length, "Coat Length", class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.select(:coat_length, Cat::COAT_LENGTH, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :intake_dt, "Intake Date", class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.text_field :intake_dt, class: 'form-control form-control-sm col-6' %>
+        <div class="form-text text-muted col-6 offset-4 small">yyyy-mm-dd</div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :available_on_dt, "Available On Date", class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.text_field :available_on_dt, class: 'form-control form-control-sm col-6' %>
+        <div class="form-text text-muted col-6 offset-4 small">yyyy-mm-dd</div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :adoption_date, "Adoption Date", class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.text_field :adoption_date, class: 'form-control form-control-sm col-6' %>
+        <div class="form-text text-muted col-6 offset-4 small">yyyy-mm-dd</div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :sponsored_by, "Sponsored by", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :sponsored_by, class: 'form-control form-control-sm col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :craigslist_ad_url, "Craigslist Ad Link", class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.text_field :craigslist_ad_url, class: 'form-control form-control-sm col-6', pattern:'^http://.*$' %>
+        <div class='invalid-feedback col-sm-6 offset-4'>please include 'http://'</div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6" id='right-column'>
+      <div class="form-group row">
+        <%= f.label :foster_id, "Foster assignment", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.collection_select(:foster_id, @foster_users, :id, :name, {include_blank: '-select-'}, {class: 'form-control form-control-sm col-6'}) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :coordinator_id, "Adoption coordinator", class: 'col-form-label col-form-label-sm col-4' %>
+        <% if can_edit_all_adopters? || can_add_cats? %>
+          <%= f.collection_select(:coordinator_id, @coordinator_users, :id, :name, {include_blank: '-select-'}, {class: 'form-control form-control-sm col-6'} ) %>
+        <% else %>
+          <%= f.collection_select(:coordinator_id, @coordinator_users, :id, :name, {include_blank: '-select-'}, {class: 'form-control form-control-sm col-6', disabled: true} ) %>
+        <% end %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :shelter_id, "Source shelter", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.collection_select(:shelter_id, @shelters, :id, :name, {include_blank: '-select-'}, {class: 'form-control form-control-sm col-6'} ) %>
+      </div>
+
+      <h3>Public Attributes</h3>
+      <div class="form-check">
+        <%= f.check_box :declawed, class: 'form-check-input' %>
+        <%= f.label :declawed, "Declawed", class: 'form-check-label col-5'  %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :litter_box_trained, class: 'form-check-input' %>
+        <%= f.label :litter_box_trained, "Litter box trained", class: 'form-check-label col-5'  %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :is_uptodateonshots, class: 'form-check-input' %>
+        <%= f.label :is_uptodateonshots, "Up-to-date on shots", class: 'form-check-label col-5'  %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :is_altered, class: 'form-check-input' %>
+        <%= f.label :is_altered, class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :is_special_needs, class: 'form-check-input' %>
+        <%= f.label :is_special_needs, class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :no_dogs, class: 'form-check-input' %>
+        <%= f.label :no_dogs, class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :no_cats, class: 'form-check-input' %>
+        <%= f.label :no_cats, class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :no_kids, class: 'form-check-input' %>
+        <%= f.label :no_kids, class: 'form-check-label col-5' %>
+      </div>
+
+      <h3>Private Attributes</h3>
+      <div class="form-check">
+        <%= f.check_box :medical_review_complete, class: 'form-check-input' %>
+        <%= f.label :medical_review_complete , class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :has_medical_need, class: 'form-check-input' %>
+        <%= f.label :has_medical_need , class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :is_high_priority, class: 'form-check-input' %>
+        <%= f.label "High Priority Cat" , class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :needs_photos, class: 'form-check-input' %>
+        <%= f.label :needs_photos , class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :has_behavior_problem, class: 'form-check-input' %>
+        <%= f.label :has_behavior_problem , class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :needs_foster, class: 'form-check-input' %>
+        <%= f.label :needs_foster , class: 'form-check-label col-5' %>
+      </div>
+
+      <h3>Vaccine Records</h3>
+
+      <div class="form-group row">
+        <%= f.label :first_shots, "First Shots", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :first_shots, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :second_shots, "Second Shots", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :second_shots, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :third_shots, "Third Shots", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :third_shots, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :rabies, "Rabies", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :rabies, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :felv_fiv_test, "FELV/FIV Test", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :felv_fiv_test, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :flea_tick_preventative, "Flea/Tick Preventative", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :flea_tick_preventative, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :dewormer, "Dewormer", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :dewormer, class: 'col-6' %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :coccidia_treatment, "Coccidia Treatment", class: 'col-form-label col-form-label-sm col-4' %>
+        <%= f.text_field :coccidia_treatment, class: 'col-6' %>
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <h2 class='col-12'>Photos</h2>
+  </div>
+  <div class="row" id='manage_photos'>
+    <%= render_unless @cat.new_record?, partial: 'cat_photos', locals: {f:f} %>
+  </div>
+  <div class='row'>
+    <div class='col-12 col-md-2'>
+      <a href='#' id='add_photo' class='btn btn-sm btn-success'>Add a Photo</a>
+    </div>
+    <div class="form-group new_photos col-12 col-md-8"></div>
+  </div>
+
+
+  <div class='row'>
+    <h2 class='col-12'>Documents</h2>
+  </div>
+  <div class="row" id='manage_attachments'>
+    <%= render_unless @cat.new_record?, partial: 'cat_attachments', locals: {f:f} %>
+  </div>
+  <div class='row'>
+    <div class='col-12 col-md-2'>
+    <a href='#' id='add_attachment' class='btn btn-sm btn-success'>Add a Document</a>
+    </div>
+    <div class='form-group new_attachments col-12 col-md-8'></div>
+  </div>
+
+  <div class='row'>
+    <h2 class='col-12'>Public Description</h2>
+  </div>
+  <div class="row form-group ">
+    <%= f.text_area :description, class: "required input-xxlarge form-control form-control-sm", rows: "8" %>
+    <small class="form-text text-muted">
+      A disclaimer for this description is displayed by default on the cat's public gallery profile.
+    </small>
+  </div>
+
+  <div class='row'>
+    <h2 class='col-12'>Medical Summary</h2>
+  </div>
+  <div class="row form-group ">
+    <%= f.text_area :medical_summary, class: "input-xxlarge form-control form-control-sm", rows: "8", disabled: !can_manage_medical_behavior_summaries? %>
+  </div>
+
+  <div class='row'>
+    <h2 class='col-12'>Behavior Summary</h2>
+  </div>
+  <div class="row form-group ">
+    <%= f.text_area :behavior_summary, class: "input-xxlarge form-control form-control-sm", rows: "8", disabled: !can_manage_medical_behavior_summaries? %>
+  </div>
+
+  <%= submit_or_return_to(f, @on_cancel_path) %>
+
+<% end %>
+
+<script type='html/template' id='new_attachment_input'>
+  <div style='height:0px;' class='new_file row mb-0 mb-sm-3 mt-3 mt-sm-0'>
+    <div class="col-10 col-md-6">
+      <input type='file' data-max-size='${max_size}' data-mime-types=${mime_types} name='cat[${type}_attributes][${index}][${singular_type}]' id='new_cat_${singular_type}'/>
+      <div class='invalid-feedback'>${ message }</div>
+    </div>
+    <a href='#' id='remove_${singular_type}' class='col-md-6 d-none d-md-inline'>remove</a>
+    <a href='#' id='remove_${singular_type}' class='col-2 d-inline d-md-none'><i class='fa fa-lg fa-times text-danger'></i></a>
+  </div>
+</script>
+
+<script type='text/javascript'>
+// add/remove new photo or document inputs
+  var new_attachment_input = _.template($('#new_attachment_input').html());
+  var last_photos_index, last_attachments_index;
+  var photo_validation_message = "<%= Photo.client_validation_error_messages_for(:photo) %>";
+  var attachment_validation_message = "<%= Attachment.client_validation_error_messages_for(:attachment) %>";
+  var photo_max_size = "<%= Photo::PHOTO_MAX_SIZE %>";
+  var attachment_max_size = "<%= Attachment::ATTACHMENT_MAX_SIZE %>";
+  var photo_mime_types = <%= raw Photo::MIME_TYPES.to_json %>;
+  var attachment_mime_types = <%= raw Attachment::MIME_TYPES.to_json %>;
+  ["photos", "attachments"].forEach(function (type) {
+    var singular_type = type.replace(/s$/, '');
+    var indexes = $.map($("#manage_" + type + " ." + singular_type), function (el) {
+      return $(el).data('index');
+    });
+    if (_.isEmpty(indexes)) {
+      this["last_" + type + "_index"] = -1;
+    } else {
+      this["last_" + type + "_index"] = _.max(indexes);
+    }
+  });
+  var add_file_field_for = function add_file_field_for(type) {
+    var unconfigured_inputs_count = _.filter($(".new_" + type + " input"), function (input) {
+      return _.isEmpty(input.value);
+    }).length;
+    var all_inputs_configured = unconfigured_inputs_count == 0;
+    var file_inputs_count = $(".new_" + type + " input").length;
+    var no_inputs_displayed = file_inputs_count == 0;
+    var inputs_displayed = !no_inputs_displayed;
+    var singular_type = type.replace(/s$/, '');
+    var message = this[singular_type+"_validation_message"];
+    var max_size = this[singular_type+"_max_size"];
+    var mime_types = this[singular_type+"_mime_types"];
+    if (no_inputs_displayed || inputs_displayed && all_inputs_configured) {
+      var new_input = new_attachment_input({ mime_types: JSON.stringify(mime_types), max_size: max_size, message: message, type: type, singular_type: singular_type, index: ++this["last_" + type + "_index"] });
+      $(new_input).appendTo($(".new_" + type)).animate({ height: '28px' }, 100);
+    }
+  };
+
+  $(function(){
+    $('#add_photo').on('click', function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      add_file_field_for('photos');
+    });
+
+    $('#add_attachment').on('click', function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      add_file_field_for('attachments');
+    });
+
+    $('.new_photos').on('click','#remove_photo', function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).parent().animate({height: '0px'},100,function(event){
+        this.remove()
+        if($('.new_photos .new_file').length==0){ $('#add_photo').html("Add a Photo") }
+      });
+    })
+
+    $('.new_attachments').on('click','#remove_attachment', function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).parent().animate({height: '0px'},100,function(){
+        this.remove()
+        if($('.new_attachments .new_file').length==0){ $('#add_attachment').html("Add a Document") }
+      });
+    })
+
+    $('.new_photos').on('change','input', function(){
+      $('#add_photo').html("Add another Photo")
+    })
+
+    $('.new_attachments').on('change','input',function(){
+      $('#add_attachment').html("Add another Document")
+    })
+
+    $('.new_photos').on('change','#new_cat_photo', upload_file_validator);
+
+    $('.new_attachments').on('change','#new_cat_attachment', upload_file_validator);
+  })
+</script>

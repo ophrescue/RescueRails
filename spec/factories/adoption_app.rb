@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :adoption_app do
     spouse_name { Faker::Name.name }
     other_household_names { 'other household' }
-    ready_to_adopt_dt { Faker::Date.between(2.days.ago, Time.zone.today) }
+    ready_to_adopt_dt { Faker::Date.between(from: 2.days.ago, to: Time.zone.today) }
     house_type { 'rent' }
     dog_exercise { 'will go to the gym' }
     dog_stay_when_away { 'In a crate' }

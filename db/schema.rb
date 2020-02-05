@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_28_181545) do
+ActiveRecord::Schema.define(version: 2019_12_18_185811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,6 +175,75 @@ ActiveRecord::Schema.define(version: 2019_04_28_181545) do
     t.boolean "active", default: true
   end
 
+  create_table "cat_adoptions", force: :cascade do |t|
+    t.integer "adopter_id"
+    t.integer "cat_id"
+    t.string "relation_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["adopter_id", "cat_id"], name: "index_cat_adoptions_on_adopter_id_and_cat_id", unique: true
+    t.index ["adopter_id"], name: "index_cat_adoptions_on_adopter_id"
+    t.index ["cat_id"], name: "index_cat_adoptions_on_cat_id"
+  end
+
+  create_table "cat_breeds", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cats", force: :cascade do |t|
+    t.string "name"
+    t.string "original_name"
+    t.integer "tracking_id"
+    t.integer "primary_breed_id"
+    t.integer "secondary_breed_id"
+    t.string "status"
+    t.string "age", limit: 75
+    t.string "size", limit: 75
+    t.boolean "is_altered"
+    t.string "gender", limit: 6
+    t.boolean "declawed"
+    t.boolean "litter_box_trained"
+    t.string "coat_length"
+    t.boolean "is_special_needs"
+    t.boolean "no_dogs"
+    t.boolean "no_cats"
+    t.boolean "no_kids"
+    t.text "description"
+    t.integer "foster_id"
+    t.date "adoption_date"
+    t.boolean "is_uptodateonshots", default: true
+    t.date "intake_dt"
+    t.date "available_on_dt"
+    t.boolean "has_medical_need", default: false
+    t.boolean "is_high_priority", default: false
+    t.boolean "needs_photos", default: false
+    t.boolean "has_behavior_problem", default: false
+    t.boolean "needs_foster", default: false
+    t.string "petfinder_ad_url"
+    t.string "craigslist_ad_url"
+    t.string "youtube_video_url"
+    t.string "microchip"
+    t.integer "fee"
+    t.integer "coordinator_id"
+    t.string "sponsored_by"
+    t.integer "shelter_id"
+    t.text "medical_summary"
+    t.text "behavior_summary"
+    t.boolean "medical_review_complete", default: false
+    t.string "first_shots"
+    t.string "second_shots"
+    t.string "third_shots"
+    t.string "rabies"
+    t.string "felv_fiv_test"
+    t.string "flea_tick_preventative"
+    t.string "dewormer"
+    t.string "coccidia_treatment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", id: :serial, force: :cascade do |t|
     t.text "content"
     t.integer "commentable_id"
@@ -280,6 +349,13 @@ ActiveRecord::Schema.define(version: 2019_04_28_181545) do
     t.datetime "updated_at", null: false
     t.text "comment"
     t.integer "campaign_id"
+    t.boolean "more_contact_info", default: false
+    t.string "phone"
+    t.string "address1"
+    t.string "address2"
+    t.string "city"
+    t.string "region", limit: 2
+    t.string "postal_code"
   end
 
   create_table "emails", id: :serial, force: :cascade do |t|
@@ -317,6 +393,7 @@ ActiveRecord::Schema.define(version: 2019_04_28_181545) do
     t.string "photographer_name"
     t.string "photographer_url"
     t.string "facebook_url"
+    t.boolean "featured", default: false, null: false
     t.index ["event_date"], name: "index_events_on_event_date"
   end
 
@@ -325,6 +402,17 @@ ActiveRecord::Schema.define(version: 2019_04_28_181545) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "locked", default: false
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "photos", id: :serial, force: :cascade do |t|
@@ -337,7 +425,22 @@ ActiveRecord::Schema.define(version: 2019_04_28_181545) do
     t.datetime "updated_at"
     t.integer "position"
     t.boolean "is_private", default: false
+    t.string "animal_type"
+    t.bigint "animal_id"
+    t.index ["animal_type", "animal_id"], name: "index_photos_on_animal_type_and_animal_id"
     t.index ["dog_id"], name: "index_photos_on_dog_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "type"
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_posts_on_slug", unique: true
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "references", id: :serial, force: :cascade do |t|
@@ -425,6 +528,10 @@ ActiveRecord::Schema.define(version: 2019_04_28_181545) do
     t.boolean "active", default: false, null: false, comment: "if false user is a candiate volunteer and should only be able to see and edit their profile"
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["agreement_id"], name: "index_users_on_agreement_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"

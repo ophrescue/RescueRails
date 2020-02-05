@@ -31,7 +31,7 @@ namespace :adoptapet_sync do
           users: {region: state}
          })
 
-      desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs"
+      desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs/"
 
       CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
         dogs.each do |d|

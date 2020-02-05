@@ -76,6 +76,7 @@ class Dogs::ManagerController < Dogs::DogsBaseController
   before_action :load_dog, only: %i[show edit update destroy]
   before_action :edit_dog_check, only: %i[edit update]
   before_action :select_bootstrap41
+  before_action :show_user_navbar
 
   def index
     session[:last_dog_manager_search] = request.url

@@ -1,0 +1,24 @@
+<% if @cat.attachments.empty? %>
+  <span id='no_attachments'><%= @cat.name %> has no documents</span>
+<% else %>
+  <div class="col-12">
+    <%= f.fields_for :attachments do |af| %>
+      <div class="form-group row attachment" data-index=<%= af.index %>>
+        <div class='col-5'>
+          <label class="col-form-label col-form-label-sm" for="delAttachment">
+            <i class="icon-file"></i>
+            <%= link_to af.object.attachment_file_name, af.object.download_url %>
+          </label>
+        </div>
+        <% if can_edit_cats? %>
+          <div class='col-7'>
+            <label class="checkbox">
+              <%= af.check_box :_destroy, :id => "delAttachment" %>
+              <span>Delete <%= af.object.attachment_file_name %></span>
+            </label>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

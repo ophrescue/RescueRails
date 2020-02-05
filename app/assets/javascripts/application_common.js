@@ -26,9 +26,12 @@
 //= require galleria-1.5.7.classic
 //= require comments.js
 //= require dog_link.js
+//= require cat_link.js
 //= require photos.js
 //= require adoption_form
 //= require jquery_ujs
 //= require jquery.ui.touch-punch.min
 //= require lodash
 //= require upload_file_validator
+//= require chartkick
+//= require Chart.bundle

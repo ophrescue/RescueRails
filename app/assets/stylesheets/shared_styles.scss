@@ -13,6 +13,10 @@ label.required:after {
   content: '*';
 }
 
+.highlight {
+  background-color: rgb(247, 241, 213)
+}
+
 .title_row {
   margin-top: 20px;
   color: #ad8b22;
@@ -23,5 +27,9 @@ label.required:after {
     color: #10acd8;
     letter-spacing: -1.5px;
     font-style: italic;
+  }
+
+  a {
+    color: #10acd8;
   }
 }

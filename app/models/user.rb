@@ -141,6 +141,27 @@ class User < ApplicationRecord
   scope :inactive_volunteer,      -> (status = false) { where(active: status)}
   scope :house_type,              -> (type) { where(house_type: type) }
 
+  HASH_SECRET = "5b0a2cd2064828d34ad737f9f6a586fb773297a01639c2b3ff24fcb7"
+  has_attached_file :avatar, styles: { thumb: "75x75>",
+                                       medium: "300x300>" },
+                             s3_permissions: "public-read",
+                             hash_secret: HASH_SECRET,
+                             default_url: "no_profile_photo.png"
+
+  PAPERCLIP_STORAGE_PATH = { test: "/system/test/user_photo/:hash.:extension",
+                             production: "/user_photo/:hash.:extension",
+                             staging: "/user_photo/:hash.:extension" }
+
+  CONTENT_TYPES = {"Images" => ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif']}
+
+  MIME_TYPES = CONTENT_TYPES.values.flatten
+
+  validates_attachment_content_type :avatar,
+                                    content_type: MIME_TYPES,
+                                    message: 'Images Only.'
+  PHOTO_MAX_SIZE = 5
+  validates_attachment_size :avatar, less_than: PHOTO_MAX_SIZE.megabytes
+
   HOUSE_TYPES = %w[ rent own ]
 
   # mapping of scope name (= query string parameter) to model attributes

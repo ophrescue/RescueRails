@@ -8,7 +8,7 @@
 
 //= require "popper"
 //= require "bootstrap-sprockets"
-//= require 'dogs_index'
+//= require 'animals_index'
 //= require 'jquery_local_extensions'
 //= require 'html5_bootstrap_form_validation'
 //= require 'donations_new'

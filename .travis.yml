@@ -1,4 +1,4 @@
-dist: trusty
+dist: bionic
 language: ruby
 cache:
 - bundler
@@ -7,17 +7,21 @@ rvm:
 - 2.5.1
 bundler_args: "--without production"
 addons:
+  artifacts: true
   postgresql: '9.6'
-  chrome: stable
   firefox: latest
+  apt:
+    packages:
+    - google-chrome-stable
 env:
   global:
-  - ARTIFACTS_AWS_REGION=us-east-1
-  - ARTIFACTS_S3_BUCKET=travis-ci-screenshots
-  - secure: CJKFy918mjHbn7oDpuhbhiVR1d2qT4ktu/mABcrLAdT31pcPO9RKExNw/fp3P3gkfcLB/kQhWQfdrknqlHWiQiJj2z2HlaJJLQDNelpKsKPOHRo0GAq0N/aBwEu6wDk+GQb2PjxeYHFaQ0uupzNiqAup6glWokCpPuUUV2eb6js=
-  - secure: AnnnXIFPy93JvGO+DuqSpYGPd9MZNSxwciYKTcCV6Yx5htJwZFU6adAak9UWvXr8vjtfwrHJD/VqViC6GII7toVCF9O9XEc6ooHVHsLGxfqvl0uOy+prgZS0F8bYW8n6EjFrWPfywdEoMn8PsZ/9iNxPFC2tH8vVKmJAq/FnxUo=
-  - secure: XPOKBecqK22Xz+hGvl/LVMs4POWweFMFzj0f2N3La8lJxmX5CJB3H9hC1RHjKFIdook4orxOe+6+Cvxeeez2goFXlaHIFsN0yMNbkg58owc4Lj7077IQi7lmVIioJ15olZS2tIitLKI7OhKXJSedj4Yt0AMDIBTiw5iG2v11BvQ=
-  - secure: xEuLhxIAOZANe5DNk8mRmxTm60/QAA6IG00rqdKKERChZ1L77ACD29viMw7pQ3wnDsU6bC+oCPdyNwFPbMA3wLqpKMuQBh5tKNJPs+wldgsX8AHMXRJXhQgsz0jzh/tvl26reK1nofRyPtVsq6Ev2ZBEglOHp4l+rk8MaGjQ17w=
+  - ARTIFACTS_S3_REGION="us-east-1"
+  - ARTIFACTS_S3_BUCKET="travis-ci-screenshots"
+  - ARTIFACTS_PATHS="tmp/capybara/"
+  - secure: mxVj329WgLFr5YjjvsBNaMVhJVG2nyVQZiXPf1sGxrDPeYA+Duh+/PGUjnoFLEHXNwaV+3RfW9V/EWRpaEpIk+hKWjJXkHkUTqCU/bK1NeOLeV4FlqrkVfSD+hBG9FU7Y3aTu/bALYlYOzGsjXHuPBfYXBqBzN1gtpi7l9S8a2U=
+  - secure: 3Ko9ZhLHpZiharEefPMoJ6KSJUpI+h1pDRmzzQzt+4M4PIN4inhMb57qudoHtSYbgJRo45hZ8A3x+QI7fjAwHQyJNTDIHnXolMTwit2/wziSpeHuaqtKWAELrVUgPfP3avnl5GC3jvO2cHK1eWPwdx6Ks/iybXhyYeTf39ogxRs=
+  - secure: fcTE2FdWMzHEv++avWgdICDN1d20c+iWfXmMEcEva04kikJfz9np++E2HHkd3OP8Y4puWJ2j4Q+QAscviP7ATmAWTjX4mscq1UY5/fNwd4qDFUkct/UG/8soS4XKzMkZy9KvoniEvSSDuJJeLmEd/0ImuS1F60Dr+jxUal0p9Fg=
+  - secure: YmVza5uaDsncEQ+8kq0XOCcrBP6VFHfHTPp0W0VpU0iq1vtCeWQGIUYQtvvxPU7O1sDzb+U7cx+Sn8aFNzxsHHwP0zLcrtPcwT1mD18XANPTmcmrKSQHozeYzgdyi7c2c/zymLr/i3KmwUvAhQe89Qt2ZmgepuRyg3oRj3VLMNI=
   matrix:
   - BROWSER=chrome_headless SUITE=spec/
   - BROWSER=firefox_headless SUITE=spec/features
@@ -33,6 +37,5 @@ before_install:
 before_script:
 - psql -c 'create database travis_ci_test;' -U postgres
 - cp config/database.yml.travis config/database.yml
-- gem install travis-artifacts
 after_failure:
-- travis-artifacts upload --path tmp/capybara/
+- artifacts upload

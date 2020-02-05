@@ -84,7 +84,7 @@ class Dog < ApplicationRecord
 
   has_many :comments, -> { order 'created_at DESC' }, as: :commentable
   has_many :attachments, as: :attachable, dependent: :destroy
-  has_many :photos, -> { order 'position ASC' }, dependent: :destroy
+  has_many :photos, -> { order 'position ASC' }, dependent: :destroy, as: :animal
   has_many :adoptions, dependent: :destroy
   has_many :adopters, through: :adoptions
 
@@ -136,9 +136,6 @@ class Dog < ApplicationRecord
     'Male' => 'M',
     'Female' => 'F'
   }.freeze
-
-  FILTER_FLAGS = ["High Priority", "Medical Need", "Special Needs", "Medical Review Needed", "Behavior Problems",
-                  "Foster Needed", "Spay Neuter Needed", "No Cats", "No Dogs", "No Kids"]
 
   AGES = %w[baby young adult senior]
   validates_inclusion_of :age, in: AGES, allow_blank: true

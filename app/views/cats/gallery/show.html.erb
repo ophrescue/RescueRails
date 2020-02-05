@@ -1,0 +1,105 @@
+<div class='container' id='public_profile'>
+  <%- if active_user? %>
+    <div class='row'>
+      <div class='col-12'>
+        <%= link_to "Manager Profile", cats_manager_path(@cat), class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  <% end %>
+  <div class="row title_row">
+    <div class='col-12 col-sm-auto'>
+      <h1>#<%=@cat.tracking_id%> <%= @cat.name %></h1>
+    </div>
+  </div>
+  <div class="row title_row">
+    <div class='col-12 col-sm-auto'>
+      <span class='status'><%= @cat.status.titleize %></span >
+      <a tabindex="0" class='fa fa-sm fa-info text-primary'
+         data-trigger='focus' data-toggle='popover' data-placement='left'
+         data-content='<%=t ".status_definitions.#{@cat.status_key}" %>'></a>
+    </div>
+  </div>
+  <div class="row title_row">
+    <div class='col-12 col-sm-auto'>
+      <% if @cat.size? %>
+        <span><%= @cat.size.titleize %>-size</span>,
+      <% end %>
+      <% if @cat.coat_length? %>
+        <span><%= @cat.coat_length.titleize %> coat length</span>,
+      <% end %>
+      <span><%= @cat.gender %>,</span>
+      <span class='age'><%= @cat.age ? @cat.age.titleize : " " %></span>
+      <span class='breed'><%= @cat.breeds.join(" x ").html_safe %></span>,
+    </div>
+  </div>
+
+  <div class="row profile">
+    <div class="col">
+      <%= some_details(@cat) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-8">
+      <div id="galleria"></div>
+    </div>
+
+    <div class="col-12 col-sm-4 align-self-center">
+      <% if @cat.is_accepting_applications?  %>
+        <a href=<%=new_adopter_path(cat_name: @cat.name) %> id='adopt_me' class='show_page_links'>
+          <%= render file: Rails.root.join('app', 'assets', 'images', 'foster_icon.svg').to_s %>
+          <span class='link'>Adopt Me</span>
+        </a>
+      <% end %>
+      <a href=<%= sponsor_path %> id='sponsor_me' class='show_page_links'>
+        <span class='fa-stack fa-lg'>
+          <i class='fa fa-circle fa-lg fa-stack-1x'></i>
+          <i class='fa fa-dollar fa-stack-1x'></i>
+        </span>
+        <span class='link'>Sponsor Me</span>
+      </a>
+
+      <a href=<%= guide_path %> id='adoption_guide' class='show_page_links' >
+        <i class='fa fa-lg fa-compass'></i>
+        <span class='link'>Adoption Guide</span>
+      </a>
+
+      <div class='share_the_love'>
+        <div class='share_the_love_header'>Share the love!</div>
+        <div class="fb-like" data-href="<%= request.url %>" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-8">
+      <div id="dogDescription" >
+        <%= simple_format(@cat.description) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-8">
+      <p><small><em>This cat's bio is based off the experiences of the foster and/or volunteers of OPH as well as any information that we received from the shelter or previous owner. This is very important because it means that while they may act one way in the foster’s home, you may experience something different in your home.</em></small></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#galleria').galleria({
+    responsive: true,
+    imageCrop: false,
+    dataSource: <%= @carousel %>,
+    theme: 'classic',
+    swipe: false
+  });
+
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+
+  $('.popover-dismiss').popover({
+    trigger: 'focus'
+  })
+</script>

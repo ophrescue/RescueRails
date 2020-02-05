@@ -9,6 +9,7 @@ gem 'audited', '~> 4.5'
 gem 'aws-sdk', '~> 2'
 gem 'bootstrap', '~> 4.3.1'
 gem 'bootstrap-will_paginate', '~> 1.0.0'
+gem "chartkick"
 gem 'clearance'
 gem 'countries'
 gem 'dotenv'
@@ -16,9 +17,11 @@ gem 'dotenv-rails'
 gem 'exception_notification'
 gem 'exception_notification-rake', '~> 0.3.0'
 gem 'font-awesome-rails'
+gem 'friendly_id', '~> 5.3'
 gem 'geocoder'
 gem 'gibbon'
 gem 'gravatar_image_tag'
+gem 'groupdate'
 gem 'has_scope'
 gem 'paperclip', '~> 5'
 gem 'rails4-autocomplete'
@@ -52,9 +55,7 @@ gem 'mini_racer', '>= 0.2.3', platforms: :ruby
 gem 'uglifier'
 
 gem 'newrelic_rpm'
-# Rollbar can pick up new versions after this issue is fixed
-# https://github.com/rollbar/rollbar-gem/issues/713
-gem 'rollbar', '2.15.5'
+gem 'honeybadger', '~> 4.0'
 gem 'sucker_punch', '~> 1.5.1'
 gem 'factory_bot_rails'
 
@@ -89,11 +90,14 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano', '~> 3.11'
   gem 'capistrano-bundler', '~> 1.1.4'
   gem 'capistrano-rails', '~> 1.1.5'
   gem 'capistrano-rails-console', require: false
   gem 'capistrano-rbenv', '~> 2.0.3'
+  gem 'capistrano-systemd-multiservice', require: false
+  gem 'ed25519', '>= 1.2', '< 2.0'
+  gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
   gem 'powder'
   gem 'rubocop'
   gem 'rubocop-rspec'

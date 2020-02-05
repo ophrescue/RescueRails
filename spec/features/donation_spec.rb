@@ -51,7 +51,7 @@ feature 'Donations' do
     end
     sign_in_as_admin
     visit '/donations/history'
-    expect(page).to have_selector :css, 'nav.pagination '
+    expect(page).to have_selector :css, 'nav.pagination'
     expect(page.all('table tbody tr').size).to eq 30
   end
 end

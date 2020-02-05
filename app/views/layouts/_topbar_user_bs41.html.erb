@@ -1,0 +1,26 @@
+<div class="nav-scroller shadow-sm">
+  <nav class="nav nav-underline">
+    <%= link_to "Dashboard", dashboards_path, class: "nav-link" %>
+    <% if can_edit_my_adopters? || can_edit_all_adopters? %>
+      <%= link_to "Adopters", adopters_path( status: "active"), class: "nav-link "%>
+    <% end %>
+    <% if current_user.active? || current_user.admin? %>
+      <%= link_to "DNA", banned_adopters_path, class: "nav-link" %>
+    <% end %>
+    <%= link_to "Dog Mgr", dogs_manager_index_path, class: "nav-link" %>
+    <% if current_user.active? || current_user.admin? %>
+      <%= link_to "Volunteers", users_path, class: "nav-link" %>
+      <%= link_to "Cat Mgr", cats_manager_index_path, class: "nav-link" %>
+    <% end %>
+    <% if current_user.admin? %>
+        <%= link_to "Donations", history_donations_path, class: "nav-link" %>
+    <% end %>
+    <% if can_dl_resources? %>
+      <%= link_to "Files", folders_path, class: "nav-link" %>
+    <% end %>
+    <% if can_edit_dogs? %>
+      <%= link_to "Shelters", shelters_path, class: "nav-link" %>
+    <% end %>
+    <%= link_to "Profile", current_user, class: "nav-link" %>
+  </nav>
+</div>

@@ -15,7 +15,11 @@
       <% end %>
       <h5>Our Goal <%= number_to_currency(@campaign.goal, precision: 0) %></h5>
       <h5>Raised <%= number_to_currency(@campaign.progress, precision: 0) %></h5>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-12">
       <% if @campaign.active %>
         <%= link_to "Donate", new_donation_path({campaign_id: @campaign.id}), class: 'btn btn-primary btn-lg', id: 'donate-now' %>
       <% end %>

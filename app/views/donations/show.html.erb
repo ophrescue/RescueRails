@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 pt-4">
+        <h2><%= @donation.name %></h2>
+
+        <div>Donated <%= number_to_currency(@donation.amount) %> <%= @donation.frequency %> at <%= @donation.created_at.strftime('%B %d, %Y %l:%M %p') %></div>
+        <%= @donation.campaign.try(:title) %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+        <% if @donation.is_memory_honor %>
+            <div>Donated <%= @donation.memory_honor_type %> <%= @donation.memory_honor_name %>.</div>
+        <% end %>
+        <h4 class="pt-4">Donor Comment</h4>
+        <div><%= simple_format(@donation.comment) %></div>
+
+        <h4 class="pt-4">Contact Info</h4>
+        <div><%= @donation.email %></div>
+
+        <% if @donation.more_contact_info %>
+            <div><%= @donation.phone %></div>
+            <div><%= @donation.address1 %></div>
+            <div><%= @donation.address2 %></div>
+            <div><%= @donation.city %>, <%= @donation.region %> <%= @donation.postal_code %></div>
+        <% end %>
+
+        <% if @donation.notify_someone %>
+            <h4 class="pt-4">Donor Notified</h4>
+            <div><%= @donation.notify_name %></div>
+            <div><%= @donation.notify_email %></div>
+            <div><%= @donation.notify_message %></div>
+        <% end %>
+
+
+    </div>
+
+    <div class="col-md-6">
+
+        <h5>Related Donations</h5>
+        <ul>
+            <%= render partial: "related_donation", collection: @related_donations %>
+        </ul>
+
+    </div>
+</div>

@@ -1,6 +1,6 @@
 STATIC_PAGES = ['5k', 'contact', 'funding-partners', 'community-partners', 'non-profit-and-corporate-partners',
                 'shelter-partners', 'training-partners', 'guide', 'aboutus', 'documentary', 'insurance',
-                'get-involved', 'volunteer', 'foster', 'fosterfaq', 'donate', 'sponsor',
+                'get-involved', 'volunteer', 'foster', 'fosterfaq', 'donate', 'sponsor', 'newsletters',
                 'special-funds', 'other-ways-to-give', 'terms', 'resources', 'tips-for-finding-lost-pets', 'status_definitions',
                 'education-and-outreach'].freeze
 
@@ -10,6 +10,7 @@ RescueRails::Application.routes.draw do
   resources :adopters do
     resources :comments, except: %i[destroy edit update]
     resources :adoptions
+    resources :cat_adoptions
   end
 
   resources :donations do
@@ -19,6 +20,8 @@ RescueRails::Application.routes.draw do
   end
 
   resources :comments, except: %i[new]
+
+  resources :cats, controller: 'cats/gallery', only: %i[index show]
 
   resources :dogs, controller: 'dogs/gallery', only: %i[index show]
 
@@ -31,6 +34,15 @@ RescueRails::Application.routes.draw do
     resources :adoptions
   end
 
+  resources :cats_manager, controller: 'cats/manager' do
+    resources :comments
+    resources :cat_adoptions
+  end
+
+  resources :bulletins, controller: :posts, type: 'Bulletin'
+  resources :opportunities, controller: :posts, type: 'Opportunity'
+  resources :infos, controller: :posts, type: 'Info'
+
   resources :sessions, only: %i[new create destroy]
 
   get '/events/:scope', to: 'events#index', scope: /(past|upcoming)/, as: "scoped_events"
@@ -40,6 +52,7 @@ RescueRails::Application.routes.draw do
   resources :adoptions,
             :adoption_app,
             :campaigns,
+            :cat_adoptions,
             :dashboards,
             :events,
             :folders,

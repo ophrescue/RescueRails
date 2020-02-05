@@ -13,8 +13,16 @@
   </div>
   <% end %>
   <div class="row">
-    <div class='col'>
-      <%= render(@events) || render(partial: 'no_events', locals: {current_scope: current_scope}) %>
+    <div class='col-md-12'>
+      <%= will_paginate(@events, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+    </div>
+  </div>
+
+  <%= render(@events) || render(partial: 'no_events', locals: {current_scope: current_scope}) %>
+
+  <div class="row">
+    <div class='col-md-12'>
+      <%= will_paginate(@events, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
     </div>
   </div>
 </div>

@@ -23,7 +23,7 @@ $( function () {
       data: $('#new_dog_link').serialize(),
       success: function (data) {
         refresh_dogs();
-        clear_autocomplete();
+        clear_dog_autocomplete();
       },
       error: function(a, b, c) {
         $('#link_dog_submit').prop('disabled', false);
@@ -61,7 +61,7 @@ function refresh_dogs() {
   $('#link_dog_submit').prop('disabled', false);
 }
 
-function clear_autocomplete() {
-  $('#autocomplete_label').val('');
+function clear_dog_autocomplete() {
+  $('#autocomplete_dog_label').val('');
   $('#adoption_dog_id').val('');
 }

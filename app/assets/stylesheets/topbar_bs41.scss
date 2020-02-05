@@ -1,8 +1,3 @@
-.navbar {
-  box-shadow: 0 5px 10px #d4d4d4;
-  margin-bottom: 20px;
-}
-
 .navbar a{
   color: #333;
 }
@@ -19,4 +14,32 @@
 
 .navbar-expand-lg {
   border: 1px solid #d4d4d4;
+}
+
+.navbar-custom {
+  background-color: #aedfe3;
+}
+
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+  color: #333333;
+}
+
+/* for dropdown only - change the color of droodown */
+.navbar-custom .dropdown-menu {
+  background-color: #aedfe3;
+}
+.navbar-custom .dropdown-item {
+  color: #333333;
+}
+
+.navbar-custom .dropdown-item:hover,
+.navbar-custom .dropdown-item:focus {
+  color: #333333;
+  // background-color: rgba(255,255,255,.5);
+}
+
+.dropdown-divider {
+  border-top: 1px solid #333333;
 }

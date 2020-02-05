@@ -18,11 +18,18 @@ class DashboardsController < ApplicationController
   before_action :require_login
   before_action :unlocked_user
   before_action :select_bootstrap41
+  before_action :show_user_navbar
 
   def index
     @current_user = current_user
-    @upcoming_nearby_events = Event.where(event_date: Time.zone.today..3.weeks.from_now).near(current_user.location, 20).limit(10)
-    @my_dogs = Dog.where(foster: current_user).where(status: Dog::ACTIVE_STATUSES).limit(10)
-    @my_adopters = Adopter.where(user: current_user).limit(10)
+    @bulletins = Bulletin.order(created_at: :desc).limit(5)
+    @opportunities = Opportunity.order(created_at: :desc).limit(5)
+    @featured_event = Event.upcoming.featured.first
+
+    @contacts_id = ENV['CONTACTS_ID']
+
+    # @upcoming_nearby_events = Event.where(event_date: Time.zone.today..3.weeks.from_now).near(current_user.location, 20).limit(10)
+    # @my_dogs = Dog.where(foster: current_user).where(status: Dog::ACTIVE_STATUSES).limit(10)
+    # @my_adopters = Adopter.where(user: current_user).limit(10)
   end
 end

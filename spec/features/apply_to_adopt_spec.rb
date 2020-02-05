@@ -8,16 +8,12 @@ feature 'Apply for Adoption' do
     end
 
     click_link('Adoption Application', match: :first)
-    check('adopter_pre_q_costs')
-    check('adopter_pre_q_surrender')
     check('adopter_pre_q_abuse')
+    check('adopter_pre_q_dog_adjust')
     check('adopter_pre_q_limited_info')
     check('adopter_pre_q_breed_info')
-    check('adopter_pre_q_reimbursement')
-    check('adopter_pre_q_dog_adjust')
-    check('adopter_pre_q_courtesy')
-    check('adopter_pre_q_travel')
     check('adopter_pre_q_hold')
+    check('adopter_pre_q_costs')
 
     click_button('Next')
 
@@ -179,16 +175,12 @@ feature 'Apply for Adoption' do
     end
 
     click_link('Adoption Application', match: :first)
-    check('adopter_pre_q_costs')
-    check('adopter_pre_q_surrender')
     check('adopter_pre_q_abuse')
+    check('adopter_pre_q_dog_adjust')
     check('adopter_pre_q_limited_info')
     check('adopter_pre_q_breed_info')
-    check('adopter_pre_q_reimbursement')
-    check('adopter_pre_q_dog_adjust')
-    check('adopter_pre_q_courtesy')
-    check('adopter_pre_q_travel')
     check('adopter_pre_q_hold')
+    check('adopter_pre_q_costs')
 
     click_button('Next')
 

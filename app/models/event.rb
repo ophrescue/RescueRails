@@ -17,9 +17,9 @@
 # Table name: events
 #
 #  id                 :integer          not null, primary key
-#  title              :string(255)
-#  location_name      :string(255)
-#  address            :string(255)
+#  title              :string
+#  location_name      :string
+#  address            :string
 #  description        :text
 #  created_by_user    :integer
 #  created_at         :datetime
@@ -29,15 +29,16 @@
 #  event_date         :date
 #  start_time         :time
 #  end_time           :time
-#  location_url       :string(255)
-#  location_phone     :string(255)
-#  photo_file_name    :string(255)
-#  photo_content_type :string(255)
+#  location_url       :string
+#  location_phone     :string
+#  photo_file_name    :string
+#  photo_content_type :string
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
-#  photographer_name  :string(255)
-#  photographer_url   :string(255)
-#  facebook_url       :string(255)
+#  photographer_name  :string
+#  photographer_url   :string
+#  facebook_url       :string
+#  featured           :boolean
 #
 
 class Event < ApplicationRecord
@@ -86,8 +87,9 @@ class Event < ApplicationRecord
   validates_attachment_size :photo, less_than: ATTACHMENT_MAX_SIZE.megabytes
   validates_attachment_content_type :photo, content_type: MIME_TYPES
 
-  scope :upcoming, ->{ where("event_date >= ?", Date.today).limit(30).order('event_date ASC')  }
-  scope :past,     ->{ where("event_date < ?",  Date.today).limit(30).order('event_date DESC') }
+  scope :upcoming, ->{ where("event_date >= ?", Date.today).order('event_date, start_time, created_at ASC') }
+  scope :past,     ->{ where("event_date < ?",  Date.today).order('event_date, start_time, created_at DESC') }
+  scope :featured, ->{ where(featured: true) }
 
   def upcoming?
     event_date >= Date.today

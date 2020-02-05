@@ -12,34 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-# == Schema Information
-#
-# Table name: events
-#
-#  id                 :integer          not null, primary key
-#  title              :string(255)
-#  location_name      :string(255)
-#  address            :string(255)
-#  description        :text
-#  created_by_user    :integer
-#  created_at         :datetime
-#  updated_at         :datetime
-#  latitude           :float
-#  longitude          :float
-#  event_date         :date
-#  start_time         :time
-#  end_time           :time
-#  location_url       :string(255)
-#  location_phone     :string(255)
-#  photo_file_name    :string(255)
-#  photo_content_type :string(255)
-#  photo_file_size    :integer
-#  photo_updated_at   :datetime
-#  photographer_name  :string(255)
-#  photographer_url   :string(255)
-#  facebook_url       :string(255)
-#
-
 class EventsController < ApplicationController
   before_action :require_login, except: [:index, :show]
   before_action :unlocked_user, except: [:index, :show]
@@ -47,13 +19,15 @@ class EventsController < ApplicationController
   before_action :select_bootstrap41
   before_action :find_event, only: [:destroy, :edit, :show, :update]
 
+  PER_PAGE = 15
+
   def index
     @scope =
       case params[:scope]
       when "upcoming", "past" then params[:scope]
       else "upcoming"
       end
-    @events = Event.public_send(@scope)
+    @events = Event.public_send(@scope).paginate(page: params[:page], per_page: PER_PAGE)
     @title = t(".title.#{@scope}")
   end
 
@@ -69,7 +43,7 @@ class EventsController < ApplicationController
 
     if @event.update_attributes(event_params)
       flash[:success] = "Event updated."
-      redirect_to scoped_events_path('upcoming')
+      redirect_to @event
     else
       render 'edit'
     end
@@ -83,7 +57,7 @@ class EventsController < ApplicationController
     end
     if @event.save
       flash[:success] = "New event added"
-      redirect_to scoped_events_path("upcoming")
+      redirect_to @event
     else
       render 'new'
     end
@@ -97,6 +71,7 @@ class EventsController < ApplicationController
   end
 
   private
+
   def valid_id?(id)
     Event.pluck(:id).include?(id)
   end
@@ -130,6 +105,7 @@ class EventsController < ApplicationController
               :photo_file_size,
               :photo_updated_at,
               :photo_delete,
-              :facebook_url)
+              :facebook_url,
+              :featured)
   end
 end

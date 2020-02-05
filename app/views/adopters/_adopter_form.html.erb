@@ -126,6 +126,22 @@
       </th>
       <td><%= @adopter.adoption_app.how_did_you_hear %></td>
     </tr>
+    <% if @adopter.adoption_app.birth_date %>
+    <tr>
+      <th>
+        Date of Birth
+      </th>
+      <td><%= @adopter.adoption_app.birth_date %></td>
+    </tr>
+    <% end %>
+    <% if @adopter.adoption_app.adopter_age %>
+    <tr>
+      <th>
+        Adopter Age
+      </th>
+      <td><%= @adopter.adoption_app.adopter_age %></td>
+    </tr>
+    <% end %>
     <tr>
       <td colspan="2">
         <a id="toggle-edit" class="btn btn-primary">Edit Info</a>

@@ -29,13 +29,20 @@
     <%= af.label :is_ofage, "Are you at least 21 years old?", :class => "control-label" %>
     <div class="controls">
       <label>
-        <%= af.radio_button :is_ofage, true, :class => "required" %>
+        <%= af.radio_button :is_ofage, true, :class => "required is-of-age-radio" %>
         <span>Yes</span>
       </label>
       <label>
-        <%= af.radio_button :is_ofage, false, :class => "required" %>
+        <%= af.radio_button :is_ofage, false, :class => "required is-of-age-radio" %>
         <span>No</span>
       </label>
+    </div>
+  </div>
+  <div class="control-group birth-date">
+    <%= af.label :birth_date, "Date of Birth", :class => "control-label" %>
+    <div class="controls">
+      <%= af.text_field :birth_date %>
+      <span class="help-inline">Enter as YYYY-MM-DD</span>
     </div>
   </div>
   <div class="control-group">
@@ -50,7 +57,7 @@
         <span>No</span>
       </label>
     </div>
-</div>
+  </div>
   <div class="control-group">
     <%= af.label :house_type, "Do you rent or own your home?", :class => "control-label" %>
     <div class="controls">

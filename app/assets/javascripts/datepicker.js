@@ -26,6 +26,15 @@ $(function() {
     minDate: '0d'
    });
 
+   $('#adopter_adoption_app_attributes_birth_date').datepicker({
+     dateFormat: 'yy-mm-dd',
+     maxDate: '0d',
+     minDate: '-21y',
+     yearRange: "-21:+00",
+     changeMonth: true,
+     changeYear: true
+    });
+
   $('#event_event_date').datepicker({
     dateFormat: 'yy-mm-dd',
     maxDate: '+6m',

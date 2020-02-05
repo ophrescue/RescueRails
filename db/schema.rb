@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_185811) do
     t.boolean "shot_flea_tick"
     t.boolean "verify_home_auth", default: false
     t.boolean "has_family_under_18"
+    t.date "birth_date"
     t.index ["adopter_id"], name: "index_adoption_apps_on_adopter_id"
   end
 

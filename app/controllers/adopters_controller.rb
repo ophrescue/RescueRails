@@ -167,6 +167,7 @@ class AdoptersController < ApplicationController
                                       :vet_info,
                                       :max_hrs_alone,
                                       :is_ofage,
+                                      :birth_date,
                                       :has_family_under_18,
                                       :shot_dhpp_dhlpp,
                                       :shot_fpv_fhv_fcv,

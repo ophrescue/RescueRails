@@ -39,6 +39,7 @@
 #  shot_flea_tick            :boolean
 #  verify_home_auth          :boolean          default(FALSE)
 #  has_family_under_18       :boolean
+#  birth_date                :date
 #
 
 require 'rails_helper'
@@ -54,6 +55,38 @@ describe AdoptionApp do
   context 'has a valid factory' do
     it 'saves' do
       expect(create(:adoption_app)).to be_valid
+    end
+  end
+
+  describe '.adopter_age' do
+    it 'returns nil when birth_date is nil' do
+      adoption_app.birth_date = nil
+
+      expect(adoption_app.adopter_age).to be nil
+    end
+
+    it 'returns 10 years when birth_date is 10 years before current date' do
+      adoption_app.birth_date = 10.years.ago.to_date
+
+      expect(adoption_app.adopter_age).to eq("10 years")
+    end
+
+    it 'returns 9 years when birth_date is 1 month before 10 years from current date' do
+      adoption_app.birth_date = (10.years.ago + 1.month).to_date
+
+      expect(adoption_app.adopter_age).to eq("9 years")
+    end
+
+    it 'returns 9 years when birth_date is 1 day before 10 years from current date' do
+      adoption_app.birth_date = (10.years.ago + 1.day).to_date
+
+      expect(adoption_app.adopter_age).to eq("9 years")
+    end
+
+    it 'returns 1 year when birth_date is 1 year from current date' do
+      adoption_app.birth_date = 1.year.ago.to_date
+
+      expect(adoption_app.adopter_age).to eq("1 year")
     end
   end
 end

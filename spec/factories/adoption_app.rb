@@ -24,7 +24,7 @@ FactoryBot.define do
     vet_info { 'Dr. Spaceman Baltimore MD' }
     max_hrs_alone { 3 }
     is_ofage { true }
-    birth_date { Faker::Date.between(20.years.ago, Time.zone.today) }
+    birth_date { Faker::Date.between(from: 20.years.ago, to: Date.today) }
     has_family_under_18 { true }
 
     factory :adoption_app_null do

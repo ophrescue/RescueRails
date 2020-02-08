@@ -47,6 +47,7 @@ feature 'Filter Cats List', js: true do
       expect(page.find('#search_icon')).to be_visible
 
       page.find('#reset_message').click
+      sleep(1)
       click_button("Search")
       expect(page.find('input#search').value).to be_blank
       expect(page.find('#search_field_index ul>li._cat_breed input', visible: false)).not_to be_checked

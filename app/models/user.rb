@@ -82,6 +82,7 @@
 #  active                       :boolean          default(FALSE), not null
 
 class User < ApplicationRecord
+  audited only: %i[admin edit_dogs edit_my_adopters edit_all_adopters locked edit_events complete_adopters add_dogs ban_adopters dl_resources dl_locked_resources active admin_comment medical_behavior_permission], on: [:update]
   include Clearance::User
   include Filterable
 
@@ -237,6 +238,10 @@ class User < ApplicationRecord
 
   def has_location?
     [city, region].all?
+  end
+
+  def audits_sorted
+    audits.sort_by(&:created_at).reverse!
   end
 
   private

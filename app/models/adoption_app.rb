@@ -73,7 +73,7 @@ class AdoptionApp < ApplicationRecord
   def adopter_age
     return unless birth_date
 
-    today = Date.today
+    today = Date.current
     age = today.year - birth_date.year
 
     if birth_date.month > today.month ||

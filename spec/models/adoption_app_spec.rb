@@ -79,8 +79,10 @@ describe AdoptionApp do
 
     it 'returns 9 years when birth_date is 1 month before 10 years from current date' do
       adoption_app.birth_date = (10.years.ago + 1.month).to_date
-      puts Time.now
-      puts Time.zone.now
+      puts "-----DEBUG-----"
+      puts "Time.now is #{Time.now}"
+      puts "Time.zone.now is #{Time.zone.now}"
+      puts "-----DEBUG-----"
       expect(adoption_app.adopter_age).to eq("9 years")
     end
 

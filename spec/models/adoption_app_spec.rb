@@ -50,6 +50,12 @@ describe AdoptionApp do
   before :each do
     allow(Adopter).to receive(:chimp_check).and_return(true)
     allow(Adopter).to receive(:chimp_subscribe).and_return(true)
+    # Travel to Jan 30th, 2020 at 01:30:44 UTC
+    travel_to Time.local(2020, 1, 30, 1, 30, 44)
+  end
+
+  after do
+    travel_back
   end
 
   context 'has a valid factory' do
@@ -79,7 +85,6 @@ describe AdoptionApp do
 
     it 'returns 9 years when birth_date is 1 day before 10 years from current date' do
       adoption_app.birth_date = (10.years.ago + 1.day).to_date
-
       expect(adoption_app.adopter_age).to eq("9 years")
     end
 

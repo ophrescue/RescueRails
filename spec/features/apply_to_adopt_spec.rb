@@ -99,6 +99,7 @@ feature 'Apply for Adoption' do
     email = double("adopter mailer", deliver_later: true)
     expect(NewAdopterMailer).to receive(:adopter_created).once.and_return(email)
     expect(AdoptAppMailer).to receive(:adopt_app).once.and_return(email)
+    expect(BitePreventionMailer).to receive(:bite_prevent).once.and_return(email)
 
     expect { click_button('Submit') }.to change { Adopter.count }.by(1)
 
@@ -259,6 +260,7 @@ feature 'Apply for Adoption' do
     email = double("adopter mailer", deliver_later: true)
     expect(NewAdopterMailer).to receive(:adopter_created).once.and_return(email)
     expect(AdoptAppMailer).to receive(:adopt_app).once.and_return(email)
+    expect(BitePreventionMailer).to receive(:bite_prevent).once.and_return(email)
 
     expect { click_button('Submit') }.to change { Adopter.count }.by(1)
 

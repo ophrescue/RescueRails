@@ -89,6 +89,7 @@ class AdoptersController < ApplicationController
 
       NewAdopterMailer.adopter_created(@adopter.id).deliver_later
       AdoptAppMailer.adopt_app(@adopter.id).deliver_later
+      BitePreventionMailer.bite_prevent(@adopter.id).deliver_later(wait: 24.hours)
       flash[:success] = render_to_string partial: 'adopt_success_message'
       redirect_to root_path(adoptapp: "complete")
     else

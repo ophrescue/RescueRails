@@ -255,9 +255,13 @@
       <div class="span6">
       </div>
         <% if is_admin? %>
-            <div class="row6">
-              <h4>Admin Notes</h4>
-              <p><%= @user.admin_comment %></p>
-            </div>
+          <div class="row6">
+            <h4>Admin Notes</h4>
+            <p><%= @user.admin_comment %></p>
+          </div>
+          <div class="row6">
+            <h4>Permission Change History</h4>
+            <p><%= render @user.audits_sorted %></p>
+          </div>
         <% end %>
     </div>

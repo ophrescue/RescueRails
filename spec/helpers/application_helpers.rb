@@ -1,13 +1,16 @@
 module ApplicationHelpers
   def flash_error_message
+    sleep(1)
     page.find('.alert.alert-error').text
   end
 
   def flash_notice_message
+    sleep(1)
     page.find('.alert.alert-notice').text
   end
 
   def flash_success_message
+    sleep(1)
     page.find('.alert.alert-success').text
   end
 

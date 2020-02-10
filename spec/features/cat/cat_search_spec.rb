@@ -40,6 +40,7 @@ feature 'search and clear search when admin is logged-in', js: true do
   it 'should show all dogs when search is cleared' do
     visit cats_manager_index_path(filter_params: { search: 'ab', search_field_index: 'name' })
     click_link 'reset_message'
+    sleep(2)
     expect(page).to have_selector(filter_params, text: "Tracking ID")
     expect(cat_names).to match_array ["Abercrombie", "Abby", "Nairobi"]
   end

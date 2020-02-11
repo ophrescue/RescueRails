@@ -42,9 +42,10 @@
 #
 
 class Donation < ApplicationRecord
-  validates :name, presence: true
-  validates :email, presence: true
+  validates :name, presence: true, length: { maximum: 255 }
+  validates :email, presence: true, length: { maximum: 255 }
   validates :amount, presence: true
+  validates :region, allow_blank: true, length: { maximum: 2 }
 
   belongs_to :campaign, optional: true
 

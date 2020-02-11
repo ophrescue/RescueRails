@@ -93,28 +93,28 @@
         <div id="moreContactFields" class="collapse">
           <div class="form-group">
             <%= f.label :phone, 'Phone Number' %>
-            <%= f.text_field :phone, class: 'form-control' %>
+            <%= f.text_field :phone, class: 'form-control', maxlength: 40 %>
           </div>
           <div class="form-group">
             <%= f.label :address1, 'Address 1' %>
-            <%= f.text_field :address1, class: 'form-control' %>
+            <%= f.text_field :address1, class: 'form-control', maxlength: 250 %>
           </div>
           <div class="form-group">
             <%= f.label :address2, 'Address 2' %>
-            <%= f.text_field :address2, class: 'form-control' %>
+            <%= f.text_field :address2, class: 'form-control', maxlength: 250 %>
           </div>
           <div class="form-row">
             <div class="form-group col-md-8">
               <%= f.label :city, 'City' %>
-              <%= f.text_field :city, class: 'form-control' %>
+              <%= f.text_field :city, class: 'form-control', maxlength: 100 %>
             </div>
             <div class="form-group col-md-2">
               <%= f.label :region, 'State' %>
-              <%= f.text_field :region, class: 'form-control' %>
+              <%= f.text_field :region, class: 'form-control', maxlength: 2 %>
             </div>
             <div class="form-group col-md-2">
               <%= f.label :postal_code, 'Zip' %>
-              <%= f.text_field :postal_code, class: 'form-control' %>
+              <%= f.text_field :postal_code, class: 'form-control', maxlength: 5 %>
             </div>
           </div>
         </div>

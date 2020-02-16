@@ -52,6 +52,7 @@
 #  shot_flea_tick            :boolean
 #  verify_home_auth          :boolean          default(FALSE)
 #  has_family_under_18       :boolean
+#  birth_date                :date
 #
 
 class AdoptionApp < ApplicationRecord
@@ -67,4 +68,19 @@ class AdoptionApp < ApplicationRecord
   validates :spouse_name, allow_blank: true, length: { maximum: 50 }
   validates :other_household_names, allow_blank: true, length: { maximum: 255 }
   validates :how_did_you_hear, allow_blank: true, length: { maximum: 255 }
+  validates :birth_date, presence: true, unless: :is_ofage?
+
+  def adopter_age
+    return unless birth_date
+
+    today = Date.current
+    age = today.year - birth_date.year
+
+    if birth_date.month > today.month ||
+      (birth_date.month == today.month && birth_date.day > today.day)
+      age -= 1
+    end
+
+    age == 1 ? "#{age} year" : "#{age} years"
+  end
 end

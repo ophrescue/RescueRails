@@ -8,4 +8,14 @@ $(document).ready(function () {
             $(".own-home-auth").hide();
         }
     });
+
+    $(".birth-date").hide();
+    $(".is-of-age-radio").change(function () {
+      if (this.value == "false") {
+        $(".birth-date").show();
+      }
+      else {
+        $(".birth-date").hide();
+      }
+    });
 });

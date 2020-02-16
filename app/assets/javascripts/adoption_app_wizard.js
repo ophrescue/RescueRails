@@ -82,6 +82,14 @@ $(function(){
                               required: true,
                               dateISO: true
                         },
+                        "adopter[adoption_app_attributes][birth_date]" : {
+                              dateISO: true,
+                              required: {
+                                depends: function () {
+                                  return $("#adopter_adoption_app_attributes_is_ofage_false").is(":checked");
+                                }
+                              }
+                        },
                         "adopter[adoption_app_attributes][landlord_name]" : {
                               maxlength: 250
                         },

@@ -395,7 +395,7 @@ GEM
       net-ssh (>= 2.8.0)
     sshkit-interactive (0.3.0)
       sshkit (~> 1.12)
-    stackprof (0.2.13)
+    stackprof (0.2.15)
     strip_attributes (1.9.2)
       activemodel (>= 3.0, < 7.0)
     stripe (4.24.0)

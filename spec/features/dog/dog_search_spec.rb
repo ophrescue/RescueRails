@@ -11,7 +11,7 @@ feature 'visit manager view', js: true do
     it 'should direct the user to sign in' do
       expect { visit '/dogs_manager?search=xyz' }.not_to raise_exception
       expect(page_heading).to eq 'Staff Sign in'
-      expect(flash_notice_message).to eq "Please sign in to continue."
+      expect(flash_notice_alert_message).to eq "Please sign in to continue."
 
       fill_and_submit(active_user)
       expect(page_heading).to eq "Dog Manager"

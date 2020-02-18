@@ -9,6 +9,11 @@ module ApplicationHelpers
     page.find('.alert.alert-notice').text
   end
 
+  def flash_notice_alert_message
+    sleep(1)
+    page.find('.alert.alert-alert').text
+  end
+
   def flash_success_message
     sleep(1)
     page.find('.alert.alert-success').text

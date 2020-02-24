@@ -445,8 +445,8 @@ feature 'edit a dog', js: true do
 
     #uniqueness of name and tracking id
     context 'user enters invalid attributes --server-side validation' do
-      let!(:fido){ create(:dog, name: "Fido", tracking_id: 100) }
-      let!(:bruno){ create(:dog, name: "Bruno", tracking_id: 200) }
+      let!(:fido){ create(:dog, name: "Fido") }
+      let!(:bruno){ create(:dog, name: "Bruno") }
 
       context 'when the user edits and creates duplicate name' do
         it 'should not save and should notify the user' do
@@ -464,7 +464,7 @@ feature 'edit a dog', js: true do
       context 'when the user edits and creates duplicate tracking_id' do
         it 'should not save and should notify the user' do
           visit edit_dogs_manager_path(bruno)
-          fill_in(:dog_tracking_id, with: '100')
+          fill_in(:dog_tracking_id, with: fido.tracking_id)
           expect{ click_button('Submit') }.not_to change{ bruno.tracking_id }
           expect(page_heading).to eq 'Edit Dog'
           expect(page.find('#dog_tracking_id')).to have_class 'is-invalid'

@@ -6,11 +6,16 @@
         <% if params[:translator] %>
         <th> Known Languages </th>
         <% end %>
-        <th>Duties</th>
+        <% if params[:foster] == 'false' %>
+          <th>Duties</th>
+        <% end %>
         <th>Phone</th>
         <th>Location</th>
         <% if params[:foster_mentor] == 'true' %>
           <th>Mentees</th>
+        <% end %>
+        <% if params[:foster] == 'true' %>
+          <th>Is Fostering</th>
         <% end %>
       </tr>
     </thead>

@@ -24,7 +24,22 @@ class SessionsController < Clearance::SessionsController
 
   def create
     set_remember_me
-    super
+    base_create
+  end
+
+  # The create from clearance/app/controllers/clearance/session_controller.rb
+  def base_create
+    @user = authenticate(params)
+
+    sign_in(@user) do |status|
+      if status.success?
+        redirect_back_or url_after_create
+      else
+        failed_login
+        flash.now.alert = status.failure_message
+        render template: "sessions/new", status: :unauthorized
+      end
+    end
   end
 
   def destroy
@@ -34,6 +49,15 @@ class SessionsController < Clearance::SessionsController
   end
 
   private
+
+  def failed_login
+    email = params[:session][:email]
+    user = User.find_by(email: email)
+    return if user.nil?
+
+    user.failed_login_attempts += 1
+    user.save
+  end
 
   def set_remember_me
     if params[:remember_me]

@@ -349,6 +349,23 @@
       </div>
     </div>
 
+    <h3>Login Info</h3>
+
+    <div class="control-group">
+      <%= f.label :lastlogin, "Last Login", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :lastlogin, :readonly => true  %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :failed_login_attempts, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :failed_login_attempts %>
+      </div>
+    </div>
+
+
     <h3>User Permissions</h3>
 
     <% if is_admin? %>

@@ -359,6 +359,13 @@
     </div>
 
     <div class="control-group">
+      <%= f.label :lastverified, "Last Verified", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :lastverified, :readonly => true  %>
+      </div>
+    </div>
+
+    <div class="control-group">
       <%= f.label :failed_login_attempts, :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :failed_login_attempts %>

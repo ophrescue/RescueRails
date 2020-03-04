@@ -3,7 +3,9 @@
   <% if params[:translator] %>
     <td> <%= user.known_languages %> </td>
   <% end %>
-  <td><%= user.duties %></td>
+  <% if !params[:foster] %>
+    <td><%= user.duties %></td>
+  <% end %>
   <td><span class="tel value"><%= user.phone %></span></td>
   <td><%= user.city %>, <%= user.region %></td>
   <% if params[:foster_mentor] == 'true' %>
@@ -11,6 +13,18 @@
       <% user.mentees.each do |m| %>
         <%= link_to m.name, m %>
         <br/>
+      <% end %>
+    </td>
+  <% end %>
+  <% if params[:foster] %>
+    <td>
+      <% user.current_foster_dogs.each do |d| %>
+        <%= link_to d.name, d %> ( <%= d.status %>)
+        <br />
+      <% end %>
+      <% user.current_foster_cats.each do |c| %>
+        <%= link_to c.name, c %> ( <%= c.status %>)
+        <br />
       <% end %>
     </td>
   <% end %>

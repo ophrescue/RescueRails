@@ -8,75 +8,82 @@
 
 <%= form_tag users_path, :method => 'get', :class => 'form-inline' do %>
   <%= text_field_tag :search, params[:search], placeholder: 'Search by Name or Email' %>
-  <%= submit_tag "Search", :name => nil %>
+  <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+  <%= link_to "Reset", users_path, class: "btn" %>
 <% end %>
 
 <%= form_tag users_path, :method => 'get',  :class => 'form-inline'  do %>
   <%= label_tag :location, 'Find active volunteers near' %>
   <%= text_field_tag :location, params[:location], :placeholder => 'City, State or Zip...' %>
-  <%= submit_tag "Locate", :name => nil %>
+  <%= submit_tag "Locate", :name => nil, class: "btn btn-primary" %>
+  <%= link_to "Reset", users_path, class: "btn" %>
+<% end %>
+
+
+<% if params[:location].present? %>
+  <h4>Results filtered to volunteers within 30 miles of <%= params[:location] %> </h4>
 <% end %>
 
 <ul class="nav nav-tabs">
   <li class="<%= 'active' if params[:admin] %>">
-    <%= link_to "Admins", users_path(:admin => true) %>
+    <%= link_to "Admins", users_path(admin: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:adoption_coordinator] %>">
-    <%= link_to "Adoptions", users_path(:adoption_coordinator => true) %>
+    <%= link_to "Adoptions", users_path(adoption_coordinator: :true, location: params[:location] ) %>
   </li>
   <li class="<%= 'active' if params[:event_planner] %>">
-    <%= link_to "Events", users_path(:event_planner => true) %>
+    <%= link_to "Events", users_path(event_planner: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:dog_adder] %>">
-    <%= link_to "Add Dogs", users_path(:dog_adder => true) %>
+    <%= link_to "Add Dogs", users_path(dog_adder: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:dog_editor] %>">
-    <%= link_to "Edit Dogs", users_path(:dog_editor => true) %>
+    <%= link_to "Edit Dogs", users_path(dog_editor: :true, location: params[:location]) %>
   </li>
   <li class="<%='active' if params[:graphic_designer] %>">
-    <%= link_to 'Graphic Designers', users_path(:graphic_designer => true) %>
+    <%= link_to 'Graphic Designers', users_path(graphic_designer: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:photographer] %>">
-    <%= link_to "Photographers", users_path(:photographer => true) %>
+    <%= link_to "Photographers", users_path(photographer: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:newsletter] %>">
-    <%= link_to "Newsletter", users_path(:newsletter => true) %>
+    <%= link_to "Newsletter", users_path(newsletter: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:foster] %>">
-    <%= link_to "Fosters", users_path(:foster => true) %>
+    <%= link_to "Fosters", users_path(foster: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:transporter] %>">
-    <%= link_to "Transporter", users_path(:transporter => true) %>
+    <%= link_to "Transporter", users_path(transporter: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:training_team] %>">
-    <%= link_to "Training", users_path(:training_team => true) %>
+    <%= link_to "Training", users_path(training_team: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:public_relations] %>">
-    <%= link_to "Public Relations", users_path(:public_relations => true) %>
+    <%= link_to "Public Relations", users_path(public_relations: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:social_media] %>">
-    <%= link_to "Social Media", users_path(social_media: true) %>
+    <%= link_to "Social Media", users_path(social_media: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:fundraising] %>">
-    <%= link_to "Fundraising", users_path(:fundraising => true) %>
+    <%= link_to "Fundraising", users_path(fundraising: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:foster_mentor] %>">
-    <%= link_to "Foster Mentor", users_path(:foster_mentor => true) %>
+    <%= link_to "Foster Mentor", users_path(foster_mentor: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:translator] %>">
-    <%= link_to "Translators", users_path(translator: true) %>
+    <%= link_to "Translators", users_path(translator: :true, location: params[:location]) %>
   </li>
   <li class="<%='active' if  params[:medical_behavior] %>">
-    <%= link_to "Medical/Behavior Managers", users_path(medical_behavior: true) %>
+    <%= link_to "Medical/Behavior Managers", users_path(medical_behavior: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:boarding_buddy] %>">
-    <%= link_to "Boarding Buddies", users_path(boarding_buddy: true) %>
+    <%= link_to "Boarding Buddies", users_path(boarding_buddy: :true, location: params[:location]) %>
   </li>
   <li class="<%='active' if params[:active_volunteer] %>">
-    <%= link_to "Active Volunteers", users_path(active_volunteer: true) %>
+    <%= link_to "Active Volunteers", users_path(active_volunteer: :true, location: params[:location]) %>
   </li>
   <li class="<%='active' if params[:inactive_volunteer] %>">
-    <%= link_to "Inactive Volunteers", users_path(inactive_volunteer: false) %>
+    <%= link_to "Inactive Volunteers", users_path(active_volunteer: :false, location: params[:location]) %>
   </li>
 </ul>
 

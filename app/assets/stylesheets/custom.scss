@@ -314,7 +314,7 @@ div .fb-like {
 
 // Bootstrap 4 Home Page - Start
 
-.dog-hero h1 {
+.dog-hero h2 {
   color: #FFFFFF;
   text-shadow:#333333 0px 0px 10px;
 
@@ -325,8 +325,8 @@ div .fb-like {
 }
 
 .dog-hero-content {
-  padding-top: 180px;
-  padding-left: 20px;
+  padding-top: ($spacer * 7.5) !important;
+  padding-left: ($spacer * .5) !important;
 }
 .dog-hero {
   background-image: image-url('home/rescue-jumbo.jpg');

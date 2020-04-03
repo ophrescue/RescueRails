@@ -10,6 +10,7 @@ FactoryBot.define do
       nn.gsub(/(\W|\s)/,'').titlecase
     }
     status {  Dog::STATUSES.sample }
+    hidden { false }
     sequence(:microchip) { |n| "MC-#{n}" }
     age { Dog::AGES.sample }
     size { Dog::SIZES.sample }

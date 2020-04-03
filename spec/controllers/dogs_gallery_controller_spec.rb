@@ -56,7 +56,7 @@ describe Dogs::GalleryController, type: :controller do
     let!(:coming_soon_dog) { create(:dog, status: 'coming soon', tracking_id: 100) }
     let!(:coming_soon_dog2) { create(:dog, status: 'coming soon', tracking_id: 109) }
     let!(:adoptable_dog2) { create(:dog, status: 'adoptable', tracking_id: 110) }
-
+    let!(:hidden_adoptable_dog) { create(:dog, name: 'sneak', status: 'adoptable', hidden: true, tracking_id: 111) }
     let!(:adopted_dog) { create(:dog, status: 'adopted', tracking_id: 1) }
     let!(:on_hold_dog) { create(:dog, status: 'on hold', tracking_id: 2) }
     let!(:not_available_dog) { create(:dog, status: 'not available', tracking_id: 3) }
@@ -70,7 +70,7 @@ describe Dogs::GalleryController, type: :controller do
 
     it 'with autocomplete parameter set all dogs are returned' do
       get :index, params: {autocomplete: true}
-      expect(assigns(:dogs)).to match_array([adoptable_dog, adoptable_dog2, adoption_pending_dog, adoption_pending_dog2, coming_soon_dog, coming_soon_dog2, adopted_dog, on_hold_dog, not_available_dog])
+      expect(assigns(:dogs)).to match_array([adoptable_dog, adoptable_dog2, hidden_adoptable_dog, adoption_pending_dog, adoption_pending_dog2, coming_soon_dog, coming_soon_dog2, adopted_dog, on_hold_dog, not_available_dog])
     end
   end
 

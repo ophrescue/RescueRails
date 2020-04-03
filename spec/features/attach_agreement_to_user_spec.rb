@@ -21,12 +21,12 @@ feature 'Attach an agreement to a user', js: true do
     click_link('Update/Verify Profile')
     expect(page).to have_content('Edit Staff Account')
 
-    page.attach_file('user_agreement_attributes_attachment', Rails.root.join("public", "docs", "spay-neuter-agreement.pdf"))
+    page.attach_file('user_agreement_attributes_attachment', Rails.root.join("public", "docs", "Puppy-rescue-letter.pdf"))
     click_button('Update / Verify')
 
     expect(page).to have_no_css('#confidentiality-agreement-dl')
     within('#foster-agreement-dl') do
-      expect(page).to have_content 'spay-neuter-agreement'
+      expect(page).to have_content 'Puppy-rescue-letter'
     end
   end
 

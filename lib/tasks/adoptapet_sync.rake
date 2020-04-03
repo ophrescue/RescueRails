@@ -28,7 +28,8 @@ namespace :adoptapet_sync do
 
       dogs = Dog.joins(:foster).where(
         { status: Dog::PUBLIC_STATUSES,
-          users: {region: state}
+          users: {region: state},
+          hidden: false
          })
 
       desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs/"

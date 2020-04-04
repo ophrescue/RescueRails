@@ -1,5 +1,5 @@
 <table class="table table-striped table-bordered table-condensed">
-  <th>Dog Selections</th>
+  <th>Pet Selections</th>
   <td>
     <%= form_for @adopter, format: :json, html: { class: 'form-horizontal' } do |f| %>
       <%= f.text_area :dog_name, rows: 5, cols: 40 %>
@@ -7,7 +7,7 @@
     <% end %>
   </td>
   <tr>
-    <th>Dog Requirements</th>
+    <th>Pet Requirements</th>
     <td><%= @adopter.dog_reqs %></td>
   </tr>
 </table>

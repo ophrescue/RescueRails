@@ -49,7 +49,7 @@ feature 'Apply for Adoption' do
     fill_in('adopter_adoption_app_attributes_rent_costs', with: 'Rent Goes Up $50 a month')
 
     click_button('Next')
-    expect(page).to have_content('Your New Dog')
+    expect(page).to have_content('Your New Pet')
     fill_in('adopter_dog_name', with: 'Rex and Precious')
     fill_in('adopter_dog_reqs', with: 'Dog Under 50lbs')
     fill_in('adopter_why_adopt', with: 'Want to love them and hold them')
@@ -210,7 +210,7 @@ feature 'Apply for Adoption' do
     check('adopter_adoption_app_attributes_verify_home_auth')
 
     click_button('Next')
-    expect(page).to have_content('Your New Dog')
+    expect(page).to have_content('Your New Pet')
     fill_in('adopter_dog_name', with: 'Rex and Precious')
     fill_in('adopter_dog_reqs', with: 'Dog Under 50lbs')
     fill_in('adopter_why_adopt', with: 'Want to love them and hold them')
@@ -368,7 +368,7 @@ feature 'Apply for Adoption' do
     check('adopter_adoption_app_attributes_verify_home_auth')
 
     click_button('Next')
-    expect(page).to have_content('Your New Dog')
+    expect(page).to have_content('Your New Pet')
     fill_in('adopter_dog_name', with: 'Rex and Precious')
     fill_in('adopter_dog_reqs', with: 'Dog Under 50lbs')
     fill_in('adopter_why_adopt', with: 'Want to love them and hold them')

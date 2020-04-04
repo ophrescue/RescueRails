@@ -1,14 +1,14 @@
 <div id="own" class="step">
-<h3>Your New Dog</h3>
+<h3>Your New Pet</h3>
   <div class="control-group">
-    <%= f.label :dog_name, "(Optional) What dogs are you interested in?", :class => "control-label" %>
+    <%= f.label :dog_name, "(Optional) What pets are you interested in?", :class => "control-label" %>
     <div class="controls">
       <%= f.text_field :dog_name %>
     </div>
   </div>
 
   <div class="control-group">
-    <%= f.label :dog_reqs, "Describe the type of dog you want to adopt.  Please include the two traits that are most important to you.", :class => "control-label" %>
+    <%= f.label :dog_reqs, "Describe the type of pet you want to adopt.  Please include the two traits that are most important to you.", :class => "control-label" %>
     <div class="controls">
       <%= f.text_area :dog_reqs, :class => "required input-xlarge", :rows => "3" %>
       <span class="help-inline">Age, Weight, Activity Level, etc.</span>
@@ -16,7 +16,7 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :why_adopt, "Why do you want to make this dog a part of your family and how will you incorporate the dog into your existing family?", :class => "control-label" %>
+    <%= f.label :why_adopt, "Why do you want to make this pet a part of your family and how will you incorporate the pet into your existing family?", :class => "control-label" %>
     <div class="controls">
       <%= f.text_area :why_adopt, :class => "required input-xlarge", :rows => "5" %>
     </div>

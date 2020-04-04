@@ -21,7 +21,7 @@ class BitePreventionMailer < ActionMailer::Base
     @adopter = Adopter.find(adopter_id)
     mail(to: "#{@adopter.email}",
          reply_to: 'adopt@ophrescue.org',
-         subject: "Dog Bite Prevention - Please Respond",
+         subject: "Dog Bite Prevention - Dog Adopters, Please Respond",
          content_type: 'text/html')
   end
 end

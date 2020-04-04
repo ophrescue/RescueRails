@@ -1,12 +1,12 @@
 <div class="control-group">
-  <%= af.label :dog_exercise, "How will your dog get exercise?", :class => "control-label" %>
+  <%= af.label :dog_exercise, "How will your pet get exercise?", :class => "control-label" %>
   <div class="controls">
     <%= af.text_area :dog_exercise, :class => "required input-xlarge", :rows => "3"%>
     <span class="help-inline">Describe yard, nearby parks and family activities.</span>
   </div>
 </div>
 <div class="control-group">
-  <%= af.label :dog_stay_when_away, "Where will your dog stay when you're away from home?", :class => "control-label" %>
+  <%= af.label :dog_stay_when_away, "Where will your pet stay when you're away from home?", :class => "control-label" %>
   <div class="controls">
     <label>
       <%= af.radio_button :dog_stay_when_away, 'In a crate', :class => "required" %>
@@ -27,13 +27,13 @@
   </div>
 </div>
 <div class="control-group">
-  <%= af.label :max_hrs_alone, "What will be the maximum length of time your dog will be left home alone?", :class => "control-label" %>
+  <%= af.label :max_hrs_alone, "What will be the maximum length of time your pet will be left home alone?", :class => "control-label" %>
   <div class="controls">
     <%= af.select(:max_hrs_alone, (0..14).to_a, :prompt => "-select-", :class => "small") %><span> hours</span>
   </div>
 </div>
 <div class="control-group">
-  <%= af.label :dog_vacation, "What are your plans for taking care of the dog while you are on vacation?", :class => "control-label" %>
+  <%= af.label :dog_vacation, "What are your plans for taking care of the pet while you are on vacation?", :class => "control-label" %>
   <div class="controls">
     <%= af.text_area :dog_vacation, :class => "required input-xlarge", :rows => "3" %>
   </div>

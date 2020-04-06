@@ -380,7 +380,7 @@ GEM
     sshkit-interactive (0.3.0)
       sshkit (~> 1.12)
     stackprof (0.2.15)
-    strip_attributes (1.9.2)
+    strip_attributes (1.11.0)
       activemodel (>= 3.0, < 7.0)
     stripe (5.17.0)
     stripe-ruby-mock (2.5.8)
@@ -403,7 +403,7 @@ GEM
       sync
     to_xls (1.5.3)
       spreadsheet
-    tzinfo (1.2.6)
+    tzinfo (1.2.7)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)

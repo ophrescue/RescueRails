@@ -63,9 +63,7 @@ class Attachment < ApplicationRecord
 
   validates_attachment_presence :attachment
   validates_attachment_size :attachment, less_than: ATTACHMENT_MAX_SIZE.megabytes
-  validates_attachment_content_type :attachment,
-   content_type: MIME_TYPES,
-   message: 'Images, Docs, PDF, Excel and Plain Text Only.'
+  do_not_validate_attachment_file_type :attachment
 
   VALIDATION_ERROR_MESSAGES = {attachment: ["attachment_constraints", {max_size: ATTACHMENT_MAX_SIZE}] }
 

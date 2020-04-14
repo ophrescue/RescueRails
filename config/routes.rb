@@ -32,11 +32,13 @@ RescueRails::Application.routes.draw do
   resources :dogs_manager, controller: 'dogs/manager' do
     resources :comments
     resources :adoptions
+    resources :treatment_records
   end
 
   resources :cats_manager, controller: 'cats/manager' do
     resources :comments
     resources :cat_adoptions
+    resources :treatment_records
   end
 
   resources :bulletins, controller: :posts, type: 'Bulletin'
@@ -58,7 +60,8 @@ RescueRails::Application.routes.draw do
             :folders,
             :passwords,
             :password_resets,
-            :shelters
+            :shelters,
+            :treatments
 
   resources :attachments, only: %i[show destroy]
   resources :folder_attachments, only: %i[index update]

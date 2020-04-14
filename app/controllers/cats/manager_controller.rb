@@ -107,7 +107,7 @@ class Cats::ManagerController < Cats::CatsBaseController
               :petfinder_ad_url, :adoptapet_ad_url, :craigslist_ad_url, :youtube_video_url, :first_shots,
               :second_shots, :third_shots, :rabies, :felv_fiv_test, :flea_tick_preventative, :dewormer,
               :coccidia_treatment, :microchip, :original_name, :fee, :coordinator_id, :sponsored_by, :shelter_id,
-              :medical_summary, :behavior_summary, :medical_review_complete, :dewormer, :toltrazuril,
+              :medical_summary, :wait_list, :behavior_summary, :medical_review_complete, :dewormer, :toltrazuril,
               attachments_attributes: [ :attachment, :description, :updated_by_user_id, :_destroy, :id ],
               photos_attributes: [ :photo, :position, :is_private, :_destroy, :id ])
   end

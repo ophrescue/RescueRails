@@ -29,5 +29,13 @@ feature 'manage medical and behavior summaries', js: true do
       click_button('Submit')
       expect(page).to have_content('The dog has ADHD.')
     end
+
+    scenario 'Edit Wait List' do
+      click_link(test_dog.name)
+      click_link('Edit')
+      fill_in('dog_wait_list', with: 'I am next in line')
+      click_button('Submit')
+      expect(page).to have_content('I am next in line')
+    end
   end
 end

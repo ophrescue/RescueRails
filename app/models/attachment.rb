@@ -18,14 +18,14 @@
 #
 #  id                      :integer          not null, primary key
 #  attachable_id           :integer
-#  attachable_type         :string(255)
-#  attachment_file_name    :string(255)
-#  attachment_content_type :string(255)
+#  attachable_type         :string
+#  attachment_file_name    :string
+#  attachment_content_type :string
 #  attachment_file_size    :integer
 #  attachment_updated_at   :datetime
 #  updated_by_user_id      :integer
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
+#  created_at              :datetime
+#  updated_at              :datetime
 #  description             :text
 #  agreement_type          :string
 #

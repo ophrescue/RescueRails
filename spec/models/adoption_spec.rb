@@ -5,7 +5,7 @@
 #  id            :integer          not null, primary key
 #  adopter_id    :integer
 #  dog_id        :integer
-#  relation_type :string(255)
+#  relation_type :string
 #  created_at    :datetime
 #  updated_at    :datetime
 #

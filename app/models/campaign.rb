@@ -11,6 +11,36 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
+#
+# == Schema Information
+#
+# Table name: campaigns
+#
+#  id                         :bigint           not null, primary key
+#  title                      :string
+#  goal                       :integer
+#  summary                    :text
+#  created_by_user_id         :integer
+#  description                :text
+#  primary_photo_file_name    :string
+#  primary_photo_content_type :string
+#  primary_photo_file_size    :integer
+#  primary_photo_updated_at   :datetime
+#  left_photo_file_name       :string
+#  left_photo_content_type    :string
+#  left_photo_file_size       :integer
+#  left_photo_updated_at      :datetime
+#  middle_photo_file_name     :string
+#  middle_photo_content_type  :string
+#  middle_photo_file_size     :integer
+#  middle_photo_updated_at    :datetime
+#  right_photo_file_name      :string
+#  right_photo_content_type   :string
+#  right_photo_file_size      :integer
+#  right_photo_updated_at     :datetime
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  active                     :boolean          default(TRUE)
 
 class Campaign < ApplicationRecord
   include ClientValidated

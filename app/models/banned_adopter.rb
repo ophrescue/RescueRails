@@ -23,8 +23,8 @@
 #  city       :string(100)
 #  state      :string(2)
 #  comment    :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 class BannedAdopter < ApplicationRecord

@@ -3,27 +3,28 @@
 # Table name: adopters
 #
 #  id                  :integer          not null, primary key
-#  name                :string(255)
-#  email               :string(255)
-#  phone               :string(255)
-#  address1            :string(255)
-#  address2            :string(255)
-#  city                :string(255)
-#  state               :string(255)
-#  zip                 :string(255)
-#  status              :string(255)
-#  when_to_call        :string(255)
+#  name                :string
+#  email               :string
+#  phone               :string
+#  address1            :string
+#  address2            :string
+#  city                :string
+#  state               :string
+#  zip                 :string
+#  status              :string
+#  when_to_call        :string
 #  created_at          :datetime
 #  updated_at          :datetime
 #  dog_reqs            :text
 #  why_adopt           :text
-#  dog_name            :string(255)
-#  other_phone         :string(255)
+#  dog_name            :string
+#  other_phone         :string
 #  assigned_to_user_id :integer
-#  flag                :string(255)
+#  flag                :string
 #  is_subscribed       :boolean          default(FALSE)
 #  completed_date      :date
 #  county              :string
+#  training_email_sent :boolean          default(FALSE), not null
 #
 
 require 'rails_helper'

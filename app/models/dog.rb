@@ -16,13 +16,13 @@
 # Table name: dogs
 #
 #  id                      :integer          not null, primary key
-#  name                    :string(255)
+#  name                    :string
 #  created_at              :datetime
 #  updated_at              :datetime
 #  tracking_id             :integer
 #  primary_breed_id        :integer
 #  secondary_breed_id      :integer
-#  status                  :string(255)
+#  status                  :string
 #  age                     :string(75)
 #  size                    :string(75)
 #  is_altered              :boolean
@@ -42,20 +42,20 @@
 #  needs_photos            :boolean          default(FALSE)
 #  has_behavior_problem    :boolean          default(FALSE)
 #  needs_foster            :boolean          default(FALSE)
-#  petfinder_ad_url        :string(255)
-#  craigslist_ad_url       :string(255)
-#  youtube_video_url       :string(255)
-#  first_shots             :string(255)
-#  second_shots            :string(255)
-#  third_shots             :string(255)
-#  rabies                  :string(255)
-#  vac_4dx                 :string(255)
-#  bordetella              :string(255)
-#  microchip               :string(255)
-#  original_name           :string(255)
+#  petfinder_ad_url        :string
+#  craigslist_ad_url       :string
+#  youtube_video_url       :string
+#  first_shots             :string
+#  second_shots            :string
+#  third_shots             :string
+#  rabies                  :string
+#  vac_4dx                 :string
+#  bordetella              :string
+#  microchip               :string
+#  original_name           :string
 #  fee                     :integer
 #  coordinator_id          :integer
-#  sponsored_by            :string(255)
+#  sponsored_by            :string
 #  shelter_id              :integer
 #  medical_summary         :text
 #  heartworm_preventative  :string
@@ -64,7 +64,7 @@
 #  behavior_summary        :text
 #  dewormer                :string
 #  toltrazuril             :string
-#  hidden                  :boolean          default(FALSE)
+#  hidden                  :boolean          default(FALSE), not null
 #
 
 class Dog < ApplicationRecord

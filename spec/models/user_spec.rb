@@ -3,30 +3,30 @@
 # Table name: users
 #
 #  id                           :integer          not null, primary key
-#  name                         :string(255)
-#  email                        :string(255)
+#  name                         :string
+#  email                        :string
 #  created_at                   :datetime
 #  updated_at                   :datetime
-#  encrypted_password           :string(255)
-#  salt                         :string(255)
+#  encrypted_password           :string
+#  salt                         :string
 #  admin                        :boolean          default(FALSE)
-#  password_reset_token         :string(255)
+#  password_reset_token         :string
 #  password_reset_sent_at       :datetime
 #  is_foster                    :boolean          default(FALSE)
-#  phone                        :string(255)
-#  address1                     :string(255)
-#  address2                     :string(255)
-#  city                         :string(255)
+#  phone                        :string
+#  address1                     :string
+#  address2                     :string
+#  city                         :string
 #  region                       :string(2)
-#  postal_code                  :string(255)
-#  duties                       :string(255)
+#  postal_code                  :string
+#  duties                       :string
 #  edit_dogs                    :boolean          default(FALSE)
 #  share_info                   :text
 #  edit_my_adopters             :boolean          default(FALSE)
 #  edit_all_adopters            :boolean          default(FALSE)
 #  locked                       :boolean          default(FALSE)
 #  edit_events                  :boolean          default(FALSE)
-#  other_phone                  :string(255)
+#  other_phone                  :string
 #  lastlogin                    :datetime
 #  lastverified                 :datetime
 #  available_to_foster          :boolean          default(FALSE)
@@ -61,12 +61,18 @@
 #  translator                   :boolean          default(FALSE), not null
 #  known_languages              :string(255)
 #  code_of_conduct_agreement_id :integer
-#  boarding_buddies             :boolean          default(FALSE), not null
 #  medical_behavior_permission  :boolean          default(FALSE)
+#  boarding_buddies             :boolean          default(FALSE), not null
 #  social_media_manager         :boolean          default(FALSE), not null
 #  graphic_design               :boolean          default(FALSE), not null
 #  country                      :string(3)        not null
 #  active                       :boolean          default(FALSE), not null
+#  confirmation_token           :string(128)
+#  remember_token               :string(128)
+#  avatar_file_name             :string
+#  avatar_content_type          :string
+#  avatar_file_size             :integer
+#  avatar_updated_at            :datetime
 #
 
 require 'rails_helper'

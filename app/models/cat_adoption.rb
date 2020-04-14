@@ -16,12 +16,12 @@
 #
 # Table name: cat_adoptions
 #
-#  id            :integer          not null, primary key
+#  id            :bigint           not null, primary key
 #  adopter_id    :integer
 #  cat_id        :integer
-#  relation_type :string(255)
-#  created_at    :datetime
-#  updated_at    :datetime
+#  relation_type :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 
 class CatAdoption < ApplicationRecord

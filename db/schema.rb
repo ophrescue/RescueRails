@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_02_233323) do
+ActiveRecord::Schema.define(version: 2020_04_14_210602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -320,6 +320,7 @@ ActiveRecord::Schema.define(version: 2020_04_02_233323) do
     t.string "dewormer"
     t.string "toltrazuril"
     t.boolean "hidden", default: false, null: false
+    t.text "wait_list"
     t.index ["age"], name: "index_dogs_on_age"
     t.index ["coordinator_id"], name: "index_dogs_on_coordinator_id"
     t.index ["foster_id"], name: "index_dogs_on_foster_id"

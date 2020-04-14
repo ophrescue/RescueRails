@@ -31,6 +31,7 @@ FactoryBot.define do
     no_cats                 { [true, false].sample }
     no_kids                 { [true, false].sample }
     description { Faker::Lorem.paragraphs(number: 3, supplemental: true).join("\n\n") }
+    wait_list { Faker::Lorem.paragraph }
     medical_summary { Faker::Lorem.paragraph }
     behavior_summary { Faker::Lorem.paragraph }
     craigslist_ad_url { [Faker::Internet.url, nil].sample }

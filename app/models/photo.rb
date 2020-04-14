@@ -18,14 +18,16 @@
 #
 #  id                 :integer          not null, primary key
 #  dog_id             :integer
-#  photo_file_name    :string(255)
-#  photo_content_type :string(255)
+#  photo_file_name    :string
+#  photo_content_type :string
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
 #  created_at         :datetime
 #  updated_at         :datetime
 #  position           :integer
 #  is_private         :boolean          default(FALSE)
+#  animal_type        :string
+#  animal_id          :bigint
 #
 
 class Photo < ApplicationRecord

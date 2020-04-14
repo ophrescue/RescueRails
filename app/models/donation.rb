@@ -33,6 +33,7 @@
 #  updated_at         :datetime         not null
 #  comment            :text
 #  campaign_id        :integer
+#  more_contact_info  :boolean          default(FALSE)
 #  phone              :string
 #  address1           :string
 #  address2           :string

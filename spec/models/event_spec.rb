@@ -24,7 +24,7 @@
 #  photographer_name  :string
 #  photographer_url   :string
 #  facebook_url       :string
-#  featured           :boolean
+#  featured           :boolean          default(FALSE), not null
 #
 
 require 'rails_helper'

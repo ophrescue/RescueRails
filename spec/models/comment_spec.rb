@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  content          :text
 #  commentable_id   :integer
-#  commentable_type :string(255)
+#  commentable_type :string
 #  user_id          :integer
 #  created_at       :datetime
 #  updated_at       :datetime

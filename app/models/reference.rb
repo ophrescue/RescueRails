@@ -18,13 +18,13 @@
 #
 #  id           :integer          not null, primary key
 #  adopter_id   :integer
-#  name         :string(255)
-#  email        :string(255)
-#  phone        :string(255)
-#  relationship :string(255)
+#  name         :string
+#  email        :string
+#  phone        :string
+#  relationship :string
 #  created_at   :datetime
 #  updated_at   :datetime
-#  whentocall   :string(255)
+#  whentocall   :string
 #
 
 class Reference < ApplicationRecord

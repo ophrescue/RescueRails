@@ -5,7 +5,7 @@
 #  id                        :integer          not null, primary key
 #  adopter_id                :integer
 #  spouse_name               :string(50)
-#  other_household_names     :string(255)
+#  other_household_names     :string
 #  ready_to_adopt_dt         :date
 #  house_type                :string(40)
 #  dog_exercise              :text
@@ -23,8 +23,8 @@
 #  surrendered_pets          :text
 #  created_at                :datetime
 #  updated_at                :datetime
-#  how_did_you_hear          :string(255)
-#  pets_branch               :string(255)
+#  how_did_you_hear          :string
+#  pets_branch               :string
 #  current_pets_fixed        :boolean
 #  rent_costs                :text
 #  vet_info                  :text

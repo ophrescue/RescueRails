@@ -16,12 +16,11 @@
 #
 # Table name: folders
 #
-#  id          :integer          not null, primary key
-#  name        :string(255)
-#  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  locked      :boolean          default(FALSE)
+#  id         :integer          not null, primary key
+#  name       :text
+#  created_at :datetime
+#  updated_at :datetime
+#  locked     :boolean          default(FALSE)
 #
 
 class Folder < ApplicationRecord

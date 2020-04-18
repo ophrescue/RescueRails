@@ -14,6 +14,8 @@
 
 class TreatmentsController < ApplicationController
   before_action :admin_user
+  before_action :select_bootstrap41
+  before_action :show_user_navbar
 
   def index
     @treatments = Treatment.order(:id)
@@ -65,4 +67,9 @@ class TreatmentsController < ApplicationController
                                       :has_date,
                                       :recommendation)
   end
+
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
+  end
+
 end

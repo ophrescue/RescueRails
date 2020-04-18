@@ -1,0 +1,15 @@
+<div class="container">
+	<h1><%= @title %></h1>
+	<div class="row">
+		<div class="col">
+			<p><%= link_to "Add Treatment", new_treatment_path, :class => "btn btn-primary" %></p>
+		<% if @treatments.count > 0 %>
+			<ul>
+				<%= render @treatments %>
+			</ul>
+		<% else %>
+			<h5>No Treatments Entered</h5>
+		<% end %>
+		</div>
+	</div>
+</div>

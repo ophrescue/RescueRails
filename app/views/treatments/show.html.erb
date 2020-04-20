@@ -1,14 +1,24 @@
 <div class="container">
 
-<h1><%= @treatment.name %></h1>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="py-2">Treatment Configuration</h1>
 
 
-<p><%= @treatment.available_for %></p>
-<p><%= @treatment.has_result %></p>
-<p><%= @treatment.has_comment %></p>
-
-<p><%= @treatment.has_date %></p>
-
-<p><%= @treatment.recommendation %></p>
-
+            <h3><%= @treatment.name %></h3>
+            <div class="py-3 pl-3">
+                <%= link_to 'Edit Treatment', edit_treatment_path(@treatment), class: 'btn btn-primary' %>
+            </div>
+            <ul>
+                <li>This treatment is for <%= @treatment.available_for.pluralize.downcase %></li>
+                <li><%= "has (+/-) test result" if @treatment.has_result %></li>
+                <li><%= "A comment can be entered" if @treatment.has_comment %></li>
+                <li><%= "A date can be entered" if @treatment.has_date %></li>
+            </ul>
+            <div class="pl-3">
+                <p>Recommendations for staff regarding this treatment:</p>
+                <%= simple_format(@treatment.recommendation) %>
+            </div>
+        </div>
+    </div>
 </div>

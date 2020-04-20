@@ -1,3 +1,3 @@
 <li>
-	<%= link_to treatment.name, treatment unless !treatment.name %> -
+	<%= link_to treatment.name, treatment unless !treatment.name %> - treatment for <%= treatment.available_for.pluralize.downcase %>
 </li>

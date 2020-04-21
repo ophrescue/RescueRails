@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Add <%= @treatment.name %> for <%= @treatable.name %> </h1>
+
+                <%= form_for [@treatable, @treatment_record] do |f| %>
+                    <%= render 'shared/error_messages', :object => f.object %>
+                        <% if @treatment.has_date %>
+                            <div class="form-group">
+                                <%= f.label :administered_date, 'Date Administered' %>
+                                <%= f.text_field :administered_date, class: "form-control" %>
+                            </div>
+                        <% end %>
+
+                        <% if @treatment.has_result %>
+                            <div class="form-group">
+                                <%= f.label :results, 'Result' %>
+                                <%= f.text_field :results, class: "form-control" %>
+                            </div>
+                        <% end %>
+
+                        <% if @treatment.has_comment %>
+                            <div class="form-group">
+                                <%= f.label :comments, 'Comment' %>
+                                <%= f.text_area :comments, class: "form-control", rows: "3" %>
+                            </div>
+                        <% end %>
+
+                        <%= f.hidden_field :treatment_id, value: @treatment.id %>
+
+                        <div class="actions well">
+                            <%= f.submit "Submit", :class => "btn btn-primary" %>
+                        </div>
+                <% end %>
+        </div>
+    </div>
+</div>

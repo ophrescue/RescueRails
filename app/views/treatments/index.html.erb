@@ -1,17 +1,17 @@
 <div class="container">
-	<h1>Treatment Configuration</h1>
+    <h1>Treatment Configuration</h1>
 
-	<p>Shots, tests and other treatments listed here can be added to the medical records of a dog or cat. </p>
-	<div class="row">
-		<div class="col">
-			<p><%= link_to "Add Treatment", new_treatment_path, :class => "btn btn-primary" %></p>
-		<% if @treatments.count > 0 %>
-			<ul>
-				<%= render @treatments %>
-			</ul>
-		<% else %>
-			<h5>No Treatments Entered</h5>
-		<% end %>
-		</div>
-	</div>
+    <p>Shots, tests and other treatments listed here can be added to the medical records of a dog or cat. </p>
+    <div class="row">
+        <div class="col">
+            <p><%= link_to "Add Treatment", new_treatment_path, :class => "btn btn-primary" %></p>
+        <% if @treatments.count > 0 %>
+            <ul>
+                <%= render @treatments %>
+            </ul>
+        <% else %>
+            <h5>No Treatments Entered</h5>
+        <% end %>
+        </div>
+    </div>
 </div>

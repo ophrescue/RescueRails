@@ -1,0 +1,3 @@
+<li>
+    <%= available_treatment.name  %> - <%= link_to "Add", new_polymorphic_path([@treatable, TreatmentRecord], treatment_id: available_treatment.id)  %>
+</li>

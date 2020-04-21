@@ -34,8 +34,6 @@ class Treatment < ApplicationRecord
                    length: {maximum: 100 },
                    uniqueness: { case_sensitive: false }
 
-  validates_presence_of :has_result, :has_comment
-
   AVAILABLE_FOR = ['Dog', 'Cat'].freeze
   validates_inclusion_of :available_for, in: AVAILABLE_FOR, allow_blank: false
 end

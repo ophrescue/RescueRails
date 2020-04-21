@@ -15,5 +15,4 @@
 class TreatmentRecord < ApplicationRecord
   belongs_to :treatment
   belongs_to :treatable, polymorphic: true
-
 end

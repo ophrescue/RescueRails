@@ -205,6 +205,18 @@ en:
       title: 'Source Shelters'
     new:
       title: 'Add a Source Shelter'
+  treatments:
+    new:
+      title: Add Treatment Configuration
+    index:
+      title: Treatment Configuration
+    edit:
+      title: Edit Treatment Configuration
+  treatment_records:
+    new:
+      title: Add Treatment Record
+    index:
+      title: Treatment Records
   users:
     edit:
       title: 'Edit Profile'

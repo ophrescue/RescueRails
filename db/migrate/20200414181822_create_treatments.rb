@@ -4,8 +4,6 @@ class CreateTreatments < ActiveRecord::Migration[5.2]
       t.string :name, null: false
       t.string :available_for, null: false
       t.boolean :has_result, null: false, default: false
-      t.boolean :has_comment, null: false, default: false
-      t.boolean :has_date, null: false, default: false
       t.text :recommendation
       t.timestamps
     end

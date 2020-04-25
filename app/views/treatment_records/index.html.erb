@@ -6,12 +6,10 @@
             <%= render partial: "available_treatment", collection: @available_treatments,
                        as: :available_treatment  || "No treatments available"  %>
             </ul>
-
             <h1>Treatment Records for <%= @treatable.name %> </h1>
             <ul>
                 <%= render @treatment_records  || "No Treatment Records"%>
             </ul>
-
         </div>
     </div>
 </div>

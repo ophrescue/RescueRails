@@ -36,7 +36,7 @@ class TreatmentRecordsController < ApplicationController
 
   def create
     @treatment_record = @treatable.treatment_records.build(treatment_record_params)
-    puts @treatment_record
+    @treatment_record.user_id = current_user.id
     if @treatment_record.save
       flash[:success] = "New Treatment Record Added"
       redirect_to polymorphic_path([@treatable, TreatmentRecord])
@@ -62,8 +62,9 @@ class TreatmentRecordsController < ApplicationController
 
   def treatment_record_params
     params.require(:treatment_record).permit(:administered_date,
-                                             :results,
-                                             :comments,
+                                             :result,
+                                             :comment,
+                                             :due_date,
                                              :treatment_id)
   end
 

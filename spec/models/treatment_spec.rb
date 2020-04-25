@@ -6,8 +6,6 @@
 #  name           :string           not null
 #  available_for  :string           not null
 #  has_result     :boolean          default(FALSE), not null
-#  has_comment    :boolean          default(FALSE), not null
-#  has_date       :boolean          default(FALSE), not null
 #  recommendation :text
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

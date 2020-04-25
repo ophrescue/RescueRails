@@ -65,6 +65,7 @@
 #  dewormer                :string
 #  toltrazuril             :string
 #  hidden                  :boolean          default(FALSE), not null
+#  wait_list               :text
 #
 
 class Dog < ApplicationRecord

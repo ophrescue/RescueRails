@@ -465,22 +465,23 @@ ActiveRecord::Schema.define(version: 2020_04_14_210602) do
 
   create_table "treatment_records", force: :cascade do |t|
     t.integer "treatment_id"
+    t.bigint "user_id"
     t.integer "treatable_id"
     t.string "treatable_type"
     t.date "administered_date"
-    t.string "results"
-    t.text "comments"
+    t.date "due_date"
+    t.string "result"
+    t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["treatment_id"], name: "index_treatment_records_on_treatment_id"
+    t.index ["user_id"], name: "index_treatment_records_on_user_id"
   end
 
   create_table "treatments", force: :cascade do |t|
     t.string "name", null: false
     t.string "available_for", null: false
     t.boolean "has_result", default: false, null: false
-    t.boolean "has_comment", default: false, null: false
-    t.boolean "has_date", default: false, null: false
     t.text "recommendation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -566,4 +567,5 @@ ActiveRecord::Schema.define(version: 2020_04_14_210602) do
   end
 
   add_foreign_key "treatment_records", "treatments"
+  add_foreign_key "treatment_records", "users"
 end

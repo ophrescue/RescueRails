@@ -63,13 +63,10 @@ class TreatmentsController < ApplicationController
     params.require(:treatment).permit(:name,
                                       :available_for,
                                       :has_result,
-                                      :has_comment,
-                                      :has_date,
                                       :recommendation)
   end
 
   def admin_user
     redirect_to(root_path) unless current_user.admin?
   end
-
 end

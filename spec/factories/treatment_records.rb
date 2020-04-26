@@ -18,7 +18,7 @@ FactoryBot.define do
   factory :treatment_record do
     administered_date { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
     due_date { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
-    results { Faker::Lorem.sentence }
-    comments { Faker::Lorem.paragraph }
+    result { Faker::Lorem.sentence }
+    comment { Faker::Lorem.paragraph }
   end
 end

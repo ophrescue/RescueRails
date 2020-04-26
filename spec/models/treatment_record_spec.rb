@@ -17,5 +17,11 @@
 require 'rails_helper'
 
 RSpec.describe TreatmentRecord, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:treatment_record) { build(:treatment_record) }
+
+  context 'has a valid factory' do
+    it 'is valid' do
+      expect(build(:treatment_record)).to be_valid
+    end
+  end
 end

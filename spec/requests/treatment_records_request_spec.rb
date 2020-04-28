@@ -28,13 +28,13 @@ RSpec.describe "TreatmentRecords", type: :request do
       end
     end
 
-    # describe 'GET #edit' do
-    #   let(:treatment_record) { create(:treatment_record, treatment_id: treatment.id, treatable_id: dog.id, treatable_type: 'Dog') }
-    #   it 'is successful' do
-    #     get edit_dog_treatment_record_path(dog, treatment_record.id, as: active_user)
-    #     expect(response).to be_successful
-    #   end
-    # end
+    describe 'GET #edit' do
+      let(:treatment_record) { create(:treatment_record, treatment_id: treatment.id, treatable_id: dog.id, treatable_type: 'Dog') }
+      it 'is successful' do
+        get edit_dog_treatment_record_path(dog, treatment_record.id, as: active_user)
+        expect(response).to be_successful
+      end
+    end
 
     describe "POST #create" do
       it 'is able to create a treatment record' do

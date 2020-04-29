@@ -1,7 +1,8 @@
 <div class="card mb-1" style="max-width: 18rem;">
-  <div class="card-header bg-info text-white"><%= treatment_record.treatment.name %></div>
+  <div class="card-header bg-info text-white"><%= treatment_record.treatment.name %> <%= link_to "Edit", edit_polymorphic_path([@treatable, treatment_record]), class: 'btn btn-sm btn-light' %></div>
   <div class="card-body">
     <ul class="list-unstyled">
+
         <% if treatment_record.administered_date.present? %>
             <li><strong>Administered</strong> <%=  treatment_record.administered_date.strftime("%m/%d/%Y") %> </li>
         <% end %>
@@ -14,5 +15,8 @@
         <li><strong>Entered by</strong> <%= treatment_record.user.name %></li>
     </ul>
     <p class="card-text"><%= simple_format(treatment_record.comment) %></p>
+      <small class="text-muted">
+          Last updated <%= time_ago_in_words(treatment_record.updated_at) %> ago
+        </small>
   </div>
 </div>

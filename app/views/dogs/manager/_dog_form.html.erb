@@ -184,7 +184,13 @@
         <%= f.label :needs_foster , class: 'form-check-label col-5' %>
       </div>
 
-      <h3>Vaccine Records</h3>
+      <% if !@dog.new_record? %>
+        <%= link_to "Treatment Records", dog_treatment_records_path(@dog), id: 'dog_tr', class: 'my-3 btn btn-primary'%>
+      <% else %>
+        <small>Treatment Records can be added after dog is saved</small>
+      <% end %>
+
+      <h4>Legacy Vaccine Records</h4>
 
       <div class="form-group row">
         <%= f.label :first_shots, "First Shots", class: 'col-form-label col-form-label-sm col-4' %>

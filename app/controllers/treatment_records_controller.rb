@@ -45,14 +45,20 @@ class TreatmentRecordsController < ApplicationController
     end
   end
 
+  def show
+    redirect_to action: "index"
+  end
+
   def edit
     @treatment_record = TreatmentRecord.find(params[:id])
+    @treatment = @treatment_record.treatment
   end
 
   def update
     @treatment_record = TreatmentRecord.find(params[:id])
     if @treatment_record.update(treatment_record_params)
       flash[:success] = "Record updated."
+      redirect_to polymorphic_path([@treatable, TreatmentRecord])
     else
       render 'edit'
     end

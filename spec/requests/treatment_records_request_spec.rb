@@ -17,7 +17,7 @@ RSpec.describe "TreatmentRecords", type: :request do
       let(:treatment_record) { create(:treatment_record, treatable_id: dog.id, treatable_type: 'Dog') }
       it 'is successful' do
         get dog_treatment_record_path(dog, treatment_record.id, as: active_user)
-        expect(response).to be_successful
+        expect(response).to redirect_to action: :index
       end
     end
 
@@ -45,12 +45,12 @@ RSpec.describe "TreatmentRecords", type: :request do
       end
     end
 
-    # describe "PUT #update" do
-    #   let(:test_treatment) { create(:treatment, name: 'old title') }
-    #   let(:request) { -> { put treatment_path(test_treatment.id, as: admin), params: { treatment: attributes_for(:treatment, name: 'new hotness') } } }
-    #   it 'can update a bulletin title' do
-    #     expect { request.call }.to change { test_treatment.reload.name }.from('old title').to('new hotness')
-    #   end
-    # end
+    describe "PUT #update" do
+      let(:test_treatment_record) { create(:treatment_record, treatment_id: treatment.id, treatable_id: dog.id, treatable_type: 'Dog', comment: 'old comment') }
+      let(:request) { -> { put polymorphic_path([dog, test_treatment_record], as: active_user), params: { treatment_record: attributes_for(:treatment_record, comment: 'new hotness') } } }
+      it 'can update a treatment name' do
+        expect { request.call }.to change { test_treatment_record.reload.comment }.from('old comment').to('new hotness')
+      end
+    end
   end
 end

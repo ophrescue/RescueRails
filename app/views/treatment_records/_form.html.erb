@@ -1,0 +1,25 @@
+                <%= form_for [@treatable, @treatment_record] do |f| %>
+                    <%= render 'shared/error_messages', :object => f.object %>
+                        <div class="form-group">
+                            <%= f.label :administered_date, 'Date Administered' %>
+                            <%= f.text_field :administered_date, class: "form-control" %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :due_date, 'Due Date' %>
+                            <%= f.text_field :due_date, class: "form-control" %>
+                        </div>
+                        <% if @treatment.has_result %>
+                            <div class="form-group">
+                                <%= f.label :result, 'Result' %>
+                                <%= f.select :result, TreatmentRecord::TEST_RESULT, {prompt: '-select-'}, class: "form-control" %>
+                            </div>
+                        <% end %>
+                        <div class="form-group">
+                            <%= f.label :comment, 'Comment' %>
+                            <%= f.text_area :comment, class: "form-control", rows: "3" %>
+                        </div>
+                        <%= f.hidden_field :treatment_id, value: @treatment.id %>
+                        <div class="actions well">
+                            <%= f.submit "Submit", :class => "btn btn-primary" %>
+                        </div>
+                <% end %>

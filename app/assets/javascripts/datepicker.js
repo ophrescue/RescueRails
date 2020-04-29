@@ -48,4 +48,12 @@ $(function() {
   $('#dog_available_on_dt').datepicker({
     dateFormat: 'yy-mm-dd'
   });
+
+  $('#treatment_record_due_date').datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
+
+  $('#treatment_record_administered_date').datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
 });

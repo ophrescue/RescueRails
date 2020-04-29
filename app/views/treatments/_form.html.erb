@@ -1,0 +1,24 @@
+
+<%= form_for @treatment do |f| %>
+    <%= render 'shared/error_messages', :object => f.object %>
+        <div class="form-group">
+            <%= f.label :name, 'Treatment Name' %>
+            <%= f.text_field :name, class: "form-control" %>
+        </div>
+        <div class="form-group">
+            <%= f.label :available_for, 'Available For'%>
+            <%= f.select(:available_for, Treatment::AVAILABLE_FOR, {prompt: '-select-'}, class: "form-control") %>
+        </div>
+        <div class="form-check">
+            <%= f.check_box :has_result, class: "form-check-input" %>
+            <%= f.label :has_result, 'Treatment has a result (Positive/Negative)',class: "form-check-label"%>
+        </div>
+        <div class="form-group">
+            <%= f.label :recommendation, 'Recomendations and Notes' %>
+            <%= f.text_area :recommendation, class: "form-control", rows: "3" %>
+            <small id="recommendationHelp" class="form-text text-muted">(optional) These notes will be displayed to volunteers when they make an medical entry using this treatment. </small>
+        </div>
+        <div class="actions well">
+            <%= f.submit "Submit", :class => "btn btn-primary" %>
+        </div>
+<% end %>

@@ -190,7 +190,13 @@
         <%= f.label :needs_foster , class: 'form-check-label col-5' %>
       </div>
 
-      <h3>Vaccine Records</h3>
+      <% if !@cat.new_record? %>
+        <%= link_to "Treatment Records", cat_treatment_records_path(@cat), id: 'cat_tr', class: 'btn btn-primary my-3'%>
+      <% else %>
+        <small>Treatment Records can be added after cat is saved</small>
+      <% end %>
+
+      <h4>Legacy Vaccine Records</h4>
 
       <div class="form-group row">
         <%= f.label :first_shots, "First Shots", class: 'col-form-label col-form-label-sm col-4' %>

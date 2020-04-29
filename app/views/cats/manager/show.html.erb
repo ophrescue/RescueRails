@@ -4,6 +4,7 @@
       <%= link_to "Cat Manager", session[:last_cat_manager_search], class: 'btn btn-primary mr-4' %>
       <% if can_edit_cats? || fostering_cat? %>
         <%= link_to "Edit", edit_cats_manager_path(@cat), id: 'edit_cat', class: 'btn btn-primary mr-4' %>
+        <%= link_to "Treatment Records", cat_treatment_records_path(@cat), id: 'cat_tr', class: 'btn btn-primary mr-4'%>
       <% end %>
       <%= link_to "Public Profile", cat_path(@cat), class: 'btn btn-secondary' %>
     </div>

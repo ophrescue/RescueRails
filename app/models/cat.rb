@@ -84,6 +84,7 @@ class Cat < ApplicationRecord
   belongs_to :coordinator, class_name: 'User'
   belongs_to :shelter
 
+  has_many :treatment_records, as: :treatable
   has_many :comments, -> { order 'created_at DESC' }, as: :commentable
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :photos, -> { order 'position ASC' }, dependent: :destroy, as: :animal

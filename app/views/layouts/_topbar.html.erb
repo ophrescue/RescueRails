@@ -80,6 +80,7 @@
                 <% end %>
                 <% if current_user.admin? %>
                   <li><%= link_to "Donations", history_donations_path %></li>
+                  <li><%= link_to "Treatments", treatments_path %></li>
                 <% end %>
                 <% if can_dl_resources? %>
                   <li><%= link_to "Staff Resources", folders_path %></li>

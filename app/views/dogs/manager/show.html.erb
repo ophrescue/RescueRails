@@ -4,6 +4,7 @@
       <%= link_to "Dog Manager", session[:last_dog_manager_search], class: 'btn btn-primary mr-4' %>
       <% if can_edit_dogs? || fostering_dog? %>
         <%= link_to "Edit", edit_dogs_manager_path(@dog), id: 'edit_dog', class: 'btn btn-primary mr-4' %>
+        <%= link_to "Treatment Records", dog_treatment_records_path(@dog), id: 'dog_tr', class: 'btn btn-primary mr-4'%>
       <% end %>
       <%= link_to "Public Profile", dog_path(@dog), class: 'btn btn-secondary' %>
     </div>

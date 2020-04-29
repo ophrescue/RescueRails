@@ -1,0 +1,20 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-12">
+            <h1 class="py-2">Treatment Configuration</h1>
+            <h3><%= @treatment.name %></h3>
+            <div class="py-3 pl-3">
+                <%= link_to 'Edit Treatment', edit_treatment_path(@treatment), class: 'btn btn-primary' %>
+            </div>
+            <ul>
+                <li>This treatment is for <%= @treatment.available_for.pluralize.downcase %></li>
+                <li><%= "has (+/-) test result" if @treatment.has_result %></li>
+            </ul>
+            <div class="pl-3">
+                <p>Recommendations for staff regarding this treatment:</p>
+                <%= simple_format(@treatment.recommendation) %>
+            </div>
+        </div>
+    </div>
+</div>

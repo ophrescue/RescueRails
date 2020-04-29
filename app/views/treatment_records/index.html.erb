@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6-sm">
+            <h3>Available Treatments</h3>
+            <ul class="list-group list-group-flush">
+            <%= render partial: "available_treatment", collection: @available_treatments,
+                       as: :available_treatment  || "No treatments available"  %>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h3>Treatment Records for <%= link_to @treatable.name, @treatable %> </h3>
+            <div class="card-deck">
+                <%= render @treatment_records  || "No Treatment Records"%>
+            </div>
+        </div>
+    </div>
+</div>

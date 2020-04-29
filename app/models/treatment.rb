@@ -29,8 +29,7 @@ class Treatment < ApplicationRecord
   has_many :treatment_records
 
   validates :name, presence: true,
-                   length: {maximum: 100 },
-                   uniqueness: { case_sensitive: false }
+                   length: {maximum: 100 }
 
   AVAILABLE_FOR = ['Dog', 'Cat'].freeze
   validates_inclusion_of :available_for, in: AVAILABLE_FOR, allow_blank: false

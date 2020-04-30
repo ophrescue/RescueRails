@@ -11,9 +11,9 @@
     <div class="row">
         <div class="col-12">
             <h3>Treatment Records for <%= link_to @treatable.name, @treatable %> </h3>
-            <div class="card-deck">
-                <%= render @treatment_records  || "No Treatment Records"%>
-            </div>
         </div>
+    </div>
+    <div class="row">
+                <%= render @treatment_records  || "No Treatment Records"%>
     </div>
 </div>

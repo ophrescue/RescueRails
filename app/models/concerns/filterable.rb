@@ -22,7 +22,7 @@ module Filterable
   end
 
   module ClassMethods
-    def filter(filtering_params)
+    def filter_class(filtering_params)
       results = self.unscoped # to be sure an ActiveRecord::Relation is returned, even with no filtering_params
       # [ "is_age", "is_size", "is_status", "has_flags"]
       filtering_params.each do |key, values|

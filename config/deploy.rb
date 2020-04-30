@@ -14,7 +14,7 @@ set :direct_rbenv_path, '/home/deploy/.rbenv'
 
 # setup rbenv
 set :rbenv_type, :user
-set :rbenv_ruby, '2.5.1'
+set :rbenv_ruby, '2.6.6'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:direct_rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:direct_rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 

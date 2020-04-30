@@ -4,7 +4,7 @@ cache:
 - bundler
 sudo: required
 rvm:
-- 2.5.1
+- 2.6.6
 bundler_args: "--without production"
 addons:
   artifacts: true

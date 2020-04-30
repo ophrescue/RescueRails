@@ -7,12 +7,14 @@
             <div class="py-3 pl-3">
                 <%= link_to 'Edit Treatment', edit_treatment_path(@treatment), class: 'btn btn-primary' %>
             </div>
-            <ul>
+            <ul class="list-unstyled">
                 <li>This treatment is for <%= @treatment.available_for.pluralize.downcase %></li>
-                <li><%= "has (+/-) test result" if @treatment.has_result %></li>
+                <% if @treatment.has_result %>
+                    <li>has (+/-) test result </li>
+                <% end %>
             </ul>
             <div class="pl-3">
-                <p>Recommendations for staff regarding this treatment:</p>
+                <h5>Recommendations</h5>
                 <%= simple_format(@treatment.recommendation) %>
             </div>
         </div>

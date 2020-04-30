@@ -6,7 +6,7 @@
         <div class="col">
             <p><%= link_to "Add Treatment", new_treatment_path, :class => "btn btn-primary" %></p>
         <% if @treatments.count > 0 %>
-            <ul>
+            <ul class="list-unstyled">
                 <%= render @treatments %>
             </ul>
         <% else %>

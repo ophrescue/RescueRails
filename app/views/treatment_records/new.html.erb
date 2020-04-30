@@ -1,8 +1,10 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1>Add <%= @treatment.name %> for <%= @treatable.name %> </h1>
-
+            <h4>Add <%= @treatment.name %> for <%= @treatable.name %> </h4>
+            <p>
+                <em><%= @treatment.recommendation %></em>
+            </p>
                 <%= render 'form'%>
         </div>
     </div>

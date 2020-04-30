@@ -26,6 +26,11 @@ class TreatmentRecordsController < ApplicationController
     @treatment_records = @treatable.treatment_records
     respond_to do |format|
       format.html
+      format.pdf do
+        render pdf: "#{@treatable.name}_medical_records",
+               viewport_size: '1280x1024',
+               show_as_html: params.key?('debug')
+      end
     end
   end
 

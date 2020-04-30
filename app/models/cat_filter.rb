@@ -29,7 +29,7 @@ class CatFilter
   end
 
   def filter
-    @cats = Cat.search(search_params).merge(Cat.filter(filtering_params)).merge(Cat.has_flags(flag_params))
+    @cats = Cat.search(search_params).merge(Cat.filter_class(filtering_params)).merge(Cat.has_flags(flag_params))
                 .paginate(per_page: per_page, page: page_params)
                 .order( "#{sort_column} #{sort_direction}" )
                 .includes(:cat_adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster)

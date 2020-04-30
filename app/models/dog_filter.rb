@@ -29,7 +29,7 @@ class DogFilter
   end
 
   def filter
-    @dogs = Dog.search(search_params).merge(Dog.filter(filtering_params)).merge(Dog.has_flags(flag_params))
+    @dogs = Dog.search(search_params).merge(Dog.filter_class(filtering_params)).merge(Dog.has_flags(flag_params))
                .paginate(per_page: per_page, page: page_params)
                .order( "#{sort_column} #{sort_direction}" )
                .includes(:adoptions, :adopters, :comments, :primary_breed, :secondary_breed, :foster)

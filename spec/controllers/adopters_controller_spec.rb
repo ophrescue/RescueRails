@@ -97,7 +97,7 @@ describe AdoptersController, type: :controller do
     end
   end
 
-  describe 'Adopter recept of Training Coupon' do
+  describe 'Adopter recept of Training Coupon and followup email' do
     include ActiveJob::TestHelper
     include_context 'signed in admin'
 
@@ -107,18 +107,25 @@ describe AdoptersController, type: :controller do
         ActiveJob::Base.queue_adapter = :test
         expect do
           put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
-        end.to have_enqueued_job.on_queue('mailers')
+        end.to have_enqueued_job.with("TrainingMailer","free_training_notice","deliver_now", adopter.id)
       end
 
-      it 'free training coupon is sent' do
+      it 'one week followup email created' do
+        ActiveJob::Base.queue_adapter = :test
+        expect do
+          put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
+        end.to have_enqueued_job.with("AdopterFollowupMailer","one_week_followup","deliver_now", adopter.id)
+      end
+
+      it 'free training coupon and one week followup is sent' do
         expect do
           perform_enqueued_jobs do
             put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
           end
-        end.to change { ActionMailer::Base.deliveries.size }.by(1)
+        end.to change { ActionMailer::Base.deliveries.size }.by(2)
       end
 
-      it 'free training coupon is set to the right user' do
+      it 'free training coupon and one week followup is set to the right adopter' do
         perform_enqueued_jobs do
           put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
         end
@@ -135,12 +142,12 @@ describe AdoptersController, type: :controller do
     context 'adopter has already been sent training email' do
       let(:adopter) { create(:adopter, :with_app, status: 'approved', training_email_sent: true) }
 
-      it 'free training coupon is not sent' do
+      it 'free training coupon is not sent but one week followup is sent' do
         expect do
           perform_enqueued_jobs do
             put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
           end
-        end.to change { ActionMailer::Base.deliveries.size }.by(0)
+        end.to change { ActionMailer::Base.deliveries.size }.by(1)
       end
     end
   end

@@ -4,7 +4,7 @@ describe NewAdopterMailer, type: :mailer do
   include ActiveJob::TestHelper
 
   describe "PLEASE REPLY Application Email" do
-    let(:adopter) { create(:adopter, :with_app) }
+    let(:adopter) { create(:adopter, :with_app, status: 'new') }
 
     it 'job is created' do
       expect do

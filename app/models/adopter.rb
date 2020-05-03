@@ -155,6 +155,7 @@ class Adopter < ApplicationRecord
 
     if ((status == 'adopted') || (status == 'adptd sn pend'))
       completed_date = Time.now.strftime('%m/%d/%Y')
+      AdopterFollowupMailer.one_week_followup(id).deliver_later(wait: 7.days)
     else
       completed_date = ''
     end

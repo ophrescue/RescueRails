@@ -1,4 +1,14 @@
 <div class="container">
+    <div class="row">
+    <h4>Medical Summary Record</h4>
+    <ul class="list-unstyled">
+        <li><%= @treatable.name %></li>
+        <li><%= @treatable.age %></li>
+        <li><%= @treatable.microchip unless @treatable.microchip.nil? %></li>
+        <li><%= @treatable.primary_breed.name unless @treatable.primary_breed.nil? %></li>
+        <li><%= @treatable.secondary_breed.name unless @treatable.secondary_breed.nil? %></li>
+    </ul>
+
     <div class="row d-table-row">
         <%= render @treatment_records %>
     </div>

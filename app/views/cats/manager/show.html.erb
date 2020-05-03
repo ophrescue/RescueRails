@@ -37,6 +37,12 @@
     </div>
   </div>
 
+    <% if @cat.hidden %>
+    <div class="alert alert-warning" role="alert">
+      Cat is hidden and will not be displayed in public gallery, regardless of status
+    </div>
+  <% end %>
+
   <div class="row">
     <div class="col-12 col-sm-8">
       <div id="galleria"></div>

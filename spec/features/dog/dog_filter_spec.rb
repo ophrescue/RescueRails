@@ -144,6 +144,7 @@ feature 'Filter Dogs List', js: true do
       sign_in_as_user
     end
 
+    let!(:hidden){ create(:dog, :no_flags, hidden: true, name: 'Hidden') }
     let!(:high_priority){ create(:dog, :no_flags, is_high_priority: true, name: 'High Priority') }
     let!(:medical_need){ create(:dog, :no_flags, has_medical_need: true, name: "Medical Need") }
     let!(:special_needs){ create(:dog, :no_flags, is_special_needs: true, name: "Special Needs") }

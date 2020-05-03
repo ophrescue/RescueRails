@@ -149,6 +149,7 @@ feature 'Filter Cats List', js: true do
       sign_in_as_user
     end
 
+    let!(:hidden){ create(:cat, :no_flags, hidden: true, name: 'Hidden') }
     let!(:high_priority){ create(:cat, :no_flags, is_high_priority: true, name: 'High Priority') }
     let!(:medical_need){ create(:cat, :no_flags, has_medical_need: true, name: "Medical Need") }
     let!(:special_needs){ create(:cat, :no_flags, is_special_needs: true, name: "Special Needs") }

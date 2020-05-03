@@ -1,10 +1,11 @@
 module Flaggable
   extend ActiveSupport::Concern
 
-  FILTER_FLAGS = ["High Priority", "Medical Need", "Special Needs", "Medical Review Needed", "Behavior Problems",
+  FILTER_FLAGS = ["Hidden", "High Priority", "Medical Need", "Special Needs", "Medical Review Needed", "Behavior Problems",
     "Foster Needed", "Spay Neuter Needed", "No Cats", "No Dogs", "No Kids"].freeze
 
   included do
+    scope :hidden,                               -> { where hidden: true }
     scope :high_priority,                        -> { where is_high_priority: true }
     scope :medical_need,                         -> { where has_medical_need: true }
     scope :medical_review_needed,                -> { where medical_review_complete: false }

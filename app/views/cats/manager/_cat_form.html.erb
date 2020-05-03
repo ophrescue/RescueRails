@@ -32,6 +32,13 @@
       </div>
 
       <div class="form-group row">
+        <%= f.label :hidden, "Hide from public gallery, regardless of status", class: 'col-form-label col-form-label-sm col-sm-4'  %>
+        <div class="form-check">
+          <%= f.check_box :hidden, class: 'form-check-input' %>
+        </div>
+      </div>
+
+      <div class="form-group row">
         <%= f.label :microchip, class: 'col-form-label col-form-label-sm col-4'  %>
         <%= f.text_field :microchip, class: 'form-control form-control-sm col-6' %>
       </div>

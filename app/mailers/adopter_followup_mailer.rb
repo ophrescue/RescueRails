@@ -1,4 +1,4 @@
-#    Copyright 2017 Operation Paws for Homes
+#    Copyright 2020 Operation Paws for Homes
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,15 +12,15 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-class NewAdopterMailer < ActionMailer::Base
+class AdopterFollowupMailer < ActionMailer::Base
   default from: 'Operation Paws for Homes <adopt@ophrescue.org>',
           return_path: 'adopt@ophrescue.org',
           reply_to: 'adopt@ophrescue.org'
 
-  def adopter_created(adopter_id)
+  def one_week_followup(adopter_id)
     @adopter = Adopter.find(adopter_id)
     mail(to: "#{@adopter.email}",
-         subject: 'Adoption Application Received!',
-         content_type: 'text/html')
+          subject: 'Following up on your adoption',
+          content_type: 'text/html')
   end
 end

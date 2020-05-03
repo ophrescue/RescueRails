@@ -23,4 +23,11 @@ class NewAdopterMailer < ActionMailer::Base
          subject: 'Adoption Application Received!',
          content_type: 'text/html')
   end
+
+  def one_week_followup(adopter_id)
+    @adopter = Adopter.find(adopter_id)
+    mail(to: "#{@adopter.email}",
+         subject: 'Following up on your adoption',
+         content_type: 'text/html')
+  end
 end

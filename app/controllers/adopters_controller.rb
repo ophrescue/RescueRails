@@ -138,6 +138,12 @@ class AdoptersController < ApplicationController
                                     :other_phone,
                                     :assigned_to_user_id,
                                     :flag,
+                                    :pre_q_abuse,
+                                    :pre_q_dog_adjust,
+                                    :pre_q_limited_info,
+                                    :pre_q_breed_info,
+                                    :pre_q_hold,
+                                    :pre_q_costs,
                                     adoption_app_attributes:
                                     [
                                       :adopter_id,

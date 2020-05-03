@@ -1,7 +1,6 @@
 <div class="card w-25 d-table-cell" style="max-width: 18rem;">
   <div class="card-header bg-info text-white"><%= treatment_record.treatment.name %></div>
   <div class="card-body">
-
     <dl class="row">
         <% if treatment_record.administered_date.present? %>
           <dt class="col-md-6">Administered</dt>
@@ -18,7 +17,6 @@
           <dd class="col-md-6"><%= treatment_record.result %></dd>
         <% end %>
     </dl>
-
     <p class="card-text"><%= simple_format(treatment_record.comment) %></p>
   </div>
 </div>

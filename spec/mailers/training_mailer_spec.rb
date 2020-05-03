@@ -4,12 +4,12 @@ describe TrainingMailer, type: :mailer do
   include ActiveJob::TestHelper
 
   describe "Training Coupon Email" do
-    let(:adopter) { create(:adopter, :with_app, status: 'adopted') }
+    let(:adopter) { create(:adopter, :with_app, status: 'new') }
 
     it 'job is created' do
       expect do
         TrainingMailer.free_training_notice(adopter.id).deliver_later
-      end.to have_enqueued_job.on_queue('mailers')
+      end.to have_enqueued_job.with("TrainingMailer","free_training_notice","deliver_now", adopter.id)
     end
 
     it 'welcome_email is sent' do

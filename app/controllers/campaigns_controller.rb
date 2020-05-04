@@ -26,6 +26,7 @@ class CampaignsController < ApplicationController
       else "active"
       end
     @campaigns = Campaign.public_send(@scope).order(created_at: :desc).paginate(page: params[:page], per_page: 30)
+    @title = "Campaigns"
   end
 
   def new
@@ -62,7 +63,7 @@ class CampaignsController < ApplicationController
 
   def show
     @campaign = Campaign.find(params[:id])
-    @title = @campaign.name
+    @title = @campaign.title
   end
 
   private

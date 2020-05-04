@@ -18,7 +18,9 @@ en:
     new:
       title: 'Create a Campaign'
     index:
-      title: "Campaigns"
+      title:
+        active: "Active Campaigns"
+        inactive: "Inactive Campaigns"
     edit:
       title: 'Edit Campaigns'
   cats:

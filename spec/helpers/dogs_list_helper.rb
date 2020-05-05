@@ -1,9 +1,10 @@
 module DogsListHelper
   def search_by(field, search_string)
-    click_button("Search")
-    select_search_by(field)
-    page.find('input#search').set(search_string)
-    page.find('#search_icon').click
+    within "#dog-search" do
+      select(field, from: "search_field_index").select_option
+      page.find('input#search').set(search_string)
+      click_button("Search")
+    end
   end
 
   def filter_info
@@ -20,10 +21,6 @@ module DogsListHelper
     names = page.all('#manager_dogs .dog a .name').map(&:text)
     breeds = page.all('#manager_dogs .dog .breed').map(&:text)
     ids.zip(names,breeds)
-  end
-
-  def select_search_by(attribute)
-    page.find('#search_field_index ul>li>label>span.filter_option', text: attribute).click
   end
 
   def create_many_dogs

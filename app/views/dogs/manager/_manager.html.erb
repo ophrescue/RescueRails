@@ -1,13 +1,13 @@
-<form class="mb-3">
+<form class="mb-3" id="dog-search">
   <div class="form-row">
     <div class="col-6">
       <input type="text" class="form-control" id='search' name='filter_params[search]' autocomplete='off' value=<%=@filter_params[:search]%> >
     </div>
     <div class="col-2">
-      <%= select_tag :search_field_index, options_for_select(Dog::SEARCH_FIELDS.as_options.invert), name: "filter_params[search_field_index]", class: "form-control" %>
+      <%= select_tag :search_field_index, options_for_select(Dog::SEARCH_FIELDS.as_options.invert, selected: @filter_params[:search_field_index] || "name"), name: "filter_params[search_field_index]", class: "form-control" %>
     </div>
     <div class="col-4">
-      <button type="submit" class="btn btn-primary">Search</button>
+      <button type="submit" id="search_button" class="btn btn-primary">Search</button>
     </div>
   </div>
 </form>

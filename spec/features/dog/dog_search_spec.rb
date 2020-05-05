@@ -43,4 +43,11 @@ feature 'search and clear search when admin is logged-in', js: true do
     expect(page).to have_selector(filter_params, text: "Tracking ID")
     expect(dog_names).to match_array ["Abercrombie", "Abby", "Nairobi"]
   end
+
+  it "should default select the search_field_index option when search results returned" do
+    visit dogs_manager_index_path
+    expect(page).to have_selector('h1', text: 'Dog Manager')
+    search_by("Breed", "retriev")
+    expect(page.find('#search_field_index').find('option[selected]').value).to eq 'breed'
+  end
 end

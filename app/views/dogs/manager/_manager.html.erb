@@ -1,12 +1,25 @@
+<form class="my-3" id="dog-search">
+  <div class="form-row">
+    <div class="col-6">
+      <input type="text" class="form-control" id='search' name='filter_params[search]' autocomplete='off' value=<%=@filter_params[:search]%> >
+    </div>
+    <div class="col-2">
+      <%= select_tag :search_field_index, options_for_select(Dog::SEARCH_FIELDS.as_options.invert, selected: @filter_params[:search_field_index] || "name"), name: "filter_params[search_field_index]", class: "form-control" %>
+    </div>
+    <div class="col-4">
+      <button type="submit" id="search_button" class="btn btn-primary">Search</button>
+    </div>
+  </div>
+</form>
+
 <div class="card bg-light mb-3">
-  <div class="card-header"> Filter, Search and Sort the database...  </div>
+  <div class="card-header"> Filter and Sort the database...  </div>
   <div class="card-body">
     <form class='row' id='filter_controls'>
       <%= render partial: 'dogs/manager/global_multiselect_dropdown', locals: {id: 'is_age', button_text: 'Age', options: Dog::AGES.as_options, multiple: true , close_on_select: "true" } %>
       <%= render partial: 'dogs/manager/global_multiselect_dropdown', locals: {id: 'is_status', button_text: 'Status', options: Dog::STATUSES.as_options, multiple: true , close_on_select: "true" } %>
       <%= render partial: 'dogs/manager/global_multiselect_dropdown', locals: {id: 'is_size', button_text: 'Size', options: Dog::SIZES.as_options, multiple: true , close_on_select: "true" } %>
       <%= render partial: 'dogs/manager/global_multiselect_dropdown', locals: {id: 'has_flags', button_text: 'Flags', options: Dog::FILTER_FLAGS.as_options, multiple:true, close_on_select: "true" } %>
-      <%= render partial: 'dogs/manager/global_multiselect_dropdown', locals: {id: 'search_field_index', button_text: 'Search', options: Dog::SEARCH_FIELDS.as_options, multiple:false, close_on_select: "false" } %>
       <%= render partial: 'dogs/manager/global_multiselect_dropdown', locals: {id: 'sort', button_text: 'Sort', options: Sortable::SORT_FIELDS, multiple: false, close_on_select: "true" } %>
     </form>
   </div>
@@ -27,7 +40,7 @@
   </div>
 </div>
 
-<div id="manager_dogs">
+<div id="manager_dogs" class="col-lg-12">
   <%- if @dogs.any? %>
     <%= render :partial => "dogs/manager/dog", :collection => @dogs, :as => :dog %>
     <div> <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %> </div>

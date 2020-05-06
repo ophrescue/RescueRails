@@ -149,7 +149,7 @@ class Dog < ApplicationRecord
   GENDERS = %w[Male Female]
   validates_inclusion_of :gender, in: GENDERS, allow_blank: true
 
-  SEARCH_FIELDS = ["Breed", "Tracking ID", "Name", "Microchip"]
+  SEARCH_FIELDS = ["Name", "Breed", "Tracking ID", "Microchip"]
 
   before_save :update_adoption_date, :update_needs_foster
 

@@ -17,6 +17,10 @@ module ApplicationHelper
     image_tag('logo.png', alt: 'Operation Paws for Homes')
   end
 
+  def human_boolean(boolean)
+    boolean ? 'Yes' : 'No'
+  end
+
   def markdown(text)
     options = {
       filter_html:     true,

@@ -1,16 +1,118 @@
 <div class="container">
     <div class="row">
-    <h4>Medical Summary Record</h4>
-    <ul class="list-unstyled">
-        <li><%= @treatable.name %></li>
-        <li><%= @treatable.age %></li>
-        <li><%= @treatable.microchip unless @treatable.microchip.nil? %></li>
-        <li><%= @treatable.primary_breed.name unless @treatable.primary_breed.nil? %></li>
-        <li><%= @treatable.secondary_breed.name unless @treatable.secondary_breed.nil? %></li>
-    </ul>
+        <div class="col">
+            <h4 class="text-center">Medical Summary Record</h4>
+
+            <table class="table table-sm table-borderless">
+                <tr>
+                    <th>Name</th>
+                    <td><%= @treatable.name %></td>
+                </tr>
+                <tr>
+                    <th>Age</th>
+                    <td><%= @treatable.age unless @treatable.age.nil? %></td>
+                </tr>
+                <tr>
+                    <th>Altered?</th>
+                    <td><%= human_boolean(@treatable.is_altered) unless @treatable.is_altered.nil? %></td>
+                </tr>
+                <tr>
+                    <th>Microchip</th>
+                    <td class="col-sm-9"><%= @treatable.microchip unless @treatable.microchip.nil? %></td>
+                </tr>
+                <tr>
+                    <th>Breed(s)</th>
+                    <td><%= @treatable.primary_breed.name unless @treatable.primary_breed.nil? %> <%= @treatable.secondary_breed.name unless @treatable.secondary_breed.nil? %> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <h5>Medications</h5>
+
+    <% @treatment_records.each_slice(3) do |treatment_records| %>
+        <div class="row d-table-row">
+        <% treatment_records.each do |treatment_record| %>
+            <div class="col w-25 d-table-cell">
+                <table class="table table-sm table-bordered">
+                    <tr>
+                    <th colspan="2" class="text-center"><%= treatment_record.treatment.name %></th>
+                    </tr>
+                    <% if treatment_record.administered_date.present? %>
+                    <tr>
+                        <th>Administered</th>
+                        <td><%=  treatment_record.administered_date.strftime("%m/%d/%Y") %></td>
+                    </tr>
+                    <% end %>
+                    <% if treatment_record.due_date.present? %>
+                    <tr>
+                        <th>Due</th>
+                        <td><%= treatment_record.due_date.strftime("%m/%d/%Y") %></td>
+                    </tr>
+                    <% end %>
+                    <% if treatment_record.result.present? %>
+                    <tr>
+                        <th>Result</th>
+                        <td><%= treatment_record.result %></td>
+                    </tr>
+                    <% end %>
+                    <% if treatment_record.comment.present? %>
+                    <tr>
+                    <th>Comment</th>
+                    <td><%= simple_format(treatment_record.comment) %></td>
+                    <% end %>
+                </table>
+            </div>
+        <% end %>
+       </div>
+    <% end %>
+
+    <div class="row">
+        <div class="col">
+            <h5>Humane Society Recommended Vaccinations**</h5>
+            <ul>
+                <li><strong>Monthly Flea and Tick Prevention</strong> - Available online (1-800-Petmeds or PetcareRX) and at Petsmart or Petco.</li>
+                <li><strong>Monthly Heartworm Prevention</strong> - Prescription from vet, available online</li>
+            <ul>
+        </div>
+    </div>
 
     <div class="row d-table-row">
-        <%= render @treatment_records %>
+        <div class="col w-25 d-table-cell">
+            <h6>Puppies and Young Adult Dogs</h6>
+            <ul>
+                <li>6-8 weeks: First puppy shot (DHLPP)</li>
+                <li>8 weeks: bordetella</li>
+                <li>11-12 weeks: Second puppy shot (DHLPP) + Corona</li>
+                <li>15-16 weeks: Third puppy shot (DHLPP)</li>
+                <li>Multiple dewormings should be completed</li>
+                <li>4 months or older: Rabies shot</li>
+                <li>7-9 months: First heartworm test</li>
+            </ul>
+        </div>
+        <div class="col w-25 d-table-cell">
+            <h6>Adult Dogs</h6>
+            <ul>
+                <li>DHLPP - Yearly</li>
+                <li>Heartworm Test - Yearly</li>
+                <li>Rabies - 1-3 years (after first two shots)</li>
+                <li>Bordetella - Yearly</li>
+            </ul>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-10 text-center">
+            <ul class="list-unstyled">
+                <li><strong>It is recommended that adopted dogs are heartworm tested every six months.</strong></li>
+                <li><em>** Please be sure to consult with your vet as to the proper vaccinations and vaccination schedule for your dog.</em></li>
+                <li>OPH does not give Lyme or Lepto vaccinations to dogs in the rescue organization.</li>
+                <li>OPH does not conduct blood analysis (unless medically neded  for apparent illness) or DNA tests on adoptable dogs.</li>
+            <ul>
+        </div>
+    </div>
+
+<small>Report Generated <%= Time.now.strftime("%A, %d %b %Y %l:%M %p")%></small>
 </div>
+
+
 <!-- https://stackoverflow.com/a/56237878/6608616 >

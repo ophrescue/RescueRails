@@ -23,7 +23,7 @@ class TreatmentRecordsController < ApplicationController
 
   def index
     @available_treatments = Treatment.where(available_for: @treatable.class.name).order(:name)
-    @treatment_records = @treatable.treatment_records
+    @treatment_records = @treatable.treatment_records.order(administered_date: :desc)
     respond_to do |format|
       format.html
       format.pdf do
@@ -46,6 +46,9 @@ class TreatmentRecordsController < ApplicationController
       flash[:success] = "New Treatment Record Added"
       redirect_to polymorphic_path([@treatable, TreatmentRecord])
     else
+      flash.now[:error] = 'form could not be saved'
+      @treatment = Treatment.find(params[:treatment_id])
+      @treatment_record = TreatmentRecord.new
       render 'new'
     end
   end

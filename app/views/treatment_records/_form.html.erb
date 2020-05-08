@@ -1,8 +1,8 @@
-                <%= form_for [@treatable, @treatment_record] do |f| %>
+                <%= form_for [@treatable, @treatment_record], :html=> {class: 'needs-validation'} do |f| %>
                     <%= render 'shared/error_messages', :object => f.object %>
                         <div class="form-group">
                             <%= f.label :administered_date, 'Date Administered' %>
-                            <%= f.text_field :administered_date, class: "form-control" %>
+                            <%= f.text_field :administered_date, class: "form-control", required: true %>
                         </div>
                         <div class="form-group">
                             <%= f.label :due_date, 'Due Date' %>

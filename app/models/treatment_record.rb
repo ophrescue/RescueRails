@@ -19,5 +19,7 @@ class TreatmentRecord < ApplicationRecord
   belongs_to :treatable, polymorphic: true
   belongs_to :user
 
+  validates :administered_date, presence: true
+
   TEST_RESULT = ['positive', 'negative'].freeze
 end

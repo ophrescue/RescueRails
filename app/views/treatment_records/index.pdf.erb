@@ -27,44 +27,24 @@
             </table>
         </div>
     </div>
-    <h5>Medications</h5>
 
-    <% @treatment_records.each_slice(3) do |treatment_records| %>
-        <div class="row d-table-row">
-        <% treatment_records.each do |treatment_record| %>
-            <div class="col w-25 d-table-cell">
-                <table class="table table-sm table-bordered">
-                    <tr>
-                    <th colspan="2" class="text-center"><%= treatment_record.treatment.name %></th>
-                    </tr>
-                    <% if treatment_record.administered_date.present? %>
-                    <tr>
-                        <th>Administered</th>
-                        <td><%=  treatment_record.administered_date.strftime("%m/%d/%Y") %></td>
-                    </tr>
-                    <% end %>
-                    <% if treatment_record.due_date.present? %>
-                    <tr>
-                        <th>Due</th>
-                        <td><%= treatment_record.due_date.strftime("%m/%d/%Y") %></td>
-                    </tr>
-                    <% end %>
-                    <% if treatment_record.result.present? %>
-                    <tr>
-                        <th>Result</th>
-                        <td><%= treatment_record.result %></td>
-                    </tr>
-                    <% end %>
-                    <% if treatment_record.comment.present? %>
-                    <tr>
-                    <th>Comment</th>
-                    <td><%= simple_format(treatment_record.comment) %></td>
-                    <% end %>
-                </table>
-            </div>
-        <% end %>
-       </div>
-    <% end %>
+    <div class="row">
+        <div class="col">
+        <h5>Medications</h5>
+        <table class="table mt-3 table-sm table-striped table-bordered">
+            <thead>
+                <th>Administered Date</th>
+                <th>Treatment</th>
+                <th>Due Date</th>
+                <th>Result</th>
+                <th>Comments</th>
+            </thead>
+            <tbody>
+                <%= render @treatment_records %>
+            </tbody>
+        </table>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col">

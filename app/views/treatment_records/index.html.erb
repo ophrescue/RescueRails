@@ -11,6 +11,7 @@
     <div class="row">
         <div class="col-12">
             <h3>Treatment Records for <%= link_to @treatable.name, @treatable %> </h3>
+            <%= link_to "PDF Export", polymorphic_path([@treatable, TreatmentRecord], format: :pdf), class: "btn btn-secondary" %>
         </div>
     </div>
     <div class="row">

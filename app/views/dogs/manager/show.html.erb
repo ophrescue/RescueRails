@@ -85,6 +85,8 @@
         <dd id='cats_ok'><%= (!@dog.no_cats).as_icon  %></dd>
         <dt>OK with kids?</dt>
         <dd id='kids_ok'><%= (!@dog.no_kids).as_icon  %></dd>
+        <dt>No Urban Settings</dt>
+        <dd id='no_urban_setting'><%= (!@dog.no_urban_setting).as_icon  %></dd>
         <dt>Medical Review Complete</dt>
         <dd id='medical_review_complete'><%= @dog.medical_review_complete.as_icon %></dd>
         <dt>Has Medical Need</dt>
@@ -101,6 +103,8 @@
         <dd id='has_behaviour_problem'><%= @dog.has_behavior_problem.as_icon %></dd>
         <dt>Needs Foster</dt>
         <dd id='needs_foster'><%= @dog.needs_foster.as_icon %></dd>
+        <dt>Home Check Required</dt>
+        <dd id='home_check_required'><%= @dog.home_check_required.as_icon %></dd>
         <dt>Foster</dt>
         <dd id='foster'><%= render partial: 'foster_details' %></dd>
         <dt>Adoption Coordinator</dt>

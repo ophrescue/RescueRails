@@ -98,6 +98,8 @@ feature 'Filter Dogs List', js: true do
     let!(:no_cats){ create(:dog, :no_flags, no_cats: true, name: 'No Cats') }
     let!(:no_dogs){ create(:dog, :no_flags, no_dogs: true, name: 'No Dogs') }
     let!(:no_kids){ create(:dog, :no_flags, no_kids: true, name: 'No Kids') }
+    let!(:no_urban_setting) { create(:dog, :no_flags, no_urban_setting: true, name: 'No Urban Setting') }
+    let!(:home_check_required) { create(:dog, :no_flags, home_check_required: true, name: 'Home Check Required') }
     let(:group_label) { '#filter_info_row #filter_info .message_group .group_label' }
     let(:filter_params) { '#filter_info_row #filter_info .message_group .filter_params' }
 

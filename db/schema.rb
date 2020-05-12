@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_143631) do
+ActiveRecord::Schema.define(version: 2020_05_12_203451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,6 +243,8 @@ ActiveRecord::Schema.define(version: 2020_05_03_143631) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "hidden", default: false, null: false
+    t.boolean "no_urban_setting", default: false, null: false
+    t.boolean "home_check_required", default: false, null: false
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -322,6 +324,8 @@ ActiveRecord::Schema.define(version: 2020_05_03_143631) do
     t.string "toltrazuril"
     t.boolean "hidden", default: false, null: false
     t.text "wait_list"
+    t.boolean "no_urban_setting", default: false, null: false
+    t.boolean "home_check_required", default: false, null: false
     t.index ["age"], name: "index_dogs_on_age"
     t.index ["coordinator_id"], name: "index_dogs_on_coordinator_id"
     t.index ["foster_id"], name: "index_dogs_on_foster_id"

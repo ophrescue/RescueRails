@@ -2,7 +2,7 @@ module Flaggable
   extend ActiveSupport::Concern
 
   FILTER_FLAGS = ["Hidden", "High Priority", "Medical Need", "Special Needs", "Medical Review Needed", "Behavior Problems",
-    "Foster Needed", "Spay Neuter Needed", "No Cats", "No Dogs", "No Kids"].freeze
+    "Foster Needed", "Spay Neuter Needed", "No Cats", "No Dogs", "No Kids", "No Urban Setting", "Home Check Required"].freeze
 
   included do
     scope :hidden,                               -> { where hidden: true }
@@ -16,6 +16,8 @@ module Flaggable
     scope :no_cats,                              -> { where no_cats: true }
     scope :no_dogs,                              -> { where no_dogs: true }
     scope :no_kids,                              -> { where no_kids: true }
+    scope :no_urban_setting,                     -> { where no_urban_setting: true }
+    scope :home_check_required,                  -> { where home_check_required: true }
   end
 
   class_methods do

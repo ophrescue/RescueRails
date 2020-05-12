@@ -24,6 +24,7 @@ module AboutAnimalHelper
     caveats << "is best in a home without dogs" if @animal.no_dogs
     caveats << "is best in a home without cats" if @animal.no_cats
     caveats << "is best in a home without small children" if @animal.no_kids
+    caveats << "is not suitable in an apartment, condo or other urban setting" if @animal.no_urban_setting
     caveats
   end
 

@@ -157,6 +157,7 @@ class Dogs::ManagerController < Dogs::DogsBaseController
               :second_shots, :third_shots, :rabies, :vac_4dx, :heartworm_preventative, :flea_tick_preventative,
               :bordetella, :microchip, :original_name, :fee, :coordinator_id, :sponsored_by, :shelter_id,
               :medical_summary, :wait_list, :behavior_summary, :medical_review_complete, :dewormer, :toltrazuril, :hidden,
+              :no_urban_setting, :home_check_required,
               attachments_attributes: [ :attachment, :description, :updated_by_user_id, :_destroy, :id ],
               photos_attributes: [ :photo, :position, :is_private, :_destroy, :id ])
   end

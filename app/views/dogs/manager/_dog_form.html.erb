@@ -157,6 +157,10 @@
         <%= f.check_box :no_kids, class: 'form-check-input' %>
         <%= f.label :no_kids, class: 'form-check-label col-5' %>
       </div>
+      <div class="form-check">
+        <%= f.check_box :no_urban_setting, class: 'form-check-input' %>
+        <%= f.label :no_urban_setting, class: 'form-check-label col-5' %>
+      </div>
 
       <h3>Private Attributes</h3>
       <div class="form-check">
@@ -182,6 +186,10 @@
       <div class="form-check">
         <%= f.check_box :needs_foster, class: 'form-check-input' %>
         <%= f.label :needs_foster , class: 'form-check-label col-5' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :home_check_required, class: 'form-check-input' %>
+        <%= f.label :home_check_required , class: 'form-check-label col-5' %>
       </div>
 
       <% if !@dog.new_record? %>

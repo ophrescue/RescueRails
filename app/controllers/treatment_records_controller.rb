@@ -17,7 +17,8 @@ class TreatmentRecordsController < ApplicationController
   before_action :unlocked_user
   before_action :active_user
   before_action :load_treatable
-  before_action :edit_pet_check, only: %i[new edit update delete]
+  before_action :edit_pet_check, only: %i[new edit update]
+  before_action :admin_user, only: %i[destroy]
   before_action :select_bootstrap41
   before_action :show_user_navbar
 
@@ -70,6 +71,12 @@ class TreatmentRecordsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    TreatmentRecord.find(params[:id]).destroy
+    flash[:success] = "Treatment Record deleted."
+    redirect_to action: "index"
   end
 
   private

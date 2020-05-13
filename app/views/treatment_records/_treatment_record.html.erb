@@ -1,9 +1,15 @@
 <tr>
-  <td><%= link_to "Edit", edit_polymorphic_path([@treatable, treatment_record]), class: 'btn btn-sm btn-light' %></td>
+  <td>
+    <%= link_to "Edit", edit_polymorphic_path([@treatable, treatment_record]), class: 'btn btn-sm btn-secondary' %>
+  </td>
   <td><%= treatment_record.administered_date.strftime("%m/%d/%Y") %></td>
   <td><%= treatment_record.treatment.name %></td>
   <td><%= treatment_record.due_date.strftime("%m/%d/%Y") unless treatment_record.due_date.blank? %></td>
   <td><%= treatment_record.result %></td>
   <td><%= simple_format(treatment_record.comment) %></td>
-  <td><small>Updated <%= time_ago_in_words(treatment_record.updated_at) %> ago by <%= treatment_record.user.name %></small> </td>
+  <td><small>Updated <%= time_ago_in_words(treatment_record.updated_at) %> ago by <%= treatment_record.user.name %></small>
+      <% if current_user.admin? %>
+      <%= link_to "Delete", polymorphic_path([@treatable, treatment_record]), method: :delete, class: 'btn btn-sm btn-danger' %>
+    <% end %>
+  </td>
 </tr>

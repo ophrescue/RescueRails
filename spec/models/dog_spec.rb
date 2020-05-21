@@ -53,6 +53,8 @@
 #  toltrazuril             :string
 #  hidden                  :boolean          default(FALSE), not null
 #  wait_list               :text
+#  no_urban_setting        :boolean          default(FALSE), not null
+#  home_check_required     :boolean          default(FALSE), not null
 #
 
 require 'rails_helper'

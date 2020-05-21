@@ -52,6 +52,9 @@
 #  coccidia_treatment      :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  hidden                  :boolean          default(FALSE), not null
+#  no_urban_setting        :boolean          default(FALSE), not null
+#  home_check_required     :boolean          default(FALSE), not null
 #
 
 

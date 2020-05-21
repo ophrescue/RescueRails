@@ -57,7 +57,10 @@ class Attachment < ApplicationRecord
 
   has_attached_file :attachment,
             hash_secret: HASH_SECRET,
-            s3_permissions: :private
+            s3_permissions: :private,
+            s3_headers: proc { |attachment|
+              { "Content-Disposition" => "attachment; filename=\"#{attachment.original_filename}\"" }
+            }
 
   ATTACHMENT_MAX_SIZE = 100
 

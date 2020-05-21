@@ -65,7 +65,8 @@ RescueRails::Application.routes.draw do
             :passwords,
             :password_resets,
             :shelters,
-            :treatments
+            :treatments,
+            :invoices
 
   resources :attachments, only: %i[show destroy]
   resources :folder_attachments, only: %i[index update]

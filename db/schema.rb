@@ -425,6 +425,23 @@ ActiveRecord::Schema.define(version: 2020_06_23_190414) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.integer "invoiceable_id"
+    t.string "invoiceable_type"
+    t.string "url_hash"
+    t.integer "due_amt"
+    t.bigint "user_id"
+    t.text "description"
+    t.string "stripe_customer_id"
+    t.string "card_token"
+    t.integer "paid_amt"
+    t.datetime "paid_at"
+    t.string "paid_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_invoices_on_user_id"
+  end
+
   create_table "photos", id: :serial, force: :cascade do |t|
     t.integer "dog_id"
     t.string "photo_file_name"
@@ -574,6 +591,7 @@ ActiveRecord::Schema.define(version: 2020_06_23_190414) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  add_foreign_key "invoices", "users"
   add_foreign_key "treatment_records", "treatments"
   add_foreign_key "treatment_records", "users"
 end

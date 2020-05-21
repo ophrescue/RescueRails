@@ -59,7 +59,7 @@ class Attachment < ApplicationRecord
             hash_secret: HASH_SECRET,
             s3_permissions: :private,
             s3_headers: proc { |attachment|
-              { "Content-Disposition" => "attachment; filename=\"#{attachment.original_filename}\"" }
+              { "Content-Disposition" => "attachment; filename=\"#{attachment.name}\"" }
             }
 
   ATTACHMENT_MAX_SIZE = 100

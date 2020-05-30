@@ -149,9 +149,10 @@
         <div class="controls">
           <%= f.fields_for :agreement do |af| %>
             <% if af.object.persisted? %>
-              <span>Foster Agreement on File, overwrite?</span>
+              <span>Foster Agreement on file</span>
+            <% else %>
+              <%= af.file_field :attachment %>
             <% end %>
-            <%= af.file_field :attachment %>
           <% end %>
         </div>
       </div>
@@ -163,9 +164,10 @@
         <div class="controls">
           <%= f.fields_for :confidentiality_agreement do |af| %>
             <% if af.object.persisted? %>
-              <span>Confidentiality Agreement on File, overwrite?</span>
+              <span>Confidentiality Agreement on file</span>
+            <% else %>
+              <%= af.file_field :attachment %>
             <% end %>
-            <%= af.file_field :attachment %>
           <% end %>
         </div>
       </div>
@@ -177,9 +179,10 @@
         <div class="controls">
           <%= f.fields_for :code_of_conduct_agreement do |af| %>
             <% if af.object.persisted? %>
-              <span>Code of Conduct Agreement on File, overwrite?</span>
+              <span>Code of Conduct Agreement on file</span>
+            <% else %>
+              <%= af.file_field :attachment %>
             <% end %>
-            <%= af.file_field :attachment %>
           <% end %>
         </div>
       </div>

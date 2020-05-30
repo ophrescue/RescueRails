@@ -219,21 +219,18 @@ class UsersController < Clearance::UsersController
                   :attachment,
                   :description,
                   :updated_by_user_id,
-                  :_destroy,
                   :id
                 ],
                 confidentiality_agreement_attributes: [
                   :attachment,
                   :description,
                   :updated_by_user_id,
-                  :_destroy,
                   :id
                 ],
                 code_of_conduct_agreement_attributes: [
                   :attachment,
                   :description,
                   :updated_by_user_id,
-                  :_destroy,
                   :id
                 ])
     else

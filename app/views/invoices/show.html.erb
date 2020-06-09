@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 pt-3">
+      <h1>OPH Adoption Fee Payment</h1>
+
+
+      <h5>Adopter <%= link_to @invoice.invoiceable.adopter.name, @invoice.invoiceable.adopter %> to adopt <%= link_to @invoice.invoiceable.animal.name, @invoice.invoiceable.animal %>  </h5>
+
+      <p>Amount Due $<span id="amtDue"><%= @invoice.due_amt %></span></p>
+
+      <p><%= @invoice.description %></p>
+      <%= form_for @invoice do |f| %>
+        <%= hidden_field_tag(:stripeToken) %>
+      <% end %>
+      <button id="payButton" class="btn btn-primary btn-lg">Make Payment</button>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<script>
+  var handler = StripeCheckout.configure({
+    key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+    locale: 'auto',
+    name: 'Operation Paws for Homes',
+    description: 'Adoption Fee',
+    panelLabel: 'Pay gg  {{amount}}',
+    zipCode: true,
+    image: '/apple-touch-icon.png',
+
+    token: function(token) {
+      $('input#stripeToken').val(token.id);
+      $('form').submit();
+    }
+  });
+
+  $('#payButton').on('click', function(e) {
+    e.preventDefault();
+
+    $('#error_explanation').html('');
+
+
+    var amount = document.getElementById("amtDue").innerText;
+    amount = amount.replace(/\$/g, '').replace(/\,/g, '');
+
+    amount = parseFloat(amount);
+
+    amount = amount * 100; // Needs to be an integer!
+
+    console.log('payment amount is '+ amount)
+    handler.open({
+      amount: Math.round(amount),
+    })
+  });
+
+    // Close Checkout on page navigation
+  $(window).on('popstate', function() {
+    handler.close();
+  });
+</script>

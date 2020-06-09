@@ -428,7 +428,7 @@ ActiveRecord::Schema.define(version: 2020_06_23_190414) do
   create_table "invoices", force: :cascade do |t|
     t.integer "invoiceable_id"
     t.string "invoiceable_type"
-    t.string "url_hash"
+    t.string "slug"
     t.integer "due_amt"
     t.bigint "user_id"
     t.text "description"
@@ -439,6 +439,7 @@ ActiveRecord::Schema.define(version: 2020_06_23_190414) do
     t.string "paid_method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_invoices_on_slug", unique: true
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 

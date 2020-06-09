@@ -32,9 +32,24 @@
 #
 
 class Invoice < ApplicationRecord
+  extend FriendlyId
   include ClientValidated
+
   belongs_to :invoiceable, polymorphic: true
   belongs_to :user
 
+  friendly_id :url_hash, use: :slugged
+
   VALIDATION_ERROR_MESSAGES = {content: :blank}
+
+  def process_payment
+    customer = Stripe::Customer.create email: email,
+                                       card: card_token
+
+    Stripe::Charge.create customer: customer.id,
+                          amount: amount * 100,
+                          description: 'Adoption Fee',
+                          currency: 'usd'
+  end
+
 end

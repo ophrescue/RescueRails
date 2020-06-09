@@ -3,7 +3,7 @@ class CreateInvoices < ActiveRecord::Migration[5.2]
     create_table :invoices do |t|
       t.integer :invoiceable_id
       t.string :invoiceable_type
-      t.string :url_hash
+      t.string :slug
       t.integer :due_amt
       t.belongs_to :user, foreign_key: true
       t.text :description
@@ -14,5 +14,6 @@ class CreateInvoices < ActiveRecord::Migration[5.2]
       t.string :paid_method
       t.timestamps
     end
+    add_index :invoices, :slug, unique: true
   end
 end

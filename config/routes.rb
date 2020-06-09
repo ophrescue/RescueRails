@@ -55,10 +55,8 @@ RescueRails::Application.routes.draw do
 
   get '/campaigns/:scope', to: 'campaigns#index', scope: /(inactive|active)/, as: "scoped_campaigns"
 
-  resources :adoptions,
-            :adoption_app,
+  resources :adoption_app,
             :campaigns,
-            :cat_adoptions,
             :dashboards,
             :events,
             :folders,
@@ -67,6 +65,14 @@ RescueRails::Application.routes.draw do
             :shelters,
             :treatments,
             :invoices
+
+  resources :adoptions do
+    resources :invoices
+  end
+
+  resources :cat_adoptions do
+    resources :invoices
+  end
 
   resources :attachments, only: %i[show destroy]
   resources :folder_attachments, only: %i[index update]

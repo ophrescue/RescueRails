@@ -47,6 +47,13 @@
                     <%= f.select :relation_type, options_for_select(Adoption::RELATION_TYPE.collect{|s| [s, s]}, adp.relation_type), {}, class: 'input-medium' %>
                     <div id="status-icon"></div>
                   <% end %>
+                  <% if adp.invoices.present? %>
+                    <% adp.invoices.find_each do |inv| %>
+                      <%= link_to "Adoption Invoice for #{adp.dog.name}", invoice_path(inv) %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to "Create Invoice for #{adp.dog.name}", new_adoption_invoice_path(adp), class: "btn btn-small" %>
+                  <% end %>
                 </div>
                 <div class="span1">
                   <%= form_for adp, html: {id: "delete_dog_link", class: "delete_adoption"}, method: :delete do |f| %>
@@ -70,6 +77,13 @@
                     <%= @adopter.name %> status with this cat is
                     <%= f.select :relation_type, options_for_select(CatAdoption::RELATION_TYPE.collect{|s| [s, s]}, adp.relation_type), {}, class: 'input-medium' %>
                     <div id="status-icon"></div>
+                  <% end %>
+                  <% if adp.invoices.present? %>
+                    <% adp.invoices.find_each do |inv| %>
+                      <%= link_to "Adoption Invoice for #{adp.cat.name}", invoice_path(inv) %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to "Create Invoice for #{adp.cat.name}", new_adoption_invoice_path(adp), class: "btn btn-small" %>
                   <% end %>
                 </div>
                 <div class="span1">

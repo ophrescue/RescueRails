@@ -1,0 +1,14 @@
+<%= form_for [@invoiceable, @invoice], :html=> {class: 'needs-validation'} do |f| %>
+    <%= render 'shared/error_messages', :object => f.object %>
+        <div class="form-group">
+            <%= f.label :due_amt, 'Amount due in whole dollars' %>
+            <%= f.number_field :due_amt, class: "form-control", required: true %>
+        </div>
+        <div class="form-group">
+            <%= f.label :description, 'Description for invoice (optional)' %>
+            <%= f.text_area :description, class: "form-control", rows: "3" %>
+        </div>
+        <div class="actions well">
+            <%= f.submit "Submit", :class => "btn btn-primary" %>
+        </div>
+<% end %>

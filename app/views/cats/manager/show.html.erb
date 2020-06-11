@@ -54,6 +54,10 @@
       <%= render partial: 'medical_summary' %>
       <%= render partial: 'behaviour_summary' %>
 
+      <h4>Adopters</h4>
+      <ul id='adopters'>
+        <%= render(partial: 'adoption', collection: @cat.cat_adoptions) || "no adopters" %>
+      </ul>
       <% if @cat.attachments.any? %>
         <h4>Attachments</h4>
           <ul class="list-unstyled">
@@ -115,8 +119,6 @@
         <dd id='sponsored_by'><%= @cat.sponsored_by %></dd>
         <dt>Source Shelter</dt>
         <dd id='shelter'><%= @cat.shelter&.name || 'unknown' %></dd>
-        <dt>Adopters</dt>
-        <dd id='adopters'><%= render(partial: 'adopter', collection: @cat.adopters) || "no adopters" %></dd>
         <dt>Available on</dt>
         <dd id='available_on_dt'><%= @cat.available_on_dt || 'unknown' %></dd>
         <dt>Intake date</dt>

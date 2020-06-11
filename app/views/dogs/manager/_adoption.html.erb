@@ -1,0 +1,17 @@
+<li class='adopter'>
+    <%= link_to adoption.adopter.name, adoption.adopter %> -
+    <%= adoption.adopter.status %> -
+    <%= adoption.relation_type %>
+    <% if adoption.invoices.present? %>
+        <ul>
+        <% adoption.invoices.find_each do |inv| %>
+            <% if inv.open? %>
+                <li>Invoice Pending Payment</li>
+            <% end %>
+            <% if inv.paid? %>
+                <li>Invoice Paid <%= inv.paid_at.strftime('%m/%d/%Y') %></li>
+            <% end %>
+        <% end %>
+        </ul>
+    <% end %>
+</li>

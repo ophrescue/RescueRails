@@ -31,6 +31,7 @@ class InvoicesController < ApplicationController
     @invoice = @invoiceable.invoices.build(invoice_create_params)
     @invoice.slug = SecureRandom.urlsafe_base64(32)
     @invoice.user_id = current_user.id
+    @invoice.status = 'open'
     if @invoice.save
       flash[:success] = "Invoice Generated"
       redirect_to polymorphic_path([@invoiceable.adopter])
@@ -51,11 +52,19 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.friendly.find(params[:id])
     @invoice.card_token =  stripe_params["stripeToken"]
 
-    @invoice.process_payment
-    @invoice.save
-  rescue Stripe::CardError => e
-    flash[:error] = e.message
-    render :show
+    begin
+      @invoice.process_payment(@invoice.invoiceable.adopter.email)
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+    else
+      @invoice.paid_method = 'Stripe'
+      @invoice.paid_at = Time.now
+      @invoice.status = 'paid'
+      @invoice.save
+      flash[:success] = 'Payment Processed Successfully '
+    ensure
+      render :show
+    end
   end
 
   def index
@@ -64,8 +73,14 @@ class InvoicesController < ApplicationController
 
   private
 
+  def format_for_page
+    return PER_PAGE unless request.format.xls?
+
+    Invoice.count
+  end
+
   def invoice_create_params
-    params.require(:invoice).permit(:due_amt, :description)
+    params.require(:invoice).permit(:amount, :description)
   end
 
   def stripe_params

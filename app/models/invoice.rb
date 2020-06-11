@@ -18,13 +18,13 @@
 #  id                 :bigint           not null, primary key
 #  invoiceable_id     :integer
 #  invoiceable_type   :string
-#  url_hash           :string
-#  due_amt            :integer
+#  slug               :string
+#  amount             :integer
+#  status             :string
 #  user_id            :bigint
 #  description        :text
 #  stripe_customer_id :string
 #  card_token         :string
-#  paid_amt           :integer
 #  paid_at            :datetime
 #  paid_method        :string
 #  created_at         :datetime         not null
@@ -40,9 +40,14 @@ class Invoice < ApplicationRecord
 
   friendly_id :url_hash, use: :slugged
 
+  STATUSES = ['open', 'paid']
+
+  validates_presence_of :status
+  validates_inclusion_of :status, in: STATUSES
+
   VALIDATION_ERROR_MESSAGES = {content: :blank}
 
-  def process_payment
+  def process_payment(email)
     customer = Stripe::Customer.create email: email,
                                        card: card_token
 
@@ -50,6 +55,14 @@ class Invoice < ApplicationRecord
                           amount: amount * 100,
                           description: 'Adoption Fee',
                           currency: 'usd'
+  end
+
+  def open?
+    return true if self.status == 'open'
+  end
+
+  def paid?
+    return true if self.status == 'paid'
   end
 
 end

@@ -13,7 +13,7 @@
 
         <%= f.fields_for :adoption_app do |af| %>
           <%= render 'adopters/steps/your_home', :af => af %>
-        <% end %>	
+        <% end %>
 
         <%= f.fields_for :adoption_app do |af| %>
 
@@ -34,6 +34,8 @@
 
         <div id="no_pets" class="step">
           <h4>References</h4>
+          <p>Providing email addresses for your references can often speed up the review process.</p>
+
           <% @i = 1 %>
           <%= f.fields_for :references do |builder| %>
             <%= render 'adopters/steps/reference_fields', :rf => builder %>

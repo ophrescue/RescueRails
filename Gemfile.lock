@@ -197,7 +197,7 @@ GEM
       activesupport (>= 4.1)
     hitimes (2.0.0)
     honeybadger (4.6.0)
-    i18n (1.8.2)
+    i18n (1.8.3)
       concurrent-ruby (~> 1.0)
     i18n_data (0.10.0)
     jmespath (1.4.0)
@@ -422,7 +422,7 @@ GEM
     websocket-extensions (0.1.5)
     whenever (0.9.7)
       chronic (>= 0.6.3)
-    wicked_pdf (2.0.2)
+    wicked_pdf (2.1.0)
       activesupport
     will_paginate (3.3.0)
     xpath (3.2.0)

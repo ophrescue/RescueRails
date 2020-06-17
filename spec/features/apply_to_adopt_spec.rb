@@ -50,6 +50,7 @@ feature 'Apply for Adoption' do
 
     click_button('Next')
     expect(page).to have_content('Your New Pet')
+    choose('adopter_dog_or_cat_dog')
     fill_in('adopter_dog_name', with: 'Rex and Precious')
     fill_in('adopter_dog_reqs', with: 'Dog Under 50lbs')
     fill_in('adopter_why_adopt', with: 'Want to love them and hold them')
@@ -139,6 +140,9 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('I never surrendered my pets')
     expect(page).to have_content('Want to love them and hold them')
 
+    click_link('Pet Choices')
+    expect(page).to have_content('Dog')
+
     click_link('Pet Vet')
     expect(page).to have_content('I have a dog named Archer')
     expect(page).to have_content('Dr. Kreiger 555-555-5555')
@@ -211,6 +215,7 @@ feature 'Apply for Adoption' do
 
     click_button('Next')
     expect(page).to have_content('Your New Pet')
+    choose('adopter_dog_or_cat_dog')
     fill_in('adopter_dog_name', with: 'Rex and Precious')
     fill_in('adopter_dog_reqs', with: 'Dog Under 50lbs')
     fill_in('adopter_why_adopt', with: 'Want to love them and hold them')
@@ -301,6 +306,9 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('I never surrendered my pets')
     expect(page).to have_content('Want to love them and hold them')
 
+    click_link('Pet Choices')
+    expect(page).to have_content('Dog')
+
     click_link('Pet Vet')
     expect(page).to have_content('I have a dog named Archer')
     expect(page).to have_content('Dr. Kreiger 555-555-5555')
@@ -369,6 +377,7 @@ feature 'Apply for Adoption' do
 
     click_button('Next')
     expect(page).to have_content('Your New Pet')
+    choose('adopter_dog_or_cat_dog')
     fill_in('adopter_dog_name', with: 'Rex and Precious')
     fill_in('adopter_dog_reqs', with: 'Dog Under 50lbs')
     fill_in('adopter_why_adopt', with: 'Want to love them and hold them')
@@ -459,6 +468,9 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('We will take the dog to training')
     expect(page).to have_content('I never surrendered my pets')
     expect(page).to have_content('Want to love them and hold them')
+
+    click_link('Pet Choices')
+    expect(page).to have_content('Dog')
 
     click_link('Pet Vet')
     expect(page).to have_content('I have a dog named Archer')

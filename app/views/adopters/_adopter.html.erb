@@ -4,6 +4,13 @@
   <% if (params[:status] == nil) || (params[:status] == "active")  %>
     <td><%= adopter.status.titleize %></td>
   <% end %>
+  <td>
+    <% if adopter.dog_or_cat %>
+      <%= adopter.dog_or_cat %>
+    <% else %>
+      Unassigned
+    <% end %>
+  </td>
   <td><%= link_to adopter.name, adopter %></td>
   <td><%= truncate(adopter.dog_name, :length => 30) %></td>
   <td>

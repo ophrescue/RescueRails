@@ -55,6 +55,7 @@
       <% if (params[:status] == nil) || (params[:status] == "active")%>
         <th><%= sortable "status" %></th>
     <% end %>
+      <th><%= sortable "dog_or_cat" %></th>
       <th><%= sortable "name" %></th>
       <th><%= sortable "dogs/cats" %></th>
       <th><%= sortable "assigned_to" %></th>

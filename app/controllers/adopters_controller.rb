@@ -29,6 +29,7 @@
 #  when_to_call        :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
+#  dog_or_cat          :string
 #  dog_reqs            :text
 #  why_adopt           :text
 #  dog_name            :string(255)
@@ -132,6 +133,7 @@ class AdoptersController < ApplicationController
                                     :zip,
                                     :status,
                                     :when_to_call,
+                                    :dog_or_cat,
                                     :dog_reqs,
                                     :why_adopt,
                                     :dog_name,

@@ -29,6 +29,7 @@
 #  when_to_call        :string
 #  created_at          :datetime
 #  updated_at          :datetime
+#  dog_or_cat          :string
 #  dog_reqs            :text
 #  why_adopt           :text
 #  dog_name            :string

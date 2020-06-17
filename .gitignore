@@ -28,3 +28,4 @@ tags
 tmp/
 yarn-debug.log*
 yarn-error.log
+script/log/*.log

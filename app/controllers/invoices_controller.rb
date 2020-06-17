@@ -19,7 +19,7 @@ class InvoicesController < ApplicationController
   before_action :require_login, except: %i[show]
   before_action :unlocked_user, except: %i[show]
   before_action :select_bootstrap41
-  before_action :show_user_navbar
+  before_action :show_user_navbar, except: %i[show]
 
   def new
     load_invoiceable

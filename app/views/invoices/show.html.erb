@@ -16,7 +16,7 @@
         <% end %>
         <button id="payButton" class="btn btn-primary btn-lg">Make Payment</button>
       <% else %>
-        <p>Invoice of $<%= number_to_currency(@invoice.amount) %> was paid in full <%= @invoice.paid_at.strftime("%m/%d/%Y at %l:%M:%S %p") %>.
+        <p>Invoice of <%= number_to_currency(@invoice.amount) %> was paid in full <%= @invoice.paid_at.strftime("%m/%d/%Y at %l:%M:%S %p") %>.
       <% end %>
     </div>
   </div>

@@ -62,6 +62,7 @@ class InvoicesController < ApplicationController
       @invoice.status = 'paid'
       @invoice.save
       flash[:success] = 'Payment Processed Successfully '
+      InvoiceMailer.invoice_paid(@invoice.id).deliver_later
     ensure
       render :show
     end

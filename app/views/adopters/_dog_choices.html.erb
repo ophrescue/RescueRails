@@ -6,7 +6,7 @@
     <% else %>
       <td>
         <%= form_for @adopter, format: :json, html: { class: 'form-horizontal' } do |f| %>
-        <%= f.select :dog_or_cat, options_for_select([['Dog'], ['Cat']]) %>
+        <%= f.select :dog_or_cat, options_for_select([['Dog'], ['Cat']]), include_blank: true %>
         <div id="status-icon" class=""></div>
         <% end %>
       </td>

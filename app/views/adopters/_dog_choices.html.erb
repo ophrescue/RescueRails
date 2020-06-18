@@ -1,7 +1,16 @@
 <table class="table table-striped table-bordered table-condensed">
   <tr>
     <th>Pet Type</th>
-    <td><%= @adopter.dog_or_cat%></td>
+    <% if @adopter.dog_or_cat? %>
+      <td><%= @adopter.dog_or_cat%></td>
+    <% else %>
+      <td>
+        <%= form_for @adopter, format: :json, html: { class: 'form-horizontal' } do |f| %>
+        <%= f.select :dog_or_cat, options_for_select([['Dog'], ['Cat']]), include_blank: true %>
+        <div id="status-icon" class=""></div>
+        <% end %>
+      </td>
+    <% end %>
   </tr>
   <tr>
   <th>Pet Selections</th>

@@ -26,6 +26,8 @@ $( function() {
       isEditing = !isEditing;
     });
 
+    $('select#adopter_dog_or_cat').on('blur', RescueRails.saveParentForm);
+
     $('textarea#adopter_cat_name').on('blur', RescueRails.saveParentForm);
 
     var remoteCatSource = function(request, response) {

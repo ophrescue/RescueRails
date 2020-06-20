@@ -75,7 +75,7 @@
       <%= f.fields_for :adoption_app do |af|%>
       <th>Others in Household</th>
       <td>
-        <div class='read-only'><%= @adopter.adoption_app.other_household_names %></div>
+        <div class='read-only'><%= af.object.other_household_names %></div>
         <div class='editable'><%= af.text_area :other_household_names %></div>
       </td>
       <% end %>
@@ -138,12 +138,12 @@
     </tr>
     <% end %>
     <% if @adopter.adoption_app.adopter_age %>
-    <tr>
-      <th>
-        Adopter Age
-      </th>
-      <td><%= @adopter.adoption_app.adopter_age %></td>
-    </tr>
+      <tr>
+        <th>
+         Adopter Age
+        </th>
+        <td><%= @adopter.adoption_app.adopter_age %></td>
+      </tr>
     <% end %>
     <tr>
       <td colspan="2">

@@ -54,7 +54,6 @@
         <div class='editable'><%= f.text_field :phone %></div>
       </td>
     </tr>
-    <% if @adopter.other_phone? %>
       <tr>
         <th>Other Phone</th>
         <td>
@@ -62,7 +61,6 @@
           <div class='editable'><%= f.text_field :other_phone %></div>
         </td>
       </tr>
-    <% end %>
     <tr>
       <th>Best Time to Call</th>
       <td>
@@ -74,8 +72,13 @@
       <td><%= @adopter.adoption_app.spouse_name %></td>
     </tr>
     <tr>
+      <%= f.fields_for :adoption_app do |af|%>
       <th>Others in Household</th>
-      <td><%= @adopter.adoption_app.other_household_names %></td>
+      <td>
+        <div class='read-only'><%= af.object.other_household_names %></div>
+        <div class='editable'><%= af.text_area :other_household_names %></div>
+      </td>
+      <% end %>
     </tr>
     <% if @adopter.adoption_app.verify_home_auth == true %>
     <tr>
@@ -135,12 +138,12 @@
     </tr>
     <% end %>
     <% if @adopter.adoption_app.adopter_age %>
-    <tr>
-      <th>
-        Adopter Age
-      </th>
-      <td><%= @adopter.adoption_app.adopter_age %></td>
-    </tr>
+      <tr>
+        <th>
+         Adopter Age
+        </th>
+        <td><%= @adopter.adoption_app.adopter_age %></td>
+      </tr>
     <% end %>
     <tr>
       <td colspan="2">

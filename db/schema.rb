@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_044120) do
+ActiveRecord::Schema.define(version: 2020_06_23_190414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 2020_06_12_044120) do
     t.boolean "verify_home_auth", default: false
     t.boolean "has_family_under_18"
     t.date "birth_date"
+    t.string "prev_pets_type"
+    t.string "current_pets_type"
     t.index ["adopter_id"], name: "index_adoption_apps_on_adopter_id"
   end
 

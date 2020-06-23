@@ -1,7 +1,21 @@
 <%= form_for @adoption_app, html: { class: 'form-horizontal edit-vet' } do |f| %>
     <table class="table table-striped table-bordered table-condensed">
     <tr>
-        <th class="span2">Current Pets</th>
+        <th class="span2">Previously Owned Cats or Dogs?</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.prev_pets_type %></div>
+          <div class='vet-editable'><%= f.select :prev_pets_type, options_for_select([['Dogs'], ['Cats'], ['Both']]), include_blank: true %></div>
+        </td>
+    </tr>
+    <tr>
+        <th class="span2">Currently Own Cats or Dogs?</th>
+        <td>
+          <div class='vet-read-only'><%= f.object.current_pets_type %></div>
+          <div class='vet-editable'><%= f.select :current_pets_type, options_for_select([['Dogs'], ['Cats'], ['Both'], ['None']]), include_blank: true %></div>
+        </td>
+    </tr>
+    <tr>
+        <th class="span2">Pets</th>
         <td>
           <div class='vet-read-only'><%= f.object.current_pets %></div>
           <div class='vet-editable'><%= f.text_area :current_pets %></div>

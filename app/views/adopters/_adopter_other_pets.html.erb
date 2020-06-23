@@ -1,6 +1,14 @@
 <table class="table table-striped table-bordered table-condensed">
   <tr>
-    <th>Current Pets</th>
+    <th>Previously Owned Cats or Dogs?</th>
+    <td><%= @adopter.adoption_app.prev_pets_type</td>
+  </tr>
+  <tr>
+    <th>Currently Own Cats or Dogs?</th>
+    <td><%= @adopter.adoption_app.current_pets_type %>
+  </tr>
+  <tr>
+    <th>Pets</th>
     <td><%= @adopter.adoption_app.current_pets %></td>
   </tr>
   <tr>

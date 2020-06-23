@@ -1,12 +1,50 @@
 <div id="other_pets" class="step">
-    <div class="control-group">
+   <div class="contol-group">
+    <%= af.label :prev_pets_type, "Have you previously owned dogs, cats, or both?", :class => "control-label"%>
+    <div class="controls">
+      <label class="radio">
+        <%= af.radio_button :prev_pets_type, "Dogs", :class => "required" %>
+        <span>Dogs</span>
+      </label>
+      <label class="radio">
+        <%= af.radio_button :prev_pets_type, "Cats", :class => "required" %>
+        <span>Cats</span>
+      </label>
+      <label class="radio">
+        <%= af.radio_button :prev_pets_type, "Both", :class => "required" %>
+        <span>Both</span>
+      </label>
+    </div>
+   </div>
+   <div class="control-group">
+    <%= af.label :current_pets_type, "Do you currently own any dogs or cats?", :class => "control-label" %>
+    <div class="controls">
+      <label class="radio">
+        <%= af.radio_button :current_pets_type, "Dogs", :class => "required pets-type-radio" %>
+        <span>Dogs</span>
+      </label>
+      <label class="radio">
+        <%= af.radio_button :current_pets_type, "Cats", :class => "required pets-type-radio" %>
+        <span>Cats</span>
+      </label>
+      <label>
+        <%= af.radio_button :current_pets_type, "Both", :class => "required pets-type-radio" %>
+        <span>Both</span>
+      </label>
+      <label>
+        <%= af.radio_button :current_pets_type, "None", :class => "required pets-type-radio" %>
+        <span>None</span>
+      </label>
+    </div>
+   </div>
+   <div class="control-group">
       <%= af.label :current_pets, "Please list all dogs or cats you have owned over the past 10 years and where they are now.  Also include pets that live in your home but don't belong to you (Roommate's dog, etc).", :class => "control-label" %>
       <div class="controls">
         <%= af.text_area :current_pets, :class => "input-xxlarge", :rows => "3" %>
         <span class="help-inline">Include name, age and breed</span>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group current-q">
       <%= af.label :had_pets, "Are all your dogs/cats spayed/neutered?", :class => "control-label" %>
       <div class="controls">
         <label class="radio">
@@ -19,16 +57,16 @@
         </label>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group current-q">
       <%= af.label :why_not_fixed, "If no, please explain why.", :class => "control-label" %>
       <div class="controls">
         <%= af.text_area :why_not_fixed, :class => "input-xxlarge", :rows => "3"%>
       </div>
     </div>
-
+    <div class="current-q">
     <h5>Are all the pets in your household up to date on these medications?</h5>
-
-    <div class="control-group">
+    </div>
+    <div class="control-group dogs-q">
       <%= af.label :shot_dhpp_dhlpp, "DHPP/DHLPP (dogs only)", :class => "control-label"  %>
       <div class="controls">
         <label class="radio">
@@ -42,7 +80,7 @@
       </div>
     </div>
 
-    <div class="control-group">
+    <div class="control-group cats-q">
       <%= af.label :shot_fpv_fhv_fcv, "FPV/FHV/FCV (cats only)", :class => "control-label"  %>
       <div class="controls">
         <label class="radio">
@@ -56,7 +94,7 @@
       </div>
     </div>
 
-    <div class="control-group">
+    <div class="control-group current-q">
       <%= af.label :shot_rabies, "Rabies", :class => "control-label"  %>
       <div class="controls">
         <label class="radio">
@@ -70,7 +108,7 @@
       </div>
     </div>
 
-    <div class="control-group">
+    <div class="control-group dogs-q">
       <%= af.label :shot_bordetella, "Bordetella (dogs only)", :class => "control-label"  %>
       <div class="controls">
         <label class="radio">
@@ -84,7 +122,7 @@
       </div>
     </div>
 
-    <div class="control-group">
+    <div class="control-group dogs-q">
       <%= af.label :shot_heartworm, "Heartworm preventative (dogs only)", :class => "control-label"  %>
       <div class="controls">
         <label class="radio">
@@ -98,7 +136,7 @@
       </div>
     </div>
 
-    <div class="control-group">
+    <div class="control-group current-q">
       <%= af.label :shot_flea_tick, "Flea/Tick preventative", :class => "control-label"  %>
       <div class="controls">
         <label class="radio">
@@ -112,13 +150,13 @@
       </div>
     </div>
 
-    <div class="control-group">
+    <div class="control-group current-q">
       <%= af.label :current_pets_uptodate_why, "If no, please explain why.", :class => "control-label" %>
       <div class="controls">
         <%= af.text_area :current_pets_uptodate_why, :class => "input-xxlarge", :rows => "3" %>
       </div>
     </div>
-
+  <div class="current-q">
     <h5>Please provide the name and phone number of a veterinarian who has seen these pets.</h5>
 
     <div class="control-group">
@@ -129,4 +167,5 @@
       </div>
     </div>
     <p><span class="label label-important">Important</span> Call your vet and give permission to release your pet records to Operation Paws for Homes.</p>
+  </div>
 </div>

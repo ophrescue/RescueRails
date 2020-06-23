@@ -157,6 +157,8 @@ class AdoptersController < ApplicationController
                                       :dog_exercise,
                                       :dog_stay_when_away,
                                       :dog_vacation,
+                                      :prev_pets_type,
+                                      :current_pets_type,
                                       :current_pets,
                                       :why_not_fixed,
                                       :current_pets_uptodate,

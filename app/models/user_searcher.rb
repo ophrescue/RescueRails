@@ -59,7 +59,7 @@ class UserSearcher
                  :has_fence, :puppies_ok, :has_parvo_house, :transporter, :training_team,
                  :foster_mentor, :translator, :public_relations, :fundraising, :medical_behavior,
                  :boarding_buddy, :social_media, :graphic_designer, :active_volunteer, :inactive_volunteer,
-                 :available_to_foster
+                 :available_to_foster, :locked
                 )
   end
 end

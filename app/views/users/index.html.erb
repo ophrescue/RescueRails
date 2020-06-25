@@ -83,7 +83,7 @@
     <%= link_to "Active Volunteers", users_path(active_volunteer: :true, location: params[:location]) %>
   </li>
   <li class="<%='active' if params[:inactive_volunteer] %>">
-    <%= link_to "Inactive Volunteers", users_path(inactive_volunteer: :true) %>
+    <%= link_to "Inactive Volunteers", users_path(inactive_volunteer: :true, location: params[:location]) %>
   </li>
   <li class="<%= 'active' if params[:locked] %>">
     <%= link_to "Locked Volunteers", users_path(locked: :true, location: params[:location]) %>

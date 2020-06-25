@@ -149,7 +149,7 @@ class User < ApplicationRecord
 
   scope :unlocked,                -> { where(locked: false) }
 
-  scope :inactive_volunteer,      -> (status = false) { where(active: status)}
+  scope :inactive_volunteer,      -> (status = false) { where(active: status, locked: status)}
   scope :house_type,              -> (type) { where(house_type: type) }
 
   HASH_SECRET = "5b0a2cd2064828d34ad737f9f6a586fb773297a01639c2b3ff24fcb7"

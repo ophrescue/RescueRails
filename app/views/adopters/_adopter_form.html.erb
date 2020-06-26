@@ -10,7 +10,7 @@
           <span class="label label-warning">Under 21</span>
         <% end %>
 
-        <% if @adopter.adoption_app.pets_branch == "no_pets" && @adopter.adoption_app.prev_pets_type.empty? %>
+        <% if @adopter.adoption_app.pets_branch == "no_pets" && @adopter.adoption_app.prev_pets_type.blank? %>
           <span class="label label-warning">First Time Pet Owner</span>
         <% elsif @adopter.adoption_app.prev_pets_type == "Cats" && @adopter.dog_or_cat == "Dog" %>
           <span class="label label-warning">First Time Dog Owner</span>

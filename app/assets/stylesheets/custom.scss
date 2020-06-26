@@ -359,6 +359,12 @@ $spacer: 1rem !default;
     padding-top: ($spacer * 1.5) !important;
   } p {
     padding-bottom: ($spacer * 0.5) !important;
+  } h3 {
+    padding-top: ($spacer * 0.25) !important;
+    padding-bottom: ($spacer * 0.25) !important;
+  } img {
+    margin: 0 auto;
+    margin-bottom: ($spacer * 0.25) !important;
   }
 }
 
@@ -367,3 +373,12 @@ img.side {
   margin-bottom: ($spacer * 5) !important;
   margin-left: ($spacer * 2) !important;
 }
+
+.documentary { 
+  margin-top: ($spacer * 1.25) !important;
+  margin-bottom: ($spacer * 1.25) !important;
+}
+iframe {
+  margin: 0 auto;
+  display: block;
+  }

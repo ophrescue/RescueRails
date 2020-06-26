@@ -93,6 +93,10 @@ form .control-group.error span.error {
   margin-bottom: 10px;
 }
 
+.article {
+  margin-right: ($spacer * 1.5) !important;
+}
+
 .article h2 {
   border-bottom: 1px solid #000000;
   margin-bottom: 10px;
@@ -349,4 +353,20 @@ $spacer: 1rem !default;
 
 .dashboard-posts h5 a{
   color: #212529;
+}
+
+// Static Pages HeadingBootstrap 4
+
+h1.pages {
+  padding-top: ($spacer * 1.5) !important;
+  padding-bottom: ($spacer * 0.5) !important;
+}
+p.pages {
+  padding-bottom: ($spacer * 1.25) !important;
+}
+
+img.side {
+  padding-top: ($spacer * 5) !important;
+  padding-bottom: ($spacer * 5) !important;
+  padding-left: ($spacer * 2) !important;
 }

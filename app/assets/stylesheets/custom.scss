@@ -17,6 +17,8 @@
   padding-bottom: 40px;
 }*/
 
+$spacer: 1rem !default;
+
 label.valid {
   width: 24px;
   height: 24px;
@@ -329,7 +331,6 @@ div .fb-like {
   color: #FFFFFF;
   text-shadow:#333333 0px 0px 10px;
 }
-$spacer: 1rem !default;
 
 .dog-hero-content {
   padding-top: ($spacer * 7.5) !important;

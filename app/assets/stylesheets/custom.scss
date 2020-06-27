@@ -307,6 +307,12 @@ div .fb-like {
   background-color: #f5f39fe1;
 }
 
+.card-feature {
+  background-color: #f5f39fe1;
+  margin-top: ($spacer * 1.25) !important;
+  margin-bottom: ($spacer * 1.25) !important;
+}
+
 // Mobile Dropdown Menu fix https://github.com/twbs/bootstrap/issues/7968
 .dropdown-backdrop {
   position: static;
@@ -374,7 +380,7 @@ img.side {
   margin-left: ($spacer * 2) !important;
 }
 
-.documentary { 
+.vid { 
   margin-top: ($spacer * 1.25) !important;
   margin-bottom: ($spacer * 1.25) !important;
 }

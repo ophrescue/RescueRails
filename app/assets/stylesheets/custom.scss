@@ -365,7 +365,7 @@ div .fb-like {
   h1 {
     padding-top: ($spacer * 1.5) !important;
   } p {
-    padding-bottom: ($spacer * 0.5) !important;
+    padding-bottom: ($spacer * 0.25) !important;
   } h3 {
     padding-top: ($spacer * 0.25) !important;
     padding-bottom: ($spacer * 0.25) !important;
@@ -374,10 +374,19 @@ div .fb-like {
   }
 }
 
+.card-space {
+  margin-bottom: ($spacer * 1.25) !important;
+}
+
 img.side {
   margin-top: ($spacer * .75) !important;
   margin-bottom: ($spacer * 5) !important;
   margin-left: ($spacer * 2) !important;
+}
+
+img.shorter-side {
+  margin-top: ($spacer * 0.5) !important;
+  margin-bottom: ($spacer * 4) !important;
 }
 
 .middle {

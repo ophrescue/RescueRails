@@ -28,6 +28,8 @@ class Adoption < ApplicationRecord
   belongs_to :dog
   belongs_to :adopter
 
+  AMOUNT_TO_SHOW = ['MyApplications', 'OpenApplications', 'AllApplications']
+
   RELATION_TYPE = ['interested', 'adopted', 'returned',
         'pending adoption', 'pending return', 'trial adoption']
 

@@ -52,7 +52,7 @@ class AdoptersController < ApplicationController
 
   def index
     session[:last_search] = request.url
-    @adopters = AdopterSearcher.search(params: params)
+    @adopters = AdopterSearcher.search(params: params, user_id: current_user.id)
   end
 
   def show

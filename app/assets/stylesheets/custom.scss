@@ -397,10 +397,29 @@ img.shorter-side {
 }
 
 .vid { 
+  margin: 0 auto;
+  display: block;
   margin-top: ($spacer * 1.25) !important;
   margin-bottom: ($spacer * 1.25) !important;
 }
-iframe {
-  margin: 0 auto;
-  display: block;
+
+.max-vid {
+  max-height: 450px;
+  max-width: 500px;
+}
+
+.partner {
+  margin-left: ($spacer * 0.5) !important;
+  img {
+    margin-top: ($spacer * 0.25) !important;
+    margin-bottom: ($spacer * 0.25) !important;
   }
+}
+
+@media screen and (max-width : 768px){
+  .lead{
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  }
+}

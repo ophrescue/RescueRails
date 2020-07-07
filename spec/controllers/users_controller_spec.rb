@@ -127,6 +127,18 @@ describe UsersController, type: :controller do
         get :index, params: { active_volunteer: true }
         expect(assigns(:users)).to match_array([smith, admin, active_user])
       end
+
+      it 'returns the inactive not locked team members' do
+        smith = create(:user, name: 'Jane Smithbot', locked: true)
+        get :index, params: { inactive_volunteer: true }
+        expect(assigns(:users)).to match_array([inactive_user])
+      end
+
+      it 'returns the locked team members' do
+        smith = create(:user, name: 'Jane Smithbot', locked: true)
+        get :index, params: { locked: true }
+        expect(assigns(:users)).to match_array([smith])
+      end
     end
 
     context 'logged in as an inactive user' do

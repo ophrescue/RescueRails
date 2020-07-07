@@ -137,6 +137,31 @@ $( function() {
       isRefEditing = !isRefEditing;
     });
 
+    var isRentalEditing = false;
+
+    $('#rental').on('click', 'a#toggle-edit-rental', function() {
+      if (isRentalEditing) {
+        // find all enabled fields in .edit-rent and disable them
+        $('form.edit-rental .to-disable').prop("disabled", true);
+        $('.rental-editable').hide();
+        $('.rental-read-only').show();
+        $('a#toggle-edit-rental').addClass('btn-primary').text("Edit Rental Info");
+        $('input.rental-save').removeClass('btn-primary');
+      }
+      else {
+        $('form.edit-rental :disabled')
+          .removeAttr('disabled')
+          .addClass('to-disable');
+
+        $('.rental-editable').show();
+        $('.rental-read-only').hide();
+        $('a#toggle-edit-rental').removeClass('btn-primary').text("Cancel");
+        $('input.rental-save').addClass('btn-primary');
+      }
+
+      isRentalEditing = !isRentalEditing;
+    });
+
     var isVetEditing = false;
 
     $('#otherpets').on('click', 'a#toggle-edit-vet', function() {

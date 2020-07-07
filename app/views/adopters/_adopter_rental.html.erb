@@ -1,26 +1,47 @@
-<table class="table table-striped table-bordered table-condensed">
-  <tr>
-    <th>Landlord Name</th>
-    <td><%= @adopter.adoption_app.landlord_name %></td>
-  </tr>
-  <tr>
-    <th>Landlord's Phone</th>
-    <td><%= @adopter.adoption_app.landlord_phone %></td>
-  </tr>
-  <tr>
-    <th>Landlord's Email</th>
-    <td>
-      <% if @adopter.adoption_app.landlord_email.present? %>
-        <%= mail_to @adopter.adoption_app.landlord_email %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th>Pet Restrictions at Rental</th>
-    <td><%= @adopter.adoption_app.rent_dog_restrictions %></td>
-  </tr>
-  <tr>
-    <th>Expected Rental Costs</th>
-    <td><%= @adopter.adoption_app.rent_costs %></td>
-  </tr>
-</table>
+<%= form_for @adoption_app, html: { class: 'form-horizontal edit-rental' } do |f| %>
+  <table class="table table-striped table-bordered table-condensed">
+    <tr>
+      <th>Landlord Name</th>
+      <td>
+        <div class='rental-read-only'><%= f.object.landlord_name %></div>
+        <div class='rental-editable'><%= f.text_field :landlord_name %></div>
+      </td>
+    </tr>
+    <tr>
+      <th>Landlord's Phone</th>
+      <td>
+        <div class='rental-read-only'><%= f.object.landlord_phone %></div>
+        <div class='rental-editable'><%= f.text_field :landlord_phone %></div>
+      </td>
+    </tr>
+    <tr>
+      <th>Landlord's Email</th>
+      <td>
+        <% if f.object.landlord_email.present? %>
+          <div class='rental-read-only'><%= mail_to f.object.landlord_email %></div>
+        <% else %>
+          <div class='rental-read-only'><%= f.object.landlord_email %></div>
+        <% end %>
+        <div class='rental-editable'><%= f.text_field :landlord_email %></div>
+      </td>
+    </tr>
+    <tr>
+      <th>Pet Restrictions at Rental</th>
+      <td>
+        <div class='rental-read-only'><%= f.object.rent_dog_restrictions %></div>
+        <div class='rental-editable'><%= f.text_area :rent_dog_restrictions %></div>
+      </td>
+    </tr>
+    <tr>
+      <th>Expected Rental Costs</th>
+      <td>
+        <div class='rental-read-only'><%= f.object.rent_costs %></div>
+        <div class='rental-editable'><%= f.text_area :rent_costs %></div>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <a id="toggle-edit-rental" class="btn btn-primary">Edit Rental Info</a>
+    <%= f.submit "Save Rental Info", class: "btn rental-save", disabled: "disabled" %>
+  </p>
+<% end %>

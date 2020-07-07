@@ -153,6 +153,7 @@ class AdoptersController < ApplicationController
                                     :pre_q_costs,
                                     adoption_app_attributes:
                                     [
+                                      :id,
                                       :adopter_id,
                                       :spouse_name,
                                       :other_household_names,

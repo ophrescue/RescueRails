@@ -149,7 +149,7 @@ class User < ApplicationRecord
 
   scope :unlocked,                -> { where(locked: false) }
 
-  scope :inactive_volunteer,      -> (status = false) { where(active: status)}
+  scope :inactive_volunteer,      -> (status = false) { where(active: status, locked: status)}
   scope :house_type,              -> (type) { where(house_type: type) }
 
   HASH_SECRET = "5b0a2cd2064828d34ad737f9f6a586fb773297a01639c2b3ff24fcb7"
@@ -193,6 +193,7 @@ class User < ApplicationRecord
                    has_dogs: :has_own_dogs,
                    has_fence: :has_fenced_yard,
                    has_parvo_house: :parvo_house,
+                   locked: :locked,
                    medical_behavior: :medical_behavior_permission,
                    newsletter: :writes_newsletter,
                    photographer: :is_photographer,
@@ -201,7 +202,8 @@ class User < ApplicationRecord
                    social_media: :social_media_manager,
                    training_team: :training_team,
                    translator: :translator,
-                   transporter: :is_transporter }
+                   transporter: :is_transporter,
+                  }
 
   FILTER_FLAGS.each do |param,attr|
     scope :"#{param}", -> (status = true) { where "#{attr}": status}

@@ -23,6 +23,14 @@ describe AdopterSearcher do
       end
     end
 
+    context 'by secondary email' do
+      let!(:found_adopter) { create(:adopter, name: 'Frank', email: 'frank@test.com', secondary_email: 'joe@test.com') }
+      let(:params) { { search: 'joe@test.com' } }
+      it 'finds the correct adopter' do
+        expect(results).to match_array([found_adopter])
+      end
+    end
+
     context 'by phone number - just numbers, main number' do
       let!(:found_adopter) { create(:adopter, phone: '(213) 456-7890') }
       let(:params) { { search: '2134567890' } }

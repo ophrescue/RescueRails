@@ -1,83 +1,65 @@
-<div class="row-fluid">
-  <div class="span8 offset4">
-    <h1>Don't Walk Away</h1>
-  </div>
-</div>
-
-<div class="row-fluid">
-  <div class="span4 eventphoto hidden-phone">
-    <%= image_tag "special_fund_milo_1.jpg"%>
-    <br>
-    <br>
-    <br>
-    <%= image_tag "special_fund_milo_2.jpg"%>
-    <br>
-    <br>
-    <br>
-    <%= image_tag "special_fund_hhh_1.jpg"%>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8 offset-sm-4 col-md-8 offset-md-4 col-lg-8 offset-lg-4">
+      <div class="pages">
+        <h1>Don't Walk Away</h1>
+      </div>
+    </div>
   </div>
 
-  <div class="span8">
-
-  <div class="article">
-    <br>
-    <p>OPH is committed to saving dogs from high-kill shelters, but did you know this includes dogs passed over for adoption at these shelters because they have medical issues?</p>
-
-    <h3>Getting passed over is a death sentence for most dogs.</h3>
-
-    <p>It's not uncommon for a shelter adopter's excitement be replaced with fear and doubt about a dog when they learn it has a condition like parvovirus, heartworms, or hip dysplasia or physical injuries.  Then, they walk away. Regardless of the dog's likelihood of a full recovery.</p>
-
-    <p><strong>OPH does not walk away. Please join us in standing by these dogs with treatable medical issues. We don’t want to ever have to say “no” to a dog in need of medical attention.</strong></p>
-
-    <p>Include “Little Miracle” or “Have a Heart” in the Special Instructions when making your gift online or on the memo line when making your donation by check.</p>
-
-    <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donate%40ophrescue%2eorg&lc=US&item_name=Operation%20Paws%20for%20Homes&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest"><%= image_tag "paypal-donate-button.png" %></a></p>
-
-    <h5>Donate by check</h5>
-
-    <p>Please mail your check payable to <strong>Operation Paws for Homes</strong> to:</p>
-
-    <%= render template: "shared/_oph_mailing_address" %>
-
-    <p><strong>Questions about supporting OPH?</strong></p>
-
-    <p>Contact us at <a href="mailto:donate@ophrescue.org">donate@ophrescue.org</a>.</p>
-
-    <p>OPH is a 501(c)3 tax-exempt organization. All donations are tax-deductible.</p>
-
-  </div>
-
-    <h2>Little Miracle Fund</h2>
-
-    <div class="article">
-
-      <p>Thousands of dogs and puppies find themselves suffering in shelters across the United States each day, in desperate need of medical attention due to injury, disease, and other life-threatening conditions. These dogs deserve a chance at a happy, healthy life, just as much as their healthy counterparts do. The Little Miracle Fund ensures that OPH can always stand by these little souls.</p>
-
-      <p>Milagro means “miracle” in Spanish. When OPH met Milagro (Milo, for short), he was a puppy from a litter of six that had contracted parvovirus, or parvo. This disease is highly contagious and can spread rapidly in overcrowded shelters. It is especially severe in puppies that are not protected by vaccination or maternal antibodies. Vaccines can prevent parvo, but mortality can reach 91% in untreated cases.</p>
-
-      <p>Within hours of being rescued by OPH, Milo and his littermate, Jazz, were the only two remaining puppies. Something heroic was needed to save them. Thanks to donations from our supporters, OPH rushed Milo and Jazz to a veterinary hospital for emergency care. Despite the best care, we were unable to take Jazz home.</p>
-
-      <p>But to every story there is a silver lining. Thanks to the blood transfusion Milo received, he was able to begin the long journey to recovery. Now, Milo is an ambassador for blood donations that are vital to life-saving procedures for dogs.</p>
-
+  <div class="row">
+    <div class="col-sm-4 col-md-4 col-lg-4 eventphoto d-none d-sm-block">
+      <%= image_tag "special_fund_milo_1.jpg", class: "side w-75"%>
+      <%= image_tag "special_fund_milo_2.jpg", class: "side w-75"%>
+      <%= image_tag "special_fund_hhh_1.jpg", class: "side w-75"%>
     </div>
 
-<br>
+    <div class="col-sm-8 col-md-8 col-lg-8">
+      <div class="article pages">
+        <p>OPH is committed to saving dogs from high-kill shelters, but did you know this includes dogs passed over for adoption at these shelters because they have medical issues?</p>
 
-    <h2>Have a Heart Fund</h2>
+        <h3>Getting passed over is a death sentence for most dogs.</h3>
 
-    <div class="article">
+        <p>It's not uncommon for a shelter adopter's excitement be replaced with fear and doubt about a dog when they learn it has a condition like parvovirus, heartworms, or hip dysplasia or physical injuries.  Then, they walk away. Regardless of the dog's likelihood of a full recovery.</p>
 
-      <p>If left untreated, heartworm is fatal for almost all of the dogs diagnosed with the disease. In the southern United States, where OPH rescues dogs from high-kill shelters, it often goes undetected until it’s too late.</p>
+        <p><strong>OPH does not walk away. Please join us in standing by these dogs with treatable medical issues. We don’t want to ever have to say “no” to a dog in need of medical attention.</strong></p>
 
-      <p>OPH does not turn our back on heartworm positive dogs. We believe all dogs deserve a forever home, especially since heartworm is treatable and preventable.</p>
+        <p>Include “Little Miracle” or “Have a Heart” in the Special Instructions when making your gift online or on the memo line when making your donation by check.</p>
 
-      <p>We have rescued, treated, and placed many heartworm positive dogs with the help of our incredible team of volunteers. Without the commitment from caring veterinarians that work with us and provide treatment at a reduced rate, we could never save so many infected dogs.</p>
+        <p class="text-center"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donate%40ophrescue%2eorg&lc=US&item_name=Operation%20Paws%20for%20Homes&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest"><%= image_tag "paypal-donate-button.png" %></a></p>
 
-      <p>Our adoption fees cannot cover the cost of heartworm treatment, so we rely on the generosity of people like you to help save these deserving dogs.</p>
+        <h3>Donate by check</h3>
 
+        <p>Please mail your check payable to <strong>Operation Paws for Homes</strong> to:</p>
+
+        <%= render template: "shared/_oph_mailing_address" %>
+
+        <p><strong>Questions about supporting OPH?</strong></p>
+
+        <p>Contact us at <a href="mailto:donate@ophrescue.org">donate@ophrescue.org</a>.</p>
+
+        <p>OPH is a 501(c)3 tax-exempt organization. All donations are tax-deductible.</p>
+
+        <h2>Little Miracle Fund</h2>
+
+          <p>Thousands of dogs and puppies find themselves suffering in shelters across the United States each day, in desperate need of medical attention due to injury, disease, and other life-threatening conditions. These dogs deserve a chance at a happy, healthy life, just as much as their healthy counterparts do. The Little Miracle Fund ensures that OPH can always stand by these little souls.</p>
+
+          <p>Milagro means “miracle” in Spanish. When OPH met Milagro (Milo, for short), he was a puppy from a litter of six that had contracted parvovirus, or parvo. This disease is highly contagious and can spread rapidly in overcrowded shelters. It is especially severe in puppies that are not protected by vaccination or maternal antibodies. Vaccines can prevent parvo, but mortality can reach 91% in untreated cases.</p>
+
+          <p>Within hours of being rescued by OPH, Milo and his littermate, Jazz, were the only two remaining puppies. Something heroic was needed to save them. Thanks to donations from our supporters, OPH rushed Milo and Jazz to a veterinary hospital for emergency care. Despite the best care, we were unable to take Jazz home.</p>
+
+          <p>But to every story there is a silver lining. Thanks to the blood transfusion Milo received, he was able to begin the long journey to recovery. Now, Milo is an ambassador for blood donations that are vital to life-saving procedures for dogs.</p>
+
+        <h2>Have a Heart Fund</h2>
+
+          <p>If left untreated, heartworm is fatal for almost all of the dogs diagnosed with the disease. In the southern United States, where OPH rescues dogs from high-kill shelters, it often goes undetected until it’s too late.</p>
+
+          <p>OPH does not turn our back on heartworm positive dogs. We believe all dogs deserve a forever home, especially since heartworm is treatable and preventable.</p>
+
+          <p>We have rescued, treated, and placed many heartworm positive dogs with the help of our incredible team of volunteers. Without the commitment from caring veterinarians that work with us and provide treatment at a reduced rate, we could never save so many infected dogs.</p>
+
+          <p>Our adoption fees cannot cover the cost of heartworm treatment, so we rely on the generosity of people like you to help save these deserving dogs.</p>
+      </div>
     </div>
-<br>
-<br>
-<br>
-<br>
+  </div>
 </div>

@@ -1,548 +1,580 @@
-﻿<div class="row-fluid">
-  <div class="span12">
-    <div class="article">
+﻿<div class="container-fluid">
+  <div class="partner">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="article pages">
 
-    <h2>Funding Partners</h2>
+        <h2>Funding Partners</h2>
 
-    <h1>Thank You!</h1>
+        <h1>Thank You!</h1>
 
-    <p>Operation Paws for Homes is a 501(c)(3) organization and is 100% donor funded.
-    We do not receive funding from federal, state or county governments. As a result,
-    we rely on generous donations and the adoption fees to help in our mission of saving dogs
-    from shelters and finding them forever homes. Thank you for joining our mission to creating a
-    No Kill nation and helping to write the futures for thousands of dogs every year.</p>
+        <p>Operation Paws for Homes is a 501(c)(3) organization and is 100% donor funded.
+        We do not receive funding from federal, state or county governments. As a result,
+        we rely on generous donations and the adoption fees to help in our mission of saving dogs
+        from shelters and finding them forever homes. Thank you for joining our mission to creating a
+        No Kill nation and helping to write the futures for thousands of dogs every year.</p>
 
-    <h3>$25,000+</h3>
-      <ul class="thumbnails">
-        <li>
-          <a target="_blank" href="https://www.petcofoundation.org/" class="thumbnail thumbnail-no-border">
-            <%= image_tag("sponsors/petco_foundation.png", alt: "Petco Foundation") %>
+        <h3>$25,000+</h3>
+      </div>
+    </div>
+    <div class="album">
+      <div class="container">
+        <div class="row">
+            <a target="_blank" href="https://www.petcofoundation.org/">
+              <%= image_tag("sponsors/petco_foundation.png", class: "img-fluid", alt: "Petco Foundation") %>
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="article pages">
+        <h3>$10,000 - $24,999</h3>
+
+        <h3>$5,000 - $9,999</h3>
+      </div>
+    </div>
+    <div class="album">
+      <div class="container">
+        <div class="row">
+          <a target="_blank" href="http://cordish.com">
+            <%= image_tag("sponsors/cordish.jpg", class: "img-fluid", alt: "The Cordish Companies") %>
           </a>
-        </li>
-      </ul>
-
-    <h3>$10,000 - $24,999</h3>
-
-    <h3>$5,000 - $9,999</h3>
-      <ul class="thumbnails">
-        <li>
-          <a target="_blank" href="http://cordish.com" class="thumbnail thumbnail-no-border">
-            <%= image_tag("sponsors/cordish.jpg", alt: "The Cordish Companies") %>
-          </a>
-        </li>
-      </ul>
-
-    <h3>$2,500 - $4,999</h3>
-
-    <% sponsors_2500 =
-      {
-        url: "http://www.fvcbank.com/",
-        img: "fvcbank.jpg",
-        alt: "FVC Bank"
-      },
-      { url: "https://www.purina.com/",
-        img: "purina.png",
-        alt: "purina"
-      },
-      {
-        url: "http://www.petvalu.com/",
-        img: "petvalu.jpg",
-        alt: "PetValu"
-      }
-    %>
-
-    <% sponsors_2500.each_slice(3) do |slice| %>
-      <div class="row">
-        <div class="span12">
-          <ul class="thumbnails">
-          <% slice.each do |spon| %>
-            <li class="span4">
-              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '275') %>
-              </a>
-            </li>
-          <% end %>
-          </ul>
         </div>
       </div>
-    <% end %>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="article pages">  
+        <h3>$2,500 - $4,999</h3>
+      </div>
+    </div>
 
-
-    <h3>$1,000 - $2,499</h3>
-
-    <% sponsors_1000 =
-      {
-        url: "#",
-        img: "daniel_brown.png",
-        alt: "Daniel Brown"
-      },
-      {
-        url: "#",
-        img: "jessica_brown_andy_howlett.png",
-        alt: "Jessica Brown and Andy Howlett"
-      },
-      {
-        url: "https://corporate.discovery.com",
-        img: "discovery.png",
-        alt: "Discovery Communications"
-      },
-      {
-        url: "https://www.nepaldogtreat.pet/",
-        img: "nepaldogtreat.png",
-        alt: "Nepal Dog Treat"
-      },
-      {
-      url: "http://www.northropgrumman.com",
-      img: "northropgrumman.png",
-      alt: "Northrup Grumman"
-      },
-      {
-        url:"https://www.oldetownepetresort.com/" ,
-        img: "oldetownepetresort.png",
-        alt: "Olde Towne Pet Resort"
-      },
-      {
-        url: "https://www.pedigreefoundation.org",
-        img: "pedigreefoundation.png",
-        alt: "Pedigree Foundation"
-      },
-      {
-        url: "http://www.petfinderfoundation.com/",
-        img: "petfinder-foundation.jpg",
-        alt: "Petfinder Foundation"
-      },
-      {
-        url: "#",
-        img: "scott_karen_roland.png",
-        alt: "Scott and Karen Roland"
-      },
-      {
-        url: "https://www.washluberepair.com/",
-        img: "washluberepair.png",
-        alt: "The Auto Spa, The Lube Center, The Auto Repair"
-      },
-      {
-        url: "#",
-        img: "libera_family.png",
-        alt: "The Libera Family"
-      },
-      {
-        url: "#",
-        img: "linda-wolf-homes.jpg",
-        alt: "Wolf Real Estate"
-      },
-      {
-        url: "#",
-        img: "christina_young.png",
-        alt: "Christina Young"
-      },
-      {
-        url: "http://dzaruba.com/",
-        img: "zaruba.jpg",
-        alt: "Zaruba Gallery"
-      }
-    %>
-
-    <% sponsors_1000.each_slice(3) do |slice| %>
-      <div class="row">
-        <div class="span12">
-          <ul class="thumbnails">
-          <% slice.each do |spon| %>
-            <li class="span4">
-              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '225') %>
-              </a>
-            </li>
+        <% sponsors_2500 =
+          {
+            url: "http://www.fvcbank.com/",
+            img: "fvcbank.jpg",
+            alt: "FVC Bank"
+          },
+          { url: "https://www.purina.com/",
+            img: "purina.png",
+            alt: "purina"
+          },
+          {
+            url: "http://www.petvalu.com/",
+            img: "petvalu.jpg",
+            alt: "PetValu"
+          }
+        %>
+    <div class="album">
+      <div class="container">
+        <div class="row align-items-center">
+          <% sponsors_2500.each_slice(3) do |slice| %>
+              <% slice.each do |spon| %>
+              <div class="col md-4 mx-auto">
+                <div class="card mb-4 border-0">
+                  <a target="_blank" href="<%= spon[:url] %>">
+                    <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], class: "w-75")%>
+                  </a>
+                </div>
+              </div>
+            <% end %>
           <% end %>
-          </ul>
         </div>
       </div>
-    <% end %>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="article pages">  
+        <h3>$1,000 - $2,499</h3>
+      </div>
+    </div>
 
-    <h3>$500 - $999</h3>
+        <% sponsors_1000 =
+          {
+            url: "#",
+            img: "daniel_brown.png",
+            alt: "Daniel Brown"
+          },
+          {
+            url: "#",
+            img: "jessica_brown_andy_howlett.png",
+            alt: "Jessica Brown and Andy Howlett"
+          },
+          {
+            url: "https://corporate.discovery.com",
+            img: "discovery.png",
+            alt: "Discovery Communications"
+          },
+          {
+            url: "https://www.nepaldogtreat.pet/",
+            img: "nepaldogtreat.png",
+            alt: "Nepal Dog Treat"
+          },
+          {
+          url: "http://www.northropgrumman.com",
+          img: "northropgrumman.png",
+          alt: "Northrup Grumman"
+          },
+          {
+            url:"https://www.oldetownepetresort.com/" ,
+            img: "oldetownepetresort.png",
+            alt: "Olde Towne Pet Resort"
+          },
+          {
+            url: "https://www.pedigreefoundation.org",
+            img: "pedigreefoundation.png",
+            alt: "Pedigree Foundation"
+          },
+          {
+            url: "http://www.petfinderfoundation.com/",
+            img: "petfinder-foundation.jpg",
+            alt: "Petfinder Foundation"
+          },
+          {
+            url: "#",
+            img: "scott_karen_roland.png",
+            alt: "Scott and Karen Roland"
+          },
+          {
+            url: "https://www.washluberepair.com/",
+            img: "washluberepair.png",
+            alt: "The Auto Spa, The Lube Center, The Auto Repair"
+          },
+          {
+            url: "#",
+            img: "libera_family.png",
+            alt: "The Libera Family"
+          },
+          {
+            url: "#",
+            img: "linda-wolf-homes.jpg",
+            alt: "Wolf Real Estate"
+          },
+          {
+            url: "#",
+            img: "christina_young.png",
+            alt: "Christina Young"
+          },
+          {
+            url: "http://dzaruba.com/",
+            img: "zaruba.jpg",
+            alt: "Zaruba Gallery"
+          }
+        %>
 
-    <% sponsors_500 =
-      {
-        url:"https://www.cfnova.org/" ,
-        img:"cfnva.jpg" ,
-      },
-      {
-        url: "http://www.companionanimalclinicvirginia.com/" ,
-        img: "companionanimalclinicvirginia.jpg" ,
-        alt: "Companion Animal Clinic"
-      },
-      {
-        url: "http://www.millertoyota.com/",
-        img: "millertoyota.png",
-        alt: "Miller Toyota"
-      },
-      {
-        url: "https://www.keywcorp.com",
-        img: "keywcorp.jpg",
-        alt: "KeyW Corporation"
-      },
-      {
-        url: "http://www.plamondonhospitalitypartners.com/",
-        img: "plamondon.jpg",
-        alt: "Plamondon Hospitality Partners",
-        show_text: true
-      },
-      {
-        url: "#",
-        img: "jason_kusar.png",
-        alt: "Jason Kusar"
-      },
-      {
-        url: "#",
-        img: "lori_eric_painter.png",
-        alt: "Lori and Eric Painter"
-      },
-      {
-        url: "https://pawsgo.com",
-        img: "pawsgo.png",
-        alt: "Pawsgo.com"
-      },
-      {
-        url: "https://vcahospitals.com/southpaws",
-        img: "vcahospitals.jpg",
-        alt: "VCA SouthPaws Veterinary"
-      },
-      {
-        url: "#",
-        img: "vortex13.png",
-        alt: "Vortex 13, LLC"
-      }
-    %>
-
-    <% sponsors_500.each_slice(4) do |slice| %>
-      <div class="row">
-        <div class="span12">
-          <ul class="thumbnails">
-          <% slice.each do |spon| %>
-            <li class="span3">
-              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-center-text thumbnail-no-border">
-                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '200') %>
-                <% if spon[:show_text] %>
-                  <%= spon[:alt] %>
-                <% end %>
-              </a>
-            </li>
+    <div class="album">
+      <div class="container">
+          <% sponsors_1000.each_slice(3) do |slice| %>
+            <div class="row align-items-center">
+            <% slice.each do |spon| %>
+              <div class="col-md-4 mx-auto">
+                <div class="card mb-4 border-0">
+                  <a target="_blank" href="<%= spon[:url] %>">
+                    <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], class: "img-fluid") %>
+                  </a>
+                </div>
+              </div>
+            <% end %>
+            </div>
           <% end %>
-          </ul>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="article pages">  
+        <h3>$500 - $999</h3>
+      </div>
+    </div>
+
+        <% sponsors_500 =
+          {
+            url:"https://www.cfnova.org/" ,
+            img:"cfnva.jpg" ,
+          },
+          {
+            url: "http://www.companionanimalclinicvirginia.com/" ,
+            img: "companionanimalclinicvirginia.jpg" ,
+            alt: "Companion Animal Clinic"
+          },
+          {
+            url: "http://www.millertoyota.com/",
+            img: "millertoyota.png",
+            alt: "Miller Toyota"
+          },
+          {
+            url: "https://www.keywcorp.com",
+            img: "keywcorp.jpg",
+            alt: "KeyW Corporation"
+          },
+          {
+            url: "http://www.plamondonhospitalitypartners.com/",
+            img: "plamondon.jpg",
+            alt: "Plamondon Hospitality Partners",
+            show_text: true
+          },
+          {
+            url: "#",
+            img: "jason_kusar.png",
+            alt: "Jason Kusar"
+          },
+          {
+            url: "#",
+            img: "lori_eric_painter.png",
+            alt: "Lori and Eric Painter"
+          },
+          {
+            url: "https://pawsgo.com",
+            img: "pawsgo.png",
+            alt: "Pawsgo.com"
+          },
+          {
+            url: "https://vcahospitals.com/southpaws",
+            img: "vcahospitals.jpg",
+            alt: "VCA SouthPaws Veterinary"
+          },
+          {
+            url: "#",
+            img: "vortex13.png",
+            alt: "Vortex 13, LLC"
+          }
+        %>
+    <div class="album">
+      <div class="container">
+        <div class="row align-items-center">
+          <% sponsors_500.each_slice(4) do |slice| %>
+            <% slice.each do |spon| %>
+              <div class="col-md-4 mx-auto">
+                <div class="card mb-4 border-0">
+                  <a target="_blank" href="<%= spon[:url] %>">
+                    <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], class: "w-75") %>
+                    <% if spon[:show_text] %>
+                      <div class="card-body"><%= spon[:alt] %></div>
+                    <% end %>
+                  </a>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="article pages">  
+        <h3>$250 - $499</h3>
+      </div>
+    </div>
 
-    <h3>$250 - $499</h3>
-
-    <% sponsors_250 =
-      {
-        url: "http://affectionatepetcare.com/" ,
-        img: "affectionatepetcare.jpg" ,
-      },
-      {
-        url: "http://www.alittleunique.com",
-        img: "alittleunique.gif",
-        alt: "A Little Unique"
-      },
-      {
-        url: "http://www.awoiponline.com/" ,
-        img: "awoip.png" ,
-        alt: "AWOIP"
-      },
-      {
-        url: "https://baydog.com/",
-        img: "baydog.png",
-        alt: "baydog"
-      },
-      {
-        url: "#",
-        img: "bryant.png",
-        alt: "Joan Bryant"
-      },
-      {
-        alt: "Caring Hands",
-        url: "http://caringhandsvet.com/",
-        img: "caringhandsvet.png"
-      },
-      {
-        url: "http://www.dn3design.com/",
-        img: "doorno3.png",
-        alt: "DN3 (Door #3)"
-      },
-      {
-        url: "#",
-        img: "draughon.png",
-        alt: "Barbara Draughon"
-      },
-      {
-        url: "https://www.embracepetinsurance.com/",
-        img: "embracepetinsurance.png",
-        alt: "Embrace Pet Insurance"
-      },
-      {
-        url: "#",
-        img: "fink.png",
-        alt: "Margaret Fink"
-      },
-      {
-        url: "http://www.mynewfeet.com/",
-        img: "frederickfootankle.png",
-        alt: "Frederick Foot and Ankle"
-      },
-      {
-        url: "#",
-        img: "guindon.png",
-        alt: "Stephanie Guindon"
-      },
-      {
-        url: "https://www.homeagain.com/",
-        img: "homeagain.png",
-        alt: "HomeAgain"
-      },
-      {
-        url: "http://www.crgelato.com/",
-        img: "hungryhenrys.png",
-        alt: "Hungry Henry's Gelato"
-      },
-      {
-        url: "#",
-        img: "murphy.png",
-        alt: "Steven Murphy"
-      },
-      {
-        url: "https://www.novec.com/",
-        img: "novec.jpg",
-        alt: "NOVEC"
-      },
-      {
-        url: "http://www.olk9md.com/",
-        img: "offleashk9.jpg",
-        alt: "Off Leash K9 Training Maryland"
-      },
-      {
-        alt: "Patrick's Pet Care",
-        url: "https://patrickspetcare.com/",
-        img: "patrickspetcare.png",
-      },
-      {
-        url: "https://www.parkwayvetclinic.com/",
-        img: "parkway.jpg",
-        alt: "Parkway Vet"
-      },
-      {
-        url: "#",
-        img: "parsons.png",
-        alt: "Patricia Parsons"
-      },
-      {
-        url: "http://www.pimlicokey.com/" ,
-        img: "pimlicokey.png" ,
-        alt: "Pimlico Key"
-      },
-      {
-        url: "http://www.poop911.com/",
-        img: "poop911.png",
-        alt: "Poop 911"
-      },
-      {
-        url: "http://prolist.com",
-        img: "prolist.jpg",
-        alt: "ProList"
-      },
-      {
-        url: "https://www.rbkpetresort.com/",
-        img: "rbkpetresort.png",
-        alt: "Reisterstown Pet Resort and Spa"
-      },
-      {
-        url: "http://www.scoop-squad.com/",
-        img: "scoop_squad.jpg",
-        alt: "Scoop Squad"
-      },
-      {
-        url: "https://www.facebook.com/snorklesway/",
-        img: "snorklesway.jpg",
-        alt: "Snorkle’s Way: Adaptive Dog Training, LLC"
-      },
-      {
-        url: "https://www.sunsetpetservices.com/" ,
-        img: "sunsetpetservices.jpg" ,
-        alt: "Sunset Pet Services"
-      },
-      {
-        url: "#",
-        img: "teixeira.png",
-        alt: "Jeffrey Teixeira"
-      },
-      {
-        url: "#",
-        img: "wilkins.png",
-        alt: "Mike and Jennifer Wilkins"
-      },
-      {
-        url: "#",
-        img: "zuckerman.png",
-        alt: "Victoria and Harvey Zuckerman"
-      }
-    %>
-
-    <% sponsors_250.each_slice(6) do |slice| %>
-      <div class="row">
-        <div class="span12">
-          <ul class="thumbnails">
-          <% slice.each do |spon| %>
-            <li class="span2">
-                <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                  <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '200') %>
-                </a>
-            </li>
+        <% sponsors_250 =
+          {
+            url: "http://affectionatepetcare.com/" ,
+            img: "affectionatepetcare.jpg" ,
+          },
+          {
+            url: "http://www.alittleunique.com",
+            img: "alittleunique.gif",
+            alt: "A Little Unique"
+          },
+          {
+            url: "http://www.awoiponline.com/" ,
+            img: "awoip.png" ,
+            alt: "AWOIP"
+          },
+          {
+            url: "https://baydog.com/",
+            img: "baydog.png",
+            alt: "baydog"
+          },
+          {
+            url: "#",
+            img: "bryant.png",
+            alt: "Joan Bryant"
+          },
+          {
+            alt: "Caring Hands",
+            url: "http://caringhandsvet.com/",
+            img: "caringhandsvet.png"
+          },
+          {
+            url: "http://www.dn3design.com/",
+            img: "doorno3.png",
+            alt: "DN3 (Door #3)"
+          },
+          {
+            url: "#",
+            img: "draughon.png",
+            alt: "Barbara Draughon"
+          },
+          {
+            url: "https://www.embracepetinsurance.com/",
+            img: "embracepetinsurance.png",
+            alt: "Embrace Pet Insurance"
+          },
+          {
+            url: "#",
+            img: "fink.png",
+            alt: "Margaret Fink"
+          },
+          {
+            url: "http://www.mynewfeet.com/",
+            img: "frederickfootankle.png",
+            alt: "Frederick Foot and Ankle"
+          },
+          {
+            url: "#",
+            img: "guindon.png",
+            alt: "Stephanie Guindon"
+          },
+          {
+            url: "https://www.homeagain.com/",
+            img: "homeagain.png",
+            alt: "HomeAgain"
+          },
+          {
+            url: "http://www.crgelato.com/",
+            img: "hungryhenrys.png",
+            alt: "Hungry Henry's Gelato"
+          },
+          {
+            url: "#",
+            img: "murphy.png",
+            alt: "Steven Murphy"
+          },
+          {
+            url: "https://www.novec.com/",
+            img: "novec.jpg",
+            alt: "NOVEC"
+          },
+          {
+            url: "http://www.olk9md.com/",
+            img: "offleashk9.jpg",
+            alt: "Off Leash K9 Training Maryland"
+          },
+          {
+            alt: "Patrick's Pet Care",
+            url: "https://patrickspetcare.com/",
+            img: "patrickspetcare.png",
+          },
+          {
+            url: "https://www.parkwayvetclinic.com/",
+            img: "parkway.jpg",
+            alt: "Parkway Vet"
+          },
+          {
+            url: "#",
+            img: "parsons.png",
+            alt: "Patricia Parsons"
+          },
+          {
+            url: "http://www.pimlicokey.com/" ,
+            img: "pimlicokey.png" ,
+            alt: "Pimlico Key"
+          },
+          {
+            url: "http://www.poop911.com/",
+            img: "poop911.png",
+            alt: "Poop 911"
+          },
+          {
+            url: "http://prolist.com",
+            img: "prolist.jpg",
+            alt: "ProList"
+          },
+          {
+            url: "https://www.rbkpetresort.com/",
+            img: "rbkpetresort.png",
+            alt: "Reisterstown Pet Resort and Spa"
+          },
+          {
+            url: "http://www.scoop-squad.com/",
+            img: "scoop_squad.jpg",
+            alt: "Scoop Squad"
+          },
+          {
+            url: "https://www.facebook.com/snorklesway/",
+            img: "snorklesway.jpg",
+            alt: "Snorkle’s Way: Adaptive Dog Training, LLC"
+          },
+          {
+            url: "https://www.sunsetpetservices.com/" ,
+            img: "sunsetpetservices.jpg" ,
+            alt: "Sunset Pet Services"
+          },
+          {
+            url: "#",
+            img: "teixeira.png",
+            alt: "Jeffrey Teixeira"
+          },
+          {
+            url: "#",
+            img: "wilkins.png",
+            alt: "Mike and Jennifer Wilkins"
+          },
+          {
+            url: "#",
+            img: "zuckerman.png",
+            alt: "Victoria and Harvey Zuckerman"
+          }
+        %>
+    <div class="album">
+      <div class="container">
+        <div class="row align-items-center">
+          <% sponsors_250.each_slice(6) do |slice| %>
+            <% slice.each do |spon| %>
+              <div class="col-md-3 mx-auto">
+                <div class="card mb-4 border-0">
+                  <a target="_blank" href="<%= spon[:url] %>">
+                    <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], class: "w-75") %>
+                  </a>
+                </div>
+              </div>
+            <% end %>
           <% end %>
-          </ul>
         </div>
       </div>
-    <% end %>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="article pages">
+        <h2>In-Kind Donors</h2>
+        <p>
+          <small>With a veterinarian’s prescription, you can save on medications like <a href="https://www.1800petmeds.com/Bravecto+Chews-prod11638.html" target="_blank">Bravecto</a> at 1-800-PetMeds</small>
+        </p>
+      </div>
+    </div>
+        <% sponsors =
 
-    <h2>In-Kind Donors</h2>
+          {
+            url: "https://chewy.com",
+            img: "chewy.png",
+            alt: "Chewy"
+          },
+          {
+            url: "https://www.commonmarket.coop/",
+            img: "commonmarket.png",
+            alt: "Common Market"
+          },
+          {
+            url: "https://www.fizzionclean.com/",
+            img: "fizzionclean.png"
+          },
+          {
+            url: "http://www.justforpetsyorkpa.com/",
+            img: "justforpets.png",
+            alt: "Just for Pets"
+          },
+          {
+            url: "https://www.petconnectapp.com/" ,
+            img: "petconnectapp.gif" ,
+          },
+          {
+            url: "http://petvalu.com/",
+            img: "petvalu.jpg",
+            alt: "PetValu"
+          },
+          {
+            url: "https://rawrev.com/",
+            img: "rawrev.png",
+            alt: "Raw Revolution"
+          },
+          {
+            url: "https://www.wegmans.com/",
+            img: "wegmans.png",
+            alt: "Wegmans"
+          }
+        %>
 
-    <p>
-      <small>With a veterinarian’s prescription, you can save on medications like <a href="https://www.1800petmeds.com/Bravecto+Chews-prod11638.html" target="_blank">Bravecto</a> at 1-800-PetMeds</small>
-    </p>
-    <% sponsors =
-
-      {
-        url: "https://chewy.com",
-        img: "chewy.png",
-        alt: "Chewy"
-      },
-      {
-        url: "https://www.commonmarket.coop/",
-        img: "commonmarket.png",
-        alt: "Common Market"
-      },
-      {
-        url: "https://www.fizzionclean.com/",
-        img: "fizzionclean.png"
-      },
-      {
-        url: "http://www.justforpetsyorkpa.com/",
-        img: "justforpets.png",
-        alt: "Just for Pets"
-      },
-      {
-        url: "https://www.petconnectapp.com/" ,
-        img: "petconnectapp.gif" ,
-      },
-      {
-        url: "http://petvalu.com/",
-        img: "petvalu.jpg",
-        alt: "PetValu"
-      },
-      {
-        url: "https://rawrev.com/",
-        img: "rawrev.png",
-        alt: "Raw Revolution"
-      },
-      {
-        url: "https://www.wegmans.com/",
-        img: "wegmans.png",
-        alt: "Wegmans"
-      }
-    %>
-
-    <% sponsors.each_slice(6) do |slice| %>
-      <div class="row">
-        <div class="span12">
-          <ul class="thumbnails">
-          <% slice.each do |spon| %>
-            <li class="span2">
-              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag "sponsors/"+spon[:img], size: '125' %>
-              </a>
-            </li>
+    <div class="album">
+      <div class="container">
+        <div class="row align-items-center">
+          <% sponsors.each_slice(6) do |slice| %>
+            <% slice.each do |spon| %>
+              <div class="col-md-3 mx-auto">
+                <div class="card mb-4 border-0">
+                  <a target="_blank" href="<%= spon[:url] %>">
+                    <%= image_tag "sponsors/"+spon[:img], class: "w-75" %>
+                  </a>
+                </div>
+              </div>
+            <% end %>
           <% end %>
-          </ul>
         </div>
       </div>
-    <% end %>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="article pages">
+        <h2>In-Kind Services</h2>
+      </div>
+    </div>
 
-
-    <h2>In-Kind Services</h2>
-
-    <% services =
-        {
-          url: "http://www.allenpearsonsphotos.com/-/allenpearsonsphotos/",
-          img: "allen_pearson.png",
-          alt: "Allen Pearson"
-        },
-        {
-          url: "https://browserstack.com",
-          img: "browserstack.png",
-          alt: "Browserstack"
-        },
-        {
-          url: "https://github.com",
-          img: "github.jpg",
-          alt: "GitHub"
-        },
-        {
-          url: "https://google.com",
-          img: "google.png",
-          alt: "Google"
-        },
-        {
-          url: "https://hakiri.io",
-          img: "hakiri.jpg",
-          alt: "Hakiri"
-        },
-        {
-        alt: "Homewood Suites Gaithersburg",
-        url: "http://www.gaithersburg.homewoodsuites.com",
-        img: "homewood_suites.jpg"
-        },
-        {
-          url: "https://www.lustreart.com/",
-          img: "lustreart.gif",
-          alt: "LustreArt"
-        },
-        {
-          url: "https://moqups.com/",
-          img: "moqups.png",
-          alt: "Moqups"
-        },
-        {
-          url: "https://newrelic.com/",
-          img: "newrelic.png",
-          alt: "NewRelic"
-        },
-        {
-          url: "http://michaelgarth.com/",
-          img: "michaelgarth.jpg",
-          alt: "Michael Garth"
-        },
-        {
-          url: "https://www.facebook.com/wagspetportraitsphotography/",
-          img: "wags-pet-portaits.jpg",
-          alt: "Wags Pet Portraits"
-        }
-    %>
-
-    <% services.each_slice(6) do |slice| %>
-      <div class="row">
-        <div class="span12">
-          <ul class="thumbnails">
-          <% slice.each do |spon| %>
-            <li class="span2">
-              <a target="_blank" href="<%= spon[:url] %>" class="thumbnail thumbnail-no-border">
-                <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], size: '150') %>
-              </a>
-            </li>
+      <% services =
+          {
+            url: "http://www.allenpearsonsphotos.com/-/allenpearsonsphotos/",
+            img: "allen_pearson.png",
+            alt: "Allen Pearson"
+          },
+          {
+            url: "https://browserstack.com",
+            img: "browserstack.png",
+            alt: "Browserstack"
+          },
+          {
+            url: "https://github.com",
+            img: "github.jpg",
+            alt: "GitHub"
+          },
+          {
+            url: "https://google.com",
+            img: "google.png",
+            alt: "Google"
+          },
+          {
+            url: "https://hakiri.io",
+            img: "hakiri.jpg",
+            alt: "Hakiri"
+          },
+          {
+          alt: "Homewood Suites Gaithersburg",
+          url: "http://www.gaithersburg.homewoodsuites.com",
+          img: "homewood_suites.jpg"
+          },
+          {
+            url: "https://www.lustreart.com/",
+            img: "lustreart.gif",
+            alt: "LustreArt"
+          },
+          {
+            url: "https://moqups.com/",
+            img: "moqups.png",
+            alt: "Moqups"
+          },
+          {
+            url: "https://newrelic.com/",
+            img: "newrelic.png",
+            alt: "NewRelic"
+          },
+          {
+            url: "http://michaelgarth.com/",
+            img: "michaelgarth.jpg",
+            alt: "Michael Garth"
+          },
+          {
+            url: "https://www.facebook.com/wagspetportraitsphotography/",
+            img: "wags-pet-portaits.jpg",
+            alt: "Wags Pet Portraits"
+          }
+      %>
+    
+    <div class="album"> 
+      <div class="container">
+        <div class="row align-items-center">
+          <% services.each_slice(6) do |slice| %>
+            <% slice.each do |spon| %>
+              <div class="col-md-3 mx-auto">
+                <div class="card mb-4 border-0">
+                  <a target="_blank" href="<%= spon[:url] %>">
+                    <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], class: "w-75") %>
+                  </a>
+                </div>
+              </div>
+            <% end %>
           <% end %>
-          </ul>
         </div>
       </div>
-    <% end %>
-
-  </div>
+    </div>
   </div>
 </div>

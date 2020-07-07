@@ -26,6 +26,9 @@ module RescueRails
     # after creating the dogs/ namespace to hold manager and gallery controllers, this becomes necessary
     config.action_view.prefix_partial_path_with_controller_namespace = false
 
+    # Precompile asset file
+    config.assets.precompile = ['.js', '.css', '*.css.erb', '.scss', '*.jpg', '*.png']
+
     # we have a custom file in support of the faker gem
     I18n.load_path += Dir[ Rails.root.join("lib","locales","**/*.yml").to_s ]
 

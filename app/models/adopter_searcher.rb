@@ -37,7 +37,7 @@ class AdopterSearcher
 
     if @params[:search]
       if email_search?
-        @adopters = @adopters.where('adopters.email ILIKE ?', "%#{@params[:search].strip}%")
+        @adopters = @adopters.where('adopters.email ILIKE ? OR adopters.secondary_email ILIKE ?', "%#{@params[:search].strip}%", "%#{@params[:search].strip}%")
       elsif phone_search?
         formatted_phone = format_phone(@params[:search].strip)
         @adopters = @adopters.where(phone: formatted_phone).or(@adopters.where(other_phone: formatted_phone))

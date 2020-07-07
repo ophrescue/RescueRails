@@ -48,6 +48,13 @@
       </td>
     </tr>
     <tr>
+      <th>Secondary E-mail</th>
+      <td>
+        <div class='read-only'><%= @adopter.secondary_email %></div>
+        <div class='editable'><%= f.text_field :secondary_email %></div>
+      </td>
+    </tr>
+    <tr>
       <th>Primary Phone</th>
       <td>
         <div class='read-only'><span class="tel value"><%= @adopter.phone %></span></div>

@@ -2,9 +2,20 @@
   <div class="span12">
     <h1><%= t('.title') %></h1>
     <ul class="nav nav-pills">
-      <li class="active"><a href="#">My Apps</a></li>
-      <li><a href="#">Open Apps</a></li>
-      <li><a href="#">All Apps</a></li>
+      <%Adoption::AMOUNT_TO_SHOW.each do |show|%>
+        <%if show == params[:show]%>
+          <li class="active">
+        <%else%>
+          <li>
+        <%end%>
+          <%=link_to show.titleize, :controller => "adopters", :show => show %>
+          </li>
+      <%end%>
+      <%if params[:show] == nil%>
+        <li class= "active">
+      <%else%>
+        <li>
+      <%end%>
     </ul>
   </div>
 </div>
@@ -14,26 +25,26 @@
     <ul class="nav nav-tabs">
       <% Adopter::STATUSES.each do |status| %>
         <% if status == params[:status] %>
-        <li class="active">
-    <% else %>
-        <li>
-    <% end %>
-      <%= link_to status.titleize, :controller => "adopters", :status => status %>
-      </li>
-    <% end %>
+          <li class="active">
+        <% else %>
+          <li>
+        <% end %>
+        <%= link_to status.titleize, :controller => "adopters", :status => status, :show => params[:show] %>
+        </li>
+      <% end %>
       <% if params[:status] == nil %>
         <li class="active">
-    <% else %>
+      <% else %>
         <li>
-    <% end %>
-      <%= link_to "All", adopters_path %>
+      <% end %>
+      <%= link_to "All", :controller => "adopters", :show => params[:show]  %>
       </li>
       <% if params[:status] == "active" %>
         <li class="active">
-    <% else %>
+      <% else %>
         <li>
-    <% end %>
-      <%= link_to "Active", :controller => "adopters", :status => "active" %>
+      <% end %>
+      <%= link_to "Active", :controller => "adopters", :status => "active", :show => params[:show] %>
       </li>
     </ul>
   </div>

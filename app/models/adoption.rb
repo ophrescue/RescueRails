@@ -27,10 +27,10 @@
 class Adoption < ApplicationRecord
   belongs_to :dog
   belongs_to :adopter
+  has_many :invoices, as: :invoiceable, dependent: :restrict_with_error
+
 
   AMOUNT_TO_SHOW = ['MyApplications', 'OpenApplications', 'AllApplications']
-  has_many :invoices, as: :invoiceable
-
   RELATION_TYPE = ['interested', 'adopted', 'returned',
         'pending adoption', 'pending return', 'trial adoption']
 

@@ -7,15 +7,23 @@
       <h5>Adopter <%= link_to @invoice.invoiceable.adopter.name, @invoice.invoiceable.adopter %>  </h5>
 
       <h5>For the Adoption of <%= link_to @invoice.invoiceable.animal.name, @invoice.invoiceable.animal %></h5>
+    </div>
 
-      <% if @invoice.open? %>
-        <p>Amount Due $<span id="amtDue"><%= number_to_currency(@invoice.amount) %></span></p>
+  <% if @invoice.open? %>
+    <div class="col-sm-6 pt-3">
+        <p>Adoption Fees Due <span id="amtDue"><%= number_to_currency(@invoice.amount) %></span></p>
         <p><%= @invoice.description %></p>
         <%= form_for @invoice do |f| %>
+          <%= render 'shared/error_messages', :object => f.object %>
+          <div class="form-group">
+              <%= f.label :donation, '(Optional) Include a donation with your payment' %>
+              <%= f.number_field :donation, class: "form-control" %>
+          </div>
           <%= hidden_field_tag(:stripeToken) %>
         <% end %>
         <button id="payButton" class="btn btn-primary btn-lg">Make Payment</button>
-      <% else %>
+
+  <% else %>
         <p>Invoice of <%= number_to_currency(@invoice.amount) %> was paid in full <%= @invoice.paid_at.strftime("%m/%d/%Y at %l:%M:%S %p") %>.
       <% end %>
     </div>
@@ -47,15 +55,29 @@
 
     $('#error_explanation').html('');
 
+    var donation = document.getElementById("invoice_donation").value;
 
-    var amount = document.getElementById("amtDue").innerText;
-    amount = amount.replace(/\$/g, '').replace(/\,/g, '');
+    donation = donation.replace(/\$/g, '').replace(/\,/g, '');
 
-    amount = parseFloat(amount);
+    if(isNaN(donation)) {
+      donation = 0
+    }
+    // set to 0 if negative
+    donation = Math.max(0,donation);
 
-    amount = amount * 100; // Needs to be an integer!
+    donation = parseFloat(donation);
+    donation = donation * 100; // Needs to be an integer!
+    console.log('donation amount is '+ donation)
 
-    console.log('payment amount is '+ amount)
+
+    var feesDue = document.getElementById("amtDue").innerText;
+    feesDue = feesDue.replace(/\$/g, '').replace(/\,/g, '');
+    feesDue = parseFloat(feesDue);
+    feesDue = feesDue * 100; // Needs to be an integer!
+
+    console.log('fee amount is '+ feesDue)
+
+    var amount = donation + feesDue
     handler.open({
       amount: Math.round(amount),
     })

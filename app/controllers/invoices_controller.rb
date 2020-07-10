@@ -57,6 +57,7 @@ class InvoicesController < ApplicationController
     rescue Stripe::CardError => e
       flash[:error] = e.message
     else
+      @invoice.donation = stripe_params["invoice"]["donation"]
       @invoice.paid_method = 'Stripe'
       @invoice.paid_at = Time.now
       @invoice.status = 'paid'
@@ -89,7 +90,11 @@ class InvoicesController < ApplicationController
                   :utf8,
                   :authenticity_token,
                   :_method,
-                  :id
+                  :id,
+                  invoice:
+                  [
+                    :donation
+                  ]
   end
 
   def load_invoiceable

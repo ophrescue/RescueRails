@@ -62,7 +62,6 @@ class AdoptionAppController < ApplicationController
               :max_hrs_alone,
               :is_ofage,
               :has_family_under_18,
-              :household_ages,
               :shot_dhpp_dhlpp,
               :shot_fpv_fhv_fcv,
               :shot_rabies,

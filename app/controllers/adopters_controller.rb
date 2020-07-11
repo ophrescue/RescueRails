@@ -180,12 +180,14 @@ class AdoptersController < ApplicationController
                                       :is_ofage,
                                       :birth_date,
                                       :has_family_under_18,
+                                      :household_ages,
                                       :shot_dhpp_dhlpp,
                                       :shot_fpv_fhv_fcv,
                                       :shot_rabies,
                                       :shot_bordetella,
                                       :shot_heartworm,
-                                      :shot_flea_tick
+                                      :shot_flea_tick,
+                                      household_ages: []
                                     ],
                                     references_attributes:
                                     [

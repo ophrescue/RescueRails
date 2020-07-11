@@ -12,6 +12,35 @@
     </div>
   </div>
   <div class="control-group">
+    <%= af.label :household_ages, "Ages of Household Members", :class => "control-label" %>
+    <div class="controls">
+      <label>
+        <%= af.check_box :household_ages, {:multiple => "true"}, "Infant", false  %>
+        <span>Infant: 0 - 1</span>
+      </label>
+      <label>
+        <%= af.check_box :household_ages, {:multiple => "true"}, "Young Child", false %>
+        <span>Young Child: 2 - 7</span>
+      </label>
+      <label>
+        <%= af.check_box :household_ages, {:multiple => "true"}, "Older Child", false %>
+        <span>Older Child: 8 - 12</span>
+      </label>
+      <label>
+        <%= af.check_box :household_ages, {:multiple => "true"}, "Teenager", false %>
+        <span>Teenager: 13 - 17</span>
+      </label>
+      <label>
+        <%= af.check_box :household_ages, {:multiple => "true"}, "Adult", false %>
+        <span>Adult: 18 - 65</span>
+      </label>
+      <label>
+        <%= af.check_box :household_ages, {:multiple => "true"}, "Senior", false %>
+        <span>Senior: 66+</span>
+      </label>
+    </div>
+  </div>
+  <div class="control-group">
     <%= af.label :how_did_you_hear, "How did you hear about us?", :class => "control-label" %>
     <div class="controls">
       <%= af.text_field :how_did_you_hear %>
@@ -43,19 +72,6 @@
     <div class="controls">
       <%= af.text_field :birth_date %>
       <span class="help-inline">Enter as YYYY-MM-DD</span>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= af.label :has_family_under_18, "Is there anyone living at your home under the age of 18?", :class => "control-label" %>
-    <div class ="controls">
-      <label>
-        <%= af.radio_button :has_family_under_18, true, :class => "required" %>
-        <span>Yes</span>
-      </label>
-      <label>
-        <%= af.radio_button :has_family_under_18, false, :class => "required" %>
-        <span>No</span>
-      </label>
     </div>
   </div>
   <div class="control-group">

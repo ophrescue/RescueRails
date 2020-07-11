@@ -62,12 +62,14 @@ class AdoptionAppController < ApplicationController
               :max_hrs_alone,
               :is_ofage,
               :has_family_under_18,
+              :household_ages,
               :shot_dhpp_dhlpp,
               :shot_fpv_fhv_fcv,
               :shot_rabies,
               :shot_bordetella,
               :shot_heartworm,
               :shot_flea_tick,
+              household_ages: [],
               attachments_attributes:
               [
                 :attachment,

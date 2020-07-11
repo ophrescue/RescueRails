@@ -2,7 +2,7 @@
   <table class="table table-striped table-bordered table-condensed">
     <tr>
       <td colspan="2">
-        <% if @adopter.adoption_app.has_family_under_18 == true %>
+        <% if @adopter.adoption_app.has_family_under_18 == true || @adopter.adoption_app.household_ages.any? { |i| ["Infant", "Young Child", "Older Child", "Teenager"].include? i } %>
           <span class="label label-warning">Has Family Under 18</span>
         <% end %>
 
@@ -82,6 +82,14 @@
       <td>
         <div class='read-only'><%= af.object.other_household_names %></div>
         <div class='editable'><%= af.text_area :other_household_names %></div>
+      </td>
+    </tr>
+    <tr>
+      <th>Household Ages</th>
+      <td>
+        <div class='read-only'><%= af.object.household_ages.join(", ") %></div>
+        <div class='editable'><%= af.select(:household_ages, [["Infant"], ["Young Child"], ["Older Child"], ["Teenager"], ["Adult"], ["Senior"]], { include_hidden: false }, { multiple: true }) %></div>
+        <small>Infants: 0 - 1, Young: 2 - 6, Older: 7 - 12, Teenager: 13 - 17, Adult: 18 - 65, Senior: 65+ </small>
       </td>
       <% end %>
     </tr>

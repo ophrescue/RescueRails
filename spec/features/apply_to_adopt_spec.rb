@@ -32,12 +32,12 @@ feature 'Apply for Adoption' do
     fill_in('adopter_when_to_call', with: 'Anytime After 3pm')
     fill_in('adopter_adoption_app_attributes_spouse_name', with: 'Miss Watir')
     fill_in('adopter_adoption_app_attributes_other_household_names', with: 'Rachel 29, Morgan 24')
+    check('Adult')
     fill_in('adopter_adoption_app_attributes_how_did_you_hear', with: 'Google and Craigslist')
     fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2012-12-13')
     find("input#adopter_adoption_app_attributes_ready_to_adopt_dt").send_keys(:tab)
 
     choose('adopter_adoption_app_attributes_is_ofage_true')
-    choose('adopter_adoption_app_attributes_has_family_under_18_true')
     choose('adopter_adoption_app_attributes_house_type_rent')
 
     click_button('Next')
@@ -117,7 +117,7 @@ feature 'Apply for Adoption' do
 
     expect(page).to have_content('4 hrs alone')
     expect(page).to have_content('Current Pets not Fixed')
-    expect(page).to have_content('Has Family Under 18')
+    expect(page).not_to have_content('Has Family Under 18')
     expect(page).to have_content('fake@ophrescue.org')
     expect(page).to have_content('(123) 456-7890')
     expect(page).to have_content('Anytime After 3pm')
@@ -204,13 +204,14 @@ feature 'Apply for Adoption' do
 
     fill_in('adopter_when_to_call', with: 'Anytime After 3pm')
     fill_in('adopter_adoption_app_attributes_spouse_name', with: 'Miss Watir')
-    fill_in('adopter_adoption_app_attributes_other_household_names', with: 'Rachel 29, Morgan 24')
+    fill_in('adopter_adoption_app_attributes_other_household_names', with: 'Rachel 29, Morgan 24, Sarah 13')
+    check('Teenager')
+    check('Adult')
     fill_in('adopter_adoption_app_attributes_how_did_you_hear', with: 'Google and Craigslist')
     fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2012-12-13')
     find("input#adopter_adoption_app_attributes_ready_to_adopt_dt").send_keys(:tab)
 
     choose('adopter_adoption_app_attributes_is_ofage_true')
-    choose('adopter_adoption_app_attributes_has_family_under_18_true')
     choose('adopter_adoption_app_attributes_house_type_own')
     check('adopter_adoption_app_attributes_verify_home_auth')
 
@@ -288,7 +289,8 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('(123) 456-7890')
     expect(page).to have_content('Anytime After 3pm')
     expect(page).to have_content('Miss Watir')
-    expect(page).to have_content('Rachel 29, Morgan 24')
+    expect(page).to have_content('Rachel 29, Morgan 24, Sarah 13')
+    expect(page).to have_content('Teenager, Adult')
     expect(page).to have_content('Test Adopter')
     expect(page).to have_content('642 S Ellwood Ave')
     expect(page).to have_content('Apt 3')
@@ -364,7 +366,9 @@ feature 'Apply for Adoption' do
 
     fill_in('adopter_when_to_call', with: 'Anytime After 3pm')
     fill_in('adopter_adoption_app_attributes_spouse_name', with: 'Miss Watir')
-    fill_in('adopter_adoption_app_attributes_other_household_names', with: 'Rachel 29, Morgan 24')
+    fill_in('adopter_adoption_app_attributes_other_household_names', with: 'Rachel 29, Morgan 24, Sarah 6')
+    check('Young Child')
+    check('Adult')
     fill_in('adopter_adoption_app_attributes_how_did_you_hear', with: 'Google and Craigslist')
     fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2012-12-13')
     find("input#adopter_adoption_app_attributes_ready_to_adopt_dt").send_keys(:tab)
@@ -373,7 +377,6 @@ feature 'Apply for Adoption' do
     fill_in('adopter_adoption_app_attributes_birth_date', with: 20.years.ago.to_date)
     find("input#adopter_adoption_app_attributes_birth_date").send_keys(:tab)
 
-    choose('adopter_adoption_app_attributes_has_family_under_18_true')
     choose('adopter_adoption_app_attributes_house_type_own')
     check('adopter_adoption_app_attributes_verify_home_auth')
 
@@ -451,7 +454,8 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('(123) 456-7890')
     expect(page).to have_content('Anytime After 3pm')
     expect(page).to have_content('Miss Watir')
-    expect(page).to have_content('Rachel 29, Morgan 24')
+    expect(page).to have_content('Rachel 29, Morgan 24, Sarah 6')
+    expect(page).to have_content('Young Child, Adult')
     expect(page).to have_content('Test Adopter')
     expect(page).to have_content('642 S Ellwood Ave')
     expect(page).to have_content('Apt 3')

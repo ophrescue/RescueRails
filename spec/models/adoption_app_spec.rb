@@ -40,7 +40,7 @@
 #  verify_home_auth          :boolean          default(FALSE)
 #  has_family_under_18       :boolean
 #  birth_date                :date
-#
+#  household_ages            :array
 
 require 'rails_helper'
 

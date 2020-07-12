@@ -186,5 +186,30 @@ $( function() {
 
       isVetEditing = !isVetEditing;
     });
+
+    var isInfoEditing = false;
+
+    $('#doginfo').on('click', 'a#toggle-edit-info', function() {
+      // find all enabled fields in .edit-info and disable them
+      if (isInfoEditing) {
+        $('form.edit-info .to-disable').prop("disabled", true);
+        $('.info-editable').hide();
+        $('.info-read-only').show();
+        $('a#toggle-edit-info').addClass('btn-primary').text("Edit Pets Info");
+        $('input.info-save').removeClass('btn-primary');
+      }
+      else {
+        $('form.edit-info :disabled')
+          .removeAttr('disabled')
+          .addClass('to-disable');
+
+        $('.info-editable').show();
+        $('.info-read-only').hide();
+        $('a#toggle-edit-info').removeClass('btn-primary').text("Cancel");
+        $('input.info-save').addClass('btn-primary');
+      }
+
+      isInfoEditing = !isInfoEditing;
+    }); 
   }
 });

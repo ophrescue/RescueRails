@@ -1,114 +1,134 @@
-<h1><%= t('.title') %></h1>
+<div class="container-fluid">
+  <div class="row ml-3">
+  <div class="col-12">
+  <h1 class="mt-3"><%= t('.title') %></h1>
+  
+  <% if is_admin? %>
+    <p><%= link_to "Create new Staff Account", new_user_path, :class => "btn btn-primary" %></p>
+  <% end %>
+  
 
-<% if is_admin? %>
-  <p>
-  <%= link_to "Create new Staff Account", new_user_path, :class => "btn btn-primary" %>
-  </p>
-<% end %>
-
-<%= form_tag users_path, :method => 'get', :class => 'form-inline' do %>
-  <%= text_field_tag :search, params[:search], placeholder: 'Search by Name or Email' %>
-  <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
-  <%= link_to "Reset", users_path, class: "btn" %>
-<% end %>
-
-<%= form_tag users_path, :method => 'get',  :class => 'form-inline'  do %>
-  <%= label_tag :location, 'Find active volunteers near' %>
-  <%= text_field_tag :location, params[:location], :placeholder => 'City, State or Zip...' %>
-  <%= submit_tag "Locate", :name => nil, class: "btn btn-primary" %>
-  <%= link_to "Reset", users_path, class: "btn" %>
-<% end %>
+  
+  <%= form_tag users_path, :method => 'get', :class => 'form-inline' do %>
+    <p><%= text_field_tag :search, params[:search], placeholder: 'Search by Name or Email', size: 30, class: "form-control" %>
+    <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+    <%= link_to "Reset", users_path, class: "btn btn-secondary" %></p>
+  <% end %>
 
 
-<% if params[:location].present? %>
-  <h4>Results filtered to volunteers within 30 miles of <%= params[:location] %> </h4>
-<% end %>
 
-<ul class="nav nav-tabs">
-  <li class="<%= 'active' if params[:admin] %>">
-    <%= link_to "Admins", users_path(admin: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:adoption_coordinator] %>">
-    <%= link_to "Adoptions", users_path(adoption_coordinator: :true, location: params[:location] ) %>
-  </li>
-  <li class="<%= 'active' if params[:event_planner] %>">
-    <%= link_to "Events", users_path(event_planner: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:dog_adder] %>">
-    <%= link_to "Add Dogs", users_path(dog_adder: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:dog_editor] %>">
-    <%= link_to "Edit Dogs", users_path(dog_editor: :true, location: params[:location]) %>
-  </li>
-  <li class="<%='active' if params[:graphic_designer] %>">
-    <%= link_to 'Graphic Designers', users_path(graphic_designer: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:photographer] %>">
-    <%= link_to "Photographers", users_path(photographer: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:newsletter] %>">
-    <%= link_to "Newsletter", users_path(newsletter: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:foster] %>">
-    <%= link_to "Fosters", users_path(foster: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:transporter] %>">
-    <%= link_to "Transporter", users_path(transporter: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:training_team] %>">
-    <%= link_to "Training", users_path(training_team: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:public_relations] %>">
-    <%= link_to "Public Relations", users_path(public_relations: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:social_media] %>">
-    <%= link_to "Social Media", users_path(social_media: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:fundraising] %>">
-    <%= link_to "Fundraising", users_path(fundraising: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:foster_mentor] %>">
-    <%= link_to "Foster Mentor", users_path(foster_mentor: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:translator] %>">
-    <%= link_to "Translators", users_path(translator: :true, location: params[:location]) %>
-  </li>
-  <li class="<%='active' if  params[:medical_behavior] %>">
-    <%= link_to "Medical/Behavior Managers", users_path(medical_behavior: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:boarding_buddy] %>">
-    <%= link_to "Boarding Buddies", users_path(boarding_buddy: :true, location: params[:location]) %>
-  </li>
-  <li class="<%='active' if params[:active_volunteer] %>">
-    <%= link_to "Active Volunteers", users_path(active_volunteer: :true, location: params[:location]) %>
-  </li>
-  <li class="<%='active' if params[:inactive_volunteer] %>">
-    <%= link_to "Inactive Volunteers", users_path(inactive_volunteer: :true, location: params[:location]) %>
-  </li>
-  <li class="<%= 'active' if params[:locked] %>">
-    <%= link_to "Locked Volunteers", users_path(locked: :true, location: params[:location]) %>
-  </li>
-</ul>
+  <%= form_tag users_path, :method => 'get' do %>
+    <label for="location">Find active volunteers near</label>
+    <p class="form-inline"><%= text_field_tag :location, params[:location], :placeholder => 'City, State or Zip...', size: 30, class: "form-control mr-1" %>
+    <%= submit_tag "Locate", :name => nil, class: "btn btn-primary mr-1" %>
+    <%= link_to "Reset", users_path, class: "btn btn-secondary" %></p>
+  <% end %>
 
-<% if is_admin? %>
-  <p>
-  <%= link_to "Download to Excel", users_path(format: :xls, params: request.query_parameters) , :class => "btn btn-success" %>
-  </p>
-<% end %>
 
-<% if params[:foster] == 'true' %>
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span2">
-        <%= render 'foster_filters' %>
-      </div>
-      <div class="span10">
-        <%= render 'user_table' %>
+ 
+
+  <% if params[:location].present? %>
+
+      <h4>Results filtered to volunteers within 30 miles of <%= params[:location] %> </h4>
+
+  <% end %>
+
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-11 mx-auto">
+
+  <div class="card-text-center mt-3">
+    <div class="card-header">
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item">
+          <%= link_to "Admins", users_path(admin: :true, location: params[:location]), class: (params[:admin] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Adoptions", users_path(adoption_coordinator: :true, location: params[:location]), class: (params[:adoption_coordinator] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Events", users_path(event_planner: :true, location: params[:location]), class: (params[:event_planner] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Add Dogs", users_path(dog_adder: :true, location: params[:location]), class: (params[:dog_adder] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Edit Dogs", users_path(dog_editor: :true, location: params[:location]), class: (params[:dog_editor] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Graphic Designers', users_path(graphic_designer: :true, location: params[:location]), class: (params[:graphic_designer] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Photographers", users_path(photographer: :true, location: params[:location]), class: (params[:photographer] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Newsletter", users_path(newsletter: :true, location: params[:location]), class: (params[:newsletter] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Fosters", users_path(foster: :true, location: params[:location]), class: (params[:foster] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Transporter", users_path(transporter: :true, location: params[:location]), class: (params[:transporter] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Training", users_path(training_team: :true, location: params[:location]), class: (params[:training_team] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Public Relations", users_path(public_relations: :true, location: params[:location]), class: (params[:public_relations] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Social Media", users_path(social_media: :true, location: params[:location]), class: (params[:social_media] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Fundraising", users_path(fundraising: :true, location: params[:location]), class: (params[:fundraising] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Foster Mentor", users_path(foster_mentor: :true, location: params[:location]), class: (params[:foster_mentor] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Translators", users_path(translator: :true, location: params[:location]), class: (params[:translator] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Medical/Behavior Managers", users_path(medical_behavior: :true, location: params[:location]), class: (params[:medical_behavior] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Boarding Buddies", users_path(boarding_buddy: :true, location: params[:location]), class: (params[:boarding_buddy] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Active Volunteers", users_path(active_volunteer: :true, location: params[:location]), class: (params[:active_volunteer] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Inactive Volunteers", users_path(inactive_volunteer: :true, location: params[:location]), class: (params[:inactive_volunteer] ? 'nav-link active' : 'nav-link') %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Locked Volunteers", users_path(locked: :true, location: params[:location]), class: (params[:locked] ? 'nav-link active' : 'nav-link') %>
+        </li>
+      </ul>
       </div>
     </div>
-  </div>
-<% else %>
-  <%= render 'user_table' %>
-<% end %>
+    <div class="card-body">
 
-<%= will_paginate @users %>
+      <% if is_admin? %>
+        <p>
+        <%= link_to "Download to Excel", users_path(format: :xls, params: request.query_parameters) , :class => "btn btn-success" %>
+        </p>
+      <% end %>
+
+      <% if params[:foster] == 'true' %>
+        <div class="row">
+          <div class="col-2">
+            <%= render 'foster_filters' %>
+          </div>
+          <div class="col-10">
+            <%= render 'user_table' %>
+          </div>
+        </div>
+      <% else %>
+        <%= render 'user_table' %>
+      <% end %>
+
+      <%= will_paginate @users %>
+    </div>
+  </div>
+</div>

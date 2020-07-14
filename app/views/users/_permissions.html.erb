@@ -133,8 +133,8 @@
   <% end %>
 
   <% if @user.locked? %>
-    <li><span class="label label-important">Account Disabled</span></li>
+    <li><span class="badge badge-warning">Account Disabled</span></li>
   <% else %>
-    <li><span class="label label-success">Account Active</span></li>
+    <li><span class="badge badge-success">Account Active</span></li>
   <% end %>
 </ul>

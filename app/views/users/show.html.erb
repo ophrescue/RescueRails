@@ -10,12 +10,15 @@
         <% if (@user == current_user || is_admin?) %>
           <strong><%= link_to( "Update/Verify Profile", edit_user_path(@user), :class => "btn btn-primary") %></strong>
         <% end %>
-
-        <h4 class="mt-2">Profile</h4>
     </div>
   </div>
   <div class="row mt-2">
     <div class="col-sm-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h4 class="mt-2">Profile</h4>
+        </div>
+        <div class="card-body">
           <table class="table table-striped table-bordered table-sm">
             <tr>
               <td>Address</td>
@@ -94,18 +97,30 @@
               </td>
             </tr>
           </table>
+          </div>
+        </div>
         </div>
         <div class="col-sm-6">
-          <div class="text-center"><%= image_tag @user.avatar.url(:medium), class: 'rounded w-50' %></div>
+          <div class="text-center"><%= image_tag @user.avatar.url(:medium) %></div>
         </div>
       </div>
       <div class="row mt-2">
         <div class="col-sm-6">
-          <h4>Permissions</h4>
-          <%= render 'permissions' %>
+          <div class="card">
+            <div class="card-header">
+              <h4>Permissions</h4>
+            </div>
+            <div class="card-body">
+              <%= render 'permissions' %>
+            </div>
+          </div>
         </div>
         <div class="col-sm-6">
+          <div class="card">
+            <div class="card-header">
           <h4>Fostering</h4>
+            </div>
+            <div class="card-body">
             <% if @user.mentor_id %>
               <p>Mentor: <%= link_to @user.mentor.name, user_path(@user.mentor) %></p>
             <% else %>
@@ -228,8 +243,10 @@
                 <p><span class="badge badge-warning">Not Available for Transport</span></p>
               <% end %>
             <% end %>
+            </div>
           </div>
-          <div class="col-10 mx-auto">
+          </div>
+          <div class="col-10 mt-4 mx-auto">
 
             <table class="table table-striped table-bordered table-sm">
               <tr>
@@ -263,12 +280,24 @@
       <div class="row mt-3">
         <% if is_admin? %>
           <div class="col-sm-6">
-            <h3 class="ml-2">Admin Notes</h3>
-            <p><%= @user.admin_comment %></p>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="ml-2">Permission Change History</h3>
+              </div>
+              <div class="card-body ml-5">
+                <p><%= render @user.audits_sorted %></p>
+              </div>
+            </div>
           </div>
           <div class="col-sm-6">
-            <h3>Permission Change History</h3>
-            <p><%= render @user.audits_sorted %></p>
+            <div class="card">
+              <div class="card-header">
+                <h3>Admin Notes</h3>
+              </div>
+              <div class="card-body">
+                <p><%= @user.admin_comment %></p>
+              </div>
+            </div>
           </div>
         <% end %>
 

@@ -62,6 +62,13 @@ class InvoicesController < ApplicationController
       @invoice.paid_at = Time.now
       @invoice.status = 'paid'
       @invoice.save
+      @donation = Donation.new
+      @donation.name = @invoice.invoiceable.adopter.name
+      @donation.email = @invoice.invoiceable.adopter.email
+      @donation.amount = @invoice.donation
+      @donation.frequency = 'Once'
+      @donation.comment = 'Adoption Fee Roundup'
+      @donation.save
       flash[:success] = 'Payment Processed Successfully '
       InvoiceMailer.invoice_paid(@invoice.id).deliver_later
     ensure

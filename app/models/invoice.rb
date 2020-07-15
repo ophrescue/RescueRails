@@ -47,7 +47,7 @@ class Invoice < ApplicationRecord
   validates_inclusion_of :status, in: STATUSES
 
   validates_numericality_of :amount, greater_than: 0
-  validates_numericality_of :donation, greater_than: 0
+  validates_numericality_of :donation, greater_than: 0, allow_nil: true
 
   VALIDATION_ERROR_MESSAGES = { amount: :numeric, donation: :numeric }.freeze
 

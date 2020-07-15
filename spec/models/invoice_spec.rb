@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: invoices
+#
+#  id                 :bigint           not null, primary key
+#  invoiceable_id     :integer
+#  invoiceable_type   :string
+#  slug               :string
+#  amount             :integer
+#  status             :string
+#  user_id            :bigint
+#  description        :text
+#  stripe_customer_id :string
+#  card_token         :string
+#  paid_at            :datetime
+#  paid_method        :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  donation           :integer
+#
 require 'rails_helper'
 
 

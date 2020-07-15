@@ -2,30 +2,56 @@
   <div class="row">
     <div class="col-12 pt-3">
       <h1>OPH Adoption Fee Payment</h1>
-
-
-      <h5>Adopter <%= link_to @invoice.invoiceable.adopter.name, @invoice.invoiceable.adopter %>  </h5>
-
-      <h5>For the Adoption of <%= link_to @invoice.invoiceable.animal.name, @invoice.invoiceable.animal %></h5>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 pt-3">
+      <dl>
+        <dt>Adopter</dt>
+        <dd><%= @invoice.invoiceable.adopter.name %></dd>
+        <dt>For the adoption of</dt>
+        <dd><%= @invoice.invoiceable.animal.name %></dd>
+      </dl>
+    </div>
+  </div>
 
-  <% if @invoice.open? %>
-    <div class="col-sm-6 pt-3">
-        <p>Adoption Fees Due <span id="amtDue"><%= number_to_currency(@invoice.amount) %></span></p>
-        <p><%= @invoice.description %></p>
+<% if @invoice.open? %>
+
+  <div class="row">
+    <div class="col-sm-4 pt-3">
+      <dl>
+        <dt>Adoption Fees Due<dt>
+        <dd><span id="amtDue"><%= number_to_currency(@invoice.amount) %></span></dd>
+        <% if @invoice.description.present? %>
+        <dd>Notes</dd>
+        </dt><%= @invoice.description %></dt>
+        <% end%>
+      </dl>
+
         <%= form_for @invoice do |f| %>
           <%= render 'shared/error_messages', :object => f.object %>
           <div class="form-group">
-              <%= f.label :donation, '(Optional) Include a donation with your payment' %>
-              <%= f.number_field :donation, class: "form-control" %>
+              <%= f.label :donation, 'Round up your donation for community spay and neuter' %>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">$</div>
+                </div>
+                <%= f.text_field :donation, class: "form-control", placeholder: "0" %>
+              </div>
           </div>
           <%= hidden_field_tag(:stripeToken) %>
         <% end %>
+        <div id="error_explanation">
+          <% if flash[:error].present? %>
+              <p><%= flash[:error] %></p>
+          <% end %>
+        </div>
         <button id="payButton" class="btn btn-primary btn-lg">Make Payment</button>
-
-  <% else %>
-        <p>Invoice of <%= number_to_currency(@invoice.amount) %> was paid in full <%= @invoice.paid_at.strftime("%m/%d/%Y at %l:%M:%S %p") %>.
-      <% end %>
+    </div>
+<% else %>
+        <p>Invoice of <%= number_to_currency(@invoice.amount) %> was paid in full <%= @invoice.paid_at.strftime("%m/%d/%Y at %l:%M:%S %p") %>.</p>
+        <p>A donation of <%= number_to_currency(@invoice.donation) %> was included.</p>
+<% end %>
     </div>
   </div>
 </div>
@@ -57,13 +83,19 @@
 
     var donation = document.getElementById("invoice_donation").value;
 
+    console.log(donation + isNaN(donation))
+
+    if (isNaN(donation)) {
+      $('#error_explanation').html('<p>Please enter a valid donation amount in whole dollars</p>')
+      throw "invalid donation amount";
+    }
+
     donation = donation.replace(/\$/g, '').replace(/\,/g, '');
 
-    if(isNaN(donation)) {
-      donation = 0
-    }
     // set to 0 if negative
     donation = Math.max(0,donation);
+
+    document.getElementById("invoice_donation").value = donation;
 
     donation = parseFloat(donation);
     donation = donation * 100; // Needs to be an integer!

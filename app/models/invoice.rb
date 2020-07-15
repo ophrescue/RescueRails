@@ -29,6 +29,7 @@
 #  paid_method        :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  donation           :integer
 #
 
 class Invoice < ApplicationRecord
@@ -45,7 +46,10 @@ class Invoice < ApplicationRecord
   validates_presence_of :status
   validates_inclusion_of :status, in: STATUSES
 
-  VALIDATION_ERROR_MESSAGES = {content: :blank}
+  validates_numericality_of :amount, greater_than: 0
+  validates_numericality_of :donation, greater_than: 0
+
+  VALIDATION_ERROR_MESSAGES = { amount: :numeric, donation: :numeric }.freeze
 
   def process_payment(email)
     customer = Stripe::Customer.create email: email,

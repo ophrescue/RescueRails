@@ -128,6 +128,7 @@ class AdoptersController < ApplicationController
                                     :phone,
                                     :address1,
                                     :address2,
+                                    :is_address_valid,
                                     :city,
                                     :state,
                                     :zip,

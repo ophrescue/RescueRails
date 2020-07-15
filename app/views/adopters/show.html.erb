@@ -18,9 +18,7 @@
       <li class="active"><a href="#dog" data-toggle="tab">Pet Choices</a></li>
       <li><a href="#doginfo" data-toggle="tab">Pet Info</a></li>
       <li><a href="#otherpets" data-toggle="tab">Pet Vet</a></li>
-      <% if @adopter.adoption_app.house_type == 'rent' %>
-        <li><a href="#rental" data-toggle="tab">Rental</a></li>
-      <% end %>
+      <li><a href="#housing" data-toggle="tab">Housing</a></li>
       <li><a href="#references" data-toggle="tab">References</a></li>
     </ul>
 
@@ -95,8 +93,8 @@
           </div>
         </div>
 
-        <div id="rental" class="tab-pane">
-          <%= render 'adopter_rental' %>
+        <div id="housing" class="tab-pane">
+          <%= render 'adopter_housing' %>
         </div>
 
         <div id='otherpets' class="tab-pane">

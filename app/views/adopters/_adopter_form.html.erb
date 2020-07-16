@@ -85,11 +85,12 @@
       </td>
     </tr>
     <tr>
-      <th>Household Ages</th>
+      <th><p>Household Ages</p>
+      <small>Infants: 0 - 1, Young: 2 - 7, Older: 8 - 12, Teenager: 13 - 18, Adult: 19 - 65, Senior: 66+ </small>
+      </th>
       <td>
         <div class='read-only'><%= af.object.household_ages.join(", ") %></div>
         <div class='editable'><%= af.select(:household_ages, [["Infant"], ["Young Child"], ["Older Child"], ["Teenager"], ["Adult"], ["Senior"]], { include_hidden: false }, { multiple: true }) %></div>
-        <small>Infants: 0 - 1, Young: 2 - 7, Older: 8 - 12, Teenager: 13 - 18, Adult: 19 - 65, Senior: 66+ </small>
       </td>
       <% end %>
     </tr>

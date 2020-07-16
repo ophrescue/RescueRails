@@ -5,6 +5,8 @@
 				<h1>Banned Adopters</h1>
 				<% if can_ban_adopters? %>
 					<p><%= link_to "Add Adopter", new_banned_adopter_path, :class => "btn btn-primary" %>
+				<% else %>
+					<p>
 				<% end %>
 
 				<% if @banned_adopters.count > 0 %>
@@ -21,13 +23,8 @@
 							<%= render @banned_adopters %>	
 						</tbody>
 					</table>
-
-					<p>
-
 				<% else %>
-					</p>
 					<h5>No Banned Adopters</h5>
-
 				<% end %>
 			</div>
 		</div>

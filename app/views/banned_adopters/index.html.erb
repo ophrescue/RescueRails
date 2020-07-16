@@ -4,10 +4,11 @@
 			<div class="pages ml-2">
 				<h1>Banned Adopters</h1>
 				<% if can_ban_adopters? %>
-					<p><%= link_to "Add", new_banned_adopter_path, :class => "btn btn-primary" %></p>
+					<p><%= link_to "Add Adopter", new_banned_adopter_path, :class => "btn btn-primary" %>
 				<% end %>
 
 				<% if @banned_adopters.count > 0 %>
+					<%= link_to "Download Excel", banned_adopters_path(format: "xls"), :class => "btn btn-success ml-2" %></p>
 					<table class="table table-striped table-bordered table-sm">
 						<thead>
 							<tr>
@@ -21,9 +22,10 @@
 						</tbody>
 					</table>
 
-					<p><%= link_to "Download Excel", banned_adopters_path(format: "xls"), :class => "btn btn-success" %></p>
+					<p>
 
 				<% else %>
+					</p>
 					<h5>No Banned Adopters</h5>
 
 				<% end %>

@@ -1,58 +1,41 @@
 <div class="row">
-	<div class="span8">
-
+	<div class="col-8">
 		<%= form_for @banned_adopter, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
 			<%= render 'shared/error_messages', :object => f.object %>
 			<fieldset>
-				<div class="control-group">
-					<%= f.label :name, nil, :class => 'control-label' %>
-					<div class="controls">
-						<%= f.text_field :name, :class => "input-large" %>
-					</div>
+				<div class="form-group">
+					<label class="mt-2" for="banned_adopter_name">Name</label>
+					<%= f.text_field :name, :class => "form-control col-12 col-sm-8 col-md-6 col-lg-4" %>
 				</div>
 
-				<div class="control-group">
-					<%= f.label :phone, "Phone Number" , :class => 'control-label'%>
-					<div class="controls">
-						<%= f.text_field :phone, :class => "input-medium" %>
-					</div>
+				<div class="form-group">
+					<label for="banned_adopter_phone">Phone Number</label>
+					<%= f.text_field :phone, :class => "form-control col-10 col-sm-6 col-md-4 col-lg-3" %>
 				</div>
 
-				<div class="control-group">
-					<%= f.label :email, "E-mail Address" , :class => 'control-label'%>
-					<div class="controls">
-						<%= f.text_field :email, :class => "input-large" %>
-					</div>
+				<div class="form-group">
+					<label for="banned_adopter_email">Email Address</label>
+					<%= f.text_field :email, :class => "form-control col-12 col-sm-8 col-md-6 col-lg-4" %>
 				</div>
 
-				<div class="control-group">
-					<%= f.label :city, "City", :class => 'control-label' %>
-					<div class="controls">
-						<%= f.text_field :city, :class => "input-medium" %>
-					</div>
+				<div class="form-group">
+					<label for="banned_adopter_city">City</label>
+					<%= f.text_field :city, :class => "form-control col-12 col-sm-8 col-md-6 col-lg-4" %>
 				</div>
 
-				<div class="control-group">
-					<%= f.label :state, "State", :class => 'control-label' %>
-					<div class="controls">
-						<%= f.text_field :state, :class => "input-small" %>
-					</div>
+				<div class="form-group">
+					<label for="banned_adopter_state">State</label>
+					<%= f.text_field :state, :class => "form-control col-4 col-sm-2 col-lg-1" %>
 				</div>
 
-				<div class="control-group">
-					<%= f.label :comment, nil, :class => 'control-label' %>
-					<div class="controls">
-						<%= f.text_area :comment, :class => "input-xlarge", :rows => "5" %>
-					</div>
-					
+				<div class="form-group">
+					<label for="banned_adopter_comment">Comment</label>
+					<%= f.text_area :comment, :class => "form-control col-12 col-sm-8 col-lg-4", :rows => "5" %>						
 				</div>
 
-				<div class="actions well">
-					<%= f.submit "Submit", :class => "btn btn-primary" %>
-				</div>
+				<%= f.submit "Submit", :class => "btn btn-primary" %>
 			</fieldset>
 
 		<% end %>
-
 	</div>
 </div>

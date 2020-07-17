@@ -16,10 +16,10 @@ class InvoicesController < ApplicationController
 
   PER_PAGE = 30
 
-  before_action :require_login, except: %i[show]
-  before_action :unlocked_user, except: %i[show]
+  before_action :require_login, except: %i[show update]
+  before_action :unlocked_user, except: %i[show update]
   before_action :select_bootstrap41
-  before_action :show_user_navbar, except: %i[show]
+  before_action :show_user_navbar, except: %i[show update]
 
   def new
     load_invoiceable

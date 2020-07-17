@@ -50,6 +50,8 @@ class Donation < ApplicationRecord
 
   belongs_to :campaign, optional: true
 
+  has_one :invoice
+
   TSHIRT_SIZE = { "Small" => 'T-Shirt Size: Small',
                   "Medium" => 'T-Shirt Size: Medium',
                   "Large" => 'Tshirt Size: Large',

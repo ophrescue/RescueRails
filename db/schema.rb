@@ -439,7 +439,9 @@ ActiveRecord::Schema.define(version: 2020_07_10_000238) do
     t.string "paid_method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "donation"
+    t.bigint "donation_id"
+    t.boolean "has_donation", default: false, null: false
+    t.index ["donation_id"], name: "index_invoices_on_donation_id"
     t.index ["slug"], name: "index_invoices_on_slug", unique: true
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
@@ -593,6 +595,7 @@ ActiveRecord::Schema.define(version: 2020_07_10_000238) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  add_foreign_key "invoices", "donations"
   add_foreign_key "invoices", "users"
   add_foreign_key "treatment_records", "treatments"
   add_foreign_key "treatment_records", "users"

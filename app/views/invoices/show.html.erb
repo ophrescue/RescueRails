@@ -31,7 +31,7 @@
         <%= form_for @invoice do |f| %>
           <%= render 'shared/error_messages', :object => f.object %>
           <div class="form-group">
-              <%= f.label :donation, 'Round up your donation for community spay and neuter' %>
+              <%= f.label :donation, 'Add a donation for community spay and neuter:' %>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <div class="input-group-text">$</div>
@@ -50,7 +50,9 @@
     </div>
 <% else %>
         <p>Invoice of <%= number_to_currency(@invoice.amount) %> was paid in full <%= @invoice.paid_at.strftime("%m/%d/%Y at %l:%M:%S %p") %>.</p>
-        <p>A donation of <%= number_to_currency(@invoice.donation) %> was included.</p>
+        <% if @invoice.has_donation? %>
+        <p>A donation of <%= number_to_currency(@invoice.donation.amount) %> was included.</p>
+        <% end %>
 <% end %>
     </div>
   </div>

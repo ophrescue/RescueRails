@@ -16,7 +16,8 @@
 #  paid_method        :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  donation           :integer
+#  donation_id        :bigint
+#  has_donation       :boolean          default(FALSE), not null
 #
 require 'rails_helper'
 

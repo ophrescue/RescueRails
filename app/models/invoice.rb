@@ -29,7 +29,8 @@
 #  paid_method        :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  donation           :integer
+#  donation_id        :bigint
+#  has_donation       :boolean          default(FALSE), not null
 #
 
 class Invoice < ApplicationRecord
@@ -38,6 +39,7 @@ class Invoice < ApplicationRecord
 
   belongs_to :invoiceable, polymorphic: true
   belongs_to :user
+  belongs_to :donation, optional: true
 
   friendly_id :url_hash, use: :slugged
 
@@ -47,7 +49,6 @@ class Invoice < ApplicationRecord
   validates_inclusion_of :status, in: STATUSES
 
   validates_numericality_of :amount, greater_than: 0
-  validates_numericality_of :donation, greater_than: 0, allow_nil: true
 
   VALIDATION_ERROR_MESSAGES = { amount: :numeric, donation: :numeric }.freeze
 
@@ -62,11 +63,11 @@ class Invoice < ApplicationRecord
   end
 
   def open?
-    return true if self.status == 'open'
+    self.status == 'open'
   end
 
   def paid?
-    return true if self.status == 'paid'
+    self.status == 'paid'
   end
 
 end

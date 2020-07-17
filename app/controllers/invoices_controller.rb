@@ -33,8 +33,8 @@ class InvoicesController < ApplicationController
     @invoice.user_id = current_user.id
     @invoice.status = 'open'
     if @invoice.save
-      flash[:success] = "Invoice Generated"
-      redirect_to polymorphic_path([@invoiceable.adopter])
+      flash[:success] = "Invoice Generated, please share the invoice with the adopter"
+      redirect_to invoice_path(@invoice)
     else
       flash.now[:error] = "Invoice could not be saved"
       render 'new'

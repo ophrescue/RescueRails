@@ -2,6 +2,13 @@
   <div class="row">
     <div class="col-12 pt-3">
       <h1>OPH Adoption Fee Payment</h1>
+        <% if signed_in? && @invoice.open?%>
+          <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">OPH Action Required</h4>
+            <p>Please share this page with the adopter so they can make their payment:</p>
+            <code><%= invoice_url(@invoice) %></code>
+          </div>
+        <% end %>
     </div>
   </div>
   <div class="row">
@@ -16,7 +23,6 @@
   </div>
 
 <% if @invoice.open? %>
-
   <div class="row">
     <div class="col-sm-4 pt-3">
       <dl>

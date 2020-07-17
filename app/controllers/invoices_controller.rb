@@ -51,27 +51,13 @@ class InvoicesController < ApplicationController
   def update
     @invoice = Invoice.friendly.find(params[:id])
     @invoice.card_token =  stripe_params["stripeToken"]
+    donation_amt = stripe_params["invoice"]["donation"].to_i
 
     begin
-      @invoice.process_payment(@invoice.invoiceable.adopter.email)
+      @invoice.process_payment(donation_amt)
     rescue Stripe::CardError => e
       flash[:error] = e.message
     else
-      if (stripe_params["invoice"]["donation"].to_i > 0)
-        @donation = Donation.new
-        @donation.name = @invoice.invoiceable.adopter.name
-        @donation.email = @invoice.invoiceable.adopter.email
-        @donation.amount = stripe_params["invoice"]["donation"].to_i
-        @donation.frequency = 'Once'
-        @donation.comment = 'Adoption Fee Roundup'
-        @donation.save!
-        @invoice.has_donation = true
-        @invoice.donation_id = @donation.id
-      end
-      @invoice.paid_method = 'Stripe'
-      @invoice.paid_at = Time.now
-      @invoice.status = 'paid'
-      @invoice.save!
       flash[:success] = 'Payment Processed Successfully '
       InvoiceMailer.invoice_paid(@invoice.id).deliver_later
     ensure

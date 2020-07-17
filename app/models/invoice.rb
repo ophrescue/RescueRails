@@ -53,29 +53,31 @@ class Invoice < ApplicationRecord
   VALIDATION_ERROR_MESSAGES = { amount: :numeric, donation: :numeric }.freeze
 
   def process_payment(donation_amt)
-    if (donation_amt > 0)
-      donation = Donation.new
-      donation.name = self.invoiceable.adopter.name
-      donation.email = self.invoiceable.adopter.email
-      donation.amount = donation_amt
-      donation.frequency = 'Once'
-      donation.comment = 'Adoption Fee Roundup'
-      donation.save!
-      self.has_donation = true
-      self.donation_id = donation.id
+    ActiveRecord::Base.transaction do
+      if (donation_amt > 0)
+        donation = Donation.new
+        donation.name = self.invoiceable.adopter.name
+        donation.email = self.invoiceable.adopter.email
+        donation.amount = donation_amt
+        donation.frequency = 'Once'
+        donation.comment = 'Adoption Fee Roundup'
+        donation.save!
+        self.has_donation = true
+        self.donation_id = donation.id
+      end
+      self.paid_method = 'Stripe'
+      self.paid_at = Time.now
+      self.status = 'paid'
+      self.save!
+
+      customer = Stripe::Customer.create email: self.invoiceable.adopter.email,
+                                        card: card_token
+
+      Stripe::Charge.create customer: customer.id,
+                            amount: amount * 100,
+                            description: 'Adoption Fee',
+                            currency: 'usd'
     end
-    self.paid_method = 'Stripe'
-    self.paid_at = Time.now
-    self.status = 'paid'
-    self.save!
-
-    customer = Stripe::Customer.create email: self.invoiceable.adopter.email,
-                                       card: card_token
-
-    Stripe::Charge.create customer: customer.id,
-                          amount: amount * 100,
-                          description: 'Adoption Fee',
-                          currency: 'usd'
   end
 
   def open?

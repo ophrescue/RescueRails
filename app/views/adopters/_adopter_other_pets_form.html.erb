@@ -4,7 +4,7 @@
         <th class="span2">Previously Owned Cats or Dogs?</th>
         <td>
           <div class='vet-read-only'><%= f.object.prev_pets_type %></div>
-          <div class='vet-editable'><%= f.select :prev_pets_type, options_for_select([['Dogs'], ['Cats'], ['Both']]), include_blank: true %></div>
+          <div class='vet-editable'><%= f.select :prev_pets_type, options_for_select([['Dogs'], ['Cats'], ['Both'], ['None']]), include_blank: true %></div>
         </td>
     </tr>
     <tr>

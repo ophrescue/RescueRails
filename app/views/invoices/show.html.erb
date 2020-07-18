@@ -24,7 +24,7 @@
 
 <% if @invoice.open? %>
   <div class="row">
-    <div class="col-sm-4 pt-3">
+    <div class="col-sm-6 pt-3">
       <dl>
         <dt>Adoption Fees Due<dt>
         <dd><span id="amtDue"><%= number_to_currency(@invoice.amount) %></span></dd>
@@ -37,7 +37,7 @@
         <%= form_for @invoice do |f| %>
           <%= render 'shared/error_messages', :object => f.object %>
           <div class="form-group">
-              <%= f.label :donation, 'Add a donation for community spay and neuter:' %>
+              <%= f.label :donation, 'Add an optional donation for community spay and neuter:' %>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <div class="input-group-text">$</div>

@@ -6,7 +6,6 @@ RSpec.describe "Invoices" do
     let!(:dog) { create(:dog) }
     let!(:adoption) { create(:adoption, adopter_id: adopter.id, dog_id: dog.id )}
 
-
     describe "GET #show unpaid invoice" do
       let(:invoice) { create(:invoice_unpaid, invoiceable_id: adoption.id, invoiceable_type: 'Adoption') }
       it 'is successful' do

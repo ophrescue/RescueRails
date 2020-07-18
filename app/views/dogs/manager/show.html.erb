@@ -86,7 +86,7 @@
         <dt>OK with kids?</dt>
         <dd id='kids_ok'><%= (!@dog.no_kids).as_icon  %></dd>
         <dt>No Urban Settings</dt>
-        <dd id='no_urban_setting'><%= (!@dog.no_urban_setting).as_icon  %></dd>
+        <dd id='no_urban_setting'><%= (@dog.no_urban_setting).as_icon  %></dd>
         <dt>Medical Review Complete</dt>
         <dd id='medical_review_complete'><%= @dog.medical_review_complete.as_icon %></dd>
         <dt>Has Medical Need</dt>

@@ -14,6 +14,10 @@
         <%= af.radio_button :prev_pets_type, "Both", :class => "required" %>
         <span>Both</span>
       </label>
+      <label class="radio">
+        <%= af.radio_button :prev_pets_type, "None", :class => "required" %>
+        <span>None</span>
+      </label>
     </div>
    </div>
    <div class="control-group">
@@ -156,16 +160,14 @@
         <%= af.text_area :current_pets_uptodate_why, :class => "input-xxlarge", :rows => "3" %>
       </div>
     </div>
-  <div class="current-q">
     <h5>Please provide the name and phone number of a veterinarian who has seen these pets.</h5>
 
     <div class="control-group">
       <%= af.label :vet_info, "Veterinarian Name and Phone Number", :class => "control-label" %>
       <div class="controls">
-        <%= af.text_area :vet_info, :class => "input-xxlarge", :rows => "3" %>
+        <%= af.text_area :vet_info, :class => "required input-xxlarge", :rows => "3" %>
         <span class="help-inline">Failure to include your Vet's Phone Number will delay your application</span>
       </div>
     </div>
     <p><span class="label label-important">Important</span> Call your vet and give permission to release your pet records to Operation Paws for Homes.</p>
-  </div>
 </div>

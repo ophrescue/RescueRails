@@ -12,7 +12,7 @@ feature 'Campaigns', js: true do
       visit campaign_path(campaign)
       click_link 'donate-now'
       expect(page).to have_content(campaign.title)
-      click_button('donate25')
+      click_button('donate20')
 
       choose('donation_frequency_once')
       check 'honorToggle'

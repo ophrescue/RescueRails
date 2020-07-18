@@ -13,7 +13,7 @@ feature 'Donations' do
   scenario "One time Donation", js: true do
     visit '/donations/new'
     expect(page).to have_content('Save a life')
-    click_button('donate25')
+    click_button('donate20')
 
     choose('donation_frequency_once')
     check 'honorToggle'

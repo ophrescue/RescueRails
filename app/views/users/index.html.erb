@@ -121,7 +121,7 @@
             <%= render 'user_table' %>
           <% end %>
 
-          <%= will_paginate @users %>
+          <%= will_paginate(@users, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
         </div>
       </div>
     </div>

@@ -19,12 +19,13 @@ class InvoiceMailer < ActionMailer::Base
 
   def invoice_paid(invoice_id)
     @invoice = Invoice.find(invoice_id)
-    notify = []
-    notify.push(@invoice.invoiceable.animal.foster.email) ||
-    notify.push(@invoice.invoiceable.user.email) ||
-    notify.push('adopt@ophrescue.org')
+    @notify = []
+    @notify.push(@invoice.invoiceable.animal.foster.email) unless @invoice.invoiceable.animal.foster.nil?
+    # Sends notification to assigned adoption coordinator
+    @notify.push(@invoice.invoiceable.adopter.user.email) unless @invoice.invoiceable.adopter.user.nil?
+    @notify.push('adopt@ophrescue.org')
     mail(to: @invoice.invoiceable.adopter.email,
-      bcc: notify,
+      cc: @notify,
       subject: "Thank you for your Adoption Fee Payment #{@invoice.invoiceable.adopter.name}",
       content_type: 'text/html')
   end

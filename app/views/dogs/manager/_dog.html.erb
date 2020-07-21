@@ -4,7 +4,8 @@
   </div>
 </div>
 <div class='row dog line-2'>
-  <div class='col offset-md-3'>
+<img class='imagepreview offset-md-1' src="<%=dog.primary_photo_url%>" class="figure-img img-fluid rounded" alt="<%=dog.name%> photo">
+  <div class='col offset-md-1'>
     <span><%= size_abbrev(dog.size) %>,</span>
     <span class='age'><%= dog.age ? dog.age.titleize : " " %>,</span>
     <span class='gender'><%= dog.gender %>,</span>

@@ -95,6 +95,14 @@ describe AdoptersController, type: :controller do
         expect(flash[:error]).to be
       end
     end
+
+    context 'cannot update with invalid email' do
+      let(:request) { -> { put :update, params: { id: adopter.id, adopter: attributes_for(:adopter, email: 'joe@test.com, jane@test.com') } } }
+
+      it 'does not update' do
+        expect { request.call }.to_not change { adopter.reload.email }
+      end
+    end
   end
 
   describe 'Adopter recept of Training Coupon and followup email' do

@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_07_10_000238) do
     t.string "county"
     t.boolean "training_email_sent", default: false, null: false
     t.string "dog_or_cat"
+    t.string "secondary_email"
     t.index ["assigned_to_user_id"], name: "index_adopters_on_assigned_to_user_id"
   end
 

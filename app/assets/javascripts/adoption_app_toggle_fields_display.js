@@ -18,4 +18,30 @@ $(document).ready(function () {
         $(".birth-date").hide();
       }
     });
+
+    $(".cats-q").hide();
+    $(".dogs-q").hide();
+    $(".current-q").hide();
+    $(".pets-type-radio").change(function () {
+      if (this.value !== "None") {
+        $(".current-q").show();
+        if (this.value == "Cats") {
+          $(".cats-q").show();
+          $(".dogs-q").hide();
+        }
+        else if (this.value == "Dogs") {
+         $(".dogs-q").show();
+         $(".cats-q").hide();
+        }
+        else if (this.value == "Both") {
+          $(".cats-q").show();
+          $(".dogs-q").show();
+        }
+      }
+      else {
+        $(".cats-q").hide();
+        $(".dogs-q").hide();
+        $(".current-q").hide();
+      }
+    });
 });

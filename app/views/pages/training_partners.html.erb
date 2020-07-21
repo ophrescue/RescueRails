@@ -256,182 +256,209 @@ I believe any dog can be trained, no matter what behavioral problems they\'re ha
   }
 %>
 
-<div class="row-fluid">
-  <div class="span12">
-    <h1>Training Partners</h1>
-    <p>The OPH Training Partners below offer one <strong>free</strong> training session with your OPH adoption. After your adoption is finalized, you will receive an email with instructions on how to make an appointment.  For questions about our training partner program, or to become a training partner, please contact <a href="mailto:kate@ophrescue.org">kate@ophrescue.org</a></p>
-  </div>
-</div>
-
-<div class="row-fluid">
-  <div class="span4">
-    <div class="well">
-      <ul>
-        <li><a href="#md">Maryland</a></li>
-        <li><a href="#pa">Pennsylvania</a></li>
-        <li><a href="#va">Virginia</a></li>
-      </ul>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="pages">
+        <h1>Training Partners</h1>
+        <p>The OPH Training Partners below offer one <strong>free</strong> training session with your OPH adoption. After your adoption is finalized, you will receive an email with instructions on how to make an appointment.  For questions about our training partner program, or to become a training partner, please contact <a href="mailto:kate@ophrescue.org">kate@ophrescue.org</a></p>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="row-fluid">
-  <div class="span12">
-    <div class="article">
-    <h2><a name="md"></a>Maryland</h2>
 
-    <% md_trainers.each do |trainer| %>
-
-      <div class="media">
-        <h3><%= trainer[:name] %></h3>
-        <a class="pull-left" target="_blank" href="">
-          <%= image_tag(trainer[:logo], alt: trainer[:name], size: "150") %>
-        </a>
-        <div class="media-body">
-          <ul class="unstyled">
-            <% if trainer[:contact] %>
-            <li>
-              <strong>Contact:</strong> <%= trainer[:contact] %>
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="card bg-light">
+        <div class="card header">
+          <ul class="nav nav-tab card-header-tab" id="states-trainers" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="md-tab" data-toggle="tab" href="#md" role="tab" aria-controls="md" aria-selected="true">Maryland</a>
             </li>
-            <% end %>
-            <li>
-              <strong>Company Address:</strong> <%= trainer[:company_address] %>
+            <li class="nav-item">
+              <a class="nav-link" id="pa-tab" data-toggle="tab" href="#pa" role="tab" aria-controls="pa" aria-selected="false">Pennsylvania</a>
             </li>
-            <% if trainer[:training_address] %>
-              <strong>Training Address:</strong> <%= trainer[:training_address] %>
-            <% end %>
-            <% if trainer[:website] %>
-            <li>
-              <strong>Website:</strong> <a href="<%= trainer[:website] %>"><%=trainer[:website] %></a>
-            </li>
-            <% end %>
-            <li>
-              <strong>Phone:</strong> <%= trainer[:phone] %>
-            </li>
-            <li>
-              <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
-            </li>
-            <% if trainer[:membership] %>
-            <li>
-              <strong>Membership:</strong> <%= trainer[:membership] %>
-            </li>
-            <% end %>
-            <% if trainer[:experience] %>
-            <li>
-              <strong>Experience:</strong> <%= trainer[:experience] %>
-            </li>
-            <% end %>
-            <li>
-              <strong>Session Type:</strong> <%= trainer[:session_type] %>
+            <li class="nav-item">
+              <a class="nav-link" id="va-tab" data-toggle="tab" href="#va" role="tab" aria-controls="va" aria-selected="false">Virginia</a>
             </li>
           </ul>
-          <% if trainer[:quote] %>
-          <p><em>"<%= trainer[:quote] %></em>"</p>
-          <% end %>
+        </div>
+        <div class="card-body">
+          <div class="tab-content" id="states-trainers">
+            <div class="tab-pane fade show active" id="md" role="tabpanel" aria-labelledby="md-tab">
+              <h2></a>Maryland</h2>
+
+              <% md_trainers.each do |trainer| %>
+              
+                <h4><%= trainer[:name] %></h4>
+                <div class="media" style="overflow-y: auto;">
+                  <% unless trainer[:logo] == 'white-50x50.gif' %>
+                      <a target="_blank" href="">
+                          <%= image_tag(trainer[:logo], alt: trainer[:name], size: "200", class: "mb-3 mt-3") %>
+                      </a>
+                  <% end%>
+                  <div class="media-body mb-3 mt-3">
+                    <ul class="unstyled">
+                      <% if trainer[:contact] %>
+                      <li>
+                        <strong>Contact:</strong> <%= trainer[:contact] %>
+                      </li>
+                      <% end %>
+                      <li>
+                        <strong>Company Address:</strong> <%= trainer[:company_address] %>
+                      </li>
+                      <% if trainer[:training_address] %>
+                        <strong>Training Address:</strong> <%= trainer[:training_address] %>
+                      <% end %>
+                      <% if trainer[:website] %>
+                      <li>
+                        <strong>Website:</strong> <a href="<%= trainer[:website] %>"><%=trainer[:website] %></a>
+                      </li>
+                      <% end %>
+                      <li>
+                        <strong>Phone:</strong> <%= trainer[:phone] %>
+                      </li>
+                      <li>
+                        <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
+                      </li>
+                      <% if trainer[:membership] %>
+                      <li>
+                        <strong>Membership:</strong> <%= trainer[:membership] %>
+                      </li>
+                      <% end %>
+                      <% if trainer[:experience] %>
+                      <li>
+                        <strong>Experience:</strong> <%= trainer[:experience] %>
+                      </li>
+                      <% end %>
+                      <li>
+                        <strong>Session Type:</strong> <%= trainer[:session_type] %>
+                      </li>
+                    </ul>
+                    <% if trainer[:quote] %>
+                      <p><em>"<%= trainer[:quote] %></em>"</p>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <div class="tab-pane fade" id="pa" role="tabpanel" aria-labelledby="pa-tab">
+              <h2></a>Pennsylvania</h2>
+
+              <% pa_trainers.each do |trainer| %>
+              
+                <h4><%= trainer[:name] %></h4>
+                <div class="media", style="overflow-y: auto;">
+                  <% unless trainer[:logo] == 'white-50x50.gif' %>
+                      <a target="_blank" href="">
+                          <%= image_tag(trainer[:logo], alt: trainer[:name], size: "200", class: "mb-3 mt-3") %>
+                      </a>
+                  <% end%>
+                  <div class="media-body mb-3 mt-3">
+                    <ul class="unstyled">
+                      <% if trainer[:contact] %>
+                      <li>
+                        <strong>Contact:</strong> <%= trainer[:contact] %>
+                      </li>
+                      <% end %>
+                      <li>
+                        <strong>Company Address:</strong> <%= trainer[:company_address] %>
+                      </li>
+                      <% if trainer[:training_address] %>
+                        <strong>Training Address:</strong> <%= trainer[:training_address] %>
+                      <% end %>
+                      <% if trainer[:website] %>
+                      <li>
+                        <strong>Website:</strong> <a href="<%= trainer[:website] %>"><%=trainer[:website] %></a>
+                      </li>
+                      <% end %>
+                      <li>
+                        <strong>Phone:</strong> <%= trainer[:phone] %>
+                      </li>
+                      <li>
+                        <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
+                      </li>
+                      <% if trainer[:membership] %>
+                      <li>
+                        <strong>Membership:</strong> <%= trainer[:membership] %>
+                      </li>
+                      <% end %>
+                      <% if trainer[:experience] %>
+                      <li>
+                        <strong>Experience:</strong> <%= trainer[:experience] %>
+                      </li>
+                      <% end %>
+                      <li>
+                        <strong>Session Type:</strong> <%= trainer[:session_type] %>
+                      </li>
+                    </ul>
+                    <% if trainer[:quote] %>
+                      <p><em>"<%= trainer[:quote] %></em>"</p>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <div class="tab-pane fade" id="va" role="tabpanel" aria-labelledby="va-tab">
+              <h2></a>Virginia</h2>
+
+              <% va_trainers.each do |trainer| %>
+              
+                <h4><%= trainer[:name] %></h4>
+                <div class="media", style="overflow-y: auto;">
+                  <% unless trainer[:logo] == 'white-50x50.gif' %>
+                    <a target="_blank" href="">
+                        <%= image_tag(trainer[:logo], alt: trainer[:name], size: "200", class: "mb-3 mt-3") %>
+                    </a>
+                  <% end%>
+                  <div class="media-body mb-3 mt-3">
+                    <ul class="unstyled">
+                      <% if trainer[:contact] %>
+                      <li>
+                        <strong>Contact:</strong> <%= trainer[:contact] %>
+                      </li>
+                      <% end %>
+                      <li>
+                        <strong>Company Address:</strong> <%= trainer[:company_address] %>
+                      </li>
+                      <% if trainer[:training_address] %>
+                        <strong>Training Address:</strong> <%= trainer[:training_address] %>
+                      <% end %>
+                      <% if trainer[:website] %>
+                      <li>
+                        <strong>Website:</strong> <a href="<%= trainer[:website] %>"><%=trainer[:website] %></a>
+                      </li>
+                      <% end %>
+                      <li>
+                        <strong>Phone:</strong> <%= trainer[:phone] %>
+                      </li>
+                      <li>
+                        <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
+                      </li>
+                      <% if trainer[:membership] %>
+                      <li>
+                        <strong>Membership:</strong> <%= trainer[:membership] %>
+                      </li>
+                      <% end %>
+                      <% if trainer[:experience] %>
+                      <li>
+                        <strong>Experience:</strong> <%= trainer[:experience] %>
+                      </li>
+                      <% end %>
+                      <li>
+                        <strong>Session Type:</strong> <%= trainer[:session_type] %>
+                      </li>
+                    </ul>
+                    <% if trainer[:quote] %>
+                      <p><em>"<%= trainer[:quote] %></em>"</p>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
-
-    <% end %>
-
-    <h2><a name="pa"></a>Pennsylvania</h2>
-
-    <% pa_trainers.each do |trainer| %>
-
-      <div class="media">
-        <h3><%= trainer[:name] %></h3>
-        <a class="pull-left" target="_blank" href="">
-          <%= image_tag(trainer[:logo], alt: trainer[:name], size: "150") %>
-        </a>
-        <div class="media-body">
-          <ul class="unstyled">
-            <li>
-              <strong>Contact:</strong> <%= trainer[:contact] %>
-            </li>
-            <li>
-              <strong>Company Address:</strong> <%= trainer[:company_address] %>
-            </li>
-            <% if trainer[:training_address] %>
-              <strong>Training Address:</strong> <%= trainer[:training_address] %>
-            <% end %>
-            <li>
-              <strong>Website:</strong> <a href="<%= trainer[:website] %>"><%=trainer[:website] %></a>
-            </li>
-            <li>
-              <strong>Phone:</strong> <%= trainer[:phone] %>
-            </li>
-            <li>
-              <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
-            </li>
-            <li>
-              <strong>Membership:</strong> <%= trainer[:membership] %>
-            </li>
-            <li>
-              <strong>Experience:</strong> <%= trainer[:experience] %>
-            </li>
-            <li>
-              <strong>Session Type:</strong> <%= trainer[:session_type] %>
-            </li>
-          </ul>
-          <p><em>"<%= trainer[:quote] %></em>"</p>
-        </div>
-      </div>
-    <% end %>
-
-    <h2><a name="va"></a>Virginia</h2>
-
-    <% va_trainers.each do |trainer| %>
-
-      <div class="media">
-        <h3><%= trainer[:name] %></h3>
-        <a class="pull-left" target="_blank" href="">
-          <%= image_tag(trainer[:logo], alt: trainer[:name], size: "150") %>
-        </a>
-        <div class="media-body">
-          <ul class="unstyled">
-            <% if trainer[:contact] %>
-              <li>
-                <strong>Contact:</strong> <%= trainer[:contact] %>
-              </li>
-            <% end %>
-            <li>
-              <strong>Company Address:</strong> <%= trainer[:company_address] %>
-            </li>
-            <% if trainer[:training_address] %>
-              <strong>Training Address:</strong> <%= trainer[:training_address] %>
-            <% end %>
-            <li>
-              <strong>Website:</strong> <a href="<%= trainer[:website] %>"><%=trainer[:website] %></a>
-            </li>
-            <li>
-              <strong>Phone:</strong> <%= trainer[:phone] %>
-            </li>
-            <li>
-              <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
-            </li>
-            <% if trainer[:membership] %>
-              <li>
-                <strong>Membership:</strong> <%= trainer[:membership] %>
-              </li>
-            <% end %>
-            <% if trainer[:experience] %>
-            <li>
-              <strong>Experience:</strong> <%= trainer[:experience] %>
-            </li>
-            <% end %>
-            <% if trainer[:session_type] %>
-              <li>
-                <strong>Session Type:</strong> <%= trainer[:session_type] %>
-              </li>
-            <% end %>
-          </ul>
-          <% if trainer[:quote] %>
-            <p><em>"<%= trainer[:quote] %></em>"</p>
-          <% end %>
-        </div>
-      </div>
-
-    <% end %>
-
     </div>
   </div>
 </div>

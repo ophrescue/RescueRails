@@ -65,7 +65,7 @@
           <div class="dropdown-menu">
               <%= link_to "Dashboard", dashboards_path, class: "nav-link" %>
             <% if can_edit_my_adopters? || can_edit_all_adopters? %>
-              <%= link_to "Applications",  adopters_path( status: "active"), class: "nav-link" %>
+              <%= link_to "Applications",  adopters_path( status: "active", show: "MyApplications"), class: "nav-link" %>
             <% end %>
             <% if current_user.active? || current_user.admin? %>
               <%= link_to "Cat Manager", cats_manager_index_path, class: "nav-link" %>

@@ -14,6 +14,7 @@
 
 class AdopterSearcher
   include ActionView::Helpers::NumberHelper
+
   PER_PAGE = 30
 
   STATUSES = [
@@ -28,12 +29,18 @@ class AdopterSearcher
 
   PHONE_CHECK = /\(?(?<areacode>[1]?[2-9]\d{2})\)?[\s-]?(?<prefix>[2-9]\d{2})[\s-]?(?<linenumber>[\d]{4})/i.freeze
 
-  def initialize(params: {})
+  def initialize(params: {}, user_id: user_id)
     @params = params
+    @user_id = user_id
   end
 
   def search
     @adopters = Adopter
+    if @params[:show] == "MyApplications"
+      @adopters = @adopters.where(assigned_to_user_id: @user_id)
+    elsif @params[:show] == "OpenApplications"
+      @adopters = @adopters.where(assigned_to_user_id: nil)
+    end
 
     if @params[:search]
       if email_search?
@@ -58,8 +65,8 @@ class AdopterSearcher
     @adopters
   end
 
-  def self.search(params: {})
-    new(params: params).search
+  def self.search(params: {}, user_id: user_id)
+    new(params: params, user_id: user_id).search
   end
 
   private

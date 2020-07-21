@@ -14,7 +14,7 @@
 
 class PagesController < ApplicationController
   before_action :require_login, only: %i[status_definitions newsletters]
-  before_action :select_bootstrap41, only: %i[home newsletters donate]
+  before_action :select_bootstrap41
   before_action :show_user_navbar, only: %i[newsletters]
 
   def status_definitions

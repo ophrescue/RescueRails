@@ -19,6 +19,8 @@ FactoryBot.define do
     surrendered_pets { 'never' }
     how_did_you_hear { 'google ad' }
     pets_branch { 'other_pets' }
+    prev_pets_type { 'Dogs' }
+    current_pets_type { 'Dogs' }
     current_pets_fixed { true }
     rent_costs { '$500 pet deposit' }
     vet_info { 'Dr. Spaceman Baltimore MD' }

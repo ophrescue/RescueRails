@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-md-12">
+        <h1>Invoices</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+        <% if @invoices.count > 0 %>
+            <%= will_paginate(@invoices, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+            <table class="table table-sm table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date Created</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Date Paid</th>
+                        <th scope="col">Adopter</th>
+                        <th scope="col">Adoptee</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%= render @invoices %>
+                </tbody>
+            </table>
+            <%= will_paginate(@invoices, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+        <% else %>
+            <h5>No Invoices!</h5>
+        <% end %>
+
+        </div>
+    </div>
+</div>

@@ -5,12 +5,17 @@
         <% if @adopter.adoption_app.has_family_under_18 == true %>
           <span class="label label-warning">Has Family Under 18</span>
         <% end %>
+
         <% if @adopter.adoption_app.is_ofage == false %>
           <span class="label label-warning">Under 21</span>
         <% end %>
 
-        <% if @adopter.adoption_app.pets_branch == "no_pets" %>
+        <% if @adopter.adoption_app.pets_branch == "no_pets" && @adopter.adoption_app.prev_pets_type.blank? %>
           <span class="label label-warning">First Time Pet Owner</span>
+        <% elsif (@adopter.adoption_app.prev_pets_type == "Cats" || @adopter.adoption_app.prev_pets_type == "None") && (@adopter.adoption_app.current_pets_type == "Cats" || @adopter.adoption_app.current_pets_type == "None") && @adopter.dog_or_cat == "Dog" %>
+          <span class="label label-warning">First Time Dog Owner</span>
+        <% elsif (@adopter.adoption_app.prev_pets_type == "Dogs" || @adopter.adoption_app.prev_pets_type == "None") && (@adopter.adoption_app.current_pets_type == "Dogs" || @adopter.adoption_app.current_pets_type == "None") && @adopter.dog_or_cat == "Cat"%>
+          <span class="label label-warning">First Time Cat Owner</span>
         <% end %>
 
         <%= max_hours_alone_label(@adopter.adoption_app.max_hrs_alone) %>

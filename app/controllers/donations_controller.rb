@@ -77,7 +77,9 @@ class DonationsController < ApplicationController
   end
 
   def stripe_params
-    params.permit :stripeToken, :utf8, :authenticity_token
+    params.permit :stripeToken,
+                  :utf8,
+                  :authenticity_token
   end
 
   def optional_params

@@ -1,109 +1,84 @@
-<div class="row-fluid">
-  <div class="span12">
+<div class="container-fluid">
+  <div class="col-12">
+    <div class="pages">
+      <h1>Get Involved - Join Us!</h1>
 
-    <h1>Get Involved - Join Us!</h1>
+      <p class="lead">Thank you for believing in our mission. There are many ways you can join OPH's family.  Learn more
+      about how to get involved below.</p>
 
-    <br />
-
-    <p>Thank you for believing in our mission. There are many ways you can join OPH's family.  Learn more
-about how to get involved below.</p>
-
-    <br />
-
-
-    <div class= "row-fluid">
-      <ul class="thumbnails donate">
-        <li class="span4">
-          <div class="thumbnail thumbnail-blue">
-            <a href="/adopt">
-              <%= image_tag "get-involved-adopt.jpg", size: "350", alt: "Adopt" %>
-              <div class="caption">
-                <h3>Adopt</h3>
-              </div>
-            </a>
-          </div>
-        </li>
-        <li class="span4">
-          <div class="thumbnail thumbnail-blue">
-            <a href="/foster">
-              <%= image_tag "get-involved-foster.jpg", size: "350", alt: "Foster" %>
-              <div class="caption">
-                <h3>Foster</h3>
-              </div>
-            </a>
-          </div>
-        </li>
-        <li class="span4">
-          <div class="thumbnail thumbnail-blue">
-            <a href="/volunteer">
-              <%= image_tag "get-involved-volunteer.jpg", size: "350", alt: "Volunteer" %>
-              <div class="caption">
-                <h3>Volunteer</h3>
-              </div>
-            </a>
-          </div>
-        </li>
-      </ul>
     </div>
+  </div>
 
-    <div class= "row-fluid">
-      <ul class="thumbnails donate">
-          <li class="span4">
-            <div class="thumbnail thumbnail-blue">
-              <a href="/events">
-                <%= image_tag "get-involved-events.jpg", size: "350", alt: "Events" %>
-                <div class="caption">
-                  <h3>Events</h3>
-                </div>
-              </a>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail thumbnail-blue">
-              <a href="/docs/oph-trainer-partnership-packet.pdf">
-                <%= image_tag "get-involved-trainers.jpg", size: "350", alt: "Trainers" %>
-                <div class="caption">
-                  <h3>Trainers</h3>
-                </div>
-              </a>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail thumbnail-blue">
-              <a href="/docs/oph-vet-partnership-packet.pdf">
-                <%= image_tag "get-involved-vets.jpg", size: "350", alt: "Vets" %>
-                <div class="caption">
-                  <h3>Vets</h3>
-                </div>
-              </a>
-            </div>
-          </li>
-      </ul>
+
+    <div class="album">
+      <div class="container">
+        <div class="row actions">
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <%= image_tag "get-involved-adopt.jpg", alt: "Adopt", class: "card-img-top" %>
+              <div class="card-body text-center">
+                <a class="btn btn-primary btn-lg" role="button" href="/guide">Adopt</a>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+              <%= image_tag "get-involved-foster.jpg",  alt: "Foster", class: "card-img-top" %>
+              <div class="card-body text-center">
+                <a class="btn btn-primary btn-lg" role="button" href="/foster">Foster</a>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+              <%= image_tag "get-involved-volunteer.jpg", alt: "Volunteer", class: "card-img-top" %>
+                <div class="card-body text-center">
+                <a class="btn btn-primary btn-lg" role="button" href="/volunteer">Volunteer</a>
+              </div>
+          </div>
+        </div>
+    <div class= "col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <%= image_tag "get-involved-events.jpg", alt: "Events", class: "card-img-top" %>
+        <div class="card-body text-center">
+          <a class="btn btn-primary btn-lg" role="button" href="/events">Events</a>
+        </div>
+      </div>
     </div>
-    <div class= "row-fluid">
-      <ul class="thumbnails donate">
-          <!-- <li class="span4">
-            <div class="thumbnail thumbnail-blue">
-              <a href="https://join.ophrescue.org/fundraiseforoph">
-                <%= image_tag "get-involved-fundraise.jpg", size: "350", alt: "Fundraise" %>
-                <div class="caption">
-                  <h3>Fundraise</h3>
-                </div>
-              </a>
-            </div>
-          </li> !-->
-          <li class="span4">
-            <div class="thumbnail thumbnail-blue">
-              <a href="/other-ways-to-give">
-                <%= image_tag "get-involved-other.jpg", size: "350", alt: "Other Ways" %>
-                <div class="caption">
-                  <h3>Other Ways</h3>
-                </div>
-              </a>
-            </div>
-          </li>
-      </ul>
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <%= image_tag "get-involved-trainers.jpg", alt: "Trainers", class: "card-img-top" %>
+        <div class="card-body text-center">
+         <a class="btn btn-primary btn-lg" role="button" href="/docs/oph-trainer-partnership-packet.pdf">Trainers</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <%= image_tag "get-involved-vets.jpg", alt: "Vets", class: "card-img-top" %>
+        <div class="card-body text-center">
+          <a class="btn btn-primary btn-lg" role="button" href="/docs/oph-vet-partnership-packet.pdf">Vets</a>
+        </div>
+      </div>
+    </div>
+    <!-- <div class= "col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <%= image_tag "get-involved-fundraise.jpg", alt: "Fundraise", class: "card-img-top" %>
+        <div class="card-body text-center">
+          <a class="btn btn-primary btn-lg" role="button" href="https://join.ophrescue.org/fundraiseforoph">Fundraise</a>
+        </div>
+      </div>
+    </div> !-->
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <%= image_tag "get-involved-other.jpg", alt: "Other Ways", class: "card-img-top" %>
+        <div class="card-body text-center">
+          <a class="btn btn-primary btn-lg" role="button" href="/other-ways-to-give">Other Ways</a>
+        </div>
+      </div>
+    </div>
+    </div>
     </div>
 
   </div>
-</div>
+

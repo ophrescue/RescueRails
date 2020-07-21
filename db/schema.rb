@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_000238) do
+ActiveRecord::Schema.define(version: 2020_07_13_164249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2020_07_10_000238) do
     t.boolean "training_email_sent", default: false, null: false
     t.string "dog_or_cat"
     t.string "secondary_email"
+    t.boolean "is_address_valid", default: true
     t.index ["assigned_to_user_id"], name: "index_adopters_on_assigned_to_user_id"
   end
 

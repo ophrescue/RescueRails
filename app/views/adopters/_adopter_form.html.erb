@@ -136,6 +136,26 @@
       </td>
     </tr>
     <tr>
+      <th>Valid Address?</th>
+      <td>
+        <div class="editable">
+          <%= f.label '' do %>
+            <%= f.radio_button :is_address_valid, true, id: 'validaddress'%> Yes
+          <% end %>
+          <%= f.label '' do %>
+            <%= f.radio_button :is_address_valid, false, id: 'invalidaddress'%> No
+          <% end %>
+        </div>
+        <div class="read-only" id="addressvalidator">
+          <% if @adopter.is_address_valid == true %>
+            Yes
+          <% else %>
+            No
+          <% end %>
+        </div>
+      </td>
+    </tr>
+    <tr>
       <th>
         Heard about us from
       </th>

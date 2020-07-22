@@ -12,9 +12,9 @@
 
         <% if @adopter.adoption_app.pets_branch == "no_pets" && @adopter.adoption_app.prev_pets_type.blank? %>
           <span class="label label-warning">First Time Pet Owner</span>
-        <% elsif @adopter.adoption_app.prev_pets_type == "Cats" && @adopter.dog_or_cat == "Dog" %>
+        <% elsif (@adopter.adoption_app.prev_pets_type == "Cats" || @adopter.adoption_app.prev_pets_type == "None") && (@adopter.adoption_app.current_pets_type == "Cats" || @adopter.adoption_app.current_pets_type == "None") && @adopter.dog_or_cat == "Dog" %>
           <span class="label label-warning">First Time Dog Owner</span>
-        <% elsif @adopter.adoption_app.prev_pets_type == "Dogs" && @adopter.dog_or_cat == "Cat"%>
+        <% elsif (@adopter.adoption_app.prev_pets_type == "Dogs" || @adopter.adoption_app.prev_pets_type == "None") && (@adopter.adoption_app.current_pets_type == "Dogs" || @adopter.adoption_app.current_pets_type == "None") && @adopter.dog_or_cat == "Cat"%>
           <span class="label label-warning">First Time Cat Owner</span>
         <% end %>
 
@@ -50,6 +50,13 @@
       <td>
         <div class='read-only'><%= @adopter.email %></div>
         <div class='editable'><%= f.text_field :email %></div>
+      </td>
+    </tr>
+    <tr>
+      <th>Secondary E-mail</th>
+      <td>
+        <div class='read-only'><%= @adopter.secondary_email %></div>
+        <div class='editable'><%= f.text_field :secondary_email %></div>
       </td>
     </tr>
     <tr>
@@ -135,6 +142,26 @@
       <td>
         <div class="editable"><%= @adopter.county %></div>
         <div class="read-only"><%= @adopter.county %></div>
+      </td>
+    </tr>
+    <tr>
+      <th>Valid Address?</th>
+      <td>
+        <div class="editable">
+          <%= f.label '' do %>
+            <%= f.radio_button :is_address_valid, true, id: 'validaddress'%> Yes
+          <% end %>
+          <%= f.label '' do %>
+            <%= f.radio_button :is_address_valid, false, id: 'invalidaddress'%> No
+          <% end %>
+        </div>
+        <div class="read-only" id="addressvalidator">
+          <% if @adopter.is_address_valid == true %>
+            Yes
+          <% else %>
+            No
+          <% end %>
+        </div>
       </td>
     </tr>
     <tr>

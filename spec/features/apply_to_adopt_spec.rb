@@ -150,7 +150,7 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('They are perfect just the way they are')
     expect(page).to have_content('They do not like shots')
 
-    click_link('Rental')
+    click_link('Housing')
     expect(page).to have_content('Jane LandLord')
     expect(page).to have_content('(570) 443-1234')
     expect(page).to have_content('jane@landlords.com')

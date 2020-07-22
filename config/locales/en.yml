@@ -103,6 +103,15 @@ en:
       title: 'Create a New Folder'
     edit:
       title: 'Edit Folder'
+  invoices:
+    new:
+      title: "New Invoice"
+    index:
+      title: "Invoices"
+    edit:
+      title: "Edit Invoice"
+    show:
+      title: "Invoice"
   pages:
     home:
       title: 'All breed dog and cat rescue in Virgina, Maryland, Washington DC and South Central PA'

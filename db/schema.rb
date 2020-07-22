@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_08_194006) do
+ActiveRecord::Schema.define(version: 2020_07_13_164249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2020_07_08_194006) do
     t.string "county"
     t.boolean "training_email_sent", default: false, null: false
     t.string "dog_or_cat"
+    t.string "secondary_email"
+    t.boolean "is_address_valid", default: true
     t.index ["assigned_to_user_id"], name: "index_adopters_on_assigned_to_user_id"
   end
 
@@ -426,6 +428,27 @@ ActiveRecord::Schema.define(version: 2020_07_08_194006) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.integer "invoiceable_id"
+    t.string "invoiceable_type"
+    t.string "slug"
+    t.integer "amount"
+    t.string "status"
+    t.bigint "user_id"
+    t.text "description"
+    t.string "stripe_customer_id"
+    t.string "card_token"
+    t.datetime "paid_at"
+    t.string "paid_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "donation_id"
+    t.boolean "has_donation", default: false, null: false
+    t.index ["donation_id"], name: "index_invoices_on_donation_id"
+    t.index ["slug"], name: "index_invoices_on_slug", unique: true
+    t.index ["user_id"], name: "index_invoices_on_user_id"
+  end
+
   create_table "photos", id: :serial, force: :cascade do |t|
     t.integer "dog_id"
     t.string "photo_file_name"
@@ -575,6 +598,8 @@ ActiveRecord::Schema.define(version: 2020_07_08_194006) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  add_foreign_key "invoices", "donations"
+  add_foreign_key "invoices", "users"
   add_foreign_key "treatment_records", "treatments"
   add_foreign_key "treatment_records", "users"
 end

@@ -52,6 +52,11 @@
       <%= render partial: 'medical_summary' %>
       <%= render partial: 'behaviour_summary' %>
 
+      <h4>Adopters</h4>
+      <ul id='adopters'>
+        <%= render(partial: 'adoption', collection: @dog.adoptions) || "no adopters" %>
+      </ul>
+
       <% if @dog.attachments.any? %>
         <h4>Attachments</h4>
           <ul class="list-unstyled">
@@ -86,7 +91,7 @@
         <dt>OK with kids?</dt>
         <dd id='kids_ok'><%= (!@dog.no_kids).as_icon  %></dd>
         <dt>No Urban Settings</dt>
-        <dd id='no_urban_setting'><%= (!@dog.no_urban_setting).as_icon  %></dd>
+        <dd id='no_urban_setting'><%= (@dog.no_urban_setting).as_icon  %></dd>
         <dt>Medical Review Complete</dt>
         <dd id='medical_review_complete'><%= @dog.medical_review_complete.as_icon %></dd>
         <dt>Has Medical Need</dt>
@@ -113,8 +118,6 @@
         <dd id='sponsored_by'><%= @dog.sponsored_by %></dd>
         <dt>Source Shelter</dt>
         <dd id='shelter'><%= @dog.shelter&.name || 'unknown' %></dd>
-        <dt>Adopters</dt>
-        <dd id='adopters'><%= render(partial: 'adopter', collection: @dog.adopters) || "no adopters" %></dd>
         <dt>Available on</dt>
         <dd id='available_on_dt'><%= @dog.available_on_dt || 'unknown' %></dd>
         <dt>Intake date</dt>

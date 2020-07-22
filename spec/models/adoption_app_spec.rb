@@ -41,6 +41,9 @@
 #  has_family_under_18       :boolean
 #  birth_date                :date
 #  household_ages            :array
+#  prev_pets_type            :string
+#  current_pets_type         :string
+#
 
 require 'rails_helper'
 

@@ -1,267 +1,307 @@
-<div class="row">
-  <div class="span12">
-      <h5><%= link_to "Users", :controller => "users" %></h5>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+
+      <h5 class="mt-2"><%= link_to "Users", :controller => "users" %></h5>
       <h1>
         <%= @user.name %>
       </h1>
       <h4><%= @user.duties %></h4>
-              <% if (@user == current_user || is_admin?) %>
+        <% if (@user == current_user || is_admin?) %>
           <strong><%= link_to( "Update/Verify Profile", edit_user_path(@user), :class => "btn btn-primary") %></strong>
         <% end %>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="span6">
-      <h4>Profile</h4>
-        <table class="table-striped table-bordered table-condensed">
-          <tr>
-            <td>Address</td>
-            <td>
-                <%= @user.address1 %><br />
-                <% if @user.address2? %>
-                  <%= @user.address2 %><br />
-                <% end %>
-                <%= @user.city %>,
-                <%= @user.region %>
-                <%= @user.postal_code %>
-            </td>
-          </tr>
-          <tr>
-            <td>Email</td>
-            <td><%= @user.email %></td>
-          </tr>
-          <tr>
-            <td>Phone</td>
-            <td><span class="tel value"><%= @user.phone %></span></td>
-          </tr>
-          <% if @user.other_phone? %>
+  <div class="row mt-2">
+    <div class="col-sm-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h4 class="mt-2">Profile</h4>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped table-bordered table-sm">
             <tr>
-              <td>Other Phone</td>
-              <td><span class="tel value"><%= @user.other_phone %></span></td>
-            </tr>
-          <% end %>
-          <% if @user.translator %>
-            <tr>
-              <td>Translation Language(s)</td>
-              <td><%= @user.known_languages %></td>
-            </tr>
-          <% end %>
-          <tr>
-            <td>Can share with adopters:</td>
-            <td><%= @user.share_info %></td>
-          </tr>
-          <tr>
-            <td>Account Created</td>
-            <td><%= @user.created_at.strftime("%m/%d/%Y") %></td>
-          </tr>
-          <tr>
-            <td>Last Login</td>
-            <% if @user.lastlogin? %>
-              <td><%= time_ago_in_words(@user.lastlogin) %> ago</td>
-            <% else %>
-              <td>Unknown</td>
-            <% end %>
-          </tr>
-          <tr>
-            <td>Contact Info Last Verified:</td>
-            <% if @user.lastverified? %>
-              <td><%= time_ago_in_words(@user.lastverified)%> ago</td>
-            <% else %>
-              <td>Never</td>
-            <% end %>
-          </tr>
-          <tr>
-            <td>Coordinated Dogs</td>
-            <td>
-              <% @user.coordinated_dogs.each do |d| %>
-                <%= link_to d.name, d %>
-                  (<%= d.status %>)
-                <br />
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td>Assigned Adoption Applications</td>
-            <td>
-              <% @user.active_applications.each do |d| %>
-                <%= link_to d.name, d %>
-                  (<%= d.status %>)
-                <br />
-              <% end %>
-            </td>
-          </tr>
-        </table>
-        <h4>Permissions</h4>
-        <%= render 'permissions' %>
-      </div>
-
-      <div class="span6">
-
-        <div><%= image_tag @user.avatar.url(:medium), class: 'rounded' %></div>
-
-        <h4>Fostering</h4>
-          <% if @user.mentor_id %>
-            <p>Mentor: <%= link_to @user.mentor.name, user_path(@user.mentor) %></p>
-          <% else %>
-            <p>No Mentor Assigned</p>
-          <% end %>
-          <% if @user.is_foster? %>
-             <p><span class="label label-success">Listed as Foster</span></p>
-          <% else %>
-            <p><span class="label label-important">Not a Foster</span></p>
-          <% end %>
-
-          <% if @user.available_to_foster %>
-            <p><span class="label label-success">Ready for Another Dog</span></p>
-          <% else %>
-            <p><span class="label label-important">Not Ready for Another Dog</span></p>
-          <% end %>
-
-          <% if @user.agreement %>
-             <p>
-              <span class="label label-success">Foster Agreement on File</span>
-              <%= link_to @user.agreement.attachment_file_name, @user.agreement.download_url, id: "foster-agreement-dl" %>
-             </p>
-          <% else %>
-            <p><span class="label label-important">No Foster Agreement on File</span></p>
-          <% end %>
-
-          <% if @user.confidentiality_agreement %>
-             <p>
-              <span class="label label-success">Confidentiality Agreement on File</span>
-              <%= link_to @user.confidentiality_agreement.attachment_file_name, @user.confidentiality_agreement.download_url, id: "confidentiality-agreement-dl" %>
-             </p>
-          <% else %>
-            <p><span class="label label-important">No Confidentiality Agreement on File</span></p>
-          <% end %>
-
-          <% if @user.code_of_conduct_agreement %>
-             <p>
-              <span class="label label-success">Code of Conduct Agreement on File</span>
-              <%= link_to @user.code_of_conduct_agreement.attachment_file_name, @user.code_of_conduct_agreement.download_url, id: "code-of-conduct-agreement-dl" %>
-             </p>
-          <% else %>
-            <p><span class="label label-important">No Code of Conduct Agreement on File</span></p>
-          <% end %>
-
-          <% if @user.house_type == "own" %>
-            <p><span class="label label-success">Owns Home</span></p>
-          <% elsif @user.house_type == "rent" %>
-            <p><span class="label label-important">Rents Home</span></p>
-          <% end %>
-
-          <% unless @user.breed_restriction.nil? %>
-            <% if @user.breed_restriction? %>
-               <p><span class="label label-important">Breed Restricted</span></p>
-            <% else %>
-              <p><span class="label label-success">No Breed Restrictions</span></p>
-            <% end %>
-          <% end %>
-
-          <% unless @user.weight_restriction.nil? %>
-            <% if @user.weight_restriction? %>
-               <p><span class="label label-important">Weight Restricted</span></p>
-            <% else %>
-              <p><span class="label label-success">No Weight Restrictions</span></p>
-            <% end %>
-          <% end %>
-
-          <% unless @user.has_own_dogs.nil? %>
-            <% if @user.has_own_dogs? %>
-               <p><span class="label label-important">Has own dogs</span></p>
-            <% else %>
-              <p><span class="label label-success">Doesn't have own dogs</span></p>
-            <% end %>
-          <% end %>
-
-          <% unless @user.has_own_cats.nil? %>
-            <% if @user.has_own_cats? %>
-               <p><span class="label label-important">Has own cats</span></p>
-            <% else %>
-              <p><span class="label label-success">Doesn't have own cats</span></p>
-            <% end %>
-          <% end %>
-
-          <% unless @user.children_under_five.nil? %>
-            <% if @user.children_under_five? %>
-               <p><span class="label label-important">Has children under 5</span></p>
-            <% else %>
-              <p><span class="label label-success">No children under 5</span></p>
-            <% end %>
-          <% end %>
-
-          <% unless @user.has_fenced_yard.nil? %>
-            <% if @user.has_fenced_yard? %>
-               <p><span class="label label-success">Has fenced in yard</span></p>
-            <% else %>
-              <p><span class="label label-important">No fenced in yard</span></p>
-            <% end %>
-          <% end %>
-
-          <% unless @user.can_foster_puppies.nil? %>
-            <% if @user.can_foster_puppies? %>
-               <p><span class="label label-success">Can foster puppies</span></p>
-            <% else %>
-              <p><span class="label label-important">No puppies</span></p>
-            <% end %>
-          <% end %>
-
-          <% unless @user.parvo_house.nil? %>
-            <% if @user.parvo_house? %>
-               <p><span class="label label-important">Had parvo in home</span></p>
-            <% else %>
-              <p><span class="label label-success">No parvo in home</span></p>
-            <% end %>
-          <% end %>
-
-          <% unless @user.is_transporter.nil? %>
-            <% if @user.is_transporter? %>
-               <p><span class="label label-success">Available for Transport</span></p>
-            <% else %>
-              <p><span class="label label-important">Not Available for Transport</span></p>
-            <% end %>
-          <% end %>
-
-          <table class="table-striped table-bordered table-condensed">
-            <tr>
-              <td>Current Dogs</td>
+              <td>Address</td>
               <td>
-                <% @user.current_foster_dogs.each do |d| %>
-                  <%= link_to d.name, dogs_manager_path(d) %>
+                  <%= @user.address1 %><br />
+                  <% if @user.address2? %>
+                    <%= @user.address2 %><br />
+                  <% end %>
+                  <%= @user.city %>,
+                  <%= @user.region %>
+                  <%= @user.postal_code %>
+              </td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td><%= @user.email %></td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td><span class="tel value"><%= @user.phone %></span></td>
+            </tr>
+            <% if @user.other_phone? %>
+              <tr>
+                <td>Other Phone</td>
+                <td><span class="tel value"><%= @user.other_phone %></span></td>
+              </tr>
+            <% end %>
+            <% if @user.translator %>
+              <tr>
+                <td>Translation Language(s)</td>
+                <td><%= @user.known_languages %></td>
+              </tr>
+            <% end %>
+            <tr>
+              <td>Can share with adopters:</td>
+              <td><%= @user.share_info %></td>
+            </tr>
+            <tr>
+              <td>Account Created</td>
+              <td><%= @user.created_at.strftime("%m/%d/%Y") %></td>
+            </tr>
+            <tr>
+              <td>Last Login</td>
+              <% if @user.lastlogin? %>
+                <td><%= time_ago_in_words(@user.lastlogin) %> ago</td>
+              <% else %>
+                <td>Unknown</td>
+              <% end %>
+            </tr>
+            <tr>
+              <td>Contact Info Last Verified:</td>
+              <% if @user.lastverified? %>
+                <td><%= time_ago_in_words(@user.lastverified)%> ago</td>
+              <% else %>
+                <td>Never</td>
+              <% end %>
+            </tr>
+            <tr>
+              <td>Coordinated Dogs</td>
+              <td>
+                <% @user.coordinated_dogs.each do |d| %>
+                  <%= link_to d.name, d %>
                     (<%= d.status %>)
                   <br />
                 <% end %>
               </td>
             </tr>
             <tr>
-              <td>Foster Mentees</td>
+              <td>Assigned Adoption Applications</td>
               <td>
-                <% @user.mentees.each do |m| %>
-                  <%= link_to m.name, m %>
+                <% @user.active_applications.each do |d| %>
+                  <%= link_to d.name, d %>
+                    (<%= d.status %>)
                   <br />
                 <% end %>
               </td>
             </tr>
-            <tr>
-              <td>Foster Details</td>
-              <td><%= @user.foster_dog_types unless !@user.foster_dog_types? %></td>
-            </tr>
           </table>
-      </div>
-    </div>
-
-
-    <div class="row">
-      <div class="span6">
-      </div>
-        <% if is_admin? %>
-          <div class="row6">
-            <h4>Admin Notes</h4>
-            <p><%= @user.admin_comment %></p>
           </div>
-          <div class="row6">
-            <h4>Permission Change History</h4>
-            <p><%= render @user.audits_sorted %></p>
+        </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="text-center"><%= image_tag @user.avatar.url(:medium) %></div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-header">
+              <h4>Permissions</h4>
+            </div>
+            <div class="card-body">
+              <%= render 'permissions' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-header">
+          <h4>Fostering</h4>
+            </div>
+            <div class="card-body">
+            <% if @user.mentor_id %>
+              <p>Mentor: <%= link_to @user.mentor.name, user_path(@user.mentor) %></p>
+            <% else %>
+              <p>No Mentor Assigned</p>
+            <% end %>
+            
+            <% if @user.is_foster? %>
+              <p><span class="badge badge-success">Listed as Foster</span></p>
+            <% else %>
+              <p><span class="badge badge-warning">Not a Foster</span></p>
+            <% end %>
+
+            <% if @user.available_to_foster %>
+              <p><span class="badge badge-success">Ready for Another Dog</span></p>
+            <% else %>
+              <p><span class="badge badge-warning">Not Ready for Another Dog</span></p>
+            <% end %>
+
+            <% if @user.agreement %>
+              <p>
+                <span class="badge badge-success">Foster Agreement on File</span>
+                <%= link_to @user.agreement.attachment_file_name, @user.agreement.download_url, id: "foster-agreement-dl" %>
+              </p>
+            <% else %>
+              <p><span class="badge badge-warning">No Foster Agreement on File</span></p>
+            <% end %>
+
+            <% if @user.confidentiality_agreement %>
+              <p>
+                <span class="badge badge-success">Confidentiality Agreement on File</span>
+                <%= link_to @user.confidentiality_agreement.attachment_file_name, @user.confidentiality_agreement.download_url, id: "confidentiality-agreement-dl" %>
+              </p>
+            <% else %>
+              <p><span class="badge badge-warning">No Confidentiality Agreement on File</span></p>
+            <% end %>
+
+            <% if @user.code_of_conduct_agreement %>
+              <p>
+                <span class="badge badge-success">Code of Conduct Agreement on File</span>
+                <%= link_to @user.code_of_conduct_agreement.attachment_file_name, @user.code_of_conduct_agreement.download_url, id: "code-of-conduct-agreement-dl" %>
+              </p>
+            <% else %>
+              <p><span class="badge badge-warning">No Code of Conduct Agreement on File</span></p>
+            <% end %>
+
+            <% if @user.house_type == "own" %>
+              <p><span class="badge badge-success">Owns Home</span></p>
+            <% elsif @user.house_type == "rent" %>
+              <p><span class="badge badge-warning">Rents Home</span></p>
+            <% end %>
+
+            <% unless @user.breed_restriction.nil? %>
+              <% if @user.breed_restriction? %>
+                <p><span class="badge badge-warning">Breed Restricted</span></p>
+              <% else %>
+                <p><span class="badge badge-success">No Breed Restrictions</span></p>
+              <% end %>
+            <% end %>
+
+            <% unless @user.weight_restriction.nil? %>
+              <% if @user.weight_restriction? %>
+                <p><span class="badge badge-warning">Weight Restricted</span></p>
+              <% else %>
+                <p><span class="badge badge-success">No Weight Restrictions</span></p>
+              <% end %>
+            <% end %>
+
+            <% unless @user.has_own_dogs.nil? %>
+              <% if @user.has_own_dogs? %>
+                <p><span class="badge badge-warning">Has own dogs</span></p>
+              <% else %>
+                <p><span class="badge badge-success">Doesn't have own dogs</span></p>
+              <% end %>
+            <% end %>
+
+            <% unless @user.has_own_cats.nil? %>
+              <% if @user.has_own_cats? %>
+                <p><span class="badge badge-warning">Has own cats</span></p>
+              <% else %>
+                <p><span class="badge badge-success">Doesn't have own cats</span></p>
+              <% end %>
+            <% end %>
+
+            <% unless @user.children_under_five.nil? %>
+              <% if @user.children_under_five? %>
+                <p><span class="badge badge-warning">Has children under 5</span></p>
+              <% else %>
+                <p><span class="badge badge-success">No children under 5</span></p>
+              <% end %>
+            <% end %>
+
+            <% unless @user.has_fenced_yard.nil? %>
+              <% if @user.has_fenced_yard? %>
+                <p><span class="badge badge-success">Has fenced in yard</span></p>
+              <% else %>
+                <p><span class="badge badge-warning">No fenced in yard</span></p>
+              <% end %>
+            <% end %>
+
+            <% unless @user.can_foster_puppies.nil? %>
+              <% if @user.can_foster_puppies? %>
+                <p><span class="badge badge-success">Can foster puppies</span></p>
+              <% else %>
+                <p><span class="badge badge-warning">No puppies</span></p>
+              <% end %>
+            <% end %>
+
+            <% unless @user.parvo_house.nil? %>
+              <% if @user.parvo_house? %>
+                <p><span class="badge badge-warning">Had parvo in home</span></p>
+              <% else %>
+                <p><span class="badge badge-success">No parvo in home</span></p>
+              <% end %>
+            <% end %>
+
+            <% unless @user.is_transporter.nil? %>
+              <% if @user.is_transporter? %>
+                <p><span class="badge badge-success">Available for Transport</span></p>
+              <% else %>
+                <p><span class="badge badge-warning">Not Available for Transport</span></p>
+              <% end %>
+            <% end %>
+            </div>
+          </div>
+          </div>
+          <div class="col-10 mt-4 mx-auto">
+
+            <table class="table table-striped table-bordered table-sm">
+              <tr>
+                <th scope="row" class="w-25">Current Dogs</th>
+                <td class="w-75">
+                  <% @user.current_foster_dogs.each do |d| %>
+                    <%= link_to d.name, dogs_manager_path(d) %>
+                      (<%= d.status %>)
+                    <br />
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="w-25">Foster Mentees</th>
+                <td class="w-75">
+                  <% @user.mentees.each do |m| %>
+                    <%= link_to m.name, m %>
+                    <br />
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="w-25">Foster Details</th>
+                <td class="w-75"><%= @user.foster_dog_types unless !@user.foster_dog_types? %></td>
+              </tr>
+            </table>
+        </div>
+      </div>
+
+
+      <div class="row mt-3">
+        <% if is_admin? %>
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="ml-2">Permission Change History</h3>
+              </div>
+              <div class="card-body ml-5">
+                <p><%= render @user.audits_sorted %></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header">
+                <h3>Admin Notes</h3>
+              </div>
+              <div class="card-body">
+                <p><%= @user.admin_comment %></p>
+              </div>
+            </div>
           </div>
         <% end %>
+
+      </div>
     </div>
+  </div>
+</div>

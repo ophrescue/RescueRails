@@ -55,4 +55,6 @@ class BannedAdopter < ApplicationRecord
   #     banned_adopter.save!
   #   end
   # end
+
+  validates :name, presence: true
 end

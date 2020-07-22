@@ -137,30 +137,43 @@ $( function() {
       isRefEditing = !isRefEditing;
     });
 
-    var isRentalEditing = false;
-
-    $('#rental').on('click', 'a#toggle-edit-rental', function() {
-      if (isRentalEditing) {
-        // find all enabled fields in .edit-rent and disable them
-        $('form.edit-rental .to-disable').prop("disabled", true);
-        $('.rental-editable').hide();
-        $('.rental-read-only').show();
-        $('a#toggle-edit-rental').addClass('btn-primary').text("Edit Rental Info");
-        $('input.rental-save').removeClass('btn-primary');
+    var isHousingEditing = false;
+    
+    $('#housing').on('click', 'a#toggle-edit-housing', function() {
+      if (isHousingEditing) {
+        // find all enabled fields in .edit-housing and disable them
+        $('form.edit-housing .to-disable').prop("disabled", true);
+        $('.rent-editable').hide();
+        $('.rent-read-only').show();
+        $('a#toggle-edit-housing').addClass('btn-primary').text("Edit Housing Info");
+        $('input.housing-save').removeClass('btn-primary');
+        if ($("#housing [data-house-type]").attr("data-house-type") == 'own'){
+          $('.show-rent-parameters').hide();
+        }
       }
       else {
-        $('form.edit-rental :disabled')
+        $('form.edit-housing :disabled')
           .removeAttr('disabled')
           .addClass('to-disable');
-
-        $('.rental-editable').show();
-        $('.rental-read-only').hide();
-        $('a#toggle-edit-rental').removeClass('btn-primary').text("Cancel");
-        $('input.rental-save').addClass('btn-primary');
+        $('.show-rent-parameters').show();
+        $('.rent-editable').show();
+        $('.rent-read-only').hide();
+        $('a#toggle-edit-housing').removeClass('btn-primary').text("Cancel");
+        $('input.housing-save').addClass('btn-primary');
+        if ($("#housing [data-house-type]").attr("data-house-type") == 'own'){
+          $('.radiobuttonown').prop("checked", true);
+        }
+        else{
+          $('.radiobuttonrent').prop("checked", true);
+        }
       }
 
-      isRentalEditing = !isRentalEditing;
+      isHousingEditing = !isHousingEditing;
     });
+
+    if ($("#housing [data-house-type]").attr("data-house-type") == 'own'){
+      $('.show-rent-parameters').hide();
+    }
 
     var isVetEditing = false;
 
@@ -177,7 +190,6 @@ $( function() {
         $('form.edit-vet :disabled')
           .removeAttr('disabled')
           .addClass('to-disable');
-
         $('.vet-editable').show();
         $('.vet-read-only').hide();
         $('a#toggle-edit-vet').removeClass('btn-primary').text("Cancel");

@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 pt-3">
+            <h1>New Adoption Invoice</h1>
+
+            <h5>For <%= link_to @invoiceable.adopter.name, @invoiceable.adopter %> to adopt <%= link_to @invoiceable.animal.name, @invoiceable.animal %>  </h5>
+
+            <p>Adoption fee for <%= link_to @invoiceable.animal.name, @invoiceable.animal %> is <%= @invoiceable.animal.fee || 'not listed in their DMS profile' %>. </p>
+            <%= render 'form' %>
+        </div>
+    </div>
+</div>

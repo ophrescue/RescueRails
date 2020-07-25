@@ -110,7 +110,7 @@ describe "Bulletins Requests", type: :request do
 
     describe "DELETE #delete" do
       let(:bulletin) { create(:bulletin) }
-      it 'can delete the bulletin' do
+      it 'can NOT delete the bulletin' do
         delete bulletin_path(bulletin.id, as: user)
         expect(response).to_not be_successful
       end

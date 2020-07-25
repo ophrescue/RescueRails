@@ -28,10 +28,19 @@ RSpec.describe "Invoices" do
         expect(response).to redirect_to('/sign_in')
       end
     end
+
+    describe "DELETE paid invoice" do
+      let!(:invoice) { create(:invoice_unpaid, invoiceable_id: adoption.id, invoiceable_type: 'Adoption') }
+      it 'can NOT delete the paid invoice' do
+        delete invoice_path(invoice.id)
+        expect(response).to_not be_successful
+      end
+    end
+
   end
 
   context "Authorized User" do
-    let!(:active_user) { create(:user, :admin) }
+    let!(:admin) { create(:user, :admin) }
     let!(:adopter) { create(:adopter) }
     let!(:dog) { create(:dog) }
     let!(:adoption) { create(:adoption, adopter_id: adopter.id, dog_id: dog.id )}
@@ -39,7 +48,7 @@ RSpec.describe "Invoices" do
     describe "GET #index" do
       let(:invoice) { create(:invoice_paid, invoiceable_id: adoption.id, invoiceable_type: 'Adoption') }
       it 'is successful' do
-        get invoices_path(as: active_user)
+        get invoices_path(as: admin)
         expect(response).to be_successful
       end
     end
@@ -48,10 +57,28 @@ RSpec.describe "Invoices" do
       it 'is able to create an invoice' do
         invoice = attributes_for(:invoice_unpaid)
         expect {
-          post adoption_invoices_path(adoption, as: active_user), params: { invoice: invoice }
+          post adoption_invoices_path(adoption, as: admin), params: { invoice: invoice }
         }.to change(Invoice, :count).by(1)
       end
     end
+
+    describe "DELETE open invoice" do
+      let!(:invoice) { create(:invoice_unpaid, invoiceable_id: adoption.id, invoiceable_type: 'Adoption') }
+      let(:request) { -> { delete invoice_path(invoice.id, as: admin) } }
+      it 'can delete the open invoice' do
+        expect { request.call }.to change(Invoice, :count).by(-1)
+      end
+    end
+
+    describe "DELETE paid invoice" do
+      let!(:invoice) { create(:invoice_paid, invoiceable_id: adoption.id, invoiceable_type: 'Adoption') }
+      let(:request) { -> { delete invoice_path(invoice.id, as: admin) } }
+      it 'can NOT delete the paid invoice' do
+        expect { request.call }.to change(Invoice, :count).by(0)
+      end
+    end
+
+
 
 
   end

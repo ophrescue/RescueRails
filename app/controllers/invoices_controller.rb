@@ -20,6 +20,7 @@ class InvoicesController < ApplicationController
   before_action :unlocked_user, except: %i[show update]
   before_action :select_bootstrap41
   before_action :show_user_navbar, except: %i[show update]
+  before_action :edit_my_adopters_user, only: %i(index create edit destroy)
 
   def new
     load_invoiceable
@@ -46,6 +47,20 @@ class InvoicesController < ApplicationController
   end
 
   def edit
+    @invoice = Invoice.friendly.find(params[:id])
+    redirect_to invoice_path(@invoice)
+  end
+
+  def destroy
+    @invoice = Invoice.friendly.find(params[:id])
+    if @invoice.open?
+      @invoice.destroy
+      flash[:error] = "Invoice deleted"
+      redirect_to invoices_path
+    else
+      flash.now[:error] = "Paid Invoices Cannot Be Deleted"
+      render 'show'
+    end
   end
 
   def update
@@ -96,6 +111,10 @@ class InvoicesController < ApplicationController
   def load_invoiceable
     resource, id = request.path.split('/')[1, 2]
     @invoiceable = resource.singularize.classify.constantize.find(id)
+  end
+
+  def edit_my_adopters_user
+    redirect_to(root_path) unless current_user.edit_my_adopters? || current_user.edit_all_adopters?
   end
 
 end

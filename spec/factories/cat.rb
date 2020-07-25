@@ -87,6 +87,10 @@ FactoryBot.define do
         status { Cat::ACTIVE_STATUSES.sample }
       end
 
+      trait :selectable_cat do
+        status { Cat::PUBLIC_STATUSES.sample }
+      end
+
       trait :primary_tabby do
         primary_breed_id { create(:cat_breed, name: 'Tabby').id }
         secondary_breed_id { nil }

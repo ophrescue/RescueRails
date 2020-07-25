@@ -60,12 +60,22 @@ describe AdoptersController, type: :controller do
   describe 'POST create' do
     let(:adoption_app) { attributes_for(:adoption_app) }
     let(:adopter) { attributes_for(:adopter, adoption_app_attributes: adoption_app) }
+    let(:prefered_pet) { {dog_ids: ["", "1", "2"], cat_ids: [""]} }
 
     it 'creates an adopter' do
-      post :create, params: { adopter: adopter }
-
+      count_of_adopters = Adopter.count
+      post :create, params: { adopter: adopter, prefered_pet: prefered_pet }
+      expect(count_of_adopters+1).to eq Adopter.count
       expect(response).to redirect_to root_path(adoptapp: 'complete')
     end
+
+    it 'links adopter with dogs he/she is interested in' do
+      post :create, params: { adopter: adopter, prefered_pet: prefered_pet }
+      expect(Adoption.where(dog_id: 1).last.adopter_id).to eq Adopter.last.id
+      expect(Adoption.where(dog_id: 2).last.adopter_id).to eq Adopter.last.id
+      expect(CatAdoption.all.size).to eq 0
+    end
+
   end
 
   describe 'PUT update' do
@@ -181,4 +191,5 @@ describe AdoptersController, type: :controller do
       end
     end
   end
+
 end

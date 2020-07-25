@@ -66,6 +66,8 @@ class AdoptersController < ApplicationController
   end
 
   def new
+    @dogs = Dog.gallery_view
+    @cats = Cat.gallery_view
     @adopter = Adopter.new
     @adopter.adoption_app = AdoptionApp.new
     @adopter.dog_name = params[:dog_name]
@@ -75,9 +77,16 @@ class AdoptersController < ApplicationController
   end
 
   def create
+    @selected_dog = params[:prefered_pet][:dog_ids].reject(&:empty?)
+    @selected_cat = params[:prefered_pet][:cat_ids].reject(&:empty?)
     @adopter = Adopter.new(adopter_params)
     @adopter.status = 'new'
-
+    for id in @selected_dog
+        @adopter.adoptions.build(:adopter_id => @adopter.id, :relation_type => 'interested',:dog_id => id)
+    end
+    for id in @selected_cat
+      @adopter.cat_adoptions.build(:adopter_id => @adopter.id, :relation_type => 'interested', :cat_id => id)
+    end
     if @adopter.adoption_app.ready_to_adopt_dt.blank?
       @adopter.adoption_app.ready_to_adopt_dt = Date.today
     end

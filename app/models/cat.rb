@@ -301,6 +301,10 @@ class Cat < ApplicationRecord
   def persisted_comments
     comments.select(&:persisted?)
   end
+
+  def display_cat_information
+    "#{name.titleize} (#{size.titleize}-size, #{gender.titleize}, #{age} #{breeds.join(" x ").html_safe})"
+  end
 end
 
 CatsManager = Cat

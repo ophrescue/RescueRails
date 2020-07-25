@@ -296,6 +296,10 @@ class Dog < ApplicationRecord
   def persisted_comments
     comments.select(&:persisted?)
   end
+
+  def display_dog_information
+    "#{name.titleize} (#{size.titleize}-size, #{gender.titleize}, #{age} #{breeds.join(" x ").html_safe})"
+  end
 end
 
 DogsManager = Dog

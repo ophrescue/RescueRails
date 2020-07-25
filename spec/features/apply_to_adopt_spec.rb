@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 feature 'Apply for Adoption' do
+  let!(:dog_to_select) { create(:dog, :selectable_dog) }
+  let!(:cat_to_select) { create(:cat, :selectable_cat) }
   scenario "Renter fills out adoption application", js: true do
     visit root_path
     within(:css, "div.actions") do
@@ -51,7 +53,8 @@ feature 'Apply for Adoption' do
     click_button('Next')
     expect(page).to have_content('Your New Pet')
     choose('adopter_dog_or_cat_dog')
-    fill_in('adopter_dog_name', with: 'Rex and Precious')
+    select(find("#dog_selected > option:nth-child(1)").text, from: 'dog_selected')
+    select(find("#cat_selected > option:nth-child(1)").text, from: 'cat_selected')
     fill_in('adopter_dog_reqs', with: 'Dog Under 50lbs')
     fill_in('adopter_why_adopt', with: 'Want to love them and hold them')
     fill_in('adopter_adoption_app_attributes_dog_exercise', with: 'Dog will go to the gym with me')
@@ -217,7 +220,8 @@ feature 'Apply for Adoption' do
     click_button('Next')
     expect(page).to have_content('Your New Pet')
     choose('adopter_dog_or_cat_dog')
-    fill_in('adopter_dog_name', with: 'Rex and Precious')
+    select(find("#dog_selected > option:nth-child(1)").text, from: 'dog_selected')
+    select(find("#cat_selected > option:nth-child(1)").text, from: 'cat_selected')
     fill_in('adopter_dog_reqs', with: 'Dog Under 50lbs')
     fill_in('adopter_why_adopt', with: 'Want to love them and hold them')
     fill_in('adopter_adoption_app_attributes_dog_exercise', with: 'Dog will go to the gym with me')
@@ -380,7 +384,8 @@ feature 'Apply for Adoption' do
     click_button('Next')
     expect(page).to have_content('Your New Pet')
     choose('adopter_dog_or_cat_dog')
-    fill_in('adopter_dog_name', with: 'Rex and Precious')
+    select(find("#dog_selected > option:nth-child(1)").text, from: 'dog_selected')
+    select(find("#cat_selected > option:nth-child(1)").text, from: 'cat_selected')
     fill_in('adopter_dog_reqs', with: 'Dog Under 50lbs')
     fill_in('adopter_why_adopt', with: 'Want to love them and hold them')
     fill_in('adopter_adoption_app_attributes_dog_exercise', with: 'Dog will go to the gym with me')

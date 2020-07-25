@@ -53,6 +53,36 @@ $( function () {
     }
   });
 
+  $('select#dog_selected').change(function(){
+    var select = $(this);
+    $('#display_dogs').empty();
+    var result = ''
+    var pets_id = select.val();
+    for(id of pets_id){
+      if (!id) {
+        continue;
+      }
+      dogName = select.find("[value="+id+"]").text();
+      result = '<li>'+dogName+'</li>'
+      $('#display_dogs').append(result);
+    }
+  })
+
+  $('select#cat_selected').change(function(){
+    var select = $(this);
+    $('#display_cats').empty();
+    var result = ''
+    var pets_id = select.val();
+    for(id of pets_id){
+      if (!id) {
+        continue;
+      }
+      catName = select.find("[value="+id+"]").text();
+      result = '<li>'+catName+'</li>'
+      $('#display_cats').append(result);
+    }
+  })
+
 });
 
 function refresh_dogs() {

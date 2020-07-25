@@ -15,12 +15,29 @@
   </div>
   
   <div class="control-group">
-    <%= f.label :dog_name, "(Optional) What pets are you interested in?", :class => "control-label" %>
+    <%= f.label :dog_name, "(Optional) What pets are you interested in? (you may select more than one with the ctrl button, or select none by pressing \"Select dogs/cats\")", :class => "control-label" %>
     <div class="controls">
-      <%= f.text_field :dog_name %>
+    <table>
+      <tr>
+        <td>
+          <%= collection_select :prefered_pet, :dog_ids, @dogs, :id, :display_dog_information, {prompt: 'Select dogs'}, {multiple: true, size: 10, id: 'dog_selected'}%>
+        </td>
+        <td>
+          <%= collection_select :prefered_pet, :cat_ids, @cats, :id, :display_cat_information, {prompt: 'Select cats'}, {multiple: true, size: 10, id: 'cat_selected'}%>
+        </td>
+      </tr>
+    </table>
+    <div>
+      Selected dogs:
+        <span id='display_dogs'></span>
+      <br>
+      Selected cats:
+        <span id='display_cats'></span>
+    </div>
     </div>
   </div>
 
+  <br>
   <div class="control-group">
     <%= f.label :dog_reqs, "Describe the type of pet you want to adopt.  Please include the two traits that are most important to you.", :class => "control-label" %>
     <div class="controls">

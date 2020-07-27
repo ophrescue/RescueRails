@@ -207,7 +207,7 @@ class Cat < ApplicationRecord
       # it would be good to have a longterm solution that has actual photos
       AWS_PHOTO_URLS.sample()
     else
-      photos.empty? ?
+      photos.visible.empty? ?
         Photo.no_photo_url :
         photos.visible.first.photo.url(:medium)
     end

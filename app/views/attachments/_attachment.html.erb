@@ -9,9 +9,8 @@
   </tr>
 <% else %>
   <tr class='attachment' data-id=<%= attachment.id %>>
-    
     <td class="description">
-      <div class="file_space"><a href=<%= attachment.download_url %> id="file_link"><%= attachment.description %></a></div>
+      <a href=<%= attachment.download_url %>><%= attachment.description %></a>
     </td>
     <td class='edit_description_container'>
       <% if is_admin? %>

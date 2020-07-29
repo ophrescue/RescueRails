@@ -11,7 +11,7 @@ FactoryBot.define do
     }
     status {  Dog::STATUSES.sample }
     hidden { false }
-    sequence(:microchip) { |n| "MC-#{n}" }
+    microchip {['9'+Faker::Number.number(digits: 14).to_s, Faker::Alphanumeric.alphanumeric(number: 10).to_s].sample }
     age { Dog::AGES.sample }
     size { Dog::SIZES.sample }
     gender { Dog::GENDERS.sample }

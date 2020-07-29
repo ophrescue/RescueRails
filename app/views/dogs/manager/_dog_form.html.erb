@@ -39,8 +39,9 @@
       </div>
 
       <div class="form-group row">
-        <%= f.label :microchip, class: 'col-form-label col-form-label-sm col-4'  %>
-        <%= f.text_field :microchip, class: 'form-control form-control-sm col-6' %>
+        <%= f.label :microchip, class: 'col-form-label col-form-label-sm col-4', 'data-bootstrap41': true  %>
+        <%= f.text_field :microchip, class: "form-control form-control-sm col-6 #{validation_class_for(f,:microchip) }", 'data-bootstrap41': true %>
+        <div class='invalid-feedback col-sm-6 offset-4'><%= validation_error_message_for(f,:microchip) %></div>
       </div>
 
       <div class="form-group row">

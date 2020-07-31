@@ -99,6 +99,10 @@ class Dog < ApplicationRecord
   validates :name, presence: true,
            length: { maximum: 75 },
            uniqueness: { case_sensitive: false }
+  
+  validates :microchip, uniqueness: true, allow_blank: true
+  
+  validate :microchip_check
 
   validates :tracking_id, uniqueness: true, presence: true
 
@@ -170,6 +174,26 @@ class Dog < ApplicationRecord
         .sort_with_search_term_matches_first(search_term)
     else
       select(:name, :id)
+    end
+  end
+
+  def microchip_check
+    if !self.microchip.nil?
+      case self.microchip.length
+      when 0
+        return
+      when 10
+        valid_format = /\A[a-zA-Z0-9]{10}\z/
+        err_message = ": 10 digit format -> This format accepts only numbers and characters"
+      when 15
+        valid_format = /\A9[0-9]{14}\z/
+        err_message = ": 15 digits format -> This format needs to start with 9, and accepts only numbers"
+      else
+        return errors.add(:microchip, "length must be 10 or 15")
+      end
+      if !valid_format.match?(self.microchip)
+        return errors.add(:microchip, err_message)
+      end
     end
   end
 

@@ -259,6 +259,20 @@
     </div>
 
     <div class="control-group">
+      <%= f.label :has_children, "Any children in your house ?", :class => "control-label" %>
+      <div class="controls">
+        <label>
+          <%= f.radio_button :has_children, true, :class => "link required" %>
+          <span>Yes</span>
+        </label>
+        <label>
+          <%= f.radio_button :has_children, false, :class => "link required" %>
+          <span>No</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="control-group">
       <%= f.label :children_under_five, "Any children under five in your house ?", :class => "control-label" %>
       <div class="controls">
         <label>

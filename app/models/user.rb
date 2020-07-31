@@ -55,6 +55,7 @@
 #  has_own_dogs                 :boolean
 #  has_own_cats                 :boolean
 #  children_under_five          :boolean
+#  has_children                 :boolean
 #  has_fenced_yard              :boolean
 #  can_foster_puppies           :boolean
 #  parvo_house                  :boolean
@@ -189,7 +190,7 @@ class User < ApplicationRecord
                    fundraising: :fundraising,
                    graphic_designer: :graphic_design,
                    has_cats: :has_own_cats,
-                   has_children_under_five: :children_under_five,
+                   has_children: :has_children,
                    has_dogs: :has_own_dogs,
                    has_fence: :has_fenced_yard,
                    has_parvo_house: :parvo_house,

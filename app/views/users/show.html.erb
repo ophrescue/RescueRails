@@ -182,6 +182,14 @@
             <% end %>
           <% end %>
 
+          <% unless @user.has_children.nil? %>
+            <% if @user.has_children? %>
+               <p><span class="label label-important">Has children</span></p>
+            <% else %>
+              <p><span class="label label-success">No children</span></p>
+            <% end %>
+          <% end %>
+
           <% unless @user.children_under_five.nil? %>
             <% if @user.children_under_five? %>
                <p><span class="label label-important">Has children under 5</span></p>

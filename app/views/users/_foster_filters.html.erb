@@ -30,9 +30,14 @@
   </label>
 
   <label class="pull-right">
-    Kids Under 5
-    <%= select_tag "has_children_under_five", options_for_select(@options, params[:has_children_under_five]), class: 'input-mini' %>
+    Has Kids
+    <%= select_tag "has_children", options_for_select(@options, params[:has_children]), class: 'input-mini' %>
   </label>
+
+  <label class="pull-right">
+  Kids Under 5
+  <%= select_tag "has_children_under_five", options_for_select(@options, params[:has_children_under_five]), class: 'input-mini' %>
+</label>
 
   <label class="pull-right">
     Fence

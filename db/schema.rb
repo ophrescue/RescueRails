@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(version: 2020_07_13_164249) do
     t.date "birth_date"
     t.string "prev_pets_type"
     t.string "current_pets_type"
+    t.string "building_type"
+    t.boolean "fenced_yard"
     t.index ["adopter_id"], name: "index_adoption_apps_on_adopter_id"
   end
 

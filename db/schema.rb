@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2020_07_13_164249) do
-  
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,7 +84,6 @@ ActiveRecord::Schema.define(version: 2020_07_13_164249) do
     t.date "birth_date"
     t.string "prev_pets_type"
     t.string "current_pets_type"
-    t.text "household_ages", default: [], array: true
     t.string "building_type"
     t.boolean "fenced_yard"
     t.index ["adopter_id"], name: "index_adoption_apps_on_adopter_id"

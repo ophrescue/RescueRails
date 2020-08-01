@@ -566,7 +566,7 @@ ActiveRecord::Schema.define(version: 2020_07_31_175918) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.boolean "has_children"
+    t.boolean "has_children", default: false, null: false
     t.index ["agreement_id"], name: "index_users_on_agreement_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"

@@ -55,8 +55,8 @@
 #  weight_restriction           :boolean
 #  has_own_dogs                 :boolean
 #  has_own_cats                 :boolean
-#  children_under_five          :boolean
 #  has_children                 :boolean
+#  children_under_five          :boolean
 #  has_fenced_yard              :boolean
 #  can_foster_puppies           :boolean
 #  parvo_house                  :boolean
@@ -194,6 +194,7 @@ class UsersController < Clearance::UsersController
                 :has_own_dogs,
                 :has_own_cats,
                 :has_children,
+                :children_under_five,
                 :has_fenced_yard,
                 :can_foster_puppies,
                 :parvo_house,
@@ -256,6 +257,7 @@ class UsersController < Clearance::UsersController
                 :has_own_dogs,
                 :has_own_cats,
                 :has_children,
+                :children_under_five,
                 :has_fenced_yard,
                 :can_foster_puppies,
                 :parvo_house,

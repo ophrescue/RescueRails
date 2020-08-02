@@ -10,12 +10,17 @@
 <% else %>
   <tr class='attachment' data-id=<%= attachment.id %>>
     <td class="description">
-      <a href=<%= attachment.download_url %>><%= attachment.description %></a>
+      <%= attachment.description %>
     </td>
     <td class='edit_description_container'>
       <% if is_admin? %>
         <span class='edit_description'>Edit</span>
       <% end %>
+    </td>
+    <td class="file_download">
+      <a href=<%= attachment.download_url %> class="btn btn-primary">
+        <i class="fa fa-download"></i>
+      </a>
     </td>
     <td>
       <% if attachment.updated_by_user %>

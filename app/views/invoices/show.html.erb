@@ -58,12 +58,23 @@
         <button id="payButton" class="btn btn-primary btn-lg">Make Payment</button>
     </div>
 
-<% else %>
+  <% elsif @invoice.paid? %>
+        <div id="error_explanation">
+          <% if flash[:error].present? %>
+              <p><%= flash[:error] %></p>
+          <% end %>
+        </div>
         <p>Invoice of <%= number_to_currency(@invoice.amount) %> was paid in full <%= @invoice.paid_at.strftime("%m/%d/%Y at %l:%M:%S %p") %>.</p>
-        <% if @invoice.has_donation? %>
-        <p>A donation of <%= number_to_currency(@invoice.donation.amount) %> was included.</p>
+        <% if @invoice.donation.present? %>
+          <p>A donation of <%= number_to_currency(@invoice.donation.amount) %> was included.</p>
         <% end %>
-<% end %>
+  <% else %>
+        <div id="error_explanation">
+          <% if flash[:error].present? %>
+              <p><%= flash[:error] %></p>
+          <% end %>
+        </div>
+  <% end %>
     </div>
   </div>
 </div>

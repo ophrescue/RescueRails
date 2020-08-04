@@ -31,7 +31,7 @@ class CatAdoption < ApplicationRecord
   has_many :invoices, as: :invoiceable
 
   RELATION_TYPE = ['interested', 'adopted', 'returned',
-        'pending adoption', 'pending return', 'trial adoption']
+        'pending adoption', 'pending return', 'trial adoption', 'canceled']
 
   validates_inclusion_of :relation_type, in: RELATION_TYPE
 

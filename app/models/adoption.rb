@@ -32,7 +32,7 @@ class Adoption < ApplicationRecord
 
   AMOUNT_TO_SHOW = ['MyApplications', 'OpenApplications', 'AllApplications']
   RELATION_TYPE = ['interested', 'adopted', 'returned',
-        'pending adoption', 'pending return', 'trial adoption']
+        'pending adoption', 'pending return', 'trial adoption', 'canceled']
 
   validates_inclusion_of :relation_type, in: RELATION_TYPE
 

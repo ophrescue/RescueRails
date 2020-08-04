@@ -191,6 +191,13 @@ class Adopter < ApplicationRecord
     self.is_subscribed = 0
   end
 
+  def approved_notification
+    return unless status_changed?
+    if (status == 'approved')
+      AdoptAppMailer.approved_to_adopt_notice(id).deliver_later
+    end
+  end
+
   def training_email
     return unless status_changed?
     if ((status == 'adopted') || (status == 'adptd sn pend')) && !training_email_sent?

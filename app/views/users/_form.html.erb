@@ -257,6 +257,22 @@
         </div>
       </fieldset>
 
+    <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-3 pt-0">Any children under in your house?</legend>
+      <div class="col-sm-9">
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :has_children, true, :class => "link required form-check-input" %>
+          <label class="form-check-label" for="user_has_children_true">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :children_under_five, false, :class => "link required form-check-input ml-2" %>
+          <label class="form-check-label" for="user_has_children_false">No</label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
       <fieldset class="form-group">
         <div class="row">
           <legend class="col-form-label col-sm-3 pt-0">Any children under five in your house?</legend>

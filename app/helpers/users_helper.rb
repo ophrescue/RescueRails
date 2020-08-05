@@ -55,6 +55,7 @@
 #  weight_restriction           :boolean
 #  has_own_dogs                 :boolean
 #  has_own_cats                 :boolean
+#  has_children                 :boolean
 #  children_under_five          :boolean
 #  has_fenced_yard              :boolean
 #  can_foster_puppies           :boolean

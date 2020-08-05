@@ -30,6 +30,11 @@
   </label>
 
   <label class="float-right">
+  Has Kids
+  <%= select_tag "has_children", options_for_select(@options, params[:has_children]), class: 'form-control-sm' %>
+</label>
+
+  <label class="float-right">
     Kids Under 5
     <%= select_tag "has_children_under_five", options_for_select(@options, params[:has_children_under_five]), class: 'form-control-sm' %>
   </label>

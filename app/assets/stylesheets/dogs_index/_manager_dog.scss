@@ -1,8 +1,8 @@
-#manager_list .dog span {
+#manager_list  span {
   margin-right: 6px;
 }
 
-#manager_list .dog.line-1 {
+#manager_list .line-1 {
   border-top: 1px solid #d4d4d4;
   border-left: 1px solid #d4e4e4;
   border-right: 1px solid #d4d4d4;
@@ -14,7 +14,7 @@
   }
 }
 
-#manager_list .dog.line-2 {
+#manager_list .line-2 {
   border-left: 1px solid #d4e4e4;
   border-right: 1px solid #d4d4d4;
   font-weight: 500;
@@ -26,7 +26,7 @@
 }
 
 
-#manager_list .dog.line-3 {
+#manager_list .line-3 {
   border-left: 1px solid #d4d4d4;
   border-right: 1px solid #d4d4d4;
   border-bottom: 1px solid #d4d4d4;
@@ -119,4 +119,10 @@
     background: $behaviour-problems-icon;
   }
 
+}
+
+//image preview
+img.imagepreview{
+  width:10%;
+  position: relative;
 }

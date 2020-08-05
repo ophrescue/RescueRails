@@ -10,7 +10,7 @@ FactoryBot.define do
         nn.gsub(/(\W|\s)/,'').titlecase
       }
       status {  Cat::STATUSES.sample }
-      sequence(:microchip) { |n| "MC-#{n}" }
+      microchip {['9'+Faker::Number.number(digits: 14).to_s, Faker::Alphanumeric.alphanumeric(number: 10).to_s].sample }
       age { Cat::AGES.sample }
       size { Cat::SIZES.sample }
       gender { Cat::GENDERS.sample }

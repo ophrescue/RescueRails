@@ -52,6 +52,9 @@
 #  coccidia_treatment      :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  hidden                  :boolean          default(FALSE), not null
+#  no_urban_setting        :boolean          default(FALSE), not null
+#  home_check_required     :boolean          default(FALSE), not null
 #
 
 
@@ -152,11 +155,11 @@ describe Cat do
   end
 
   describe 'matches_microchip scope' do
-    let!(:good_cat){ create(:cat, microchip: 55) }
-    let!(:bad_cat){ create(:cat, microchip: 77) }
+    let!(:good_cat){ create(:cat, microchip: '923456789a') }
+    let!(:bad_cat){ create(:cat, microchip: '923456789b') }
 
     it 'result includes only matching tracking_id' do
-      cats = Cat.search(['55','microchip'])
+      cats = Cat.search(['923456789a','microchip'])
       expect(cats.length).to eq 1
       expect(cats).to include(good_cat)
       expect(cats).not_to include(bad_cat)

@@ -91,6 +91,8 @@ class Adopter < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :phone, presence: true, length: { in: 10..25 }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :secondary_email, allow_blank: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :address1, presence: true, length: { maximum: 255 }
   validates :address2, allow_blank: true, length: { maximum: 255 }
   validates :city, presence: true, length: { maximum: 255 }
@@ -187,6 +189,13 @@ class Adopter < ApplicationRecord
   def chimp_unsubscribe
     AdopterUnsubscribeJob.perform_later(email)
     self.is_subscribed = 0
+  end
+
+  def approved_notification
+    return unless status_changed?
+    if (status == 'approved')
+      AdoptAppMailer.approved_to_adopt_notice(id).deliver_later
+    end
   end
 
   def training_email

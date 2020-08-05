@@ -1,62 +1,62 @@
 <h4>Foster Filters</h4>
 
-<form class=form-inline">
+<form class="form-inline">
   <input type="hidden" name="foster" value="true"/>
   <%= hidden_field_tag(:location, params[:location]) %>
 
-  <label class="pull-right">
+  <label class="float-right">
     Available
-    <%= select_tag "available_to_foster", options_for_select(@options, params[:available_to_foster]), class: 'input-mini' %>
+    <%= select_tag "available_to_foster", options_for_select(@options, params[:available_to_foster]), class: 'form-control-sm' %>
   </label>
 
   <%# <label class="pull-right"> %>
   <%#   Waiver %>
-  <%#   <%= select_tag "available_to_foster", options_for_select(@options, params[:available_to_foster]), class: 'input-mini' %1> %>
+  <%#   <%= select_tag "available_to_foster", options_for_select(@options, params[:available_to_foster]), class: 'form-control-sm' %1> %>
   <%# </label> %>
 
-  <label class="pull-right">
+  <label class="float-right">
     House
-    <%= select_tag "house_type", options_for_select(@rent_options, params[:house_type]), class: 'input-mini' %>
+    <%= select_tag "house_type", options_for_select(@rent_options, params[:house_type]), class: 'form-control-sm' %>
   </label>
 
-  <label class="pull-right">
+  <label class="float-right">
     Own Dogs
-    <%= select_tag "has_dogs", options_for_select(@options, params[:has_dogs]), class: 'input-mini' %>
+    <%= select_tag "has_dogs", options_for_select(@options, params[:has_dogs]), class: 'form-control-sm' %>
   </label>
 
-  <label class="pull-right">
+  <label class="float-right">
     Own Cats
-    <%= select_tag "has_cats", options_for_select(@options, params[:has_cats]), class: 'input-mini' %>
+    <%= select_tag "has_cats", options_for_select(@options, params[:has_cats]), class: 'form-control-sm' %>
   </label>
 
-  <label class="pull-right">
-    Has Kids
-    <%= select_tag "has_children", options_for_select(@options, params[:has_children]), class: 'input-mini' %>
-  </label>
-
-  <label class="pull-right">
-  Kids Under 5
-  <%= select_tag "has_children_under_five", options_for_select(@options, params[:has_children_under_five]), class: 'input-mini' %>
+  <label class="float-right">
+  Has Kids
+  <%= select_tag "has_children", options_for_select(@options, params[:has_children]), class: 'form-control-sm' %>
 </label>
 
-  <label class="pull-right">
+  <label class="float-right">
+    Kids Under 5
+    <%= select_tag "has_children_under_five", options_for_select(@options, params[:has_children_under_five]), class: 'form-control-sm' %>
+  </label>
+
+  <label class="float-right">
     Fence
-    <%= select_tag "has_fence", options_for_select(@options, params[:has_fence]), class: 'input-mini' %>
+    <%= select_tag "has_fence", options_for_select(@options, params[:has_fence]), class: 'form-control-sm' %>
   </label>
 
-  <label class="pull-right">
+  <label class="float-right">
     Puppies Ok
-    <%= select_tag "puppies_ok", options_for_select(@options, params[:puppies_ok]), class: 'input-mini' %>
+    <%= select_tag "puppies_ok", options_for_select(@options, params[:puppies_ok]), class: 'form-control-sm' %>
   </label>
 
-  <label class="pull-right">
+  <label class="float-right">
     Parvo Home
-    <%= select_tag "has_parvo_house", options_for_select(@options, params[:has_parvo_house]), class: 'input-mini' %>
+    <%= select_tag "has_parvo_house", options_for_select(@options, params[:has_parvo_house]), class: 'form-control-sm' %>
   </label>
 
-  <div class="row pull-right">
-    <div class="span12">
-      <button type="submit" class="btn">Filter</button>
+  <div class="row float-right">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <button type="submit" class="btn btn-primary">Filter</button>
     </div>
   </div>
 </form>

@@ -25,4 +25,11 @@ class AdoptAppMailer < ActionMailer::Base
        subject: "PLEASE RESPOND #{@adopter.name} for #{@adopter.dog_name} [OPH Adoption]",
        content_type: 'text/html')
   end
+
+  def approved_to_adopt(adopter_id)
+    @adopter = Adopter.find(adopter_id)
+    mail(to: "#{@adopter.email}",
+      subject: "Your OPH Adoption has been Approved",
+      content_type: 'text/html')
+  end
 end

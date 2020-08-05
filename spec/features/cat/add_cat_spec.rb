@@ -100,7 +100,7 @@ feature 'add a cat', js: true do
         fill_in(:cat_flea_tick_preventative, with: 'born in a barn')
         fill_in(:cat_dewormer, with: 'duis aute')
         fill_in(:cat_coccidia_treatment, with: 'have a nice day')
-        fill_in(:cat_microchip, with: '1234abcd')
+        fill_in(:cat_microchip, with: '923456789a')
         fill_in(:cat_original_name, with: 'Snoop Catt')
         fill_in(:cat_fee, with: '333')
         select(adoption_coordinator.name, from: 'cat_coordinator_id')
@@ -172,7 +172,7 @@ feature 'add a cat', js: true do
         expect(cat.flea_tick_preventative).to eq 'born in a barn'
         expect(cat.dewormer).to eq 'duis aute'
         expect(cat.coccidia_treatment).to eq 'have a nice day'
-        expect(cat.microchip).to eq '1234abcd'
+        expect(cat.microchip).to eq '923456789a'
         expect(cat.original_name).to eq 'Snoop Catt'
         expect(cat.fee).to eq 333
         expect(cat.coordinator_id).to eq adoption_coordinator.id
@@ -361,8 +361,8 @@ feature 'add a cat', js: true do
     #uniqueness of name validated on server
     context 'user enters invalid attributes --server-side validation' do
       let!(:fido){ create(:cat, name: "Fido") }
-
-      context 'when the user adds a dog with a duplicate name' do
+      
+      context 'when the user adds a cat with a duplicate name' do
         it 'should not save and should notify the user' do
           visit new_cats_manager_path
           fill_in(:cat_name, with: 'fido')

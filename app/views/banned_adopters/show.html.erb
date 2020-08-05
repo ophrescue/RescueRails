@@ -1,15 +1,30 @@
-<h5><%= link_to "Return to List", banned_adopters_path %></h5>
+<div class="container-fluid">
+	<div class="col-12">
+		<div class="pages ml-2">
+			<h5 class="mt-4"><%= link_to "Return to List", banned_adopters_path %></h5>
 
-<h1><%= @banned_adopter.name %></h1>
+			<h1 class="mb-2"><%= @banned_adopter.name %></h1>
 
-<p><%= link_to "Edit", edit_banned_adopter_path(@banned_adopter), :class => "btn btn-primary btn-small" %></p>
+			<table class="table table-striped table-bordered table-sm col-12 col-sm-8 col-md-6 col-lg-4">
+				<tr>
+					<th>Phone</th>
+					<td><%= @banned_adopter.phone %></td>
+				</tr>
+				<tr>
+					<th>Email</th>
+					<td><%= @banned_adopter.email %></td>
+				</tr>
+				<tr>
+					<th>Location</th>
+					<td><%= @banned_adopter.city %>, <%= @banned_adopter.state %></td>
+				</tr>
+				<tr>
+					<th>Comments</th>
+					<td><%= simple_format(@banned_adopter.comment) %></td>
+				</tr>
+			</table>
 
-
-
-<ul class="unstyled">
-	<li><%= @banned_adopter.phone %></li>
-	<li><%= @banned_adopter.email %></li>
-	<li><%= @banned_adopter.city %>, <%= @banned_adopter.state %></li>
-</ul>
-
-<p><%= simple_format(@banned_adopter.comment) %></p>
+			<p><%= link_to "Edit", edit_banned_adopter_path(@banned_adopter), :class => "btn btn-primary btn-small" %></p>
+		</div>
+	</div>
+</div>

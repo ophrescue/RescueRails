@@ -1,491 +1,503 @@
-<%= form_for @user, :html=> { :multipart => true, :class => "form-horizontal" }  do |f| %>
-  <fieldset>
-    <%= render 'shared/error_messages', :object => f.object %>
+<%= form_for @user, :html=> { :multipart => true, :class => "form-horizontal",  }  do |f| %>
+    <div class="ml-2">
+      <%= render 'shared/error_messages', :object => f.object %>
 
-    <div class="control-group">
-      <%= f.label :name, :class => 'control-label' %>
-      <div class="controls">
-        <% if is_admin? %>
-          <%= f.text_field :name, :autocomplete => :off%>
-        <% else %>
-          <%= f.text_field :name, :autocomplete => :off , :disabled => true %>
-          <span class="help-inline">Contact an <a href='/users?admin=true'>Admin</a> to change your name.<span>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :avatar, 'Profile Photo',:class => 'control-label' %>
-      <div class="controls">
-        <%= f.file_field :avatar %>
-        <span class="help-inline">Help fellow volunteers by using a real profile photo. </span>
-      </div>
-
-    </div>
-
-    <div class="control-group">
-      <%= f.label :duties, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :duties, :autocomplete => :off %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :email, :class => 'control-label' %>
-      <div class="controls">
-        <% if is_admin? %>
-          <%= f.text_field :email, :autocomplete => :off %>
-        <% else %>
-          <%= f.text_field :email, :autocomplete => :off, :disabled => true %>
-          <span class="help-inline">Contact an <a href='/users?admin=true'>Admin</a> to change your email.<span>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :phone, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :phone, :autocomplete => :off %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :other_phone, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :other_phone, :autocomplete => :off %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :address1, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :address1, :autocomplete => :off %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :address2, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :address2, :autocomplete => :off %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :city, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :city, :autocomplete => :off %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :state, 'State/Province', class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :region, :autocomplete => :off %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :postal_code, 'ZIP/Postal Code', class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :postal_code, :autocomplete => :off %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :country, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.select :country, [['USA', ISO3166::Country[:us].alpha3], ['Canada', ISO3166::Country[:ca].alpha3]], selected: @user.country || ISO3166::Country[:us].alpha3 %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :translator,'Are you able to translate English into one or more languages?', class: 'control-label' %>
-      <div class="controls">
-        <%= f.check_box :translator %> <span class="help-inline">Yes, I can translate English into one or more languages</span>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :known_languages,'If box above is checked, please list language(s)', class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :known_languages, autocomplete: :off %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :share_info, "What contact information can Adoption Coordinators share with Approved Adopters?", :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_area :share_info, :class => "xlarge", :rows => "4" %>
-        <span class="help-inline">E-mail, Phone number, etc.<span>
-      </div>
-    </div>
-
-    <h3>Fostering</h3>
-
-    <% if is_admin? %>
-      <div class="control-group">
-        <%= f.label :mentor_id, "Mentor", :class => 'control-label' %>
+      <div class="form-group">
+        <label for="user_name">Name</label>
         <div class="controls">
-          <%= f.collection_select(:mentor_id, @foster_users, :id, :name, :include_blank => '-select-') %>
-        </div>
-      </div>
-    <% end %>
-
-    <div class="control-group">
-      <%= f.label :available_to_foster, "Foster Status", :class => 'control-label' %>
-      <div class="controls">
-        <label class="radio">
-          <%= f.radio_button :available_to_foster, true %><span>Ready to foster another dog</span>
-        </label>
-        <label class="radio">
-          <%= f.radio_button :available_to_foster, false %><span>NOT ready to foster another dog</span>
-        </label>
-      </div>
-    </div>
-
-    <% if is_admin? %>
-      <div class="control-group">
-        <%= f.label :agreement, 'Foster Agreement', :class => 'control-label' %>
-        <div class="controls">
-          <%= f.fields_for :agreement do |af| %>
-            <% if af.object.persisted? %>
-              <span>Foster Agreement on file</span>
-            <% else %>
-              <%= af.file_field :attachment %>
-            <% end %>
+          <% if is_admin? %>
+            <%= f.text_field :name, :autocomplete => :off, class: "col-8 col-sm-4 form-control" %>
+          <% else %>
+            <%= f.text_field :name, :autocomplete => :off , :disabled => true %>
+            <small id="nameHelp" class="form-text text-muted">Contact an <a href='/users?admin=true'>Admin</a> to change your name.</small>
           <% end %>
         </div>
       </div>
-    <% end %>
 
-    <% if is_admin? %>
-      <div class="control-group">
-        <%= f.label :confidentiality_agreement, 'Confidentiality Agreement', :class => 'control-label' %>
-        <div class="controls">
-          <%= f.fields_for :confidentiality_agreement do |af| %>
-            <% if af.object.persisted? %>
-              <span>Confidentiality Agreement on file</span>
-            <% else %>
-              <%= af.file_field :attachment %>
-            <% end %>
+      <div class="form-group">
+        <label for="user_avatar">Profile Photo</label>
+        <%= f.file_field :avatar, :class => "form-control-file", :accept => "image/png,image/jpeg" %>
+        <small id="avatarHelp" class="form-text text-muted">Help fellow volunteers by using a real profile photo.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="user_duties">Duties</label>
+        <%= f.text_field :duties, :class => "col-8 col-sm-4 form-control", :autocomplete => :off %>
+      </div>
+
+      <div class="form-group">
+        <label for="user_email">Email</label>
+          <% if is_admin? %>
+            <%= f.text_field :email, :class => "col-8 col-sm-4 form-control", :autocomplete => :off, :disabled => false %>
+          <% else %>
+            <%= f.text_field :email, :autocomplete => :off, :disabled => true %>
+            <small id="emailHelp" class="form-text text-muted">Contact an <a href='/users?admin=true'>Admin</a> to change your email.</small>
           <% end %>
-        </div>
       </div>
-    <% end %>
 
-    <% if is_admin? %>
-      <div class="control-group">
-        <%= f.label :code_of_conduct_agreement, 'Code of Conduct Agreement', :class => 'control-label' %>
+      <div class="form-group">
+      <label for="user_phone">Phone</label>
+        <%= f.text_field :phone, :class => "col-6 col-sm-4 col-md-3 col-lg-2 form-control", :autocomplete => :off %>
+      </div>
+
+      <div class="form-group">
+        <label for="user_other_phone">Other Phone</label>
+        <%= f.text_field :other_phone, :class => "col-6 col-sm-4 col-md-3 col-lg-2 form-control", :autocomplete => :off %>
+      </div>
+
+      <div class="form-group">
+        <label for="user_address1">Address 1</label>
         <div class="controls">
-          <%= f.fields_for :code_of_conduct_agreement do |af| %>
-            <% if af.object.persisted? %>
-              <span>Code of Conduct Agreement on file</span>
-            <% else %>
-              <%= af.file_field :attachment %>
-            <% end %>
-          <% end %>
+          <%= f.text_field :address1, :class => "col-8 col-sm-4 form-control", :autocomplete => :off %>
         </div>
       </div>
-    <% end %>
 
-    <div class="control-group">
-      <%= f.label :house_type, "Do you rent or own your home?", :class => "control-label" %>
-      <div class="controls">
-        <label>
-          <%= f.radio_button :house_type, 'rent', :class => "link required" %>
-          <span>Rent</span>
-        </label>
-        <label>
-          <%= f.radio_button :house_type, 'own', :class => "link required" %>
-          <span>Own</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :breed_restriction, "Any breed restrictions?", :class => "control-label" %>
-      <div class="controls">
-        <label>
-          <%= f.radio_button :breed_restriction, true, :class => "link required" %>
-          <span>Yes</span>
-        </label>
-        <label>
-          <%= f.radio_button :breed_restriction, false, :class => "link required" %>
-          <span>No</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :weight_restriction, "Any weight restrictions?", :class => "control-label" %>
-      <div class="controls">
-        <label>
-          <%= f.radio_button :weight_restriction, true, :class => "link required" %>
-          <span>Yes</span>
-        </label>
-        <label>
-          <%= f.radio_button :weight_restriction, false, :class => "link required" %>
-          <span>No</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :has_own_dogs, "Do you have your own dogs?", :class => "control-label" %>
-      <div class="controls">
-        <label>
-          <%= f.radio_button :has_own_dogs, true, :class => "link required" %>
-          <span>Yes</span>
-        </label>
-        <label>
-          <%= f.radio_button :has_own_dogs, false, :class => "link required" %>
-          <span>No</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :has_own_cats, "Do you have your own cats?", :class => "control-label" %>
-      <div class="controls">
-        <label>
-          <%= f.radio_button :has_own_cats, true, :class => "link required" %>
-          <span>Yes</span>
-        </label>
-        <label>
-          <%= f.radio_button :has_own_cats, false, :class => "link required" %>
-          <span>No</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :has_children, "Any children in your house ?", :class => "control-label" %>
-      <div class="controls">
-        <label>
-          <%= f.radio_button :has_children, true, :class => "link required" %>
-          <span>Yes</span>
-        </label>
-        <label>
-          <%= f.radio_button :has_children, false, :class => "link required" %>
-          <span>No</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :children_under_five, "Any children under five in your house ?", :class => "control-label" %>
-      <div class="controls">
-        <label>
-          <%= f.radio_button :children_under_five, true, :class => "link required" %>
-          <span>Yes</span>
-        </label>
-        <label>
-          <%= f.radio_button :children_under_five, false, :class => "link required" %>
-          <span>No</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :has_fenced_yard, "Do you have a fenced in yard?", :class => "control-label" %>
-      <div class="controls">
-        <label>
-          <%= f.radio_button :has_fenced_yard, true, :class => "link required" %>
-          <span>Yes</span>
-        </label>
-        <label>
-          <%= f.radio_button :has_fenced_yard, false, :class => "link required" %>
-          <span>No</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :can_foster_puppies, "Are you willing to foster puppies?", :class => "control-label" %>
-      <div class="controls">
-        <label>
-          <%= f.radio_button :can_foster_puppies, true, :class => "link required" %>
-          <span>Yes</span>
-        </label>
-        <label>
-          <%= f.radio_button :can_foster_puppies, false, :class => "link required" %>
-          <span>No</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :parvo_house, "Have you or anyone in your household ever had a dog with parvo?", :class => "control-label" %>
-      <div class="controls">
-        <label>
-          <%= f.radio_button :parvo_house, true, :class => "link required" %>
-          <span>Yes</span>
-        </label>
-        <label>
-          <%= f.radio_button :parvo_house, false, :class => "link required" %>
-          <span>No</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :is_transporter, "Are you willing to assist with dog transport? (You will receive additional emails)", :class => "control-label" %>
-      <div class="controls">
-        <label>
-          <%= f.radio_button :is_transporter, true, :class => "link required" %>
-          <span>Yes</span>
-        </label>
-        <label>
-          <%= f.radio_button :is_transporter, false, :class => "link required" %>
-          <span>No</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :foster_dog_types, "Please detail any fostering restrictions", :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_area :foster_dog_types, :class => "xxlarge", :rows => "6" %>
-        <span class="help-inline">Weight, breed, medical, etc<span>
-      </div>
-    </div>
-
-    <h3>Password Change</h3>
-
-    <div class="control-group">
-      <%= f.label :password, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.password_field :password, autocomplete: 'new-password' %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :password_confirmation, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.password_field :password_confirmation, :autocomplete => 'new-password' %>
-      </div>
-    </div>
-
-    <h3>User Permissions</h3>
-
-    <% if is_admin? %>
-      <div class="control-group">
-        <%= f.label :admin_comment, "Admins Only Comment", :class => 'control-label' %>
+      <div class="form-group">
+        <label for="user_address2">Address 2</label>
         <div class="controls">
-          <%= f.text_area :admin_comment, :class => "xxlarge", :rows => "6" %>
-          <span class="help-inline">Visible to staff with admin access<span>
+          <%= f.text_field :address2, :class => "col-8 col-sm-4 form-control", :autocomplete => :off %>
         </div>
       </div>
-    <% end %>
 
-    <div class="control-group">
+      <div class="form-group">
+        <label for="user_city">City</label>
+        <div class="controls">
+          <%= f.text_field :city, :class => "col-8 col-sm-4 col-md-3 form-control", :autocomplete => :off %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="user_state">State/Province</label>
+        <div class="controls">
+          <%= f.text_field :region, :class => "col-3 col-sm-1 form-control", :autocomplete => :off %>
+          <small id="regionHelp" class="form-text text-muted">Please enter two letter abbreviation</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="user_postal_code">ZIP/Postal Code</label>
+        <div class="controls">
+          <%= f.text_field :postal_code, :class => "col-3 col-sm-2 col-lg-1 form-control", :autocomplete => :off %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="user_country">Country</label>
+        <%= f.select :country, [['USA', ISO3166::Country[:us].alpha3], ['Canada', ISO3166::Country[:ca].alpha3]], {}, {class: "form-control col-3 col-sm-2 col-lg-1", selected: @user.country || ISO3166::Country[:us].alpha3} %>
+      </div>
+
+      <div class="form-group">
+        <label for="user_translator">Are you able to translate English into one or more languages?</label>
+        <div class="form-check">
+          <%= f.check_box :translator, class: "form-check-input" %>
+          <label class="form-check-label" for="user_translator">Yes, I can translate English into one or more languages</label> 
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="user_known_languages">If box above is checked, please list language(s)</label>
+        <div class="controls">
+          <%= f.text_area :known_languages, class: "form-control col-8 col-md-4", autocomplete: :off %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="user_share_info">What contact information can Adoption Coordinators share with Approved Adopters?</label>
+        <div class="controls">
+          <%= f.text_area :share_info, :class => "form-control col-8 col-md-4", :rows => "4" %>
+          <small id="shareInfoHelp" class="form-text text-muted">E-mail, Phone number, etc.</small>
+        </div>
+      </div>
+
+      <h3>Fostering</h3>
+
       <% if is_admin? %>
-        <label id="optionsCheckboxes">Check All that Apply</label>
-        <div class="controls">
-          <label class="checkbox">
-            <%= f.check_box :admin %>
-            <span><strong>Admin</strong> - Add/edit staff, set staff permissions.</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :edit_all_adopters %>
-            <span><strong>Adoption Coordinator</strong> - Process All Adoption Applications</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :edit_my_adopters %>
-            <span><strong>Assign Applications</strong> - Can be Assigned Adoption Applications</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :complete_adopters %>
-            <span><strong>Mark Apps as Completed</strong> - Can set an application to the completed status.  Do not grant this to anyone without express permission from Jen.</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :ban_adopters %>
-            <span><strong>Banned Adopters</strong> - Allowed to update or edit the banned adopters list.</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :edit_events %>
-            <span><strong>Manage Events</strong> - Add/Edit Events </span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :add_dogs %>
-            <span><strong>Add Dogs</strong> - If checked, user can add dogs.</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :medical_behavior_permission %>
-            <span><strong>Manage Medical and Behavior Summaries</strong> - If checked, user can edit Medical and Behavior Summaries.</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :edit_dogs %>
-            <span><strong>Edit Dogs</strong> - If checked, user can edit all dogs and all fields.  If unchecked, they can view all data for all dogs, and only edit some fields of dogs they are assigned to as fosters.  You probably want this unchecked for most people. </span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :is_foster %>
-            <span><strong>Foster</strong> - This person can be selected as a foster on the dog edit screen.</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :foster_mentor %>
-            <span><strong>Foster Mentor</strong> - Adds user to the Foster Mentor tab.</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :graphic_design %>
-            <span><strong>Graphic Design</strong>- Adds user to the Graphic Design Team</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :is_photographer %>
-            <span><strong>Photographer</strong> - Adds user to the Photographer Tab</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :writes_newsletter %>
-            <span><strong>Newsletter Team</strong> - Adds user to the Newsletter Team Tab</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :training_team %>
-            <span><strong>Training Team</strong> - Adds user to the Training Team Tab</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :social_media_manager %>
-            <span><strong>Social Media</strong> - Adds user to the Social Media Tab</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :public_relations %>
-            <span><strong>Public Relations</strong> - Adds user to the Public Relations Tab</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :fundraising %>
-            <span><strong>Fundraising</strong> - Adds user to the Fundraising Tab</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :boarding_buddies %>
-            <span><strong>Boarding Buddies</strong> - User is a Boarding Buddy</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :dl_resources %>
-            <span><strong>Download Resources</strong> - This person can access the Staff Resources section.</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :dl_locked_resources %>
-            <span><strong>Download Restricted Resources</strong> - This person can access Restricted folders in the Staff Resources section.  Download Resources permission needed too.</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :active %>
-            <span><strong>Active Volunteer</strong>- This person is an active volunteer and currently working with OPH (i.e. working at the shelter, going to events, etc..).</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :locked %>
-            <span><strong>Lock</strong> - Will disable account, preventing user from logging in.</span>
-          </label>
-        </div>
-      <% else %>
-        <div class="row">
-          <div class="span8 offset2">
-            <%= render 'permissions' %>
+        <div class="form-group">
+          <label for="user_mentor_id">Mentor</label>
+          <div class="controls">
+            <%= f.collection_select(:mentor_id, @foster_users, :id, :name, {include_blank: '-select-'}, {class: "form-control col-6 col-sm-3"}) %>
           </div>
         </div>
       <% end %>
-    </div>
 
-    <div class="actions well">
-      <%= f.submit "Update / Verify", :class => "btn btn-primary" %>
+      <div class="form-group">
+        <p class='mb-1'>Foster Status</p>
+        <div class="form-check form-check-inline">
+            <%= f.radio_button :available_to_foster, true, class: "form-check-input" %>
+            <label class="form-check-label" for="user_available_to_foster_true">Ready to foster another dog</label>     
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :available_to_foster, false, class: "form-check-input" %>
+          <label class="form-check-label" for="user_available_to_foster_false">NOT ready to foster another dog</label>
+        </div>
+      </div>
+
+      <% if is_admin? %>
+        <div class="form-group">
+          <label for="user_agreement">Foster Agreement</label>
+          <div class="controls">
+            <%= f.fields_for :agreement do |af| %>
+              <% if af.object.persisted? %>
+                <span>Foster Agreement on file</span>
+              <% else %>
+                <%= af.file_field :attachment, class: "form-control-file" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if is_admin? %>
+        <div class="form-group">
+          <label for="user_confidentiality_agreement">Confidentiality Agreement</label>
+          <div class="controls">
+            <%= f.fields_for :confidentiality_agreement do |af| %>
+              <% if af.object.persisted? %>
+                <span>Confidentiality Agreement on file</span>
+              <% else %>
+                <%= af.file_field :attachment, class: "form-control-file" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if is_admin? %>
+        <div class="form-group">
+          <label for="user_code_of_conduct_agreement">Code of Conduct Agreement</label>
+          <div class="controls">
+            <%= f.fields_for :code_of_conduct_agreement do |af| %>
+              <% if af.object.persisted? %>
+                <span>Code of Conduct Agreement on file</span>
+              <% else %>
+                <%= af.file_field :attachment, class: "form-control-file" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0">Do you rent or own your home?</legend>
+          <div class="col-sm-9">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :house_type, 'rent', :class => "link required form-check-input" %>
+              <label class="form-check-label" for="user_house_type_rent">Rent</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :house_type, 'own', :class => "link required form-check-input" %>
+              <label class="form-check-label" for="user_house_type_own">Own</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0">Any breed restrictions?</legend>
+          <div class="col-sm-9">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :breed_restriction, true, :class => "link required form-check-input" %>
+              <label class="form-check-label" for="user_breed_restriction_true">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :breed_restriction, false, :class => "link required form-check-input ml-2" %>
+              <label class="form-check-label" for="user_breed_restriction_false">No</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0">Any weight restrictions?</legend>
+          <div class="col-sm-9">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :weight_restriction, true, :class => "link required form-check-input" %>
+              <label class="form-check-label" for="user_weight_restriction_true">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :weight_restriction, false, :class => "link required form-check-input ml-2" %>
+              <label class="form-check-label" for="user_weight_restriction_false">No</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0">Do you have your own dogs?</legend>
+          <div class="col-sm-9">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :has_own_dogs, true, :class => "link required form-check-input" %>
+              <label class="form-check-label" for="user_has_own_dogs_true">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :has_own_dogs, false, :class => "link required form-check-input ml-2" %>
+              <label class="form-check-label" for="user_has_own_dogs_false">No</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0">Do you have your own cats?</legend>
+          <div class="col-sm-9">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :has_own_cats, true, :class => "link required form-check-input" %>
+              <label class="form-check-label" for="has_own_cats_true">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :has_own_cats, false, :class => "link required form-check-input ml-2" %>
+              <label class="form-check-label" for="has_own_cats_false">No</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+    <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-3 pt-0">Any children under in your house?</legend>
+      <div class="col-sm-9">
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :has_children, true, :class => "link required form-check-input" %>
+          <label class="form-check-label" for="user_has_children_true">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :children_under_five, false, :class => "link required form-check-input ml-2" %>
+          <label class="form-check-label" for="user_has_children_false">No</label>
+        </div>
+      </div>
     </div>
   </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0">Any children under five in your house?</legend>
+          <div class="col-sm-9">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :children_under_five, true, :class => "link required form-check-input" %>
+              <label class="form-check-label" for="user_children_under_five_true">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :children_under_five, false, :class => "link required form-check-input ml-2" %>
+              <label class="form-check-label" for="user_children_under_five_false">No</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0">Do you have a fenced in yard?</legend>
+          <div class="col-sm-9">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :has_fenced_yard, true, :class => "link required form-check-input" %>
+              <label class="form-check-label" for="user_has_fenced_yard_true">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :has_fenced_yard, false, :class => "link required form-check-input ml-2" %>
+              <label class="form-check-label" for="user_has_fenced_yard_false">No</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0">Are you willing to foster puppies?</legend>
+          <div class="col-sm-9">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :can_foster_puppies, true, :class => "link required form-check-input" %>
+              <label class="form-check-label" for="user_can_foster_puppies_true">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :can_foster_puppies, false, :class => "link required form-check-input ml-2" %>
+              <label class="form-check-label" for="user_can_foster_puppies_false">No</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0">Have you or anyone in your household ever had a dog with parvo?</legend>
+          <div class="col-sm-9">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :parvo_house, true, :class => "link required form-check-input" %>
+              <label class="form-check-label" for="user_parvo_house_true">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :parvo_house, false, :class => "link required form-check-input ml-2" %>
+              <label class="form-check-label" for="user_parvo_house_false">No</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0">Are you willing to assist with dog transport? (You will receive additional emails)</legend>
+          <div class="col-sm-9">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :is_transporter, true, :class => "link required form-check-input" %>
+              <label class="form-check-label" for="user_is_transporter_true">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :is_transporter, false, :class => "link required form-check-input ml-2" %>
+              <label class="form-check-label" for="user_is_transporter_false">No</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="form-group">
+        <label for="user_foster_dog_types">Please detail any fostering restrictions</label>
+        <div class="controls">
+          <%= f.text_area :foster_dog_types, :class => "form-control col-8 col-sm-6 col-md-4", :rows => "6" %>
+          <small class="fosterHelp" class="form-text text-muted">Weight, breed, medical, etc</small>
+        </div>
+      </div>
+
+      <h3>Password Change</h3>
+
+      <div class="form-group">
+        <label for="user_password">Password</label>
+        <div class="controls">
+          <%= f.password_field :password, autocomplete: 'new-password', class: "form-control col-6 col-sm-4 col-md-2" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="user_password_confirmation">Password Confirmation</label>
+        <div class="controls">
+          <%= f.password_field :password_confirmation, :autocomplete => 'new-password', class: "form-control col-6 col-sm-4 col-md-2" %>
+        </div>
+      </div>
+
+      <h3>User Permissions</h3>
+
+      <% if is_admin? %>
+        <div class="form-group">
+          <label for="user_admin_comment">Admins Only Comment</label>
+          <div class="controls">
+            <%= f.text_area :admin_comment, :class => "form-control col-8 col-sm-6 col-md-4", :rows => "6" %>
+            <small class="adminCommentHelp" class="form-text text-muted">Visible to staff with admin access</small>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <% if is_admin? %>
+          <label id="optionsCheckboxes">Check All that Apply</label>
+          <div class="form-check">
+            <%= f.check_box :admin, class: "form-check-input" %>
+            <label class="form-check-label" for="admin"><strong>Admin</strong> - Add/edit staff, set staff permissions.</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :edit_all_adopters, class: "form-check-input" %>
+            <label class="form-check-label" for="edit_all_adopters"><strong>Adoption Coordinator</strong> - Process All Adoption Applications</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :edit_my_adopters, class: "form-check-input" %>
+            <label class="form-check-label" for="edit_my_adopters"><strong>Assign Applications</strong> - Can be Assigned Adoption Applications</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :complete_adopters, class: "form-check-input" %>
+            <label class="form-check-label" for="complete_adopters"><strong>Mark Apps as Completed</strong> - Can set an application to the completed status.  Do not grant this to anyone without express permission from Jen.</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :ban_adopters, class: "form-check-input" %>
+            <label class="form-check-label" for="ban_adopters"><strong>Banned Adopters</strong> - Allowed to update or edit the banned adopters list.</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :edit_events, class: "form-check-input" %>
+            <label class="form-check-label" for="edit_events"><strong>Manage Events</strong> - Add/Edit Events </label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :add_dogs, class: "form-check-input" %>
+            <label class="form-check-label" for="add_dogs"><strong>Add Dogs</strong> - If checked, user can add dogs.</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :medical_behavior_permission, class: "form-check-input" %>
+            <label class="form-check-label" for="medical_behavior_permission"><strong>Manage Medical and Behavior Summaries</strong> - If checked, user can edit Medical and Behavior Summaries.</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :edit_dogs, class: "form-check-input" %>
+            <label class="form-check-label" for="edit_dogs"><strong>Edit Dogs</strong> - If checked, user can edit all dogs and all fields.  If unchecked, they can view all data for all dogs, and only edit some fields of dogs they are assigned to as fosters.  You probably want this unchecked for most people. </label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :is_foster, class: "form-check-input" %>
+            <label class="form-check-label" for="is_foster"><strong>Foster</strong> - This person can be selected as a foster on the dog edit screen.</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :foster_mentor, class: "form-check-input" %>
+            <label class="form-check-label" for="foster_mentor"><strong>Foster Mentor</strong> - Adds user to the Foster Mentor tab.</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :graphic_design, class: "form-check-input" %>
+            <label class="form-check-label" for="graphic_design"><strong>Graphic Design</strong>- Adds user to the Graphic Design Team</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :is_photographer, class: "form-check-input" %>
+            <label class="form-check-label" for="is_photographer"><strong>Photographer</strong> - Adds user to the Photographer Tab</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :writes_newsletter, class: "form-check-input" %>
+            <label class="form-check-label" for="writes_newsletter"><strong>Newsletter Team</strong> - Adds user to the Newsletter Team Tab</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :training_team, class: "form-check-input" %>
+            <label class="form-check-label" for="training_team"><strong>Training Team</strong> - Adds user to the Training Team Tab</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :social_media_manager, class: "form-check-input" %>
+            <label class="form-check-label" for="social_media_manager"><strong>Social Media</strong> - Adds user to the Social Media Tab</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :public_relations, class: "form-check-input" %>
+            <label class="form-check-label" for="public_relations"><strong>Public Relations</strong> - Adds user to the Public Relations Tab</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :fundraising, class: "form-check-input" %>
+            <label class="form-check-label" for="fundraising"><strong>Fundraising</strong> - Adds user to the Fundraising Tab</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :boarding_buddies, class: "form-check-input" %>
+            <label class="form-check-label" for="boarding_buddies"><strong>Boarding Buddies</strong> - User is a Boarding Buddy</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :dl_resources, class: "form-check-input" %>
+            <label class="form-check-label" for="dl_resources"><strong>Download Resources</strong> - This person can access the Staff Resources section.</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :dl_locked_resources, class: "form-check-input" %>
+            <label class="form-check-label" for="dl_locked_resources"><strong>Download Restricted Resources</strong> - This person can access Restricted folders in the Staff Resources section.  Download Resources permission needed too.</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :active, class: "form-check-input" %>
+            <label class="form-check-label" for="active"><strong>Active Volunteer</strong>- This person is an active volunteer and currently working with OPH (i.e. working at the shelter, going to events, etc..).</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :locked, class: "form-check-input" %>
+            <label class="form-check-label" for="locked"><strong>Lock</strong> - Will disable account, preventing user from logging in.</label>
+          </div>
+        <% else %>
+          <div class="row">
+            <div class="col-8 offset-2">
+              <%= render 'permissions' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-4">
+        <div class="actions">
+          <%= f.submit "Update / Verify", :class => "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+
 <% end %>

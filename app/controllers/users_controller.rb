@@ -77,6 +77,7 @@
 class UsersController < Clearance::UsersController
   include ApplicationHelper
 
+  before_action :select_bootstrap41
   before_action :require_login
   before_action :unlocked_user
   before_action :correct_user, only: [:edit, :update]

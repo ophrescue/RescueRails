@@ -21,7 +21,9 @@
 #  other_household_names     :string
 #  ready_to_adopt_dt         :date
 #  house_type                :string(40)
+#  building_type             :string
 #  dog_exercise              :text
+#  fenced_yard               :boolean
 #  dog_stay_when_away        :string(100)
 #  dog_vacation              :text
 #  current_pets              :text
@@ -53,6 +55,8 @@
 #  verify_home_auth          :boolean          default(FALSE)
 #  has_family_under_18       :boolean
 #  birth_date                :date
+#  prev_pets_type            :string
+#  current_pets_type         :string
 #
 
 class AdoptionApp < ApplicationRecord
@@ -69,6 +73,7 @@ class AdoptionApp < ApplicationRecord
   validates :other_household_names, allow_blank: true, length: { maximum: 255 }
   validates :how_did_you_hear, allow_blank: true, length: { maximum: 255 }
   validates :birth_date, presence: true, unless: :is_ofage?
+  validates :house_type, presence: true
 
   def adopter_age
     return unless birth_date

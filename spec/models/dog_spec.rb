@@ -53,6 +53,8 @@
 #  toltrazuril             :string
 #  hidden                  :boolean          default(FALSE), not null
 #  wait_list               :text
+#  no_urban_setting        :boolean          default(FALSE), not null
+#  home_check_required     :boolean          default(FALSE), not null
 #
 
 require 'rails_helper'
@@ -153,11 +155,11 @@ describe Dog do
   end
 
   describe 'matches_microchip scope' do
-    let!(:good_dog){ create(:dog, microchip: 55) }
-    let!(:bad_dog){ create(:dog, microchip: 77) }
+    let!(:good_dog){ create(:dog, microchip: '923456789a') }
+    let!(:bad_dog){ create(:dog, microchip: '923456789b') }
 
     it 'result includes only matching tracking_id' do
-      dogs = Dog.search(['55','microchip'])
+      dogs = Dog.search(['923456789a','microchip'])
       expect(dogs.length).to eq 1
       expect(dogs).to include(good_dog)
       expect(dogs).not_to include(bad_dog)

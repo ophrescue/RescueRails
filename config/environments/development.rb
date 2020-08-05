@@ -40,7 +40,7 @@ Rails.application.configure do
 # My Configs
 # ----------
 
-  config.action_controller.action_on_unpermitted_parameters = :raise
+  # config.action_controller.action_on_unpermitted_parameters = :raise
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true

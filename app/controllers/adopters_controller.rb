@@ -99,17 +99,21 @@ class AdoptersController < ApplicationController
   end
 
   def update
+    @title = @adopter.name
+    @adoption_app = @adopter.adoption_app
+    @adopter_users = User.where(edit_my_adopters: true).order("name")
     if (params[:adopter][:status] == 'completed') && !can_complete_adopters?
       flash[:error] = "You are not allowed to set an application to completed"
-    else
-      @adopter.update_attributes(adopter_params)
-      flash[:success] = "Application Updated"
+      return render :show
     end
 
-    respond_with(@adopter) do |format|
-      format.html { render }
-      format.json { render json: @adopter }
+    if @adopter.update(adopter_params)
+      flash[:success] = "Application Updated"
+      redirect_to adopter_url(@adopter)
+    else
+      render :show
     end
+
   end
 
   def check_email
@@ -125,9 +129,11 @@ class AdoptersController < ApplicationController
   def adopter_params
     params.require(:adopter).permit(:name,
                                     :email,
+                                    :secondary_email,
                                     :phone,
                                     :address1,
                                     :address2,
+                                    :is_address_valid,
                                     :city,
                                     :state,
                                     :zip,
@@ -155,7 +161,9 @@ class AdoptersController < ApplicationController
                                       :ready_to_adopt_dt,
                                       :house_type,
                                       :verify_home_auth,
+                                      :building_type,
                                       :dog_exercise,
+                                      :fenced_yard,
                                       :dog_stay_when_away,
                                       :dog_vacation,
                                       :prev_pets_type,

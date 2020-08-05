@@ -68,4 +68,18 @@ feature 'Edit Adopter Form', js: true do
     click_link('All')
     expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
   end
+
+
+  scenario 'edit is_valid_address' do
+
+    visit adopter_path(adopter)
+
+    page.find('#toggle-edit').click    
+    page.choose('No')
+
+    click_button('Save')
+
+    page.assert_selector('#addressvalidator', text: 'No', visible: true)
+  end
+
 end

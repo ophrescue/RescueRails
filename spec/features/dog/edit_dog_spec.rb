@@ -176,7 +176,7 @@ feature 'edit a dog', js: true do
         fill_in(:dog_rabies, with: 'kablooie')
         fill_in(:dog_vac_4dx, with: 'schmutz')
         fill_in(:dog_bordetella, with: 'words')
-        fill_in(:dog_microchip, with: '1234abcd')
+        fill_in(:dog_microchip, with: '923456789a')
         fill_in(:dog_original_name, with: 'Snoop Dogg')
         fill_in(:dog_fee, with: '333')
         select(adoption_coordinator.name, from: 'dog_coordinator_id')
@@ -248,7 +248,7 @@ feature 'edit a dog', js: true do
         expect(dog.rabies).to eq 'kablooie'
         expect(dog.vac_4dx).to eq 'schmutz'
         expect(dog.bordetella).to eq 'words'
-        expect(dog.microchip).to eq '1234abcd'
+        expect(dog.microchip).to eq '923456789a'
         expect(dog.original_name).to eq 'Snoop Dogg'
         expect(dog.fee).to eq 333
         expect(dog.coordinator_id).to eq adoption_coordinator.id
@@ -295,7 +295,7 @@ feature 'edit a dog', js: true do
         expect(page.find('#rabies').text).to eq 'kablooie'
         expect(page.find('#vac_4dx').text).to eq 'schmutz'
         expect(page.find('#bordetella').text).to eq 'words'
-        expect(page.find('#microchip').text).to eq '1234abcd'
+        expect(page.find('#microchip').text).to eq '923456789a'
         expect(page.find('#original_name').text).to eq 'Snoop Dogg'
         expect(page.find('#fee').text).to eq '$333'
         expect(page.find('#adoption_coordinator').text).to eq adoption_coordinator.name

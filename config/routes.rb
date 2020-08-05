@@ -55,17 +55,24 @@ RescueRails::Application.routes.draw do
 
   get '/campaigns/:scope', to: 'campaigns#index', scope: /(inactive|active)/, as: "scoped_campaigns"
 
-  resources :adoptions,
-            :adoption_app,
+  resources :adoption_app,
             :campaigns,
-            :cat_adoptions,
             :dashboards,
             :events,
             :folders,
             :passwords,
             :password_resets,
             :shelters,
-            :treatments
+            :treatments,
+            :invoices
+
+  resources :adoptions do
+    resources :invoices
+  end
+
+  resources :cat_adoptions do
+    resources :invoices
+  end
 
   resources :attachments, only: %i[show destroy]
   resources :folder_attachments, only: %i[index update]
@@ -99,4 +106,5 @@ RescueRails::Application.routes.draw do
   get '/international/tcspca',                          to: 'pages#international-tcspca'
   get '/international/volunteer-takes-oph-to-india',    to: 'pages#international-article'
   get '/international/7000-miles-home',                 to: 'pages#7000-miles-home'
+  get '/international/hope-for-hope',                  to: 'pages#hope-for-hope'
 end

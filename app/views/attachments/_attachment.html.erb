@@ -18,7 +18,8 @@
       <% end %>
     </td>
     <td class="file_download">
-      <a href=<%= attachment.download_url %> class="btn btn-primary">
+      <a href=<%= attachment.download_url %> class="btn btn-primary" 
+        id=<%= File.basename(attachment.attachment_file_name, ".*") + "_" + (attachment.id).to_s %>>
         <i class="fa fa-download"></i>
       </a>
     </td>

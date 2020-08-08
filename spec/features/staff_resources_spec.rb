@@ -145,7 +145,7 @@ feature "folder management", js: true do
     end
 
     context 'when the folder contains files' do
-      let!(:resource){ create(:attachment, :downloadable, attachment_file_name: "foobar.pdf", updated_by_user_id: admin.id, attachable_id: folder.id, attachable_type: 'Folder') }
+      let!(:resource){ create(:attachment, attachment_file_name: "foobar.pdf", updated_by_user_id: admin.id, attachable_id: folder.id, attachable_type: 'Folder') }
 
       before do
         sign_in_as_admin
@@ -153,7 +153,7 @@ feature "folder management", js: true do
       end
 
       it "should show list of attachments" do
-        expect(page).to have_button('//[@id="foobar_1"]')
+        expect(page).to have_selector('#foobar_1')
         expect(page).to have_selector('.attachment input.delete_attachment')
       end
     end

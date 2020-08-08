@@ -4,7 +4,7 @@
     &.actions { width: 10% }
   }
   .attachment {
-    .edit_description_container {
+    .edit_description_container, .file_download {
       border-left: none;
       text-align: center;
       width: 1em;

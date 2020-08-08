@@ -1,30 +1,24 @@
-<div class="row">
-  <div class="span12">
+<div class="row ml-2">
+  <div class="col-12">
     <%= form_for @folder, :html=> { :multipart => true, :class => "form-horizontal"  } do |f| %>
       <%= render 'shared/error_messages', :object => f.object %>
       <fieldset>
-        <div class="control-group">
-          <%= f.label :name, "Folder Name", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :name %>
+        <div class="form-group">
+          <label for="folder_name">Folder Name</label>
+          <%= f.text_field :name, :class => "col-8 col-sm-4 col-md-3 form-control" %>
+        </div>
+        <div class="form-group">
+          <label for="folder_locked">Folder Permissions</label>
+          <div class="form-check">
+            <%= f.radio_button :locked, :true, :class => "form-check-input" %>
+            <label class="form-check-label" for="folder_locked_true"><i class="fa fa-lock"></i> Restricted Folder</label>
+          </div>
+          <div class="form-check">
+            <%= f.radio_button :locked, :false, :class => "form-check-input" %>
+            <label class="form-check-label" for="folder_locked_false"><i class="fa fa-unlock"></i> Unrestricted Folder</label>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label :locked, "Folder Permissions", :class => "control-label" %>
-          <div class="controls">
-            <label>
-              <%= f.radio_button :locked, :true %>
-              <span><i class="fa fa-lock"></i> Restricted Folder</span>
-            </label>
-            <label>
-              <%= f.radio_button :locked, :false %>
-              <span><i class="fa fa-unlock"></i> Unrestricted Folder</span>
-            </label>
-          </div>
-        </div>
-        <div class="actions well">
-          <%= f.submit "Submit", :class => "btn btn-primary" %>
-        </div>
+        <%= f.submit "Submit", :class => "btn btn-primary" %>
       </fieldset>
     <% end %>
   </div>

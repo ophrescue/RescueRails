@@ -1,5 +1,5 @@
 <% if @cat.attachments.empty? %>
-  <span id='no_attachments'><%= @cat.name %> has no documents</span>
+  <span id='no_attachments' class="mb-3"><%= @cat.name %> has no documents</span>
 <% else %>
   <div class="col-12">
     <%= f.fields_for :attachments do |af| %>

@@ -29,17 +29,15 @@ class AdopterSearcher
 
   PHONE_CHECK = /\(?(?<areacode>[1]?[2-9]\d{2})\)?[\s-]?(?<prefix>[2-9]\d{2})[\s-]?(?<linenumber>[\d]{4})/i.freeze
 
-  def initialize(params: {}, user_id: user_id)
+  def initialize(params: {}, user_id:)
     @params = params
     @user_id = user_id
   end
 
   def search
     @adopters = Adopter
-    if @params[:show] == "MyApplications"
+    if user_search?
       @adopters = @adopters.where(assigned_to_user_id: @user_id)
-    elsif @params[:show] == "OpenApplications"
-      @adopters = @adopters.where(assigned_to_user_id: nil)
     end
 
     if @params[:search]
@@ -65,7 +63,7 @@ class AdopterSearcher
     @adopters
   end
 
-  def self.search(params: {}, user_id: user_id)
+  def self.search(params: {}, user_id: nil)
     new(params: params, user_id: user_id).search
   end
 
@@ -123,6 +121,10 @@ class AdopterSearcher
 
   def phone_search?
     @params[:search].match(PHONE_CHECK)
+  end
+
+  def user_search?
+    @user_id == false ? @user_id : true
   end
 
   def format_phone(phone)

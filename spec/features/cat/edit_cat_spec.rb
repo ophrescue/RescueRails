@@ -179,7 +179,7 @@ feature 'edit a cat', js: true do
         fill_in(:cat_flea_tick_preventative, with: 'words')
         fill_in(:cat_dewormer, with: 'duis aute')
         fill_in(:cat_coccidia_treatment, with: 'excepteur sint')
-        fill_in(:cat_microchip, with: '1234abcd')
+        fill_in(:cat_microchip, with: '923456789a')
         fill_in(:cat_original_name, with: 'Snoop Dogg')
         fill_in(:cat_fee, with: '333')
         select(adoption_coordinator.name, from: 'cat_coordinator_id')
@@ -249,7 +249,7 @@ feature 'edit a cat', js: true do
         expect(cat.flea_tick_preventative).to eq 'words'
         expect(cat.dewormer).to eq 'duis aute'
         expect(cat.coccidia_treatment).to eq 'excepteur sint'
-        expect(cat.microchip).to eq '1234abcd'
+        expect(cat.microchip).to eq '923456789a'
         expect(cat.original_name).to eq 'Snoop Dogg'
         expect(cat.fee).to eq 333
         expect(cat.coordinator_id).to eq adoption_coordinator.id
@@ -296,7 +296,7 @@ feature 'edit a cat', js: true do
         expect(page.find('#flea_tick_preventative').text).to eq 'words'
         expect(page.find('#dewormer').text).to eq 'duis aute'
         expect(page.find('#coccidia_treatment').text).to eq 'excepteur sint'
-        expect(page.find('#microchip').text).to eq '1234abcd'
+        expect(page.find('#microchip').text).to eq '923456789a'
         expect(page.find('#original_name').text).to eq 'Snoop Dogg'
         expect(page.find('#fee').text).to eq '$333'
         expect(page.find('#adoption_coordinator').text).to eq adoption_coordinator.name

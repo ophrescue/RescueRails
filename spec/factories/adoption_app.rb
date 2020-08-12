@@ -4,7 +4,9 @@ FactoryBot.define do
     other_household_names { 'other household' }
     ready_to_adopt_dt { Faker::Date.between(from: 2.days.ago, to: Time.zone.today) }
     house_type { 'rent' }
+    building_type { 'Apartment / Condo' }
     dog_exercise { 'will go to the gym' }
+    fenced_yard { false }
     dog_stay_when_away { 'In a crate' }
     dog_vacation { 'dog vacation' }
     current_pets { 'currently have a bunch of dogs' }

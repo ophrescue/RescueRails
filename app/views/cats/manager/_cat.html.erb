@@ -4,7 +4,8 @@
   </div>
 </div>
 <div class='row cat line-2'>
-  <div class='col offset-md-3'>
+<img class='imagepreview offset-md-1' src="<%=cat.primary_photo_url%>" class="figure-img img-fluid rounded" alt="<%=cat.name%> photo">
+  <div class='col offset-md-1'>
     <span><%= size_abbrev(cat.size) %>,</span>
     <span class='age'><%= cat.age ? cat.age.titleize : " " %>,</span>
     <span class='gender'><%= cat.gender %>,</span>

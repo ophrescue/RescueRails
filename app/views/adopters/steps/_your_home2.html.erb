@@ -1,8 +1,42 @@
+  <div class="control-group">
+    <%= af.label :building_type, "What type of home do you live in?", :class => "control-label" %>
+    <div class="controls">
+      <label>
+        <%= af.radio_button :building_type, "Apartment / Condo", :class => "required" %>
+        <span>Apartment / Condo</span>
+      </label>
+      <label>
+        <%= af.radio_button :building_type, "Townhouse", :class => "required" %>
+        <span>Townhouse</span>
+      </label>
+      <label>
+        <%= af.radio_button :building_type, "Single Family", :class => "required" %>
+        <span>Single Family</span>
+      </label>
+      <label>
+        <%= af.radio_button :building_type, "Farm", :class => "required" %>
+        <span>Farm</span>
+      </label>
+    </div>
+  </div>
 <div class="control-group">
   <%= af.label :dog_exercise, "How will your pet get exercise?", :class => "control-label" %>
   <div class="controls">
     <%= af.text_area :dog_exercise, :class => "required input-xlarge", :rows => "3"%>
     <span class="help-inline">Describe yard, nearby parks and family activities.</span>
+  </div>
+</div>
+<div class="control-group">
+  <%= af.label :fenced_yard, "Do you have a fenced yard?", :class => "control-label" %>
+  <div class="controls">
+    <label>
+      <%= af.radio_button :fenced_yard, true, :class => "required" %>
+      <span>Yes</span>
+    </label>
+    <label>
+      <%= af.radio_button :fenced_yard, false, :class => "required" %>
+      <span>No</span>
+    </label>
   </div>
 </div>
 <div class="control-group">

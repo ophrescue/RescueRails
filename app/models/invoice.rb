@@ -54,13 +54,17 @@ class Invoice < ApplicationRecord
 
   def process_payment(donation_amt)
     ActiveRecord::Base.transaction do
+      description_msg = 'Adoption Fee'
+      total_charge = amount
       if (donation_amt > 0)
+        description_msg = 'Adoption Fee and Donation'
+        total_charge = amount + donation_amt
         donation = Donation.new
         donation.name = self.invoiceable.adopter.name
         donation.email = self.invoiceable.adopter.email
         donation.amount = donation_amt
         donation.frequency = 'Once'
-        donation.comment = 'Adoption Fee Roundup'
+        donation.comment = 'Adoption Fee Roundup - Valid'
         donation.save!
         self.has_donation = true
         self.donation_id = donation.id
@@ -74,8 +78,8 @@ class Invoice < ApplicationRecord
                                         card: card_token
 
       Stripe::Charge.create customer: customer.id,
-                            amount: amount * 100,
-                            description: 'Adoption Fee',
+                            amount: total_charge * 100,
+                            description: description_msg,
                             currency: 'usd'
     end
   end

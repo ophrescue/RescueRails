@@ -123,7 +123,7 @@ GEM
     chartkick (3.4.0)
     childprocess (3.0.0)
     chronic (0.10.2)
-    clearance (2.2.1)
+    clearance (2.3.0)
       actionmailer (>= 5.0)
       activemodel (>= 5.0)
       activerecord (>= 5.0)

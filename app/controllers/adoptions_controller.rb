@@ -56,12 +56,8 @@ class AdoptionsController < ApplicationController
   end
 
   def destroy
-    if @adoption.relation_type == 'interested'
-      @adoption.destroy
-      flash[:warning] = 'Dog removed from Application'
-    else
-      flash[:warning] = 'Adoption record cannot be deleted'
-    end
+    @adoption.destroy
+    flash[:success] = 'Dog removed from Application'
   end
 
   private

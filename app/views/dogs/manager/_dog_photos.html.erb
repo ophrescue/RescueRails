@@ -4,17 +4,20 @@
 <div class="col-12" id='photos_sort' data-update-url="<%= sort_photos_url %>">
   <%= f.fields_for :photos do |photo| %>
     <div class='photo row align-items-center' id="photo_<%= photo.object.id %>" data-index=<%= photo.index %>>
-      <div class='col-5'>
-        <i class="fa fa-sort fa-3x sort-handle"></i>
-        <%= image_tag(photo.object.photo.url(:thumb)) %>
+      <div class='col-6 col-sm-4 col-md-3'>
+        <i class="fa fa-sort fa-3x sort-handle w-25"></i>
+        <%= image_tag(photo.object.photo.url(:thumb), :class => "w-50") %>
       </div>
-      <div class='col-2'>
+      <div class="col-2" id=<%= 'dog_photo_timestamp_' + photo.object.id.to_s %>>
+        <%=  photo.object.created_at.strftime("%b %d, %Y %H:%M") %>
+      </div>
+      <div class='col-2 col-md-3'>
         <label>
           <%= photo.check_box :is_private %>
           <span>Private Photo</span>
         </label>
       </div>
-      <div class='col-2'>
+      <div class='col-2 col-md-3'>
         <label>
           <%= photo.check_box :_destroy %>
           <span>Delete Photo</span>

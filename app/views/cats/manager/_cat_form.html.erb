@@ -259,7 +259,7 @@
   <div class='row'>
     <h2 class='col-12'>Photos</h2>
   </div>
-  <div class="row" id='manage_photos'>
+  <div class="row mb-3" id='manage_photos'>
     <%= render_unless @cat.new_record?, partial: 'cat_photos', locals: {f:f} %>
   </div>
   <div class='row'>
@@ -271,7 +271,7 @@
 
 
   <div class='row'>
-    <h2 class='col-12'>Documents</h2>
+    <h2 class='col-12 mt-2'>Documents</h2>
   </div>
   <div class="row" id='manage_attachments'>
     <%= render_unless @cat.new_record?, partial: 'cat_attachments', locals: {f:f} %>
@@ -284,7 +284,7 @@
   </div>
 
   <div class='row'>
-    <h2 class='col-12'>Public Description</h2>
+    <h2 class='col-12 mt-2'>Public Description</h2>
   </div>
   <div class="row form-group ">
     <%= f.text_area :description, class: "required input-xxlarge form-control form-control-sm", rows: "8" %>

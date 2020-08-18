@@ -98,13 +98,13 @@ describe AdopterSearcher do
   end
 
   describe 'display filtered adopters' do
-    let(:adopters_to_display) { AdopterSearcher.search(params: params, user_id: 1) }
     let(:assigned_to_me) { create(:adopter, :with_app, status: 'approved', assigned_to_user_id: 1) }
     let(:assigned_to_other) { create(:adopter, :with_app, status: 'approved', assigned_to_user_id: 2) }
     let(:unassigned_to) { create(:adopter, :with_app, status: 'approved', assigned_to_user_id: nil) }
 
     context 'my apps' do    
       let(:params){{show: "MyApplications"}}
+      let(:adopters_to_display) { AdopterSearcher.search(params: params, user_id: 1) }
       it 'filters by id when my apps is selected' do
         expect(adopters_to_display).to include(assigned_to_me)
         expect(adopters_to_display).to_not include(assigned_to_other)
@@ -114,6 +114,7 @@ describe AdopterSearcher do
 
     context 'open apps' do
       let(:params){{show: "OpenApplications"}}
+      let(:adopters_to_display) { AdopterSearcher.search(params: params, user_id: nil) }
       it 'filters unassigned apps when open apps is selected' do
         expect(adopters_to_display).to include(unassigned_to)
         expect(adopters_to_display).to_not include(assigned_to_me)
@@ -123,6 +124,7 @@ describe AdopterSearcher do
 
     context 'all apps' do
       let(:params){{show: "AllApplications"}}
+      let(:adopters_to_display) { AdopterSearcher.search(params: params, user_id: false) }
       it 'show all active apps when all apps is selected' do
         expect(adopters_to_display).to include(assigned_to_other)
         expect(adopters_to_display).to_not include(unassigned_to)

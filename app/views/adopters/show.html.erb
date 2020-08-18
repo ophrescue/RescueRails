@@ -56,8 +56,10 @@
                   <% end %>
                 </div>
                 <div class="span1">
-                  <%= form_for adp, html: {id: "delete_dog_link", class: "delete_adoption"}, method: :delete do |f| %>
-                    <%= f.submit "X", class: "btn btn-danger btn-small" %>
+                  <% if adp.invoices.blank? %>
+                    <%= form_for adp, html: {id: "delete_dog_link", class: "delete_adoption"}, method: :delete do |f| %>
+                      <%= f.submit "X", class: "btn btn-danger btn-small" %>
+                    <% end %>
                   <% end %>
                 </div>
               <% end %>

@@ -15,8 +15,8 @@ describe "Adoption Requests", type: :request do
     describe "DELETE returned adoption" do
       let!(:adoption_returned) { create(:adoption, relation_type: 'returned')}
       let(:request) { -> { delete adoption_path(adoption_returned.id, as: admin) } }
-      it 'should NOT be deleted' do
-        expect { request.call }.to change(Adoption, :count).by(0)
+      it 'should be deleted' do
+        expect { request.call }.to change(Adoption, :count).by(-1)
       end
     end
 

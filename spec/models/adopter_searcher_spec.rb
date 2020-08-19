@@ -85,6 +85,23 @@ describe AdopterSearcher do
       end
     end
 
+    context 'by name when assigned to a user' do
+      let!(:user) { create(:user)}
+      let!(:assigned_adopter) { create(:adopter, name: 'Frank Jones', assigned_to_user_id: user.id) }
+      let!(:unassigned_adopter) { create(:adopter, name: 'Tom Jones') }
+      let!(:other_assigned_adopter) { create(:adopter, name: 'Tom Finkle, assigned_to_user_id: user.id') }
+      let!(:other_unassigned_adopter) { create(:adopter, name: 'Paul Sanders') }
+      let(:params) { { search: 'jones'} }
+
+      it 'still finds both adopters' do
+        expect(results).to include(assigned_adopter)
+        expect(results).to include(unassigned_adopter)
+        expect(results).to_not include(other_assigned_adopter)
+        expect(results).to_not include(other_unassigned_adopter)
+      end
+    end
+
+
     context 'all adopters' do
       let!(:found_adopter) { create(:adopter, status: 'denied') }
       let!(:other_adopter) { create(:adopter, status: 'new') }
@@ -102,7 +119,7 @@ describe AdopterSearcher do
     let(:assigned_to_other) { create(:adopter, :with_app, status: 'approved', assigned_to_user_id: 2) }
     let(:unassigned_to) { create(:adopter, :with_app, status: 'approved', assigned_to_user_id: nil) }
 
-    context 'my apps' do    
+    context 'my apps' do
       let(:params){{show: "MyApplications"}}
       let(:adopters_to_display) { AdopterSearcher.search(params: params, user_id: 1) }
       it 'filters by id when my apps is selected' do

@@ -52,7 +52,14 @@ class AdoptersController < ApplicationController
 
   def index
     session[:last_search] = request.url
-    @adopters = AdopterSearcher.search(params: params, user_id: current_user.id)
+    if params[:show] == "MyApplications"
+      user_id = current_user.id
+    elsif params[:show] == "OpenApplications"
+      user_id = nil
+    elsif params[:show] == "AllApplications"
+      user_id = false
+    end
+    @adopters = AdopterSearcher.search(params: params, user_id: user_id)
   end
 
   def show

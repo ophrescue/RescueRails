@@ -89,7 +89,7 @@ describe AdopterSearcher do
       let!(:user) { create(:user)}
       let!(:assigned_adopter) { create(:adopter, name: 'Frank Jones', assigned_to_user_id: user.id) }
       let!(:unassigned_adopter) { create(:adopter, name: 'Tom Jones') }
-      let!(:other_assigned_adopter) { create(:adopter, name: 'Tom Finkle, assigned_to_user_id: user.id') }
+      let!(:other_assigned_adopter) { create(:adopter, name: 'Tom Finkle', assigned_to_user_id: user.id) }
       let!(:other_unassigned_adopter) { create(:adopter, name: 'Paul Sanders') }
       let(:params) { { search: 'jones'} }
 

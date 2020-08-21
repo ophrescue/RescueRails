@@ -36,7 +36,6 @@ class AdopterSearcher
 
   def search
     @adopters = Adopter
-
     if @params[:search]
       if email_search?
         clean_email = @params[:search].strip
@@ -52,16 +51,18 @@ class AdopterSearcher
     elsif status_search?
       @adopters = @adopters.where(status: @params[:status])
     end
+    if filter_by_id? and !@params[:search]
+       @user_id == nil ? @adopters = @adopters.where(assigned_to_user_id: nil) : @adopters = @adopters.where(assigned_to_user_id: @user_id)
+    end
 
     with_includes
     with_sorting
     for_page(@params[:page])
-
     @adopters
   end
 
-  def self.search(params: {}, user_id: nil)
-    new(params: params, user_id: user_id).search
+  def self.search(params: {}, user_id:)
+      new(params: params, user_id: user_id).search
   end
 
   private
@@ -118,6 +119,10 @@ class AdopterSearcher
 
   def phone_search?
     @params[:search].match(PHONE_CHECK)
+  end
+
+  def filter_by_id?
+    (@user_id == nil or @user_id.is_a? Numeric) ? true : false
   end
 
   def format_phone(phone)

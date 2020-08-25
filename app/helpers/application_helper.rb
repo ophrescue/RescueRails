@@ -66,6 +66,7 @@ module ApplicationHelper
     css_id = "sort_by_#{column}"
     css_class = column == params[:sort] ? "current #{params[:direction]}" : nil
     direction = column == params[:sort] && params[:direction] == 'asc' ? 'desc' : 'asc'
+    show = params[:show]
     status = params[:status]
     search_term = params[:search]
     is_status = params[:is_status]
@@ -73,7 +74,7 @@ module ApplicationHelper
     is_size = params[:is_size]
     is_breed = params[:is_breed]
     commit = params[:commit]
-    link_to title, { commit: commit, sort: column, direction: direction, status: status, search: search_term, is_size: is_size, is_age: is_age, is_status: is_status, is_breed: is_breed }, { class: css_class, id: css_id }
+    link_to title, { commit: commit, sort: column, direction: direction, status: status, show: show, search: search_term, is_size: is_size, is_age: is_age, is_status: is_status, is_breed: is_breed }, { class: css_class, id: css_id }
   end
 
   def submit_or_return_to(f,return_path)

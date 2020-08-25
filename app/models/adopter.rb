@@ -200,7 +200,7 @@ class Adopter < ApplicationRecord
 
   def training_email
     return unless status_changed?
-    if ((status == 'adopted') || (status == 'adptd sn pend')) && !training_email_sent?
+    if ((status == 'adopted') || (status == 'adptd sn pend')) && !training_email_sent? && dog_or_cat == "Dog"
       TrainingMailer.free_training_notice(id).deliver_later
       self.training_email_sent = true
     end

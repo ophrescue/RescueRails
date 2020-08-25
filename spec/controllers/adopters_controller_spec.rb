@@ -105,12 +105,22 @@ describe AdoptersController, type: :controller do
     end
   end
 
-  describe 'Adopter recept of Training Coupon and followup email' do
+  describe 'Adopter receipt of Training Coupon and followup email' do
     include ActiveJob::TestHelper
     include_context 'signed in admin'
 
+    context 'cat adopter test training email' do
+      let(:adopter) { create(:adopter, :with_app, dog_or_cat: 'Cat', status: 'approved') }
+      it 'cat adopter does not create training email' do
+        ActiveJob::Base.queue_adapter = :test
+        expect do 
+          put :update, params: { id: adopter.id, adopter: { status: 'adopted' } }
+        end.not_to have_enqueued_job.with("TrainingMailer","free_training_notice","deliver_now", adopter.id)
+      end
+    end
+ 
     context 'adopter set to adopted status for the first time' do
-      let(:adopter) { create(:adopter, :with_app, status: 'approved') }
+      let(:adopter) { create(:adopter, :with_app, dog_or_cat: 'Dog', status: 'approved') }
       it 'free training coupon email created' do
         ActiveJob::Base.queue_adapter = :test
         expect do

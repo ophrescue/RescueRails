@@ -21,30 +21,30 @@
         <dd><%= @invoice.invoiceable.adopter.name %></dd>
         <dt>For the adoption of</dt>
         <dd><%= @invoice.invoiceable.animal.name %></dd>
+        <% if @invoice.description.present? %>
+          <dt>Notes</dt>
+          <dd><%= @invoice.description %></dd>
+        <% end%>
       </dl>
     </div>
   </div>
 
 <% if @invoice.open? %>
   <div class="row">
-    <div class="col-sm-6 pt-3">
-      <dl>
-        <dt>Adoption Fees Due<dt>
-        <dd><span id="amtDue"><%= number_to_currency(@invoice.amount) %></span></dd>
-        <% if @invoice.description.present? %>
-        <dd>Notes</dd>
-        </dt><%= @invoice.description %></dt>
-        <% end%>
-      </dl>
-
+    <div class="col-12 pt-3">
         <%= form_for @invoice do |f| %>
           <%= render 'shared/error_messages', :object => f.object %>
-          <div class="form-group">
-              <%= f.label :donation, 'Add an optional donation for community spay and neuter:' %>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">$</div>
-                </div>
+
+          <div class="form-group row">
+            <label for="amtDue" class="col-5 col-form-label">Adoption Fees Due:</label>
+            <div class="col-5">
+              <input type="text" readonly class="form-control" id="amtDue" value="<%= number_to_currency(@invoice.amount) %>">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :donation, 'Add a Donation:', class: "col-5 col-form-label" %>
+              <div class="col-5">
                 <%= f.text_field :donation, class: "form-control", placeholder: "0" %>
               </div>
           </div>
@@ -125,7 +125,7 @@
     console.log('donation amount is '+ donation)
 
 
-    var feesDue = document.getElementById("amtDue").innerText;
+    var feesDue = document.getElementById("amtDue").value;
     feesDue = feesDue.replace(/\$/g, '').replace(/\,/g, '');
     feesDue = parseFloat(feesDue);
     feesDue = feesDue * 100; // Needs to be an integer!

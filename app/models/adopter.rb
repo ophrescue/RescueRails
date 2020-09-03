@@ -156,7 +156,7 @@ class Adopter < ApplicationRecord
       }
     end
 
-    if ((status == 'adopted') || (status == 'adptd sn pend'))
+    if (status == 'adopted' || status == 'adptd sn pend') && adoptions.any?{ |a| a.relation_type == 'adopted' } && dog_or_cat == "Dog"
       completed_date = Time.now.strftime('%m/%d/%Y')
       AdopterFollowupMailer.one_week_followup(id).deliver_later(wait: 7.days)
     else
@@ -177,7 +177,7 @@ class Adopter < ApplicationRecord
   end
 
   def chimp_check
-    return unless status_changed?
+    return unless adoptions.any?{ |a| a.relation_type_changed? }
 
     if (status == 'denied') && is_subscribed?
       chimp_unsubscribe
@@ -199,10 +199,9 @@ class Adopter < ApplicationRecord
   end
 
   def training_email
-    return unless status_changed?
-    if ((status == 'adopted') || (status == 'adptd sn pend')) && !training_email_sent? && dog_or_cat == "Dog"
+    return unless adoptions.any?{ |a| a.relation_type_changed? }
+    if (status == 'adopted' || status == 'adptd sn pend') && adoptions.any?{ |a| a.relation_type == 'adopted' } && dog_or_cat == "Dog"
       TrainingMailer.free_training_notice(id).deliver_later
-      self.training_email_sent = true
     end
   end
 

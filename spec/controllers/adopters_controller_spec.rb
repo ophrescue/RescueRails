@@ -118,12 +118,6 @@ describe AdoptersController, type: :controller do
           adopter.update_attributes(adoptions_attributes: [{ id: adopter.adoptions.first.id, relation_type: 'adopted' }])
         end.not_to have_enqueued_job.with("TrainingMailer","free_training_notice","deliver_now", adopter.id)
       end
-
-      it 'returns proper relation_type' do
-        adopter.update_attributes(adoptions_attributes: [{ id: adopter.adoptions.first.id, relation_type: 'adopted' }])
-        expect(adopter.adoptions.first.relation_type).to eq("adopted")
-      end
-
     end
  
     context 'adopter set to adopted status for the first time' do
@@ -158,6 +152,20 @@ describe AdoptersController, type: :controller do
         mail = ActionMailer::Base.deliveries.last
         expect(mail.to[0]).to eq adopter.email
       end
+    end
+
+  context 'three adoptions, three training emails'
+    let(:adopter) { create(:adopter, :with_app, status: 'adopted', dog_or_cat: 'Dog', adoptions_attributes: [
+      { relation_type: 'interested' }, { relation_type: 'interested' }, { relation_type: 'interested' }]) }
+
+    it 'sends three training coupon emails and three followup emails' do
+      expect do
+        perform_enqueued_jobs do
+          adopter.update_attributes(adoptions_attributes: [{ id: adopter.adoptions.first.id, relation_type: 'adopted' }])
+          adopter.update_attributes(adoptions_attributes: [{ id: adopter.adoptions[1].id, relation_type: 'adopted' }])
+          adopter.update_attributes(adoptions_attributes: [{ id: adopter.adoptions[2].id, relation_type: 'adopted' }])
+        end
+      end.to change { ActionMailer::Base.deliveries.size }.by(6)
     end
   end
 

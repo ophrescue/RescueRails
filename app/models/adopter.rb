@@ -177,7 +177,7 @@ class Adopter < ApplicationRecord
   end
 
   def chimp_check
-    return unless adoptions.any?{ |a| a.relation_type_changed? }
+    return unless status_changed? || adoptions.any?{ |a| a.relation_type_changed? }
 
     if (status == 'denied') && is_subscribed?
       chimp_unsubscribe

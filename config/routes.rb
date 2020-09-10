@@ -2,7 +2,7 @@ STATIC_PAGES = ['5k', 'contact', 'funding-partners', 'community-partners', 'non-
                 'training-partners', 'guide', 'aboutus', 'documentary', 'insurance',
                 'get-involved', 'volunteer', 'foster', 'fosterfaq', 'donate', 'sponsor', 'newsletters',
                 'special-funds', 'other-ways-to-give', 'terms', 'resources', 'tips-for-finding-lost-pets', 'status_definitions',
-                'education-and-outreach','adoption-fee-payments'].freeze
+                'education-and-outreach','adoption-fee-payments','microchip-registration'].freeze
 
 RescueRails::Application.routes.draw do
   get "/adopters/check_email", to: "adopters#check_email"

@@ -71,6 +71,17 @@
           </ul>
       <% end %>
 
+  <% if @dog.medical_review_complete %>
+    <div class="alert alert-success" role="alert">
+    Medical Review Complete
+    </div>
+  <% else %>
+      <div class="alert alert-danger" role="alert">
+      Medical Review NOT complete, this dog cannot go home to an adopter.
+      Email <a href="mailto:meds@ophrescue.org">meds@ophrescue.org</a> to be cleared.
+    </div>
+  <% end %>
+
       <div class="d-none d-sm-block">
         <%= render partial: 'comments_audits', locals: {device:'_large'} %>
       </div>

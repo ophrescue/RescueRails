@@ -120,7 +120,7 @@ describe AdoptersController, type: :controller do
       end
     end
  
-    context 'adopter set to adopted status for the first time' do
+    context 'adoption set to adopted relation_type for the first time' do
       let(:adopter) { create(:adopter, :with_app, status: 'adopted', dog_or_cat: 'Dog', adoptions_attributes: [{ relation_type: 'interested' }]) }
       
       it 'free training coupon email created' do

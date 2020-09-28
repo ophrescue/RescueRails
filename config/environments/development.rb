@@ -45,7 +45,7 @@ Rails.application.configure do
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
-  config.cache_store = :dalli_store
+  config.cache_store = :mem_cache_store
 
   # Setup rack cache
   config.action_dispatch.rack_cache = {

@@ -121,7 +121,7 @@ describe AdoptersController, type: :controller do
     end
  
     context 'adoption set to adopted relation_type for the first time' do
-      let(:adopter) { create(:adopter, :with_app, status: 'adopted', dog_or_cat: 'Dog', adoptions_attributes: [{ relation_type: 'interested' }]) }
+      let(:adopter) { create(:adopter, :with_app, status: 'completed', dog_or_cat: 'Dog', adoptions_attributes: [{ relation_type: 'interested' }]) }
       
       it 'free training coupon email created' do
         ActiveJob::Base.queue_adapter = :test
@@ -155,7 +155,7 @@ describe AdoptersController, type: :controller do
     end
 
   context 'three adoptions, three training emails'
-    let(:adopter) { create(:adopter, :with_app, status: 'adopted', dog_or_cat: 'Dog', adoptions_attributes: [
+    let(:adopter) { create(:adopter, :with_app, status: 'completed', dog_or_cat: 'Dog', adoptions_attributes: [
       { relation_type: 'interested' }, { relation_type: 'interested' }, { relation_type: 'interested' }]) }
 
     it 'sends three training coupon emails and three followup emails' do

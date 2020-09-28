@@ -92,14 +92,6 @@ feature 'add a cat', js: true do
         check(:cat_has_behavior_problem)
         check(:cat_needs_foster)
         fill_in(:cat_craigslist_ad_url, with: 'http://www.example.com/foo')
-        fill_in(:cat_first_shots, with: 'some text')
-        fill_in(:cat_second_shots, with: 'lorem ipsum')
-        fill_in(:cat_third_shots, with: 'blah blah')
-        fill_in(:cat_rabies, with: 'kablooie')
-        fill_in(:cat_felv_fiv_test, with: 'schmutz')
-        fill_in(:cat_flea_tick_preventative, with: 'born in a barn')
-        fill_in(:cat_dewormer, with: 'duis aute')
-        fill_in(:cat_coccidia_treatment, with: 'have a nice day')
         fill_in(:cat_microchip, with: '923456789a')
         fill_in(:cat_original_name, with: 'Snoop Catt')
         fill_in(:cat_fee, with: '333')
@@ -164,14 +156,6 @@ feature 'add a cat', js: true do
         expect(cat.has_behavior_problem).to eq true
         expect(cat.needs_foster).to eq true
         expect(cat.craigslist_ad_url).to eq 'http://www.example.com/foo'
-        expect(cat.first_shots).to eq 'some text'
-        expect(cat.second_shots).to eq 'lorem ipsum'
-        expect(cat.third_shots).to eq 'blah blah'
-        expect(cat.rabies).to eq 'kablooie'
-        expect(cat.felv_fiv_test).to eq 'schmutz'
-        expect(cat.flea_tick_preventative).to eq 'born in a barn'
-        expect(cat.dewormer).to eq 'duis aute'
-        expect(cat.coccidia_treatment).to eq 'have a nice day'
         expect(cat.microchip).to eq '923456789a'
         expect(cat.original_name).to eq 'Snoop Catt'
         expect(cat.fee).to eq 333
@@ -361,7 +345,7 @@ feature 'add a cat', js: true do
     #uniqueness of name validated on server
     context 'user enters invalid attributes --server-side validation' do
       let!(:fido){ create(:cat, name: "Fido") }
-      
+
       context 'when the user adds a cat with a duplicate name' do
         it 'should not save and should notify the user' do
           visit new_cats_manager_path

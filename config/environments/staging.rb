@@ -91,7 +91,7 @@ Rails.application.configure do
   #Force SSL
   config.force_ssl = false
 
-  config.cache_store = :dalli_store
+  config.cache_store = :mem_cache_store
 
   # Setup rack cache
   config.action_dispatch.rack_cache = {

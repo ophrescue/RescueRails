@@ -28,6 +28,7 @@ class Adoption < ApplicationRecord
   belongs_to :dog
   belongs_to :adopter
   has_many :invoices, as: :invoiceable, dependent: :restrict_with_error
+  before_update :training_followup_email
 
 
   AMOUNT_TO_SHOW = ['MyApplications', 'OpenApplications', 'AllApplications']
@@ -40,4 +41,11 @@ class Adoption < ApplicationRecord
     return dog
   end
 
+  def training_followup_email
+    return unless relation_type_changed?
+    if relation_type == 'adopted' && adopter.dog_or_cat == "Dog"
+      TrainingMailer.free_training_notice(adopter.id).deliver_later
+      AdopterFollowupMailer.one_week_followup(adopter.id).deliver_later(wait: 7.days)
+    end
+  end
 end

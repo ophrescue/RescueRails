@@ -106,7 +106,7 @@ class Adopter < ApplicationRecord
   validates_inclusion_of :status, in: STATUSES
 
   before_create :chimp_subscribe
-  before_update :chimp_check, :training_email
+  before_update :chimp_check
   before_save :populate_county
 
   def populate_county
@@ -145,6 +145,11 @@ class Adopter < ApplicationRecord
 
   def chimp_subscribe
     if (status == 'adopted') || (status == 'completed') || (status == 'adptd sn pend')
+      if (status != 'completed')
+        completed_date = Time.now.strftime('%m/%d/%Y')
+      else
+        completed_date = ''
+      end
       interests = {
         adopted_from_oph: true,
         active_application: false
@@ -154,13 +159,6 @@ class Adopter < ApplicationRecord
         adopted_from_oph: false,
         active_application: true
       }
-    end
-
-    if adoptions.any?{ |a| a.relation_type_changed? && a.relation_type == 'adopted' } && dog_or_cat == "Dog"
-      completed_date = Time.now.strftime('%m/%d/%Y')
-      AdopterFollowupMailer.one_week_followup(id).deliver_later(wait: 7.days)
-    else
-      completed_date = ''
     end
 
     merge_vars = {
@@ -177,7 +175,7 @@ class Adopter < ApplicationRecord
   end
 
   def chimp_check
-    return unless status_changed? || adoptions.any?{ |a| a.relation_type_changed? }
+    return unless status_changed?
 
     if (status == 'denied') && is_subscribed?
       chimp_unsubscribe
@@ -195,13 +193,6 @@ class Adopter < ApplicationRecord
     return unless status_changed?
     if (status == 'approved')
       AdoptAppMailer.approved_to_adopt_notice(id).deliver_later
-    end
-  end
-
-  def training_email
-    return unless adoptions.any?{ |a| a.relation_type_changed? }
-    if adoptions.any?{ |a| a.relation_type == 'adopted' } && dog_or_cat == "Dog"
-      TrainingMailer.free_training_notice(id).deliver_later
     end
   end
 

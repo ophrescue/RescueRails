@@ -1,28 +1,31 @@
-<table class="table table-striped table-bordered table-condensed">
-  <tr>
-    <th>Pet Type</th>
-    <% if @adopter.dog_or_cat? %>
-      <td><%= @adopter.dog_or_cat%></td>
-    <% else %>
+<%= form_for @adopter, html: { class: 'form-horizontal edit-pet-choices'} do |f| %>
+  <table class="table table-striped table-bordered table-condensed">
+    <tr>
+      <th>Pet Type</th>
       <td>
-        <%= form_for @adopter, format: :json, html: { class: 'form-horizontal' } do |f| %>
-        <%= f.select :dog_or_cat, options_for_select([['Dog'], ['Cat']]), include_blank: true %>
-        <div id="status-icon" class=""></div>
-        <% end %>
+        <div class="pet-choices-read-only"><%= f.object.dog_or_cat%></div>
+        <div class="pet-choices-editable">
+          <%= f.select :dog_or_cat, options_for_select([['Dog'], ['Cat']], f.object.dog_or_cat), include_blank: true %>
+        </div>
       </td>
-    <% end %>
-  </tr>
-  <tr>
-  <th>Pet Selections</th>
-  <td>
-    <%= form_for @adopter, format: :json, html: { class: 'form-horizontal' } do |f| %>
-      <%= f.text_area :dog_name, rows: 5, cols: 40 %>
-      <div id="status-icon" class=""></div>
-    <% end %>
-  </td>
-  </tr>
-  <tr>
-    <th>Pet Requirements</th>
-    <td><%= @adopter.dog_reqs %></td>
-  </tr>
-</table>
+    </tr>
+    <tr>
+      <th>Pet Selections</th>
+      <td>
+        <div class="pet-choices-read-only"><%= f.object.dog_name %></div>
+        <div class="pet-choices-editable"><%= f.text_area :dog_name, value: f.object.dog_name, rows: 5, cols: 40 %></div>
+      </td>
+    </tr>
+    <tr>
+      <th>Pet Requirements</th>
+      <td>
+        <div class="pet-choices-read-only"><%= f.object.dog_reqs %></div>
+        <div class="pet-choices-editable"><%= f.text_area :dog_reqs, value: f.object.dog_reqs, rows: 4, cols: 40 %></div>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <a id="toggle-edit-pet-choices" class="btn btn-primary">Edit Pet Choices</a>
+    <%= f.submit "Save Pet Choices", class: "btn pet-choices-save", disabled: "disabled" %>
+  </p>
+<% end %>

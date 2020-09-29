@@ -19,7 +19,8 @@ feature 'edit a dog', js: true do
     context 'user not permitted to add dogs' do
       let!(:dog) { create(:dog) }
       let!(:active_user) { create(:user, :admin, add_dogs: false) }
-      let(:disallowed_fields) { ['name','original_name','primary_breed_id', 'secondary_breed_id'] }
+      let(:disallowed_fields) { ['name','original_name','primary_breed_id',
+      'secondary_breed_id'] }
 
       it 'should allow access to all fields except breed fields and status' do
         visit edit_dogs_manager_path(dog)
@@ -59,7 +60,8 @@ feature 'edit a dog', js: true do
     context 'user not permitted to manage_medical_behavior' do
       let!(:dog) { create(:dog) }
       let!(:active_user) { create(:user, :admin, medical_behavior_permission: false ) }
-      let(:disallowed_fields){ ['medical_summary', 'behavior_summary'] }
+      let(:disallowed_fields){ ['medical_summary', 'behavior_summary','first_shots','second_shots','third_shots','rabies','vac_4dx',
+      'bordetella','heartworm_preventative','flea_tick_preventative','dewormer','toltrazuril'] }
 
       it 'should allow access to all fields except medical summary' do
         visit edit_dogs_manager_path(dog)
@@ -79,7 +81,7 @@ feature 'edit a dog', js: true do
     context 'user is fostering the dog' do
       let!(:active_user) { create(:user, :foster) }
       let!(:dog) { create(:dog, foster_id: active_user.id) }
-      let(:disallowed_fields){ %w[tracking_id name original_name fee medical_summary behavior_summary status primary_breed_id secondary_breed_id coordinator_id] }
+      let(:disallowed_fields){ %w[tracking_id name original_name fee medical_summary behavior_summary status primary_breed_id secondary_breed_id coordinator_id first_shots second_shots third_shots rabies vac_4dx bordetella heartworm_preventative flea_tick_preventative dewormer toltrazuril] }
 
       it 'should allow access to limited foster fields' do
         visit edit_dogs_manager_path(dog)
@@ -170,12 +172,6 @@ feature 'edit a dog', js: true do
         check(:dog_has_behavior_problem)
         check(:dog_needs_foster)
         fill_in(:dog_craigslist_ad_url, with: 'http://www.example.com/foo')
-        fill_in(:dog_first_shots, with: 'some text')
-        fill_in(:dog_second_shots, with: 'lorem ipsum')
-        fill_in(:dog_third_shots, with: 'blah blah')
-        fill_in(:dog_rabies, with: 'kablooie')
-        fill_in(:dog_vac_4dx, with: 'schmutz')
-        fill_in(:dog_bordetella, with: 'words')
         fill_in(:dog_microchip, with: '923456789a')
         fill_in(:dog_original_name, with: 'Snoop Dogg')
         fill_in(:dog_fee, with: '333')
@@ -183,12 +179,8 @@ feature 'edit a dog', js: true do
         fill_in(:dog_sponsored_by, with: 'Harry Harker')
         select(shelter.name, from: 'dog_shelter_id')
         fill_in(:dog_medical_summary, with: 'medical words')
-        fill_in(:dog_heartworm_preventative, with: 'have a nice day')
-        fill_in(:dog_flea_tick_preventative, with: 'born in a barn')
         check(:dog_medical_review_complete)
         fill_in(:dog_behavior_summary, with: 'words describing behaviour')
-        fill_in(:dog_dewormer, with: 'duis aute')
-        fill_in(:dog_toltrazuril, with: 'excepteur sint')
 
         # add photos
         click_link('Add a Photo')
@@ -242,12 +234,6 @@ feature 'edit a dog', js: true do
         expect(dog.has_behavior_problem).to eq true
         expect(dog.needs_foster).to eq true
         expect(dog.craigslist_ad_url).to eq 'http://www.example.com/foo'
-        expect(dog.first_shots).to eq 'some text'
-        expect(dog.second_shots).to eq 'lorem ipsum'
-        expect(dog.third_shots).to eq 'blah blah'
-        expect(dog.rabies).to eq 'kablooie'
-        expect(dog.vac_4dx).to eq 'schmutz'
-        expect(dog.bordetella).to eq 'words'
         expect(dog.microchip).to eq '923456789a'
         expect(dog.original_name).to eq 'Snoop Dogg'
         expect(dog.fee).to eq 333
@@ -255,12 +241,8 @@ feature 'edit a dog', js: true do
         expect(dog.sponsored_by).to eq 'Harry Harker'
         expect(dog.shelter_id).to eq shelter.id
         expect(dog.medical_summary).to eq 'medical words'
-        expect(dog.heartworm_preventative).to eq 'have a nice day'
-        expect(dog.flea_tick_preventative).to eq 'born in a barn'
         expect(dog.medical_review_complete).to eq true
         expect(dog.behavior_summary).to eq 'words describing behaviour'
-        expect(dog.dewormer).to eq 'duis aute'
-        expect(dog.toltrazuril).to eq 'excepteur sint'
         expect(dog.photos.length).to eq 2
 
         expect(page_heading).to match 'newname'
@@ -289,12 +271,6 @@ feature 'edit a dog', js: true do
         expect(page.find('#needs_foster')).to have_check_icon
         expect(page.find('#craigslist_ad_url').text).to eq 'Craigslist'
         expect(page.find('#craigslist_ad_url a')['href']).to eq 'http://www.example.com/foo'
-        expect(page.find('#first_shots').text).to eq 'some text'
-        expect(page.find('#second_shots').text).to eq 'lorem ipsum'
-        expect(page.find('#third_shots').text).to eq 'blah blah'
-        expect(page.find('#rabies').text).to eq 'kablooie'
-        expect(page.find('#vac_4dx').text).to eq 'schmutz'
-        expect(page.find('#bordetella').text).to eq 'words'
         expect(page.find('#microchip').text).to eq '923456789a'
         expect(page.find('#original_name').text).to eq 'Snoop Dogg'
         expect(page.find('#fee').text).to eq '$333'
@@ -302,12 +278,8 @@ feature 'edit a dog', js: true do
         expect(page.find('#sponsored_by').text).to eq 'Harry Harker'
         expect(page.find('#shelter').text).to eq shelter.name
         expect(page.find('#medical_summary').text).to eq 'medical words'
-        expect(page.find('#heartworm_preventative').text).to eq 'have a nice day'
-        expect(page.find('#flea_tick_preventative').text).to eq 'born in a barn'
         expect(page.find('#medical_review_complete')).to have_check_icon
         expect(page.find('#behavior_summary').text).to eq 'words describing behaviour'
-        expect(page.find('#dewormer').text).to eq 'duis aute'
-        expect(page.find('#toltrazuril').text).to eq 'excepteur sint'
         expect(page.all('#galleria .galleria-stage .galleria-image img').length).to eq 1
         expect(page.all('#galleria .galleria-thumbnails-container .galleria-image img').length).to eq 2
       end

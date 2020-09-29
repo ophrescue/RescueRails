@@ -214,44 +214,49 @@
 
       <h4>Legacy Vaccine Records</h4>
 
+      <div class="alert alert-info" role="alert">
+        The fields below are read-only and no longer used.  Fosters, please use Treatment Records above.
+      </div>
+
+
       <div class="form-group row">
         <%= f.label :first_shots, "First Shots", class: 'col-form-label col-form-label-sm col-4' %>
-        <%= f.text_field :first_shots, class: 'col-6' %>
+        <%= f.text_field :first_shots, class: 'col-6', disabled: !can_manage_medical_behavior_summaries? %>
       </div>
 
       <div class="form-group row">
         <%= f.label :second_shots, "Second Shots", class: 'col-form-label col-form-label-sm col-4' %>
-        <%= f.text_field :second_shots, class: 'col-6' %>
+        <%= f.text_field :second_shots, class: 'col-6', disabled: !can_manage_medical_behavior_summaries? %>
       </div>
 
       <div class="form-group row">
         <%= f.label :third_shots, "Third Shots", class: 'col-form-label col-form-label-sm col-4' %>
-        <%= f.text_field :third_shots, class: 'col-6' %>
+        <%= f.text_field :third_shots, class: 'col-6', disabled: !can_manage_medical_behavior_summaries? %>
       </div>
 
       <div class="form-group row">
         <%= f.label :rabies, "Rabies", class: 'col-form-label col-form-label-sm col-4' %>
-        <%= f.text_field :rabies, class: 'col-6' %>
+        <%= f.text_field :rabies, class: 'col-6', disabled: !can_manage_medical_behavior_summaries? %>
       </div>
 
       <div class="form-group row">
         <%= f.label :felv_fiv_test, "FELV/FIV Test", class: 'col-form-label col-form-label-sm col-4' %>
-        <%= f.text_field :felv_fiv_test, class: 'col-6' %>
+        <%= f.text_field :felv_fiv_test, class: 'col-6', disabled: !can_manage_medical_behavior_summaries? %>
       </div>
 
       <div class="form-group row">
         <%= f.label :flea_tick_preventative, "Flea/Tick Preventative", class: 'col-form-label col-form-label-sm col-4' %>
-        <%= f.text_field :flea_tick_preventative, class: 'col-6' %>
+        <%= f.text_field :flea_tick_preventative, class: 'col-6', disabled: !can_manage_medical_behavior_summaries? %>
       </div>
 
       <div class="form-group row">
         <%= f.label :dewormer, "Dewormer", class: 'col-form-label col-form-label-sm col-4' %>
-        <%= f.text_field :dewormer, class: 'col-6' %>
+        <%= f.text_field :dewormer, class: 'col-6', disabled: !can_manage_medical_behavior_summaries? %>
       </div>
 
       <div class="form-group row">
         <%= f.label :coccidia_treatment, "Coccidia Treatment", class: 'col-form-label col-form-label-sm col-4' %>
-        <%= f.text_field :coccidia_treatment, class: 'col-6' %>
+        <%= f.text_field :coccidia_treatment, class: 'col-6', disabled: !can_manage_medical_behavior_summaries? %>
       </div>
     </div>
   </div>

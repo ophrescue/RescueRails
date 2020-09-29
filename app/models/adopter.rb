@@ -106,7 +106,7 @@ class Adopter < ApplicationRecord
   validates_inclusion_of :status, in: STATUSES
 
   before_create :chimp_subscribe
-  before_update :chimp_check, :training_followup_email
+  before_update :chimp_check
   before_save :populate_county
 
   def populate_county
@@ -193,14 +193,6 @@ class Adopter < ApplicationRecord
     return unless status_changed?
     if (status == 'approved')
       AdoptAppMailer.approved_to_adopt_notice(id).deliver_later
-    end
-  end
-
-  def training_followup_email
-    return unless adoptions.any?{ |a| a.relation_type_changed? }
-    if adoptions.any?{ |a| a.relation_type == 'adopted' } && dog_or_cat == "Dog"
-      TrainingMailer.free_training_notice(id).deliver_later
-      AdopterFollowupMailer.one_week_followup(id).deliver_later(wait: 7.days)
     end
   end
 

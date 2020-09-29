@@ -59,7 +59,7 @@ feature 'edit a cat', js: true do
     context 'user not permitted to manage_medical_behavior' do
       let!(:cat) { create(:cat) }
       let!(:active_user) { create(:user, :admin, medical_behavior_permission: false ) }
-      let(:disallowed_fields){ ['medical_summary', 'behavior_summary'] }
+      let(:disallowed_fields){ ['medical_summary', 'behavior_summary', 'first_shots','second_shots','third_shots','rabies','felv_fiv_test','flea_tick_preventative','dewormer','coccidia_treatment'] }
 
       it 'should allow access to all fields except medical summary' do
         visit edit_cats_manager_path(cat)
@@ -79,7 +79,7 @@ feature 'edit a cat', js: true do
     context 'user is fostering the cat' do
       let!(:active_user) { create(:user, :foster) }
       let!(:cat) { create(:cat, foster_id: active_user.id) }
-      let(:disallowed_fields){ %w[tracking_id name original_name fee medical_summary behavior_summary status primary_breed_id secondary_breed_id coordinator_id] }
+      let(:disallowed_fields){ %w[tracking_id name original_name fee medical_summary behavior_summary status primary_breed_id secondary_breed_id coordinator_id first_shots second_shots third_shots rabies felv_fiv_test flea_tick_preventative dewormer coccidia_treatment] }
 
       it 'should allow access to limited foster fields' do
         visit edit_cats_manager_path(cat)

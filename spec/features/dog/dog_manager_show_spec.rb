@@ -98,16 +98,6 @@ feature 'visit dog show page', js: true do
       expect(page.find('#available_on_dt').text).to eq 'unknown'
       expect(page.find('#intake_dt').text).to eq 'unknown'
       expect(page.find('#adoption_date').text).to eq 'unknown'
-      expect(page.find('#first_shots')).to have_x_icon
-      expect(page.find('#second_shots')).to have_x_icon
-      expect(page.find('#third_shots')).to have_x_icon
-      expect(page.find('#rabies')).to have_x_icon
-      expect(page.find('#vac_4dx')).to have_x_icon
-      expect(page.find('#bordetella')).to have_x_icon
-      expect(page.find('#heartworm_preventative')).to have_x_icon
-      expect(page.find('#flea_tick_preventative')).to have_x_icon
-      expect(page.find('#dewormer')).to have_x_icon
-      expect(page.find('#toltrazuril')).to have_x_icon
     end
   end
 

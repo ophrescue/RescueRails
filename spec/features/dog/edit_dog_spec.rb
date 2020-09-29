@@ -19,7 +19,8 @@ feature 'edit a dog', js: true do
     context 'user not permitted to add dogs' do
       let!(:dog) { create(:dog) }
       let!(:active_user) { create(:user, :admin, add_dogs: false) }
-      let(:disallowed_fields) { ['name','original_name','primary_breed_id', 'secondary_breed_id'] }
+      let(:disallowed_fields) { ['name','original_name','primary_breed_id',
+      'secondary_breed_id'] }
 
       it 'should allow access to all fields except breed fields and status' do
         visit edit_dogs_manager_path(dog)
@@ -59,7 +60,8 @@ feature 'edit a dog', js: true do
     context 'user not permitted to manage_medical_behavior' do
       let!(:dog) { create(:dog) }
       let!(:active_user) { create(:user, :admin, medical_behavior_permission: false ) }
-      let(:disallowed_fields){ ['medical_summary', 'behavior_summary'] }
+      let(:disallowed_fields){ ['medical_summary', 'behavior_summary','first_shots','second_shots','third_shots','rabies','vac_4dx',
+      'bordetella','heartworm_preventative','flea_tick_preventative','dewormer','toltrazuril'] }
 
       it 'should allow access to all fields except medical summary' do
         visit edit_dogs_manager_path(dog)
@@ -79,7 +81,7 @@ feature 'edit a dog', js: true do
     context 'user is fostering the dog' do
       let!(:active_user) { create(:user, :foster) }
       let!(:dog) { create(:dog, foster_id: active_user.id) }
-      let(:disallowed_fields){ %w[tracking_id name original_name fee medical_summary behavior_summary status primary_breed_id secondary_breed_id coordinator_id] }
+      let(:disallowed_fields){ %w[tracking_id name original_name fee medical_summary behavior_summary status primary_breed_id secondary_breed_id coordinator_id first_shots second_shots third_shots rabies vac_4dx bordetella heartworm_preventative flea_tick_preventative dewormer toltrazuril] }
 
       it 'should allow access to limited foster fields' do
         visit edit_dogs_manager_path(dog)
@@ -239,12 +241,8 @@ feature 'edit a dog', js: true do
         expect(dog.sponsored_by).to eq 'Harry Harker'
         expect(dog.shelter_id).to eq shelter.id
         expect(dog.medical_summary).to eq 'medical words'
-        expect(dog.heartworm_preventative).to eq 'have a nice day'
-        expect(dog.flea_tick_preventative).to eq 'born in a barn'
         expect(dog.medical_review_complete).to eq true
         expect(dog.behavior_summary).to eq 'words describing behaviour'
-        expect(dog.dewormer).to eq 'duis aute'
-        expect(dog.toltrazuril).to eq 'excepteur sint'
         expect(dog.photos.length).to eq 2
 
         expect(page_heading).to match 'newname'

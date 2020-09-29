@@ -26,10 +26,6 @@ $( function() {
       isEditing = !isEditing;
     });
 
-    $('select#adopter_dog_or_cat').on('blur', RescueRails.saveParentForm);
-
-    $('textarea#adopter_cat_name').on('blur', RescueRails.saveParentForm);
-
     var remoteCatSource = function(request, response) {
       $.getJSON('/cats?autocomplete=true&search=' + request.term, function(data) {
         var results = [];
@@ -222,6 +218,28 @@ $( function() {
       }
 
       isInfoEditing = !isInfoEditing;
-    }); 
+    });
+    
+    var isChoicesEditing = false;
+
+    $('#dog').on('click', 'a#toggle-edit-pet-choices', function () {
+      if (isChoicesEditing) {
+        $('form.edit-pet-choices .to-disable').prop("disabled", true);
+        $('.pet-choices-editable').hide();
+        $('.pet-choices-read-only').show();
+        $('a#toggle-edit-pet-choices').addClass('btn-primary').text("Edit Pet Choices");
+        $('input.pet-choices-save').removeClass('btn-primary');
+      } else {
+        $('form.edit-pet-choices :disabled')
+          .removeAttr('disabled')
+          .addClass('to-disable');
+        $('.pet-choices-editable').show();
+        $('.pet-choices-read-only').hide();
+        $('a#toggle-edit-pet-choices').removeClass('btn-primary').text("Cancel");
+        $('input.pet-choices-save').addClass('btn-primary');
+      }
+
+      isChoicesEditing = !isChoicesEditing;
+    });
   }
 });

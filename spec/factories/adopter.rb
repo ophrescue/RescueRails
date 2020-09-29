@@ -21,6 +21,7 @@ FactoryBot.define do
     status { Adopter::STATUSES.sample }
     when_to_call { call_times.sample }
     training_email_sent { false }
+    dog_or_cat { "Cat" }
     dog_reqs { Faker::Lorem.sentence }
     why_adopt { Faker::Lorem.sentence }
     dog_name { Faker::Creature::Dog.name }

@@ -21,7 +21,8 @@ feature 'add a dog', js: true do
 
     context 'user not permitted to manage_medical_behavior' do
       let!(:active_user) { create(:user, :admin, medical_behavior_permission: false ) }
-      let(:disallowed_fields){ ['medical_summary', 'behavior_summary'] }
+      let(:disallowed_fields){ ['medical_summary', 'behavior_summary','first_shots','second_shots','third_shots','rabies','vac_4dx',
+      'bordetella','heartworm_preventative','flea_tick_preventative','dewormer','toltrazuril'] }
 
       it 'should allow access to all fields except medical summary' do
         (all_form_fields - disallowed_fields).each do |field|

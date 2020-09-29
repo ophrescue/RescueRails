@@ -21,7 +21,7 @@ feature 'add a cat', js: true do
 
     context 'user not permitted to manage_medical_behavior' do
       let!(:active_user) { create(:user, :admin, medical_behavior_permission: false ) }
-      let(:disallowed_fields){ ['medical_summary', 'behavior_summary'] }
+      let(:disallowed_fields){ ['medical_summary', 'behavior_summary','first_shots','second_shots','third_shots','rabies','felv_fiv_test','flea_tick_preventative','dewormer','coccidia_treatment'] }
 
       it 'should allow access to all fields except medical summary' do
         (all_form_fields - disallowed_fields).each do |field|

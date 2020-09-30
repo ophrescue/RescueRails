@@ -70,6 +70,7 @@ class AdoptionAppController < ApplicationController
               :shot_bordetella,
               :shot_heartworm,
               :shot_flea_tick,
+              household_ages: [],
               attachments_attributes:
               [
                 :attachment,

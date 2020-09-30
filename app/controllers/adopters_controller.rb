@@ -200,7 +200,8 @@ class AdoptersController < ApplicationController
                                       :shot_rabies,
                                       :shot_bordetella,
                                       :shot_heartworm,
-                                      :shot_flea_tick
+                                      :shot_flea_tick,
+                                      household_ages: []
                                     ],
                                     references_attributes:
                                     [

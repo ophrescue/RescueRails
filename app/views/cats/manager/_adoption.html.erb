@@ -11,6 +11,11 @@
             <% if inv.paid? %>
                 <li>Invoice Paid <%= inv.paid_at.strftime('%m/%d/%Y') %></li>
             <% end %>
+            <% if inv.contract_received_at? %>
+                <li>Contract Received <%= inv.contract_received_at.strftime('%m/%d/%Y') %></li>
+            <% else %>
+                <li>Contract Has Not Been Received</li>
+            <% end %>
         <% end %>
         </ul>
     <% end %>

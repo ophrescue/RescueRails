@@ -66,6 +66,12 @@ RescueRails::Application.routes.draw do
             :treatments,
             :invoices
 
+  resources :invoices do
+    member do
+      post :record_contract
+    end
+  end
+
   resources :adoptions do
     resources :invoices
   end

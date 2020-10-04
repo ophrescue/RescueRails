@@ -14,6 +14,23 @@
         <% end %>
     </div>
   </div>
+  <% if signed_in? %>
+  <div class="row">
+    <div class="col-12 pt-3">
+      <% if @invoice.contract_received_at.nil? %>
+        <div class="alert alert-danger" role="alert">
+          <p>Contract has not been received by OPH</p>
+          <%= button_to "Record Contract Receipt", {action: "record_contract", remote: true}, {class: 'btn btn-primary'} if is_admin? %>
+        </div>
+      <% else %>
+        <div class="alert alert-success" role="alert">
+          <p>Contract Received <%= @invoice.contract_received_at.try(:strftime, "%m/%d/%Y at %l:%M:%S %p")  %> by <%= @invoice.audits.last.user.name   %></p>
+          <%= button_to "Delete Contract Receipt", {action: "record_contract", remote: true}, {class: 'btn btn-danger'} if is_admin?  %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
   <div class="row">
     <div class="col-sm-3 pt-3">
       <dl>

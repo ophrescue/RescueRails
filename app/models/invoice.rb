@@ -34,6 +34,7 @@
 #
 
 class Invoice < ApplicationRecord
+  audited only: :contract_received_at
   extend FriendlyId
   include ClientValidated
 

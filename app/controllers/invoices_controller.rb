@@ -21,6 +21,7 @@ class InvoicesController < ApplicationController
   before_action :select_bootstrap41
   before_action :show_user_navbar, except: %i[show update]
   before_action :edit_my_adopters_user, only: %i(index create edit destroy)
+  before_action :admin_user, only: :contract_received_at
 
   def new
     load_invoiceable
@@ -80,6 +81,25 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def record_contract
+    @invoice = Invoice.friendly.find(params[:id])
+    if @invoice.contract_received_at.nil?
+      @invoice.contract_received_at = Time.now
+
+    else
+      @invoice.contract_received_at = nil
+
+    end
+    if @invoice.save!
+      flash[:success] = "Contract status updated, notifications sent"
+      contract_notification(@invoice)
+      redirect_to invoice_path(@invoice)
+    else
+      flash.now[:error] = "Invoice could not be saved"
+      redirect_to invoice_path(@invoice)
+    end
+  end
+
   def index
     @invoices = Invoice.order(created_at: :desc).paginate(page: params[:page], per_page: format_for_page)
   end
@@ -113,8 +133,20 @@ class InvoicesController < ApplicationController
     @invoiceable = resource.singularize.classify.constantize.find(id)
   end
 
+  def contract_notification(invoice)
+    if invoice.contract_received_at
+      InvoiceMailer.contract_added(invoice.id).deliver_later
+    else
+      InvoiceMailer.contract_removed(invoice.id).deliver_later
+    end
+  end
+
   def edit_my_adopters_user
     redirect_to(root_path) unless current_user.edit_my_adopters? || current_user.edit_all_adopters?
+  end
+
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
   end
 
 end

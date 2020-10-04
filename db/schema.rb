@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_192359) do
+ActiveRecord::Schema.define(version: 2020_10_03_183353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -445,6 +445,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_192359) do
     t.datetime "updated_at", null: false
     t.bigint "donation_id"
     t.boolean "has_donation", default: false, null: false
+    t.datetime "contract_received_at"
     t.index ["donation_id"], name: "index_invoices_on_donation_id"
     t.index ["slug"], name: "index_invoices_on_slug", unique: true
     t.index ["user_id"], name: "index_invoices_on_user_id"

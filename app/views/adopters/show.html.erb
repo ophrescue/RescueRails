@@ -49,7 +49,7 @@
                   <% end %>
                   <% if adp.invoices.present? %>
                     <% adp.invoices.find_each do |inv| %>
-                    <i class="icon-file"></i><%= link_to "Adoption Invoice for #{adp.dog.name}", invoice_path(inv) %> - <%= inv.status %> <%= inv.paid_at.strftime("%m/%d/%Y") unless inv.paid_at.blank? %> - contract <%= "not " unless inv.contract_received_at %> recevied <%= inv.contract_received_at.strftime("%m/%d/%Y") unless inv.contract_received_at.blank? %>
+                    <i class="icon-file"></i><%= link_to "Adoption Invoice for #{adp.dog.name}", invoice_path(inv) %> - <%= inv.status %> <%= inv.paid_at.strftime("%m/%d/%Y") unless inv.paid_at.blank? %> - contract <%= "not " unless inv.contract_received_at %> received <%= inv.contract_received_at.strftime("%m/%d/%Y") unless inv.contract_received_at.blank? %>
                     <% end %>
                   <% else %>
                     <%= link_to "Create Invoice for #{adp.dog.name}", new_adoption_invoice_path(adp), class: "btn btn-small" %>
@@ -82,7 +82,7 @@
                   <% end %>
                   <% if adp_cat.invoices.present? %>
                     <% adp_cat.invoices.find_each do |inv| %>
-                      <i class="icon-file"></i><%= link_to "Adoption Invoice for #{adp_cat.cat.name}", invoice_path(inv) %> - <%= inv.status %> <%= inv.paid_at.strftime("%m/%d/%Y") unless inv.paid_at.blank? %> - contract <%= "not " unless inv.contract_received_at %> recevied <%= inv.contract_received_at.strftime("%m/%d/%Y") unless inv.contract_received_at.blank? %>
+                      <i class="icon-file"></i><%= link_to "Adoption Invoice for #{adp_cat.cat.name}", invoice_path(inv) %> - <%= inv.status %> <%= inv.paid_at.strftime("%m/%d/%Y") unless inv.paid_at.blank? %> - contract <%= "not " unless inv.contract_received_at %> received <%= inv.contract_received_at.strftime("%m/%d/%Y") unless inv.contract_received_at.blank? %>
                     <% end %>
                   <% else %>
                     <%= link_to "Create Invoice for #{adp_cat.cat.name}", new_cat_adoption_invoice_path(adp_cat), class: "btn btn-small" %>

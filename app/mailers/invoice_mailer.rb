@@ -31,5 +31,31 @@ class InvoiceMailer < ActionMailer::Base
       content_type: 'text/html')
   end
 
+  def contract_added(invoice_id)
+    @invoice = Invoice.find(invoice_id)
+    @notify = []
+    @notify.push(@invoice.invoiceable.animal.foster.email) unless @invoice.invoiceable.animal.foster.nil?
+    # Sends notification to assigned adoption coordinator
+    @notify.push(@invoice.invoiceable.adopter.user.email) unless @invoice.invoiceable.adopter.user.nil?
+
+    mail(to: @invoice.invoiceable.adopter.email,
+        cc: @notify,
+        subject: "Adoption Contract Added #{@invoice.invoiceable.adopter.name}",
+        content_type: 'text/html')
+  end
+
+  def contract_removed(invoice_id)
+    @invoice = Invoice.find(invoice_id)
+    @notify = []
+    @notify.push(@invoice.invoiceable.animal.foster.email) unless @invoice.invoiceable.animal.foster.nil?
+    # Sends notification to assigned adoption coordinator
+    @notify.push(@invoice.invoiceable.adopter.user.email) unless @invoice.invoiceable.adopter.user.nil?
+
+    mail(to: @invoice.invoiceable.adopter.email,
+        cc: @notify,
+        subject: "Important Adoption Contract Update #{@invoice.invoiceable.adopter.name}",
+        content_type: 'text/html')
+  end
+
 
 end

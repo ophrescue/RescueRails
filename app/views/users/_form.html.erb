@@ -177,6 +177,19 @@
         </div>
       <% end %>
 
+      <div class="form-group">
+        <label for="user_insurance_training_agreement">Insurance Training Verification</label>
+        <div class="controls">
+          <%= f.fields_for :insurance_training_agreement do |af| %>
+            <% if af.object.persisted? %>
+              <span>Insurance Training Completed</span>
+            <% else %>
+              <%= af.file_field :attachment, class: "form-control-file" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
       <fieldset class="form-group">
         <div class="row">
           <legend class="col-form-label col-sm-3 pt-0">Do you rent or own your home?</legend>

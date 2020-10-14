@@ -126,7 +126,7 @@
             <% else %>
               <p>No Mentor Assigned</p>
             <% end %>
-            
+
             <% if @user.is_foster? %>
               <p><span class="badge badge-success">Listed as Foster</span></p>
             <% else %>
@@ -164,6 +164,15 @@
               </p>
             <% else %>
               <p><span class="badge badge-warning">No Code of Conduct Agreement on File</span></p>
+            <% end %>
+
+            <% if @user.insurance_training_agreement %>
+              <p>
+                <span class="badge badge-success">Insurance Training Completed</span>
+                <%= link_to @user.insurance_training_agreement.attachment_file_name, @user.insurance_training_agreement.download_url, id: "insurance-training-agreement-dl" %>
+              </p>
+            <% else %>
+              <p><span class="badge badge-warning">Insurance Training Incomplete</span></p>
             <% end %>
 
             <% if @user.house_type == "own" %>

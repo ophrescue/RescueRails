@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_03_183353) do
+ActiveRecord::Schema.define(version: 2020_10_14_212102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -593,6 +593,7 @@ ActiveRecord::Schema.define(version: 2020_10_03_183353) do
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.boolean "has_children", default: false
+    t.integer "insurance_training_agreement_id"
     t.index ["agreement_id"], name: "index_users_on_agreement_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"

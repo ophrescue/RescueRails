@@ -136,6 +136,10 @@ class User < ApplicationRecord
           as: :attachable, class_name: 'Attachment', dependent: :destroy
   accepts_nested_attributes_for :code_of_conduct_agreement
 
+  has_one :insurance_training_agreement, -> { where(agreement_type: Attachment::AGREEMENT_TYPE_INSURANCE_TRAINING) },
+          as: :attachable, class_name: 'Attachment', dependent: :destroy
+  accepts_nested_attributes_for :insurance_training_agreement
+
   has_many :assignments, class_name: 'Adopter', foreign_key: 'assigned_to_user_id'
   has_many :active_applications, -> { where(status: ['new', 'pend response', 'workup', 'ready for final', 'approved']) }, class_name: 'Adopter', foreign_key: 'assigned_to_user_id'
   belongs_to :mentor, class_name: 'User', foreign_key: 'mentor_id'

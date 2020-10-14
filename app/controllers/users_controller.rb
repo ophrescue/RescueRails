@@ -235,6 +235,12 @@ class UsersController < Clearance::UsersController
                   :description,
                   :updated_by_user_id,
                   :id
+                ],
+                insurance_training_agreement_attributes: [
+                  :attachment,
+                  :description,
+                  :updated_by_user_id,
+                  :id
                 ])
     else
       params.require(:user)
@@ -266,7 +272,13 @@ class UsersController < Clearance::UsersController
                 :mentor_id,
                 :translator,
                 :known_languages,
-                :avatar)
+                :avatar,
+                insurance_training_agreement_attributes: [
+                  :attachment,
+                  :description,
+                  :updated_by_user_id,
+                  :id
+                ])
     end
   end
 
@@ -274,6 +286,7 @@ class UsersController < Clearance::UsersController
     @user.build_agreement unless @user.agreement
     @user.build_confidentiality_agreement unless @user.confidentiality_agreement
     @user.build_code_of_conduct_agreement unless @user.code_of_conduct_agreement
+    @user.build_insurance_training_agreement unless @user.insurance_training_agreement
     @foster_users = User.where(locked: false).order("name")
   end
 

@@ -144,11 +144,19 @@ class Adopter < ApplicationRecord
   end
 
   def chimp_subscribe
+    # TODO refactor logic
     if (status == 'adopted') || (status == 'completed') || (status == 'adptd sn pend')
       if (status != 'completed')
-        completed_date = Time.now.strftime('%m/%d/%Y')
+        merge_vars = {
+          'FNAME' => name,
+          'MMERGE2' => status,
+          'MMERGE3' => Time.now.strftime('%m/%d/%Y')  # sets completed_date
+        }
       else
-        completed_date = ''
+        merge_vars = {
+          'FNAME' => name,
+          'MMERGE2' => status
+        }
       end
       interests = {
         adopted_from_oph: true,
@@ -161,11 +169,6 @@ class Adopter < ApplicationRecord
       }
     end
 
-    merge_vars = {
-      'FNAME' => name,
-      'MMERGE2' => status,
-      'MMERGE3' => completed_date
-    }
     AdopterSubscribeJob.perform_later(email, merge_vars, interests)
     self.is_subscribed = true
   end

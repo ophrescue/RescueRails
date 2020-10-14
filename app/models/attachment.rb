@@ -70,6 +70,7 @@ class Attachment < ApplicationRecord
   AGREEMENT_TYPE_FOSTER = 'foster'
   AGREEMENT_TYPE_CONFIDENTIALITY = 'confidentiality'
   AGREEMENT_TYPE_CODE_OF_CONDUCT = 'code of conduct'
+  AGREEMENT_TYPE_INSURANCE_TRAINING = 'insurance training'
 
   def download_url(style_name = :original)
     attachment.expiring_url(3600, style_name)

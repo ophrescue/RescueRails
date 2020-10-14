@@ -8,6 +8,29 @@ feature 'Attach an agreement to a user', js: true do
     allow_any_instance_of(Attachment).to receive(:download_url).and_return('http://')
   end
 
+  scenario 'User attaches insurance training agreement to their profile' do
+    sign_in_as(user)
+
+    visit '/users'
+    expect(page).to have_content('Staff Directory')
+
+    click_link(user.name)
+    expect(page).to have_content(user.name)
+    expect(page).to have_content('Insurance Training Incomplete')
+
+    click_link('Update/Verify Profile')
+    expect(page).to have_content('Edit Staff Account')
+
+    page.attach_file('user_insurance_training_agreement_attributes_attachment', Rails.root.join("public", "docs", "Puppy-rescue-letter.pdf"))
+    click_button('Update / Verify')
+
+    expect(page).to have_no_css('#confidentiality-agreement-dl')
+    expect(page).to have_no_css('#foster-agreement-dl')
+    within('#insurance-training-agreement-dl') do
+      expect(page).to have_content 'Puppy-rescue-letter'
+    end
+  end
+
   scenario 'Admin attaches a foster agreement to a user', exclude_ie: true do
     sign_in_as_admin
 

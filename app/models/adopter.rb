@@ -106,7 +106,7 @@ class Adopter < ApplicationRecord
   validates_inclusion_of :status, in: STATUSES
 
   before_create :chimp_subscribe
-  before_update :chimp_check
+  before_update :chimp_check, :approved_notification
   before_save :populate_county
 
   def populate_county
@@ -144,19 +144,14 @@ class Adopter < ApplicationRecord
   end
 
   def chimp_subscribe
-    # TODO refactor logic
+    merge_vars = {
+      'FNAME' => name,
+      'MMERGE2' => status
+    }
     if (status == 'adopted') || (status == 'completed') || (status == 'adptd sn pend')
       if (status != 'completed')
-        merge_vars = {
-          'FNAME' => name,
-          'MMERGE2' => status,
-          'MMERGE3' => Time.now.strftime('%m/%d/%Y')  # sets completed_date
-        }
-      else
-        merge_vars = {
-          'FNAME' => name,
-          'MMERGE2' => status
-        }
+        completed_date = Time.now.strftime('%m/%d/%Y')
+        merge_vars[:MMERGE3] = completed_date
       end
       interests = {
         adopted_from_oph: true,

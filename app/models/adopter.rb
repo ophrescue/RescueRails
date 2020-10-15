@@ -190,7 +190,7 @@ class Adopter < ApplicationRecord
   def approved_notification
     return unless status_changed?
     if (status == 'approved')
-      AdoptAppMailer.approved_to_adopt_notice(id).deliver_later
+      AdoptAppMailer.approved_to_adopt(id).deliver_later
     end
   end
 

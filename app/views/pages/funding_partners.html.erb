@@ -32,12 +32,32 @@
         <h3>$5,000 - $9,999</h3>
       </div>
     </div>
+      <% sponsors_5000 =
+          {
+            url: "http://cordish.com",
+            img: "cordish.jpg",
+            alt: "The Cordish Companies"
+          },
+          {
+            url: "https://ophfriendsfamilyprogram.weebly.com/",
+            img: "linda-wolf-homes.jpg",
+            alt: "Wolf Real Estate"
+          }
+        %>
     <div class="album">
       <div class="container">
-        <div class="row">
-          <a target="_blank" href="http://cordish.com">
-            <%= image_tag("sponsors/cordish.jpg", class: "img-fluid", alt: "The Cordish Companies") %>
-          </a>
+        <div class="row align-items-center">
+          <% sponsors_5000.each_slice(3) do |slice| %>
+              <% slice.each do |spon| %>
+              <div class="col md-4 mx-auto">
+                <div class="card mb-4 border-0">
+                  <a target="_blank" href="<%= spon[:url] %>">
+                    <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt])%>
+                  </a>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -141,11 +161,6 @@
             url: "#",
             img: "libera_family.png",
             alt: "The Libera Family"
-          },
-          {
-            url: "#",
-            img: "linda-wolf-homes.jpg",
-            alt: "Wolf Real Estate"
           },
           {
             url: "#",

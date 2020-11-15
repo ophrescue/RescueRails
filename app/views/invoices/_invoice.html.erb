@@ -8,6 +8,10 @@
             <%= link_to invoice.invoiceable.adopter.name, invoice.invoiceable.adopter %>
         <% end %>
     </td>
-    <td><%= link_to invoice.invoiceable.animal.name, invoice.invoiceable.animal %></td>
+    <td>
+        <% if invoice.invoiceable %>
+            <%= link_to invoice.invoiceable.animal.name, invoice.invoiceable.animal %>
+        <% end %>
+    </td>
     <td><%= number_to_currency(invoice.amount) %></td>
 </tr>

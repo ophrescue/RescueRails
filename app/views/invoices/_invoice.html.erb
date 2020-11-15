@@ -3,7 +3,11 @@
     <td><%= invoice.created_at.strftime('%m/%d/%Y') %></td>
     <td><%= invoice.status %></td>
     <td><%= invoice.paid_at.strftime('%m/%d/%Y') unless invoice.paid_at.blank? %></td>
-    <td><%= link_to invoice.invoiceable.adopter.name, invoice.invoiceable.adopter %></td>
+    <td>
+        <%= if invoice.invoiceable.adopter.present? %>
+            <%= link_to invoice.invoiceable.adopter.name, invoice.invoiceable.adopter %>
+        <% end %>
+    </td>
     <td><%= link_to invoice.invoiceable.animal.name, invoice.invoiceable.animal %></td>
     <td><%= number_to_currency(invoice.amount) %></td>
 </tr>

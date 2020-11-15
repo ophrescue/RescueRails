@@ -4,7 +4,7 @@
     <td><%= invoice.status %></td>
     <td><%= invoice.paid_at.strftime('%m/%d/%Y') unless invoice.paid_at.blank? %></td>
     <td>
-        <% if invoice.invoiceable.adopter %>
+        <% if invoice.invoiceable %>
             <%= link_to invoice.invoiceable.adopter.name, invoice.invoiceable.adopter %>
         <% end %>
     </td>

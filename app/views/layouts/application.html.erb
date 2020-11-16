@@ -67,7 +67,7 @@
   <% if @hide_topbar.nil? %>
     <% if @bootstrap41 %>
       <%= render 'layouts/topbar_bs41' %>
-      <% if @show_user_topbar %>
+      <% if signed_in?  %>
         <%= render 'layouts/topbar_user_bs41' %>
       <% end %>
     <% else %>

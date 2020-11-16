@@ -225,7 +225,7 @@ class User < ApplicationRecord
   end
 
   def out_of_date?
-    lastverified.blank? || (lastverified.to_date < 30.days.ago.to_date)
+    lastverified.blank? || (lastverified.to_date < 120.days.ago.to_date)
   end
 
   def chimp_subscribe

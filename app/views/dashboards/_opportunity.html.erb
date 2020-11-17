@@ -1,5 +1,6 @@
 <li class="media">
-    <div class="media-body border-bottom border-gray pb-1 mb-3">
+    <div class="media-body pb-1 mb-3">
     <h5 class="mt-0 mb-1"><%= link_to(opportunity.title.titleize, opportunity) %></h5>
+    <p class="small text-muted">Posted by <%= opportunity.user.name.titleize %> <%= time_ago_in_words(opportunity.created_at) %> ago.</p>
     </div>
 </li>

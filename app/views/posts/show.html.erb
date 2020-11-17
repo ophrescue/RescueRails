@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col">
-      <p class="small text-muted">Posted by <%= @post.user.name.titleize %> <%= time_ago_in_words(@post.created_at) %> ago.
+      <p class="small text-muted">Posted by <%= @post.user.name.titleize %> <%= time_ago_in_words(@post.created_at) %> ago.</p>
       <div>
         <%= raw sanitize @post.content, tags: Post::VALID_TAGS, attributes: Post::VALID_ATTRIBUTES %>
       </div>

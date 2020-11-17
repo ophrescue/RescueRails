@@ -223,8 +223,8 @@ describe User do
       end
     end
 
-    context 'user was last_verified over 30 days ago' do
-      let(:user) { create(:user, lastverified: 31.days.ago) }
+    context 'user was last_verified over 120 days ago' do
+      let(:user) { create(:user, lastverified: 121.days.ago) }
 
       it 'returns true' do
         expect(user.out_of_date?).to eq(true)

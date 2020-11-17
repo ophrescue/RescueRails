@@ -1,4 +1,14 @@
 <main role="main" class="container">
+    <div class="row highlight rounded">
+        <div class="col-md-6 text-center py-2">
+            <a href="/newsletters" class="btn btn-large btn-info">Volunteer Newsletters</a>
+        </div>
+        <div class="col-md-6 text-center py-2">
+            <% if @contacts_id.present? %>
+                <%= link_to "OPH Contact List", info_path(@contacts_id), class: 'btn btn-large btn-info' %>
+            <% end %>
+        </div>
+    </div>
     <div class="row">
         <div clas="col-md">
             <div class="pl-3">
@@ -13,7 +23,6 @@
             <a href="https://www.youtube.com/user/RescueOPH" target="_blank" rel="noopener"><i class="fa fa-youtube fa-3x"></i></a>
         </div>
     </div>
-
     <div class="row my-2">
         <div class="col-md dashboard-posts">
             <h4 class="border-bottom border-gray">Bulletins</h4>
@@ -26,17 +35,6 @@
                 <% end %>
                 <%= link_to 'All Bulletins', bulletins_path %>
             </small>
-        </div>
-    </div>
-
-    <div class="row highlight rounded">
-        <div class="col-md-6 text-center py-2">
-            <a href="/newsletters" class="btn btn-large btn-info">Volunteer Newsletters</a>
-        </div>
-        <div class="col-md-6 text-center py-2">
-            <% if @contacts_id.present? %>
-                <%= link_to "OPH Contact List", info_path(@contacts_id), class: 'btn btn-large btn-info' %>
-            <% end %>
         </div>
     </div>
 

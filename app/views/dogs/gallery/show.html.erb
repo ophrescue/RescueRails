@@ -30,12 +30,6 @@
     </div>
   </div>
 
-  <div class="row profile">
-    <div class="col">
-      <%= some_details(@dog) %>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-12 col-sm-8">
       <div id="galleria"></div>
@@ -73,6 +67,12 @@
       <div id="dogDescription" >
         <%= simple_format(@dog.description) %>
       </div>
+    </div>
+  </div>
+
+  <div class="row profile">
+    <div class="col">
+      <%= some_details(@dog) %>
     </div>
   </div>
 

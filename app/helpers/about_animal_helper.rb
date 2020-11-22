@@ -35,7 +35,7 @@ module AboutAnimalHelper
 
   def up_to_date_on_shots
     not_yet = not_yet(@animal.is_uptodateonshots)
-    "is #{not_yet} up-to-date on #{posessive_pronoun} shots"
+    "is #{not_yet} up-to-date on #{posessive_pronoun} vaccinations"
   end
 
   def not_yet(is_true)

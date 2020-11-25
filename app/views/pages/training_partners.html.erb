@@ -1,5 +1,14 @@
 <%
 
+  dc_trainers = [{
+    name: 'Positive Dog Solutions',
+    logo: 'sponsors/positive-dog-solutions.png',
+    website: 'https://www.positivedogsolutions.com/',
+    phone: '202-630-0249',
+    email: 'info@positivedogsolutions.com',
+    session_type: 'Virtual and in-person one on one sessions.'
+  }]
+
   md_trainers =
     {
     name: 'Calvert Dog Academy',
@@ -9,7 +18,7 @@
     website: 'https://calvertdogacademy.com/',
     phone: '443-295-3698',
     email: 'elizabeth@CalvertDogAcademy.com',
-    session_type: '1-hour private lesson at Calvert Dog Academy. Please schedule 1-2 weeks in advance.',
+    session_type: '1-hour private lesson at Calvert Dog Academy. Please schedule 1-2 weeks in advance.'
  },
   {
     name: 'Creekside Canine Training',
@@ -281,6 +290,9 @@ I believe any dog can be trained, no matter what behavioral problems they\'re ha
             <li class="nav-item">
               <a class="nav-link" id="va-tab" data-toggle="tab" href="#va" role="tab" aria-controls="va" aria-selected="false">Virginia</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" id="dc-tab" data-toggle="tab" href="#dc" role="tab" aria-controls="dc" aria-selected="false">Washington DC</a>
+            </li>
           </ul>
         </div>
         <div class="card-body">
@@ -307,6 +319,60 @@ I believe any dog can be trained, no matter what behavioral problems they\'re ha
                       <li>
                         <strong>Company Address:</strong> <%= trainer[:company_address] %>
                       </li>
+                      <% if trainer[:training_address] %>
+                        <strong>Training Address:</strong> <%= trainer[:training_address] %>
+                      <% end %>
+                      <% if trainer[:website] %>
+                      <li>
+                        <strong>Website:</strong> <a href="<%= trainer[:website] %>"><%=trainer[:website] %></a>
+                      </li>
+                      <% end %>
+                      <li>
+                        <strong>Phone:</strong> <%= trainer[:phone] %>
+                      </li>
+                      <li>
+                        <strong>Email:</strong> <a href="mailto:<%= trainer[:email] %>"><%=trainer[:email] %></a>
+                      </li>
+                      <% if trainer[:membership] %>
+                      <li>
+                        <strong>Membership:</strong> <%= trainer[:membership] %>
+                      </li>
+                      <% end %>
+                      <% if trainer[:experience] %>
+                      <li>
+                        <strong>Experience:</strong> <%= trainer[:experience] %>
+                      </li>
+                      <% end %>
+                      <li>
+                        <strong>Session Type:</strong> <%= trainer[:session_type] %>
+                      </li>
+                    </ul>
+                    <% if trainer[:quote] %>
+                      <p><em>"<%= trainer[:quote] %></em>"</p>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <div class="tab-pane fade" id="dc" role="tabpanel" aria-labelledby="dc-tab">
+              <h2></a>Washington DC</h2>
+
+              <% dc_trainers.each do |trainer| %>
+
+                <h4><%= trainer[:name] %></h4>
+                <div class="media", style="overflow-y: auto;">
+                  <% unless trainer[:logo] == 'white-50x50.gif' %>
+                      <a target="_blank" href="<%= trainer[:website] %>">
+                          <%= image_tag(trainer[:logo], alt: trainer[:name], class: "mb-3 mt-3") %>
+                      </a>
+                  <% end%>
+                  <div class="media-body mb-3 mt-3">
+                    <ul class="unstyled">
+                      <% if trainer[:contact] %>
+                      <li>
+                        <strong>Contact:</strong> <%= trainer[:contact] %>
+                      </li>
+                      <% end %>
                       <% if trainer[:training_address] %>
                         <strong>Training Address:</strong> <%= trainer[:training_address] %>
                       <% end %>

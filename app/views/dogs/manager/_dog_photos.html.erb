@@ -9,7 +9,7 @@
         <%= image_tag(photo.object.photo.url(:thumb), :class => "w-50") %>
       </div>
       <div class="col-2" id=<%= 'dog_photo_timestamp_' + photo.object.id.to_s %>>
-        <%=  photo.object.created_at.strftime("%b %d, %Y %H:%M") %>
+        <%=  photo.object.created_at.strftime("%b %d, %Y %H:%M") unless photo.object.created_at.nil? %>
       </div>
       <div class='col-2 col-md-3'>
         <label>

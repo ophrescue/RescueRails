@@ -15,78 +15,79 @@
 #
 # Table name: users
 #
-#  id                           :integer          not null, primary key
-#  name                         :string
-#  email                        :string
-#  created_at                   :datetime
-#  updated_at                   :datetime
-#  encrypted_password           :string
-#  salt                         :string
-#  admin                        :boolean          default(FALSE)
-#  password_reset_token         :string
-#  password_reset_sent_at       :datetime
-#  is_foster                    :boolean          default(FALSE)
-#  phone                        :string
-#  address1                     :string
-#  address2                     :string
-#  city                         :string
-#  region                       :string(2)
-#  postal_code                  :string
-#  duties                       :string
-#  edit_dogs                    :boolean          default(FALSE)
-#  share_info                   :text
-#  edit_my_adopters             :boolean          default(FALSE)
-#  edit_all_adopters            :boolean          default(FALSE)
-#  locked                       :boolean          default(FALSE)
-#  edit_events                  :boolean          default(FALSE)
-#  other_phone                  :string
-#  lastlogin                    :datetime
-#  lastverified                 :datetime
-#  available_to_foster          :boolean          default(FALSE)
-#  foster_dog_types             :text
-#  complete_adopters            :boolean          default(FALSE)
-#  add_dogs                     :boolean          default(FALSE)
-#  ban_adopters                 :boolean          default(FALSE)
-#  dl_resources                 :boolean          default(TRUE)
-#  agreement_id                 :integer
-#  house_type                   :string(40)
-#  breed_restriction            :boolean
-#  weight_restriction           :boolean
-#  has_own_dogs                 :boolean
-#  has_own_cats                 :boolean
-#  children_under_five          :boolean
-#  has_children                 :boolean
-#  has_fenced_yard              :boolean
-#  can_foster_puppies           :boolean
-#  parvo_house                  :boolean
-#  admin_comment                :text
-#  is_photographer              :boolean          default(FALSE)
-#  writes_newsletter            :boolean          default(FALSE)
-#  is_transporter               :boolean          default(FALSE)
-#  mentor_id                    :integer
-#  latitude                     :float
-#  longitude                    :float
-#  dl_locked_resources          :boolean          default(FALSE)
-#  training_team                :boolean          default(FALSE)
-#  confidentiality_agreement_id :integer
-#  foster_mentor                :boolean          default(FALSE)
-#  public_relations             :boolean          default(FALSE)
-#  fundraising                  :boolean          default(FALSE)
-#  translator                   :boolean          default(FALSE), not null
-#  known_languages              :string(255)
-#  code_of_conduct_agreement_id :integer
-#  medical_behavior_permission  :boolean          default(FALSE)
-#  boarding_buddies             :boolean          default(FALSE), not null
-#  social_media_manager         :boolean          default(FALSE), not null
-#  graphic_design               :boolean          default(FALSE), not null
-#  country                      :string(3)        not null
-#  active                       :boolean          default(FALSE), not null
-#  confirmation_token           :string(128)
-#  remember_token               :string(128)
-#  avatar_file_name             :string
-#  avatar_content_type          :string
-#  avatar_file_size             :integer
-#  avatar_updated_at            :datetime
+#  id                              :integer          not null, primary key
+#  name                            :string
+#  email                           :string
+#  created_at                      :datetime
+#  updated_at                      :datetime
+#  encrypted_password              :string
+#  salt                            :string
+#  admin                           :boolean          default(FALSE)
+#  password_reset_token            :string
+#  password_reset_sent_at          :datetime
+#  is_foster                       :boolean          default(FALSE)
+#  phone                           :string
+#  address1                        :string
+#  address2                        :string
+#  city                            :string
+#  region                          :string(2)
+#  postal_code                     :string
+#  duties                          :string
+#  edit_dogs                       :boolean          default(FALSE)
+#  share_info                      :text
+#  edit_my_adopters                :boolean          default(FALSE)
+#  edit_all_adopters               :boolean          default(FALSE)
+#  locked                          :boolean          default(FALSE)
+#  edit_events                     :boolean          default(FALSE)
+#  other_phone                     :string
+#  lastlogin                       :datetime
+#  lastverified                    :datetime
+#  available_to_foster             :boolean          default(FALSE)
+#  foster_dog_types                :text
+#  complete_adopters               :boolean          default(FALSE)
+#  add_dogs                        :boolean          default(FALSE)
+#  ban_adopters                    :boolean          default(FALSE)
+#  dl_resources                    :boolean          default(TRUE)
+#  agreement_id                    :integer
+#  house_type                      :string(40)
+#  breed_restriction               :boolean
+#  weight_restriction              :boolean
+#  has_own_dogs                    :boolean
+#  has_own_cats                    :boolean
+#  children_under_five             :boolean
+#  has_fenced_yard                 :boolean
+#  can_foster_puppies              :boolean
+#  parvo_house                     :boolean
+#  admin_comment                   :text
+#  is_photographer                 :boolean          default(FALSE)
+#  writes_newsletter               :boolean          default(FALSE)
+#  is_transporter                  :boolean          default(FALSE)
+#  mentor_id                       :integer
+#  latitude                        :float
+#  longitude                       :float
+#  dl_locked_resources             :boolean          default(FALSE)
+#  training_team                   :boolean          default(FALSE)
+#  confidentiality_agreement_id    :integer
+#  foster_mentor                   :boolean          default(FALSE)
+#  public_relations                :boolean          default(FALSE)
+#  fundraising                     :boolean          default(FALSE)
+#  translator                      :boolean          default(FALSE), not null
+#  known_languages                 :string(255)
+#  code_of_conduct_agreement_id    :integer
+#  medical_behavior_permission     :boolean          default(FALSE)
+#  boarding_buddies                :boolean          default(FALSE), not null
+#  social_media_manager            :boolean          default(FALSE), not null
+#  graphic_design                  :boolean          default(FALSE), not null
+#  country                         :string(3)        not null
+#  active                          :boolean          default(FALSE), not null
+#  confirmation_token              :string(128)
+#  remember_token                  :string(128)
+#  avatar_file_name                :string
+#  avatar_content_type             :string
+#  avatar_file_size                :integer
+#  avatar_updated_at               :datetime
+#  has_children                    :boolean          default(FALSE)
+#  insurance_training_agreement_id :integer
 #
 
 class User < ApplicationRecord

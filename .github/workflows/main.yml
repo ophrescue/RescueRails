@@ -29,7 +29,7 @@ jobs:
           PGHOST: localhost
           PGUSER: myapp
         run: |
-          bundle exec rake db:test:prepare
+          bundle exec rails db:prepare
 
       - name: Run Tests
         run: |

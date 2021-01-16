@@ -7,8 +7,8 @@ jobs:
       db:
         image: postgres:9.6
         env:
-          POSTGRES_USER: myapp
-          POSTGRES_DB: myapp_test
+          POSTGRES_USER: postgres
+          POSTGRES_DB: travis_ci_test
           POSTGRES_PASSWORD: ""
         ports: ['5432:5432']
     runs-on: ubuntu-18.04
@@ -24,11 +24,8 @@ jobs:
         run: sudo apt-get -yqq install libpq-dev
 
       - name: Setup test database
-        env:
-          RAILS_ENV: test
-          PGHOST: localhost
-          PGUSER: myapp
         run: |
+          cp config/database.yml.travis config/database.yml
           RAILS_ENV=test bundle exec rake db:migrate --trace
           bundle exec rake db:test:prepare
 

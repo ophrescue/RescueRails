@@ -1,13 +1,6 @@
 require 'simplecov'
-require 'coveralls'
 require "rack_session_access/capybara"
 require 'faker'
-
-SimpleCov.formatters = [
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
-SimpleCov.start 'rails'
 
 Faker::Config.random = Random.new(RSpec.configuration.seed)
 

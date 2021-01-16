@@ -21,12 +21,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
-        # with:
-        #   bundler-cache: true
-      - name: manual bundle
-        run: |
-          gem install bundler
-          bundle install
+        with:
+          bundler-cache: true
+      - name: list bundle
+        run: bundle list
 
       - name: Install Postgresql client
         run: sudo apt-get -yqq install libpq-dev
@@ -43,7 +41,7 @@ jobs:
 
       - name: Run Rspec Tests
         run: |
-          bundle exec rpsec
+          bundle exec rspec
         env:
           RAILS_ENV: test
           POSTGRES_USER: postgres

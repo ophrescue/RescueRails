@@ -1,0 +1,2 @@
+class VolunteerReference < ApplicationRecord
+end

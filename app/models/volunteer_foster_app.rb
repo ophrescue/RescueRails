@@ -1,0 +1,2 @@
+class VolunteerFosterApp < ApplicationRecord
+end

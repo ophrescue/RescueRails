@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request]
+on: [pull_request]
 jobs:
   test:
     services:
@@ -21,7 +21,7 @@ jobs:
           bundler-cache: true
 
       - name: Install Postgresql client
-        run: apt-get -yqq install libpq-dev
+        run: sudo apt-get -yqq install libpq-dev
 
       - name: Setup test database
         env:

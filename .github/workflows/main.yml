@@ -29,7 +29,8 @@ jobs:
           PGHOST: localhost
           PGUSER: myapp
         run: |
-          bundle exec rails db:prepare
+          RAILS_ENV=test bundle exec rake db:migrate --trace
+          bundle exec rake db:test:prepare
 
       - name: Run Tests
         run: |

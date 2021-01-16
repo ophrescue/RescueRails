@@ -27,16 +27,20 @@ jobs:
       - name: Install Postgresql client
         run: sudo apt-get -yqq install libpq-dev
 
-      - name: Setup test database
+      - name: Setup Database
+        run: |
+          cp config/database.github-actions.yml config/database.yml
+          bundle exec rake db:create
+          bundle exec rake db:schema:load
         env:
           RAILS_ENV: test
-          PGHOST: localhost
-          PGUSER: myapp
-        run: |
-          psql -c 'create database travis_ci_test;' -U postgres
-          cp config/database.yml.travis config/database.yml
-          bin/rails db:setup
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
 
-      - name: Run Tests
+      - name: Run Rspec Tests
         run: |
           bundle exec rpsec
+        env:
+          RAILS_ENV: test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres

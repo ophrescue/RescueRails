@@ -4,13 +4,14 @@ on: [pull_request]
 jobs:
   test:
     services:
-      db:
+      postgres:
         image: postgres:9.6
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: travis_ci_test
+          POSTGRES_USER: myapp
+          POSTGRES_DB: myapp_test
           POSTGRES_PASSWORD: ""
         ports: ['5432:5432']
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     runs-on: ubuntu-18.04
 
     steps:
@@ -24,10 +25,12 @@ jobs:
         run: sudo apt-get -yqq install libpq-dev
 
       - name: Setup test database
+        env:
+          RAILS_ENV: test
+          PGHOST: localhost
+          PGUSER: myapp
         run: |
-          cp config/database.yml.travis config/database.yml
-          RAILS_ENV=test bundle exec rake db:migrate --trace
-          bundle exec rake db:test:prepare
+          bin/rails db:setup
 
       - name: Run Tests
         run: |

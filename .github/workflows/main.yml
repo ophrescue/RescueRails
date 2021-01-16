@@ -21,8 +21,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
+        # with:
+        #   bundler-cache: true
+      - name: manual bundle
+        run: |
+          gem install bundler
+          bundle install
 
       - name: Install Postgresql client
         run: sudo apt-get -yqq install libpq-dev

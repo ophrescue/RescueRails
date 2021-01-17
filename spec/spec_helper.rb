@@ -1,15 +1,33 @@
 require 'simplecov'
-require 'coveralls'
+require 'simplecov-lcov'
 require "rack_session_access/capybara"
 require 'faker'
 
-SimpleCov.formatters = [
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
-SimpleCov.start 'rails'
-
 Faker::Config.random = Random.new(RSpec.configuration.seed)
+
+# Fix incompatibility of simplecov-lcov with older versions of simplecov that are not expresses in its gemspec.
+# https://github.com/fortissimo1997/simplecov-lcov/pull/25
+if !SimpleCov.respond_to?(:branch_coverage)
+  module SimpleCov
+    def self.branch_coverage?
+      false
+    end
+  end
+end
+
+SimpleCov::Formatter::LcovFormatter.config do |c|
+  c.report_with_single_file = true
+  c.single_report_path = 'coverage/lcov.info'
+end
+SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
+  [
+    SimpleCov::Formatter::HTMLFormatter,
+    SimpleCov::Formatter::LcovFormatter,
+  ]
+)
+SimpleCov.start('rails') do
+  add_filter 'spec/'
+end
 
 RSpec.configure do |config|
   # Use documentation formatter when running a single file.

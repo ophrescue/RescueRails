@@ -79,11 +79,12 @@ group :test do
   gem 'capybara-screenshot'
   gem 'capybara-selenium'
   gem 'webdrivers'
-  gem 'coveralls', require: false
   gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'rack_session_access'
   gem 'browserstack-local'
+  gem 'simplecov',      require: false
+  gem 'simplecov-lcov', require: false
   gem 'stripe-ruby-mock', '~> 2.5.4', :require => 'stripe_mock'
 end
 

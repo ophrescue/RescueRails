@@ -20,7 +20,7 @@ class AdoptionAppController < ApplicationController
 
   def update
     @adopter = AdoptionApp.find(params[:id])
-    @adopter.update_attributes(adoption_app_params)
+    @adopter.update(adoption_app_params)
 
     respond_with(@adopter) do |format|
       format.html { handle_redirect }

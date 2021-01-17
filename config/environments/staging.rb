@@ -118,13 +118,4 @@ Rails.application.configure do
     url: ':s3_domain_url'
   }
 
-  # Exception Notification
-  ExceptionNotifier::Rake.configure
-
-  config.middleware.use ExceptionNotification::Rack,
-    email: {
-      sender_address: 'info@ophrescue.org',
-      exception_recipients: 'admin@ophrescue.org'
-    }
-
 end

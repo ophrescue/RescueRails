@@ -25,6 +25,11 @@ FactoryBot.define do
     amount { Faker::Number.number(digits: 3)}
     status {'open'}
     slug { SecureRandom.urlsafe_base64(32) }
+    user
+    for_dog
+    trait :for_dog do
+      association :invoiceable, factory: :adoption
+    end
   end
 
   factory :invoice_paid, class: Invoice do
@@ -32,5 +37,10 @@ FactoryBot.define do
     paid_at { Faker::Date.backward(days: 14) }
     status {'paid'}
     slug { SecureRandom.urlsafe_base64(32) }
+    user
+    for_cat
+    trait :for_cat do
+      association :invoiceable, factory: :cat_adoption
+    end
   end
 end

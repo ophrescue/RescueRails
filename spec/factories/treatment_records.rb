@@ -16,6 +16,9 @@
 #
 FactoryBot.define do
   factory :treatment_record do
+    user
+    treatment
+    association :treatable, factory: :dog
     administered_date { [Date.today.advance(days: -rand(365)).to_s].sample }
     due_date { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
     result { Faker::Lorem.sentence }

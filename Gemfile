@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby   '2.6.6'
 
-gem 'rails', '~> 5.2.4.3'
+gem 'rails', '~> 6.0.3.4'
 
 gem 'rack-cache'
 
@@ -14,8 +14,6 @@ gem 'clearance'
 gem 'countries'
 gem 'dotenv'
 gem 'dotenv-rails'
-gem 'exception_notification'
-gem 'exception_notification-rake', '~> 0.3.0'
 gem 'font-awesome-rails'
 gem 'friendly_id', '~> 5.3'
 gem 'geocoder'
@@ -58,7 +56,7 @@ gem 'uglifier'
 gem 'newrelic_rpm'
 gem 'honeybadger', '~> 4.0'
 gem 'sucker_punch', '~> 1.5.1'
-gem 'factory_bot_rails'
+
 
 group :development, :test do
   gem 'faker'
@@ -72,6 +70,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'puma'
   gem 'stackprof'
+  gem 'factory_bot_rails'
 end
 
 group :test do
@@ -100,6 +99,7 @@ group :development do
   gem 'capistrano-systemd-multiservice', require: false
   gem 'ed25519', '>= 1.2', '< 2.0'
   gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+  gem 'listen'
   gem 'powder'
   gem 'rubocop'
   gem 'rubocop-rspec'

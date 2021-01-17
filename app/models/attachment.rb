@@ -32,7 +32,7 @@
 class Attachment < ApplicationRecord
   include ClientValidated
 
-  belongs_to :attachable, polymorphic: true
+  belongs_to :attachable, polymorphic: true, optional: true
 
   belongs_to :updated_by_user, class_name: 'User'
 

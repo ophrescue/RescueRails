@@ -47,7 +47,7 @@ class CatAdoptionsController < ApplicationController
   end
 
   def update
-    @cat_adoption.update_attributes(cat_adoption_params)
+    @cat_adoption.update(cat_adoption_params)
 
     respond_with(@cat_adoption) do |format|
       format.html { render }

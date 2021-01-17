@@ -87,7 +87,7 @@ class Adopter < ApplicationRecord
   has_many :cats, through: :cat_adoptions
   has_many :comments, -> { order('created_at DESC') }, as: :commentable
 
-  belongs_to :user, class_name: 'User', primary_key: 'id', foreign_key: 'assigned_to_user_id'
+  belongs_to :user, class_name: 'User', primary_key: 'id', foreign_key: 'assigned_to_user_id', optional: true
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :phone, presence: true, length: { in: 10..25 }

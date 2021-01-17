@@ -3,7 +3,11 @@ FactoryBot.define do
     dog
     adopter
 
-    relation_type { 'interested' }
+    interested
+
+    trait :interested do
+      relation_type { 'interested' }
+    end
 
     trait :adopted do
       relation_type { 'adopted' }

@@ -38,7 +38,7 @@ class FolderAttachmentsController < ApplicationController
 
   def update
     @attachment = FolderAttachment.find(params[:id])
-    if @attachment.update_attributes(folder_attachment_params)
+    if @attachment.update(folder_attachment_params)
       render json: @attachment, status: 200
     else
       head 422

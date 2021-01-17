@@ -80,11 +80,11 @@ class Dog < ApplicationRecord
 
   has_associated_audits
 
-  belongs_to :primary_breed, class_name: 'Breed'
-  belongs_to :secondary_breed, class_name: 'Breed'
-  belongs_to :foster, class_name: 'User'
-  belongs_to :coordinator, class_name: 'User'
-  belongs_to :shelter
+  belongs_to :primary_breed,   class_name: 'Breed', optional: true
+  belongs_to :secondary_breed, class_name: 'Breed', optional: true
+  belongs_to :foster,          class_name: 'User',  optional: true
+  belongs_to :coordinator,     class_name: 'User',  optional: true
+  belongs_to :shelter,                              optional: true
 
   has_many :treatment_records, as: :treatable
   has_many :comments, -> { order 'created_at DESC' }, as: :commentable
@@ -99,9 +99,9 @@ class Dog < ApplicationRecord
   validates :name, presence: true,
            length: { maximum: 75 },
            uniqueness: { case_sensitive: false }
-  
+
   validates :microchip, uniqueness: true, allow_blank: true
-  
+
   validate :microchip_check
 
   validates :tracking_id, uniqueness: true, presence: true

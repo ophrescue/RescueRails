@@ -1,3 +1,4 @@
+require 'simplecov'
 require 'simplecov-lcov'
 
 SimpleCov::Formatter::LcovFormatter.config do |c|

@@ -1,8 +1,21 @@
 require 'simplecov'
+require 'simplecov-lcov'
 require "rack_session_access/capybara"
 require 'faker'
 
 Faker::Config.random = Random.new(RSpec.configuration.seed)
+
+SimpleCov::Formatter::LcovFormatter.config do |c|
+  c.report_with_single_file = true
+  c.single_report_path = 'coverage/lcov.info'
+end
+SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
+  [
+    SimpleCov::Formatter::HTMLFormatter,
+    SimpleCov::Formatter::LcovFormatter,
+  ]
+)
+SimpleCov.start('rails')
 
 RSpec.configure do |config|
   # Use documentation formatter when running a single file.

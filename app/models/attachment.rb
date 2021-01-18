@@ -34,7 +34,7 @@ class Attachment < ApplicationRecord
 
   belongs_to :attachable, polymorphic: true, optional: true
 
-  belongs_to :updated_by_user, class_name: 'User'
+  belongs_to :updated_by_user, class_name: 'User', optional: true
 
   scope :matching, ->(search_term){ where('attachment_file_name ILIKE :search OR attachments.description ILIKE :search', search: "%#{search_term&.strip}%") }
 

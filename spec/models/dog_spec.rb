@@ -86,7 +86,7 @@ describe Dog do
       end
 
       it 'updates the adoption date if one is provided by the user' do
-        dog.update_attributes(status: 'completed', adoption_date: Date.new(2000,1,1))
+        dog.update(status: 'completed', adoption_date: Date.new(2000,1,1))
         expect(dog.adoption_date).to eq(Date.new(2000,1,1))
       end
     end

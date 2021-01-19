@@ -38,7 +38,7 @@ RSpec.describe "TreatmentRecords", type: :request do
 
     describe "POST #create" do
       it 'is able to create a treatment record' do
-        treatment_record = attributes_for(:treatment_record)
+      treatment_record = attributes_for(:treatment_record, treatment_id: treatment.id, treatable_id: dog.id, treatable_type: 'Dog')
         expect {
           post dog_treatment_records_path(dog, as: active_user), params: { treatment_record: treatment_record }
         }.to change(TreatmentRecord, :count).by(1)

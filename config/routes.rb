@@ -1,10 +1,11 @@
 STATIC_PAGES = ['5k', 'contact', 'funding-partners', 'community-partners', 'non-profit-and-corporate-partners',
-                'training-partners', 'guide', 'aboutus', 'documentary', 'insurance',
-                'get-involved', 'volunteer', 'foster', 'fosterfaq', 'donate', 'sponsor', 'newsletters',
-                'special-funds', 'other-ways-to-give', 'terms', 'resources', 'tips-for-finding-lost-pets', 'status_definitions',
-                'education-and-outreach','adoption-fee-payments','microchip-registration'].freeze
+  'training-partners', 'guide', 'aboutus', 'documentary', 'insurance',
+  'get-involved', 'volunteer', 'foster', 'fosterfaq', 'donate', 'sponsor', 'newsletters',
+  'special-funds', 'other-ways-to-give', 'terms', 'resources', 'tips-for-finding-lost-pets', 'status_definitions',
+  'education-and-outreach','adoption-fee-payments','microchip-registration'].freeze
 
-RescueRails::Application.routes.draw do
+Rails.application.routes.draw do
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get "/adopters/check_email", to: "adopters#check_email"
 
   resources :adopters do

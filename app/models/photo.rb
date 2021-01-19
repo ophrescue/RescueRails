@@ -33,7 +33,7 @@
 class Photo < ApplicationRecord
   extend ActionView::Helpers::AssetUrlHelper
   include ClientValidated
-  belongs_to :animal, touch: true, polymorphic: true
+  belongs_to :animal, touch: true, polymorphic: true, optional: true
 
   HASH_SECRET = "80fd0acd1674d7efdda5b913a7110d5c955e2d73"
   PAPERCLIP_STORAGE_PATH = { test:       "/system/test/photos/:hash.:extension",

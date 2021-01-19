@@ -8,11 +8,16 @@ Bundler.require(*Rails.groups)
 
 module RescueRails
   class Application < Rails::Application
+    # Needed for clearance gem overrides
     config.paths.add 'lib', eager_load: true
 
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 6.0
+
     # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+    # Application configuration can go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded after loading
+    # the framework and any gems in your application.
     config.active_job.queue_adapter = :delayed_job
 
     config.active_record.time_zone_aware_types = [:datetime, :time]

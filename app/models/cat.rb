@@ -81,11 +81,11 @@ class Cat < ApplicationRecord
 
   has_associated_audits
 
-  belongs_to :primary_breed, class_name: 'CatBreed'
-  belongs_to :secondary_breed, class_name: 'CatBreed'
-  belongs_to :foster, class_name: 'User'
-  belongs_to :coordinator, class_name: 'User'
-  belongs_to :shelter
+  belongs_to :primary_breed,   class_name: 'CatBreed', optional: true
+  belongs_to :secondary_breed, class_name: 'CatBreed', optional: true
+  belongs_to :foster,          class_name: 'User' ,    optional: true
+  belongs_to :coordinator,     class_name: 'User',     optional: true
+  belongs_to :shelter,                                 optional: true
 
   has_many :treatment_records, as: :treatable
   has_many :comments, -> { order 'created_at DESC' }, as: :commentable
@@ -105,7 +105,7 @@ class Cat < ApplicationRecord
   validates :tracking_id, uniqueness: true, presence: true
 
   validates :microchip, uniqueness: true, allow_blank: true
-  
+
   validate :microchip_check
 
   STATUSES = ['adoptable', 'adopted', 'adoption pending', 'trial adoption',

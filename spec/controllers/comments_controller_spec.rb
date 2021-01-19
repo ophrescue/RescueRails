@@ -71,7 +71,7 @@ describe CommentsController, type: :controller do
       include_context 'signed in user'
 
       it 'updates the comment' do
-        expect_any_instance_of(Comment).to receive(:update_attributes)
+        expect_any_instance_of(Comment).to receive(:update)
         subject
         expect(response).to be_ok
       end

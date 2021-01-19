@@ -48,5 +48,17 @@ FactoryBot.define do
         create(:adoption_app_null, adopter: adopter)
       end
     end
+
+    trait :with_adoption do
+      after(:create) do |adopter|
+        create(:adoption, adopter: adopter)
+      end
+    end
+
+    trait :with_cat_adoption do
+      after(:create) do |adopter|
+        create(:cat_adoption, adopter: adopter)
+      end
+    end
   end
 end

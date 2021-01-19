@@ -87,7 +87,7 @@ describe Cat do
       end
 
       it 'updates the adoption date if one is provided by the user' do
-        cat.update_attributes(status: 'completed', adoption_date: Date.new(2000,1,1))
+        cat.update(status: 'completed', adoption_date: Date.new(2000,1,1))
         expect(cat.adoption_date).to eq(Date.new(2000,1,1))
       end
     end

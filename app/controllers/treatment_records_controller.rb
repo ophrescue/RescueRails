@@ -47,7 +47,7 @@ class TreatmentRecordsController < ApplicationController
       flash[:success] = "New Treatment Record Added"
       redirect_to polymorphic_path([@treatable, TreatmentRecord])
     else
-      flash.now[:error] = 'form could not be saved'
+      flash.now[:error] = 'Form could not be saved'
       @treatment = Treatment.find(params[:treatment_id])
       @treatment_record = TreatmentRecord.new
       render 'new'

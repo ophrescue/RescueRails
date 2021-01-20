@@ -56,7 +56,7 @@ gem 'uglifier'
 gem 'newrelic_rpm'
 gem 'honeybadger', '~> 4.0'
 gem 'sucker_punch', '~> 1.5.1'
-
+gem 'factory_bot_rails'
 
 group :development, :test do
   gem 'faker'
@@ -70,7 +70,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'puma'
   gem 'stackprof'
-  gem 'factory_bot_rails'
 end
 
 group :test do

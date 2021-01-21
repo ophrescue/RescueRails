@@ -41,8 +41,8 @@
 #
 
 class AdoptersController < ApplicationController
-  before_action :require_login, except: %i(new create check_email)
-  before_action :unlocked_user, except: %i(new create check_email)
+  before_action :require_login, except: %i(new create complete check_email)
+  before_action :unlocked_user, except: %i(new create complete check_email)
   before_action :edit_my_adopters_user, only: %i(index show edit update)
   before_action :edit_all_adopters_user, only: %i(index show edit update)
   before_action :admin_user, only: %i(destroy)
@@ -99,10 +99,13 @@ class AdoptersController < ApplicationController
       AdoptAppMailer.adopt_app(@adopter.id).deliver_later
       BitePreventionMailer.bite_prevent(@adopter.id).deliver_later(wait: 24.hours)
       flash[:success] = render_to_string partial: 'adopt_success_message'
-      redirect_to root_path(adoptapp: "complete")
+      render 'complete'
     else
       render 'new'
     end
+  end
+
+  def complete
   end
 
   def update

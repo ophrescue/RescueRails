@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get "/adopters/check_email", to: "adopters#check_email"
 
+  get "/adopters/complete", to: "adopters#complete"
+
   resources :adopters do
     resources :comments, except: %i[destroy edit update]
     resources :adoptions

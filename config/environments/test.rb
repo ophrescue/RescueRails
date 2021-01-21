@@ -66,4 +66,13 @@ Rails.application.configure do
 
   # Access to rack session
   config.middleware.use RackSessionAccess::Middleware
+
+  # test exception notification
+
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  email: {
+    email_prefix: '[ERROR] ',
+    sender_address: 'info@ophrescue.org',
+    exception_recipients: 'admin@ophrescue.org'
+  }
 end

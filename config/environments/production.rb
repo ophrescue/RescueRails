@@ -149,5 +149,13 @@ Rails.application.configure do
     path: ":paperclip_production_path",
     url: ':s3_domain_url'
   }
+  # Exception Notification
+
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  email: {
+    email_prefix: '[ERROR] ',
+    sender_address: 'info@ophrescue.org',
+    exception_recipients: 'admin@ophrescue.org'
+  }
 
 end

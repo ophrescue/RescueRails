@@ -14,7 +14,6 @@
 
 class CountyService
   def self.fetch(zip)
-    return zip # Temporary disable
     return zip if Rails.env.test?
     return unless ENV['GOOGLE_MAPS_GEOCODE'].present?
 

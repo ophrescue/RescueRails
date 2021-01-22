@@ -217,9 +217,6 @@ GEM
     launchy (2.5.0)
       addressable (~> 2.7)
     libv8 (8.4.255.0)
-    listen (3.4.1)
-      rb-fsevent (~> 0.10, >= 0.10.3)
-      rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.9.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -323,9 +320,6 @@ GEM
     rainbow (3.0.0)
     raindrops (0.19.1)
     rake (13.0.3)
-    rb-fsevent (0.10.4)
-    rb-inotify (0.10.1)
-      ffi (~> 1.0)
     record_tag_helper (1.0.1)
       actionview (>= 5)
     redcarpet (3.5.1)
@@ -494,7 +488,6 @@ DEPENDENCIES
   groupdate
   has_scope
   honeybadger (~> 4.0)
-  listen
   mini_racer (>= 0.2.3)
   newrelic_rpm
   paperclip (~> 5)

@@ -41,7 +41,7 @@
     <div class="col-12 col-sm-4 align-self-center">
       <% if @cat.is_accepting_applications?  %>
         <a href=<%=new_adopter_path(cat_name: @cat.name) %> id='adopt_me' class='show_page_links'>
-          <%= render file: Rails.root.join('app', 'assets', 'images', 'foster_icon.svg').to_s %>
+          <i class='fa fa-lg fa-paw'></i>
           <span class='link'>Adopt Me</span>
         </a>
       <% end %>
@@ -57,11 +57,6 @@
         <i class='fa fa-lg fa-compass'></i>
         <span class='link'>Adoption Guide</span>
       </a>
-
-      <div class='share_the_love'>
-        <div class='share_the_love_header'>Share the love!</div>
-        <div class="fb-like" data-href="<%= request.url %>" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
-      </div>
     </div>
   </div>
 

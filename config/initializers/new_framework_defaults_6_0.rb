@@ -44,3 +44,8 @@ Rails.application.config.action_mailer.delivery_job = "ActionMailer::DeliveryJob
 # `ActiveRecord::Relation` changes by moving the volatile information (max updated at and count)
 # of the relation's cache key into the cache version to support recycling cache key.
 # Rails.application.config.active_record.collection_cache_versioning = true
+
+
+# From Rails 5 - TOOD fix Proxy so this works
+# https://bigbinary.com/blog/new-framework-defaults-in-rails-5-to-make-upgrade-easier
+Rails.application.config.action_controller.forgery_protection_origin_check = false

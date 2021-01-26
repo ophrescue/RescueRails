@@ -9,7 +9,7 @@ describe TrainingMailer, type: :mailer do
     it 'job is created' do
       expect do
         TrainingMailer.free_training_notice(adopter.id).deliver_later
-      end.to have_enqueued_job(TrainingMailer, :free_training_notice)
+      end.to have_enqueued_job.on_queue('mailers')
     end
 
     it 'welcome_email is sent' do

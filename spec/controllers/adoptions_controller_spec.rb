@@ -23,7 +23,7 @@ describe 'Adopter receipt of Training Coupon and followup email' do
         ActiveJob::Base.queue_adapter = :test
         expect do
           adopter.update(cat_adoptions_attributes: [{ id: adopter.cat_adoptions.first.id, relation_type: 'adopted' }])
-        end.not_to have_enqueued_job.with("TrainingMailer","free_training_notice","deliver_now", adopter.id)
+        end.not_to have_enqueued_mail(TrainingMailer, :free_training_notice)
       end
     end
 
@@ -34,14 +34,14 @@ describe 'Adopter receipt of Training Coupon and followup email' do
         ActiveJob::Base.queue_adapter = :test
         expect do
           adopter.update(adoptions_attributes: [{ id: adopter.adoptions.first.id, relation_type: 'adopted' }])
-        end.to have_enqueued_job.with("TrainingMailer","free_training_notice","deliver_now", adopter.id)
+        end.to have_enqueued_mail(TrainingMailer, :free_training_notice)
       end
 
       it 'one week followup email created' do
         ActiveJob::Base.queue_adapter = :test
         expect do
           adopter.update(adoptions_attributes: [{ id: adopter.adoptions.first.id, relation_type: 'adopted' }])
-        end.to have_enqueued_job.with("AdopterFollowupMailer","one_week_followup","deliver_now", adopter.id)
+        end.to have_enqueued_mail(AdopterFollowupMailer, :one_week_followup)
       end
 
       it 'free training coupon and one week followup is sent' do

@@ -33,6 +33,9 @@ jobs:
         with:
           node-version: '14'
 
+      - name: yarn install
+        run: yarn install
+
       - name: List Bundle
         run: bundle list
 
@@ -48,6 +51,9 @@ jobs:
           RAILS_ENV: test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+
+      - name: Webpack compilation
+        run: NODE_ENV=test bundle exec rails webpacker:compile
 
       - name: Run Rspec Tests
         run: bundle exec rspec

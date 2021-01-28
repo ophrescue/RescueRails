@@ -121,4 +121,7 @@ namespace :deploy do
   # As of Capistrano 3.1, the `deploy:restart` task is not called
   # automatically.
   after 'deploy:publishing', 'deploy:restart'
+
+  # Run yarn install for webpacker
+  before "deploy:assets:precompile", "deploy:yarn_install"
 end

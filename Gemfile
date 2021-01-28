@@ -29,6 +29,7 @@ gem 'responders'
 gem 'strip_attributes'
 gem 'stripe'
 gem 'to_xls'
+gem 'webpacker', '~> 5.2', '>= 5.2.1'
 gem 'wicked_pdf'
 gem 'whenever', '~> 0.9.4', require: false
 gem 'will_paginate'

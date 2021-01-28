@@ -49,6 +49,8 @@
     <%= javascript_tag "$.fx.off = true;" %>
   <% end %>
 
+  <%= javascript_pack_tag 'application' %>
+
   </head>
   <body class="<%= controller_name + action_name %>">
     <% if Rails.env.production? || Rails.env.staging? %>

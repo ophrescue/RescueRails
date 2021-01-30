@@ -69,6 +69,8 @@ development:
     headers:
       'Access-Control-Allow-Origin': '*'
     watch_options:
+      poll: 5000
+      aggregateTimeout: 600
       ignored: '**/node_modules/**'
 
 

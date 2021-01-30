@@ -31,4 +31,9 @@ class Reference < ApplicationRecord
   audited on: :update, associated_with: :adopter
 
   belongs_to :adopter, class_name: 'Adopter'
+
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :phone, presence: true, length: { in: 10..25 }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :relationship, length: { maximum: 255 }
 end

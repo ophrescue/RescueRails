@@ -1,4 +1,4 @@
-class CreateVolunteerFosterApps < ActiveRecord::Migration[5.2]
+class CreateVolunteerFosterApps < ActiveRecord::Migration[6.0]
   def change
     create_table :volunteer_foster_apps do |t|
       t.belongs_to :volunteer_app, index: { unique: true }, foreign_key: true

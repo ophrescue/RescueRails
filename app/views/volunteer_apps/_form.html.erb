@@ -1,0 +1,33 @@
+<%# #  name                   :string
+#  email                  :string
+#  phone                  :string
+#  address1               :string
+#  address2               :string
+#  city                   :string
+#  region                 :string(2)
+#  postal_code            :string
+#  referrer               :string
+#  writing_interest       :boolean
+#  events_interest        :boolean
+#  fostering_interest     :boolean
+#  training_interest      :boolean
+#  fundraising_interest   :boolean
+#  transport_bb_interest  :boolean
+#  adoption_team_interest :boolean
+#  admin_interest         :boolean
+#  about                  :text %>
+
+
+<%= form_for @volunteer_app, html: { multipart: true, class: 'form-horizontal'} do |f| %>
+  <div class="ml-2">
+    <%= render 'shared/error_messages', :object => f.object %>
+
+    <div class="form-group">
+      <label for="user_name">Name</label>
+      <div class="controls">
+        <%= f.text_field :name, :autocomplete => :off, class: "col-8 col-sm-4 form-control" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

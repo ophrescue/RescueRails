@@ -48,6 +48,8 @@ Rails.application.routes.draw do
     resources :treatment_records
   end
 
+  resources :volunteer_apps
+
   resources :bulletins, controller: :posts, type: 'Bulletin'
   resources :opportunities, controller: :posts, type: 'Opportunity'
   resources :infos, controller: :posts, type: 'Info'

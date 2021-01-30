@@ -1,4 +1,4 @@
-class CreateVolunteerReferences < ActiveRecord::Migration[5.2]
+class CreateVolunteerReferences < ActiveRecord::Migration[6.0]
   def change
     create_table :volunteer_references do |t|
       t.belongs_to :volunteer_app, index: true, foreign_key: true

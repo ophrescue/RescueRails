@@ -1,4 +1,4 @@
-class CreateVolunteerApp < ActiveRecord::Migration[5.2]
+class CreateVolunteerApp < ActiveRecord::Migration[6.0]
   def change
     create_table :volunteer_apps do |t|
       t.string :name

@@ -18,16 +18,83 @@
 #  about                  :text %>
 
 
-<%= form_for @volunteer_app, html: { multipart: true, class: 'form-horizontal'} do |f| %>
+<%= form_for @volunteer_app, html: { multipart: true } do |f| %>
   <div class="ml-2">
     <%= render 'shared/error_messages', :object => f.object %>
 
     <div class="form-group">
-      <label for="user_name">Name</label>
-      <div class="controls">
-        <%= f.text_field :name, :autocomplete => :off, class: "col-8 col-sm-4 form-control" %>
-      </div>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "col-8 form-control" %>
     </div>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "col-8 form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :phone %>
+      <%= f.text_field :phone, class: "col-8 form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :address1 %>
+      <%= f.text_field :address1, class: "col-8 form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :address2 %>
+      <%= f.text_field :address2, class: "col-8 form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :city %>
+      <%= f.text_field :city, class: "col-8 form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :region, 'State' %>
+      <%= f.text_field :region, class: "col-8 form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :postal_code, 'Zip Code' %>
+      <%= f.text_field :postal_code, class: "col-8 form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :referrer, 'How did you hear about OPH?' %>
+      <%= f.text_field :referrer, class: "col-8 form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :about, 'Tell us about yourself' %>
+      <%= f.text_area :about, class: "col-8 form-control" %>
+    </div>
+    <div class="form-check">
+      <%= f.check_box(:writing_interest) %>
+      <%= f.label(:writing_interest) %>
+    </div>
+    <div class="form-check">
+      <%= f.check_box(:events_interest) %>
+      <%= f.label(:events_interest) %>
+    </div>
+    <div class="form-check">
+      <%= f.check_box(:fostering_interest) %>
+      <%= f.label(:fostering_interest) %>
+    </div>
+    <div class="form-check">
+      <%= f.check_box(:training_interest) %>
+      <%= f.label(:training_interest) %>
+    </div>
+    <div class="form-check">
+      <%= f.check_box(:fundraising_interest) %>
+      <%= f.label(:fundraising_interest) %>
+    </div>
+    <div class="form-check">
+      <%= f.check_box(:transport_bb_interest) %>
+      <%= f.label(:transport_bb_interest) %>
+    </div>
+    <div class="form-check">
+      <%= f.check_box(:adoption_team_interest) %>
+      <%= f.label(:adoption_team_interest) %>
+    </div>
+    <div class="form-check">
+      <%= f.check_box(:admin_interest) %>
+      <%= f.label(:admin_interest) %>
+    </div>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
   </div>
 
 <% end %>

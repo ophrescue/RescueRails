@@ -1,4 +1,5 @@
 class VolunteerAppsController < ApplicationController
+  before_action :select_bootstrap41
   before_action :require_login, except: %i(new create complete)
   before_action :admin_user, only: %i(destroy)
 
@@ -21,7 +22,7 @@ class VolunteerAppsController < ApplicationController
 
   def create
     @volunteer_app = VolunteerApp.new(volunteer_app_params)
-    @volunteer_app.status = 'new'
+    #@volunteer_app.status = 'new'
 
     if @volunteer_app.save
       flash[:success] = 'Volunteer Application Submitted Successfully'

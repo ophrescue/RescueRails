@@ -94,6 +94,118 @@
       <%= f.check_box(:admin_interest) %>
       <%= f.label(:admin_interest) %>
     </div>
+
+  <div id="foster-questions">
+    <%= f.fields_for :volunteer_foster_app do |vfa| %>
+      <div class="form-check">
+        <%= vfa.check_box(:can_foster_dogs) %>
+        <%= vfa.label(:can_foster_dogs) %>
+      </div>
+      <div class="form-check">
+        <%= vfa.check_box(:can_foster_cats) %>
+        <%= vfa.label(:can_foster_cats) %>
+      </div>
+      <div class="form-group">
+        <%= vfa.label :home_type %>
+        <%= vfa.text_field :home_type, class: "col-8 form-control" %>
+      </div>
+
+      <div id="foster-rental-questions">
+        <div class="form-group">
+          <%= vfa.label :rental_restrictions %>
+          <%= vfa.text_area :rental_restrictions, class: "col-8 form-control" %>
+        </div>
+        <div class="form-group">
+          <%= vfa.label :rental_landlord_name %>
+          <%= vfa.text_field :rental_landlord_name, class: "col-8 form-control" %>
+        </div>
+        <div class="form-group">
+          <%= vfa.label :rental_landlord_info %>
+          <%= vfa.text_area :rental_landlord_info, class: "col-8 form-control" %>
+        </div>
+      </div>
+
+      <h5>Are there any pets in your home?</h5>
+        <div class="custom-control custom-radio">
+          <%= vfa.radio_button :has_pets, true, class: "custom-control-input" %>
+          <%= vfa.label :has_pets, 'Yes', value: true, class: "custom-control-label" %>
+        </div>
+        <div class="custom-control custom-radio">
+          <%= vfa.radio_button :has_pets, false, class: "custom-control-input" %>
+          <%= vfa.label :has_pets, 'No', value: false, class: "custom-control-label" %>
+        </div>
+
+
+        <div id='other-pets-questions'>
+          <div class="form-group">
+            <%= vfa.label :vet_info %>
+            <%= vfa.text_area :vet_info, class: "col-8 form-control" %>
+          </div>
+          <div class="form-group">
+            <%= vfa.label :current_pets %>
+            <%= vfa.text_area :current_pets, class: "col-8 form-control" %>
+          </div>
+          <div class="form-group">
+            <%= vfa.label :current_pets_spay_neuter %>
+            <%= vfa.text_area :current_pets_spay_neuter, class: "col-8 form-control" %>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <%= vfa.label :about_family %>
+          <%= vfa.text_area :about_family, class: "col-8 form-control" %>
+        </div>
+        <div class="form-group">
+          <%= vfa.label :breed_pref %>
+          <%= vfa.text_area :breed_pref, class: "col-8 form-control" %>
+        </div>
+        <div class="form-group">
+          <%= vfa.label :ready_to_foster_dt %>
+          <%= vfa.text_field :ready_to_foster_dt, class: "col-8 form-control" %>
+        </div>
+        <div class="form-group">
+          <%= vfa.label :foster_term %>
+          <%= vfa.text_field :foster_term, class: "col-8 form-control" %>
+        </div>
+        <div class="form-group">
+          <%= vfa.label :max_time_alone %>
+          <%= vfa.text_field :max_time_alone, class: "col-8 form-control" %>
+        </div>
+
+
+      <div id="dog-foster-questions">
+        <h5>Do you have a fenced in yard?</h5>
+        <div class="custom-control custom-radio">
+          <%= vfa.radio_button :dog_fenced_in_yard, true, class: "custom-control-input" %>
+          <%= vfa.label :dog_fenced_in_yard, 'Yes', value: true, class: "custom-control-label" %>
+        </div>
+        <div class="custom-control custom-radio">
+          <%= vfa.radio_button :dog_fenced_in_yard, false, class: "custom-control-input" %>
+          <%= vfa.label :dog_fenced_in_yard, 'No', value: false, class: "custom-control-label" %>
+        </div>
+        <div class="form-group">
+          <%= vfa.label :dog_exercise %>
+          <%= vfa.text_area :dog_exercise, class: "col-8 form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= vfa.label :kept_during_day %>
+        <%= vfa.text_area :kept_during_day, class: "col-8 form-control" %>
+      </div>
+      <div class="form-group">
+        <%= vfa.label :kept_at_night %>
+        <%= vfa.text_area :kept_at_night, class: "col-8 form-control" %>
+      </div>
+      <div class="form-group">
+        <%= vfa.label :kept_when_alone %>
+        <%= vfa.text_area :kept_when_alone, class: "col-8 form-control" %>
+      </div>
+
+    <% end %>
+  </div>
+
     <%= f.submit "Submit", class: "btn btn-primary" %>
   </div>
 

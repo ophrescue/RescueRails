@@ -2,7 +2,7 @@
 
 [![Code Climate](https://codeclimate.com/github/ophrescue/RescueRails.png)](https://codeclimate.com/github/ophrescue/RescueRails) [![Build Status](https://travis-ci.org/ophrescue/RescueRails.svg?branch=master)](https://travis-ci.org/ophrescue/RescueRails) [![Coverage Status](https://coveralls.io/repos/github/ophrescue/RescueRails/badge.svg?branch=master)](https://coveralls.io/github/ophrescue/RescueRails?branch=master)
 
-Rails 5.2.x
+Rails 6.0.x
 Ruby 2.6.6
 Postgresql 9.6.x
 
@@ -33,7 +33,15 @@ CREATE SEQUENCE cat_tracking_id_seq START 1;
 \q                                              //quit and return to command prompt.
 ```
 
-Fire up the app and see what happens.  App is setup to run SSL always, might want to use POW as your webserver in dev.
+Launch the application in dev mode, if using the ubnutu example vagrant vm:
+```
+bundle exec rails server -b 0.0.0.0
+```
+
+(optional) in another session to speed up any webpack related development
+```
+./bin/webpack-dev-server -b 0.0.0.0
+```
 
 See `db/seeds.rb` for default admin login info
 

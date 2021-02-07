@@ -3,7 +3,228 @@
     <div class="col-12">
       <h1 class="mt-3 ml-2">New Volunteer Application</h1>
 
-      <%= render 'form' %>
+        <%= form_for @volunteer_app, html: { multipart: true } do |f| %>
+          <div class="ml-2">
+            <%= render 'shared/error_messages', :object => f.object %>
+
+            <div class="form-group">
+              <%= f.label :name %>
+              <%= f.text_field :name, class: "col-8 form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :email %>
+              <%= f.text_field :email, class: "col-8 form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :phone %>
+              <%= f.text_field :phone, class: "col-8 form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :address1 %>
+              <%= f.text_field :address1, class: "col-8 form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :address2 %>
+              <%= f.text_field :address2, class: "col-8 form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :city %>
+              <%= f.text_field :city, class: "col-8 form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :region, 'State' %>
+              <%= f.text_field :region, class: "col-8 form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :postal_code, 'Zip Code' %>
+              <%= f.text_field :postal_code, class: "col-8 form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :referrer, 'How did you hear about OPH?' %>
+              <%= f.text_field :referrer, class: "col-8 form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :about, 'Tell us about yourself, such as prior volunteer experience, current work, time availabity and any special interests.' %>
+              <%= f.text_area :about, class: "col-8 form-control" %>
+            </div>
+            <h3>What roles are you interested in?</h3>
+            <div class="form-check">
+              <%= f.check_box(:writing_interest) %>
+              <%= f.label(:writing_interest, "Writing, Marketing and Social Media") %>
+            </div>
+            <div class="form-check">
+              <%= f.check_box(:events_interest) %>
+              <%= f.label(:events_interest, "Event Coordination") %>
+            </div>
+            <div class="form-check">
+              <%= f.check_box :fostering_interest %>
+              <%= f.label(:fostering_interest, 'Fostering Dogs and Cats (Additional Questions Below)') %>
+            </div>
+            <div class="form-check">
+              <%= f.check_box(:training_interest) %>
+              <%= f.label(:training_interest, "Dog Training") %>
+            </div>
+            <div class="form-check">
+              <%= f.check_box(:fundraising_interest) %>
+              <%= f.label(:fundraising_interest, "Grants and Fundraising") %>
+            </div>
+            <div class="form-check">
+              <%= f.check_box(:transport_bb_interest) %>
+              <%= f.label(:transport_bb_interest, "Transport and Boarding Buddies") %>
+            </div>
+            <div class="form-check">
+              <%= f.check_box(:adoption_team_interest) %>
+              <%= f.label(:adoption_team_interest, "Adoption Team") %>
+            </div>
+            <div class="form-check">
+              <%= f.check_box(:admin_interest) %>
+              <%= f.label(:admin_interest, "Administration") %>
+            </div>
+
+          <div id="foster-questions", class="collapse">
+            <h3>Additional Foster Questions</h3>
+            <%= f.fields_for :volunteer_foster_app do |vfa| %>
+              <h5>What types of Animals do you want to foster?</h5>
+              <div class="form-check">
+                <%= vfa.check_box(:can_foster_dogs) %>
+                <%= vfa.label(:can_foster_dogs, "Dogs") %>
+              </div>
+              <div class="form-check">
+                <%= vfa.check_box(:can_foster_cats) %>
+                <%= vfa.label(:can_foster_cats, "Cats") %>
+              </div>
+
+              <h5>Do you rent or own you home?</h5>
+              <div id='rent-own-toggle'>
+                <div class="custom-control custom-radio">
+                  <%= vfa.radio_button :home_type, 'Rent', class: "custom-control-input home-type-toggle" %>
+                  <%= vfa.label :home_type, 'Rent', value: 'Rent', class: "custom-control-label" %>
+                </div>
+                <div class="custom-control custom-radio">
+                  <%= vfa.radio_button :home_type, 'Own', class: "custom-control-input home-type-toggle" %>
+                  <%= vfa.label :home_type, 'Own', value: 'Own', class: "custom-control-label" %>
+                </div>
+              </div>
+
+              <div id="foster-rental-questions" class='collapse' >
+                <h4>Rental Questions</h4>
+                <div class="form-group">
+                  <%= vfa.label :rental_restrictions, "Please detail any pet restrictions for your rental." %>
+                  <%= vfa.text_area :rental_restrictions, class: "col-8 form-control" %>
+                </div>
+                <div class="form-group">
+                  <%= vfa.label :rental_landlord_name %>
+                  <%= vfa.text_field :rental_landlord_name, class: "col-8 form-control" %>
+                </div>
+                <div class="form-group">
+                  <%= vfa.label :rental_landlord_info, "Landlord Contact Information (name, address, email, phone number)" %>
+                  <%= vfa.text_area :rental_landlord_info, class: "col-8 form-control" %>
+                </div>
+              </div>
+
+              <h5>Are there any pets in your home?</h5>
+                <div id='other-pets-toggle'>
+                  <div class="custom-control custom-radio">
+                    <%= vfa.radio_button :has_pets, true, class: "custom-control-input" %>
+                    <%= vfa.label :has_pets, 'Yes', value: true, class: "custom-control-label" %>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <%= vfa.radio_button :has_pets, false, class: "custom-control-input" %>
+                    <%= vfa.label :has_pets, 'No', value: false, class: "custom-control-label" %>
+                  </div>
+                </div>
+
+
+                <div id='other-pets-questions', class='collapse'>
+                  <h4>About your Pets</h4>
+                  <div class="form-group">
+                    <%= vfa.label :vet_info, "Please provide contact information for your Vet, including name, address and phone number." %>
+                    <%= vfa.text_area :vet_info, class: "col-8 form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%= vfa.label :current_pets, "Please list the ages, breeds and types of pets in your home." %>
+                    <%= vfa.text_area :current_pets, class: "col-8 form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%= vfa.label :current_pets_spay_neuter, "Are your currents pets spayed/neutered?  If no, why not?" %>
+                    <%= vfa.text_area :current_pets_spay_neuter, class: "col-8 form-control" %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <%= vfa.label :about_family, 'Tell us about the people living in your home' %>
+                  <%= vfa.text_area :about_family, class: "col-8 form-control" %>
+                </div>
+
+                <div class="form-group">
+                  <%= vfa.label :foster_experience, 'Detail your experience with dogs or cats, including:' %>
+                    <ul>
+                      <li>Kennel Cough</li>
+                      <li>Pregnancy</li>
+                      <li>Parvo</li>
+                      <li>Mange treatment</li>
+                      <li>Aggression</li>
+                      <li>Leash Training</li>
+                      <li>House/Litterbox Training</li>
+                      <li>Ringworm</li>
+                      <li>Puppies/Kittens</li>
+                      <li>Panleukopenia</li>
+                      <li>Respiratory infections</li>
+                      <li>Urinary Tract Infections</li>
+                    </ul>
+                  <%= vfa.text_area :foster_experience, class: "col-8 form-control" %>
+                </div>
+                <div class="form-group">
+                  <%= vfa.label :breed_pref, 'Do you have any breed /size Preferences or Restrictions?' %>
+                  <%= vfa.text_area :breed_pref, class: "col-8 form-control" %>
+                </div>
+                <div class="form-group">
+                  <%= vfa.label :ready_to_foster_dt, 'When can you begin fostering?' %>
+                  <%= vfa.text_field :ready_to_foster_dt, class: "col-8 form-control" %>
+                </div>
+                <div class="form-group">
+                  <%= vfa.label :max_time_alone, 'What is the maximum length of time in hours the dog or cat would be left alone?' %>
+                  <%= vfa.text_field :max_time_alone, class: "col-8 form-control" %>
+                </div>
+
+              <div id="dog-foster-questions", class='collapse'>
+                <h5>Do you have a fenced in yard?</h5>
+                <div class="custom-control custom-radio">
+                  <%= vfa.radio_button :dog_fenced_in_yard, true, class: "custom-control-input" %>
+                  <%= vfa.label :dog_fenced_in_yard, 'Yes', value: true, class: "custom-control-label" %>
+                </div>
+                <div class="custom-control custom-radio">
+                  <%= vfa.radio_button :dog_fenced_in_yard, false, class: "custom-control-input" %>
+                  <%= vfa.label :dog_fenced_in_yard, 'No', value: false, class: "custom-control-label" %>
+                </div>
+                <div class="form-group">
+                  <%= vfa.label :dog_exercise, 'How will the dog be exercised?' %>
+                  <%= vfa.text_area :dog_exercise, class: "col-8 form-control" %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= vfa.label :kept_during_day, "Where will foster pets be kept during the day?" %>
+                <%= vfa.text_area :kept_during_day, class: "col-8 form-control" %>
+              </div>
+              <div class="form-group">
+                <%= vfa.label :kept_at_night, "Where will foster pets be kept at night?" %>
+                <%= vfa.text_area :kept_at_night, class: "col-8 form-control" %>
+              </div>
+              <div class="form-group">
+                <%= vfa.label :kept_when_alone, "Where will foster pets be kept when they're alone?" %>
+                <%= vfa.text_area :kept_when_alone, class: "col-8 form-control" %>
+              </div>
+
+            <% end %>
+          </div>
+
+            <%= f.submit "Submit", class: "btn btn-primary" %>
+          </div>
+
+        <% end %>
     </div>
   </div>
 </div>
+
+<%= javascript_pack_tag 'volunteer_app' %>

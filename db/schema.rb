@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_29_221149) do
+ActiveRecord::Schema.define(version: 2021_02_07_170505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -638,7 +638,6 @@ ActiveRecord::Schema.define(version: 2021_01_29_221149) do
     t.text "about_family"
     t.text "breed_pref"
     t.date "ready_to_foster_dt"
-    t.string "foster_term"
     t.integer "max_time_alone"
     t.boolean "dog_fenced_in_yard"
     t.text "dog_exercise"
@@ -647,6 +646,7 @@ ActiveRecord::Schema.define(version: 2021_01_29_221149) do
     t.text "kept_when_alone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "foster_experience"
     t.index ["volunteer_app_id"], name: "index_volunteer_foster_apps_on_volunteer_app_id", unique: true
   end
 

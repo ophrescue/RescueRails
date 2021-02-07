@@ -17,7 +17,6 @@
 #  about_family             :text
 #  breed_pref               :text
 #  ready_to_foster_dt       :date
-#  foster_term              :string
 #  max_time_alone           :integer
 #  dog_fenced_in_yard       :boolean
 #  dog_exercise             :text
@@ -26,6 +25,7 @@
 #  kept_when_alone          :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
+#  foster_experience        :text
 #
 class VolunteerFosterApp < ApplicationRecord
 end

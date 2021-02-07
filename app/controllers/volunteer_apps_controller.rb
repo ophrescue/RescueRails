@@ -55,6 +55,28 @@ class VolunteerAppsController < ApplicationController
                                           :transport_bb_interest,
                                           :adoption_team_interest,
                                           :admin_interest,
-                                          :about)
+                                          :about,
+                                          volunteer_foster_app_attributes:[
+                                            :can_foster_dogs,
+                                            :can_foster_cats,
+                                            :home_type,
+                                            :rental_restrictions,
+                                            :rental_landlord_name,
+                                            :rental_landlord_info,
+                                            :has_pets,
+                                            :vet_info,
+                                            :current_pets,
+                                            :current_pets_spay_neut,
+                                            :about_family,
+                                            :breed_pref,
+                                            :ready_to_foster_dt,
+                                            :max_time_alone,
+                                            :dog_fenced_in_yard,
+                                            :dog_exercise,
+                                            :kept_during_day,
+                                            :kept_at_night,
+                                            :kept_when_alone,
+                                            :foster_experience
+                                          ])
   end
 end

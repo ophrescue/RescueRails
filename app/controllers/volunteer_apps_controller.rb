@@ -22,6 +22,9 @@ class VolunteerAppsController < ApplicationController
 
   def create
     @volunteer_app = VolunteerApp.new(volunteer_app_params)
+    if !@volunteer_app.fostering_interest
+      @volunteer_app.volunteer_foster_app = nil
+    end
     #@volunteer_app.status = 'new'
 
     if @volunteer_app.save

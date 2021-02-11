@@ -39,8 +39,8 @@ jobs:
       - name: List Bundle
         run: bundle list
 
-      - name: Install Postgresql client
-        run: sudo apt-get -yqq install libpq-dev
+      - name: Install Postgresql client and libffi
+        run: sudo apt-get -yqq install libpq-dev libffi-dev
 
       - name: Setup Database
         run: |

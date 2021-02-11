@@ -19,16 +19,16 @@ class AdoptionAppController < ApplicationController
   respond_to :html, :json
 
   def update
-    @adopter = AdoptionApp.find(params[:id])
-    if @adopter.update(adoption_app_params)
+    @adoption_app = AdoptionApp.find(params[:id])
+    if @adoption_app.update(adoption_app_params)
       flash[:success] = "Application Updated"
-      respond_with(@adopter) do |format|
+      respond_with(@adoption_app) do |format|
         format.html { handle_redirect }
         format.json { render json: @adopter }
       end
     else
-      flash[:error]
-      redirect_to adopter_url(@adopter)
+      flash[:error] = @adoption_app.errors.full_messages[0]
+      redirect_to adopter_url(@adoption_app.adopter)
     end
   end
 

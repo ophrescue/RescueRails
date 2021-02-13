@@ -92,6 +92,7 @@ class Adopter < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :phone, presence: true, length: { in: 10..25 }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates_uniqueness_of :email, message: 'You have already submitted an adoption application, please email adopt@ophrescue.org to update your application or to adopt again.', on: :create
   validates :secondary_email, allow_blank: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :address1, presence: true, length: { maximum: 255 }
   validates :address2, allow_blank: true, length: { maximum: 255 }

@@ -50,7 +50,7 @@ gem 'delayed_job_active_record'
 # Gems used only for assets and not required
 # in production environments by default.
 
-gem 'sass-rails'
+gem 'sassc', '~> 2.4'
 gem 'mini_racer', '>= 0.2.3', platforms: :ruby
 gem 'uglifier'
 

@@ -106,6 +106,7 @@ class Adopter < ApplicationRecord
   validates_presence_of :status
   validates_inclusion_of :status, in: STATUSES
 
+  before_validation :downcase_email
   before_create :chimp_subscribe
   before_update :chimp_check, :approved_notification
   before_save :populate_county
@@ -197,5 +198,10 @@ class Adopter < ApplicationRecord
 
   def persisted_comments
     comments.select(&:persisted?)
+  end
+
+  private
+  def downcase_email
+    self.email = email.downcase if email.present?
   end
 end

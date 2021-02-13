@@ -85,8 +85,10 @@ class AdoptersController < ApplicationController
     @adopter = Adopter.new(adopter_params)
     @adopter.status = 'new'
 
-    if @adopter.adoption_app.ready_to_adopt_dt.blank?
-      @adopter.adoption_app.ready_to_adopt_dt = Date.today
+    if @adopter.adoption_app.present?
+      if @adopter.adoption_app.ready_to_adopt_dt.blank?
+        @adopter.adoption_app.ready_to_adopt_dt = Date.today
+      end
     end
 
     if @adopter.save

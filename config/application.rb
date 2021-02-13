@@ -34,6 +34,11 @@ module RescueRails
     # Precompile asset file
     config.assets.precompile = ['.js', '.css', '*.css.erb', '.scss', '*.jpg', '*.png']
 
+    # https://github.com/sass/sassc-ruby/issues/207
+    config.assets.configure do |env|
+      env.export_concurrent = false
+    end
+
     # we have a custom file in support of the faker gem
     I18n.load_path += Dir[ Rails.root.join("lib","locales","**/*.yml").to_s ]
 

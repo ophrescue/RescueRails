@@ -29,7 +29,7 @@ class AdoptAppMailer < ActionMailer::Base
   def approved_to_adopt(adopter_id)
     @adopter = Adopter.find(adopter_id)
     mail(to: "#{@adopter.email}",
-      subject: "Your OPH Adoption has been Approved",
+      subject: "It is Time to Prepare for Adoption",
       content_type: 'text/html')
   end
 end

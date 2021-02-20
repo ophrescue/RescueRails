@@ -6,7 +6,7 @@ fosterToggle.addEventListener('click', function (event) {
 let rentToggle = document.getElementById('rent-own-toggle')
 rentToggle.addEventListener('change', function (event) {
   console.log(`${event.target.value} is picked`);
-  if (event.target.value === 'Rent') {
+  if (event.target.value === 'rent') {
     document.getElementById('foster-rental-questions').classList.remove('collapse')
   } else {
     document.getElementById('foster-rental-questions').classList.add('collapse')

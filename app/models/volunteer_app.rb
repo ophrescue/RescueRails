@@ -40,4 +40,11 @@ class VolunteerApp < ApplicationRecord
   validates :postal_code, presence: true, length: { in: 5..10 }
   validates :referrer, allow_blank: true, length: { maximum: 255 }
   validates :about, presence: true, length: { maximum: 30000 }
+
+  STATUSES = ['new',
+              'workup',
+              'ready for call',
+              'on hold',
+              'approved',
+              'withdrawn']
 end

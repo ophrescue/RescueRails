@@ -98,11 +98,11 @@
               <div id='rent-own-toggle'>
                 <div class="custom-control custom-radio">
                   <%= vfa.radio_button :home_type, 'Rent', class: "custom-control-input home-type-toggle" %>
-                  <%= vfa.label :home_type, 'Rent', value: 'Rent', class: "custom-control-label" %>
+                  <%= vfa.label :home_type, 'Rent', value: 'rent', class: "custom-control-label" %>
                 </div>
                 <div class="custom-control custom-radio">
                   <%= vfa.radio_button :home_type, 'Own', class: "custom-control-input home-type-toggle" %>
-                  <%= vfa.label :home_type, 'Own', value: 'Own', class: "custom-control-label" %>
+                  <%= vfa.label :home_type, 'Own', value: 'own', class: "custom-control-label" %>
                 </div>
               </div>
 
@@ -152,7 +152,7 @@
                 </div>
 
                 <div class="form-group">
-                  <%= vfa.label :about_family, 'Tell us about the people living in your home' %>
+                  <%= vfa.label :about_family, 'Tell us about the people living in your home including ages.' %>
                   <%= vfa.text_area :about_family, class: "col-8 form-control" %>
                 </div>
 
@@ -217,6 +217,15 @@
               </div>
 
             <% end %>
+
+          <h4>References</h4>
+          <p>Providing email addresses for your references can often speed up the review process.</p>
+
+          <% @i = 1 %>
+          <%= f.fields_for :volunteer_references do |builder| %>
+            <%= render 'volunteer_apps/steps/volunteer_reference_fields', :rf => builder %>
+          <% end %>
+
           </div>
 
             <%= f.submit "Submit", class: "btn btn-primary" %>

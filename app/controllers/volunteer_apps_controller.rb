@@ -25,7 +25,7 @@ class VolunteerAppsController < ApplicationController
     if !@volunteer_app.fostering_interest
       @volunteer_app.volunteer_foster_app = nil
     end
-    #@volunteer_app.status = 'new'
+    @volunteer_app.status = 'new'
 
     if @volunteer_app.save
       flash[:success] = 'Volunteer Application Submitted Successfully'
@@ -80,6 +80,14 @@ class VolunteerAppsController < ApplicationController
                                             :kept_at_night,
                                             :kept_when_alone,
                                             :foster_experience
+                                          ],
+                                          references_attributes:
+                                          [
+                                            :id,
+                                            :name,
+                                            :phone,
+                                            :email,
+                                            :relationship
                                           ])
   end
 end

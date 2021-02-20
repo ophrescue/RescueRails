@@ -9,7 +9,7 @@ jobs:
   test:
     services:
       postgres:
-        image: postgres:9.6
+        image: postgres:12.5
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres

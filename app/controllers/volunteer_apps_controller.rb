@@ -1,15 +1,15 @@
 class VolunteerAppsController < ApplicationController
   before_action :select_bootstrap41
-  before_action :require_login, except: %i(new create complete)
-  before_action :admin_user, only: %i(destroy)
+  before_action :admin_user
+  # before_action :admin_user, except: %i(new create complete)
 
   def index
     @volunteer_apps = VolunteerApp.order(id: :desc)
   end
 
   def show
-    @title = @volunteer_app.name
-
+    @volunteer_app = VolunteerApp.find(params[:id])
+    @title = "Volunteer App: " + @volunteer_app.name
   end
 
   def new
@@ -39,6 +39,10 @@ class VolunteerAppsController < ApplicationController
   end
 
   private
+
+  def admin_user
+    redirect_to(new_donation_path) unless current_user.admin?
+  end
 
   def volunteer_app_params
     params.require(:volunteer_app).permit(:name,

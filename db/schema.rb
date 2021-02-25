@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_20_163531) do
+ActiveRecord::Schema.define(version: 2021_02_25_220220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -622,6 +622,8 @@ ActiveRecord::Schema.define(version: 2021_02_20_163531) do
     t.boolean "admin_interest"
     t.text "about"
     t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "volunteer_foster_apps", force: :cascade do |t|

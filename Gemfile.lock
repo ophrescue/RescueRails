@@ -212,7 +212,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
     hitimes (2.0.0)
-    honeybadger (4.7.2)
+    honeybadger (4.7.3)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     i18n_data (0.10.0)

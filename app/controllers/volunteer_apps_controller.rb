@@ -73,7 +73,7 @@ class VolunteerAppsController < ApplicationController
                                             :has_pets,
                                             :vet_info,
                                             :current_pets,
-                                            :current_pets_spay_neut,
+                                            :current_pets_spay_neuter,
                                             :about_family,
                                             :breed_pref,
                                             :ready_to_foster_dt,
@@ -85,7 +85,7 @@ class VolunteerAppsController < ApplicationController
                                             :kept_when_alone,
                                             :foster_experience
                                           ],
-                                          references_attributes:
+                                          volunteer_references_attributes:
                                           [
                                             :id,
                                             :name,

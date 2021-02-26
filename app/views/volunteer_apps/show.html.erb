@@ -39,7 +39,9 @@
         <%= @volunteer_app.referrer %> <br/>
         <%= @volunteer_app.about %> <br/>
 
-      <%= @volunteer_app.created_at %> <br/>
+      Created: <%= @volunteer_app.created_at %> <br/>
+
+      <%= render "volunteer_foster_app" if @volunteer_app.fostering_interest %>
 
     </div>
   </div>

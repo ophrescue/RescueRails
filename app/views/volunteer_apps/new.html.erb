@@ -9,19 +9,19 @@
 
             <div class="form-group">
               <%= f.label :name %>
-              <%= f.text_field :name, class: "col-8 form-control" %>
+              <%= f.text_field :name, class: "col-8 form-control", required: true %>
             </div>
             <div class="form-group">
               <%= f.label :email %>
-              <%= f.text_field :email, class: "col-8 form-control" %>
+              <%= f.text_field :email, class: "col-8 form-control", required: true %>
             </div>
             <div class="form-group">
               <%= f.label :phone %>
-              <%= f.text_field :phone, class: "col-8 form-control" %>
+              <%= f.text_field :phone, class: "col-8 form-control", required: true %>
             </div>
             <div class="form-group">
               <%= f.label :address1 %>
-              <%= f.text_field :address1, class: "col-8 form-control" %>
+              <%= f.text_field :address1, class: "col-8 form-control", required: true %>
             </div>
             <div class="form-group">
               <%= f.label :address2 %>
@@ -29,11 +29,11 @@
             </div>
             <div class="form-group">
               <%= f.label :city %>
-              <%= f.text_field :city, class: "col-8 form-control" %>
+              <%= f.text_field :city, class: "col-8 form-control", required: true %>
             </div>
             <div class="form-group">
               <%= f.label :region, 'State' %>
-              <%= f.text_field :region, class: "col-8 form-control" %>
+              <%= f.text_field :region, class: "col-8 form-control", required: true %>
             </div>
             <div class="form-group">
               <%= f.label :postal_code, 'Zip Code' %>
@@ -45,7 +45,7 @@
             </div>
             <div class="form-group">
               <%= f.label :about, 'Tell us about yourself, such as prior volunteer experience, current work, time availabity and any special interests.' %>
-              <%= f.text_area :about, class: "col-8 form-control" %>
+              <%= f.text_area :about, class: "col-8 form-control", required: true %>
             </div>
             <h3>What roles are you interested in?</h3>
             <div class="form-check">

@@ -15,7 +15,6 @@
 #  when_to_call        :string
 #  created_at          :datetime
 #  updated_at          :datetime
-#  dog_or_cat          :string
 #  dog_reqs            :text
 #  why_adopt           :text
 #  dog_name            :string
@@ -26,6 +25,9 @@
 #  completed_date      :date
 #  county              :string
 #  training_email_sent :boolean          default(FALSE), not null
+#  dog_or_cat          :string
+#  secondary_email     :string
+#  is_address_valid    :boolean          default(TRUE)
 #
 
 require 'rails_helper'

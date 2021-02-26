@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div clas="col-12">
+        <%= @volunteer_app.name %>
+        <ul>
+          <% if @volunteer_app.writing_interest %>
+        <li>Writing</li>
+        <% end %>
+        <% if @volunteer_app.events_interest %>
+            <li>Events</li>
+        <% end %>
+        <% if @volunteer_app.fostering_interest %>
+          <li>Fostering</li>
+        <% end %>
+        <% if @volunteer_app.training_interest %>
+          <li>Training</li>
+        <% end %>
+        <% if @volunteer_app.fundraising_interest %>
+          <li>Fundraising</li>
+        <% end %>
+        <% if @volunteer_app.transport_bb_interest %>
+          <li>Transport and Boarding Buddies</li>
+        <% end %>
+        <% if @volunteer_app.adoption_team_interest %>
+          <li>Adoption Team</li>
+        <% end %>
+        <% if @volunteer_app.admin_interest %>
+          <li>Administrative</li>
+        <% end %>
+        </ul>
+
+        <%= @volunteer_app.email %> <br/>
+        <%= @volunteer_app.phone %> <br/>
+        <%= @volunteer_app.address1 %> <br/>
+        <%= @volunteer_app.address2 %> <br/>
+        <%= @volunteer_app.city %> <br/>
+        <%= @volunteer_app.region %> <br/>
+        <%= @volunteer_app.postal_code %> <br/>
+        <%= @volunteer_app.referrer %> <br/>
+        <%= @volunteer_app.about %> <br/>
+
+      Created: <%= @volunteer_app.created_at %> <br/>
+
+      <%= render "volunteer_foster_app" if @volunteer_app.fostering_interest %>
+
+    </div>
+  </div>
+</div>

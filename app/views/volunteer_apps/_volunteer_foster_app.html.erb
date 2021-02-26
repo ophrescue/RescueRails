@@ -1,0 +1,32 @@
+
+<%= @volunteer_app.volunteer_foster_app.can_foster_dogs %> <br/>
+<%= @volunteer_app.volunteer_foster_app.can_foster_cats %> <br/>
+
+<%= @volunteer_app.volunteer_foster_app.home_type %> <br/>
+<%= @volunteer_app.volunteer_foster_app.rental_restrictions %> <br/>
+<%= @volunteer_app.volunteer_foster_app.rental_landlord_name %> <br/>
+<%= @volunteer_app.volunteer_foster_app.rental_landlord_info %> <br/>
+
+<%= @volunteer_app.volunteer_foster_app.has_pets %> <br/>
+<%= @volunteer_app.volunteer_foster_app.vet_info %> <br/>
+<%= @volunteer_app.volunteer_foster_app.current_pets %> <br/>
+<%= @volunteer_app.volunteer_foster_app.current_pets_spay_neuter %> <br/>
+
+<%= @volunteer_app.volunteer_foster_app.about_family %> <br/>
+<%= @volunteer_app.volunteer_foster_app.breed_pref %> <br/>
+<%= @volunteer_app.volunteer_foster_app.ready_to_foster_dt %> <br/>
+<%= @volunteer_app.volunteer_foster_app.max_time_alone %> <br/>
+<%= @volunteer_app.volunteer_foster_app.dog_fenced_in_yard %> <br/>
+<%= @volunteer_app.volunteer_foster_app.dog_exercise %> <br/>
+<%= @volunteer_app.volunteer_foster_app.kept_during_day %> <br/>
+<%= @volunteer_app.volunteer_foster_app.kept_at_night %> <br/>
+<%= @volunteer_app.volunteer_foster_app.kept_when_alone %> <br/>
+
+<%= @volunteer_app.volunteer_foster_app.foster_experience %> <br/>
+
+<% @volunteer_app.volunteer_references.each do |ref| %>
+  <%= ref.name %><br/>
+  <%= ref.email %><br/>
+  <%= ref.phone %><br/>
+  <%= ref.relationship %><br/>
+<% end%>

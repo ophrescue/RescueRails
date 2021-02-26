@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_17_184124) do
+ActiveRecord::Schema.define(version: 2021_02_25_220220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -602,8 +602,72 @@ ActiveRecord::Schema.define(version: 2021_01_17_184124) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  create_table "volunteer_apps", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.string "address1"
+    t.string "address2"
+    t.string "city"
+    t.string "region", limit: 2, comment: "Region (state or province) as a 2 character ISO 3166-2 code"
+    t.string "postal_code", comment: "Postal code - ZIP code for US addresses"
+    t.string "referrer"
+    t.boolean "writing_interest"
+    t.boolean "events_interest"
+    t.boolean "fostering_interest"
+    t.boolean "training_interest"
+    t.boolean "fundraising_interest"
+    t.boolean "transport_bb_interest"
+    t.boolean "adoption_team_interest"
+    t.boolean "admin_interest"
+    t.text "about"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "volunteer_foster_apps", force: :cascade do |t|
+    t.bigint "volunteer_app_id"
+    t.boolean "can_foster_dogs"
+    t.boolean "can_foster_cats"
+    t.string "home_type"
+    t.text "rental_restrictions"
+    t.string "rental_landlord_name"
+    t.text "rental_landlord_info"
+    t.boolean "has_pets"
+    t.text "vet_info"
+    t.text "current_pets"
+    t.text "current_pets_spay_neuter"
+    t.text "about_family"
+    t.text "breed_pref"
+    t.date "ready_to_foster_dt"
+    t.integer "max_time_alone"
+    t.boolean "dog_fenced_in_yard"
+    t.text "dog_exercise"
+    t.text "kept_during_day"
+    t.text "kept_at_night"
+    t.text "kept_when_alone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "foster_experience"
+    t.index ["volunteer_app_id"], name: "index_volunteer_foster_apps_on_volunteer_app_id", unique: true
+  end
+
+  create_table "volunteer_references", force: :cascade do |t|
+    t.bigint "volunteer_app_id"
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.string "relationship"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["volunteer_app_id"], name: "index_volunteer_references_on_volunteer_app_id"
+  end
+
   add_foreign_key "invoices", "donations"
   add_foreign_key "invoices", "users"
   add_foreign_key "treatment_records", "treatments"
   add_foreign_key "treatment_records", "users"
+  add_foreign_key "volunteer_foster_apps", "volunteer_apps"
+  add_foreign_key "volunteer_references", "volunteer_apps"
 end

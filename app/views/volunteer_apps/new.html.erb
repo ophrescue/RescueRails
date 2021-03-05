@@ -2,26 +2,28 @@
   <div class="row">
     <div class="col-12">
       <h1 class="mt-3 ml-2">New Volunteer Application</h1>
-
-        <%= form_for @volunteer_app, html: { multipart: true } do |f| %>
+        <%= form_for @volunteer_app, html: { multipart: true, novalidate: true, class: 'needs-validation' } do |f| %>
           <div class="ml-2">
             <%= render 'shared/error_messages', :object => f.object %>
-
             <div class="form-group">
               <%= f.label :name %>
               <%= f.text_field :name, class: "col-8 form-control", required: true %>
+              <div class='invalid-feedback'><%= validation_error_message_for(f,:name) %></div>
             </div>
             <div class="form-group">
               <%= f.label :email %>
               <%= f.text_field :email, class: "col-8 form-control", required: true %>
+              <div class='invalid-feedback'><%= validation_error_message_for(f,:email) %></div>
             </div>
             <div class="form-group">
               <%= f.label :phone %>
               <%= f.text_field :phone, class: "col-8 form-control", required: true %>
+              <div class='invalid-feedback'><%= validation_error_message_for(f,:phone) %></div>
             </div>
             <div class="form-group">
               <%= f.label :address1 %>
               <%= f.text_field :address1, class: "col-8 form-control", required: true %>
+              <div class='invalid-feedback'><%= validation_error_message_for(f,:address1) %></div>
             </div>
             <div class="form-group">
               <%= f.label :address2 %>
@@ -30,14 +32,19 @@
             <div class="form-group">
               <%= f.label :city %>
               <%= f.text_field :city, class: "col-8 form-control", required: true %>
+              <div class='invalid-feedback'><%= validation_error_message_for(f,:city) %></div>
             </div>
             <div class="form-group">
-              <%= f.label :region, 'State' %>
-              <%= f.text_field :region, class: "col-8 form-control", required: true %>
+              <%= f.label :region, 'State/Region' %>
+              <%= f.text_field :region, class: "col-8 form-control", maxlength: 2, required: true %>
+              <small class="form-text text-muted">Two Letter Abbreviation PA, MD, VA, etc.</small>
+              <div class='invalid-feedback'><%= validation_error_message_for(f,:region) %></div>
             </div>
             <div class="form-group">
-              <%= f.label :postal_code, 'Zip Code' %>
-              <%= f.text_field :postal_code, class: "col-8 form-control" %>
+              <%= f.label :postal_code, 'Postal/Zip Code' %>
+              <%= f.text_field :postal_code, class: "col-8 form-control", maxlength: 5, required: true %>
+              <small class="form-text text-muted">5 Digit Zip Code</small>
+              <div class='invalid-feedback'><%= validation_error_message_for(f,:postal_code) %></div>
             </div>
             <div class="form-group">
               <%= f.label :referrer, 'How did you hear about OPH?' %>
@@ -46,6 +53,7 @@
             <div class="form-group">
               <%= f.label :about, 'Tell us about yourself, such as prior volunteer experience, current work, time availabity and any special interests.' %>
               <%= f.text_area :about, class: "col-8 form-control", required: true %>
+              <div class='invalid-feedback'><%= validation_error_message_for(f,:about) %></div>
             </div>
             <h3>What roles are you interested in?</h3>
             <div class="form-check">
@@ -140,14 +148,17 @@
                   <div class="form-group">
                     <%= vfa.label :vet_info, "Please provide contact information for your Vet, including name, address and phone number." %>
                     <%= vfa.text_area :vet_info, class: "col-8 form-control" %>
+                    <div class='invalid-feedback'><%= validation_error_message_for(f,:vet_info) %></div>
                   </div>
                   <div class="form-group">
                     <%= vfa.label :current_pets, "Please list the ages, breeds and types of pets in your home." %>
                     <%= vfa.text_area :current_pets, class: "col-8 form-control" %>
+                    <div class='invalid-feedback'><%= validation_error_message_for(f,:current_pets) %></div>
                   </div>
                   <div class="form-group">
                     <%= vfa.label :current_pets_spay_neuter, "Are your currents pets spayed/neutered?  If no, why not?" %>
                     <%= vfa.text_area :current_pets_spay_neuter, class: "col-8 form-control" %>
+                    <div class='invalid-feedback'><%= validation_error_message_for(f,:current_pets_spay_neuter) %></div>
                   </div>
                 </div>
 
@@ -173,14 +184,17 @@
                       <li>Urinary Tract Infections</li>
                     </ul>
                   <%= vfa.text_area :foster_experience, class: "col-8 form-control" %>
+                  <div class='invalid-feedback'><%= validation_error_message_for(f,:foster_experience) %></div>
                 </div>
                 <div class="form-group">
                   <%= vfa.label :breed_pref, 'Do you have any breed /size Preferences or Restrictions?' %>
                   <%= vfa.text_area :breed_pref, class: "col-8 form-control" %>
+                  <div class='invalid-feedback'><%= validation_error_message_for(f,:breed_pref) %></div>
                 </div>
                 <div class="form-group">
                   <%= vfa.label :ready_to_foster_dt, 'When can you begin fostering?' %>
                   <%= vfa.text_field :ready_to_foster_dt, class: "col-8 form-control" %>
+                  <div class='invalid-feedback'><%= validation_error_message_for(f,:ready_to_foster_dt) %></div>
                 </div>
                 <div class="form-group">
                   <%= vfa.label :max_time_alone, 'What is the maximum length of time in hours the dog or cat would be left alone?' %>
@@ -202,20 +216,21 @@
                   <%= vfa.text_area :dog_exercise, class: "col-8 form-control" %>
                 </div>
               </div>
-
               <div class="form-group">
                 <%= vfa.label :kept_during_day, "Where will foster pets be kept during the day?" %>
                 <%= vfa.text_area :kept_during_day, class: "col-8 form-control" %>
+                <div class='invalid-feedback'><%= validation_error_message_for(f,:kept_during_day) %></div>
               </div>
               <div class="form-group">
                 <%= vfa.label :kept_at_night, "Where will foster pets be kept at night?" %>
                 <%= vfa.text_area :kept_at_night, class: "col-8 form-control" %>
+                <div class='invalid-feedback'><%= validation_error_message_for(f,:kept_at_night) %></div>
               </div>
               <div class="form-group">
                 <%= vfa.label :kept_when_alone, "Where will foster pets be kept when they're alone?" %>
                 <%= vfa.text_area :kept_when_alone, class: "col-8 form-control" %>
+                <div class='invalid-feedback'><%= validation_error_message_for(f,:kept_when_alone) %></div>
               </div>
-
             <% end %>
 
           <h4>References</h4>

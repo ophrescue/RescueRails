@@ -24,4 +24,5 @@ jQuery(function($){
    $("#adopter_references_attributes_2_phone").inputmask("(999) 999-9999");
    $("#event_location_phone").inputmask("(999) 999-9999");
    $("#banned_adopter_phone").inputmask("(999) 999-9999");
+   $("#volunteer_app_phone").inputmask("(999) 999-9999");
 });

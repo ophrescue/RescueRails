@@ -56,4 +56,8 @@ $(function() {
   $('#treatment_record_administered_date').datepicker({
     dateFormat: 'yy-mm-dd'
   });
+
+  $('#volunteer_app_volunteer_foster_app_attributes_ready_to_foster_dt').datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
 });

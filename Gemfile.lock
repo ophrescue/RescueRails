@@ -407,7 +407,7 @@ GEM
     stackprof (0.2.16)
     strip_attributes (1.11.0)
       activemodel (>= 3.0, < 7.0)
-    stripe (5.29.1)
+    stripe (5.30.0)
     stripe-ruby-mock (2.5.8)
       dante (>= 0.2.0)
       multi_json (~> 1.0)

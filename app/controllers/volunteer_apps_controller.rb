@@ -24,6 +24,7 @@ class VolunteerAppsController < ApplicationController
     @volunteer_app = VolunteerApp.new(volunteer_app_params)
     if !@volunteer_app.fostering_interest
       @volunteer_app.volunteer_foster_app = nil
+      @volunteer_app.volunteer_references.destroy_all
     end
     @volunteer_app.status = 'new'
 

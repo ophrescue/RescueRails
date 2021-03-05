@@ -23,6 +23,9 @@
 #  about                  :text
 #
 class VolunteerApp < ApplicationRecord
+  include ClientValidated
+
+  VALIDATION_ERROR_MESSAGES = { name: :blank }
 
   has_many :volunteer_references, dependent: :destroy
   accepts_nested_attributes_for :volunteer_references

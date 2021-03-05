@@ -265,3 +265,8 @@ en:
       title: 'Staff Directory'
     new:
       title: 'Add a Staff Account'
+  volunteer_apps:
+    new:
+      title: 'New Volunteer Application'
+    index:
+      title: 'Volunteer Applications'

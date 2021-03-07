@@ -1,0 +1,12 @@
+<%= form_tag volunteer_apps_path, :method => 'get', :class => 'form-inline' do %>
+  <p><%= text_field_tag :search, params[:search], placeholder: 'Search by Name or Email', size: 30, class: "form-control" %>
+  <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+  <%= link_to "Reset", volunteer_apps_path, class: "btn btn-secondary" %></p>
+<% end %>
+
+<%= form_tag volunteer_apps_path, :method => 'get', :class => 'form-inline' do %>
+  <p><%= select_tag :status, options_for_select(VolunteerApp::STATUSES.as_options), class: "form-control" %>
+  <%= select_tag :interests, options_for_select(VolunteerApp::INTERESTS.as_options), class: "form-control" %>
+  <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+  <%= link_to "Reset", volunteer_apps_path, class: "btn btn-secondary" %></p>
+<% end %>

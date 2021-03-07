@@ -50,4 +50,13 @@ class VolunteerApp < ApplicationRecord
               'on hold',
               'approved',
               'withdrawn']
+
+  INTERESTS = ['writing',
+               'events',
+               'fostering',
+               'training',
+               'fundraising',
+               'transport',
+               'adoption',
+               'admin']
 end

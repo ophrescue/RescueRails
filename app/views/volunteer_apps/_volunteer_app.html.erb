@@ -1,33 +1,35 @@
-<div class="row">
-  <div class="col-12">
-  <%= link_to volunteer_app.name, volunteer_app %>
-  <%= volunteer_app.status %>
-  <%= volunteer_app.city %>, <%= volunteer_app.region %>
-  <ul>
-    <% if volunteer_app.writing_interest %>
-      <li>Writing</li>
+<div class="row line-1">
+  <div class="col-4">
+    <%= link_to volunteer_app.name, volunteer_app %>
+    <ul>
+      <% if volunteer_app.writing_interest %>
+        <li>Writing</li>
+      <% end %>
+      <% if volunteer_app.events_interest %>
+      <li>Events</li>
+      <% end %>
+    <% if volunteer_app.fostering_interest %>
+      <li>Fostering</li>
     <% end %>
-    <% if volunteer_app.events_interest %>
-    <li>Events</li>
+    <% if volunteer_app.training_interest %>
+      <li>Training</li>
     <% end %>
-  <% if volunteer_app.fostering_interest %>
-    <li>Fostering</li>
-  <% end %>
-  <% if volunteer_app.training_interest %>
-    <li>Training</li>
-  <% end %>
-  <% if volunteer_app.fundraising_interest %>
-    <li>Fundraising</li>
-  <% end %>
-  <% if volunteer_app.transport_bb_interest %>
-    <li>Transport and Boarding Buddies</li>
-  <% end %>
-  <% if volunteer_app.adoption_team_interest %>
-    <li>Adoption Team</li>
-  <% end %>
-  <% if volunteer_app.admin_interest %>
-    <li>Administrative</li>
-  <% end %>
-  </ul>
+    <% if volunteer_app.fundraising_interest %>
+      <li>Fundraising</li>
+    <% end %>
+    <% if volunteer_app.transport_bb_interest %>
+      <li>Transport and Boarding Buddies</li>
+    <% end %>
+    <% if volunteer_app.adoption_team_interest %>
+      <li>Adoption Team</li>
+    <% end %>
+    <% if volunteer_app.admin_interest %>
+      <li>Administrative</li>
+    <% end %>
+    </ul>
+  </div>
+  <div class="col-5 offset-1">
+    Status: <%= volunteer_app.status.capitalize %> <br />
+    <%= volunteer_app.city %>, <%= volunteer_app.region %>
   </div>
 </div>

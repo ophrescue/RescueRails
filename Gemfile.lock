@@ -199,7 +199,7 @@ GEM
       railties (>= 3.2, < 7)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
-    geocoder (1.6.5)
+    geocoder (1.6.6)
     gibbon (3.3.4)
       faraday (>= 0.16.0)
       multi_json (>= 1.11.0)

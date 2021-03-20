@@ -1,32 +1,56 @@
 
-<%= @volunteer_app.volunteer_foster_app.can_foster_dogs %> <br/>
-<%= @volunteer_app.volunteer_foster_app.can_foster_cats %> <br/>
+<dl>
+  <dt>Foster Type</dt>
+  <dd><%= 'Dogs' if @volunteer_app.volunteer_foster_app.can_foster_dogs %></dd>
+  <dd><%= 'Cats' if @volunteer_app.volunteer_foster_app.can_foster_cats %></dd>
+  <dt>Home Type</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.home_type %></dd>
+  <dt>Rental Restrictions</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.rental_restrictions %></dd>
+  <dt>Landlord Info</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.rental_landlord_name %></dd>
+  <dd><%= @volunteer_app.volunteer_foster_app.rental_landlord_info %></dd>
 
-<%= @volunteer_app.volunteer_foster_app.home_type %> <br/>
-<%= @volunteer_app.volunteer_foster_app.rental_restrictions %> <br/>
-<%= @volunteer_app.volunteer_foster_app.rental_landlord_name %> <br/>
-<%= @volunteer_app.volunteer_foster_app.rental_landlord_info %> <br/>
+  <% if @volunteer_app.volunteer_foster_app.has_pets %>
+  <dt>Has Other Pets in Home</dt>
+  <dt>Vet Info</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.vet_info %></dd>
+  <dt>Curent Pets</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.current_pets %></dd>
+  <dt>Spay/Neuter of Current Pets</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.current_pets_spay_neuter %></dd>
+  <% end %>
 
-<%= @volunteer_app.volunteer_foster_app.has_pets %> <br/>
-<%= @volunteer_app.volunteer_foster_app.vet_info %> <br/>
-<%= @volunteer_app.volunteer_foster_app.current_pets %> <br/>
-<%= @volunteer_app.volunteer_foster_app.current_pets_spay_neuter %> <br/>
+  <dt>About Family</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.about_family %></dd>
+  <dt>Breed Preference</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.breed_pref %></dd>
+  <dt>Ready to Foster Date</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.ready_to_foster_dt %></dd>
+  <dt>Max Time Alone</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.max_time_alone %></dd>
+  <% if @volunteer_app.volunteer_foster_app.dog_fenced_in_yard %>
+    <dt>Has a fenced in yard</dt>
+  <% else %>
+    <dt>Does not have a fenced in yard</dt>
+  <% end %>
+  <dt>Dog Exercise</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.dog_exercise %></dd>
+  <dt>Kept During Day</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.kept_during_day %></dd>
+  <dt>Kept at Night</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.kept_at_night %></dd>
+  <dt>Kept when Alone</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.kept_when_alone %></dd>
+  <dt>Foster Experience</dt>
+  <dd><%= @volunteer_app.volunteer_foster_app.foster_experience %></dd>
+</dl>
 
-<%= @volunteer_app.volunteer_foster_app.about_family %> <br/>
-<%= @volunteer_app.volunteer_foster_app.breed_pref %> <br/>
-<%= @volunteer_app.volunteer_foster_app.ready_to_foster_dt %> <br/>
-<%= @volunteer_app.volunteer_foster_app.max_time_alone %> <br/>
-<%= @volunteer_app.volunteer_foster_app.dog_fenced_in_yard %> <br/>
-<%= @volunteer_app.volunteer_foster_app.dog_exercise %> <br/>
-<%= @volunteer_app.volunteer_foster_app.kept_during_day %> <br/>
-<%= @volunteer_app.volunteer_foster_app.kept_at_night %> <br/>
-<%= @volunteer_app.volunteer_foster_app.kept_when_alone %> <br/>
-
-<%= @volunteer_app.volunteer_foster_app.foster_experience %> <br/>
-
+<h4>References</h4>
 <% @volunteer_app.volunteer_references.each do |ref| %>
-  <%= ref.name %><br/>
+  <strong><%= ref.name %><br/></strong>
   <%= ref.email %><br/>
   <%= ref.phone %><br/>
   <%= ref.relationship %><br/>
+  <br />
 <% end%>

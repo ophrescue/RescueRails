@@ -1,3 +1,15 @@
 // Place all the styles related to the VolunteerApp controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#volunteer_app_list .line-1 {
+  border-top: 1px solid #d4d4d4;
+  border-left: 1px solid #d4e4e4;
+  border-right: 1px solid #d4d4d4;
+  border-bottom: 1px solid #d4d4d4;
+  font-weight: 500;
+  margin-bottom: 6px;
+  .name {
+    font-weight: 700px;
+  }
+}

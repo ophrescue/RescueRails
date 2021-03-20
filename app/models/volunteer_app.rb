@@ -59,4 +59,43 @@ class VolunteerApp < ApplicationRecord
                'transport',
                'adoption',
                'admin']
+
+  scope :filter_by_status, -> (status) { where status: status }
+
+  def self.filter_by_interest(interest)
+    if interest == 'writing'
+      where(writing_interest: true)
+    elsif interest == 'events'
+      where(events_interest: true)
+    elsif interest == 'fostering'
+      where(fostering_interest: true)
+    elsif interest == 'training'
+      where(training_interest: true)
+    elsif interest == 'fundraising'
+      where(fundraising_interest: true)
+    elsif interest == 'transport'
+      where(transport_bb_interest: true)
+    elsif interest == 'adoption'
+      where(adoption_team_interest: true)
+    elsif interest == 'admin'
+      where(admin_interest: true)
+    else
+      all
+    end
+  end
+
+  # mapping of scope name (= query string parameter) to model attributes
+  # FILTER_FLAGS = { writing: :writing_interest,
+  #                  events: :events_interest,
+  #                  fostering: :fostering_interest,
+  #                  training: :training_interest,
+  #                  fundraising: :fundraising_interest,
+  #                  transport: :transport_bb_interest,
+  #                  adoption: :adoption_team_interest,
+  #                  admin: :admin_interest
+  #                }
+
+  # FILTER_FLAGS.each do |param,attr|
+  #   scope :"#{param}", -> (status = true) { where "#{attr}": status}
+  # end
 end

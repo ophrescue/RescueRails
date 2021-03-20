@@ -1,10 +1,12 @@
 class VolunteerAppsController < ApplicationController
+  include ApplicationHelper
+
   before_action :select_bootstrap41
   before_action :require_login, except: %i(new create complete)
   before_action :admin_user, except: %i(new create complete)
 
   def index
-    @volunteer_apps = VolunteerApp.order(id: :desc)
+    @volunteer_apps = VolunteerAppSearcher.search(params: params)
   end
 
   def show

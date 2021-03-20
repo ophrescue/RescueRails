@@ -68,7 +68,7 @@ class VolunteerAppsController < ApplicationController
                                           :region,
                                           :postal_code,
                                           :referrer,
-                                          :writing_interest,
+                                          :marketing_interest,
                                           :events_interest,
                                           :fostering_interest,
                                           :training_interest,

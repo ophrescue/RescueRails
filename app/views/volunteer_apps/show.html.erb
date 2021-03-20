@@ -4,8 +4,8 @@
       <h3><%= @volunteer_app.name %></h3>
       <dd>Submitted: <%= @volunteer_app.created_at.strftime('%A, %d %b %Y %l:%M %p') %><dd>
       <ul>
-        <% if @volunteer_app.writing_interest %>
-      <li>Writing</li>
+        <% if @volunteer_app.marketing_interest %>
+      <li>Marketing/PR</li>
       <% end %>
       <% if @volunteer_app.events_interest %>
           <li>Events</li>

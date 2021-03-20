@@ -10,6 +10,12 @@
       <% end %>
     <% if volunteer_app.fostering_interest %>
       <li>Fostering</li>
+      <% if volunteer_app.volunteer_foster_app.can_foster_dogs %>
+          <li>Dog Foster</li>
+        <% end %>
+        <% if volunteer_app.volunteer_foster_app.can_foster_cats %>
+          <li>Cat Foster</li>
+        <% end %>
     <% end %>
     <% if volunteer_app.training_interest %>
       <li>Training</li>

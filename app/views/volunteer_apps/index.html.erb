@@ -12,4 +12,5 @@
 
   <%= render @volunteer_apps %>
 
+  <%= will_paginate(@volunteer_apps, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 </div>

@@ -22,6 +22,16 @@ class VolunteerAppsController < ApplicationController
     end
   end
 
+  def update
+    @volunteer_app = VolunteerApp.find(params[:id])
+    if @volunteer_app.update(volunteer_app_params)
+      flash[:success] = 'Application Updated'
+      redirect_to @volunteer_app
+    else
+      render 'show'
+    end
+  end
+
   def create
     @volunteer_app = VolunteerApp.new(volunteer_app_params)
     if !@volunteer_app.fostering_interest
@@ -44,12 +54,13 @@ class VolunteerAppsController < ApplicationController
   private
 
   def admin_user
-    redirect_to(new_donation_path) unless current_user.admin?
+    redirect_to(new_volunteer_app_path) unless current_user.admin?
   end
 
   def volunteer_app_params
     params.require(:volunteer_app).permit(:name,
                                           :email,
+                                          :status,
                                           :phone,
                                           :address1,
                                           :address2,

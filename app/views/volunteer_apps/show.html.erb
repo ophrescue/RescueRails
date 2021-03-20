@@ -1,48 +1,62 @@
 <div class="container">
-  <div class="row">
-    <div clas="col-12">
-        <%= @volunteer_app.name %>
-        <ul>
-          <% if @volunteer_app.writing_interest %>
-        <li>Writing</li>
-        <% end %>
-        <% if @volunteer_app.events_interest %>
-            <li>Events</li>
-        <% end %>
-        <% if @volunteer_app.fostering_interest %>
-          <li>Fostering</li>
-        <% end %>
-        <% if @volunteer_app.training_interest %>
-          <li>Training</li>
-        <% end %>
-        <% if @volunteer_app.fundraising_interest %>
-          <li>Fundraising</li>
-        <% end %>
-        <% if @volunteer_app.transport_bb_interest %>
-          <li>Transport and Boarding Buddies</li>
-        <% end %>
-        <% if @volunteer_app.adoption_team_interest %>
-          <li>Adoption Team</li>
-        <% end %>
-        <% if @volunteer_app.admin_interest %>
-          <li>Administrative</li>
-        <% end %>
-        </ul>
+  <div class="row mt-4">
+    <div class="col-6-md">
+      <h3><%= @volunteer_app.name %></h3>
+      <dd>Submitted: <%= @volunteer_app.created_at.strftime('%A, %d %b %Y %l:%M %p') %><dd>
+      <ul>
+        <% if @volunteer_app.writing_interest %>
+      <li>Writing</li>
+      <% end %>
+      <% if @volunteer_app.events_interest %>
+          <li>Events</li>
+      <% end %>
+      <% if @volunteer_app.fostering_interest %>
+        <li>Fostering</li>
+      <% end %>
+      <% if @volunteer_app.training_interest %>
+        <li>Training</li>
+      <% end %>
+      <% if @volunteer_app.fundraising_interest %>
+        <li>Fundraising</li>
+      <% end %>
+      <% if @volunteer_app.transport_bb_interest %>
+        <li>Transport and Boarding Buddies</li>
+      <% end %>
+      <% if @volunteer_app.adoption_team_interest %>
+        <li>Adoption Team</li>
+      <% end %>
+      <% if @volunteer_app.admin_interest %>
+        <li>Administrative</li>
+      <% end %>
+      </ul>
 
-        <%= @volunteer_app.email %> <br/>
-        <%= @volunteer_app.phone %> <br/>
-        <%= @volunteer_app.address1 %> <br/>
-        <%= @volunteer_app.address2 %> <br/>
-        <%= @volunteer_app.city %> <br/>
-        <%= @volunteer_app.region %> <br/>
-        <%= @volunteer_app.postal_code %> <br/>
-        <%= @volunteer_app.referrer %> <br/>
-        <%= @volunteer_app.about %> <br/>
+      <dl>
+        <dt>Email</dt>
+        <dd><%= @volunteer_app.email %></dd>
+        <dt>Phone</dt>
+        <dd><%= @volunteer_app.phone %></dd>
+        <dt>Address</dt>
+        <dd><%= @volunteer_app.address1 %></dd>
+        <dd><%= @volunteer_app.address2 %></dd>
+        <dd><%= @volunteer_app.city %>, <%= @volunteer_app.region %> <%= @volunteer_app.postal_code %></dd>
+        <dd><%= @volunteer_app.referrer %></dd>
+        <dt>About</dt>
+        <dd><%= @volunteer_app.about %></dd>
+      </dl>
 
-      Created: <%= @volunteer_app.created_at %> <br/>
-
-      <%= render "volunteer_foster_app" if @volunteer_app.fostering_interest %>
+    <%= form_for @volunteer_app do |f| %>
+      <div class="form-group">
+        <%= f.label :status %>
+        <%= f.select :status, VolunteerApp::STATUSES.collect{|s| [s, s]}, {}, class: "form-control" %>
+      </div>
+      <%= f.submit "Update", class: "btn btn-primary" %>
+    <% end %>
 
     </div>
+    <div class="col-6-md ml-4">
+        <%= render "volunteer_foster_app" if @volunteer_app.fostering_interest %>
+    </div>
+
+
   </div>
 </div>

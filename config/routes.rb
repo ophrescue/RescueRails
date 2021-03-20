@@ -48,7 +48,9 @@ Rails.application.routes.draw do
     resources :treatment_records
   end
 
-  resources :volunteer_apps
+  resources :volunteer_apps do
+    resources :comments, except: %i[destroy edit update]
+  end
 
   resources :bulletins, controller: :posts, type: 'Bulletin'
   resources :opportunities, controller: :posts, type: 'Opportunity'

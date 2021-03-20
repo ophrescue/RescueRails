@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row mt-4">
-    <div class="col-6-md">
+    <div class="col-6">
       <h3><%= @volunteer_app.name %></h3>
       <dd>Submitted: <%= @volunteer_app.created_at.strftime('%A, %d %b %Y %l:%M %p') %><dd>
       <ul>
@@ -53,10 +53,20 @@
     <% end %>
 
     </div>
-    <div class="col-6-md ml-4">
+
+    <div class="col-6 ml-4">
         <%= render "volunteer_foster_app" if @volunteer_app.fostering_interest %>
     </div>
 
+  </div>
+  <div class="row">
+    <div class="col-8">
 
+      <h4>Add Comment</h4>
+      <%= render 'comment_form' %>
+
+      <%= render 'changes/changes', parent: @volunteer_app, device: '' %>
+
+    </div>
   </div>
 </div>

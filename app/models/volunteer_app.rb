@@ -26,6 +26,8 @@
 #  marketing_interest     :boolean
 #
 class VolunteerApp < ApplicationRecord
+  audited on: :update
+  has_associated_audits
   include ClientValidated
 
   VALIDATION_ERROR_MESSAGES = { name: :blank }
@@ -35,6 +37,8 @@ class VolunteerApp < ApplicationRecord
 
   has_one :volunteer_foster_app, dependent: :destroy
   accepts_nested_attributes_for :volunteer_foster_app
+
+  has_many :comments, -> { order('created_at DESC') }, as: :commentable
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :phone, presence: true, length: { in: 10..25 }
@@ -64,6 +68,18 @@ class VolunteerApp < ApplicationRecord
                'admin']
 
   scope :filter_by_status, -> (status) { where status: status }
+
+  def comments_and_audits_and_associated_audits
+    (persisted_comments + audits + associated_audits).sort_by(&:created_at).reverse!
+  end
+
+  def persisted_comments
+    comments.select(&:persisted?)
+  end
+
+  def audits_and_associated_audits
+    (audits + associated_audits).sort_by(&:created_at).reverse!
+  end
 
   def self.filter_by_interest(interest)
     if interest == 'marketing'

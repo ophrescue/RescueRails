@@ -1,0 +1,7 @@
+<%= form_for [@volunteer_app, @volunteer_app.comments.build], data: {remote: true}, :html => {novalidate: true, :id => "new_comment"} do |f| %>
+  <div class='form-group'>
+  <%= f.text_area :content, :class => "form-control comment_content", :rows => "6", :required => true %>
+  </div>
+  <%= f.submit "Post", class:"btn btn-primary comment_submit", id: "comment_submit" %>
+
+<% end %>

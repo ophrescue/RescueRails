@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_25_220220) do
+ActiveRecord::Schema.define(version: 2021_03_20_185426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -612,7 +612,6 @@ ActiveRecord::Schema.define(version: 2021_02_25_220220) do
     t.string "region", limit: 2, comment: "Region (state or province) as a 2 character ISO 3166-2 code"
     t.string "postal_code", comment: "Postal code - ZIP code for US addresses"
     t.string "referrer"
-    t.boolean "writing_interest"
     t.boolean "events_interest"
     t.boolean "fostering_interest"
     t.boolean "training_interest"
@@ -624,6 +623,7 @@ ActiveRecord::Schema.define(version: 2021_02_25_220220) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "marketing_interest"
   end
 
   create_table "volunteer_foster_apps", force: :cascade do |t|

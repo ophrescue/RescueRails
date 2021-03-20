@@ -12,7 +12,6 @@
 #  region                 :string(2)
 #  postal_code            :string
 #  referrer               :string
-#  writing_interest       :boolean
 #  events_interest        :boolean
 #  fostering_interest     :boolean
 #  training_interest      :boolean
@@ -21,8 +20,14 @@
 #  adoption_team_interest :boolean
 #  admin_interest         :boolean
 #  about                  :text
+#  status                 :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  marketing_interest     :boolean
 #
 class VolunteerApp < ApplicationRecord
+  audited on: :update
+  has_associated_audits
   include ClientValidated
 
   VALIDATION_ERROR_MESSAGES = { name: :blank }
@@ -32,6 +37,8 @@ class VolunteerApp < ApplicationRecord
 
   has_one :volunteer_foster_app, dependent: :destroy
   accepts_nested_attributes_for :volunteer_foster_app
+
+  has_many :comments, -> { order('created_at DESC') }, as: :commentable
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :phone, presence: true, length: { in: 10..25 }
@@ -51,7 +58,7 @@ class VolunteerApp < ApplicationRecord
               'approved',
               'withdrawn']
 
-  INTERESTS = ['writing',
+  INTERESTS = ['marketing',
                'events',
                'fostering',
                'training',
@@ -62,9 +69,21 @@ class VolunteerApp < ApplicationRecord
 
   scope :filter_by_status, -> (status) { where status: status }
 
+  def comments_and_audits_and_associated_audits
+    (persisted_comments + audits + associated_audits).sort_by(&:created_at).reverse!
+  end
+
+  def persisted_comments
+    comments.select(&:persisted?)
+  end
+
+  def audits_and_associated_audits
+    (audits + associated_audits).sort_by(&:created_at).reverse!
+  end
+
   def self.filter_by_interest(interest)
-    if interest == 'writing'
-      where(writing_interest: true)
+    if interest == 'marketing'
+      where(marketing_interest: true)
     elsif interest == 'events'
       where(events_interest: true)
     elsif interest == 'fostering'
@@ -83,19 +102,4 @@ class VolunteerApp < ApplicationRecord
       all
     end
   end
-
-  # mapping of scope name (= query string parameter) to model attributes
-  # FILTER_FLAGS = { writing: :writing_interest,
-  #                  events: :events_interest,
-  #                  fostering: :fostering_interest,
-  #                  training: :training_interest,
-  #                  fundraising: :fundraising_interest,
-  #                  transport: :transport_bb_interest,
-  #                  adoption: :adoption_team_interest,
-  #                  admin: :admin_interest
-  #                }
-
-  # FILTER_FLAGS.each do |param,attr|
-  #   scope :"#{param}", -> (status = true) { where "#{attr}": status}
-  # end
 end

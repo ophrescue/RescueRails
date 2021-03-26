@@ -101,7 +101,7 @@ class AdoptersController < ApplicationController
       AdoptAppMailer.adopt_app(@adopter.id).deliver_later
       BitePreventionMailer.bite_prevent(@adopter.id).deliver_later(wait: 24.hours)
       flash[:success] = 'Adoption Application Submitted Successfully'
-      render 'complete'
+      redirect_to action: 'complete'
     else
       render 'new'
     end

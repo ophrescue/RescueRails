@@ -97,11 +97,6 @@
     <li>Foster Needed for Adoptapet</li>
   <% end %>
 
-  <% if !@dog.craigslist_ad_url.blank? %>
-    <li><%= link_to "Craigslist", @dog.craigslist_ad_url %></li>
-  <% else %>
-    <li>Needs Craigslist Ad</li>
-  <% end %>
 </ul>
 
 <% if @dog.attachments.any? %>
@@ -142,4 +137,3 @@
 
 <h5>Flea Tick Preventative</h5>
 <p><%= @dog.flea_tick_preventative %></p>
-

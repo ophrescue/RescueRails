@@ -97,11 +97,6 @@
     <li>Foster Needed for Adoptapet</li>
   <% end %>
 
-  <% if !@cat.craigslist_ad_url.blank? %>
-    <li><%= link_to "Craigslist", @cat.craigslist_ad_url %></li>
-  <% else %>
-    <li>Needs Craigslist Ad</li>
-  <% end %>
 </ul>
 
 <% if @cat.attachments.any? %>

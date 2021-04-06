@@ -89,7 +89,6 @@ feature 'add a dog', js: true do
         check(:dog_needs_photos)
         check(:dog_has_behavior_problem)
         check(:dog_needs_foster)
-        fill_in(:dog_craigslist_ad_url, with: 'http://www.example.com/foo')
         fill_in(:dog_microchip, with: '923456789a')
         fill_in(:dog_original_name, with: 'Snoop Dogg')
         fill_in(:dog_fee, with: '333')
@@ -150,7 +149,6 @@ feature 'add a dog', js: true do
         expect(dog.needs_photos).to eq true
         expect(dog.has_behavior_problem).to eq true
         expect(dog.needs_foster).to eq true
-        expect(dog.craigslist_ad_url).to eq 'http://www.example.com/foo'
         expect(dog.microchip).to eq '923456789a'
         expect(dog.original_name).to eq 'Snoop Dogg'
         expect(dog.fee).to eq 333
@@ -246,20 +244,6 @@ feature 'add a dog', js: true do
           select('adoption pending', from: 'dog_status')
           expect{ click_button('Submit') }.to change{Dog.count}.by(1)
           expect(Dog.first.name).to eq "B.B. Mc-Fido"
-        end
-      end
-
-      context 'improperly formatted craigslist ad url' do
-        it "should not save and should notify user" do
-          fill_in(:dog_name, with: 'Fido')
-          select('adoption pending', from: 'dog_status')
-          fill_in(:dog_craigslist_ad_url, with: 'www.craigslist.com/foo/bar/baz')
-          expect{ click_button('Submit') }.not_to change{Dog.count}
-          expect(validation_error_message_for(:dog_craigslist_ad_url).text).to eq "please include 'http://'"
-          expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
-          fill_in(:dog_craigslist_ad_url, with: 'http://www.craigslist.com/foo/bar/baz')
-          expect(validation_error_message_for(:dog_craigslist_ad_url)).not_to be_visible
-          expect(submit_button_form_error_message).not_to be_visible
         end
       end
 

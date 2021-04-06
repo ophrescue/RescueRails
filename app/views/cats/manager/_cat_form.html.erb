@@ -110,12 +110,6 @@
         <%= f.label :sponsored_by, "Sponsored by", class: 'col-form-label col-form-label-sm col-4' %>
         <%= f.text_field :sponsored_by, class: 'form-control form-control-sm col-6' %>
       </div>
-
-      <div class="form-group row">
-        <%= f.label :craigslist_ad_url, "Craigslist Ad Link", class: 'col-form-label col-form-label-sm col-4'  %>
-        <%= f.text_field :craigslist_ad_url, class: 'form-control form-control-sm col-6', pattern:'^http://.*$' %>
-        <div class='invalid-feedback col-sm-6 offset-4'>please include 'http://'</div>
-      </div>
     </div>
 
     <div class="col-12 col-md-6" id='right-column'>

@@ -10,7 +10,7 @@ feature 'add a dog', js: true do
 
   feature 'permitted access to fields' do
     let(:active_record_attributes){ [:created_at, :updated_at, :id].map(&:to_s) }
-    let(:not_editable_attributes){ [:youtube_video_url, :petfinder_ad_url, :tracking_id].map(&:to_s) }
+    let(:not_editable_attributes){ [:youtube_video_url, :petfinder_ad_url, :tracking_id, :craigslist_ad_url].map(&:to_s) }
     let(:all_database_attributes){ Dog.new.attributes.keys }
     let(:all_form_fields) { all_database_attributes - active_record_attributes - not_editable_attributes }
 

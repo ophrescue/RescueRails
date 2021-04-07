@@ -66,7 +66,7 @@ describe AdoptersController, type: :controller do
       expect{
         post :create, params: { adopter: adopter }
       }.to change(Adopter, :count).by(1)
-      expect(response).to be_successful
+      expect(response).to redirect_to(adopters_complete_path)
     end
   end
 

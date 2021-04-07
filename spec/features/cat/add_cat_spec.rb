@@ -10,7 +10,7 @@ feature 'add a cat', js: true do
 
   feature 'permitted access to fields' do
     let(:active_record_attributes){ [:created_at, :updated_at, :id].map(&:to_s) }
-    let(:not_editable_attributes){ [:youtube_video_url, :petfinder_ad_url, :tracking_id].map(&:to_s) }
+    let(:not_editable_attributes){ [:youtube_video_url, :petfinder_ad_url, :tracking_id, :craigslist_ad_url].map(&:to_s) }
     let(:all_database_attributes){ Cat.new.attributes.keys }
     let(:all_form_fields) { all_database_attributes - active_record_attributes - not_editable_attributes }
 
@@ -91,7 +91,6 @@ feature 'add a cat', js: true do
         check(:cat_needs_photos)
         check(:cat_has_behavior_problem)
         check(:cat_needs_foster)
-        fill_in(:cat_craigslist_ad_url, with: 'http://www.example.com/foo')
         fill_in(:cat_microchip, with: '923456789a')
         fill_in(:cat_original_name, with: 'Snoop Catt')
         fill_in(:cat_fee, with: '333')
@@ -155,7 +154,6 @@ feature 'add a cat', js: true do
         expect(cat.needs_photos).to eq true
         expect(cat.has_behavior_problem).to eq true
         expect(cat.needs_foster).to eq true
-        expect(cat.craigslist_ad_url).to eq 'http://www.example.com/foo'
         expect(cat.microchip).to eq '923456789a'
         expect(cat.original_name).to eq 'Snoop Catt'
         expect(cat.fee).to eq 333
@@ -253,20 +251,6 @@ feature 'add a cat', js: true do
           select('adoption pending', from: 'cat_status')
           expect{ click_button('Submit') }.to change{Cat.count}.by(1)
           expect(Cat.first.name).to eq "B.B. Mc-Fido"
-        end
-      end
-
-      context 'improperly formatted craigslist ad url' do
-        it "should not save and should notify user" do
-          fill_in(:cat_name, with: 'Fido')
-          select('adoption pending', from: 'cat_status')
-          fill_in(:cat_craigslist_ad_url, with: 'www.craigslist.com/foo/bar/baz')
-          expect{ click_button('Submit') }.not_to change{Cat.count}
-          expect(validation_error_message_for(:cat_craigslist_ad_url).text).to eq "please include 'http://'"
-          expect(submit_button_form_error_message.text).to eq "form cannot be saved due to errors"
-          fill_in(:cat_craigslist_ad_url, with: 'http://www.craigslist.com/foo/bar/baz')
-          expect(validation_error_message_for(:cat_craigslist_ad_url)).not_to be_visible
-          expect(submit_button_form_error_message).not_to be_visible
         end
       end
 

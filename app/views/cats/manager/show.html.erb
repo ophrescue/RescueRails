@@ -129,9 +129,6 @@
         <dd>
           <div id='adoptapet_ad'><%= @adoptapet %></div>
           <div><a href="<%= PETFINDER::OPH_PAGE %>">Petfinder</a></div>
-          <div id='craigslist_ad_url'>
-            <%= link_to_if @cat.craigslist_ad_url, "Craigslist", @cat.craigslist_ad_url do "Needs Craigslist ad" end %>
-          </div>
         </dd>
 
         <dt>Up-to-date on shots</dt>

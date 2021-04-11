@@ -103,4 +103,9 @@ class VolunteerApp < ApplicationRecord
     end
   end
 
+  def send_release_contract
+    return unless ENV['ESIGNATURES_API_KEY'].present?
+    params = {template_id: '31cf38ca-c0eb-4bc1-b020-911ef616d8a6', signers: [{name: name, email: email}]}
+    response = RestClient.post("https://#{ENV['ESIGNATURES_API_KEY']}:@esignatures.io/api/contracts", params.to_json)
+  end
 end

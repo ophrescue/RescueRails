@@ -16,8 +16,11 @@ class Contract < ApplicationRecord
   belongs_to :contractable, polymorphic: true
 
   def get_details
-    return unless ENV['ESIGNATURES_API_KEY'].present?
-    r = RestClient.get("https://#{ENV['ESIGNATURES_API_KEY']}:@esignatures.io/api/contracts/#{esig_contract_id}")
-    return JSON.parse(r)
+    return {} if ENV['ESIGNATURES_API_KEY'].blank?
+    @_get_details ||= begin
+      r = RestClient.get("https://#{ENV['ESIGNATURES_API_KEY']}:@esignatures.io/api/contracts/#{esig_contract_id}")
+      JSON.parse(r)["data"]
+    end
   end
+
 end

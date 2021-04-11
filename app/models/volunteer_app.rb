@@ -38,6 +38,8 @@ class VolunteerApp < ApplicationRecord
   has_one :volunteer_foster_app, dependent: :destroy
   accepts_nested_attributes_for :volunteer_foster_app
 
+  has_many :contracts, -> { order('created_at DESC') }, as: :contractable
+
   has_many :comments, -> { order('created_at DESC') }, as: :commentable
 
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
@@ -107,5 +109,7 @@ class VolunteerApp < ApplicationRecord
     return unless ENV['ESIGNATURES_API_KEY'].present?
     params = {template_id: '31cf38ca-c0eb-4bc1-b020-911ef616d8a6', signers: [{name: name, email: email}]}
     response = RestClient.post("https://#{ENV['ESIGNATURES_API_KEY']}:@esignatures.io/api/contracts", params.to_json)
+    contract_json = JSON.parse(response)
+    self.contracts.create(esig_contract_id: contract_json["data"]["contract"]["id"])
   end
 end

@@ -25,4 +25,7 @@ jQuery(function($){
    $("#event_location_phone").inputmask("(999) 999-9999");
    $("#banned_adopter_phone").inputmask("(999) 999-9999");
    $("#volunteer_app_phone").inputmask("(999) 999-9999");
+   $("#volunteer_app_volunteer_references_attributes_0_phone").inputmask("(999) 999-9999");
+   $("#volunteer_app_volunteer_references_attributes_1_phone").inputmask("(999) 999-9999");
+   $("#volunteer_app_volunteer_references_attributes_2_phone").inputmask("(999) 999-9999");
 });

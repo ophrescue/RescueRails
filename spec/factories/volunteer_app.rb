@@ -10,7 +10,6 @@ FactoryBot.define do
       postal_code { Faker::Address.zip_code }
       status { VolunteerApp::STATUSES.sample }
       referrer { Faker::Lorem.sentence(word_count: 3) }
-      is_subscribed { [true, false].sample }
       marketing_interest { [true, false].sample }
       events_interest { [true, false].sample }
       fostering_interest { false }

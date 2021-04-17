@@ -42,6 +42,8 @@ class VolunteerAppsController < ApplicationController
 
     if @volunteer_app.save
       flash[:success] = 'Volunteer Application Submitted Successfully'
+      VolunteerAppMailer.with(volunteer_app: @volunteer_app).notify_applicant.deliver_later
+      VolunteerAppMailer.with(volunteer_app: @volunteer_app).notify_oph.deliver_later
       render 'complete'
     else
       render 'new'

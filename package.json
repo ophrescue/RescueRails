@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@rails/webpacker": "5.2.1",
+    "mjml": "^4.9.0",
     "stimulus": "^2.0.0"
   },
   "devDependencies": {

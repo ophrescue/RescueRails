@@ -242,6 +242,7 @@ GEM
     mini_racer (0.3.1)
       libv8 (~> 8.4.255)
     minitest (5.14.4)
+    mjml-rails (4.6.1)
     multi_json (1.15.0)
     multipart-post (2.1.1)
     net-scp (3.0.0)
@@ -505,6 +506,7 @@ DEPENDENCIES
   has_scope
   honeybadger (~> 4.0)
   mini_racer (>= 0.2.3)
+  mjml-rails (~> 4.6, >= 4.6.1)
   newrelic_rpm
   paperclip (~> 5)
   pg (~> 0.21.0)
@@ -548,4 +550,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   2.1.4
+   2.2.11

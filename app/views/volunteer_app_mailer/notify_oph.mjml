@@ -1,0 +1,11 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="20px" color="#F45E43" font-family="helvetica">New Volunteer Application Received</mj-text>
+        <mj-text font-size="14px" font-family="helvetica"><%= @va.name %></mj-text>
+        <mj-button href=<%= volunteer_app_url(@va) %>>View Application</mj-button>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

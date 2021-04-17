@@ -243,7 +243,12 @@
 
           </div>
 
-            <%= f.submit "Submit", class: "btn btn-primary" %>
+            <div class="actions row">
+              <div class="col-12">
+                <%= f.submit "Submit", class: "btn btn-primary" %>
+                <div class='invalid-feedback'>Please scroll up and correct form errors highlighted in red.</div>
+              </div>
+            </div>
           </div>
 
         <% end %>

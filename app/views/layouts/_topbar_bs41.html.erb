@@ -77,9 +77,10 @@
             <% if current_user.admin? %>
               <%= link_to "Donations", history_donations_path, class: "nav-link" %>
               <%= link_to "Treatments", treatments_path, class: "nav-link"%>
+              <%= link_to "VolunteerApps", volunteer_apps_path, class: "nav-link"%>
             <% end %>
             <% if can_dl_resources? %>
-              <%= link_to "Staff Resources", folders_path, class: "nav-link" %>
+              <%= link_to "Files", folders_path, class: "nav-link" %>
             <% end %>
             <% if can_edit_dogs? %>
               <%= link_to "Shelters", shelters_path, class: "nav-link" %>

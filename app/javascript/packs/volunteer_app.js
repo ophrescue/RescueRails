@@ -39,7 +39,7 @@ dogsToggle.addEventListener('click', function (event) {
     document.getElementById('dog-foster-questions').classList.remove('collapse')
     makeDogFosterQuestionsRequired(true)
   } else {
-    document.getElementById('dog-foster-questions').classList.remove('collapse')
+    document.getElementById('dog-foster-questions').classList.add('collapse')
     makeDogFosterQuestionsRequired(false)
   }
 

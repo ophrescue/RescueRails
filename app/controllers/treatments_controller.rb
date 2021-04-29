@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 class TreatmentsController < ApplicationController
+  before_action :require_login
   before_action :admin_user
   before_action :select_bootstrap41
   before_action :show_user_navbar

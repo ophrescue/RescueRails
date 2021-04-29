@@ -35,7 +35,7 @@ class VolunteerFosterApp < ApplicationRecord
   validates :rental_landlord_info, presence: true, if: :rents_home?
   validates :rental_restrictions, presence: true, if: :rents_home?
 
-  validates :has_pets, presence: true
+  validates_inclusion_of :has_pets, in: [true, false]
   validates :vet_info, presence: true, if: :has_pets?
   validates :current_pets, presence: true, if: :has_pets?
   validates :current_pets_spay_neuter, presence: true, if: :has_pets?
@@ -44,7 +44,7 @@ class VolunteerFosterApp < ApplicationRecord
   validates :breed_pref, presence: true
   validates :ready_to_foster_dt, presence: true
   validates :max_time_alone, presence: true
-  validates :dog_fenced_in_yard, presence: true, if: :can_foster_dogs?
+  validates_inclusion_of :dog_fenced_in_yard, in: [true, false], if: :can_foster_dogs?
   validates :dog_exercise, presence: true, if: :can_foster_dogs?
   validates :kept_during_day, presence: true
   validates :kept_at_night, presence: true

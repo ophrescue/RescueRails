@@ -105,16 +105,16 @@
               <h5>Do you rent or own you home?</h5>
               <div id='rent-own-toggle'>
                 <div class="custom-control custom-radio">
-                  <%= vfa.radio_button :home_type, 'Rent', class: "custom-control-input home-type-toggle" %>
+                  <%= vfa.radio_button :home_type, 'Rent', class: "custom-control-input" %>
                   <%= vfa.label :home_type, 'Rent', value: 'rent', class: "custom-control-label" %>
                 </div>
                 <div class="custom-control custom-radio">
-                  <%= vfa.radio_button :home_type, 'Own', class: "custom-control-input home-type-toggle" %>
+                  <%= vfa.radio_button :home_type, 'Own', class: "custom-control-input" %>
                   <%= vfa.label :home_type, 'Own', value: 'own', class: "custom-control-label" %>
                 </div>
               </div>
 
-              <div id="foster-rental-questions" class='collapse' >
+              <div id="foster-rental-questions" class="collapse" >
                 <h4>Rental Questions</h4>
                 <div class="form-group">
                   <%= vfa.label :rental_restrictions, "Please detail any pet restrictions for your rental." %>
@@ -143,7 +143,7 @@
                 </div>
 
 
-                <div id='other-pets-questions', class='collapse'>
+                <div id='other-pets-questions', class="collapse">
                   <h4>About your Pets</h4>
                   <div class="form-group">
                     <%= vfa.label :vet_info, "Please provide contact information for your Vet, including name, address and phone number." %>
@@ -201,7 +201,7 @@
                   <%= vfa.text_field :max_time_alone, class: "col-8 form-control" %>
                 </div>
 
-              <div id="dog-foster-questions", class='collapse'>
+              <div id="dog-foster-questions", class="collapse">
                 <h5>Do you have a fenced in yard?</h5>
                 <div class="custom-control custom-radio">
                   <%= vfa.radio_button :dog_fenced_in_yard, true, class: "custom-control-input" %>

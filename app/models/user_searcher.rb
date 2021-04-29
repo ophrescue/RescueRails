@@ -1,5 +1,5 @@
 class UserSearcher
-  PER_PAGE = 30
+  PER_PAGE = 200
   EMAIL_CHECK = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
   def initialize(params: {})

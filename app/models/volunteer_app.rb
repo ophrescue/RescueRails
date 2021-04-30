@@ -53,7 +53,7 @@ class VolunteerApp < ApplicationRecord
 
   STATUSES = ['new',
               'workup',
-              'ready for call',
+              'ready for call ort',
               'on hold',
               'approved',
               'withdrawn']

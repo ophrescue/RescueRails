@@ -28,6 +28,7 @@ class VolunteerAppsController < ApplicationController
       flash[:success] = 'Application Updated'
       redirect_to @volunteer_app
     else
+      flash[:error] = 'Error Saving Volunteer Application Update'
       render 'show'
     end
   end

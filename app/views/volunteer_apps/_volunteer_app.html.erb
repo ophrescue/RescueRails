@@ -35,6 +35,7 @@
     </ul>
   </div>
   <div class="col-5 offset-1">
+    Submitted <%= time_ago_in_words (volunteer_app.created_at) %> ago <br />
     Status: <%= volunteer_app.status.capitalize %> <br />
     <%= volunteer_app.city %>, <%= volunteer_app.region %>
   </div>

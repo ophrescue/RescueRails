@@ -21,7 +21,7 @@ class VolunteerAppSearcher
 
     for_page(@params[:page])
 
-    @volunteer_apps
+    @volunteer_apps = @volunteer_apps.order(created_at: :desc)
   end
 
   def self.search(params: {})

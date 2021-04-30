@@ -390,6 +390,31 @@
         </div>
       </div>
 
+
+      <h3>Dog and Cat Training</h3>
+      <% if is_admin? %>
+          <div class="form-check">
+            <%= f.check_box :dog_handling_training_complete, class: "form-check-input", id: "dog_handling_training_complete" %>
+            <label class="form-check-label" for="dog_handling_training_complete">Dog handling training complete</label>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :cat_handling_training_complete, class: "form-check-input", id: "cat_handling_training_complete" %>
+            <label class="form-check-label" for="cat_handling_training_complete">Cat handling training complete</label>
+          </div>
+      <% else %>
+        <% if @user.dog_handling_training_complete? %>
+          <p><span class="badge badge-info">Dog Handling Training Complete</span></p>
+        <% else %>
+          <p><span class="badge badge-danger">Dog Handling Training Incomplete</span></p>
+        <% end %>
+        <% if @user.cat_handling_training_complete? %>
+          <p><span class="badge badge-info">Cat Handling Training Complete</span></p>
+        <% else %>
+          <p><span class="badge badge-danger">Cat Handling Training Incomplete</span></p>
+        <% end %>
+      <% end %>
+
+
       <h3>User Permissions</h3>
 
       <% if is_admin? %>

@@ -218,6 +218,8 @@ class UsersController < Clearance::UsersController
                 :social_media_manager,
                 :graphic_design,
                 :active,
+                :dog_handling_training_complete,
+                :cat_handling_training_complete,
                 agreement_attributes: [
                   :attachment,
                   :description,

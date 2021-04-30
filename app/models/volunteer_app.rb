@@ -40,9 +40,9 @@ class VolunteerApp < ApplicationRecord
 
   has_many :comments, -> { order('created_at DESC') }, as: :commentable
 
-  validates :name, presence: true, length: { maximum: 50 }
+  validates :name, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
   validates :phone, presence: true, length: { in: 10..25 }
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: { case_sensitive: false }
   validates :address1, presence: true, length: { maximum: 255 }
   validates :address2, allow_blank: true, length: { maximum: 255 }
   validates :city, presence: true, length: { maximum: 255 }
@@ -102,4 +102,5 @@ class VolunteerApp < ApplicationRecord
       all
     end
   end
+
 end

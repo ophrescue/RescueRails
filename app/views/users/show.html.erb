@@ -19,6 +19,16 @@
           <h4 class="mt-2">Profile</h4>
         </div>
         <div class="card-body">
+             <% if @user.dog_handling_training_complete? %>
+                <p><span class="badge badge-info">Dog Handling Training Complete</span></p>
+              <% else %>
+                <p><span class="badge badge-danger">Dog Handling Training Incomplete</span></p>
+              <% end %>
+              <% if @user.cat_handling_training_complete? %>
+                <p><span class="badge badge-info">Cat Handling Training Complete</span></p>
+              <% else %>
+                <p><span class="badge badge-danger">Cat Handling Training Incomplete</span></p>
+              <% end %>
           <table class="table table-striped table-bordered table-sm">
             <tr>
               <td>Address</td>

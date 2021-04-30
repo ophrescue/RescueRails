@@ -91,7 +91,7 @@
 #
 
 class User < ApplicationRecord
-  audited only: %i[admin edit_dogs edit_my_adopters edit_all_adopters locked edit_events complete_adopters add_dogs ban_adopters dl_resources dl_locked_resources active admin_comment medical_behavior_permission], on: [:update]
+  audited only: %i[admin edit_dogs edit_my_adopters edit_all_adopters locked edit_events complete_adopters add_dogs ban_adopters dl_resources dl_locked_resources active admin_comment medical_behavior_permission dog_handling_training_complete cat_handling_training_complete], on: [:update]
   include Clearance::User
   include Filterable
 

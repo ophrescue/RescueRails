@@ -132,7 +132,9 @@
               <h4>Contracts</h4>
             </div>
             <div class="card-body">
+              <% if is_admin? %>
               <%= link_to 'Send Release Contract', create_release_contract_user_path(@user), method: :patch, class: 'btn btn-info btn-sm' %>
+              <% end %>
               <ul>
               <% @user.contracts.each do |ctr| %>
                 <%= render 'contracts/contract', :contract => ctr %>

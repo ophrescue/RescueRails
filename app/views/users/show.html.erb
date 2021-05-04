@@ -125,7 +125,22 @@
             </div>
           </div>
         </div>
+
         <div class="col-sm-6">
+          <div class="card">
+            <div class="card-header">
+              <h4>Contracts</h4>
+            </div>
+            <div class="card-body">
+              <%= link_to 'Send Release Contract', create_release_contract_user_path(@user), method: :patch, class: 'btn btn-info btn-sm' %>
+              <ul>
+              <% @user.contracts.each do |ctr| %>
+                <%= render 'contracts/contract', :contract => ctr %>
+              <% end %>
+              </ul>
+            </div>
+          </div>
+
           <div class="card">
             <div class="card-header">
           <h4>Fostering</h4>

@@ -125,6 +125,8 @@ class User < ApplicationRecord
   has_many :coordinated_dogs, -> { where(status: ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'coordinator_id'
   has_many :comments
 
+  has_many :contracts, -> { order('created_at DESC') }, as: :contractable
+
   has_one :agreement, -> { where(agreement_type: Attachment::AGREEMENT_TYPE_FOSTER) },
           as: :attachable, class_name: 'Attachment', dependent: :destroy
   accepts_nested_attributes_for :agreement

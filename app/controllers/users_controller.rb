@@ -83,7 +83,7 @@ class UsersController < Clearance::UsersController
   before_action :correct_user, only: [:edit, :update]
   before_action :active_user, only: [:index]
   before_action :allowed_to_see_user, only: [:show]
-  before_action :admin_user, only: [:new, :create, :destroy]
+  before_action :admin_user, only: [:new, :create, :destroy, :create_release_contract]
 
   YES_NO_OPTIONS = [['Any', ''], ['Yes', 't'], ['No', 'f']]
   OWN_RENT_OPTIONS = [['Any', ''], ['Own', 'own'], ['Rent', 'rent']]
@@ -139,6 +139,16 @@ class UsersController < Clearance::UsersController
       init_fields
       render 'edit'
     end
+  end
+
+  def create_release_contract
+    @user = User.find(params[:id])
+    return unless ENV['ESIGNATURES_API_KEY'].present?
+    params = {template_id: '31cf38ca-c0eb-4bc1-b020-911ef616d8a6', signers: [{name: @user.name, email: @user.email}]}
+    response = RestClient.post("https://#{ENV['ESIGNATURES_API_KEY']}:@esignatures.io/api/contracts", params.to_json)
+    contract_json = JSON.parse(response)
+    @user.contracts.create(esig_contract_id: contract_json["data"]["contract"]["id"])
+    redirect_to @user
   end
 
   def destroy

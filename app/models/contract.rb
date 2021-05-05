@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 class Contract < ApplicationRecord
-  attr_accessible :esig_contract_id
+  attr_accessible # none
   belongs_to :contractable, polymorphic: true
 
   def get_details

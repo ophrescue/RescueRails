@@ -265,6 +265,14 @@ ActiveRecord::Schema.define(version: 2021_04_30_214358) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "contracts", force: :cascade do |t|
+    t.string "contractable_type"
+    t.integer "contractable_id"
+    t.string "esig_contract_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "delayed_jobs", id: :serial, force: :cascade do |t|
     t.integer "priority", default: 0
     t.integer "attempts", default: 0

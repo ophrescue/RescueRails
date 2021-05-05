@@ -91,6 +91,9 @@ Rails.application.routes.draw do
   resources :folder_attachments, only: %i[index update]
 
   resources :users do
+    member do
+      patch :create_release_contract
+    end
     resource :password, controller: :passwords, only: %i[create edit update]
   end
 

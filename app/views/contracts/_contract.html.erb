@@ -1,0 +1,8 @@
+<li>
+<span>
+  <%= contract.get_details["title"] %> - <%= contract.get_details["status"] %>
+  <% if contract.get_details["status"] == 'signed' %> -
+  <%= link_to("view pdf", contract.get_details["contract_pdf_url"]) %>
+  <% end %>
+</span>
+</li>

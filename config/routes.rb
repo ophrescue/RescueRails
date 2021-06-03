@@ -87,6 +87,7 @@ Rails.application.routes.draw do
     resources :invoices
   end
 
+  resources :badges
   resources :attachments, only: %i[show destroy]
   resources :folder_attachments, only: %i[index update]
 

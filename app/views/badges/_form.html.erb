@@ -1,0 +1,27 @@
+
+<div class="container">
+<%= form_for @badge, url: @badge.new_record? ? badges_path : badge_path(@badge), :html=> { multipart: true, id: "badge_form", class: "container form-horizontal needs-validation", autocomplete: 'off', novalidate: true } do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+
+  <div class="form-group row">
+    <%= f.label :title, nil, class: 'col-form-label col-sm-2 required' %>
+    <%= f.text_field :title, class: "form-control col-sm-4", required: true, 'data-bootstrap41': true, maxlength: 255 %>
+    <%= f.bootstrap_errors :title, class: 'col-sm-10 offset-2'  %>
+  </div>
+
+  <div class="form-group row">
+
+      <%= f.label "Image", for: 'image', class: 'col-form-label col-sm-2'%>
+      <%= f.file_field :image, data: {mime_types: Badge::MIME_TYPES, max_size: Badge::IMAGE_MAX_SIZE}, class: 'form-control col-sm-6' %>
+      <%= f.bootstrap_errors :image, class: 'col-sm-8 offset-2'  %>
+
+  </div>
+
+  <%= submit_or_return_to(f, badges_path) %>
+
+<% end %>
+</div>
+
+<script type='text/javascript'>
+  $(function(){ $('#badge_image').on('change', upload_file_validator); });
+</script>

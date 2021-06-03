@@ -35,6 +35,13 @@ en:
       title: 'Adoption Applications'
     new:
       title: 'Adoption Application'
+  badges:
+    index:
+      title: 'Badges'
+    new:
+      title: 'New Badge'
+    edit:
+      title: 'Edit Badge'
   banned_adopters:
     index:
       title: 'Do Not Adopt List'

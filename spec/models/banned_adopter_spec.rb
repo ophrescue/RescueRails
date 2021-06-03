@@ -15,7 +15,7 @@
 
 require 'rails_helper'
 
-describe AdoptionApp do
+describe BannedAdopter do
   let(:banned_adopter) { build(:banned_adopter) }
 
   context 'has a valid factory' do

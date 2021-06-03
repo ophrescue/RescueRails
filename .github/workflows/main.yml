@@ -63,6 +63,12 @@ jobs:
           POSTGRES_PASSWORD: postgres
           STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          path: tmp/capybara/*.png
+          if-no-files-found: ignore
+
 
       - name: Coveralls
         uses: coverallsapp/github-action@master

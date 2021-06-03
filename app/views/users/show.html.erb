@@ -304,6 +304,16 @@
                 </td>
               </tr>
               <tr>
+                <th scope="row" class="w-25">Current Cats</th>
+                <td class="w-75">
+                  <% @user.current_foster_cats.each do |c| %>
+                    <%= link_to c.name, cats_manager_path(c) %>
+                      (<%= c.status %>)
+                    <br />
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
                 <th scope="row" class="w-25">Foster Mentees</th>
                 <td class="w-75">
                   <% @user.mentees.each do |m| %>

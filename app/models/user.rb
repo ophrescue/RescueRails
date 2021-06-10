@@ -183,6 +183,8 @@ class User < ApplicationRecord
 
   HOUSE_TYPES = %w[ rent own ]
 
+  RANGES = %w[5 10 15 20 30 ]
+
   # mapping of scope name (= query string parameter) to model attributes
   FILTER_FLAGS = { active_volunteer: :active,
                    admin: :admin,

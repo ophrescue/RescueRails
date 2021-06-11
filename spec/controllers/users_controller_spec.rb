@@ -90,7 +90,7 @@ describe UsersController, type: :controller do
 
       it 'returns users near the searched location' do
         expect(User).to receive(:near).and_call_original
-        get :index, params: { location: '21224' }
+        get :index, params: { location: '21224', range: '10' }
       end
 
       it 'returns the training team members' do

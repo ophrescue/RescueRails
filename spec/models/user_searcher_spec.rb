@@ -23,8 +23,8 @@ describe UserSearcher do
     end
 
     context 'search by location' do
-      let!(:found_user) { create(:user, name: 'Ann', city: 'Brooklyn') }
-      let(:params) { { location: 'Brooklyn' } }
+      let!(:found_user) { create(:user, name: 'Ann', city: 'Brooklyn', region: 'NY') }
+      let(:params) { { location: 'Brooklyn, NY' , range: '5'} }
 
       it 'finds the correct user by location' do
         expect(results).to match_array([found_user])

@@ -16,8 +16,10 @@ class UserSearcher
         @users = @users.where('lower(name) LIKE ?', "%#{search_term}%")
       end
     elsif location_search?
-      @users = @users.unlocked.filter_class(filtering_params).near(@params[:location], 30)
+      @users = @users.filter_class(filtering_params).near(@params[:location], @params[:range])
     else
+      @params[:location] = nil
+      @params[:range] = nil
       @users = @users.unlocked.filter_class(filtering_params).order('name')
     end
 
@@ -41,7 +43,7 @@ class UserSearcher
   end
 
   def location_search?
-    @params[:location].present?
+    @params[:location].present? && @params[:range].present? && @params[:range].to_i.between?(1,30)
   end
 
   def search_term

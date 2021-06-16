@@ -116,6 +116,7 @@ class User < ApplicationRecord
 
   geocoded_by :full_street_address
   after_validation :geocode
+  before_update :unset_permissions_on_locked_user
 
   has_many :foster_cats, class_name: 'Cat', foreign_key: 'foster_id'
   has_many :current_foster_cats, -> { where(status: ['adoptable', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Cat', foreign_key: 'foster_id'
@@ -282,6 +283,34 @@ class User < ApplicationRecord
     def format_cleanup
       region.upcase!
       email.downcase!
+    end
+
+    def unset_permissions_on_locked_user
+      return if !locked?
+      update_columns(admin: false,
+                    is_foster: false,
+                    edit_dogs: false,
+                    edit_my_adopters: false,
+                    edit_all_adopters: false,
+                    edit_events: false,
+                    available_to_foster: false,
+                    complete_adopters: false,
+                    add_dogs: false,
+                    ban_adopters: false,
+                    dl_resources: false,
+                    is_photographer: false,
+                    writes_newsletter: false,
+                    is_transporter: false,
+                    dl_locked_resources: false,
+                    training_team: false,
+                    foster_mentor: false,
+                    public_relations: false,
+                    fundraising: false,
+                    boarding_buddies: false,
+                    medical_behavior_permission: false,
+                    social_media_manager: false,
+                    graphic_design: false,
+                    active: false)
     end
 
     def sanitize_postal_code

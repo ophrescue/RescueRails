@@ -31,8 +31,7 @@ class Badge < ApplicationRecord
           original: 'x1024',
           thumb: 'x125'
         },
-        hash_secret: HASH_SECRET,
-        s3_permissions: :private
+        hash_secret: HASH_SECRET
 
   IMAGE_MAX_SIZE = 2
 

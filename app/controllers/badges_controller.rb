@@ -13,8 +13,11 @@
 #    limitations under the License.
 
 class BadgesController < ApplicationController
-  before_action :admin_user
   before_action :select_bootstrap41
+  before_action :require_login
+  before_action :unlocked_user
+  before_action :admin_user
+
 
   def index
     @badges = Badge.order(:title).paginate(page: params[:page], per_page: 50)

@@ -12,16 +12,16 @@
         <%=  photo.object.created_at.strftime("%b %d, %Y %H:%M") unless photo.object.created_at.nil? %>
       </div>
       <div class='col-2 col-md-3'>
-        <label>
-          <%= photo.check_box :is_private %>
-          <span>Private Photo</span>
-        </label>
+        <div class="form-check">
+          <%= photo.check_box :is_private, class: "form-check-input" %>
+          <%= photo.label :is_private, "Private Photo" %>
+        </div>
       </div>
       <div class='col-2 col-md-3'>
-        <label>
-          <%= photo.check_box :_destroy %>
-          <span>Delete Photo</span>
-        </label>
+        <div class="form-check">
+          <%= photo.check_box :_destroy, class: "form-check-input" %>
+          <%= photo.label :_destroy, "Delete Photo" %>
+        </div>
       </div>
     </div>
   <% end %>

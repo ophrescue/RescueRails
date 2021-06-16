@@ -3,7 +3,6 @@ class VolunteerAppsController < ApplicationController
 
   before_action :select_bootstrap41
   before_action :require_login, except: %i(new create complete)
-  before_action :unlocked_user
   before_action :admin_user, except: %i(new create complete)
 
   def index

@@ -5,6 +5,7 @@ Clearance.configure do |config|
   config.password_strategy = PasswordStrategies::WoofBark
   config.redirect_url = '/'
   config.rotate_csrf_on_sign_in = true
+  config.same_site = :lax
   config.routes = false
   config.signed_cookie = true
   config.sign_in_guards = [Clearance::LockedAccountGuard,Clearance::LogLastLoginAt]

@@ -28,6 +28,10 @@ module RescueRails
     # https://github.com/rails/rails/issues/21948#issuecomment-163995796
     config.action_dispatch.default_headers.merge!('Cache-Control' => 'no-store, no-cache')
 
+    # Fixes Samesite cookie warnings
+    # https://github.com/rails/rails/issues/35822
+    config.action_dispatch.cookies_same_site_protection = :lax
+
     # after creating the dogs/ namespace to hold manager and gallery controllers, this becomes necessary
     config.action_view.prefix_partial_path_with_controller_namespace = false
 

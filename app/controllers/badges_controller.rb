@@ -16,8 +16,7 @@ class BadgesController < ApplicationController
   before_action :select_bootstrap41
   before_action :require_login
   before_action :unlocked_user
-  before_action :admin_user
-
+  before_action :admin_user, only: %i(edit update new create destroy)
 
   def index
     @badges = Badge.order(:title).paginate(page: params[:page], per_page: 50)

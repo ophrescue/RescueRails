@@ -71,7 +71,8 @@ Rails.application.routes.draw do
             :password_resets,
             :shelters,
             :treatments,
-            :invoices
+            :invoices,
+            :users_badges
 
   resources :invoices do
     member do

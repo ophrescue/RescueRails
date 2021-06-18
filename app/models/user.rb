@@ -149,6 +149,8 @@ class User < ApplicationRecord
   belongs_to :mentor, class_name: 'User', foreign_key: 'mentor_id', optional: true
   has_many :mentees, class_name: 'User', foreign_key: 'mentor_id'
 
+  has_and_belongs_to_many :badges, optional: true
+
   before_validation :sanitize_postal_code
   before_validation :sanitize_region
 

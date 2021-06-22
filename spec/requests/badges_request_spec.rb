@@ -62,17 +62,17 @@ describe "Badges", type: :request do
   context 'normal user' do
     let(:user) { create(:user) }
     describe "GET #index" do
-      it "is blocked" do
+      it "is successful" do
         get badges_path(as: user)
-        expect(response).to_not be_successful
+        expect(response).to be_successful
       end
     end
 
     describe 'GET #show' do
       let(:badge) { create(:badge) }
-      it 'is blocked' do
+      it 'is successful' do
         get badge_path(badge.id, as: user)
-        expect(response).to_not be_successful
+        expect(response).to be_successful
       end
     end
 

@@ -1,15 +1,26 @@
 <div class="container" id="badge_show">
-    <div class="row">
-        <div class="col-12">
-        <h1 class="mt-3"><%= @badge.title %></h1>
-        <%= link_to "Edit", edit_badge_path(@badge), class: "btn btn-primary" %>
+    <% if current_user.admin? %>
+        <div class="row">
+            <div class="col-12">
+            <h1 class="mt-3"><%= @badge.title %></h1>
+            <%= link_to "Edit", edit_badge_path(@badge), class: "btn btn-primary" %>
+            </div>
         </div>
-    </div>
-
+    <% end %>
 
     <div class="row">
         <div class="col-10">
-            <%= image_tag(@badge.image.url(:thumb)) %>  <%= @badge.title %>
+            <%= link_to(image_tag(@badge.image.url(:thumb), alt: @badge.title),badge_path(@badge)) %>  <%= @badge.title %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <h5>Users with this badge</h5>
+            <ul>
+            <% @badge.users.each do |user| %>
+                <li><%= link_to user.name, user_path %></li>
+            <% end %>
+            </ul>
         </div>
     </div>
 </div>

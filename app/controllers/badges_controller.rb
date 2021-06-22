@@ -19,7 +19,7 @@ class BadgesController < ApplicationController
   before_action :admin_user, only: %i(edit update new create destroy)
 
   def index
-    @badges = Badge.order(:title).paginate(page: params[:page], per_page: 50)
+    @badges = Badge.order(:title).paginate(page: params[:page], per_page: 30)
   end
 
   def show

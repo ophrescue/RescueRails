@@ -4,6 +4,7 @@
         <%= badge.title %>
     </div>
     <div class="col-5 my-auto">
+        <%# TODO Get Rid of this N+1 Query %>
         <% if badge.users.where(id: current_user).exists? %>
             <%= button_to "Remove from profile", users_badge_path(1, :badge_id => badge.id ), method: :delete, class: "btn btn-danger" %>
         <% else %>

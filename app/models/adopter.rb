@@ -110,7 +110,7 @@ class Adopter < ApplicationRecord
 
   before_validation :downcase_email
   before_create :chimp_subscribe
-  before_update :chimp_check, :approved_notification
+  before_update :chimp_check, :approved_notification, :populate_county
   before_save :populate_county
 
   def populate_county

@@ -46,6 +46,13 @@
       <td><%= time_ago_in_words(@adopter.created_at) %> ago</td>
     </tr>
     <tr>
+      <th>Name</th>
+      <td>
+        <div class='read-only'><%= @adopter.name %></div>
+        <div class='editable'><%= f.text_field :name %></div>
+      </td>
+    </tr>
+    <tr>
       <th>E-mail</th>
       <td>
         <div class='read-only'><%= @adopter.email %></div>
@@ -76,20 +83,33 @@
     <tr>
       <th>Best Time to Call</th>
       <td>
-        <%= @adopter.when_to_call %>
+        <div class='read-only'><span class="tel value"><%= @adopter.when_to_call %><span></div>
+        <div class='editable'><%= f.text_field :when_to_call %></div>
+      </td>
+    </tr>
+      <%= f.fields_for :adoption_app do |af|%>
+    <tr>
+      <th>Spouse's Name</th>
+      <td>
+        <div class='read-only'><%= af.object.spouse_name %></div>
+        <div class='editable'><%= af.text_area :spouse_name %></div>
       </td>
     </tr>
     <tr>
-      <th>Spouse's Name</th>
-      <td><%= @adopter.adoption_app.spouse_name %></td>
-    </tr>
-    <tr>
-      <%= f.fields_for :adoption_app do |af|%>
       <th>Others in Household</th>
       <td>
         <div class='read-only'><%= af.object.other_household_names %></div>
         <div class='editable'><%= af.text_area :other_household_names %></div>
       </td>
+    <tr>
+      <th>
+        Heard about us from
+      </th>
+      <td>
+        <div class='read-only'><%= af.object.how_did_you_hear %></div>
+        <div class='editable'><%= af.text_area :how_did_you_hear %></div>
+      </td>
+    </tr>
       <% end %>
     </tr>
     <% if @adopter.adoption_app.verify_home_auth == true %>
@@ -154,12 +174,6 @@
           <% end %>
         </div>
       </td>
-    </tr>
-    <tr>
-      <th>
-        Heard about us from
-      </th>
-      <td><%= @adopter.adoption_app.how_did_you_hear %></td>
     </tr>
     <% if @adopter.adoption_app.birth_date %>
     <tr>

@@ -105,4 +105,6 @@ group :development do
   gem 'powder'
   gem 'rubocop'
   gem 'rubocop-rspec'
+  gem 'rubocop-rails'
+  gem 'rubocop-performance'
 end

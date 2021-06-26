@@ -15,8 +15,15 @@
     </div>
     <div class="row">
         <div class="col-10">
-            <h5>Users with this badge</h5>
+            <h5>Users with this Badge</h5>
+                <ul>
+                    <% @badge.users.each do |user| %>
+                        <li><%= link_to user.name, user %></li>
+                    <% end %>
+                </ul>
+
             <% if is_admin? %>
+                <h5>Assign Badge</h5>
                 <%= form_for @badge do |f| %>
                     <%= f.collection_check_boxes(:user_ids, User.where(active: true).order(:name), :id, :name) do |b| %>
                         <div class="form-check">
@@ -26,12 +33,6 @@
                     <% end %>
                     <%= f.submit "Submit", class: "btn btn-primary" %>
                 <% end%>
-            <% else%>
-                <ul>
-                    <% @badge.users.each do |user| %>
-                        <li><%= link_to user.name, user %></li>
-                    <% end %>
-                </ul>
             <% end %>
         </div>
     </div>

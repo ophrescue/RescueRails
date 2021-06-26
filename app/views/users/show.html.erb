@@ -112,7 +112,6 @@
         </div>
         <div class="col-sm-6">
           <div class="text-center"><%= image_tag @user.avatar.url(:medium) %></div>
-          <div class="text-center"><%= link_to "Manage Badges", badges_path, class: "btn btn-secondary btn-sm" %></div>
           <div class="row mt-2">
             <div class="col-sm">
               <% @user.badges.each do |badge| %>

@@ -75,7 +75,8 @@ class BadgesController < ApplicationController
                                   :image_content_type,
                                   :image_file_size,
                                   :image_updated_at,
-                                  :image_delete)
+                                  :image_delete,
+                                  user_ids: [])
   end
 
   def admin_user

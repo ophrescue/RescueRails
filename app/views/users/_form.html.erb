@@ -414,6 +414,15 @@
         <% end %>
       <% end %>
 
+      <% if is_admin? %>
+      <h3>Badges</h3>
+        <%= f.collection_check_boxes(:badge_ids, Badge.all, :id, :title) do |b| %>
+          <div class="form-check">
+            <%= b.check_box %>
+            <%= b.label %>
+          </div>
+        <% end %>
+      <% end %>
 
       <h3>User Permissions</h3>
 

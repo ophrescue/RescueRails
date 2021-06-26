@@ -3,12 +3,4 @@
         <%= link_to(image_tag(badge.image.url(:thumb), alt: badge.title),badge_path(badge)) %>
         <%= badge.title %>
     </div>
-    <div class="col-5 my-auto">
-        <%# TODO Get Rid of this N+1 Query %>
-        <% if badge.users.where(id: current_user).exists? %>
-            <%= button_to "Remove from profile", users_badge_path(1, :badge_id => badge.id ), method: :delete, class: "btn btn-danger" %>
-        <% else %>
-            <%= button_to "Add to profile", users_badges_path(:badge_id => badge.id ), method: :post, class: "btn btn-secondary" %>
-        <% end %>
-    </div>
 </div>

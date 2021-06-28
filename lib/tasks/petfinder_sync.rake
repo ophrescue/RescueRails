@@ -26,6 +26,7 @@ namespace :petfinder_sync do
 
     dogs = Dog.where(
       { status: ["adoptable", "adoption pending", "coming soon"],
+        is_altered: true,
         hidden: false }
     )
     CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|

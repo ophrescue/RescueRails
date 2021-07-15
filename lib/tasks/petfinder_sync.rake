@@ -90,7 +90,7 @@ namespace :petfinder_sync do
     # at is for appending the file https://stackoverflow.com/a/23051095/6608616
     CSV.open(path + filename, "at", force_quotes: "true", col_sep: ",") do |csv|
       cats.each do |c|
-        csv << [c.id.to_s,
+        csv << ["cat" + c.id.to_s,
                 c.tracking_id.to_s,
                 c.name,
                 c.primary_breed ? c.primary_breed.name : "",

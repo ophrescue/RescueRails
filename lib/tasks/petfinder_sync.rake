@@ -87,7 +87,8 @@ namespace :petfinder_sync do
       { status: ["adoptable", "adoption pending", "coming soon"],
         hidden: false }
     )
-    CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
+    # at is for appending the file https://stackoverflow.com/a/23051095/6608616
+    CSV.open(path + filename, "at", force_quotes: "true", col_sep: ",") do |csv|
       cats.each do |c|
         csv << [c.id.to_s,
                 c.tracking_id.to_s,
@@ -106,7 +107,7 @@ namespace :petfinder_sync do
                 c.no_cats ? "1" : "",            # NoCats
                 c.no_kids ? "1" : "",            # NoKids
                 "",                              # Housetrained
-                "",                              # Declawed
+                c.declawed ? "1" : "",           # Declawed
                 c.is_special_needs ? "1" : "",   # specialNeeds
                 "",                              # Mix
                 c.photos.visible.count >= 1 ? c.id.to_s + "-1.jpg" : "", # Photo1 filename

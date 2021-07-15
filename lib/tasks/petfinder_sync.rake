@@ -20,9 +20,9 @@ namespace :petfinder_sync do
     FileUtils::Verbose.rm_r(photo_path) if Dir.exists?(photo_path)
     FileUtils::Verbose.mkdir(photo_path)
 
-    desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs/"
-    desc_suffix1 = "To adopt this dog, or any OPH dog, fill out the simple online application at https://ophrescue.org &#10;"
-    desc_suffix2 = "Operation Paws for Homes, Inc. (OPH) rescues dogs of all breeds and ages from high-kill shelters  in NC, VA, MD, and SC, reducing the numbers being euthanized. With limited resources, the shelters are forced to put down 50-90% of the animals that come in the front door. OPH provides pet adoption services to families located in VA, DC, MD, PA and neighboring states. OPH is a 501(c)(3) organization and is 100% donor funded.  OPH does not operate a shelter or have a physical location. We rely on foster families who open their homes to give love and attention to each dog before finding a forever home."
+    desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/"
+    desc_suffix1 = "To adopt fill out the simple online application at https://ophrescue.org &#10;"
+    desc_suffix2 = "Operation Paws for Homes, Inc. (OPH) rescues dogs and cats of all breeds and ages from high-kill shelters  in NC, VA, MD, and SC, reducing the numbers being euthanized. With limited resources, the shelters are forced to put down 50-90% of the animals that come in the front door. OPH provides pet adoption services to families located in VA, DC, MD, PA and neighboring states. OPH is a 501(c)(3) organization and is 100% donor funded.  OPH does not operate a shelter or have a physical location. We rely on foster families who open their homes to give love and attention to each pet before finding a forever home."
     desc_suffix3 = "All adult dogs, cats, and kittens are altered prior to adoption. Puppies too young to be altered at the time of adoption must be brought to our partner vet in Davidsonville, MD  for spay or neuter paid for by Operation Paws for Homes by 6 months of age.  Adopters may choose to have the procedure done at their own vet before 6 months of age and be reimbursed the amount that the rescue would pay our partner vet in Davidsonville.  "
 
     dogs = Dog.where(
@@ -56,29 +56,86 @@ namespace :petfinder_sync do
                 d.photos.visible.count >= 3 ? d.id.to_s + "-3.jpg" : ""  # Photo3 filename
                 ]
 
-          ## Photo Export Code
-          next if d.photos.visible.empty?
+        ## Photo Export Code
+        next if d.photos.visible.empty?
 
-          counter = 0
-          d.photos.visible.order('position asc')
-          d.photos.visible[0..2].each do |p|
-            counter += 1
-            attempt_count = 0
-            begin
-              attempt_count += 1
-              open(p.photo.url(:large)).read
-            rescue OpenURI::HTTPError => error
-                puts "Photo not found for dog " + d.id.to_s
-            rescue SocketError, Net::ReadTimeout => e
-                puts "error: #{e}"
-                sleep 3
-                retry if attempt_count < max_attempts
-            else
-                open(photo_path + d.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
-                   file << open(p.photo.url(:large)).read
-                 end
+        counter = 0
+        d.photos.visible.order('position asc')
+        d.photos.visible[0..2].each do |p|
+          counter += 1
+          attempt_count = 0
+          begin
+            attempt_count += 1
+            open(p.photo.url(:large)).read
+          rescue OpenURI::HTTPError => error
+            puts "Photo not found for dog " + d.id.to_s
+          rescue SocketError, Net::ReadTimeout => e
+            puts "error: #{e}"
+            sleep 3
+            retry if attempt_count < max_attempts
+          else
+            open(photo_path + d.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
+              file << open(p.photo.url(:large)).read
             end
           end
+        end
+      end
+    end
+
+    cats = Cat.where(
+      { status: ["adoptable", "adoption pending", "coming soon"],
+        hidden: false }
+    )
+    CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
+      cats.each do |c|
+        csv << [c.id.to_s,
+                c.tracking_id.to_s,
+                c.name,
+                c.primary_breed ? c.primary_breed.name : "",
+                c.secondary_breed ? c.secondary_breed.name : "",
+                c.to_petfinder_gender,
+                c.to_petfinder_size,
+                c.age.titleize,
+                desc_prefix + c.id.to_s + "&#10;&#10;" + c.description.gsub(/\r\n?/, "&#10;") + "&#10;" + desc_suffix1 + desc_suffix2 + desc_suffix3,
+                "Cat",
+                c.to_petfinder_status,
+                "",                              # Shots
+                c.is_altered ? "1" : "",         # Altered
+                c.no_dogs ? "1" : "",            # NoDogs
+                c.no_cats ? "1" : "",            # NoCats
+                c.no_kids ? "1" : "",            # NoKids
+                "",                              # Housetrained
+                "",                              # Declawed
+                c.is_special_needs ? "1" : "",   # specialNeeds
+                "",                              # Mix
+                c.photos.visible.count >= 1 ? c.id.to_s + "-1.jpg" : "", # Photo1 filename
+                c.photos.visible.count >= 2 ? c.id.to_s + "-2.jpg" : "", # Photo2 filename
+                c.photos.visible.count >= 3 ? c.id.to_s + "-3.jpg" : ""  # Photo3 filename
+                ]
+
+        ## Photo Export Code
+        next if c.photos.visible.empty?
+
+        counter = 0
+        c.photos.visible.order('position asc')
+        c.photos.visible[0..2].each do |p|
+          counter += 1
+          attempt_count = 0
+          begin
+            attempt_count += 1
+            open(p.photo.url(:large)).read
+          rescue OpenURI::HTTPError => error
+            puts "Photo not found for cat " + c.id.to_s
+          rescue SocketError, Net::ReadTimeout => e
+            puts "error: #{e}"
+            sleep 3
+            retry if attempt_count < max_attempts
+          else
+            open(photo_path + c.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
+              file << open(p.photo.url(:large)).read
+            end
+          end
+        end
       end
     end
 

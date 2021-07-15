@@ -110,9 +110,9 @@ namespace :petfinder_sync do
                 c.declawed ? "1" : "",           # Declawed
                 c.is_special_needs ? "1" : "",   # specialNeeds
                 "",                              # Mix
-                c.photos.visible.count >= 1 ? c.id.to_s + "-1.jpg" : "", # Photo1 filename
-                c.photos.visible.count >= 2 ? c.id.to_s + "-2.jpg" : "", # Photo2 filename
-                c.photos.visible.count >= 3 ? c.id.to_s + "-3.jpg" : ""  # Photo3 filename
+                c.photos.visible.count >= 1 ? "cat" + c.id.to_s + "-1.jpg" : "", # Photo1 filename
+                c.photos.visible.count >= 2 ? "cat" + c.id.to_s + "-2.jpg" : "", # Photo2 filename
+                c.photos.visible.count >= 3 ? "cat" + c.id.to_s + "-3.jpg" : ""  # Photo3 filename
                 ]
 
         ## Photo Export Code
@@ -133,7 +133,7 @@ namespace :petfinder_sync do
             sleep 3
             retry if attempt_count < max_attempts
           else
-            open(photo_path + c.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
+            open(photo_path + "cat" + c.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
               file << open(p.photo.url(:large)).read
             end
           end

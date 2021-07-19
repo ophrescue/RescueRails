@@ -73,28 +73,28 @@ namespace :petfinder_sync do
                 ""] # tags
 
         ## Photo Export Code
-        next if d.photos.visible.empty?
+        # next if d.photos.visible.empty?
 
-        counter = 0
-        d.photos.visible.order('position asc')
-        d.photos.visible[0..2].each do |p|
-          counter += 1
-          attempt_count = 0
-          begin
-            attempt_count += 1
-            open(p.photo.url(:large)).read
-          rescue OpenURI::HTTPError => error
-            puts "Photo not found for dog " + d.id.to_s
-          rescue SocketError, Net::ReadTimeout => e
-            puts "error: #{e}"
-            sleep 3
-            retry if attempt_count < max_attempts
-          else
-            open(photo_path + d.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
-              file << open(p.photo.url(:large)).read
-            end
-          end
-        end
+        # counter = 0
+        # d.photos.visible.order('position asc')
+        # d.photos.visible[0..2].each do |p|
+        #   counter += 1
+        #   attempt_count = 0
+        #   begin
+        #     attempt_count += 1
+        #     open(p.photo.url(:large)).read
+        #   rescue OpenURI::HTTPError => error
+        #     puts "Photo not found for dog " + d.id.to_s
+        #   rescue SocketError, Net::ReadTimeout => e
+        #     puts "error: #{e}"
+        #     sleep 3
+        #     retry if attempt_count < max_attempts
+        #   else
+        #     open(photo_path + d.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
+        #       file << open(p.photo.url(:large)).read
+        #     end
+        #   end
+        # end
       end
     end
 
@@ -146,28 +146,28 @@ namespace :petfinder_sync do
                 ""] # tags
 
         ## Photo Export Code
-        next if c.photos.visible.empty?
+        # next if c.photos.visible.empty?
 
-        counter = 0
-        c.photos.visible.order('position asc')
-        c.photos.visible[0..2].each do |p|
-          counter += 1
-          attempt_count = 0
-          begin
-            attempt_count += 1
-            open(p.photo.url(:large)).read
-          rescue OpenURI::HTTPError => error
-            puts "Photo not found for cat " + c.id.to_s
-          rescue SocketError, Net::ReadTimeout => e
-            puts "error: #{e}"
-            sleep 3
-            retry if attempt_count < max_attempts
-          else
-            open(photo_path + "cat" + c.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
-              file << open(p.photo.url(:large)).read
-            end
-          end
-        end
+        # counter = 0
+        # c.photos.visible.order('position asc')
+        # c.photos.visible[0..2].each do |p|
+        #   counter += 1
+        #   attempt_count = 0
+        #   begin
+        #     attempt_count += 1
+        #     open(p.photo.url(:large)).read
+        #   rescue OpenURI::HTTPError => error
+        #     puts "Photo not found for cat " + c.id.to_s
+        #   rescue SocketError, Net::ReadTimeout => e
+        #     puts "error: #{e}"
+        #     sleep 3
+        #     retry if attempt_count < max_attempts
+        #   else
+        #     open(photo_path + "cat" + c.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
+        #       file << open(p.photo.url(:large)).read
+        #     end
+        #   end
+        # end
       end
     end
 

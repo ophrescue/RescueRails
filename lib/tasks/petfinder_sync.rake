@@ -5,20 +5,14 @@ namespace :petfinder_sync do
   require 'fileutils'
 
   path = "/tmp/petfinder/"
-  photo_path = path + "photos/"
   filename = 'VA600.csv'
 
-  max_attempts = 5
-
-  desc "Export Records to CSV with Top 3 Photos, upload to Petfinder"
+  desc "Export Records to CSV, upload to Petfinder"
   task export_upload: :environment do
     puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Petfinder Export Start"
 
     FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
     FileUtils::Verbose.mkdir(path)
-
-    FileUtils::Verbose.rm_r(photo_path) if Dir.exists?(photo_path)
-    FileUtils::Verbose.mkdir(photo_path)
 
     dog_desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs/"
     cat_desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/cats/"
@@ -53,11 +47,11 @@ namespace :petfinder_sync do
                 d.is_special_needs ? "1" : "",   # specialNeeds
                 "",                              # Mix
                 d.photos.visible[0] ? d.photos.visible[0].photo.url(:large) : "", # url to S3 image
-                d.photos.visible[1] ? d.photos.visible[0].photo.url(:large) : "",
-                d.photos.visible[2] ? d.photos.visible[0].photo.url(:large) : "",
-                d.photos.visible[3] ? d.photos.visible[0].photo.url(:large) : "",
-                d.photos.visible[4] ? d.photos.visible[0].photo.url(:large) : "",
-                d.photos.visible[5] ? d.photos.visible[0].photo.url(:large) : "",
+                d.photos.visible[1] ? d.photos.visible[1].photo.url(:large) : "",
+                d.photos.visible[2] ? d.photos.visible[2].photo.url(:large) : "",
+                d.photos.visible[3] ? d.photos.visible[3].photo.url(:large) : "",
+                d.photos.visible[4] ? d.photos.visible[4].photo.url(:large) : "",
+                d.photos.visible[5] ? d.photos.visible[5].photo.url(:large) : "",
                 "", # arrival_date
                 "", # birth_date
                 "", # primaryColor
@@ -72,29 +66,6 @@ namespace :petfinder_sync do
                 "", # no_other_note
                 ""] # tags
 
-        ## Photo Export Code
-        # next if d.photos.visible.empty?
-
-        # counter = 0
-        # d.photos.visible.order('position asc')
-        # d.photos.visible[0..2].each do |p|
-        #   counter += 1
-        #   attempt_count = 0
-        #   begin
-        #     attempt_count += 1
-        #     open(p.photo.url(:large)).read
-        #   rescue OpenURI::HTTPError => error
-        #     puts "Photo not found for dog " + d.id.to_s
-        #   rescue SocketError, Net::ReadTimeout => e
-        #     puts "error: #{e}"
-        #     sleep 3
-        #     retry if attempt_count < max_attempts
-        #   else
-        #     open(photo_path + d.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
-        #       file << open(p.photo.url(:large)).read
-        #     end
-        #   end
-        # end
       end
     end
 
@@ -126,11 +97,11 @@ namespace :petfinder_sync do
                 c.is_special_needs ? "1" : "",   # specialNeeds
                 "",                              # Mix
                 c.photos.visible[0] ? c.photos.visible[0].photo.url(:large) : "", # url to S3 image
-                c.photos.visible[1] ? c.photos.visible[0].photo.url(:large) : "",
-                c.photos.visible[2] ? c.photos.visible[0].photo.url(:large) : "",
-                c.photos.visible[3] ? c.photos.visible[0].photo.url(:large) : "",
-                c.photos.visible[4] ? c.photos.visible[0].photo.url(:large) : "",
-                c.photos.visible[5] ? c.photos.visible[0].photo.url(:large) : "",
+                c.photos.visible[1] ? c.photos.visible[1].photo.url(:large) : "",
+                c.photos.visible[2] ? c.photos.visible[2].photo.url(:large) : "",
+                c.photos.visible[3] ? c.photos.visible[3].photo.url(:large) : "",
+                c.photos.visible[4] ? c.photos.visible[4].photo.url(:large) : "",
+                c.photos.visible[5] ? c.photos.visible[5].photo.url(:large) : "",
                 "", # arrival_date
                 "", # birth_date
                 "", # primaryColor
@@ -145,29 +116,6 @@ namespace :petfinder_sync do
                 "", # no_other_note
                 ""] # tags
 
-        ## Photo Export Code
-        # next if c.photos.visible.empty?
-
-        # counter = 0
-        # c.photos.visible.order('position asc')
-        # c.photos.visible[0..2].each do |p|
-        #   counter += 1
-        #   attempt_count = 0
-        #   begin
-        #     attempt_count += 1
-        #     open(p.photo.url(:large)).read
-        #   rescue OpenURI::HTTPError => error
-        #     puts "Photo not found for cat " + c.id.to_s
-        #   rescue SocketError, Net::ReadTimeout => e
-        #     puts "error: #{e}"
-        #     sleep 3
-        #     retry if attempt_count < max_attempts
-        #   else
-        #     open(photo_path + "cat" + c.id.to_s + "-" + counter.to_s + ".jpg", "wb") do |file|
-        #       file << open(p.photo.url(:large)).read
-        #     end
-        #   end
-        # end
       end
     end
 
@@ -181,13 +129,6 @@ namespace :petfinder_sync do
       ftp.login(ENV['PETFINDER_FTP_USER'], ENV['PETFINDER_FTP_PW'])
       ftp.chdir('/import/')
       ftp.putbinaryfile(path + filename, filename)
-
-      # ftp.chdir('/import/photos/')
-
-      # Dir.foreach(photo_path) do |file|
-      #   next if file == '.' or file == '..'
-      #   ftp.putbinaryfile(photo_path + file, file)
-      # end
 
       ftp.close
       puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Upload Completed"

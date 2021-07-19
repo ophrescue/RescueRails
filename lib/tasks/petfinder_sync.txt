@@ -1,0 +1,123 @@
+# Petfinder Sync Format
+
+***Enabling import feature on your Petfinder account***
+Please email help@petfinder.com to request an FTP account for the purposes of using import.  Be sure to mention the name of the software package that you’re using, or if you’ll be creating your own CSV formatted data.
+
+If any pets currently exist in your Petfinder account, you should also tell us how those listings should be treated prior to import being enabled.  Can they be overwritten with the data you’re sending to us, or should they be protected from deletion?
+
+Please note that all requests in this process must come from the group administrator or primary contact as listed on the Petfinder account.  It can not come from a third party, even if that third party is a software vendor you are using to facilitate import.
+Once you have your FTP account, note that your data file is uploaded into the /import folder.  Your photos are uploaded into the /import/photos folder.  You also have the option of providing photo URLs in the data, instead of uploading the photos to us.  When requesting that we enable import, you would need to mention which you plan on doing.
+
+
+
+***Be aware of how updates are treated through import***
+The info below is important for organizations that already have pets in their Petfinder account.
+If a pet (1) is currently in your Petfinder account and (2) has a "Pet ID" and (3) a pet matching that Pet ID is NOT in the new data file, it will be DELETED. The Pet ID is how import uniquely identifies a pet listing.
+
+
+
+***Using the Pet ID field to manually add pets***
+To manually add a pet listing to https://pro.petfinder.com/ but not have import delete it, make sure it has nothing in the “Pet ID” field.  Import can not update/modify/delete a pet on Petfinder if that listing has nothing in the “Pet ID” field.
+
+
+
+***How to manually prepare a CSV data file for Petfinder import***
+This is the Petfinder Import Standard Template.
+CSV records must be created with fields in the following order, surrounded by double- quotes, separated by a comma:
+"ID","Internal","AnimalName","PrimaryBreed","SecondaryBreed","Sex","Size","Age","Desc","Type","Status","Shots","Altered","NoDogs","NoCats","NoKids","Housetrained","Declawed","specialNeeds","Mix","photo1","photo2","photo3","photo4","photo5","photo6","arrival_date","birth_date","primaryColor","secondaryColor","tertiaryColor","coat_length","adoption_fee","display_adoption_fee","adoption_fee_waived","special_needs_notes","no_other","no_other_note","tags"
+
+Example:
+"testID123","test-internal1","test-name1","Schnauzer","Basset Hound","F","L","Senior","sample description here&#10;&#10;here’s a new paragraph","Dog","A","1","1","1","1","1","1","","1","1","http://s3.amazonaws.com/testID123-1.jpg?eUZ=2019-05-23T06:40:36","http://s3.amazonaws.com/testID123-2.jpg?eUZ=2019-05-23T06:40:36","http://s3.amazonaws.com/testID123-3.jpg?eUZ=2019-05-23T06:40:36","http://s3.amazonaws.com/testID123-4.jpg?eUZ=2019-05-23T06:40:36","http://s3.amazonaws.com/testID123-5.jpg?eUZ=2019-05-23T06:40:36","http://s3.amazonaws.com/testID123-6.jpg?eUZ=2019-05-23T06:40:36","2019-07-01","2019-06-01","Brindle","Brown / Chocolate","Red / Chestnut / Orange","Wire","50","1","0","requires insulin","1","can not be around squirrels","likes to do stuff"
+
+Use of any data other than that listed below, (including exact breed values) will cause all of some of your data to fail.
+The data file must be named with this format, with the state abbreviation in all CAPS:
+SHELTERID.csv
+
+Example:
+NJ94.csv
+
+
+
+***How to create line breaks in pet descriptions***
+
+Our import system accepts some HTML Unicode.
+
+To create line breaks (new line / paragraph / carriage return) in your pet descriptions, use this code:
+&#10;
+
+Example:
+This pet is available for adoption. &#10;This is a new line.  &#10; &#10;This is a new paragraph.
+
+
+
+***Field explanations***
+ID = your own unique ID field; unique to each pet (required)
+Internal = your own internal field; can be anything
+AnimalName = anything (required)
+PrimaryBreed = See breeds/coat/color documentation file for acceptable Primary Breed values (required)
+SecondaryBreed = See breeds/coat/color documentation file for acceptable Secondary Breed values.
+
+Sex:  M, F (required)
+Size:  S, M, L, XL (required)
+Age:  Baby, Young, Adult, Senior (required)
+Desc:  pet's description; use plain text. No ASCII or HTML. However, note that you can create a line break by using:  &#10;
+Type:  "Barnyard", "Bird", "Cat", "Dog", "Horse", "Pig", "Rabbit", " Scales, Fins & Other", "Small & Furry" (required)
+Status:  A, H, X, P, F  (A = adoptable; H = hold; X = adopted; P = pending; F = found) (required, defaults to "A" if nothing provided)
+Shots:  1 or leave blank
+Altered:  1 or leave blank
+NoDogs:  See “NoDogs,NoCats,NoKids” below
+NoCats:  See “NoDogs,NoCats,NoKids” below
+NoKids:  See “NoDogs,NoCats,NoKids” below
+Housetrained:  1 or leave blank
+Declawed:  1 or leave blank   (dogs can not be declawed)
+specialNeeds:  1 or leave blank
+Mix:  1 or leave blank
+
+NoDogs,NoCats,NoKids:
+1/y/yes/t/true = Not a Good fit w/ dogs
+1/y/yes/t/true = Not a Good fit w/ cats
+1/y/yes/t/true = Not a Good fit w/ children
+0/n/no/f/false = Good fit w/ dogs
+0/n/no/f/false = Good fit w/ cats
+0/n/no/f/false = Good fit w/ children
+[nothing] = Unknown w/ dogs
+[nothing] = Unknown w/ cats
+[nothing] = Unknown w/ children
+
+***New fields added in August 2019***
+arrival_date:  date in the following format YYYY-MM-DD.  If using Excel to create your data file, please set the field type as "DATE".
+birth_date:  date in the following format YYYY-MM-DD.  If using Excel to create your data file, please set the field type as "DATE".
+primaryColor:  See breeds/coat/color documentation file
+secondaryColor:  See breeds/coat/color documentation file
+tertiaryColor:  See breeds/coat/color documentation file
+coat_length:  See breeds/coat/color documentation file
+adoption_fee:  Must be numeric, can have decimal.  No dollar sign, no commas.
+display_adoption_fee:  1/y/yes/t/true or 0/n/no/f/false
+adoption_fee_waived:  1/y/yes/t/true or 0/n/no/f/false
+special_needs_notes:  Text field.  If "specialNeeds" is true, then describe further.
+no_other:  Not a good fit w/ other pets.  1/y/yes/t/true or 0/n/no/f/false
+no_other_note:  If "Not a good fit w/ other pets" is true, then describe further.
+tags:  Comma delimited list of words such as "excitable, friendly, likes to run".  Must be surrounded by quotes
+
+photo1 = 1st pet photo
+photo2 = 2nd pet photo
+photo3 = 3rd pet photo
+photo4 = 4th pet photo
+photo5 = 5th pet photo
+photo6 = 6th pet photo
+
+Photos uploaded should be named with the following format:
+ID-sortorder.jpg
+
+For a pet with ID testID123, the photos should be named:
+testID123-1.jpg, testID123-2.jpg, testID123-3.jpg, testID123-4.jpg, testID123-5.jpg, testID123-6.jpg,
+
+As an alternative, you can provide the photo URLs instead of uploading & referencing the uploaded file.
+
+Note that these fields do not appear on public pet profile.  They are for your records:
+ID = your own unique ID field; unique to each pet (required)
+Internal = your own internal field; can be anything
+arrival_date:  date in the following format YYYY-MM-DD.  If using Excel to create your data file, please set the field type as "DATE".
+birth_date:  date in the following format YYYY-MM-DD.  If using Excel to create your data file, please set the field type as "DATE".
+
+See breeds documentation file for an acceptable list of animal types, breed names, coat lengths, and colors.  Field values must be typed exactly as seen in order for them to be accepted by our system.

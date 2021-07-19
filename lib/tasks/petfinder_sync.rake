@@ -52,10 +52,25 @@ namespace :petfinder_sync do
                 "",                              # Declawed
                 d.is_special_needs ? "1" : "",   # specialNeeds
                 "",                              # Mix
-                d.photos.visible.count >= 1 ? d.id.to_s + "-1.jpg" : "", # Photo1 filename
-                d.photos.visible.count >= 2 ? d.id.to_s + "-2.jpg" : "", # Photo2 filename
-                d.photos.visible.count >= 3 ? d.id.to_s + "-3.jpg" : ""  # Photo3 filename
-                ]
+                d.photos.visible[0] ? d.photos.visible[0].photo.url(:large) : "", # url to S3 image
+                d.photos.visible[1] ? d.photos.visible[0].photo.url(:large) : "",
+                d.photos.visible[2] ? d.photos.visible[0].photo.url(:large) : "",
+                d.photos.visible[3] ? d.photos.visible[0].photo.url(:large) : "",
+                d.photos.visible[4] ? d.photos.visible[0].photo.url(:large) : "",
+                d.photos.visible[5] ? d.photos.visible[0].photo.url(:large) : "",
+                "", # arrival_date
+                "", # birth_date
+                "", # primaryColor
+                "", # secondaryColor
+                "", # tertiaryColor
+                "", # coat_length
+                "", # adoption_fee
+                "", # display_adoption_fee
+                "", # adoption_fee_waived
+                "", # special_needs_notes
+                "", # no_other
+                "", # no_other_note
+                ""] # tags
 
         ## Photo Export Code
         next if d.photos.visible.empty?
@@ -110,10 +125,25 @@ namespace :petfinder_sync do
                 c.declawed ? "1" : "",           # Declawed
                 c.is_special_needs ? "1" : "",   # specialNeeds
                 "",                              # Mix
-                c.photos.visible.count >= 1 ? "cat" + c.id.to_s + "-1.jpg" : "", # Photo1 filename
-                c.photos.visible.count >= 2 ? "cat" + c.id.to_s + "-2.jpg" : "", # Photo2 filename
-                c.photos.visible.count >= 3 ? "cat" + c.id.to_s + "-3.jpg" : ""  # Photo3 filename
-                ]
+                c.photos.visible[0] ? c.photos.visible[0].photo.url(:large) : "", # url to S3 image
+                c.photos.visible[1] ? c.photos.visible[0].photo.url(:large) : "",
+                c.photos.visible[2] ? c.photos.visible[0].photo.url(:large) : "",
+                c.photos.visible[3] ? c.photos.visible[0].photo.url(:large) : "",
+                c.photos.visible[4] ? c.photos.visible[0].photo.url(:large) : "",
+                c.photos.visible[5] ? c.photos.visible[0].photo.url(:large) : "",
+                "", # arrival_date
+                "", # birth_date
+                "", # primaryColor
+                "", # secondaryColor
+                "", # tertiaryColor
+                "", # coat_length
+                "", # adoption_fee
+                "", # display_adoption_fee
+                "", # adoption_fee_waived
+                "", # special_needs_notes
+                "", # no_other
+                "", # no_other_note
+                ""] # tags
 
         ## Photo Export Code
         next if c.photos.visible.empty?
@@ -156,7 +186,6 @@ namespace :petfinder_sync do
 
       Dir.foreach(photo_path) do |file|
         next if file == '.' or file == '..'
-        puts 'uploading '+ photo_path
         ftp.putbinaryfile(photo_path + file, file)
       end
 

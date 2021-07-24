@@ -18,7 +18,7 @@ class Contract < ApplicationRecord
   def get_details
     return {} if ENV['ESIGNATURES_API_KEY'].blank?
     @get_details ||= begin
-      Rails.cache.fetch(esig_contract_id, expires: 15.minutes) do
+      Rails.cache.fetch(esig_contract_id, expires: 5.minutes) do
         begin
           r = RestClient.get("https://#{ENV['ESIGNATURES_API_KEY']}:@esignatures.io/api/contracts/#{esig_contract_id}")
         rescue RestClient::ExceptionWithResponse, RestClient::TooManyRequests, Errno::ECONNREFUSED, SocketError

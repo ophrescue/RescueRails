@@ -30,6 +30,12 @@
       <% end %>
       </ul>
 
+      <% if @volunteer_app.adult %>
+        <span class="badge badge-success">18 or Older</span>
+      <% else %>
+        <span class="badge badge-danger">Under 18</span>
+      <% end %>
+
       <dl>
         <dt>Email</dt>
         <dd><%= @volunteer_app.email %></dd>

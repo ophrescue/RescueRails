@@ -80,6 +80,7 @@ class VolunteerAppsController < ApplicationController
                                           :adoption_team_interest,
                                           :admin_interest,
                                           :about,
+                                          :adult,
                                           volunteer_foster_app_attributes:[
                                             :can_foster_dogs,
                                             :can_foster_cats,

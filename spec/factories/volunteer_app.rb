@@ -18,6 +18,7 @@ FactoryBot.define do
       transport_bb_interest { [true, false].sample }
       adoption_team_interest { [true, false].sample }
       admin_interest { [true, false].sample }
+      adult { [true, false].sample }
       about { Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4) }
 
       trait :with_foster_app do

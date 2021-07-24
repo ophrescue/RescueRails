@@ -55,6 +55,17 @@
               <%= f.text_area :about, class: "col-8 form-control", required: true %>
               <div class='invalid-feedback'><%= validation_error_message_for(f,:about) %></div>
             </div>
+            <h5>Are you over the age of 18? If not, please add your age in the comments above.</h5>
+                <div id='age'>
+                  <div class="custom-control custom-radio">
+                    <%= f.radio_button :adult, true, class: "custom-control-input", required: true %>
+                    <%= f.label :adult, 'Yes', value: true, class: "custom-control-label" %>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <%= f.radio_button :adult, false, class: "custom-control-input" %>
+                    <%= f.label :adult, 'No', value: false, class: "custom-control-label" %>
+                  </div>
+                </div>
             <h3>What roles are you interested in?</h3>
             <div class="form-check">
               <%= f.check_box(:marketing_interest) %>

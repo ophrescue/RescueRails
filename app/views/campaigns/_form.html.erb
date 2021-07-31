@@ -18,6 +18,7 @@
   <div class="form-group row">
     <%= f.label :goal, "Fundraising Goal", class: 'col-form-label col-sm-2 required' %>
     <%= f.number_field :goal, class: "form-control col-sm-4", required: true, maxlength: 10 %>
+    <small class='col-sm-12 offset-2'>Enter 0 for no goal</small>
     <%= f.bootstrap_errors :goal, class: 'col-sm-12 offset-2'  %>
   </div>
 

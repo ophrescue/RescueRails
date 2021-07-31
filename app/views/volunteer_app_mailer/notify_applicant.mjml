@@ -8,7 +8,13 @@
         <mj-divider border-color="#F45E43"></mj-divider>
 
         <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Thank You!</mj-text>
-        <mj-text font-size="14px" font-family="helvetica">Your Operation Paws for Homes volunteer application has been received. A member of the OPH team will be contacting you soon to discuss your application.</mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Operation Paws for Homes would not exist without the hard work and dedication of our volunteers. The number of dogs and cats we can save truly depends on the number of people we have helping us. With that said, we are incredibly grateful to receive your time, talents and interest to volunteer.</mj-text>
+        <mj-text font-size="14px" font-family="helvetica">OPH is more than just a dog and cat rescue. We have many sectors of the organization, and every role, big or small, ongoing or short-term, is a critical piece of the puzzle. No matter how you engage, your engagement matters!</mj-text>
+        <mj-text font-size="14px" font-family="helvetica">All volunteers must first participate in our virtual volunteer orientation. Next step: our Orientation Coordinator will be in touch with you to help get you set up!</mj-text>
+
+        <mj-button href="https://ophrescue.org/volunteer" font-family="Helvetica" background-color="#f45e43" color="white">
+          Learn about OPH Volunteer Roles
+         </mj-button>
 
       </mj-column>
     </mj-section>

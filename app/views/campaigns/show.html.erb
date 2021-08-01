@@ -13,8 +13,10 @@
           Sorry, this campaign is in not accepting donations at this time.  Please see our <a href="/campaigns/active">Active Campaigns</a>
         </div>
       <% end %>
+      <% if @campaign.goal > 0 %>
       <h5>Our Goal <%= number_to_currency(@campaign.goal, precision: 0) %></h5>
       <h5>Raised <%= number_to_currency(@campaign.progress, precision: 0) %></h5>
+      <% end %>
     </div>
   </div>
 

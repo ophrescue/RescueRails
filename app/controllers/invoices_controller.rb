@@ -66,7 +66,7 @@ class InvoicesController < ApplicationController
 
   def update
     @invoice = Invoice.friendly.find(params[:id])
-    @invoice.card_token =  stripe_params["stripeToken"]
+    @invoice.card_token = stripe_params["stripeToken"]
     donation_amt = stripe_params["invoice"]["donation"].to_i
 
     begin
@@ -76,19 +76,17 @@ class InvoicesController < ApplicationController
     else
       flash[:success] = 'Payment Processed Successfully '
       InvoiceMailer.invoice_paid(@invoice.id).deliver_later
-    ensure
-      render :show
     end
+    @invoice = Invoice.friendly.find(params[:id])
+    render :show
   end
 
   def record_contract
     @invoice = Invoice.friendly.find(params[:id])
     if @invoice.contract_received_at.nil?
       @invoice.contract_received_at = Time.now
-
     else
       @invoice.contract_received_at = nil
-
     end
     if @invoice.save!
       flash[:success] = "Contract status updated, notifications sent"

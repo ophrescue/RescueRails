@@ -22,10 +22,16 @@ feature 'Invoices' do
       expect(page).to have_content(dog.name)
       click_button('Make Payment')
       stripe_card_number = '4242424242424242'
+      stripe_card_exp = 1.year.from_now.strftime("%m%y")
       within_frame 'stripe_checkout_app' do
-        find_field('Card number').send_keys(stripe_card_number)
-        find_field('MM / YY').send_keys "01#{Time.zone.now.year + 1}"
+        stripe_card_number.chars.each do |digit|
+          find_field('Card number').send_keys(digit)
+        end
+        stripe_card_exp.chars.each do |digit|
+          find_field('MM / YY').send_keys(digit)
+        end
         find_field('CVC').send_keys '123'
+        sleep(1)
         find_field('ZIP Code').send_keys '12345'
         find('button[type="submit"]').click
       end
@@ -50,10 +56,16 @@ feature 'Invoices' do
       fill_in('invoice_donation', with: '50')
       click_button('Make Payment')
       stripe_card_number = '4242424242424242'
+      stripe_card_exp = 1.year.from_now.strftime("%m%y")
       within_frame 'stripe_checkout_app' do
-        find_field('Card number').send_keys(stripe_card_number)
-        find_field('MM / YY').send_keys "01#{Time.zone.now.year + 1}"
+        stripe_card_number.chars.each do |digit|
+          find_field('Card number').send_keys(digit)
+        end
+        stripe_card_exp.chars.each do |digit|
+          find_field('MM / YY').send_keys(digit)
+        end
         find_field('CVC').send_keys '123'
+        sleep(1)
         find_field('ZIP Code').send_keys '12345'
         find('button[type="submit"]').click
       end

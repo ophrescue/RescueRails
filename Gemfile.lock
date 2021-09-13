@@ -218,7 +218,7 @@ GEM
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
     geocoder (1.6.7)
-    gibbon (3.4.0)
+    gibbon (3.4.1)
       faraday (>= 0.16.0)
       multi_json (>= 1.11.0)
     globalid (0.5.2)

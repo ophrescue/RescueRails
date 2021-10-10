@@ -157,6 +157,8 @@ class Dog < ApplicationRecord
 
   SEARCH_FIELDS = ["Name", "Breed", "Tracking ID", "Microchip"]
 
+  ENERGY_LEVEL = (1..5).freeze
+
   before_save :update_adoption_date, :update_needs_foster
 
   scope :is_breed,                                ->(breed_partial) { joins("join breeds on (breeds.id = dogs.primary_breed_id) or (breeds.id = dogs.secondary_breed_id)").where("breeds.name ilike '%#{sanitize_sql_like(breed_partial)}%'").distinct }

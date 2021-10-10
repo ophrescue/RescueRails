@@ -6,5 +6,6 @@
     <%= dog.foster_location %><br />
     <%= dog.gender %> - <%= dog.age.try(:titleize) %><br />
     <%= dog.breeds.join(" x ").html_safe %>
+    <%= render "energy_level/energy_level_icon", energy_level: dog.energy_level, img_size: 150 %>
   <% end %>
 </div>

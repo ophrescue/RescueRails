@@ -69,6 +69,11 @@
       </div>
 
       <div class="form-group row">
+        <%= f.label :energy_level, class: 'col-form-label col-form-label-sm col-4'  %>
+        <%= f.select :energy_level, Dog::ENERGY_LEVEL, {include_blank: '-select-'}, {class: 'form-control form-control-sm col-6'} %>
+      </div>
+
+      <div class="form-group row">
         <%= f.label :gender, class: 'col-form-label col-form-label-sm col-4'  %>
         <%= f.select(:gender, Dog::GENDERS, {prompt: '-select-'}, {class: "col-2 form-control form-control-sm col-6"}) %>
       </div>

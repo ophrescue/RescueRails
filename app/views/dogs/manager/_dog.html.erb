@@ -10,6 +10,7 @@
     <span class='age'><%= dog.age ? dog.age.titleize : " " %>,</span>
     <span class='gender'><%= dog.gender %>,</span>
     <span class='breed'><%= dog.breeds.join(" x ").html_safe %>,</span>
+    <span>Energy Level <%= dog.energy_level %>, </span>
     <span class='status'>
       <% if (params[:status] == nil) || (params[:status] == "active")  %>
         <%= dog.status.titleize %>

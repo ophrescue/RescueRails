@@ -80,7 +80,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'capybara-selenium'
-  gem 'webdrivers'
+  gem 'webdrivers', '~> 4.6.1'
   gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'rack_session_access'

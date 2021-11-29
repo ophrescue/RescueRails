@@ -71,6 +71,8 @@ class Adopter < ApplicationRecord
               'withdrawn',
               'denied']
 
+  ENERGY_LEVEL = (1..5).freeze
+
   FLAGS = ['High', 'Low', 'On Hold']
 
   has_many :references, dependent: :destroy
@@ -104,6 +106,8 @@ class Adopter < ApplicationRecord
   validates :when_to_call, allow_blank: true, length: { maximum: 255 }
   validates :dog_name, allow_blank: true, length: { maximum: 255 }
   validates :other_phone, allow_blank: true, length: { maximum: 255 }
+
+  validates :energy_level, allow_blank: true, inclusion: ENERGY_LEVEL
 
   validates_presence_of :status
   validates_inclusion_of :status, in: STATUSES

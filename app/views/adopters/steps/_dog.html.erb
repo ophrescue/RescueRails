@@ -13,11 +13,37 @@
       </label>
     </div>
   </div>
-  
+
   <div class="control-group">
     <%= f.label :dog_name, "(Optional) What pets are you interested in?", :class => "control-label" %>
     <div class="controls">
       <%= f.text_field :dog_name %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :energy_level, "For Dogs Only - How active would you like your dog to be?", :class => "control-label" %>
+    <div class="controls">
+      <label>
+        <%= f.radio_button :energy_level, '1', :class => "" %>
+        <span>I am looking for a dog to lay next to me while I watch TV or work from my computer.</span>
+      </label>
+      <label>
+        <%= f.radio_button :energy_level, '2', :class => "" %>
+        <span>I am looking for a dog that has a fairly low activity level but enjoys an occasional walk</span>
+      </label>
+      <label>
+        <%= f.radio_button :energy_level, '3', :class => "" %>
+        <span>I am looking for a dog that enjoys walks most days and a little bit of playtime but settles down easily.</span>
+      </label>
+      <label>
+        <%= f.radio_button :energy_level, '4', :class => "" %>
+        <span> I am looking for a dog that loves to run and play. I can ensure that my dog will have at least 1 hour of a combination of mental stimulation and physical exercise off-leash every day. </span>
+      </label>
+      <label>
+        <%= f.radio_button :energy_level, '5', :class => "" %>
+        <span>I am looking for a dog that is an athlete. I can ensure that my dog will have at least 3 hours of a combination of mental stimulation and physical exercise off-leash every day rain or shine.</span>
+      </label>
     </div>
   </div>
 

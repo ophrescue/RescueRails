@@ -155,6 +155,7 @@ class AdoptersController < ApplicationController
                                     :dog_reqs,
                                     :why_adopt,
                                     :dog_name,
+                                    :energy_level,
                                     :other_phone,
                                     :assigned_to_user_id,
                                     :flag,

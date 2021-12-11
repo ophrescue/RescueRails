@@ -213,6 +213,8 @@ class User < ApplicationRecord
                    photographer: :is_photographer,
                    public_relations: :public_relations,
                    puppies_ok: :can_foster_puppies,
+                   dogs_ok: :can_foster_dogs,
+                   cats_ok: :can_foster_cats,
                    social_media: :social_media_manager,
                    training_team: :training_team,
                    translator: :translator,

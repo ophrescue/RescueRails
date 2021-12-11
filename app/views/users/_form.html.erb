@@ -320,6 +320,22 @@
 
       <fieldset class="form-group">
         <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0">Are you willing to foster dogs?</legend>
+          <div class="col-sm-9">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :can_foster_dogs, true, :class => "link required form-check-input" %>
+              <label class="form-check-label" for="user_can_foster_dogs_true">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :can_foster_dogs, false, :class => "link required form-check-input ml-2" %>
+              <label class="form-check-label" for="user_can_foster_dogs_false">No</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
           <legend class="col-form-label col-sm-3 pt-0">Are you willing to foster puppies?</legend>
           <div class="col-sm-9">
             <div class="form-check form-check-inline">
@@ -329,6 +345,22 @@
             <div class="form-check form-check-inline">
               <%= f.radio_button :can_foster_puppies, false, :class => "link required form-check-input ml-2" %>
               <label class="form-check-label" for="user_can_foster_puppies_false">No</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0">Are you willing to foster cats?</legend>
+          <div class="col-sm-9">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :can_foster_cats, true, :class => "link required form-check-input" %>
+              <label class="form-check-label" for="user_can_foster_cats_true">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :can_foster_cats, false, :class => "link required form-check-input ml-2" %>
+              <label class="form-check-label" for="user_can_foster_cats_false">No</label>
             </div>
           </div>
         </div>

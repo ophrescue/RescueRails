@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_222239) do
+ActiveRecord::Schema.define(version: 2021_12_11_192840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -270,6 +270,7 @@ ActiveRecord::Schema.define(version: 2021_11_29_222239) do
     t.boolean "hidden", default: false, null: false
     t.boolean "no_urban_setting", default: false, null: false
     t.boolean "home_check_required", default: false, null: false
+    t.text "wait_list"
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -623,6 +624,8 @@ ActiveRecord::Schema.define(version: 2021_11_29_222239) do
     t.integer "insurance_training_agreement_id"
     t.boolean "dog_handling_training_complete", default: false, null: false
     t.boolean "cat_handling_training_complete", default: false, null: false
+    t.boolean "can_foster_cats", default: false
+    t.boolean "can_foster_dogs", default: false
     t.index ["agreement_id"], name: "index_users_on_agreement_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"

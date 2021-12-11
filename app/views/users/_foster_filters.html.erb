@@ -15,6 +15,21 @@
   <%# </label> %>
 
   <label class="float-right">
+    Dogs Ok
+    <%= select_tag "dogs_ok", options_for_select(@options, params[:dogs_ok]), class: 'form-control-sm' %>
+  </label>
+
+  <label class="float-right">
+    Puppies Ok
+    <%= select_tag "puppies_ok", options_for_select(@options, params[:puppies_ok]), class: 'form-control-sm' %>
+  </label>
+
+  <label class="float-right">
+    Cats Ok
+    <%= select_tag "cats_ok", options_for_select(@options, params[:cats_ok]), class: 'form-control-sm' %>
+  </label>
+
+  <label class="float-right">
     House
     <%= select_tag "house_type", options_for_select(@rent_options, params[:house_type]), class: 'form-control-sm' %>
   </label>
@@ -42,11 +57,6 @@
   <label class="float-right">
     Fence
     <%= select_tag "has_fence", options_for_select(@options, params[:has_fence]), class: 'form-control-sm' %>
-  </label>
-
-  <label class="float-right">
-    Puppies Ok
-    <%= select_tag "puppies_ok", options_for_select(@options, params[:puppies_ok]), class: 'form-control-sm' %>
   </label>
 
   <label class="float-right">

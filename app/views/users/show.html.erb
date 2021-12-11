@@ -270,11 +270,27 @@
               <% end %>
             <% end %>
 
+            <% unless @user.can_foster_dogs.nil? %>
+              <% if @user.can_foster_dogs? %>
+                <p><span class="badge badge-success">Can foster dogs</span></p>
+              <% else %>
+                <p><span class="badge badge-warning">Cannot foster dogs</span></p>
+              <% end %>
+            <% end %>
+
             <% unless @user.can_foster_puppies.nil? %>
               <% if @user.can_foster_puppies? %>
                 <p><span class="badge badge-success">Can foster puppies</span></p>
               <% else %>
-                <p><span class="badge badge-warning">No puppies</span></p>
+                <p><span class="badge badge-warning">Cannot foster puppies</span></p>
+              <% end %>
+            <% end %>
+
+            <% unless @user.can_foster_cats.nil? %>
+              <% if @user.can_foster_cats? %>
+                <p><span class="badge badge-success">Can foster cats</span></p>
+              <% else %>
+                <p><span class="badge badge-warning">Cannot foster cats</span></p>
               <% end %>
             <% end %>
 

@@ -100,6 +100,7 @@ feature 'add a cat', js: true do
         fill_in(:cat_medical_summary, with: 'medical words')
         check(:cat_medical_review_complete)
         fill_in(:cat_behavior_summary, with: 'words describing behaviour')
+        fill_in(:cat_wait_list, with: 'next in line')
 
         # add photos
         click_link('Add a Photo')
@@ -164,6 +165,7 @@ feature 'add a cat', js: true do
 
         expect(cat.medical_review_complete).to eq true
         expect(cat.behavior_summary).to eq 'words describing behaviour'
+        expect(cat.wait_list).to eq 'next in line'
 
         expect(cat.photos.length).to eq 2
 

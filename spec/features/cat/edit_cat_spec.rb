@@ -179,6 +179,7 @@ feature 'edit a cat', js: true do
         fill_in(:cat_medical_summary, with: 'medical words')
         check(:cat_medical_review_complete)
         fill_in(:cat_behavior_summary, with: 'words describing behaviour')
+        fill_in(:cat_wait_list, with: 'next in line')
 
         # add photos
         click_link('Add a Photo')

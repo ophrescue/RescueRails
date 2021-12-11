@@ -32,6 +32,7 @@ FactoryBot.define do
       no_dogs                 { [true, false].sample }
       no_cats                 { [true, false].sample }
       no_kids                 { [true, false].sample }
+      wait_list { Faker::Lorem.paragraph }
       description { Faker::Lorem.paragraphs(number: 3, supplemental: true).join("\n\n") }
       medical_summary { Faker::Lorem.paragraph }
       behavior_summary { Faker::Lorem.paragraph }

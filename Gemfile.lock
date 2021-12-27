@@ -262,7 +262,7 @@ GEM
     mini_racer (0.5.0)
       libv8-node (~> 16.10.0.0)
     minitest (5.15.0)
-    mjml-rails (4.7.0)
+    mjml-rails (4.7.1)
     multi_json (1.15.0)
     multipart-post (2.1.1)
     net-scp (3.0.0)

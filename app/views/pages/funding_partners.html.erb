@@ -13,35 +13,19 @@
         from shelters and finding them forever homes. Thank you for joining our mission to creating a
         No Kill nation and helping to write the futures for thousands of dogs and cats every year.</p>
 
-        <h3>$25,000+</h3>
-      </div>
-    </div>
-    <div class="album">
-      <div class="container">
-        <div class="row">
-            <a target="_blank" href="https://www.petcofoundation.org/">
-              <%= image_tag("sponsors/petco_foundation.png", class: "img-fluid", alt: "Petco Foundation") %>
-            </a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-12 col-lg-12">
-      <div class="article pages">
-        <h3>$10,000 - $24,999</h3>
-
         <h3>$5,000 - $9,999</h3>
       </div>
     </div>
       <% sponsors_5000 =
           {
-            url: "http://cordish.com",
-            img: "cordish.jpg",
-            alt: "The Cordish Companies"
-          },
-          {
             url: "https://ophfriendsfamilyprogram.weebly.com/",
             img: "linda-wolf-homes.jpg",
             alt: "Wolf Real Estate"
+          },
+          {
+            url: "#",
+            img: "christina_young.png",
+            alt: "Christina Young"
           }
         %>
     <div class="album">
@@ -52,7 +36,10 @@
               <div class="col md-4 mx-auto">
                 <div class="card mb-4 border-0">
                   <a target="_blank" href="<%= spon[:url] %>">
-                    <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt])%>
+                    <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], class: "w-75") %>
+                    <% if spon[:show_text] %>
+                      <div class="card-body"><%= spon[:alt] %></div>
+                    <% end %>
                   </a>
                 </div>
               </div>
@@ -66,21 +53,16 @@
         <h3>$2,500 - $4,999</h3>
       </div>
     </div>
-
         <% sponsors_2500 =
           {
             url: "http://www.fvcbank.com/",
             img: "fvcbank.jpg",
             alt: "FVC Bank"
           },
-          { url: "https://www.purina.com/",
-            img: "purina.png",
-            alt: "purina"
-          },
           {
-            url: "http://www.petvalu.com/",
-            img: "petvalu.jpg",
-            alt: "PetValu"
+            url: "",
+            img: "",
+            alt: ""
           }
         %>
     <div class="album">
@@ -109,43 +91,8 @@
         <% sponsors_1000 =
           {
             url: "#",
-            img: "daniel_brown.png",
-            alt: "Daniel Brown"
-          },
-          {
-            url: "#",
-            img: "jessica_brown_andy_howlett.png",
-            alt: "Jessica Brown and Andy Howlett"
-          },
-          {
-            url: "https://corporate.discovery.com",
-            img: "discovery.png",
-            alt: "Discovery Communications"
-          },
-          {
-            url: "https://www.farrishsubaru.com/",
-            img: "farrish_subaru.jpg",
-            alt: "Farrish Subaru"
-          },
-          {
-            url: "#",
             img: "fitzgerald-kolish.png",
             alt: "David FitzGerald and Elaine Kolish"
-          },
-          {
-          url: "http://www.northropgrumman.com",
-          img: "northropgrumman.png",
-          alt: "Northrup Grumman"
-          },
-          {
-            url:"https://www.oldetownepetresort.com/" ,
-            img: "oldetownepetresort.png",
-            alt: "Olde Towne Pet Resort"
-          },
-          {
-            url: "https://www.pedigreefoundation.org",
-            img: "pedigreefoundation.png",
-            alt: "Pedigree Foundation"
           },
           {
             url: "http://www.petfinderfoundation.com/",
@@ -168,11 +115,6 @@
             alt: "The Libera Family"
           },
           {
-            url: "#",
-            img: "christina_young.png",
-            alt: "Christina Young"
-          },
-          {
             url: "http://dzaruba.com/",
             img: "zaruba.jpg",
             alt: "Zaruba Gallery"
@@ -187,7 +129,7 @@
               <div class="col-md-4 mx-auto">
                 <div class="card mb-4 border-0">
                   <a target="_blank" href="<%= spon[:url] %>">
-                    <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], class: "img-fluid") %>
+                    <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], class: "w-75") %>
                   </a>
                 </div>
               </div>
@@ -208,11 +150,6 @@
             img:"cfnva.jpg" ,
           },
           {
-            url: "http://www.companionanimalclinicvirginia.com/" ,
-            img: "companionanimalclinicvirginia.jpg" ,
-            alt: "Companion Animal Clinic"
-          },
-          {
             url: "https://huxleyandkent.com/",
             img: "huxleyandkent.png",
             alt: "Huxley and Kent"
@@ -226,16 +163,6 @@
             url: "https://www.novec.com/",
             img: "novec.jpg",
             alt: "NOVEC"
-          },
-          {
-            url: "https://www.nepaldogtreat.pet/",
-            img: "nepaldogtreat.png",
-            alt: "Nepal Dog Treat"
-          },
-          {
-            url: "https://www.keywcorp.com",
-            img: "keywcorp.jpg",
-            alt: "KeyW Corporation"
           },
           {
             url: "http://www.plamondonhospitalitypartners.com/",
@@ -254,19 +181,9 @@
             alt: "Lori and Eric Painter"
           },
           {
-            url: "https://pawsgo.com",
-            img: "pawsgo.png",
-            alt: "Pawsgo.com"
-          },
-          {
             url: "http://www.seafordconsulting.com/",
             img: "seaford_consulting.jpg",
             alt: "Seaford Consulting"
-          },
-          {
-            url: "https://vcahospitals.com/southpaws",
-            img: "vcahospitals.jpg",
-            alt: "VCA SouthPaws Veterinary"
           },
           {
             url: "#",
@@ -307,33 +224,9 @@
             alt: "Accent Fence, Inc."
           },
           {
-            url: "http://affectionatepetcare.com/" ,
-            img: "affectionatepetcare.jpg" ,
-          },
-          {
-            url: "http://www.alittleunique.com",
-            img: "alittleunique.gif",
-            alt: "A Little Unique"
-          },
-          {
-            url: "http://www.awoiponline.com/" ,
-            img: "awoip.png" ,
-            alt: "AWOIP"
-          },
-          {
-            url: "https://baydog.com/",
-            img: "baydog.png",
-            alt: "baydog"
-          },
-          {
             url: "#",
             img: "bryant.png",
             alt: "Joan Bryant"
-          },
-          {
-            alt: "Caring Hands",
-            url: "http://caringhandsvet.com/",
-            img: "caringhandsvet.png"
           },
           {
             alt: "Corinto Gallery",
@@ -344,16 +237,6 @@
             url: "http://www.dn3design.com/",
             img: "doorno3.png",
             alt: "DN3 (Door #3)"
-          },
-          {
-            url: "#",
-            img: "draughon.png",
-            alt: "Barbara Draughon"
-          },
-          {
-            url: "https://www.embracepetinsurance.com/",
-            img: "embracepetinsurance.png",
-            alt: "Embrace Pet Insurance"
           },
           {
             url: "#",
@@ -371,29 +254,9 @@
             alt: "Stephanie Guindon"
           },
           {
-            url: "https://www.hagerstownhonda.com/",
-            img: "hagerstown_honda.jpg",
-            alt: "Hagerstown Honda"
-          },
-          {
-            url: "https://www.longandfoster.com/CarolHermandorfer",
-            img: "carol_hermandorfer.jpg",
-            alt: "Carol Hermandorfer, Realtor"
-          },
-          {
             url: "https://www.homeagain.com/",
             img: "homeagain.png",
             alt: "HomeAgain"
-          },
-          {
-            url: "http://www.crgelato.com/",
-            img: "hungryhenrys.png",
-            alt: "Hungry Henry's Gelato"
-          },
-          {
-            url: "https://www.citychicrealestate.com/j-dann-faught-realtor/",
-            img: "j_d_ann_melnick.jpg",
-            alt: "J. D’Ann Melnick, Realtor"
           },
           {
             url: "#",
@@ -416,69 +279,14 @@
             alt: "Off Leash K9 Training Maryland"
           },
           {
-            alt: "Patrick's Pet Care",
-            url: "https://patrickspetcare.com/",
-            img: "patrickspetcare.png",
-          },
-          {
-            url: "https://www.parkwayvetclinic.com/",
-            img: "parkway.jpg",
-            alt: "Parkway Vet"
-          },
-          {
-            url: "#",
-            img: "parsons.png",
-            alt: "Patricia Parsons"
-          },
-          {
-            url: "http://www.pimlicokey.com/" ,
-            img: "pimlicokey.png" ,
-            alt: "Pimlico Key"
-          },
-          {
-            url: "http://www.poop911.com/",
-            img: "poop911.png",
-            alt: "Poop 911"
-          },
-          {
-            url: "http://prolist.com",
-            img: "prolist.jpg",
-            alt: "ProList"
-          },
-          {
-            url: "https://www.rbkpetresort.com/",
-            img: "rbkpetresort.png",
-            alt: "Reisterstown Pet Resort and Spa"
-          },
-          {
             url: "http://www.scoop-squad.com/",
             img: "scoop_squad.jpg",
             alt: "Scoop Squad"
           },
           {
-            url: "https://www.facebook.com/snorklesway/",
-            img: "snorklesway.jpg",
-            alt: "Snorkle’s Way: Adaptive Dog Training, LLC"
-          },
-          {
-            url: "https://www.sunsetpetservices.com/" ,
-            img: "sunsetpetservices.jpg" ,
-            alt: "Sunset Pet Services"
-          },
-          {
-            url: "#",
-            img: "teixeira.png",
-            alt: "Jeffrey Teixeira"
-          },
-          {
             url: "#",
             img: "wilkins.png",
             alt: "Mike and Jennifer Wilkins"
-          },
-          {
-            url: "#",
-            img: "zuckerman.png",
-            alt: "Victoria and Harvey Zuckerman"
           }
         %>
     <div class="album">
@@ -519,22 +327,9 @@
             alt: "Common Market"
           },
           {
-            url: "https://www.fizzionclean.com/",
-            img: "fizzionclean.png"
-          },
-          {
             url: "http://www.justforpetsyorkpa.com/",
             img: "justforpets.png",
             alt: "Just for Pets"
-          },
-          {
-            url: "https://www.petconnectapp.com/" ,
-            img: "petconnectapp.gif" ,
-          },
-          {
-            url: "http://petvalu.com/",
-            img: "petvalu.jpg",
-            alt: "PetValu"
           },
           {
             url: "https://rawrev.com/",
@@ -573,19 +368,9 @@
 
       <% services =
           {
-            url: "http://www.allenpearsonsphotos.com/-/allenpearsonsphotos/",
-            img: "allen_pearson.png",
-            alt: "Allen Pearson"
-          },
-          {
             url: "https://browserstack.com",
             img: "browserstack.png",
             alt: "Browserstack"
-          },
-          {
-            url: "https://www.easy-dna.com/",
-            img: "easydna.png",
-            alt: "EasyDNA Dog DNA Tests"
           },
           {
             url: "https://github.com",
@@ -596,16 +381,6 @@
             url: "https://google.com",
             img: "google.png",
             alt: "Google"
-          },
-          {
-            url: "https://hakiri.io",
-            img: "hakiri.jpg",
-            alt: "Hakiri"
-          },
-          {
-          alt: "Homewood Suites Gaithersburg",
-          url: "http://www.gaithersburg.homewoodsuites.com",
-          img: "homewood_suites.jpg"
           },
           {
             url: "https://www.lustreart.com/",

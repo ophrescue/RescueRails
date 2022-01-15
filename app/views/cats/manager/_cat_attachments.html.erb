@@ -10,7 +10,7 @@
             <%= link_to af.object.attachment_file_name, af.object.download_url %>
           </label>
         </div>
-        <% if can_edit_cats? %>
+        <% if is_admin? %>
           <div class='col-7'>
             <label class="checkbox">
               <%= af.check_box :_destroy, :id => "delAttachment" %>

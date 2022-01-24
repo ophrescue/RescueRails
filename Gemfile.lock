@@ -179,9 +179,9 @@ GEM
     email_validator (2.2.3)
       activemodel
     erubi (1.10.0)
-    exception_notification (4.4.3)
-      actionmailer (>= 4.0, < 7)
-      activesupport (>= 4.0, < 7)
+    exception_notification (4.5.0)
+      actionmailer (>= 5.2, < 8)
+      activesupport (>= 5.2, < 8)
     execjs (2.8.1)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)

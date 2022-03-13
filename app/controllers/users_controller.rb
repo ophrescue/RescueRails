@@ -214,6 +214,7 @@ class UsersController < Clearance::UsersController
                 :admin_comment,
                 :is_photographer,
                 :writes_newsletter,
+                :is_clerical,
                 :is_transporter,
                 :mentor_id,
                 :training_team,

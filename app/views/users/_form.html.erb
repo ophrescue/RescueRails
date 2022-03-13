@@ -528,6 +528,10 @@
             <label class="form-check-label" for="writes_newsletter"><strong>Newsletter Team</strong> - Adds user to the Newsletter Team Tab</label>
           </div>
           <div class="form-check">
+            <%= f.check_box :is_clerical, class: "form-check-input" %>
+            <label class="form-check-label" for="is_clerical"><strong>Clerical Team</strong> - Adds user to the Clerical Team Tab</label>
+          </div>
+          <div class="form-check">
             <%= f.check_box :training_team, class: "form-check-input" %>
             <label class="form-check-label" for="training_team"><strong>Training Team</strong> - Adds user to the Training Team Tab</label>
           </div>

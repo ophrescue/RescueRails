@@ -210,6 +210,7 @@ class User < ApplicationRecord
                    locked: :locked,
                    medical_behavior: :medical_behavior_permission,
                    newsletter: :writes_newsletter,
+                   clerical: :is_clerical,
                    photographer: :is_photographer,
                    public_relations: :public_relations,
                    puppies_ok: :can_foster_puppies,
@@ -218,11 +219,10 @@ class User < ApplicationRecord
                    social_media: :social_media_manager,
                    training_team: :training_team,
                    translator: :translator,
-                   transporter: :is_transporter,
-                  }
+                   transporter: :is_transporter }
 
   FILTER_FLAGS.each do |param,attr|
-    scope :"#{param}", -> (status = true) { where "#{attr}": status}
+    scope :"#{param}", ->(status = true) { where "#{attr}": status}
   end
 
   def display_name
@@ -314,6 +314,7 @@ class User < ApplicationRecord
                     medical_behavior_permission: false,
                     social_media_manager: false,
                     graphic_design: false,
+                    clerical: false,
                     active: false)
     end
 
@@ -333,7 +334,6 @@ class User < ApplicationRecord
         errors.add(:country, "is not recognized.")
         return
       end
-
       unless CountryService.supported_country? country
         errors.add(:country, "is not supported. Must be one of: #{CountryService.supported_country_names.join(', ')}.")
       end

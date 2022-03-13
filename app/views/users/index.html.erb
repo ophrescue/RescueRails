@@ -42,6 +42,9 @@
               <%= link_to "Adoptions", users_path(adoption_coordinator: :true, location: params[:location], range: params[:range]), class: (params[:adoption_coordinator] ? 'nav-link active' : 'nav-link') %>
             </li>
             <li class="nav-item">
+              <%= link_to "Clerical", users_path(clerical: :true, location: params[:location], range: params[:range]), class: (params[:clerical] ? 'nav-link active' : 'nav-link') %>
+            </li>
+            <li class="nav-item">
               <%= link_to "Events", users_path(event_planner: :true, location: params[:location], range: params[:range]), class: (params[:event_planner] ? 'nav-link active' : 'nav-link') %>
             </li>
             <li class="nav-item">

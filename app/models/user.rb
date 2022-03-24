@@ -314,7 +314,7 @@ class User < ApplicationRecord
                     medical_behavior_permission: false,
                     social_media_manager: false,
                     graphic_design: false,
-                    clerical: false,
+                    is_clerical: false,
                     active: false)
     end
 

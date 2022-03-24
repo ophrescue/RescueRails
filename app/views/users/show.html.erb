@@ -186,8 +186,6 @@
                 <span class="badge badge-success">Confidentiality Agreement on File</span>
                 <%= link_to @user.confidentiality_agreement.attachment_file_name, @user.confidentiality_agreement.download_url, id: "confidentiality-agreement-dl" %>
               </p>
-            <% else %>
-              <p><span class="badge badge-warning">No Confidentiality Agreement on File</span></p>
             <% end %>
 
             <% if @user.code_of_conduct_agreement %>

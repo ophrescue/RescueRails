@@ -1,0 +1,74 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+
+        <mj-image width="100px" src="https://ophrescue.org/oph_logo.png"></mj-image>
+
+        <mj-divider border-color="#F45E43"></mj-divider>
+
+        <mj-text font-size="14px" font-family="helvetica">Congratulations on your decision to add a rescue dog to your family! We know that you and your family are hoping to gain a new best friend so we have some guides for you to review before making the final commitment. This information is so important to ensure the safety of your children, children in the community, and a potential adopted dog. Moving into a new home is a bit stressful for any dog, regardless of how secure of an environment you are providing for them. It is crucial that you talk with all family members about these points before bringing a new dog into your household.</mj-text>
+
+        <mj-text font-size="14px" font-family="helvetica">
+          <ul>
+            <li>77% of all dog bites occur in children and are from a family or friend's dog, but following appropriate safety measures can significantly reduce this risk. <a href="https://www.thefamilydog.com/stop-the-77" rel="noopener">Watch this video to understand the 77%</a></li>
+
+            <li>Many rescue dogs have never lived with a family in a home before, and may have never interacted with children very much, it is imperative to take things slow while the dog is getting to know your rules and children</li>
+
+            <li>Be prepared to keep the dog in a crate during any times when you cannot supervise them directly with your children</li>
+
+            <li>Before making the final decision, please review the aga appropriate resources below with your children or children that you regularly interact with. It is important to talk about what their behavior Should look like around your new furry friend</li>
+          </ul>
+        </mj-text>
+
+        <mj-text font-size="14px" font-family="helvetica">
+          Please Watch These Fun Videos with your Children.
+          <h3>For Everyone</h3>
+
+          Video - <a href="https://youtu.be/8AaNg1rMjak" rel="noopener">How to Kiss a Dog</a><br />
+          Video - <a href="https://youtu.be/HqlFuQfL8Lo" rel="noopener">Strange Dog, Play it Safe</a><br />
+          Video - <a href="https://youtu.be/YI1EBub2mgI" rel="noopener">Child / Dog Interactions, This is More of a Parent's Guide</a><br />
+          Video - <a href="https://www.youtube.com/watch?v=FXdgNqB0xNg" rel="noopener">Dog Bite Safety with Jimmy the Dog</a><br />
+          Video - <a href="https://www.gooddoginabox.com/meet-new-dog/" rel="noopener">How to Meet a New Dog</a><br />
+          Article with Video - <a href="http://www.clickertraining.com/node/3535" rel="noopener">Be a Tree; When a Dog Approaches You</a><br />
+
+          <h3>For Babies and Infants</h3>
+
+          Article - <a href="https://www.doggonesafe.com/baby_safety_around_dogs" rel="noopener">Baby's Safety Around Dogs</a><br />
+          Article - <a href="https://www.akc.org/expert-advice/training/how-to-introduce-babies-and-dogs/" rel="noopener">Helpful Hints When Introducing Babies and Dogs</a><br />
+          Article - <a href="https://drsophiayin.com/blog/entry/keeping_dogs_kids_and_infants_safe_in_the_same_household/" rel="noopener">Dogs and Babies: Can They be Safe in the Same Household?</a><br />
+
+          <h3>For Preschoolers</h3>
+
+          Video - <a href="https://youtu.be/36Z9RRjiQMA" rel="noopener">I Speak Doggy</a><br />
+
+          <h3>For Elementary</h3>
+          Video - <a href="https://youtu.be/MYDW2KV_TzE" rel="noopener">Dog Stars (Bite Preventions)</a><br />
+
+          <h3>For Older Kids</h3>
+          <a href="https://www.puppyleaks.com/teaching-dog-bite-prevention-kids/" rel="noopener">Article - Dog Bite prevention</a><br />
+
+          <h3>More Articles</h3>
+
+          <a href="https://www.aspca.org/pet-care/dog-care/dog-bite-prevention" rel="noopener">ASPCA Dog Bite Prevention</a><br />
+          <a href="https://doggonesafe.com/Dog_bite_prevention_for_parents/" rel="noopener">Parent's Guide; Dog Bite Prevention</a><br />
+          <a href="https://doggonesafe.com/dog_bite_preventio_tips/" rel="noopener">More Dog Bite Prevention Tips for Parents</a><br />
+          <a href="https://doggonesafe.com/why_dogs_bite/" rel="noopener">Why Dogs Bite and How They Warn Us</a><br />
+          <a href="https://phz8.petinsurance.com/ownership-adoption/pet-ownership/pet-behavior/why-dogs-bite-kids" rel="noopener">Why Dogs Bite Kids</a><br />
+          <a href="https://www.avma.org/about/dog-bite-prevention.aspx/teaching-children-how-prevent-dog-bites" rel="noopener">Teaching Children About Dog Bite Prevention</a><br />
+          <a href="https://www.petassure.com/new-newsletters/teaching-dog-safety-to-children/" rel="noopener">Teaching Dog Safety to Children</a><br />
+          <a href="https://drsophiayin.com/blog/entry/dog-bite-prevention-dogs-bite-when-humans-greet-inappropriately/" rel="noopener">Dogs Bite when Humans Greet Inappropriately</a><br />
+        </mj-text>
+
+        <mj-text font-size="14px" font-family="helvetica">
+          Thank you for viewing our safety information regarding rescue pups, we hope you found it informative. OPH wants to ensure that dogs find families who are prepared to take on this big responsibility! We believe that following these guidelines can lead to a happy and safe lifestyle for everyone involved! Please feel free to reach out to us if you have any questions.
+        </mj-text>
+
+        <mj-text font-size="14px" font-family="helvetica">
+          When you have a moment, would you please reply that you have received this email and reviewed the information with your children or children that you interact with?
+        </mj-text>
+
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

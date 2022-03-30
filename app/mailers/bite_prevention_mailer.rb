@@ -22,6 +22,8 @@ class BitePreventionMailer < ActionMailer::Base
     mail(to: "#{@adopter.email}",
          reply_to: 'adopt@ophrescue.org',
          subject: "Dog Bite Prevention - Dog Adopters, Please Respond",
-         content_type: 'text/html')
+         content_type: 'text/html') do |format|
+          format.mjml
+         end
   end
 end

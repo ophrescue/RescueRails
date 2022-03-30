@@ -53,28 +53,6 @@ feature 'Attach an agreement to a user', js: true do
     end
   end
 
-  scenario 'Admin attaches a confidentiality agreement to a user', exclude_ie: true do
-    sign_in_as_admin
-
-    visit '/users'
-    expect(page).to have_content('Staff Directory')
-
-    click_link(user.name)
-    expect(page).to have_content(user.name)
-    expect(page).to have_content('No Confidentiality Agreement on File')
-
-    click_link('Update/Verify Profile')
-    expect(page).to have_content('Edit Staff Account')
-
-    page.attach_file('user_confidentiality_agreement_attributes_attachment', Rails.root.join("public", "docs", "what-to-buy-ahead-of-time.pdf"))
-    click_button('Update / Verify')
-
-    expect(page).to have_no_css('#foster-agreement-dl')
-    within('#confidentiality-agreement-dl') do
-      expect(page).to have_content 'what-to-buy-ahead-of-time'
-    end
-  end
-
   scenario 'Admin attaches a code of conduct agreement to a user', exclude_ie: true do
     sign_in_as_admin
 

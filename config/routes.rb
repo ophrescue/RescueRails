@@ -1,7 +1,7 @@
 STATIC_PAGES = ['5k', 'contact', 'funding-partners', 'community-partners', 'non-profit-and-corporate-partners',
   'training-partners', 'guide', 'aboutus', 'documentary', 'insurance',
   'get-involved', 'volunteer', 'faq', 'foster', 'fosterfaq', 'donate', 'sponsor', 'newsletters',
-  'special-funds', 'other-ways-to-give', 'terms', 'resources', 'tips-for-finding-lost-pets', 'status_definitions',
+  'other-ways-to-give', 'terms', 'resources', 'tips-for-finding-lost-pets', 'status_definitions',
   'education-and-outreach','adoption-fee-payments','microchip-registration'].freeze
 
 Rails.application.routes.draw do

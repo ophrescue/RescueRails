@@ -24,6 +24,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  marketing_interest     :boolean
+#  lost_dog_interest      :boolean
 #
 class VolunteerApp < ApplicationRecord
   audited on: :update
@@ -65,7 +66,8 @@ class VolunteerApp < ApplicationRecord
                'fundraising',
                'transport',
                'adoption',
-               'admin']
+               'admin',
+               'lost-dog']
 
   scope :filter_by_status, -> (status) { where status: status }
 
@@ -82,21 +84,24 @@ class VolunteerApp < ApplicationRecord
   end
 
   def self.filter_by_interest(interest)
-    if interest == 'marketing'
+    case interest
+    when 'marketing'
       where(marketing_interest: true)
-    elsif interest == 'events'
+    when 'events'
       where(events_interest: true)
-    elsif interest == 'fostering'
+    when 'lost-dog'
+      where(lost_dog_interest: true)
+    when 'fostering'
       where(fostering_interest: true)
-    elsif interest == 'training'
+    when 'training'
       where(training_interest: true)
-    elsif interest == 'fundraising'
+    when 'fundraising'
       where(fundraising_interest: true)
-    elsif interest == 'transport'
+    when 'transport'
       where(transport_bb_interest: true)
-    elsif interest == 'adoption'
+    when 'adoption'
       where(adoption_team_interest: true)
-    elsif interest == 'admin'
+    when 'admin'
       where(admin_interest: true)
     else
       all

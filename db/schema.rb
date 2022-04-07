@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_181446) do
+ActiveRecord::Schema.define(version: 2022_04_07_231441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -658,6 +658,7 @@ ActiveRecord::Schema.define(version: 2022_03_13_181446) do
     t.datetime "updated_at", null: false
     t.boolean "marketing_interest"
     t.boolean "adult"
+    t.boolean "lost_dog_interest", default: false, null: false
   end
 
   create_table "volunteer_foster_apps", force: :cascade do |t|

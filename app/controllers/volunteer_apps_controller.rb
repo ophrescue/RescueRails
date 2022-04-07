@@ -76,6 +76,7 @@ class VolunteerAppsController < ApplicationController
                                           :fostering_interest,
                                           :training_interest,
                                           :fundraising_interest,
+                                          :lost_dog_interest,
                                           :transport_bb_interest,
                                           :adoption_team_interest,
                                           :admin_interest,

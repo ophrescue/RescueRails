@@ -16,6 +16,7 @@ FactoryBot.define do
       training_interest { [true, false].sample }
       fundraising_interest { [true, false].sample }
       transport_bb_interest { [true, false].sample }
+      lost_dog_interest { [true, false].sample }
       adoption_team_interest { [true, false].sample }
       admin_interest { [true, false].sample }
       adult { [true, false].sample }

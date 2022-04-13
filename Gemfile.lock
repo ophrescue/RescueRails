@@ -210,7 +210,7 @@ GEM
     globalid (1.0.0)
       activesupport (>= 5.0)
     gravatar_image_tag (1.2.0)
-    groupdate (6.0.1)
+    groupdate (6.1.0)
       activesupport (>= 5.2)
     has_scope (0.8.0)
       actionpack (>= 5.2)

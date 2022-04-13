@@ -11,7 +11,7 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'bootstrap-will_paginate', '~> 1.0.0'
 gem "chartkick"
 gem 'clearance'
-gem 'countries'
+gem 'countries', '~> 4.2', '>= 4.2.3'
 gem 'dotenv'
 gem 'dotenv-rails'
 gem 'font-awesome-rails'

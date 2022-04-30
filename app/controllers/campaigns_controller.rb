@@ -21,9 +21,10 @@ class CampaignsController < ApplicationController
 
   def index
     @scope =
-      case params[:scope]
-      when "active", "inactive" then params[:scope]
-      else "active"
+      if (params[:scope] == "inactive") && is_admin?
+        params[:scope]
+      else
+        params[:scope] = "active"
       end
     @campaigns = Campaign.public_send(@scope).order(created_at: :desc).paginate(page: params[:page], per_page: 30)
     @title = "Campaigns"
@@ -107,5 +108,9 @@ class CampaignsController < ApplicationController
 
   def edit_events_user
     redirect_to(root_path) unless current_user.edit_events?
+  end
+
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
   end
 end

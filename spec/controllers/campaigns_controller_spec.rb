@@ -18,13 +18,25 @@ describe CampaignsController, type: :controller do
     end
   end
 
-  describe 'GET #index with inactive scope' do
+  describe 'GET #index with inactive scope as admin' do
+    include_context 'signed in admin'
     let(:active_campaign) { create(:campaign, active: true) }
     let(:inactive_campaign) { create(:campaign, active: false) }
-    it 'shows active campaigns' do
+    it 'shows inactive campaigns' do
       get :index, params: { scope: "inactive" }
       expect(response).to be_successful
       expect(assigns[:campaigns]).to eq [inactive_campaign]
+    end
+  end
+
+  describe 'GET #index inactive as event manager (CANNOT VIEW)' do
+    include_context 'signed in event manager'
+    let(:active_campaign) { create(:campaign, active: true) }
+    let(:inactive_campaign) { create(:campaign, active: false) }
+    it 'shows onyl active campaigns' do
+      get :index, params: { scope: "inactive" }
+      expect(response).to be_successful
+      expect(assigns[:campaigns]).to eq [active_campaign]
     end
   end
 

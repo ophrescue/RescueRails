@@ -107,21 +107,31 @@
               </td>
             </tr>
           </table>
-          </div>
-        </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="text-center"><%= image_tag @user.avatar.url(:medium) %></div>
-          <div class="row mt-2">
-            <div class="col-sm">
-              <% @user.badges.each do |badge| %>
-                <%= link_to(image_tag(badge.image.url(:thumb), alt: badge.title),badge_path(badge)) %>
-              <% end %>
-          </div>
         </div>
       </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="text-center"><%= image_tag @user.avatar.url(:medium) %></div>
+      <div class="row mt-2">
+        <div class="col-sm">
+          <% @user.badges.each do |badge| %>
+            <%= link_to(image_tag(badge.image.url(:thumb), alt: badge.title),badge_path(badge)) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
       <div class="row mt-2">
         <div class="col-sm-6">
+          <div class="card">
+            <div class="card-header">
+              <h4>Self-Assignable Teams</h4>
+            </div>
+            <div class="card-body">
+              <%= render 'teams' %>
+            </div>
+          </div>
           <div class="card">
             <div class="card-header">
               <h4>Permissions</h4>

@@ -1,0 +1,37 @@
+<ul>
+  <% if @user.graphic_design? %>
+    <li>Graphic Design Team</li>
+  <% end %>
+
+  <% if @user.is_photographer? %>
+    <li>Photographer</li>
+  <% end %>
+
+  <% if @user.writes_newsletter? %>
+    <li>Newsletter Team</li>
+  <% end %>
+
+  <% if @user.is_clerical? %>
+    <li>Clerical Team</li>
+  <% end %>
+
+  <% if @user.training_team? %>
+    <li>Training Team</li>
+  <% end %>
+
+   <% if @user.social_media_manager %>
+    <li>Social Media Team</li>
+  <%end%>
+
+  <% if @user.public_relations? %>
+    <li>Public Relations Team</li>
+  <% end %>
+
+  <% if @user.fundraising? %>
+    <li>Fundraising Team</li>
+  <% end %>
+
+  <% if @user.boarding_buddies? %>
+    <li>Boarding Buddy</li>
+  <% end %>
+</ul>

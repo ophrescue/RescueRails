@@ -43,7 +43,7 @@ class Adoption < ApplicationRecord
 
   def training_followup_email
     return unless relation_type_changed?
-    if relation_type == 'adopted' && adopter.dog_or_cat == "Dog"
+    if relation_type == 'adopted'
       TrainingMailer.free_training_notice(adopter.id).deliver_later
       AdopterFollowupMailer.one_week_followup(adopter.id).deliver_later(wait: 7.days)
     end

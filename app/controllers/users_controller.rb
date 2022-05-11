@@ -228,6 +228,7 @@ class UsersController < Clearance::UsersController
                 :known_languages,
                 :medical_behavior_permission,
                 :boarding_buddies,
+                :foster_friend,
                 :social_media_manager,
                 :graphic_design,
                 :active,
@@ -300,6 +301,7 @@ class UsersController < Clearance::UsersController
                 :public_relations,
                 :fundraising,
                 :boarding_buddies,
+                :foster_friend,
                 insurance_training_agreement_attributes: [
                   :attachment,
                   :description,

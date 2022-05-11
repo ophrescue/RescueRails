@@ -219,7 +219,8 @@ class User < ApplicationRecord
                    social_media: :social_media_manager,
                    training_team: :training_team,
                    translator: :translator,
-                   transporter: :is_transporter }
+                   transporter: :is_transporter,
+                   foster_friend: :foster_friend }
 
   FILTER_FLAGS.each do |param,attr|
     scope :"#{param}", ->(status = true) { where "#{attr}": status}
@@ -311,6 +312,7 @@ class User < ApplicationRecord
                     public_relations: false,
                     fundraising: false,
                     boarding_buddies: false,
+                    foster_friend: false,
                     medical_behavior_permission: false,
                     social_media_manager: false,
                     graphic_design: false,

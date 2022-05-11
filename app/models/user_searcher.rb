@@ -60,7 +60,7 @@ class UserSearcher
                  :newsletter, :clerical, :has_dogs, :has_cats, :house_type, :has_children, :has_children_under_five,
                  :has_fence, :puppies_ok, :dogs_ok, :cats_ok, :has_parvo_house, :transporter, :training_team,
                  :foster_mentor, :translator, :public_relations, :fundraising, :medical_behavior,
-                 :boarding_buddy, :social_media, :graphic_designer, :active_volunteer, :inactive_volunteer,
+                 :boarding_buddy, :foster_friend, :social_media, :graphic_designer, :active_volunteer, :inactive_volunteer,
                  :available_to_foster, :locked, :unlocked
                 )
   end

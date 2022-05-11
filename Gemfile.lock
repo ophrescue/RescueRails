@@ -117,7 +117,7 @@ GEM
       sshkit (~> 1.3)
     capistrano-systemd-multiservice (0.1.0.beta12)
       capistrano (>= 3.7.0, < 3.17.0)
-    capybara (3.37.0)
+    capybara (3.37.1)
       addressable
       matrix
       mini_mime (>= 0.1.3)
@@ -341,7 +341,7 @@ GEM
     record_tag_helper (1.0.1)
       actionview (>= 5)
     redcarpet (3.5.1)
-    regexp_parser (2.3.1)
+    regexp_parser (2.4.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)

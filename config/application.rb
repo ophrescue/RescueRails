@@ -26,7 +26,7 @@ module RescueRails
 
     # Resolves InvalidAuthenticityToken errors in Mobile Safari and Mobile Chrome
     # https://github.com/rails/rails/issues/21948#issuecomment-163995796
-    config.action_dispatch.default_headers.merge!('Cache-Control' => 'no-store, no-cache')
+    config.action_dispatch.default_headers['Cache-Control'] = 'no-store, no-cache'
 
     # Fixes Samesite cookie warnings
     # https://github.com/rails/rails/issues/35822

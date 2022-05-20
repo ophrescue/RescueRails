@@ -1,0 +1,7 @@
+<% if @dog.foster && @dog.foster.mentor %>
+    <ul class='list-unstyled'>
+        <li><%= link_to @dog.foster.mentor.name, user_path(@dog.foster.mentor) %></li>
+    </ul>
+<% else %>
+  not assigned
+<% end %>

@@ -73,6 +73,7 @@ class InvoicesController < ApplicationController
       @invoice.process_payment(donation_amt)
     rescue Stripe::CardError => e
       flash[:error] = e.message
+      InvoiceMailer.payment_declined(@invoice.id, e.message).deliver_later
     else
       flash[:success] = 'Payment Processed Successfully '
       InvoiceMailer.invoice_paid(@invoice.id).deliver_later

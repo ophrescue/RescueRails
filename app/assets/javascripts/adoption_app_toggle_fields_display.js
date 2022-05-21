@@ -9,16 +9,6 @@ $(document).ready(function () {
         }
     });
 
-    $(".birth-date").hide();
-    $(".is-of-age-radio").change(function () {
-      if (this.value == "false") {
-        $(".birth-date").show();
-      }
-      else {
-        $(".birth-date").hide();
-      }
-    });
-
     $(".cats-q").hide();
     $(".dogs-q").hide();
     $(".current-q").hide();

@@ -1,0 +1,12 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="14px" color="#F45E43" font-family="helvetica">An attempt to pay an adoption invoice was not succesful:</mj-text>
+        <mj-text font-size="14px" color="#F45E43" font-family="helvetica"><%= error_message %></mj-text>
+        <mj-text font-size="14px" color="#F45E43" font-family="helvetica">Adopter: <%= @invoice.invoiceable.adopter.name %></mj-text>
+        <mj-button href=<%= invoice_url(@invoice) %>>View Invoice</mj-button>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

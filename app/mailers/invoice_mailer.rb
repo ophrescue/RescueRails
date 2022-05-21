@@ -26,9 +26,24 @@ class InvoiceMailer < ActionMailer::Base
     @notify.push('adopt@ophrescue.org')
     @notify.push('accounting@ophrescue.org')
     mail(to: @invoice.invoiceable.adopter.email,
-      cc: @notify,
-      subject: "Thank you for your Adoption Fee Payment #{@invoice.invoiceable.adopter.name}",
-      content_type: 'text/html')
+         cc: @notify,
+         subject: "Thank you for your Adoption Fee Payment #{@invoice.invoiceable.adopter.name}",
+         content_type: 'text/html')
+  end
+
+  def payment_declined(invoice_id, error_message)
+    @invoice = Invoice.find(invoice_id)
+    @notify = []
+    @notify.push(@invoice.invoiceable.animal.foster.email) unless @invoice.invoiceable.animal.foster.nil?
+    @notify.push('accounting@ophrescue.org')
+    mail(to: @invoice.invoiceable.adopter.email,
+         cc: @notify,
+         subject: "Invoice Payment Declined: #{error_message}",
+         content_type: 'text/html') do |format|
+      format.mjml {
+        render locals: { error_message: error_message }
+      }
+    end
   end
 
   def contract_added(invoice_id)
@@ -39,9 +54,9 @@ class InvoiceMailer < ActionMailer::Base
     @notify.push(@invoice.invoiceable.adopter.user.email) unless @invoice.invoiceable.adopter.user.nil?
 
     mail(to: @invoice.invoiceable.adopter.email,
-        cc: @notify,
-        subject: "Adoption Contract Added #{@invoice.invoiceable.adopter.name}",
-        content_type: 'text/html')
+         cc: @notify,
+         subject: "Adoption Contract Added #{@invoice.invoiceable.adopter.name}",
+         content_type: 'text/html')
   end
 
   def contract_removed(invoice_id)
@@ -52,10 +67,8 @@ class InvoiceMailer < ActionMailer::Base
     @notify.push(@invoice.invoiceable.adopter.user.email) unless @invoice.invoiceable.adopter.user.nil?
 
     mail(to: @invoice.invoiceable.adopter.email,
-        cc: @notify,
-        subject: "Important Adoption Contract Update #{@invoice.invoiceable.adopter.name}",
-        content_type: 'text/html')
+         cc: @notify,
+         subject: "Important Adoption Contract Update #{@invoice.invoiceable.adopter.name}",
+         content_type: 'text/html')
   end
-
-
 end

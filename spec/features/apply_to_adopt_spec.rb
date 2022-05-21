@@ -36,7 +36,10 @@ feature 'Apply for Adoption' do
     fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2012-12-13')
     find("input#adopter_adoption_app_attributes_ready_to_adopt_dt").send_keys(:tab)
 
+
     choose('adopter_adoption_app_attributes_is_ofage_true')
+    fill_in('adopter_adoption_app_attributes_birth_date', with: '1950-01-01')
+    find("input#adopter_adoption_app_attributes_birth_date").send_keys(:tab)
     choose('adopter_adoption_app_attributes_has_family_under_18_true')
     choose('adopter_adoption_app_attributes_house_type_rent')
 
@@ -214,6 +217,8 @@ feature 'Apply for Adoption' do
     find("input#adopter_adoption_app_attributes_ready_to_adopt_dt").send_keys(:tab)
 
     choose('adopter_adoption_app_attributes_is_ofage_true')
+    fill_in('adopter_adoption_app_attributes_birth_date', with: '1960-01-01')
+    find("input#adopter_adoption_app_attributes_birth_date").send_keys(:tab)
     choose('adopter_adoption_app_attributes_has_family_under_18_true')
     choose('adopter_adoption_app_attributes_house_type_own')
     check('adopter_adoption_app_attributes_verify_home_auth')

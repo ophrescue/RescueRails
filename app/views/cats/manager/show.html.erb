@@ -73,6 +73,17 @@
           </ul>
       <% end %>
 
+      <% if @cat.medical_review_complete %>
+        <div class="alert alert-success" role="alert">
+        Medical Review Complete
+        </div>
+      <% else %>
+          <div class="alert alert-danger" role="alert">
+          Medical Review NOT complete, this cat cannot go home to an adopter.
+          Email <a href="mailto:cats@ophrescue.org">cats@ophrescue.org</a> to be cleared.
+        </div>
+      <% end %>
+
       <div class="d-none d-sm-block">
         <%= render partial: 'comments_audits', locals: {device:'_large'} %>
       </div>

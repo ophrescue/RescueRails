@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby   '2.7.4'
 
-gem 'rails', '~> 6.0.4.3'
+gem 'rails', '~> 6.0.5'
 
 gem 'rack-cache'
 

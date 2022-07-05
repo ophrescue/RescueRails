@@ -87,7 +87,7 @@
         <div class='editable'><%= f.text_field :when_to_call %></div>
       </td>
     </tr>
-      <%= f.fields_for :adoption_app do |af|%>
+  <%= f.fields_for :adoption_app do |af|%>
     <tr>
       <th>Spouse's Name</th>
       <td>
@@ -110,7 +110,24 @@
         <div class='editable'><%= af.text_area :how_did_you_hear %></div>
       </td>
     </tr>
-      <% end %>
+    <tr>
+      <th>
+        Date of Birth
+      </th>
+      <td>
+        <div class="read-only"><%= af.object.birth_date unless af.object.birth_date.blank? %></div>
+        <div class="editable"><%= af.text_field :birth_date %></div>
+      </td>
+    </tr>
+    <% end %>
+    <% if @adopter.adoption_app.adopter_age %>
+      <tr>
+        <th>
+        Adopter Age
+        </th>
+        <td><%= @adopter.adoption_app.adopter_age %></td>
+      </tr>
+  <% end %>
     </tr>
     <% if @adopter.adoption_app.verify_home_auth == true %>
     <tr>
@@ -175,22 +192,6 @@
         </div>
       </td>
     </tr>
-    <% if @adopter.adoption_app.birth_date %>
-    <tr>
-      <th>
-        Date of Birth
-      </th>
-      <td><%= @adopter.adoption_app.birth_date %></td>
-    </tr>
-    <% end %>
-    <% if @adopter.adoption_app.adopter_age %>
-      <tr>
-        <th>
-         Adopter Age
-        </th>
-        <td><%= @adopter.adoption_app.adopter_age %></td>
-      </tr>
-    <% end %>
     <tr>
       <td colspan="2">
         <a id="toggle-edit" class="btn btn-primary">Edit Info</a>

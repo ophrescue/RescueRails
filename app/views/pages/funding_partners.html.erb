@@ -48,7 +48,7 @@
         <div class="row align-items-center">
           <% sponsors_5000.each_slice(3) do |slice| %>
               <% slice.each do |spon| %>
-              <div class="col md-4 mx-auto">
+              <div class="col-md-4 mx-auto">
                 <div class="card mb-4 border-0">
                   <a target="_blank" href="<%= spon[:url] %>">
                     <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], class: "w-75") %>

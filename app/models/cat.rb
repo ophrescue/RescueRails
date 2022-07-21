@@ -233,7 +233,7 @@ class Cat < ApplicationRecord
     else
       photos.visible.empty? ?
         Photo.no_photo_url :
-        photos.visible.first.photo.url(:large)
+        photos.visible.first.photo.url(:medium)
     end
   end
 

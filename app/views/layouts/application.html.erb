@@ -10,6 +10,11 @@
       <meta property="og:image:width" content="3059">
       <meta property="og:image:height" content="2447">
     <% end %>
+
+    <% if @og_image_path %>
+      <meta property="og:image" content="<%= @og_image_path %>">
+    <% end %>
+
     <title><%= title %></title>
     <%= csrf_meta_tag %>
     <%= render 'layouts/assets' %>

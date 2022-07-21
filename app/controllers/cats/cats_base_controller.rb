@@ -18,6 +18,7 @@ class Cats::CatsBaseController < ApplicationController
   def show
     session[:last_cat_manager_search] ||= cats_manager_index_url
     @title = @cat.name
+    @og_image_path = @cat.primary_photo_url
     @carousel = Carousel.new(@cat)
     @adoptapet = Adoptapet.new(@cat.foster&.region)
     flash.now[:danger] = render_to_string partial: 'cats/unavailable_flash_message' if @cat.unavailable?

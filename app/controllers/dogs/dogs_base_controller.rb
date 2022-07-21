@@ -68,6 +68,7 @@ class Dogs::DogsBaseController < ApplicationController
   def show
     session[:last_dog_manager_search] ||= dogs_manager_index_url
     @title = @dog.name
+    @og_image_path = @dog.primary_photo_url
     @carousel = Carousel.new(@dog)
     @adoptapet = Adoptapet.new(@dog.foster&.region)
     flash.now[:danger]= render_to_string partial: 'dogs/unavailable_flash_message' if @dog.unavailable?

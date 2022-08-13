@@ -35,6 +35,7 @@ class InvoiceMailer < ActionMailer::Base
     @invoice = Invoice.find(invoice_id)
     @notify = []
     @notify.push(@invoice.invoiceable.animal.foster.email) unless @invoice.invoiceable.animal.foster.nil?
+    @notify.push('adopt@ophrescue.org')
     @notify.push('accounting@ophrescue.org')
     mail(to: @invoice.invoiceable.adopter.email,
          cc: @notify,

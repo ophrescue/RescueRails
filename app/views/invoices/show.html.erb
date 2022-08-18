@@ -49,7 +49,7 @@
 <% if @invoice.open? %>
   <div class="row">
     <div class="col-12 pt-3">
-        <%= form_for @invoice do |f| %>
+        <%= form_for(@invoice, url: begin_checkout_invoice_path, method: :post)  do |f| %>
           <%= render 'shared/error_messages', :object => f.object %>
 
           <div class="form-group row">
@@ -65,14 +65,8 @@
                 <%= f.text_field :donation, class: "form-control", placeholder: "0" %>
               </div>
           </div>
-          <%= hidden_field_tag(:stripeToken) %>
+          <%= f.submit 'New Checkout' %>
         <% end %>
-        <div id="error_explanation">
-          <% if flash[:error].present? %>
-              <p><%= flash[:error] %></p>
-          <% end %>
-        </div>
-        <button id="payButton" class="btn btn-primary btn-lg">Make Payment</button>
     </div>
 
   <% elsif @invoice.paid? %>
@@ -95,68 +89,3 @@
     </div>
   </div>
 </div>
-
-
-<script src="https://checkout.stripe.com/checkout.js"></script>
-
-<script>
-  var handler = StripeCheckout.configure({
-    key: '<%= Rails.configuration.stripe[:publishable_key] %>',
-    locale: 'auto',
-    name: 'Operation Paws for Homes',
-    description: 'Adoption Fee',
-    panelLabel: 'Pay {{amount}}',
-    email: '<%= @invoice.invoiceable.adopter.email %>',
-    zipCode: true,
-    image: '/apple-touch-icon.png',
-
-    token: function(token) {
-      $('input#stripeToken').val(token.id);
-      $('form').submit();
-    }
-  });
-
-  $('#payButton').on('click', function(e) {
-    e.preventDefault();
-
-    $('#error_explanation').html('');
-
-    var donation = document.getElementById("invoice_donation").value;
-
-    console.log(donation + isNaN(donation))
-
-    if (isNaN(donation)) {
-      $('#error_explanation').html('<p>Please enter a valid donation amount in whole dollars</p>')
-      throw "invalid donation amount";
-    }
-
-    donation = donation.replace(/\$/g, '').replace(/\,/g, '');
-
-    // set to 0 if negative
-    donation = Math.max(0,donation);
-
-    document.getElementById("invoice_donation").value = donation;
-
-    donation = parseFloat(donation);
-    donation = donation * 100; // Needs to be an integer!
-    console.log('donation amount is '+ donation)
-
-
-    var feesDue = document.getElementById("amtDue").value;
-    feesDue = feesDue.replace(/\$/g, '').replace(/\,/g, '');
-    feesDue = parseFloat(feesDue);
-    feesDue = feesDue * 100; // Needs to be an integer!
-
-    console.log('fee amount is '+ feesDue)
-
-    var amount = donation + feesDue
-    handler.open({
-      amount: Math.round(amount),
-    })
-  });
-
-    // Close Checkout on page navigation
-  $(window).on('popstate', function() {
-    handler.close();
-  });
-</script>

@@ -54,30 +54,18 @@ class Invoice < ApplicationRecord
 
   VALIDATION_ERROR_MESSAGES = { amount: :numeric, donation: :numeric }.freeze
 
-  def process_payment(donation_amt)
+  def pay_invoice(checkout_session)
     ActiveRecord::Base.transaction do
-      description_msg = 'Adoption Fee'
-      total_charge = amount
-      if donation_amt.positive?
-        description_msg = 'Adoption Fee and Donation'
-        total_charge = amount + donation_amt
+      donation_amt = checkout_session.metadata.donation_amt
+      if donation_amt.to_i.positive?
         donation = prepare_donation(donation_amt)
         donation.save
         self.has_donation = true
         self.donation_id = donation.id
       end
-      self.paid_method = 'Stripe'
+      self.paid_method = 'Stripe Checkout'
       self.paid_at = Time.zone.now
       self.status = 'paid'
-
-      customer = Stripe::Customer.create email: self.invoiceable.adopter.email,
-                                        card: card_token
-
-      Stripe::Charge.create customer: customer.id,
-                            amount: total_charge * 100,
-                            description: description_msg,
-                            currency: 'usd'
-
       save
     end
   end

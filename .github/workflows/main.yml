@@ -53,7 +53,15 @@ jobs:
           POSTGRES_PASSWORD: postgres
 
       - name: Webpack compilation
-        run: NODE_ENV=test bundle exec rails webpacker:compile
+        run: bundle exec rails webpacker:compile
+        env:
+          STRIPE_PUBLISHABLE_KEY: none
+          STRIPE_SECRET_KEY: none
+          STRIPE_MONTHLY_DONATION_PLAN: none
+          STRIPE_ONE_TIME_PAYMENT_PRODUCT: none
+          STRIPE_INVOICE_ENDPOINT_SECRET: none
+          NODE_ENV: test
+          RAILS_ENV: test
 
       - name: Run Rspec Tests
         run: bundle exec rspec

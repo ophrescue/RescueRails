@@ -31,22 +31,6 @@ class InvoiceMailer < ActionMailer::Base
          content_type: 'text/html')
   end
 
-  def payment_declined(invoice_id, error_message)
-    @invoice = Invoice.find(invoice_id)
-    @notify = []
-    @notify.push(@invoice.invoiceable.animal.foster.email) unless @invoice.invoiceable.animal.foster.nil?
-    @notify.push('adopt@ophrescue.org')
-    @notify.push('accounting@ophrescue.org')
-    mail(to: @invoice.invoiceable.adopter.email,
-         cc: @notify,
-         subject: "Invoice Payment Declined: #{error_message}",
-         content_type: 'text/html') do |format|
-      format.mjml {
-        render locals: { error_message: error_message }
-      }
-    end
-  end
-
   def contract_added(invoice_id)
     @invoice = Invoice.find(invoice_id)
     @notify = []

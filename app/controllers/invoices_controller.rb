@@ -94,7 +94,7 @@ class InvoicesController < ApplicationController
                                                     donation_amt: @donation_amt
                                                   },
                                                   mode: 'payment',
-                                                  success_url: "#{invoices_url}/thank_you?checkout_id={CHECKOUT_SESSION_ID}",
+                                                  success_url: "#{root_url}invoice_thank_you?checkout_id={CHECKOUT_SESSION_ID}",
                                                   cancel_url: invoice_url(@invoice) })
 
     redirect_to @session.url

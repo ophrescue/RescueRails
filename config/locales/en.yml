@@ -147,6 +147,8 @@ en:
       title: "Edit Invoice"
     show:
       title: "Invoice"
+    thank_you:
+      title: "Thank You"
   pages:
     home:
       title: 'All breed dog and cat rescue in Virgina, Maryland, Washington DC and South Central PA'

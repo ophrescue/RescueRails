@@ -74,9 +74,13 @@ Rails.application.routes.draw do
             :invoices,
             :users_badges
 
+  post '/invoices/stripe_webhook', to: 'invoices#stripe_webhook'
+  get "/invoice_thank_you",        to: 'invoices#thank_you'
+
   resources :invoices do
     member do
       post :record_contract
+      post :begin_checkout
     end
   end
 

@@ -143,6 +143,8 @@
 <p style="line-height: 1.2; word-break: break-word; mso-line-height-alt: NaNpx; margin: 0;">Amount paid: <%= number_to_currency(@invoice.amount) %> </p>
 <p style="line-height: 1.2; word-break: break-word; mso-line-height-alt: NaNpx; margin: 0;"> </p>
 <p style="line-height: 1.2; word-break: break-word; mso-line-height-alt: NaNpx; margin: 0;">Invoice paid: <%= @invoice.paid_at.strftime('%m/%d/%Y') %></p>
+<p style="line-height: 1.2; word-break: break-word; mso-line-height-alt: NaNpx; margin: 0;"> </p>
+<p style="line-height: 1.2; word-break: break-word; mso-line-height-alt: NaNpx; margin: 0;"><a href=<%= invoice_url(@invoice)%>>View Invoice</a></p>
 </div>
 </div>
 <!--[if mso]></td></tr></table><![endif]-->

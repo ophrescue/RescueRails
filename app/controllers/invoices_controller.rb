@@ -13,13 +13,13 @@
 #    limitations under the License.
 
 class InvoicesController < ApplicationController
-
+  protect_from_forgery except: :stripe_webhook
   PER_PAGE = 30
 
-  before_action :require_login, except: %i[show update]
-  before_action :unlocked_user, except: %i[show update]
+  before_action :require_login, except: %i[show update begin_checkout stripe_webhook thank_you]
+  before_action :unlocked_user, except: %i[show update begin_checkout stripe_webhook thank_you]
   before_action :select_bootstrap41
-  before_action :show_user_navbar, except: %i[show update]
+  before_action :show_user_navbar, except: %i[show update begin_checkout stripe_webhook thank_you]
   before_action :edit_my_adopters_user, only: %i(index create edit destroy)
   before_action :admin_user, only: :contract_received_at
 
@@ -47,6 +47,17 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.friendly.find(params[:id])
   end
 
+  def thank_you
+    if params.key?(:'checkout_id')
+      @session = Stripe::Checkout::Session.retrieve(params[:checkout_id])
+      @customer = Stripe::Customer.retrieve(@session.customer)
+      @invoice = Invoice.friendly.find(@session.metadata.oph_invoice_id)
+    else
+      flash.now[:error] = "Redirected to Homepage"
+      redirect_to(root_path)
+    end
+  end
+
   def edit
     @invoice = Invoice.friendly.find(params[:id])
     redirect_to invoice_path(@invoice)
@@ -64,22 +75,56 @@ class InvoicesController < ApplicationController
     end
   end
 
-  def update
+  def begin_checkout
     @invoice = Invoice.friendly.find(params[:id])
-    @invoice.card_token = stripe_params["stripeToken"]
-    donation_amt = stripe_params["invoice"]["donation"].to_i
+    @donation_amt = params["invoice"]["donation"].to_i
+    @total_due = (@donation_amt + @invoice.amount) * 100
+    @session = Stripe::Checkout::Session.create({ payment_method_types: ['card'],
+                                                  customer_email: @invoice.invoiceable.adopter.email,
+                                                  line_items: [
+                                                    price_data: {
+                                                      product: ENV['STRIPE_ONE_TIME_PAYMENT_PRODUCT'],
+                                                      unit_amount: @total_due,
+                                                      currency: 'usd'
+                                                    },
+                                                    quantity: 1
+                                                  ],
+                                                  metadata: {
+                                                    oph_invoice_id: @invoice.id,
+                                                    donation_amt: @donation_amt
+                                                  },
+                                                  mode: 'payment',
+                                                  success_url: "#{root_url}invoice_thank_you?checkout_id={CHECKOUT_SESSION_ID}",
+                                                  cancel_url: invoice_url(@invoice) })
 
+    redirect_to @session.url
+  end
+
+  def stripe_webhook
+    payload = request.body.read
+    endpoint_secret = ENV['STRIPE_INVOICE_ENDPOINT_SECRET']
+    sig_header = request.env['HTTP_STRIPE_SIGNATURE']
     begin
-      @invoice.process_payment(donation_amt)
-    rescue Stripe::CardError => e
-      flash[:error] = e.message
-      InvoiceMailer.payment_declined(@invoice.id, e.message).deliver_later
-    else
-      flash[:success] = 'Payment Processed Successfully '
-      InvoiceMailer.invoice_paid(@invoice.id).deliver_later
+      event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
+    rescue JSON::ParserError => e
+      # Invalid payload
+      return head :bad_request
+    rescue Stripe::SignatureVerificationError => e
+      # Invalid signature
+      return head :bad_request
     end
-    @invoice = Invoice.friendly.find(params[:id])
-    render :show
+
+    case event['type']
+    when 'checkout.session.completed'
+      checkout_session = event['data']['object']
+      if checkout_session.payment_status == 'paid'
+        @invoice = Invoice.find(checkout_session.metadata.oph_invoice_id)
+        @invoice.pay_invoice(checkout_session)
+        InvoiceMailer.invoice_paid(@invoice.id).deliver_later
+      end
+    end
+
+    head :no_content
   end
 
   def record_contract
@@ -89,14 +134,14 @@ class InvoicesController < ApplicationController
     else
       @invoice.contract_received_at = nil
     end
+
     if @invoice.save!
       flash[:success] = "Contract status updated, notifications sent"
       contract_notification(@invoice)
-      redirect_to invoice_path(@invoice)
     else
       flash.now[:error] = "Invoice could not be saved"
-      redirect_to invoice_path(@invoice)
     end
+    redirect_to invoice_path(@invoice)
   end
 
   def index
@@ -115,16 +160,8 @@ class InvoicesController < ApplicationController
     params.require(:invoice).permit(:amount, :description)
   end
 
-  def stripe_params
-    params.permit :stripeToken,
-                  :utf8,
-                  :authenticity_token,
-                  :_method,
-                  :id,
-                  invoice:
-                  [
-                    :donation
-                  ]
+  def invoice_begin_checkout_params
+    params.require(:invoice).permit(:donation)
   end
 
   def load_invoiceable
@@ -147,5 +184,4 @@ class InvoicesController < ApplicationController
   def admin_user
     redirect_to(root_path) unless current_user.admin?
   end
-
 end

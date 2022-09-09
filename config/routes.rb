@@ -125,8 +125,6 @@ Rails.application.routes.draw do
 
   get '/international',                                 to: 'pages#international'
   get '/international/kaw',                             to: 'pages#international-kaw'
-  get '/international/tcspca',                          to: 'pages#international-tcspca'
-  get '/international/volunteer-takes-oph-to-india',    to: 'pages#international-article'
   get '/international/7000-miles-home',                 to: 'pages#7000-miles-home'
   get '/international/hope-for-hope',                  to: 'pages#hope-for-hope'
 end

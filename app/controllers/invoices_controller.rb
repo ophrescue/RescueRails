@@ -80,6 +80,9 @@ class InvoicesController < ApplicationController
     @donation_amt = params["invoice"]["donation"].to_i
     @total_due = (@donation_amt + @invoice.amount) * 100
     @session = Stripe::Checkout::Session.create({ payment_method_types: ['card'],
+                                                  payment_intent_data: {
+                                                    description: payment_description(@donation_amt)
+                                                  },
                                                   customer_email: @invoice.invoiceable.adopter.email,
                                                   line_items: [
                                                     price_data: {
@@ -183,5 +186,10 @@ class InvoicesController < ApplicationController
 
   def admin_user
     redirect_to(root_path) unless current_user.admin?
+  end
+
+  def payment_description(donation_amt)
+    return 'Adoption Fee and Donation' if donation_amt.positive?
+    return 'Adoption Fee'
   end
 end

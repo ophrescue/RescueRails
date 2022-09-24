@@ -1,9 +1,12 @@
 <main role="main" class="container">
     <div class="row highlight rounded">
-        <div class="col-md-6 text-center py-2">
-            <a href="/newsletters" class="btn btn-large btn-info">Volunteer Newsletters</a>
+        <div class="col-md-4 text-center py-2">
+            <a href="/newsletters" class="btn btn-large btn-info">Newsletters</a>
         </div>
-        <div class="col-md-6 text-center py-2">
+        <div class="col-md-4 text-center py-2">
+            <a href="/calendar" class="btn btn-large btn-info">Calendar</a>
+        </div>
+        <div class="col-md-4 text-center py-2">
             <% if @contacts_id.present? %>
                 <%= link_to "OPH Contact List", info_path(@contacts_id), class: 'btn btn-large btn-info' %>
             <% end %>

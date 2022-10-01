@@ -11,7 +11,7 @@ feature 'edit a cat', js: true do
   end
 
   feature 'permitted access to fields' do
-    let(:active_record_attributes){ [:created_at, :updated_at, :id].map(&:to_s) }
+    let(:active_record_attributes){ [:created_at, :updated_at, :id, :wait_list].map(&:to_s) }
     let(:not_editable_attributes){ [:youtube_video_url, :petfinder_ad_url, :craigslist_ad_url].map(&:to_s) }
     let(:all_database_attributes){ Cat.new.attributes.keys }
     let(:all_form_fields) { all_database_attributes - active_record_attributes - not_editable_attributes }
@@ -105,6 +105,7 @@ feature 'edit a cat', js: true do
         all_form_fields.each do |field|
           expect(page.find("#cat_#{field}")).not_to be_disabled
         end
+        expect(page.find("#cat_wait_list")).not_to be_disabled
       end
     end
   end

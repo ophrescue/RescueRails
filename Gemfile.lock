@@ -342,7 +342,7 @@ GEM
     record_tag_helper (1.0.1)
       actionview (>= 5)
     redcarpet (3.5.1)
-    regexp_parser (2.5.0)
+    regexp_parser (2.6.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -386,10 +386,10 @@ GEM
     rubocop-performance (1.15.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rails (2.15.2)
+    rubocop-rails (2.16.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
-      rubocop (>= 1.7.0, < 2.0)
+      rubocop (>= 1.33.0, < 2.0)
     rubocop-rspec (2.13.2)
       rubocop (~> 1.33)
     ruby-ole (1.2.12.2)
@@ -483,7 +483,7 @@ GEM
       nokogiri (~> 1.8)
     yard (0.9.28)
       webrick (~> 1.7.0)
-    zeitwerk (2.6.0)
+    zeitwerk (2.6.1)
 
 PLATFORMS
   x86_64-darwin-20

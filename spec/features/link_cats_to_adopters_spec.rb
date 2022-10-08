@@ -4,8 +4,9 @@ feature 'Link Cats to Adoption Applications via Adoption model', js: true do
   let!(:test_applicant) { create(:adopter, :with_app) }
 
   scenario 'Happy Path' do
-    create(:cat, name: 'Meow')
-    create(:cat, name: 'Meop')
+    create(:cat, name: 'Meow', status: 'adoptable')
+    create(:cat, name: 'Meop', status: 'adoptable')
+    create(:cat, name: 'Meoo', status: 'not available')
 
     sign_in_as_admin
 

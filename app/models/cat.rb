@@ -166,6 +166,7 @@ class Cat < ApplicationRecord
 
   scope :is_breed,                                ->(breed_partial) { joins("join cat_breeds on (cat_breeds.id = cats.primary_breed_id) or (cat_breeds.id = cats.secondary_breed_id)").where("cat_breeds.name ilike '%#{sanitize_sql_like(breed_partial)}%'").distinct }
   scope :pattern_matching_name,                   ->(search_term) { where("name ilike ?", search_term) }
+  scope :autocomplete_filter,                     -> { where(status: Cat::ACTIVE_STATUSES)}
 
   # Rails 5.2 issues deprecation errors for any order that is not column names
   # so arel is the workaround
@@ -176,6 +177,7 @@ class Cat < ApplicationRecord
     if search_term.present?
       select(:name, :id)
         .pattern_matching_name("%"+search_term+"%")
+        .autocomplete_filter
         .sort_with_search_term_matches_first(search_term)
     else
       select(:name, :id)

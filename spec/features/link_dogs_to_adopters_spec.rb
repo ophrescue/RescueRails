@@ -4,8 +4,9 @@ feature 'Link Dogs to Adoption Applications via Adoption model', js: true do
   let!(:test_applicant) { create(:adopter, :with_app) }
 
   scenario 'Happy Path' do
-    create(:dog, name: 'Bark')
-    create(:dog, name: 'Bart')
+    create(:dog, name: 'Bark', status: 'adoptable')
+    create(:dog, name: 'Bart', status: 'adoptable')
+    create(:dog, name: 'Barf', status: 'not available')
 
     sign_in_as_admin
 

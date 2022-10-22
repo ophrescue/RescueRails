@@ -72,14 +72,16 @@ GEM
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-sdk (2.11.632)
-      aws-sdk-resources (= 2.11.632)
-    aws-sdk-core (2.11.632)
-      aws-sigv4 (~> 1.0)
-      jmespath (~> 1.0)
-    aws-sdk-resources (2.11.632)
-      aws-sdk-core (= 2.11.632)
-    aws-sigv4 (1.5.1)
+    aws-partitions (1.649.0)
+    aws-sdk-core (3.164.0)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.525.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1, >= 1.6.1)
+    aws-sdk-locationservice (1.24.0)
+      aws-sdk-core (~> 3, >= 3.127.0)
+      aws-sigv4 (~> 1.1)
+    aws-sigv4 (1.5.2)
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.18)
     bcrypt_pbkdf (1.1.0)
@@ -261,7 +263,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.9-x86_64-linux)
       racc (~> 1.4)
-    paperclip (5.3.0)
+    paperclip (6.1.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       mime-types
@@ -492,7 +494,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   audited (~> 4.5)
-  aws-sdk (~> 2)
+  aws-sdk-locationservice (~> 1.24)
   bcrypt_pbkdf (>= 1.0, < 2.0)
   better_errors
   binding_of_caller
@@ -534,7 +536,7 @@ DEPENDENCIES
   mini_racer (>= 0.2.3)
   mjml-rails (~> 4.6, >= 4.6.1)
   newrelic_rpm
-  paperclip (~> 5)
+  paperclip (~> 6)
   pg (~> 0.21.0)
   powder
   pry-byebug

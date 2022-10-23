@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_11_190134) do
+ActiveRecord::Schema.define(version: 2022_10_23_204657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,10 @@ ActiveRecord::Schema.define(version: 2022_05_11_190134) do
     t.string "secondary_email"
     t.boolean "is_address_valid", default: true
     t.integer "energy_level"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["assigned_to_user_id"], name: "index_adopters_on_assigned_to_user_id"
+    t.index ["latitude", "longitude"], name: "index_adopters_on_latitude_and_longitude"
   end
 
   create_table "adoption_apps", id: :serial, force: :cascade do |t|

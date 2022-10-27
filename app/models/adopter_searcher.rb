@@ -51,6 +51,9 @@ class AdopterSearcher
     elsif status_search?
       @adopters = @adopters.where(status: @params[:status])
     end
+    if location_search?
+      @adopters = @adopters.near(@params[:location], @params[:range])
+    end
     if filter_by_id? and !@params[:search]
        @user_id == nil ? @adopters = @adopters.where(assigned_to_user_id: nil) : @adopters = @adopters.where(assigned_to_user_id: @user_id)
     end
@@ -115,6 +118,10 @@ class AdopterSearcher
 
   def email_search?
     @params[:search].match(EMAIL_CHECK)
+  end
+
+  def location_search?
+    @params[:location].present? && @params[:range].present? && @params[:range].to_i.between?(1,30)
   end
 
   def phone_search?

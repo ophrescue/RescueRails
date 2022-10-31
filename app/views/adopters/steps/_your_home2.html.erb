@@ -1,74 +1,103 @@
-  <div class="control-group">
-    <%= af.label :building_type, "What type of home do you live in?", :class => "control-label" %>
-    <div class="controls">
-      <label>
-        <%= af.radio_button :building_type, "Apartment / Condo", :class => "required" %>
+<div class="form-group">
+  <%= af.label :building_type, "What type of home do you live in?", :class => "col-form-label" %>
+  <div class="controls">
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <%= af.radio_button :building_type, "Apartment / Condo", :class => "required form-check-input" %>
         <span>Apartment / Condo</span>
       </label>
-      <label>
-        <%= af.radio_button :building_type, "Townhouse", :class => "required" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <%= af.radio_button :building_type, "Townhouse", :class => "required form-check-input" %>
         <span>Townhouse</span>
       </label>
-      <label>
-        <%= af.radio_button :building_type, "Single Family", :class => "required" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <%= af.radio_button :building_type, "Single Family", :class => "required form-check-input" %>
         <span>Single Family</span>
       </label>
-      <label>
-        <%= af.radio_button :building_type, "Farm", :class => "required" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <%= af.radio_button :building_type, "Farm", :class => "required form-check-input" %>
         <span>Farm</span>
       </label>
     </div>
   </div>
-<div class="control-group">
-  <%= af.label :dog_exercise, "How will your pet get exercise?", :class => "control-label" %>
+</div>
+
+<div class="form-group">
+  <%= af.label :dog_exercise, "How will your pet get exercise?", :class => "col-form-label" %>
   <div class="controls">
-    <%= af.text_area :dog_exercise, :class => "required input-xlarge", :rows => "3"%>
-    <span class="help-inline">Describe yard, nearby parks and family activities.</span>
+    <%= af.text_area :dog_exercise, :class => "form-control col-8 col-sm-6 col-md-4", :rows => "3"%>
+    <span class="form-text text-muted">Describe yard, nearby parks and family activities.</span>
   </div>
 </div>
-<div class="control-group">
-  <%= af.label :fenced_yard, "Do you have a fenced yard?", :class => "control-label" %>
-  <div class="controls">
-    <label>
-      <%= af.radio_button :fenced_yard, true, :class => "required" %>
-      <span>Yes</span>
-    </label>
-    <label>
-      <%= af.radio_button :fenced_yard, false, :class => "required" %>
-      <span>No</span>
-    </label>
+
+<div class="form-group">
+  <div class="row">
+    <%= af.label :fenced_yard, "Do you have a fenced yard?", :class => "col-form-label col-sm-3 pt-0" %>
+    <div class="controls col-sm-9">
+      <div class="form-check form-check-inline">
+        <label>
+          <%= af.radio_button :fenced_yard, true, :class => "required" %>
+          <span>Yes</span>
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label>
+          <%= af.radio_button :fenced_yard, false, :class => "required" %>
+          <span>No</span>
+        </label>
+      </div>
+    </div>
   </div>
 </div>
-<div class="control-group">
-  <%= af.label :dog_stay_when_away, "Where will your pet stay when you're away from home?", :class => "control-label" %>
+
+<div class="form-group">
+  <%= af.label :dog_stay_when_away, "Where will your pet stay when you're away from home?", :class => "col-form-label" %>
   <div class="controls">
-    <label>
-      <%= af.radio_button :dog_stay_when_away, 'In a crate', :class => "required" %>
-      <span>In a crate</span>
-    </label>
-    <label>
-      <%= af.radio_button :dog_stay_when_away, 'In a limited area of home' %>
-      <span>In a limited area of home</span>
-    </label>
-    <label>
-      <%= af.radio_button :dog_stay_when_away, 'Free range of home' %>
-      <span>Free range of home</span>
-    </label>
-    <label>
-      <%= af.radio_button :dog_stay_when_away, 'Outside' %>
-      <span>Outside</span>
-    </label>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <%= af.radio_button :dog_stay_when_away, 'In a crate', :class => "required form-check-input" %>
+        <span>In a crate</span>
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <%= af.radio_button :dog_stay_when_away, 'In a limited area of home', :class => "form-check-input" %>
+        <span>In a limited area of home</span>
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <%= af.radio_button :dog_stay_when_away, 'Free range of home', :class => "form-check-input" %>
+        <span>Free range of home</span>
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <%= af.radio_button :dog_stay_when_away, 'Outside', :class => "form-check-input" %>
+        <span>Outside</span>
+      </label>
+    </div>
   </div>
 </div>
-<div class="control-group">
-  <%= af.label :max_hrs_alone, "What will be the maximum length of time your pet will be left home alone?", :class => "control-label" %>
+
+<div class="form-group">
+  <%= af.label :max_hrs_alone, "What will be the maximum length of time your pet will be left home alone?", :class => "col-form-label" %>
   <div class="controls">
-    <%= af.select(:max_hrs_alone, (0..14).to_a, :prompt => "-select-", :class => "small") %><span> hours</span>
+    <div class="form-check-inline">
+      <%= af.select(:max_hrs_alone, (0..14).to_a, {prompt: "-select-"}, {class: "form-control"}) %><span class="form-text text-muted pl-2"> hours</span>
+    </div>
   </div>
 </div>
-<div class="control-group">
-  <%= af.label :dog_vacation, "What are your plans for taking care of the pet while you are on vacation?", :class => "control-label" %>
+
+<div class="form-group">
+  <%= af.label :dog_vacation, "What are your plans for taking care of the pet while you are on vacation?", :class => "col-form-label" %>
   <div class="controls">
-    <%= af.text_area :dog_vacation, :class => "required input-xlarge", :rows => "3" %>
+    <%= af.text_area :dog_vacation, :class => "required form-control col-8 col-sm-6 col-md-4", :rows => "3" %>
   </div>
 </div>

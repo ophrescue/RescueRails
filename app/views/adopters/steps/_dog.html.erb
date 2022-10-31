@@ -1,28 +1,35 @@
 <div id="own" class="step">
 <h3>Your New Pet</h3>
-  <div class="control-group">
-    <%= f.label :dog_or_cat, "Are you applying to adopt a dog or cat?", :class => "control-label" %>
-    <div class="controls">
-      <label>
-        <%= f.radio_button :dog_or_cat, 'Dog', :class => "required" %>
-        <span>Dog</span>
-      </label>
-      <label>
-        <%= f.radio_button :dog_or_cat, 'Cat', :class => "required" %>
-        <span>Cat</span>
-      </label>
+
+  <div class="form-group">
+    <div class="row">
+      <%= f.label :dog_or_cat, "Are you applying to adopt a dog or cat?", :class => "col-form-label col-sm-3 pt-0" %>
+      <div class="controls col-sm-9">
+        <div class="form-check form-check-inline">
+          <label>
+            <%= f.radio_button :dog_or_cat, 'Dog', :class => "required" %>
+            <span>Dog</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label>
+            <%= f.radio_button :dog_or_cat, 'Cat', :class => "required" %>
+            <span>Cat</span>
+          </label>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :dog_name, "(Optional) What pets are you interested in?", :class => "control-label" %>
+  <div class="form-group">
+    <%= f.label :dog_name, "(Optional) What pets are you interested in?", :class => "col-form-label" %>
     <div class="controls">
-      <%= f.text_field :dog_name %>
+      <%= f.text_field :dog_name, :class => "col-8 col-sm-4 form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :energy_level, "For Dogs Only - How active would you like your dog to be?", :class => "control-label" %>
+  <div class="form-group">
+    <%= f.label :energy_level, "For Dogs Only - How active would you like your dog to be?", :class => "col-form-label" %>
     <div class="controls">
       <label>
         <%= f.radio_button :energy_level, '1', :class => "" %>
@@ -47,17 +54,17 @@
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :dog_reqs, "Describe the type of pet you want to adopt.  Please include the two traits that are most important to you.", :class => "control-label" %>
+  <div class="form-group">
+    <%= f.label :dog_reqs, "Describe the type of pet you want to adopt.  Please include the two traits that are most important to you.", :class => "col-form-label" %>
     <div class="controls">
-      <%= f.text_area :dog_reqs, :class => "required input-xlarge", :rows => "3" %>
-      <span class="help-inline">Age, Weight, Activity Level, etc.</span>
+      <%= f.text_area :dog_reqs, :class => "required form-control col-8 col-sm-6 col-md-4", :rows => "3" %>
+      <span class="form-text text-muted">Age, Weight, Activity Level, etc.</span>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :why_adopt, "Why do you want to make this pet a part of your family and how will you incorporate the pet into your existing family?", :class => "control-label" %>
+  <div class="form-group">
+    <%= f.label :why_adopt, "Why do you want to make this pet a part of your family and how will you incorporate the pet into your existing family?", :class => "col-form-label" %>
     <div class="controls">
-      <%= f.text_area :why_adopt, :class => "required input-xlarge", :rows => "5" %>
+      <%= f.text_area :why_adopt, :class => "required form-control col-8 col-sm-6 col-md-4", :rows => "5" %>
     </div>
   </div>

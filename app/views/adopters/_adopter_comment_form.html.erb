@@ -1,4 +1,4 @@
 <%= form_for [@adopter, @adopter.comments.build], data: {remote: true}, :html => {novalidate: true, :id => "new_comment"} do |f| %>
-  <%= f.text_area :content, :class => "input-xxlarge comment_content", :rows => "5" %>
+  <%= f.text_area :content, :class => "form-control col-8 col-sm-6 col-md-4 comment_content", :rows => "5" %>
   <%= f.submit "Post", class:"btn btn-primary comment_submit", id: "comment_submit" %>
 <% end %>

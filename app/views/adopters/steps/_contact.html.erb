@@ -1,64 +1,73 @@
 <div id="contact" class="step">
 <h3>Contact Information</h3>
-  <div class="control-group">
-    <%= f.label :name, "Full Name", :class => "control-label" %>
+  <div class="form-group">
+    <%= f.label :name, "Full Name", :class => "col-form-label " %>
     <div class="controls">
-      <%= f.text_field :name, :class => "required" %>
+      <%= f.text_field :name, :class => "required col-8 col-sm-4 form-control" %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :email, "E-mail", :class => "control-label" %>
+
+  <div class="form-group">
+    <%= f.label :email, "E-mail", :class => "col-form-label " %>
     <div class="controls">
-      <%= f.text_field :email, :class => "required" %>
+      <%= f.text_field :email, :class => "required col-8 col-sm-4 form-control" %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :address1,"Address Line 1", :class => "control-label" %>
+
+  <div class="form-group">
+    <%= f.label :address1,"Address Line 1", :class => "col-form-label" %>
     <div class="controls">
-      <%= f.text_field :address1, :class => "required" %>
-      <span class="help-inline">This must be the physical address where you live. PO Boxes will not be accepted.</span>
+      <%= f.text_field :address1, :class => "required col-8 col-sm-4 form-control" %>
+      <span class="form-text text-muted">This must be the physical address where you live. PO Boxes will not be accepted.</span>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :address2, "Address Line 2", :class => "control-label" %>
+
+  <div class="form-group">
+    <%= f.label :address2, "Address Line 2", :class => "col-form-label" %>
     <div class="controls">
-      <%= f.text_field :address2 %>
+      <%= f.text_field :address2, :class => "col-8 col-sm-4 form-control" %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :city, "City", :class => "control-label" %>
+
+  <div class="form-group">
+    <%= f.label :city, "City", :class => "col-form-label" %>
     <div class="controls">
-      <%= f.text_field :city, :class => "required" %>
+      <%= f.text_field :city, :class => "required col-8 col-sm-4 col-md-3 form-control" %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :state, "State", :class => "control-label" %>
+
+  <div class="form-group">
+    <%= f.label :state, "State", :class => "col-form-label" %>
     <div class="controls">
-      <%= f.text_field :state, :class => "required small" %>
-      <span class="help-inline">We primarily adopt to central and northern VA, DC, Maryland and south central PA as we want to be in proximity to support our adopters. We do make exceptions in certain cases. We do not ship pets. </span>
+      <%= f.text_field :state, :class => "required small col-3 col-sm-1 form-control" %>
+      <span class="form-text text-muted">We primarily adopt to central and northern VA, DC, Maryland and south central PA as we want to be in proximity to support our adopters. We do make exceptions in certain cases. We do not ship pets. </span>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :zip, "Zip Code", :class => "control-label" %>
+
+  <div class="form-group">
+    <%= f.label :zip, "Zip Code", :class => "col-form-label" %>
     <div class="controls">
-      <%= f.text_field :zip, :class => "required small" %>
+      <%= f.text_field :zip, :class => "required  col-3 col-sm-2 col-lg-1 form-control" %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :phone, "Primary Phone Number", :class => "control-label" %>
+
+  <div class="form-group">
+    <%= f.label :phone, "Primary Phone Number", :class => "col-form-label" %>
     <div class="controls">
-      <%= f.text_field :phone, :class => "required" %>
+      <%= f.text_field :phone, :class => "required col-6 col-sm-4 col-md-3 col-lg-2 form-control" %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :other_phone, "Alternate Phone Number", :class => "control-label" %>
+
+  <div class="form-group">
+    <%= f.label :other_phone, "Alternate Phone Number", :class => "col-form-label" %>
     <div class="controls">
-      <%= f.text_field :other_phone %>
+      <%= f.text_field :other_phone, :class => "col-6 col-sm-4 col-md-3 col-lg-2 form-control" %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :when_to_call, "What is the best time to call you?", :class => "control-label" %>
+
+  <div class="form-group">
+    <%= f.label :when_to_call, "What is the best time to call you?", :class => "col-form-label" %>
     <div class="controls">
-      <%= f.text_field :when_to_call, :class => "required" %>
+      <%= f.text_field :when_to_call, :class => "required col-6 col-sm-4 col-md-3 col-lg-2 form-control" %>
     </div>
   </div>

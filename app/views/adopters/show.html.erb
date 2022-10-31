@@ -1,34 +1,34 @@
 <%= render 'shared/error_messages', :object => @adopter %>
 
-<h5><%= link_to "Adoption Applications", session[:last_search] %></h5>
+<h5 class="ml-3 mt-3"><%= link_to "Adoption Applications", session[:last_search] %></h5>
 
-<div class="row">
-  <div class="span5">
+<div class="row container-fluid">
+  <div class="col-md-5">
     <h2><%= @adopter.name %></h2>
   </div>
 
-  <div class="span6 offset1"></div>
+  <div class="col-md-6 offset-1"></div>
 </div>
 
-<div class="row">
-  <div class="span4">
+<div class="row container-fluid">
+  <div class="col-md-4">
     <%= render 'adopter_form' %>
   </div>
 
-  <div class="span8">
+  <div class="col-md-8">
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#dog" data-toggle="tab">Pet Choices</a></li>
-      <li><a href="#doginfo" data-toggle="tab">Pet Info</a></li>
-      <li><a href="#otherpets" data-toggle="tab">Pet Vet</a></li>
-      <li><a href="#housing" data-toggle="tab">Housing</a></li>
-      <li><a href="#references" data-toggle="tab">References</a></li>
+      <li class="active nav-link"><a href="#dog" data-toggle="tab">Pet Choices</a></li>
+      <li><a class="nav-link" href="#doginfo" data-toggle="tab">Pet Info</a></li>
+      <li><a class="nav-link" href="#otherpets" data-toggle="tab">Pet Vet</a></li>
+      <li><a class="nav-link" href="#housing" data-toggle="tab">Housing</a></li>
+      <li><a class="nav-link" href="#references" data-toggle="tab">References</a></li>
     </ul>
 
     <div class="pill-content">
       <div class="tab-content">
         <div id="dog" class="tab-pane active">
-          <div class="row">
-            <div class="span4">
+          <div>
+            <div>
               <%= render 'dog_choices' %>
             </div>
           </div>
@@ -39,7 +39,7 @@
           <div id="parent_linked_dogs_table">
             <div id="linked_dogs_table" class="row">
               <% @adopter.adoptions.find_each do |adp| %>
-                <div class="span6">
+                <div class="col-md-6">
                   <%= form_for adp, html: {method: :put}, format: :json do |f| %>
                     <%=  link_to adp.dog.name, dogs_manager_path(adp.dog) %>
                     (<%= adp.dog.status %>),
@@ -55,7 +55,7 @@
                     <%= link_to "Create Invoice for #{adp.dog.name}", new_adoption_invoice_path(adp), class: "btn btn-small" %>
                   <% end %>
                 </div>
-                <div class="span1">
+                <div class="col-md-1">
                   <% if adp.invoices.blank? %>
                     <%= form_for adp, html: {id: "delete_dog_link", class: "delete_adoption"}, method: :delete do |f| %>
                       <%= f.submit "X", class: "btn btn-danger btn-small" %>
@@ -66,13 +66,13 @@
             </div>
           </div>
 
-          <h3>Cats</h3>
+          <h3 class="mt-3">Cats</h3>
           <%= render 'associated_cats_form' %>
 
           <div id="parent_linked_cats_table">
             <div id="linked_cats_table" class="row">
               <% @adopter.cat_adoptions.find_each do |adp_cat| %>
-                <div class="span6">
+                <div class="col-md-6">
                   <%= form_for adp_cat, html: {method: :put}, format: :json do |f| %>
                     <%=  link_to adp_cat.cat.name, cats_manager_path(adp_cat.cat) %>
                     (<%= adp_cat.cat.status %>),
@@ -88,7 +88,7 @@
                     <%= link_to "Create Invoice for #{adp_cat.cat.name}", new_cat_adoption_invoice_path(adp_cat), class: "btn btn-small" %>
                   <% end %>
                 </div>
-                <div class="span1">
+                <div class="col-md-1">
                   <%= form_for adp_cat, html: {id: "delete_cat_link", class: "delete_cat_adoption"}, method: :delete do |f| %>
                     <%= f.submit "X", class: "btn btn-danger btn-small" %>
                   <% end %>
@@ -104,8 +104,8 @@
         </div>
 
         <div id="references" class="tab-pane">
-          <div class="row">
-            <div class="span4">
+          <div>
+            <div>
               <%= render 'adopter_references' %>
             </div>
           </div>
@@ -123,13 +123,13 @@
   </div>
 </div>
 
-<%= form_for @adoption_app, :html=> { :multipart => true, :class => "form-horizontal" } do |f| %>
-  <div class="row">
-    <div class="span12">
-      <h2>Documents</h2>
-      <div class="span5">
+<%= form_for @adoption_app, :html=> { :multipart => true } do |f| %>
+  <div class="row container-fluid">
+    <div class="col-md-12">
+      <h2 class="ml-3 mt-3">Documents</h2>
+      <div class="col-md-5">
         <h3>New Documents</h3>
-        <div class="control-group">
+        <div class="form-group">
           <%= f.fields_for :attachments do |af| %>
             <% if af.object.new_record? %>
               <%= af.file_field :attachment %><br />
@@ -138,11 +138,11 @@
         </div>
       </div>
 
-      <div class="span5">
+      <div class="col-md-5">
         <h3>Existing Documents</h3>
           <%= f.fields_for :attachments do |af| %>
             <% if af.object.persisted? %>
-              <div class="control-group">
+              <div class="form-group">
                 <label for="delAttachment">
                   <i class="icon-file"></i><%= link_to af.object.attachment_file_name, af.object.download_url %>
                 </label>
@@ -152,17 +152,17 @@
       </div>
     </div>
   </div>
-  <div class="row>">
-    <div class="span12">
+  <div class="ml-3">
+    <div class="col-md-12">
       <%= f.submit "Update Documents", :class => "btn btn-primary" %>
     </div>
   </div>
 <% end %>
 
-<div class="row">
-  <div class="span12">
+<div class="container-fluid">
+  <div class="col-md-12">
 
-    <h4>Add Comment</h4>
+    <h4 class="ml-1 mt-3">Add Comment</h4>
     <%= render 'adopter_comment_form' %>
 
     <%= render 'changes/changes', parent: @adopter, device: '' %>

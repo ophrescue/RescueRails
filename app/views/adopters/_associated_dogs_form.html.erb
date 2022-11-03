@@ -1,7 +1,7 @@
 <%= form_for(@adopter.adoptions.build(:adopter_id => @adopter.id),:html => {:id => "new_dog_link"}) do |ad| %>
   <fieldset>
-    <div class="control-group">
-      <%= ad.label :dog_id, "Associate Dog with Application", :class => "control-label" %>
+    <div class="form-group">
+      <%= ad.label :dog_id, "Associate Dog with Application", :class => "col-form-label" %>
       <div class="controls">
         <input id="autocomplete_dog_label" name="adoption_dog_name" class='autocomplete'>
         <input id="adoption_dog_id" type="hidden" name="adoption[dog_id]">

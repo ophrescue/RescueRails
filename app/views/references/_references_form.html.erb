@@ -1,8 +1,8 @@
 <%= form_for @adopter, html: { class: 'form-horizontal edit-reference' } do |f| %>
   <%= f.fields_for :references, f.object.references.order(:name) do |rf| %>
-    <table class="table table-striped table-bordered table-condensed">
+    <table class="table table-striped table-bordered table-sm">
       <tr>
-        <th class="span2">Name</th>
+        <th class="col-md-2">Name</th>
         <td>
           <div class='ref-read-only'><%= rf.object.name %></div>
           <div class='ref-editable'><%= rf.text_field :name %></div>

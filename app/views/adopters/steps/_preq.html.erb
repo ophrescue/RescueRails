@@ -13,11 +13,11 @@
       <p>We are excited to start the journey of working together with you to find the right dog or cat.  Operation Paws for Homes (OPH) is committed to each pet and their new adoptive families, so welcome in advance to the OPH Rescue family.  We are here to answer your questions about dogs and cats, adoption, their social, health and training needs.  </p>
       </div>
       <div class="control-group error">
-      <label class="control-label"><strong>Please check off that you have read each of the following statements about adopting with OPH – all are focused on ensuring the safety and happiness of both the pet and the adopter.</strong></label>
+      <label class="col-form-label text-danger"><strong>Please check off that you have read each of the following statements about adopting with OPH – all are focused on ensuring the safety and happiness of both the pet and the adopter.</strong></label>
         <div class="controls">
 
           <label class="checkbox">
-            <%= f.check_box :pre_q_abuse, :class => "required" %>
+            <%= f.check_box :pre_q_abuse, :class => "required"  %>
             <span>Applicant has never been convicted of animal abuse.</span>
           </label>
           <span for="adopter[pre_q_abuse]" generated="true" class="help-inline error"></span>
@@ -29,19 +29,19 @@
           <span for="adopter[pre_q_dog_adjust]" generated="true" class="help-inline error"></span>
 
           <label class="checkbox ">
-            <%= f.check_box :pre_q_limited_info, :class => "required" %>
+            <%= f.check_box :pre_q_limited_info, :class => "required"  %>
             <span>A veterinarian has examined each OPH pet and all known medical issues will be addressed by OPH and/or disclosed to potential adopters. </span>
           </label>
           <span for="adopter[pre_q_limited_info]" generated="true" class="help-inline error"></span>
 
           <label class="checkbox ">
-            <%= f.check_box :pre_q_breed_info, :class => "required" %>
+            <%= f.check_box :pre_q_breed_info, :class => "required"  %>
             <span>OPH does not have exact breed information about our pets. Listed breeds are an educated guess made by veterinarians, shelter staff, and OPH volunteers without the benefit of parental history.</span>
           </label>
           <span for="adopter[pre_q_breed_info]" generated="true" class="help-inline error"></span>
 
           <label class="checkbox ">
-            <%= f.check_box :pre_q_hold, :class => "required" %>
+            <%= f.check_box :pre_q_hold, :class => "required"  %>
             <span>A pet can be placed on hold for only 7 days after your adoption application is approved. We will happily work with you to find a pet that meets your availability.</span>
           </label>
           <span for="adopter[pre_q_hold]" generated="true" class="help-inline error"></span>

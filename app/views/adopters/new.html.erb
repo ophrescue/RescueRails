@@ -1,8 +1,8 @@
-<div class="page-header">
-  <h2>Adoption Application</h2>
+<div class="container-fluid">
+  <h2 class="mt-3 ml-3">Adoption Application</h2>
 </div>
-<div class="row">
-  <div class="span8">
+<div class="container-fluid">
+  <div class="col-md-8">
     <%= form_for(@adopter, :html=> { :class => "form-horizontal" }) do |f| %>
       <fieldset>
         <%= render 'shared/error_messages', :object => f.object %>
@@ -43,8 +43,8 @@
         </div>
 
         <div id="Navigation" class="form-actions well">
-          <input class="btn btn-large" id="back" value="Back" type="reset" />
-          <%= f.submit "Submit", :id =>"next", :class => "btn btn-large btn-primary", :disable_with => 'Saving...' %>
+          <input class="btn btn-lg btn-light" id="back" value="Back" type="reset" />
+          <%= f.submit "Submit", :id =>"next", :class => "btn btn-lg btn-primary", :disable_with => 'Saving...' %>
         </div>
       </fieldset>
     <% end %>

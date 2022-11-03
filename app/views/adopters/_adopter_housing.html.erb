@@ -1,7 +1,7 @@
 
-<%= form_for @adoption_app, html: { class: 'form-horizontal edit-housing' } do |f| %>
+<%= form_for @adoption_app, html: { class: 'edit-housing' } do |f| %>
 
-  <table class="table table-striped table-bordered table-condensed" data-house-type=<%=f.object.house_type%>>
+  <table class="table table-striped table-bordered table-sm" data-house-type=<%=f.object.house_type%>>
     <tr>
       <th>Home ownership</th>
       <td>
@@ -16,7 +16,7 @@
     </tr>
   </table>
   <h4 class = 'show-rent-parameters'>Rental information</h6>
-  <table class="table table-striped table-bordered table-condensed show-rent-parameters">
+  <table class="table table-striped table-bordered table-sm show-rent-parameters">
     <tr>
       <th>Landlord Name</th>
       <td>
@@ -63,5 +63,3 @@
     <%= f.submit "Save Housing Info", class: "btn housing-save", disabled: "disabled" %>
   </p>
 <%end%>
-
-

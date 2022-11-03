@@ -113,6 +113,10 @@ class Adopter < ApplicationRecord
   validates_inclusion_of :status, in: STATUSES
 
   before_validation :downcase_email
+
+  geocoded_by :full_street_address
+  after_validation :geocode,
+                   if: ->(obj){ obj.address1.present? and obj.address1_changed? }
   before_create :chimp_subscribe
   before_update :chimp_check, :approved_notification
   before_save :populate_county
@@ -209,5 +213,9 @@ class Adopter < ApplicationRecord
   private
   def downcase_email
     self.email = email.downcase if email.present?
+  end
+
+  def full_street_address
+    [address1, address2, city, state, zip].compact.join(', ')
   end
 end

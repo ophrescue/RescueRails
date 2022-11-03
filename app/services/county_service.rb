@@ -15,16 +15,16 @@
 class CountyService
   def self.fetch(zip)
     return zip if Rails.env.test?
-    return unless ENV['GOOGLE_MAPS_GEOCODE'].present?
+    return unless ENV['AWS_ACCESS_KEY_ID'].present?
 
-    fetch_from_google(zip)
+    fetch_from_aws(zip)
   end
 
-  def self.fetch_from_google(zip)
+  def self.fetch_from_aws(zip)
     result = Geocoder.search(zip)
     return if result.empty?
 
-    google_result = Geocoder::Result::Google.new(result[0]&.data)
-    google_result.sub_state
+    aws_result = Geocoder::Result::AmazonLocationService.new(result[0])
+    aws_result.instance_variable_get(:@place).instance_variable_get(:@place).sub_region
   end
 end

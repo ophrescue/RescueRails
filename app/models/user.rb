@@ -115,7 +115,7 @@ class User < ApplicationRecord
   validates_with PostalCodeValidator
 
   geocoded_by :full_street_address
-  after_validation :geocode
+  after_validation :geocode, ->(obj){ obj.address1.present? and obj.address1_changed? }
   before_update :unset_permissions_on_locked_user
 
   has_many :foster_cats, class_name: 'Cat', foreign_key: 'foster_id'

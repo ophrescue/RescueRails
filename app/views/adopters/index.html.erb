@@ -1,15 +1,14 @@
 <div>
   <div class="col-md-12">
     <h1><%= t('.title') %></h1>
-    <ul class="nav nav-pills">
+    <ul class="nav nav-pills mt-3">
       <%Adoption::AMOUNT_TO_SHOW.each do |show|%>
         <%if show == params[:show]%>
-          <li class="active">
+          <% active_css = "active" %>
         <%else%>
-          <li>
+          <% active_css = "" %>
         <%end%>
-          <%=link_to show.titleize, {:controller => "adopters", :show => show}, class: "nav-link" %>
-          </li>
+          <%=link_to show.titleize, {:controller => "adopters", :show => show}, class: "nav-link #{active_css}" %>
       <%end%>
       <%if params[:show] == nil%>
         <li class= "active">
@@ -20,17 +19,16 @@
   </div>
 </div>
 
-<div>
+<div class="mt-3">
   <div class="col-md-12">
     <ul class="nav nav-tabs">
       <% Adopter::STATUSES.each do |status| %>
         <% if status == params[:status] %>
-          <li class="active">
+          <% active_css = "active" %>
         <% else %>
-          <li>
+          <% active_css = "" %>
         <% end %>
-        <%= link_to status.titleize, {:controller => "adopters", :status => status, :show => params[:show]}, :class => "nav-link" %>
-        </li>
+        <%= link_to status.titleize, {:controller => "adopters", :status => status, :show => params[:show]}, :class => "nav-link  #{active_css}" %>
       <% end %>
       <% if params[:status] == nil %>
         <li class="active">

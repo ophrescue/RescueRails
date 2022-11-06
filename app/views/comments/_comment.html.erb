@@ -12,7 +12,7 @@
           <em><%= comment.created_at.strftime('%m/%d/%Y %l:%M%P') %></em>
 
           <% if current_user == comment.user %>
-            <a class="toggle-edit-comment btn btn-primary btn-sm">Edit</a>
+            <button class="toggle-edit-comment btn btn-primary btn-sm" type="button">Edit</button>
             <%= fc.submit "Save", class: "save-edit-comment btn btn-primary btn-sm" %>
           <% end %>
         </small>

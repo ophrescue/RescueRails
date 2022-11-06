@@ -29,8 +29,8 @@ $(function() {
    $('#adopter_adoption_app_attributes_birth_date').datepicker({
      dateFormat: 'yy-mm-dd',
      maxDate: '0d',
-     minDate: '-21y',
-     yearRange: "-21:+00",
+     minDate: '-121y',
+     yearRange: "-121:+00",
      changeMonth: true,
      changeYear: true
     });

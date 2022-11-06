@@ -53,14 +53,14 @@ $( function () {
 function editComment($parent) {
   $parent.find('.read-only-comment').hide();
   $parent.find('.editable-comment').show();
-  $parent.find('.toggle-edit-comment').removeClass('btn-primary').text('Cancel');
+  $parent.find('.toggle-edit-comment').removeClass('btn-primary').text('Cancel').addClass('btn-secondary');
   $parent.find('.save-edit-comment').show();
 }
 
 function showComment($parent) {
   $parent.find('.read-only-comment').show();
   $parent.find('.editable-comment').hide();
-  $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit');
+  $parent.find('.toggle-edit-comment').addClass('btn-primary').text('Edit').removeClass('btn-secondary');
   $parent.find('.save-edit-comment').hide();
 }
 

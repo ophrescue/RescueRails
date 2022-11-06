@@ -16,7 +16,7 @@ feature 'Edit Reference Form', js: true do
     expect(first('.ref-read-only', visible: false)).to be_visible
     expect(first('.ref-editable', visible: false)).not_to be_visible
 
-    click_button('Edit Refrences')
+    click_button('Edit References')
 
     expect(first('.ref-read-only', visible: false)).not_to be_visible
     expect(first('.ref-editable', visible: false)).to be_visible
@@ -33,7 +33,7 @@ feature 'Edit Reference Form', js: true do
     sign_in_as_admin
     visit adopter_path(adopter)
 
-    click_button('Edit Refrences')
+    click_button('Edit References')
     expect(page).to have_content(reference.name)
     expect(page).to have_content(reference.email)
 

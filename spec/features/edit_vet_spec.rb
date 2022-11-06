@@ -14,12 +14,12 @@ feature 'Edit Vet Info Form', js: true do
     expect(first('.vet-read-only', visible: false)).to be_visible
     expect(first('.vet-editable', visible: false)).not_to be_visible
 
-    find('#toggle-edit-vet').click
+    click_button('Edit Vet Info')
 
     expect(first('.vet-read-only', visible: false)).not_to be_visible
     expect(first('.vet-editable', visible: false)).to be_visible
 
-    find('#toggle-edit-vet').click
+    click_button('Cancel')
 
     expect(first('.vet-read-only', visible: false)).to be_visible
     expect(first('.vet-editable', visible: false)).not_to be_visible
@@ -33,7 +33,7 @@ feature 'Edit Vet Info Form', js: true do
     click_link('Pet Vet')
     expect(page).to have_content(adopter.adoption_app.current_pets)
 
-    find('#toggle-edit-vet').click
+    click_button('Edit Vet Info')
     fill_in('adoption_app_current_pets', with: 'Fluffy Ole Puppers')
     click_button('Save Vet Info')
 

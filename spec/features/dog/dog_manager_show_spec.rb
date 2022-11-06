@@ -139,7 +139,7 @@ feature 'visit dog show page', js: true do
     end
 
     it 'should be editable' do
-      page.find('a', text:'Edit').click
+      click_button('Edit')
       page.find('.editable-comment>textarea').set("new comment text")
       click_button('Save')
       expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
@@ -148,7 +148,7 @@ feature 'visit dog show page', js: true do
     end
 
     it 'edit comment to blank' do
-      page.find('a', text:'Edit').click
+      click_button('Edit')
       page.find('.editable-comment>textarea').set("")
       click_button('Save')
       within('#comment_table_small .editable-comment') do
@@ -208,7 +208,7 @@ feature 'visit dog show page', js: true do
     end
 
     it 'should be editable' do
-      page.find('a', text:'Edit').click
+      click_button('Edit')
       page.find('.editable-comment>textarea').set("new comment text")
       click_button('Save')
       expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
@@ -217,7 +217,7 @@ feature 'visit dog show page', js: true do
     end
 
     it 'edit comment to blank' do
-      page.find('a', text:'Edit').click
+      click_button('Edit')
       page.find('.editable-comment>textarea').set("")
       click_button('Save')
       within('#comment_table_large .editable-comment') do

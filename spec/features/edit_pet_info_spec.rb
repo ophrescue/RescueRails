@@ -14,16 +14,16 @@ feature 'Edit Pet Info Form', js: true do
         expect(first('.info-read-only', visible: false)).to be_visible
         expect(first('.info-editable', visible: false)).not_to be_visible
 
-        find('#toggle-edit-info').click
+        click_button('Edit Pet Info')
 
         expect(first('.info-read-only', visible: false)).not_to be_visible
         expect(first('.info-editable', visible: false)).to be_visible
 
-        find('#toggle-edit-info').click
+        click_button('Cancel')
 
         expect(first('.info-read-only', visible: false)).to be_visible
         expect(first('.info-editable', visible: false)).not_to be_visible
-   
+
     end
 
     scenario "Admin edits pet info", js: true do
@@ -35,7 +35,7 @@ feature 'Edit Pet Info Form', js: true do
 
         expect(page).to have_content(adopter.adoption_app.building_type)
 
-        find('#toggle-edit-info').click
+        click_button('Edit Pet Info')
         select('Farm', from: 'adoption_app_building_type')
         click_button('Save Pet Info')
 

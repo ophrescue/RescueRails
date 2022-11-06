@@ -61,7 +61,7 @@ feature 'Edit Adopter Form', js: true do
 
   scenario 'Edit comment' do
     visit adopter_path(adopter)
-    page.find('a.toggle-edit-comment', text:'Edit').click
+    click_button('Edit')
     page.find('.editable-comment>textarea').set("new comment text")
     click_button('Save')
     expect(page).to have_selector("#comment_content_#{comment_id}", text: "new comment text")
@@ -74,7 +74,7 @@ feature 'Edit Adopter Form', js: true do
 
     visit adopter_path(adopter)
 
-    page.find('#toggle-edit').click    
+    page.find('#toggle-edit').click
     page.choose('No')
 
     click_button('Save')

@@ -13,16 +13,16 @@ feature 'Edit Pet Choices Form', js: true do
         expect(first('.pet-choices-read-only', visible: false)).to be_visible
         expect(first('.pet-choices-editable', visible: false)).not_to be_visible
 
-        find('#toggle-edit-pet-choices').click
+        click_button('Edit Pet Choices')
 
         expect(first('.pet-choices-read-only', visible: false)).not_to be_visible
         expect(first('.pet-choices-editable', visible: false)).to be_visible
 
-        find('#toggle-edit-pet-choices').click
+        click_button('Cancel')
 
         expect(first('.pet-choices-read-only', visible: false)).to be_visible
         expect(first('.pet-choices-editable', visible: false)).not_to be_visible
-   
+
     end
 
     scenario "Admin edits pet choices", js: true do
@@ -33,7 +33,7 @@ feature 'Edit Pet Choices Form', js: true do
 
         expect(page).to have_content(adopter.dog_or_cat)
 
-        find('#toggle-edit-pet-choices').click
+        click_button('Edit Pet Choices')
         select('Dog', from: 'adopter_dog_or_cat')
         click_button('Save Pet Choices')
 

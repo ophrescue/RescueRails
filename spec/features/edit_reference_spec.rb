@@ -16,12 +16,12 @@ feature 'Edit Reference Form', js: true do
     expect(first('.ref-read-only', visible: false)).to be_visible
     expect(first('.ref-editable', visible: false)).not_to be_visible
 
-    find('#toggle-edit-ref').click
+    click_button('Edit Refrences')
 
     expect(first('.ref-read-only', visible: false)).not_to be_visible
     expect(first('.ref-editable', visible: false)).to be_visible
 
-    find('#toggle-edit-ref').click
+    click_button('Cancel')
 
     expect(first('.ref-read-only', visible: false)).to be_visible
     expect(first('.ref-editable', visible: false)).not_to be_visible
@@ -33,7 +33,7 @@ feature 'Edit Reference Form', js: true do
     sign_in_as_admin
     visit adopter_path(adopter)
 
-    click_link('References')
+    click_button('Edit Refrences')
     expect(page).to have_content(reference.name)
     expect(page).to have_content(reference.email)
 

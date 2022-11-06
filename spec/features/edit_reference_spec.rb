@@ -33,11 +33,11 @@ feature 'Edit Reference Form', js: true do
     sign_in_as_admin
     visit adopter_path(adopter)
 
-    click_button('Edit References')
+    click_link('References')
     expect(page).to have_content(reference.name)
     expect(page).to have_content(reference.email)
 
-    find('#toggle-edit-ref').click
+    click_button('Edit References')
     fill_in('adopter_references_attributes_0_name', with: 'First Reference')
     within(:css, "#references") do
       click_button('Save References')

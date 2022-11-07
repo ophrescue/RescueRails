@@ -1,39 +1,40 @@
-<div class="row mb-20">
-  <div class="span6 offset1">
-    <h1>Staff Sign in</h1>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Staff Sign in</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-7">
+      <%= form_for :session, url: sessions_path do |form| %>
+        <div class="form-group">
+          <%= form.label :email %>
+          <%= form.text_field :email, class: 'form-control', type: 'email' %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :password %>
+          <%= form.password_field :password, class: 'form-control' %>
+        </div>
+
+        <div class="remember-me-field mb-20">
+          <label class="checkbox">
+            <input type="checkbox" name="remember_me"> Remember Me
+          </label>
+        </div>
+
+        <div class="submit-field">
+          <%= form.submit 'Sign in', class: 'btn btn-primary btn-large' %>
+        </div>
+
+        <div class="other-links mt-4">
+          <%= link_to t('sessions.form.forgot_password'), new_password_path %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
-
-<div class="row">
-  <div class="span6 offset1">
-    <%= form_for :session, url: sessions_path do |form| %>
-      <div class="text-field">
-        <%= form.label :email %>
-        <%= form.text_field :email, type: 'email' %>
-      </div>
-
-      <div class="password-field">
-        <%= form.label :password %>
-        <%= form.password_field :password %>
-      </div>
-
-      <div class="remember-me-field mb-20">
-        <label class="checkbox">
-          <input type="checkbox" name="remember_me"> Remember Me
-        </label>
-      </div>
-
-      <div class="submit-field">
-        <%= form.submit %>
-      </div>
-
-      <div class="other-links">
-        <%= link_to t('sessions.form.forgot_password'), new_password_path %>
-      </div>
-    <% end %>
-  </div>
-</div>
-
 <script type="text/javascript">
   $(function(){
     $("#session_email")[0].focus();

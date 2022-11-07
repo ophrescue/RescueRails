@@ -16,6 +16,7 @@
 
 class SessionsController < Clearance::SessionsController
   before_action :prevent_caching
+  before_action :select_bootstrap41
 
   def new
     # it wasn't an access-denied redirect, so there will not be a redirect after login

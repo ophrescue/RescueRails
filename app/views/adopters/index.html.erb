@@ -1,15 +1,14 @@
-<div class="row">
-  <div class="span12">
+<div>
+  <div class="col-md-12">
     <h1><%= t('.title') %></h1>
-    <ul class="nav nav-pills">
+    <ul class="nav nav-pills mt-3">
       <%Adoption::AMOUNT_TO_SHOW.each do |show|%>
         <%if show == params[:show]%>
-          <li class="active">
+          <% active_css = "active" %>
         <%else%>
-          <li>
+          <% active_css = "" %>
         <%end%>
-          <%=link_to show.titleize, :controller => "adopters", :show => show %>
-          </li>
+          <%=link_to show.titleize, {:controller => "adopters", :show => show}, class: "nav-link #{active_css}" %>
       <%end%>
       <%if params[:show] == nil%>
         <li class= "active">
@@ -20,66 +19,65 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="span12">
+<div class="mt-3">
+  <div class="col-md-12">
     <ul class="nav nav-tabs">
       <% Adopter::STATUSES.each do |status| %>
         <% if status == params[:status] %>
-          <li class="active">
+          <% active_css = "active" %>
         <% else %>
-          <li>
+          <% active_css = "" %>
         <% end %>
-        <%= link_to status.titleize, :controller => "adopters", :status => status, :show => params[:show] %>
-        </li>
+        <%= link_to status.titleize, {:controller => "adopters", :status => status, :show => params[:show]}, :class => "nav-link  #{active_css}" %>
       <% end %>
       <% if params[:status] == nil %>
         <li class="active">
       <% else %>
         <li>
       <% end %>
-      <%= link_to "All", :controller => "adopters", :show => params[:show]  %>
+    <%= link_to "All", {:controller => "adopters", :show => params[:show]}, :class => "nav-link"  %>
       </li>
       <% if params[:status] == "active" %>
         <li class="active">
       <% else %>
         <li>
       <% end %>
-      <%= link_to "Active", :controller => "adopters", :status => "active", :show => params[:show] %>
+      <%= link_to "Active", {:controller => "adopters", :status => "active", :show => params[:show]}, :class => "nav-link" %>
       </li>
     </ul>
   </div>
 </div>
 
 <%= form_tag adopters_path, :method => 'get', :class => 'form-inline'  do %>
-<%= text_field_tag :search, params[:search], placeholder: 'Search by Name, Email or Phone' %>
-<%= submit_tag "Search", :name => nil %>
+<%= text_field_tag :search, params[:search], placeholder: 'Search by Name, Email or Phone', class: "form-control" %>
+<%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
 <% end %>
 
 <% if @adopters.any? %>
   <%= will_paginate @adopters %>
-
-  <table class="table-striped table-bordered table-condensed">
-  <thead>
-    <tr>
-      <th><%= sortable "id" %></th>
-      <th><%= sortable "ready_to_adopt_dt", "RTA" %></th>
-      <% if (params[:status] == nil) || (params[:status] == "active")%>
-        <th><%= sortable "status" %></th>
-    <% end %>
-      <th><%= sortable "dog_or_cat" %></th>
-      <th><%= sortable "name" %></th>
-      <th><%= sortable "dogs/cats" %></th>
-      <th><%= sortable "assigned_to" %></th>
-      <th><%= sortable "comments.updated_at","Last Comment Date" %></th>
-      <th>Last Comment</th>
-    </tr>
-  </thead>
-  <tbody id="adopters">
-    <%= render @adopters %>
-  </tbody>
-</table>
-
+<div class="container-fluid">
+  <table class="table-striped table-bordered table-sm">
+    <thead>
+      <tr>
+        <th><%= sortable "id" %></th>
+        <th><%= sortable "ready_to_adopt_dt", "RTA" %></th>
+        <% if (params[:status] == nil) || (params[:status] == "active")%>
+          <th><%= sortable "status" %></th>
+      <% end %>
+        <th><%= sortable "dog_or_cat" %></th>
+        <th><%= sortable "name" %></th>
+        <th><%= sortable "dogs/cats" %></th>
+        <th><%= sortable "assigned_to" %></th>
+        <th><%= sortable "comments.updated_at","Last Comment Date" %></th>
+        <th>Last Comment</th>
+      </tr>
+    </thead>
+    <tbody id="adopters">
+      <%= render @adopters %>
+    </tbody>
+  </table>
+</div>
 <%= will_paginate @adopters %>
 <% else %>
-  <h3>No Records Found</h3>
+  <h3 class="ml-3 mt-3">No Records Found</h3>
 <% end %>

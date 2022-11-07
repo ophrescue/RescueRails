@@ -16,12 +16,12 @@ feature 'Edit Reference Form', js: true do
     expect(first('.ref-read-only', visible: false)).to be_visible
     expect(first('.ref-editable', visible: false)).not_to be_visible
 
-    find('#toggle-edit-ref').click
+    click_button('Edit References')
 
     expect(first('.ref-read-only', visible: false)).not_to be_visible
     expect(first('.ref-editable', visible: false)).to be_visible
 
-    find('#toggle-edit-ref').click
+    click_button('Cancel')
 
     expect(first('.ref-read-only', visible: false)).to be_visible
     expect(first('.ref-editable', visible: false)).not_to be_visible
@@ -37,7 +37,7 @@ feature 'Edit Reference Form', js: true do
     expect(page).to have_content(reference.name)
     expect(page).to have_content(reference.email)
 
-    find('#toggle-edit-ref').click
+    click_button('Edit References')
     fill_in('adopter_references_attributes_0_name', with: 'First Reference')
     within(:css, "#references") do
       click_button('Save References')

@@ -3,14 +3,14 @@ $( function() {
 
     var isEditing = false;
 
-    $('a#toggle-edit').on('click', function(e) {
+    $('button#toggle-edit').on('click', function(e) {
       if (isEditing) {
         // find all disabled fields in .edit-adopter and enable them
         $('form.edit-adopter .to-disable').attr('disabled', 'disabled');
         $('.editable').hide();
         $('.read-only').show();
-        $('a#toggle-edit').addClass('btn-primary').text("Edit Info");
-        $('input.adopter-save').removeClass('btn-primary');
+        $('button#toggle-edit').addClass('btn-primary').text("Edit Info").removeClass('btn-secondary');
+        $('input.adopter-save').removeClass('btn-primary').addClass('btn-secondary');
       }
       else {
         $('form.edit-adopter :disabled')
@@ -19,8 +19,8 @@ $( function() {
 
         $('.editable').show();
         $('.read-only').hide();
-        $('a#toggle-edit').removeClass('btn-primary').text("Cancel");
-        $('input.adopter-save').addClass('btn-primary');
+        $('button#toggle-edit').removeClass('btn-primary').text("Cancel").addClass('btn-secondary');
+        $('input.adopter-save').addClass('btn-primary').removeClass('btn-secondary');
       }
 
       isEditing = !isEditing;
@@ -110,14 +110,14 @@ $( function() {
 
     var isRefEditing = false;
 
-    $('#references').on('click', 'a#toggle-edit-ref', function() {
+    $('#references').on('click', 'button#toggle-edit-ref', function() {
       if (isRefEditing) {
         // find all enabled fields in .edit-reference and disable them
         $('form.edit-reference .to-disable').prop("disabled", true);
         $('.ref-editable').hide();
         $('.ref-read-only').show();
-        $('a#toggle-edit-ref').addClass('btn-primary').text("Edit References");
-        $('input.reference-save').removeClass('btn-primary');
+        $('button#toggle-edit-ref').addClass('btn-primary').text("Edit References").removeClass('btn-secondary');
+        $('input.reference-save').removeClass('btn-primary').addClass('btn-secondary');
       }
       else {
         $('form.edit-reference :disabled')
@@ -126,23 +126,23 @@ $( function() {
 
         $('.ref-editable').show();
         $('.ref-read-only').hide();
-        $('a#toggle-edit-ref').removeClass('btn-primary').text("Cancel");
-        $('input.reference-save').addClass('btn-primary');
+        $('button#toggle-edit-ref').removeClass('btn-primary').text("Cancel").addClass('btn-secondary');
+        $('input.reference-save').addClass('btn-primary').removeClass('btn-secondary');
       }
 
       isRefEditing = !isRefEditing;
     });
 
     var isHousingEditing = false;
-    
-    $('#housing').on('click', 'a#toggle-edit-housing', function() {
+
+    $('#housing').on('click', 'button#toggle-edit-housing', function() {
       if (isHousingEditing) {
         // find all enabled fields in .edit-housing and disable them
         $('form.edit-housing .to-disable').prop("disabled", true);
         $('.rent-editable').hide();
         $('.rent-read-only').show();
-        $('a#toggle-edit-housing').addClass('btn-primary').text("Edit Housing Info");
-        $('input.housing-save').removeClass('btn-primary');
+        $('button#toggle-edit-housing').addClass('btn-primary').text("Edit Housing Info").removeClass('btn-secondary');
+        $('input.housing-save').removeClass('btn-primary').addClass('btn-secondary');
         if ($("#housing [data-house-type]").attr("data-house-type") == 'own'){
           $('.show-rent-parameters').hide();
         }
@@ -154,8 +154,8 @@ $( function() {
         $('.show-rent-parameters').show();
         $('.rent-editable').show();
         $('.rent-read-only').hide();
-        $('a#toggle-edit-housing').removeClass('btn-primary').text("Cancel");
-        $('input.housing-save').addClass('btn-primary');
+        $('button#toggle-edit-housing').removeClass('btn-primary').text("Cancel").addClass('btn-secondary');
+        $('input.housing-save').addClass('btn-primary').removeClass('btn-secondary');
         if ($("#housing [data-house-type]").attr("data-house-type") == 'own'){
           $('.radiobuttonown').prop("checked", true);
         }
@@ -173,14 +173,14 @@ $( function() {
 
     var isVetEditing = false;
 
-    $('#otherpets').on('click', 'a#toggle-edit-vet', function() {
+    $('#otherpets').on('click', 'button#toggle-edit-vet', function() {
       if (isVetEditing) {
         // find all enabled fields in .edit-vet and disable them
         $('form.edit-vet .to-disable').prop("disabled", true);
         $('.vet-editable').hide();
         $('.vet-read-only').show();
-        $('a#toggle-edit-vet').addClass('btn-primary').text("Edit Vet Info");
-        $('input.vet-save').removeClass('btn-primary');
+        $('button#toggle-edit-vet').addClass('btn-primary').text("Edit Vet Info").removeClass('btn-secondary');
+        $('input.vet-save').removeClass('btn-primary').addClass('btn-secondary');
       }
       else {
         $('form.edit-vet :disabled')
@@ -188,8 +188,8 @@ $( function() {
           .addClass('to-disable');
         $('.vet-editable').show();
         $('.vet-read-only').hide();
-        $('a#toggle-edit-vet').removeClass('btn-primary').text("Cancel");
-        $('input.vet-save').addClass('btn-primary');
+        $('button#toggle-edit-vet').removeClass('btn-primary').text("Cancel").addClass('btn-secondary');
+        $('input.vet-save').addClass('btn-primary').removeClass('btn-secondary');
       }
 
       isVetEditing = !isVetEditing;
@@ -197,14 +197,14 @@ $( function() {
 
     var isInfoEditing = false;
 
-    $('#doginfo').on('click', 'a#toggle-edit-info', function() {
+    $('#doginfo').on('click', 'button#toggle-edit-info', function() {
       // find all enabled fields in .edit-info and disable them
       if (isInfoEditing) {
         $('form.edit-info .to-disable').prop("disabled", true);
         $('.info-editable').hide();
         $('.info-read-only').show();
-        $('a#toggle-edit-info').addClass('btn-primary').text("Edit Pets Info");
-        $('input.info-save').removeClass('btn-primary');
+        $('button#toggle-edit-info').addClass('btn-primary').text("Edit Pets Info").removeClass('btn-secondary');
+        $('input.info-save').removeClass('btn-primary').addClass('btn-secondary');
       }
       else {
         $('form.edit-info :disabled')
@@ -213,30 +213,30 @@ $( function() {
 
         $('.info-editable').show();
         $('.info-read-only').hide();
-        $('a#toggle-edit-info').removeClass('btn-primary').text("Cancel");
-        $('input.info-save').addClass('btn-primary');
+        $('button#toggle-edit-info').removeClass('btn-primary').text("Cancel").addClass('btn-secondary');
+        $('input.info-save').addClass('btn-primary').removeClass('btn-secondary');
       }
 
       isInfoEditing = !isInfoEditing;
     });
-    
+
     var isChoicesEditing = false;
 
-    $('#dog').on('click', 'a#toggle-edit-pet-choices', function () {
+    $('#dog').on('click', 'button#toggle-edit-pet-choices', function () {
       if (isChoicesEditing) {
         $('form.edit-pet-choices .to-disable').prop("disabled", true);
         $('.pet-choices-editable').hide();
         $('.pet-choices-read-only').show();
-        $('a#toggle-edit-pet-choices').addClass('btn-primary').text("Edit Pet Choices");
-        $('input.pet-choices-save').removeClass('btn-primary');
+        $('button#toggle-edit-pet-choices').addClass('btn-primary').text("Edit Pet Choices").removeClass("btn-secondary");
+        $('input.pet-choices-save').removeClass('btn-primary').addClass('btn-secondary');
       } else {
         $('form.edit-pet-choices :disabled')
           .removeAttr('disabled')
           .addClass('to-disable');
         $('.pet-choices-editable').show();
         $('.pet-choices-read-only').hide();
-        $('a#toggle-edit-pet-choices').removeClass('btn-primary').text("Cancel");
-        $('input.pet-choices-save').addClass('btn-primary');
+        $('button#toggle-edit-pet-choices').removeClass('btn-primary').text("Cancel").addClass('btn-secondary');
+        $('input.pet-choices-save').addClass('btn-primary').removeClass('btn-secondary');
       }
 
       isChoicesEditing = !isChoicesEditing;

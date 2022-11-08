@@ -184,9 +184,9 @@ class User < ApplicationRecord
   PHOTO_MAX_SIZE = 5
   validates_attachment_size :avatar, less_than: PHOTO_MAX_SIZE.megabytes
 
-  HOUSE_TYPES = %w[ rent own ]
+  HOUSE_TYPES = %w[rent own]
 
-  RANGES = %w[5 10 15 20 30 ]
+  RANGES = %w[5 10 15 20 30]
 
   # mapping of scope name (= query string parameter) to model attributes
   FILTER_FLAGS = { active_volunteer: :active,

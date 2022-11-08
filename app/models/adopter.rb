@@ -75,6 +75,8 @@ class Adopter < ApplicationRecord
 
   FLAGS = ['High', 'Low', 'On Hold']
 
+  RANGES = %w[5 10 15 20 30]
+
   has_many :references, dependent: :destroy
   accepts_nested_attributes_for :references
 

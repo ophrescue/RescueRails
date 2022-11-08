@@ -54,8 +54,9 @@
 <% end %>
 
 <% if @adopters.any? %>
-  <%= will_paginate @adopters %>
+
 <div class="container-fluid">
+  <div> <%= will_paginate(@adopters, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %> </div>
   <table class="table-striped table-bordered table-sm">
     <thead>
       <tr>
@@ -76,8 +77,9 @@
       <%= render @adopters %>
     </tbody>
   </table>
+  <div class="mt-2"> <%= will_paginate(@adopters, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %> </div>
 </div>
-<%= will_paginate @adopters %>
+
 <% else %>
   <h3 class="ml-3 mt-3">No Records Found</h3>
 <% end %>

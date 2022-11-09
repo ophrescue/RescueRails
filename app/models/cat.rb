@@ -133,7 +133,7 @@ class Cat < ApplicationRecord
     'adoption pending' => 'P',
     'on hold' => 'H',
     'return pending' => 'H',
-    'coming soon' => 'H'
+    'coming soon' => 'A'
   }.freeze
 
   PETFINDER_SIZE = {

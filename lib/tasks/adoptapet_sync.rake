@@ -57,7 +57,7 @@ namespace :adoptapet_sync do
                   d.age,
                   d.to_petfinder_gender,
                   d.to_petfinder_size,
-                  dog_desc_prefix + d.id.to_s + "<br>" + d.description.gsub(/\r\n?/, "<br>"),
+                  dog_desc_prefix + d.id.to_s + "<br>" + d.description.gsub(/\r\n?/, "<br>") + coming_soon_suffix(d),
                   "Available",                      # status
                   d.no_kids ? "N" : "",            # GoodWKids
                   d.no_cats ? "N" : "",            # GoodWCats
@@ -88,7 +88,7 @@ namespace :adoptapet_sync do
                   c.age,
                   c.to_petfinder_gender,
                   c.to_petfinder_size,
-                  cat_desc_prefix + c.id.to_s + "<br>" + c.description.gsub(/\r\n?/, "<br>"),
+                  cat_desc_prefix + c.id.to_s + "<br>" + c.description.gsub(/\r\n?/, "<br>") + coming_soon_suffix(c),
                   "Available",                      # status
                   c.no_kids ? "N" : "",            # GoodWKids
                   c.no_cats ? "N" : "",            # GoodWCats
@@ -118,6 +118,14 @@ namespace :adoptapet_sync do
         ftp.close
         puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Upload Completed for #{state}"
       end
+    end
+  end
+
+  def coming_soon_suffix(pet)
+    if pet.status == 'coming soon'
+      return "This pet is expected to arrive at an Operation Paws for Homes Foster Home soon. If you are interested in adoption, please submit your application so that you may be pre-approved prior to arrival.  All pets must be granted a Health Certificate in order to cross state lines and come to the rescue.  Obtaining the health certificate is largely dependent on veterinary resources at the originating animal shelter so some pets may not arrive as planned."
+    else
+      return ""
     end
   end
 end

@@ -34,7 +34,7 @@ namespace :petfinder_sync do
                 d.to_petfinder_gender,
                 d.to_petfinder_size,
                 d.age.titleize,
-                dog_desc_prefix + d.id.to_s + "&#10;&#10;" + d.description.gsub(/\r\n?/, "&#10;") + "&#10;" + desc_suffix1 + desc_suffix2 + desc_suffix3,
+                dog_desc_prefix + d.id.to_s + "&#10;&#10;" + d.description.gsub(/\r\n?/, "&#10;") + "&#10;" + coming_soon_suffix(d) + desc_suffix1 + desc_suffix2 + desc_suffix3,
                 "Dog",
                 d.to_petfinder_status,
                 "",                              # Shots
@@ -84,7 +84,7 @@ namespace :petfinder_sync do
                 c.to_petfinder_gender,
                 c.to_petfinder_size,
                 c.age.titleize,
-                cat_desc_prefix + c.id.to_s + "&#10;&#10;" + c.description.gsub(/\r\n?/, "&#10;") + "&#10;" + desc_suffix1 + desc_suffix2 + desc_suffix3,
+                cat_desc_prefix + c.id.to_s + "&#10;&#10;" + c.description.gsub(/\r\n?/, "&#10;") + "&#10;" + coming_soon_suffix(c) + desc_suffix1 + desc_suffix2 + desc_suffix3,
                 "Cat",
                 c.to_petfinder_status,
                 "",                              # Shots
@@ -134,6 +134,16 @@ namespace :petfinder_sync do
       puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Upload Completed"
     else
       puts "Not production, skipping upload"
+    end
+  end
+
+  private
+
+  def coming_soon_suffix(pet)
+    if pet.status == 'coming soon'
+      return "This pet is expected to arrive at an Operation Paws for Homes Foster Home soon. If you are interested in adoption, please submit your application so that you may be pre-approved prior to arrival.  All pets must be granted a Health Certificate in order to cross state lines and come to the rescue.  Obtaining the health certificate is largely dependent on veterinary resources at the originating animal shelter so some pets may not arrive as planned."
+    else
+      return ""
     end
   end
 end

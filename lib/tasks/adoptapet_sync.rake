@@ -29,10 +29,16 @@ namespace :adoptapet_sync do
       dogs = Dog.joins(:foster).where(
         { status: Dog::PUBLIC_STATUSES,
           users: {region: state},
-          hidden: false
-         })
+          hidden: false })
 
-      desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs/"
+      dog_desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs/"
+
+      cats = Cat.joins(:foster).where(
+        { status: Cat::PUBLIC_STATUSES,
+          users: {region: state},
+          hidden: false })
+
+      cat_desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/cats/"
 
       CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
         dogs.each do |d|
@@ -51,7 +57,7 @@ namespace :adoptapet_sync do
                   d.age,
                   d.to_petfinder_gender,
                   d.to_petfinder_size,
-                  desc_prefix + d.id.to_s + "<br>" + d.description.gsub(/\r\n?/, "<br>"),
+                  dog_desc_prefix + d.id.to_s + "<br>" + d.description.gsub(/\r\n?/, "<br>"),
                   "Available",                      # status
                   d.no_kids ? "N" : "",            # GoodWKids
                   d.no_cats ? "N" : "",            # GoodWCats
@@ -65,6 +71,38 @@ namespace :adoptapet_sync do
                   d.youtube_video_url ? d.youtube_video_url : ""
           ]
         end
+
+        cats.each do |c|
+          photo_urls = Array.new
+          pics = c.photos.visible.reorder('position asc')
+          pics[0..3].each do |p|
+            photo_urls << p.photo.url(:large)
+          end
+
+          csv << [c.id.to_s,
+                  "Cat",
+                  c.primary_breed ? c.primary_breed.name : "",
+                  c.secondary_breed ? c.secondary_breed.name : "",
+                  "N",                             # PureBreed
+                  c.name,
+                  c.age,
+                  c.to_petfinder_gender,
+                  c.to_petfinder_size,
+                  cat_desc_prefix + c.id.to_s + "<br>" + c.description.gsub(/\r\n?/, "<br>"),
+                  "Available",                      # status
+                  c.no_kids ? "N" : "",            # GoodWKids
+                  c.no_cats ? "N" : "",            # GoodWCats
+                  c.no_dogs ? "N" : "",            # GoodWDogs
+                  c.is_altered ? "Y" : "N",         # SpayedNeutered
+                  c.is_special_needs ? "Y" : "N",    # SpecialNeeds
+                  photo_urls[0],
+                  photo_urls[1],
+                  photo_urls[2],
+                  photo_urls[3],
+                  c.youtube_video_url ? c.youtube_video_url : ""
+          ]
+        end
+
       end
 
       if Rails.env.production?

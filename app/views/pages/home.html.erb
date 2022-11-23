@@ -1,15 +1,4 @@
 <div class="container-fluid">
-    <% if Time.zone.now.between?((Time.zone.parse("2022-10-15 23:46").to_datetime), (Time.zone.parse("2022-10-30 21:00").to_datetime)) %>
-    <div class="row pt-3 bg-lightorange px-5">
-        <div class="col-12 pb-5 text-center">
-            <h2 class="text-center">OPH's Online Auction is October 23-30</h2>
-            <h5 class="text-center">Bid or Buy Now on over 800 items!</h5>
-            <a class="btn btn-primary btn-lg" href="https://www.32auctions.com/organizations/56587/auctions/125917?r=1&t=all" target="_blank" rel="noopener">
-                View Items
-            </a>
-        </div>
-    </div>
-    <% end %>
     <div class="row dog-hero">
         <div class="col-10">
             <div class="dog-hero-content">
@@ -32,6 +21,19 @@
         </a>
     </div>
 </div>
+
+<% if Time.zone.now.between?((Time.zone.parse("2022-11-21 23:46").to_datetime), (Time.zone.parse("2022-11-30 04:00").to_datetime)) %>
+<div class="row pt-5">
+    <div class="col-12 text-center">
+        <%= image_tag "banner-2022-gt.jpg", alt: "Giving Tuesday" %>
+    </div>
+</div>
+<div class="row pt-2 text-center">
+    <div class="col-12">
+        <%= link_to "Change a Life - Donate Now!", "/campaigns/26", :class => "btn btn-primary" %>
+    </div>
+</div>
+<% end %>
 
 <div class="row pt-5">
     <div class="col-12">

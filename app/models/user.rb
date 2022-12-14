@@ -120,10 +120,12 @@ class User < ApplicationRecord
 
   has_many :foster_cats, class_name: 'Cat', foreign_key: 'foster_id'
   has_many :current_foster_cats, -> { where(status: ['adoptable', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Cat', foreign_key: 'foster_id'
+  has_many :coordinated_cats, -> { where(status: ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Cat', foreign_key: 'coordinator_id'
 
   has_many :foster_dogs, class_name: 'Dog', foreign_key: 'foster_id'
   has_many :current_foster_dogs, -> { where(status: ['adoptable', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'foster_id'
   has_many :coordinated_dogs, -> { where(status: ['adoptable', 'adopted', 'adoption pending', 'on hold', 'coming soon', 'return pending']) }, class_name: 'Dog', foreign_key: 'coordinator_id'
+
   has_many :comments
 
   has_many :contracts, -> { order('created_at DESC') }, as: :contractable

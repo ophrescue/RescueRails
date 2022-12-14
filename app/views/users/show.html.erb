@@ -97,6 +97,16 @@
               </td>
             </tr>
             <tr>
+              <td>Coordinated Cats</td>
+              <td>
+                <% @user.coordinated_cats.each do |c| %>
+                  <%= link_to c.name, c %>
+                    (<%= c.status %>)
+                  <br />
+                <% end %>
+              </td>
+            </tr>
+            <tr>
               <td>Assigned Adoption Applications</td>
               <td>
                 <% @user.active_applications.each do |d| %>

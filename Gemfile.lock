@@ -264,7 +264,7 @@ GEM
       net-ssh (>= 2.6.5, < 8.0.0)
     net-ssh (7.0.1)
     netrc (0.11.0)
-    newrelic_rpm (8.10.1)
+    newrelic_rpm (8.14.0)
     nio4r (2.5.8)
     nokogiri (1.13.10-x86_64-darwin)
       racc (~> 1.4)

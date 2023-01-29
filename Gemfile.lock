@@ -236,6 +236,12 @@ GEM
     jmespath (1.6.1)
     json (2.6.2)
     kgio (2.11.4)
+    kt-paperclip (6.4.2)
+      activemodel (>= 4.2.0)
+      activesupport (>= 4.2.0)
+      mime-types
+      mimemagic (~> 0.3.0)
+      terrapin (~> 0.6.0)
     launchy (2.5.0)
       addressable (~> 2.7)
     libv8-node (16.10.0.0-x86_64-darwin)
@@ -270,12 +276,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
-    paperclip (6.1.0)
-      activemodel (>= 4.2.0)
-      activesupport (>= 4.2.0)
-      mime-types
-      mimemagic (~> 0.3.0)
-      terrapin (~> 0.6.0)
     parallel (1.22.1)
     parser (3.1.2.1)
       ast (~> 2.4.1)
@@ -541,10 +541,10 @@ DEPENDENCIES
   groupdate
   has_scope
   honeybadger (~> 4.0)
+  kt-paperclip (~> 6)
   mini_racer (>= 0.2.3)
   mjml-rails (~> 4.6, >= 4.6.1)
   newrelic_rpm
-  paperclip (~> 6)
   pg (~> 0.21.0)
   powder
   pry-byebug

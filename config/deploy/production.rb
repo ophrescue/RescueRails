@@ -6,11 +6,13 @@ set :branch, "master"
 # app side by side. Also provides quick sanity checks when looking
 # at filepaths
 set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
-#set :server_name, "husky.ophrescue.org"
+
 set :server_name, "ophrescue.org"
 
-server '45.79.161.105', user: 'deploy', roles: %w{web app db whenever}, primary: true
-server '173.255.234.243 ', user: 'deploy', roles: %w{web app db}
+# server '45.79.161.105', user: 'deploy', roles: %w{web app db whenever}, primary: true
+# server '173.255.234.243 ', user: 'deploy', roles: %w{web app db}
+server '172.104.219.216 ', user: 'deploy', roles: %w{web app db whenever}, primary: true
+server '172.104.219.123 ', user: 'deploy', roles: %w{web app db}
 
 set :deploy_to, "/var/www/#{fetch(:full_app_name)}"
 

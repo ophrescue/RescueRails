@@ -1,5 +1,5 @@
 STATIC_PAGES = ['contact', 'funding-partners', 'community-partners', 'non-profit-and-corporate-partners',
-  'training-partners', 'guide', 'aboutus', 'documentary', 'insurance',
+  'training-partners', 'guide', 'aboutus', 'documentary', 'insurance', 'home',
   'get-involved', 'volunteer', 'faq', 'foster', 'fosterfaq', 'donate', 'sponsor', 'newsletters', 'calendar',
   'other-ways-to-give', 'terms', 'resources', 'tips-for-finding-lost-pets', 'status_definitions',
   'education-and-outreach','adoption-fee-payments','microchip-registration'].freeze
@@ -107,7 +107,15 @@ Rails.application.routes.draw do
     collection { post :import }
   end
 
-  root to: 'pages#home'
+  #root to: 'pages#home'
+
+  constraints Clearance::Constraints::SignedIn.new do
+    root to: "dashboards#index", as: :signed_in_root
+  end
+
+  constraints Clearance::Constraints::SignedOut.new do
+    root to: "pages#home"
+  end
 
   STATIC_PAGES.each do |page|
     get("/#{page}", to: "pages##{page.underscore}")
@@ -126,5 +134,5 @@ Rails.application.routes.draw do
   get '/international',                                 to: 'pages#international'
   get '/international/kaw',                             to: 'pages#international-kaw'
   get '/international/7000-miles-home',                 to: 'pages#7000-miles-home'
-  get '/international/hope-for-hope',                  to: 'pages#hope-for-hope'
+  get '/international/hope-for-hope',                   to: 'pages#hope-for-hope'
 end

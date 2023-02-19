@@ -27,6 +27,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          rubygems: latest
 
       - name: Setup Nodejs
         uses: actions/setup-node@v3

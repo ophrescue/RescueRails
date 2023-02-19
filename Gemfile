@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby   '2.7.4'
 
-gem 'rails', '~> 6.0.5'
+gem 'rails', '~> 6.1', '>= 6.1.7.2'
 
 gem 'rack-cache'
 
@@ -23,6 +23,7 @@ gem 'gravatar_image_tag'
 gem 'groupdate'
 gem 'has_scope'
 gem 'mjml-rails', '~> 4.6', '>= 4.6.1'
+gem 'net-http'
 gem 'kt-paperclip', '~> 6'
 gem 'rails4-autocomplete'
 gem 'record_tag_helper', '~> 1.0'
@@ -39,7 +40,7 @@ gem 'will_paginate'
 
 # datas
 gem 'dalli'
-gem 'pg', '~> 0.21.0'
+gem 'pg', '~> 1.4', '>= 1.4.5'
 
 group :production do
   gem "unicorn", "~> 5.5.0.1.g6836"
@@ -61,7 +62,6 @@ gem 'newrelic_rpm'
 gem 'honeybadger', '~> 4.0'
 gem 'sucker_punch', '~> 1.5.1'
 gem 'factory_bot_rails'
-gem 'exception_notification'
 
 group :development, :test do
   gem 'faker'

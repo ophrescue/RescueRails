@@ -363,7 +363,7 @@ GEM
     rake (13.0.6)
     record_tag_helper (1.0.1)
       actionview (>= 5)
-    redcarpet (3.5.1)
+    redcarpet (3.6.0)
     regexp_parser (2.5.0)
     responders (3.0.1)
       actionpack (>= 5.0)

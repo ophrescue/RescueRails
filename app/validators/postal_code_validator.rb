@@ -8,14 +8,14 @@ class PostalCodeValidator < ActiveModel::Validator
     country = ISO3166::Country.find_country_by_alpha3(record.country)
 
     unless country
-      record.errors[:postal_code] << "cannot be validated without a value for country."
+      record.errors.add(:postal_code, message: "cannot be validated without a value for country.")
       return
     end
 
     if country.eql?(ISO3166::Country[:us]) && !record.postal_code.match(VALID_US_ZIP_CODE)
-      record.errors[:postal_code] << "should be 12345 or 12345-1234"
+      record.errors.add(:postal_code, message: "should be 12345 or 12345-1234")
     elsif country.eql?(ISO3166::Country[:ca]) && !record.postal_code.match(VALID_CANADIAN_POSTAL_CODE)
-      record.errors[:postal_code] << "is not valid"
+      record.errors.add(:postal_code, message: "is not valid")
     end
   end
 end

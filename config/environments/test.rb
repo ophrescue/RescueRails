@@ -44,7 +44,7 @@ Rails.application.configure do
   config.active_support.deprecation = :stderr
 
   # Raises error for missing translations.
-  config.action_view.raise_on_missing_translations = true
+  config.i18n.raise_on_missing_translations = true
   #----------------
   # My Configs
   #----------------
@@ -67,12 +67,4 @@ Rails.application.configure do
   # Access to rack session
   config.middleware.use RackSessionAccess::Middleware
 
-  # test exception notification
-
-  Rails.application.config.middleware.use ExceptionNotification::Rack,
-  email: {
-    email_prefix: '[ERROR] ',
-    sender_address: 'info@ophrescue.org',
-    exception_recipients: 'admin@ophrescue.org'
-  }
 end

@@ -484,7 +484,7 @@ GEM
       unf_ext
     unf_ext (0.0.8.2)
     unicode-display_width (2.4.2)
-    unicorn (5.5.0.1.g6836)
+    unicorn (6.1.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     webdrivers (4.6.1)
@@ -513,6 +513,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
@@ -594,7 +595,7 @@ DEPENDENCIES
   sucker_punch (~> 1.5.1)
   to_xls
   uglifier
-  unicorn (~> 5.5.0.1.g6836)
+  unicorn (~> 6.1)
   webdrivers (~> 4.6.1)
   webpacker (~> 5.2, >= 5.2.1)
   whenever (~> 0.9.4)
@@ -602,7 +603,7 @@ DEPENDENCIES
   will_paginate
 
 RUBY VERSION
-   ruby 2.7.4p191
+   ruby 3.0.5p211
 
 BUNDLED WITH
    2.4.7

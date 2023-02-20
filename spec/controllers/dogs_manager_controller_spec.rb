@@ -66,7 +66,7 @@ describe Dogs::ManagerController, type: :controller do
         let(:params) { {} }
 
         it 'should set default sort and direction if no params are supplied' do
-          get :index, params {}
+          get :index
           expect(assigns(:dogs)).to match_array([adoptable_dog, adoption_pending_dog, coming_soon_dog, adopted_dog, on_hold_dog, not_available_dog, baby_small_special_needs_dog])
           expect(assigns(:filter_params)[:sort]).to eq "tracking_id"
           expect(assigns(:filter_params)[:direction]).to eq "desc"

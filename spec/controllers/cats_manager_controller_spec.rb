@@ -72,7 +72,7 @@ describe Cats::ManagerController, type: :controller do
         let(:params) { {} }
 
         it 'should set default sort and direction if no params are supplied' do
-          get :index, params {}
+          get :index
           expect(assigns(:cats)).to match_array([adoptable_cat, adoption_pending_cat, coming_soon_cat, adopted_cat, on_hold_cat, not_available_cat, baby_small_special_needs_cat])
           expect(assigns(:filter_params)[:sort]).to eq "tracking_id"
           expect(assigns(:filter_params)[:direction]).to eq "desc"

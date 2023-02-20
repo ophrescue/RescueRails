@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby   '2.7.4'
+ruby   '3.0.5'
 
 gem 'rails', '~> 6.1', '>= 6.1.7.2'
 
@@ -42,7 +42,7 @@ gem 'dalli'
 gem 'pg', '~> 1.4', '>= 1.4.5'
 
 group :production do
-  gem "unicorn", "~> 5.5.0.1.g6836"
+  gem 'unicorn', '~> 6.1'
 end
 
 # Cool mail async stuff

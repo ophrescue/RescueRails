@@ -23,7 +23,6 @@ gem 'gravatar_image_tag'
 gem 'groupdate'
 gem 'has_scope'
 gem 'mjml-rails', '~> 4.6', '>= 4.6.1'
-gem 'net-http'
 gem 'kt-paperclip', '~> 6'
 gem 'rails4-autocomplete'
 gem 'record_tag_helper', '~> 1.0'
@@ -72,7 +71,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'rack-mini-profiler', require: false
   gem 'rspec-collection_matchers'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 6.0.0'
   gem 'puma'
   gem 'stackprof'
 end

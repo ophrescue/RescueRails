@@ -1,5 +1,3 @@
-include ActionDispatch::TestProcess
-
 FactoryBot.define do
   factory :event do
     title { 'A Dog Event' }
@@ -13,7 +11,7 @@ FactoryBot.define do
     location_phone { Faker::Base.with_locale "en-US" do; "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number}"; end }
     latitude {(350000000 + rand(150000000)).to_f/10000000} # 35 to 50 deg N
     longitude {(-800000000 - rand(400000000)).to_f/10000000} # 80 to 120 deg W
-    photo { fixture_file_upload(Rails.root.join('lib', 'sample_images', 'event_images', "pic_#{rand(15)}.jpg"), 'image/jpg') }
+    photo { Rack::Test::UploadedFile.new("lib/sample_images/event_images/pic_#{rand(15)}.jpg", 'image/png') }
     photographer_name  { Faker::Name.name }
     photographer_url   { Faker::Internet.url }
     facebook_url       { Faker::Internet.url }

@@ -8,11 +8,10 @@ module ClientValidated
       key = self::VALIDATION_ERROR_MESSAGES[field] || :blank
       if key.is_a?(Array)
         key, params = key
-        I18n.t("errors.messages.#{key}", params)
+        I18n.t("errors.messages.#{key}", **params)
       else
         I18n.t("errors.messages.#{key}")
       end
     end
   end
-
 end

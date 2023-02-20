@@ -81,7 +81,7 @@ class AdopterSearcher
       column = sort_column
     end
 
-    @adopters = @adopters.order(column + ' ' + sort_direction)
+    @adopters = @adopters.order(Arel.sql(column + ' ' + sort_direction))
   end
 
   def sort_column

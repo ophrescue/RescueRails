@@ -102,6 +102,8 @@ class User < ApplicationRecord
   validates :name,  presence: true,
                     length: { maximum: 50 }
 
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+
   validates :country, length: { is: 3 }
   validate :country_is_supported
 

@@ -31,7 +31,7 @@ describe Cats::GalleryController, type: :controller do
   end
 
   describe 'GET #show' do
-    let(:cat) { create(:cat) }
+    let(:cat) { create(:cat, status: 'adoptable') }
 
     it 'is successful' do
       get :show, params: { id: cat.id }

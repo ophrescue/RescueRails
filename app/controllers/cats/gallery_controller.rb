@@ -13,7 +13,9 @@
 #    limitations under the License.
 
 class Cats::GalleryController < Cats::CatsBaseController
-  before_action :load_cat, only: %i(show)
+  before_action :load_cat, only: %i[show]
+  before_action :require_login, only: %i[show], if: -> { @cat.unavailable? }
+  before_action :unlocked_user, only: %i[show], if: -> { @cat.unavailable? }
   before_action :select_bootstrap41
 
   def index

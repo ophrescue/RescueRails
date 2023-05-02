@@ -74,8 +74,8 @@ describe Dogs::GalleryController, type: :controller do
     end
   end
 
-  describe 'GET #show' do
-    let(:dog) { create(:dog) }
+  describe 'GET #show for an available dog is visible to the public' do
+    let(:dog) { create(:dog, status: 'adoptable') }
 
     it 'is successful' do
       get :show, params: { id: dog.id }
@@ -83,5 +83,12 @@ describe Dogs::GalleryController, type: :controller do
     end
   end
 
+  describe 'GET #show for an unavailable dog is NOT visible to the public' do
+    let(:dog) { create(:dog, status: 'not available') }
 
+    it 'redirects to sign in' do
+      get :show, params: { id: dog.id }
+      expect(response).to redirect_to('/sign_in')
+    end
+  end
 end

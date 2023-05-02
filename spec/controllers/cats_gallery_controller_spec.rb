@@ -39,5 +39,12 @@ describe Cats::GalleryController, type: :controller do
     end
   end
 
+  describe 'GET #show for an unavailable cat is NOT visible to the public' do
+    let(:cat) { create(:cat, status: 'not available') }
 
+    it 'redirects to sign in' do
+      get :show, params: { id: cat.id }
+      expect(response).to redirect_to('/sign_in')
+    end
+  end
 end

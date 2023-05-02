@@ -63,8 +63,9 @@
 #
 
 class Dogs::GalleryController < Dogs::DogsBaseController
-
-  before_action :load_dog, only: %i(show)
+  before_action :load_dog, only: %i[show]
+  before_action :require_login, only: %i[show], if: -> { @dog.unavailable? }
+  before_action :unlocked_user, only: %i[show], if: -> { @dog.unavailable? }
   before_action :select_bootstrap41
 
   def index

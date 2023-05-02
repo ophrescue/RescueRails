@@ -3,22 +3,6 @@ require_relative '../../helpers/animal_show_helper'
 
 feature 'visit dog show page', js: true do
   include AnimalShowHelper
-  context "dog is unavailable" do
-    before(:each) do
-      visit dog_path(adoption_completed_dog)
-    end
-
-    ["adopted", "completed", "not available"].each do |status|
-      context "when the dog adoption is #{status}" do
-        let(:adoption_completed_dog){FactoryBot.create(:dog, status: status)}
-        it 'should show alert to inform user' do
-          expect(page).to have_selector('.alert.alert-danger h4', text: "Sorry, this dog is no longer available for adoption!")
-          expect(page).to have_selector('.alert.alert-danger', text: "Please see our gallery of")
-          expect(page).to have_selector('.alert.alert-danger a', text: "available dogs")
-        end
-      end
-    end
-  end
 
   context 'dog does not have any photos' do
     before(:each) do

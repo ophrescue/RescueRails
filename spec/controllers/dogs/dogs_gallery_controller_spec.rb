@@ -50,18 +50,18 @@ require 'rails_helper'
 
 describe Dogs::GalleryController, type: :controller do
   describe 'GET #index' do
-    let!(:adoptable_dog) { create(:dog, status: 'adoptable', tracking_id: 102) }
-    let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending', tracking_id: 99) }
-    let!(:adoption_pending_dog2) { create(:dog, status: 'adoption pending', tracking_id: 105) }
-    let!(:coming_soon_dog) { create(:dog, status: 'coming soon', tracking_id: 100) }
-    let!(:coming_soon_dog2) { create(:dog, status: 'coming soon', tracking_id: 109) }
-    let!(:adoptable_dog2) { create(:dog, status: 'adoptable', tracking_id: 110) }
-    let!(:hidden_adoptable_dog) { create(:dog, name: 'sneak', status: 'adoptable', hidden: true, tracking_id: 111) }
-    let!(:adopted_dog) { create(:dog, status: 'adopted', tracking_id: 1) }
-    let!(:on_hold_dog) { create(:dog, status: 'on hold', tracking_id: 2) }
-    let!(:not_available_dog) { create(:dog, status: 'not available', tracking_id: 3) }
-
     subject(:get_index) { get :index, params: {} }
+
+    let!(:adoptable_dog) { create(:dog, name: 'adoptable_dog', status: 'adoptable', tracking_id: 102) }
+    let!(:adoption_pending_dog) { create(:dog, name: 'adoption_pending_dog',status: 'adoption pending', tracking_id: 99) }
+    let!(:adoption_pending_dog2) { create(:dog, name: 'adoption_pending_dog2',status: 'adoption pending', tracking_id: 105) }
+    let!(:coming_soon_dog) { create(:dog, name: 'coming_soon_dog',status: 'coming soon', tracking_id: 100) }
+    let!(:coming_soon_dog2) { create(:dog, name: 'coming_soon_dog2',status: 'coming soon', tracking_id: 109) }
+    let!(:adoptable_dog2) { create(:dog, name: 'adoptable_dog2',status: 'adoptable', tracking_id: 110) }
+    let!(:hidden_adoptable_dog) { create(:dog, name: 'hidden_adoptable_dog', status: 'adoptable', hidden: true, tracking_id: 111) }
+    let!(:adopted_dog) { create(:dog, name: 'adopted_dog',status: 'adopted', tracking_id: 1) }
+    let!(:on_hold_dog) { create(:dog, name: 'on_hold_dog',status: 'on hold', tracking_id: 2) }
+    let!(:not_available_dog) { create(:dog, name: 'not_available_dog',status: 'not available', tracking_id: 3) }
 
     it 'Only adoptable, coming soon and adoption pending dogs should be displayed respectively in order by status then tracking id' do
       get_index
@@ -74,8 +74,8 @@ describe Dogs::GalleryController, type: :controller do
     end
   end
 
-  describe 'GET #show' do
-    let(:dog) { create(:dog) }
+  describe 'GET #show for an available dog is visible to the public' do
+    let(:dog) { create(:dog, status: 'adoptable') }
 
     it 'is successful' do
       get :show, params: { id: dog.id }
@@ -83,5 +83,12 @@ describe Dogs::GalleryController, type: :controller do
     end
   end
 
+  describe 'GET #show for an unavailable dog is NOT visible to the public' do
+    let(:dog) { create(:dog, status: 'not available') }
 
+    it 'redirects to sign in' do
+      get :show, params: { id: dog.id }
+      expect(response).to redirect_to('/sign_in')
+    end
+  end
 end

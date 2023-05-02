@@ -1,14 +1,7 @@
 FactoryBot.define do
     factory :cat do
       tracking_id { Cat.next_tracking_id }
-      name {
-        until(nn = Faker::Creature::Cat.name; !Cat.pluck(:name).include?(nn))
-        end
-        # it's a workaround for TravisCI sorting weirdness.
-        # It doesn't handle spaces inside names as expected
-        # (expected means ' '< 'x')
-        nn.gsub(/(\W|\s)/,'').titlecase
-      }
+      name { Faker::Creature::Cat.name }
       status {  Cat::STATUSES.sample }
       microchip {['9'+Faker::Number.number(digits: 14).to_s, Faker::Alphanumeric.alphanumeric(number: 10).to_s].sample }
       age { Cat::AGES.sample }

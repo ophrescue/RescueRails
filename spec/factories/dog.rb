@@ -1,15 +1,8 @@
 FactoryBot.define do
   factory :dog do
     tracking_id { Dog.next_tracking_id }
-    name {
-      until(nn = Faker::Creature::Dog.name; !Dog.pluck(:name).include?(nn))
-      end
-      # it's a workaround for TravisCI sorting weirdness.
-      # It doesn't handle spaces inside names as expected
-      # (expected means ' '< 'x')
-      nn.gsub(/(\W|\s)/,'').titlecase
-    }
-    status {  Dog::STATUSES.sample }
+    name { Faker::Creature::Dog.name }
+    status { Dog::STATUSES.sample }
     hidden { false }
     microchip {['9'+Faker::Number.number(digits: 14).to_s, Faker::Alphanumeric.alphanumeric(number: 10).to_s].sample }
     age { Dog::AGES.sample }

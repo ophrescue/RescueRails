@@ -50,6 +50,8 @@ require 'rails_helper'
 
 describe Dogs::GalleryController, type: :controller do
   describe 'GET #index' do
+    subject(:get_index) { get :index, params: {} }
+
     let!(:adoptable_dog) { create(:dog, status: 'adoptable', tracking_id: 102) }
     let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending', tracking_id: 99) }
     let!(:adoption_pending_dog2) { create(:dog, status: 'adoption pending', tracking_id: 105) }
@@ -60,8 +62,6 @@ describe Dogs::GalleryController, type: :controller do
     let!(:adopted_dog) { create(:dog, status: 'adopted', tracking_id: 1) }
     let!(:on_hold_dog) { create(:dog, status: 'on hold', tracking_id: 2) }
     let!(:not_available_dog) { create(:dog, status: 'not available', tracking_id: 3) }
-
-    subject(:get_index) { get :index, params: {} }
 
     it 'Only adoptable, coming soon and adoption pending dogs should be displayed respectively in order by status then tracking id' do
       get_index

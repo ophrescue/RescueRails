@@ -6,18 +6,18 @@ require 'rails_helper'
 
 describe Cats::GalleryController, type: :controller do
   describe 'GET #index' do
-    let!(:adoptable_cat) { create(:cat, status: 'adoptable', tracking_id: 102) }
-    let!(:adoption_pending_cat) { create(:cat, status: 'adoption pending', tracking_id: 99) }
-    let!(:adoption_pending_cat2) { create(:cat, status: 'adoption pending', tracking_id: 105) }
-    let!(:coming_soon_cat) { create(:cat, status: 'coming soon', tracking_id: 100) }
-    let!(:coming_soon_cat2) { create(:cat, status: 'coming soon', tracking_id: 109) }
-    let!(:adoptable_cat2) { create(:cat, status: 'adoptable', tracking_id: 110) }
-
-    let!(:adopted_cat) { create(:cat, status: 'adopted', tracking_id: 1) }
-    let!(:on_hold_cat) { create(:cat, status: 'on hold', tracking_id: 2) }
-    let!(:not_available_cat) { create(:cat, status: 'not available', tracking_id: 3) }
-
     subject(:get_index) { get :index, params: {} }
+
+    let!(:adoptable_cat) { create(:cat, name: 'adoptable_cat', status: 'adoptable', tracking_id: 102) }
+    let!(:adoption_pending_cat) { create(:cat, name: 'adoption_pending_cat', status: 'adoption pending', tracking_id: 99) }
+    let!(:adoption_pending_cat2) { create(:cat, name: 'adoption_pending_cat2', status: 'adoption pending', tracking_id: 105) }
+    let!(:coming_soon_cat) { create(:cat, name: 'coming_soon_cat', status: 'coming soon', tracking_id: 100) }
+    let!(:coming_soon_cat2) { create(:cat, name: 'coming_soon_cat2', status: 'coming soon', tracking_id: 109) }
+    let!(:adoptable_cat2) { create(:cat, name: 'adoptable_cat2', status: 'adoptable', tracking_id: 110) }
+
+    let!(:adopted_cat) { create(:cat, name: 'adopted_cat', status: 'adopted', tracking_id: 1) }
+    let!(:on_hold_cat) { create(:cat, name: 'on_hold_cat', status: 'on hold', tracking_id: 2) }
+    let!(:not_available_cat) { create(:cat, name: 'not_available_cat', status: 'not available', tracking_id: 3) }
 
     it 'Only adoptable, coming soon and adoption pending cats should be displayed respectively in order by status then tracking id' do
       get_index

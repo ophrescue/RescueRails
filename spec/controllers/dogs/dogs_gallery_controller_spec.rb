@@ -52,16 +52,16 @@ describe Dogs::GalleryController, type: :controller do
   describe 'GET #index' do
     subject(:get_index) { get :index, params: {} }
 
-    let!(:adoptable_dog) { create(:dog, status: 'adoptable', tracking_id: 102) }
-    let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending', tracking_id: 99) }
-    let!(:adoption_pending_dog2) { create(:dog, status: 'adoption pending', tracking_id: 105) }
-    let!(:coming_soon_dog) { create(:dog, status: 'coming soon', tracking_id: 100) }
-    let!(:coming_soon_dog2) { create(:dog, status: 'coming soon', tracking_id: 109) }
-    let!(:adoptable_dog2) { create(:dog, status: 'adoptable', tracking_id: 110) }
-    let!(:hidden_adoptable_dog) { create(:dog, name: 'sneak', status: 'adoptable', hidden: true, tracking_id: 111) }
-    let!(:adopted_dog) { create(:dog, status: 'adopted', tracking_id: 1) }
-    let!(:on_hold_dog) { create(:dog, status: 'on hold', tracking_id: 2) }
-    let!(:not_available_dog) { create(:dog, status: 'not available', tracking_id: 3) }
+    let!(:adoptable_dog) { create(:dog, name: 'adoptable_dog', status: 'adoptable', tracking_id: 102) }
+    let!(:adoption_pending_dog) { create(:dog, name: 'adoption_pending_dog',status: 'adoption pending', tracking_id: 99) }
+    let!(:adoption_pending_dog2) { create(:dog, name: 'adoption_pending_dog2',status: 'adoption pending', tracking_id: 105) }
+    let!(:coming_soon_dog) { create(:dog, name: 'coming_soon_dog',status: 'coming soon', tracking_id: 100) }
+    let!(:coming_soon_dog2) { create(:dog, name: 'coming_soon_dog2',status: 'coming soon', tracking_id: 109) }
+    let!(:adoptable_dog2) { create(:dog, name: 'adoptable_dog2',status: 'adoptable', tracking_id: 110) }
+    let!(:hidden_adoptable_dog) { create(:dog, name: 'hidden_adoptable_dog', status: 'adoptable', hidden: true, tracking_id: 111) }
+    let!(:adopted_dog) { create(:dog, name: 'adopted_dog',status: 'adopted', tracking_id: 1) }
+    let!(:on_hold_dog) { create(:dog, name: 'on_hold_dog',status: 'on hold', tracking_id: 2) }
+    let!(:not_available_dog) { create(:dog, name: 'not_available_dog',status: 'not available', tracking_id: 3) }
 
     it 'Only adoptable, coming soon and adoption pending dogs should be displayed respectively in order by status then tracking id' do
       get_index

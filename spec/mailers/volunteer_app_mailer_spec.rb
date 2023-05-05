@@ -51,7 +51,7 @@ describe VolunteerAppMailer, type: :mailer do
         VolunteerAppMailer.with(volunteer_app: volunteer_app).notify_oph.deliver_later
       end
       mail = ActionMailer::Base.deliveries.last
-      expect(mail.to[0]).to include "liz@ophrescue.org"
+      expect(mail.to[0]).to include "jamie@ophrescue.org"
     end
   end
 

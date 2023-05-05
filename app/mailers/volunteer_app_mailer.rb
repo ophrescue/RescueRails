@@ -29,7 +29,7 @@ class VolunteerAppMailer < ActionMailer::Base
     @notify = []
 
     if @va.fostering_interest
-      @notify.push('liz@ophrescue.org')
+      @notify.push('jamie@ophrescue.org')
     end
     if (@va.marketing_interest || @va.events_interest || @va.training_interest || @va.fundraising_interest || @va.transport_bb_interest || @va.adoption_team_interest || @va.admin_interest)
       @notify.push('volunteer@ophrescue.org')

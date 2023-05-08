@@ -284,7 +284,7 @@ GEM
       net-protocol
     net-ssh (7.0.1)
     netrc (0.11.0)
-    newrelic_rpm (9.2.0)
+    newrelic_rpm (9.2.2)
     nio4r (2.5.9)
     nokogiri (1.14.3-x86_64-darwin)
       racc (~> 1.4)

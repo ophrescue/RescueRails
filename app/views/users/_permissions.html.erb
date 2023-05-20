@@ -55,14 +55,14 @@
   <% end %>
 
   <% if @user.active? %>
-    <li>Is an Active Volunteer</li>
+    <li><span class="badge badge-success">Active Volunteer</span></li>
   <% else %>
-    <li>Is not an Active Volunteer</li>
+    <li><span class="badge badge-warning">Inactive Volunteer</span></li>
   <% end %>
 
   <% if @user.locked? %>
-    <li><span class="badge badge-warning">Account Disabled</span></li>
+    <li><span class="badge badge-danger">Account Locked</span></li>
   <% else %>
-    <li><span class="badge badge-success">Account Active</span></li>
+    <li><span class="badge badge-success">Account Unlocked</span></li>
   <% end %>
 </ul>

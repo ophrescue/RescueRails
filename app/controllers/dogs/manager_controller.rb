@@ -166,7 +166,7 @@ class Dogs::ManagerController < Dogs::DogsBaseController
     @foster_users = User.where(is_foster: true).order("name")
     @coordinator_users = User.where(edit_all_adopters: true).order("name")
     @shelters = Shelter.order("name")
-    @breeds = Breed.all
+    @breeds = Breed.order("name")
   end
 
   def edit_dogs_user

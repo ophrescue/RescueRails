@@ -141,39 +141,39 @@ $(function(){
                               maxlength: 1000
                         },
                         "adopter[references_attributes][0][name]" : {
-                              required: true,
+                              required: false,
                               maxlength: 250
                         },
                         "adopter[references_attributes][0][email]" : {
                               required: false,
-                              email: true,
+                              email: false,
                               maxlength: 250
                         },
                         "adopter[references_attributes][0][relationship]" : {
-                              required: true,
-                              referenceRelationship: true,
+                              required: false,
+                              referenceRelationship: false,
                               maxlength: 250
                         },
                         "adopter[references_attributes][0][whentocall]" : {
-                              required: true,
+                              required: false,
                               maxlength: 250
                         },
                         "adopter[references_attributes][1][name]" : {
-                              required: true,
+                              required: false,
                               maxlength: 250
                         },
                         "adopter[references_attributes][1][email]" : {
                               required: false,
-                              email: true,
+                              email: false,
                               maxlength: 250
                         },
                         "adopter[references_attributes][1][relationship]" : {
                               required: true,
-                              referenceRelationship: true,
+                              referenceRelationship: false,
                               maxlength: 250
                         },
                         "adopter[references_attributes][1][whentocall]" : {
-                              required: true,
+                              required: false,
                               maxlength: 250
                         },
                         "adopter[references_attributes][2][name]" : {
@@ -186,12 +186,12 @@ $(function(){
                               maxlength: 250
                         },
                         "adopter[references_attributes][2][relationship]" : {
-                              required: true,
-                              referenceRelationship: true,
+                              required: false,
+                              referenceRelationship: false,
                               maxlength: 250
                         },
                         "adopter[references_attributes][2][whentocall]" : {
-                              required: true,
+                              required: false,
                               maxlength: 250
                         }
           },

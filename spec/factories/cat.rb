@@ -1,7 +1,7 @@
 FactoryBot.define do
     factory :cat do
       tracking_id { Cat.next_tracking_id }
-      name { Faker::Creature::Cat.name + Faker::Number.number(1000) }
+      name { [Faker::Creature::Cat.name, Faker::Alphanumeric.alphanumeric(number: 10).to_s] }
       status {  Cat::STATUSES.sample }
       microchip {['9'+Faker::Number.number(digits: 14).to_s, Faker::Alphanumeric.alphanumeric(number: 10).to_s].sample }
       age { Cat::AGES.sample }

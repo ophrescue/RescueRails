@@ -32,16 +32,6 @@
 
         <% end %>
 
-        <div id="no_pets" class="step">
-          <h4>References</h4>
-          <p>Providing email addresses for your references can often speed up the review process.</p>
-
-          <% @i = 1 %>
-          <%= f.fields_for :references do |builder| %>
-            <%= render 'adopters/steps/reference_fields', :rf => builder %>
-          <% end %>
-        </div>
-
         <div id="Navigation" class="form-actions well">
           <input class="btn btn-lg btn-light" id="back" value="Back" type="reset" />
           <%= f.submit "Submit", :id =>"next", :class => "btn btn-lg btn-primary", :disable_with => 'Saving...' %>

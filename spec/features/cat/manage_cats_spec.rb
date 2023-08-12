@@ -20,7 +20,7 @@ feature 'View Cats', js: true do
       visit cats_manager_path(test_cat)
       expect(page).to have_content(test_cat.name)
       ["Medical Summary",
-       "Behavior Summary",
+       "Behavior and Breed Summary",
        "Original Name",
        "Microchip",
        "Adoption Fee",
@@ -77,7 +77,7 @@ feature 'View Cats', js: true do
       visit cats_manager_path(test_cat)
       expect(page).to have_content(test_cat.name)
       ["Medical Summary",
-       "Behavior Summary",
+       "Behavior and Breed Summary",
        "Original Name",
        "Microchip",
        "Adoption Fee",
@@ -134,7 +134,7 @@ feature 'View Cats', js: true do
       visit cats_manager_index_path(test_cat)
       expect(page).to have_content(test_cat.name)
       ["Medical Summary",
-       "Behavior Summary",
+       "Behavior and Breed Summary",
        "Original Name",
        "Microchip",
        "Adoption Fee",

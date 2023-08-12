@@ -20,7 +20,7 @@ feature 'View Dogs', js: true do
       visit dogs_manager_path(test_dog)
       expect(page).to have_content(test_dog.name)
       ["Medical Summary",
-       "Behavior Summary",
+       "Behavior and Breed Summary",
        "Original Name",
        "Microchip",
        "Adoption Fee",
@@ -79,7 +79,7 @@ feature 'View Dogs', js: true do
       visit dogs_manager_path(test_dog)
       expect(page).to have_content(test_dog.name)
       ["Medical Summary",
-       "Behavior Summary",
+       "Behavior and Breed Summary",
        "Original Name",
        "Microchip",
        "Adoption Fee",
@@ -138,7 +138,7 @@ feature 'View Dogs', js: true do
       visit dogs_manager_index_path(test_dog)
       expect(page).to have_content(test_dog.name)
       ["Medical Summary",
-       "Behavior Summary",
+       "Behavior and Breed Summary",
        "Original Name",
        "Microchip",
        "Adoption Fee",

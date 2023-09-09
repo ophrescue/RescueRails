@@ -29,7 +29,7 @@ feature 'Manage Events', js: true do
       fill_in('event_location_name', with: test_event.location_name)
       fill_in('event_location_url', with: test_event.location_url)
       fill_in('event_facebook_url', with: test_event.facebook_url)
-      fill_in('event_location_phone', with: test_event.location_phone)
+      find_field('Location Phone').send_keys(test_event.location_phone)
       fill_in('event_address', with: test_event.address)
       fill_in('event_description', with: test_event.description)
       fill_in('event_photographer_name', with: test_event.photographer_name)

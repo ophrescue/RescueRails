@@ -30,7 +30,7 @@ module ApplicationHelpers
 
     element = page.find(:link, locator)
 
-    Capybara.current_session.driver.browser.execute_script(script,element.native)
+    # Capybara.current_session.driver.browser.execute_script(script,element.native)
 
     element.click
   end

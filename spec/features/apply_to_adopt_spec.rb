@@ -26,16 +26,15 @@ feature 'Apply for Adoption' do
     fill_in('adopter_state', with: 'MD')
     fill_in('adopter_zip', with: '21224')
 
-    fill_in('adopter_phone', with: '1234567890')
-    fill_in('adopter_other_phone', with: '0987654321')
+    find_field('Primary Phone Number').send_keys('1234567890')
+    find_field('Alternate Phone Number').send_keys('0987654321')
 
     fill_in('adopter_when_to_call', with: 'Anytime After 3pm')
     fill_in('adopter_adoption_app_attributes_spouse_name', with: 'Miss Watir')
     fill_in('adopter_adoption_app_attributes_other_household_names', with: 'Rachel 29, Morgan 24')
     fill_in('adopter_adoption_app_attributes_how_did_you_hear', with: 'Google and Craigslist')
     fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2012-12-13')
-    find("input#adopter_adoption_app_attributes_ready_to_adopt_dt").send_keys(:tab)
-
+    find("input#adopter_adoption_app_attributes_birth_date").send_keys(:tab)
 
     choose('adopter_adoption_app_attributes_is_ofage_true')
     fill_in('adopter_adoption_app_attributes_birth_date', with: '1950-01-01')
@@ -47,7 +46,7 @@ feature 'Apply for Adoption' do
     expect(page).to have_content("Landlord's Name")
     fill_in('adopter_adoption_app_attributes_landlord_name', with: 'Jane LandLord')
     fill_in('adopter_adoption_app_attributes_landlord_email', with: 'jane@landlords.com')
-    find('input#adopter_adoption_app_attributes_landlord_phone').set('5704431234')
+    find('input#adopter_adoption_app_attributes_landlord_phone').send_keys('5704431234')
     fill_in('adopter_adoption_app_attributes_rent_dog_restrictions', with: 'No dogs over 50 lbs')
     fill_in('adopter_adoption_app_attributes_rent_costs', with: 'Rent Goes Up $50 a month')
 
@@ -107,6 +106,9 @@ feature 'Apply for Adoption' do
     expect(NewAdopterMailer).to receive(:adopter_created).once.and_return(email)
     expect(AdoptAppMailer).to receive(:adopt_app).once.and_return(email)
     expect(BitePreventionMailer).to receive(:bite_prevent).once.and_return(email)
+
+    click_button('Next')
+    expect(page).to have_content('No references are needed at this time, you may submit your application')
 
     expect { click_button('Submit') }.to change { Adopter.count }.by(1)
 
@@ -206,8 +208,8 @@ feature 'Apply for Adoption' do
     fill_in('adopter_state', with: 'MD')
     fill_in('adopter_zip', with: '21224')
 
-    fill_in('adopter_phone', with: '1234567890')
-    fill_in('adopter_other_phone', with: '0987654321')
+    find_field('Primary Phone Number').send_keys('1234567890')
+    find_field('Alternate Phone Number').send_keys('0987654321')
 
     fill_in('adopter_when_to_call', with: 'Anytime After 3pm')
     fill_in('adopter_adoption_app_attributes_spouse_name', with: 'Miss Watir')
@@ -218,7 +220,7 @@ feature 'Apply for Adoption' do
 
     choose('adopter_adoption_app_attributes_is_ofage_true')
     fill_in('adopter_adoption_app_attributes_birth_date', with: '1960-01-01')
-    find("input#adopter_adoption_app_attributes_birth_date").send_keys(:tab)
+    find_field('Alternate Phone Number').send_keys(:tab)
     choose('adopter_adoption_app_attributes_has_family_under_18_true')
     choose('adopter_adoption_app_attributes_house_type_own')
     check('adopter_adoption_app_attributes_verify_home_auth')
@@ -279,6 +281,9 @@ feature 'Apply for Adoption' do
     expect(NewAdopterMailer).to receive(:adopter_created).once.and_return(email)
     expect(AdoptAppMailer).to receive(:adopt_app).once.and_return(email)
     expect(BitePreventionMailer).to receive(:bite_prevent).once.and_return(email)
+
+    click_button('Next')
+    expect(page).to have_content('No references are needed at this time, you may submit your application')
 
     expect { click_button('Submit') }.to change { Adopter.count }.by(1)
 
@@ -372,15 +377,15 @@ feature 'Apply for Adoption' do
     fill_in('adopter_state', with: 'MD')
     fill_in('adopter_zip', with: '21224')
 
-    fill_in('adopter_phone', with: '1234567890')
-    fill_in('adopter_other_phone', with: '0987654321')
+    find_field('Primary Phone Number').send_keys('1234567890')
+    find_field('Alternate Phone Number').send_keys('0987654321')
 
     fill_in('adopter_when_to_call', with: 'Anytime After 3pm')
     fill_in('adopter_adoption_app_attributes_spouse_name', with: 'Miss Watir')
     fill_in('adopter_adoption_app_attributes_other_household_names', with: 'Rachel 29, Morgan 24')
     fill_in('adopter_adoption_app_attributes_how_did_you_hear', with: 'Google and Craigslist')
-    fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2012-12-13')
-    find("input#adopter_adoption_app_attributes_ready_to_adopt_dt").send_keys(:tab)
+    fill_in('adopter_adoption_app_attributes_ready_to_adopt_dt', with: '2023-12-13')
+    find("input#adopter_adoption_app_attributes_birth_date").send_keys(:tab)
 
     choose('adopter_adoption_app_attributes_is_ofage_false')
     fill_in('adopter_adoption_app_attributes_birth_date', with: 20.years.ago.to_date)
@@ -446,6 +451,9 @@ feature 'Apply for Adoption' do
     expect(NewAdopterMailer).to receive(:adopter_created).once.and_return(email)
     expect(AdoptAppMailer).to receive(:adopt_app).once.and_return(email)
 
+    click_button('Next')
+    expect(page).to have_content('No references are needed at this time, you may submit your application')
+
     expect { click_button('Submit') }.to change { Adopter.count }.by(1)
 
     expect(page).to have_content 'Success! Your adoption application has been submitted'
@@ -478,7 +486,7 @@ feature 'Apply for Adoption' do
     expect(page).to have_content('20 years')
 
     click_link('Pet Info')
-    expect(page).to have_field("adoption_app_ready_to_adopt_dt", with: "2012-12-13")
+    expect(page).to have_field("adoption_app_ready_to_adopt_dt", with: "2023-12-13")
     expect(page).to have_content('Townhouse')
     expect(page).to have_content('Dog will go to the gym with me')
     expect(page).to have_content('No')

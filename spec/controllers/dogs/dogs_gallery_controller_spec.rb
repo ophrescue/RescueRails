@@ -65,7 +65,7 @@ describe Dogs::GalleryController, type: :controller do
 
     it 'Only adoptable, coming soon and adoption pending dogs should be displayed respectively in order by status then tracking id' do
       get_index
-      expect(assigns(:dogs)).to eq([adoptable_dog, adoptable_dog2, coming_soon_dog, coming_soon_dog2, adoption_pending_dog, adoption_pending_dog2])
+      expect(assigns(:dogs)).to eq([adoptable_dog2, adoptable_dog, coming_soon_dog2, coming_soon_dog, adoption_pending_dog2, adoption_pending_dog ])
     end
 
     it 'with autocomplete parameter set all dogs are returned' do

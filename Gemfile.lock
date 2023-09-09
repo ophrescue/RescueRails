@@ -272,7 +272,7 @@ GEM
     mini_racer (0.6.3)
       libv8-node (~> 16.10.0.0)
     minitest (5.18.1)
-    mjml-rails (4.8.0)
+    mjml-rails (4.9.0)
     multi_json (1.15.0)
     net-imap (0.3.6)
       date

@@ -13,9 +13,9 @@
 #    limitations under the License.
 
 class TrainingMailer < ActionMailer::Base
-  default from: "Operation Paws for Homes <kate@ophrescue.org>",
-          return_path: 'kate@ophrescue.org',
-          reply_to: 'kate@ophrescue.org'
+  default from: "OPH Training Team <training@ophrescue.org>",
+          return_path: 'training@ophrescue.org',
+          reply_to: 'training@ophrescue.org'
 
   def free_training_notice(adopter_id)
     @adopter = Adopter.find(adopter_id)

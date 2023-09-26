@@ -48,7 +48,7 @@
       <div id="galleria"></div>
       <div id="catDescription" >
         <h4>Description</h4>
-        <%= simple_format(@cat.description) %>
+        <%= markdown(@cat.description) %>
       </div>
 
       <%= render partial: 'wait_list' %>

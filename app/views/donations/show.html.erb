@@ -13,7 +13,7 @@
             <div>Donated <%= @donation.memory_honor_type %> <%= @donation.memory_honor_name %>.</div>
         <% end %>
         <h4 class="pt-4">Donor Comment</h4>
-        <div><%= simple_format(@donation.comment) %></div>
+        <div><%= markdown(@donation.comment) %></div>
 
         <h4 class="pt-4">Contact Info</h4>
         <div><%= @donation.email %></div>

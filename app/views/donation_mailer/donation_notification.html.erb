@@ -320,7 +320,7 @@ a[x-apple-data-detectors=true] {
 <p style="margin: 0;font-size: 14px;line-height: 20px;text-align: left">A message from <%= @donation.name %>:
 </p>
 <br>
-<p style="margin: 0;font-size: 14px;line-height: 20px;text-align: left"><%= simple_format(@donation.notify_message) %>
+<p style="margin: 0;font-size: 14px;line-height: 20px;text-align: left"><%= markdown(@donation.notify_message) %>
 </p>
 
 <br>

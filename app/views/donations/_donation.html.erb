@@ -4,5 +4,5 @@
     <td><%= link_to donation.name, donation %></td>
     <td><%= donation.frequency %></td>
     <td><%= number_to_currency(donation.amount) %></td>
-    <td><%= simple_format(donation.comment) %>
+    <td><%= markdown(donation.comment) %>
 </tr>

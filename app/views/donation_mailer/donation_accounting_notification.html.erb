@@ -110,7 +110,7 @@
                                                     </ul>
                                                     <% if @donation.comment %>
                                                         <h4>Comment from the donor:</h4>
-                                                        <p><%= markdown(@donation.comment) %></p>
+                                                        <p><%= simple_format(@donation.comment) %></p>
                                                     <% end %>
                                                     <%= link_to "View Donation Details", @donation %>
                                                 </div>

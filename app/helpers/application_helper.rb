@@ -21,7 +21,7 @@ module ApplicationHelper
     boolean ? 'Yes' : 'No'
   end
 
-  def markdown(text*)
+  def markdown(text)
     options = {
       filter_html:     true,
       hard_wrap:       true,
@@ -36,10 +36,12 @@ module ApplicationHelper
       disable_indented_code_blocks: true
     }
 
-    renderer = Redcarpet::Render::HTML.new(options)
-    markdown = Redcarpet::Markdown.new(renderer, extensions)
-
-    markdown.render(text).html_safe
+    if text.blank?
+      nil
+    else
+      renderer = Redcarpet::Render::HTML.new(options)
+      markdown = Redcarpet::Markdown.new(renderer, extensions)
+      markdown.render(text).html_safe
   end
 
   def title

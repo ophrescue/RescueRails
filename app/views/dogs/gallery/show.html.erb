@@ -63,7 +63,7 @@
       <div id="dogDescription" >
         <%= render "energy_level/energy_level_icon", energy_level: @dog.energy_level, img_size: 250 %>
         <%= render "energy_level/energy_level_desc", energy_level: @dog.energy_level %>
-        <%= markdown(@dog.description) %>
+        <%= simple_format(@dog.description) %>
       </div>
     </div>
   </div>

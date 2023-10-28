@@ -6,9 +6,9 @@
           <span class="badge badge-warning">Has Family Under 18</span>
         <% end %>
 
-        <% if @adopter.adoption_app.is_ofage == false %>
-          <span class="badge badge-warning">Under 21</span>
-        <% end %>
+          <% if @adopter.adoption_app.is_ofage == false %>
+            <span class="badge badge-warning">Under 21</span>
+          <% end %>
 
         <% if @adopter.adoption_app.pets_branch == "no_pets" && @adopter.adoption_app.prev_pets_type.blank? %>
           <span class="badge badge-warning">First Time Pet Owner</span>

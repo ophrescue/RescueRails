@@ -26,26 +26,6 @@
     </div>
   </div>
 
-  <div class="form-group">
-    <div class="row">
-      <%= af.label :is_ofage, "Are you at least 21 years old?", :class => "col-form-label col-sm-3 pt-0" %>
-      <div class="controls col-sm-9">
-        <div class="form-check form-check-inline">
-          <label>
-            <%= af.radio_button :is_ofage, true, :class => "required is-of-age-radio" %>
-            <span>Yes</span>
-          </label>
-        </div>
-        <div class="form-check form-check-inline">
-          <label>
-            <%= af.radio_button :is_ofage, false, :class => "required is-of-age-radio" %>
-            <span>No</span>
-          </label>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="form-group birth-date">
     <%= af.label :birth_date, "Date of Birth", :class => "col-form-label" %>
     <div class="controls">

@@ -28,7 +28,6 @@ FactoryBot.define do
     rent_costs { '$500 pet deposit' }
     vet_info { 'Dr. Spaceman Baltimore MD' }
     max_hrs_alone { 3 }
-    is_ofage { true }
     birth_date { Faker::Date.between(from: 20.years.ago, to: Date.today) }
     has_family_under_18 { true }
 
@@ -56,7 +55,6 @@ FactoryBot.define do
       rent_costs { nil }
       vet_info { nil }
       max_hrs_alone { nil }
-      is_ofage { true }
       birth_date { 20.years.ago.to_date }
       has_family_under_18 { true }
     end

@@ -216,7 +216,7 @@ GEM
     flamegraph (0.9.5)
     font-awesome-rails (4.7.0.8)
       railties (>= 3.2, < 8.0)
-    friendly_id (5.5.0)
+    friendly_id (5.5.1)
       activerecord (>= 4.0.0)
     geocoder (1.8.2)
     gibbon (3.5.0)
@@ -516,7 +516,7 @@ GEM
       nokogiri (~> 1.8)
     yard (0.9.28)
       webrick (~> 1.7.0)
-    zeitwerk (2.6.11)
+    zeitwerk (2.6.12)
 
 PLATFORMS
   x86_64-darwin-20

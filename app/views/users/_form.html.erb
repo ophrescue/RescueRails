@@ -138,10 +138,9 @@
           <div class="controls">
             <%= f.fields_for :agreement do |af| %>
               <% if af.object.persisted? %>
-                <span>Foster Agreement on file</span>
-              <% else %>
-                <%= af.file_field :attachment, class: "form-control-file" %>
+                <span>Foster Agreement on file, adding a new file will permanetly overwrite the existing file</span>
               <% end %>
+              <%= af.file_field :attachment, class: "form-control-file" %>
             <% end %>
           </div>
         </div>
@@ -153,10 +152,9 @@
           <div class="controls">
             <%= f.fields_for :confidentiality_agreement do |af| %>
               <% if af.object.persisted? %>
-                <span>Confidentiality Agreement on file</span>
-              <% else %>
-                <%= af.file_field :attachment, class: "form-control-file" %>
+                <span>Confidentiality Agreement on file, adding a new file will permanetly overwrite the existing file</span>
               <% end %>
+              <%= af.file_field :attachment, class: "form-control-file" %>
             <% end %>
           </div>
         </div>
@@ -168,10 +166,9 @@
           <div class="controls">
             <%= f.fields_for :code_of_conduct_agreement do |af| %>
               <% if af.object.persisted? %>
-                <span>Code of Conduct Agreement on file</span>
-              <% else %>
-                <%= af.file_field :attachment, class: "form-control-file" %>
+                <span>Code of Conduct Agreement on file, adding a new file will permanetly overwrite the existing file</span>
               <% end %>
+              <%= af.file_field :attachment, class: "form-control-file" %>
             <% end %>
           </div>
         </div>
@@ -182,10 +179,9 @@
         <div class="controls">
           <%= f.fields_for :insurance_training_agreement do |af| %>
             <% if af.object.persisted? %>
-              <span>Insurance Training Completed</span>
-            <% else %>
-              <%= af.file_field :attachment, class: "form-control-file" %>
+              <span>Insurance Training on file, adding a new file will permanetly overwrite the existing file</span>
             <% end %>
+            <%= af.file_field :attachment, class: "form-control-file" %>
           <% end %>
         </div>
       </div>

@@ -1,12 +1,25 @@
+<form class="my-3" id="cat-search">
+  <div class="form-row">
+    <div class="col-6">
+      <input type="text" class="form-control" id='search' name='filter_params[search]' autocomplete='off' value=<%=@filter_params[:search]%> >
+    </div>
+    <div class="col-2">
+      <%= select_tag :search_field_index, options_for_select(Cat::SEARCH_FIELDS.as_options.invert, selected: @filter_params[:search_field_index] || "name"), name: "filter_params[search_field_index]", class: "form-control" %>
+    </div>
+    <div class="col-4">
+      <button type="submit" id="search_button" class="btn btn-primary">Search</button>
+    </div>
+  </div>
+</form>
+
 <div class="card bg-light mb-3">
-  <div class="card-header"> Filter, Search and Sort the database...  </div>
+  <div class="card-header"> Filter and Sort the database...  </div>
   <div class="card-body">
     <form class='row' id='filter_controls'>
       <%= render partial: 'cats/manager/global_multiselect_dropdown', locals: {id: 'is_age', button_text: 'Age', options: Cat::AGES.as_options, multiple: true , close_on_select: "true" } %>
       <%= render partial: 'cats/manager/global_multiselect_dropdown', locals: {id: 'is_status', button_text: 'Status', options: Cat::STATUSES.as_options, multiple: true , close_on_select: "true" } %>
       <%= render partial: 'cats/manager/global_multiselect_dropdown', locals: {id: 'is_size', button_text: 'Size', options: Cat::SIZES.as_options, multiple: true , close_on_select: "true" } %>
       <%= render partial: 'cats/manager/global_multiselect_dropdown', locals: {id: 'has_flags', button_text: 'Flags', options: Cat::FILTER_FLAGS.as_options, multiple:true, close_on_select: "true" } %>
-      <%= render partial: 'cats/manager/global_multiselect_dropdown', locals: {id: 'search_field_index', button_text: 'Search', options: Cat::SEARCH_FIELDS.as_options, multiple:false, close_on_select: "false" } %>
       <%= render partial: 'cats/manager/global_multiselect_dropdown', locals: {id: 'sort', button_text: 'Sort', options: Sortable::SORT_FIELDS, multiple: false, close_on_select: "true" } %>
     </form>
   </div>

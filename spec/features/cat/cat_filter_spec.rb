@@ -26,11 +26,6 @@ feature 'Filter Cats List', js: true do
       search_by("Cat Breed", "shorthai")
       expect(cats_list).to eq [ ["##{abby.tracking_id}", "Abby", "American Shorthair,"],
                                 ["##{zeke.tracking_id}","Zeke", "American Shorthair,"] ]
-      click_button("Search")
-      # search parameters for the search currently active are shown in the search dropdown
-      expect(page.find('input#search').value).to eq 'shorthai'
-      expect(page.find('#search_field_index ul>li._cat_breed input', visible: false)).to be_checked # it's not visible b/c we hide it in order to make custom radio button
-      expect(page.find('#search_icon')).to be_visible
 
       # all current filter params are shown
       expect(page).to have_selector(group_label, text: "Sort:")
@@ -39,18 +34,12 @@ feature 'Filter Cats List', js: true do
       expect(page).to have_selector(filter_params, text: "Breed matches 'shorthai'")
       expect(page).to have_selector('#reset_message')
 
-      # close and open the search dropdown... search params are still shown
-      click_button("Search") # close
-      click_button("Search") # open
+      # search value and search_field_index still displayed
       expect(page.find('input#search').value).to eq 'shorthai'
-      expect(page.find('#search_field_index ul>li._cat_breed input', visible: false)).to be_checked # it's not visible b/c we hide it in order to make custom radio button
-      expect(page.find('#search_icon')).to be_visible
+      expect(page.find('#search_field_index').find('option[selected]').value).to eq 'cat_breed'
 
       page.find('#reset_message').click
-      sleep(1)
-      click_button("Search")
-      expect(page.find('input#search').value).to be_blank
-      expect(page.find('#search_field_index ul>li._cat_breed input', visible: false)).not_to be_checked
+      sleep(2)
       expect(cats_list).to eq all_cats_sorted_by_id.reverse
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Tracking ID")
@@ -91,56 +80,6 @@ feature 'Filter Cats List', js: true do
       page.find('#reset_message').click
       expect(page).to have_selector(filter_params, text: "Tracking ID")
       expect(cats_list).to eq all_cats_sorted_by_id.reverse
-    end
-
-    scenario 'shows error message if user forgets to select search attribute' do
-      visit cats_manager_index_path
-      expect(page).to have_selector('h1', text: 'Cat Manager')
-      click_button("Search")
-      expect(page).to have_selector('#search-dropdown-heading')
-      page.find('input#search').set("shorthai")
-      page.find('#search_icon').click
-      expect(page).to have_no_selector('#search-dropdown-heading')
-      expect(page).to have_selector('#search-error-message', text: 'Please select a field to search in')
-      select_search_by('Cat Breed')
-      expect(page).to have_no_selector('#search-error-message')
-      expect(page).to have_no_selector('#search-dropdown-heading')
-    end
-
-    scenario 'search after being reminded to select search attribute' do
-      visit cats_manager_index_path
-      expect(page).to have_selector('h1', text: 'Cat Manager')
-      click_button("Search")
-      page.find('input#search').set("shorthai")
-      page.find('#search_icon').click
-      select_search_by('Cat Breed')
-      page.find('#search_icon').click
-      expect(cat_names).to match_array ["Zeke", "Abby"]
-    end
-
-    scenario 'reset search field' do
-      visit cats_manager_index_path
-      expect(page).to have_selector('h1', text: 'Cat Manager')
-      click_button("Search")
-      page.find('input#search').set("shortha")
-      select_search_by('Cat Breed')
-      page.find('#search_reset_button').click
-      expect(page.find('input#search').value).to be_blank
-      expect(page.find('#search_reset_button', visible: false)).not_to be_visible
-      expect(page.find('#search_button', visible: false)).not_to be_visible
-      expect(page.all('#search_field_index input[type="radio"]', visible: false).map(&:checked?).any?).to eq false
-    end
-
-    scenario 'reset search params on dropdown close without search' do
-      visit cats_manager_index_path
-      expect(page).to have_selector('h1', text: 'Cat Manager')
-      click_button("Search")
-      select_search_by('Cat Breed')
-      page.find('input#search').set("shorthai")
-      click_button("Search") # close
-      click_button("Search") # open again
-      expect(page.find('input#search').value).to be_blank
-      expect(page.all('#search_field_index input[type="radio"]', visible: false).map(&:checked?).any?).to eq false
     end
   end
 

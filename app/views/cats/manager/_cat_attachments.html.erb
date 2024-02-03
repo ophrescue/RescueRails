@@ -10,8 +10,11 @@
             <%= link_to af.object.attachment_file_name, af.object.download_url %>
           </label>
         </div>
+        <div class="col-2" id=<%= 'cat_attachment_timestamp_' + af.object.id.to_s %>>
+          <%=  af.object.created_at.strftime("%b %d, %Y %H:%M") unless af.object.created_at.nil? %>
+        </div>
         <% if is_admin? %>
-          <div class='col-7'>
+          <div class='col-5'>
             <label class="checkbox">
               <%= af.check_box :_destroy, :id => "delAttachment" %>
               <span>Delete <%= af.object.attachment_file_name %></span>

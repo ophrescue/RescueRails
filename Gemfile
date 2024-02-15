@@ -35,7 +35,7 @@ gem 'to_xls'
 gem 'webpacker', '~> 5.2', '>= 5.2.1'
 gem 'wicked_pdf'
 gem 'whenever', '~> 0.9.4', require: false
-gem 'will_paginate'
+gem 'will_paginate', '~> 3.3.1'
 
 # datas
 gem 'dalli'

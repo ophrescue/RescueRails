@@ -50,8 +50,8 @@ namespace :adoptapet_sync do
 
           csv << [d.id.to_s,
                   "Dog",
-                  d.primary_breed ? d.primary_breed.name : "",
-                  d.secondary_breed ? d.secondary_breed.name : "",
+                  d.primary_breed ? d.to_adoptapet_breed(d.primary_breed.name, d.size) : "",
+                  d.secondary_breed ? d.to_adoptapet_breed(d.secondary_breed.name, d.size) : "",
                   "N",                             # PureBreed
                   d.name,
                   d.age,

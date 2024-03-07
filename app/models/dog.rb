@@ -301,6 +301,14 @@ class Dog < ApplicationRecord
     PETFINDER_GENDER[gender]
   end
 
+  def to_adoptapet_breed(breed, size)
+    return unless breed == 'Mixed Breed'
+    if size == 'extra large'
+      size = 'large'
+    end
+    "Mixed Breed (#{size.capitalize})"
+  end
+
   def update_adoption_date
     return unless status_changed?
     return if status == 'completed'

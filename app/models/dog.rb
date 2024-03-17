@@ -302,7 +302,7 @@ class Dog < ApplicationRecord
   end
 
   def to_adoptapet_breed(breed, size)
-    return unless breed == 'Mixed Breed'
+    return breed unless breed == 'Mixed Breed'
     if size == 'extra large'
       size = 'large'
     end

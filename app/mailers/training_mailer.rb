@@ -21,6 +21,8 @@ class TrainingMailer < ActionMailer::Base
     @adopter = Adopter.find(adopter_id)
     mail(to: @adopter.email,
          subject: 'Free Training Session for your new dog!',
-         content_type: 'text/html')
+         content_type: 'text/html') do |format|
+           format.mjml
+         end
   end
 end

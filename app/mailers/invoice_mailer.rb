@@ -28,7 +28,7 @@ class InvoiceMailer < ActionMailer::Base
     mail(to: @invoice.invoiceable.adopter.email,
          cc: @notify,
          subject: "Thank you for your Adoption Fee Payment #{@invoice.invoiceable.adopter.name}",
-         content_type: 'text/html')do |format|
+         content_type: 'text/html') do |format|
       format.mjml
     end
   end
@@ -43,7 +43,7 @@ class InvoiceMailer < ActionMailer::Base
     mail(to: @invoice.invoiceable.adopter.email,
          cc: @notify,
          subject: "Adoption Contract Added #{@invoice.invoiceable.adopter.name}",
-         content_type: 'text/html')do |format|
+         content_type: 'text/html') do |format|
       format.mjml
     end
   end

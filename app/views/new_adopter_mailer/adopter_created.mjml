@@ -1,0 +1,31 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="https://ophrescue.org/oph_logo.png"></mj-image>
+
+        <mj-text font-size="25px">Thank you!</mj-text>
+
+        <mj-divider></mj-divider>
+
+        <mj-text font-size="16px" font-family="helvetica">Success! Your adoption application has been submitted successfully. We will review your application and do our best to contact you in the next 1-2 business days. <strong>Please respond to our follow up emails to complete your application.</strong></mj-text>
+
+        <mj-text font-size="16px" font-family="helvetica">Next Steps:</mj-text>
+
+        <mj-text font-size="16px" font-family="helvetica">- Call your vet and verify that any current dogs or cats are spayed/neutered and up to date on shots.</mj-text>
+        <mj-text font-size="16px" font-family="helvetica">- Give your vet permission to release records to us.</mj-text>
+        <mj-text font-size="16px" font-family="helvetica">- Contact us at <strong>adopt@ophrescue.org</strong> if you want to make any changes to your application, or withdraw it.</mj-text>
+        <mj-text font-size="16px" font-family="helvetica">For more information please read our adoption guide and other resources.</mj-text>
+        <mj-text font-size="16px" font-family="helvetica"><a href="http://ophrescue.org/guide">Adoption Guide</a> </mj-text>
+      <mj-text font-size="16px" font-family="helvetica"><a href="http://ophrescue.org/resources">Resources for Adopters</a></mj-text>
+      </mj-column>
+</mj-section>
+    <mj-section full-width="full-width" background-color="#B0E2FF">
+      <mj-column>
+      <mj-text align="center" font-size="14px" font-family="helvetica">Operation Paws for Homes</mj-text>
+            <mj-text align="center" font-size="14px" font-family="helvetica"><a href="https://ophrescue.org">https://ophrescue.org</a></mj-text>
+</mj-column>
+    </mj-section>
+
+  </mj-body>
+</mjml>

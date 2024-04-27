@@ -21,6 +21,8 @@ class AdopterFollowupMailer < ActionMailer::Base
     @adopter = Adopter.find(adopter_id)
     mail(to: "#{@adopter.email}",
           subject: 'Following up on your adoption',
-          content_type: 'text/html')
+          content_type: 'text/html') do |format|
+            format.mjml
+          end
   end
 end

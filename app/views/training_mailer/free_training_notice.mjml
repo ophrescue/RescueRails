@@ -22,6 +22,13 @@
       Print this email and bring it to your training session.</mj-text>
                 <mj-button font-size="20px" background-color="#F45E43" href="https://ophrescue.org/training-partners">View Training Partners</mj-button>
       </mj-column>
+</mj-section>
+    <mj-section full-width="full-width" background-color="#B0E2FF">
+      <mj-column>
+      <mj-text align="center" font-size="14px" font-family="helvetica">Operation Paws for Homes</mj-text>
+            <mj-text align="center" font-size="14px" font-family="helvetica"><a href="https://ophrescue.org">https://ophrescue.org</a></mj-text>
+</mj-column>
     </mj-section>
+
   </mj-body>
 </mjml>

@@ -30,6 +30,8 @@ class AdoptAppMailer < ActionMailer::Base
     @adopter = Adopter.find(adopter_id)
     mail(to: "#{@adopter.email}",
       subject: "It is Time to Prepare for Adoption",
-      content_type: 'text/html')
+      content_type: 'text/html') do |format|
+        format.mjml
+      end
   end
 end

@@ -1,0 +1,18 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="https://ophrescue.org/oph_logo.png"></mj-image>
+
+        <mj-divider border-color="#F45E43"></mj-divider>
+
+        <mj-text font-size="14px" font-family="helvetica">There has been an Operation Paws for Homes contract modification that needs your attention.
+        This can mean either the contract has been voided or an addendum has been added. Please check your email for notification from PandaDoc if an addendum has been added.</mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Invoice #<%= @invoice.id %></mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Adopter: <%= @invoice.invoiceable.adopter.name %></mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Contract for: <%= @invoice.invoiceable.animal.tracking_id %> <%= @invoice.invoiceable.animal.name %></mj-text>
+        <mj-text font-size="14px" font-family="helvetica"><a href=<%= invoice_url(@invoice)%>>View Invoice</a></mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

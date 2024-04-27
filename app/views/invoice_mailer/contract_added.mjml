@@ -1,0 +1,20 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="https://ophrescue.org/oph_logo.png"></mj-image>
+
+        <mj-divider border-color="#F45E43"></mj-divider>
+
+        <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Adoption Contract Signed</mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Thank you for signing the adoption contract for <a href="https://ophrescue.org">Operation Paws for Homes</a>.</mj-text>
+
+        <mj-text font-size="14px" font-family="helvetica">Invoice #<%= @invoice.id %></mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Adopter: <%= @invoice.invoiceable.adopter.name %></mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Contract for: <%= @invoice.invoiceable.animal.tracking_id %> <%= @invoice.invoiceable.animal.name %></mj-text>
+
+        <mj-text font-size="14px" font-family="helvetica">Contract marked as received: <%= @invoice.contract_received_at.strftime('%m/%d/%Y') %></mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

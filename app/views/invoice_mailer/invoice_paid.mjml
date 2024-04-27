@@ -1,0 +1,19 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="https://ophrescue.org/oph_logo.png"></mj-image>
+
+        <mj-divider border-color="#F45E43"></mj-divider>
+
+        <mj-text font-size="14px" font-family="helvetica">Thank you for your Adoption Fee payment to Operation Paws for Homes.</mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Invoice #<%= @invoice.id %></mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Adopter: <%= @invoice.invoiceable.adopter.name %></mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Adoption Fee for: <%= @invoice.invoiceable.animal.tracking_id %> <%= @invoice.invoiceable.animal.name %></mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Amount paid: <%= number_to_currency(@invoice.amount) %> </mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Invoice paid: <%= @invoice.paid_at.strftime('%m/%d/%Y') %></mj-text>
+        <mj-text font-size="14px" font-family="helvetica"><a href=<%= invoice_url(@invoice)%>>View Invoice</a></mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

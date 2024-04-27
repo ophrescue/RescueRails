@@ -1,0 +1,44 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="https://ophrescue.org/oph_logo.png"></mj-image>
+
+        <mj-divider></mj-divider>
+
+
+        <mj-text font-size="16px" font-family="helvetica">We are thrilled that you have added a new furry family member to your family! Now that things have settled down a bit, we wanted to check in and see how everything is going. Below are some points we’d like to bring to your attention:</mj-text>
+
+        <mj-text font-size="16px" font-family="helvetica">Please let us know how your new family member is adjusting (a quick reply to this email will do!). With all pets, they will take time, love and patience to settle into life in a new home. Our adoption resources are available to download on our website at <a href="https://ophrescue.org/resources">https://ophrescue.org/resources</a></mj-text>
+
+        <mj-text font-size="16px" font-family="helvetica">Pets don’t understand when there is a sudden change in routine and this can trigger anxiety. We can get ahead of challenging behavior that can be a result of anxiety with a little preparation. <a href="https://www.youtube.com/watch?v=eZUKpxCjda4"> Please view this training video that specifically addresses this topic.</a></mj-text>
+
+        <mj-text font-size="16px" font-family="helvetica">First and foremost, we ask in the adoption agreement that you take your new pet to the vet within 14 days of adoption. This vet visit is a great opportunity to provide your vet with all vaccination information you have received. The vet will enter this into their system to ensure your pet stays on track to completing all the necessary vaccinations.</mj-text>
+
+        <mj-text font-size="16px" font-family="helvetica">Also be sure to check when your pet is due for monthly preventatives and ensure that these are purchased either from your vet or online. Monthly preventatives are vital to your pet's good health!</mj-text>
+
+        <mj-text font-size="16px" font-family="helvetica">Note: If any health concerns arise from the day you bring your pet home and on, please reach out to us.</mj-text>
+
+<mj-text font-size="16px" font-family="helvetica">We include several guides in our adoption folder to help you incorporate your new pet into your life, including training resources, pet-friendly places to take your new family member and food/nutrition information.</mj-text>
+<mj-text font-size="16px" font-family="helvetica">You may also find this article on dog adoption of interest.</mj-text>
+<mj-text font-size="16px" font-family="helvetica"><a href="https://www.petfinder.com/after-pet-adoption/tips-for-first-30-days-dog.html">https://www.petfinder.com/after-pet-adoption/tips-for-first-30-days-dog.html</a>
+
+ </mj-text>
+<mj-text font-size="16px" font-family="helvetica">Here is an article on cat adoption</mj-text>
+<mj-text font-size="16px" font-family="helvetica"><a href="https://www.petfinder.com/pet-adoption/cat-adoption/">https://www.petfinder.com/pet-adoption/cat-adoption/</a></mj-text>
+
+
+<mj-text font-size="16px" font-family="helvetica">Join the OPH adoption community! We now have a dedicated Facebook page for our adopters. This is a place you can share your story, post pictures, set up play dates with litter mates and get advice from your OPH peers! We'd love for you to join in the fun!
+Simple click here <a href="https://www.facebook.com/groups/1801413090076241">https://www.facebook.com/groups/1801413090076241</a> and request to join.</mj-text>
+<mj-text font-size="16px" font-family="helvetica">If you aren’t on Facebook, we hope that you will take the time to update us every now and then.</mj-text>
+      </mj-column>
+</mj-section>
+    <mj-section full-width="full-width" background-color="#B0E2FF">
+      <mj-column>
+      <mj-text align="center" font-size="14px" font-family="helvetica">Operation Paws for Homes</mj-text>
+            <mj-text align="center" font-size="14px" font-family="helvetica"><a href="https://ophrescue.org">https://ophrescue.org</a></mj-text>
+</mj-column>
+    </mj-section>
+
+  </mj-body>
+</mjml>

@@ -28,7 +28,9 @@ class InvoiceMailer < ActionMailer::Base
     mail(to: @invoice.invoiceable.adopter.email,
          cc: @notify,
          subject: "Thank you for your Adoption Fee Payment #{@invoice.invoiceable.adopter.name}",
-         content_type: 'text/html')
+         content_type: 'text/html') do |format|
+      format.mjml
+    end
   end
 
   def contract_added(invoice_id)
@@ -41,7 +43,9 @@ class InvoiceMailer < ActionMailer::Base
     mail(to: @invoice.invoiceable.adopter.email,
          cc: @notify,
          subject: "Adoption Contract Added #{@invoice.invoiceable.adopter.name}",
-         content_type: 'text/html')
+         content_type: 'text/html') do |format|
+      format.mjml
+    end
   end
 
   def contract_removed(invoice_id)
@@ -54,6 +58,8 @@ class InvoiceMailer < ActionMailer::Base
     mail(to: @invoice.invoiceable.adopter.email,
          cc: @notify,
          subject: "Important Adoption Contract Update #{@invoice.invoiceable.adopter.name}",
-         content_type: 'text/html')
+         content_type: 'text/html') do |format|
+      format.mjml
+    end
   end
 end

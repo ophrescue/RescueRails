@@ -1,0 +1,34 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="https://ophrescue.org/oph_logo.png"></mj-image>
+
+        <mj-divider></mj-divider>
+
+        <mj-text font-size="20px" font-family="helvetica">Free Training Session from Operation Paws for Homes</mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Thank you for choosing to adopt!&#160; We are thrilled you have found your new best friend, and we know you are excited to start your journey together.</mj-text>
+
+        <mj-text font-size="14px" font-family="helvetica">To get started, please bring this email to one of our Training Partners to receive one free training session.</mj-text>
+        <mj-text font-size="14px" font-family="helvetica"></mj-text>
+
+        <mj-text font-size="16px" font-weight="bold" font-family="helvetica">
+          How to Redeem</mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Use our Training Partner directory to find an OPH Training Partner near you.</mj-text>
+
+  <mj-text font-size="14px" font-family="helvetica">
+    Contact the Training Partner to learn about training options and schedule a session, be sure to mention you adopted your dog from Operation Paws for Homes.</mj-text>
+    <mj-text font-size="14px" font-family="helvetica">
+      Print this email and bring it to your training session.</mj-text>
+                <mj-button font-size="20px" background-color="#F45E43" href="https://ophrescue.org/training-partners">View Training Partners</mj-button>
+      </mj-column>
+</mj-section>
+    <mj-section full-width="full-width" background-color="#B0E2FF">
+      <mj-column>
+      <mj-text align="center" font-size="14px" font-family="helvetica">Operation Paws for Homes</mj-text>
+            <mj-text align="center" font-size="14px" font-family="helvetica"><a href="https://ophrescue.org">https://ophrescue.org</a></mj-text>
+</mj-column>
+    </mj-section>
+
+  </mj-body>
+</mjml>

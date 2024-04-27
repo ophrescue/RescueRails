@@ -1,0 +1,22 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="https://ophrescue.org/oph_logo.png"></mj-image>
+
+        <mj-divider></mj-divider>
+
+        <mj-text font-size="16px" font-family="helvetica">We ask that all applicants carefully watch <a href="https://youtu.be/Bdu6PbUfV1I">this video</a> before your meet and greet. The video contains lots of valuable information and tips to help set you both up for success. This email is intended for preparation and does not make any guarantees for the adoption of a specific dog or puppy</mj-text>
+
+        <mj-button font-size="20px" background-color="#F45E43" href="https://youtu.be/Bdu6PbUfV1I">Watch Video</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section full-width="full-width" background-color="#B0E2FF">
+      <mj-column>
+        <mj-text align="center" font-size="14px" font-family="helvetica">Operation Paws for Homes</mj-text>
+        <mj-text align="center" font-size="14px" font-family="helvetica"><a href="https://ophrescue.org">https://ophrescue.org</a></mj-text>
+      </mj-column>
+    </mj-section>
+
+  </mj-body>
+</mjml>

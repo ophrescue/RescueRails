@@ -1,3 +1,4 @@
+
 #    Copyright 2017 Operation Paws for Homes
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -67,7 +68,6 @@ class Adopter < ApplicationRecord
               'adptd sn pend',
               'completed',
               'returned',
-              'standby',
               'withdrawn',
               'denied']
 

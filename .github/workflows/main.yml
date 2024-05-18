@@ -9,7 +9,7 @@ jobs:
   test:
     services:
       postgres:
-        image: postgres:12.17
+        image: postgres:12.11
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -22,8 +22,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -31,9 +30,9 @@ jobs:
           rubygems: latest
 
       - name: Setup Nodejs
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '16'
 
       - name: yarn install
         run: yarn install

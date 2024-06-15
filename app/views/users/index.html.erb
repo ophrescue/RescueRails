@@ -81,7 +81,10 @@
               <%= link_to "Fundraising", users_path(fundraising: :true, location: params[:location], range: params[:range]), class: (params[:fundraising] ? 'nav-link active' : 'nav-link') %>
             </li>
             <li class="nav-item">
-              <%= link_to "Foster Mentor", users_path(foster_mentor: :true, location: params[:location], range: params[:range]), class: (params[:foster_mentor] ? 'nav-link active' : 'nav-link') %>
+              <%= link_to "Cat Foster Mentor", users_path(foster_mentor: :true, cat_handling_training_complete: :true, location: params[:location], range: params[:range]), class: (params[:cat_handling_training_complete] ? 'nav-link active' : 'nav-link') %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Dog Foster Mentor", users_path(foster_mentor: :true, dog_handling_training_complete: :true, location: params[:location], range: params[:range]), class: (params[:dog_handling_training_complete] ? 'nav-link active' : 'nav-link') %>
             </li>
             <li class="nav-item">
               <%= link_to "Translators", users_path(translator: :true, location: params[:location], range: params[:range]), class: (params[:translator] ? 'nav-link active' : 'nav-link') %>

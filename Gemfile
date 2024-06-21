@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby   '3.0.5'
 
-gem 'rails', '~> 6.1', '>= 6.1.7.6'
+gem 'rails', '~> 6.1', '>= 6.1.7.8'
 
 gem 'rack-cache'
 

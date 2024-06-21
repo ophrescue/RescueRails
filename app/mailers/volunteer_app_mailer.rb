@@ -33,7 +33,6 @@ class VolunteerAppMailer < ActionMailer::Base
     end
     if (@va.marketing_interest || @va.events_interest || @va.training_interest || @va.fundraising_interest || @va.transport_bb_interest || @va.adoption_team_interest || @va.admin_interest)
       @notify.push('volunteer@ophrescue.org')
-      @notify.push('joanne@ophrescue.org')
     end
 
     mail(to: @notify, subject: "New Volunteer App #{@va.name}", context_type: 'text/html') do |format|

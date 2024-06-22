@@ -94,7 +94,6 @@ GEM
       aws-sigv4 (~> 1.8)
     aws-sigv4 (1.8.0)
       aws-eventstream (~> 1, >= 1.0.2)
-    base64 (0.2.0)
     bcrypt (3.1.20)
     bcrypt_pbkdf (1.1.1)
     bcrypt_pbkdf (1.1.1-x86_64-darwin)
@@ -163,7 +162,6 @@ GEM
       i18n_data (~> 0.16.0)
       sixarm_ruby_unaccent (~> 1.1)
     crass (1.0.6)
-    csv (3.3.0)
     cuprite (0.15)
       capybara (~> 3.0)
       ferrum (~> 0.14.0)
@@ -220,9 +218,7 @@ GEM
       railties (>= 3.2, < 8.0)
     friendly_id (5.5.1)
       activerecord (>= 4.0.0)
-    geocoder (1.8.3)
-      base64 (>= 0.1.0)
-      csv (>= 3.0.0)
+    geocoder (1.8.2)
     gibbon (3.5.0)
       faraday (>= 1.0)
       multi_json (>= 1.11.0)
@@ -570,7 +566,7 @@ DEPENDENCIES
   flamegraph
   font-awesome-rails
   friendly_id (~> 5.3)
-  geocoder
+  geocoder (= 1.8.2)
   gibbon
   gravatar_image_tag
   groupdate

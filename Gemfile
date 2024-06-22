@@ -17,7 +17,7 @@ gem 'dotenv'
 gem 'dotenv-rails'
 gem 'font-awesome-rails'
 gem 'friendly_id', '~> 5.3'
-gem 'geocoder'
+gem 'geocoder', "1.8.2" # locked to 1.8.2 until county lookup issue is fixed
 gem 'gibbon'
 gem 'gravatar_image_tag'
 gem 'groupdate'

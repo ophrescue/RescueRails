@@ -6,7 +6,7 @@ gem 'rails', '~> 6.1', '>= 6.1.7.8'
 gem 'rack-cache'
 
 gem 'audited', '~> 4.5'
-gem 'aws-sdk-locationservice', '~> 1.24'
+gem 'aws-sdk-locationservice', '~> 1.51'
 gem 'aws-sdk-s3', '~> 1.116'
 gem 'bootstrap', '~> 4.3.1'
 gem 'bootstrap-will_paginate', '~> 1.0.0'

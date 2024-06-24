@@ -145,7 +145,7 @@ GEM
       launchy
     celluloid (0.16.0)
       timers (~> 4.0.0)
-    chartkick (5.0.6)
+    chartkick (5.0.7)
     chronic (0.10.2)
     clearance (2.7.1)
       actionmailer (>= 5.0)

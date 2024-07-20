@@ -33,6 +33,10 @@
             <input type="number" id="otherAmount" class="form-control" placeholder="0.00">
           </div>
         </div>
+        <div class="form-group form-check">
+          <input id="feeOffsetToggle" class="form-check-input" type="checkbox">
+          <label class="form-check-label" for="feeOffsetToggle">Cover the credit card fees associated with my donation.</label>
+        </div>
         <div class="form-group form-check form-check-inline">
           <%= f.radio_button :frequency, 'Monthly', class: 'form-check-input', id: 'donation_frequency_monthly' %>
           <%= f.label :frequency_monthly, 'Donate Monthly', class: 'form-check-label'%>
@@ -140,7 +144,6 @@
 </div>
 
 <script>
-
     let honorToggle = document.getElementById('honorToggle');
     honorToggle.addEventListener('click', function (event) {
       document.getElementById('honorFields').classList.toggle('collapse')
@@ -207,6 +210,13 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
 <script>
+
+  function percentage(num, per)
+  {
+    // Multiply num by per divided by 100 to find the percentage.
+    return (num/100)*per;
+  }
+
   var handler = StripeCheckout.configure({
     key: '<%= Rails.configuration.stripe[:publishable_key] %>',
     locale: 'auto',
@@ -233,6 +243,9 @@
     amount = amount.replace(/\$/g, '').replace(/\,/g, '');
 
     amount = parseFloat(amount);
+
+    creditCardFee = parseFloat(percentage(amount, 2.2) + 0.30)
+    console.log('creditCardFee value set to :' + creditCardFee);
 
     if ($('input#donation_name').val().length == 0) {
       $('#error_explanation').html('<p>Please enter your name.</p>')
@@ -274,6 +287,9 @@
       $('#error_explanation').html('<p>Donation amount must be at least $5.</p>');
     }
     else {
+      if ($('#feeOffsetToggle').prop('checked')) {
+        amount = amount + creditCardFee
+      }
       amount = amount * 100; // Needs to be an integer!
       handler.open({
         amount: Math.round(amount),

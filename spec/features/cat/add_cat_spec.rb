@@ -83,6 +83,7 @@ feature 'add a cat', js: true do
         fill_in(:cat_adoption_date, with: "2010-8-28")
         check(:cat_is_uptodateonshots)
         fill_in(:cat_intake_dt, with: "2009-1-29")
+        fill_in(:cat_birth_dt, with: "2008-12-29")
         fill_in(:cat_available_on_dt, with: "2019-8-31")
         check(:cat_declawed)
         check(:cat_litter_box_trained)
@@ -149,6 +150,7 @@ feature 'add a cat', js: true do
         expect(cat.adoption_date).to eq nil # b/c of the update_adoption_date callback on Dog model
         expect(cat.is_uptodateonshots).to eq true
         expect(cat.intake_dt).to eq Date.new(2009,1,29)
+        expect(cat.birth_dt).to eq Date.new(2008,12,29)
         expect(cat.available_on_dt).to eq Date.new(2019,8,31)
         expect(cat.has_medical_need).to eq true
         expect(cat.is_high_priority).to eq true

@@ -18,6 +18,7 @@ FactoryBot.define do
       needs_foster { [true, false].sample }
       is_altered { [true, false].sample }
       intake_dt { Date.today.advance(:days => -rand(365)) }
+      birth_dt { [nil, Date.today.advance(days: -rand(365)).to_s].sample }
       primary_breed_id { Breed.pluck(:id).sample }
       secondary_breed_id { Breed.pluck(:id).sample }
       is_uptodateonshots { [true, false].sample }

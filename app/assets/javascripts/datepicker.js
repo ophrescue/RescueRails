@@ -45,7 +45,23 @@ $(function() {
     dateFormat: 'yy-mm-dd'
   });
 
+  $('#dog_birth_dt').datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
+
   $('#dog_available_on_dt').datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
+
+  $('#cat_intake_dt').datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
+
+  $('#cat_birth_dt').datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
+
+  $('#cat_available_on_dt').datepicker({
     dateFormat: 'yy-mm-dd'
   });
 

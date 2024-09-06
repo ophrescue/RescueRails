@@ -83,6 +83,7 @@ feature 'add a dog', js: true do
         fill_in(:dog_adoption_date, with: "2010-8-28")
         check(:dog_is_uptodateonshots)
         fill_in(:dog_intake_dt, with: "2009-1-29")
+        fill_in(:dog_birth_dt, with: "2008-12-29")
         fill_in(:dog_available_on_dt, with: "2019-8-31")
         check(:dog_has_medical_need)
         check(:dog_is_high_priority)
@@ -143,6 +144,7 @@ feature 'add a dog', js: true do
         expect(dog.adoption_date).to eq nil # b/c of the update_adoption_date callback on Dog model
         expect(dog.is_uptodateonshots).to eq true
         expect(dog.intake_dt).to eq Date.new(2009,1,29)
+        expect(dog.birth_dt).to eq Date.new(2008,12,29)
         expect(dog.available_on_dt).to eq Date.new(2019,8,31)
         expect(dog.has_medical_need).to eq true
         expect(dog.is_high_priority).to eq true

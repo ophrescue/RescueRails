@@ -75,7 +75,7 @@ jobs:
           STRIPE_MONTHLY_DONATION_PLAN: none
           STRIPE_ONE_TIME_PAYMENT_PRODUCT: none
           STRIPE_INVOICE_ENDPOINT_SECRET: none
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           path: tmp/capybara/*.png

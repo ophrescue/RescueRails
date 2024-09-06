@@ -165,6 +165,7 @@ feature 'edit a cat', js: true do
         fill_in(:cat_adoption_date, with: "2010-8-28")
         check(:cat_is_uptodateonshots)
         fill_in(:cat_intake_dt, with: "2009-1-29")
+        fill_in(:cat_birth_dt, with: "2008-12-29")
         fill_in(:cat_available_on_dt, with: "2019-8-31")
         check(:cat_has_medical_need)
         check(:cat_is_high_priority)
@@ -227,6 +228,7 @@ feature 'edit a cat', js: true do
         expect(cat.adoption_date).to eq nil # b/c of the update_adoption_date callback on Dog model
         expect(cat.is_uptodateonshots).to eq true
         expect(cat.intake_dt).to eq Date.new(2009,1,29)
+        expect(cat.birth_dt).to eq Date.new(2008,12,29)
         expect(cat.available_on_dt).to eq Date.new(2019,8,31)
         expect(cat.has_medical_need).to eq true
         expect(cat.is_high_priority).to eq true
@@ -264,6 +266,7 @@ feature 'edit a cat', js: true do
         expect(page.find('#adoption_date').text).to eq 'unknown'
         expect(page.find('#is_uptodateonshots')).to have_check_icon
         expect(page.find('#intake_dt').text).to eq "2009-01-29"
+        expect(page.find('#birth_dt').text).to eq "2008-12-29"
         expect(page.find('#available_on_dt').text).to eq "2019-08-31"
         expect(page.find('#has_medical_need')).to have_check_icon
         expect(page.find('#is_high_priority')).to have_check_icon

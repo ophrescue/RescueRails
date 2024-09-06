@@ -227,7 +227,8 @@ feature 'edit a cat', js: true do
         expect(cat.foster_id).to eq foster.id
         expect(cat.adoption_date).to eq nil # b/c of the update_adoption_date callback on Dog model
         expect(cat.is_uptodateonshots).to eq true
-        expect(cat.intake_dt).to eq Date.new(2008,12,29)
+        expect(cat.intake_dt).to eq Date.new(2009,1,29)
+        expect(cat.birth_dt).to eq Date.new(2008,12,29)
         expect(cat.available_on_dt).to eq Date.new(2019,8,31)
         expect(cat.has_medical_need).to eq true
         expect(cat.is_high_priority).to eq true

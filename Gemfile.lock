@@ -273,7 +273,7 @@ GEM
     mini_mime (1.1.5)
     mini_racer (0.12.0)
       libv8-node (~> 21.7.2.0)
-    minitest (5.23.0)
+    minitest (5.25.1)
     mjml-rails (4.11.0)
     multi_json (1.15.0)
     mutex_m (0.2.0)
@@ -422,10 +422,10 @@ GEM
     rubocop-performance (1.21.1)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-rails (2.25.0)
+    rubocop-rails (2.26.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
-      rubocop (>= 1.33.0, < 2.0)
+      rubocop (>= 1.52.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rspec (3.1.0)
       rubocop (~> 1.61)
@@ -511,7 +511,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.36)
-    zeitwerk (2.6.14)
+    zeitwerk (2.6.18)
 
 PLATFORMS
   x86_64-darwin-20

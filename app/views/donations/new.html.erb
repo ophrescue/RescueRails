@@ -90,11 +90,8 @@
           <%= f.label :email %>
           <%= f.email_field :email, class: 'form-control' %>
         </div>
-        <div class="form-group form-check">
-          <%= f.check_box :more_contact_info, class: 'form-check-input', id: 'moreContactToggle' %>
-          <%= f.label :more_contact_info, 'Provide additional contact info', class: 'form-check-label', for: 'moreContactToggle' %>
-        </div>
-        <div id="moreContactFields" class="collapse">
+
+
           <div class="form-group">
             <%= f.label :phone, 'Phone Number' %>
             <%= f.text_field :phone, class: 'form-control', maxlength: 40 %>
@@ -121,7 +118,7 @@
               <%= f.text_field :postal_code, class: 'form-control', maxlength: 5 %>
             </div>
           </div>
-        </div>
+
         <div class="form-group">
           <%= f.label :comment, 'Comment' %>
           <%= f.text_area :comment, class: 'form-control', rows: '5' %>
@@ -152,11 +149,6 @@
     let notifyToggle = document.getElementById('notifyToggle');
     notifyToggle.addEventListener('click', function (event) {
       document.getElementById('notifyFields').classList.toggle('collapse')
-    });
-
-    let moreContactToggle = document.getElementById('moreContactToggle');
-    moreContactToggle.addEventListener('click', function (event) {
-      document.getElementById('moreContactFields').classList.toggle('collapse')
     });
 
     let donationAmount = document.getElementById('donation_amount');

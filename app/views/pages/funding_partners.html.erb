@@ -60,40 +60,6 @@
     </div>
     <div class="col-sm-12 col-md-12 col-lg-12">
       <div class="article pages">
-        <h3>$2,500 - $4,999</h3>
-      </div>
-    </div>
-        <% sponsors_2500 =
-          {
-            url: "http://www.fvcbank.com/",
-            img: "fvcbank.jpg",
-            alt: "FVC Bank"
-          },
-          {
-            url: "",
-            img: "",
-            alt: ""
-          }
-        %>
-    <div class="album">
-      <div class="container">
-        <div class="row align-items-center">
-          <% sponsors_2500.each_slice(3) do |slice| %>
-              <% slice.each do |spon| %>
-              <div class="col md-4 mx-auto">
-                <div class="card mb-4 border-0">
-                  <a target="_blank" href="<%= spon[:url] %>">
-                    <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], class: "w-75")%>
-                  </a>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-12 col-lg-12">
-      <div class="article pages">
         <h3>$1,000 - $2,499</h3>
       </div>
     </div>
@@ -103,11 +69,6 @@
             url: "#",
             img: "fitzgerald-kolish.png",
             alt: "David FitzGerald and Elaine Kolish"
-          },
-          {
-            url: "http://www.jwallacelaw.com/",
-            img: "jwallacelaw.png",
-            alt: "Law Office of Justin A. Wallace"
           },
           {
             url: "http://www.petfinderfoundation.com/",
@@ -123,11 +84,6 @@
             url: "#",
             img: "scott_karen_roland.png",
             alt: "Scott and Karen Roland"
-          },
-          {
-            url: "https://www.washluberepair.com/",
-            img: "washluberepair.png",
-            alt: "The Auto Spa, The Lube Center, The Auto Repair"
           },
           {
             url: "#",
@@ -161,9 +117,25 @@
 
         <% sponsors_500 =
           {
+            url: "https://www.buckeystownvet.com",
+            img: "buckeystownvet.svg",
+            alt: "Buckeystown Veterinary Hospital",
+            show_text: true
+          },
+          {
+            url: "https://www.fitzmall.com/",
+            img: "fitzmall.png",
+            alt: "Fitzgerald Auto Mall"
+          },
+          {
             url: "https://huxleyandkent.com/",
             img: "huxleyandkent.png",
             alt: "Huxley and Kent"
+          },
+          {
+            url: "https://www.mcfenceanddeck.com/",
+            img: "mcfenceanddeck.png",
+            alt: "Mc Fence and Deck",
           },
           {
             url: "http://www.millertoyota.com/",
@@ -202,9 +174,24 @@
             alt: "Thoughts Brewing, LLC"
           },
           {
+            url: "https://vadasfund.org/",
+            img: "vadasfund.jpg",
+            alt: "Vada's Fund"
+          },
+          {
+            url: "https://veturgency.com/",
+            img: "veturgency.svg",
+            alt: "Vet Urgency"
+          },
+          {
             url: "#",
             img: "vortex13.png",
             alt: "Vortex 13, LLC"
+          },
+          {
+            url: "https://www.washluberepair.com/",
+            img: "washluberepair.png",
+            alt: "The Auto Spa, The Lube Center, The Auto Repair"
           }
         %>
     <div class="album">
@@ -234,6 +221,27 @@
     </div>
 
         <% sponsors_250 =
+          {
+            url: "https://www.clearviewah.com/",
+            img: "clearviewah.png",
+            alt: "Clearview Animal Hospital",
+            show_text: true
+          },
+          {
+            url: "https://www.compassionvetcenter.com/",
+            img: "compassionvetcenter.png",
+            alt: "Compassion Veterinary Center"
+          },
+          {
+            url: "http://www.fvcbank.com/",
+            img: "fvcbank.jpg",
+            alt: "FVC Bank"
+          },
+          {
+            url: "https://hawkinslandscaping.com/",
+            img: "hawkinslandscaping.png",
+            alt: "Hawkins Landscaping Team"
+          },
           {
             url: "http://www.scoop-squad.com/",
             img: "scoop_squad.jpg",
@@ -273,6 +281,11 @@
         <% sponsors =
 
           {
+            url: "https://atlanticbluewaterservices.com/",
+            img: "atlanticbluewaterservices.png",
+            alt: "Atlasntic Blue Water Services"
+          },
+          {
             url: "https://chewy.com",
             img: "chewy.png",
             alt: "Chewy"
@@ -296,6 +309,11 @@
             url: "https://rawrev.com/",
             img: "rawrev.png",
             alt: "Raw Revolution"
+          },
+          {
+            url: "http://www.jwallacelaw.com/",
+            img: "jwallacelaw.png",
+            alt: "Law Office of Justin A. Wallace"
           },
           {
             url: "https://www.wegmans.com/",

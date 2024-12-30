@@ -192,7 +192,7 @@ GEM
     email_validator (2.2.4)
       activemodel
     erubi (1.13.1)
-    execjs (2.9.1)
+    execjs (2.10.0)
     factory_bot (6.4.6)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.4.3)
@@ -488,7 +488,7 @@ GEM
       spreadsheet
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uglifier (4.2.0)
+    uglifier (4.2.1)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.6.0)
     unicorn (6.1.0)

@@ -233,7 +233,9 @@ class UsersController < Clearance::UsersController
                 :graphic_design,
                 :active,
                 :dog_handling_training_complete,
+                :dog_training_completed_dt,
                 :cat_handling_training_complete,
+                :cat_training_completed_dt,
                 badge_ids: [],
                 agreement_attributes: [
                   :attachment,

@@ -425,9 +425,19 @@
             <%= f.check_box :dog_handling_training_complete, class: "form-check-input", id: "dog_handling_training_complete" %>
             <label class="form-check-label" for="dog_handling_training_complete">Dog handling training complete</label>
           </div>
+          <div class="form-group row">
+            <%= f.label :dog_training_completed_dt, "Dog Training Completed Date", class: 'col-form-label col-form-label-sm col-4'  %>
+            <%= f.text_field :dog_training_completed_dt, class: 'form-control form-control-sm col-6' %>
+            <div class="form-text text-muted col-6 offset-4 small">yyyy-mm-dd</div>
+          </div>
           <div class="form-check">
             <%= f.check_box :cat_handling_training_complete, class: "form-check-input", id: "cat_handling_training_complete" %>
             <label class="form-check-label" for="cat_handling_training_complete">Cat handling training complete</label>
+          </div>
+          <div class="form-group row">
+            <%= f.label :cat_training_completed_dt, "Cat Training Completed Date", class: 'col-form-label col-form-label-sm col-4'  %>
+            <%= f.text_field :cat_training_completed_dt, class: 'form-control form-control-sm col-6' %>
+            <div class="form-text text-muted col-6 offset-4 small">yyyy-mm-dd</div>
           </div>
       <% else %>
         <% if @user.dog_handling_training_complete? %>
@@ -435,11 +445,13 @@
         <% else %>
           <p><span class="badge badge-danger">Dog Handling Training Incomplete</span></p>
         <% end %>
+          <p><%= @user.dog_training_completed_dt.strftime('%m/%d/%Y') if @user.dog_training_completed_dt %></p>
         <% if @user.cat_handling_training_complete? %>
           <p><span class="badge badge-info">Cat Handling Training Complete</span></p>
         <% else %>
           <p><span class="badge badge-danger">Cat Handling Training Incomplete</span></p>
         <% end %>
+           <p><%= @user.cat_training_completed_dt.strftime('%m/%d/%Y') if @user.cat_training_completed_dt %></p>
       <% end %>
 
       <% if is_admin? %>

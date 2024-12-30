@@ -22,6 +22,7 @@ require 'capistrano/bundler'
 require 'capistrano/rails/assets'
 require 'capistrano/rails/console'
 require 'capistrano/rails/migrations'
+require 'capistrano/maintenance'
 require 'whenever/capistrano'
 require "capistrano/systemd/multiservice"
 install_plugin Capistrano::Systemd::MultiService.new_service("unicorn")

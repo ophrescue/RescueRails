@@ -39,7 +39,7 @@ gem 'will_paginate', '~> 3.3.1'
 
 # datas
 gem 'dalli'
-gem 'pg', '~> 1.4', '>= 1.4.5'
+gem 'pg', '~> 1.5', '>= 1.5.9'
 
 group :production do
   gem 'unicorn', '~> 6.1'
@@ -94,6 +94,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'capistrano', '~> 3.11'
   gem 'capistrano-bundler', '~> 1.1.4'
+  gem 'capistrano-maintenance', '~> 1.2', require: false
   gem 'capistrano-rails', '~> 1.1.5'
   gem 'capistrano-rails-console', require: false
   gem 'capistrano-rbenv', '~> 2.0.3'

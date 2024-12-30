@@ -39,7 +39,7 @@ gem 'will_paginate', '~> 3.3.1'
 
 # datas
 gem 'dalli'
-gem 'pg', '~> 1.4', '>= 1.4.5'
+gem 'pg', '~> 1.5', '>= 1.5.9'
 
 group :production do
   gem 'unicorn', '~> 6.1'

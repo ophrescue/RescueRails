@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_26_170549) do
+ActiveRecord::Schema.define(version: 2024_12_30_193326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -633,6 +633,8 @@ ActiveRecord::Schema.define(version: 2024_10_26_170549) do
     t.boolean "can_foster_dogs", default: false
     t.boolean "is_clerical", default: false, null: false
     t.boolean "foster_friend", default: false, null: false
+    t.date "dog_training_completed_dt"
+    t.date "cat_training_completed_dt"
     t.index ["agreement_id"], name: "index_users_on_agreement_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"

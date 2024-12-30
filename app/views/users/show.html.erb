@@ -31,6 +31,16 @@
               <% end %>
           <table class="table table-striped table-bordered table-sm">
             <tr>
+              <td>Dog Handling Training Completed Date</td>
+              <td><%= @user.dog_training_completed_dt.strftime('%m/%d/%Y') if @user.dog_training_completed_dt %></td>
+            </tr>
+            <tr>
+              <td>Cat Handling Training Completed Date</td>
+              <td><%= @user.cat_training_completed_dt.strftime('%m/%d/%Y') if @user.cat_training_completed_dt %></td>
+            </tr>
+          </table>
+          <table class="table table-striped table-bordered table-sm">
+            <tr>
               <td>Address</td>
               <td>
                   <%= @user.address1 %><br />

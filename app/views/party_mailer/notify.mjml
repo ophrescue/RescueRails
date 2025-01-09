@@ -1,0 +1,18 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="14px" font-family="helvetica">Pup-Tastic Party Request</mj-text>
+        <mj-text font-size="14px" font-family="helvetica">Name: <%= @name %></mj-text>
+        <mj-text font-size="14px" font-family="helvetica">email: <%= @email %></mj-text>
+        <mj-text font-size="14px" font-family="helvetica">phone: <%= @phone %> </mj-text>
+        <mj-text font-size="14px" font-family="helvetica">organization: <%= @organization %> </mj-text>
+        <mj-text font-size="14px" font-family="helvetica">event_date_and_time: <%= @event_date_and_time %> </mj-text>
+        <mj-text font-size="14px" font-family="helvetica">event_location: <%= @event_location %> </mj-text>
+        <mj-text font-size="14px" font-family="helvetica">event_description: <%= @event_description %> </mj-text>
+        <mj-text font-size="14px" font-family="helvetica">guest_count: <%= @guest_count %> </mj-text>
+        <mj-text font-size="14px" font-family="helvetica">event_details: <%= @event_details %> </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

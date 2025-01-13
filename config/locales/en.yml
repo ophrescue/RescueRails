@@ -198,6 +198,8 @@ en:
       title: 'Non-Profit and Corporate Partners'
     shelter_partners:
       title: 'Shelter Partners'
+    pup_tastic_parties:
+      title: 'Pup-Tastic Parties'
     resources:
       title: 'Resources for Adopters'
     volunteer:
@@ -230,6 +232,9 @@ en:
       title: 'Training Partners'
     microchip_registration:
       title: 'Microchip Registration'
+  party_contact_form:
+    new:
+      title: 'Pup-Tastic Party Contact Form'
   posts:
     bulletins:
       index:

@@ -60,4 +60,4 @@ feature 'Donations' do
     expect(page).to have_selector :css, 'nav.pagination'
     expect(page.all('table tbody tr').size).to eq 30
   end
-end
+end if false

@@ -21,11 +21,12 @@ class DonationsController < ApplicationController
   before_action :show_user_navbar, only: %i[history show]
 
   def new
-    @donation = Donation.new optional_params
+    redirect_to("/donate")
+    # @donation = Donation.new optional_params
   end
 
   def index
-    redirect_to(new_donation_path)
+    redirect_to("/donate")
   end
 
   def history
@@ -73,7 +74,7 @@ class DonationsController < ApplicationController
   end
 
   def admin_user
-    redirect_to(new_donation_path) unless current_user.admin?
+    redirect_to("/donate") unless current_user.admin?
   end
 
   def stripe_params

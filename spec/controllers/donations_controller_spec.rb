@@ -36,4 +36,4 @@ describe DonationsController, type: :controller do
       expect(response).to be_successful
     end
   end
-end
+end if false

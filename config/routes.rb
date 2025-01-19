@@ -60,10 +60,10 @@ Rails.application.routes.draw do
 
   get '/events/:scope', to: 'events#index', scope: /(past|upcoming)/, as: "scoped_events"
 
-  get '/campaigns/:scope', to: 'campaigns#index', scope: /(inactive|active)/, as: "scoped_campaigns"
+#  get '/campaigns/:scope', to: 'campaigns#index', scope: /(inactive|active)/, as: "scoped_campaigns"
 
   resources :adoption_app,
-            :campaigns,
+#            :campaigns,
             :dashboards,
             :events,
             :folders,

@@ -151,6 +151,13 @@ class Cat < ApplicationRecord
   AGES = %w[baby young adult senior].freeze
   validates_inclusion_of :age, in: AGES, allow_blank: true
 
+  SHELTERLUV_AGE = {
+    'baby' => 'Kitten',
+    'young' => 'Young',
+    'adult' => 'Adult Cat',
+    'senior' => 'Senior'
+  }
+
   SIZES = ['small', 'medium', 'large', 'extra large'].freeze
   validates_inclusion_of :size, in: SIZES, allow_blank: true
 
@@ -303,6 +310,10 @@ class Cat < ApplicationRecord
 
   def to_petfinder_gender
     PETFINDER_GENDER[gender]
+  end
+
+  def to_shelterluv_age
+    SHELTERLUV_AGE[age]
   end
 
   def update_adoption_date

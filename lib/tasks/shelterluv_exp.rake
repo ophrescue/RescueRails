@@ -1,22 +1,38 @@
-namespace :shelterluv_exp do
+namespace :shelterluv do
   require 'csv'
   require 'fileutils'
+  require 'street_address'
 
   path = "/tmp/shelterluv/"
 
   filename = 'animals.csv'
 
   desc "Export Records to CSV, for Shelterluv"
-  task export_upload: :environment do
+  task export: :environment do
     puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Shelterluv Export Start"
 
     FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
     FileUtils::Verbose.mkdir(path)
 
-    #dogs = Dog.all
-    dogs = Dog.eager_load(:adoptions).where(adoptions: {relation_type: "adopted"}).order(updated_at: :desc).distinct
+
+    subquery = Adoption.where(relation_type: 'adopted').to_sql
+
+    dogs = Dog.joins("LEFT JOIN (#{subquery}) AS adptn ON adptn.dog_id = dogs.id")
+
     CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
       dogs.each do |d|
+
+
+        if d.adopters.first
+          if d.adopters.first.address1.match(/^(\d+)\s+(.+?)\s+(\w+(?:\s+\w+){0,3})$/)
+            street_number = Regexp.last_match[1]
+            street_name   = Regexp.last_match[2].strip
+            street_type   = Regexp.last_match[3].strip
+          else
+            puts "Address format not recognized"
+          end
+        end
+
         csv << [
                 d.tracking_id.to_s,                                        # Animal ID
                 "Dog",                                                     # Species
@@ -28,7 +44,7 @@ namespace :shelterluv_exp do
                 d.name,                                                    # Animal Name
                 d.gender,                                                  # Gender
                 d.to_shelterluv_age,                                       # Age Group
-                d.shelter.name ? d.shelter.name : "DMS Import",            # Transfer In Partner
+                d.shelter ? d.shelter.name : "DMS Import",            # Transfer In Partner
                 "",                                                        # Transfer Out Partner
                 "IMPORT",                                                  # Intake Person ID
                 "DMS Import",                                              # Intake person name
@@ -43,19 +59,19 @@ namespace :shelterluv_exp do
                 "",                                               # Intake person city
                 "",                                               # Intake person state
                 "",                                               # Intake person zip code
-                d.adoptions.adopter.id,                           # Outcome person id
-                d.adoptions.adopter.name,                         # Outcome person name
-                d.adoptions.adopter.email,                        # outcome person email
-                d.adoption.adopter.phone,                         # outcome person home phone
+                d.adopters.first ? d.adopters.first.id : "",                           # Outcome person id
+                d.adopters.first ? d.adopters.first.name : "",                         # Outcome person name
+                d.adopters.first ? d.adopters.first.email : "",                        # outcome person email
+                d.adopters.first ? d.adopters.first.phone : "",                         # outcome person home phone
                 "",                                               # outcome person cell phone
-                d.adoption.adopter.address2,                      # outcome person unit number
-                "todo",                                           # outcome person street number
-                "todo",                                                  # outcome person street name
-                "todo",                                                  # outcome person street type
-                "todo",                                                 # outcome person street direction
-                d.adoption.adopter.city,                                                  # outcome person city
-                d.adoption.adopter.state,                                     # outcome person sate
-                d.adotion.adopter.zip,                                                  # outcome person zip
+                d.adopters.first ? d.adopters.first.address2 : "",      # outcome person unit number
+                d.adopters.first ? street_number : "",           # outcome person street number
+                d.adopters.first ? street_name : "",           # outcome person street name
+                d.adopters.first ? street_type : "",           # outcome person street type
+                "",                                                   # outcome person street direction
+                d.adopters.first ? d.adopters.first.city : "",         # outcome person city
+                d.adopters.first ? d.adopters.first.state : "",            # outcome person sate
+                d.adopters.first ? d.adopters.first.zip : "",                # outcome person zip
                 "",                                                        # intake subtype
                 "",                                                            # outcome subtype
                 d.secondary_breed ? d.secondary_breed.name : "",          # secondary breed

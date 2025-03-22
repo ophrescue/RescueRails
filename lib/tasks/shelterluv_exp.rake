@@ -36,7 +36,7 @@ namespace :shelterluv do
                 "Dog",                                                     # Species
                 d.primary_breed ? d.primary_breed.name : "",               # Primary Breed
                 "Transfer In",                                             # Intake Type
-                d.intake_dt.present? ? intake_dt : d.created_at.strftime("%F"),     # Intake Date
+                d.intake_dt.present? ? d.intake_dt : d.created_at.strftime("%F"),     # Intake Date
                 d.adopters.first ? "Adoption" : "",                         # Outcome Type
                 d.adoption_date ? d.adoption_date : "",                    # Outcome Date
                 d.name,                                                    # Animal Name

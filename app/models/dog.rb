@@ -149,6 +149,13 @@ class Dog < ApplicationRecord
   AGES = %w[baby young adult senior]
   validates_inclusion_of :age, in: AGES, allow_blank: true
 
+  SHELTERLUV_AGE = {
+    'baby' => 'Puppy',
+    'young' => 'Young',
+    'adult' => 'Adult Dog',
+    'senior' => 'Senior'
+  }
+
   SIZES = ['small', 'medium', 'large', 'extra large']
   validates_inclusion_of :size, in: SIZES, allow_blank: true
 
@@ -299,6 +306,10 @@ class Dog < ApplicationRecord
 
   def to_petfinder_gender
     PETFINDER_GENDER[gender]
+  end
+
+  def to_shelterluv_age
+    SHELTERLUV_AGE[age]
   end
 
   def to_adoptapet_breed(breed, size)

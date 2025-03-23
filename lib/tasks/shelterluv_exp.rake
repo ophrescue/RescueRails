@@ -107,7 +107,7 @@ namespace :shelterluv do
             street_type   = Regexp.last_match[3].strip
           else
             street_number = ""
-            street_name = d.adopters.first.address1
+            street_name = c.adopters.first.address1
             street_type = ""
           end
         end

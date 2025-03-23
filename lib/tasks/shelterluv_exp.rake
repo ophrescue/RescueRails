@@ -106,7 +106,9 @@ namespace :shelterluv do
             street_name   = Regexp.last_match[2].strip
             street_type   = Regexp.last_match[3].strip
           else
-            puts "Address format not recognized"
+            street_number = ""
+            street_name = d.adopters.first.address1
+            street_type = ""
           end
         end
 
@@ -115,7 +117,7 @@ namespace :shelterluv do
                 "Cat",                                                     # Species
                 c.primary_breed ? c.primary_breed.name : "",               # Primary Breed
                 "Transfer In",                                             # Intake Type
-                c.intake_dt ? intake_dt : c.created_at.strftime("%F"),     # Intake Date
+                c.intake_dt ? c.intake_dt : c.created_at.strftime("%F"),     # Intake Date
                 c.adopters.first ? "Adoption" : "",                         # Outcome Type
                 c.adoption_date ? c.adoption_date : "",                    # Outcome Date
                 c.name,                                                    # Animal Name

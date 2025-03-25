@@ -4,7 +4,8 @@ namespace :shelterluv do
 
   path = "/tmp/shelterluv/"
 
-  filename = 'animals.csv'
+  animal_csv = 'animals.csv'
+  memo_csv = 'memos.csv'
 
   desc "Export Records to CSV, for Shelterluv"
   task export: :environment do
@@ -17,7 +18,7 @@ namespace :shelterluv do
     subquery = Adoption.where(relation_type: 'adopted').to_sql
     dogs = Dog.joins("LEFT JOIN (#{subquery}) AS adptn ON adptn.dog_id = dogs.id")
 
-    CSV.open(path + filename, "wt", force_quotes: "true", col_sep: ",") do |csv|
+    CSV.open(path + animal_csv, "wt", force_quotes: "true", col_sep: ",") do |csv|
       dogs.each do |d|
 
 
@@ -34,7 +35,7 @@ namespace :shelterluv do
         end
 
         csv << [
-                d.tracking_id.to_s,                                        # Animal ID
+                "D" + d.tracking_id.to_s,                                        # Animal ID (add a D in font)
                 "Dog",                                                     # Species
                 d.primary_breed ? d.primary_breed.name : "",               # Primary Breed
                 "Transfer In",                                             # Intake Type
@@ -97,7 +98,7 @@ namespace :shelterluv do
     cat_subquery = CatAdoption.where(relation_type: 'adopted').to_sql
     cats = Cat.joins("LEFT JOIN (#{cat_subquery}) AS adptn ON adptn.cat_id = cats.id")
 
-    CSV.open(path + filename, "at", force_quotes: "true", col_sep: ",") do |csv|
+    CSV.open(path + animal_csv, "at", force_quotes: "true", col_sep: ",") do |csv|
       cats.each do |c|
 
         if c.adopters.first
@@ -113,7 +114,7 @@ namespace :shelterluv do
         end
 
         csv << [
-                c.tracking_id.to_s,                                        # Animal ID
+                "C" + c.tracking_id.to_s,                                      # Animal ID (add a C in front)
                 "Cat",                                                     # Species
                 c.primary_breed ? c.primary_breed.name : "",               # Primary Breed
                 "Transfer In",                                             # Intake Type
@@ -171,9 +172,87 @@ namespace :shelterluv do
       end
     end
 
+    puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Shelterluv animal Export Completed"
 
+    puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Shelterluv Memo Export Start"
 
-    puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Shelterluv Export Completed"
+    dogs_all = Dog.all
+
+    CSV.open(path + memo_csv, "wt", force_quotes: "true", col_sep: ",") do |csv|
+      dogs_all.each do |dd|
+        csv << [dd.created_at.strftime("%F"),     # Date
+                "D"+ dd.tracking_id.to_s,     # Animal ID
+                "Kennel Card/Website",        # Memo Type
+                dd.description                # Memo Content
+        ]
+      end
+
+      dogs_all.each do |dd|
+        csv << [dd.created_at.strftime("%F"),     # Date
+                "D"+ dd.tracking_id.to_s,     # Animal ID
+                "Medical",        # Memo Type
+                dd.medical_summary           # Memo Content
+        ]
+      end
+
+      dogs_all.each do |dd|
+        csv << [dd.created_at.strftime("%F"),     # Date
+                "D"+ dd.tracking_id.to_s,     # Animal ID
+                "Behavior",        # Memo Type
+                dd.behavior_summary           # Memo Content
+        ]
+      end
+
+      dogs_all.each do |dd|
+        dd.comments.each do |ddc|
+          csv << [dd.created_at.strftime("%F"),     # Date
+                  "D"+ dd.tracking_id.to_s,     # Animal ID
+                  "Behavior",        # Memo Type
+                  ddc.content           # Memo Content
+          ]
+        end
+      end
+
+    end
+
+    cats_all = Cat.all
+
+    CSV.open(path + memo_csv, "at", force_quotes: "true", col_sep: ",") do |csv|
+      cats.each do |cc|
+        csv << [cc.created_at.strftime("%F"),     # Date
+                "C"+ cc.tracking_id.to_s,     # Animal ID
+                "Kennel Card/Website",        # Memo Type
+                cc.description                # Memo Content
+        ]
+      end
+
+      cats_all.each do |cc|
+        csv << [cc.created_at.strftime("%F"),     # Date
+                "C"+ cc.tracking_id.to_s,     # Animal ID
+                "Medical",        # Memo Type
+                cc.medical_summary           # Memo Content
+        ]
+      end
+
+      cats_all.each do |dd|
+        csv << [cc.created_at.strftime("%F"),     # Date
+                "C"+ cc.tracking_id.to_s,     # Animal ID
+                "Behavior",        # Memo Type
+                dd.behavior_summary           # Memo Content
+        ]
+      end
+
+      cats_all.each do |cc|
+        cc.comments.each do |ccc|
+          csv << [cc.created_at.strftime("%F"),     # Date
+                  "C"+ cc.tracking_id.to_s,     # Animal ID
+                  "Behavior",        # Memo Type
+                  ccc.content           # Memo Content
+          ]
+        end
+      end
+
+    end
 
 
   end

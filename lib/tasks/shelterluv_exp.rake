@@ -234,7 +234,7 @@ namespace :shelterluv do
         ]
       end
 
-      cats_all.each do |dd|
+      cats_all.each do |cc|
         csv << [cc.created_at.strftime("%F"),     # Date
                 "C"+ cc.tracking_id.to_s,     # Animal ID
                 "Behavior",        # Memo Type

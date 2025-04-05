@@ -238,7 +238,7 @@ namespace :shelterluv do
         csv << [cc.created_at.strftime("%F"),     # Date
                 "C"+ cc.tracking_id.to_s,     # Animal ID
                 "Behavior",        # Memo Type
-                dd.behavior_summary           # Memo Content
+                cc.behavior_summary           # Memo Content
         ]
       end
 

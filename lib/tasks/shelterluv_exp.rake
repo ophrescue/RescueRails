@@ -37,13 +37,13 @@ namespace :shelterluv do
         csv << [
                 "D" + d.tracking_id.to_s,                                        # Animal ID (add a D in font)
                 "Dog",                                                     # Species
-                d.primary_breed ? d.primary_breed.name : "",               # Primary Breed
+                d.primary_breed ? d.primary_breed.name : "Unknown",               # Primary Breed
                 "Transfer In",                                             # Intake Type
                 d.intake_dt.present? ? d.intake_dt : d.created_at.strftime("%F"),     # Intake Date
                 d.adopters.first ? "Adoption" : "",                         # Outcome Type
                 d.adoption_date ? d.adoption_date : "",                    # Outcome Date
                 d.name,                                                    # Animal Name
-                d.gender,                                                  # Gender
+                d.gender.present? ? d.gender : "Uknown",                  # Gender
                 d.to_shelterluv_age,                                       # Age Group
                 d.shelter ? d.shelter.name : "DMS Import",            # Transfer In Partner
                 "",                                                        # Transfer Out Partner
@@ -116,13 +116,13 @@ namespace :shelterluv do
         csv << [
                 "C" + c.tracking_id.to_s,                                      # Animal ID (add a C in front)
                 "Cat",                                                     # Species
-                c.primary_breed ? c.primary_breed.name : "",               # Primary Breed
+                c.primary_breed ? c.primary_breed.name : "Unknown",               # Primary Breed
                 "Transfer In",                                             # Intake Type
                 c.intake_dt ? c.intake_dt : c.created_at.strftime("%F"),     # Intake Date
                 c.adopters.first ? "Adoption" : "",                         # Outcome Type
                 c.adoption_date ? c.adoption_date : "",                    # Outcome Date
                 c.name,                                                    # Animal Name
-                c.gender,                                                  # Gender
+                c.gender.present? ? c.gender : "Unknown",                   # Gender
                 c.to_shelterluv_age,                                       # Age Group
                 c.shelter ? c.shelter.name : "DMS Import",            # Transfer In Partner
                 "",                                                        # Transfer Out Partner
@@ -183,7 +183,7 @@ namespace :shelterluv do
         csv << [dd.created_at.strftime("%F"),     # Date
                 "D"+ dd.tracking_id.to_s,     # Animal ID
                 "Kennel Card/Website",        # Memo Type
-                dd.description                # Memo Content
+                dd.description.gsub(/\R+/, ' ')                # Memo Content
         ]
       end
 
@@ -191,7 +191,7 @@ namespace :shelterluv do
         csv << [dd.created_at.strftime("%F"),     # Date
                 "D"+ dd.tracking_id.to_s,     # Animal ID
                 "Medical",        # Memo Type
-                dd.medical_summary           # Memo Content
+                dd.medical_summary.gsub(/\R+/, ' ')           # Memo Content
         ]
       end
 
@@ -199,7 +199,7 @@ namespace :shelterluv do
         csv << [dd.created_at.strftime("%F"),     # Date
                 "D"+ dd.tracking_id.to_s,     # Animal ID
                 "Behavior",        # Memo Type
-                dd.behavior_summary           # Memo Content
+                dd.behavior_summary.gsub(/\R+/, ' ')           # Memo Content
         ]
       end
 
@@ -208,7 +208,7 @@ namespace :shelterluv do
           csv << [dd.created_at.strftime("%F"),     # Date
                   "D"+ dd.tracking_id.to_s,     # Animal ID
                   "Behavior",        # Memo Type
-                  ddc.content           # Memo Content
+                  ddc.content.gsub(/\R+/, ' ')           # Memo Content
           ]
         end
       end
@@ -222,7 +222,7 @@ namespace :shelterluv do
         csv << [cc.created_at.strftime("%F"),     # Date
                 "C"+ cc.tracking_id.to_s,     # Animal ID
                 "Kennel Card/Website",        # Memo Type
-                cc.description                # Memo Content
+                cc.description.gsub(/\R+/, ' ')                # Memo Content
         ]
       end
 
@@ -230,7 +230,7 @@ namespace :shelterluv do
         csv << [cc.created_at.strftime("%F"),     # Date
                 "C"+ cc.tracking_id.to_s,     # Animal ID
                 "Medical",        # Memo Type
-                cc.medical_summary           # Memo Content
+                cc.medical_summary.gsub(/\R+/, ' ')           # Memo Content
         ]
       end
 
@@ -238,7 +238,7 @@ namespace :shelterluv do
         csv << [cc.created_at.strftime("%F"),     # Date
                 "C"+ cc.tracking_id.to_s,     # Animal ID
                 "Behavior",        # Memo Type
-                cc.behavior_summary           # Memo Content
+                cc.behavior_summary.gsub(/\R+/, ' ')           # Memo Content
         ]
       end
 
@@ -247,7 +247,7 @@ namespace :shelterluv do
           csv << [cc.created_at.strftime("%F"),     # Date
                   "C"+ cc.tracking_id.to_s,     # Animal ID
                   "Behavior",        # Memo Type
-                  ccc.content           # Memo Content
+                  ccc.content.gsub(/\R+/, ' ')           # Memo Content
           ]
         end
       end

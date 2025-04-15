@@ -254,7 +254,7 @@ namespace :shelterluv do
 
     end
 
-
+      puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Shelterluv Export COMPLETE!"
   end
 
   private

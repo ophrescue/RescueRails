@@ -39,9 +39,9 @@ namespace :shelterluv do
                 "Dog",                                                     # Species
                 d.primary_breed ? d.primary_breed.to_shelterluv_breed : "Unknown",               # Primary Breed
                 "Transfer In",                                             # Intake Type
-                d.intake_dt.present? ? d.intake_dt : d.created_at.strftime("%F"),     # Intake Date
+                d.intake_dt < d.adoption_date ? d.intake_dt : d.adoption_date - 30.days ,     # Intake Date
                 d.adopters.first ? "Adoption" : "",                         # Outcome Type
-                d.adoption_date ? d.adoption_date : "",                    # Outcome Date
+                d.adopters.first && d.adoption_date ? d.adoption_date : "",        # Outcome Date
                 d.name,                                                    # Animal Name
                 d.gender.present? ? d.gender : "Uknown",                  # Gender
                 d.to_shelterluv_age,                                       # Age Group
@@ -118,9 +118,9 @@ namespace :shelterluv do
                 "Cat",                                                     # Species
                 c.primary_breed ? c.primary_breed.to_shelterluv_breed : "Unknown",               # Primary Breed
                 "Transfer In",                                             # Intake Type
-                c.intake_dt ? c.intake_dt : c.created_at.strftime("%F"),     # Intake Date
+                c.intake_dt < c.adoption_date ? c.intake_dt : c.adoption_date - 30.days ,     # Intake Date
                 c.adopters.first ? "Adoption" : "",                         # Outcome Type
-                c.adoption_date ? c.adoption_date : "",                    # Outcome Date
+                c.adopters.first && c.adoption_date ? c.adoption_date : "",        # Outcome Date
                 c.name,                                                    # Animal Name
                 c.gender.present? ? c.gender : "Unknown",                   # Gender
                 c.to_shelterluv_age,                                       # Age Group
@@ -205,9 +205,9 @@ namespace :shelterluv do
 
       dogs_all.each do |dd|
         dd.comments.each do |ddc|
-          csv << [dd.created_at.strftime("%F"),     # Date
+          csv << [ddc.created_at.strftime("%F"),     # Date
                   "D"+ dd.tracking_id.to_s,     # Animal ID
-                  "Behavior",        # Memo Type
+                  "Private**",        # Memo Type
                   ddc.content ? ddc.content.gsub(/\R+/, ' ') : " "           # Memo Content
           ]
         end
@@ -244,9 +244,9 @@ namespace :shelterluv do
 
       cats_all.each do |cc|
         cc.comments.each do |ccc|
-          csv << [cc.created_at.strftime("%F"),     # Date
+          csv << [ccc.created_at.strftime("%F"),     # Date
                   "C"+ cc.tracking_id.to_s,     # Animal ID
-                  "Behavior",        # Memo Type
+                  "Private**",        # Memo Type
                   ccc.content ? ccc.content.gsub(/\R+/, ' ') : " "           # Memo Content
           ]
         end

@@ -37,7 +37,7 @@ namespace :shelterluv do
         csv << [
                 "D" + d.tracking_id.to_s,                                        # Animal ID (add a D in font)
                 "Dog",                                                     # Species
-                d.primary_breed ? d.primary_breed.name : "Unknown",               # Primary Breed
+                d.primary_breed ? d.primary_breed.to_shelterluv_breed : "Unknown",               # Primary Breed
                 "Transfer In",                                             # Intake Type
                 d.intake_dt.present? ? d.intake_dt : d.created_at.strftime("%F"),     # Intake Date
                 d.adopters.first ? "Adoption" : "",                         # Outcome Type
@@ -75,7 +75,7 @@ namespace :shelterluv do
                 d.adopters.first ? d.adopters.first.zip : "",                # outcome person zip
                 "",                                                        # intake subtype
                 "",                                                            # outcome subtype
-                d.secondary_breed ? d.secondary_breed.name : "",          # secondary breed
+                d.secondary_breed ? d.secondary_breed.to_shelterluv_breed : "",          # secondary breed
                 "",                                                        # distinguiishing marks
                 d.is_altered ? "Yes" : "No",                             # altered
                 d.birth_dt ? d.birth_dt : "",                           # date of birth
@@ -116,7 +116,7 @@ namespace :shelterluv do
         csv << [
                 "C" + c.tracking_id.to_s,                                      # Animal ID (add a C in front)
                 "Cat",                                                     # Species
-                c.primary_breed ? c.primary_breed.name : "Unknown",               # Primary Breed
+                c.primary_breed ? c.primary_breed.to_shelterluv_breed : "Unknown",               # Primary Breed
                 "Transfer In",                                             # Intake Type
                 c.intake_dt ? c.intake_dt : c.created_at.strftime("%F"),     # Intake Date
                 c.adopters.first ? "Adoption" : "",                         # Outcome Type
@@ -154,7 +154,7 @@ namespace :shelterluv do
                 c.adopters.first ? c.adopters.first.zip : "",                # outcome person zip
                 "",                                                        # intake subtype
                 "",                                                            # outcome subtype
-                c.secondary_breed ? c.secondary_breed.name : "",          # secondary breed
+                c.secondary_breed ? c.secondary_breed.to_shelterluv_breed : "",          # secondary breed
                 "",                                                        # distinguiishing marks
                 c.is_altered ? "Yes" : "No",                             # altered
                 c.birth_dt ? c.birth_dt : "",                           # date of birth

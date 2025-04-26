@@ -39,7 +39,7 @@ namespace :shelterluv do
                 "Dog",                                                     # Species
                 d.primary_breed ? d.primary_breed.to_shelterluv_breed : "Unknown",               # Primary Breed
                 "Transfer In",                                             # Intake Type
-                d.intake_dt < d.adoption_date ? d.intake_dt : d.adoption_date - 30.days ,     # Intake Date
+                process_intake_dt(d.intake_dt, d.adoption_date, d.created_at), # Intake Date
                 d.adopters.first ? "Adoption" : "",                         # Outcome Type
                 d.adopters.first && d.adoption_date ? d.adoption_date : "",        # Outcome Date
                 d.name,                                                    # Animal Name
@@ -118,7 +118,7 @@ namespace :shelterluv do
                 "Cat",                                                     # Species
                 c.primary_breed ? c.primary_breed.to_shelterluv_breed : "Unknown",               # Primary Breed
                 "Transfer In",                                             # Intake Type
-                c.intake_dt < c.adoption_date ? c.intake_dt : c.adoption_date - 30.days ,     # Intake Date
+                process_intake_dt(c.intake_dt, c.adoption_date, c.created_at), # Intake Date
                 c.adopters.first ? "Adoption" : "",                         # Outcome Type
                 c.adopters.first && c.adoption_date ? c.adoption_date : "",        # Outcome Date
                 c.name,                                                    # Animal Name
@@ -258,6 +258,17 @@ namespace :shelterluv do
   end
 
   private
+
+  def process_intake_dt(intake_dt, adoption_date, created_at)
+    return created_at unless adoption_date
+
+    if intake_dt.present? && intake_dt < adoption_date
+      intake_dt
+    else
+      adoption_date - 30.days
+    end
+  end
+
 
 
 end

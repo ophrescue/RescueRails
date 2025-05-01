@@ -40,7 +40,7 @@ namespace :shelterluv do
                 d.primary_breed ? d.primary_breed.to_shelterluv_breed : "Unknown",               # Primary Breed
                 "Transfer In",                                             # Intake Type
                 process_intake_dt(d.intake_dt, d.adoption_date, d.created_at), # Intake Date
-                d.adopters.first ? "Adoption" : "",                         # Outcome Type
+                d.adopters.first && d.adoption_date ? "Adoption" : "",             # Outcome Type
                 d.adopters.first && d.adoption_date ? d.adoption_date : "",        # Outcome Date
                 d.name,                                                    # Animal Name
                 d.gender.present? ? d.gender : "Uknown",                  # Gender
@@ -119,7 +119,7 @@ namespace :shelterluv do
                 c.primary_breed ? c.primary_breed.to_shelterluv_breed : "Unknown",               # Primary Breed
                 "Transfer In",                                             # Intake Type
                 process_intake_dt(c.intake_dt, c.adoption_date, c.created_at), # Intake Date
-                c.adopters.first ? "Adoption" : "",                         # Outcome Type
+                c.adopters.first && c.adoption_date ? "Adoption" : "",             # Outcome Type
                 c.adopters.first && c.adoption_date ? c.adoption_date : "",        # Outcome Date
                 c.name,                                                    # Animal Name
                 c.gender.present? ? c.gender : "Unknown",                   # Gender
@@ -180,36 +180,44 @@ namespace :shelterluv do
 
     CSV.open(path + memo_csv, "wt", force_quotes: "true", col_sep: ",") do |csv|
       dogs_all.each do |dd|
-        csv << [dd.created_at.strftime("%F"),     # Date
-                "D"+ dd.tracking_id.to_s,     # Animal ID
-                "Kennel Card/Website",        # Memo Type
-                dd.description ? dd.description.gsub(/\R+/, ' ') : ""                # Memo Content
-        ]
+        if dd.description.present?
+          csv << [dd.created_at.strftime("%F"),     # Date
+                  "D"+ dd.tracking_id.to_s,     # Animal ID
+                  "Kennel Card/Website",        # Memo Type
+                  dd.description ? dd.description.gsub(/\R+/, ' ') : ""                # Memo Content
+          ]
+        end
       end
 
       dogs_all.each do |dd|
-        csv << [dd.created_at.strftime("%F"),     # Date
-                "D"+ dd.tracking_id.to_s,     # Animal ID
-                "Medical",        # Memo Type
-                dd.medical_summary ? dd.medical_summary.gsub(/\R+/, ' ') : ""           # Memo Content
-        ]
+        if dd.medical_summary.present?
+          csv << [dd.created_at.strftime("%F"),     # Date
+                  "D"+ dd.tracking_id.to_s,     # Animal ID
+                  "Medical",        # Memo Type
+                  dd.medical_summary ? dd.medical_summary.gsub(/\R+/, ' ') : ""           # Memo Content
+          ]
+        end
       end
 
       dogs_all.each do |dd|
-        csv << [dd.created_at.strftime("%F"),     # Date
-                "D"+ dd.tracking_id.to_s,     # Animal ID
-                "Behavior",        # Memo Type
-                dd.behavior_summary ? dd.behavior_summary.gsub(/\R+/, ' ') : ""          # Memo Content
-        ]
+        if dd.behavior_summary.present?
+          csv << [dd.created_at.strftime("%F"),     # Date
+                  "D"+ dd.tracking_id.to_s,     # Animal ID
+                  "Behavior",        # Memo Type
+                  dd.behavior_summary ? dd.behavior_summary.gsub(/\R+/, ' ') : ""          # Memo Content
+          ]
+        end
       end
 
       dogs_all.each do |dd|
         dd.comments.each do |ddc|
-          csv << [ddc.created_at.strftime("%F"),     # Date
-                  "D"+ dd.tracking_id.to_s,     # Animal ID
-                  "Private**",        # Memo Type
-                  ddc.content ? ddc.content.gsub(/\R+/, ' ') : " "           # Memo Content
-          ]
+          if ddc.content.present?
+            csv << [ddc.created_at.strftime("%F"),     # Date
+                    "D"+ dd.tracking_id.to_s,     # Animal ID
+                    "Private**",        # Memo Type
+                    ddc.content ? ddc.content.gsub(/\R+/, ' ') : " "           # Memo Content
+            ]
+          end
         end
       end
 
@@ -219,36 +227,44 @@ namespace :shelterluv do
 
     CSV.open(path + memo_csv, "at", force_quotes: "true", col_sep: ",") do |csv|
       cats.each do |cc|
-        csv << [cc.created_at.strftime("%F"),     # Date
-                "C"+ cc.tracking_id.to_s,     # Animal ID
-                "Kennel Card/Website",        # Memo Type
-                cc.description ? cc.description.gsub(/\R+/, ' ') : " "                # Memo Content
-        ]
+        if cc.description.present?
+          csv << [cc.created_at.strftime("%F"),     # Date
+                  "C"+ cc.tracking_id.to_s,     # Animal ID
+                  "Kennel Card/Website",        # Memo Type
+                  cc.description ? cc.description.gsub(/\R+/, ' ') : " "                # Memo Content
+          ]
+        end
       end
 
       cats_all.each do |cc|
-        csv << [cc.created_at.strftime("%F"),     # Date
-                "C"+ cc.tracking_id.to_s,     # Animal ID
-                "Medical",        # Memo Type
-                cc.medical_summary ? cc.medical_summary.gsub(/\R+/, ' ') : " "           # Memo Content
-        ]
+        if cc.medical_summary.present?
+          csv << [cc.created_at.strftime("%F"),     # Date
+                  "C"+ cc.tracking_id.to_s,     # Animal ID
+                  "Medical",        # Memo Type
+                  cc.medical_summary ? cc.medical_summary.gsub(/\R+/, ' ') : " "           # Memo Content
+          ]
+        end
       end
 
       cats_all.each do |cc|
-        csv << [cc.created_at.strftime("%F"),     # Date
-                "C"+ cc.tracking_id.to_s,     # Animal ID
-                "Behavior",        # Memo Type
-                cc.behavior_summary ? cc.behavior_summary.gsub(/\R+/, ' ') : " "           # Memo Content
-        ]
+        if cc.behavior_summary.present?
+          csv << [cc.created_at.strftime("%F"),     # Date
+                  "C"+ cc.tracking_id.to_s,     # Animal ID
+                  "Behavior",        # Memo Type
+                  cc.behavior_summary ? cc.behavior_summary.gsub(/\R+/, ' ') : " "           # Memo Content
+          ]
+        end
       end
 
       cats_all.each do |cc|
         cc.comments.each do |ccc|
-          csv << [ccc.created_at.strftime("%F"),     # Date
-                  "C"+ cc.tracking_id.to_s,     # Animal ID
-                  "Private**",        # Memo Type
-                  ccc.content ? ccc.content.gsub(/\R+/, ' ') : " "           # Memo Content
-          ]
+          if ccc.content.present?
+            csv << [ccc.created_at.strftime("%F"),     # Date
+                    "C"+ cc.tracking_id.to_s,     # Animal ID
+                    "Private**",        # Memo Type
+                    ccc.content ? ccc.content.gsub(/\R+/, ' ') : " "           # Memo Content
+            ]
+          end
         end
       end
 
@@ -268,7 +284,5 @@ namespace :shelterluv do
       adoption_date - 30.days
     end
   end
-
-
 
 end

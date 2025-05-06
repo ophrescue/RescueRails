@@ -1,20 +1,26 @@
-<h1>Source Shelters</h1>
-<br />
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-md-12">
+            <h1>Source Shelters</h1>
+        </div>
+    </div>
 
-<div class="row">
-	<div class="span12">
-		<p><%= link_to "Add", new_shelter_path, :class => "btn btn-primary" %></p>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p><%= link_to "Add", new_shelter_path, :class => "btn btn-primary" %></p>
 
 
-	<% if @shelters.count > 0 %>
-		<ul>
-			<%= render @shelters %>
-		</ul>
-	<% else %>
+        <% if @shelters.count > 0 %>
+            <ul>
+                <%= render @shelters %>
+            </ul>
+        <% else %>
 
-		<h5>No Shelters</h5>
+            <h5>No Shelters</h5>
 
-	<% end %>
+        <% end %>
 
-	</div>
+        </div>
+    </div>
 </div>

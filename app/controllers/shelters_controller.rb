@@ -26,6 +26,7 @@ class SheltersController < ApplicationController
   before_action :require_login
   before_action :unlocked_user
   before_action :edit_dogs_user
+  before_action :select_bootstrap41
 
   def index
     @shelters = Shelter.order(:id)

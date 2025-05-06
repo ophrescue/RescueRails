@@ -1,15 +1,28 @@
-<h1><%= @shelter.name %></h1>
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-md-12">
+            <h4><%= link_to "Back to Shelter list", shelters_path %></h4>
+            <h1><%= @shelter.name %></h1>
+        </div>
+    </div>
 
-<h3>Dogs</h3>
-<ul>
-<% @shelter.dogs.each do |d| %>
-	<li><%= link_to d.name, dog_path(d) %></li>
-<% end %>
-</ul>
+    <div class="row">
+        <div class="col-md-12">
+        <p><%= link_to "Edit", edit_shelter_path(@shelter), :class => "btn btn-primary" %></p>
 
-<h3>Cats</h3>
-<ul>
-<% @shelter.cats.each do |c| %>
-	<li><%= link_to c.name, cat_path(c) %></li>
-<% end %>
-</ul>
+        <h3>Dogs</h3>
+        <ul>
+        <% @shelter.dogs.each do |d| %>
+            <li><%= link_to d.name, dog_path(d) %></li>
+        <% end %>
+        </ul>
+
+        <h3>Cats</h3>
+        <ul>
+        <% @shelter.cats.each do |c| %>
+            <li><%= link_to c.name, cat_path(c) %></li>
+        <% end %>
+        </ul>
+        </div>
+    </div>
+</div>

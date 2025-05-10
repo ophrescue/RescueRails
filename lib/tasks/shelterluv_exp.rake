@@ -45,7 +45,7 @@ namespace :shelterluv do
                 d.name,                                                    # Animal Name
                 d.gender.present? ? d.gender : "Uknown",                  # Gender
                 d.to_shelterluv_age,                                       # Age Group
-                d.shelter ? d.shelter.name : "DMS Import",            # Transfer In Partner
+                d.shelter ? d.shelter.name : "",            # Transfer In Partner
                 "",                                                        # Transfer Out Partner
                 "IMPORT",                                                  # Intake Person ID
                 "DMS Import",                                              # Intake person name
@@ -124,7 +124,7 @@ namespace :shelterluv do
                 c.name,                                                    # Animal Name
                 c.gender.present? ? c.gender : "Unknown",                   # Gender
                 c.to_shelterluv_age,                                       # Age Group
-                c.shelter ? c.shelter.name : "DMS Import",            # Transfer In Partner
+                c.shelter ? c.shelter.name : "",            # Transfer In Partner
                 "",                                                        # Transfer Out Partner
                 "IMPORT",                                                  # Intake Person ID
                 "DMS Import",                                              # Intake person name

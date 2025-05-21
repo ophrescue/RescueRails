@@ -276,7 +276,7 @@ namespace :shelterluv do
   private
 
   def process_intake_dt(intake_dt, adoption_date, created_at)
-    return created_at unless adoption_date
+    return created_at.strftime("%Y-%m-%e") unless adoption_date
 
     if intake_dt.present? && intake_dt < adoption_date
       intake_dt

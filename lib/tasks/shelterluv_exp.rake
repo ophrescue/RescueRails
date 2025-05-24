@@ -6,6 +6,7 @@ namespace :shelterluv do
 
   animal_csv = 'animals.csv'
   memo_csv = 'memos.csv'
+  reject_csv = 'rejects.csv'
 
   desc "Export Records to CSV, for Shelterluv"
   task export: :environment do
@@ -19,33 +20,44 @@ namespace :shelterluv do
     dogs = Dog.joins("LEFT JOIN (#{subquery}) AS adptn ON adptn.dog_id = dogs.id")
 
     CSV.open(path + animal_csv, "wt", force_quotes: "true", col_sep: ",") do |csv|
-      dogs.each do |d|
+      CSV.open(path + reject_csv, "wt", force_quotes: "true", col_sep: ",") do |rejectCSV|
 
-
-        if d.adopters.first
-          if d.adopters.first.address1.match(/^(\d+)\s+(.+?)\s+(\w+(?:\s+\w+){0,3})$/)
-            street_number = Regexp.last_match[1]
-            street_name   = Regexp.last_match[2].strip
-            street_type   = Regexp.last_match[3].strip
-          else
-            street_number = ""
-            street_name = d.adopters.first.address1
-            street_type = ""
+        dogs.each do |d|
+          if d.adopters.first
+            if d.adopters.first.address1.match(/^(\d+)\s+(.+?)\s+(\w+(?:\s+\w+){0,3})$/)
+              street_number = Regexp.last_match[1]
+              street_name   = Regexp.last_match[2].strip
+              street_type   = Regexp.last_match[3].strip
+            else
+              street_number = ""
+              street_name = d.adopters.first.address1
+              street_type = ""
+            end
           end
-        end
+
+
+        if ((d.status  == 'Adopted') || (d.status == 'Completed')) && d.adoption_date.blank?
+          rejectCSV << [
+                      "D" + c.tracking_id.to_s,                # Animal ID (add a C in front)
+                      "Dog",                                    # Species
+                      d.name,
+                      d.status,
+                      "Adopted/Completed but missing Adoption Date - NOT IMPORTED"
+          ]
+        else
 
         csv << [
-                "D" + d.tracking_id.to_s,                                        # Animal ID (add a D in font)
+                "D" + d.tracking_id.to_s,                                  # Animal ID (add a D in font)
                 "Dog",                                                     # Species
                 d.primary_breed ? d.primary_breed.to_shelterluv_breed : "Unknown",               # Primary Breed
-                "Transfer In",                                             # Intake Type
+                process_intake_type(d.shelter ? d.shelter.name : "Partner Unknown"),           # Intake Type
                 process_intake_dt(d.intake_dt, d.adoption_date, d.created_at), # Intake Date
                 d.adopters.first && d.adoption_date ? "Adoption" : "",             # Outcome Type
                 d.adopters.first && d.adoption_date ? d.adoption_date : "",        # Outcome Date
                 d.name,                                                    # Animal Name
                 d.gender.present? ? d.gender : "Uknown",                  # Gender
                 d.to_shelterluv_age,                                       # Age Group
-                d.shelter ? d.shelter.name : "",            # Transfer In Partner
+                d.shelter ? d.shelter.name : "Partner Unknown",            # Transfer In Partner
                 "",                                                        # Transfer Out Partner
                 "IMPORT",                                                  # Intake Person ID
                 "DMS Import",                                              # Intake person name
@@ -90,6 +102,8 @@ namespace :shelterluv do
                 "",                                                        # found zip code
                 "",                                                        # asilomar intake status
                 ""]                                                        # asilomar outcome status
+        end
+        end
       end
     end
 
@@ -99,76 +113,89 @@ namespace :shelterluv do
     cats = Cat.joins("LEFT JOIN (#{cat_subquery}) AS adptn ON adptn.cat_id = cats.id")
 
     CSV.open(path + animal_csv, "at", force_quotes: "true", col_sep: ",") do |csv|
-      cats.each do |c|
+      CSV.open(path + reject_csv, "at", force_quotes: "true", col_sep: ",") do |rejectCSV|
 
-        if c.adopters.first
-          if c.adopters.first.address1.match(/^(\d+)\s+(.+?)\s+(\w+(?:\s+\w+){0,3})$/)
-            street_number = Regexp.last_match[1]
-            street_name   = Regexp.last_match[2].strip
-            street_type   = Regexp.last_match[3].strip
+        cats.each do |c|
+
+          if c.adopters.first
+            if c.adopters.first.address1.match(/^(\d+)\s+(.+?)\s+(\w+(?:\s+\w+){0,3})$/)
+              street_number = Regexp.last_match[1]
+              street_name   = Regexp.last_match[2].strip
+              street_type   = Regexp.last_match[3].strip
+            else
+              street_number = ""
+              street_name = c.adopters.first.address1
+              street_type = ""
+            end
+          end
+
+          if ((c.status  == 'Adopted') || (c.status == 'Completed')) && c.adoption_date.blank?
+            rejectCSV << [
+                        "C" + c.tracking_id.to_s,                # Animal ID (add a C in front)
+                        "Cat",                                    # Species
+                        c.name,
+                        c.status,
+                        "Adopted/Completed but missing Adoption Date - NOT IMPORTED"
+            ]
           else
-            street_number = ""
-            street_name = c.adopters.first.address1
-            street_type = ""
+            csv << [
+                    "C" + c.tracking_id.to_s,                                  # Animal ID (add a C in front)
+                    "Cat",                                                     # Species
+                    c.primary_breed ? c.primary_breed.to_shelterluv_breed : "Unknown",               # Primary Breed
+                    process_intake_type(c.shelter ? c.shelter.name : "Partner Unknown"),   # Intake Type
+                    process_intake_dt(c.intake_dt, c.adoption_date, c.created_at), # Intake Date
+                    c.adopters.first && c.adoption_date ? "Adoption" : "",             # Outcome Type
+                    c.adopters.first && c.adoption_date ? c.adoption_date : "",        # Outcome Date
+                    c.name,                                                    # Animal Name
+                    c.gender.present? ? c.gender : "Unknown",                   # Gender
+                    c.to_shelterluv_age,                                       # Age Group
+                    c.shelter ? c.shelter.name : "Partner Unknown",            # Transfer In Partner
+                    "",                                                        # Transfer Out Partner
+                    "IMPORT",                                                  # Intake Person ID
+                    "DMS Import",                                              # Intake person name
+                    "",                                                    # Intake person email
+                    "",                                               # Intake person home phone
+                    "",                                               # Intake person cell phone
+                    "",                                               # intake person unit number
+                    "",                                               # Intake person street number
+                    "",                                               # Intake person street name
+                    "",                                               # Intake person street type
+                    "",                                               # Intake person street direction
+                    "",                                               # Intake person city
+                    "",                                               # Intake person state
+                    "",                                               # Intake person zip code
+                    c.adopters.first ? c.adopters.first.id : "",                           # Outcome person id
+                    c.adopters.first ? c.adopters.first.name : "",                         # Outcome person name
+                    c.adopters.first ? c.adopters.first.email : "",                        # outcome person email
+                    c.adopters.first ? c.adopters.first.phone : "",                         # outcome person home phone
+                    "",                                               # outcome person cell phone
+                    c.adopters.first ? c.adopters.first.address2 : "",      # outcome person unit number
+                    c.adopters.first ? street_number : "",           # outcome person street number
+                    c.adopters.first ? street_name : "",           # outcome person street name
+                    c.adopters.first ? street_type : "",           # outcome person street type
+                    "",                                                   # outcome person street direction
+                    c.adopters.first ? c.adopters.first.city : "",         # outcome person city
+                    c.adopters.first ? c.adopters.first.state : "",            # outcome person sate
+                    c.adopters.first ? c.adopters.first.zip : "",                # outcome person zip
+                    "",                                                        # intake subtype
+                    "",                                                            # outcome subtype
+                    c.secondary_breed ? c.secondary_breed.to_shelterluv_breed : "",          # secondary breed
+                    "",                                                        # distinguiishing marks
+                    c.is_altered ? "Yes" : "No",                             # altered
+                    c.birth_dt ? c.birth_dt : "",                           # date of birth
+                    c.status,                                                        # current status
+                    "",                                                        # location
+                    "",                                                        # sublocation
+                    "",                                                        # microchip issue date
+                    "",                                                        # microchip issuer
+                    c.microchip,                                                        # microchip number
+                    "",                                                        # additional previous id
+                    "",                                                        # found address
+                    "",                                                        # found zip code
+                    "",                                                        # asilomar intake status
+                    ""]                                                        # asilomar outcome status
           end
         end
-
-        csv << [
-                "C" + c.tracking_id.to_s,                                      # Animal ID (add a C in front)
-                "Cat",                                                     # Species
-                c.primary_breed ? c.primary_breed.to_shelterluv_breed : "Unknown",               # Primary Breed
-                "Transfer In",                                             # Intake Type
-                process_intake_dt(c.intake_dt, c.adoption_date, c.created_at), # Intake Date
-                c.adopters.first && c.adoption_date ? "Adoption" : "",             # Outcome Type
-                c.adopters.first && c.adoption_date ? c.adoption_date : "",        # Outcome Date
-                c.name,                                                    # Animal Name
-                c.gender.present? ? c.gender : "Unknown",                   # Gender
-                c.to_shelterluv_age,                                       # Age Group
-                c.shelter ? c.shelter.name : "",            # Transfer In Partner
-                "",                                                        # Transfer Out Partner
-                "IMPORT",                                                  # Intake Person ID
-                "DMS Import",                                              # Intake person name
-                "",                                                    # Intake person email
-                "",                                               # Intake person home phone
-                "",                                               # Intake person cell phone
-                "",                                               # intake person unit number
-                "",                                               # Intake person street number
-                "",                                               # Intake person street name
-                "",                                               # Intake person street type
-                "",                                               # Intake person street direction
-                "",                                               # Intake person city
-                "",                                               # Intake person state
-                "",                                               # Intake person zip code
-                c.adopters.first ? c.adopters.first.id : "",                           # Outcome person id
-                c.adopters.first ? c.adopters.first.name : "",                         # Outcome person name
-                c.adopters.first ? c.adopters.first.email : "",                        # outcome person email
-                c.adopters.first ? c.adopters.first.phone : "",                         # outcome person home phone
-                "",                                               # outcome person cell phone
-                c.adopters.first ? c.adopters.first.address2 : "",      # outcome person unit number
-                c.adopters.first ? street_number : "",           # outcome person street number
-                c.adopters.first ? street_name : "",           # outcome person street name
-                c.adopters.first ? street_type : "",           # outcome person street type
-                "",                                                   # outcome person street direction
-                c.adopters.first ? c.adopters.first.city : "",         # outcome person city
-                c.adopters.first ? c.adopters.first.state : "",            # outcome person sate
-                c.adopters.first ? c.adopters.first.zip : "",                # outcome person zip
-                "",                                                        # intake subtype
-                "",                                                            # outcome subtype
-                c.secondary_breed ? c.secondary_breed.to_shelterluv_breed : "",          # secondary breed
-                "",                                                        # distinguiishing marks
-                c.is_altered ? "Yes" : "No",                             # altered
-                c.birth_dt ? c.birth_dt : "",                           # date of birth
-                c.status,                                                        # current status
-                "",                                                        # location
-                "",                                                        # sublocation
-                "",                                                        # microchip issue date
-                "",                                                        # microchip issuer
-                c.microchip,                                                        # microchip number
-                "",                                                        # additional previous id
-                "",                                                        # found address
-                "",                                                        # found zip code
-                "",                                                        # asilomar intake status
-                ""]                                                        # asilomar outcome status
       end
     end
 
@@ -272,6 +299,8 @@ namespace :shelterluv do
 
       puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Shelterluv Export COMPLETE!"
   end
+end
+
 
   private
 
@@ -285,4 +314,7 @@ namespace :shelterluv do
     end
   end
 
-end
+  def process_intake_type(shelter_name)
+    return "Transfer In" unless (shelter_name == "Born in Care") || (shelter_name == "Owner Surrender")
+    return shelter_name
+  end

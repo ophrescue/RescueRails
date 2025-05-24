@@ -29,7 +29,7 @@ class SheltersController < ApplicationController
   before_action :select_bootstrap41
 
   def index
-    @shelters = Shelter.order(:id)
+    @shelters = Shelter.order(:name)
     respond_to do |format|
       format.html
     end

@@ -42,9 +42,9 @@ namespace :shelterluv do
                       "Dog",                                    # Species
                       d.name,
                       d.status,
-                      "Adopted/Completed but missing Adoption Date - NOT IMPORTED"
+                      "Adopted/Completed but missing Adoption Date"
           ]
-        else
+        end
 
         csv << [
                 "D" + d.tracking_id.to_s,                                  # Animal ID (add a D in font)
@@ -103,7 +103,6 @@ namespace :shelterluv do
                 "",                                                        # asilomar intake status
                 ""]                                                        # asilomar outcome status
         end
-        end
       end
     end
 
@@ -135,9 +134,9 @@ namespace :shelterluv do
                         "Cat",                                    # Species
                         c.name,
                         c.status,
-                        "Adopted/Completed but missing Adoption Date - NOT IMPORTED"
+                        "Adopted/Completed but missing Adoption Date"
             ]
-          else
+          end
             csv << [
                     "C" + c.tracking_id.to_s,                                  # Animal ID (add a C in front)
                     "Cat",                                                     # Species
@@ -194,7 +193,7 @@ namespace :shelterluv do
                     "",                                                        # found zip code
                     "",                                                        # asilomar intake status
                     ""]                                                        # asilomar outcome status
-          end
+
         end
       end
     end

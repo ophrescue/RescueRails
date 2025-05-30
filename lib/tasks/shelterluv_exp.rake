@@ -36,7 +36,7 @@ namespace :shelterluv do
           end
 
 
-        if ((d.status  == 'Adopted') || (d.status == 'Completed')) && d.adoption_date.blank?
+        if ((d.status  == 'adopted') || (d.status == 'completed')) && d.adoption_date.blank?
           rejectCSV << [
                       "D" + c.tracking_id.to_s,                # Animal ID (add a C in front)
                       "Dog",                                    # Species
@@ -128,7 +128,7 @@ namespace :shelterluv do
             end
           end
 
-          if ((c.status  == 'Adopted') || (c.status == 'Completed')) && c.adoption_date.blank?
+          if ((c.status  == 'adopted') || (c.status == 'completed')) && c.adoption_date.blank?
             rejectCSV << [
                         "C" + c.tracking_id.to_s,                # Animal ID (add a C in front)
                         "Cat",                                    # Species

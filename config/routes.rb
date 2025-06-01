@@ -2,7 +2,7 @@ STATIC_PAGES = ['contact', 'funding-partners', 'community-partners', 'non-profit
   'training-partners', 'guide', 'aboutus', 'documentary', 'insurance', 'home','pup-tastic-parties',
   'get-involved', 'volunteer', 'faq', 'foster', 'fosterfaq', 'donate', 'sponsor', 'newsletters', 'calendar',
   'other-ways-to-give', 'terms', 'resources', 'tips-for-finding-lost-pets', 'status_definitions', 'shop',
-  'education-and-outreach','adoption-fee-payments','microchip-registration'].freeze
+  'education-and-outreach','adoption-fee-payments','microchip-registration', 'shelterlove-cat-gallery', 'shelterlove-dog-gallery'].freeze
 
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -137,4 +137,6 @@ Rails.application.routes.draw do
   get '/international/kaw',                             to: 'pages#international-kaw'
   get '/international/7000-miles-home',                 to: 'pages#7000-miles-home'
   get '/international/hope-for-hope',                   to: 'pages#hope-for-hope'
+  get 'dog-gallery',                                    to: 'pages#shelterlove-dog-gallery'
+  get 'cat-gallery',                                    to: 'pages#shelterlove-cat-gallery'
 end

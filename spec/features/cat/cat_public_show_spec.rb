@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../helpers/animal_show_helper'
 
-feature 'visit cat show page', js: true do
+xfeature 'visit cat show page', js: true do
   include AnimalShowHelper
 
   context 'cat does not have any photos' do

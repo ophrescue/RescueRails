@@ -2,7 +2,8 @@ class VolunteerAppsController < ApplicationController
   include ApplicationHelper
 
   before_action :select_bootstrap41
-  before_action :require_login, except: %i(new create complete)
+  before_action :require_login
+  # before_action :require_login, except: %i(new create complete)
   before_action :admin_user, except: %i(new create complete)
 
   def index

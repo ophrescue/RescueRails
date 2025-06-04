@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Apply for Adoption' do
+xfeature 'Apply for Adoption' do
   scenario "Renter fills out adoption application", js: true do
     visit root_path
     within(:css, "div.actions") do

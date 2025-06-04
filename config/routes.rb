@@ -137,6 +137,6 @@ Rails.application.routes.draw do
   get '/international/kaw',                             to: 'pages#international-kaw'
   get '/international/7000-miles-home',                 to: 'pages#7000-miles-home'
   get '/international/hope-for-hope',                   to: 'pages#hope-for-hope'
-  get 'dog-gallery',                                    to: 'pages#shelterlove-dog-gallery'
-  get 'cat-gallery',                                    to: 'pages#shelterlove-cat-gallery'
+  get '/dogs',                                    to: 'pages#shelterlove-dog-gallery'
+  get '/cats',                                    to: 'pages#shelterlove-cat-gallery'
 end

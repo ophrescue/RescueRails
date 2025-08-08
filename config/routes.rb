@@ -1,5 +1,5 @@
 STATIC_PAGES = ['contact', 'funding-partners', 'community-partners', 'non-profit-and-corporate-partners',
-  'training-partners', 'guide', 'aboutus', 'documentary', 'insurance', 'home','pup-tastic-parties',
+  'guide', 'aboutus', 'documentary', 'insurance', 'home','pup-tastic-parties',
   'get-involved', 'volunteer', 'faq', 'foster', 'fosterfaq', 'donate', 'sponsor', 'newsletters', 'calendar',
   'other-ways-to-give', 'terms', 'resources', 'tips-for-finding-lost-pets', 'status_definitions', 'shop',
   'education-and-outreach','adoption-fee-payments','microchip-registration', 'shelterlove-cat-gallery', 'shelterlove-dog-gallery'].freeze

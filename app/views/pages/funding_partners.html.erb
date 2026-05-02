@@ -66,6 +66,11 @@
 
         <% sponsors_1000 =
           {
+            url: "https://www.broadhurstlandscaping.com/",
+            img: "broadhurstlandscaping.png",
+            alt: "Broadhurst Landscaping"
+          },
+          {
             url: "#",
             img: "fitzgerald-kolish.png",
             alt: "David FitzGerald and Elaine Kolish"
@@ -122,15 +127,9 @@
 
         <% sponsors_500 =
           {
-            url: "https://www.buckeystownvet.com",
-            img: "buckeystownvet.svg",
-            alt: "Buckeystown Veterinary Hospital",
-            show_text: true
-          },
-          {
-            url: "https://www.fitzmall.com/",
-            img: "fitzmall.png",
-            alt: "Fitzgerald Auto Mall"
+            url: "https://www.3dayblinds.com/",
+            img: "3dayblinds.png",
+            alt: "3 Day Blinds"
           },
           {
             url: "https://huxleyandkent.com/",
@@ -227,6 +226,12 @@
 
         <% sponsors_250 =
           {
+            url: "https://www.buckeystownvet.com",
+            img: "buckeystownvet.svg",
+            alt: "Buckeystown Veterinary Hospital",
+            show_text: true
+          },
+          {
             url: "https://www.clearviewah.com/",
             img: "clearviewah.png",
             alt: "Clearview Animal Hospital",
@@ -236,6 +241,17 @@
             url: "https://www.compassionvetcenter.com/",
             img: "compassionvetcenter.png",
             alt: "Compassion Veterinary Center"
+          },
+          {
+            url: "#",
+            img: "essentialsoftware.svg",
+            alt: "Essential Software",
+            show_text: true
+          },
+          {
+            url: "https://www.fitzmall.com/",
+            img: "fitzmall.png",
+            alt: "Fitzgerald Auto Mall"
           },
           {
             url: "http://www.fvcbank.com/",
@@ -251,6 +267,21 @@
             url: "http://www.jpsimpsonboutique.com/",
             img: "jpsimpsonboutique.jpg",
             alt: "JP Simpson Boutique"
+          },
+          {
+            url: "https://linganorevet.com/",
+            img: "linganorevet.png",
+            alt: "Linganore Vet Clininc"
+          },
+          {
+            url: "https://midmarylandpetsitting.com/",
+            img: "midmarylandpetsitting.png",
+            alt: "Mid-Maryland Pet Sitting"
+          },
+          {
+            url: "https://taneytowndancecenter.com/",
+            img: "taneytowndancecenter.png",
+            alt: "Taneytown Dance Center"
           },
           {
             url: "http://www.scoop-squad.com/",
@@ -272,6 +303,9 @@
                 <div class="card mb-4 border-0">
                   <a target="_blank" href="<%= spon[:url] %>">
                     <%= image_tag("sponsors/"+spon[:img], alt: spon[:alt], class: "w-75") %>
+                    <% if spon[:show_text] %>
+                      <div class="card-body"><%= spon[:alt] %></div>
+                    <% end %>
                   </a>
                 </div>
               </div>
@@ -289,7 +323,6 @@
       </div>
     </div>
         <% sponsors =
-
           {
             url: "https://atlanticbluewaterservices.com/",
             img: "atlanticbluewaterservices.png",

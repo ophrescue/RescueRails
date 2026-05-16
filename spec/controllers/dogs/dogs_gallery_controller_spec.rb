@@ -63,10 +63,14 @@ describe Dogs::GalleryController, type: :controller do
     end
   end
 
-  describe 'GET #show' do
-    it 'redirect to sign in' do
+  describe 'GET #show for a dog is visible to an admin' do
+    include_context 'signed in admin'
+    let(:dog) { create(:dog, status: 'adoptable') }
+
+    it 'is successful' do
       get :show, params: { id: dog.id }
-      expect(response).to redirect_to('/sign_in')
+      expect(response).to be_successful
     end
   end
+
 end

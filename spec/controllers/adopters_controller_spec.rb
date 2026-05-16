@@ -51,6 +51,7 @@ describe AdoptersController, type: :controller do
   end
 
   describe 'GET new' do
+    include_context 'signed in admin'
     it 'should be successful' do
       get :new
       expect(response).to be_successful
@@ -58,6 +59,7 @@ describe AdoptersController, type: :controller do
   end
 
   describe 'POST create' do
+    include_context 'signed in admin'
     let(:adoption_app) { attributes_for(:adoption_app) }
     let(:adopter) { attributes_for(:adopter, adoption_app_attributes: adoption_app) }
 
@@ -108,6 +110,7 @@ describe AdoptersController, type: :controller do
   end
 
   describe 'GET check_email' do
+    include_context 'signed in admin'
     subject(:check_email) { get :check_email, xhr: true, params: { adopter: { email: adopter.email } } }
 
     context 'email exists' do

@@ -25,8 +25,9 @@ SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
     SimpleCov::Formatter::LcovFormatter,
   ]
 )
-SimpleCov.start('rails') do
-  add_filter 'spec/'
+
+if ENV['COVERAGE']
+  SimpleCov.start('rails') { add_filter 'spec/' }
 end
 
 RSpec.configure do |config|
@@ -52,7 +53,8 @@ RSpec.configure do |config|
     ActiveRecord::Base.connection.execute("CREATE SEQUENCE tracking_id_seq START 1;")
     ActiveRecord::Base.connection.execute("DROP SEQUENCE IF EXISTS cat_tracking_id_seq;")
     ActiveRecord::Base.connection.execute("CREATE SEQUENCE cat_tracking_id_seq START 1;")
-    `RAILS_ENV=test rake assets:precompile 2>/dev/null` # inhibit STD_OUT b/c it overruns the terminal page
+    # Only compile if assets are actually stale
+    system("RAILS_ENV=test rake assets:precompile 2>/dev/null") unless File.exist?(Rails.root.join('public/assets/manifest-.json')) || Dir[Rails.root.join('public/assets/.sprockets-manifest-*.json')].any?
   end
 
   config.before :each, type: :feature do

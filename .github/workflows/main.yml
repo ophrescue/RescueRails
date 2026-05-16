@@ -31,7 +31,7 @@ jobs:
       - name: Setup Nodejs
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '22'
 
       - name: yarn install
         run: yarn install
@@ -66,6 +66,7 @@ jobs:
       - name: Run Rspec Tests
         run: bundle exec rspec
         env:
+          COVERAGE: true
           RAILS_ENV: test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres

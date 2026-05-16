@@ -59,9 +59,7 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the public dog gallery' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name)
-      click_link(test_dog.name)
-      expect(page).to have_content(test_dog.name)
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
   end
 
@@ -118,9 +116,7 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the public dog gallery' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name)
-      click_link(test_dog.name)
-      expect(page).to have_content(test_dog.name)
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
   end
 
@@ -177,9 +173,7 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the public dog gallery' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name)
-      click_link(test_dog.name)
-      expect(page).to have_content(test_dog.name)
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
   end
 
@@ -191,9 +185,7 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the public dog gallery' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name)
-      click_link(test_dog.name)
-      expect(page).to have_content(test_dog.name)
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
   end
 end

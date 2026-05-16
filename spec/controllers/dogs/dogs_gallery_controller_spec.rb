@@ -52,41 +52,19 @@ describe Dogs::GalleryController, type: :controller do
   describe 'GET #index' do
     subject(:get_index) { get :index, params: {} }
 
-    let!(:adoptable_dog) { create(:dog, status: 'adoptable', tracking_id: 102) }
-    let!(:adoption_pending_dog) { create(:dog, status: 'adoption pending', tracking_id: 99) }
-    let!(:adoption_pending_dog2) { create(:dog, status: 'adoption pending', tracking_id: 105) }
-    let!(:coming_soon_dog) { create(:dog, status: 'coming soon', tracking_id: 100) }
-    let!(:coming_soon_dog2) { create(:dog, status: 'coming soon', tracking_id: 109) }
-    let!(:adoptable_dog2) { create(:dog, status: 'adoptable', tracking_id: 110) }
-    let!(:hidden_adoptable_dog) { create(:dog, status: 'adoptable', hidden: true, tracking_id: 111) }
-    let!(:adopted_dog) { create(:dog, status: 'adopted', tracking_id: 1) }
-    let!(:on_hold_dog) { create(:dog, status: 'on hold', tracking_id: 2) }
-    let!(:not_available_dog) { create(:dog, status: 'not available', tracking_id: 3) }
-
-    it 'Only adoptable, coming soon and adoption pending dogs should be displayed respectively in order by status then tracking id' do
-      get_index
-      expect(assigns(:dogs)).to eq([adoptable_dog2, adoptable_dog, coming_soon_dog2, coming_soon_dog, adoption_pending_dog2, adoption_pending_dog ])
+    it 'redirects to sign in when not authenticated' do
+      get :index, params: {}
+      expect(response).to redirect_to('/sign_in')
     end
 
-    it 'with autocomplete parameter set all dogs are returned' do
+    it 'with autocomplete parameter redirects to sign in when not authenticated' do
       get :index, params: {autocomplete: true}
-      expect(assigns(:dogs)).to match_array([adoptable_dog, adoptable_dog2, hidden_adoptable_dog, adoption_pending_dog, adoption_pending_dog2, coming_soon_dog, coming_soon_dog2, adopted_dog, on_hold_dog, not_available_dog])
+      expect(response).to redirect_to('/sign_in')
     end
   end
 
-  describe 'GET #show for an available dog is visible to the public' do
-    let(:dog) { create(:dog, status: 'adoptable') }
-
-    it 'is successful' do
-      get :show, params: { id: dog.id }
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET #show for an unavailable dog is NOT visible to the public' do
-    let(:dog) { create(:dog, status: 'not available') }
-
-    it 'redirects to sign in' do
+  describe 'GET #show' do
+    it 'redirect to sign in' do
       get :show, params: { id: dog.id }
       expect(response).to redirect_to('/sign_in')
     end

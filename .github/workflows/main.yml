@@ -31,7 +31,7 @@ jobs:
       - name: Setup Nodejs
         uses: actions/setup-node@v3
         with:
-          node-version: '22'
+          node-version: '16'
 
       - name: yarn install
         run: yarn install

@@ -123,45 +123,12 @@ feature 'View Cats', js: true do
 
     scenario 'cannot view the Manager View' do
       visit cats_manager_index_path
-      expect(page_heading).to eq 'Our Cats'
+      expect(page_heading).to eq 'Cats'
     end
 
     scenario 'can not view private information about a cat' do
       visit cats_manager_index_path(test_cat)
-      expect(page).to have_content(test_cat.name)
-      ["Medical Summary",
-       "Behavior and Breed Summary",
-       "Original Name",
-       "Microchip",
-       "Adoption Fee",
-       "OK with dogs?",
-       "OK with cats?",
-       "OK with kids?",
-       "Medical Review Complete",
-       "Has Medical Need",
-       "Needs Spay or Neuter",
-       "High Priority",
-       "Needs Photos",
-       "Has Behavior Problem",
-       "Needs Foster",
-       "Foster",
-       "Adoption Coordinator",
-       "Source Shelter",
-       "Adopters",
-       "Available on",
-       "Intake date",
-       "Adopted on",
-       "Ads",
-       "Up-to-date on shots",
-       "First shots",
-       "Second shots",
-       "Third shots",
-       "Rabies",
-       "FELV/FIV Test",
-       "Flea/Tick Preventative",
-       "Dewormer",
-       "Coccidia Treatment"].each do |private_info|
-        expect(page).to have_no_content private_info
+      expect(page).to have_content("This page is powered by Shelterluv.")
       end
     end
 

@@ -66,6 +66,7 @@ jobs:
       - name: Run Rspec Tests
         run: bundle exec rspec
         env:
+          COVERAGE: true
           RAILS_ENV: test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres

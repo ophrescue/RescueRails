@@ -4,6 +4,7 @@
       <h1 class="mt-3 ml-2">Pup-Tastic Party Request</h1>
 
 <%= form_with scope: :party_contact_form, url: party_contact_form_index_path, method: :post, local: true, class: "container" do |f| %>
+<%= recaptcha_tags %>
 <div class="ml-2">
             <div class="form-group">
               <%= f.label :name %>

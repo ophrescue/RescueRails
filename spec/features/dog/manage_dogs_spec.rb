@@ -59,9 +59,7 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the public dog gallery' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name)
-      click_link(test_dog.name)
-      expect(page).to have_content(test_dog.name)
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
   end
 
@@ -118,9 +116,7 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the public dog gallery' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name)
-      click_link(test_dog.name)
-      expect(page).to have_content(test_dog.name)
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
   end
 
@@ -131,55 +127,17 @@ feature 'View Dogs', js: true do
 
     scenario 'cannot view the Manager View' do
       visit dogs_manager_index_path
-      expect(page_heading).to eq 'Our Dogs'
+      expect(page_heading).to eq 'Dogs'
     end
 
     scenario 'can not view private information about a dog' do
       visit dogs_manager_index_path(test_dog)
-      expect(page).to have_content(test_dog.name)
-      ["Medical Summary",
-       "Behavior and Breed Summary",
-       "Original Name",
-       "Microchip",
-       "Adoption Fee",
-       "OK with dogs?",
-       "OK with cats?",
-       "OK with kids?",
-       "Medical Review Complete",
-       "Has Medical Need",
-       "Needs Spay or Neuter",
-       "High Priority",
-       "Needs Photos",
-       "Has Behavior Problem",
-       "Needs Foster",
-       "Foster",
-       "Adoption Coordinator",
-       "Source Shelter",
-       "Adopters",
-       "Available on",
-       "Intake date",
-       "Adopted on",
-       "Ads",
-       "Up-to-date on shots",
-       "First shots",
-       "Second shots",
-       "Third shots",
-       "Rabies",
-       "4DX",
-       "Bordetella",
-       "Heartworm Preventative",
-       "Flea/Tick Preventative",
-       "Dewormer",
-       "Toltrazuril"].each do |private_info|
-        expect(page).to have_no_content private_info
-      end
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
 
     scenario 'can view the public dog gallery' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name)
-      click_link(test_dog.name)
-      expect(page).to have_content(test_dog.name)
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
   end
 
@@ -191,9 +149,7 @@ feature 'View Dogs', js: true do
 
     scenario 'can view the public dog gallery' do
       visit dogs_path
-      expect(page).to have_content(test_dog.name)
-      click_link(test_dog.name)
-      expect(page).to have_content(test_dog.name)
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
   end
 end

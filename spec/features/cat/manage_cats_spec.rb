@@ -57,9 +57,7 @@ feature 'View Cats', js: true do
 
     scenario 'can view the public cat gallery' do
       visit cats_path
-      expect(page).to have_content(test_cat.name)
-      click_link(test_cat.name)
-      expect(page).to have_content(test_cat.name)
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
   end
 
@@ -114,9 +112,7 @@ feature 'View Cats', js: true do
 
     scenario 'can view the public cat gallery' do
       visit cats_path
-      expect(page).to have_content(test_cat.name)
-      click_link(test_cat.name)
-      expect(page).to have_content(test_cat.name)
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
   end
 
@@ -171,9 +167,7 @@ feature 'View Cats', js: true do
 
     scenario 'can view the public cat gallery' do
       visit cats_path
-      expect(page).to have_content(test_cat.name)
-      click_link(test_cat.name)
-      expect(page).to have_content(test_cat.name)
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
   end
 
@@ -185,9 +179,7 @@ feature 'View Cats', js: true do
 
     scenario 'can view the public cat gallery' do
       visit cats_path
-      expect(page).to have_content(test_cat.name)
-      click_link(test_cat.name)
-      expect(page).to have_content(test_cat.name)
+      expect(page).to have_content("This page is powered by Shelterluv.")
     end
   end
 end

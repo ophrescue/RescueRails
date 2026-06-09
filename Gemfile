@@ -25,6 +25,7 @@ gem 'has_scope'
 gem 'mjml-rails', '~> 4.6', '>= 4.6.1'
 gem 'kt-paperclip', '~> 6'
 gem 'rails4-autocomplete'
+gem "recaptcha"
 gem 'record_tag_helper', '~> 1.0'
 gem 'redcarpet'
 gem 'responders'

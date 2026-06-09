@@ -2,6 +2,11 @@ class PartyContactFormController < ApplicationController
   before_action :select_bootstrap41
 
   def create
+    unless verify_recaptcha
+      flash[:error] = "reCAPTCHA verification failed. Please try again."
+      return redirect_to new_party_contact_form_path
+    end
+
     @name = params[:party_contact_form][:name]
     @email = params[:party_contact_form][:email]
     @phone = params[:party_contact_form][:phone]
@@ -11,7 +16,6 @@ class PartyContactFormController < ApplicationController
     @event_description = params[:party_contact_form][:event_description]
     @guest_count = params[:party_contact_form][:guest_count]
     @event_details = params[:party_contact_form][:event_details]
-
 
     PartyMailer.notify(@name, @email, @phone, @organization, @event_date_and_time, @event_location, @event_description, @guest_count, @event_details).deliver_later
 

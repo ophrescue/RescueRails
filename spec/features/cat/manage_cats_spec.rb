@@ -129,7 +129,6 @@ feature 'View Cats', js: true do
     scenario 'can not view private information about a cat' do
       visit cats_manager_index_path(test_cat)
       expect(page).to have_content("This page is powered by Shelterluv.")
-      end
     end
 
     scenario 'can view the public cat gallery' do

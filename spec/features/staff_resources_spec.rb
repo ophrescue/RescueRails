@@ -153,7 +153,7 @@ feature "folder management", js: true do
       end
 
       it "should show list of attachments" do
-        expect(page).to have_selector('#foobar_6')
+        expect(page).to have_selector("#foobar_#{resource.id}")
         expect(page).to have_selector('.attachment input.delete_attachment')
       end
     end

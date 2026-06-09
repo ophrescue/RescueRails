@@ -4,7 +4,6 @@
       <h1 class="mt-3 ml-2">Pup-Tastic Party Request</h1>
 
 <%= form_with scope: :party_contact_form, url: party_contact_form_index_path, method: :post, local: true, class: "container" do |f| %>
-<%= recaptcha_tags %>
 <div class="ml-2">
             <div class="form-group">
               <%= f.label :name %>
@@ -43,7 +42,7 @@ activity, etc.)' %>
               <%= f.label :event_details, 'Anything else you would like to share about your event' %>
               <%= f.text_area :event_details, class: "col-8 form-control", required: true %>
             </div>
-
+<%= recaptcha_tags %>
             <p>An OPH representative will be in touch with you to discuss your request.</p>
             <p>Note: if we are able to provide puppies for your event, the donation must be paid before we will
 reserve your event.</p>

@@ -14,7 +14,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |file| require file }
 
 Capybara.javascript_driver = :cuprite
 Capybara.register_driver(:cuprite) do |app|
-  Capybara::Cuprite::Driver.new(app,
+  cuprite_options = {
     window_size: [1200, 800],
     process_timeout: 60,
     timeout: 60,
@@ -22,7 +22,15 @@ Capybara.register_driver(:cuprite) do |app|
       'no-sandbox' => nil,
       'disable-dev-shm-usage' => nil
     }
-  )
+  }
+
+  # In the devcontainer, Chromium is installed via Playwright and symlinked
+  # here (Google Chrome ships no arm64 build). Falls back to Ferrum's own
+  # auto-detection when running outside the container.
+  chrome_path = ENV['CHROME_PATH'] || '/usr/local/bin/chromium'
+  cuprite_options[:browser_path] = chrome_path if File.exist?(chrome_path)
+
+  Capybara::Cuprite::Driver.new(app, **cuprite_options)
 end
 
 # Checks for pending migrations before tests are run.

@@ -1,0 +1,34 @@
+{
+  "name": "RescueRails (Rails 6.1 / Ubuntu 22)",
+  "dockerComposeFile": "compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+
+  "features": {
+    // Adds convenience CLI tooling if you want it (optional, remove if unwanted)
+    // "ghcr.io/devcontainers/features/git:1": {}
+  },
+
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind"
+  ],
+
+  "postCreateCommand": "bundle install && rbenv rehash && yarn install && bin/rails db:prepare",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-lsp",
+        "bung87.rails",
+        "eamodio.gitlens",
+        "anthropic.claude-code"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  "forwardPorts": [3000, 5432],
+  "remoteUser": "vscode"
+}

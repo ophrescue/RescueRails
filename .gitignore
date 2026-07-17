@@ -1,6 +1,7 @@
 .ackrc
 .bundle
 .byebug_history
+.claude/
 .clinerules
 .DS_Store
 .env.*

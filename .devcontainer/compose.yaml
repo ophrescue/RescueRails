@@ -1,0 +1,44 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        RUBY_VERSION: "3.0.5"
+    volumes:
+      - ..:/workspace:cached
+      - bundle_cache:/usr/local/rbenv/versions/3.0.5/lib/ruby/gems
+    command: sleep infinity
+    depends_on:
+      - db
+      - memcached
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      MEMCACHED_HOST: memcached
+      STRIPE_PUBLISHABLE_KEY: none
+      STRIPE_SECRET_KEY: none
+      STRIPE_MONTHLY_DONATION_PLAN: none
+      STRIPE_ONE_TIME_PAYMENT_PRODUCT: none
+      STRIPE_INVOICE_ENDPOINT_SECRET: none
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app_development
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  memcached:
+    image: memcached:1.6-alpine
+    restart: unless-stopped
+
+volumes:
+  pg_data:
+  bundle_cache:

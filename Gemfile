@@ -107,4 +107,5 @@ group :development do
   gem 'rubocop-rspec'
   gem 'rubocop-rails'
   gem 'rubocop-performance'
+  gem 'ruby-lsp', require: false
 end

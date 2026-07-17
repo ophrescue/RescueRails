@@ -5,7 +5,7 @@ gem 'rails', '~> 6.1', '>= 6.1.7.10'
 
 gem 'rack-cache'
 
-gem 'audited', '~> 4.5'
+gem 'audited', '~> 5.0'
 gem 'aws-sdk-locationservice', '~> 1.51'
 gem 'aws-sdk-s3', '~> 1.116'
 gem 'bootstrap', '~> 4.3.1'
@@ -23,7 +23,7 @@ gem 'gravatar_image_tag'
 gem 'groupdate'
 gem 'has_scope'
 gem 'mjml-rails', '~> 4.6', '>= 4.6.1'
-gem 'kt-paperclip', '~> 6'
+gem 'kt-paperclip', '~> 7.2'
 gem 'rails4-autocomplete'
 gem "recaptcha"
 gem 'record_tag_helper', '~> 1.0'

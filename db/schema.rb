@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_30_193326) do
-
+ActiveRecord::Schema[7.0].define(version: 2026_07_17_021815) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,8 +25,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "zip"
     t.string "status"
     t.string "when_to_call"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.text "dog_reqs"
     t.text "why_adopt"
     t.string "dog_name"
@@ -67,8 +66,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.text "surrender_pet_causes"
     t.text "training_explain"
     t.text "surrendered_pets"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "how_did_you_hear"
     t.string "pets_branch"
     t.boolean "current_pets_fixed"
@@ -97,8 +96,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.integer "adopter_id"
     t.integer "dog_id"
     t.string "relation_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["adopter_id", "dog_id"], name: "index_adoptions_on_adopter_id_and_dog_id", unique: true
     t.index ["adopter_id"], name: "index_adoptions_on_adopter_id"
     t.index ["dog_id"], name: "index_adoptions_on_dog_id"
@@ -110,10 +109,10 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "attachment_file_name"
     t.string "attachment_content_type"
     t.integer "attachment_file_size"
-    t.datetime "attachment_updated_at"
+    t.datetime "attachment_updated_at", precision: nil
     t.integer "updated_by_user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.text "description"
     t.string "agreement_type"
   end
@@ -132,9 +131,9 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "comment"
     t.string "remote_address"
     t.string "request_uuid"
-    t.datetime "created_at"
-    t.index ["associated_id", "associated_type"], name: "associated_index"
-    t.index ["auditable_id", "auditable_type"], name: "auditable_index"
+    t.datetime "created_at", precision: nil
+    t.index ["associated_type", "associated_id"], name: "associated_index"
+    t.index ["auditable_type", "auditable_id"], name: "auditable_index"
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
@@ -145,9 +144,9 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "image_updated_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "badges_users", force: :cascade do |t|
@@ -164,15 +163,15 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "city", limit: 100
     t.string "state", limit: 2
     t.text "comment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["name"], name: "index_banned_adopters_on_name"
   end
 
   create_table "breeds", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["name"], name: "index_breeds_on_name"
   end
 
@@ -185,21 +184,21 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "primary_photo_file_name"
     t.string "primary_photo_content_type"
     t.integer "primary_photo_file_size"
-    t.datetime "primary_photo_updated_at"
+    t.datetime "primary_photo_updated_at", precision: nil
     t.string "left_photo_file_name"
     t.string "left_photo_content_type"
     t.integer "left_photo_file_size"
-    t.datetime "left_photo_updated_at"
+    t.datetime "left_photo_updated_at", precision: nil
     t.string "middle_photo_file_name"
     t.string "middle_photo_content_type"
     t.integer "middle_photo_file_size"
-    t.datetime "middle_photo_updated_at"
+    t.datetime "middle_photo_updated_at", precision: nil
     t.string "right_photo_file_name"
     t.string "right_photo_content_type"
     t.integer "right_photo_file_size"
-    t.datetime "right_photo_updated_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "right_photo_updated_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "active", default: true
   end
 
@@ -207,8 +206,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.integer "adopter_id"
     t.integer "cat_id"
     t.string "relation_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["adopter_id", "cat_id"], name: "index_cat_adoptions_on_adopter_id_and_cat_id", unique: true
     t.index ["adopter_id"], name: "index_cat_adoptions_on_adopter_id"
     t.index ["cat_id"], name: "index_cat_adoptions_on_cat_id"
@@ -216,8 +215,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
 
   create_table "cat_breeds", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "cats", force: :cascade do |t|
@@ -268,8 +267,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "flea_tick_preventative"
     t.string "dewormer"
     t.string "coccidia_treatment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "hidden", default: false, null: false
     t.boolean "no_urban_setting", default: false, null: false
     t.boolean "home_check_required", default: false, null: false
@@ -282,8 +281,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.integer "commentable_id"
     t.string "commentable_type"
     t.integer "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["commentable_id"], name: "index_comments_on_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -292,8 +291,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "contractable_type"
     t.integer "contractable_id"
     t.string "esig_contract_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "delayed_jobs", id: :serial, force: :cascade do |t|
@@ -301,20 +300,20 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.integer "attempts", default: 0
     t.text "handler"
     t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
+    t.datetime "run_at", precision: nil
+    t.datetime "locked_at", precision: nil
+    t.datetime "failed_at", precision: nil
     t.string "locked_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "queue"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "dogs", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "tracking_id"
     t.integer "primary_breed_id"
     t.integer "secondary_breed_id"
@@ -392,8 +391,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.boolean "is_memory_honor"
     t.string "memory_honor_type"
     t.string "memory_honor_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "comment"
     t.integer "campaign_id"
     t.boolean "more_contact_info", default: false
@@ -413,9 +412,9 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.text "cc_address"
     t.text "bcc_address"
     t.text "content"
-    t.datetime "sent_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "sent_at", precision: nil
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "events", id: :serial, force: :cascade do |t|
@@ -424,8 +423,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "address"
     t.text "description"
     t.integer "created_by_user"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.float "latitude"
     t.float "longitude"
     t.date "event_date"
@@ -436,7 +435,7 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "photo_file_name"
     t.string "photo_content_type"
     t.integer "photo_file_size"
-    t.datetime "photo_updated_at"
+    t.datetime "photo_updated_at", precision: nil
     t.string "photographer_name"
     t.string "photographer_url"
     t.string "facebook_url"
@@ -446,8 +445,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
 
   create_table "folders", id: :serial, force: :cascade do |t|
     t.text "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.boolean "locked", default: false
   end
 
@@ -456,7 +455,7 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
@@ -472,13 +471,13 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.text "description"
     t.string "stripe_customer_id"
     t.string "card_token"
-    t.datetime "paid_at"
+    t.datetime "paid_at", precision: nil
     t.string "paid_method"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "donation_id"
     t.boolean "has_donation", default: false, null: false
-    t.datetime "contract_received_at"
+    t.datetime "contract_received_at", precision: nil
     t.index ["donation_id"], name: "index_invoices_on_donation_id"
     t.index ["slug"], name: "index_invoices_on_slug", unique: true
     t.index ["user_id"], name: "index_invoices_on_user_id"
@@ -489,9 +488,9 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "photo_file_name"
     t.string "photo_content_type"
     t.integer "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "photo_updated_at", precision: nil
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "position"
     t.boolean "is_private", default: false
     t.string "animal_type"
@@ -505,8 +504,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "type"
     t.string "title"
     t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "slug"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -518,16 +517,16 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "email"
     t.string "phone"
     t.string "relationship"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "whentocall"
     t.index ["adopter_id"], name: "index_references_on_adopter_id"
   end
 
   create_table "shelters", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "treatment_records", force: :cascade do |t|
@@ -539,8 +538,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.date "due_date"
     t.string "result"
     t.text "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["treatment_id"], name: "index_treatment_records_on_treatment_id"
     t.index ["user_id"], name: "index_treatment_records_on_user_id"
   end
@@ -550,20 +549,20 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "available_for", null: false
     t.boolean "has_result", default: false, null: false
     t.text "recommendation"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "encrypted_password"
     t.string "salt"
     t.boolean "admin", default: false
     t.string "password_reset_token"
-    t.datetime "password_reset_sent_at"
+    t.datetime "password_reset_sent_at", precision: nil
     t.boolean "is_foster", default: false
     t.string "phone"
     t.string "address1"
@@ -579,8 +578,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.boolean "locked", default: false
     t.boolean "edit_events", default: false
     t.string "other_phone"
-    t.datetime "lastlogin"
-    t.datetime "lastverified"
+    t.datetime "lastlogin", precision: nil
+    t.datetime "lastverified", precision: nil
     t.boolean "available_to_foster", default: false
     t.text "foster_dog_types"
     t.boolean "complete_adopters", default: false
@@ -624,7 +623,7 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "avatar_file_name"
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
-    t.datetime "avatar_updated_at"
+    t.datetime "avatar_updated_at", precision: nil
     t.boolean "has_children", default: false
     t.integer "insurance_training_agreement_id"
     t.boolean "dog_handling_training_complete", default: false, null: false
@@ -662,8 +661,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.boolean "admin_interest"
     t.text "about"
     t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "marketing_interest"
     t.boolean "adult"
     t.boolean "lost_dog_interest", default: false, null: false
@@ -690,8 +689,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.text "kept_during_day"
     t.text "kept_at_night"
     t.text "kept_when_alone"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "foster_experience"
     t.index ["volunteer_app_id"], name: "index_volunteer_foster_apps_on_volunteer_app_id", unique: true
   end
@@ -702,8 +701,8 @@ ActiveRecord::Schema.define(version: 2024_12_30_193326) do
     t.string "email"
     t.string "phone"
     t.string "relationship"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["volunteer_app_id"], name: "index_volunteer_references_on_volunteer_app_id"
   end
 

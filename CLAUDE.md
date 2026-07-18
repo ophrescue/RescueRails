@@ -13,7 +13,7 @@ The app is ~13 years old (`db/migrate` goes back to 2011) and has never, in
 its history, gone past Rails 6.1 — see "Upgrade roadmap" below.
 
 **Stack:**
-- Ruby 3.0.5, Rails 7.0.10 (as of the pass recorded below)
+- Ruby 3.0.5, Rails 7.1.6 (as of the pass recorded below)
 - PostgreSQL, `pg` gem
 - Auth: **Clearance** (not Devise) — see `config/initializers/clearance.rb`
 - File uploads: **kt-paperclip** (not ActiveStorage, though activestorage
@@ -128,9 +128,87 @@ Ground rules for every pass:
     the real test/CI suites, which never eager-load); `webpacker:compile`
     fails in this Node 18 devcontainer due to an OpenSSL 3/Webpack 4
     digest-algorithm incompatibility, independent of Ruby/Rails version.
+    (The `animal.rb` dead file was since removed in commit `f942b929`,
+    unrelated to either upgrade pass — `zeitwerk:check` is clean as of
+    Pass 2.)
+
+**Pass 2 — Rails 7.0.10 → 7.1.6 (Ruby stays 3.0.5): DONE**
+(commit `a67837b6` on `upgrade/rails-7.1`)
+
+- `bundle update rails --conservative` moved only the Rails-family gems
+  and their standard transitive dependencies (`rack-session`, `rackup`,
+  `irb`, `psych`, `tsort`, etc.). `clearance` stayed at 2.7.1 (as
+  expected — versions ≥ 2.9.0 require Ruby ≥ 3.1.6), and `kt-paperclip`,
+  `audited`, `webpacker`, `puma`, `unicorn`, `delayed_job`/
+  `delayed_job_active_record` were all unaffected. No forced
+  companion-gem bump was needed this pass.
+- Ran `bin/rails app:update` and declined every offered file change.
+  Each conflicting file (`config/application.rb`, `config/environments/
+  *.rb`, `config/initializers/{assets,content_security_policy,
+  filter_parameter_logging,inflections,permissions_policy}.rb`, the
+  binstubs) mixed trivial quote-style/comment-wording noise with either
+  real app customizations that must be preserved (Paperclip/S3 config,
+  mail settings, rack-cache, the `lib` eager-load path, `Clearance::
+  BackDoor`/`RackSessionAccess::Middleware` in `test.rb`) or new-default
+  opt-ins that belong in the generated `new_framework_defaults_7_1.rb`
+  rather than being force-applied. Accepted only that file (fully
+  commented out, same treatment as `_7_0.rb`) and the auto-copied,
+  guarded (`return unless table_exists?`) ActiveStorage migration
+  (`RemoveNotNullOnActiveStorageBlobsChecksum`), matching the pattern of
+  prior auto-copied ActiveStorage migrations already in this app's
+  history (this app has no `active_storage_blobs` table, so it's a
+  no-op).
+  - Caution for future passes: this devcontainer's local (untracked)
+    `.bundle/config` had `BUNDLE_BIN: "bin"` set, which makes any
+    `bundle install`/`update` regenerate Bundler-style binstubs for
+    *every* gem in the bundle — clobbering this app's custom `bin/rails`
+    (which needs its Rails-generated `APP_PATH`/`require_relative
+    "../config/boot"` form, not Bundler's generic stub) and littering
+    `bin/` with dozens of unrelated stubs (`bin/puma`, `bin/rubocop`,
+    etc.). Not a repo-tracked setting, so it won't reproduce elsewhere,
+    but reverted the clobbered/created files and ran
+    `bundle config unset bin` this session to stop it recurring.
+- Required one app-code fix, found via the full RSpec suite (36
+  failures) and confirmed absent on the pre-upgrade commit: Rails 7.1
+  changed `config.i18n.raise_on_missing_translations = true` (set in
+  this app's `development.rb`/`test.rb`) to also globally override
+  `I18n.exception_handler`, so bare `I18n.t()` calls now raise on any
+  missing key — not just the view/controller `t`/`translate` helpers as
+  in 7.0 (`activesupport-7.1.6/lib/active_support/i18n_railtie.rb`'s
+  `setup_raise_on_missing_translations_config`, replacing 7.0's
+  `forward_raise_on_missing_translations_config` which only patched the
+  ActionView/ActionController helpers). `app/helpers/
+  application_helper.rb`'s `title` method calls `I18n.t` directly for a
+  per-action title key that doesn't exist for most actions (only
+  `new`/`edit`/`index` are defined per controller in `config/locales/
+  en.yml`). Fixed with `default: nil`, which sidesteps the exception
+  path entirely — a per-call `raise: false` option does **not** work
+  here, since I18n only consults it on the raise/throw path; once
+  neither is set it falls through to `config.exception_handler`, which
+  is the handler Rails 7.1 globally overrides. As a side effect, this
+  also makes the pre-existing (previously dead, since `I18n.t` never
+  actually returned `nil` before) `@title.nil?` fallback to
+  `base_title` finally work, instead of baking a "translation missing:
+  ..." string into the page `<title>` as Rails 7.0 silently did.
+- Full RSpec suite: 742 examples, 0 failures, 12 pending — matches the
+  fresh Pass-2 baseline exactly, across two consecutive runs with
+  different random seeds. `bin/rails zeitwerk:check` passes cleanly.
+  Manually booted `bin/rails server` and confirmed both the Sprockets
+  asset pipeline and the Webpacker `javascript_pack_tag` resolve with
+  200s on the same page.
+- Explicitly deferred/out of scope for this pass (same list as Pass 1,
+  still true, not yet addressed): Webpacker replacement, kt-paperclip →
+  ActiveStorage migration, Unicorn/Puma reconciliation, the Ruby version
+  bump, the `config.load_defaults` catch-up, and the other pre-existing
+  papercuts noted above (`.rubocop.yml` stale target version, CI's
+  Node 16 pin, `webpacker:compile`'s Node 18/OpenSSL 3 incompatibility
+  in this devcontainer).
 
 **Next pass: not yet decided.** Candidates, in roughly the order they'd
-naturally come up: Rails 7.0 → 7.1/7.2, or the deferred `config.load_defaults`
-catch-up, or the Ruby version bump. Decide based on what's most pressing
-(security support windows, blocking a needed feature, etc.) when picking
-up the next pass — don't assume the order above is a commitment.
+naturally come up: Rails 7.1 → 7.2 (note: 7.2 raises Rails' minimum Ruby
+floor, so it may force the Ruby version bump to happen in the same pass
+rather than staying single-purpose like Passes 1 and 2), or the deferred
+`config.load_defaults` catch-up, or the Ruby version bump on its own.
+Decide based on what's most pressing (security support windows, blocking
+a needed feature, etc.) when picking up the next pass — don't assume the
+order above is a commitment.

@@ -47,7 +47,7 @@ module ApplicationHelper
 
   def title
     @controller_i18n = controller_i18n(controller_path)
-    @title ||= I18n.t("#{controller_i18n(controller_path)}.#{action_name}.title")
+    @title ||= I18n.t("#{controller_i18n(controller_path)}.#{action_name}.title", default: nil)
     if @title.nil?
       base_title
     else

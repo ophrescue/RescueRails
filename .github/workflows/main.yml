@@ -52,6 +52,11 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
 
+      - name: Zeitwerk check
+        run: bundle exec rails zeitwerk:check
+        env:
+          RAILS_ENV: test
+
       - name: Webpack compilation
         run: bundle exec rails webpacker:compile
         env:

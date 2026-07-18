@@ -11,6 +11,15 @@ module RescueRails
     # Needed for clearance gem overrides
     config.paths.add 'lib', eager_load: true
 
+    # lib/capistrano holds deploy-time scripts loaded directly by Capfile's
+    # `import`, and lib/local_extensions holds core-class monkey patches
+    # loaded directly by config/environment.rb's `require` -- neither is
+    # Zeitwerk-managed classes/modules, so exclude both from eager loading.
+    Rails.autoloaders.main.ignore(
+      Rails.root.join('lib', 'capistrano'),
+      Rails.root.join('lib', 'local_extensions')
+    )
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.0
 

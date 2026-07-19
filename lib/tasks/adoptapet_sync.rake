@@ -10,11 +10,11 @@ namespace :adoptapet_sync do
   desc "Export Records to CSV for adoptapet"
   task export_upload: :environment do
     if Rails.env.production?
-      FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
+      FileUtils::Verbose.rm_r(path) if Dir.exist?(path)
       FileUtils::Verbose.mkdir(path)
       FileUtils::Verbose.cp "#{Rails.root.to_s}/lib/tasks/import.cfg", path
     else
-      FileUtils.rm_r(path) if Dir.exists?(path)
+      FileUtils.rm_r(path) if Dir.exist?(path)
       FileUtils.mkdir(path)
       FileUtils.cp "#{Rails.root.to_s}/lib/tasks/import.cfg", path
     end

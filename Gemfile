@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby   '3.0.5'
+ruby   '3.3.12'
 
 gem 'rails', '~> 7.1.6'
 
@@ -11,7 +11,7 @@ gem 'aws-sdk-s3', '~> 1.116'
 gem 'bootstrap', '~> 4.3.1'
 gem 'bootstrap-will_paginate', '~> 1.0.0'
 gem "chartkick"
-gem 'clearance'
+gem 'clearance', '~> 2.11.0'
 gem 'countries', '~> 4.2', '>= 4.2.3'
 gem 'dotenv'
 gem 'dotenv-rails'
@@ -23,6 +23,7 @@ gem 'gravatar_image_tag'
 gem 'groupdate'
 gem 'has_scope'
 gem 'mjml-rails', '~> 4.6', '>= 4.6.1'
+gem 'net-ftp'
 gem 'kt-paperclip', '~> 7.2'
 gem 'rails4-autocomplete'
 gem "recaptcha"

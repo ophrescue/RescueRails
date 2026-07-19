@@ -208,12 +208,13 @@ Ground rules for every pass:
 stays 7.1.6): DONE**
 (commits `a2a4e229`, `c404d69e` on `upgrade/ruby-3.3.12`)
 
-- Ruby is pinned in five places; all five updated in commit 1:
-  `Gemfile`, `.ruby-version`, `.devcontainer/Dockerfile` (`ARG
-  RUBY_VERSION`), `.devcontainer/compose.yaml` (**both** the build arg
-  *and* the `bundle_cache` volume path, which is version-specific —
-  easy to update only one and silently point the gem cache at a
-  nonexistent path), and `config/deploy.rb`'s Capistrano `rbenv_ruby`.
+- Ruby is pinned via six version-bearing settings across five files; all
+  six updated in commit 1: `Gemfile`, `.ruby-version`,
+  `.devcontainer/Dockerfile` (`ARG RUBY_VERSION`),
+  `.devcontainer/compose.yaml` (**both** the build arg *and* the
+  `bundle_cache` volume path, which is version-specific — easy to
+  update only one and silently point the gem cache at a nonexistent
+  path), and `config/deploy.rb`'s Capistrano `rbenv_ruby`.
   Did **not** touch `.rubocop.yml`'s stale `TargetRubyVersion: 2.6`,
   consistent with both prior passes deferring it.
 - Verified locally by installing 3.3.12 via `rbenv` alongside the
@@ -234,7 +235,7 @@ stays 7.1.6): DONE**
     still ships with the Ruby install, but Bundler no longer auto-loads
     it without an explicit Gemfile entry. Added `gem 'net-ftp'`.
   - `Dir.exists?`/`File.exists?` (deprecated since Ruby 2.7) were
-    removed outright in Ruby 3.2. Fixed the four call sites:
+    removed outright in Ruby 3.2. Fixed the five call sites:
     `lib/tasks/adoptapet_sync.rake` (×2), `lib/tasks/
     petfinder_sync.rake`, `lib/tasks/shelterluv_exp.rake`, and
     `config/deploy/shared/unicorn.rb.erb` (the Capistrano unicorn

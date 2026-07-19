@@ -204,11 +204,94 @@ Ground rules for every pass:
   Node 16 pin, `webpacker:compile`'s Node 18/OpenSSL 3 incompatibility
   in this devcontainer).
 
+**Pass 3 — Ruby 3.0.5 → 3.3.12, plus clearance 2.7.1 → 2.11.0 (Rails
+stays 7.1.6): DONE**
+(commits `a2a4e229`, `c404d69e` on `upgrade/ruby-3.3.12`)
+
+- Ruby is pinned in five places; all five updated in commit 1:
+  `Gemfile`, `.ruby-version`, `.devcontainer/Dockerfile` (`ARG
+  RUBY_VERSION`), `.devcontainer/compose.yaml` (**both** the build arg
+  *and* the `bundle_cache` volume path, which is version-specific —
+  easy to update only one and silently point the gem cache at a
+  nonexistent path), and `config/deploy.rb`'s Capistrano `rbenv_ruby`.
+  Did **not** touch `.rubocop.yml`'s stale `TargetRubyVersion: 2.6`,
+  consistent with both prior passes deferring it.
+- Verified locally by installing 3.3.12 via `rbenv` alongside the
+  existing 3.0.5 (this devcontainer has `ruby-build`'s `3.3.12`
+  definition and usable `rbenv`), reinstalling the pinned bundler
+  (2.4.22) under it, then `bundle install`: only the `Gemfile.lock`
+  `RUBY VERSION` line changed, no gem versions moved, all
+  native-extension gems (nokogiri, ffi, sassc, puma, unicorn, pg,
+  bcrypt, mini_racer, **argon2**) recompiled cleanly against the new
+  ABI.
+- Two runtime-only breaks surfaced via the full RSpec suite (confirmed
+  absent on pre-upgrade 3.0.5, fixed as minimal required companions to
+  the Ruby bump, not opportunistic cleanup):
+  - `net/ftp`, required directly by three sync rake tasks
+    (`adoptapet_sync.rake`, `petfinder_sync.rake`,
+    `shelterluv_exp.rake`), was a Ruby 3.0 **default gem** (always on
+    the load path) but was demoted to a **bundled gem** in Ruby 3.1+ —
+    still ships with the Ruby install, but Bundler no longer auto-loads
+    it without an explicit Gemfile entry. Added `gem 'net-ftp'`.
+  - `Dir.exists?`/`File.exists?` (deprecated since Ruby 2.7) were
+    removed outright in Ruby 3.2. Fixed the four call sites:
+    `lib/tasks/adoptapet_sync.rake` (×2), `lib/tasks/
+    petfinder_sync.rake`, `lib/tasks/shelterluv_exp.rake`, and
+    `config/deploy/shared/unicorn.rb.erb` (the Capistrano unicorn
+    template, which runs under the same rbenv Ruby on the deploy host,
+    so it shares the same floor even though it's not exercised by
+    RSpec).
+- Commit 2: `clearance` was stuck at 2.7.1 because ≥2.9.0 requires Ruby
+  ≥3.1.6. With 3.3.12 active, `bundle update clearance --conservative`
+  moved only `clearance` and its own declared deps (`argon2` 2.3.0 →
+  2.3.3, `bcrypt` 3.1.20 → 3.1.22, `ffi-compiler` 1.3.2 → 1.4.2); no
+  Rails-family gem moved.
+  - **Deviated from the original plan**, which expected leaving `gem
+    'clearance'` unconstrained and landing on the resolver's choice
+    (2.12.0). An unconstrained update *does* resolve cleanly to 2.12.0
+    — but that version's `passwords_controller`/`users_controller`
+    render `status: :unprocessable_content`, a Rails 7.1-era HTTP status
+    symbol that only `Rack::Utils::SYMBOL_TO_STATUS_CODE` in Rack ≥3.0
+    recognizes. This app is still on Rack 2.2.10, and even the latest
+    2.2.x patch (2.2.23, checked directly against its `lib/rack/
+    utils.rb`) never added that symbol — confirmed via the full RSpec
+    suite (one failure, `spec/features/clearance/
+    visitor_updates_password_spec.rb`), not static analysis, matching
+    this repo's standing "clean `bundle install` isn't proof of runtime
+    compatibility" rule. Bumping Rack to 3.x to accommodate it would be
+    its own real modernization pass (Unicorn/Puma compatibility, other
+    middleware) — out of scope here. Pinned `gem 'clearance', '~>
+    2.11.0'` instead: the last release before that change, still clears
+    the ≥3.1.6 Ruby floor, and is still a substantial real unblock
+    (2.7.1 → 2.11.0).
+- Full RSpec suite: 742 examples, 0 failures, 12 pending after each
+  commit, stable across multiple random seeds — matches the Pass 2
+  baseline exactly. `bin/rails zeitwerk:check` clean after each commit.
+  Manually booted `bin/rails server` after each commit and confirmed
+  `/` (Sprockets + Webpacker `javascript_pack_tag`) and, after commit 2,
+  clearance's `/sign_in` route (`SessionsController#new`) all resolve
+  with 200s.
+- Dockerfile/compose.yaml/deploy.rb changes take effect only on the
+  next container rebuild / Capistrano deploy to a host with 3.3.12
+  already installed via rbenv — not exercised by this session's
+  verification, flagged in the PR description as a pre-deploy
+  prerequisite.
+- Explicitly deferred/out of scope for this pass (same list as Passes 1
+  and 2, still true, not yet addressed): Webpacker replacement,
+  kt-paperclip → ActiveStorage migration, Unicorn/Puma reconciliation,
+  the `config.load_defaults` catch-up, `.rubocop.yml`'s stale target
+  version, CI's Node 16 pin, `webpacker:compile`'s Node 18/OpenSSL 3
+  incompatibility in this devcontainer.
+- New candidate surfaced by this pass, not yet scheduled: **Rack 2 → 3**
+  — needed to eventually let `clearance` move past 2.11.0, and its own
+  independent compatibility question for Unicorn/Puma.
+
 **Next pass: not yet decided.** Candidates, in roughly the order they'd
 naturally come up: Rails 7.1 → 7.2 (note: 7.2 raises Rails' minimum Ruby
-floor, so it may force the Ruby version bump to happen in the same pass
-rather than staying single-purpose like Passes 1 and 2), or the deferred
-`config.load_defaults` catch-up, or the Ruby version bump on its own.
-Decide based on what's most pressing (security support windows, blocking
-a needed feature, etc.) when picking up the next pass — don't assume the
-order above is a commitment.
+floor further, but this pass already moved Ruby to 3.3.12, so that
+particular forcing function is gone), the deferred `config.load_defaults`
+catch-up, or the newly surfaced Rack 2 → 3 bump (itself gated on
+Unicorn/Puma compatibility research). Decide based on what's most
+pressing (security support windows, blocking a needed feature, etc.)
+when picking up the next pass — don't assume the order above is a
+commitment.

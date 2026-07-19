@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby   '3.0.5'
+ruby   '3.3.12'
 
 gem 'rails', '~> 7.1.6'
 
@@ -23,6 +23,7 @@ gem 'gravatar_image_tag'
 gem 'groupdate'
 gem 'has_scope'
 gem 'mjml-rails', '~> 4.6', '>= 4.6.1'
+gem 'net-ftp'
 gem 'kt-paperclip', '~> 7.2'
 gem 'rails4-autocomplete'
 gem "recaptcha"

@@ -11,7 +11,7 @@ namespace :petfinder_sync do
   task export_upload: :environment do
     puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Petfinder Export Start"
 
-    FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
+    FileUtils::Verbose.rm_r(path) if Dir.exist?(path)
     FileUtils::Verbose.mkdir(path)
 
     dog_desc_prefix = "ADOPT ME ONLINE: https://ophrescue.org/dogs/"

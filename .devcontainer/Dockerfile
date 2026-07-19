@@ -51,7 +51,7 @@ ENV PATH=$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH
 RUN git clone https://github.com/rbenv/rbenv.git $RBENV_ROOT && \
     git clone https://github.com/rbenv/ruby-build.git $RBENV_ROOT/plugins/ruby-build
 
-ARG RUBY_VERSION=3.0.5
+ARG RUBY_VERSION=3.3.12
 RUN rbenv install $RUBY_VERSION && rbenv global $RUBY_VERSION
 
 RUN gem install bundler -v 2.4.22

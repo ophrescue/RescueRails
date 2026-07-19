@@ -12,7 +12,7 @@ namespace :shelterluv do
   task export: :environment do
     puts Time.now.strftime("%m/%d/%Y %H:%M")+ " Shelterluv Export Start"
 
-    FileUtils::Verbose.rm_r(path) if Dir.exists?(path)
+    FileUtils::Verbose.rm_r(path) if Dir.exist?(path)
     FileUtils::Verbose.mkdir(path)
 
 

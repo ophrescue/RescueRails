@@ -277,6 +277,21 @@ stays 7.1.6): DONE**
   already installed via rbenv — not exercised by this session's
   verification, flagged in the PR description as a pre-deploy
   prerequisite.
+- **Post-merge devcontainer rebuild caught a real bug in the above**:
+  `.devcontainer/compose.yaml`'s `bundle_cache` named volume was never
+  version-qualified, only its mount path was. Docker only auto-populates
+  a named volume from the image's build-time content the *first* time
+  that volume is created empty; the pre-existing `bundle_cache` volume
+  (populated with Ruby 3.0.5's gems from before this pass) got
+  remounted as-is onto the new `.../3.3.12/lib/ruby/gems` path, hiding
+  the `bundler` gem the Dockerfile installs into the image at that same
+  path — surfacing as `postCreateCommand`'s `bundle install` failing
+  with `Gem::GemNotFoundException: can't find gem bundler`. Fixed by
+  renaming the volume itself to `bundle_cache_3_3_12` (both the service
+  mount and the top-level `volumes:` entry), so each Ruby version gets
+  its own cache volume and this can't recur on the next Ruby bump. The
+  old orphaned `bundle_cache` volume is harmless to leave in place
+  (just unused disk) or can be pruned with `docker volume rm`.
 - Explicitly deferred/out of scope for this pass (same list as Passes 1
   and 2, still true, not yet addressed): Webpacker replacement,
   kt-paperclip → ActiveStorage migration, Unicorn/Puma reconciliation,

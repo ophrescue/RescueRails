@@ -7,7 +7,7 @@ services:
         RUBY_VERSION: "3.3.12"
     volumes:
       - ..:/workspace:cached
-      - bundle_cache:/usr/local/rbenv/versions/3.3.12/lib/ruby/gems
+      - bundle_cache_3_3_12:/usr/local/rbenv/versions/3.3.12/lib/ruby/gems
     command: sleep infinity
     depends_on:
       - db
@@ -41,4 +41,4 @@ services:
 
 volumes:
   pg_data:
-  bundle_cache:
+  bundle_cache_3_3_12:

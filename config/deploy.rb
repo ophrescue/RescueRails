@@ -30,6 +30,16 @@ set :log_level, :debug
 # Default value for :pty is false, use passwordless sudo
 set :pty, false
 
+# Fail fast instead of hanging: :timeout bounds the initial connection
+# attempt, :keepalive/:keepalive_interval detect a connection that dies
+# mid-command (observed in production as multi-minute hangs on trivial
+# commands) so net-ssh raises instead of blocking indefinitely.
+set :ssh_options, {
+  timeout: 15,
+  keepalive: true,
+  keepalive_interval: 10
+}
+
 set :newrelic_license_key, ENV['NEW_RELIC_LICENSE_KEY']
 
 # what specs should be run before deployment is allowed to

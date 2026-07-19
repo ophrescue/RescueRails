@@ -35,6 +35,10 @@ en:
       title: 'Adoption Applications'
     new:
       title: 'Adoption Application'
+    create:
+      title: 'Adoption Application'
+    complete:
+      title: 'Application Submitted'
   badges:
     index:
       title: 'Badges'
@@ -42,12 +46,20 @@ en:
       title: 'New Badge'
     edit:
       title: 'Edit Badge'
+    create:
+      title: 'New Badge'
+    update:
+      title: 'Edit Badge'
   banned_adopters:
     index:
       title: 'Do Not Adopt List'
     new:
       title: 'Add a Banned Adopter'
     edit:
+      title: 'Edit'
+    create:
+      title: 'Add a Banned Adopter'
+    update:
       title: 'Edit'
   campaigns:
     new:
@@ -66,6 +78,10 @@ en:
         title: "Edit Cat"
       index:
         title: "Cat Manager"
+      create:
+        title: "Add a New Cat"
+      update:
+        title: "Edit Cat"
     gallery:
       index:
         title: "Our Cats"
@@ -93,6 +109,10 @@ en:
         title: "Edit Dog"
       index:
         title: "Dog Manager"
+      create:
+        title: "Add a New Dog"
+      update:
+        title: "Edit Dog"
     gallery:
       index:
         title: "Our Dogs"
@@ -114,6 +134,10 @@ en:
       title: "Donate"
     history:
       title: "Donation History"
+    show:
+      title: "Donation Details"
+    create:
+      title: "Thank You"
   events:
     edit:
       title: 'Edit Event'
@@ -127,6 +151,10 @@ en:
       title:
         new: 'Add an Event'
         clone: 'Create Event by Copy'
+    create:
+      title: 'Add an Event'
+    update:
+      title: 'Edit Event'
 
   folder_attachments:
     index:
@@ -137,6 +165,10 @@ en:
     new:
       title: 'Create a New Folder'
     edit:
+      title: 'Edit Folder'
+    create:
+      title: 'Create a New Folder'
+    update:
       title: 'Edit Folder'
   invoices:
     new:
@@ -149,6 +181,10 @@ en:
       title: "Invoice"
     thank_you:
       title: "Thank You"
+    create:
+      title: "New Invoice"
+    destroy:
+      title: "Invoice"
   pages:
     home:
       title: 'All breed dog and cat rescue in Virgina, Maryland, Washington DC and South Central PA'
@@ -232,10 +268,41 @@ en:
       title: 'Training Partners'
     microchip_registration:
       title: 'Microchip Registration'
+    calendar:
+      title: 'Volunteer Calendar'
+    faq:
+      title: 'Frequently Asked Questions'
+    newsletters:
+      title: 'Volunteer Newsletters'
+    shop:
+      title: 'Shop'
+    'hope-for-hope':
+      title: 'Watch Hope for Hope'
+    'shelterlove-cat-gallery':
+      title: 'Our Cats'
+    'shelterlove-dog-gallery':
+      title: 'Our Dogs'
   party_contact_form:
     new:
       title: 'Pup-Tastic Party Contact Form'
+  passwords:
+    new:
+      title: 'Reset Password'
+    create:
+      title: 'Reset Password'
+    edit:
+      title: 'Change Password'
+    update:
+      title: 'Change Password'
   posts:
+    index:
+      title: 'Posts'
+    new:
+      title: 'New Post'
+    edit:
+      title: 'Edit Post'
+    show:
+      title: 'Post'
     bulletins:
       index:
         title: 'Bulletins'
@@ -253,6 +320,8 @@ en:
   sessions:
     new:
       title: 'Sign In'
+    create:
+      title: 'Sign In'
   shelters:
     edit:
       title: 'Edit'
@@ -267,11 +336,19 @@ en:
       title: Treatment Configuration
     edit:
       title: Edit Treatment Configuration
+    create:
+      title: Add Treatment Configuration
+    update:
+      title: Edit Treatment Configuration
   treatment_records:
     new:
       title: Add Treatment Record
     index:
       title: Treatment Records
+    edit:
+      title: Edit Treatment Record
+    create:
+      title: Add Treatment Record
   users:
     edit:
       title: 'Edit Profile'
@@ -279,8 +356,16 @@ en:
       title: 'Staff Directory'
     new:
       title: 'Add a Staff Account'
+    create:
+      title: 'Add a Staff Account'
+    update:
+      title: 'Edit Profile'
   volunteer_apps:
     new:
       title: 'New Volunteer Application'
     index:
       title: 'Volunteer Applications'
+    create:
+      title: 'New Volunteer Application'
+    update:
+      title: 'Volunteer Application'

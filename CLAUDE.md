@@ -302,12 +302,83 @@ stays 7.1.6): DONE**
   — needed to eventually let `clearance` move past 2.11.0, and its own
   independent compatibility question for Unicorn/Puma.
 
+**Pass 4 — Rails 7.1.6 → 7.2.3.1 (Ruby stays 3.3.12,
+`config.load_defaults` stays frozen at 5.0): DONE**
+(commits `213842ed`, `40bd33db`, `c42106d7` on `upgrade/rails-7.2`)
+
+- Pre-flight audit (two Explore passes over Gemfile/Gemfile.lock and all
+  config/CI files) found no gem version cap blocking resolution against
+  Rails 7.2 — the only resolution blocker was the Gemfile's own `gem
+  'rails', '~> 7.1.6'` pin, making this structurally simpler than Pass 1
+  or 3 (no *anticipated* forced companion bump, unlike what actually
+  happened — see below).
+- Commit 1: bumped the Gemfile pin to `~> 7.2.0`, ran `bundle update
+  rails --conservative`. Moved only the Rails-family gems to 7.2.3.1 plus
+  one new transitive dependency (`useragent`, backing 7.2's opt-in
+  `allow_browser`, unused by this app). Reviewed the full lockfile diff
+  line by line: `kt-paperclip`, `clearance`, `webpacker`, `audited`,
+  `puma`, `unicorn`, `delayed_job`/`delayed_job_active_record`,
+  `annotate`, `rack`, `rack-cache`, `sprockets`/`sprockets-rails`, and
+  (at this point) `rspec-rails` all stayed put.
+- Commit 2: ran `bin/rails app:update`, same rule as Pass 2 — decline
+  real customizations and trivial noise, accept only inert scaffolding.
+  Declined all of `config/application.rb`, `config/environments/*.rb`,
+  the same initializer set as Pass 2, and all binstubs. Also discarded
+  several newly-offered files that don't fit the accept list and aren't
+  needed by this bump: `bin/rubocop` (a new binstub, unrelated to the
+  Rails version), and `public/icon.{png,svg}` +
+  `public/406-unsupported-browser.html` (Rails' new default
+  favicon/`allow_browser` rejection-page scaffolding — this app already
+  has its own favicon setup in `app/views/layouts/_favicons.html.erb`
+  and doesn't use `allow_browser`). Accepted only
+  `config/initializers/new_framework_defaults_7_2.rb` (verified fully
+  commented out, zero non-comment/non-blank lines), matching the
+  `_7_0.rb`/`_7_1.rb` precedent. No new guarded migration was offered
+  this pass.
+- Commit 3 (forced, confirmed via `bin/rails zeitwerk:check`, not
+  static analysis): `rspec-rails` 6.0.4's Railtie sets
+  `config.action_mailer.preview_path=` (singular) in its
+  `rspec_rails.action_mailer` initializer. Rails 7.2 removed that
+  deprecated singular alias entirely (only `preview_paths=` remains —
+  see `actionmailer-7.2.3.1`'s CHANGELOG: "Remove deprecated
+  `config.action_mailer.preview_path`."), so every Rails boot under the
+  `test`/`development` groups raised `NoMethodError` on
+  `ActionMailer::Base`. `rspec-rails` 6.1.5 branches on
+  `Rails::VERSION::STRING >= "7.1.0"` to call `preview_paths=` instead,
+  fixing it. Bumped the Gemfile pin `~> 6.0.0` → `~> 6.1.0`; `bundle
+  update rspec-rails --conservative` moved only `rspec-rails` and its
+  own declared deps (`rspec-core`, `rspec-mocks`) — no Rails-family gem
+  moved. This is the exact "newly-surfaced note" Pass 3 flagged
+  (rspec-rails 6.0.x's weaker 7.1/7.2-era support) — that note assumed
+  the suite wasn't actually blocked without a bump; it was.
+- Full RSpec suite: 742 examples, 0 failures, 12 pending across two
+  random seeds, both before Commit 3 confirmed the break and after
+  confirmed the fix — matches the Pass 3 baseline exactly. `bin/rails
+  zeitwerk:check` clean. Manually booted `bin/rails server` and
+  confirmed `/` (200) and `/sign_in` (200); confirmed both the Sprockets
+  asset (`/assets/application_bs41.debug-*.js`, 200) and the Webpacker
+  pack (`/packs/js/application-*.js`, 200) actually resolve, not just
+  appear in the HTML.
+- Explicitly deferred/out of scope for this pass (same list as Passes 1
+  through 3, still true, not yet addressed): Webpacker replacement,
+  kt-paperclip → ActiveStorage migration, Unicorn/Puma reconciliation,
+  the `config.load_defaults` catch-up, Rack 2 → 3, `.rubocop.yml`'s
+  stale target version, CI's Node 16 pin, `webpacker:compile`'s Node
+  18/OpenSSL 3 incompatibility in this devcontainer.
+- New notes surfaced by this pass, not yet actionable:
+  - `delayed_job_active_record` and `annotate` both cap `activerecord <
+    8.0` — irrelevant now, will block a future Rails 8 pass.
+  - `rspec-rails` is now pinned `~> 6.1.0` (was `~> 6.0.0`, forced
+    above); no upper cap blocks going further, but bumping past 6.1.x is
+    out of scope unless a future pass is actually blocked without it.
+
 **Next pass: not yet decided.** Candidates, in roughly the order they'd
-naturally come up: Rails 7.1 → 7.2 (note: 7.2 raises Rails' minimum Ruby
-floor further, but this pass already moved Ruby to 3.3.12, so that
-particular forcing function is gone), the deferred `config.load_defaults`
-catch-up, or the newly surfaced Rack 2 → 3 bump (itself gated on
-Unicorn/Puma compatibility research). Decide based on what's most
-pressing (security support windows, blocking a needed feature, etc.)
-when picking up the next pass — don't assume the order above is a
-commitment.
+naturally come up: the deferred `config.load_defaults` catch-up, the
+Rack 2 → 3 bump (itself gated on Unicorn/Puma compatibility research,
+and a prerequisite for letting `clearance` move past 2.11.0), or Rails
+7.2 → 8.0 (note: Rails 8 will hit the `delayed_job_active_record`/
+`annotate` `activerecord < 8.0` caps surfaced this pass — expect a
+forced companion-gem investigation, similar in shape to Pass 1/3, not
+Pass 2/4). Decide based on what's most pressing (security support
+windows, blocking a needed feature, etc.) when picking up the next pass
+— don't assume the order above is a commitment.

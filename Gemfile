@@ -11,7 +11,7 @@ gem 'aws-sdk-s3', '~> 1.116'
 gem 'bootstrap', '~> 4.3.1'
 gem 'bootstrap-will_paginate', '~> 1.0.0'
 gem "chartkick"
-gem 'clearance'
+gem 'clearance', '~> 2.11.0'
 gem 'countries', '~> 4.2', '>= 4.2.3'
 gem 'dotenv'
 gem 'dotenv-rails'

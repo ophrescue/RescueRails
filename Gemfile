@@ -73,7 +73,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'rack-mini-profiler', require: false
   gem 'rspec-collection_matchers'
-  gem 'rspec-rails', '~> 6.0.0'
+  gem 'rspec-rails', '~> 6.1.0'
   gem 'puma'
   gem 'stackprof'
 end

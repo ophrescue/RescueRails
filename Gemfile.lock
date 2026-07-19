@@ -448,22 +448,22 @@ GEM
     rouge (4.2.0)
     rspec-collection_matchers (1.2.1)
       rspec-expectations (>= 2.99.0.beta1)
-    rspec-core (3.13.0)
+    rspec-core (3.13.6)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-mocks (3.13.0)
+    rspec-mocks (3.13.8)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-rails (6.0.4)
+    rspec-rails (6.1.5)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       railties (>= 6.1)
-      rspec-core (~> 3.12)
-      rspec-expectations (~> 3.12)
-      rspec-mocks (~> 3.12)
-      rspec-support (~> 3.12)
+      rspec-core (~> 3.13)
+      rspec-expectations (~> 3.13)
+      rspec-mocks (~> 3.13)
+      rspec-support (~> 3.13)
     rspec-support (3.13.0)
     rubocop (1.66.1)
       json (~> 2.3)
@@ -654,7 +654,7 @@ DEPENDENCIES
   responders
   rest-client (~> 2.1)
   rspec-collection_matchers
-  rspec-rails (~> 6.0.0)
+  rspec-rails (~> 6.1.0)
   rubocop
   rubocop-performance
   rubocop-rails

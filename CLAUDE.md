@@ -372,13 +372,81 @@ stays 7.1.6): DONE**
     above); no upper cap blocks going further, but bumping past 6.1.x is
     out of scope unless a future pass is actually blocked without it.
 
-**Next pass: not yet decided.** Candidates, in roughly the order they'd
-naturally come up: the deferred `config.load_defaults` catch-up, the
-Rack 2 → 3 bump (itself gated on Unicorn/Puma compatibility research,
-and a prerequisite for letting `clearance` move past 2.11.0), or Rails
-7.2 → 8.0 (note: Rails 8 will hit the `delayed_job_active_record`/
-`annotate` `activerecord < 8.0` caps surfaced this pass — expect a
-forced companion-gem investigation, similar in shape to Pass 1/3, not
-Pass 2/4). Decide based on what's most pressing (security support
-windows, blocking a needed feature, etc.) when picking up the next pass
-— don't assume the order above is a commitment.
+**Pass 5 — Rack 2.2.10 → 3.2.6 (Rails stays 7.2.3.1, Ruby stays
+3.3.12): DONE**
+(commit on `upgrade/rack-3`)
+
+- Security-motivated: Rack 2.x has an accumulated CVE history
+  (multipart temp-file leakage, header-parsing ReDoS, Range-header DoS
+  across various 2.2.x releases); Rack 3.x is where active security
+  maintenance is concentrated. Requested by the user to start a new
+  security-focused modernization phase.
+- `rack` is not directly pinned in the `Gemfile` — resolves
+  transitively, pulled in by `actionpack`. Two hard blockers forced
+  companion bumps, both confirmed in the pre-pass lockfile: `rack-session
+  (1.0.2)` and `rackup (1.0.1)` each capped `rack (< 3)`.
+  `bundle update rack rack-session rackup --conservative` resolved
+  cleanly: `rack` 2.2.10 → 3.2.6, `rack-session` 1.0.2 → 2.1.2 (gained a
+  `base64 (>= 0.1.0)` dependency edge — `base64` itself was already in
+  the lockfile, unmoved), `rackup` 1.0.1 → 2.3.1 (dropped its `webrick`
+  dependency; `webrick` 1.8.2 stayed in the lockfile regardless, pulled
+  in independently by `ferrum`/Cuprite). No other gem moved — reviewed
+  the full lockfile diff line by line per the standing rule.
+  - Ceiling: `actionpack (7.2.3.1)` requires `rack (>= 2.2.4, < 3.3)`,
+    so this pass tops out in the 3.0–3.2.x line, not the latest Rack
+    release — expected and fine.
+  - `unicorn ~> 6.1` and `puma` (resolved 6.5.0) already supported Rack
+    3 (since unicorn 6.1.0 / puma 6.0) — no version bump needed for
+    either app server.
+  - `clearance (2.11.0)`, pinned `~> 2.11.0` since Pass 3, uses
+    `status: :unprocessable_entity` throughout, not
+    `:unprocessable_content` — so the Rack-3-only
+    `SYMBOL_TO_STATUS_CODE` issue that blocked clearance 2.12.0 in
+    Pass 3 didn't apply here. No forced clearance bump.
+  - Did **not** add an explicit `gem 'rack', ...` line to the
+    `Gemfile` — it wasn't pinned before this pass and there's no reason
+    introduced by this pass to start pinning it.
+- No forced companion-gem code fix was needed this pass (unlike Pass 1,
+  3, and 4's Commit 3) — the only diff is the `Gemfile.lock` bump.
+- Full RSpec suite: 742 examples, 0 failures, 12 pending, matching the
+  fresh pre-pass baseline exactly across two runs with different random
+  seeds. Individually re-ran `spec/features/event_management_spec.rb`
+  (the `Clearance::BackDoor` `as: admin` regression target, since
+  `config/environments/test.rb` wires up both `Clearance::BackDoor` and
+  `RackSessionAccess::Middleware`) and all of `spec/features/clearance/`
+  (sign-in, sign-out, password reset/update) individually — both clean.
+  `bin/rails zeitwerk:check` clean. Manually booted `bin/rails server`
+  and confirmed `/` and `/sign_in` returned real 200s, including the
+  actual Sprockets and Webpacker asset URLs (not just their presence in
+  the HTML). Confirmed no `rack-mini-profiler` boot errors in the dev
+  log. Attempted a `RAILS_ENV=production bin/rails runner` boot smoke
+  check per the plan; it failed on `ActiveRecord::AdapterNotSpecified`
+  because this devcontainer has no `production` database configured —
+  a pre-existing environment limitation unrelated to Rack (dev/test
+  only), not exercised further.
+- Explicitly deferred/out of scope for this pass (same list as Passes 1
+  through 4, still true, not yet addressed): Webpacker replacement,
+  kt-paperclip → ActiveStorage migration, Unicorn/Puma reconciliation
+  (both already independently supported Rack 3, so "already touching
+  Rack" wasn't a reason to fold it in), the `config.load_defaults`
+  catch-up, Rails 7.2 → 8.0, `.rubocop.yml`'s stale target version, CI's
+  Node 16 pin, `webpacker:compile`'s Node 18/OpenSSL 3 incompatibility
+  in this devcontainer. Also out of scope, called out explicitly as the
+  natural next pass rather than folded in: CI security scanning
+  (brakeman, bundler-audit, extending `.github/dependabot.yml` beyond
+  `bundler`) — a real, cheap-to-close gap, but unrelated to a version
+  bump.
+
+**Next pass: not yet decided**, but CI security scanning (brakeman for
+SAST, bundler-audit for known-CVE gem scanning, a `github-actions`
+entry in `.github/dependabot.yml`) is the leading candidate — cheap,
+decouples entirely from version-bump risk, and continues the user's
+stated security focus from Pass 5. Other candidates, roughly in order:
+Rails 7.2 → 8.0 (will need to resolve the `delayed_job_active_record`/
+`annotate` `activerecord < 8.0` caps first, flagged since Pass 4), gem
+staleness cleanup (nokogiri, stripe, mini_racer/libv8-node, honeybadger
+— no known active CVEs currently, so lower urgency), Unicorn/Puma
+reconciliation, and the `config.load_defaults` catch-up (both
+long-deferred, not security-driven, lowest urgency of the group).
+Decide based on what's most pressing when picking up the next pass —
+don't assume the order above is a commitment.

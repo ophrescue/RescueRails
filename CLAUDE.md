@@ -392,9 +392,10 @@ stays 7.1.6): DONE**
   dependency; `webrick` 1.8.2 stayed in the lockfile regardless, pulled
   in independently by `ferrum`/Cuprite). No other gem moved — reviewed
   the full lockfile diff line by line per the standing rule.
-  - Ceiling: `actionpack (7.2.3.1)` requires `rack (>= 2.2.4, < 3.3)`,
-    so this pass tops out in the 3.0–3.2.x line, not the latest Rack
-    release — expected and fine.
+  - Ceiling: `actionpack (7.2.3.1)` requires `rack (>= 2.2.4, < 3.3)`.
+    This permits the resolved `3.2.6` and excludes only a future
+    `3.3.x` line, which hadn't shipped as of this pass — `3.2.6` is
+    itself the latest Rack release published to date.
   - `unicorn ~> 6.1` and `puma` (resolved 6.5.0) already supported Rack
     3 (since unicorn 6.1.0 / puma 6.0) — no version bump needed for
     either app server.

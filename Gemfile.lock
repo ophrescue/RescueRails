@@ -254,7 +254,9 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
     hitimes (2.0.0)
-    honeybadger (4.12.2)
+    honeybadger (5.30.0)
+      logger
+      ostruct
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
@@ -629,7 +631,7 @@ DEPENDENCIES
   gravatar_image_tag
   groupdate
   has_scope
-  honeybadger (~> 4.0)
+  honeybadger (~> 5.1)
   kt-paperclip (~> 7.2)
   mini_racer (>= 0.2.3)
   mjml-rails (~> 4.6, >= 4.6.1)

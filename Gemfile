@@ -60,7 +60,7 @@ gem 'mini_racer', '>= 0.2.3', platforms: :ruby
 gem 'uglifier'
 
 gem 'newrelic_rpm'
-gem 'honeybadger', '~> 4.0'
+gem 'honeybadger', '~> 5.1'
 gem 'sucker_punch', '~> 1.5.1'
 gem 'factory_bot_rails'
 

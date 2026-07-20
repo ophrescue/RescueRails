@@ -2,8 +2,8 @@
 
 [![Code Climate](https://codeclimate.com/github/ophrescue/RescueRails.png)](https://codeclimate.com/github/ophrescue/RescueRails) [![Build Status](https://travis-ci.org/ophrescue/RescueRails.svg?branch=master)](https://travis-ci.org/ophrescue/RescueRails) [![Coverage Status](https://coveralls.io/repos/github/ophrescue/RescueRails/badge.svg?branch=master)](https://coveralls.io/github/ophrescue/RescueRails?branch=master)
 
-Rails 6.1.x
-Ruby 3.0.5
+Rails 7.2.x
+Ruby 3.3.12
 Postgresql 16
 
 ## About

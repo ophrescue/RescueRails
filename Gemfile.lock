@@ -606,7 +606,7 @@ DEPENDENCIES
   bcrypt_pbkdf (>= 1.0, < 2.0)
   better_errors
   binding_of_caller
-  bootstrap (~> 4.6.2)
+  bootstrap (>= 4.6.2.1, < 4.7)
   bootstrap-will_paginate (~> 1.0.0)
   bundler-audit
   capistrano (~> 3.11)

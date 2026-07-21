@@ -484,7 +484,11 @@ version change): DONE**
   (CVE-2024-6531, XSS) — the fix needs `> 4.6.2`. Rather than jump to
   Bootstrap 5 (breaking: drops jQuery, renames every `data-*` attribute
   to `data-bs-*`, out of scope for a CVE pass), loosened the pin to
-  `~> 4.6.2` to land on 4.6.2.1, the last 4.x release with the fix.
+  `>= 4.6.2.1', '< 4.7'` to land on 4.6.2.1, the last 4.x release with
+  the fix. Deliberately not `~> 4.6.2` — that pessimistic form only
+  bounds the version *above* 4.7, it doesn't exclude the vulnerable
+  4.6.2 exact release from being re-resolved below the patched
+  4.6.2.1, so the floor is pinned explicitly at the patched version.
   Discovered a real latent fragility doing this: `bootstrap` 4.6.2.1
   dropped its own runtime dependency on `sassc-rails`, and
   `sassc-rails`/`sprockets`/`sprockets-rails`/`tilt` were **never

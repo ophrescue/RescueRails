@@ -8,7 +8,7 @@ gem 'rack-cache'
 gem 'audited', '~> 5.0'
 gem 'aws-sdk-locationservice', '~> 1.51'
 gem 'aws-sdk-s3', '~> 1.116'
-gem 'bootstrap', '~> 4.6.2'
+gem 'bootstrap', '>= 4.6.2.1', '< 4.7'
 gem 'bootstrap-will_paginate', '~> 1.0.0'
 gem "chartkick"
 gem 'clearance', '~> 2.11.0'

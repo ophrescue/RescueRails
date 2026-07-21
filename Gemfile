@@ -104,6 +104,7 @@ group :development do
   gem 'ed25519', '>= 1.2', '< 2.0'
   gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
   gem 'powder'
+  gem 'bundler-audit'
   gem 'rubocop'
   gem 'rubocop-rspec'
   gem 'rubocop-rails'

@@ -8,7 +8,7 @@ gem 'rack-cache'
 gem 'audited', '~> 5.0'
 gem 'aws-sdk-locationservice', '~> 1.51'
 gem 'aws-sdk-s3', '~> 1.116'
-gem 'bootstrap', '~> 4.3.1'
+gem 'bootstrap', '~> 4.6.2'
 gem 'bootstrap-will_paginate', '~> 1.0.0'
 gem "chartkick"
 gem 'clearance', '~> 2.11.0'
@@ -56,6 +56,7 @@ gem 'delayed_job_active_record'
 # in production environments by default.
 
 gem 'sassc', '~> 2.4'
+gem 'sassc-rails'
 gem 'mini_racer', '>= 0.2.3', platforms: :ruby
 gem 'uglifier'
 

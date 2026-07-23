@@ -379,7 +379,7 @@ GEM
     rack (3.2.6)
     rack-cache (1.17.0)
       rack (>= 0.4)
-    rack-mini-profiler (3.3.1)
+    rack-mini-profiler (4.0.1)
       rack (>= 1.2.0)
     rack-proxy (0.7.7)
       rack

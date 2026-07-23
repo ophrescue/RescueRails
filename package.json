@@ -5,6 +5,6 @@
     "stimulus": "^2.0.0"
   },
   "devDependencies": {
-    "webpack-dev-server": "^4.2.1"
+    "webpack-dev-server": "^6.0.0"
   }
 }

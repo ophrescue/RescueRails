@@ -541,15 +541,108 @@ version change): DONE**
   stale target version, CI's Node 16 pin, `webpacker:compile`'s Node
   18/OpenSSL 3 devcontainer incompatibility.
 
+**Pass 7 — Production incident: Unicorn 6.1.0 crashing on Rack 3
+multi-value `Set-Cookie` headers, breaking all logins (no Rails/Ruby
+version change): DONE**
+
+- User-reported symptom: production sign-in silently stopped working,
+  with **no error in `production.log`**. Per this file's own "stop if
+  you can't find it" instruction, checked for the production ansible
+  playbooks at `~/projects/oph-prd-env/` to review NGINX/Unicorn config
+  — that path (and `~/projects/` itself) doesn't exist anywhere on this
+  filesystem, so no ansible/NGINX review was possible or, as it turned
+  out, necessary.
+- Root cause, confirmed by reading the actual installed gem source (not
+  guessed from version numbers) and reproduced locally: Pass 5's Rack
+  2.2.10 → 3.2.6 bump changed how a **second** `Set-Cookie` header is
+  represented — `Rack::Utils.set_cookie_header!` in `rack-3.2.6/lib/
+  rack/utils.rb` stores it as an **Array** of strings, where Rack 2
+  always used a single `"\n"`-joined String. `unicorn` is pinned `~>
+  6.1` and resolves to `6.1.0` — confirmed via `gem list unicorn
+  --remote --all` to still be **the latest gem release available**, no
+  6.2+ exists. Its `Unicorn::HttpResponse#http_response_write`
+  (`unicorn-6.1.0/lib/unicorn/http_response.rb:43`) only ever checked
+  `value =~ /\n/`, a String-only check left over from the Rack 2 world,
+  and raises `NoMethodError: undefined method '=~' for an instance of
+  Array` on any response carrying 2+ `Set-Cookie` headers. This is a
+  known, still-unreleased upstream gap — the real fix exists merged but
+  unshipped in any unicorn gem, at
+  [Shopify/unicorn#5](https://github.com/Shopify/unicorn/pull/5).
+  - Pass 5's claim that "unicorn ~> 6.1 ... already supported Rack 3
+    (since unicorn 6.1.0)" was correct for general request handling but
+    missed this specific multi-`Set-Cookie` code path — Pass 5's manual
+    boot checks only hit plain `GET /` and `GET /sign_in`, never an
+    actual sign-in `POST`, so the crash never surfaced until real
+    production login traffic hit it.
+  - Because Unicorn's response-writer builds the entire header buffer
+    before writing anything to the socket, a mid-loop crash here means
+    **nothing** is written — Unicorn's own rescue path sends a bare
+    fallback 500 with no headers at all. The client never receives any
+    `Set-Cookie`, so sign-in appears to succeed application-side (no
+    Rails exception, nothing in `production.log`) while the browser
+    never actually gets a session. The crash itself is logged only to
+    Unicorn's own error log, not Rails'.
+  - Confirmed this is unrelated to the `clearance` 2.7.1 → 2.11.0 bump
+    (Pass 3): nothing in that version range's `CHANGELOG.md` or `lib/
+    clearance/session.rb` touches cookie/session-writing code. Also
+    unrelated to NGINX: the crash happens entirely inside the Unicorn
+    worker serializing its own response, before NGINX ever sees
+    anything but a broken connection.
+  - Locally reproduced (per this file's standing "confirm before
+    assuming" rule) by booting real `unicorn` against this app
+    (`bundle exec unicorn` itself fails in this devcontainer the same
+    way `bundle exec rails`/`bundle exec rspec` do — worked around with
+    `ruby -e 'require "bundler/setup"; load Gem.bin_path("unicorn",
+    "unicorn")'`) and driving a real sign-in `POST` through it: got the
+    identical stack trace, line number and all. Rack's own header hash
+    for a real `GET /sign_in` in this devcontainer confirmed the
+    `Array` shape directly (`["_RescueRails_session=...",
+    "__profilin=p%3Dt;..."]` — the second cookie here is
+    `rack-mini-profiler`'s dev-only cookie; in production it's
+    Clearance's `remember_token` cookie, set alongside the session
+    cookie on every sign-in).
+- Fix: `config/initializers/unicorn_rack3_cookie_fix.rb`, guarded by
+  `if defined?(Unicorn::HttpResponse)` (a no-op everywhere Unicorn isn't
+  loaded — dev/test Puma, console, rake tasks). Uses
+  `Unicorn::HttpResponse.prepend` to reproduce the unreleased
+  Shopify/unicorn#5 fix verbatim: same `http_response_write` body, with
+  an added `when Array` branch ahead of the existing `\n`-splitting
+  branch. Chosen over switching production to Puma (bigger change,
+  needs the unreachable ansible repo to update Capistrano/systemd) or
+  rolling back Rack 3 (would undo Pass 5's CVE remediation) — a
+  deliberate, minimal, targeted patch for an unreleased upstream gap,
+  same pattern as Pass 1's kt-paperclip and Pass 4's rspec-rails forced
+  fixes.
+- Verified by repeating the exact same local repro (real `unicorn`
+  process, real sign-in `POST`) after adding the fix: no crash, the
+  response carries all of `remember_token`, `_RescueRails_session`, and
+  `__profilin` as three intact `Set-Cookie` headers, and a follow-up
+  request using the resulting cookie jar shows the user actually signed
+  in ("Sign out" link present). Full RSpec suite: 742 examples, 0
+  failures, 12 pending — matches the Pass 6 baseline exactly (expected:
+  these specs run under Puma/rack-test and don't exercise Unicorn at
+  all, so this is a regression check, not a fix verification).
+  `bin/rails zeitwerk:check` clean.
+- Explicitly out of reach this pass: actually deploying this fix and
+  restarting/rolling the production Unicorn workers — this session has
+  no access to `~/projects/oph-prd-env/` or any production host, so
+  that remains a manual follow-up for the user.
+- Sharpens the existing "Unicorn/Puma reconciliation" roadmap item from
+  a version-gap footnote into a confirmed-broken-in-production gap:
+  Unicorn's Rack 3 support has a real, unfixed hole with no upstream
+  gem release in sight, while Puma already handles this correctly and
+  is already running in dev/test. Bumps that reconciliation up the
+  priority list below.
+
 **Next pass: not yet decided.** Leading candidates, roughly in order:
-brakeman for SAST (the other half of "CI security scanning", deferred
-from this pass), wiring `bundle-audit` (now in the Gemfile) into
-`.github/workflows/main.yml` as an actual CI gate, Rails 7.2 → 8.0
-(will need to resolve the `delayed_job_active_record`/`annotate`
-`activerecord < 8.0` caps first, flagged since Pass 4), Unicorn/Puma
-reconciliation (dev now runs Puma 8.0.2 vs. production's `unicorn ~>
-6.1` — a version gap worth noting even though this pass's CVE fix
-didn't require closing it), and the `config.load_defaults` catch-up
+Unicorn/Puma reconciliation (elevated by Pass 7 — Unicorn now has a
+confirmed, unresolved-upstream Rack 3 bug in production, not just a
+version-gap footnote), brakeman for SAST (the other half of "CI
+security scanning", deferred since Pass 5), wiring `bundle-audit` (in
+the Gemfile since Pass 6) into `.github/workflows/main.yml` as an
+actual CI gate, Rails 7.2 → 8.0 (will need to resolve the
+`delayed_job_active_record`/`annotate` `activerecord < 8.0` caps first,
+flagged since Pass 4), and the `config.load_defaults` catch-up
 (long-deferred, not security-driven, lowest urgency of the group).
 Decide based on what's most pressing when picking up the next pass —
 don't assume the order above is a commitment.

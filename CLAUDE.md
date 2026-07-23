@@ -438,16 +438,118 @@ stays 7.1.6): DONE**
   `bundler`) — a real, cheap-to-close gap, but unrelated to a version
   bump.
 
-**Next pass: not yet decided**, but CI security scanning (brakeman for
-SAST, bundler-audit for known-CVE gem scanning, a `github-actions`
-entry in `.github/dependabot.yml`) is the leading candidate — cheap,
-decouples entirely from version-bump risk, and continues the user's
-stated security focus from Pass 5. Other candidates, roughly in order:
-Rails 7.2 → 8.0 (will need to resolve the `delayed_job_active_record`/
-`annotate` `activerecord < 8.0` caps first, flagged since Pass 4), gem
-staleness cleanup (nokogiri, stripe, mini_racer/libv8-node, honeybadger
-— no known active CVEs currently, so lower urgency), Unicorn/Puma
-reconciliation, and the `config.load_defaults` catch-up (both
-long-deferred, not security-driven, lowest urgency of the group).
+**Pass 6 — bundler-audit: known-CVE gem scan + remediation (no Rails/Ruby
+version change): DONE**
+(commits `882e34bb`, `df1773ad`, `da2e3c1d` on `upgrade/bundler-audit`)
+
+- Narrowed scope of the "CI security scanning" candidate flagged after
+  Pass 5: gems only (bundler-audit), not brakeman/SAST — a separate
+  future pass — and no permanent CI gate yet, by explicit user choice.
+  Motivated by the same concern that shaped this whole log: a model's
+  training-data knowledge of CVEs goes stale, and this pass's date
+  (2026-07-20) is 6+ months past this session's knowledge cutoff, so
+  the actual `ruby-advisory-db` (live-fetched, last updated 2026-07-18)
+  was the only trustworthy source — not a manual read of the lockfile.
+- Commit 1: added `bundler-audit` (0.9.3) to the `Gemfile`'s
+  `:development` group, alongside `rubocop` and friends — same
+  reasoning as those: a dev-only tool kept in the repo for repeat use,
+  not wired into CI this pass. Lockfile diff was just `bundler-audit` +
+  its own already-satisfied deps (`bundler`, `thor`).
+- `bundle exec bundle-audit update && bundle-audit check` against the
+  Pass-5 lockfile found **84 advisories across 15 gems** — far more
+  than expected from a stale mental model of this lockfile, which is
+  exactly the point of running the real tool instead of guessing:
+  `nokogiri` alone accounted for 48 (libxml2 UAF/DoS advisories,
+  1.17.2 → needed 1.19.4), plus `net-imap`, `websocket-driver`,
+  `crass`, `faraday`, `concurrent-ruby`, `yard`, `uri`, `puma`, `thor`,
+  `rails-html-sanitizer`, `loofah`, `addressable`, `aws-sdk-s3`, and
+  `bootstrap`.
+- Commit 2: remediated the 14 gems fixable via a straight `bundle
+  update <gems...> --conservative` with no Gemfile pin changes —
+  `nokogiri`, `net-imap`, `websocket-driver`, `crass`, `faraday`,
+  `concurrent-ruby`, `yard`, `uri`, `puma`, `thor`,
+  `rails-html-sanitizer`, `loofah`, `addressable`, `aws-sdk-s3`. Found
+  one forced companion via the standing "clean resolve isn't proof"
+  pattern: `--conservative` alone left `aws-sdk-s3` at 1.177.0, short of
+  the required 1.208.0, because its fix needs `aws-sdk-core >= 3.234.0`
+  and conservative mode won't bump an unlisted gem — adding
+  `aws-sdk-core`/`aws-sdk-kms` to the same update call let it reach
+  1.228.0. `puma` (6.5.0 → 8.0.2, a major-version jump) is safe here
+  specifically because this app only runs Puma in dev/test — production
+  uses `unicorn` (per the Pass-1-era stack note), so it has no
+  production blast radius. Full lockfile diff reviewed line by line:
+  only these gems and their own declared deps moved.
+- Commit 3 (the one real surprise this pass): `bootstrap`'s Gemfile pin
+  (`~> 4.3.1`) only ever allowed the exact vulnerable version
+  (CVE-2024-6531, XSS) — the fix needs `> 4.6.2`. Rather than jump to
+  Bootstrap 5 (breaking: drops jQuery, renames every `data-*` attribute
+  to `data-bs-*`, out of scope for a CVE pass), loosened the pin to
+  `>= 4.6.2.1', '< 4.7'` to land on 4.6.2.1, the last 4.x release with
+  the fix. Deliberately not `~> 4.6.2` — that pessimistic form only
+  bounds the version *above* 4.7, it doesn't exclude the vulnerable
+  4.6.2 exact release from being re-resolved below the patched
+  4.6.2.1, so the floor is pinned explicitly at the patched version.
+  Discovered a real latent fragility doing this: `bootstrap` 4.6.2.1
+  dropped its own runtime dependency on `sassc-rails`, and
+  `sassc-rails`/`sprockets`/`sprockets-rails`/`tilt` were **never
+  declared directly in this app's Gemfile** — they'd only ever been
+  present because `bootstrap` pulled `sassc-rails` in transitively.
+  Bumping bootstrap alone silently dropped all four from
+  `Gemfile.lock`, which would have broken this app's actual Sprockets
+  asset pipeline (`app/assets/stylesheets/application_bs41.scss`, the
+  same asset referenced in Pass 4's server-boot check) on the next
+  clean `bundle install` in CI/production. Confirmed by reproducing the
+  drop in isolation before fixing it. Fixed by adding `gem
+  'sassc-rails'` directly to the Gemfile so this app's real dependency
+  is explicit — not a bootstrap-version-bump workaround, a correction
+  of a pre-existing undeclared dependency the bump happened to expose.
+- Full RSpec suite: 742 examples, 0 failures, 12 pending, stable across
+  three different random seeds (two before finalizing commit
+  boundaries, one re-run against the exact final three-commit state) —
+  matches the Pass 5 baseline exactly, captured fresh via `git stash`
+  immediately before this pass's first change. `bin/rails
+  zeitwerk:check` clean. Manually booted `bin/rails server` (on a
+  separate port/pidfile from the devcontainer's own already-running dev
+  server, left untouched) and confirmed `/` and `/sign_in` both
+  resolved 200s with real Sprockets-compiled asset output, not just
+  presence in the HTML.
+- One anomaly investigated and ruled pre-existing, per the standing
+  "check whether it reproduces on the pre-upgrade code" rule: the
+  manual server-boot check logged a `SystemStackError` inside a
+  background `newrelic_rpm` agent thread
+  (`NewRelic::Agent::StatsEngine::StatsHash#record`), not on the
+  request thread — both smoke-tested pages still returned real 200s.
+  Reproduced identically on the unmodified pre-pass code (confirmed via
+  `git stash`, re-running the same server-boot check, same stack
+  trace). This app has no `config/newrelic.yml`, so the agent runs on
+  bare defaults with (presumably) no license key in this devcontainer —
+  unrelated to any gem this pass touched, not investigated further
+  here, but worth a note if a future pass ever touches
+  `newrelic_rpm`/`concurrent-ruby` again.
+- Post-remediation `bundle-audit check`: 0 vulnerabilities. No
+  `.bundler-audit.yml` ignores were needed — every advisory found had a
+  real, in-scope fix landed this pass.
+- Explicitly deferred/out of scope for this pass: brakeman/SAST (own
+  future pass), wiring `bundle-audit` into `.github/workflows/main.yml`
+  as a CI gate (by user choice this pass — tool is available locally/in
+  dev only), `.github/dependabot.yml`'s `github-actions` ecosystem
+  entry (a different concern than gem CVEs), Ruby-language CVEs (not a
+  gem, out of this pass's explicit "known-CVE gems" framing), and the
+  full standing list from Passes 1–5: Webpacker replacement,
+  kt-paperclip → ActiveStorage, Unicorn/Puma reconciliation,
+  `config.load_defaults` catch-up, Rails 7.2 → 8.0, `.rubocop.yml`'s
+  stale target version, CI's Node 16 pin, `webpacker:compile`'s Node
+  18/OpenSSL 3 devcontainer incompatibility.
+
+**Next pass: not yet decided.** Leading candidates, roughly in order:
+brakeman for SAST (the other half of "CI security scanning", deferred
+from this pass), wiring `bundle-audit` (now in the Gemfile) into
+`.github/workflows/main.yml` as an actual CI gate, Rails 7.2 → 8.0
+(will need to resolve the `delayed_job_active_record`/`annotate`
+`activerecord < 8.0` caps first, flagged since Pass 4), Unicorn/Puma
+reconciliation (dev now runs Puma 8.0.2 vs. production's `unicorn ~>
+6.1` — a version gap worth noting even though this pass's CVE fix
+didn't require closing it), and the `config.load_defaults` catch-up
+(long-deferred, not security-driven, lowest urgency of the group).
 Decide based on what's most pressing when picking up the next pass —
 don't assume the order above is a commitment.

@@ -34,6 +34,7 @@ namespace :deploy do
       end
 
       invoke 'systemd:unicorn:setup'
+      invoke 'systemd:puma:setup'
       invoke 'systemd:delayed_job:setup'
     end
   end

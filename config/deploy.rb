@@ -56,6 +56,7 @@ set :linked_files, %W{config/database.yml
                       config/newrelic.yml
                       config/initializers/setup_mail.rb
                       config/unicorn.rb
+                      config/puma.rb
                       .env.#{fetch(:stage)} }
 
 # dirs we want symlinking to shared
@@ -67,7 +68,8 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 set(:config_files, %w[nginx.conf
                       log_rotation
                       monit
-                      unicorn.rb])
+                      unicorn.rb
+                      puma.rb])
 
 
 # link cap managed config files to elsewhere in the server
@@ -125,7 +127,7 @@ namespace :deploy do
   # we've added
   after 'deploy:setup_config', 'monit:restart'
 
-  after 'deploy:restart', 'systemd:unicorn:reload-or-restart'
+  after 'deploy:restart', 'systemd:puma:reload-or-restart'
   after 'deploy:restart', 'systemd:delayed_job:restart'
 
   # As of Capistrano 3.1, the `deploy:restart` task is not called

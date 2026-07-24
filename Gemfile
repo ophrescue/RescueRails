@@ -43,6 +43,8 @@ gem 'will_paginate', '~> 3.3.1'
 gem 'dalli'
 gem 'pg', '~> 1.5', '>= 1.5.9'
 
+gem 'puma', '~> 8.0'
+
 group :production do
   gem 'unicorn', '~> 6.1'
 end
@@ -75,7 +77,6 @@ group :development, :test do
   gem 'rack-mini-profiler', require: false
   gem 'rspec-collection_matchers'
   gem 'rspec-rails', '~> 6.1.0'
-  gem 'puma'
   gem 'stackprof'
 end
 

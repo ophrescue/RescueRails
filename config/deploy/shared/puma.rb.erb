@@ -1,0 +1,43 @@
+root = "<%= current_path %>"
+directory root
+
+app_name = "<%= fetch(:full_app_name) %>"
+
+bind "unix://tmp/puma.#{app_name}.sock"
+
+pidfile "#{root}/tmp/pids/puma.pid"
+state_path "#{root}/tmp/pids/puma.state"
+stdout_redirect "#{root}/log/puma.log", "#{root}/log/puma.log", true
+
+environment "<%= fetch(:rails_env) %>"
+
+workers <%= fetch(:puma_worker_count) %>
+threads <%= fetch(:puma_min_threads) %>, <%= fetch(:puma_max_threads) %>
+
+# Boot the app once in the master before forking workers, so workers
+# share memory via copy-on-write. Equivalent to unicorn.rb.erb's
+# `preload_app true`.
+preload_app!
+
+worker_shutdown_timeout 30
+
+# Equivalent to unicorn.rb.erb's before_fork AR disconnect. Unicorn's
+# before_fork also had an old-master-oldpid-QUIT dance for its USR2
+# rolling restart -- Puma's own restart signals (see puma.service.erb)
+# replace that need entirely, so it's intentionally not translated here.
+before_fork do
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
+end
+
+# Equivalent to unicorn.rb.erb's after_fork AR reconnect. The manual
+# per-worker PID-file write is dropped -- monit no longer tracks
+# per-worker PIDs (see monit.erb).
+before_worker_boot do
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.establish_connection
+end
+
+before_restart do
+  ENV['BUNDLE_GEMFILE'] = "#{root}/Gemfile"
+end

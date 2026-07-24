@@ -33,11 +33,11 @@ end
 # Equivalent to unicorn.rb.erb's after_fork AR reconnect. The manual
 # per-worker PID-file write is dropped -- monit no longer tracks
 # per-worker PIDs (see monit.erb).
-on_worker_boot do
+before_worker_boot do
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
 end
 
-on_restart do
+before_restart do
   ENV['BUNDLE_GEMFILE'] = "#{root}/Gemfile"
 end

@@ -921,6 +921,49 @@ change): DONE**
   no longer stale — Commit 4 above bumped it to 18, forced by esbuild
   itself rather than deferred as a papercut.)
 
+**Pass 10 — Dependabot incident: erb CVE-2026-41316, blocked by the
+pre-existing `< 6` pin (no Rails/Ruby version change): DONE**
+(commit `970cf072` on `master`)
+
+- Reactive, same category as Pass 7: triggered by an external report
+  (Dependabot's `security_update_not_possible` error for `erb`), not a
+  scheduled roadmap item. `erb '< 6'` itself was **not** introduced by
+  this pass — it was added in commit `3c25d9c7` (during the Pass 8 Puma
+  work, to keep `capistrano-systemd-multiservice` 0.1.0.beta13's legacy
+  `ERB.new(str, nil, 2)` call working under `erb >= 6`'s dropped
+  positional-args signature) but was never logged here at the time.
+  Dependabot's report is what surfaced that gap in this log.
+- Confirmed the actual advisory via `bundle-audit` (not just Dependabot's
+  summary, per this file's "verify against the real tool" habit from
+  Pass 6): **CVE-2026-41316** / GHSA-q339-8rmv-2mhv, High — an ERB
+  `@_init` deserialization guard bypass. Fixed releases: `~> 4.0.3.1`,
+  `~> 4.0.4.1`, `~> 6.0.1.1`, `>= 6.0.4`. The 5.x branch (this app was
+  resolved to `5.1.3`) never got a backported fix at all — Dependabot
+  couldn't reach 6.0.1.1+ because of the pre-existing `< 6` pin, and had
+  no lower-version fix to offer because it only considers upgrades.
+- Fix: downgraded to the patched `4.0.4.1`, the only fixed release
+  compatible with staying under `6`. Changed the Gemfile pin to `gem
+  'erb', '~> 4.0', '>= 4.0.4.1', '< 6'`. `bundle update erb
+  --conservative` moved only `erb` itself (5.1.3 → 4.0.4.1, gaining one
+  new dependency edge, `cgi (>= 0.3.3)`, already satisfied by the
+  installed `cgi 0.5.2`) — reviewed the full lockfile diff line by
+  line, nothing else moved.
+- Confirmed the whole reason for the `< 6` pin still holds at 4.0.4.1:
+  `bin/rails runner 'ERB.new("<%= 1+1 %>", nil, 2).result'` succeeds
+  (deprecation warning, not a hard error — identical behavior to 5.1.3),
+  so `capistrano-systemd-multiservice`'s `systemd:*:setup` tasks remain
+  unaffected.
+- Full RSpec suite: 743 examples, 0 failures, 12 pending, both
+  immediately before and after the change — matches the Pass 9 baseline
+  exactly. `bin/rails zeitwerk:check` clean. `bundle-audit check`: 0
+  vulnerabilities (was 1 — this one — before the fix).
+- Explicitly out of scope for this pass: replacing
+  `capistrano-systemd-multiservice` itself (the unmaintained beta gem
+  that necessitates the `< 6` pin in the first place) — still the real
+  long-term fix, but a bigger, unrelated change; revisit if that gem
+  ships a fix, or if a future erb CVE has no patched pre-6 release to
+  fall back on the way this one did.
+
 **Next pass: not yet decided.** Leading candidates, roughly in order:
 completing the Puma cutover itself (staging deploy → verify → production
 deploy, per the Pass 8 manual follow-up — this is arguably more urgent

@@ -20,6 +20,14 @@ set :rails_env, :staging
 # the unicorn.rb and the monit configs
 set :unicorn_worker_count, 3
 
+# puma cluster topology -- mirrors unicorn_worker_count's 3-worker
+# topology (same physical capacity), reflected in puma.rb.erb and
+# monit.erb. 5 threads/worker matches Active Record's connection pool
+# assumptions (database.yml pool: 20 already covers 3 x 5 = 15).
+set :puma_worker_count, 3
+set :puma_min_threads, 5
+set :puma_max_threads, 5
+
 # whether we're using ssl or not, used for building nginx
 # config file
 set :enable_ssl, false

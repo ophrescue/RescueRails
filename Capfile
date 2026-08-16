@@ -26,6 +26,7 @@ require 'capistrano/maintenance'
 require 'whenever/capistrano'
 require "capistrano/systemd/multiservice"
 install_plugin Capistrano::Systemd::MultiService.new_service("unicorn")
+install_plugin Capistrano::Systemd::MultiService.new_service("puma")
 install_plugin Capistrano::Systemd::MultiService.new_service("delayed_job")
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.

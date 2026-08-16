@@ -634,10 +634,159 @@ version change): DONE**
   is already running in dev/test. Bumps that reconciliation up the
   priority list below.
 
+**Pass 8 — Unicorn → Puma production migration (code only; host cutover
+is a manual follow-up): DONE**
+(commits `5d67b109`, `44949fbb`, `088f9e5a`, `5969e5fc` on
+`upgrade/puma-production`)
+
+- Directly answers the priority Pass 7 raised: Puma becomes the
+  actively-deployed production app server, wired all the way through
+  Capistrano/systemd/nginx/monit. Unicorn is deliberately **not**
+  deleted — kept installed-but-inactive as a same-day rollback path,
+  per explicit user decision — so a future pass removes it once
+  production has run stably on Puma for a while.
+- Topology: **clustered, 3 workers x 5 threads**, matching Unicorn's
+  existing 3-worker capacity exactly (chosen over a single-process
+  multi-threaded model specifically because this codebase already has
+  years of proven fork-safety under Unicorn's `preload_app true` +
+  `before_fork`/`after_fork` AR reconnect — Puma's `preload_app!` +
+  `before_fork`/`before_worker_boot` is a near-literal translation of
+  the same pattern, not a novel concurrency model for this app).
+  `database.yml`'s hardcoded `pool: 20` already covers 3×5=15
+  connections without changes.
+- Commit 1: new `config/deploy/shared/puma.rb.erb` (Capistrano-rendered,
+  following the exact precedent of `unicorn.rb.erb` — `config/unicorn.rb`
+  has never been a checked-in file, so neither is a production
+  `config/puma.rb`; the dev/test static file only gained an explanatory
+  comment) and `config/systemd/puma.service.erb`. Two signal choices
+  verified against Puma's actual semantics rather than copied from
+  Unicorn by analogy: `ExecReload` sends `USR2` (Puma's full hot-restart
+  re-exec, needed because `USR1`'s phased restart doesn't pick up a new
+  `Gemfile.lock` from a fresh Capistrano release) and `KillSignal =
+  SIGTERM` — **not** `SIGQUIT` copied from Unicorn's unit, since Puma's
+  signal polarity is the reverse of Unicorn's (Unicorn: `QUIT` graceful,
+  `TERM` fast; Puma: `TERM` graceful, `QUIT` fast). Copying `SIGQUIT`
+  verbatim would have silently turned every deploy/stop into a hard
+  connection drop. Also moved the `puma` gem out of the dev/test-only
+  Gemfile group to top-level, pinned `~> 8.0` (resolved version, 8.0.2,
+  didn't move) — it now needs to run everywhere, not just dev/test.
+  `unicorn` stays exactly where it is in `group :production`, since
+  this repo's `capistrano-bundler` default (`bundle_without:
+  development:test`, never overridden) means anything outside those two
+  groups always installs on staging/production — moving Unicorn
+  anywhere to mark it "dormant" would make it vanish from the next
+  `bundle install` and defeat the whole rollback premise. "Dormant" is
+  expressed at the systemd/nginx layer only.
+- Commit 2: the actual cutover switch. `config/deploy.rb`'s
+  `deploy:restart` hook now drives `systemd:puma:reload-or-restart`
+  instead of Unicorn's — deliberately not kept alongside Unicorn's
+  hook, since leaving both would spin dormant Unicorn back up on every
+  deploy. `Capfile` registers a third `capistrano-systemd-multiservice`
+  instance for `puma`, additive to the existing `unicorn`/`delayed_job`
+  ones. Verified directly from the installed gem source
+  (`capistrano-systemd-multiservice-0.1.0.beta13`) that these are
+  **system-scoped** systemd units (`/etc/systemd/system`, `sudo
+  systemctl`), not user-scoped as a first pass at this plan assumed —
+  `new_service` defaults `service_type: 'system'`, and `unicorn.service.erb`
+  itself declaring `User = deploy`/`Group = deploy` is itself
+  system-scoped-only evidence. Unit filenames follow `<application>_<name>`
+  (`application` is `RescueRails`), so the new unit is
+  `/etc/systemd/system/RescueRails_puma.service`. `setup_config.cap` now
+  invokes `systemd:puma:setup` alongside (not replacing)
+  `systemd:unicorn:setup` — both services end up installed+enabled on
+  disk after a deploy, only Puma is actively started/restarted by the
+  pipeline. `production.rb`/`staging.rb` gained `puma_worker_count`/
+  `puma_min_threads`/`puma_max_threads` (3/5/5) alongside the existing
+  `unicorn_worker_count`.
+- Commit 3: `nginx.conf.erb`'s upstream/location swapped from Unicorn's
+  socket to Puma's (`/tmp/puma.<app>.sock`) as a straight swap, not a
+  flag-driven toggle — a boolean would still need a host-side re-render
+  to take effect, buying nothing over a plain revert, and a true
+  emergency rollback happens by hand-editing the live rendered file
+  directly either way. `monit.erb`'s per-worker check loop was dropped
+  entirely (nothing to watch under Puma — no manual per-worker PID
+  files like Unicorn's `after_fork` hack, and Puma's own
+  `worker_shutdown_timeout`/restart handling is exactly why Unicorn
+  needed monit's external `kill_worker` mechanism and Puma doesn't).
+  The master-process check now watches Puma's pidfile and routes
+  start/stop through `systemctl` directly (in-repo, unlike Unicorn's
+  `/etc/init.d/unicorn_<app>_<env>` script, which isn't tracked in this
+  repo). Unicorn's monit check group was removed rather than kept
+  alongside — alerting/restarting a service that's intentionally
+  stopped would just be noise.
+- Commit 4 (found via manual verification, not static analysis):
+  `puma.rb.erb`'s `on_worker_boot`/`on_restart` hooks logged deprecation
+  warnings under the pinned Puma 8.0.2 — `before_worker_boot`/
+  `before_restart` are the current names (confirmed in the installed
+  gem's `lib/puma/dsl.rb`), same behavior. Fixed before this ever became
+  a real production concern, per the standing "verify before trusting"
+  pattern.
+- Full RSpec suite: 742 examples, 0 failures, 12 pending — matches the
+  Pass 7 baseline exactly. `bin/rails zeitwerk:check` clean. As this
+  file's own conventions predict, the suite is a **regression check
+  only** — it runs via rack-test and never boots a real app-server
+  socket, exactly the blind spot that let Pass 7's incident through
+  undetected. The verification that actually mattered was manual: hand-
+  rendered `puma.rb.erb`'s `fetch()` values into a scratch config
+  (3 workers x 5 threads, `preload_app!`, a throwaway local Unix
+  socket) and booted real Puma against the real app, the same
+  `bundle exec`-workaround pattern Pass 7 used
+  (`ruby -e 'require "bundler/setup"; load Gem.bin_path(...)'` — though
+  for signal-restart testing this had to be swapped for invoking the
+  resolved `puma` executable path directly, since the `-e`-wrapped form
+  broke Puma's `USR2` re-exec with a `NameError` on its own `-C` flag,
+  a devcontainer-specific invocation artifact unrelated to the app
+  itself). Confirmed: 3 real preloaded workers forked; `GET /` and
+  `GET /sign_in` both real 200s over the socket; a real sign-in `POST`
+  to `/sessions` returned 3 genuine `Set-Cookie` headers
+  (`remember_token`, `_RescueRails_session`, `__profilin`) — the exact
+  multi-cookie shape that crashed Unicorn in Pass 7 — followed by an
+  authenticated request showing the actual "Sign out" link, closing the
+  Pass 7 loop end-to-end; several AR-backed requests spread across all
+  3 workers with no stale-connection errors (validates the
+  `before_fork`/`before_worker_boot` reconnect hooks); `SIGUSR2` against
+  the real executable produced a clean graceful worker shutdown +
+  re-exec + socket-inherited reboot with new worker PIDs, and a
+  follow-up request still returned 200 (validates `ExecReload`);
+  `SIGTERM` produced a clean graceful shutdown with no crash (validates
+  `KillSignal`). One pre-existing, unrelated anomaly reproduced during
+  this testing exactly as Pass 6 already documented it: a
+  `SystemStackError` inside a background `newrelic_rpm` agent thread,
+  not the request thread — not investigated further here, already
+  understood as pre-existing.
+- **Explicitly out of reach this pass, same wall Pass 7 hit**: this
+  session has no access to the production/staging hosts or the
+  ansible/nginx-provisioning repo (`~/projects/oph-prd-env/` doesn't
+  exist here), so none of `cap staging deploy:setup_config`, `cap
+  staging deploy`, or the production equivalent were run. Required
+  manual follow-up, in order: deploy to **staging first**, exercise it
+  over real HTTP (not just a local socket) through at least one more
+  deploy cycle to prove the `USR2`/monit paths under real repeated
+  restarts, *then* deploy to both production hosts
+  (`172.104.219.216`, `172.104.219.123`). Rollback needs **both**
+  `sudo systemctl stop RescueRails_puma && sudo systemctl start
+  RescueRails_unicorn` **and** either a hand-edited live `nginx.conf`
+  (fastest) or a tracked `git revert` + re-render (auditable) — stopping
+  Puma and starting Unicorn alone does not move nginx's traffic back on
+  its own, since Unicorn's monit check was removed in this pass and
+  its systemd unit is merely installed, not actively managed.
+- Flagged but explicitly out of scope: `.env.production`/
+  `.env.staging` contain live-looking AWS/Mailchimp/Honeybadger/
+  eSignatures/reCAPTCHA credentials committed directly in the repo —
+  unrelated to this migration, worth raising separately (rotation +
+  removal from version control).
+- New candidates surfaced by this pass, not yet scheduled: deleting the
+  now-dormant Unicorn files (gem, `unicorn.rb.erb`,
+  `unicorn.service.erb`, the Rack3 cookie monkeypatch at
+  `config/initializers/unicorn_rack3_cookie_fix.rb`) once production has
+  run stably on Puma for a while — explicitly deferred, not this pass.
+
 **Next pass: not yet decided.** Leading candidates, roughly in order:
-Unicorn/Puma reconciliation (elevated by Pass 7 — Unicorn now has a
-confirmed, unresolved-upstream Rack 3 bug in production, not just a
-version-gap footnote), brakeman for SAST (the other half of "CI
+completing the Puma cutover itself (staging deploy → verify → production
+deploy, per the manual follow-up above — this is arguably more urgent
+than starting new modernization work, since Pass 8 only prepared the
+code), deleting the dormant Unicorn files once Puma has run stably in
+production, brakeman for SAST (the other half of "CI
 security scanning", deferred since Pass 5), wiring `bundle-audit` (in
 the Gemfile since Pass 6) into `.github/workflows/main.yml` as an
 actual CI gate, Rails 7.2 → 8.0 (will need to resolve the

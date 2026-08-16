@@ -43,6 +43,12 @@ gem 'will_paginate', '~> 3.3.1'
 gem 'dalli'
 gem 'pg', '~> 1.5', '>= 1.5.9'
 
+# connection_pool 3.0 made ConnectionPool#initialize keyword-only, breaking
+# activesupport 7.2's MemCacheStore#build_mem_cache, which still calls it
+# with a positional options Hash. Pin below the breaking major version until
+# a Rails release calls it with **pool_options instead.
+gem 'connection_pool', '< 3.0'
+
 group :production do
   gem 'unicorn', '~> 6.1'
 end

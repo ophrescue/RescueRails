@@ -11,7 +11,15 @@ Environment = PWD=<%= current_path %>
 WorkingDirectory = <%= current_path %>
 
 ExecStart = <%= fetch(:direct_rbenv_path) %>/bin/rbenv exec bundle exec puma -C <%= current_path %>/config/puma.rb
-ExecReload = /bin/kill -USR2 $MAINPID
+# USR1 triggers a phased (rolling) restart: workers are replaced one
+# at a time, so the others keep serving throughout -- this is what
+# makes routine deploys zero-downtime (see puma.rb.erb for why
+# preload_app! had to be dropped for this to work). This does NOT
+# restart the master process itself, so it won't pick up a Puma gem
+# bump or a Ruby version change -- for those, restart the unit
+# manually (`sudo systemctl restart RescueRails_puma`) instead of
+# relying on this deploy-time reload.
+ExecReload = /bin/kill -USR1 $MAINPID
 
 PIDFile = <%= shared_path %>/tmp/pids/puma.pid
 KillSignal = SIGTERM

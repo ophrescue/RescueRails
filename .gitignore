@@ -13,9 +13,9 @@
 .yarn-integrity
 /node_modules
 /public/assets
-/public/packs
-/public/packs-test
 /public/system/
+/app/assets/builds/*
+!/app/assets/builds/.keep
 chromedriver.log
 config/database.yml
 config/initializers/setup_mail.rb
@@ -32,8 +32,6 @@ yarn-debug.log*
 yarn-error.log
 script/log/*.log
 
-/public/packs
-/public/packs-test
 /node_modules
 /yarn-error.log
 yarn-debug.log*

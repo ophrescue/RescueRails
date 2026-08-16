@@ -31,7 +31,7 @@ jobs:
       - name: Setup Nodejs
         uses: actions/setup-node@v7
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: yarn install
         run: yarn install
@@ -60,8 +60,8 @@ jobs:
         env:
           RAILS_ENV: test
 
-      - name: Webpack compilation
-        run: bundle exec rails webpacker:compile
+      - name: JS build
+        run: yarn build
         env:
           STRIPE_PUBLISHABLE_KEY: none
           STRIPE_SECRET_KEY: none

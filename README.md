@@ -38,9 +38,9 @@ Launch the application in dev mode, if using the ubnutu example vagrant vm:
 bundle exec rails server -b 0.0.0.0
 ```
 
-(optional) in another session to speed up any webpack related development
+(optional) in another session, to rebuild JS automatically as you edit `app/javascript`
 ```
-./bin/webpack-dev-server -b 0.0.0.0
+yarn build --watch
 ```
 
 See `db/seeds.rb` for default admin login info

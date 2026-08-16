@@ -134,6 +134,6 @@ namespace :deploy do
   # automatically.
   after 'deploy:publishing', 'deploy:restart'
 
-  # Run yarn install for webpacker
+  # Run yarn install so esbuild's toolchain is available before the JS build
   before "deploy:assets:precompile", "deploy:yarn_install"
 end

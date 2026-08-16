@@ -3,7 +3,7 @@ directory root
 
 app_name = "<%= fetch(:full_app_name) %>"
 
-bind "unix://tmp/puma.#{app_name}.sock"
+bind "unix:///tmp/puma.#{app_name}.sock"
 
 pidfile "#{root}/tmp/pids/puma.pid"
 state_path "#{root}/tmp/pids/puma.state"

@@ -19,8 +19,9 @@ its history, gone past Rails 6.1 — see "Upgrade roadmap" below.
 - File uploads: **kt-paperclip** (not ActiveStorage, though activestorage
   ships with Rails regardless)
 - Background jobs: **DelayedJob** (not Sidekiq)
-- Asset pipeline: **dual** Sprockets + Webpacker 5 (deprecated/unmaintained
-  but still functional)
+- Asset pipeline: Sprockets, with JS bundled via **jsbundling-rails +
+  esbuild** (Webpacker replaced in Pass 9) plugging into the same
+  Sprockets manifest/precompile flow — one pipeline, not two
 - Production app server: **Unicorn** (prod-only Gemfile group); **Puma**
   only in dev/test — a pre-existing inconsistency, not yet reconciled
 - Deploy: Capistrano (not containers/Kamal) — the `.devcontainer/` setup
@@ -781,9 +782,130 @@ is a manual follow-up): DONE**
   `config/initializers/unicorn_rack3_cookie_fix.rb`) once production has
   run stably on Puma for a while — explicitly deferred, not this pass.
 
+**Pass 9 — Webpacker → jsbundling-rails + esbuild (no Rails/Ruby version
+change): DONE**
+(commits `d81e58c9`, `b7df5a9b`, `023bed91` on
+`upgrade/webpacker-to-jsbundling`)
+
+- Closes the last major item on the "explicitly deferred" list carried
+  since Pass 1. Investigation found an unusually small Webpacker
+  footprint to migrate: only 2 packs (`application`, `volunteer_app`),
+  referenced from exactly 2 view call sites; zero custom webpack config
+  (`config/webpack/*.js` were pure passthroughs); no React/Vue/
+  TypeScript, just Stimulus 2.0 and one file of plain DOM JS; HMR
+  explicitly disabled (`webpacker.yml`'s `hmr: false`) and the non-HMR
+  dev server documented as optional; CSS/SCSS was never handled by
+  Webpacker at all — 100% Sprockets + `sassc-rails`, untouched by this
+  pass.
+- Chose jsbundling-rails + esbuild over Shakapacker (keeps the full
+  webpack toolchain alive for no benefit here — this app exercises none
+  of webpack's extra power) and Vite Ruby (its strengths — HMR, SPA dev
+  speed — don't apply; this app uses neither), confirmed with the user
+  up front. esbuild has effectively no dependencies of its own, and
+  jsbundling-rails plugs into the same Sprockets manifest/precompile
+  flow already used for CSS, collapsing the app from two asset
+  pipelines to one.
+- Commit 1: `Gemfile`/`Gemfile.lock` gem swap only — removed `webpacker
+  (~> 5.2, >= 5.2.1)`, added `jsbundling-rails`. Reviewed the lockfile
+  diff line by line per the standing rule: only `webpacker` and its own
+  declared deps (`rack-proxy`, `semantic_range`) dropped; no
+  Rails-family gem moved.
+- Commit 2: the actual JS migration.
+  - `app/javascript/packs/{application,volunteer_app}.js` flattened to
+    `app/javascript/` per jsbundling-rails convention. The Stimulus
+    entry point could **not** keep the name `application.js`: Sprockets
+    already serves an unrelated `app/assets/javascripts/application.js`
+    (the legacy jQuery pipeline, wired through `config/assets/
+    manifest.js`'s `//= link application.js`), and reusing that name for
+    the esbuild output would collide with it. Renamed to `stimulus.js`.
+  - A second, less obvious collision was hit and fixed during
+    verification (found via an actual `yarn build` run producing a
+    suspiciously tiny/empty bundle, not by inspection): the first
+    attempt named the entry point `app/javascript/controllers.js`,
+    which collides with the sibling `app/javascript/controllers/`
+    directory — `import "./controllers"` from within `controllers.js`
+    resolves to *itself* (Node/esbuild resolution tries the exact
+    `.js` file before the directory's `index.js`), producing a
+    circular self-import that silently compiled to an empty IIFE with
+    no error. Renamed the entry point to `stimulus.js` a second time
+    (this time for the collision-avoidance reason above, not the
+    Sprockets one) to sidestep both problems at once.
+  - `app/javascript/controllers/index.js` dropped webpack's
+    `require.context`-based auto-loader (no esbuild equivalent) for an
+    explicit `import`/`register` of the one real controller
+    (`hello_controller.js`) — proportionate given there was only ever
+    one controller to wire up. Left the `stimulus` npm package at
+    `^2.0.0`; upgrading to `@hotwired/stimulus`/`stimulus-rails` for
+    manifest generation wasn't needed to unblock this and is deferred,
+    not folded in.
+  - `package.json`/`yarn.lock`: `@rails/webpacker` and
+    `webpack-dev-server` (and their full webpack 4/babel/postcss-loader
+    transitive tree) replaced with `esbuild` alone — `yarn.lock` dropped
+    from 8371 to 1358 lines, a concrete instance of exactly the kind of
+    large, unaudited third-party JS dependency tree the Pass 6
+    bundler-audit work was reacting to, just never swept because it
+    lives in `yarn.lock` rather than `Gemfile.lock`. `mjml` (the
+    Node-side compiler behind `format.mjml` mailer responders —
+    unrelated to JS bundling) was left untouched.
+  - Deleted now-dead Webpacker generator boilerplate:
+    `config/webpacker.yml`, `config/webpack/`, `babel.config.js`,
+    `postcss.config.js`/`.postcssrc.yml` (a pre-existing duplicate pair,
+    confirmed dead once Webpacker's loader chain is gone),
+    `.browserslistrc`, `bin/webpack`, `bin/webpack-dev-server`. Added
+    the standard jsbundling-rails `bin/dev` + `Procfile.dev`, replacing
+    the old optional `bin/webpack-dev-server` workflow in `README.md`.
+  - `app/assets/config/manifest.js` gained `//= link_tree ../builds`;
+    `config/application.rb`'s existing extension-based
+    `config.assets.precompile` list already covers anything `.js`/`.css`
+    at the load path's top level, so no further precompile-list change
+    was needed — confirmed via an actual `assets:precompile` run.
+  - Views: both `javascript_pack_tag` call sites (main layout,
+    volunteer app form) became `javascript_include_tag`. No
+    Turbolinks/Turbo in this app, so no `data-turbo-track` attribute
+    was needed.
+- Commit 3: CI's explicit `bundle exec rails webpacker:compile` step
+  became `yarn build`; `config/deploy.rb`'s pre-existing
+  `deploy:yarn_install` hook mechanism is unchanged (still needs to run
+  before asset precompile, just installs esbuild's toolchain now
+  instead of Webpacker's) — only its stale comment was updated;
+  `README.md`'s dev-setup section swapped the optional
+  `bin/webpack-dev-server` mention for `yarn build --watch`.
+- Full RSpec suite: **743** examples (one more than the 742 recorded in
+  every prior pass — pre-existing, unrelated to this migration, not
+  investigated further here), 0 failures, 12 pending, both before and
+  after this pass's changes — captured as a genuinely fresh baseline via
+  `git stash`, not assumed from the historical log. `bin/rails
+  zeitwerk:check` clean. `yarn build` runs clean; spot-checked the
+  actual output content (not just that files were written) — the
+  Stimulus bundle contains the real `Application.start()`/`register`
+  calls and `hello_controller`'s class body, and `volunteer_app.js`
+  contains its real toggle functions. A `RAILS_ENV=test
+  assets:precompile` run (the devcontainer has no `production` database
+  configured, the same pre-existing limitation Pass 5/6 hit) produced
+  correctly digested output for both new files alongside the existing,
+  unrelated `application-*.js`, confirming no collision. Manually booted
+  the dev server and confirmed real 200s for `/` and its resolved
+  `stimulus.js` asset, and for `volunteer_app.js`'s actual Sprockets
+  asset path (fetched directly, since `/volunteer_apps/new` itself
+  returned 401 — a pre-existing, unrelated app behavior:
+  `volunteer_apps_controller.rb` requires login on all actions, and the
+  matching request spec is already marked `xdescribe`/"Temporarily
+  skipped"). `hello_controller`'s live DOM behavior couldn't be
+  browser-verified — no view actually uses `data-controller="hello"`;
+  it was already-disconnected demo boilerplate before this pass, not a
+  regression introduced by it.
+- Explicitly deferred/out of scope for this pass: upgrading
+  `stimulus` past `2.0.0`/adopting `@hotwired/stimulus` +
+  `stimulus-rails`, kt-paperclip → ActiveStorage migration, the
+  `config.load_defaults` catch-up, Rails 7.2 → 8.0, `.rubocop.yml`'s
+  stale target version, CI's Node 16 pin (esbuild runs fine on either
+  16 or the devcontainer's 18; not forced by this migration), wiring
+  `bundle-audit` into CI as a gate, brakeman/SAST, and completing the
+  Pass 8 Puma production cutover.
+
 **Next pass: not yet decided.** Leading candidates, roughly in order:
 completing the Puma cutover itself (staging deploy → verify → production
-deploy, per the manual follow-up above — this is arguably more urgent
+deploy, per the Pass 8 manual follow-up — this is arguably more urgent
 than starting new modernization work, since Pass 8 only prepared the
 code), deleting the dormant Unicorn files once Puma has run stably in
 production, brakeman for SAST (the other half of "CI

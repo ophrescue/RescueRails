@@ -38,10 +38,10 @@ Launch the application in dev mode, if using the ubnutu example vagrant vm:
 bundle exec rails server -b 0.0.0.0
 ```
 
-(optional) in another session, to rebuild JS automatically as you edit `app/javascript`
-```
-yarn build --watch
-```
+In another session, install JS dependencies and build the JS bundle — required, since Sprockets serves esbuild's output rather than compiling it on the fly:
+
+    yarn install
+    yarn build --watch
 
 See `db/seeds.rb` for default admin login info
 

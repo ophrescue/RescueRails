@@ -815,7 +815,7 @@ change): DONE**
     `app/javascript/` per jsbundling-rails convention. The Stimulus
     entry point could **not** keep the name `application.js`: Sprockets
     already serves an unrelated `app/assets/javascripts/application.js`
-    (the legacy jQuery pipeline, wired through `config/assets/
+    (the legacy jQuery pipeline, wired through `app/assets/config/
     manifest.js`'s `//= link application.js`), and reusing that name for
     the esbuild output would collide with it. Renamed to `stimulus.js`.
   - A second, less obvious collision was hit and fixed during

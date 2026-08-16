@@ -3,15 +3,18 @@ fosterToggle.addEventListener('click', function (event) {
   if (fosterToggle.checked === true){
     document.getElementById('foster-questions').classList.remove('collapse')
     makeFosterQuestionsRequired(true)
+    restoreNestedFosterQuestionsState()
   } else {
     document.getElementById('foster-questions').classList.add('collapse')
     makeFosterQuestionsRequired(false)
+    makeRentalQuestionsRequired(false)
+    makeHasPetsQuestionsRequired(false)
+    makeDogFosterQuestionsRequired(false)
   }
 });
 
 let rentToggle = document.getElementById('rent-own-toggle')
 rentToggle.addEventListener('change', function (event) {
-  console.log(`${event.target.value} is picked`);
   if (event.target.value === 'Rent') {
     document.getElementById('foster-rental-questions').classList.remove('collapse')
     makeRentalQuestionsRequired(true)
@@ -23,7 +26,6 @@ rentToggle.addEventListener('change', function (event) {
 
 let petsToggle = document.getElementById('other-pets-toggle')
 petsToggle.addEventListener('change', function (event) {
-  console.log(`${event.target.value} is picked`);
   if (event.target.value === 'true') {
     document.getElementById('other-pets-questions').classList.remove('collapse')
     makeHasPetsQuestionsRequired(true)
@@ -51,20 +53,7 @@ window.addEventListener('DOMContentLoaded', function(){
   if (fosterToggle.checked === true) {
     document.getElementById('foster-questions').classList.remove('collapse')
     makeFosterQuestionsRequired(true)
-  }
-  let rentRadio = document.getElementById('volunteer_app_volunteer_foster_app_attributes_home_type_rent')
-  if (rentRadio.checked === true ) {
-    document.getElementById('foster-rental-questions').classList.remove('collapse')
-    makeRentalQuestionsRequired(true)
-  }
-  let otherPetsRadio = document.getElementById('volunteer_app_volunteer_foster_app_attributes_has_pets_true')
-  if (otherPetsRadio.checked === true){
-    document.getElementById('other-pets-questions').classList.remove('collapse')
-    makeHasPetsQuestionsRequired(true)
-  }
-  if (dogsToggle.checked === true){
-    document.getElementById('dog-foster-questions').classList.remove('collapse')
-    makeDogFosterQuestionsRequired(true)
+    restoreNestedFosterQuestionsState()
   }
 });
 
@@ -109,4 +98,35 @@ let makeHasPetsQuestionsRequired = function(bool) {
 
 let makeDogFosterQuestionsRequired = function(bool) {
   document.getElementById("volunteer_app_volunteer_foster_app_attributes_dog_exercise").required = bool;
+}
+
+// Restores each nested foster section (rental, other pets, dogs) to match
+// its own input's current state, rather than leaving it hidden after
+// fostering interest is re-selected.
+let restoreNestedFosterQuestionsState = function() {
+  let rentRadio = document.getElementById('volunteer_app_volunteer_foster_app_attributes_home_type_rent')
+  if (rentRadio.checked === true) {
+    document.getElementById('foster-rental-questions').classList.remove('collapse')
+    makeRentalQuestionsRequired(true)
+  } else {
+    document.getElementById('foster-rental-questions').classList.add('collapse')
+    makeRentalQuestionsRequired(false)
+  }
+
+  let otherPetsRadio = document.getElementById('volunteer_app_volunteer_foster_app_attributes_has_pets_true')
+  if (otherPetsRadio.checked === true) {
+    document.getElementById('other-pets-questions').classList.remove('collapse')
+    makeHasPetsQuestionsRequired(true)
+  } else {
+    document.getElementById('other-pets-questions').classList.add('collapse')
+    makeHasPetsQuestionsRequired(false)
+  }
+
+  if (dogsToggle.checked === true) {
+    document.getElementById('dog-foster-questions').classList.remove('collapse')
+    makeDogFosterQuestionsRequired(true)
+  } else {
+    document.getElementById('dog-foster-questions').classList.add('collapse')
+    makeDogFosterQuestionsRequired(false)
+  }
 }

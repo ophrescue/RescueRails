@@ -20,7 +20,10 @@ WickedPdf.configure do |config|
 
   # Layout file to be used for all PDFs
   # (but can be overridden in `render :pdf` calls)
-  config.layout = 'pdf.html'
+  # Must name a template whose format is :pdf (app/views/layouts/pdf.pdf.erb),
+  # not :html — Rails' template resolver treats a name containing a literal
+  # "." as unparseable and never matches any file, regardless of format.
+  config.layout = 'pdf'
 
   # Using wkhtmltopdf without an X server can be achieved by enabling the
   # 'use_xvfb' flag. This will wrap all wkhtmltopdf commands around the

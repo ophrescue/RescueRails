@@ -13,6 +13,14 @@ RSpec.describe "TreatmentRecords", type: :request do
       end
     end
 
+    describe "GET #index as pdf" do
+      it "is successful" do
+        get dog_treatment_records_path(dog, as: active_user, format: :pdf)
+        expect(response).to be_successful
+        expect(response.media_type).to eq('application/pdf')
+      end
+    end
+
     describe 'GET #show' do
       let(:treatment_record) { create(:treatment_record, treatable_id: dog.id, treatable_type: 'Dog') }
       it 'is successful' do

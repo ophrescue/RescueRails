@@ -870,6 +870,23 @@ change): DONE**
   instead of Webpacker's) — only its stale comment was updated;
   `README.md`'s dev-setup section swapped the optional
   `bin/webpack-dev-server` mention for `yarn build --watch`.
+- Commit 4 (forced, found only after pushing — not caught locally):
+  CI's `yarn install` failed outright, `error esbuild@0.24.2: The
+  engine "node" is incompatible with this module. Expected version
+  ">=18". Got "16.20.2"`. This session's own pre-flight research had
+  actually surfaced the Node 16 (CI) vs. Node 18 (devcontainer)
+  mismatch, but wrongly assumed esbuild would run fine on either —
+  that assumption was never checked against esbuild's actual declared
+  `engines` requirement, and this session's local verification only
+  ever ran under the devcontainer's Node 18, so the gap never surfaced
+  before push. A real instance of this repo's own standing rule ("a
+  clean resolve/local run isn't proof of runtime compatibility")
+  applying to the Node toolchain, not just Ruby gems. Fixed by bumping
+  `.github/workflows/main.yml`'s `node-version` from `'16'` to `'18'`,
+  matching what `.devcontainer/Dockerfile` already used — the minimal
+  version of the forced change, not a broader Node-pinning cleanup
+  (still no `.nvmrc`/`engines` field added, per the standing
+  "minimal required change" rule).
 - Full RSpec suite: **743** examples (one more than the 742 recorded in
   every prior pass — pre-existing, unrelated to this migration, not
   investigated further here), 0 failures, 12 pending, both before and
@@ -898,10 +915,11 @@ change): DONE**
   `stimulus` past `2.0.0`/adopting `@hotwired/stimulus` +
   `stimulus-rails`, kt-paperclip → ActiveStorage migration, the
   `config.load_defaults` catch-up, Rails 7.2 → 8.0, `.rubocop.yml`'s
-  stale target version, CI's Node 16 pin (esbuild runs fine on either
-  16 or the devcontainer's 18; not forced by this migration), wiring
-  `bundle-audit` into CI as a gate, brakeman/SAST, and completing the
-  Pass 8 Puma production cutover.
+  stale target version, wiring `bundle-audit` into CI as a gate,
+  brakeman/SAST, and completing the Pass 8 Puma production cutover.
+  (CI's Node version, previously on this list in every prior pass, is
+  no longer stale — Commit 4 above bumped it to 18, forced by esbuild
+  itself rather than deferred as a papercut.)
 
 **Next pass: not yet decided.** Leading candidates, roughly in order:
 completing the Puma cutover itself (staging deploy → verify → production

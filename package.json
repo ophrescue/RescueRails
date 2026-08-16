@@ -4,7 +4,7 @@
     "stimulus": "^2.0.0"
   },
   "devDependencies": {
-    "esbuild": "^0.24.0"
+    "esbuild": "^0.28.1"
   },
   "scripts": {
     "build": "esbuild app/javascript/stimulus.js app/javascript/volunteer_app.js --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets"

@@ -15,6 +15,12 @@ gem 'clearance', '~> 2.11.0'
 gem 'countries', '~> 4.2', '>= 4.2.3'
 gem 'dotenv'
 gem 'dotenv-rails'
+# erb 6.0.0 dropped ERB.new's legacy positional args (safe_level,
+# trim_mode) entirely -- capistrano-systemd-multiservice 0.1.0.beta13
+# still calls `ERB.new(str, nil, 2)` and raises ArgumentError on any
+# systemd:*:setup task under erb >= 6. Pin below the breaking major
+# version until that gem (unmaintained beta) ships a fix.
+gem 'erb', '< 6'
 gem 'font-awesome-rails'
 gem 'friendly_id', '~> 5.3'
 gem 'geocoder', "1.8.2" # locked to 1.8.2 until county lookup issue is fixed

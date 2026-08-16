@@ -20,7 +20,13 @@ gem 'dotenv-rails'
 # still calls `ERB.new(str, nil, 2)` and raises ArgumentError on any
 # systemd:*:setup task under erb >= 6. Pin below the breaking major
 # version until that gem (unmaintained beta) ships a fix.
-gem 'erb', '< 6'
+#
+# Within that constraint, pin to the >= 4.0.4.1 patch for
+# CVE-2026-41316 (GHSA-q339-8rmv-2mhv, ERB @_init deserialization guard
+# bypass) -- the fix was backported to the 4.0.x branch and to 6.0.1.1+,
+# but never to 5.x, so 5.1.3 (previously resolved here) has no patched
+# release and must be downgraded rather than upgraded.
+gem 'erb', '~> 4.0', '>= 4.0.4.1', '< 6'
 gem 'font-awesome-rails'
 gem 'friendly_id', '~> 5.3'
 gem 'geocoder', "1.8.2" # locked to 1.8.2 until county lookup issue is fixed

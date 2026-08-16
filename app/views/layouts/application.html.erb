@@ -35,7 +35,7 @@
     <%= javascript_tag "$.fx.off = true;" %>
   <% end %>
 
-  <%= javascript_pack_tag 'application' %>
+  <%= javascript_include_tag "stimulus", defer: true %>
 
   </head>
   <body class="<%= controller_name + action_name %>">

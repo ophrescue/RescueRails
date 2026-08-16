@@ -42,6 +42,9 @@ jobs:
       - name: Install Postgresql client and libffi
         run: sudo apt-get -yqq install libpq-dev libffi-dev
 
+      - name: Install wkhtmltopdf
+        run: sudo apt-get -yqq install wkhtmltopdf
+
       - name: Setup Database
         run: |
           cp config/database.github-actions.yml config/database.yml

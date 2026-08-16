@@ -12,6 +12,14 @@ updates:
       - minor
       - patch
   ignore:
+  # Major-version bumps (including of transitive/indirect gems swept along
+  # inside another gem's patch/minor PR - e.g. connection_pool 2.x -> 3.0
+  # riding inside a 2026-07-31 "activestorage patch bump" PR broke
+  # MemCacheStore in production) must go through a deliberate, reviewed
+  # `bundle update <gem> --conservative` pass, never an automated PR.
+  - dependency-name: "*"
+    update-types:
+    - "version-update:semver-major"
   - dependency-name: rubocop-rspec
     versions:
     - "< 1.31, >= 1.30.a"
@@ -36,6 +44,10 @@ updates:
       update-types:
       - minor
       - patch
+  ignore:
+  - dependency-name: "*"
+    update-types:
+    - "version-update:semver-major"
 
 - package-ecosystem: github-actions
   directory: "/"
@@ -47,3 +59,7 @@ updates:
       update-types:
       - minor
       - patch
+  ignore:
+  - dependency-name: "*"
+    update-types:
+    - "version-update:semver-major"

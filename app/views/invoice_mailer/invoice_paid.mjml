@@ -12,7 +12,7 @@
         <mj-text font-size="14px" font-family="helvetica">Adoption Fee for: <%= @invoice.invoiceable.animal.tracking_id %> <%= @invoice.invoiceable.animal.name %></mj-text>
         <mj-text font-size="14px" font-family="helvetica">Amount paid: <%= number_to_currency(@invoice.amount) %> </mj-text>
         <mj-text font-size="14px" font-family="helvetica">Invoice paid: <%= @invoice.paid_at.strftime('%m/%d/%Y') %></mj-text>
-        <mj-text font-size="14px" font-family="helvetica"><a href=<%= invoice_url(@invoice)%>>View Invoice</a></mj-text>
+        <mj-text font-size="14px" font-family="helvetica"><a href="<%= invoice_url(@invoice) %>">View Invoice</a></mj-text>
       </mj-column>
     </mj-section>
   </mj-body>

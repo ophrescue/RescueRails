@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+  username: <%= ENV.fetch("DATABASE_USERNAME", "postgres") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "postgres") %>
+  pool: 20
+
+development:
+  <<: *default
+  database: rescuerails_development
+
+test:
+  <<: *default
+  # TEST_ENV_NUMBER is set by parallel_tests ("", "2", "3", ...) so each
+  # parallel worker gets its own database -- keep this even if you never
+  # run tests in parallel yourself, since bin/parallel_rspec relies on it.
+  database: rescuerails_test<%= ENV['TEST_ENV_NUMBER'] %>

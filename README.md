@@ -17,8 +17,9 @@ RescueRails is the public facing website for Operation Paws for Homes, as well a
     cd RescueRails
     bundle install
 
-Create database.yml file, and use postgres
+Copy config/database.yml.sample to config/database.yml, adjusting for your local postgres setup if needed
 
+    cp config/database.yml.sample config/database.yml
     rake db:setup
     rake db:seed
 

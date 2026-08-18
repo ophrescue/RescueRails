@@ -123,8 +123,8 @@ feature 'add a dog', js: true do
         expect(page.all('#new_dog_attachment').length).to eq 2
 
         # 5 size variants created from each image upload, see app/models/photo.rb
-        expect{ click_button('Submit') }.to change{Dir.glob(Rails.root.join('public','system','test','photos','*')).length}.by(10).
-                                        and change{Dir.glob(Rails.root.join('public','system','test','attachments','*')).length}.by(2)
+        expect{ click_button('Submit') }.to change{Dir.glob(Rails.root.join('public','system',"test#{ENV['TEST_ENV_NUMBER']}",'photos','*')).length}.by(10).
+                                        and change{Dir.glob(Rails.root.join('public','system',"test#{ENV['TEST_ENV_NUMBER']}",'attachments','*')).length}.by(2)
 
         dog = Dog.first
         expect(dog.name).to eq 'newname'
@@ -283,7 +283,7 @@ feature 'add a dog', js: true do
         it 'should not save and should warn user' do
           click_link('Add a Photo')
           find("#new_dog_photo").set(Rails.root.join('spec','fixtures','photo','animal_large_pic.jpg').to_s)
-          expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system','test','photos','*')).length}
+          expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system',"test#{ENV['TEST_ENV_NUMBER']}",'photos','*')).length}
           expect(page).to have_selector('.new_photos .invalid-feedback', text: 'must be a jpg or png file smaller than 10Mb')
         end
       end
@@ -292,7 +292,7 @@ feature 'add a dog', js: true do
         it 'should not save and should warn user' do
           click_link('Add a Photo')
           find("#new_dog_photo").set(Rails.root.join('spec','fixtures','doc','sample.pdf').to_s)
-          expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system','test','photos','*')).length}
+          expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system',"test#{ENV['TEST_ENV_NUMBER']}",'photos','*')).length}
           expect(page).to have_selector('.new_photos .invalid-feedback', text: 'must be a jpg or png file smaller than 10Mb')
         end
       end
@@ -306,7 +306,7 @@ feature 'add a dog', js: true do
         it 'should not save and should warn user' do
           click_link('Add a Document')
           find("#new_dog_attachment").set(Rails.root.join('spec','fixtures','doc','sample_large.pdf').to_s)
-          expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system','test','attachments','*')).length}
+          expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system',"test#{ENV['TEST_ENV_NUMBER']}",'attachments','*')).length}
           expect(page).to have_selector('.new_attachments .invalid-feedback', text: 'Images, MS Docs, PDF or Plain Text smaller than 100Mb')
         end
       end
@@ -315,7 +315,7 @@ feature 'add a dog', js: true do
         it 'should not save and should warn user' do
           click_link('Add a Document')
           find("#new_dog_attachment").set(Rails.root.join('spec','fixtures','doc','sample.rb').to_s)
-          expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system','test','attachments','*')).length}
+          expect{ click_button('Submit') }.not_to change{Dir.glob(Rails.root.join('public','system',"test#{ENV['TEST_ENV_NUMBER']}",'attachments','*')).length}
           expect(page).to have_selector('.new_attachments .invalid-feedback', text: 'Images, MS Docs, PDF or Plain Text smaller than 100Mb')
         end
       end

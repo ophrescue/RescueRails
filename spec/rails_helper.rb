@@ -52,4 +52,12 @@ end
 # Keep only the screenshots generated from the last failing test suite
 Capybara::Screenshot.prune_strategy = :keep_last_run
 
+# Each parallel_tests worker gets its own screenshot directory (TEST_ENV_NUMBER
+# is "", "2", "3", ...) -- otherwise :keep_last_run's prune (an unconditional
+# rm_rf of the whole shared directory, run on each process's first failure)
+# races across workers and silently deletes another worker's already-saved
+# failure screenshot. Confirmed by forcing two workers to fail several
+# seconds apart: without this, only the later worker's screenshot survived.
+Capybara::Screenshot.capybara_tmp_path = "tmp/capybara#{ENV['TEST_ENV_NUMBER']}"
+
 Capybara.asset_host="http://localhost:3000/assets"

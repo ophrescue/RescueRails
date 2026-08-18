@@ -88,6 +88,7 @@ gem 'factory_bot_rails'
 group :development, :test do
   gem 'faker'
   gem 'flamegraph'
+  gem 'parallel_tests'
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'

@@ -27,6 +27,11 @@ SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
 )
 
 if ENV['COVERAGE']
+  # Under parallel_tests, each worker is a separate SimpleCov process; a
+  # unique command_name per worker (TEST_ENV_NUMBER is "", "2", "3", ...)
+  # makes SimpleCov merge their results instead of the default shared
+  # name causing one worker's coverage to clobber another's.
+  SimpleCov.command_name "rspec-#{ENV['TEST_ENV_NUMBER']}"
   SimpleCov.start('rails') { add_filter 'spec/' }
 end
 
@@ -68,7 +73,7 @@ RSpec.configure do |config|
 
   config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
-    FileUtils.rm_rf(Dir[Rails.root.join('public', 'system', 'test')])
+    FileUtils.rm_rf(Dir[Rails.root.join('public', 'system', "test#{ENV['TEST_ENV_NUMBER']}")])
     FileUtils.rm_rf(Dir[Rails.root.join('public', 'assets', '*')])
     FileUtils.rm(Dir[Rails.root.join('public', 'assets', '.sprockets*')])
   end

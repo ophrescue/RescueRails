@@ -64,13 +64,13 @@ FactoryBot.define do
     # for development environment
     trait :with_photos do
       after(:create) do |dog|
-        `mkdir -p #{Rails.root.join("public","system","test","photos")}`
+        `mkdir -p #{Rails.root.join("public","system","test#{ENV['TEST_ENV_NUMBER']}","photos")}`
         3.times do |i|
           photo = FactoryBot.create(:photo, animal_type: 'Dog', animal_id: dog.id, is_private: false, position: i+1 )
           ["medium", "original"].each do |style|
             data = "photos/photos/#{photo.id}/#{style}/"
             hash = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, Photo::HASH_SECRET, data)
-            filepath = "public/system/test/photos/#{hash}.jpeg"
+            filepath = "public/system/test#{ENV['TEST_ENV_NUMBER']}/photos/#{hash}.jpeg"
             image_source = Rails.root.join('spec','fixtures','photo','animal_pic.jpg').to_s
             `cp #{image_source} #{Rails.root.join(filepath)}`
           end

@@ -8,7 +8,7 @@ FactoryBot.define do
     trait :downloadable do
       after(:create) do |attachment|
         test_file = Rails.root.join('spec','fixtures','doc','sample.pdf')
-        download_file = Rails.root.join('public','system','test','attachments',"#{attachment.attachment.hash_key}.pdf")
+        download_file = Rails.root.join('public','system',"test#{ENV['TEST_ENV_NUMBER']}",'attachments',"#{attachment.attachment.hash_key}.pdf")
         FileUtils.mkdir_p(download_file.parent)
         FileUtils.cp test_file, download_file
       end

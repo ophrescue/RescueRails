@@ -86,7 +86,7 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
-          path: tmp/capybara/*.png
+          path: tmp/capybara*/*.png
           if-no-files-found: ignore
 
 

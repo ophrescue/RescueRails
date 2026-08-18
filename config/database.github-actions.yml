@@ -12,6 +12,6 @@ test:
   host: localhost
   encoding: unicode
   pool: 20
-  database: github-actions
+  database: github-actions<%= ENV['TEST_ENV_NUMBER'] %>
   username: <%= ENV["POSTGRES_USER"] %>
   password: <%= ENV["POSTGRES_PASSWORD"] %>

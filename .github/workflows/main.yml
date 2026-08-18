@@ -48,8 +48,8 @@ jobs:
       - name: Setup Database
         run: |
           cp config/database.github-actions.yml config/database.yml
-          bundle exec rake db:create
-          bundle exec rake db:schema:load
+          bundle exec rake parallel:create
+          bundle exec rake parallel:load_schema
         env:
           RAILS_ENV: test
           POSTGRES_USER: postgres
@@ -72,7 +72,7 @@ jobs:
           RAILS_ENV: test
 
       - name: Run Rspec Tests
-        run: bundle exec rspec
+        run: bundle exec parallel_rspec spec
         env:
           COVERAGE: true
           RAILS_ENV: test

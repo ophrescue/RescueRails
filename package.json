@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "mjml": "^4.18.0",
     "stimulus": "^2.0.0"
   },
   "devDependencies": {

@@ -2,7 +2,7 @@ require 'rails_helper'
 require_relative '../helpers/application_helpers'
 require_relative '../helpers/client_validation_form_helpers'
 
-feature 'Manage Events', js: true do
+feature 'Manage Events' do
   include ApplicationHelpers
   include ClientValidationFormHelpers
 
@@ -15,7 +15,11 @@ feature 'Manage Events', js: true do
       visit events_path(as: admin)
     end
 
-    it 'should save and render attributes' do
+    # find_field(...).send_keys is used below for Location Phone specifically
+    # because #event_location_phone has a JS inputmask ((999) 999-9999) that
+    # only reformats correctly on real keystroke events -- fill_in sets the
+    # value directly and bypasses it. Needs a real browser driver.
+    it 'should save and render attributes', js: true do
       expect(page).to have_content('No Upcoming Events')
       expect(page).to have_content('Add an Event')
       click_link 'Add an Event'
@@ -82,7 +86,7 @@ feature 'Manage Events', js: true do
       expect(page).to have_no_selector('.event_photo a')
     end
 
-    it 'should delete an upcoming event and redirect to upcoming events' do
+    it 'should delete an upcoming event and redirect to upcoming events', js: true do
       count = Event.count
       accept_confirm do
         click_link('delete')
@@ -113,7 +117,7 @@ feature 'Manage Events', js: true do
       expect(page).to have_selector('.event-title h3', text: event.title)
     end
 
-    it 'should delete a past event and redirect to past events' do
+    it 'should delete a past event and redirect to past events', js: true do
       count = Event.count
       visit scoped_events_path("past")
       accept_confirm do
@@ -131,7 +135,12 @@ feature 'Manage Events', js: true do
       expect(page.current_path).to eq adopt_path
     end
 
-    scenario 'clone a past event' do
+    # Cloning fetches the source event's own photo via a real HTTP request
+    # (Event#attach_photo_from, open-uri) -- only works when Capybara has
+    # booted a real listening server (as it does for any non-rack_test
+    # driver), since rack_test dispatches entirely in-process with nothing
+    # actually listening on that URL.
+    scenario 'clone a past event', js: true do
       visit scoped_events_path("past")
       click_link("create copy")
       expect(page_heading).to eq 'Create Event by Copy'
@@ -168,7 +177,7 @@ feature 'Manage Events', js: true do
     end
   end
 
-  describe "event validation" do
+  describe "event validation", js: true do
     let!(:event){ create(:event, :in_the_future) }
     let(:test_event){ build(:event, :in_the_future) }
 

@@ -20,6 +20,20 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     runs-on: ubuntu-22.04
+    env:
+      # This app has no config/master.key/credentials.yml.enc, so
+      # secret_key_base for the test env is normally derived by Rails'
+      # own generate_local_secret fallback (config/application/
+      # configuration.rb), which does a non-atomic check-then-write
+      # against a single shared tmp/local_secret.txt. On a fresh CI
+      # checkout that file doesn't exist yet, and parallel:create /
+      # parallel_rspec both boot several Rails processes concurrently --
+      # if two race to create it, a loser can read back an empty file
+      # and Rails raises `secret_key_base ... must be a type of String`.
+      # Setting it explicitly here skips that fallback entirely, so nothing
+      # is ever generated or raced on. Value is a fixed, non-secret
+      # placeholder -- fine for test env, never used in production.
+      SECRET_KEY_BASE: 0833c84aa1b0985ffea5ac8fa04885893b37ba3b5dd9d07e2e75460a24d3ba507381f695e803eb91a5fcc30cbd73fbfb59e889b147fc448a92e403e1b5963ec2
 
     steps:
       - uses: actions/checkout@v7

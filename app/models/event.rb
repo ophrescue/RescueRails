@@ -125,7 +125,7 @@ class Event < ApplicationRecord
       raise ArgumentError, "Unsupported photo URL scheme: #{source_photo_uri.scheme.inspect}"
     end
 
-    self.photo = source_photo_uri.open
+    self.photo = source_photo_uri.open(redirect: false)
     self.photo_file_name, self.photo_content_type, self.photo_file_size, self.photo_updated_at =
       source_event.attributes.values_at "photo_file_name", "photo_content_type", "photo_file_size", "photo_updated_at"
   end

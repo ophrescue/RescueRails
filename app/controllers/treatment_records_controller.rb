@@ -13,6 +13,13 @@
 #    limitations under the License.
 
 class TreatmentRecordsController < ApplicationController
+  TREATABLE_TYPES = {
+    'cats' => Cat,
+    'dogs' => Dog,
+    'cats_manager' => Cat,
+    'dogs_manager' => Dog
+  }.freeze
+
   before_action :require_login
   before_action :unlocked_user
   before_action :active_user
@@ -108,8 +115,11 @@ class TreatmentRecordsController < ApplicationController
   end
 
   def load_treatable
-    resource, id = request.path.split('/')[1,2]
-    @treatable = resource.singularize.classify.constantize.find(id)
+    resource, id = request.path.split('/')[1, 2]
+    klass = TREATABLE_TYPES[resource]
+    raise ActionController::RoutingError, "Not Found" unless klass
+
+    @treatable = klass.find(id)
   end
 
   def edit_pet_check

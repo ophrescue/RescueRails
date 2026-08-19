@@ -27,7 +27,7 @@ class EventsController < ApplicationController
       when "upcoming", "past" then params[:scope]
       else "upcoming"
       end
-    @events = Event.public_send(@scope).paginate(page: params[:page], per_page: PER_PAGE)
+    @events = (@scope == "past" ? Event.past : Event.upcoming).paginate(page: params[:page], per_page: PER_PAGE)
     @title = t(".title.#{@scope}")
   end
 

@@ -15,6 +15,10 @@
 class InvoicesController < ApplicationController
   protect_from_forgery except: :stripe_webhook
   PER_PAGE = 30
+  INVOICEABLE_TYPES = {
+    'adoptions' => Adoption,
+    'cat_adoptions' => CatAdoption
+  }.freeze
 
   before_action :require_login, except: %i[show update begin_checkout stripe_webhook thank_you]
   before_action :unlocked_user, except: %i[show update begin_checkout stripe_webhook thank_you]
@@ -169,7 +173,10 @@ class InvoicesController < ApplicationController
 
   def load_invoiceable
     resource, id = request.path.split('/')[1, 2]
-    @invoiceable = resource.singularize.classify.constantize.find(id)
+    klass = INVOICEABLE_TYPES[resource]
+    raise ActionController::RoutingError, "Not Found" unless klass
+
+    @invoiceable = klass.find(id)
   end
 
   def contract_notification(invoice)

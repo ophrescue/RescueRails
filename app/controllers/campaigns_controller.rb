@@ -26,7 +26,8 @@ class CampaignsController < ApplicationController
       else
         params[:scope] = "active"
       end
-    @campaigns = Campaign.public_send(@scope).order(created_at: :desc).paginate(page: params[:page], per_page: 30)
+    @campaigns = (@scope == "inactive" ? Campaign.inactive : Campaign.active)
+                 .order(created_at: :desc).paginate(page: params[:page], per_page: 30)
     @title = "Campaigns"
   end
 

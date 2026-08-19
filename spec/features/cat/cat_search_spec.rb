@@ -2,7 +2,7 @@ require 'rails_helper'
 require_relative '../../helpers/application_helpers'
 require_relative '../../helpers/cats_list_helper'
 
-feature 'visit manager view', js: true do
+feature 'visit manager view' do
   include ApplicationHelpers
 
   let!(:active_user) { create(:user, :admin) }
@@ -19,7 +19,7 @@ feature 'visit manager view', js: true do
   end
 end
 
-feature 'search and clear search when admin is logged-in', js: true do
+feature 'search and clear search when admin is logged-in' do
   include CatsListHelper
 
   before do
@@ -37,7 +37,7 @@ feature 'search and clear search when admin is logged-in', js: true do
     expect(cat_names).to match_array ["Abercrombie", "Abby"]
   end
 
-  it 'should show all dogs when search is cleared' do
+  it 'should show all dogs when search is cleared', js: true do
     visit cats_manager_index_path(filter_params: { search: 'ab', search_field_index: 'name' })
     click_link 'reset_message'
     sleep(2)

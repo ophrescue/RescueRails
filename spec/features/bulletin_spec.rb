@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Bulletin', js: true do
+feature 'Bulletin' do
   scenario 'visit Bulletins as volunteer' do
     sign_in_as_admin
     visit bulletins_path

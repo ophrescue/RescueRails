@@ -120,7 +120,12 @@ class Event < ApplicationRecord
     return unless source_event.photo
     source_photo_url = source_event.photo.url
     source_photo_url.prepend(request.base_url) if source_photo_url =~ /^\// # make the url absolute, there should be a better way!
-    self.photo = URI.open(source_photo_url)
+    source_photo_uri = URI.parse(source_photo_url)
+    unless %w[http https].include?(source_photo_uri.scheme)
+      raise ArgumentError, "Unsupported photo URL scheme: #{source_photo_uri.scheme.inspect}"
+    end
+
+    self.photo = source_photo_uri.open
     self.photo_file_name, self.photo_content_type, self.photo_file_size, self.photo_updated_at =
       source_event.attributes.values_at "photo_file_name", "photo_content_type", "photo_file_size", "photo_updated_at"
   end

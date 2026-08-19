@@ -72,11 +72,11 @@ class PostsController < ApplicationController
   end
 
   def allowed_types
-    ['Bulletin', 'Opportunity', 'Info']
+    { 'Bulletin' => Bulletin, 'Opportunity' => Opportunity, 'Info' => Info }
   end
 
   def type_class
-    params[:type].constantize if params[:type].in? allowed_types
+    allowed_types[params[:type]]
   end
 
   def post_params

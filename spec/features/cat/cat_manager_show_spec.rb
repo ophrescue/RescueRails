@@ -4,7 +4,7 @@ require_relative '../../helpers/rspec_matchers'
 require_relative '../../helpers/client_validation_form_helpers'
 require_relative '../../helpers/application_helpers'
 
-feature 'visit cat show page', js: true do
+feature 'visit cat show page' do
   include AnimalShowHelper
   include ClientValidationFormHelpers
   include ApplicationHelpers
@@ -107,7 +107,7 @@ feature 'visit cat show page', js: true do
     end
   end
 
-  context 'comments tabs, small screen' do
+  context 'comments tabs, small screen', js: true do
     let!(:cat){ create(:cat, :adoptable, comments: [create(:comment, user: active_user)]) }
     let!(:comment_id){ cat.comments.first.id }
     before(:each) do
@@ -180,7 +180,7 @@ feature 'visit cat show page', js: true do
     end
   end
 
-  context 'comments tabs, large screen' do
+  context 'comments tabs, large screen', js: true do
     let!(:cat){ create(:cat, :adoptable, comments: [create(:comment, user: active_user)]) }
     let!(:comment_id){ cat.comments.first.id }
     before(:each) do

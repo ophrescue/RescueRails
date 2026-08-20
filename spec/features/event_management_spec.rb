@@ -123,7 +123,6 @@ feature 'Manage Events' do
       accept_confirm do
         click_link('delete')
       end
-      sleep(2)
       expect(flash_notice_message).to eq "Event deleted"
       expect(page.current_path).to eq scoped_events_path("past")
       expect(Event.count).to eq count-1

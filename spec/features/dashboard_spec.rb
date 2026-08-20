@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Dashboard', js: true do
+feature 'Dashboard' do
   scenario 'visit dashboard as volunteer' do
     sign_in_as_admin
     visit dashboards_path

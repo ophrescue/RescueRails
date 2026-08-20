@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../helpers/application_helpers'
 
-feature "folder management", js: true do
+feature "folder management" do
   include ApplicationHelpers
 
   describe "folder index" do
@@ -208,7 +208,7 @@ feature "folder management", js: true do
         visit folder_path(folder)
       end
 
-      it "should save edited description" do
+      it "should save edited description", js: true do
         page.find('.edit_description').click
         fill_in('file_description', with: "new file description")
         expect{ page.find('.save_edit').click; wait_for_ajax }.to change{ Attachment.first.description }.to "new file description"

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Attach an agreement to a user', js: true do
+feature 'Attach an agreement to a user' do
   let!(:admin) { create(:user, :admin) }
   let!(:user) { create(:user) }
 

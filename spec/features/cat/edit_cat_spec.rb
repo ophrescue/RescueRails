@@ -3,7 +3,7 @@ require_relative '../../helpers/application_helpers'
 require_relative '../../helpers/rspec_matchers'
 require_relative '../../helpers/client_validation_form_helpers'
 
-feature 'edit a cat', js: true do
+feature 'edit a cat' do
   include ClientValidationFormHelpers
 
   before do
@@ -143,7 +143,7 @@ feature 'edit a cat', js: true do
     end
 
     context 'user enters valid attributes' do
-      it "should save the updated values" do
+      it "should save the updated values", js: true do
         expect(page).to have_selector '#manage_photos #no_photos', text: 'Scout has no photos'
         expect(page).to have_selector '#manage_attachments #no_attachments', text: 'Scout has no documents'
         fill_in(:cat_name, with: 'newname')
@@ -296,7 +296,7 @@ feature 'edit a cat', js: true do
       end
     end
 
-    context 'user enters invalid attributes --client-side validation' do
+    context 'user enters invalid attributes --client-side validation', js: true do
       context 'non-integer tracking id' do
         it "should not save, and should notify user" do
           fill_in(:cat_tracking_id, with: 'new_tracking_id') # tracking id must be integer

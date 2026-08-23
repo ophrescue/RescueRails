@@ -2,7 +2,7 @@ require 'rails_helper'
 require_relative '../../helpers/application_helpers'
 require_relative '../../helpers/cats_list_helper'
 
-feature 'add a new dog', js: true do
+feature 'add a new dog' do
   include ApplicationHelpers
   include CatsListHelper
 

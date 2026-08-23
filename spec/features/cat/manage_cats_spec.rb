@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../helpers/application_helpers'
 
-feature 'View Cats', js: true do
+feature 'View Cats' do
   include ApplicationHelpers
   let!(:test_foster) { create(:user) }
   let!(:test_cat) { create(:cat_with_photo_and_attachment, name: "Couch potato", foster_id: test_foster.id, status: 'adoptable') }

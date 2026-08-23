@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Edit User Profile', js: true do
+feature 'Edit User Profile' do
   let!(:user) { create(:user, active: true) }
 
   scenario 'Admin is presented with non-disabled name field' do

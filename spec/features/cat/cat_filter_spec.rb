@@ -39,13 +39,12 @@ feature 'Filter Cats List', js: true do
       expect(page.find('#search_field_index').find('option[selected]').value).to eq 'cat_breed'
 
       page.find('#reset_message').click
-      sleep(2)
+      expect(page).to have_no_selector('#reset_message')
       expect(cats_list).to eq all_cats_sorted_by_id.reverse
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Tracking ID")
       expect(page).to have_no_selector(group_label, text: "Search by:")
       expect(page).to have_no_selector(filter_params, text: "Breed matches 'shorthai'")
-      expect(page).to have_no_selector('#reset_message')
     end
 
     scenario 'and sort results by cat name' do

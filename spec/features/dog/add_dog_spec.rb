@@ -4,7 +4,7 @@ require_relative '../../helpers/rspec_matchers'
 require_relative '../../helpers/client_validation_form_helpers'
 require_relative '../../helpers/dogs_list_helper'
 
-feature 'add a dog', js: true do
+feature 'add a dog' do
   include ClientValidationFormHelpers
   include ApplicationHelpers
 
@@ -65,7 +65,7 @@ feature 'add a dog', js: true do
     end
 
     context 'user enters valid attributes', exclude_ie: true do
-      it "should save the user-entered values" do
+      it "should save the user-entered values", js: true do
         fill_in(:dog_name, with: 'newname')
         select('new primary breed', from: 'dog_primary_breed_id')
         select('new secondary breed', from: 'dog_secondary_breed_id')
@@ -174,7 +174,7 @@ feature 'add a dog', js: true do
       end
     end
 
-    context 'user enters invalid attributes --client-side validation' do
+    context 'user enters invalid attributes --client-side validation', js: true do
       context 'no status selected' do
         it "should not save and should notify user" do
           fill_in(:dog_name, with: 'Fido')

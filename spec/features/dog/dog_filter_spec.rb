@@ -39,13 +39,12 @@ feature 'Filter Dogs List', js: true do
       expect(page.find('#search_field_index').find('option[selected]').value).to eq 'breed'
 
       page.find('#reset_message').click
-      sleep(2)
+      expect(page).to have_no_selector('#reset_message')
       expect(dogs_list).to eq all_dogs_sorted_by_id.reverse
       expect(page).to have_selector(group_label, text: "Sort:")
       expect(page).to have_selector(filter_params, text: "Tracking ID")
       expect(page).to have_no_selector(group_label, text: "Search by:")
       expect(page).to have_no_selector(filter_params, text: "Breed matches 'retriev'")
-      expect(page).to have_no_selector('#reset_message')
     end
 
     scenario 'and sort results by dog name' do

@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../helpers/application_helpers'
 
-feature 'View Dogs', js: true do
+feature 'View Dogs' do
   include ApplicationHelpers
   let!(:test_foster) { create(:user) }
   let!(:test_dog) { create(:dog_with_photo_and_attachment, name: "Couch potato", foster_id: test_foster.id, status: 'adoptable') }

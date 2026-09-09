@@ -33,11 +33,7 @@
           <%end%>
             <%=link_to show.titleize, {:controller => "adopters", :show => show, location: params[:location], range: params[:range]}, class: "nav-link #{active_css}" %>
         <%end%>
-        <%if params[:show] == nil%>
-          <li class= "active">
-        <%else%>
-          <li>
-        <%end%>
+        <li class="<%= 'active' if params[:show].nil? %>"></li>
       </ul>
     </div>
   </div>
@@ -53,19 +49,11 @@
           <% end %>
           <%= link_to status.titleize, {:controller => "adopters", :status => status, :show => params[:show], location: params[:location], range: params[:range]}, :class => "nav-link  #{active_css}" %>
         <% end %>
-        <% if params[:status] == nil %>
-          <li class="active">
-        <% else %>
-          <li>
-        <% end %>
-      <%= link_to "All", {:controller => "adopters", :show => params[:show], location: params[:location], range: params[:range]}, :class => "nav-link"  %>
+        <li class="<%= 'active' if params[:status].nil? %>">
+          <%= link_to "All", {:controller => "adopters", :show => params[:show], location: params[:location], range: params[:range]}, :class => "nav-link" %>
         </li>
-        <% if params[:status] == "active" %>
-          <li class="active">
-        <% else %>
-          <li>
-        <% end %>
-        <%= link_to "Active", {:controller => "adopters", :status => "active", :show => params[:show], location: params[:location], range: params[:range]}, :class => "nav-link" %>
+        <li class="<%= 'active' if params[:status] == "active" %>">
+          <%= link_to "Active", {:controller => "adopters", :status => "active", :show => params[:show], location: params[:location], range: params[:range]}, :class => "nav-link" %>
         </li>
       </ul>
     </div>

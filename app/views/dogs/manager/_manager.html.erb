@@ -45,7 +45,7 @@
     <%= render :partial => "dogs/manager/dog", :collection => @dogs, :as => :dog %>
     <div> <%= will_paginate(@dogs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %> </div>
   <% else %>
-    <div id="none_found"><h4>No dogs were found that match the specified criteria</h3></div>
+    <div id="none_found"><h4>No dogs were found that match the specified criteria</h4></div>
   <% end %>
 </div>
 

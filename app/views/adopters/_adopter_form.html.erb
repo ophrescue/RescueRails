@@ -76,14 +76,14 @@
       <tr>
         <th>Other Phone</th>
         <td>
-          <div class='read-only'><span class="tel value"><%= @adopter.other_phone %><span></div>
+          <div class='read-only'><span class="tel value"><%= @adopter.other_phone %></span></div>
           <div class='editable'><%= f.text_field :other_phone %></div>
         </td>
       </tr>
     <tr>
       <th>Best Time to Call</th>
       <td>
-        <div class='read-only'><span class="tel value"><%= @adopter.when_to_call %><span></div>
+        <div class='read-only'><span class="tel value"><%= @adopter.when_to_call %></span></div>
         <div class='editable'><%= f.text_field :when_to_call %></div>
       </td>
     </tr>
@@ -101,6 +101,7 @@
         <div class='read-only'><%= af.object.other_household_names %></div>
         <div class='editable'><%= af.text_area :other_household_names %></div>
       </td>
+    </tr>
     <tr>
       <th>
         Heard about us from
@@ -127,8 +128,7 @@
         </th>
         <td><%= @adopter.adoption_app.adopter_age %></td>
       </tr>
-  <% end %>
-    </tr>
+    <% end %>
     <% if @adopter.adoption_app.verify_home_auth == true %>
     <tr>
       <th></th>

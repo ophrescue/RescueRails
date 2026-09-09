@@ -176,7 +176,7 @@
         <div class="card-body">
           <div class="tab-content" id="states-trainers">
             <div class="tab-pane fade show active" id="md" role="tabpanel" aria-labelledby="md-tab">
-              <h2></a>Maryland</h2>
+              <h2>Maryland</h2>
 
               <% md_trainers.each do |trainer| %>
 
@@ -233,12 +233,12 @@
               <% end %>
             </div>
             <div class="tab-pane fade" id="dc" role="tabpanel" aria-labelledby="dc-tab">
-              <h2></a>Washington DC</h2>
+              <h2>Washington DC</h2>
 
               <% dc_trainers.each do |trainer| %>
 
                 <h4><%= trainer[:name] %></h4>
-                <div class="media", style="overflow-y: auto;">
+                <div class="media" style="overflow-y: auto;">
                   <% unless trainer[:logo] == 'white-50x50.gif' %>
                       <a target="_blank" href="<%= trainer[:website] %>">
                           <%= image_tag(trainer[:logo], alt: trainer[:name], class: "mb-3 mt-3") %>
@@ -287,12 +287,12 @@
               <% end %>
             </div>
             <div class="tab-pane fade" id="pa" role="tabpanel" aria-labelledby="pa-tab">
-              <h2></a>Pennsylvania</h2>
+              <h2>Pennsylvania</h2>
 
               <% pa_trainers.each do |trainer| %>
 
                 <h4><%= trainer[:name] %></h4>
-                <div class="media", style="overflow-y: auto;">
+                <div class="media" style="overflow-y: auto;">
                   <% unless trainer[:logo] == 'white-50x50.gif' %>
                       <a target="_blank" href="">
                           <%= image_tag(trainer[:logo], alt: trainer[:name], size: "200", class: "mb-3 mt-3") %>
@@ -344,12 +344,12 @@
               <% end %>
             </div>
             <div class="tab-pane fade" id="va" role="tabpanel" aria-labelledby="va-tab">
-              <h2></a>Virginia</h2>
+              <h2>Virginia</h2>
 
               <% va_trainers.each do |trainer| %>
 
                 <h4><%= trainer[:name] %></h4>
-                <div class="media", style="overflow-y: auto;">
+                <div class="media" style="overflow-y: auto;">
                   <% unless trainer[:logo] == 'white-50x50.gif' %>
                     <a target="_blank" href="">
                         <%= image_tag(trainer[:logo], alt: trainer[:name], size: "200", class: "mb-3 mt-3") %>
@@ -401,12 +401,12 @@
               <% end %>
             </div>
             <div class="tab-pane fade" id="remote" role="tabpanel" aria-labelledby="remote-tab">
-              <h2></a>Remote Trainers</h2>
+              <h2>Remote Trainers</h2>
 
               <% remote_trainers.each do |trainer| %>
 
                 <h4><%= trainer[:name] %></h4>
-                <div class="media", style="overflow-y: auto;">
+                <div class="media" style="overflow-y: auto;">
                   <% unless trainer[:logo] == 'white-50x50.gif' %>
                     <a target="_blank" href="">
                         <%= image_tag(trainer[:logo], alt: trainer[:name], style: 'height:100%;width:auto;', class: "mb-3 mt-3") %>

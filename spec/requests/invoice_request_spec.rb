@@ -1,24 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe "Invoices" do
-  context "Public User" do
+  context "Unauthenticated User" do
     let!(:adopter) { create(:adopter) }
     let!(:dog) { create(:dog) }
     let!(:adoption) { create(:adoption, adopter_id: adopter.id, dog_id: dog.id )}
 
     describe "GET #show unpaid invoice" do
       let(:invoice) { create(:invoice_unpaid, invoiceable_id: adoption.id, invoiceable_type: 'Adoption') }
-      it 'is successful' do
+      it 'redirects to /sign_in' do
         get invoice_path(invoice.slug)
-        expect(response).to be_successful
+        expect(response).to redirect_to('/sign_in')
       end
     end
 
     describe "GET #show paid invoice" do
       let(:invoice) { create(:invoice_paid, invoiceable_id: adoption.id, invoiceable_type: 'Adoption') }
-      it 'is successful' do
+      it 'redirects to /sign_in' do
         get invoice_path(invoice.slug)
-        expect(response).to be_successful
+        expect(response).to redirect_to('/sign_in')
       end
     end
 
@@ -49,6 +49,22 @@ RSpec.describe "Invoices" do
       let(:invoice) { create(:invoice_paid, invoiceable_id: adoption.id, invoiceable_type: 'Adoption') }
       it 'is successful' do
         get invoices_path(as: admin)
+        expect(response).to be_successful
+      end
+    end
+
+    describe "GET #show unpaid invoice" do
+      let(:invoice) { create(:invoice_unpaid, invoiceable_id: adoption.id, invoiceable_type: 'Adoption') }
+      it 'is successful' do
+        get invoice_path(invoice.slug, as: admin)
+        expect(response).to be_successful
+      end
+    end
+
+    describe "GET #show paid invoice" do
+      let(:invoice) { create(:invoice_paid, invoiceable_id: adoption.id, invoiceable_type: 'Adoption') }
+      it 'is successful' do
+        get invoice_path(invoice.slug, as: admin)
         expect(response).to be_successful
       end
     end

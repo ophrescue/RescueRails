@@ -143,9 +143,9 @@ feature 'View Cats' do
       expect(page_heading).to eq "Staff Sign in"
     end
 
-    scenario 'can view the public cat gallery' do
+    scenario 'can not view the public cat gallery' do
       visit cats_path
-      expect(page).to have_content("This page is powered by Shelterluv.")
+      expect(page_heading).to eq "Staff Sign in"
     end
   end
 end

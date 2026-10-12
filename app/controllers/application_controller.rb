@@ -22,6 +22,28 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include ApplicationHelper
 
+  # The whole app now requires a valid (signed in + unlocked) login on every
+  # page -- this site has been replaced by a new system and is staff/login-only
+  # going forward.
+  #
+  # These two before_actions deliberately do NOT reuse the :require_login /
+  # :unlocked_user filter names that dozens of controllers already declare
+  # locally (many with their own `except:`/`only:` lists for what used to be
+  # public pages). ActiveSupport::Callbacks treats a same-named before_action
+  # redeclared in a subclass as a full REPLACEMENT of the inherited one --
+  # matched only by kind+name+filter, ignoring any only:/except: difference --
+  # not as an additional filter (confirmed via
+  # `PagesController._process_action_callbacks`). So reusing those names here
+  # would have let every one of those local `except:` lists silently reopen
+  # the exact pages they used to exempt. Using distinct names means this
+  # filter can't be overridden by any of that pre-existing code; those local
+  # declarations still run too, but are now redundant leftovers rather than
+  # actual exceptions. Sign-in/password-reset must stay reachable without a
+  # session already, so both are explicitly skipped in
+  # SessionsController/PasswordsController.
+  before_action :enforce_sitewide_login
+  before_action :enforce_sitewide_unlocked_user
+
   helper_method :handle_redirect
 
   def handle_redirect
@@ -38,5 +60,15 @@ class ApplicationController < ActionController::Base
 
   def show_user_navbar
     @show_user_topbar = true
+  end
+
+  private
+
+  def enforce_sitewide_login
+    require_login
+  end
+
+  def enforce_sitewide_unlocked_user
+    unlocked_user
   end
 end

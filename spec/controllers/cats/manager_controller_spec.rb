@@ -130,9 +130,9 @@ describe Cats::ManagerController, type: :controller do
     context 'public user' do
       let(:cat) { create(:cat) }
 
-      it 'is redirected to the cat public profile' do
+      it 'is redirected to sign in' do
         get :show, params: { id: cat.id }
-        expect(subject).to redirect_to(cat_path(cat.id))
+        expect(subject).to redirect_to(sign_in_path)
       end
     end
     context 'signed in as admin' do

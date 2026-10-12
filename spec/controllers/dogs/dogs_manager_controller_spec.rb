@@ -124,9 +124,9 @@ describe Dogs::ManagerController, type: :controller do
     context 'public user' do
       let(:dog) { create(:dog) }
 
-      it 'is redirected to the dog public profile' do
+      it 'is redirected to sign in' do
         get :show, params: { id: dog.id }
-        expect(subject).to redirect_to(dog_path(dog.id))
+        expect(subject).to redirect_to(sign_in_path)
       end
     end
     context 'signed in as admin' do

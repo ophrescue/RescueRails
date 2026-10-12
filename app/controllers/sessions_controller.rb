@@ -15,6 +15,15 @@
 #    limitations under the License.
 
 class SessionsController < Clearance::SessionsController
+  # Clearance::SessionsController already skips its own :require_login for
+  # these actions, but ApplicationController's sitewide login enforcement
+  # uses its own differently-named filters (see the comment there), so they
+  # need an explicit skip here too -- otherwise nobody could ever reach
+  # sign-in in the first place, and :enforce_sitewide_unlocked_user would
+  # raise on current_user being nil for a signed-out visitor.
+  skip_before_action :enforce_sitewide_login, raise: false
+  skip_before_action :enforce_sitewide_unlocked_user, raise: false
+
   before_action :prevent_caching
   before_action :select_bootstrap41
 

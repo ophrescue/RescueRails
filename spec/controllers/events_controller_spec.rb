@@ -1,7 +1,27 @@
 require 'rails_helper'
 
 describe EventsController, type: :controller do
-  context 'public user' do
+  context 'unauthenticated user' do
+    describe 'GET #index' do
+      it 'redirects to sign in' do
+        get :index
+        expect(response).to redirect_to(sign_in_path)
+      end
+    end
+
+    describe 'GET #show' do
+      let(:event) { create(:event) }
+
+      it 'redirects to sign in' do
+        get :show, params: { id: event.id }
+        expect(response).to redirect_to(sign_in_path)
+      end
+    end
+  end
+
+  context 'signed in user' do
+    include_context 'signed in user'
+
     describe 'GET #index' do
       it 'is successful' do
         get :index

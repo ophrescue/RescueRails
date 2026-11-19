@@ -14,7 +14,7 @@ environment "<%= fetch(:rails_env) %>"
 workers <%= fetch(:puma_worker_count) %>
 threads <%= fetch(:puma_min_threads) %>, <%= fetch(:puma_max_threads) %>
 
-# Deliberately disabled (unlike unicorn.rb.erb's `preload_app true`).
+# Deliberately disabled (`preload_app!` is not used).
 # Puma does not support phased (rolling, USR1) restarts when the app
 # is preloaded in the master -- preload_app forces every restart to be
 # a full hot restart (USR2, see puma.service.erb), which replaces the
@@ -38,10 +38,9 @@ preload_app! false
 # AR connection to disconnect before forking and nothing to explicitly
 # reconnect in each worker -- each worker's own boot process
 # (config/environment.rb) establishes its own connection normally, the
-# same as `rails server` does. Unicorn's before_fork/after_fork AR
-# dance (and the equivalent Puma before_fork/before_worker_boot hooks
-# this file used to carry) is therefore unnecessary and has been
-# dropped.
+# same as `rails server` does. A before_fork/before_worker_boot AR
+# disconnect/reconnect dance (which this file used to carry) is
+# therefore unnecessary and has been dropped.
 
 worker_shutdown_timeout 30
 

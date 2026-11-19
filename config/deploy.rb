@@ -55,7 +55,6 @@ set :linked_files, %W{config/database.yml
                       config/rds.pem
                       config/newrelic.yml
                       config/initializers/setup_mail.rb
-                      config/unicorn.rb
                       config/puma.rb
                       .env.#{fetch(:stage)} }
 
@@ -68,7 +67,6 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 set(:config_files, %w[nginx.conf
                       log_rotation
                       monit
-                      unicorn.rb
                       puma.rb])
 
 

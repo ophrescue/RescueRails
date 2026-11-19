@@ -22,8 +22,8 @@ its history, gone past Rails 6.1 — see "Upgrade roadmap" below.
 - Asset pipeline: Sprockets, with JS bundled via **jsbundling-rails +
   esbuild** (Webpacker replaced in Pass 9) plugging into the same
   Sprockets manifest/precompile flow — one pipeline, not two
-- Production app server: **Unicorn** (prod-only Gemfile group); **Puma**
-  only in dev/test — a pre-existing inconsistency, not yet reconciled
+- App server: **Puma** everywhere (dev/test/staging/production — clustered,
+  3 workers x 5 threads in deployed envs; Unicorn removed in Pass 11)
 - Deploy: Capistrano (not containers/Kamal) — the `.devcontainer/` setup
   is local-dev-only, unrelated to how production is deployed
 - Tests: RSpec (~108 spec files across models/controllers/requests/
@@ -75,6 +75,16 @@ Ground rules for every pass:
 - **One PR per pass, staged into a few reviewable commits** (e.g. forced
   companion-gem bumps in one commit, the core framework bump in another),
   not one PR per gem and not a single squashed commit.
+- **This repo is public (open source) — never write infrastructure or
+  secret information into it, including this file's upgrade log.** No
+  host names/IPs, server filesystem paths, socket/unit file locations,
+  provisioning-repo locations, credentials or key material (not even
+  partial or "redacted" values), and no output pasted from production
+  hosts. Describe such things generically ("the production hosts", "the
+  Puma unit") and keep specifics out of commits, PR text and docs. Deploy
+  target hosts live in a gitignored file (`config/deploy/
+  production_hosts.rb`, template alongside as `.sample`) — see README.md
+  "Deploying".
 - When investigating a boot/spec failure, check whether it reproduces on
   the *pre-upgrade* code (`git stash` / a clean checkout of the prior
   commit) before assuming it's caused by the change in progress — several
@@ -548,11 +558,10 @@ version change): DONE**
 
 - User-reported symptom: production sign-in silently stopped working,
   with **no error in `production.log`**. Per this file's own "stop if
-  you can't find it" instruction, checked for the production ansible
-  playbooks at `~/projects/oph-prd-env/` to review NGINX/Unicorn config
-  — that path (and `~/projects/` itself) doesn't exist anywhere on this
-  filesystem, so no ansible/NGINX review was possible or, as it turned
-  out, necessary.
+  you can't find it" instruction, looked for the production
+  provisioning (ansible) playbooks to review NGINX/Unicorn config — they
+  aren't available in this environment, so no ansible/NGINX review was
+  possible or, as it turned out, necessary.
 - Root cause, confirmed by reading the actual installed gem source (not
   guessed from version numbers) and reproduced locally: Pass 5's Rack
   2.2.10 → 3.2.6 bump changed how a **second** `Set-Cookie` header is
@@ -626,7 +635,7 @@ version change): DONE**
   `bin/rails zeitwerk:check` clean.
 - Explicitly out of reach this pass: actually deploying this fix and
   restarting/rolling the production Unicorn workers — this session has
-  no access to `~/projects/oph-prd-env/` or any production host, so
+  no access to the provisioning repo or any production host, so
   that remains a manual follow-up for the user.
 - Sharpens the existing "Unicorn/Puma reconciliation" roadmap item from
   a version-gap footnote into a confirmed-broken-in-production gap:
@@ -686,13 +695,13 @@ is a manual follow-up): DONE**
   instance for `puma`, additive to the existing `unicorn`/`delayed_job`
   ones. Verified directly from the installed gem source
   (`capistrano-systemd-multiservice-0.1.0.beta13`) that these are
-  **system-scoped** systemd units (`/etc/systemd/system`, `sudo
-  systemctl`), not user-scoped as a first pass at this plan assumed —
+  **system-scoped** systemd units (installed system-wide, managed via
+  `sudo systemctl`), not user-scoped as a first pass at this plan assumed —
   `new_service` defaults `service_type: 'system'`, and `unicorn.service.erb`
   itself declaring `User = deploy`/`Group = deploy` is itself
   system-scoped-only evidence. Unit filenames follow `<application>_<name>`
   (`application` is `RescueRails`), so the new unit is
-  `/etc/systemd/system/RescueRails_puma.service`. `setup_config.cap` now
+  `RescueRails_puma.service`. `setup_config.cap` now
   invokes `systemd:puma:setup` alongside (not replacing)
   `systemd:unicorn:setup` — both services end up installed+enabled on
   disk after a deploy, only Puma is actively started/restarted by the
@@ -700,7 +709,7 @@ is a manual follow-up): DONE**
   `puma_min_threads`/`puma_max_threads` (3/5/5) alongside the existing
   `unicorn_worker_count`.
 - Commit 3: `nginx.conf.erb`'s upstream/location swapped from Unicorn's
-  socket to Puma's (`/tmp/puma.<app>.sock`) as a straight swap, not a
+  socket to Puma's as a straight swap, not a
   flag-driven toggle — a boolean would still need a host-side re-render
   to take effect, buying nothing over a plain revert, and a true
   emergency rollback happens by hand-editing the live rendered file
@@ -711,8 +720,7 @@ is a manual follow-up): DONE**
   needed monit's external `kill_worker` mechanism and Puma doesn't).
   The master-process check now watches Puma's pidfile and routes
   start/stop through `systemctl` directly (in-repo, unlike Unicorn's
-  `/etc/init.d/unicorn_<app>_<env>` script, which isn't tracked in this
-  repo). Unicorn's monit check group was removed rather than kept
+  init script, which wasn't tracked in this repo). Unicorn's monit check group was removed rather than kept
   alongside — alerting/restarting a service that's intentionally
   stopped would just be noise.
 - Commit 4 (found via manual verification, not static analysis):
@@ -757,25 +765,25 @@ is a manual follow-up): DONE**
   understood as pre-existing.
 - **Explicitly out of reach this pass, same wall Pass 7 hit**: this
   session has no access to the production/staging hosts or the
-  ansible/nginx-provisioning repo (`~/projects/oph-prd-env/` doesn't
-  exist here), so none of `cap staging deploy:setup_config`, `cap
+  ansible/nginx-provisioning repo, so none of `cap staging deploy:setup_config`, `cap
   staging deploy`, or the production equivalent were run. Required
   manual follow-up, in order: deploy to **staging first**, exercise it
   over real HTTP (not just a local socket) through at least one more
   deploy cycle to prove the `USR2`/monit paths under real repeated
-  restarts, *then* deploy to both production hosts
-  (`172.104.219.216`, `172.104.219.123`). Rollback needs **both**
-  `sudo systemctl stop RescueRails_puma && sudo systemctl start
-  RescueRails_unicorn` **and** either a hand-edited live `nginx.conf`
+  restarts, *then* deploy to both production hosts. Rollback needs
+  **both** stopping the Puma unit and starting the Unicorn unit **and**
+  either a hand-edited live `nginx.conf`
   (fastest) or a tracked `git revert` + re-render (auditable) — stopping
   Puma and starting Unicorn alone does not move nginx's traffic back on
   its own, since Unicorn's monit check was removed in this pass and
   its systemd unit is merely installed, not actively managed.
-- Flagged but explicitly out of scope: `.env.production`/
-  `.env.staging` contain live-looking AWS/Mailchimp/Honeybadger/
-  eSignatures/reCAPTCHA credentials committed directly in the repo —
-  unrelated to this migration, worth raising separately (rotation +
-  removal from version control).
+- Flagged at the time as out of scope: `.env.production`/`.env.staging`
+  contain live-looking AWS/Mailchimp/Honeybadger/eSignatures/reCAPTCHA
+  credentials. **Correction (Pass 12):** this entry originally said they
+  were "committed directly in the repo" — they are not. Both are
+  gitignored (`.env.*`) and have never appeared in git history; they are
+  local-only files. (The tracked `.env` is a separate question — see
+  Pass 12.)
 - New candidates surfaced by this pass, not yet scheduled: deleting the
   now-dormant Unicorn files (gem, `unicorn.rb.erb`,
   `unicorn.service.erb`, the Rack3 cookie monkeypatch at
@@ -964,17 +972,87 @@ pre-existing `< 6` pin (no Rails/Ruby version change): DONE**
   ships a fix, or if a future erb CVE has no patched pre-6 release to
   fall back on the way this one did.
 
-**Next pass: not yet decided.** Leading candidates, roughly in order:
-completing the Puma cutover itself (staging deploy → verify → production
-deploy, per the Pass 8 manual follow-up — this is arguably more urgent
-than starting new modernization work, since Pass 8 only prepared the
-code), deleting the dormant Unicorn files once Puma has run stably in
-production, brakeman for SAST (the other half of "CI
-security scanning", deferred since Pass 5), wiring `bundle-audit` (in
-the Gemfile since Pass 6) into `.github/workflows/main.yml` as an
-actual CI gate, Rails 7.2 → 8.0 (will need to resolve the
-`delayed_job_active_record`/`annotate` `activerecord < 8.0` caps first,
-flagged since Pass 4), and the `config.load_defaults` catch-up
-(long-deferred, not security-driven, lowest urgency of the group).
-Decide based on what's most pressing when picking up the next pass —
-don't assume the order above is a commitment.
+**Pass 11 — Remove Unicorn (no Rails/Ruby version change): DONE**
+(branch `cleanup/remove-unicorn`)
+
+- Closes the "delete the dormant Unicorn files" candidate from Pass 8.
+  Prompted by a production check showing Puma serving traffic while the
+  old Unicorn service was still enabled and running idle (it restarted on
+  boot). The user disabled it on the production hosts and confirmed the
+  site kept working before this pass began.
+- Removed: the `unicorn` gem (and its `group :production` block;
+  lockfile diff was exactly `unicorn`, `kgio`, `raindrops`),
+  `config/deploy/shared/unicorn.rb.erb`, `config/systemd/
+  unicorn.service.erb`, `config/initializers/unicorn_rack3_cookie_fix.rb`
+  (Pass 7's patch — only ever active when `Unicorn::HttpResponse` was
+  loaded), the `unicorn` service in `Capfile`, `config/unicorn.rb` in
+  `linked_files`, `unicorn.rb` in `config_files`, the
+  `systemd:unicorn:setup` call in `setup_config.cap`, and
+  `unicorn_worker_count` in `config/deploy/{production,staging}.rb`.
+  Comments in `config/puma.rb`/`puma.rb.erb` that pointed at the
+  Unicorn files were reworded. `cap production -T` still loads and lists
+  zero unicorn tasks.
+- Host cleanup was done by hand by the user (this session has no host
+  access): the Unicorn service stopped/disabled and its unit file removed,
+  plus its stale config, log, pid and socket files — reported done, not
+  independently verified. There is no longer a staging environment, so
+  production is the only deployed env; `config/deploy/staging.rb`,
+  `config/environments/staging.rb` and the local `.env.staging` look dead
+  (a cleanup candidate, not touched here), and the Pass 8 "deploy to
+  staging first" guidance no longer applies.
+- Rollback to Unicorn is no longer a one-command option; it would mean
+  reverting this pass's commits.
+- Full RSpec suite: 748 examples, 0 failures, 12 pending, both before and
+  after (fresh baseline captured before the first edit; 748 rather than
+  743 because master gained specs since Pass 10). `bin/rails
+  zeitwerk:check` clean.
+- Side effect for the upgrade series: `bundle install` on the hosts no
+  longer needs `unicorn`'s native extensions to build, one fewer thing
+  to verify for the Ruby 3.4 bump.
+
+**Pass 12 — Public-repo hygiene: remove infrastructure detail (no
+Rails/Ruby version change): DONE**
+(branch `cleanup/remove-unicorn`, kept separate from Pass 11's changes)
+
+- Trigger: the user pointed out the repo is open source and shouldn't
+  carry infrastructure information that could be a security risk.
+- Deploy hosts: `config/deploy/production.rb` no longer contains server
+  addresses (the two live hosts plus two stale commented-out ones). It
+  now `load`s `config/deploy/production_hosts.rb`, which is **gitignored**;
+  `config/deploy/production_hosts.rb.sample` is the tracked template. If
+  the real file is missing, `cap production ...` aborts with a message
+  pointing at the sample and README rather than deploying nowhere.
+  Verified with `cap production doctor:servers` (resolves both servers,
+  with their roles and the primary flag, when the file is present;
+  aborts cleanly when absent). Whoever runs `cap` needs their own copy of
+  the real file. Documented in README.md ("Deploying") and in the working
+  conventions above.
+- CLAUDE.md: removed the IPs, the local path of the provisioning repo,
+  host filesystem/socket/unit-file locations and a literal rollback
+  command line from the Pass 7/8/11 entries; added the public-repo
+  convention; corrected the Pass 8 note about `.env.production`/
+  `.env.staging` (local-only, never committed).
+- **Not fixed by this pass — history is forever:** the removed values
+  remain in this repo's git history and in any fork/clone. Scrubbing
+  them would need a history rewrite (and a force-push to a shared
+  branch), which was not done and needs an explicit decision. Treat the
+  old host addresses as publicly known: rely on firewall/SSH-key hygiene
+  rather than their obscurity, and consider re-IP'ing/rotating if that
+  matters. Pass 8's note about the tracked `.env` (Stripe variables) is
+  unresolved: the session was blocked from reading its values, so
+  whether they are live keys is unchecked — the user needs to confirm,
+  and rotate + untrack the file if so.
+- Not changed: `config.deploy` details that aren't host-identifying
+  (stage name, `deploy_to` convention, public domain name).
+
+**Next pass: not yet decided.** The CVE-driven upgrade series is
+planned as: non-Rails gem CVE sweep (rack, nokogiri, loofah,
+rails-html-sanitizer, addressable, crass, mail, net-ssh, puma, dalli
+~> 3.2) → Rails 7.2 → 8.0.5.2 (needs an explicit decision on `annotate`,
+whose `activerecord < 8.0` cap makes the resolver silently downgrade it
+to 2.6.5) → Ruby 3.3.12 → 3.4.13 (add `gem 'csv'`) → Rails 8.0 → 8.1.4.1.
+Other candidates: brakeman for SAST, wiring `bundle-audit` into
+`.github/workflows/main.yml` as a CI gate, and the `config.load_defaults`
+catch-up (long-deferred, lowest urgency). Decide based on what's most
+pressing when picking up the next pass — don't assume the order above is
+a commitment.

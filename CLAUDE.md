@@ -1045,13 +1045,72 @@ Rails/Ruby version change): DONE**
 - Not changed: `config.deploy` details that aren't host-identifying
   (stage name, `deploy_to` convention, public domain name).
 
-**Next pass: not yet decided.** The CVE-driven upgrade series is
-planned as: non-Rails gem CVE sweep (rack, nokogiri, loofah,
-rails-html-sanitizer, addressable, crass, mail, net-ssh, puma, dalli
-~> 3.2) → Rails 7.2 → 8.0.5.2 (needs an explicit decision on `annotate`,
-whose `activerecord < 8.0` cap makes the resolver silently downgrade it
-to 2.6.5) → Ruby 3.3.12 → 3.4.13 (add `gem 'csv'`) → Rails 8.0 → 8.1.4.1.
-Other candidates: brakeman for SAST, wiring `bundle-audit` into
+**Pass 13 — Non-Rails gem CVE sweep (Rails stays 7.2.3.2, Ruby stays
+3.3.12): DONE**
+(branch `upgrade/gem-cve-sweep`; lockfile-only, no Gemfile change)
+
+- First pass of the CVE-driven series that was planned after Pass 12:
+  clear every known-CVE gem that can be fixed inside its current major,
+  leaving only the Rails-family advisories, which have no 7.2.x fix and
+  are closed by the Rails 8.0 pass. Source of truth was a fresh
+  `bundle-audit update && check` (71 advisories before; the 18 left after
+  are all `actionpack`/`actionview`/`activestorage`/`actionmailbox`/
+  `activesupport`, fixed only by Rails `~> 8.0.5, >= 8.0.5.2` or
+  `>= 8.1.4.1`).
+- Commit 1 (web-facing stack): `bundle update rack nokogiri loofah
+  rails-html-sanitizer addressable crass mail --conservative` — rack 3.2.7
+  → 3.2.8, nokogiri 1.19.4 → 1.19.7, loofah 2.25.2 → 2.25.3,
+  rails-html-sanitizer 1.7.1 → 1.7.2, addressable 2.9.0 → 2.9.2, crass
+  1.0.7 → 1.0.8, mail 2.8.1 → 2.9.1. Rack stays inside `actionpack`
+  7.2's `< 3.3` ceiling.
+- Commit 2 (infrastructure/dev tooling): net-ssh 7.3.3 → 7.3.10
+  (Capistrano side), puma 8.0.2 → 8.0.4 and dalli 3.2.8 → 3.2.17. Puma
+  and dalli were updated with `--patch` so they stay on puma 8.0.x and
+  dalli 3.2.x — dalli 5.x and puma 8.1 are outside what a CVE sweep
+  needs, and Rails 7.2's `MemCacheStore` against dalli 5 is untested.
+- Lockfile reviewed line by line: only the ten gems above moved, plus
+  new dependency edges (`mail` and `net-ssh` each gained `logger`,
+  already locked at 1.7.0; `loofah`/`rails-html-sanitizer` raised their
+  own floors on each other and on `nokogiri`). No forced companion bump
+  and no Gemfile edit were needed. Nothing outside the intended set moved.
+- Full RSpec suite: 748 examples, 0 failures, 12 pending, identical to the
+  baseline captured on clean `master` immediately before the first
+  change, run on the final state with two different seeds.
+  `bin/rails zeitwerk:check` clean; `yarn build` clean.
+- Real-server smoke test (the suite never opens a server socket — the
+  Pass 7 blind spot): booted real Puma 8.0.4 (3 workers, preloaded) on a
+  local port against the dev database and confirmed `/` (redirect to
+  sign-in) and `/sign_in` resolve 200 with the Sprockets and esbuild asset
+  URLs fetched as real 200s; a real sign-in `POST` returned three
+  `Set-Cookie` headers and an authenticated follow-up showed the "Sign
+  out" link; repeated DB-backed requests across the workers succeeded
+  with no stale-connection errors; `SIGTERM` shut it down cleanly. The
+  known `newrelic_rpm` background-thread `SystemStackError` (Pass 6) was
+  the only error in the log. `spec/features/event_management_spec.rb` and
+  `spec/features/clearance/` were also run on their own: clean. (A
+  curl smoke test needs `Accept: text/html`: with `*/*`, Clearance's
+  `require_login` returns a bare 401 instead of redirecting.) A quick
+  `rails runner` check confirmed `sanitize` still strips scripts and event
+  handlers, `Mail` builds and delivers via the test delivery method, and
+  `Addressable::URI` normalizes.
+- **Not verifiable here:** dalli. The suite uses a null cache store and
+  there is no memcached in this devcontainer, so the production
+  `:mem_cache_store` path through dalli 3.2.17 was only load-checked
+  (the client constructs; a `set` raises `Dalli::RingError` with no
+  server, as expected). The same applies to real SMTP delivery via mail
+  2.9.1 (only the test delivery method was exercised). Both need a
+  look after the first production deploy.
+- Post-change `bundle-audit check`: 18 advisories, all Rails family.
+- Explicitly deferred/out of scope: the Rails-family advisories (Rails
+  7.2 → 8.0.5.2 is the next pass), puma 8.1 and dalli 5.x, the open
+  Dependabot group PR that overlaps this sweep (left for the maintainers
+  to handle), and the standing list from earlier passes.
+
+**Next pass: not yet decided.** The remaining CVE-driven upgrade series
+is planned as: Rails 7.2 → 8.0.5.2 (needs an explicit decision on
+`annotate`, whose `activerecord < 8.0` cap makes the resolver silently
+downgrade it to 2.6.5) → Ruby 3.3.12 → 3.4.13 (add `gem 'csv'`) → Rails
+8.0 → 8.1.4.1. Other candidates: brakeman for SAST, wiring `bundle-audit` into
 `.github/workflows/main.yml` as a CI gate, and the `config.load_defaults`
 catch-up (long-deferred, lowest urgency). Decide based on what's most
 pressing when picking up the next pass — don't assume the order above is

@@ -58,7 +58,9 @@ jobs:
         run: bundle list
 
       - name: Install Postgresql client and libffi
-        run: sudo apt-get -yqq install libpq-dev libffi-dev
+        # `update` first: the runner image's package index can be stale, and
+        # superseded .debs 404 on the mirror (this broke the wkhtmltopdf step).
+        run: sudo apt-get -yqq update && sudo apt-get -yqq install libpq-dev libffi-dev
 
       - name: Install wkhtmltopdf
         run: sudo apt-get -yqq install wkhtmltopdf

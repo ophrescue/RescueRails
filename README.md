@@ -140,6 +140,15 @@ For the test environment, the storage is ephemeral and files are destroyed at th
 
 For the production and staging environments, the path is formed by the concatenation of AWS ENV variables, and the path strings stored in PAPERCLIP_STORAGE_PATH constant.
 
+### Deploying
+Deployment uses Capistrano (`cap production deploy`). Because this repository is public, the production host addresses are **not** committed. They live in a gitignored file:
+
+1. Copy `config/deploy/production_hosts.rb.sample` to `config/deploy/production_hosts.rb`.
+2. Replace the placeholders with the real production hosts (ask a maintainer). Never commit this file; it is listed in `.gitignore`.
+3. Check it with `cap production doctor:servers` before deploying.
+
+If the file is missing, `cap production ...` aborts with a message saying so. Please also keep hostnames, IPs, server paths and credentials out of commits, issues and PR descriptions.
+
 ## Contributing
 
 If you're very new to web development or to Ruby on Rails, you'll have a lot to learn before you get started.  I recommend [learnenough.com](https://www.learnenough.com/) and [railstutorial.org](https://www.railstutorial.org/) as imporant first steps to complete.

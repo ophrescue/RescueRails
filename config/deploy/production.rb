@@ -9,10 +9,17 @@ set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
 set :server_name, "dms.ophrescue.org"
 
-# server '45.79.161.105', user: 'deploy', roles: %w{web app db whenever}, primary: true
-# server '173.255.234.243 ', user: 'deploy', roles: %w{web app db}
-server '172.104.219.216', user: 'deploy', roles: %w{web app db whenever}, primary: true
-server '172.104.219.123', user: 'deploy', roles: %w{web app db}
+# Deploy target hosts are deliberately NOT in this file: this repo is
+# public. They live in config/deploy/production_hosts.rb, which is
+# gitignored. Copy config/deploy/production_hosts.rb.sample to that name
+# and fill it in -- see the "Deploying" section of README.md.
+hosts_file = File.join(__dir__, 'production_hosts.rb')
+unless File.exist?(hosts_file)
+  abort "Missing #{hosts_file} -- copy production_hosts.rb.sample to " \
+        "production_hosts.rb and fill in the real hosts (see README.md, " \
+        "\"Deploying\")."
+end
+load hosts_file
 
 set :deploy_to, "/var/www/#{fetch(:full_app_name)}"
 

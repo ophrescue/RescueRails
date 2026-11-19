@@ -18,6 +18,7 @@
 !/app/assets/builds/.keep
 chromedriver.log
 config/database.yml
+config/deploy/production_hosts.rb
 config/initializers/setup_mail.rb
 config/newrelic.yml
 coverage

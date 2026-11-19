@@ -2,9 +2,7 @@
 # `bin/rails server` or Puma's default config lookup). Staging and
 # production use config/deploy/shared/puma.rb.erb instead, rendered by
 # Capistrano's deploy:setup_config task and symlinked over this file's
-# path on deployed hosts (see config/deploy.rb's linked_files/config_files
-# and config/deploy/shared/unicorn.rb.erb for the equivalent Unicorn
-# pattern this mirrors).
+# path on deployed hosts (see config/deploy.rb's linked_files/config_files).
 #
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.

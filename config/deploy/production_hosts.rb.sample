@@ -1,0 +1,10 @@
+# Production deploy hosts for Capistrano (loaded by config/deploy/production.rb).
+#
+# Copy this file to config/deploy/production_hosts.rb (which is gitignored --
+# the repo is public, so real hostnames/IPs must never be committed) and
+# replace the placeholders. Keep the real file wherever you run `cap` from.
+#
+# Exactly one server should be `primary: true` and carry the `whenever`
+# (cron) role; add one `server` line per additional web/app host.
+server 'PRIMARY_HOST_OR_IP', user: 'deploy', roles: %w{web app db whenever}, primary: true
+server 'SECOND_HOST_OR_IP', user: 'deploy', roles: %w{web app db}

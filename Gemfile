@@ -63,10 +63,6 @@ gem 'puma', '~> 8.0'
 # a Rails release calls it with **pool_options instead.
 gem 'connection_pool', '< 3.0'
 
-group :production do
-  gem 'unicorn', '~> 6.1'
-end
-
 # Cool mail async stuff
 gem 'daemons'
 gem 'delayed_job'

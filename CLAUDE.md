@@ -1310,6 +1310,30 @@ Rails/Ruby version change): DONE**
   `config.load_defaults`, the `connection_pool < 3.0` pin removal,
   `sprockets-rails` 3.5.x, and the standing list from earlier passes.
 
+**Pass 15 follow-up — Capistrano `bundle_jobs` (no Rails/Ruby version
+change): DONE**
+(branch `fix/deploy-bundle-jobs`)
+
+- Found by the first production deploy of Pass 15: `bundler:install` was
+  killed by the OS (`bundle install` exit status 137, no gem or Ruby error
+  in the output) while compiling native gems. A new Ruby version starts
+  with an empty gem directory, so every native gem compiles from scratch,
+  and `capistrano-bundler`'s default of 4 parallel jobs exceeded what the
+  production hosts can hold in memory next to the running app. The deploy
+  aborted before the release was switched in, so production kept serving
+  the previous release.
+- Out-of-memory was inferred from the evidence (SIGKILL, no compiler
+  error, install interrupted partway through compiling, small hosts), not
+  confirmed: the deploy user cannot read the kernel log.
+- Fix: `set :bundle_jobs, 1` in `config/deploy.rb`, so gems compile one at
+  a time. Slower first install after a Ruby bump, lower peak memory. Gems
+  already installed are skipped, so a retried deploy resumes.
+- Not verified here: this session cannot deploy. The first deploy with
+  this change is the real test.
+- Lesson for future Ruby bumps: the "first deploy compiles every native
+  gem" cost belongs in the deploy note alongside the Ruby-installed
+  prerequisite.
+
 **Next pass: not yet decided.** The remaining CVE-driven upgrade series
 is planned as: Rails 8.0.5.2 → 8.1.4.1 (the `to_time` deprecation above is
 its input checklist). The `annotate` decision is settled (Pass 14:

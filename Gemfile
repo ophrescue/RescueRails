@@ -37,6 +37,7 @@ gem 'has_scope'
 gem 'mjml-rails', '~> 4.6', '>= 4.6.1'
 gem 'mrml'
 gem 'net-ftp'
+gem 'csv'
 gem 'kt-paperclip', '~> 7.2'
 gem 'rails4-autocomplete'
 gem "recaptcha"

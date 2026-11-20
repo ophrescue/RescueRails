@@ -188,6 +188,7 @@ GEM
       i18n_data (~> 0.16.0)
       sixarm_ruby_unaccent (~> 1.1)
     crass (1.0.8)
+    csv (3.3.7)
     cuprite (0.17)
       capybara (~> 3.0)
       ferrum (~> 0.17.0)
@@ -637,6 +638,7 @@ DEPENDENCIES
   clearance (~> 2.11.0)
   connection_pool (< 3.0)
   countries (~> 4.2, >= 4.2.3)
+  csv
   cuprite
   daemons
   dalli

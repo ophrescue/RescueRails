@@ -14,7 +14,7 @@ its history, gone past Rails 6.1 until the upgrade passes logged in
 "Upgrade roadmap" below.
 
 **Stack:**
-- Ruby 3.3.12, Rails 8.0.5.2 (as of Pass 14 below; `config.load_defaults`
+- Ruby 3.4.13, Rails 8.0.5.2 (as of Pass 15 below; `config.load_defaults`
   is still frozen at 5.0)
 - PostgreSQL, `pg` gem
 - Auth: **Clearance** (not Devise) — see `config/initializers/clearance.rb`
@@ -1219,12 +1219,103 @@ Rails/Ruby version change): DONE**
   Dependabot PR (left to the maintainers), `sprockets-rails` 3.5.x, and the
   standing list from earlier passes.
 
+**Pass 15 — Ruby 3.3.12 → 3.4.13 (Rails stays 8.0.5.2,
+`config.load_defaults` stays frozen at 5.0): DONE**
+(branch `upgrade/ruby-3.4`)
+
+- Next link of the CVE-driven series after the Rails 8.0 pass. Ruby 3.4.13
+  was installed on the production hosts by the maintainers before this
+  pass's deploy (a deploy prerequisite, not something the session can do).
+- Commit 1: the version bump, in every place the Ruby version is pinned
+  (the same six settings Pass 3 listed, plus the README's Ruby line):
+  `Gemfile`, `.ruby-version`, `.devcontainer/Dockerfile` (`ARG
+  RUBY_VERSION`), `.devcontainer/compose.yaml` (the build arg, the
+  version-specific mount path **and** the named volume itself, renamed to
+  `bundle_cache_3_4_13`, applying Pass 3's post-merge lesson), and
+  `config/deploy.rb`'s `rbenv_ruby`. CI reads `.ruby-version`, so the
+  workflow needed no edit. `.rubocop.yml`'s stale `TargetRubyVersion` was
+  left alone, as in every earlier pass.
+  - Local install: this devcontainer's `ruby-build` only knew up to 3.4.10,
+    so it was updated with a `git pull` of the plugin before `rbenv install
+    3.4.13`. The pinned Bundler 2.4.22 was installed under 3.4.13 and works
+    unchanged (no Bundler bump needed). `bundle install` recompiled all
+    native gems cleanly; the only lockfile change was the `RUBY VERSION`
+    line, and `bin/` was untouched.
+- Commit 2 (forced companion, out of scope for a plain bump): `gem 'csv'`.
+  `csv` left the default gems in 3.4, and four rake tasks
+  (`adoptapet_sync`, `petfinder_sync`, `shelterluv_exp`, `animal_archive`)
+  `require 'csv'` at task-load time. Confirmed by running the suite before
+  adding it: `Rails.application.load_tasks` raised `LoadError: cannot load
+  such file -- csv` in the `before(:suite)` hook, so all 748 examples
+  failed to start. Lockfile diff: `csv` 3.3.7 only. Same pattern as
+  `net-ftp` in Pass 3. Checked the rest of the gems that were demoted from
+  default to bundled in 3.3/3.4 (`base64`, `bigdecimal`, `drb`, `logger`,
+  `ostruct`, `benchmark`, and the `net-*` family are already locked;
+  `mutex_m`, `observer`, `abbrev`, `getoptlong`, `nkf`, `syslog`,
+  `resolv-replace`, `rinda` are not referenced anywhere in `app/`, `lib/`,
+  `config/`, `spec/` or the rake tasks; `Syslog` appears only in a
+  commented-out line in `production.rb`). Nothing else needed a Gemfile
+  entry.
+- No app-code fix was needed. Specs contain no assertions on inspected
+  hashes or error-message text (the 3.4 `Hash#inspect` and quote-style
+  changes), and the only `.inspect` in app code is an `ArgumentError`
+  message for an unsupported photo URL scheme (a String, unaffected).
+- Warnings: no new warnings under 3.4.13. Booting with `RUBYOPT=-W:deprecated`
+  and eager-loading the app plus loading all rake tasks printed nothing
+  (no chilled-string warnings), and the suite's stderr still shows only the
+  one pre-existing `to_time` Rails 8.1 deprecation from Pass 14.
+- Verification:
+  - Full RSpec suite: baseline on clean master (Ruby 3.3.12, seed 1111) 748
+    examples, 0 failures, 12 pending; after the change on 3.4.13 748/0/12
+    on two seeds (1111 and 2222). `bin/rails zeitwerk:check` clean, `yarn
+    build` clean, `bundle-audit check` 0 vulnerabilities before and after.
+  - The four csv-requiring rake tasks load (`bin/rails -T` lists them, `ruby
+    -c` clean); the existing `spec/tasks/adoptapet_sync_spec.rb` exercises
+    `CSV` for real. Nothing that contacts an external service was run.
+  - Real-server smoke test: real Puma 8.0.4 (3 workers, preloaded,
+    development env) on Ruby 3.4.13: `/` (redirect) and `/sign_in` 200, the
+    real Sprockets/esbuild asset URLs 200, a real sign-in `POST` returned
+    three `Set-Cookie` headers (`remember_token`, the session cookie,
+    `__profilin`) and the follow-up showed "Sign out", repeated DB-backed
+    requests across the workers all succeeded, `SIGTERM` shut it down
+    cleanly. `spec/features/event_management_spec.rb` and
+    `spec/features/clearance/` run individually: 27 examples, 0 failures.
+    The temporary user created for the sign-in was deleted.
+  - The known `newrelic_rpm` background-thread `SystemStackError` (Pass 6)
+    appeared again, this time with `URI::RFC3986_Parser#split` as the top
+    frame as well as `StatsHash#record`. Reproduced identically on clean
+    master under Ruby 3.3.12 (same server boot), so it is pre-existing and
+    not caused by 3.4 or its RFC 3986 `URI` default; it is confined to the
+    agent's vendor-utilization thread and no request is affected.
+  - Production-env boot against a scratch local Postgres database (dummy
+    secret, from a clean `git archive` copy so no ignored local env file
+    was loaded; dropped afterward): `bin/rails runner` eager-loaded the app
+    under the production config and resolved
+    `ActiveSupport::Cache::MemCacheStore`. `RAILS_ENV=test
+    assets:precompile` produced digested output for both esbuild bundles and
+    the Sprockets assets (output removed afterward).
+  - Cache store: write/read/delete/fetch round trips against the local
+    memcached succeeded on a plain `MemCacheStore` and one with a `pool:`
+    option, under 3.4.13.
+  - Known flaky: not hit this pass.
+- Deploy note: the production hosts need Ruby 3.4.13 installed under rbenv
+  *before* the deploy (otherwise `bundle install` fails); the human confirms
+  that before deploying. Deploy to **one production host first**, verify
+  sign-in (multiple `Set-Cookie`), a Paperclip/S3 image, a mailer /
+  DelayedJob job and the cache, then the second host. Native gems recompile
+  on the first `bundle install`. Rollback is redeploying the previous
+  release (its `rbenv_ruby` still points at 3.3.12, which stays installed);
+  this pass adds no migrations.
+- Explicitly deferred/out of scope: `.rubocop.yml`'s stale target version,
+  `config.load_defaults`, the `connection_pool < 3.0` pin removal,
+  `sprockets-rails` 3.5.x, and the standing list from earlier passes.
+
 **Next pass: not yet decided.** The remaining CVE-driven upgrade series
-is planned as: Ruby 3.3.12 → 3.4.13 (add `gem 'csv'`) → Rails 8.0.5.2 → 8.1.4.1
-(the `to_time` deprecation above is its input checklist). The `annotate`
-decision is settled (Pass 14: `annotaterb`). Other candidates: brakeman
-for SAST, wiring `bundle-audit` into `.github/workflows/main.yml` as a CI
-gate, the `connection_pool < 3.0` pin removal, and the
+is planned as: Rails 8.0.5.2 → 8.1.4.1 (the `to_time` deprecation above is
+its input checklist). The `annotate` decision is settled (Pass 14:
+`annotaterb`) and the Ruby 3.4 bump is done (Pass 15). Other candidates:
+brakeman for SAST, wiring `bundle-audit` into `.github/workflows/main.yml`
+as a CI gate, the `connection_pool < 3.0` pin removal, and the
 `config.load_defaults` catch-up (long-deferred, lowest urgency). Decide
 based on what's most pressing when picking up the next pass — don't assume
 the order above is a commitment.

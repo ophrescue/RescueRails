@@ -14,7 +14,7 @@ its history, gone past Rails 6.1 until the upgrade passes logged in
 "Upgrade roadmap" below.
 
 **Stack:**
-- Ruby 3.4.13, Rails 8.0.5.2 (as of Pass 15 below; `config.load_defaults`
+- Ruby 3.4.13, Rails 8.1.4.1 (as of Pass 16 below; `config.load_defaults`
   is still frozen at 5.0)
 - PostgreSQL, `pg` gem
 - Auth: **Clearance** (not Devise) — see `config/initializers/clearance.rb`
@@ -1334,12 +1334,128 @@ change): DONE**
   gem" cost belongs in the deploy note alongside the Ruby-installed
   prerequisite.
 
-**Next pass: not yet decided.** The remaining CVE-driven upgrade series
-is planned as: Rails 8.0.5.2 → 8.1.4.1 (the `to_time` deprecation above is
-its input checklist). The `annotate` decision is settled (Pass 14:
-`annotaterb`) and the Ruby 3.4 bump is done (Pass 15). Other candidates:
-brakeman for SAST, wiring `bundle-audit` into `.github/workflows/main.yml`
-as a CI gate, the `connection_pool < 3.0` pin removal, and the
-`config.load_defaults` catch-up (long-deferred, lowest urgency). Decide
-based on what's most pressing when picking up the next pass — don't assume
-the order above is a commitment.
+**Pass 16 — Rails 8.0.5.2 → 8.1.4.1 (Ruby stays 3.4.13,
+`config.load_defaults` stays frozen at 5.0): DONE**
+(branch `upgrade/rails-8.1`)
+
+- Motivation: Rails 8.0 no longer receives security support, so the app
+  moves to the 8.1 line, the last link of the CVE-driven series. The
+  advisory count was already 0 before this pass and is 0 after
+  (`bundle-audit check`). Final Rails target is the patched `8.1.4.1`.
+- Commit 1 (core bump): Gemfile pin `gem 'rails', '~> 8.1.4', '>=
+  8.1.4.1'` (the second bound again keeps conservative mode from stopping
+  at 8.1.4, which is not the patched release); `bundle update rails
+  --conservative`. Reviewed the full lockfile diff line by line: only the
+  thirteen Rails-family gems moved, plus one new gem, `action_text-trix`
+  2.1.19 (a dependency of `actiontext`), and one dependency edge swap on
+  `activesupport` (`benchmark` out, `json` in; both already locked). No
+  forced companion gem bump was needed: `annotaterb`, `rspec-rails`
+  6.1.5, `clearance` 2.11.0, `kt-paperclip`, `audited`,
+  `delayed_job_active_record` and `sprockets-rails` all work unchanged.
+  - Ran `bin/rails app:update` and declined everything except
+    `config/initializers/new_framework_defaults_8_1.rb` (verified fully
+    commented out); the newly offered scaffolding (`bin/ci`,
+    `bin/bundler-audit`, `bin/rubocop`, `config/ci.rb`,
+    `config/bundler-audit.yml`, public pages and icons) was discarded, the
+    same treatment as Passes 2, 4 and 14. No migration was offered.
+- Commit 2 (`db/schema.rb`, mechanical, Rails-generated): the pre-pass
+  expectation was a large rewrite because Rails 8.1.0 sorted table columns
+  alphabetically in `schema.rb`. That did **not** materialize: Rails 8.1.4
+  reverted it (activerecord 8.1.4.1 CHANGELOG: "Revert alphabetical
+  sorting of table columns inside `schema.rb`. Alphabetical sorting of
+  table columns inside the schema creates improper production tables when
+  using `db:prepare`."). A separate, similarly worded 8.1.4 entry, "Revert
+  stable sorting of columns and indexes in serialized schema caches", is
+  about the schema *cache* file, not `schema.rb`; the `schema.rb` result
+  was therefore checked empirically rather than inferred from it. Loaded
+  the previous `schema.rb` into a scratch database and ran `bin/rails
+  db:migrate` (which re-dumps) on 8.1.4.1: exactly two lines change.
+  `ActiveRecord::Schema[7.1]` becomes `[8.1]`, and `enable_extension
+  "plpgsql"` becomes `"pg_catalog.plpgsql"` (8.1 writes an extension's
+  schema when it is not the current schema; `plpgsql` lives in
+  `pg_catalog`). The new file loads, and a load/dump round trip is stable.
+  Committed as its own commit so the two lines are easy to see; no column
+  reordering. The scratch databases were dropped and the development
+  database was not touched.
+- No app-code fix was needed.
+- Checklist from Pass 14 (every item resolved or consciously not
+  applicable):
+  - `to_time` deprecation: gone. Rails 8.1 removed the "preserve the
+    system local time" behavior and `to_time` now always preserves the
+    receiver's timezone; `config.active_support.to_time_preserves_timezone`
+    is itself deprecated (removed in 8.2) and is ignored, so the
+    `load_defaults 5.0` value no longer does anything and nothing was
+    set in an initializer. The app has no `to_time` call sites in
+    `app/`, `lib/` or the specs. The suite and the boot print no
+    deprecation warnings at all on 8.1.4.1 (the one-warning list from
+    Pass 14 is now empty). Reading `ActiveSupport.to_time_preserves_timezone`
+    directly would warn, but the app never does.
+  - Time/TimeWithZone arithmetic and `Time#since(Time)`: no such call
+    sites (grepped `app/`, `lib/`, `config/`, `spec/`), and no
+    deprecation fired.
+  - Semicolon query-string separators, leading-bracket parameter names,
+    multi-path routes: no occurrences in views, JS, routes or specs.
+  - Order-dependent finders (`photos.visible.first` in `dog.rb`/`cat.rb`
+    and similar): the 8.1 deprecation (and the opt-in
+    `raise_on_missing_required_finder_order_columns` in the new defaults
+    file, left commented out) only concerns models with no primary key or
+    `implicit_order_column` to fall back on. Every table in `schema.rb`
+    has an `id`, so nothing is affected.
+  - `ActiveSupport::Configurable`, `String#mb_chars`,
+    `enqueue_after_transaction_commit`, `signed_id_verifier_secret`: not
+    used anywhere in the app.
+- Verification:
+  - Full RSpec suite: baseline on clean master 748 examples, 0 failures,
+    12 pending (seed 1111); after the change 748/0/12 on two seeds (4242
+    and 9917). `bin/rails zeitwerk:check` clean, `yarn build` clean,
+    `bundle-audit check` 0 vulnerabilities before and after.
+  - Real-server smoke test (the suite never opens a socket): real Puma
+    (3 workers, preloaded, development env, local port) served `/`
+    (redirect to sign-in), `/sign_in` and the real Sprockets/esbuild asset
+    URLs as 200s; a real sign-in `POST` to `/sessions` returned three
+    `Set-Cookie` headers (`remember_token`, the session cookie,
+    `__profilin`) and the follow-up request showed "Sign out"; repeated
+    requests and several manager/gallery pages succeeded across the
+    workers with no stale-connection errors; `SIGTERM` shut it down
+    gracefully. The known `newrelic_rpm` background-thread
+    `SystemStackError` (Pass 6) was the only error. The temporary user
+    created for the sign-in was deleted.
+    `spec/features/event_management_spec.rb` and
+    `spec/features/clearance/` also run individually: 27 examples, 0
+    failures.
+  - Production-env boot against a scratch local Postgres database (dummy
+    secret, from a clean `git archive` copy so no ignored env file was
+    loaded; dropped afterward): the app eager-loaded under the production
+    config, `ActiveSupport::Cache::MemCacheStore` and the Paperclip S3
+    storage resolved, no deprecation output, `yarn build` plus a
+    production `assets:precompile` produced digested output for both
+    esbuild bundles and the Sprockets assets, and `/sign_in` rendered 200
+    through the production middleware stack.
+  - Cache store: write/read/delete/fetch round trips against the local
+    memcached succeeded on `Rails.cache`, a plain `MemCacheStore`, and one
+    with a `pool:` option.
+  - Not verified here: real SMTP delivery (test delivery method only), and
+    anything that needs the production hosts (Paperclip/S3 uploads,
+    DelayedJob against the production database, Honeybadger).
+- Deploy note: Rails minor bump, no migrations. Deploy to **one production
+  host first** and verify sign-in (multiple `Set-Cookie`), a Paperclip/S3
+  image, a mailer / DelayedJob job, the cache (dalli) and the Honeybadger
+  channel before the second host. Watch the logs for deprecation noise.
+  `schema.rb` is only loaded on fresh databases, so the two-line schema
+  change has no effect on the existing production database. Rollback is
+  redeploying the previous release.
+- Explicitly deferred/out of scope: `config.load_defaults` (the 8.1
+  defaults file stays commented out), removing the `connection_pool < 3.0`
+  pin, `sprockets-rails` 3.5.x, regenerating model annotations, the open
+  Dependabot PRs (left to the maintainers), and the standing list from
+  earlier passes.
+
+**Next pass: not yet decided.** The CVE-driven Rails/Ruby upgrade series
+is complete (Rails 8.1.4.1 on Ruby 3.4.13, `bundle-audit` at 0
+advisories). Remaining candidates: brakeman for SAST, wiring
+`bundle-audit` into `.github/workflows/main.yml` as a CI gate, removing the
+`connection_pool < 3.0` pin (memcached can now be exercised locally),
+`sprockets-rails` 3.5.x (see Pass 14's note on its missing-asset
+fallback), and the `config.load_defaults` catch-up (long-deferred, lowest
+urgency). Decide based on what's most pressing when picking
+up the next pass — don't assume any order is a commitment.

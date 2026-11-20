@@ -21,6 +21,12 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 #how many old releases we want to keep
 set :keep_releases, 5
 
+# Compile gems one at a time. Capistrano's default is 4 parallel bundle jobs,
+# which can exhaust memory on the production hosts when native gems must be
+# compiled from scratch (e.g. after a Ruby version bump) and the OS kills
+# `bundle install` (exit status 137).
+set :bundle_jobs, 1
+
 # Default value for :format is :pretty
 # set :format, :pretty
 

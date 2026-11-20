@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby   '3.3.12'
 
-gem 'rails', '~> 7.2.0'
+gem 'rails', '~> 8.0.5', '>= 8.0.5.2'
 
 gem 'rack-cache'
 
@@ -108,7 +108,7 @@ group :test do
 end
 
 group :development do
-  gem 'annotate'
+  gem 'annotaterb'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'capistrano', '~> 3.11'

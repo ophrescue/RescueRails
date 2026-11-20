@@ -9,11 +9,13 @@ internal admin/staff system (`app/controllers/dogs/manager`,
 adopters, volunteers, and staff. No admin-engine gem (ActiveAdmin/RailsAdmin)
 is used — the admin UI is hand-built.
 
-The app is ~13 years old (`db/migrate` goes back to 2011) and has never, in
-its history, gone past Rails 6.1 — see "Upgrade roadmap" below.
+The app is ~13 years old (`db/migrate` goes back to 2011) and had never, in
+its history, gone past Rails 6.1 until the upgrade passes logged in
+"Upgrade roadmap" below.
 
 **Stack:**
-- Ruby 3.0.5, Rails 7.1.6 (as of the pass recorded below)
+- Ruby 3.3.12, Rails 8.0.5.2 (as of Pass 14 below; `config.load_defaults`
+  is still frozen at 5.0)
 - PostgreSQL, `pg` gem
 - Auth: **Clearance** (not Devise) — see `config/initializers/clearance.rb`
 - File uploads: **kt-paperclip** (not ActiveStorage, though activestorage
@@ -1106,12 +1108,123 @@ Rails/Ruby version change): DONE**
   Dependabot group PR that overlaps this sweep (left for the maintainers
   to handle), and the standing list from earlier passes.
 
+**Pass 14 — Rails 7.2.3.2 → 8.0.5.2 (Ruby stays 3.3.12,
+`config.load_defaults` stays frozen at 5.0): DONE**
+(branch `upgrade/rails-8.0`)
+
+- Closes the 18 Rails-family advisories Pass 13 left behind
+  (`actionpack` 6, `activestorage` 6, `actionview` 4, `activesupport` 1,
+  `actionmailbox` 1), which had no 7.2.x fix; the fixed releases are
+  `~> 8.0.5, >= 8.0.5.2`. Post-change `bundle-audit check`: 0
+  vulnerabilities.
+- Commit 1 (forced companion): `annotate` → `annotaterb`. `annotate`
+  3.2.0 caps `activerecord < 8.0`, so with Rails 8 the resolver would have
+  silently downgraded it to the ancient 2.6.5 instead of failing. Decided
+  with the maintainers to swap to `annotaterb` (the maintained fork,
+  dev-only, resolved 4.26.0). Gem swap only: no `.annotaterb.yml` added
+  and the existing schema-comment headers were **not** regenerated.
+  Checked: running `annotaterb models` with its defaults rewrites ~50
+  model/spec/factory files (about 900 added and 600 removed lines),
+  so that was reverted and is left as a separate decision if the team
+  wants annotations refreshed. Lockfile diff: `annotate` out,
+  `annotaterb` in, nothing else.
+- Commit 2 (core bump): Gemfile pin `gem 'rails', '~> 8.0.5', '>=
+  8.0.5.2'` (the second bound stops conservative mode short of the
+  patched release); `bundle update rails --conservative`. Reviewed the
+  full lockfile diff line by line: only the thirteen Rails-family gems
+  moved (`actioncable`, `actionmailbox`, `actionmailer`, `actionpack`,
+  `actiontext`, `actionview`, `activejob`, `activemodel`, `activerecord`,
+  `activestorage`, `activesupport`, `rails`, `railties`), plus dependency
+  edges (`cgi`/`racc` dropped from `actionpack`/`railties`, `uri` added to
+  `activesupport`, `rails-html-sanitizer` floor `>= 1.7.2`, `rack` cap
+  loosened to `>= 2.2.4`). No other gem version moved and no forced
+  companion beyond `annotaterb` was needed: `rspec-rails` 6.1.5,
+  `clearance` 2.11.0, `kt-paperclip`, `audited`, `delayed_job_active_record`
+  and the rest all work unchanged on Rails 8.0.
+  - Ran `bin/rails app:update` and declined every conflict
+    (`config/application.rb`, `config/boot.rb`, `config/environment.rb`,
+    `config/puma.rb`, `config/environments/*.rb`, the same initializer set
+    as Passes 2/4, `bin/dev`/`bin/rails`/`bin/setup`, public error pages,
+    `robots.txt`), and discarded the newly offered scaffolding
+    (`bin/rubocop`, `public/400.html`, `public/406-unsupported-browser.html`,
+    `public/icon.{png,svg}`). Kept only
+    `config/initializers/new_framework_defaults_8_0.rb` (verified fully
+    commented out). No migration was offered or needed.
+  - `Regexp.timeout = 1` (the new 8.0 default) turned out to be a
+    `load_defaults 8.0` setting, offered only in the commented-out defaults
+    file, so it does **not** apply while `load_defaults` stays at 5.0;
+    `Regexp.timeout` is `nil` in the app. It still has to be reckoned with
+    when the `load_defaults` catch-up happens (about 28 regex call sites).
+  - None of the AR/ActionController/ActiveJob configs Rails 8.0 removed are
+    set outside the commented-out `new_framework_defaults_7_1.rb`.
+- No app-code fix was needed.
+- Verification:
+  - Full RSpec suite: baseline on clean master 748 examples, 0 failures, 12
+    pending (seed 1081); after the change 748/0/12 on two seeds (4242 and
+    9917). `bin/rails zeitwerk:check` clean, `yarn build` clean.
+  - Deprecations (test env prints them to stderr; the suite hit exactly one
+    unique warning, at boot, and none in `log/test.log` or in the
+    development-env requests below): `to_time` will always preserve the full
+    timezone rather than the offset in Rails 8.1 (opt in with
+    `config.active_support.to_time_preserves_timezone = :zone`; triggered by
+    the `load_defaults 5.0` value `true`). This is the Rails 8.1 pass's
+    checklist. No Time/TimeWithZone arithmetic or `Time#since(Time)`
+    deprecations fired.
+  - Real-server smoke test (the suite never opens a socket): real Puma
+    (3 workers, preloaded, development env) served `/` and `/sign_in` and
+    the real Sprockets/esbuild asset URLs as 200s; a real sign-in `POST`
+    returned three `Set-Cookie` headers (`remember_token`, the session
+    cookie, `__profilin`) and the follow-up request showed "Sign out";
+    repeated DB-backed requests across the workers all succeeded with no
+    stale-connection errors; `SIGTERM` shut it down gracefully. The known
+    `newrelic_rpm` background-thread `SystemStackError` (Pass 6) was the
+    only error. `spec/features/event_management_spec.rb` and
+    `spec/features/clearance/` also run individually: 27 examples, 0
+    failures. The temporary user created for the sign-in was deleted.
+  - Production-env boot against a scratch local Postgres database (schema
+    loaded, dummy secret, from a clean `git archive` copy so no local env
+    file was loaded; dropped afterward): eager-load clean, no deprecation
+    output, `ActiveSupport::Cache::MemCacheStore` and the Paperclip S3 config
+    resolved, and, after a production `assets:precompile` (digested output for
+    both esbuild bundles and the Sprockets assets), `/sign_in` rendered 200
+    through the production middleware stack including rack-cache.
+  - Cache store: this devcontainer does provide a local memcached (reached
+    through the `MEMCACHE_SERVERS` environment variable), so the production
+    `:mem_cache_store` path through dalli 3.2.17 was exercised for real:
+    write/read/delete/fetch round trips on `Rails.cache`, a plain
+    `MemCacheStore`, and one with a `pool:` option (connection_pool 2.5.5),
+    all succeeded. This closes the dalli gap Pass 13 left open.
+    Real SMTP delivery via `mail` 2.9.1 remains unverified (test delivery
+    method only).
+- Found along the way, not fixed (out of scope): `sprockets-rails` 3.4.2's
+  missing-asset fallback in `compute_asset_path` calls the removed singleton
+  `ActiveSupport::Deprecation.warn`, so a page referencing an asset that is
+  absent from the manifest raises `NoMethodError` instead of falling back.
+  It only matters when assets were not precompiled (it showed up in a
+  production-env check without a precompile and disappeared once assets
+  existed), so it is not a deploy risk, but it is a latent trap if a layout
+  ever references an unprecompiled asset. A newer `sprockets-rails` (3.5.x)
+  exists; not bumped here.
+- Deploy note: first Rails-major deploy. Deploy to **one production host
+  first** and verify sign-in (multiple `Set-Cookie`), a Paperclip/S3 image, a
+  mailer / DelayedJob job, the cache (dalli) and the Honeybadger channel
+  before the second host. Watch the logs for `Regexp::TimeoutError`
+  (not expected while `load_defaults` is 5.0) and deprecation noise.
+  Rollback is redeploying the previous release; this pass adds no
+  migrations.
+- Explicitly deferred/out of scope: removing the `connection_pool < 3.0`
+  pin (Rails 8.0's `MemCacheStore` should no longer need it, but that is a
+  separate follow-up now that a memcached check is possible locally),
+  regenerating model annotations, `config.load_defaults`, the open
+  Dependabot PR (left to the maintainers), `sprockets-rails` 3.5.x, and the
+  standing list from earlier passes.
+
 **Next pass: not yet decided.** The remaining CVE-driven upgrade series
-is planned as: Rails 7.2 → 8.0.5.2 (needs an explicit decision on
-`annotate`, whose `activerecord < 8.0` cap makes the resolver silently
-downgrade it to 2.6.5) → Ruby 3.3.12 → 3.4.13 (add `gem 'csv'`) → Rails
-8.0 → 8.1.4.1. Other candidates: brakeman for SAST, wiring `bundle-audit` into
-`.github/workflows/main.yml` as a CI gate, and the `config.load_defaults`
-catch-up (long-deferred, lowest urgency). Decide based on what's most
-pressing when picking up the next pass — don't assume the order above is
-a commitment.
+is planned as: Ruby 3.3.12 → 3.4.13 (add `gem 'csv'`) → Rails 8.0.5.2 → 8.1.4.1
+(the `to_time` deprecation above is its input checklist). The `annotate`
+decision is settled (Pass 14: `annotaterb`). Other candidates: brakeman
+for SAST, wiring `bundle-audit` into `.github/workflows/main.yml` as a CI
+gate, the `connection_pool < 3.0` pin removal, and the
+`config.load_defaults` catch-up (long-deferred, lowest urgency). Decide
+based on what's most pressing when picking up the next pass — don't assume
+the order above is a commitment.

@@ -4,10 +4,10 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        RUBY_VERSION: "3.3.12"
+        RUBY_VERSION: "3.4.13"
     volumes:
       - ..:/workspace:cached
-      - bundle_cache_3_3_12:/usr/local/rbenv/versions/3.3.12/lib/ruby/gems
+      - bundle_cache_3_4_13:/usr/local/rbenv/versions/3.4.13/lib/ruby/gems
     command: sleep infinity
     depends_on:
       - db
@@ -41,4 +41,4 @@ services:
 
 volumes:
   pg_data:
-  bundle_cache_3_3_12:
+  bundle_cache_3_4_13:

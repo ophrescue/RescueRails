@@ -104,7 +104,7 @@
               <%= f.label(:admin_interest, "Administration ") %> <small>(technical - IT/Website/DMS, HR, onboarding, volunteer resources, mentorship program, data and reporting, finance and accounting, writing, special projects)</small>
             </div>
 
-          <div id="foster-questions", class="collapse">
+          <div id="foster-questions" class="collapse">
             <h3>Additional Foster Questions</h3>
             <%= f.fields_for :volunteer_foster_app do |vfa| %>
               <h5>What types of Animals do you want to foster?</h5>
@@ -158,7 +158,7 @@
                 </div>
 
 
-                <div id='other-pets-questions', class="collapse">
+                <div id='other-pets-questions' class="collapse">
                   <h4>About your Pets</h4>
                   <div class="form-group">
                     <%= vfa.label :vet_info, "Please provide contact information for your Vet, including name, address and phone number." %>
@@ -216,7 +216,7 @@
                   <%= vfa.text_field :max_time_alone, class: "col-8 form-control" %>
                 </div>
 
-              <div id="dog-foster-questions", class="collapse">
+              <div id="dog-foster-questions" class="collapse">
                 <h5>Do you have a fenced in yard?</h5>
                 <div class="custom-control custom-radio">
                   <%= vfa.radio_button :dog_fenced_in_yard, true, class: "custom-control-input" %>

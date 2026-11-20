@@ -1,8 +1,8 @@
 <tr>
     <td><%= donation.created_at.strftime('%m/%d/%Y') %></td>
-    <td><%= donation.campaign.try(:title) %>
+    <td><%= donation.campaign.try(:title) %></td>
     <td><%= link_to donation.name, donation %></td>
     <td><%= donation.frequency %></td>
     <td><%= number_to_currency(donation.amount) %></td>
-    <td><%= markdown(donation.comment) %>
+    <td><%= markdown(donation.comment) %></td>
 </tr>
